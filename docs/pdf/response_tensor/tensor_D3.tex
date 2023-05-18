@@ -1,0 +1,218 @@
+\documentclass[fleqn,10pt]{jsarticle}
+
+%%% package
+
+\usepackage[usenames]{color}
+\usepackage{amsmath}
+\usepackage{breqn}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{enumerate}
+\usepackage{braket}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+%%% layout setting
+
+\paperwidth=210truemm
+\paperheight=297truemm
+\textwidth=169.2truemm
+\textheight=249.2truemm
+\oddsidemargin=-5truemm
+\topmargin=-5truemm
+\footskip=7truemm
+
+%%% fixed
+
+\hoffset=0truemm
+\voffset=0truemm
+\headheight=0truemm
+\headsep=0truemm
+\marginparsep=0truemm
+\marginparwidth=0truemm
+
+%%% main text
+
+\begin{document}
+
+\setcounter{MaxMatrixCols}{16}
+
+\begin{center}
+\LARGE
+Response Tensors up to 4th rank in $D_{3}$
+\end{center}
+\begin{center}\LARGE --- polar tensors ---\end{center}
+\begin{align*}
+C^{(0,Q)} = \begin{pmatrix} C^{(0,Q)} \end{pmatrix}
+\end{align*}
+\begin{quote}
+\begin{align*}
+& C^{(0,Q)} = Q_{0}
+\end{align*}
+\end{quote}
+\begin{align*}
+S^{(2,Q)} = \begin{pmatrix} S^{(2,Q)}_{xx} & 0 & 0 \\ 0 & S^{(2,Q)}_{xx} & 0 \\ 0 & 0 & S^{(2,Q)}_{zz} \end{pmatrix}
+\end{align*}
+\begin{quote}
+\begin{align*}
+& S^{(2,Q)}_{xx} = Q_{0} - Q_{u} \\
+& S^{(2,Q)}_{zz} = Q_{0} + 2 Q_{u}
+\end{align*}
+\end{quote}
+\begin{align*}
+S^{(3,Q)} = \begin{pmatrix} 0 & S^{(3,Q)}_{1y} & 0 \\ 0 & - S^{(3,Q)}_{1y} & 0 \\ 0 & 0 & 0 \\ S^{(3,Q)}_{4x} & 0 & 0 \\ 0 & - S^{(3,Q)}_{4x} & 0 \\ S^{(3,Q)}_{1y} & 0 & 0 \end{pmatrix}
+\end{align*}
+\begin{quote}
+\begin{align*}
+& S^{(3,Q)}_{1y} = Q_{3}^{\beta} \\
+& S^{(3,Q)}_{4x} = - 3 G_{u}[1]
+\end{align*}
+\end{quote}
+\begin{align*}
+A^{(3,Q)} = \begin{pmatrix} A^{(3,Q)}_{4x} & 0 & 0 \\ 0 & A^{(3,Q)}_{4x} & 0 \\ 0 & 0 & A^{(3,Q)}_{6z} \end{pmatrix}
+\end{align*}
+\begin{quote}
+\begin{align*}
+& A^{(3,Q)}_{4x} = G_{0} - G_{u}[2] \\
+& A^{(3,Q)}_{6z} = G_{0} + 2 G_{u}[2]
+\end{align*}
+\end{quote}
+\begin{align*}
+S^{(4,Q)} = \begin{pmatrix} S^{(4,Q)}_{11} & S^{(4,Q)}_{12} & S^{(4,Q)}_{13} & 0 & S^{(4,Q)}_{15} & 0 \\ S^{(4,Q)}_{12} & S^{(4,Q)}_{11} & S^{(4,Q)}_{13} & 0 & - S^{(4,Q)}_{15} & 0 \\ S^{(4,Q)}_{13} & S^{(4,Q)}_{13} & S^{(4,Q)}_{33} & 0 & 0 & 0 \\ 0 & 0 & 0 & S^{(4,Q)}_{44} & 0 & - S^{(4,Q)}_{15} \\ S^{(4,Q)}_{15} & - S^{(4,Q)}_{15} & 0 & 0 & S^{(4,Q)}_{44} & 0 \\ 0 & 0 & 0 & - S^{(4,Q)}_{15} & 0 & \frac{S^{(4,Q)}_{11}}{2} - \frac{S^{(4,Q)}_{12}}{2} \end{pmatrix}
+\end{align*}
+\begin{quote}
+\begin{align*}
+& S^{(4,Q)}_{11} = Q_{0}[1] + 2 Q_{0}[2] + 3 Q_{4} - 2 Q_{u}[1] - 4 Q_{u}[2] \\
+& S^{(4,Q)}_{12} = Q_{0}[1] + Q_{4} - 2 Q_{u}[1] \\
+& S^{(4,Q)}_{13} = Q_{0}[1] - 4 Q_{4} + Q_{u}[1] \\
+& S^{(4,Q)}_{15} = Q_{4}^{\alpha} \\
+& S^{(4,Q)}_{33} = Q_{0}[1] + 2 Q_{0}[2] + 8 Q_{4} + 4 Q_{u}[1] + 8 Q_{u}[2] \\
+& S^{(4,Q)}_{44} = Q_{0}[2] - 4 Q_{4} + Q_{u}[2]
+\end{align*}
+\end{quote}
+\begin{align*}
+\bar{S}^{(4,Q)} = \begin{pmatrix} 0 & 0 & \bar{S}^{(4,Q)}_{13} & 0 & \bar{S}^{(4,Q)}_{15} & 0 \\ 0 & 0 & \bar{S}^{(4,Q)}_{13} & 0 & - \bar{S}^{(4,Q)}_{15} & 0 \\ - \bar{S}^{(4,Q)}_{13} & - \bar{S}^{(4,Q)}_{13} & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & \bar{S}^{(4,Q)}_{15} \\ - \bar{S}^{(4,Q)}_{15} & \bar{S}^{(4,Q)}_{15} & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & - \bar{S}^{(4,Q)}_{15} & 0 & 0 \end{pmatrix}
+\end{align*}
+\begin{quote}
+\begin{align*}
+& \bar{S}^{(4,Q)}_{13} = 3 Q_{u}[3] \\
+& \bar{S}^{(4,Q)}_{15} = - 2 G_{3}^{\beta}[1]
+\end{align*}
+\end{quote}
+\begin{align*}
+A^{(4,Q)} = \begin{pmatrix} A^{(4,Q)}_{xx} & 0 & 0 \\ 0 & A^{(4,Q)}_{xx} & 0 \\ 0 & 0 & A^{(4,Q)}_{zz} \end{pmatrix}
+\end{align*}
+\begin{quote}
+\begin{align*}
+& A^{(4,Q)}_{xx} = Q_{0}[3] - 2 Q_{u}[6] \\
+& A^{(4,Q)}_{zz} = Q_{0}[3] + 4 Q_{u}[6]
+\end{align*}
+\end{quote}
+\begin{align*}
+M^{(4,Q)} = \begin{pmatrix} 0 & M^{(4,Q)}_{1y} & 0 \\ 0 & - M^{(4,Q)}_{1y} & 0 \\ 0 & 0 & 0 \\ M^{(4,Q)}_{4x} & 0 & 0 \\ 0 & - M^{(4,Q)}_{4x} & 0 \\ M^{(4,Q)}_{1y} & 0 & 0 \end{pmatrix}
+\end{align*}
+\begin{quote}
+\begin{align*}
+& M^{(4,Q)}_{1y} = G_{3}^{\beta}[2] \\
+& M^{(4,Q)}_{4x} = - 3 Q_{u}[4]
+\end{align*}
+\end{quote}
+\begin{align*}
+\bar{M}^{(4,Q)} = \begin{pmatrix} 0 & 0 & 0 & \bar{M}^{(4,Q)}_{x4} & 0 & \bar{M}^{(4,Q)}_{x6} \\ \bar{M}^{(4,Q)}_{x6} & - \bar{M}^{(4,Q)}_{x6} & 0 & 0 & - \bar{M}^{(4,Q)}_{x4} & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 \end{pmatrix}
+\end{align*}
+\begin{quote}
+\begin{align*}
+& \bar{M}^{(4,Q)}_{x4} = - 3 Q_{u}[5] \\
+& \bar{M}^{(4,Q)}_{x6} = G_{3}^{\beta}[3]
+\end{align*}
+\end{quote}
+\newpage
+\begin{center}\LARGE --- axial tensors ---\end{center}
+\begin{align*}
+C^{(0,G)} = \begin{pmatrix} C^{(0,G)} \end{pmatrix}
+\end{align*}
+\begin{quote}
+\begin{align*}
+& C^{(0,G)} = G_{0}
+\end{align*}
+\end{quote}
+\begin{align*}
+S^{(2,G)} = \begin{pmatrix} S^{(2,G)}_{xx} & 0 & 0 \\ 0 & S^{(2,G)}_{xx} & 0 \\ 0 & 0 & S^{(2,G)}_{zz} \end{pmatrix}
+\end{align*}
+\begin{quote}
+\begin{align*}
+& S^{(2,G)}_{xx} = G_{0} - G_{u} \\
+& S^{(2,G)}_{zz} = G_{0} + 2 G_{u}
+\end{align*}
+\end{quote}
+\begin{align*}
+S^{(3,G)} = \begin{pmatrix} 0 & S^{(3,G)}_{1y} & 0 \\ 0 & - S^{(3,G)}_{1y} & 0 \\ 0 & 0 & 0 \\ S^{(3,G)}_{4x} & 0 & 0 \\ 0 & - S^{(3,G)}_{4x} & 0 \\ S^{(3,G)}_{1y} & 0 & 0 \end{pmatrix}
+\end{align*}
+\begin{quote}
+\begin{align*}
+& S^{(3,G)}_{1y} = G_{3}^{\beta} \\
+& S^{(3,G)}_{4x} = - 3 Q_{u}[1]
+\end{align*}
+\end{quote}
+\begin{align*}
+A^{(3,G)} = \begin{pmatrix} A^{(3,G)}_{4x} & 0 & 0 \\ 0 & A^{(3,G)}_{4x} & 0 \\ 0 & 0 & A^{(3,G)}_{6z} \end{pmatrix}
+\end{align*}
+\begin{quote}
+\begin{align*}
+& A^{(3,G)}_{4x} = Q_{0} - Q_{u}[2] \\
+& A^{(3,G)}_{6z} = Q_{0} + 2 Q_{u}[2]
+\end{align*}
+\end{quote}
+\begin{align*}
+S^{(4,G)} = \begin{pmatrix} S^{(4,G)}_{11} & S^{(4,G)}_{12} & S^{(4,G)}_{13} & 0 & S^{(4,G)}_{15} & 0 \\ S^{(4,G)}_{12} & S^{(4,G)}_{11} & S^{(4,G)}_{13} & 0 & - S^{(4,G)}_{15} & 0 \\ S^{(4,G)}_{13} & S^{(4,G)}_{13} & S^{(4,G)}_{33} & 0 & 0 & 0 \\ 0 & 0 & 0 & S^{(4,G)}_{44} & 0 & - S^{(4,G)}_{15} \\ S^{(4,G)}_{15} & - S^{(4,G)}_{15} & 0 & 0 & S^{(4,G)}_{44} & 0 \\ 0 & 0 & 0 & - S^{(4,G)}_{15} & 0 & \frac{S^{(4,G)}_{11}}{2} - \frac{S^{(4,G)}_{12}}{2} \end{pmatrix}
+\end{align*}
+\begin{quote}
+\begin{align*}
+& S^{(4,G)}_{11} = G_{0}[1] + 2 G_{0}[2] + 3 G_{4} - 2 G_{u}[1] - 4 G_{u}[2] \\
+& S^{(4,G)}_{12} = G_{0}[1] + G_{4} - 2 G_{u}[1] \\
+& S^{(4,G)}_{13} = G_{0}[1] - 4 G_{4} + G_{u}[1] \\
+& S^{(4,G)}_{15} = G_{4}^{\alpha} \\
+& S^{(4,G)}_{33} = G_{0}[1] + 2 G_{0}[2] + 8 G_{4} + 4 G_{u}[1] + 8 G_{u}[2] \\
+& S^{(4,G)}_{44} = G_{0}[2] - 4 G_{4} + G_{u}[2]
+\end{align*}
+\end{quote}
+\begin{align*}
+\bar{S}^{(4,G)} = \begin{pmatrix} 0 & 0 & \bar{S}^{(4,G)}_{13} & 0 & \bar{S}^{(4,G)}_{15} & 0 \\ 0 & 0 & \bar{S}^{(4,G)}_{13} & 0 & - \bar{S}^{(4,G)}_{15} & 0 \\ - \bar{S}^{(4,G)}_{13} & - \bar{S}^{(4,G)}_{13} & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & \bar{S}^{(4,G)}_{15} \\ - \bar{S}^{(4,G)}_{15} & \bar{S}^{(4,G)}_{15} & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & - \bar{S}^{(4,G)}_{15} & 0 & 0 \end{pmatrix}
+\end{align*}
+\begin{quote}
+\begin{align*}
+& \bar{S}^{(4,G)}_{13} = 3 G_{u}[3] \\
+& \bar{S}^{(4,G)}_{15} = - 2 Q_{3}^{\beta}[1]
+\end{align*}
+\end{quote}
+\begin{align*}
+A^{(4,G)} = \begin{pmatrix} A^{(4,G)}_{xx} & 0 & 0 \\ 0 & A^{(4,G)}_{xx} & 0 \\ 0 & 0 & A^{(4,G)}_{zz} \end{pmatrix}
+\end{align*}
+\begin{quote}
+\begin{align*}
+& A^{(4,G)}_{xx} = G_{0}[3] - 2 G_{u}[6] \\
+& A^{(4,G)}_{zz} = G_{0}[3] + 4 G_{u}[6]
+\end{align*}
+\end{quote}
+\begin{align*}
+M^{(4,G)} = \begin{pmatrix} 0 & M^{(4,G)}_{1y} & 0 \\ 0 & - M^{(4,G)}_{1y} & 0 \\ 0 & 0 & 0 \\ M^{(4,G)}_{4x} & 0 & 0 \\ 0 & - M^{(4,G)}_{4x} & 0 \\ M^{(4,G)}_{1y} & 0 & 0 \end{pmatrix}
+\end{align*}
+\begin{quote}
+\begin{align*}
+& M^{(4,G)}_{1y} = Q_{3}^{\beta}[2] \\
+& M^{(4,G)}_{4x} = - 3 G_{u}[4]
+\end{align*}
+\end{quote}
+\begin{align*}
+\bar{M}^{(4,G)} = \begin{pmatrix} 0 & 0 & 0 & \bar{M}^{(4,G)}_{x4} & 0 & \bar{M}^{(4,G)}_{x6} \\ \bar{M}^{(4,G)}_{x6} & - \bar{M}^{(4,G)}_{x6} & 0 & 0 & - \bar{M}^{(4,G)}_{x4} & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 \end{pmatrix}
+\end{align*}
+\begin{quote}
+\begin{align*}
+& \bar{M}^{(4,G)}_{x4} = - 3 G_{u}[5] \\
+& \bar{M}^{(4,G)}_{x6} = Q_{3}^{\beta}[3]
+\end{align*}
+\end{quote}
+
+\end{document}

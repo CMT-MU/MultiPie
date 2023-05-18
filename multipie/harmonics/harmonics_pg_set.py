@@ -1,0 +1,49 @@
+"""
+HarmonicsPGSet manages a set of point-group harmonics (real).
+"""
+from multipie.harmonics.harmonics_pg import HarmonicsPG
+from multipie.tag.tag_group import TagGroup
+from multipie.tag.tag_list import TagList
+
+
+# ==================================================
+class HarmonicsPGSet(dict):  # dict of (group tag, hamonics set), {TagGroup: HarmonicsPG}.
+    """
+    a set of point-group harmonics (real).
+
+    Attributes:
+        tag (str): class name tag.
+    """
+
+    # ==================================================
+    def __init__(self):
+        """
+        initialize the class.
+        """
+        self.tag = __class__.__name__
+        """class name tag."""
+        for tag in TagGroup.create():
+            self[tag] = HarmonicsPG(tag)
+
+    # ==================================================
+    def __str__(self):
+        return self.tag
+
+    # ==================================================
+    def __repr__(self):
+        return self.tag
+
+    # ==================================================
+    def latex(self):
+        return self.tag
+
+    # ==================================================
+    def __getitem__(self, tag):
+        if type(tag) == str:
+            return self.get(TagGroup(tag))
+        else:
+            return self.get(tag)
+
+    # ==================================================
+    def key_list(self):
+        return TagList(self.keys())
