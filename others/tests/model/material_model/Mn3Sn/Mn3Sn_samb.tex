@@ -1,0 +1,1157 @@
+\documentclass[fleqn,10pt,landscape]{article}
+\special{papersize=\the\paperwidth,\the\paperheight}
+
+%%% package
+
+\usepackage[usenames]{color}
+\usepackage{amsmath}
+\usepackage{breqn}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{enumerate}
+\usepackage{braket}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+%%% layout setting
+
+\paperwidth=279.4truemm
+\paperheight=215.9truemm
+\textwidth=228.59999999999997truemm
+\textheight=158.10000000000002truemm
+\oddsidemargin=0truemm
+\topmargin=0truemm
+\footskip=7truemm
+
+%%% fixed
+
+\hoffset=0truemm
+\voffset=0truemm
+\headheight=0truemm
+\headsep=0truemm
+\marginparsep=0truemm
+\marginparwidth=0truemm
+
+%%% main text
+
+\begin{document}
+
+\setcounter{MaxMatrixCols}{16}
+
+\setlength{\baselineskip}{16pt}
+\footnotesize
+\begin{center}
+\LARGE
+SAMB for ``\texttt{Mn3Sn}''
+\end{center}
+\begin{flushright}
+Generated on 2023-05-24 22:59 by MultiPie 1.1.1
+\end{flushright}
+\vspace{1cm}
+
+
+ \hfil \hrule height 1mm width \textwidth \hfil
+
+\begin{itemize}
+\item Group: No. 194\quad$D_{6h}^{4}$\quad$P6_3/mmc$\quad[ hexagonal ]
+
+\item Associated point group: No. 27\quad$D_{6h}$\quad$6/mmm$\quad[ hexagonal ]
+
+\vspace{5mm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% generation condition.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Generation condition
+
+\quad - model type: \texttt{tight_binding}
+
+\quad - time-reversal type: \texttt{electric}
+
+\quad - irrep: \texttt{[A1g]}
+
+\quad - \texttt{spinless}
+
+
+ \hfil \hrule height 1mm width \textwidth \hfil
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% unit cell.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Unit cell:
+
+\quad $a=1.0,\,\, b=1.0,\,\, c=1.0,\,\, \alpha=90.0,\,\, \beta=90.0,\,\, \gamma=120.0$
+
+\item Lattice vectors:
+
+\quad $\bm{a}_1=\begin{pmatrix} 1.0 & 0 & 0 \end{pmatrix}$
+
+\quad $\bm{a}_2=\begin{pmatrix} -0.5 & 0.86602540378444 & 0 \end{pmatrix}$
+
+\quad $\bm{a}_3=\begin{pmatrix} 0 & 0 & 1.0 \end{pmatrix}$
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% k path.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{longtable}{c|cc|cc}
+\caption{High-symmetry line: $\Gamma$-X.}
+ \\
+ \hline \hline
+ & symbol & position & symbol & position \\ \hline \endfirsthead
+
+\multicolumn{4}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+ & symbol & position & symbol & position \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{4}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{4}{r}{} \\ \endlastfoot
+
+ & $\Gamma$ & $\begin{pmatrix} 0 & 0 & 0 \end{pmatrix}$ & X & $\begin{pmatrix} \frac{1}{2} & 0 & 0 \end{pmatrix}$ \\
+\end{longtable}
+\end{center}
+
+ \hfil \hrule height 1mm width \textwidth \hfil
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ket hilbert space.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Kets: dimension = 40
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{longtable}{c|cc|cc|cc|cc|cc}
+\caption{Hilbert space for full matrix.}
+ \\
+ \hline \hline
+ & No. & ket & No. & ket & No. & ket & No. & ket & No. & ket \\ \hline \endfirsthead
+
+\multicolumn{10}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+ & No. & ket & No. & ket & No. & ket & No. & ket & No. & ket \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{10}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{10}{r}{} \\ \endlastfoot
+
+ & 1 & $d_{u}$@Mn$_{1}$ & 2 & $d_{v}$@Mn$_{1}$ & 3 & $d_{yz}$@Mn$_{1}$ & 4 & $d_{zx}$@Mn$_{1}$ & 5 & $d_{xy}$@Mn$_{1}$ \\
+& 6 & $d_{u}$@Mn$_{2}$ & 7 & $d_{v}$@Mn$_{2}$ & 8 & $d_{yz}$@Mn$_{2}$ & 9 & $d_{zx}$@Mn$_{2}$ & 10 & $d_{xy}$@Mn$_{2}$ \\
+& 11 & $d_{u}$@Mn$_{3}$ & 12 & $d_{v}$@Mn$_{3}$ & 13 & $d_{yz}$@Mn$_{3}$ & 14 & $d_{zx}$@Mn$_{3}$ & 15 & $d_{xy}$@Mn$_{3}$ \\
+& 16 & $d_{u}$@Mn$_{4}$ & 17 & $d_{v}$@Mn$_{4}$ & 18 & $d_{yz}$@Mn$_{4}$ & 19 & $d_{zx}$@Mn$_{4}$ & 20 & $d_{xy}$@Mn$_{4}$ \\
+& 21 & $d_{u}$@Mn$_{5}$ & 22 & $d_{v}$@Mn$_{5}$ & 23 & $d_{yz}$@Mn$_{5}$ & 24 & $d_{zx}$@Mn$_{5}$ & 25 & $d_{xy}$@Mn$_{5}$ \\
+& 26 & $d_{u}$@Mn$_{6}$ & 27 & $d_{v}$@Mn$_{6}$ & 28 & $d_{yz}$@Mn$_{6}$ & 29 & $d_{zx}$@Mn$_{6}$ & 30 & $d_{xy}$@Mn$_{6}$ \\
+& 31 & $d_{u}$@Sn$_{1}$ & 32 & $d_{v}$@Sn$_{1}$ & 33 & $d_{yz}$@Sn$_{1}$ & 34 & $d_{zx}$@Sn$_{1}$ & 35 & $d_{xy}$@Sn$_{1}$ \\
+& 36 & $d_{u}$@Sn$_{2}$ & 37 & $d_{v}$@Sn$_{2}$ & 38 & $d_{yz}$@Sn$_{2}$ & 39 & $d_{zx}$@Sn$_{2}$ & 40 & $d_{xy}$@Sn$_{2}$ \\
+\end{longtable}
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% sites in unit cell.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Sites in (primitive) unit cell:
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{longtable}{cc|c|l}
+\caption{Site-clusters.}
+ \\
+ \hline \hline
+ & site & position & mapping \\ \hline \endfirsthead
+
+\multicolumn{3}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+ & site & position & mapping \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{3}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{3}{r}{} \\ \endlastfoot
+
+S$_{1}$ & Mn$_1$ & $\begin{pmatrix} 0.8388 & 0.6776 & \frac{1}{4} \end{pmatrix}$ & [1,6,14,17] \\
+& Mn$_2$ & $\begin{pmatrix} 0.1612 & 0.3224 & \frac{3}{4} \end{pmatrix}$ & [2,3,13,18] \\
+& Mn$_3$ & $\begin{pmatrix} 0.1612 & 0.8388 & \frac{3}{4} \end{pmatrix}$ & [4,11,19,22] \\
+& Mn$_4$ & $\begin{pmatrix} 0.6776 & 0.8388 & \frac{3}{4} \end{pmatrix}$ & [5,12,20,21] \\
+& Mn$_5$ & $\begin{pmatrix} 0.8388 & 0.1612 & \frac{1}{4} \end{pmatrix}$ & [7,10,15,23] \\
+& Mn$_6$ & $\begin{pmatrix} 0.3224 & 0.1612 & \frac{1}{4} \end{pmatrix}$ & [8,9,16,24] \\ \hline
+S$_{2}$ & Sn$_1$ & $\begin{pmatrix} \frac{1}{3} & \frac{2}{3} & \frac{1}{4} \end{pmatrix}$ & [1,6,7,8,9,10,14,15,16,17,23,24] \\
+& Sn$_2$ & $\begin{pmatrix} \frac{2}{3} & \frac{1}{3} & \frac{3}{4} \end{pmatrix}$ & [2,3,4,5,11,12,13,18,19,20,21,22] \\
+\end{longtable}
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% bonds in unit cell.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Bonds in (primitive) unit cell:
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{longtable}{cc|cc|c|c|c|l}
+\caption{Bond-clusters.}
+ \\
+ \hline \hline
+ & bond & tail & head & $n$ & \# & $\bm{b}@\bm{c}$ & mapping \\ \hline \endfirsthead
+
+\multicolumn{7}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+ & bond & tail & head & $n$ & \# & $\bm{b}@\bm{c}$ & mapping \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{7}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{7}{r}{} \\ \endlastfoot
+
+B$_{1}$ & b$_{1}$ & Mn$_{1}$ & Mn$_{5}$ & 1 & 1 & $\begin{pmatrix} 0 & 0.4836 & 0 \end{pmatrix}@\begin{pmatrix} 0.8388 & 0.9194 & \frac{1}{4} \end{pmatrix}$ & [1,-7,-15,17] \\
+& b$_{2}$ & Mn$_{2}$ & Mn$_{3}$ & 1 & 1 & $\begin{pmatrix} 0 & -0.4836 & 0 \end{pmatrix}@\begin{pmatrix} 0.1612 & 0.0806 & \frac{3}{4} \end{pmatrix}$ & [2,-4,13,-19] \\
+& b$_{3}$ & Mn$_{2}$ & Mn$_{4}$ & 1 & 1 & $\begin{pmatrix} -0.4836 & -0.4836 & 0 \end{pmatrix}@\begin{pmatrix} 0.9194 & 0.0806 & \frac{3}{4} \end{pmatrix}$ & [3,-12,18,-21] \\
+& b$_{4}$ & Mn$_{3}$ & Mn$_{4}$ & 1 & 1 & $\begin{pmatrix} -0.4836 & 0 & 0 \end{pmatrix}@\begin{pmatrix} 0.9194 & 0.8388 & \frac{3}{4} \end{pmatrix}$ & [-5,11,-20,22] \\
+& b$_{5}$ & Mn$_{1}$ & Mn$_{6}$ & 1 & 1 & $\begin{pmatrix} 0.4836 & 0.4836 & 0 \end{pmatrix}@\begin{pmatrix} 0.0806 & 0.9194 & \frac{1}{4} \end{pmatrix}$ & [6,-9,14,-24] \\
+& b$_{6}$ & Mn$_{5}$ & Mn$_{6}$ & 1 & 1 & $\begin{pmatrix} 0.4836 & 0 & 0 \end{pmatrix}@\begin{pmatrix} 0.0806 & 0.1612 & \frac{1}{4} \end{pmatrix}$ & [-8,10,-16,23] \\ \hline
+B$_{2}$ & b$_{7}$ & Sn$_{1}$ & Sn$_{2}$ & 1 & 1 & $\begin{pmatrix} \frac{1}{3} & \frac{2}{3} & - \frac{1}{2} \end{pmatrix}@\begin{pmatrix} \frac{1}{2} & 0 & 0 \end{pmatrix}$ & [1,-3,-13,14] \\
+& b$_{8}$ & Sn$_{1}$ & Sn$_{2}$ & 1 & 1 & $\begin{pmatrix} \frac{1}{3} & \frac{2}{3} & \frac{1}{2} \end{pmatrix}@\begin{pmatrix} \frac{1}{2} & 0 & \frac{1}{2} \end{pmatrix}$ & [-2,6,17,-18] \\
+& b$_{9}$ & Sn$_{1}$ & Sn$_{2}$ & 1 & 1 & $\begin{pmatrix} \frac{1}{3} & - \frac{1}{3} & - \frac{1}{2} \end{pmatrix}@\begin{pmatrix} \frac{1}{2} & \frac{1}{2} & 0 \end{pmatrix}$ & [-4,10,15,-22] \\
+& b$_{10}$ & Sn$_{1}$ & Sn$_{2}$ & 1 & 1 & $\begin{pmatrix} - \frac{2}{3} & - \frac{1}{3} & - \frac{1}{2} \end{pmatrix}@\begin{pmatrix} 0 & \frac{1}{2} & 0 \end{pmatrix}$ & [-5,9,16,-21] \\
+& b$_{11}$ & Sn$_{1}$ & Sn$_{2}$ & 1 & 1 & $\begin{pmatrix} \frac{1}{3} & - \frac{1}{3} & \frac{1}{2} \end{pmatrix}@\begin{pmatrix} \frac{1}{2} & \frac{1}{2} & \frac{1}{2} \end{pmatrix}$ & [7,-11,-19,23] \\
+& b$_{12}$ & Sn$_{1}$ & Sn$_{2}$ & 1 & 1 & $\begin{pmatrix} - \frac{2}{3} & - \frac{1}{3} & \frac{1}{2} \end{pmatrix}@\begin{pmatrix} 0 & \frac{1}{2} & \frac{1}{2} \end{pmatrix}$ & [8,-12,-20,24] \\ \hline
+B$_{3}$ & b$_{13}$ & Mn$_{1}$ & Sn$_{1}$ & 1 & 1 & $\begin{pmatrix} 0.494533333333333 & -0.0109333333333333 & 0 \end{pmatrix}@\begin{pmatrix} 0.0860666666666667 & 0.672133333333333 & \frac{1}{4} \end{pmatrix}$ & [1,17] \\
+& b$_{14}$ & Mn$_{2}$ & Sn$_{2}$ & 1 & 1 & $\begin{pmatrix} -0.494533333333333 & 0.0109333333333333 & 0 \end{pmatrix}@\begin{pmatrix} 0.913933333333333 & 0.327866666666667 & \frac{3}{4} \end{pmatrix}$ & [2,13] \\
+& b$_{15}$ & Mn$_{2}$ & Sn$_{2}$ & 1 & 1 & $\begin{pmatrix} 0.505466666666667 & 0.0109333333333333 & 0 \end{pmatrix}@\begin{pmatrix} 0.413933333333333 & 0.327866666666667 & \frac{3}{4} \end{pmatrix}$ & [3,18] \\
+& b$_{16}$ & Mn$_{3}$ & Sn$_{2}$ & 1 & 1 & $\begin{pmatrix} -0.494533333333333 & -0.505466666666667 & 0 \end{pmatrix}@\begin{pmatrix} 0.913933333333333 & 0.586066666666667 & \frac{3}{4} \end{pmatrix}$ & [4,19] \\
+& b$_{17}$ & Mn$_{4}$ & Sn$_{2}$ & 1 & 1 & $\begin{pmatrix} -0.0109333333333333 & 0.494533333333333 & 0 \end{pmatrix}@\begin{pmatrix} 0.672133333333333 & 0.0860666666666667 & \frac{3}{4} \end{pmatrix}$ & [5,20] \\
+& b$_{18}$ & Mn$_{1}$ & Sn$_{1}$ & 1 & 1 & $\begin{pmatrix} -0.505466666666667 & -0.0109333333333333 & 0 \end{pmatrix}@\begin{pmatrix} 0.586066666666667 & 0.672133333333333 & \frac{1}{4} \end{pmatrix}$ & [6,14] \\
+& b$_{19}$ & Mn$_{5}$ & Sn$_{1}$ & 1 & 1 & $\begin{pmatrix} 0.494533333333333 & 0.505466666666667 & 0 \end{pmatrix}@\begin{pmatrix} 0.0860666666666667 & 0.413933333333333 & \frac{1}{4} \end{pmatrix}$ & [7,15] \\
+& b$_{20}$ & Mn$_{6}$ & Sn$_{1}$ & 1 & 1 & $\begin{pmatrix} 0.0109333333333333 & -0.494533333333333 & 0 \end{pmatrix}@\begin{pmatrix} 0.327866666666667 & 0.913933333333333 & \frac{1}{4} \end{pmatrix}$ & [8,16] \\
+& b$_{21}$ & Mn$_{6}$ & Sn$_{1}$ & 1 & 1 & $\begin{pmatrix} 0.0109333333333333 & 0.505466666666667 & 0 \end{pmatrix}@\begin{pmatrix} 0.327866666666667 & 0.413933333333333 & \frac{1}{4} \end{pmatrix}$ & [9,24] \\
+& b$_{22}$ & Mn$_{5}$ & Sn$_{1}$ & 1 & 1 & $\begin{pmatrix} -0.505466666666667 & -0.494533333333333 & 0 \end{pmatrix}@\begin{pmatrix} 0.586066666666667 & 0.913933333333333 & \frac{1}{4} \end{pmatrix}$ & [10,23] \\
+& b$_{23}$ & Mn$_{3}$ & Sn$_{2}$ & 1 & 1 & $\begin{pmatrix} 0.505466666666667 & 0.494533333333333 & 0 \end{pmatrix}@\begin{pmatrix} 0.413933333333333 & 0.0860666666666667 & \frac{3}{4} \end{pmatrix}$ & [11,22] \\
+& b$_{24}$ & Mn$_{4}$ & Sn$_{2}$ & 1 & 1 & $\begin{pmatrix} -0.0109333333333333 & -0.505466666666667 & 0 \end{pmatrix}@\begin{pmatrix} 0.672133333333333 & 0.586066666666667 & \frac{3}{4} \end{pmatrix}$ & [12,21] \\
+\end{longtable}
+\end{center}
+
+ \hfil \hrule height 1mm width \textwidth \hfil
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SAMB.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item SAMB:
+
+\vspace{4mm}
+\noindent \fbox{No. {1}} $\,\,\,\hat{\mathbb{Q}}_{0}^{(A_{1g})}$ [M$_{1}$,\,S$_{1}$]
+\begin{dmath*}
+\hat{\mathbb{Z}}_{1}=\mathbb{X}_{1}[\mathbb{Q}_{0}^{(a,A_{1g})}] \otimes\mathbb{Y}_{1}[\mathbb{Q}_{0}^{(s,A_{1g})}]
+\end{dmath*}
+\begin{dmath*}
+\hat{\mathbb{Z}}_{1}(\bm{k})=\mathbb{X}_{1}[\mathbb{Q}_{0}^{(a,A_{1g})}] \otimes\mathbb{U}_{1}[\mathbb{Q}_{0}^{(s,A_{1g})}]
+\end{dmath*}
+\vspace{4mm}
+\noindent \fbox{No. {2}} $\,\,\,\hat{\mathbb{Q}}_{2}^{(A_{1g})}$ [M$_{1}$,\,S$_{1}$]
+\begin{dmath*}
+\hat{\mathbb{Z}}_{2}=\mathbb{X}_{2}[\mathbb{Q}_{2}^{(a,A_{1g})}] \otimes\mathbb{Y}_{1}[\mathbb{Q}_{0}^{(s,A_{1g})}]
+\end{dmath*}
+\begin{dmath*}
+\hat{\mathbb{Z}}_{2}(\bm{k})=\mathbb{X}_{2}[\mathbb{Q}_{2}^{(a,A_{1g})}] \otimes\mathbb{U}_{1}[\mathbb{Q}_{0}^{(s,A_{1g})}]
+\end{dmath*}
+\vspace{4mm}
+\noindent \fbox{No. {3}} $\,\,\,\hat{\mathbb{Q}}_{0}^{(A_{1g})}$ [M$_{1}$,\,S$_{1}$]
+\begin{dmath*}
+\hat{\mathbb{Z}}_{3}=\frac{\sqrt{2} \mathbb{X}_{8}[\mathbb{Q}_{2,0}^{(a,E_{2g})}] \otimes\mathbb{Y}_{2}[\mathbb{Q}_{2,0}^{(s,E_{2g})}]}{2} + \frac{\sqrt{2} \mathbb{X}_{9}[\mathbb{Q}_{2,1}^{(a,E_{2g})}] \otimes\mathbb{Y}_{3}[\mathbb{Q}_{2,1}^{(s,E_{2g})}]}{2}
+\end{dmath*}
+\begin{dmath*}
+\hat{\mathbb{Z}}_{3}(\bm{k})=\frac{\sqrt{2} \mathbb{X}_{8}[\mathbb{Q}_{2,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{2}[\mathbb{Q}_{2,0}^{(s,E_{2g})}]}{2} + \frac{\sqrt{2} \mathbb{X}_{9}[\mathbb{Q}_{2,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{3}[\mathbb{Q}_{2,1}^{(s,E_{2g})}]}{2}
+\end{dmath*}
+\vspace{4mm}
+\noindent \fbox{No. {4}} $\,\,\,\hat{\mathbb{Q}}_{4}^{(A_{1g})}$ [M$_{1}$,\,S$_{1}$]
+\begin{dmath*}
+\hat{\mathbb{Z}}_{4}=\mathbb{X}_{3}[\mathbb{Q}_{4}^{(a,A_{1g})}] \otimes\mathbb{Y}_{1}[\mathbb{Q}_{0}^{(s,A_{1g})}]
+\end{dmath*}
+\begin{dmath*}
+\hat{\mathbb{Z}}_{4}(\bm{k})=\mathbb{X}_{3}[\mathbb{Q}_{4}^{(a,A_{1g})}] \otimes\mathbb{U}_{1}[\mathbb{Q}_{0}^{(s,A_{1g})}]
+\end{dmath*}
+\vspace{4mm}
+\noindent \fbox{No. {5}} $\,\,\,\hat{\mathbb{Q}}_{2}^{(A_{1g})}$ [M$_{1}$,\,S$_{1}$]
+\begin{dmath*}
+\hat{\mathbb{Z}}_{5}=\frac{\sqrt{2} \mathbb{X}_{12}[\mathbb{Q}_{4,0}^{(a,E_{2g},2)}] \otimes\mathbb{Y}_{2}[\mathbb{Q}_{2,0}^{(s,E_{2g})}]}{2} + \frac{\sqrt{2} \mathbb{X}_{13}[\mathbb{Q}_{4,1}^{(a,E_{2g},2)}] \otimes\mathbb{Y}_{3}[\mathbb{Q}_{2,1}^{(s,E_{2g})}]}{2}
+\end{dmath*}
+\begin{dmath*}
+\hat{\mathbb{Z}}_{5}(\bm{k})=\frac{\sqrt{2} \mathbb{X}_{12}[\mathbb{Q}_{4,0}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{2}[\mathbb{Q}_{2,0}^{(s,E_{2g})}]}{2} + \frac{\sqrt{2} \mathbb{X}_{13}[\mathbb{Q}_{4,1}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{3}[\mathbb{Q}_{2,1}^{(s,E_{2g})}]}{2}
+\end{dmath*}
+\vspace{4mm}
+\noindent \fbox{No. {6}} $\,\,\,\hat{\mathbb{Q}}_{6}^{(A_{1g},2)}$ [M$_{1}$,\,S$_{1}$]
+\begin{dmath*}
+\hat{\mathbb{Z}}_{6}=\frac{\sqrt{2} \mathbb{X}_{10}[\mathbb{Q}_{4,0}^{(a,E_{2g},1)}] \otimes\mathbb{Y}_{2}[\mathbb{Q}_{2,0}^{(s,E_{2g})}]}{2} + \frac{\sqrt{2} \mathbb{X}_{11}[\mathbb{Q}_{4,1}^{(a,E_{2g},1)}] \otimes\mathbb{Y}_{3}[\mathbb{Q}_{2,1}^{(s,E_{2g})}]}{2}
+\end{dmath*}
+\begin{dmath*}
+\hat{\mathbb{Z}}_{6}(\bm{k})=\frac{\sqrt{2} \mathbb{X}_{10}[\mathbb{Q}_{4,0}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{2}[\mathbb{Q}_{2,0}^{(s,E_{2g})}]}{2} + \frac{\sqrt{2} \mathbb{X}_{11}[\mathbb{Q}_{4,1}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{3}[\mathbb{Q}_{2,1}^{(s,E_{2g})}]}{2}
+\end{dmath*}
+\vspace{4mm}
+\noindent \fbox{No. {7}} $\,\,\,\hat{\mathbb{Q}}_{0}^{(A_{1g})}$ [M$_{1}$,\,S$_{2}$]
+\begin{dmath*}
+\hat{\mathbb{Z}}_{7}=\mathbb{X}_{1}[\mathbb{Q}_{0}^{(a,A_{1g})}] \otimes\mathbb{Y}_{4}[\mathbb{Q}_{0}^{(s,A_{1g})}]
+\end{dmath*}
+\begin{dmath*}
+\hat{\mathbb{Z}}_{7}(\bm{k})=\mathbb{X}_{1}[\mathbb{Q}_{0}^{(a,A_{1g})}] \otimes\mathbb{U}_{4}[\mathbb{Q}_{0}^{(s,A_{1g})}]
+\end{dmath*}
+\vspace{4mm}
+\noindent \fbox{No. {8}} $\,\,\,\hat{\mathbb{Q}}_{2}^{(A_{1g})}$ [M$_{1}$,\,S$_{2}$]
+\begin{dmath*}
+\hat{\mathbb{Z}}_{8}=\mathbb{X}_{2}[\mathbb{Q}_{2}^{(a,A_{1g})}] \otimes\mathbb{Y}_{4}[\mathbb{Q}_{0}^{(s,A_{1g})}]
+\end{dmath*}
+\begin{dmath*}
+\hat{\mathbb{Z}}_{8}(\bm{k})=\mathbb{X}_{2}[\mathbb{Q}_{2}^{(a,A_{1g})}] \otimes\mathbb{U}_{4}[\mathbb{Q}_{0}^{(s,A_{1g})}]
+\end{dmath*}
+\vspace{4mm}
+\noindent \fbox{No. {9}} $\,\,\,\hat{\mathbb{Q}}_{4}^{(A_{1g})}$ [M$_{1}$,\,S$_{2}$]
+\begin{dmath*}
+\hat{\mathbb{Z}}_{9}=\mathbb{X}_{3}[\mathbb{Q}_{4}^{(a,A_{1g})}] \otimes\mathbb{Y}_{4}[\mathbb{Q}_{0}^{(s,A_{1g})}]
+\end{dmath*}
+\begin{dmath*}
+\hat{\mathbb{Z}}_{9}(\bm{k})=\mathbb{X}_{3}[\mathbb{Q}_{4}^{(a,A_{1g})}] \otimes\mathbb{U}_{4}[\mathbb{Q}_{0}^{(s,A_{1g})}]
+\end{dmath*}
+\vspace{4mm}
+\noindent \fbox{No. {10}} $\,\,\,\hat{\mathbb{Q}}_{0}^{(A_{1g})}$ [M$_{1}$,\,B$_{1}$]
+\begin{dmath*}
+\hat{\mathbb{Z}}_{10}=\mathbb{X}_{1}[\mathbb{Q}_{0}^{(a,A_{1g})}] \otimes\mathbb{Y}_{5}[\mathbb{Q}_{0}^{(b,A_{1g})}]
+\end{dmath*}
+\begin{dmath*}
+\hat{\mathbb{Z}}_{10}(\bm{k})=- \frac{\sqrt{6} \mathbb{X}_{1}[\mathbb{Q}_{0}^{(a,A_{1g})}] \otimes\mathbb{U}_{11}[\mathbb{T}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{4}[\mathbb{T}_{1,0}^{(k,E_{1u})}]}{6} - \frac{\sqrt{6} \mathbb{X}_{1}[\mathbb{Q}_{0}^{(a,A_{1g})}] \otimes\mathbb{U}_{12}[\mathbb{T}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{5}[\mathbb{T}_{1,1}^{(k,E_{1u})}]}{6} - \frac{\sqrt{6} \mathbb{X}_{1}[\mathbb{Q}_{0}^{(a,A_{1g})}] \otimes\mathbb{U}_{15}[\mathbb{T}_{3}^{(u,B_{2u})}] \otimes\mathbb{F}_{6}[\mathbb{T}_{3}^{(k,B_{2u})}]}{6} + \frac{\sqrt{6} \mathbb{X}_{1}[\mathbb{Q}_{0}^{(a,A_{1g})}] \otimes\mathbb{U}_{5}[\mathbb{Q}_{0}^{(u,A_{1g})}] \otimes\mathbb{F}_{1}[\mathbb{Q}_{0}^{(k,A_{1g})}]}{6} + \frac{\sqrt{6} \mathbb{X}_{1}[\mathbb{Q}_{0}^{(a,A_{1g})}] \otimes\mathbb{U}_{8}[\mathbb{Q}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{2}[\mathbb{Q}_{2,0}^{(k,E_{2g})}]}{6} + \frac{\sqrt{6} \mathbb{X}_{1}[\mathbb{Q}_{0}^{(a,A_{1g})}] \otimes\mathbb{U}_{9}[\mathbb{Q}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{3}[\mathbb{Q}_{2,1}^{(k,E_{2g})}]}{6}
+\end{dmath*}
+\vspace{4mm}
+\noindent \fbox{No. {11}} $\,\,\,\hat{\mathbb{Q}}_{2}^{(A_{1g})}$ [M$_{1}$,\,B$_{1}$]
+\begin{dmath*}
+\hat{\mathbb{Z}}_{11}=\mathbb{X}_{2}[\mathbb{Q}_{2}^{(a,A_{1g})}] \otimes\mathbb{Y}_{5}[\mathbb{Q}_{0}^{(b,A_{1g})}]
+\end{dmath*}
+\begin{dmath*}
+\hat{\mathbb{Z}}_{11}(\bm{k})=- \frac{\sqrt{6} \mathbb{X}_{2}[\mathbb{Q}_{2}^{(a,A_{1g})}] \otimes\mathbb{U}_{11}[\mathbb{T}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{4}[\mathbb{T}_{1,0}^{(k,E_{1u})}]}{6} - \frac{\sqrt{6} \mathbb{X}_{2}[\mathbb{Q}_{2}^{(a,A_{1g})}] \otimes\mathbb{U}_{12}[\mathbb{T}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{5}[\mathbb{T}_{1,1}^{(k,E_{1u})}]}{6} - \frac{\sqrt{6} \mathbb{X}_{2}[\mathbb{Q}_{2}^{(a,A_{1g})}] \otimes\mathbb{U}_{15}[\mathbb{T}_{3}^{(u,B_{2u})}] \otimes\mathbb{F}_{6}[\mathbb{T}_{3}^{(k,B_{2u})}]}{6} + \frac{\sqrt{6} \mathbb{X}_{2}[\mathbb{Q}_{2}^{(a,A_{1g})}] \otimes\mathbb{U}_{5}[\mathbb{Q}_{0}^{(u,A_{1g})}] \otimes\mathbb{F}_{1}[\mathbb{Q}_{0}^{(k,A_{1g})}]}{6} + \frac{\sqrt{6} \mathbb{X}_{2}[\mathbb{Q}_{2}^{(a,A_{1g})}] \otimes\mathbb{U}_{8}[\mathbb{Q}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{2}[\mathbb{Q}_{2,0}^{(k,E_{2g})}]}{6} + \frac{\sqrt{6} \mathbb{X}_{2}[\mathbb{Q}_{2}^{(a,A_{1g})}] \otimes\mathbb{U}_{9}[\mathbb{Q}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{3}[\mathbb{Q}_{2,1}^{(k,E_{2g})}]}{6}
+\end{dmath*}
+\vspace{4mm}
+\noindent \fbox{No. {12}} $\,\,\,\hat{\mathbb{Q}}_{0}^{(A_{1g})}$ [M$_{1}$,\,B$_{1}$]
+\begin{dmath*}
+\hat{\mathbb{Z}}_{12}=\frac{\sqrt{2} \mathbb{X}_{8}[\mathbb{Q}_{2,0}^{(a,E_{2g})}] \otimes\mathbb{Y}_{6}[\mathbb{Q}_{2,0}^{(b,E_{2g})}]}{2} + \frac{\sqrt{2} \mathbb{X}_{9}[\mathbb{Q}_{2,1}^{(a,E_{2g})}] \otimes\mathbb{Y}_{7}[\mathbb{Q}_{2,1}^{(b,E_{2g})}]}{2}
+\end{dmath*}
+\begin{dmath*}
+\hat{\mathbb{Z}}_{12}(\bm{k})=\frac{\sqrt{6} \mathbb{X}_{8}[\mathbb{Q}_{2,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{11}[\mathbb{T}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{4}[\mathbb{T}_{1,0}^{(k,E_{1u})}]}{12} - \frac{\sqrt{3} \mathbb{X}_{8}[\mathbb{Q}_{2,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{11}[\mathbb{T}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{6}[\mathbb{T}_{3}^{(k,B_{2u})}]}{6} - \frac{\sqrt{6} \mathbb{X}_{8}[\mathbb{Q}_{2,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{12}[\mathbb{T}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{5}[\mathbb{T}_{1,1}^{(k,E_{1u})}]}{12} - \frac{\sqrt{3} \mathbb{X}_{8}[\mathbb{Q}_{2,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{15}[\mathbb{T}_{3}^{(u,B_{2u})}] \otimes\mathbb{F}_{4}[\mathbb{T}_{1,0}^{(k,E_{1u})}]}{6} + \frac{\sqrt{3} \mathbb{X}_{8}[\mathbb{Q}_{2,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{5}[\mathbb{Q}_{0}^{(u,A_{1g})}] \otimes\mathbb{F}_{2}[\mathbb{Q}_{2,0}^{(k,E_{2g})}]}{6} + \frac{\sqrt{3} \mathbb{X}_{8}[\mathbb{Q}_{2,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{8}[\mathbb{Q}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{1}[\mathbb{Q}_{0}^{(k,A_{1g})}]}{6} - \frac{\sqrt{6} \mathbb{X}_{8}[\mathbb{Q}_{2,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{8}[\mathbb{Q}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{2}[\mathbb{Q}_{2,0}^{(k,E_{2g})}]}{12} + \frac{\sqrt{6} \mathbb{X}_{8}[\mathbb{Q}_{2,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{9}[\mathbb{Q}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{3}[\mathbb{Q}_{2,1}^{(k,E_{2g})}]}{12} - \frac{\sqrt{6} \mathbb{X}_{9}[\mathbb{Q}_{2,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{11}[\mathbb{T}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{5}[\mathbb{T}_{1,1}^{(k,E_{1u})}]}{12} - \frac{\sqrt{6} \mathbb{X}_{9}[\mathbb{Q}_{2,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{12}[\mathbb{T}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{4}[\mathbb{T}_{1,0}^{(k,E_{1u})}]}{12} - \frac{\sqrt{3} \mathbb{X}_{9}[\mathbb{Q}_{2,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{12}[\mathbb{T}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{6}[\mathbb{T}_{3}^{(k,B_{2u})}]}{6} - \frac{\sqrt{3} \mathbb{X}_{9}[\mathbb{Q}_{2,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{15}[\mathbb{T}_{3}^{(u,B_{2u})}] \otimes\mathbb{F}_{5}[\mathbb{T}_{1,1}^{(k,E_{1u})}]}{6} + \frac{\sqrt{3} \mathbb{X}_{9}[\mathbb{Q}_{2,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{5}[\mathbb{Q}_{0}^{(u,A_{1g})}] \otimes\mathbb{F}_{3}[\mathbb{Q}_{2,1}^{(k,E_{2g})}]}{6} + \frac{\sqrt{6} \mathbb{X}_{9}[\mathbb{Q}_{2,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{8}[\mathbb{Q}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{3}[\mathbb{Q}_{2,1}^{(k,E_{2g})}]}{12} + \frac{\sqrt{3} \mathbb{X}_{9}[\mathbb{Q}_{2,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{9}[\mathbb{Q}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{1}[\mathbb{Q}_{0}^{(k,A_{1g})}]}{6} + \frac{\sqrt{6} \mathbb{X}_{9}[\mathbb{Q}_{2,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{9}[\mathbb{Q}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{2}[\mathbb{Q}_{2,0}^{(k,E_{2g})}]}{12}
+\end{dmath*}
+\vspace{4mm}
+\noindent \fbox{No. {13}} $\,\,\,\hat{\mathbb{Q}}_{4}^{(A_{1g})}$ [M$_{1}$,\,B$_{1}$]
+\begin{dmath*}
+\hat{\mathbb{Z}}_{13}=\mathbb{X}_{3}[\mathbb{Q}_{4}^{(a,A_{1g})}] \otimes\mathbb{Y}_{5}[\mathbb{Q}_{0}^{(b,A_{1g})}]
+\end{dmath*}
+\begin{dmath*}
+\hat{\mathbb{Z}}_{13}(\bm{k})=- \frac{\sqrt{6} \mathbb{X}_{3}[\mathbb{Q}_{4}^{(a,A_{1g})}] \otimes\mathbb{U}_{11}[\mathbb{T}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{4}[\mathbb{T}_{1,0}^{(k,E_{1u})}]}{6} - \frac{\sqrt{6} \mathbb{X}_{3}[\mathbb{Q}_{4}^{(a,A_{1g})}] \otimes\mathbb{U}_{12}[\mathbb{T}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{5}[\mathbb{T}_{1,1}^{(k,E_{1u})}]}{6} - \frac{\sqrt{6} \mathbb{X}_{3}[\mathbb{Q}_{4}^{(a,A_{1g})}] \otimes\mathbb{U}_{15}[\mathbb{T}_{3}^{(u,B_{2u})}] \otimes\mathbb{F}_{6}[\mathbb{T}_{3}^{(k,B_{2u})}]}{6} + \frac{\sqrt{6} \mathbb{X}_{3}[\mathbb{Q}_{4}^{(a,A_{1g})}] \otimes\mathbb{U}_{5}[\mathbb{Q}_{0}^{(u,A_{1g})}] \otimes\mathbb{F}_{1}[\mathbb{Q}_{0}^{(k,A_{1g})}]}{6} + \frac{\sqrt{6} \mathbb{X}_{3}[\mathbb{Q}_{4}^{(a,A_{1g})}] \otimes\mathbb{U}_{8}[\mathbb{Q}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{2}[\mathbb{Q}_{2,0}^{(k,E_{2g})}]}{6} + \frac{\sqrt{6} \mathbb{X}_{3}[\mathbb{Q}_{4}^{(a,A_{1g})}] \otimes\mathbb{U}_{9}[\mathbb{Q}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{3}[\mathbb{Q}_{2,1}^{(k,E_{2g})}]}{6}
+\end{dmath*}
+\vspace{4mm}
+\noindent \fbox{No. {14}} $\,\,\,\hat{\mathbb{Q}}_{2}^{(A_{1g})}$ [M$_{1}$,\,B$_{1}$]
+\begin{dmath*}
+\hat{\mathbb{Z}}_{14}=\frac{\sqrt{2} \mathbb{X}_{12}[\mathbb{Q}_{4,0}^{(a,E_{2g},2)}] \otimes\mathbb{Y}_{6}[\mathbb{Q}_{2,0}^{(b,E_{2g})}]}{2} + \frac{\sqrt{2} \mathbb{X}_{13}[\mathbb{Q}_{4,1}^{(a,E_{2g},2)}] \otimes\mathbb{Y}_{7}[\mathbb{Q}_{2,1}^{(b,E_{2g})}]}{2}
+\end{dmath*}
+\begin{dmath*}
+\hat{\mathbb{Z}}_{14}(\bm{k})=\frac{\sqrt{6} \mathbb{X}_{12}[\mathbb{Q}_{4,0}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{11}[\mathbb{T}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{4}[\mathbb{T}_{1,0}^{(k,E_{1u})}]}{12} - \frac{\sqrt{3} \mathbb{X}_{12}[\mathbb{Q}_{4,0}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{11}[\mathbb{T}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{6}[\mathbb{T}_{3}^{(k,B_{2u})}]}{6} - \frac{\sqrt{6} \mathbb{X}_{12}[\mathbb{Q}_{4,0}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{12}[\mathbb{T}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{5}[\mathbb{T}_{1,1}^{(k,E_{1u})}]}{12} - \frac{\sqrt{3} \mathbb{X}_{12}[\mathbb{Q}_{4,0}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{15}[\mathbb{T}_{3}^{(u,B_{2u})}] \otimes\mathbb{F}_{4}[\mathbb{T}_{1,0}^{(k,E_{1u})}]}{6} + \frac{\sqrt{3} \mathbb{X}_{12}[\mathbb{Q}_{4,0}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{5}[\mathbb{Q}_{0}^{(u,A_{1g})}] \otimes\mathbb{F}_{2}[\mathbb{Q}_{2,0}^{(k,E_{2g})}]}{6} + \frac{\sqrt{3} \mathbb{X}_{12}[\mathbb{Q}_{4,0}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{8}[\mathbb{Q}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{1}[\mathbb{Q}_{0}^{(k,A_{1g})}]}{6} - \frac{\sqrt{6} \mathbb{X}_{12}[\mathbb{Q}_{4,0}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{8}[\mathbb{Q}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{2}[\mathbb{Q}_{2,0}^{(k,E_{2g})}]}{12} + \frac{\sqrt{6} \mathbb{X}_{12}[\mathbb{Q}_{4,0}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{9}[\mathbb{Q}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{3}[\mathbb{Q}_{2,1}^{(k,E_{2g})}]}{12} - \frac{\sqrt{6} \mathbb{X}_{13}[\mathbb{Q}_{4,1}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{11}[\mathbb{T}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{5}[\mathbb{T}_{1,1}^{(k,E_{1u})}]}{12} - \frac{\sqrt{6} \mathbb{X}_{13}[\mathbb{Q}_{4,1}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{12}[\mathbb{T}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{4}[\mathbb{T}_{1,0}^{(k,E_{1u})}]}{12} - \frac{\sqrt{3} \mathbb{X}_{13}[\mathbb{Q}_{4,1}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{12}[\mathbb{T}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{6}[\mathbb{T}_{3}^{(k,B_{2u})}]}{6} - \frac{\sqrt{3} \mathbb{X}_{13}[\mathbb{Q}_{4,1}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{15}[\mathbb{T}_{3}^{(u,B_{2u})}] \otimes\mathbb{F}_{5}[\mathbb{T}_{1,1}^{(k,E_{1u})}]}{6} + \frac{\sqrt{3} \mathbb{X}_{13}[\mathbb{Q}_{4,1}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{5}[\mathbb{Q}_{0}^{(u,A_{1g})}] \otimes\mathbb{F}_{3}[\mathbb{Q}_{2,1}^{(k,E_{2g})}]}{6} + \frac{\sqrt{6} \mathbb{X}_{13}[\mathbb{Q}_{4,1}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{8}[\mathbb{Q}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{3}[\mathbb{Q}_{2,1}^{(k,E_{2g})}]}{12} + \frac{\sqrt{3} \mathbb{X}_{13}[\mathbb{Q}_{4,1}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{9}[\mathbb{Q}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{1}[\mathbb{Q}_{0}^{(k,A_{1g})}]}{6} + \frac{\sqrt{6} \mathbb{X}_{13}[\mathbb{Q}_{4,1}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{9}[\mathbb{Q}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{2}[\mathbb{Q}_{2,0}^{(k,E_{2g})}]}{12}
+\end{dmath*}
+\vspace{4mm}
+\noindent \fbox{No. {15}} $\,\,\,\hat{\mathbb{Q}}_{6}^{(A_{1g},2)}$ [M$_{1}$,\,B$_{1}$]
+\begin{dmath*}
+\hat{\mathbb{Z}}_{15}=\frac{\sqrt{2} \mathbb{X}_{10}[\mathbb{Q}_{4,0}^{(a,E_{2g},1)}] \otimes\mathbb{Y}_{6}[\mathbb{Q}_{2,0}^{(b,E_{2g})}]}{2} + \frac{\sqrt{2} \mathbb{X}_{11}[\mathbb{Q}_{4,1}^{(a,E_{2g},1)}] \otimes\mathbb{Y}_{7}[\mathbb{Q}_{2,1}^{(b,E_{2g})}]}{2}
+\end{dmath*}
+\begin{dmath*}
+\hat{\mathbb{Z}}_{15}(\bm{k})=\frac{\sqrt{6} \mathbb{X}_{10}[\mathbb{Q}_{4,0}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{11}[\mathbb{T}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{4}[\mathbb{T}_{1,0}^{(k,E_{1u})}]}{12} - \frac{\sqrt{3} \mathbb{X}_{10}[\mathbb{Q}_{4,0}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{11}[\mathbb{T}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{6}[\mathbb{T}_{3}^{(k,B_{2u})}]}{6} - \frac{\sqrt{6} \mathbb{X}_{10}[\mathbb{Q}_{4,0}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{12}[\mathbb{T}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{5}[\mathbb{T}_{1,1}^{(k,E_{1u})}]}{12} - \frac{\sqrt{3} \mathbb{X}_{10}[\mathbb{Q}_{4,0}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{15}[\mathbb{T}_{3}^{(u,B_{2u})}] \otimes\mathbb{F}_{4}[\mathbb{T}_{1,0}^{(k,E_{1u})}]}{6} + \frac{\sqrt{3} \mathbb{X}_{10}[\mathbb{Q}_{4,0}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{5}[\mathbb{Q}_{0}^{(u,A_{1g})}] \otimes\mathbb{F}_{2}[\mathbb{Q}_{2,0}^{(k,E_{2g})}]}{6} + \frac{\sqrt{3} \mathbb{X}_{10}[\mathbb{Q}_{4,0}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{8}[\mathbb{Q}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{1}[\mathbb{Q}_{0}^{(k,A_{1g})}]}{6} - \frac{\sqrt{6} \mathbb{X}_{10}[\mathbb{Q}_{4,0}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{8}[\mathbb{Q}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{2}[\mathbb{Q}_{2,0}^{(k,E_{2g})}]}{12} + \frac{\sqrt{6} \mathbb{X}_{10}[\mathbb{Q}_{4,0}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{9}[\mathbb{Q}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{3}[\mathbb{Q}_{2,1}^{(k,E_{2g})}]}{12} - \frac{\sqrt{6} \mathbb{X}_{11}[\mathbb{Q}_{4,1}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{11}[\mathbb{T}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{5}[\mathbb{T}_{1,1}^{(k,E_{1u})}]}{12} - \frac{\sqrt{6} \mathbb{X}_{11}[\mathbb{Q}_{4,1}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{12}[\mathbb{T}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{4}[\mathbb{T}_{1,0}^{(k,E_{1u})}]}{12} - \frac{\sqrt{3} \mathbb{X}_{11}[\mathbb{Q}_{4,1}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{12}[\mathbb{T}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{6}[\mathbb{T}_{3}^{(k,B_{2u})}]}{6} - \frac{\sqrt{3} \mathbb{X}_{11}[\mathbb{Q}_{4,1}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{15}[\mathbb{T}_{3}^{(u,B_{2u})}] \otimes\mathbb{F}_{5}[\mathbb{T}_{1,1}^{(k,E_{1u})}]}{6} + \frac{\sqrt{3} \mathbb{X}_{11}[\mathbb{Q}_{4,1}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{5}[\mathbb{Q}_{0}^{(u,A_{1g})}] \otimes\mathbb{F}_{3}[\mathbb{Q}_{2,1}^{(k,E_{2g})}]}{6} + \frac{\sqrt{6} \mathbb{X}_{11}[\mathbb{Q}_{4,1}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{8}[\mathbb{Q}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{3}[\mathbb{Q}_{2,1}^{(k,E_{2g})}]}{12} + \frac{\sqrt{3} \mathbb{X}_{11}[\mathbb{Q}_{4,1}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{9}[\mathbb{Q}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{1}[\mathbb{Q}_{0}^{(k,A_{1g})}]}{6} + \frac{\sqrt{6} \mathbb{X}_{11}[\mathbb{Q}_{4,1}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{9}[\mathbb{Q}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{2}[\mathbb{Q}_{2,0}^{(k,E_{2g})}]}{12}
+\end{dmath*}
+\vspace{4mm}
+\noindent \fbox{No. {16}} $\,\,\,\hat{\mathbb{Q}}_{6}^{(A_{1g},2)}$ [M$_{1}$,\,B$_{1}$]
+\begin{dmath*}
+\hat{\mathbb{Z}}_{16}=- \mathbb{X}_{15}[\mathbb{M}_{1}^{(a,A_{2g})}] \otimes\mathbb{Y}_{10}[\mathbb{T}_{6}^{(b,A_{2g})}]
+\end{dmath*}
+\begin{dmath*}
+\hat{\mathbb{Z}}_{16}(\bm{k})=- \frac{\sqrt{6} \mathbb{X}_{15}[\mathbb{M}_{1}^{(a,A_{2g})}] \otimes\mathbb{U}_{10}[\mathbb{Q}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{6}[\mathbb{T}_{3}^{(k,B_{2u})}]}{6} + \frac{\sqrt{6} \mathbb{X}_{15}[\mathbb{M}_{1}^{(a,A_{2g})}] \otimes\mathbb{U}_{13}[\mathbb{T}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{3}[\mathbb{Q}_{2,1}^{(k,E_{2g})}]}{6} - \frac{\sqrt{6} \mathbb{X}_{15}[\mathbb{M}_{1}^{(a,A_{2g})}] \otimes\mathbb{U}_{14}[\mathbb{T}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{2}[\mathbb{Q}_{2,0}^{(k,E_{2g})}]}{6} - \frac{\sqrt{6} \mathbb{X}_{15}[\mathbb{M}_{1}^{(a,A_{2g})}] \otimes\mathbb{U}_{16}[\mathbb{T}_{6}^{(u,A_{2g})}] \otimes\mathbb{F}_{1}[\mathbb{Q}_{0}^{(k,A_{1g})}]}{6} + \frac{\sqrt{6} \mathbb{X}_{15}[\mathbb{M}_{1}^{(a,A_{2g})}] \otimes\mathbb{U}_{6}[\mathbb{Q}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{5}[\mathbb{T}_{1,1}^{(k,E_{1u})}]}{6} - \frac{\sqrt{6} \mathbb{X}_{15}[\mathbb{M}_{1}^{(a,A_{2g})}] \otimes\mathbb{U}_{7}[\mathbb{Q}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{4}[\mathbb{T}_{1,0}^{(k,E_{1u})}]}{6}
+\end{dmath*}
+\vspace{4mm}
+\noindent \fbox{No. {17}} $\,\,\,\hat{\mathbb{Q}}_{2}^{(A_{1g})}$ [M$_{1}$,\,B$_{1}$]
+\begin{dmath*}
+\hat{\mathbb{Z}}_{17}=- \frac{\sqrt{2} \mathbb{X}_{17}[\mathbb{M}_{3,0}^{(a,E_{2g})}] \otimes\mathbb{Y}_{8}[\mathbb{T}_{2,0}^{(b,E_{2g})}]}{2} - \frac{\sqrt{2} \mathbb{X}_{18}[\mathbb{M}_{3,1}^{(a,E_{2g})}] \otimes\mathbb{Y}_{9}[\mathbb{T}_{2,1}^{(b,E_{2g})}]}{2}
+\end{dmath*}
+\begin{dmath*}
+\hat{\mathbb{Z}}_{17}(\bm{k})=\frac{\sqrt{3} \mathbb{X}_{17}[\mathbb{M}_{3,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{10}[\mathbb{Q}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{5}[\mathbb{T}_{1,1}^{(k,E_{1u})}]}{6} - \frac{\sqrt{3} \mathbb{X}_{17}[\mathbb{M}_{3,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{13}[\mathbb{T}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{1}[\mathbb{Q}_{0}^{(k,A_{1g})}]}{6} - \frac{\sqrt{6} \mathbb{X}_{17}[\mathbb{M}_{3,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{13}[\mathbb{T}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{2}[\mathbb{Q}_{2,0}^{(k,E_{2g})}]}{12} + \frac{\sqrt{6} \mathbb{X}_{17}[\mathbb{M}_{3,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{14}[\mathbb{T}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{3}[\mathbb{Q}_{2,1}^{(k,E_{2g})}]}{12} + \frac{\sqrt{3} \mathbb{X}_{17}[\mathbb{M}_{3,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{16}[\mathbb{T}_{6}^{(u,A_{2g})}] \otimes\mathbb{F}_{3}[\mathbb{Q}_{2,1}^{(k,E_{2g})}]}{6} - \frac{\sqrt{6} \mathbb{X}_{17}[\mathbb{M}_{3,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{6}[\mathbb{Q}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{4}[\mathbb{T}_{1,0}^{(k,E_{1u})}]}{12} - \frac{\sqrt{3} \mathbb{X}_{17}[\mathbb{M}_{3,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{6}[\mathbb{Q}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{6}[\mathbb{T}_{3}^{(k,B_{2u})}]}{6} + \frac{\sqrt{6} \mathbb{X}_{17}[\mathbb{M}_{3,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{7}[\mathbb{Q}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{5}[\mathbb{T}_{1,1}^{(k,E_{1u})}]}{12} - \frac{\sqrt{3} \mathbb{X}_{18}[\mathbb{M}_{3,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{10}[\mathbb{Q}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{4}[\mathbb{T}_{1,0}^{(k,E_{1u})}]}{6} + \frac{\sqrt{6} \mathbb{X}_{18}[\mathbb{M}_{3,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{13}[\mathbb{T}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{3}[\mathbb{Q}_{2,1}^{(k,E_{2g})}]}{12} - \frac{\sqrt{3} \mathbb{X}_{18}[\mathbb{M}_{3,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{14}[\mathbb{T}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{1}[\mathbb{Q}_{0}^{(k,A_{1g})}]}{6} + \frac{\sqrt{6} \mathbb{X}_{18}[\mathbb{M}_{3,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{14}[\mathbb{T}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{2}[\mathbb{Q}_{2,0}^{(k,E_{2g})}]}{12} - \frac{\sqrt{3} \mathbb{X}_{18}[\mathbb{M}_{3,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{16}[\mathbb{T}_{6}^{(u,A_{2g})}] \otimes\mathbb{F}_{2}[\mathbb{Q}_{2,0}^{(k,E_{2g})}]}{6} + \frac{\sqrt{6} \mathbb{X}_{18}[\mathbb{M}_{3,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{6}[\mathbb{Q}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{5}[\mathbb{T}_{1,1}^{(k,E_{1u})}]}{12} + \frac{\sqrt{6} \mathbb{X}_{18}[\mathbb{M}_{3,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{7}[\mathbb{Q}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{4}[\mathbb{T}_{1,0}^{(k,E_{1u})}]}{12} - \frac{\sqrt{3} \mathbb{X}_{18}[\mathbb{M}_{3,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{7}[\mathbb{Q}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{6}[\mathbb{T}_{3}^{(k,B_{2u})}]}{6}
+\end{dmath*}
+\vspace{4mm}
+\noindent \fbox{No. {18}} $\,\,\,\hat{\mathbb{Q}}_{6}^{(A_{1g},2)}$ [M$_{1}$,\,B$_{1}$]
+\begin{dmath*}
+\hat{\mathbb{Z}}_{18}=\mathbb{X}_{16}[\mathbb{M}_{3}^{(a,A_{2g})}] \otimes\mathbb{Y}_{10}[\mathbb{T}_{6}^{(b,A_{2g})}]
+\end{dmath*}
+\begin{dmath*}
+\hat{\mathbb{Z}}_{18}(\bm{k})=\frac{\sqrt{6} \mathbb{X}_{16}[\mathbb{M}_{3}^{(a,A_{2g})}] \otimes\mathbb{U}_{10}[\mathbb{Q}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{6}[\mathbb{T}_{3}^{(k,B_{2u})}]}{6} - \frac{\sqrt{6} \mathbb{X}_{16}[\mathbb{M}_{3}^{(a,A_{2g})}] \otimes\mathbb{U}_{13}[\mathbb{T}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{3}[\mathbb{Q}_{2,1}^{(k,E_{2g})}]}{6} + \frac{\sqrt{6} \mathbb{X}_{16}[\mathbb{M}_{3}^{(a,A_{2g})}] \otimes\mathbb{U}_{14}[\mathbb{T}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{2}[\mathbb{Q}_{2,0}^{(k,E_{2g})}]}{6} + \frac{\sqrt{6} \mathbb{X}_{16}[\mathbb{M}_{3}^{(a,A_{2g})}] \otimes\mathbb{U}_{16}[\mathbb{T}_{6}^{(u,A_{2g})}] \otimes\mathbb{F}_{1}[\mathbb{Q}_{0}^{(k,A_{1g})}]}{6} - \frac{\sqrt{6} \mathbb{X}_{16}[\mathbb{M}_{3}^{(a,A_{2g})}] \otimes\mathbb{U}_{6}[\mathbb{Q}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{5}[\mathbb{T}_{1,1}^{(k,E_{1u})}]}{6} + \frac{\sqrt{6} \mathbb{X}_{16}[\mathbb{M}_{3}^{(a,A_{2g})}] \otimes\mathbb{U}_{7}[\mathbb{Q}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{4}[\mathbb{T}_{1,0}^{(k,E_{1u})}]}{6}
+\end{dmath*}
+\vspace{4mm}
+\noindent \fbox{No. {19}} $\,\,\,\hat{\mathbb{Q}}_{0}^{(A_{1g})}$ [M$_{1}$,\,B$_{2}$]
+\begin{dmath*}
+\hat{\mathbb{Z}}_{19}=\mathbb{X}_{1}[\mathbb{Q}_{0}^{(a,A_{1g})}] \otimes\mathbb{Y}_{11}[\mathbb{Q}_{0}^{(b,A_{1g})}]
+\end{dmath*}
+\begin{dmath*}
+\hat{\mathbb{Z}}_{19}(\bm{k})=\frac{\sqrt{2} \mathbb{X}_{1}[\mathbb{Q}_{0}^{(a,A_{1g})}] \otimes\mathbb{U}_{17}[\mathbb{Q}_{0}^{(u,A_{1g})}] \otimes\mathbb{F}_{7}[\mathbb{Q}_{0}^{(k,A_{1g})}]}{2} - \frac{\sqrt{2} \mathbb{X}_{1}[\mathbb{Q}_{0}^{(a,A_{1g})}] \otimes\mathbb{U}_{18}[\mathbb{T}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{16}[\mathbb{T}_{3}^{(k,B_{1u})}]}{2}
+\end{dmath*}
+\vspace{4mm}
+\noindent \fbox{No. {20}} $\,\,\,\hat{\mathbb{Q}}_{2}^{(A_{1g})}$ [M$_{1}$,\,B$_{2}$]
+\begin{dmath*}
+\hat{\mathbb{Z}}_{20}=\mathbb{X}_{2}[\mathbb{Q}_{2}^{(a,A_{1g})}] \otimes\mathbb{Y}_{11}[\mathbb{Q}_{0}^{(b,A_{1g})}]
+\end{dmath*}
+\begin{dmath*}
+\hat{\mathbb{Z}}_{20}(\bm{k})=\frac{\sqrt{2} \mathbb{X}_{2}[\mathbb{Q}_{2}^{(a,A_{1g})}] \otimes\mathbb{U}_{17}[\mathbb{Q}_{0}^{(u,A_{1g})}] \otimes\mathbb{F}_{7}[\mathbb{Q}_{0}^{(k,A_{1g})}]}{2} - \frac{\sqrt{2} \mathbb{X}_{2}[\mathbb{Q}_{2}^{(a,A_{1g})}] \otimes\mathbb{U}_{18}[\mathbb{T}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{16}[\mathbb{T}_{3}^{(k,B_{1u})}]}{2}
+\end{dmath*}
+\vspace{4mm}
+\noindent \fbox{No. {21}} $\,\,\,\hat{\mathbb{Q}}_{0}^{(A_{1g})}$ [M$_{1}$,\,B$_{2}$]
+\begin{dmath*}
+\hat{\mathbb{Z}}_{21}=\frac{\mathbb{X}_{4}[\mathbb{Q}_{2,0}^{(a,E_{1g})}] \otimes\mathbb{Y}_{12}[\mathbb{Q}_{2,0}^{(b,E_{1g})}]}{2} + \frac{\mathbb{X}_{5}[\mathbb{Q}_{2,1}^{(a,E_{1g})}] \otimes\mathbb{Y}_{13}[\mathbb{Q}_{2,1}^{(b,E_{1g})}]}{2} + \frac{\mathbb{X}_{8}[\mathbb{Q}_{2,0}^{(a,E_{2g})}] \otimes\mathbb{Y}_{14}[\mathbb{Q}_{2,0}^{(b,E_{2g})}]}{2} + \frac{\mathbb{X}_{9}[\mathbb{Q}_{2,1}^{(a,E_{2g})}] \otimes\mathbb{Y}_{15}[\mathbb{Q}_{2,1}^{(b,E_{2g})}]}{2}
+\end{dmath*}
+\begin{dmath*}
+\hat{\mathbb{Z}}_{21}(\bm{k})=\frac{\sqrt{2} \mathbb{X}_{4}[\mathbb{Q}_{2,0}^{(a,E_{1g})}] \otimes\mathbb{U}_{17}[\mathbb{Q}_{0}^{(u,A_{1g})}] \otimes\mathbb{F}_{8}[\mathbb{Q}_{2,0}^{(k,E_{1g})}]}{4} + \frac{\sqrt{2} \mathbb{X}_{4}[\mathbb{Q}_{2,0}^{(a,E_{1g})}] \otimes\mathbb{U}_{18}[\mathbb{T}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{18}[\mathbb{T}_{3,1}^{(k,E_{2u})}]}{4} + \frac{\sqrt{2} \mathbb{X}_{5}[\mathbb{Q}_{2,1}^{(a,E_{1g})}] \otimes\mathbb{U}_{17}[\mathbb{Q}_{0}^{(u,A_{1g})}] \otimes\mathbb{F}_{9}[\mathbb{Q}_{2,1}^{(k,E_{1g})}]}{4} - \frac{\sqrt{2} \mathbb{X}_{5}[\mathbb{Q}_{2,1}^{(a,E_{1g})}] \otimes\mathbb{U}_{18}[\mathbb{T}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{17}[\mathbb{T}_{3,0}^{(k,E_{2u})}]}{4} + \frac{\sqrt{2} \mathbb{X}_{8}[\mathbb{Q}_{2,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{17}[\mathbb{Q}_{0}^{(u,A_{1g})}] \otimes\mathbb{F}_{10}[\mathbb{Q}_{2,0}^{(k,E_{2g})}]}{4} - \frac{\sqrt{2} \mathbb{X}_{8}[\mathbb{Q}_{2,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{18}[\mathbb{T}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{15}[\mathbb{T}_{1,1}^{(k,E_{1u})}]}{4} + \frac{\sqrt{2} \mathbb{X}_{9}[\mathbb{Q}_{2,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{17}[\mathbb{Q}_{0}^{(u,A_{1g})}] \otimes\mathbb{F}_{11}[\mathbb{Q}_{2,1}^{(k,E_{2g})}]}{4} + \frac{\sqrt{2} \mathbb{X}_{9}[\mathbb{Q}_{2,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{18}[\mathbb{T}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{14}[\mathbb{T}_{1,0}^{(k,E_{1u})}]}{4}
+\end{dmath*}
+\vspace{4mm}
+\noindent \fbox{No. {22}} $\,\,\,\hat{\mathbb{Q}}_{2}^{(A_{1g})}$ [M$_{1}$,\,B$_{2}$]
+\begin{dmath*}
+\hat{\mathbb{Z}}_{22}=\frac{\mathbb{X}_{4}[\mathbb{Q}_{2,0}^{(a,E_{1g})}] \otimes\mathbb{Y}_{12}[\mathbb{Q}_{2,0}^{(b,E_{1g})}]}{2} + \frac{\mathbb{X}_{5}[\mathbb{Q}_{2,1}^{(a,E_{1g})}] \otimes\mathbb{Y}_{13}[\mathbb{Q}_{2,1}^{(b,E_{1g})}]}{2} - \frac{\mathbb{X}_{8}[\mathbb{Q}_{2,0}^{(a,E_{2g})}] \otimes\mathbb{Y}_{14}[\mathbb{Q}_{2,0}^{(b,E_{2g})}]}{2} - \frac{\mathbb{X}_{9}[\mathbb{Q}_{2,1}^{(a,E_{2g})}] \otimes\mathbb{Y}_{15}[\mathbb{Q}_{2,1}^{(b,E_{2g})}]}{2}
+\end{dmath*}
+\begin{dmath*}
+\hat{\mathbb{Z}}_{22}(\bm{k})=\frac{\sqrt{2} \mathbb{X}_{4}[\mathbb{Q}_{2,0}^{(a,E_{1g})}] \otimes\mathbb{U}_{17}[\mathbb{Q}_{0}^{(u,A_{1g})}] \otimes\mathbb{F}_{8}[\mathbb{Q}_{2,0}^{(k,E_{1g})}]}{4} + \frac{\sqrt{2} \mathbb{X}_{4}[\mathbb{Q}_{2,0}^{(a,E_{1g})}] \otimes\mathbb{U}_{18}[\mathbb{T}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{18}[\mathbb{T}_{3,1}^{(k,E_{2u})}]}{4} + \frac{\sqrt{2} \mathbb{X}_{5}[\mathbb{Q}_{2,1}^{(a,E_{1g})}] \otimes\mathbb{U}_{17}[\mathbb{Q}_{0}^{(u,A_{1g})}] \otimes\mathbb{F}_{9}[\mathbb{Q}_{2,1}^{(k,E_{1g})}]}{4} - \frac{\sqrt{2} \mathbb{X}_{5}[\mathbb{Q}_{2,1}^{(a,E_{1g})}] \otimes\mathbb{U}_{18}[\mathbb{T}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{17}[\mathbb{T}_{3,0}^{(k,E_{2u})}]}{4} - \frac{\sqrt{2} \mathbb{X}_{8}[\mathbb{Q}_{2,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{17}[\mathbb{Q}_{0}^{(u,A_{1g})}] \otimes\mathbb{F}_{10}[\mathbb{Q}_{2,0}^{(k,E_{2g})}]}{4} + \frac{\sqrt{2} \mathbb{X}_{8}[\mathbb{Q}_{2,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{18}[\mathbb{T}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{15}[\mathbb{T}_{1,1}^{(k,E_{1u})}]}{4} - \frac{\sqrt{2} \mathbb{X}_{9}[\mathbb{Q}_{2,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{17}[\mathbb{Q}_{0}^{(u,A_{1g})}] \otimes\mathbb{F}_{11}[\mathbb{Q}_{2,1}^{(k,E_{2g})}]}{4} - \frac{\sqrt{2} \mathbb{X}_{9}[\mathbb{Q}_{2,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{18}[\mathbb{T}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{14}[\mathbb{T}_{1,0}^{(k,E_{1u})}]}{4}
+\end{dmath*}
+\vspace{4mm}
+\noindent \fbox{No. {23}} $\,\,\,\hat{\mathbb{Q}}_{4}^{(A_{1g})}$ [M$_{1}$,\,B$_{2}$]
+\begin{dmath*}
+\hat{\mathbb{Z}}_{23}=\mathbb{X}_{3}[\mathbb{Q}_{4}^{(a,A_{1g})}] \otimes\mathbb{Y}_{11}[\mathbb{Q}_{0}^{(b,A_{1g})}]
+\end{dmath*}
+\begin{dmath*}
+\hat{\mathbb{Z}}_{23}(\bm{k})=\frac{\sqrt{2} \mathbb{X}_{3}[\mathbb{Q}_{4}^{(a,A_{1g})}] \otimes\mathbb{U}_{17}[\mathbb{Q}_{0}^{(u,A_{1g})}] \otimes\mathbb{F}_{7}[\mathbb{Q}_{0}^{(k,A_{1g})}]}{2} - \frac{\sqrt{2} \mathbb{X}_{3}[\mathbb{Q}_{4}^{(a,A_{1g})}] \otimes\mathbb{U}_{18}[\mathbb{T}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{16}[\mathbb{T}_{3}^{(k,B_{1u})}]}{2}
+\end{dmath*}
+\vspace{4mm}
+\noindent \fbox{No. {24}} $\,\,\,\hat{\mathbb{Q}}_{2}^{(A_{1g})}$ [M$_{1}$,\,B$_{2}$]
+\begin{dmath*}
+\hat{\mathbb{Z}}_{24}=\frac{\sqrt{6} \mathbb{X}_{12}[\mathbb{Q}_{4,0}^{(a,E_{2g},2)}] \otimes\mathbb{Y}_{14}[\mathbb{Q}_{2,0}^{(b,E_{2g})}]}{6} + \frac{\sqrt{6} \mathbb{X}_{13}[\mathbb{Q}_{4,1}^{(a,E_{2g},2)}] \otimes\mathbb{Y}_{15}[\mathbb{Q}_{2,1}^{(b,E_{2g})}]}{6} + \frac{\sqrt{3} \mathbb{X}_{6}[\mathbb{Q}_{4,0}^{(a,E_{1g})}] \otimes\mathbb{Y}_{12}[\mathbb{Q}_{2,0}^{(b,E_{1g})}]}{3} + \frac{\sqrt{3} \mathbb{X}_{7}[\mathbb{Q}_{4,1}^{(a,E_{1g})}] \otimes\mathbb{Y}_{13}[\mathbb{Q}_{2,1}^{(b,E_{1g})}]}{3}
+\end{dmath*}
+\begin{dmath*}
+\hat{\mathbb{Z}}_{24}(\bm{k})=\frac{\sqrt{3} \mathbb{X}_{12}[\mathbb{Q}_{4,0}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{17}[\mathbb{Q}_{0}^{(u,A_{1g})}] \otimes\mathbb{F}_{10}[\mathbb{Q}_{2,0}^{(k,E_{2g})}]}{6} - \frac{\sqrt{3} \mathbb{X}_{12}[\mathbb{Q}_{4,0}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{18}[\mathbb{T}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{15}[\mathbb{T}_{1,1}^{(k,E_{1u})}]}{6} + \frac{\sqrt{3} \mathbb{X}_{13}[\mathbb{Q}_{4,1}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{17}[\mathbb{Q}_{0}^{(u,A_{1g})}] \otimes\mathbb{F}_{11}[\mathbb{Q}_{2,1}^{(k,E_{2g})}]}{6} + \frac{\sqrt{3} \mathbb{X}_{13}[\mathbb{Q}_{4,1}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{18}[\mathbb{T}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{14}[\mathbb{T}_{1,0}^{(k,E_{1u})}]}{6} + \frac{\sqrt{6} \mathbb{X}_{6}[\mathbb{Q}_{4,0}^{(a,E_{1g})}] \otimes\mathbb{U}_{17}[\mathbb{Q}_{0}^{(u,A_{1g})}] \otimes\mathbb{F}_{8}[\mathbb{Q}_{2,0}^{(k,E_{1g})}]}{6} + \frac{\sqrt{6} \mathbb{X}_{6}[\mathbb{Q}_{4,0}^{(a,E_{1g})}] \otimes\mathbb{U}_{18}[\mathbb{T}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{18}[\mathbb{T}_{3,1}^{(k,E_{2u})}]}{6} + \frac{\sqrt{6} \mathbb{X}_{7}[\mathbb{Q}_{4,1}^{(a,E_{1g})}] \otimes\mathbb{U}_{17}[\mathbb{Q}_{0}^{(u,A_{1g})}] \otimes\mathbb{F}_{9}[\mathbb{Q}_{2,1}^{(k,E_{1g})}]}{6} - \frac{\sqrt{6} \mathbb{X}_{7}[\mathbb{Q}_{4,1}^{(a,E_{1g})}] \otimes\mathbb{U}_{18}[\mathbb{T}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{17}[\mathbb{T}_{3,0}^{(k,E_{2u})}]}{6}
+\end{dmath*}
+\vspace{4mm}
+\noindent \fbox{No. {25}} $\,\,\,\hat{\mathbb{Q}}_{4}^{(A_{1g})}$ [M$_{1}$,\,B$_{2}$]
+\begin{dmath*}
+\hat{\mathbb{Z}}_{25}=- \frac{\sqrt{3} \mathbb{X}_{12}[\mathbb{Q}_{4,0}^{(a,E_{2g},2)}] \otimes\mathbb{Y}_{14}[\mathbb{Q}_{2,0}^{(b,E_{2g})}]}{3} - \frac{\sqrt{3} \mathbb{X}_{13}[\mathbb{Q}_{4,1}^{(a,E_{2g},2)}] \otimes\mathbb{Y}_{15}[\mathbb{Q}_{2,1}^{(b,E_{2g})}]}{3} + \frac{\sqrt{6} \mathbb{X}_{6}[\mathbb{Q}_{4,0}^{(a,E_{1g})}] \otimes\mathbb{Y}_{12}[\mathbb{Q}_{2,0}^{(b,E_{1g})}]}{6} + \frac{\sqrt{6} \mathbb{X}_{7}[\mathbb{Q}_{4,1}^{(a,E_{1g})}] \otimes\mathbb{Y}_{13}[\mathbb{Q}_{2,1}^{(b,E_{1g})}]}{6}
+\end{dmath*}
+\begin{dmath*}
+\hat{\mathbb{Z}}_{25}(\bm{k})=- \frac{\sqrt{6} \mathbb{X}_{12}[\mathbb{Q}_{4,0}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{17}[\mathbb{Q}_{0}^{(u,A_{1g})}] \otimes\mathbb{F}_{10}[\mathbb{Q}_{2,0}^{(k,E_{2g})}]}{6} + \frac{\sqrt{6} \mathbb{X}_{12}[\mathbb{Q}_{4,0}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{18}[\mathbb{T}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{15}[\mathbb{T}_{1,1}^{(k,E_{1u})}]}{6} - \frac{\sqrt{6} \mathbb{X}_{13}[\mathbb{Q}_{4,1}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{17}[\mathbb{Q}_{0}^{(u,A_{1g})}] \otimes\mathbb{F}_{11}[\mathbb{Q}_{2,1}^{(k,E_{2g})}]}{6} - \frac{\sqrt{6} \mathbb{X}_{13}[\mathbb{Q}_{4,1}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{18}[\mathbb{T}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{14}[\mathbb{T}_{1,0}^{(k,E_{1u})}]}{6} + \frac{\sqrt{3} \mathbb{X}_{6}[\mathbb{Q}_{4,0}^{(a,E_{1g})}] \otimes\mathbb{U}_{17}[\mathbb{Q}_{0}^{(u,A_{1g})}] \otimes\mathbb{F}_{8}[\mathbb{Q}_{2,0}^{(k,E_{1g})}]}{6} + \frac{\sqrt{3} \mathbb{X}_{6}[\mathbb{Q}_{4,0}^{(a,E_{1g})}] \otimes\mathbb{U}_{18}[\mathbb{T}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{18}[\mathbb{T}_{3,1}^{(k,E_{2u})}]}{6} + \frac{\sqrt{3} \mathbb{X}_{7}[\mathbb{Q}_{4,1}^{(a,E_{1g})}] \otimes\mathbb{U}_{17}[\mathbb{Q}_{0}^{(u,A_{1g})}] \otimes\mathbb{F}_{9}[\mathbb{Q}_{2,1}^{(k,E_{1g})}]}{6} - \frac{\sqrt{3} \mathbb{X}_{7}[\mathbb{Q}_{4,1}^{(a,E_{1g})}] \otimes\mathbb{U}_{18}[\mathbb{T}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{17}[\mathbb{T}_{3,0}^{(k,E_{2u})}]}{6}
+\end{dmath*}
+\vspace{4mm}
+\noindent \fbox{No. {26}} $\,\,\,\hat{\mathbb{Q}}_{6}^{(A_{1g},2)}$ [M$_{1}$,\,B$_{2}$]
+\begin{dmath*}
+\hat{\mathbb{Z}}_{26}=\frac{\sqrt{2} \mathbb{X}_{10}[\mathbb{Q}_{4,0}^{(a,E_{2g},1)}] \otimes\mathbb{Y}_{14}[\mathbb{Q}_{2,0}^{(b,E_{2g})}]}{2} + \frac{\sqrt{2} \mathbb{X}_{11}[\mathbb{Q}_{4,1}^{(a,E_{2g},1)}] \otimes\mathbb{Y}_{15}[\mathbb{Q}_{2,1}^{(b,E_{2g})}]}{2}
+\end{dmath*}
+\begin{dmath*}
+\hat{\mathbb{Z}}_{26}(\bm{k})=\frac{\mathbb{X}_{10}[\mathbb{Q}_{4,0}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{17}[\mathbb{Q}_{0}^{(u,A_{1g})}] \otimes\mathbb{F}_{10}[\mathbb{Q}_{2,0}^{(k,E_{2g})}]}{2} - \frac{\mathbb{X}_{10}[\mathbb{Q}_{4,0}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{18}[\mathbb{T}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{15}[\mathbb{T}_{1,1}^{(k,E_{1u})}]}{2} + \frac{\mathbb{X}_{11}[\mathbb{Q}_{4,1}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{17}[\mathbb{Q}_{0}^{(u,A_{1g})}] \otimes\mathbb{F}_{11}[\mathbb{Q}_{2,1}^{(k,E_{2g})}]}{2} + \frac{\mathbb{X}_{11}[\mathbb{Q}_{4,1}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{18}[\mathbb{T}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{14}[\mathbb{T}_{1,0}^{(k,E_{1u})}]}{2}
+\end{dmath*}
+\vspace{4mm}
+\noindent \fbox{No. {27}} $\,\,\,\hat{\mathbb{Q}}_{0}^{(A_{1g})}$ [M$_{1}$,\,B$_{2}$]
+\begin{dmath*}
+\hat{\mathbb{Z}}_{27}=\mathbb{X}_{14}[\mathbb{Q}_{4}^{(a,B_{2g})}] \otimes\mathbb{Y}_{16}[\mathbb{Q}_{4}^{(b,B_{2g})}]
+\end{dmath*}
+\begin{dmath*}
+\hat{\mathbb{Z}}_{27}(\bm{k})=\frac{\sqrt{2} \mathbb{X}_{14}[\mathbb{Q}_{4}^{(a,B_{2g})}] \otimes\mathbb{U}_{17}[\mathbb{Q}_{0}^{(u,A_{1g})}] \otimes\mathbb{F}_{12}[\mathbb{Q}_{4}^{(k,B_{2g})}]}{2} - \frac{\sqrt{2} \mathbb{X}_{14}[\mathbb{Q}_{4}^{(a,B_{2g})}] \otimes\mathbb{U}_{18}[\mathbb{T}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{13}[\mathbb{T}_{1}^{(k,A_{2u})}]}{2}
+\end{dmath*}
+\vspace{4mm}
+\noindent \fbox{No. {28}} $\,\,\,\hat{\mathbb{Q}}_{0}^{(A_{1g})}$ [M$_{1}$,\,B$_{3}$]
+\begin{dmath*}
+\hat{\mathbb{Z}}_{28}=\mathbb{X}_{1}[\mathbb{Q}_{0}^{(a,A_{1g})}] \otimes\mathbb{Y}_{17}[\mathbb{Q}_{0}^{(b,A_{1g})}]
+\end{dmath*}
+\begin{dmath*}
+\hat{\mathbb{Z}}_{28}(\bm{k})=\frac{\sqrt{6} \mathbb{X}_{1}[\mathbb{Q}_{0}^{(a,A_{1g})}] \otimes\mathbb{U}_{19}[\mathbb{Q}_{0}^{(u,A_{1g})}] \otimes\mathbb{F}_{19}[\mathbb{Q}_{0}^{(k,A_{1g})}]}{6} + \frac{\sqrt{2} \mathbb{X}_{1}[\mathbb{Q}_{0}^{(a,A_{1g})}] \otimes\mathbb{U}_{22}[\mathbb{Q}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{20}[\mathbb{Q}_{2,0}^{(k,E_{2g})}]}{4} + \frac{\sqrt{6} \mathbb{X}_{1}[\mathbb{Q}_{0}^{(a,A_{1g})}] \otimes\mathbb{U}_{22}[\mathbb{Q}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{22}[\mathbb{Q}_{4,0}^{(k,E_{2g},1)}]}{12} + \frac{\sqrt{2} \mathbb{X}_{1}[\mathbb{Q}_{0}^{(a,A_{1g})}] \otimes\mathbb{U}_{23}[\mathbb{Q}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{21}[\mathbb{Q}_{2,1}^{(k,E_{2g})}]}{4} + \frac{\sqrt{6} \mathbb{X}_{1}[\mathbb{Q}_{0}^{(a,A_{1g})}] \otimes\mathbb{U}_{23}[\mathbb{Q}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{23}[\mathbb{Q}_{4,1}^{(k,E_{2g},1)}]}{12} + \mathbb{X}_{1}[\mathbb{Q}_{0}^{(a,A_{1g})}] \otimes\mathbb{U}_{26}[\mathbb{T}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{25}[\mathbb{T}_{1,0}^{(k,E_{1u})}] \left(- \frac{1}{4} + \frac{\sqrt{3}}{12}\right) + \mathbb{X}_{1}[\mathbb{Q}_{0}^{(a,A_{1g})}] \otimes\mathbb{U}_{26}[\mathbb{T}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{29}[\mathbb{T}_{5,0}^{(k,E_{1u},1)}] \left(\frac{\sqrt{3}}{12} + \frac{1}{4}\right) + \mathbb{X}_{1}[\mathbb{Q}_{0}^{(a,A_{1g})}] \otimes\mathbb{U}_{27}[\mathbb{T}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{26}[\mathbb{T}_{1,1}^{(k,E_{1u})}] \left(- \frac{1}{4} + \frac{\sqrt{3}}{12}\right) + \mathbb{X}_{1}[\mathbb{Q}_{0}^{(a,A_{1g})}] \otimes\mathbb{U}_{27}[\mathbb{T}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{30}[\mathbb{T}_{5,1}^{(k,E_{1u},1)}] \left(\frac{\sqrt{3}}{12} + \frac{1}{4}\right) - \frac{\sqrt{6} \mathbb{X}_{1}[\mathbb{Q}_{0}^{(a,A_{1g})}] \otimes\mathbb{U}_{30}[\mathbb{T}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{27}[\mathbb{T}_{3}^{(k,B_{1u})}]}{6}
+\end{dmath*}
+\vspace{4mm}
+\noindent \fbox{No. {29}} $\,\,\,\hat{\mathbb{Q}}_{2}^{(A_{1g})}$ [M$_{1}$,\,B$_{3}$]
+\begin{dmath*}
+\hat{\mathbb{Z}}_{29}=\mathbb{X}_{2}[\mathbb{Q}_{2}^{(a,A_{1g})}] \otimes\mathbb{Y}_{17}[\mathbb{Q}_{0}^{(b,A_{1g})}]
+\end{dmath*}
+\begin{dmath*}
+\hat{\mathbb{Z}}_{29}(\bm{k})=\frac{\sqrt{6} \mathbb{X}_{2}[\mathbb{Q}_{2}^{(a,A_{1g})}] \otimes\mathbb{U}_{19}[\mathbb{Q}_{0}^{(u,A_{1g})}] \otimes\mathbb{F}_{19}[\mathbb{Q}_{0}^{(k,A_{1g})}]}{6} + \frac{\sqrt{2} \mathbb{X}_{2}[\mathbb{Q}_{2}^{(a,A_{1g})}] \otimes\mathbb{U}_{22}[\mathbb{Q}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{20}[\mathbb{Q}_{2,0}^{(k,E_{2g})}]}{4} + \frac{\sqrt{6} \mathbb{X}_{2}[\mathbb{Q}_{2}^{(a,A_{1g})}] \otimes\mathbb{U}_{22}[\mathbb{Q}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{22}[\mathbb{Q}_{4,0}^{(k,E_{2g},1)}]}{12} + \frac{\sqrt{2} \mathbb{X}_{2}[\mathbb{Q}_{2}^{(a,A_{1g})}] \otimes\mathbb{U}_{23}[\mathbb{Q}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{21}[\mathbb{Q}_{2,1}^{(k,E_{2g})}]}{4} + \frac{\sqrt{6} \mathbb{X}_{2}[\mathbb{Q}_{2}^{(a,A_{1g})}] \otimes\mathbb{U}_{23}[\mathbb{Q}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{23}[\mathbb{Q}_{4,1}^{(k,E_{2g},1)}]}{12} + \mathbb{X}_{2}[\mathbb{Q}_{2}^{(a,A_{1g})}] \otimes\mathbb{U}_{26}[\mathbb{T}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{25}[\mathbb{T}_{1,0}^{(k,E_{1u})}] \left(- \frac{1}{4} + \frac{\sqrt{3}}{12}\right) + \mathbb{X}_{2}[\mathbb{Q}_{2}^{(a,A_{1g})}] \otimes\mathbb{U}_{26}[\mathbb{T}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{29}[\mathbb{T}_{5,0}^{(k,E_{1u},1)}] \left(\frac{\sqrt{3}}{12} + \frac{1}{4}\right) + \mathbb{X}_{2}[\mathbb{Q}_{2}^{(a,A_{1g})}] \otimes\mathbb{U}_{27}[\mathbb{T}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{26}[\mathbb{T}_{1,1}^{(k,E_{1u})}] \left(- \frac{1}{4} + \frac{\sqrt{3}}{12}\right) + \mathbb{X}_{2}[\mathbb{Q}_{2}^{(a,A_{1g})}] \otimes\mathbb{U}_{27}[\mathbb{T}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{30}[\mathbb{T}_{5,1}^{(k,E_{1u},1)}] \left(\frac{\sqrt{3}}{12} + \frac{1}{4}\right) - \frac{\sqrt{6} \mathbb{X}_{2}[\mathbb{Q}_{2}^{(a,A_{1g})}] \otimes\mathbb{U}_{30}[\mathbb{T}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{27}[\mathbb{T}_{3}^{(k,B_{1u})}]}{6}
+\end{dmath*}
+\vspace{4mm}
+\noindent \fbox{No. {30}} $\,\,\,\hat{\mathbb{Q}}_{0}^{(A_{1g})}$ [M$_{1}$,\,B$_{3}$]
+\begin{dmath*}
+\hat{\mathbb{Z}}_{30}=\frac{\sqrt{2} \mathbb{X}_{8}[\mathbb{Q}_{2,0}^{(a,E_{2g})}] \otimes\mathbb{Y}_{18}[\mathbb{Q}_{2,0}^{(b,E_{2g})}]}{2} + \frac{\sqrt{2} \mathbb{X}_{9}[\mathbb{Q}_{2,1}^{(a,E_{2g})}] \otimes\mathbb{Y}_{19}[\mathbb{Q}_{2,1}^{(b,E_{2g})}]}{2}
+\end{dmath*}
+\begin{dmath*}
+\hat{\mathbb{Z}}_{30}(\bm{k})=\frac{\sqrt{3} \mathbb{X}_{8}[\mathbb{Q}_{2,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{19}[\mathbb{Q}_{0}^{(u,A_{1g})}] \otimes\mathbb{F}_{20}[\mathbb{Q}_{2,0}^{(k,E_{2g})}]}{6} + \frac{\mathbb{X}_{8}[\mathbb{Q}_{2,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{22}[\mathbb{Q}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{19}[\mathbb{Q}_{0}^{(k,A_{1g})}]}{4} + \frac{\sqrt{6} \mathbb{X}_{8}[\mathbb{Q}_{2,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{22}[\mathbb{Q}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{20}[\mathbb{Q}_{2,0}^{(k,E_{2g})}]}{24} + \frac{\sqrt{2} \mathbb{X}_{8}[\mathbb{Q}_{2,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{22}[\mathbb{Q}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{22}[\mathbb{Q}_{4,0}^{(k,E_{2g},1)}]}{8} - \frac{\sqrt{6} \mathbb{X}_{8}[\mathbb{Q}_{2,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{23}[\mathbb{Q}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{21}[\mathbb{Q}_{2,1}^{(k,E_{2g})}]}{24} - \frac{\sqrt{2} \mathbb{X}_{8}[\mathbb{Q}_{2,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{23}[\mathbb{Q}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{23}[\mathbb{Q}_{4,1}^{(k,E_{2g},1)}]}{8} + \frac{\sqrt{3} \mathbb{X}_{8}[\mathbb{Q}_{2,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{23}[\mathbb{Q}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{24}[\mathbb{Q}_{6}^{(k,A_{2g})}]}{12} + \mathbb{X}_{8}[\mathbb{Q}_{2,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{26}[\mathbb{T}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{25}[\mathbb{T}_{1,0}^{(k,E_{1u})}] \left(- \frac{1}{8} + \frac{\sqrt{3}}{24}\right) + \frac{\sqrt{3} \mathbb{X}_{8}[\mathbb{Q}_{2,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{26}[\mathbb{T}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{28}[\mathbb{T}_{3}^{(k,B_{2u})}]}{12} + \mathbb{X}_{8}[\mathbb{Q}_{2,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{26}[\mathbb{T}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{29}[\mathbb{T}_{5,0}^{(k,E_{1u},1)}] \left(- \frac{1}{8} - \frac{\sqrt{3}}{24}\right) + \mathbb{X}_{8}[\mathbb{Q}_{2,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{27}[\mathbb{T}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{26}[\mathbb{T}_{1,1}^{(k,E_{1u})}] \left(\frac{1}{8} - \frac{\sqrt{3}}{24}\right) - \frac{\mathbb{X}_{8}[\mathbb{Q}_{2,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{27}[\mathbb{T}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{27}[\mathbb{T}_{3}^{(k,B_{1u})}]}{4} + \mathbb{X}_{8}[\mathbb{Q}_{2,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{27}[\mathbb{T}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{30}[\mathbb{T}_{5,1}^{(k,E_{1u},1)}] \left(\frac{\sqrt{3}}{24} + \frac{1}{8}\right) - \frac{\sqrt{6} \mathbb{X}_{8}[\mathbb{Q}_{2,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{30}[\mathbb{T}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{26}[\mathbb{T}_{1,1}^{(k,E_{1u})}]}{12} + \frac{\sqrt{6} \mathbb{X}_{8}[\mathbb{Q}_{2,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{30}[\mathbb{T}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{30}[\mathbb{T}_{5,1}^{(k,E_{1u},1)}]}{12} + \frac{\sqrt{3} \mathbb{X}_{9}[\mathbb{Q}_{2,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{19}[\mathbb{Q}_{0}^{(u,A_{1g})}] \otimes\mathbb{F}_{21}[\mathbb{Q}_{2,1}^{(k,E_{2g})}]}{6} - \frac{\sqrt{6} \mathbb{X}_{9}[\mathbb{Q}_{2,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{22}[\mathbb{Q}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{21}[\mathbb{Q}_{2,1}^{(k,E_{2g})}]}{24} - \frac{\sqrt{2} \mathbb{X}_{9}[\mathbb{Q}_{2,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{22}[\mathbb{Q}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{23}[\mathbb{Q}_{4,1}^{(k,E_{2g},1)}]}{8} - \frac{\sqrt{3} \mathbb{X}_{9}[\mathbb{Q}_{2,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{22}[\mathbb{Q}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{24}[\mathbb{Q}_{6}^{(k,A_{2g})}]}{12} + \frac{\mathbb{X}_{9}[\mathbb{Q}_{2,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{23}[\mathbb{Q}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{19}[\mathbb{Q}_{0}^{(k,A_{1g})}]}{4} - \frac{\sqrt{6} \mathbb{X}_{9}[\mathbb{Q}_{2,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{23}[\mathbb{Q}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{20}[\mathbb{Q}_{2,0}^{(k,E_{2g})}]}{24} - \frac{\sqrt{2} \mathbb{X}_{9}[\mathbb{Q}_{2,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{23}[\mathbb{Q}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{22}[\mathbb{Q}_{4,0}^{(k,E_{2g},1)}]}{8} + \mathbb{X}_{9}[\mathbb{Q}_{2,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{26}[\mathbb{T}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{26}[\mathbb{T}_{1,1}^{(k,E_{1u})}] \left(\frac{1}{8} - \frac{\sqrt{3}}{24}\right) + \frac{\mathbb{X}_{9}[\mathbb{Q}_{2,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{26}[\mathbb{T}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{27}[\mathbb{T}_{3}^{(k,B_{1u})}]}{4} + \mathbb{X}_{9}[\mathbb{Q}_{2,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{26}[\mathbb{T}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{30}[\mathbb{T}_{5,1}^{(k,E_{1u},1)}] \left(\frac{\sqrt{3}}{24} + \frac{1}{8}\right) + \mathbb{X}_{9}[\mathbb{Q}_{2,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{27}[\mathbb{T}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{25}[\mathbb{T}_{1,0}^{(k,E_{1u})}] \left(\frac{1}{8} - \frac{\sqrt{3}}{24}\right) + \frac{\sqrt{3} \mathbb{X}_{9}[\mathbb{Q}_{2,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{27}[\mathbb{T}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{28}[\mathbb{T}_{3}^{(k,B_{2u})}]}{12} + \mathbb{X}_{9}[\mathbb{Q}_{2,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{27}[\mathbb{T}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{29}[\mathbb{T}_{5,0}^{(k,E_{1u},1)}] \left(\frac{\sqrt{3}}{24} + \frac{1}{8}\right) + \frac{\sqrt{6} \mathbb{X}_{9}[\mathbb{Q}_{2,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{30}[\mathbb{T}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{25}[\mathbb{T}_{1,0}^{(k,E_{1u})}]}{12} - \frac{\sqrt{6} \mathbb{X}_{9}[\mathbb{Q}_{2,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{30}[\mathbb{T}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{29}[\mathbb{T}_{5,0}^{(k,E_{1u},1)}]}{12}
+\end{dmath*}
+\vspace{4mm}
+\noindent \fbox{No. {31}} $\,\,\,\hat{\mathbb{Q}}_{6}^{(A_{1g},2)}$ [M$_{1}$,\,B$_{3}$]
+\begin{dmath*}
+\hat{\mathbb{Z}}_{31}=\frac{\sqrt{2} \mathbb{X}_{8}[\mathbb{Q}_{2,0}^{(a,E_{2g})}] \otimes\mathbb{Y}_{20}[\mathbb{Q}_{4,0}^{(b,E_{2g},1)}]}{2} + \frac{\sqrt{2} \mathbb{X}_{9}[\mathbb{Q}_{2,1}^{(a,E_{2g})}] \otimes\mathbb{Y}_{21}[\mathbb{Q}_{4,1}^{(b,E_{2g},1)}]}{2}
+\end{dmath*}
+\begin{dmath*}
+\hat{\mathbb{Z}}_{31}(\bm{k})=\frac{\sqrt{3} \mathbb{X}_{8}[\mathbb{Q}_{2,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{19}[\mathbb{Q}_{0}^{(u,A_{1g})}] \otimes\mathbb{F}_{22}[\mathbb{Q}_{4,0}^{(k,E_{2g},1)}]}{6} + \frac{\sqrt{3} \mathbb{X}_{8}[\mathbb{Q}_{2,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{22}[\mathbb{Q}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{19}[\mathbb{Q}_{0}^{(k,A_{1g})}]}{12} + \frac{\sqrt{2} \mathbb{X}_{8}[\mathbb{Q}_{2,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{22}[\mathbb{Q}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{20}[\mathbb{Q}_{2,0}^{(k,E_{2g})}]}{8} - \frac{\sqrt{6} \mathbb{X}_{8}[\mathbb{Q}_{2,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{22}[\mathbb{Q}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{22}[\mathbb{Q}_{4,0}^{(k,E_{2g},1)}]}{24} - \frac{\sqrt{2} \mathbb{X}_{8}[\mathbb{Q}_{2,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{23}[\mathbb{Q}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{21}[\mathbb{Q}_{2,1}^{(k,E_{2g})}]}{8} + \frac{\sqrt{6} \mathbb{X}_{8}[\mathbb{Q}_{2,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{23}[\mathbb{Q}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{23}[\mathbb{Q}_{4,1}^{(k,E_{2g},1)}]}{24} - \frac{\mathbb{X}_{8}[\mathbb{Q}_{2,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{23}[\mathbb{Q}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{24}[\mathbb{Q}_{6}^{(k,A_{2g})}]}{4} + \mathbb{X}_{8}[\mathbb{Q}_{2,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{26}[\mathbb{T}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{25}[\mathbb{T}_{1,0}^{(k,E_{1u})}] \left(\frac{\sqrt{3}}{24} + \frac{1}{8}\right) - \frac{\mathbb{X}_{8}[\mathbb{Q}_{2,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{26}[\mathbb{T}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{28}[\mathbb{T}_{3}^{(k,B_{2u})}]}{4} + \mathbb{X}_{8}[\mathbb{Q}_{2,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{26}[\mathbb{T}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{29}[\mathbb{T}_{5,0}^{(k,E_{1u},1)}] \left(- \frac{1}{8} + \frac{\sqrt{3}}{24}\right) + \mathbb{X}_{8}[\mathbb{Q}_{2,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{27}[\mathbb{T}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{26}[\mathbb{T}_{1,1}^{(k,E_{1u})}] \left(- \frac{1}{8} - \frac{\sqrt{3}}{24}\right) - \frac{\sqrt{3} \mathbb{X}_{8}[\mathbb{Q}_{2,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{27}[\mathbb{T}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{27}[\mathbb{T}_{3}^{(k,B_{1u})}]}{12} + \mathbb{X}_{8}[\mathbb{Q}_{2,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{27}[\mathbb{T}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{30}[\mathbb{T}_{5,1}^{(k,E_{1u},1)}] \left(\frac{1}{8} - \frac{\sqrt{3}}{24}\right) + \frac{\sqrt{6} \mathbb{X}_{8}[\mathbb{Q}_{2,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{30}[\mathbb{T}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{26}[\mathbb{T}_{1,1}^{(k,E_{1u})}]}{12} + \frac{\sqrt{6} \mathbb{X}_{8}[\mathbb{Q}_{2,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{30}[\mathbb{T}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{30}[\mathbb{T}_{5,1}^{(k,E_{1u},1)}]}{12} + \frac{\sqrt{3} \mathbb{X}_{9}[\mathbb{Q}_{2,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{19}[\mathbb{Q}_{0}^{(u,A_{1g})}] \otimes\mathbb{F}_{23}[\mathbb{Q}_{4,1}^{(k,E_{2g},1)}]}{6} - \frac{\sqrt{2} \mathbb{X}_{9}[\mathbb{Q}_{2,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{22}[\mathbb{Q}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{21}[\mathbb{Q}_{2,1}^{(k,E_{2g})}]}{8} + \frac{\sqrt{6} \mathbb{X}_{9}[\mathbb{Q}_{2,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{22}[\mathbb{Q}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{23}[\mathbb{Q}_{4,1}^{(k,E_{2g},1)}]}{24} + \frac{\mathbb{X}_{9}[\mathbb{Q}_{2,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{22}[\mathbb{Q}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{24}[\mathbb{Q}_{6}^{(k,A_{2g})}]}{4} + \frac{\sqrt{3} \mathbb{X}_{9}[\mathbb{Q}_{2,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{23}[\mathbb{Q}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{19}[\mathbb{Q}_{0}^{(k,A_{1g})}]}{12} - \frac{\sqrt{2} \mathbb{X}_{9}[\mathbb{Q}_{2,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{23}[\mathbb{Q}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{20}[\mathbb{Q}_{2,0}^{(k,E_{2g})}]}{8} + \frac{\sqrt{6} \mathbb{X}_{9}[\mathbb{Q}_{2,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{23}[\mathbb{Q}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{22}[\mathbb{Q}_{4,0}^{(k,E_{2g},1)}]}{24} + \mathbb{X}_{9}[\mathbb{Q}_{2,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{26}[\mathbb{T}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{26}[\mathbb{T}_{1,1}^{(k,E_{1u})}] \left(- \frac{1}{8} - \frac{\sqrt{3}}{24}\right) + \frac{\sqrt{3} \mathbb{X}_{9}[\mathbb{Q}_{2,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{26}[\mathbb{T}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{27}[\mathbb{T}_{3}^{(k,B_{1u})}]}{12} + \mathbb{X}_{9}[\mathbb{Q}_{2,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{26}[\mathbb{T}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{30}[\mathbb{T}_{5,1}^{(k,E_{1u},1)}] \left(\frac{1}{8} - \frac{\sqrt{3}}{24}\right) + \mathbb{X}_{9}[\mathbb{Q}_{2,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{27}[\mathbb{T}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{25}[\mathbb{T}_{1,0}^{(k,E_{1u})}] \left(- \frac{1}{8} - \frac{\sqrt{3}}{24}\right) - \frac{\mathbb{X}_{9}[\mathbb{Q}_{2,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{27}[\mathbb{T}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{28}[\mathbb{T}_{3}^{(k,B_{2u})}]}{4} + \mathbb{X}_{9}[\mathbb{Q}_{2,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{27}[\mathbb{T}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{29}[\mathbb{T}_{5,0}^{(k,E_{1u},1)}] \left(\frac{1}{8} - \frac{\sqrt{3}}{24}\right) - \frac{\sqrt{6} \mathbb{X}_{9}[\mathbb{Q}_{2,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{30}[\mathbb{T}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{25}[\mathbb{T}_{1,0}^{(k,E_{1u})}]}{12} - \frac{\sqrt{6} \mathbb{X}_{9}[\mathbb{Q}_{2,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{30}[\mathbb{T}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{29}[\mathbb{T}_{5,0}^{(k,E_{1u},1)}]}{12}
+\end{dmath*}
+\vspace{4mm}
+\noindent \fbox{No. {32}} $\,\,\,\hat{\mathbb{Q}}_{4}^{(A_{1g})}$ [M$_{1}$,\,B$_{3}$]
+\begin{dmath*}
+\hat{\mathbb{Z}}_{32}=\mathbb{X}_{3}[\mathbb{Q}_{4}^{(a,A_{1g})}] \otimes\mathbb{Y}_{17}[\mathbb{Q}_{0}^{(b,A_{1g})}]
+\end{dmath*}
+\begin{dmath*}
+\hat{\mathbb{Z}}_{32}(\bm{k})=\frac{\sqrt{6} \mathbb{X}_{3}[\mathbb{Q}_{4}^{(a,A_{1g})}] \otimes\mathbb{U}_{19}[\mathbb{Q}_{0}^{(u,A_{1g})}] \otimes\mathbb{F}_{19}[\mathbb{Q}_{0}^{(k,A_{1g})}]}{6} + \frac{\sqrt{2} \mathbb{X}_{3}[\mathbb{Q}_{4}^{(a,A_{1g})}] \otimes\mathbb{U}_{22}[\mathbb{Q}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{20}[\mathbb{Q}_{2,0}^{(k,E_{2g})}]}{4} + \frac{\sqrt{6} \mathbb{X}_{3}[\mathbb{Q}_{4}^{(a,A_{1g})}] \otimes\mathbb{U}_{22}[\mathbb{Q}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{22}[\mathbb{Q}_{4,0}^{(k,E_{2g},1)}]}{12} + \frac{\sqrt{2} \mathbb{X}_{3}[\mathbb{Q}_{4}^{(a,A_{1g})}] \otimes\mathbb{U}_{23}[\mathbb{Q}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{21}[\mathbb{Q}_{2,1}^{(k,E_{2g})}]}{4} + \frac{\sqrt{6} \mathbb{X}_{3}[\mathbb{Q}_{4}^{(a,A_{1g})}] \otimes\mathbb{U}_{23}[\mathbb{Q}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{23}[\mathbb{Q}_{4,1}^{(k,E_{2g},1)}]}{12} + \mathbb{X}_{3}[\mathbb{Q}_{4}^{(a,A_{1g})}] \otimes\mathbb{U}_{26}[\mathbb{T}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{25}[\mathbb{T}_{1,0}^{(k,E_{1u})}] \left(- \frac{1}{4} + \frac{\sqrt{3}}{12}\right) + \mathbb{X}_{3}[\mathbb{Q}_{4}^{(a,A_{1g})}] \otimes\mathbb{U}_{26}[\mathbb{T}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{29}[\mathbb{T}_{5,0}^{(k,E_{1u},1)}] \left(\frac{\sqrt{3}}{12} + \frac{1}{4}\right) + \mathbb{X}_{3}[\mathbb{Q}_{4}^{(a,A_{1g})}] \otimes\mathbb{U}_{27}[\mathbb{T}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{26}[\mathbb{T}_{1,1}^{(k,E_{1u})}] \left(- \frac{1}{4} + \frac{\sqrt{3}}{12}\right) + \mathbb{X}_{3}[\mathbb{Q}_{4}^{(a,A_{1g})}] \otimes\mathbb{U}_{27}[\mathbb{T}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{30}[\mathbb{T}_{5,1}^{(k,E_{1u},1)}] \left(\frac{\sqrt{3}}{12} + \frac{1}{4}\right) - \frac{\sqrt{6} \mathbb{X}_{3}[\mathbb{Q}_{4}^{(a,A_{1g})}] \otimes\mathbb{U}_{30}[\mathbb{T}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{27}[\mathbb{T}_{3}^{(k,B_{1u})}]}{6}
+\end{dmath*}
+\vspace{4mm}
+\noindent \fbox{No. {33}} $\,\,\,\hat{\mathbb{Q}}_{2}^{(A_{1g})}$ [M$_{1}$,\,B$_{3}$]
+\begin{dmath*}
+\hat{\mathbb{Z}}_{33}=\frac{\sqrt{2} \mathbb{X}_{12}[\mathbb{Q}_{4,0}^{(a,E_{2g},2)}] \otimes\mathbb{Y}_{18}[\mathbb{Q}_{2,0}^{(b,E_{2g})}]}{2} + \frac{\sqrt{2} \mathbb{X}_{13}[\mathbb{Q}_{4,1}^{(a,E_{2g},2)}] \otimes\mathbb{Y}_{19}[\mathbb{Q}_{2,1}^{(b,E_{2g})}]}{2}
+\end{dmath*}
+\begin{dmath*}
+\hat{\mathbb{Z}}_{33}(\bm{k})=\frac{\sqrt{3} \mathbb{X}_{12}[\mathbb{Q}_{4,0}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{19}[\mathbb{Q}_{0}^{(u,A_{1g})}] \otimes\mathbb{F}_{20}[\mathbb{Q}_{2,0}^{(k,E_{2g})}]}{6} + \frac{\mathbb{X}_{12}[\mathbb{Q}_{4,0}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{22}[\mathbb{Q}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{19}[\mathbb{Q}_{0}^{(k,A_{1g})}]}{4} + \frac{\sqrt{6} \mathbb{X}_{12}[\mathbb{Q}_{4,0}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{22}[\mathbb{Q}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{20}[\mathbb{Q}_{2,0}^{(k,E_{2g})}]}{24} + \frac{\sqrt{2} \mathbb{X}_{12}[\mathbb{Q}_{4,0}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{22}[\mathbb{Q}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{22}[\mathbb{Q}_{4,0}^{(k,E_{2g},1)}]}{8} - \frac{\sqrt{6} \mathbb{X}_{12}[\mathbb{Q}_{4,0}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{23}[\mathbb{Q}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{21}[\mathbb{Q}_{2,1}^{(k,E_{2g})}]}{24} - \frac{\sqrt{2} \mathbb{X}_{12}[\mathbb{Q}_{4,0}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{23}[\mathbb{Q}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{23}[\mathbb{Q}_{4,1}^{(k,E_{2g},1)}]}{8} + \frac{\sqrt{3} \mathbb{X}_{12}[\mathbb{Q}_{4,0}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{23}[\mathbb{Q}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{24}[\mathbb{Q}_{6}^{(k,A_{2g})}]}{12} + \mathbb{X}_{12}[\mathbb{Q}_{4,0}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{26}[\mathbb{T}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{25}[\mathbb{T}_{1,0}^{(k,E_{1u})}] \left(- \frac{1}{8} + \frac{\sqrt{3}}{24}\right) + \frac{\sqrt{3} \mathbb{X}_{12}[\mathbb{Q}_{4,0}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{26}[\mathbb{T}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{28}[\mathbb{T}_{3}^{(k,B_{2u})}]}{12} + \mathbb{X}_{12}[\mathbb{Q}_{4,0}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{26}[\mathbb{T}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{29}[\mathbb{T}_{5,0}^{(k,E_{1u},1)}] \left(- \frac{1}{8} - \frac{\sqrt{3}}{24}\right) + \mathbb{X}_{12}[\mathbb{Q}_{4,0}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{27}[\mathbb{T}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{26}[\mathbb{T}_{1,1}^{(k,E_{1u})}] \left(\frac{1}{8} - \frac{\sqrt{3}}{24}\right) - \frac{\mathbb{X}_{12}[\mathbb{Q}_{4,0}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{27}[\mathbb{T}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{27}[\mathbb{T}_{3}^{(k,B_{1u})}]}{4} + \mathbb{X}_{12}[\mathbb{Q}_{4,0}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{27}[\mathbb{T}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{30}[\mathbb{T}_{5,1}^{(k,E_{1u},1)}] \left(\frac{\sqrt{3}}{24} + \frac{1}{8}\right) - \frac{\sqrt{6} \mathbb{X}_{12}[\mathbb{Q}_{4,0}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{30}[\mathbb{T}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{26}[\mathbb{T}_{1,1}^{(k,E_{1u})}]}{12} + \frac{\sqrt{6} \mathbb{X}_{12}[\mathbb{Q}_{4,0}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{30}[\mathbb{T}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{30}[\mathbb{T}_{5,1}^{(k,E_{1u},1)}]}{12} + \frac{\sqrt{3} \mathbb{X}_{13}[\mathbb{Q}_{4,1}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{19}[\mathbb{Q}_{0}^{(u,A_{1g})}] \otimes\mathbb{F}_{21}[\mathbb{Q}_{2,1}^{(k,E_{2g})}]}{6} - \frac{\sqrt{6} \mathbb{X}_{13}[\mathbb{Q}_{4,1}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{22}[\mathbb{Q}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{21}[\mathbb{Q}_{2,1}^{(k,E_{2g})}]}{24} - \frac{\sqrt{2} \mathbb{X}_{13}[\mathbb{Q}_{4,1}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{22}[\mathbb{Q}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{23}[\mathbb{Q}_{4,1}^{(k,E_{2g},1)}]}{8} - \frac{\sqrt{3} \mathbb{X}_{13}[\mathbb{Q}_{4,1}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{22}[\mathbb{Q}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{24}[\mathbb{Q}_{6}^{(k,A_{2g})}]}{12} + \frac{\mathbb{X}_{13}[\mathbb{Q}_{4,1}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{23}[\mathbb{Q}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{19}[\mathbb{Q}_{0}^{(k,A_{1g})}]}{4} - \frac{\sqrt{6} \mathbb{X}_{13}[\mathbb{Q}_{4,1}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{23}[\mathbb{Q}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{20}[\mathbb{Q}_{2,0}^{(k,E_{2g})}]}{24} - \frac{\sqrt{2} \mathbb{X}_{13}[\mathbb{Q}_{4,1}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{23}[\mathbb{Q}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{22}[\mathbb{Q}_{4,0}^{(k,E_{2g},1)}]}{8} + \mathbb{X}_{13}[\mathbb{Q}_{4,1}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{26}[\mathbb{T}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{26}[\mathbb{T}_{1,1}^{(k,E_{1u})}] \left(\frac{1}{8} - \frac{\sqrt{3}}{24}\right) + \frac{\mathbb{X}_{13}[\mathbb{Q}_{4,1}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{26}[\mathbb{T}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{27}[\mathbb{T}_{3}^{(k,B_{1u})}]}{4} + \mathbb{X}_{13}[\mathbb{Q}_{4,1}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{26}[\mathbb{T}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{30}[\mathbb{T}_{5,1}^{(k,E_{1u},1)}] \left(\frac{\sqrt{3}}{24} + \frac{1}{8}\right) + \mathbb{X}_{13}[\mathbb{Q}_{4,1}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{27}[\mathbb{T}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{25}[\mathbb{T}_{1,0}^{(k,E_{1u})}] \left(\frac{1}{8} - \frac{\sqrt{3}}{24}\right) + \frac{\sqrt{3} \mathbb{X}_{13}[\mathbb{Q}_{4,1}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{27}[\mathbb{T}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{28}[\mathbb{T}_{3}^{(k,B_{2u})}]}{12} + \mathbb{X}_{13}[\mathbb{Q}_{4,1}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{27}[\mathbb{T}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{29}[\mathbb{T}_{5,0}^{(k,E_{1u},1)}] \left(\frac{\sqrt{3}}{24} + \frac{1}{8}\right) + \frac{\sqrt{6} \mathbb{X}_{13}[\mathbb{Q}_{4,1}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{30}[\mathbb{T}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{25}[\mathbb{T}_{1,0}^{(k,E_{1u})}]}{12} - \frac{\sqrt{6} \mathbb{X}_{13}[\mathbb{Q}_{4,1}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{30}[\mathbb{T}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{29}[\mathbb{T}_{5,0}^{(k,E_{1u},1)}]}{12}
+\end{dmath*}
+\vspace{4mm}
+\noindent \fbox{No. {34}} $\,\,\,\hat{\mathbb{Q}}_{6}^{(A_{1g},2)}$ [M$_{1}$,\,B$_{3}$]
+\begin{dmath*}
+\hat{\mathbb{Z}}_{34}=\frac{\sqrt{2} \mathbb{X}_{10}[\mathbb{Q}_{4,0}^{(a,E_{2g},1)}] \otimes\mathbb{Y}_{18}[\mathbb{Q}_{2,0}^{(b,E_{2g})}]}{2} + \frac{\sqrt{2} \mathbb{X}_{11}[\mathbb{Q}_{4,1}^{(a,E_{2g},1)}] \otimes\mathbb{Y}_{19}[\mathbb{Q}_{2,1}^{(b,E_{2g})}]}{2}
+\end{dmath*}
+\begin{dmath*}
+\hat{\mathbb{Z}}_{34}(\bm{k})=\frac{\sqrt{3} \mathbb{X}_{10}[\mathbb{Q}_{4,0}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{19}[\mathbb{Q}_{0}^{(u,A_{1g})}] \otimes\mathbb{F}_{20}[\mathbb{Q}_{2,0}^{(k,E_{2g})}]}{6} + \frac{\mathbb{X}_{10}[\mathbb{Q}_{4,0}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{22}[\mathbb{Q}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{19}[\mathbb{Q}_{0}^{(k,A_{1g})}]}{4} + \frac{\sqrt{6} \mathbb{X}_{10}[\mathbb{Q}_{4,0}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{22}[\mathbb{Q}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{20}[\mathbb{Q}_{2,0}^{(k,E_{2g})}]}{24} + \frac{\sqrt{2} \mathbb{X}_{10}[\mathbb{Q}_{4,0}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{22}[\mathbb{Q}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{22}[\mathbb{Q}_{4,0}^{(k,E_{2g},1)}]}{8} - \frac{\sqrt{6} \mathbb{X}_{10}[\mathbb{Q}_{4,0}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{23}[\mathbb{Q}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{21}[\mathbb{Q}_{2,1}^{(k,E_{2g})}]}{24} - \frac{\sqrt{2} \mathbb{X}_{10}[\mathbb{Q}_{4,0}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{23}[\mathbb{Q}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{23}[\mathbb{Q}_{4,1}^{(k,E_{2g},1)}]}{8} + \frac{\sqrt{3} \mathbb{X}_{10}[\mathbb{Q}_{4,0}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{23}[\mathbb{Q}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{24}[\mathbb{Q}_{6}^{(k,A_{2g})}]}{12} + \mathbb{X}_{10}[\mathbb{Q}_{4,0}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{26}[\mathbb{T}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{25}[\mathbb{T}_{1,0}^{(k,E_{1u})}] \left(- \frac{1}{8} + \frac{\sqrt{3}}{24}\right) + \frac{\sqrt{3} \mathbb{X}_{10}[\mathbb{Q}_{4,0}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{26}[\mathbb{T}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{28}[\mathbb{T}_{3}^{(k,B_{2u})}]}{12} + \mathbb{X}_{10}[\mathbb{Q}_{4,0}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{26}[\mathbb{T}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{29}[\mathbb{T}_{5,0}^{(k,E_{1u},1)}] \left(- \frac{1}{8} - \frac{\sqrt{3}}{24}\right) + \mathbb{X}_{10}[\mathbb{Q}_{4,0}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{27}[\mathbb{T}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{26}[\mathbb{T}_{1,1}^{(k,E_{1u})}] \left(\frac{1}{8} - \frac{\sqrt{3}}{24}\right) - \frac{\mathbb{X}_{10}[\mathbb{Q}_{4,0}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{27}[\mathbb{T}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{27}[\mathbb{T}_{3}^{(k,B_{1u})}]}{4} + \mathbb{X}_{10}[\mathbb{Q}_{4,0}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{27}[\mathbb{T}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{30}[\mathbb{T}_{5,1}^{(k,E_{1u},1)}] \left(\frac{\sqrt{3}}{24} + \frac{1}{8}\right) - \frac{\sqrt{6} \mathbb{X}_{10}[\mathbb{Q}_{4,0}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{30}[\mathbb{T}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{26}[\mathbb{T}_{1,1}^{(k,E_{1u})}]}{12} + \frac{\sqrt{6} \mathbb{X}_{10}[\mathbb{Q}_{4,0}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{30}[\mathbb{T}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{30}[\mathbb{T}_{5,1}^{(k,E_{1u},1)}]}{12} + \frac{\sqrt{3} \mathbb{X}_{11}[\mathbb{Q}_{4,1}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{19}[\mathbb{Q}_{0}^{(u,A_{1g})}] \otimes\mathbb{F}_{21}[\mathbb{Q}_{2,1}^{(k,E_{2g})}]}{6} - \frac{\sqrt{6} \mathbb{X}_{11}[\mathbb{Q}_{4,1}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{22}[\mathbb{Q}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{21}[\mathbb{Q}_{2,1}^{(k,E_{2g})}]}{24} - \frac{\sqrt{2} \mathbb{X}_{11}[\mathbb{Q}_{4,1}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{22}[\mathbb{Q}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{23}[\mathbb{Q}_{4,1}^{(k,E_{2g},1)}]}{8} - \frac{\sqrt{3} \mathbb{X}_{11}[\mathbb{Q}_{4,1}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{22}[\mathbb{Q}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{24}[\mathbb{Q}_{6}^{(k,A_{2g})}]}{12} + \frac{\mathbb{X}_{11}[\mathbb{Q}_{4,1}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{23}[\mathbb{Q}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{19}[\mathbb{Q}_{0}^{(k,A_{1g})}]}{4} - \frac{\sqrt{6} \mathbb{X}_{11}[\mathbb{Q}_{4,1}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{23}[\mathbb{Q}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{20}[\mathbb{Q}_{2,0}^{(k,E_{2g})}]}{24} - \frac{\sqrt{2} \mathbb{X}_{11}[\mathbb{Q}_{4,1}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{23}[\mathbb{Q}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{22}[\mathbb{Q}_{4,0}^{(k,E_{2g},1)}]}{8} + \mathbb{X}_{11}[\mathbb{Q}_{4,1}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{26}[\mathbb{T}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{26}[\mathbb{T}_{1,1}^{(k,E_{1u})}] \left(\frac{1}{8} - \frac{\sqrt{3}}{24}\right) + \frac{\mathbb{X}_{11}[\mathbb{Q}_{4,1}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{26}[\mathbb{T}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{27}[\mathbb{T}_{3}^{(k,B_{1u})}]}{4} + \mathbb{X}_{11}[\mathbb{Q}_{4,1}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{26}[\mathbb{T}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{30}[\mathbb{T}_{5,1}^{(k,E_{1u},1)}] \left(\frac{\sqrt{3}}{24} + \frac{1}{8}\right) + \mathbb{X}_{11}[\mathbb{Q}_{4,1}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{27}[\mathbb{T}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{25}[\mathbb{T}_{1,0}^{(k,E_{1u})}] \left(\frac{1}{8} - \frac{\sqrt{3}}{24}\right) + \frac{\sqrt{3} \mathbb{X}_{11}[\mathbb{Q}_{4,1}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{27}[\mathbb{T}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{28}[\mathbb{T}_{3}^{(k,B_{2u})}]}{12} + \mathbb{X}_{11}[\mathbb{Q}_{4,1}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{27}[\mathbb{T}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{29}[\mathbb{T}_{5,0}^{(k,E_{1u},1)}] \left(\frac{\sqrt{3}}{24} + \frac{1}{8}\right) + \frac{\sqrt{6} \mathbb{X}_{11}[\mathbb{Q}_{4,1}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{30}[\mathbb{T}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{25}[\mathbb{T}_{1,0}^{(k,E_{1u})}]}{12} - \frac{\sqrt{6} \mathbb{X}_{11}[\mathbb{Q}_{4,1}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{30}[\mathbb{T}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{29}[\mathbb{T}_{5,0}^{(k,E_{1u},1)}]}{12}
+\end{dmath*}
+\vspace{4mm}
+\noindent \fbox{No. {35}} $\,\,\,\hat{\mathbb{Q}}_{0}^{(A_{1g})}$ [M$_{1}$,\,B$_{3}$]
+\begin{dmath*}
+\hat{\mathbb{Z}}_{35}=\frac{\sqrt{2} \mathbb{X}_{10}[\mathbb{Q}_{4,0}^{(a,E_{2g},1)}] \otimes\mathbb{Y}_{20}[\mathbb{Q}_{4,0}^{(b,E_{2g},1)}]}{2} + \frac{\sqrt{2} \mathbb{X}_{11}[\mathbb{Q}_{4,1}^{(a,E_{2g},1)}] \otimes\mathbb{Y}_{21}[\mathbb{Q}_{4,1}^{(b,E_{2g},1)}]}{2}
+\end{dmath*}
+\begin{dmath*}
+\hat{\mathbb{Z}}_{35}(\bm{k})=\frac{\sqrt{3} \mathbb{X}_{10}[\mathbb{Q}_{4,0}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{19}[\mathbb{Q}_{0}^{(u,A_{1g})}] \otimes\mathbb{F}_{22}[\mathbb{Q}_{4,0}^{(k,E_{2g},1)}]}{6} + \frac{\sqrt{3} \mathbb{X}_{10}[\mathbb{Q}_{4,0}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{22}[\mathbb{Q}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{19}[\mathbb{Q}_{0}^{(k,A_{1g})}]}{12} + \frac{\sqrt{2} \mathbb{X}_{10}[\mathbb{Q}_{4,0}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{22}[\mathbb{Q}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{20}[\mathbb{Q}_{2,0}^{(k,E_{2g})}]}{8} - \frac{\sqrt{6} \mathbb{X}_{10}[\mathbb{Q}_{4,0}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{22}[\mathbb{Q}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{22}[\mathbb{Q}_{4,0}^{(k,E_{2g},1)}]}{24} - \frac{\sqrt{2} \mathbb{X}_{10}[\mathbb{Q}_{4,0}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{23}[\mathbb{Q}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{21}[\mathbb{Q}_{2,1}^{(k,E_{2g})}]}{8} + \frac{\sqrt{6} \mathbb{X}_{10}[\mathbb{Q}_{4,0}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{23}[\mathbb{Q}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{23}[\mathbb{Q}_{4,1}^{(k,E_{2g},1)}]}{24} - \frac{\mathbb{X}_{10}[\mathbb{Q}_{4,0}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{23}[\mathbb{Q}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{24}[\mathbb{Q}_{6}^{(k,A_{2g})}]}{4} + \mathbb{X}_{10}[\mathbb{Q}_{4,0}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{26}[\mathbb{T}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{25}[\mathbb{T}_{1,0}^{(k,E_{1u})}] \left(\frac{\sqrt{3}}{24} + \frac{1}{8}\right) - \frac{\mathbb{X}_{10}[\mathbb{Q}_{4,0}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{26}[\mathbb{T}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{28}[\mathbb{T}_{3}^{(k,B_{2u})}]}{4} + \mathbb{X}_{10}[\mathbb{Q}_{4,0}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{26}[\mathbb{T}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{29}[\mathbb{T}_{5,0}^{(k,E_{1u},1)}] \left(- \frac{1}{8} + \frac{\sqrt{3}}{24}\right) + \mathbb{X}_{10}[\mathbb{Q}_{4,0}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{27}[\mathbb{T}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{26}[\mathbb{T}_{1,1}^{(k,E_{1u})}] \left(- \frac{1}{8} - \frac{\sqrt{3}}{24}\right) - \frac{\sqrt{3} \mathbb{X}_{10}[\mathbb{Q}_{4,0}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{27}[\mathbb{T}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{27}[\mathbb{T}_{3}^{(k,B_{1u})}]}{12} + \mathbb{X}_{10}[\mathbb{Q}_{4,0}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{27}[\mathbb{T}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{30}[\mathbb{T}_{5,1}^{(k,E_{1u},1)}] \left(\frac{1}{8} - \frac{\sqrt{3}}{24}\right) + \frac{\sqrt{6} \mathbb{X}_{10}[\mathbb{Q}_{4,0}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{30}[\mathbb{T}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{26}[\mathbb{T}_{1,1}^{(k,E_{1u})}]}{12} + \frac{\sqrt{6} \mathbb{X}_{10}[\mathbb{Q}_{4,0}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{30}[\mathbb{T}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{30}[\mathbb{T}_{5,1}^{(k,E_{1u},1)}]}{12} + \frac{\sqrt{3} \mathbb{X}_{11}[\mathbb{Q}_{4,1}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{19}[\mathbb{Q}_{0}^{(u,A_{1g})}] \otimes\mathbb{F}_{23}[\mathbb{Q}_{4,1}^{(k,E_{2g},1)}]}{6} - \frac{\sqrt{2} \mathbb{X}_{11}[\mathbb{Q}_{4,1}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{22}[\mathbb{Q}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{21}[\mathbb{Q}_{2,1}^{(k,E_{2g})}]}{8} + \frac{\sqrt{6} \mathbb{X}_{11}[\mathbb{Q}_{4,1}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{22}[\mathbb{Q}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{23}[\mathbb{Q}_{4,1}^{(k,E_{2g},1)}]}{24} + \frac{\mathbb{X}_{11}[\mathbb{Q}_{4,1}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{22}[\mathbb{Q}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{24}[\mathbb{Q}_{6}^{(k,A_{2g})}]}{4} + \frac{\sqrt{3} \mathbb{X}_{11}[\mathbb{Q}_{4,1}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{23}[\mathbb{Q}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{19}[\mathbb{Q}_{0}^{(k,A_{1g})}]}{12} - \frac{\sqrt{2} \mathbb{X}_{11}[\mathbb{Q}_{4,1}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{23}[\mathbb{Q}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{20}[\mathbb{Q}_{2,0}^{(k,E_{2g})}]}{8} + \frac{\sqrt{6} \mathbb{X}_{11}[\mathbb{Q}_{4,1}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{23}[\mathbb{Q}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{22}[\mathbb{Q}_{4,0}^{(k,E_{2g},1)}]}{24} + \mathbb{X}_{11}[\mathbb{Q}_{4,1}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{26}[\mathbb{T}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{26}[\mathbb{T}_{1,1}^{(k,E_{1u})}] \left(- \frac{1}{8} - \frac{\sqrt{3}}{24}\right) + \frac{\sqrt{3} \mathbb{X}_{11}[\mathbb{Q}_{4,1}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{26}[\mathbb{T}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{27}[\mathbb{T}_{3}^{(k,B_{1u})}]}{12} + \mathbb{X}_{11}[\mathbb{Q}_{4,1}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{26}[\mathbb{T}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{30}[\mathbb{T}_{5,1}^{(k,E_{1u},1)}] \left(\frac{1}{8} - \frac{\sqrt{3}}{24}\right) + \mathbb{X}_{11}[\mathbb{Q}_{4,1}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{27}[\mathbb{T}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{25}[\mathbb{T}_{1,0}^{(k,E_{1u})}] \left(- \frac{1}{8} - \frac{\sqrt{3}}{24}\right) - \frac{\mathbb{X}_{11}[\mathbb{Q}_{4,1}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{27}[\mathbb{T}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{28}[\mathbb{T}_{3}^{(k,B_{2u})}]}{4} + \mathbb{X}_{11}[\mathbb{Q}_{4,1}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{27}[\mathbb{T}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{29}[\mathbb{T}_{5,0}^{(k,E_{1u},1)}] \left(\frac{1}{8} - \frac{\sqrt{3}}{24}\right) - \frac{\sqrt{6} \mathbb{X}_{11}[\mathbb{Q}_{4,1}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{30}[\mathbb{T}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{25}[\mathbb{T}_{1,0}^{(k,E_{1u})}]}{12} - \frac{\sqrt{6} \mathbb{X}_{11}[\mathbb{Q}_{4,1}^{(a,E_{2g},1)}] \otimes\mathbb{U}_{30}[\mathbb{T}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{29}[\mathbb{T}_{5,0}^{(k,E_{1u},1)}]}{12}
+\end{dmath*}
+\vspace{4mm}
+\noindent \fbox{No. {36}} $\,\,\,\hat{\mathbb{Q}}_{6}^{(A_{1g},2)}$ [M$_{1}$,\,B$_{3}$]
+\begin{dmath*}
+\hat{\mathbb{Z}}_{36}=- \frac{\sqrt{2} \mathbb{X}_{12}[\mathbb{Q}_{4,0}^{(a,E_{2g},2)}] \otimes\mathbb{Y}_{20}[\mathbb{Q}_{4,0}^{(b,E_{2g},1)}]}{2} - \frac{\sqrt{2} \mathbb{X}_{13}[\mathbb{Q}_{4,1}^{(a,E_{2g},2)}] \otimes\mathbb{Y}_{21}[\mathbb{Q}_{4,1}^{(b,E_{2g},1)}]}{2}
+\end{dmath*}
+\begin{dmath*}
+\hat{\mathbb{Z}}_{36}(\bm{k})=- \frac{\sqrt{3} \mathbb{X}_{12}[\mathbb{Q}_{4,0}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{19}[\mathbb{Q}_{0}^{(u,A_{1g})}] \otimes\mathbb{F}_{22}[\mathbb{Q}_{4,0}^{(k,E_{2g},1)}]}{6} - \frac{\sqrt{3} \mathbb{X}_{12}[\mathbb{Q}_{4,0}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{22}[\mathbb{Q}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{19}[\mathbb{Q}_{0}^{(k,A_{1g})}]}{12} - \frac{\sqrt{2} \mathbb{X}_{12}[\mathbb{Q}_{4,0}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{22}[\mathbb{Q}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{20}[\mathbb{Q}_{2,0}^{(k,E_{2g})}]}{8} + \frac{\sqrt{6} \mathbb{X}_{12}[\mathbb{Q}_{4,0}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{22}[\mathbb{Q}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{22}[\mathbb{Q}_{4,0}^{(k,E_{2g},1)}]}{24} + \frac{\sqrt{2} \mathbb{X}_{12}[\mathbb{Q}_{4,0}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{23}[\mathbb{Q}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{21}[\mathbb{Q}_{2,1}^{(k,E_{2g})}]}{8} - \frac{\sqrt{6} \mathbb{X}_{12}[\mathbb{Q}_{4,0}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{23}[\mathbb{Q}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{23}[\mathbb{Q}_{4,1}^{(k,E_{2g},1)}]}{24} + \frac{\mathbb{X}_{12}[\mathbb{Q}_{4,0}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{23}[\mathbb{Q}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{24}[\mathbb{Q}_{6}^{(k,A_{2g})}]}{4} + \mathbb{X}_{12}[\mathbb{Q}_{4,0}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{26}[\mathbb{T}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{25}[\mathbb{T}_{1,0}^{(k,E_{1u})}] \left(- \frac{1}{8} - \frac{\sqrt{3}}{24}\right) + \frac{\mathbb{X}_{12}[\mathbb{Q}_{4,0}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{26}[\mathbb{T}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{28}[\mathbb{T}_{3}^{(k,B_{2u})}]}{4} + \mathbb{X}_{12}[\mathbb{Q}_{4,0}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{26}[\mathbb{T}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{29}[\mathbb{T}_{5,0}^{(k,E_{1u},1)}] \left(\frac{1}{8} - \frac{\sqrt{3}}{24}\right) + \mathbb{X}_{12}[\mathbb{Q}_{4,0}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{27}[\mathbb{T}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{26}[\mathbb{T}_{1,1}^{(k,E_{1u})}] \left(\frac{\sqrt{3}}{24} + \frac{1}{8}\right) + \frac{\sqrt{3} \mathbb{X}_{12}[\mathbb{Q}_{4,0}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{27}[\mathbb{T}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{27}[\mathbb{T}_{3}^{(k,B_{1u})}]}{12} + \mathbb{X}_{12}[\mathbb{Q}_{4,0}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{27}[\mathbb{T}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{30}[\mathbb{T}_{5,1}^{(k,E_{1u},1)}] \left(- \frac{1}{8} + \frac{\sqrt{3}}{24}\right) - \frac{\sqrt{6} \mathbb{X}_{12}[\mathbb{Q}_{4,0}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{30}[\mathbb{T}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{26}[\mathbb{T}_{1,1}^{(k,E_{1u})}]}{12} - \frac{\sqrt{6} \mathbb{X}_{12}[\mathbb{Q}_{4,0}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{30}[\mathbb{T}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{30}[\mathbb{T}_{5,1}^{(k,E_{1u},1)}]}{12} - \frac{\sqrt{3} \mathbb{X}_{13}[\mathbb{Q}_{4,1}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{19}[\mathbb{Q}_{0}^{(u,A_{1g})}] \otimes\mathbb{F}_{23}[\mathbb{Q}_{4,1}^{(k,E_{2g},1)}]}{6} + \frac{\sqrt{2} \mathbb{X}_{13}[\mathbb{Q}_{4,1}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{22}[\mathbb{Q}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{21}[\mathbb{Q}_{2,1}^{(k,E_{2g})}]}{8} - \frac{\sqrt{6} \mathbb{X}_{13}[\mathbb{Q}_{4,1}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{22}[\mathbb{Q}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{23}[\mathbb{Q}_{4,1}^{(k,E_{2g},1)}]}{24} - \frac{\mathbb{X}_{13}[\mathbb{Q}_{4,1}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{22}[\mathbb{Q}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{24}[\mathbb{Q}_{6}^{(k,A_{2g})}]}{4} - \frac{\sqrt{3} \mathbb{X}_{13}[\mathbb{Q}_{4,1}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{23}[\mathbb{Q}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{19}[\mathbb{Q}_{0}^{(k,A_{1g})}]}{12} + \frac{\sqrt{2} \mathbb{X}_{13}[\mathbb{Q}_{4,1}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{23}[\mathbb{Q}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{20}[\mathbb{Q}_{2,0}^{(k,E_{2g})}]}{8} - \frac{\sqrt{6} \mathbb{X}_{13}[\mathbb{Q}_{4,1}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{23}[\mathbb{Q}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{22}[\mathbb{Q}_{4,0}^{(k,E_{2g},1)}]}{24} + \mathbb{X}_{13}[\mathbb{Q}_{4,1}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{26}[\mathbb{T}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{26}[\mathbb{T}_{1,1}^{(k,E_{1u})}] \left(\frac{\sqrt{3}}{24} + \frac{1}{8}\right) - \frac{\sqrt{3} \mathbb{X}_{13}[\mathbb{Q}_{4,1}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{26}[\mathbb{T}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{27}[\mathbb{T}_{3}^{(k,B_{1u})}]}{12} + \mathbb{X}_{13}[\mathbb{Q}_{4,1}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{26}[\mathbb{T}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{30}[\mathbb{T}_{5,1}^{(k,E_{1u},1)}] \left(- \frac{1}{8} + \frac{\sqrt{3}}{24}\right) + \mathbb{X}_{13}[\mathbb{Q}_{4,1}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{27}[\mathbb{T}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{25}[\mathbb{T}_{1,0}^{(k,E_{1u})}] \left(\frac{\sqrt{3}}{24} + \frac{1}{8}\right) + \frac{\mathbb{X}_{13}[\mathbb{Q}_{4,1}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{27}[\mathbb{T}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{28}[\mathbb{T}_{3}^{(k,B_{2u})}]}{4} + \mathbb{X}_{13}[\mathbb{Q}_{4,1}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{27}[\mathbb{T}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{29}[\mathbb{T}_{5,0}^{(k,E_{1u},1)}] \left(- \frac{1}{8} + \frac{\sqrt{3}}{24}\right) + \frac{\sqrt{6} \mathbb{X}_{13}[\mathbb{Q}_{4,1}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{30}[\mathbb{T}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{25}[\mathbb{T}_{1,0}^{(k,E_{1u})}]}{12} + \frac{\sqrt{6} \mathbb{X}_{13}[\mathbb{Q}_{4,1}^{(a,E_{2g},2)}] \otimes\mathbb{U}_{30}[\mathbb{T}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{29}[\mathbb{T}_{5,0}^{(k,E_{1u},1)}]}{12}
+\end{dmath*}
+\vspace{4mm}
+\noindent \fbox{No. {37}} $\,\,\,\hat{\mathbb{Q}}_{6}^{(A_{1g},2)}$ [M$_{1}$,\,B$_{3}$]
+\begin{dmath*}
+\hat{\mathbb{Z}}_{37}=- \mathbb{X}_{15}[\mathbb{M}_{1}^{(a,A_{2g})}] \otimes\mathbb{Y}_{26}[\mathbb{T}_{6}^{(b,A_{2g})}]
+\end{dmath*}
+\begin{dmath*}
+\hat{\mathbb{Z}}_{37}(\bm{k})=\mathbb{X}_{15}[\mathbb{M}_{1}^{(a,A_{2g})}] \otimes\mathbb{U}_{20}[\mathbb{Q}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{26}[\mathbb{T}_{1,1}^{(k,E_{1u})}] \left(\frac{\sqrt{3}}{12} + \frac{1}{4}\right) + \mathbb{X}_{15}[\mathbb{M}_{1}^{(a,A_{2g})}] \otimes\mathbb{U}_{20}[\mathbb{Q}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{30}[\mathbb{T}_{5,1}^{(k,E_{1u},1)}] \left(\frac{1}{4} - \frac{\sqrt{3}}{12}\right) + \mathbb{X}_{15}[\mathbb{M}_{1}^{(a,A_{2g})}] \otimes\mathbb{U}_{21}[\mathbb{Q}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{25}[\mathbb{T}_{1,0}^{(k,E_{1u})}] \left(- \frac{1}{4} - \frac{\sqrt{3}}{12}\right) + \mathbb{X}_{15}[\mathbb{M}_{1}^{(a,A_{2g})}] \otimes\mathbb{U}_{21}[\mathbb{Q}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{29}[\mathbb{T}_{5,0}^{(k,E_{1u},1)}] \left(- \frac{1}{4} + \frac{\sqrt{3}}{12}\right) - \frac{\sqrt{6} \mathbb{X}_{15}[\mathbb{M}_{1}^{(a,A_{2g})}] \otimes\mathbb{U}_{24}[\mathbb{Q}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{28}[\mathbb{T}_{3}^{(k,B_{2u})}]}{6} - \frac{\sqrt{6} \mathbb{X}_{15}[\mathbb{M}_{1}^{(a,A_{2g})}] \otimes\mathbb{U}_{25}[\mathbb{T}_{0}^{(u,A_{1g})}] \otimes\mathbb{F}_{24}[\mathbb{Q}_{6}^{(k,A_{2g})}]}{6} + \frac{\sqrt{6} \mathbb{X}_{15}[\mathbb{M}_{1}^{(a,A_{2g})}] \otimes\mathbb{U}_{28}[\mathbb{T}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{21}[\mathbb{Q}_{2,1}^{(k,E_{2g})}]}{12} - \frac{\sqrt{2} \mathbb{X}_{15}[\mathbb{M}_{1}^{(a,A_{2g})}] \otimes\mathbb{U}_{28}[\mathbb{T}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{23}[\mathbb{Q}_{4,1}^{(k,E_{2g},1)}]}{4} - \frac{\sqrt{6} \mathbb{X}_{15}[\mathbb{M}_{1}^{(a,A_{2g})}] \otimes\mathbb{U}_{29}[\mathbb{T}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{20}[\mathbb{Q}_{2,0}^{(k,E_{2g})}]}{12} + \frac{\sqrt{2} \mathbb{X}_{15}[\mathbb{M}_{1}^{(a,A_{2g})}] \otimes\mathbb{U}_{29}[\mathbb{T}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{22}[\mathbb{Q}_{4,0}^{(k,E_{2g},1)}]}{4}
+\end{dmath*}
+\vspace{4mm}
+\noindent \fbox{No. {38}} $\,\,\,\hat{\mathbb{Q}}_{2}^{(A_{1g})}$ [M$_{1}$,\,B$_{3}$]
+\begin{dmath*}
+\hat{\mathbb{Z}}_{38}=- \frac{\sqrt{2} \mathbb{X}_{17}[\mathbb{M}_{3,0}^{(a,E_{2g})}] \otimes\mathbb{Y}_{22}[\mathbb{T}_{2,0}^{(b,E_{2g})}]}{2} - \frac{\sqrt{2} \mathbb{X}_{18}[\mathbb{M}_{3,1}^{(a,E_{2g})}] \otimes\mathbb{Y}_{23}[\mathbb{T}_{2,1}^{(b,E_{2g})}]}{2}
+\end{dmath*}
+\begin{dmath*}
+\hat{\mathbb{Z}}_{38}(\bm{k})=\mathbb{X}_{17}[\mathbb{M}_{3,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{20}[\mathbb{Q}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{25}[\mathbb{T}_{1,0}^{(k,E_{1u})}] \left(- \frac{1}{8} + \frac{\sqrt{3}}{24}\right) + \frac{\sqrt{3} \mathbb{X}_{17}[\mathbb{M}_{3,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{20}[\mathbb{Q}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{28}[\mathbb{T}_{3}^{(k,B_{2u})}]}{12} + \mathbb{X}_{17}[\mathbb{M}_{3,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{20}[\mathbb{Q}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{29}[\mathbb{T}_{5,0}^{(k,E_{1u},1)}] \left(- \frac{1}{8} - \frac{\sqrt{3}}{24}\right) + \mathbb{X}_{17}[\mathbb{M}_{3,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{21}[\mathbb{Q}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{26}[\mathbb{T}_{1,1}^{(k,E_{1u})}] \left(\frac{1}{8} - \frac{\sqrt{3}}{24}\right) - \frac{\mathbb{X}_{17}[\mathbb{M}_{3,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{21}[\mathbb{Q}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{27}[\mathbb{T}_{3}^{(k,B_{1u})}]}{4} + \mathbb{X}_{17}[\mathbb{M}_{3,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{21}[\mathbb{Q}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{30}[\mathbb{T}_{5,1}^{(k,E_{1u},1)}] \left(\frac{\sqrt{3}}{24} + \frac{1}{8}\right) - \frac{\sqrt{6} \mathbb{X}_{17}[\mathbb{M}_{3,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{24}[\mathbb{Q}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{26}[\mathbb{T}_{1,1}^{(k,E_{1u})}]}{12} + \frac{\sqrt{6} \mathbb{X}_{17}[\mathbb{M}_{3,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{24}[\mathbb{Q}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{30}[\mathbb{T}_{5,1}^{(k,E_{1u},1)}]}{12} - \frac{\sqrt{3} \mathbb{X}_{17}[\mathbb{M}_{3,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{25}[\mathbb{T}_{0}^{(u,A_{1g})}] \otimes\mathbb{F}_{20}[\mathbb{Q}_{2,0}^{(k,E_{2g})}]}{6} - \frac{\mathbb{X}_{17}[\mathbb{M}_{3,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{28}[\mathbb{T}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{19}[\mathbb{Q}_{0}^{(k,A_{1g})}]}{4} - \frac{\sqrt{6} \mathbb{X}_{17}[\mathbb{M}_{3,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{28}[\mathbb{T}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{20}[\mathbb{Q}_{2,0}^{(k,E_{2g})}]}{24} - \frac{\sqrt{2} \mathbb{X}_{17}[\mathbb{M}_{3,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{28}[\mathbb{T}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{22}[\mathbb{Q}_{4,0}^{(k,E_{2g},1)}]}{8} + \frac{\sqrt{6} \mathbb{X}_{17}[\mathbb{M}_{3,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{29}[\mathbb{T}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{21}[\mathbb{Q}_{2,1}^{(k,E_{2g})}]}{24} + \frac{\sqrt{2} \mathbb{X}_{17}[\mathbb{M}_{3,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{29}[\mathbb{T}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{23}[\mathbb{Q}_{4,1}^{(k,E_{2g},1)}]}{8} - \frac{\sqrt{3} \mathbb{X}_{17}[\mathbb{M}_{3,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{29}[\mathbb{T}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{24}[\mathbb{Q}_{6}^{(k,A_{2g})}]}{12} + \mathbb{X}_{18}[\mathbb{M}_{3,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{20}[\mathbb{Q}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{26}[\mathbb{T}_{1,1}^{(k,E_{1u})}] \left(\frac{1}{8} - \frac{\sqrt{3}}{24}\right) + \frac{\mathbb{X}_{18}[\mathbb{M}_{3,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{20}[\mathbb{Q}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{27}[\mathbb{T}_{3}^{(k,B_{1u})}]}{4} + \mathbb{X}_{18}[\mathbb{M}_{3,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{20}[\mathbb{Q}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{30}[\mathbb{T}_{5,1}^{(k,E_{1u},1)}] \left(\frac{\sqrt{3}}{24} + \frac{1}{8}\right) + \mathbb{X}_{18}[\mathbb{M}_{3,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{21}[\mathbb{Q}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{25}[\mathbb{T}_{1,0}^{(k,E_{1u})}] \left(\frac{1}{8} - \frac{\sqrt{3}}{24}\right) + \frac{\sqrt{3} \mathbb{X}_{18}[\mathbb{M}_{3,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{21}[\mathbb{Q}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{28}[\mathbb{T}_{3}^{(k,B_{2u})}]}{12} + \mathbb{X}_{18}[\mathbb{M}_{3,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{21}[\mathbb{Q}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{29}[\mathbb{T}_{5,0}^{(k,E_{1u},1)}] \left(\frac{\sqrt{3}}{24} + \frac{1}{8}\right) + \frac{\sqrt{6} \mathbb{X}_{18}[\mathbb{M}_{3,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{24}[\mathbb{Q}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{25}[\mathbb{T}_{1,0}^{(k,E_{1u})}]}{12} - \frac{\sqrt{6} \mathbb{X}_{18}[\mathbb{M}_{3,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{24}[\mathbb{Q}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{29}[\mathbb{T}_{5,0}^{(k,E_{1u},1)}]}{12} - \frac{\sqrt{3} \mathbb{X}_{18}[\mathbb{M}_{3,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{25}[\mathbb{T}_{0}^{(u,A_{1g})}] \otimes\mathbb{F}_{21}[\mathbb{Q}_{2,1}^{(k,E_{2g})}]}{6} + \frac{\sqrt{6} \mathbb{X}_{18}[\mathbb{M}_{3,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{28}[\mathbb{T}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{21}[\mathbb{Q}_{2,1}^{(k,E_{2g})}]}{24} + \frac{\sqrt{2} \mathbb{X}_{18}[\mathbb{M}_{3,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{28}[\mathbb{T}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{23}[\mathbb{Q}_{4,1}^{(k,E_{2g},1)}]}{8} + \frac{\sqrt{3} \mathbb{X}_{18}[\mathbb{M}_{3,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{28}[\mathbb{T}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{24}[\mathbb{Q}_{6}^{(k,A_{2g})}]}{12} - \frac{\mathbb{X}_{18}[\mathbb{M}_{3,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{29}[\mathbb{T}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{19}[\mathbb{Q}_{0}^{(k,A_{1g})}]}{4} + \frac{\sqrt{6} \mathbb{X}_{18}[\mathbb{M}_{3,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{29}[\mathbb{T}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{20}[\mathbb{Q}_{2,0}^{(k,E_{2g})}]}{24} + \frac{\sqrt{2} \mathbb{X}_{18}[\mathbb{M}_{3,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{29}[\mathbb{T}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{22}[\mathbb{Q}_{4,0}^{(k,E_{2g},1)}]}{8}
+\end{dmath*}
+\vspace{4mm}
+\noindent \fbox{No. {39}} $\,\,\,\hat{\mathbb{Q}}_{6}^{(A_{1g},2)}$ [M$_{1}$,\,B$_{3}$]
+\begin{dmath*}
+\hat{\mathbb{Z}}_{39}=- \frac{\sqrt{2} \mathbb{X}_{17}[\mathbb{M}_{3,0}^{(a,E_{2g})}] \otimes\mathbb{Y}_{24}[\mathbb{T}_{4,0}^{(b,E_{2g},1)}]}{2} - \frac{\sqrt{2} \mathbb{X}_{18}[\mathbb{M}_{3,1}^{(a,E_{2g})}] \otimes\mathbb{Y}_{25}[\mathbb{T}_{4,1}^{(b,E_{2g},1)}]}{2}
+\end{dmath*}
+\begin{dmath*}
+\hat{\mathbb{Z}}_{39}(\bm{k})=\mathbb{X}_{17}[\mathbb{M}_{3,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{20}[\mathbb{Q}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{25}[\mathbb{T}_{1,0}^{(k,E_{1u})}] \left(\frac{\sqrt{3}}{24} + \frac{1}{8}\right) - \frac{\mathbb{X}_{17}[\mathbb{M}_{3,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{20}[\mathbb{Q}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{28}[\mathbb{T}_{3}^{(k,B_{2u})}]}{4} + \mathbb{X}_{17}[\mathbb{M}_{3,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{20}[\mathbb{Q}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{29}[\mathbb{T}_{5,0}^{(k,E_{1u},1)}] \left(- \frac{1}{8} + \frac{\sqrt{3}}{24}\right) + \mathbb{X}_{17}[\mathbb{M}_{3,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{21}[\mathbb{Q}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{26}[\mathbb{T}_{1,1}^{(k,E_{1u})}] \left(- \frac{1}{8} - \frac{\sqrt{3}}{24}\right) - \frac{\sqrt{3} \mathbb{X}_{17}[\mathbb{M}_{3,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{21}[\mathbb{Q}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{27}[\mathbb{T}_{3}^{(k,B_{1u})}]}{12} + \mathbb{X}_{17}[\mathbb{M}_{3,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{21}[\mathbb{Q}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{30}[\mathbb{T}_{5,1}^{(k,E_{1u},1)}] \left(\frac{1}{8} - \frac{\sqrt{3}}{24}\right) + \frac{\sqrt{6} \mathbb{X}_{17}[\mathbb{M}_{3,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{24}[\mathbb{Q}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{26}[\mathbb{T}_{1,1}^{(k,E_{1u})}]}{12} + \frac{\sqrt{6} \mathbb{X}_{17}[\mathbb{M}_{3,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{24}[\mathbb{Q}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{30}[\mathbb{T}_{5,1}^{(k,E_{1u},1)}]}{12} - \frac{\sqrt{3} \mathbb{X}_{17}[\mathbb{M}_{3,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{25}[\mathbb{T}_{0}^{(u,A_{1g})}] \otimes\mathbb{F}_{22}[\mathbb{Q}_{4,0}^{(k,E_{2g},1)}]}{6} - \frac{\sqrt{3} \mathbb{X}_{17}[\mathbb{M}_{3,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{28}[\mathbb{T}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{19}[\mathbb{Q}_{0}^{(k,A_{1g})}]}{12} - \frac{\sqrt{2} \mathbb{X}_{17}[\mathbb{M}_{3,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{28}[\mathbb{T}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{20}[\mathbb{Q}_{2,0}^{(k,E_{2g})}]}{8} + \frac{\sqrt{6} \mathbb{X}_{17}[\mathbb{M}_{3,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{28}[\mathbb{T}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{22}[\mathbb{Q}_{4,0}^{(k,E_{2g},1)}]}{24} + \frac{\sqrt{2} \mathbb{X}_{17}[\mathbb{M}_{3,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{29}[\mathbb{T}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{21}[\mathbb{Q}_{2,1}^{(k,E_{2g})}]}{8} - \frac{\sqrt{6} \mathbb{X}_{17}[\mathbb{M}_{3,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{29}[\mathbb{T}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{23}[\mathbb{Q}_{4,1}^{(k,E_{2g},1)}]}{24} + \frac{\mathbb{X}_{17}[\mathbb{M}_{3,0}^{(a,E_{2g})}] \otimes\mathbb{U}_{29}[\mathbb{T}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{24}[\mathbb{Q}_{6}^{(k,A_{2g})}]}{4} + \mathbb{X}_{18}[\mathbb{M}_{3,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{20}[\mathbb{Q}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{26}[\mathbb{T}_{1,1}^{(k,E_{1u})}] \left(- \frac{1}{8} - \frac{\sqrt{3}}{24}\right) + \frac{\sqrt{3} \mathbb{X}_{18}[\mathbb{M}_{3,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{20}[\mathbb{Q}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{27}[\mathbb{T}_{3}^{(k,B_{1u})}]}{12} + \mathbb{X}_{18}[\mathbb{M}_{3,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{20}[\mathbb{Q}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{30}[\mathbb{T}_{5,1}^{(k,E_{1u},1)}] \left(\frac{1}{8} - \frac{\sqrt{3}}{24}\right) + \mathbb{X}_{18}[\mathbb{M}_{3,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{21}[\mathbb{Q}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{25}[\mathbb{T}_{1,0}^{(k,E_{1u})}] \left(- \frac{1}{8} - \frac{\sqrt{3}}{24}\right) - \frac{\mathbb{X}_{18}[\mathbb{M}_{3,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{21}[\mathbb{Q}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{28}[\mathbb{T}_{3}^{(k,B_{2u})}]}{4} + \mathbb{X}_{18}[\mathbb{M}_{3,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{21}[\mathbb{Q}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{29}[\mathbb{T}_{5,0}^{(k,E_{1u},1)}] \left(\frac{1}{8} - \frac{\sqrt{3}}{24}\right) - \frac{\sqrt{6} \mathbb{X}_{18}[\mathbb{M}_{3,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{24}[\mathbb{Q}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{25}[\mathbb{T}_{1,0}^{(k,E_{1u})}]}{12} - \frac{\sqrt{6} \mathbb{X}_{18}[\mathbb{M}_{3,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{24}[\mathbb{Q}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{29}[\mathbb{T}_{5,0}^{(k,E_{1u},1)}]}{12} - \frac{\sqrt{3} \mathbb{X}_{18}[\mathbb{M}_{3,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{25}[\mathbb{T}_{0}^{(u,A_{1g})}] \otimes\mathbb{F}_{23}[\mathbb{Q}_{4,1}^{(k,E_{2g},1)}]}{6} + \frac{\sqrt{2} \mathbb{X}_{18}[\mathbb{M}_{3,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{28}[\mathbb{T}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{21}[\mathbb{Q}_{2,1}^{(k,E_{2g})}]}{8} - \frac{\sqrt{6} \mathbb{X}_{18}[\mathbb{M}_{3,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{28}[\mathbb{T}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{23}[\mathbb{Q}_{4,1}^{(k,E_{2g},1)}]}{24} - \frac{\mathbb{X}_{18}[\mathbb{M}_{3,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{28}[\mathbb{T}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{24}[\mathbb{Q}_{6}^{(k,A_{2g})}]}{4} - \frac{\sqrt{3} \mathbb{X}_{18}[\mathbb{M}_{3,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{29}[\mathbb{T}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{19}[\mathbb{Q}_{0}^{(k,A_{1g})}]}{12} + \frac{\sqrt{2} \mathbb{X}_{18}[\mathbb{M}_{3,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{29}[\mathbb{T}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{20}[\mathbb{Q}_{2,0}^{(k,E_{2g})}]}{8} - \frac{\sqrt{6} \mathbb{X}_{18}[\mathbb{M}_{3,1}^{(a,E_{2g})}] \otimes\mathbb{U}_{29}[\mathbb{T}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{22}[\mathbb{Q}_{4,0}^{(k,E_{2g},1)}]}{24}
+\end{dmath*}
+\vspace{4mm}
+\noindent \fbox{No. {40}} $\,\,\,\hat{\mathbb{Q}}_{6}^{(A_{1g},2)}$ [M$_{1}$,\,B$_{3}$]
+\begin{dmath*}
+\hat{\mathbb{Z}}_{40}=\mathbb{X}_{16}[\mathbb{M}_{3}^{(a,A_{2g})}] \otimes\mathbb{Y}_{26}[\mathbb{T}_{6}^{(b,A_{2g})}]
+\end{dmath*}
+\begin{dmath*}
+\hat{\mathbb{Z}}_{40}(\bm{k})=\mathbb{X}_{16}[\mathbb{M}_{3}^{(a,A_{2g})}] \otimes\mathbb{U}_{20}[\mathbb{Q}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{26}[\mathbb{T}_{1,1}^{(k,E_{1u})}] \left(- \frac{1}{4} - \frac{\sqrt{3}}{12}\right) + \mathbb{X}_{16}[\mathbb{M}_{3}^{(a,A_{2g})}] \otimes\mathbb{U}_{20}[\mathbb{Q}_{1,0}^{(u,E_{1u})}] \otimes\mathbb{F}_{30}[\mathbb{T}_{5,1}^{(k,E_{1u},1)}] \left(- \frac{1}{4} + \frac{\sqrt{3}}{12}\right) + \mathbb{X}_{16}[\mathbb{M}_{3}^{(a,A_{2g})}] \otimes\mathbb{U}_{21}[\mathbb{Q}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{25}[\mathbb{T}_{1,0}^{(k,E_{1u})}] \left(\frac{\sqrt{3}}{12} + \frac{1}{4}\right) + \mathbb{X}_{16}[\mathbb{M}_{3}^{(a,A_{2g})}] \otimes\mathbb{U}_{21}[\mathbb{Q}_{1,1}^{(u,E_{1u})}] \otimes\mathbb{F}_{29}[\mathbb{T}_{5,0}^{(k,E_{1u},1)}] \left(\frac{1}{4} - \frac{\sqrt{3}}{12}\right) + \frac{\sqrt{6} \mathbb{X}_{16}[\mathbb{M}_{3}^{(a,A_{2g})}] \otimes\mathbb{U}_{24}[\mathbb{Q}_{3}^{(u,B_{1u})}] \otimes\mathbb{F}_{28}[\mathbb{T}_{3}^{(k,B_{2u})}]}{6} + \frac{\sqrt{6} \mathbb{X}_{16}[\mathbb{M}_{3}^{(a,A_{2g})}] \otimes\mathbb{U}_{25}[\mathbb{T}_{0}^{(u,A_{1g})}] \otimes\mathbb{F}_{24}[\mathbb{Q}_{6}^{(k,A_{2g})}]}{6} - \frac{\sqrt{6} \mathbb{X}_{16}[\mathbb{M}_{3}^{(a,A_{2g})}] \otimes\mathbb{U}_{28}[\mathbb{T}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{21}[\mathbb{Q}_{2,1}^{(k,E_{2g})}]}{12} + \frac{\sqrt{2} \mathbb{X}_{16}[\mathbb{M}_{3}^{(a,A_{2g})}] \otimes\mathbb{U}_{28}[\mathbb{T}_{2,0}^{(u,E_{2g})}] \otimes\mathbb{F}_{23}[\mathbb{Q}_{4,1}^{(k,E_{2g},1)}]}{4} + \frac{\sqrt{6} \mathbb{X}_{16}[\mathbb{M}_{3}^{(a,A_{2g})}] \otimes\mathbb{U}_{29}[\mathbb{T}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{20}[\mathbb{Q}_{2,0}^{(k,E_{2g})}]}{12} - \frac{\sqrt{2} \mathbb{X}_{16}[\mathbb{M}_{3}^{(a,A_{2g})}] \otimes\mathbb{U}_{29}[\mathbb{T}_{2,1}^{(u,E_{2g})}] \otimes\mathbb{F}_{22}[\mathbb{Q}_{4,0}^{(k,E_{2g},1)}]}{4}
+\end{dmath*}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% atomic SAMB group.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{longtable}{c|c|c}
+\caption{Atomic SAMB group.}
+ \\
+ \hline \hline
+group & bra & ket \\ \hline \endfirsthead
+
+\multicolumn{2}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+group & bra & ket \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{2}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{2}{r}{} \\ \endlastfoot
+
+M$_{1}$ & $d_{u}, d_{v}, d_{yz}, d_{zx}, d_{xy}$ & $d_{u}, d_{v}, d_{yz}, d_{zx}, d_{xy}$ \\
+\end{longtable}
+\end{center}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% atomic SAMB.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{longtable}{c|c|c|c}
+\caption{Atomic SAMB.}
+ \\
+ \hline \hline
+symbol & type & group & form \\ \hline \endfirsthead
+
+\multicolumn{3}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+symbol & type & group & form \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{3}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{3}{r}{} \\ \endlastfoot
+
+$ \mathbb{X}_{1} $ & $\mathbb{Q}_{0}^{(a,A_{1g})}$ & M$_{1}$ & $\begin{pmatrix} \frac{\sqrt{5}}{5} & 0 & 0 & 0 & 0 \\ 0 & \frac{\sqrt{5}}{5} & 0 & 0 & 0 \\ 0 & 0 & \frac{\sqrt{5}}{5} & 0 & 0 \\ 0 & 0 & 0 & \frac{\sqrt{5}}{5} & 0 \\ 0 & 0 & 0 & 0 & \frac{\sqrt{5}}{5} \end{pmatrix}$ \\
+$ \mathbb{X}_{2} $ & $\mathbb{Q}_{2}^{(a,A_{1g})}$ & M$_{1}$ & $\begin{pmatrix} \frac{\sqrt{14}}{7} & 0 & 0 & 0 & 0 \\ 0 & - \frac{\sqrt{14}}{7} & 0 & 0 & 0 \\ 0 & 0 & \frac{\sqrt{14}}{14} & 0 & 0 \\ 0 & 0 & 0 & \frac{\sqrt{14}}{14} & 0 \\ 0 & 0 & 0 & 0 & - \frac{\sqrt{14}}{7} \end{pmatrix}$ \\
+$ \mathbb{X}_{3} $ & $\mathbb{Q}_{4}^{(a,A_{1g})}$ & M$_{1}$ & $\begin{pmatrix} \frac{3 \sqrt{70}}{35} & 0 & 0 & 0 & 0 \\ 0 & \frac{\sqrt{70}}{70} & 0 & 0 & 0 \\ 0 & 0 & - \frac{2 \sqrt{70}}{35} & 0 & 0 \\ 0 & 0 & 0 & - \frac{2 \sqrt{70}}{35} & 0 \\ 0 & 0 & 0 & 0 & \frac{\sqrt{70}}{70} \end{pmatrix}$ \\
+$ \mathbb{X}_{4} $ & $\mathbb{Q}_{2,0}^{(a,E_{1g})}$ & M$_{1}$ & $\begin{pmatrix} 0 & 0 & 0 & \frac{\sqrt{14}}{14} & 0 \\ 0 & 0 & 0 & \frac{\sqrt{42}}{14} & 0 \\ 0 & 0 & 0 & 0 & - \frac{\sqrt{42}}{14} \\ \frac{\sqrt{14}}{14} & \frac{\sqrt{42}}{14} & 0 & 0 & 0 \\ 0 & 0 & - \frac{\sqrt{42}}{14} & 0 & 0 \end{pmatrix}$ \\
+$ \mathbb{X}_{5} $ & $\mathbb{Q}_{2,1}^{(a,E_{1g})}$ & M$_{1}$ & $\begin{pmatrix} 0 & 0 & \frac{\sqrt{14}}{14} & 0 & 0 \\ 0 & 0 & - \frac{\sqrt{42}}{14} & 0 & 0 \\ \frac{\sqrt{14}}{14} & - \frac{\sqrt{42}}{14} & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & - \frac{\sqrt{42}}{14} \\ 0 & 0 & 0 & - \frac{\sqrt{42}}{14} & 0 \end{pmatrix}$ \\
+$ \mathbb{X}_{6} $ & $\mathbb{Q}_{4,0}^{(a,E_{1g})}$ & M$_{1}$ & $\begin{pmatrix} 0 & 0 & 0 & \frac{\sqrt{21}}{7} & 0 \\ 0 & 0 & 0 & - \frac{\sqrt{7}}{14} & 0 \\ 0 & 0 & 0 & 0 & \frac{\sqrt{7}}{14} \\ \frac{\sqrt{21}}{7} & - \frac{\sqrt{7}}{14} & 0 & 0 & 0 \\ 0 & 0 & \frac{\sqrt{7}}{14} & 0 & 0 \end{pmatrix}$ \\
+$ \mathbb{X}_{7} $ & $\mathbb{Q}_{4,1}^{(a,E_{1g})}$ & M$_{1}$ & $\begin{pmatrix} 0 & 0 & \frac{\sqrt{21}}{7} & 0 & 0 \\ 0 & 0 & \frac{\sqrt{7}}{14} & 0 & 0 \\ \frac{\sqrt{21}}{7} & \frac{\sqrt{7}}{14} & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & \frac{\sqrt{7}}{14} \\ 0 & 0 & 0 & \frac{\sqrt{7}}{14} & 0 \end{pmatrix}$ \\
+$ \mathbb{X}_{8} $ & $\mathbb{Q}_{2,0}^{(a,E_{2g})}$ & M$_{1}$ & $\begin{pmatrix} 0 & - \frac{\sqrt{14}}{7} & 0 & 0 & 0 \\ - \frac{\sqrt{14}}{7} & 0 & 0 & 0 & 0 \\ 0 & 0 & - \frac{\sqrt{42}}{14} & 0 & 0 \\ 0 & 0 & 0 & \frac{\sqrt{42}}{14} & 0 \\ 0 & 0 & 0 & 0 & 0 \end{pmatrix}$ \\
+$ \mathbb{X}_{9} $ & $\mathbb{Q}_{2,1}^{(a,E_{2g})}$ & M$_{1}$ & $\begin{pmatrix} 0 & 0 & 0 & 0 & - \frac{\sqrt{14}}{7} \\ 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & - \frac{\sqrt{42}}{14} & 0 \\ 0 & 0 & - \frac{\sqrt{42}}{14} & 0 & 0 \\ - \frac{\sqrt{14}}{7} & 0 & 0 & 0 & 0 \end{pmatrix}$ \\
+$ \mathbb{X}_{10} $ & $\mathbb{Q}_{4,0}^{(a,E_{2g},1)}$ & M$_{1}$ & $\begin{pmatrix} 0 & 0 & 0 & 0 & 0 \\ 0 & \frac{\sqrt{2}}{2} & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & - \frac{\sqrt{2}}{2} \end{pmatrix}$ \\
+$ \mathbb{X}_{11} $ & $\mathbb{Q}_{4,1}^{(a,E_{2g},1)}$ & M$_{1}$ & $\begin{pmatrix} 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & - \frac{\sqrt{2}}{2} \\ 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 \\ 0 & - \frac{\sqrt{2}}{2} & 0 & 0 & 0 \end{pmatrix}$ \\
+$ \mathbb{X}_{12} $ & $\mathbb{Q}_{4,0}^{(a,E_{2g},2)}$ & M$_{1}$ & $\begin{pmatrix} 0 & \frac{\sqrt{42}}{14} & 0 & 0 & 0 \\ \frac{\sqrt{42}}{14} & 0 & 0 & 0 & 0 \\ 0 & 0 & - \frac{\sqrt{14}}{7} & 0 & 0 \\ 0 & 0 & 0 & \frac{\sqrt{14}}{7} & 0 \\ 0 & 0 & 0 & 0 & 0 \end{pmatrix}$ \\
+$ \mathbb{X}_{13} $ & $\mathbb{Q}_{4,1}^{(a,E_{2g},2)}$ & M$_{1}$ & $\begin{pmatrix} 0 & 0 & 0 & 0 & \frac{\sqrt{42}}{14} \\ 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & - \frac{\sqrt{14}}{7} & 0 \\ 0 & 0 & - \frac{\sqrt{14}}{7} & 0 & 0 \\ \frac{\sqrt{42}}{14} & 0 & 0 & 0 & 0 \end{pmatrix}$ \\
+$ \mathbb{X}_{14} $ & $\mathbb{Q}_{4}^{(a,B_{2g})}$ & M$_{1}$ & $\begin{pmatrix} 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & \frac{1}{2} & 0 & 0 \\ 0 & \frac{1}{2} & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & - \frac{1}{2} \\ 0 & 0 & 0 & - \frac{1}{2} & 0 \end{pmatrix}$ \\
+$ \mathbb{X}_{15} $ & $\mathbb{M}_{1}^{(a,A_{2g})}$ & M$_{1}$ & $\begin{pmatrix} 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & \frac{\sqrt{10} i}{5} \\ 0 & 0 & 0 & \frac{\sqrt{10} i}{10} & 0 \\ 0 & 0 & - \frac{\sqrt{10} i}{10} & 0 & 0 \\ 0 & - \frac{\sqrt{10} i}{5} & 0 & 0 & 0 \end{pmatrix}$ \\
+$ \mathbb{X}_{16} $ & $\mathbb{M}_{3}^{(a,A_{2g})}$ & M$_{1}$ & $\begin{pmatrix} 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & - \frac{\sqrt{10} i}{10} \\ 0 & 0 & 0 & \frac{\sqrt{10} i}{5} & 0 \\ 0 & 0 & - \frac{\sqrt{10} i}{5} & 0 & 0 \\ 0 & \frac{\sqrt{10} i}{10} & 0 & 0 & 0 \end{pmatrix}$ \\
+$ \mathbb{X}_{17} $ & $\mathbb{M}_{3,0}^{(a,E_{2g})}$ & M$_{1}$ & $\begin{pmatrix} 0 & - \frac{\sqrt{2} i}{2} & 0 & 0 & 0 \\ \frac{\sqrt{2} i}{2} & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 \end{pmatrix}$ \\
+$ \mathbb{X}_{18} $ & $\mathbb{M}_{3,1}^{(a,E_{2g})}$ & M$_{1}$ & $\begin{pmatrix} 0 & 0 & 0 & 0 & - \frac{\sqrt{2} i}{2} \\ 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 \\ \frac{\sqrt{2} i}{2} & 0 & 0 & 0 & 0 \end{pmatrix}$ \\
+\end{longtable}
+\end{center}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% cluster SAMB.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{longtable}{c|c|c|c}
+\caption{Cluster SAMB.}
+ \\
+ \hline \hline
+symbol & type & cluster & form \\ \hline \endfirsthead
+
+\multicolumn{3}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+symbol & type & cluster & form \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{3}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{3}{r}{} \\ \endlastfoot
+
+$ \mathbb{Y}_{1} $ & $\mathbb{Q}_{0}^{(s,A_{1g})}$ & S$_{1}$ & $\begin{pmatrix} \frac{\sqrt{6}}{6} & \frac{\sqrt{6}}{6} & \frac{\sqrt{6}}{6} & \frac{\sqrt{6}}{6} & \frac{\sqrt{6}}{6} & \frac{\sqrt{6}}{6} \end{pmatrix}$ \\
+$ \mathbb{Y}_{2} $ & $\mathbb{Q}_{2,0}^{(s,E_{2g})}$ & S$_{1}$ & $\begin{pmatrix} \frac{\sqrt{3}}{3} & \frac{\sqrt{3}}{3} & - \frac{\sqrt{3}}{6} & - \frac{\sqrt{3}}{6} & - \frac{\sqrt{3}}{6} & - \frac{\sqrt{3}}{6} \end{pmatrix}$ \\
+$ \mathbb{Y}_{3} $ & $\mathbb{Q}_{2,1}^{(s,E_{2g})}$ & S$_{1}$ & $\begin{pmatrix} 0 & 0 & - \frac{1}{2} & \frac{1}{2} & - \frac{1}{2} & \frac{1}{2} \end{pmatrix}$ \\ \hline
+$ \mathbb{Y}_{4} $ & $\mathbb{Q}_{0}^{(s,A_{1g})}$ & S$_{2}$ & $\begin{pmatrix} \frac{\sqrt{2}}{2} & \frac{\sqrt{2}}{2} \end{pmatrix}$ \\ \hline
+$ \mathbb{Y}_{5} $ & $\mathbb{Q}_{0}^{(b,A_{1g})}$ & B$_{1}$ & $\begin{pmatrix} \frac{\sqrt{6}}{6} & \frac{\sqrt{6}}{6} & \frac{\sqrt{6}}{6} & \frac{\sqrt{6}}{6} & \frac{\sqrt{6}}{6} & \frac{\sqrt{6}}{6} \end{pmatrix}$ \\
+$ \mathbb{Y}_{6} $ & $\mathbb{Q}_{2,0}^{(b,E_{2g})}$ & B$_{1}$ & $\begin{pmatrix} \frac{\sqrt{3}}{6} & \frac{\sqrt{3}}{6} & \frac{\sqrt{3}}{6} & - \frac{\sqrt{3}}{3} & \frac{\sqrt{3}}{6} & - \frac{\sqrt{3}}{3} \end{pmatrix}$ \\
+$ \mathbb{Y}_{7} $ & $\mathbb{Q}_{2,1}^{(b,E_{2g})}$ & B$_{1}$ & $\begin{pmatrix} - \frac{1}{2} & - \frac{1}{2} & \frac{1}{2} & 0 & \frac{1}{2} & 0 \end{pmatrix}$ \\
+$ \mathbb{Y}_{8} $ & $\mathbb{T}_{2,0}^{(b,E_{2g})}$ & B$_{1}$ & $\begin{pmatrix} \frac{i}{2} & \frac{i}{2} & \frac{i}{2} & 0 & \frac{i}{2} & 0 \end{pmatrix}$ \\
+$ \mathbb{Y}_{9} $ & $\mathbb{T}_{2,1}^{(b,E_{2g})}$ & B$_{1}$ & $\begin{pmatrix} \frac{\sqrt{3} i}{6} & \frac{\sqrt{3} i}{6} & - \frac{\sqrt{3} i}{6} & - \frac{\sqrt{3} i}{3} & - \frac{\sqrt{3} i}{6} & - \frac{\sqrt{3} i}{3} \end{pmatrix}$ \\
+$ \mathbb{Y}_{10} $ & $\mathbb{T}_{6}^{(b,A_{2g})}$ & B$_{1}$ & $\begin{pmatrix} \frac{\sqrt{6} i}{6} & \frac{\sqrt{6} i}{6} & - \frac{\sqrt{6} i}{6} & \frac{\sqrt{6} i}{6} & - \frac{\sqrt{6} i}{6} & \frac{\sqrt{6} i}{6} \end{pmatrix}$ \\ \hline
+$ \mathbb{Y}_{11} $ & $\mathbb{Q}_{0}^{(b,A_{1g})}$ & B$_{2}$ & $\begin{pmatrix} \frac{\sqrt{6}}{6} & \frac{\sqrt{6}}{6} & \frac{\sqrt{6}}{6} & \frac{\sqrt{6}}{6} & \frac{\sqrt{6}}{6} & \frac{\sqrt{6}}{6} \end{pmatrix}$ \\
+$ \mathbb{Y}_{12} $ & $\mathbb{Q}_{2,0}^{(b,E_{1g})}$ & B$_{2}$ & $\begin{pmatrix} 0 & 0 & \frac{1}{2} & - \frac{1}{2} & - \frac{1}{2} & \frac{1}{2} \end{pmatrix}$ \\
+$ \mathbb{Y}_{13} $ & $\mathbb{Q}_{2,1}^{(b,E_{1g})}$ & B$_{2}$ & $\begin{pmatrix} \frac{\sqrt{3}}{3} & - \frac{\sqrt{3}}{3} & - \frac{\sqrt{3}}{6} & - \frac{\sqrt{3}}{6} & \frac{\sqrt{3}}{6} & \frac{\sqrt{3}}{6} \end{pmatrix}$ \\
+$ \mathbb{Y}_{14} $ & $\mathbb{Q}_{2,0}^{(b,E_{2g})}$ & B$_{2}$ & $\begin{pmatrix} \frac{\sqrt{3}}{3} & \frac{\sqrt{3}}{3} & - \frac{\sqrt{3}}{6} & - \frac{\sqrt{3}}{6} & - \frac{\sqrt{3}}{6} & - \frac{\sqrt{3}}{6} \end{pmatrix}$ \\
+$ \mathbb{Y}_{15} $ & $\mathbb{Q}_{2,1}^{(b,E_{2g})}$ & B$_{2}$ & $\begin{pmatrix} 0 & 0 & - \frac{1}{2} & \frac{1}{2} & - \frac{1}{2} & \frac{1}{2} \end{pmatrix}$ \\
+$ \mathbb{Y}_{16} $ & $\mathbb{Q}_{4}^{(b,B_{2g})}$ & B$_{2}$ & $\begin{pmatrix} \frac{\sqrt{6}}{6} & - \frac{\sqrt{6}}{6} & \frac{\sqrt{6}}{6} & \frac{\sqrt{6}}{6} & - \frac{\sqrt{6}}{6} & - \frac{\sqrt{6}}{6} \end{pmatrix}$ \\ \hline
+$ \mathbb{Y}_{17} $ & $\mathbb{Q}_{0}^{(b,A_{1g})}$ & B$_{3}$ & $\begin{pmatrix} \frac{\sqrt{3}}{6} & \frac{\sqrt{3}}{6} & \frac{\sqrt{3}}{6} & \frac{\sqrt{3}}{6} & \frac{\sqrt{3}}{6} & \frac{\sqrt{3}}{6} & \frac{\sqrt{3}}{6} & \frac{\sqrt{3}}{6} & \frac{\sqrt{3}}{6} & \frac{\sqrt{3}}{6} & \frac{\sqrt{3}}{6} & \frac{\sqrt{3}}{6} \end{pmatrix}$ \\
+$ \mathbb{Y}_{18} $ & $\mathbb{Q}_{2,0}^{(b,E_{2g})}$ & B$_{3}$ & $\begin{pmatrix} \frac{\sqrt{2}}{4} & \frac{\sqrt{2}}{4} & \frac{\sqrt{2}}{4} & 0 & - \frac{\sqrt{2}}{4} & \frac{\sqrt{2}}{4} & 0 & - \frac{\sqrt{2}}{4} & 0 & - \frac{\sqrt{2}}{4} & - \frac{\sqrt{2}}{4} & 0 \end{pmatrix}$ \\
+$ \mathbb{Y}_{19} $ & $\mathbb{Q}_{2,1}^{(b,E_{2g})}$ & B$_{3}$ & $\begin{pmatrix} - \frac{\sqrt{6}}{12} & - \frac{\sqrt{6}}{12} & \frac{\sqrt{6}}{12} & - \frac{\sqrt{6}}{6} & \frac{\sqrt{6}}{12} & \frac{\sqrt{6}}{12} & - \frac{\sqrt{6}}{6} & \frac{\sqrt{6}}{12} & \frac{\sqrt{6}}{6} & - \frac{\sqrt{6}}{12} & - \frac{\sqrt{6}}{12} & \frac{\sqrt{6}}{6} \end{pmatrix}$ \\
+$ \mathbb{Y}_{20} $ & $\mathbb{Q}_{4,0}^{(b,E_{2g},1)}$ & B$_{3}$ & $\begin{pmatrix} \frac{\sqrt{6}}{12} & \frac{\sqrt{6}}{12} & \frac{\sqrt{6}}{12} & - \frac{\sqrt{6}}{6} & \frac{\sqrt{6}}{12} & \frac{\sqrt{6}}{12} & - \frac{\sqrt{6}}{6} & \frac{\sqrt{6}}{12} & - \frac{\sqrt{6}}{6} & \frac{\sqrt{6}}{12} & \frac{\sqrt{6}}{12} & - \frac{\sqrt{6}}{6} \end{pmatrix}$ \\
+$ \mathbb{Y}_{21} $ & $\mathbb{Q}_{4,1}^{(b,E_{2g},1)}$ & B$_{3}$ & $\begin{pmatrix} \frac{\sqrt{2}}{4} & \frac{\sqrt{2}}{4} & - \frac{\sqrt{2}}{4} & 0 & \frac{\sqrt{2}}{4} & - \frac{\sqrt{2}}{4} & 0 & \frac{\sqrt{2}}{4} & 0 & - \frac{\sqrt{2}}{4} & - \frac{\sqrt{2}}{4} & 0 \end{pmatrix}$ \\
+$ \mathbb{Y}_{22} $ & $\mathbb{T}_{2,0}^{(b,E_{2g})}$ & B$_{3}$ & $\begin{pmatrix} \frac{\sqrt{2} i}{4} & \frac{\sqrt{2} i}{4} & \frac{\sqrt{2} i}{4} & 0 & - \frac{\sqrt{2} i}{4} & \frac{\sqrt{2} i}{4} & 0 & - \frac{\sqrt{2} i}{4} & 0 & - \frac{\sqrt{2} i}{4} & - \frac{\sqrt{2} i}{4} & 0 \end{pmatrix}$ \\
+$ \mathbb{Y}_{23} $ & $\mathbb{T}_{2,1}^{(b,E_{2g})}$ & B$_{3}$ & $\begin{pmatrix} - \frac{\sqrt{6} i}{12} & - \frac{\sqrt{6} i}{12} & \frac{\sqrt{6} i}{12} & - \frac{\sqrt{6} i}{6} & \frac{\sqrt{6} i}{12} & \frac{\sqrt{6} i}{12} & - \frac{\sqrt{6} i}{6} & \frac{\sqrt{6} i}{12} & \frac{\sqrt{6} i}{6} & - \frac{\sqrt{6} i}{12} & - \frac{\sqrt{6} i}{12} & \frac{\sqrt{6} i}{6} \end{pmatrix}$ \\
+$ \mathbb{Y}_{24} $ & $\mathbb{T}_{4,0}^{(b,E_{2g},1)}$ & B$_{3}$ & $\begin{pmatrix} \frac{\sqrt{6} i}{12} & \frac{\sqrt{6} i}{12} & \frac{\sqrt{6} i}{12} & - \frac{\sqrt{6} i}{6} & \frac{\sqrt{6} i}{12} & \frac{\sqrt{6} i}{12} & - \frac{\sqrt{6} i}{6} & \frac{\sqrt{6} i}{12} & - \frac{\sqrt{6} i}{6} & \frac{\sqrt{6} i}{12} & \frac{\sqrt{6} i}{12} & - \frac{\sqrt{6} i}{6} \end{pmatrix}$ \\
+$ \mathbb{Y}_{25} $ & $\mathbb{T}_{4,1}^{(b,E_{2g},1)}$ & B$_{3}$ & $\begin{pmatrix} \frac{\sqrt{2} i}{4} & \frac{\sqrt{2} i}{4} & - \frac{\sqrt{2} i}{4} & 0 & \frac{\sqrt{2} i}{4} & - \frac{\sqrt{2} i}{4} & 0 & \frac{\sqrt{2} i}{4} & 0 & - \frac{\sqrt{2} i}{4} & - \frac{\sqrt{2} i}{4} & 0 \end{pmatrix}$ \\
+$ \mathbb{Y}_{26} $ & $\mathbb{T}_{6}^{(b,A_{2g})}$ & B$_{3}$ & $\begin{pmatrix} \frac{\sqrt{3} i}{6} & \frac{\sqrt{3} i}{6} & - \frac{\sqrt{3} i}{6} & - \frac{\sqrt{3} i}{6} & - \frac{\sqrt{3} i}{6} & - \frac{\sqrt{3} i}{6} & - \frac{\sqrt{3} i}{6} & - \frac{\sqrt{3} i}{6} & \frac{\sqrt{3} i}{6} & \frac{\sqrt{3} i}{6} & \frac{\sqrt{3} i}{6} & \frac{\sqrt{3} i}{6} \end{pmatrix}$ \\
+\end{longtable}
+\end{center}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% uniform SAMB.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{longtable}{c|c|c|c}
+\caption{Uniform SAMB.}
+ \\
+ \hline \hline
+symbol & type & cluster & form \\ \hline \endfirsthead
+
+\multicolumn{3}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+symbol & type & cluster & form \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{3}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{3}{r}{} \\ \endlastfoot
+
+$ \mathbb{U}_{1} $ & $\mathbb{Q}_{0}^{(s,A_{1g})}$ & S$_{1}$ & $\begin{pmatrix} \frac{\sqrt{6}}{6} & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & \frac{\sqrt{6}}{6} & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & \frac{\sqrt{6}}{6} & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & \frac{\sqrt{6}}{6} & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & \frac{\sqrt{6}}{6} & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & \frac{\sqrt{6}}{6} & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \end{pmatrix}$ \\
+$ \mathbb{U}_{2} $ & $\mathbb{Q}_{2,0}^{(s,E_{2g})}$ & S$_{1}$ & $\begin{pmatrix} \frac{\sqrt{3}}{3} & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & \frac{\sqrt{3}}{3} & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & - \frac{\sqrt{3}}{6} & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & - \frac{\sqrt{3}}{6} & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & - \frac{\sqrt{3}}{6} & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & - \frac{\sqrt{3}}{6} & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \end{pmatrix}$ \\
+$ \mathbb{U}_{3} $ & $\mathbb{Q}_{2,1}^{(s,E_{2g})}$ & S$_{1}$ & $\begin{pmatrix} 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & - \frac{1}{2} & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & \frac{1}{2} & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & - \frac{1}{2} & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & \frac{1}{2} & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \end{pmatrix}$ \\ \hline
+$ \mathbb{U}_{4} $ & $\mathbb{Q}_{0}^{(s,A_{1g})}$ & S$_{2}$ & $\begin{pmatrix} 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & \frac{\sqrt{2}}{2} & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & \frac{\sqrt{2}}{2} \end{pmatrix}$ \\ \hline
+$ \mathbb{U}_{5} $ & $\mathbb{Q}_{0}^{(u,A_{1g})}$ & B$_{1}$ & $\begin{pmatrix} 0 & 0 & 0 & 0 & \frac{\sqrt{3}}{6} & \frac{\sqrt{3}}{6} & 0 & 0 \\ 0 & 0 & \frac{\sqrt{3}}{6} & \frac{\sqrt{3}}{6} & 0 & 0 & 0 & 0 \\ 0 & \frac{\sqrt{3}}{6} & 0 & \frac{\sqrt{3}}{6} & 0 & 0 & 0 & 0 \\ 0 & \frac{\sqrt{3}}{6} & \frac{\sqrt{3}}{6} & 0 & 0 & 0 & 0 & 0 \\ \frac{\sqrt{3}}{6} & 0 & 0 & 0 & 0 & \frac{\sqrt{3}}{6} & 0 & 0 \\ \frac{\sqrt{3}}{6} & 0 & 0 & 0 & \frac{\sqrt{3}}{6} & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \end{pmatrix}$ \\
+$ \mathbb{U}_{6} $ & $\mathbb{Q}_{1,0}^{(u,E_{1u})}$ & B$_{1}$ & $\begin{pmatrix} 0 & 0 & 0 & 0 & \frac{\sqrt{2}}{4} & - \frac{\sqrt{2}}{4} & 0 & 0 \\ 0 & 0 & - \frac{\sqrt{2}}{4} & \frac{\sqrt{2}}{4} & 0 & 0 & 0 & 0 \\ 0 & - \frac{\sqrt{2}}{4} & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & \frac{\sqrt{2}}{4} & 0 & 0 & 0 & 0 & 0 & 0 \\ \frac{\sqrt{2}}{4} & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ - \frac{\sqrt{2}}{4} & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \end{pmatrix}$ \\
+$ \mathbb{U}_{7} $ & $\mathbb{Q}_{1,1}^{(u,E_{1u})}$ & B$_{1}$ & $\begin{pmatrix} 0 & 0 & 0 & 0 & \frac{\sqrt{6}}{12} & \frac{\sqrt{6}}{12} & 0 & 0 \\ 0 & 0 & - \frac{\sqrt{6}}{12} & - \frac{\sqrt{6}}{12} & 0 & 0 & 0 & 0 \\ 0 & - \frac{\sqrt{6}}{12} & 0 & \frac{\sqrt{6}}{6} & 0 & 0 & 0 & 0 \\ 0 & - \frac{\sqrt{6}}{12} & \frac{\sqrt{6}}{6} & 0 & 0 & 0 & 0 & 0 \\ \frac{\sqrt{6}}{12} & 0 & 0 & 0 & 0 & - \frac{\sqrt{6}}{6} & 0 & 0 \\ \frac{\sqrt{6}}{12} & 0 & 0 & 0 & - \frac{\sqrt{6}}{6} & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \end{pmatrix}$ \\
+$ \mathbb{U}_{8} $ & $\mathbb{Q}_{2,0}^{(u,E_{2g})}$ & B$_{1}$ & $\begin{pmatrix} 0 & 0 & 0 & 0 & \frac{\sqrt{6}}{12} & \frac{\sqrt{6}}{12} & 0 & 0 \\ 0 & 0 & \frac{\sqrt{6}}{12} & \frac{\sqrt{6}}{12} & 0 & 0 & 0 & 0 \\ 0 & \frac{\sqrt{6}}{12} & 0 & - \frac{\sqrt{6}}{6} & 0 & 0 & 0 & 0 \\ 0 & \frac{\sqrt{6}}{12} & - \frac{\sqrt{6}}{6} & 0 & 0 & 0 & 0 & 0 \\ \frac{\sqrt{6}}{12} & 0 & 0 & 0 & 0 & - \frac{\sqrt{6}}{6} & 0 & 0 \\ \frac{\sqrt{6}}{12} & 0 & 0 & 0 & - \frac{\sqrt{6}}{6} & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \end{pmatrix}$ \\
+$ \mathbb{U}_{9} $ & $\mathbb{Q}_{2,1}^{(u,E_{2g})}$ & B$_{1}$ & $\begin{pmatrix} 0 & 0 & 0 & 0 & - \frac{\sqrt{2}}{4} & \frac{\sqrt{2}}{4} & 0 & 0 \\ 0 & 0 & - \frac{\sqrt{2}}{4} & \frac{\sqrt{2}}{4} & 0 & 0 & 0 & 0 \\ 0 & - \frac{\sqrt{2}}{4} & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & \frac{\sqrt{2}}{4} & 0 & 0 & 0 & 0 & 0 & 0 \\ - \frac{\sqrt{2}}{4} & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ \frac{\sqrt{2}}{4} & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \end{pmatrix}$ \\
+$ \mathbb{U}_{10} $ & $\mathbb{Q}_{3}^{(u,B_{1u})}$ & B$_{1}$ & $\begin{pmatrix} 0 & 0 & 0 & 0 & \frac{\sqrt{3}}{6} & \frac{\sqrt{3}}{6} & 0 & 0 \\ 0 & 0 & - \frac{\sqrt{3}}{6} & - \frac{\sqrt{3}}{6} & 0 & 0 & 0 & 0 \\ 0 & - \frac{\sqrt{3}}{6} & 0 & - \frac{\sqrt{3}}{6} & 0 & 0 & 0 & 0 \\ 0 & - \frac{\sqrt{3}}{6} & - \frac{\sqrt{3}}{6} & 0 & 0 & 0 & 0 & 0 \\ \frac{\sqrt{3}}{6} & 0 & 0 & 0 & 0 & \frac{\sqrt{3}}{6} & 0 & 0 \\ \frac{\sqrt{3}}{6} & 0 & 0 & 0 & \frac{\sqrt{3}}{6} & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \end{pmatrix}$ \\
+$ \mathbb{U}_{11} $ & $\mathbb{T}_{1,0}^{(u,E_{1u})}$ & B$_{1}$ & $\begin{pmatrix} 0 & 0 & 0 & 0 & \frac{\sqrt{6} i}{12} & - \frac{\sqrt{6} i}{12} & 0 & 0 \\ 0 & 0 & - \frac{\sqrt{6} i}{12} & \frac{\sqrt{6} i}{12} & 0 & 0 & 0 & 0 \\ 0 & \frac{\sqrt{6} i}{12} & 0 & \frac{\sqrt{6} i}{6} & 0 & 0 & 0 & 0 \\ 0 & - \frac{\sqrt{6} i}{12} & - \frac{\sqrt{6} i}{6} & 0 & 0 & 0 & 0 & 0 \\ - \frac{\sqrt{6} i}{12} & 0 & 0 & 0 & 0 & - \frac{\sqrt{6} i}{6} & 0 & 0 \\ \frac{\sqrt{6} i}{12} & 0 & 0 & 0 & \frac{\sqrt{6} i}{6} & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \end{pmatrix}$ \\
+$ \mathbb{U}_{12} $ & $\mathbb{T}_{1,1}^{(u,E_{1u})}$ & B$_{1}$ & $\begin{pmatrix} 0 & 0 & 0 & 0 & - \frac{\sqrt{2} i}{4} & - \frac{\sqrt{2} i}{4} & 0 & 0 \\ 0 & 0 & \frac{\sqrt{2} i}{4} & \frac{\sqrt{2} i}{4} & 0 & 0 & 0 & 0 \\ 0 & - \frac{\sqrt{2} i}{4} & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & - \frac{\sqrt{2} i}{4} & 0 & 0 & 0 & 0 & 0 & 0 \\ \frac{\sqrt{2} i}{4} & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ \frac{\sqrt{2} i}{4} & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \end{pmatrix}$ \\
+$ \mathbb{U}_{13} $ & $\mathbb{T}_{2,0}^{(u,E_{2g})}$ & B$_{1}$ & $\begin{pmatrix} 0 & 0 & 0 & 0 & \frac{\sqrt{2} i}{4} & \frac{\sqrt{2} i}{4} & 0 & 0 \\ 0 & 0 & \frac{\sqrt{2} i}{4} & \frac{\sqrt{2} i}{4} & 0 & 0 & 0 & 0 \\ 0 & - \frac{\sqrt{2} i}{4} & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & - \frac{\sqrt{2} i}{4} & 0 & 0 & 0 & 0 & 0 & 0 \\ - \frac{\sqrt{2} i}{4} & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ - \frac{\sqrt{2} i}{4} & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \end{pmatrix}$ \\
+$ \mathbb{U}_{14} $ & $\mathbb{T}_{2,1}^{(u,E_{2g})}$ & B$_{1}$ & $\begin{pmatrix} 0 & 0 & 0 & 0 & \frac{\sqrt{6} i}{12} & - \frac{\sqrt{6} i}{12} & 0 & 0 \\ 0 & 0 & \frac{\sqrt{6} i}{12} & - \frac{\sqrt{6} i}{12} & 0 & 0 & 0 & 0 \\ 0 & - \frac{\sqrt{6} i}{12} & 0 & - \frac{\sqrt{6} i}{6} & 0 & 0 & 0 & 0 \\ 0 & \frac{\sqrt{6} i}{12} & \frac{\sqrt{6} i}{6} & 0 & 0 & 0 & 0 & 0 \\ - \frac{\sqrt{6} i}{12} & 0 & 0 & 0 & 0 & - \frac{\sqrt{6} i}{6} & 0 & 0 \\ \frac{\sqrt{6} i}{12} & 0 & 0 & 0 & \frac{\sqrt{6} i}{6} & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \end{pmatrix}$ \\
+$ \mathbb{U}_{15} $ & $\mathbb{T}_{3}^{(u,B_{2u})}$ & B$_{1}$ & $\begin{pmatrix} 0 & 0 & 0 & 0 & \frac{\sqrt{3} i}{6} & - \frac{\sqrt{3} i}{6} & 0 & 0 \\ 0 & 0 & - \frac{\sqrt{3} i}{6} & \frac{\sqrt{3} i}{6} & 0 & 0 & 0 & 0 \\ 0 & \frac{\sqrt{3} i}{6} & 0 & - \frac{\sqrt{3} i}{6} & 0 & 0 & 0 & 0 \\ 0 & - \frac{\sqrt{3} i}{6} & \frac{\sqrt{3} i}{6} & 0 & 0 & 0 & 0 & 0 \\ - \frac{\sqrt{3} i}{6} & 0 & 0 & 0 & 0 & \frac{\sqrt{3} i}{6} & 0 & 0 \\ \frac{\sqrt{3} i}{6} & 0 & 0 & 0 & - \frac{\sqrt{3} i}{6} & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \end{pmatrix}$ \\
+$ \mathbb{U}_{16} $ & $\mathbb{T}_{6}^{(u,A_{2g})}$ & B$_{1}$ & $\begin{pmatrix} 0 & 0 & 0 & 0 & \frac{\sqrt{3} i}{6} & - \frac{\sqrt{3} i}{6} & 0 & 0 \\ 0 & 0 & \frac{\sqrt{3} i}{6} & - \frac{\sqrt{3} i}{6} & 0 & 0 & 0 & 0 \\ 0 & - \frac{\sqrt{3} i}{6} & 0 & \frac{\sqrt{3} i}{6} & 0 & 0 & 0 & 0 \\ 0 & \frac{\sqrt{3} i}{6} & - \frac{\sqrt{3} i}{6} & 0 & 0 & 0 & 0 & 0 \\ - \frac{\sqrt{3} i}{6} & 0 & 0 & 0 & 0 & \frac{\sqrt{3} i}{6} & 0 & 0 \\ \frac{\sqrt{3} i}{6} & 0 & 0 & 0 & - \frac{\sqrt{3} i}{6} & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \end{pmatrix}$ \\ \hline
+$ \mathbb{U}_{17} $ & $\mathbb{Q}_{0}^{(u,A_{1g})}$ & B$_{2}$ & $\begin{pmatrix} 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & \frac{\sqrt{2}}{2} \\ 0 & 0 & 0 & 0 & 0 & 0 & \frac{\sqrt{2}}{2} & 0 \end{pmatrix}$ \\
+$ \mathbb{U}_{18} $ & $\mathbb{T}_{3}^{(u,B_{1u})}$ & B$_{2}$ & $\begin{pmatrix} 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & \frac{\sqrt{2} i}{2} \\ 0 & 0 & 0 & 0 & 0 & 0 & - \frac{\sqrt{2} i}{2} & 0 \end{pmatrix}$ \\ \hline
+$ \mathbb{U}_{19} $ & $\mathbb{Q}_{0}^{(u,A_{1g})}$ & B$_{3}$ & $\begin{pmatrix} 0 & 0 & 0 & 0 & 0 & 0 & \frac{\sqrt{3}}{6} & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & \frac{\sqrt{3}}{6} \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & \frac{\sqrt{3}}{6} \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & \frac{\sqrt{3}}{6} \\ 0 & 0 & 0 & 0 & 0 & 0 & \frac{\sqrt{3}}{6} & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & \frac{\sqrt{3}}{6} & 0 \\ \frac{\sqrt{3}}{6} & 0 & 0 & 0 & \frac{\sqrt{3}}{6} & \frac{\sqrt{3}}{6} & 0 & 0 \\ 0 & \frac{\sqrt{3}}{6} & \frac{\sqrt{3}}{6} & \frac{\sqrt{3}}{6} & 0 & 0 & 0 & 0 \end{pmatrix}$ \\
+$ \mathbb{U}_{20} $ & $\mathbb{Q}_{1,0}^{(u,E_{1u})}$ & B$_{3}$ & $\begin{pmatrix} 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & - \frac{\sqrt{2}}{4} \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & \frac{\sqrt{2}}{4} \\ 0 & 0 & 0 & 0 & 0 & 0 & \frac{\sqrt{2}}{4} & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & - \frac{\sqrt{2}}{4} & 0 \\ 0 & 0 & 0 & 0 & \frac{\sqrt{2}}{4} & - \frac{\sqrt{2}}{4} & 0 & 0 \\ 0 & 0 & - \frac{\sqrt{2}}{4} & \frac{\sqrt{2}}{4} & 0 & 0 & 0 & 0 \end{pmatrix}$ \\
+$ \mathbb{U}_{21} $ & $\mathbb{Q}_{1,1}^{(u,E_{1u})}$ & B$_{3}$ & $\begin{pmatrix} 0 & 0 & 0 & 0 & 0 & 0 & \frac{\sqrt{6}}{6} & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & - \frac{\sqrt{6}}{6} \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & \frac{\sqrt{6}}{12} \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & \frac{\sqrt{6}}{12} \\ 0 & 0 & 0 & 0 & 0 & 0 & - \frac{\sqrt{6}}{12} & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & - \frac{\sqrt{6}}{12} & 0 \\ \frac{\sqrt{6}}{6} & 0 & 0 & 0 & - \frac{\sqrt{6}}{12} & - \frac{\sqrt{6}}{12} & 0 & 0 \\ 0 & - \frac{\sqrt{6}}{6} & \frac{\sqrt{6}}{12} & \frac{\sqrt{6}}{12} & 0 & 0 & 0 & 0 \end{pmatrix}$ \\
+$ \mathbb{U}_{22} $ & $\mathbb{Q}_{2,0}^{(u,E_{2g})}$ & B$_{3}$ & $\begin{pmatrix} 0 & 0 & 0 & 0 & 0 & 0 & \frac{\sqrt{6}}{6} & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & \frac{\sqrt{6}}{6} \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & - \frac{\sqrt{6}}{12} \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & - \frac{\sqrt{6}}{12} \\ 0 & 0 & 0 & 0 & 0 & 0 & - \frac{\sqrt{6}}{12} & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & - \frac{\sqrt{6}}{12} & 0 \\ \frac{\sqrt{6}}{6} & 0 & 0 & 0 & - \frac{\sqrt{6}}{12} & - \frac{\sqrt{6}}{12} & 0 & 0 \\ 0 & \frac{\sqrt{6}}{6} & - \frac{\sqrt{6}}{12} & - \frac{\sqrt{6}}{12} & 0 & 0 & 0 & 0 \end{pmatrix}$ \\
+$ \mathbb{U}_{23} $ & $\mathbb{Q}_{2,1}^{(u,E_{2g})}$ & B$_{3}$ & $\begin{pmatrix} 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & - \frac{\sqrt{2}}{4} \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & \frac{\sqrt{2}}{4} \\ 0 & 0 & 0 & 0 & 0 & 0 & - \frac{\sqrt{2}}{4} & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & \frac{\sqrt{2}}{4} & 0 \\ 0 & 0 & 0 & 0 & - \frac{\sqrt{2}}{4} & \frac{\sqrt{2}}{4} & 0 & 0 \\ 0 & 0 & - \frac{\sqrt{2}}{4} & \frac{\sqrt{2}}{4} & 0 & 0 & 0 & 0 \end{pmatrix}$ \\
+$ \mathbb{U}_{24} $ & $\mathbb{Q}_{3}^{(u,B_{1u})}$ & B$_{3}$ & $\begin{pmatrix} 0 & 0 & 0 & 0 & 0 & 0 & \frac{\sqrt{3}}{6} & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & - \frac{\sqrt{3}}{6} \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & - \frac{\sqrt{3}}{6} \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & - \frac{\sqrt{3}}{6} \\ 0 & 0 & 0 & 0 & 0 & 0 & \frac{\sqrt{3}}{6} & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & \frac{\sqrt{3}}{6} & 0 \\ \frac{\sqrt{3}}{6} & 0 & 0 & 0 & \frac{\sqrt{3}}{6} & \frac{\sqrt{3}}{6} & 0 & 0 \\ 0 & - \frac{\sqrt{3}}{6} & - \frac{\sqrt{3}}{6} & - \frac{\sqrt{3}}{6} & 0 & 0 & 0 & 0 \end{pmatrix}$ \\
+$ \mathbb{U}_{25} $ & $\mathbb{T}_{0}^{(u,A_{1g})}$ & B$_{3}$ & $\begin{pmatrix} 0 & 0 & 0 & 0 & 0 & 0 & \frac{\sqrt{3} i}{6} & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & \frac{\sqrt{3} i}{6} \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & \frac{\sqrt{3} i}{6} \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & \frac{\sqrt{3} i}{6} \\ 0 & 0 & 0 & 0 & 0 & 0 & \frac{\sqrt{3} i}{6} & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & \frac{\sqrt{3} i}{6} & 0 \\ - \frac{\sqrt{3} i}{6} & 0 & 0 & 0 & - \frac{\sqrt{3} i}{6} & - \frac{\sqrt{3} i}{6} & 0 & 0 \\ 0 & - \frac{\sqrt{3} i}{6} & - \frac{\sqrt{3} i}{6} & - \frac{\sqrt{3} i}{6} & 0 & 0 & 0 & 0 \end{pmatrix}$ \\
+$ \mathbb{U}_{26} $ & $\mathbb{T}_{1,0}^{(u,E_{1u})}$ & B$_{3}$ & $\begin{pmatrix} 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & - \frac{\sqrt{2} i}{4} \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & \frac{\sqrt{2} i}{4} \\ 0 & 0 & 0 & 0 & 0 & 0 & \frac{\sqrt{2} i}{4} & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & - \frac{\sqrt{2} i}{4} & 0 \\ 0 & 0 & 0 & 0 & - \frac{\sqrt{2} i}{4} & \frac{\sqrt{2} i}{4} & 0 & 0 \\ 0 & 0 & \frac{\sqrt{2} i}{4} & - \frac{\sqrt{2} i}{4} & 0 & 0 & 0 & 0 \end{pmatrix}$ \\
+$ \mathbb{U}_{27} $ & $\mathbb{T}_{1,1}^{(u,E_{1u})}$ & B$_{3}$ & $\begin{pmatrix} 0 & 0 & 0 & 0 & 0 & 0 & \frac{\sqrt{6} i}{6} & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & - \frac{\sqrt{6} i}{6} \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & \frac{\sqrt{6} i}{12} \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & \frac{\sqrt{6} i}{12} \\ 0 & 0 & 0 & 0 & 0 & 0 & - \frac{\sqrt{6} i}{12} & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & - \frac{\sqrt{6} i}{12} & 0 \\ - \frac{\sqrt{6} i}{6} & 0 & 0 & 0 & \frac{\sqrt{6} i}{12} & \frac{\sqrt{6} i}{12} & 0 & 0 \\ 0 & \frac{\sqrt{6} i}{6} & - \frac{\sqrt{6} i}{12} & - \frac{\sqrt{6} i}{12} & 0 & 0 & 0 & 0 \end{pmatrix}$ \\
+$ \mathbb{U}_{28} $ & $\mathbb{T}_{2,0}^{(u,E_{2g})}$ & B$_{3}$ & $\begin{pmatrix} 0 & 0 & 0 & 0 & 0 & 0 & \frac{\sqrt{6} i}{6} & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & \frac{\sqrt{6} i}{6} \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & - \frac{\sqrt{6} i}{12} \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & - \frac{\sqrt{6} i}{12} \\ 0 & 0 & 0 & 0 & 0 & 0 & - \frac{\sqrt{6} i}{12} & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & - \frac{\sqrt{6} i}{12} & 0 \\ - \frac{\sqrt{6} i}{6} & 0 & 0 & 0 & \frac{\sqrt{6} i}{12} & \frac{\sqrt{6} i}{12} & 0 & 0 \\ 0 & - \frac{\sqrt{6} i}{6} & \frac{\sqrt{6} i}{12} & \frac{\sqrt{6} i}{12} & 0 & 0 & 0 & 0 \end{pmatrix}$ \\
+$ \mathbb{U}_{29} $ & $\mathbb{T}_{2,1}^{(u,E_{2g})}$ & B$_{3}$ & $\begin{pmatrix} 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & - \frac{\sqrt{2} i}{4} \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & \frac{\sqrt{2} i}{4} \\ 0 & 0 & 0 & 0 & 0 & 0 & - \frac{\sqrt{2} i}{4} & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & \frac{\sqrt{2} i}{4} & 0 \\ 0 & 0 & 0 & 0 & \frac{\sqrt{2} i}{4} & - \frac{\sqrt{2} i}{4} & 0 & 0 \\ 0 & 0 & \frac{\sqrt{2} i}{4} & - \frac{\sqrt{2} i}{4} & 0 & 0 & 0 & 0 \end{pmatrix}$ \\
+$ \mathbb{U}_{30} $ & $\mathbb{T}_{3}^{(u,B_{1u})}$ & B$_{3}$ & $\begin{pmatrix} 0 & 0 & 0 & 0 & 0 & 0 & \frac{\sqrt{3} i}{6} & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & - \frac{\sqrt{3} i}{6} \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & - \frac{\sqrt{3} i}{6} \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & - \frac{\sqrt{3} i}{6} \\ 0 & 0 & 0 & 0 & 0 & 0 & \frac{\sqrt{3} i}{6} & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & \frac{\sqrt{3} i}{6} & 0 \\ - \frac{\sqrt{3} i}{6} & 0 & 0 & 0 & - \frac{\sqrt{3} i}{6} & - \frac{\sqrt{3} i}{6} & 0 & 0 \\ 0 & \frac{\sqrt{3} i}{6} & \frac{\sqrt{3} i}{6} & \frac{\sqrt{3} i}{6} & 0 & 0 & 0 & 0 \end{pmatrix}$ \\
+\end{longtable}
+\end{center}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% structure SAMB.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{longtable}{c|c|c|c}
+\caption{Structure SAMB.}
+ \\
+ \hline \hline
+symbol & type & cluster & form \\ \hline \endfirsthead
+
+\multicolumn{3}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+symbol & type & cluster & form \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{3}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{3}{r}{} \\ \endlastfoot
+
+$ \mathbb{F}_{1} $ & $\mathbb{Q}_{0}^{(k,A_{1g})}$ & B$_{1}$ & $\frac{\sqrt{6} c_{001}}{3} + \frac{\sqrt{6} c_{003}}{3} + \frac{\sqrt{6} c_{004}}{3}$ \\
+$ \mathbb{F}_{2} $ & $\mathbb{Q}_{2,0}^{(k,E_{2g})}$ & B$_{1}$ & $\frac{\sqrt{3} c_{001}}{3} + \frac{\sqrt{3} c_{003}}{3} - \frac{2 \sqrt{3} c_{004}}{3}$ \\
+$ \mathbb{F}_{3} $ & $\mathbb{Q}_{2,1}^{(k,E_{2g})}$ & B$_{1}$ & $- c_{001} + c_{003}$ \\
+$ \mathbb{F}_{4} $ & $\mathbb{T}_{1,0}^{(k,E_{1u})}$ & B$_{1}$ & $\frac{\sqrt{3} s_{001}}{3} + \frac{\sqrt{3} s_{003}}{3} + \frac{2 \sqrt{3} s_{004}}{3}$ \\
+$ \mathbb{F}_{5} $ & $\mathbb{T}_{1,1}^{(k,E_{1u})}$ & B$_{1}$ & $- s_{001} + s_{003}$ \\
+$ \mathbb{F}_{6} $ & $\mathbb{T}_{3}^{(k,B_{2u})}$ & B$_{1}$ & $\frac{\sqrt{6} s_{001}}{3} + \frac{\sqrt{6} s_{003}}{3} - \frac{\sqrt{6} s_{004}}{3}$ \\ \hline
+$ \mathbb{F}_{7} $ & $\mathbb{Q}_{0}^{(k,A_{1g})}$ & B$_{2}$ & $\frac{\sqrt{3} c_{007}}{3} + \frac{\sqrt{3} c_{008}}{3} + \frac{\sqrt{3} c_{009}}{3} + \frac{\sqrt{3} c_{010}}{3} + \frac{\sqrt{3} c_{011}}{3} + \frac{\sqrt{3} c_{012}}{3}$ \\
+$ \mathbb{F}_{8} $ & $\mathbb{Q}_{2,0}^{(k,E_{1g})}$ & B$_{2}$ & $\frac{\sqrt{2} c_{009}}{2} - \frac{\sqrt{2} c_{010}}{2} - \frac{\sqrt{2} c_{011}}{2} + \frac{\sqrt{2} c_{012}}{2}$ \\
+$ \mathbb{F}_{9} $ & $\mathbb{Q}_{2,1}^{(k,E_{1g})}$ & B$_{2}$ & $\frac{\sqrt{6} c_{007}}{3} - \frac{\sqrt{6} c_{008}}{3} - \frac{\sqrt{6} c_{009}}{6} - \frac{\sqrt{6} c_{010}}{6} + \frac{\sqrt{6} c_{011}}{6} + \frac{\sqrt{6} c_{012}}{6}$ \\
+$ \mathbb{F}_{10} $ & $\mathbb{Q}_{2,0}^{(k,E_{2g})}$ & B$_{2}$ & $\frac{\sqrt{6} c_{007}}{3} + \frac{\sqrt{6} c_{008}}{3} - \frac{\sqrt{6} c_{009}}{6} - \frac{\sqrt{6} c_{010}}{6} - \frac{\sqrt{6} c_{011}}{6} - \frac{\sqrt{6} c_{012}}{6}$ \\
+$ \mathbb{F}_{11} $ & $\mathbb{Q}_{2,1}^{(k,E_{2g})}$ & B$_{2}$ & $- \frac{\sqrt{2} c_{009}}{2} + \frac{\sqrt{2} c_{010}}{2} - \frac{\sqrt{2} c_{011}}{2} + \frac{\sqrt{2} c_{012}}{2}$ \\
+$ \mathbb{F}_{12} $ & $\mathbb{Q}_{4}^{(k,B_{2g})}$ & B$_{2}$ & $\frac{\sqrt{3} c_{007}}{3} - \frac{\sqrt{3} c_{008}}{3} + \frac{\sqrt{3} c_{009}}{3} + \frac{\sqrt{3} c_{010}}{3} - \frac{\sqrt{3} c_{011}}{3} - \frac{\sqrt{3} c_{012}}{3}$ \\
+$ \mathbb{F}_{13} $ & $\mathbb{T}_{1}^{(k,A_{2u})}$ & B$_{2}$ & $\frac{\sqrt{3} s_{007}}{3} - \frac{\sqrt{3} s_{008}}{3} + \frac{\sqrt{3} s_{009}}{3} + \frac{\sqrt{3} s_{010}}{3} - \frac{\sqrt{3} s_{011}}{3} - \frac{\sqrt{3} s_{012}}{3}$ \\
+$ \mathbb{F}_{14} $ & $\mathbb{T}_{1,0}^{(k,E_{1u})}$ & B$_{2}$ & $\frac{\sqrt{2} s_{009}}{2} - \frac{\sqrt{2} s_{010}}{2} + \frac{\sqrt{2} s_{011}}{2} - \frac{\sqrt{2} s_{012}}{2}$ \\
+$ \mathbb{F}_{15} $ & $\mathbb{T}_{1,1}^{(k,E_{1u})}$ & B$_{2}$ & $\frac{\sqrt{6} s_{007}}{3} + \frac{\sqrt{6} s_{008}}{3} - \frac{\sqrt{6} s_{009}}{6} - \frac{\sqrt{6} s_{010}}{6} - \frac{\sqrt{6} s_{011}}{6} - \frac{\sqrt{6} s_{012}}{6}$ \\
+$ \mathbb{F}_{16} $ & $\mathbb{T}_{3}^{(k,B_{1u})}$ & B$_{2}$ & $\frac{\sqrt{3} s_{007}}{3} + \frac{\sqrt{3} s_{008}}{3} + \frac{\sqrt{3} s_{009}}{3} + \frac{\sqrt{3} s_{010}}{3} + \frac{\sqrt{3} s_{011}}{3} + \frac{\sqrt{3} s_{012}}{3}$ \\
+$ \mathbb{F}_{17} $ & $\mathbb{T}_{3,0}^{(k,E_{2u})}$ & B$_{2}$ & $\frac{\sqrt{6} s_{007}}{3} - \frac{\sqrt{6} s_{008}}{3} - \frac{\sqrt{6} s_{009}}{6} - \frac{\sqrt{6} s_{010}}{6} + \frac{\sqrt{6} s_{011}}{6} + \frac{\sqrt{6} s_{012}}{6}$ \\
+$ \mathbb{F}_{18} $ & $\mathbb{T}_{3,1}^{(k,E_{2u})}$ & B$_{2}$ & $- \frac{\sqrt{2} s_{009}}{2} + \frac{\sqrt{2} s_{010}}{2} + \frac{\sqrt{2} s_{011}}{2} - \frac{\sqrt{2} s_{012}}{2}$ \\ \hline
+$ \mathbb{F}_{19} $ & $\mathbb{Q}_{0}^{(k,A_{1g})}$ & B$_{3}$ & $\frac{\sqrt{3} c_{013}}{3} + \frac{\sqrt{3} c_{015}}{3} + \frac{\sqrt{3} c_{016}}{3} + \frac{\sqrt{3} c_{017}}{3} + \frac{\sqrt{3} c_{021}}{3} + \frac{\sqrt{3} c_{022}}{3}$ \\
+$ \mathbb{F}_{20} $ & $\mathbb{Q}_{2,0}^{(k,E_{2g})}$ & B$_{3}$ & $\frac{\sqrt{2} c_{013}}{2} + \frac{\sqrt{2} c_{015}}{2} - \frac{\sqrt{2} c_{017}}{2} - \frac{\sqrt{2} c_{022}}{2}$ \\
+$ \mathbb{F}_{21} $ & $\mathbb{Q}_{2,1}^{(k,E_{2g})}$ & B$_{3}$ & $- \frac{\sqrt{6} c_{013}}{6} + \frac{\sqrt{6} c_{015}}{6} - \frac{\sqrt{6} c_{016}}{3} + \frac{\sqrt{6} c_{017}}{6} + \frac{\sqrt{6} c_{021}}{3} - \frac{\sqrt{6} c_{022}}{6}$ \\
+$ \mathbb{F}_{22} $ & $\mathbb{Q}_{4,0}^{(k,E_{2g},1)}$ & B$_{3}$ & $\frac{\sqrt{6} c_{013}}{6} + \frac{\sqrt{6} c_{015}}{6} - \frac{\sqrt{6} c_{016}}{3} + \frac{\sqrt{6} c_{017}}{6} - \frac{\sqrt{6} c_{021}}{3} + \frac{\sqrt{6} c_{022}}{6}$ \\
+$ \mathbb{F}_{23} $ & $\mathbb{Q}_{4,1}^{(k,E_{2g},1)}$ & B$_{3}$ & $\frac{\sqrt{2} c_{013}}{2} - \frac{\sqrt{2} c_{015}}{2} + \frac{\sqrt{2} c_{017}}{2} - \frac{\sqrt{2} c_{022}}{2}$ \\
+$ \mathbb{F}_{24} $ & $\mathbb{Q}_{6}^{(k,A_{2g})}$ & B$_{3}$ & $\frac{\sqrt{3} c_{013}}{3} - \frac{\sqrt{3} c_{015}}{3} - \frac{\sqrt{3} c_{016}}{3} - \frac{\sqrt{3} c_{017}}{3} + \frac{\sqrt{3} c_{021}}{3} + \frac{\sqrt{3} c_{022}}{3}$ \\
+$ \mathbb{F}_{25} $ & $\mathbb{T}_{1,0}^{(k,E_{1u})}$ & B$_{3}$ & $\frac{\sqrt{3} s_{013}}{6} + \frac{s_{013}}{2} + \frac{\sqrt{3} s_{015}}{6} + \frac{s_{015}}{2} - \frac{\sqrt{3} s_{016}}{3} - \frac{s_{017}}{2} + \frac{\sqrt{3} s_{017}}{6} - \frac{\sqrt{3} s_{021}}{3} - \frac{s_{022}}{2} + \frac{\sqrt{3} s_{022}}{6}$ \\
+$ \mathbb{F}_{26} $ & $\mathbb{T}_{1,1}^{(k,E_{1u})}$ & B$_{3}$ & $- \frac{\sqrt{3} s_{013}}{6} + \frac{s_{013}}{2} - \frac{s_{015}}{2} + \frac{\sqrt{3} s_{015}}{6} - \frac{\sqrt{3} s_{016}}{3} + \frac{\sqrt{3} s_{017}}{6} + \frac{s_{017}}{2} + \frac{\sqrt{3} s_{021}}{3} - \frac{s_{022}}{2} - \frac{\sqrt{3} s_{022}}{6}$ \\
+$ \mathbb{F}_{27} $ & $\mathbb{T}_{3}^{(k,B_{1u})}$ & B$_{3}$ & $\frac{\sqrt{3} s_{013}}{3} - \frac{\sqrt{3} s_{015}}{3} - \frac{\sqrt{3} s_{016}}{3} - \frac{\sqrt{3} s_{017}}{3} + \frac{\sqrt{3} s_{021}}{3} + \frac{\sqrt{3} s_{022}}{3}$ \\
+$ \mathbb{F}_{28} $ & $\mathbb{T}_{3}^{(k,B_{2u})}$ & B$_{3}$ & $\frac{\sqrt{3} s_{013}}{3} + \frac{\sqrt{3} s_{015}}{3} + \frac{\sqrt{3} s_{016}}{3} + \frac{\sqrt{3} s_{017}}{3} + \frac{\sqrt{3} s_{021}}{3} + \frac{\sqrt{3} s_{022}}{3}$ \\
+$ \mathbb{F}_{29} $ & $\mathbb{T}_{5,0}^{(k,E_{1u},1)}$ & B$_{3}$ & $- \frac{\sqrt{3} s_{013}}{6} + \frac{s_{013}}{2} - \frac{\sqrt{3} s_{015}}{6} + \frac{s_{015}}{2} + \frac{\sqrt{3} s_{016}}{3} - \frac{s_{017}}{2} - \frac{\sqrt{3} s_{017}}{6} + \frac{\sqrt{3} s_{021}}{3} - \frac{s_{022}}{2} - \frac{\sqrt{3} s_{022}}{6}$ \\
+$ \mathbb{F}_{30} $ & $\mathbb{T}_{5,1}^{(k,E_{1u},1)}$ & B$_{3}$ & $- \frac{s_{013}}{2} - \frac{\sqrt{3} s_{013}}{6} + \frac{\sqrt{3} s_{015}}{6} + \frac{s_{015}}{2} - \frac{\sqrt{3} s_{016}}{3} - \frac{s_{017}}{2} + \frac{\sqrt{3} s_{017}}{6} + \frac{\sqrt{3} s_{021}}{3} - \frac{\sqrt{3} s_{022}}{6} + \frac{s_{022}}{2}$ \\
+\end{longtable}
+\end{center}
+
+ \hfil \hrule height 1mm width \textwidth \hfil
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% harmonics.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{longtable}{ccccccc}
+\caption{Polar harmonics.}
+ \\
+ \hline \hline
+No. & symbol & rank & irrep. & mul. & comp. & form \\ \hline \endfirsthead
+
+\multicolumn{6}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+No. & symbol & rank & irrep. & mul. & comp. & form \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{6}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{6}{r}{} \\ \endlastfoot
+
+$ 1 $ & $ \mathbb{Q}_{0}^{(A_{1g})} $ & $ 0 $ & $ A_{1g} $ & $ - $ & $ - $ & $ 1 $ \\ \hline
+$ 2 $ & $ \mathbb{Q}_{1}^{(A_{2u})} $ & $ 1 $ & $ A_{2u} $ & $ - $ & $ - $ & $ z $ \\
+$ 3 $ & $ \mathbb{Q}_{1,0}^{(E_{1u})} $ & $ 1 $ & $ E_{1u} $ & $ - $ & $ 0 $ & $ x $ \\
+$ 4 $ & $ \mathbb{Q}_{1,1}^{(E_{1u})} $ & $ 1 $ & $ E_{1u} $ & $ - $ & $ 1 $ & $ y $ \\ \hline
+$ 5 $ & $ \mathbb{Q}_{2}^{(A_{1g})} $ & $ 2 $ & $ A_{1g} $ & $ - $ & $ - $ & $ - \frac{x^{2}}{2} - \frac{y^{2}}{2} + z^{2} $ \\
+$ 6 $ & $ \mathbb{Q}_{2,0}^{(E_{1g})} $ & $ 2 $ & $ E_{1g} $ & $ - $ & $ 0 $ & $ \sqrt{3} x z $ \\
+$ 7 $ & $ \mathbb{Q}_{2,1}^{(E_{1g})} $ & $ 2 $ & $ E_{1g} $ & $ - $ & $ 1 $ & $ \sqrt{3} y z $ \\
+$ 8 $ & $ \mathbb{Q}_{2,0}^{(E_{2g})} $ & $ 2 $ & $ E_{2g} $ & $ - $ & $ 0 $ & $ \frac{\sqrt{3} \left(x - y\right) \left(x + y\right)}{2} $ \\
+$ 9 $ & $ \mathbb{Q}_{2,1}^{(E_{2g})} $ & $ 2 $ & $ E_{2g} $ & $ - $ & $ 1 $ & $ - \sqrt{3} x y $ \\ \hline
+$ 10 $ & $ \mathbb{Q}_{3}^{(B_{1u})} $ & $ 3 $ & $ B_{1u} $ & $ - $ & $ - $ & $ \frac{\sqrt{10} y \left(3 x^{2} - y^{2}\right)}{4} $ \\
+$ 11 $ & $ \mathbb{Q}_{3}^{(B_{2u})} $ & $ 3 $ & $ B_{2u} $ & $ - $ & $ - $ & $ \frac{\sqrt{10} x \left(x^{2} - 3 y^{2}\right)}{4} $ \\
+$ 12 $ & $ \mathbb{Q}_{3,0}^{(E_{2u})} $ & $ 3 $ & $ E_{2u} $ & $ - $ & $ 0 $ & $ \frac{\sqrt{15} z \left(x - y\right) \left(x + y\right)}{2} $ \\
+$ 13 $ & $ \mathbb{Q}_{3,1}^{(E_{2u})} $ & $ 3 $ & $ E_{2u} $ & $ - $ & $ 1 $ & $ - \sqrt{15} x y z $ \\ \hline
+$ 14 $ & $ \mathbb{Q}_{4}^{(A_{1g})} $ & $ 4 $ & $ A_{1g} $ & $ - $ & $ - $ & $ \frac{3 x^{4}}{8} + \frac{3 x^{2} y^{2}}{4} - 3 x^{2} z^{2} + \frac{3 y^{4}}{8} - 3 y^{2} z^{2} + z^{4} $ \\
+$ 15 $ & $ \mathbb{Q}_{4}^{(B_{2g})} $ & $ 4 $ & $ B_{2g} $ & $ - $ & $ - $ & $ \frac{\sqrt{70} y z \left(3 x^{2} - y^{2}\right)}{4} $ \\
+$ 16 $ & $ \mathbb{Q}_{4,0}^{(E_{1g})} $ & $ 4 $ & $ E_{1g} $ & $ - $ & $ 0 $ & $ - \frac{\sqrt{10} x z \left(3 x^{2} + 3 y^{2} - 4 z^{2}\right)}{4} $ \\
+$ 17 $ & $ \mathbb{Q}_{4,1}^{(E_{1g})} $ & $ 4 $ & $ E_{1g} $ & $ - $ & $ 1 $ & $ - \frac{\sqrt{10} y z \left(3 x^{2} + 3 y^{2} - 4 z^{2}\right)}{4} $ \\
+$ 18 $ & $ \mathbb{Q}_{4,0}^{(E_{2g},1)} $ & $ 4 $ & $ E_{2g} $ & $ 1 $ & $ 0 $ & $ \frac{\sqrt{35} \left(x^{2} - 2 x y - y^{2}\right) \left(x^{2} + 2 x y - y^{2}\right)}{8} $ \\
+$ 19 $ & $ \mathbb{Q}_{4,1}^{(E_{2g},1)} $ & $ 4 $ & $ E_{2g} $ & $ 1 $ & $ 1 $ & $ \frac{\sqrt{35} x y \left(x - y\right) \left(x + y\right)}{2} $ \\
+$ 20 $ & $ \mathbb{Q}_{4,0}^{(E_{2g},2)} $ & $ 4 $ & $ E_{2g} $ & $ 2 $ & $ 0 $ & $ - \frac{\sqrt{5} \left(x - y\right) \left(x + y\right) \left(x^{2} + y^{2} - 6 z^{2}\right)}{4} $ \\
+$ 21 $ & $ \mathbb{Q}_{4,1}^{(E_{2g},2)} $ & $ 4 $ & $ E_{2g} $ & $ 2 $ & $ 1 $ & $ \frac{\sqrt{5} x y \left(x^{2} + y^{2} - 6 z^{2}\right)}{2} $ \\ \hline
+$ 22 $ & $ \mathbb{Q}_{5,0}^{(E_{1u},1)} $ & $ 5 $ & $ E_{1u} $ & $ 1 $ & $ 0 $ & $ \frac{3 \sqrt{14} x \left(x^{4} - 10 x^{2} y^{2} + 5 y^{4}\right)}{16} $ \\
+$ 23 $ & $ \mathbb{Q}_{5,1}^{(E_{1u},1)} $ & $ 5 $ & $ E_{1u} $ & $ 1 $ & $ 1 $ & $ - \frac{3 \sqrt{14} y \left(5 x^{4} - 10 x^{2} y^{2} + y^{4}\right)}{16} $ \\ \hline
+$ 24 $ & $ \mathbb{Q}_{6}^{(A_{2g})} $ & $ 6 $ & $ A_{2g} $ & $ - $ & $ - $ & $ \frac{\sqrt{462} x y \left(x^{2} - 3 y^{2}\right) \left(3 x^{2} - y^{2}\right)}{16} $ \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{longtable}{ccccccc}
+\caption{Axial harmonics.}
+ \\
+ \hline \hline
+No. & symbol & rank & irrep. & mul. & comp. & form \\ \hline \endfirsthead
+
+\multicolumn{6}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+No. & symbol & rank & irrep. & mul. & comp. & form \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{6}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{6}{r}{} \\ \endlastfoot
+
+$ 1 $ & $ \mathbb{G}_{1}^{(A_{2g})} $ & $ 1 $ & $ A_{2g} $ & $ - $ & $ - $ & $ Z $ \\ \hline
+$ 2 $ & $ \mathbb{G}_{3}^{(A_{2g})} $ & $ 3 $ & $ A_{2g} $ & $ - $ & $ - $ & $ - \frac{Z \left(3 X^{2} + 3 Y^{2} - 2 Z^{2}\right)}{2} $ \\
+$ 3 $ & $ \mathbb{G}_{3,0}^{(E_{2g})} $ & $ 3 $ & $ E_{2g} $ & $ - $ & $ 0 $ & $ \sqrt{15} X Y Z $ \\
+$ 4 $ & $ \mathbb{G}_{3,1}^{(E_{2g})} $ & $ 3 $ & $ E_{2g} $ & $ - $ & $ 1 $ & $ \frac{\sqrt{15} Z \left(X - Y\right) \left(X + Y\right)}{2} $ \\
+\end{longtable}
+\end{center}
+
+ \hfil \hrule height 1mm width \textwidth \hfil
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% group information.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Group info.: Generator = $\{3^{+}_{\,\,001}|0\},\,\,\{2{}_{001}|0 0 \frac{1}{2}\},\,\,\{2{}_{110}|0\},\,\,\{-1|0\}$
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{longtable}{c|l}
+\caption{Conjugacy class (point-group part).}
+ \\
+ \hline \hline
+rep. SO & symmetry operations \\ \hline \endfirsthead
+
+\multicolumn{1}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+rep. SO & symmetry operations \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{1}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{1}{r}{} \\ \endlastfoot
+
+$\{1|0\}$ & $\{1|0\}$ \\ \hline
+$\{2{}_{001}|0 0 \frac{1}{2}\}$ & $\{2{}_{001}|0 0 \frac{1}{2}\}$ \\ \hline
+$\{2{}_{100}|0\}$ & $\{2{}_{100}|0\}$,\,\, $\{2{}_{010}|0\}$,\,\, $\{2{}_{110}|0\}$ \\ \hline
+$\{2{}_{120}|0 0 \frac{1}{2}\}$ & $\{2{}_{120}|0 0 \frac{1}{2}\}$,\,\, $\{2{}_{210}|0 0 \frac{1}{2}\}$,\,\, $\{2{}_{1-10}|0 0 \frac{1}{2}\}$ \\ \hline
+$\{3^{+}_{\,\,001}|0\}$ & $\{3^{+}_{\,\,001}|0\}$,\,\, $\{3^{-}_{\,\,001}|0\}$ \\ \hline
+$\{6^{+}_{\,\,001}|0 0 \frac{1}{2}\}$ & $\{6^{+}_{\,\,001}|0 0 \frac{1}{2}\}$,\,\, $\{6^{-}_{\,\,001}|0 0 \frac{1}{2}\}$ \\ \hline
+$\{-1|0\}$ & $\{-1|0\}$ \\ \hline
+$\{{\rm m}_{100}|0\}$ & $\{{\rm m}_{100}|0\}$,\,\, $\{{\rm m}_{010}|0\}$,\,\, $\{{\rm m}_{110}|0\}$ \\ \hline
+$\{{\rm m}_{001}|0 0 \frac{1}{2}\}$ & $\{{\rm m}_{001}|0 0 \frac{1}{2}\}$ \\ \hline
+$\{{\rm m}_{120}|0 0 \frac{1}{2}\}$ & $\{{\rm m}_{120}|0 0 \frac{1}{2}\}$,\,\, $\{{\rm m}_{210}|0 0 \frac{1}{2}\}$,\,\, $\{{\rm m}_{1-10}|0 0 \frac{1}{2}\}$ \\ \hline
+$\{-3^{+}_{\,\,001}|0\}$ & $\{-3^{+}_{\,\,001}|0\}$,\,\, $\{-3^{-}_{\,\,001}|0\}$ \\ \hline
+$\{-6^{+}_{\,\,001}|0 0 \frac{1}{2}\}$ & $\{-6^{+}_{\,\,001}|0 0 \frac{1}{2}\}$,\,\, $\{-6^{-}_{\,\,001}|0 0 \frac{1}{2}\}$ \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{longtable}{c|cc|cc|cc|cc|cc}
+\caption{Symmetry operations.}
+ \\
+ \hline \hline
+ & No. & SO & No. & SO & No. & SO & No. & SO & No. & SO \\ \hline \endfirsthead
+
+\multicolumn{10}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+ & No. & SO & No. & SO & No. & SO & No. & SO & No. & SO \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{10}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{10}{r}{} \\ \endlastfoot
+
+ & 1 & $\{1|0\}$ & 2 & $\{2{}_{001}|0 0 \frac{1}{2}\}$ & 3 & $\{2{}_{100}|0\}$ & 4 & $\{2{}_{010}|0\}$ & 5 & $\{2{}_{110}|0\}$ \\
+& 6 & $\{2{}_{120}|0 0 \frac{1}{2}\}$ & 7 & $\{2{}_{210}|0 0 \frac{1}{2}\}$ & 8 & $\{2{}_{1-10}|0 0 \frac{1}{2}\}$ & 9 & $\{3^{+}_{\,\,001}|0\}$ & 10 & $\{3^{-}_{\,\,001}|0\}$ \\
+& 11 & $\{6^{+}_{\,\,001}|0 0 \frac{1}{2}\}$ & 12 & $\{6^{-}_{\,\,001}|0 0 \frac{1}{2}\}$ & 13 & $\{-1|0\}$ & 14 & $\{{\rm m}_{100}|0\}$ & 15 & $\{{\rm m}_{010}|0\}$ \\
+& 16 & $\{{\rm m}_{110}|0\}$ & 17 & $\{{\rm m}_{001}|0 0 \frac{1}{2}\}$ & 18 & $\{{\rm m}_{120}|0 0 \frac{1}{2}\}$ & 19 & $\{{\rm m}_{210}|0 0 \frac{1}{2}\}$ & 20 & $\{{\rm m}_{1-10}|0 0 \frac{1}{2}\}$ \\
+& 21 & $\{-3^{+}_{\,\,001}|0\}$ & 22 & $\{-3^{-}_{\,\,001}|0\}$ & 23 & $\{-6^{+}_{\,\,001}|0 0 \frac{1}{2}\}$ & 24 & $\{-6^{-}_{\,\,001}|0 0 \frac{1}{2}\}$ &  &  \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.0}
+\begin{longtable}{c|rrrrrrrrrrrr}
+\caption{Character table (point-group part).}
+ \\
+ \hline \hline
+ & $ 1 $ & $ 2{}_{001} $ & $ 2{}_{100} $ & $ 2{}_{120} $ & $ 3^{+}_{\,\,001} $ & $ 6^{+}_{\,\,001} $ & $ -1 $ & $ {\rm m}_{100} $ & $ {\rm m}_{001} $ & $ {\rm m}_{120} $ & $ -3^{+}_{\,\,001} $ & $ -6^{+}_{\,\,001} $ \\ \hline \endfirsthead
+
+\multicolumn{12}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+ & $ 1 $ & $ 2{}_{001} $ & $ 2{}_{100} $ & $ 2{}_{120} $ & $ 3^{+}_{\,\,001} $ & $ 6^{+}_{\,\,001} $ & $ -1 $ & $ {\rm m}_{100} $ & $ {\rm m}_{001} $ & $ {\rm m}_{120} $ & $ -3^{+}_{\,\,001} $ & $ -6^{+}_{\,\,001} $ \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{12}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{12}{r}{} \\ \endlastfoot
+
+$ A_{1g} $ & $ 1 $ & $ 1 $ & $ 1 $ & $ 1 $ & $ 1 $ & $ 1 $ & $ 1 $ & $ 1 $ & $ 1 $ & $ 1 $ & $ 1 $ & $ 1 $ \\
+$ A_{2g} $ & $ 1 $ & $ 1 $ & $ -1 $ & $ -1 $ & $ 1 $ & $ 1 $ & $ 1 $ & $ -1 $ & $ 1 $ & $ -1 $ & $ 1 $ & $ 1 $ \\
+$ B_{1g} $ & $ 1 $ & $ -1 $ & $ -1 $ & $ 1 $ & $ 1 $ & $ -1 $ & $ 1 $ & $ -1 $ & $ -1 $ & $ 1 $ & $ 1 $ & $ -1 $ \\
+$ B_{2g} $ & $ 1 $ & $ -1 $ & $ 1 $ & $ -1 $ & $ 1 $ & $ -1 $ & $ 1 $ & $ 1 $ & $ -1 $ & $ -1 $ & $ 1 $ & $ -1 $ \\
+$ E_{1g} $ & $ 2 $ & $ -2 $ & $ 0 $ & $ 0 $ & $ -1 $ & $ 1 $ & $ 2 $ & $ 0 $ & $ -2 $ & $ 0 $ & $ -1 $ & $ 1 $ \\
+$ E_{2g} $ & $ 2 $ & $ 2 $ & $ 0 $ & $ 0 $ & $ -1 $ & $ -1 $ & $ 2 $ & $ 0 $ & $ 2 $ & $ 0 $ & $ -1 $ & $ -1 $ \\
+$ A_{1u} $ & $ 1 $ & $ 1 $ & $ 1 $ & $ 1 $ & $ 1 $ & $ 1 $ & $ -1 $ & $ -1 $ & $ -1 $ & $ -1 $ & $ -1 $ & $ -1 $ \\
+$ A_{2u} $ & $ 1 $ & $ 1 $ & $ -1 $ & $ -1 $ & $ 1 $ & $ 1 $ & $ -1 $ & $ 1 $ & $ -1 $ & $ 1 $ & $ -1 $ & $ -1 $ \\
+$ B_{1u} $ & $ 1 $ & $ -1 $ & $ -1 $ & $ 1 $ & $ 1 $ & $ -1 $ & $ -1 $ & $ 1 $ & $ 1 $ & $ -1 $ & $ -1 $ & $ 1 $ \\
+$ B_{2u} $ & $ 1 $ & $ -1 $ & $ 1 $ & $ -1 $ & $ 1 $ & $ -1 $ & $ -1 $ & $ -1 $ & $ 1 $ & $ 1 $ & $ -1 $ & $ 1 $ \\
+$ E_{1u} $ & $ 2 $ & $ -2 $ & $ 0 $ & $ 0 $ & $ -1 $ & $ 1 $ & $ -2 $ & $ 0 $ & $ 2 $ & $ 0 $ & $ 1 $ & $ -1 $ \\
+$ E_{2u} $ & $ 2 $ & $ 2 $ & $ 0 $ & $ 0 $ & $ -1 $ & $ -1 $ & $ -2 $ & $ 0 $ & $ -2 $ & $ 0 $ & $ 1 $ & $ 1 $ \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.0}
+\begin{longtable}{cccccc}
+\caption{Parity conversion.}
+ \\
+ \hline \hline
+ & $\leftrightarrow$ & $\leftrightarrow$ & $\leftrightarrow$ & $\leftrightarrow$ & $\leftrightarrow$ \\ \hline \endfirsthead
+
+\multicolumn{5}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+ & $\leftrightarrow$ & $\leftrightarrow$ & $\leftrightarrow$ & $\leftrightarrow$ & $\leftrightarrow$ \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{5}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{5}{r}{} \\ \endlastfoot
+
+ & $ A_{1g}\,\,(A_{1u}) $ & $ A_{2g}\,\,(A_{2u}) $ & $ B_{1g}\,\,(B_{1u}) $ & $ B_{2g}\,\,(B_{2u}) $ & $ E_{1g}\,\,(E_{1u}) $ \\
+& $ E_{2g}\,\,(E_{2u}) $ & $ A_{1u}\,\,(A_{1g}) $ & $ A_{2u}\,\,(A_{2g}) $ & $ B_{1u}\,\,(B_{1g}) $ & $ B_{2u}\,\,(B_{2g}) $ \\
+& $ E_{1u}\,\,(E_{1g}) $ & $ E_{2u}\,\,(E_{2g}) $ & $  $ & $  $ & $  $ \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.0}
+\begin{longtable}{c|cccccccccccc}
+\caption{Symmetric product, $[\Gamma\otimes\Gamma']_+.$}
+ \\
+ \hline \hline
+ & $ A_{1g} $ & $ A_{2g} $ & $ B_{1g} $ & $ B_{2g} $ & $ E_{1g} $ & $ E_{2g} $ & $ A_{1u} $ & $ A_{2u} $ & $ B_{1u} $ & $ B_{2u} $ & $ E_{1u} $ & $ E_{2u} $ \\ \hline \endfirsthead
+
+\multicolumn{12}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+ & $ A_{1g} $ & $ A_{2g} $ & $ B_{1g} $ & $ B_{2g} $ & $ E_{1g} $ & $ E_{2g} $ & $ A_{1u} $ & $ A_{2u} $ & $ B_{1u} $ & $ B_{2u} $ & $ E_{1u} $ & $ E_{2u} $ \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{12}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{12}{r}{} \\ \endlastfoot
+
+$ A_{1g} $ & $ A_{1g} $ & $ A_{2g} $ & $ B_{1g} $ & $ B_{2g} $ & $ E_{1g} $ & $ E_{2g} $ & $ A_{1u} $ & $ A_{2u} $ & $ B_{1u} $ & $ B_{2u} $ & $ E_{1u} $ & $ E_{2u} $ \\
+$ A_{2g} $ & $  $ & $ A_{1g} $ & $ B_{2g} $ & $ B_{1g} $ & $ E_{1g} $ & $ E_{2g} $ & $ A_{2u} $ & $ A_{1u} $ & $ B_{2u} $ & $ B_{1u} $ & $ E_{1u} $ & $ E_{2u} $ \\
+$ B_{1g} $ & $  $ & $  $ & $ A_{1g} $ & $ A_{2g} $ & $ E_{2g} $ & $ E_{1g} $ & $ B_{1u} $ & $ B_{2u} $ & $ A_{1u} $ & $ A_{2u} $ & $ E_{2u} $ & $ E_{1u} $ \\
+$ B_{2g} $ & $  $ & $  $ & $  $ & $ A_{1g} $ & $ E_{2g} $ & $ E_{1g} $ & $ B_{2u} $ & $ B_{1u} $ & $ A_{2u} $ & $ A_{1u} $ & $ E_{2u} $ & $ E_{1u} $ \\
+$ E_{1g} $ & $  $ & $  $ & $  $ & $  $ & $ A_{1g} + E_{2g} $ & $ B_{1g} + B_{2g} + E_{1g} $ & $ E_{1u} $ & $ E_{1u} $ & $ E_{2u} $ & $ E_{2u} $ & $ A_{1u} + A_{2u} + E_{2u} $ & $ B_{1u} + B_{2u} + E_{1u} $ \\
+$ E_{2g} $ & $  $ & $  $ & $  $ & $  $ & $  $ & $ A_{1g} + E_{2g} $ & $ E_{2u} $ & $ E_{2u} $ & $ E_{1u} $ & $ E_{1u} $ & $ B_{1u} + B_{2u} + E_{1u} $ & $ A_{1u} + A_{2u} + E_{2u} $ \\
+$ A_{1u} $ & $  $ & $  $ & $  $ & $  $ & $  $ & $  $ & $ A_{1g} $ & $ A_{2g} $ & $ B_{1g} $ & $ B_{2g} $ & $ E_{1g} $ & $ E_{2g} $ \\
+$ A_{2u} $ & $  $ & $  $ & $  $ & $  $ & $  $ & $  $ & $  $ & $ A_{1g} $ & $ B_{2g} $ & $ B_{1g} $ & $ E_{1g} $ & $ E_{2g} $ \\
+$ B_{1u} $ & $  $ & $  $ & $  $ & $  $ & $  $ & $  $ & $  $ & $  $ & $ A_{1g} $ & $ A_{2g} $ & $ E_{2g} $ & $ E_{1g} $ \\
+$ B_{2u} $ & $  $ & $  $ & $  $ & $  $ & $  $ & $  $ & $  $ & $  $ & $  $ & $ A_{1g} $ & $ E_{2g} $ & $ E_{1g} $ \\
+$ E_{1u} $ & $  $ & $  $ & $  $ & $  $ & $  $ & $  $ & $  $ & $  $ & $  $ & $  $ & $ A_{1g} + E_{2g} $ & $ B_{1g} + B_{2g} + E_{1g} $ \\
+$ E_{2u} $ & $  $ & $  $ & $  $ & $  $ & $  $ & $  $ & $  $ & $  $ & $  $ & $  $ & $  $ & $ A_{1g} + E_{2g} $ \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.0}
+\begin{longtable}{ccccccccccccc}
+\caption{Anti-symmetric product, $[\Gamma\otimes\Gamma]_-$.}
+ \\
+ \hline \hline
+ & $ A_{1g} $ & $ A_{2g} $ & $ B_{1g} $ & $ B_{2g} $ & $ E_{1g} $ & $ E_{2g} $ & $ A_{1u} $ & $ A_{2u} $ & $ B_{1u} $ & $ B_{2u} $ & $ E_{1u} $ & $ E_{2u} $ \\ \hline \endfirsthead
+
+\multicolumn{12}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+ & $ A_{1g} $ & $ A_{2g} $ & $ B_{1g} $ & $ B_{2g} $ & $ E_{1g} $ & $ E_{2g} $ & $ A_{1u} $ & $ A_{2u} $ & $ B_{1u} $ & $ B_{2u} $ & $ E_{1u} $ & $ E_{2u} $ \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{12}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{12}{r}{} \\ \endlastfoot
+
+$  $ & $ - $ & $ - $ & $ - $ & $ - $ & $ A_{2g} $ & $ A_{2g} $ & $ - $ & $ - $ & $ - $ & $ - $ & $ A_{2g} $ & $ A_{2g} $ \\
+\end{longtable}
+\end{center}
+
+ \hfil \hrule height 1mm width \textwidth \hfil
+
+{
+\scriptsize
+\begin{center}
+\renewcommand{\arraystretch}{1.7}
+\begin{longtable}{ccccccccc}
+\caption{Virtual-cluster sites.}
+ \\
+ \hline \hline
+ & No. & position & No. & position & No. & position & No. & position \\ \hline \endfirsthead
+
+\multicolumn{8}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+ & No. & position & No. & position & No. & position & No. & position \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{8}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{8}{r}{} \\ \endlastfoot
+
+ & $ 1 $ & $ \begin{pmatrix} 1 + \sqrt{3} & -1 + \sqrt{3} & 1 \end{pmatrix} $ & $ 2 $ & $ \begin{pmatrix} - \sqrt{3} - 1 & 1 - \sqrt{3} & 1 \end{pmatrix} $ & $ 3 $ & $ \begin{pmatrix} 2 & 1 - \sqrt{3} & -1 \end{pmatrix} $ & $ 4 $ & $ \begin{pmatrix} - \sqrt{3} - 1 & -2 & -1 \end{pmatrix} $ \\
+& $ 5 $ & $ \begin{pmatrix} -1 + \sqrt{3} & 1 + \sqrt{3} & -1 \end{pmatrix} $ & $ 6 $ & $ \begin{pmatrix} -2 & -1 + \sqrt{3} & -1 \end{pmatrix} $ & $ 7 $ & $ \begin{pmatrix} 1 + \sqrt{3} & 2 & -1 \end{pmatrix} $ & $ 8 $ & $ \begin{pmatrix} 1 - \sqrt{3} & - \sqrt{3} - 1 & -1 \end{pmatrix} $ \\
+& $ 9 $ & $ \begin{pmatrix} 1 - \sqrt{3} & 2 & 1 \end{pmatrix} $ & $ 10 $ & $ \begin{pmatrix} -2 & - \sqrt{3} - 1 & 1 \end{pmatrix} $ & $ 11 $ & $ \begin{pmatrix} 2 & 1 + \sqrt{3} & 1 \end{pmatrix} $ & $ 12 $ & $ \begin{pmatrix} -1 + \sqrt{3} & -2 & 1 \end{pmatrix} $ \\
+& $ 13 $ & $ \begin{pmatrix} - \sqrt{3} - 1 & 1 - \sqrt{3} & -1 \end{pmatrix} $ & $ 14 $ & $ \begin{pmatrix} -2 & -1 + \sqrt{3} & 1 \end{pmatrix} $ & $ 15 $ & $ \begin{pmatrix} 1 + \sqrt{3} & 2 & 1 \end{pmatrix} $ & $ 16 $ & $ \begin{pmatrix} 1 - \sqrt{3} & - \sqrt{3} - 1 & 1 \end{pmatrix} $ \\
+& $ 17 $ & $ \begin{pmatrix} 1 + \sqrt{3} & -1 + \sqrt{3} & -1 \end{pmatrix} $ & $ 18 $ & $ \begin{pmatrix} 2 & 1 - \sqrt{3} & 1 \end{pmatrix} $ & $ 19 $ & $ \begin{pmatrix} - \sqrt{3} - 1 & -2 & 1 \end{pmatrix} $ & $ 20 $ & $ \begin{pmatrix} -1 + \sqrt{3} & 1 + \sqrt{3} & 1 \end{pmatrix} $ \\
+& $ 21 $ & $ \begin{pmatrix} -1 + \sqrt{3} & -2 & -1 \end{pmatrix} $ & $ 22 $ & $ \begin{pmatrix} 2 & 1 + \sqrt{3} & -1 \end{pmatrix} $ & $ 23 $ & $ \begin{pmatrix} -2 & - \sqrt{3} - 1 & -1 \end{pmatrix} $ & $ 24 $ & $ \begin{pmatrix} 1 - \sqrt{3} & 2 & -1 \end{pmatrix} $ \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.7}
+\begin{longtable}{ccccccccccc}
+\caption{Virtual-cluster basis.}
+ \\
+ \hline \hline
+symbol & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\ \hline \endfirsthead
+
+\multicolumn{10}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+symbol & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{10}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{10}{r}{} \\ \endlastfoot
+
+$\mathbb{Q}_{0}^{(A_{1g})}$ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ \\
+& $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ \\
+& $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $  $ & $  $ & $  $ & $  $ & $  $ & $  $ \\ \hline
+$\mathbb{Q}_{1}^{(A_{2u})}$ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ \\
+& $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ \\
+& $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $  $ & $  $ & $  $ & $  $ & $  $ & $  $ \\ \hline
+$\mathbb{Q}_{1,0}^{(E_{1u})}$ & $ \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ - \frac{\sqrt{2}}{8} - \frac{\sqrt{6}}{24} $ & $ \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{2}}{8} + \frac{\sqrt{6}}{24} $ & $ - \frac{\sqrt{2}}{8} - \frac{\sqrt{6}}{24} $ & $ \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{2}}{8} + \frac{\sqrt{6}}{24} $ \\
+& $ - \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{2}}{8} - \frac{\sqrt{6}}{24} $ & $ - \frac{\sqrt{2}}{8} - \frac{\sqrt{6}}{24} $ & $ \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{2}}{8} + \frac{\sqrt{6}}{24} $ \\
+& $ \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ - \frac{\sqrt{2}}{8} + \frac{\sqrt{6}}{24} $ & $ - \frac{\sqrt{6}}{12} $ & $  $ & $  $ & $  $ & $  $ & $  $ & $  $ \\ \hline
+$\mathbb{Q}_{1,1}^{(E_{1u})}$ & $ - \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ - \frac{\sqrt{2}}{8} + \frac{\sqrt{6}}{24} $ & $ - \frac{\sqrt{2}}{8} + \frac{\sqrt{6}}{24} $ & $ - \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ - \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{2}}{8} - \frac{\sqrt{6}}{24} $ & $ \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{2}}{8} - \frac{\sqrt{6}}{24} $ \\
+& $ \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{2}}{8} + \frac{\sqrt{6}}{24} $ & $ - \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{2}}{8} - \frac{\sqrt{6}}{24} $ & $ - \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ - \frac{\sqrt{2}}{8} + \frac{\sqrt{6}}{24} $ & $ - \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ \\
+& $ - \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ - \frac{\sqrt{2}}{8} - \frac{\sqrt{6}}{24} $ & $ \frac{\sqrt{6}}{12} $ & $  $ & $  $ & $  $ & $  $ & $  $ & $  $ \\ \hline
+$\mathbb{Q}_{2,0}^{(E_{1g})}$ & $ \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ - \frac{\sqrt{2}}{8} - \frac{\sqrt{6}}{24} $ & $ - \frac{\sqrt{2}}{8} - \frac{\sqrt{6}}{24} $ & $ \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{2}}{8} + \frac{\sqrt{6}}{24} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{2}}{8} + \frac{\sqrt{6}}{24} $ \\
+& $ - \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ - \frac{\sqrt{2}}{8} - \frac{\sqrt{6}}{24} $ & $ \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ - \frac{\sqrt{2}}{8} - \frac{\sqrt{6}}{24} $ & $ \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{2}}{8} + \frac{\sqrt{6}}{24} $ \\
+& $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{2}}{8} + \frac{\sqrt{6}}{24} $ & $ - \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ \frac{\sqrt{6}}{12} $ & $  $ & $  $ & $  $ & $  $ & $  $ & $  $ \\ \hline
+$\mathbb{Q}_{2,1}^{(E_{1g})}$ & $ - \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ - \frac{\sqrt{2}}{8} + \frac{\sqrt{6}}{24} $ & $ - \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{2}}{8} - \frac{\sqrt{6}}{24} $ & $ - \frac{\sqrt{2}}{8} + \frac{\sqrt{6}}{24} $ & $ - \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{2}}{8} - \frac{\sqrt{6}}{24} $ \\
+& $ \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ - \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{2}}{8} - \frac{\sqrt{6}}{24} $ & $ - \frac{\sqrt{2}}{8} + \frac{\sqrt{6}}{24} $ & $ - \frac{\sqrt{2}}{8} + \frac{\sqrt{6}}{24} $ & $ - \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ \\
+& $ \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{2}}{8} - \frac{\sqrt{6}}{24} $ & $ \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ - \frac{\sqrt{6}}{12} $ & $  $ & $  $ & $  $ & $  $ & $  $ & $  $ \\ \hline
+$\mathbb{Q}_{2,0}^{(E_{2g})}$ & $ \frac{1}{4} $ & $ \frac{1}{4} $ & $ \frac{1}{4} $ & $ 0 $ & $ - \frac{1}{4} $ & $ \frac{1}{4} $ & $ 0 $ & $ - \frac{1}{4} $ & $ 0 $ & $ - \frac{1}{4} $ \\
+& $ - \frac{1}{4} $ & $ 0 $ & $ \frac{1}{4} $ & $ \frac{1}{4} $ & $ 0 $ & $ - \frac{1}{4} $ & $ \frac{1}{4} $ & $ \frac{1}{4} $ & $ 0 $ & $ - \frac{1}{4} $ \\
+& $ 0 $ & $ - \frac{1}{4} $ & $ - \frac{1}{4} $ & $ 0 $ & $  $ & $  $ & $  $ & $  $ & $  $ & $  $ \\ \hline
+$\mathbb{Q}_{2,1}^{(E_{2g})}$ & $ - \frac{\sqrt{3}}{12} $ & $ - \frac{\sqrt{3}}{12} $ & $ \frac{\sqrt{3}}{12} $ & $ - \frac{\sqrt{3}}{6} $ & $ \frac{\sqrt{3}}{12} $ & $ \frac{\sqrt{3}}{12} $ & $ - \frac{\sqrt{3}}{6} $ & $ \frac{\sqrt{3}}{12} $ & $ \frac{\sqrt{3}}{6} $ & $ - \frac{\sqrt{3}}{12} $ \\
+& $ - \frac{\sqrt{3}}{12} $ & $ \frac{\sqrt{3}}{6} $ & $ - \frac{\sqrt{3}}{12} $ & $ \frac{\sqrt{3}}{12} $ & $ - \frac{\sqrt{3}}{6} $ & $ \frac{\sqrt{3}}{12} $ & $ - \frac{\sqrt{3}}{12} $ & $ \frac{\sqrt{3}}{12} $ & $ - \frac{\sqrt{3}}{6} $ & $ \frac{\sqrt{3}}{12} $ \\
+& $ \frac{\sqrt{3}}{6} $ & $ - \frac{\sqrt{3}}{12} $ & $ - \frac{\sqrt{3}}{12} $ & $ \frac{\sqrt{3}}{6} $ & $  $ & $  $ & $  $ & $  $ & $  $ & $  $ \\ \hline
+$\mathbb{Q}_{3}^{(B_{1u})}$ & $ \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ \\
+& $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ \\
+& $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $  $ & $  $ & $  $ & $  $ & $  $ & $  $ \\ \hline
+$\mathbb{Q}_{3}^{(B_{2u})}$ & $ \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ \\
+& $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ \\
+& $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $  $ & $  $ & $  $ & $  $ & $  $ & $  $ \\ \hline
+$\mathbb{Q}_{3,0}^{(E_{2u})}$ & $ \frac{1}{4} $ & $ \frac{1}{4} $ & $ - \frac{1}{4} $ & $ 0 $ & $ \frac{1}{4} $ & $ - \frac{1}{4} $ & $ 0 $ & $ \frac{1}{4} $ & $ 0 $ & $ - \frac{1}{4} $ \\
+& $ - \frac{1}{4} $ & $ 0 $ & $ - \frac{1}{4} $ & $ \frac{1}{4} $ & $ 0 $ & $ - \frac{1}{4} $ & $ - \frac{1}{4} $ & $ \frac{1}{4} $ & $ 0 $ & $ - \frac{1}{4} $ \\
+& $ 0 $ & $ \frac{1}{4} $ & $ \frac{1}{4} $ & $ 0 $ & $  $ & $  $ & $  $ & $  $ & $  $ & $  $ \\ \hline
+$\mathbb{Q}_{3,1}^{(E_{2u})}$ & $ - \frac{\sqrt{3}}{12} $ & $ - \frac{\sqrt{3}}{12} $ & $ - \frac{\sqrt{3}}{12} $ & $ \frac{\sqrt{3}}{6} $ & $ - \frac{\sqrt{3}}{12} $ & $ - \frac{\sqrt{3}}{12} $ & $ \frac{\sqrt{3}}{6} $ & $ - \frac{\sqrt{3}}{12} $ & $ \frac{\sqrt{3}}{6} $ & $ - \frac{\sqrt{3}}{12} $ \\
+& $ - \frac{\sqrt{3}}{12} $ & $ \frac{\sqrt{3}}{6} $ & $ \frac{\sqrt{3}}{12} $ & $ \frac{\sqrt{3}}{12} $ & $ - \frac{\sqrt{3}}{6} $ & $ \frac{\sqrt{3}}{12} $ & $ \frac{\sqrt{3}}{12} $ & $ \frac{\sqrt{3}}{12} $ & $ - \frac{\sqrt{3}}{6} $ & $ \frac{\sqrt{3}}{12} $ \\
+& $ - \frac{\sqrt{3}}{6} $ & $ \frac{\sqrt{3}}{12} $ & $ \frac{\sqrt{3}}{12} $ & $ - \frac{\sqrt{3}}{6} $ & $  $ & $  $ & $  $ & $  $ & $  $ & $  $ \\ \hline
+$\mathbb{Q}_{4}^{(B_{1g})}$ & $ \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ \\
+& $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ \\
+& $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $  $ & $  $ & $  $ & $  $ & $  $ & $  $ \\ \hline
+$\mathbb{Q}_{4}^{(B_{2g})}$ & $ \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ \\
+& $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ \\
+& $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $  $ & $  $ & $  $ & $  $ & $  $ & $  $ \\ \hline
+$\mathbb{Q}_{4,0}^{(E_{2g},1)}$ & $ \frac{\sqrt{3}}{12} $ & $ \frac{\sqrt{3}}{12} $ & $ \frac{\sqrt{3}}{12} $ & $ - \frac{\sqrt{3}}{6} $ & $ \frac{\sqrt{3}}{12} $ & $ \frac{\sqrt{3}}{12} $ & $ - \frac{\sqrt{3}}{6} $ & $ \frac{\sqrt{3}}{12} $ & $ - \frac{\sqrt{3}}{6} $ & $ \frac{\sqrt{3}}{12} $ \\
+& $ \frac{\sqrt{3}}{12} $ & $ - \frac{\sqrt{3}}{6} $ & $ \frac{\sqrt{3}}{12} $ & $ \frac{\sqrt{3}}{12} $ & $ - \frac{\sqrt{3}}{6} $ & $ \frac{\sqrt{3}}{12} $ & $ \frac{\sqrt{3}}{12} $ & $ \frac{\sqrt{3}}{12} $ & $ - \frac{\sqrt{3}}{6} $ & $ \frac{\sqrt{3}}{12} $ \\
+& $ - \frac{\sqrt{3}}{6} $ & $ \frac{\sqrt{3}}{12} $ & $ \frac{\sqrt{3}}{12} $ & $ - \frac{\sqrt{3}}{6} $ & $  $ & $  $ & $  $ & $  $ & $  $ & $  $ \\ \hline
+$\mathbb{Q}_{4,1}^{(E_{2g},1)}$ & $ \frac{1}{4} $ & $ \frac{1}{4} $ & $ - \frac{1}{4} $ & $ 0 $ & $ \frac{1}{4} $ & $ - \frac{1}{4} $ & $ 0 $ & $ \frac{1}{4} $ & $ 0 $ & $ - \frac{1}{4} $ \\
+& $ - \frac{1}{4} $ & $ 0 $ & $ \frac{1}{4} $ & $ - \frac{1}{4} $ & $ 0 $ & $ \frac{1}{4} $ & $ \frac{1}{4} $ & $ - \frac{1}{4} $ & $ 0 $ & $ \frac{1}{4} $ \\
+& $ 0 $ & $ - \frac{1}{4} $ & $ - \frac{1}{4} $ & $ 0 $ & $  $ & $  $ & $  $ & $  $ & $  $ & $  $ \\ \hline
+$\mathbb{Q}_{5,0}^{(E_{1u},1)}$ & $ - \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ - \frac{\sqrt{2}}{8} + \frac{\sqrt{6}}{24} $ & $ - \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{2}}{8} - \frac{\sqrt{6}}{24} $ & $ - \frac{\sqrt{2}}{8} + \frac{\sqrt{6}}{24} $ & $ - \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{2}}{8} - \frac{\sqrt{6}}{24} $ \\
+& $ \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{2}}{8} + \frac{\sqrt{6}}{24} $ & $ - \frac{\sqrt{2}}{8} + \frac{\sqrt{6}}{24} $ & $ - \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ - \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ - \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{2}}{8} - \frac{\sqrt{6}}{24} $ \\
+& $ - \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ - \frac{\sqrt{2}}{8} - \frac{\sqrt{6}}{24} $ & $ \frac{\sqrt{6}}{12} $ & $  $ & $  $ & $  $ & $  $ & $  $ & $  $ \\ \hline
+$\mathbb{Q}_{5,1}^{(E_{1u},1)}$ & $ - \frac{\sqrt{2}}{8} - \frac{\sqrt{6}}{24} $ & $ \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{2}}{8} + \frac{\sqrt{6}}{24} $ & $ - \frac{\sqrt{2}}{8} - \frac{\sqrt{6}}{24} $ & $ \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ \\
+& $ - \frac{\sqrt{2}}{8} + \frac{\sqrt{6}}{24} $ & $ - \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ - \frac{\sqrt{2}}{8} - \frac{\sqrt{6}}{24} $ & $ \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ - \frac{\sqrt{2}}{8} - \frac{\sqrt{6}}{24} $ & $ \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{2}}{8} + \frac{\sqrt{6}}{24} $ \\
+& $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{2}}{8} + \frac{\sqrt{6}}{24} $ & $ - \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ \frac{\sqrt{6}}{12} $ & $  $ & $  $ & $  $ & $  $ & $  $ & $  $ \\ \hline
+$\mathbb{Q}_{5,0}^{(E_{2u},1)}$ & $ \frac{\sqrt{3}}{12} $ & $ \frac{\sqrt{3}}{12} $ & $ - \frac{\sqrt{3}}{12} $ & $ \frac{\sqrt{3}}{6} $ & $ - \frac{\sqrt{3}}{12} $ & $ - \frac{\sqrt{3}}{12} $ & $ \frac{\sqrt{3}}{6} $ & $ - \frac{\sqrt{3}}{12} $ & $ - \frac{\sqrt{3}}{6} $ & $ \frac{\sqrt{3}}{12} $ \\
+& $ \frac{\sqrt{3}}{12} $ & $ - \frac{\sqrt{3}}{6} $ & $ - \frac{\sqrt{3}}{12} $ & $ \frac{\sqrt{3}}{12} $ & $ - \frac{\sqrt{3}}{6} $ & $ \frac{\sqrt{3}}{12} $ & $ - \frac{\sqrt{3}}{12} $ & $ \frac{\sqrt{3}}{12} $ & $ - \frac{\sqrt{3}}{6} $ & $ \frac{\sqrt{3}}{12} $ \\
+& $ \frac{\sqrt{3}}{6} $ & $ - \frac{\sqrt{3}}{12} $ & $ - \frac{\sqrt{3}}{12} $ & $ \frac{\sqrt{3}}{6} $ & $  $ & $  $ & $  $ & $  $ & $  $ & $  $ \\ \hline
+$\mathbb{Q}_{5,1}^{(E_{2u},1)}$ & $ \frac{1}{4} $ & $ \frac{1}{4} $ & $ \frac{1}{4} $ & $ 0 $ & $ - \frac{1}{4} $ & $ \frac{1}{4} $ & $ 0 $ & $ - \frac{1}{4} $ & $ 0 $ & $ - \frac{1}{4} $ \\
+& $ - \frac{1}{4} $ & $ 0 $ & $ - \frac{1}{4} $ & $ - \frac{1}{4} $ & $ 0 $ & $ \frac{1}{4} $ & $ - \frac{1}{4} $ & $ - \frac{1}{4} $ & $ 0 $ & $ \frac{1}{4} $ \\
+& $ 0 $ & $ \frac{1}{4} $ & $ \frac{1}{4} $ & $ 0 $ & $  $ & $  $ & $  $ & $  $ & $  $ & $  $ \\ \hline
+$\mathbb{Q}_{6}^{(A_{2g})}$ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ \\
+& $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ \\
+& $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $  $ & $  $ & $  $ & $  $ & $  $ & $  $ \\ \hline
+$\mathbb{Q}_{6,0}^{(E_{1g},1)}$ & $ - \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ - \frac{\sqrt{2}}{8} + \frac{\sqrt{6}}{24} $ & $ - \frac{\sqrt{2}}{8} + \frac{\sqrt{6}}{24} $ & $ - \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ - \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{2}}{8} - \frac{\sqrt{6}}{24} $ & $ \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{2}}{8} - \frac{\sqrt{6}}{24} $ \\
+& $ \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ - \frac{\sqrt{2}}{8} + \frac{\sqrt{6}}{24} $ & $ - \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ - \frac{\sqrt{2}}{8} + \frac{\sqrt{6}}{24} $ & $ - \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{2}}{8} - \frac{\sqrt{6}}{24} $ \\
+& $ \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{2}}{8} - \frac{\sqrt{6}}{24} $ & $ \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ - \frac{\sqrt{6}}{12} $ & $  $ & $  $ & $  $ & $  $ & $  $ & $  $ \\ \hline
+$\mathbb{Q}_{6,1}^{(E_{1g},1)}$ & $ - \frac{\sqrt{2}}{8} - \frac{\sqrt{6}}{24} $ & $ \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ - \frac{\sqrt{2}}{8} - \frac{\sqrt{6}}{24} $ & $ \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{2}}{8} + \frac{\sqrt{6}}{24} $ & $ \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ \\
+& $ - \frac{\sqrt{2}}{8} + \frac{\sqrt{6}}{24} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{2}}{8} - \frac{\sqrt{6}}{24} $ & $ - \frac{\sqrt{2}}{8} - \frac{\sqrt{6}}{24} $ & $ \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{2}}{8} + \frac{\sqrt{6}}{24} $ \\
+& $ \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{24} + \frac{\sqrt{2}}{8} $ & $ - \frac{\sqrt{2}}{8} + \frac{\sqrt{6}}{24} $ & $ - \frac{\sqrt{6}}{12} $ & $  $ & $  $ & $  $ & $  $ & $  $ & $  $ \\ \hline
+$\mathbb{Q}_{7}^{(A_{1u})}$ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ \\
+& $ \frac{\sqrt{6}}{12} $ & $ \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ \\
+& $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $ - \frac{\sqrt{6}}{12} $ & $  $ & $  $ & $  $ & $  $ & $  $ & $  $ \\
+\end{longtable}
+\end{center}
+}
+\end{itemize}
+
+\end{document}

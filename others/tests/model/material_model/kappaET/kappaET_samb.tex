@@ -1,0 +1,721 @@
+\documentclass[fleqn,10pt,landscape]{article}
+\special{papersize=\the\paperwidth,\the\paperheight}
+
+%%% package
+
+\usepackage[usenames]{color}
+\usepackage{amsmath}
+\usepackage{breqn}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{enumerate}
+\usepackage{braket}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+%%% layout setting
+
+\paperwidth=279.4truemm
+\paperheight=215.9truemm
+\textwidth=228.59999999999997truemm
+\textheight=158.10000000000002truemm
+\oddsidemargin=0truemm
+\topmargin=0truemm
+\footskip=7truemm
+
+%%% fixed
+
+\hoffset=0truemm
+\voffset=0truemm
+\headheight=0truemm
+\headsep=0truemm
+\marginparsep=0truemm
+\marginparwidth=0truemm
+
+%%% main text
+
+\begin{document}
+
+\setcounter{MaxMatrixCols}{16}
+
+\setlength{\baselineskip}{16pt}
+\footnotesize
+\begin{center}
+\LARGE
+SAMB for ``\texttt{kappaET}''
+\end{center}
+\begin{flushright}
+Generated on 2023-05-24 22:53 by MultiPie 1.1.1
+\end{flushright}
+\vspace{1cm}
+
+
+ \hfil \hrule height 1mm width \textwidth \hfil
+
+\begin{itemize}
+\item Group: No. 32\quad$C_{2v}^{8}$\quad$Pba2$\quad[ orthorhombic ]
+
+\item Associated point group: No. 7\quad$C_{2v}$\quad$mm2$\quad[ orthorhombic ]
+
+\vspace{5mm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% generation condition.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Generation condition
+
+\quad - model type: \texttt{tight_binding}
+
+\quad - time-reversal type: \texttt{electric}
+
+\quad - irrep: \texttt{[A1]}
+
+\quad - \texttt{spinful}
+
+
+ \hfil \hrule height 1mm width \textwidth \hfil
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% unit cell.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Unit cell:
+
+\quad $a=1.0,\,\, b=1.2,\,\, c=1.0,\,\, \alpha=90.0,\,\, \beta=90.0,\,\, \gamma=90.0$
+
+\item Lattice vectors:
+
+\quad $\bm{a}_1=\begin{pmatrix} 1.0 & 0 & 0 \end{pmatrix}$
+
+\quad $\bm{a}_2=\begin{pmatrix} 0 & 1.2 & 0 \end{pmatrix}$
+
+\quad $\bm{a}_3=\begin{pmatrix} 0 & 0 & 1.0 \end{pmatrix}$
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% k path.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{longtable}{c|cc|cc}
+\caption{High-symmetry line: $\Gamma$-X.}
+ \\
+ \hline \hline
+ & symbol & position & symbol & position \\ \hline \endfirsthead
+
+\multicolumn{4}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+ & symbol & position & symbol & position \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{4}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{4}{r}{} \\ \endlastfoot
+
+ & $\Gamma$ & $\begin{pmatrix} 0 & 0 & 0 \end{pmatrix}$ & X & $\begin{pmatrix} \frac{1}{2} & 0 & 0 \end{pmatrix}$ \\
+\end{longtable}
+\end{center}
+
+ \hfil \hrule height 1mm width \textwidth \hfil
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ket hilbert space.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Kets: dimension = 8
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{longtable}{c|cc|cc}
+\caption{Hilbert space for full matrix.}
+ \\
+ \hline \hline
+ & No. & ket & No. & ket \\ \hline \endfirsthead
+
+\multicolumn{4}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+ & No. & ket & No. & ket \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{4}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{4}{r}{} \\ \endlastfoot
+
+ & 1 & $(s,\uparrow)$@A$_{1}$ & 2 & $(s,\downarrow)$@A$_{1}$ \\
+\end{longtable}
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% sites in unit cell.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Sites in (primitive) unit cell:
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{longtable}{cc|c|l}
+\caption{Site-clusters.}
+ \\
+ \hline \hline
+ & site & position & mapping \\ \hline \endfirsthead
+
+\multicolumn{3}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+ & site & position & mapping \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{3}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{3}{r}{} \\ \endlastfoot
+
+S$_{1}$ & A$_1$ & $\begin{pmatrix} \frac{9}{10} & \frac{1}{20} & 0 \end{pmatrix}$ & [1] \\
+& A$_2$ & $\begin{pmatrix} \frac{1}{10} & \frac{19}{20} & 0 \end{pmatrix}$ & [2] \\
+& A$_3$ & $\begin{pmatrix} \frac{2}{5} & \frac{9}{20} & 0 \end{pmatrix}$ & [3] \\
+& A$_4$ & $\begin{pmatrix} \frac{3}{5} & \frac{11}{20} & 0 \end{pmatrix}$ & [4] \\
+\end{longtable}
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% bonds in unit cell.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Bonds in (primitive) unit cell:
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{longtable}{cc|cc|c|c|c|l}
+\caption{Bond-clusters.}
+ \\
+ \hline \hline
+ & bond & tail & head & $n$ & \# & $\bm{b}@\bm{c}$ & mapping \\ \hline \endfirsthead
+
+\multicolumn{7}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+ & bond & tail & head & $n$ & \# & $\bm{b}@\bm{c}$ & mapping \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{7}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{7}{r}{} \\ \endlastfoot
+
+B$_{1}$ & b$_{1}$ & A$_{1}$ & A$_{2}$ & 1 & 1 & $\begin{pmatrix} \frac{1}{5} & - \frac{1}{10} & 0 \end{pmatrix}@\begin{pmatrix} 0 & 0 & 0 \end{pmatrix}$ & [1,-2] \\
+& b$_{2}$ & A$_{3}$ & A$_{4}$ & 1 & 1 & $\begin{pmatrix} \frac{1}{5} & \frac{1}{10} & 0 \end{pmatrix}@\begin{pmatrix} \frac{1}{2} & \frac{1}{2} & 0 \end{pmatrix}$ & [3,-4] \\ \hline
+B$_{2}$ & b$_{3}$ & A$_{1}$ & A$_{4}$ & 2 & 1 & $\begin{pmatrix} - \frac{3}{10} & \frac{1}{2} & 0 \end{pmatrix}@\begin{pmatrix} \frac{3}{4} & \frac{3}{10} & 0 \end{pmatrix}$ & [1] \\
+& b$_{4}$ & A$_{2}$ & A$_{3}$ & 2 & 1 & $\begin{pmatrix} \frac{3}{10} & - \frac{1}{2} & 0 \end{pmatrix}@\begin{pmatrix} \frac{1}{4} & \frac{7}{10} & 0 \end{pmatrix}$ & [2] \\
+& b$_{5}$ & A$_{2}$ & A$_{3}$ & 2 & 1 & $\begin{pmatrix} \frac{3}{10} & \frac{1}{2} & 0 \end{pmatrix}@\begin{pmatrix} \frac{1}{4} & \frac{1}{5} & 0 \end{pmatrix}$ & [-3] \\
+& b$_{6}$ & A$_{1}$ & A$_{4}$ & 2 & 1 & $\begin{pmatrix} - \frac{3}{10} & - \frac{1}{2} & 0 \end{pmatrix}@\begin{pmatrix} \frac{3}{4} & \frac{4}{5} & 0 \end{pmatrix}$ & [-4] \\ \hline
+B$_{3}$ & b$_{7}$ & A$_{1}$ & A$_{3}$ & 3 & 1 & $\begin{pmatrix} \frac{1}{2} & \frac{2}{5} & 0 \end{pmatrix}@\begin{pmatrix} \frac{3}{20} & \frac{1}{4} & 0 \end{pmatrix}$ & [1] \\
+& b$_{8}$ & A$_{2}$ & A$_{4}$ & 3 & 1 & $\begin{pmatrix} - \frac{1}{2} & - \frac{2}{5} & 0 \end{pmatrix}@\begin{pmatrix} \frac{17}{20} & \frac{3}{4} & 0 \end{pmatrix}$ & [2] \\
+& b$_{9}$ & A$_{1}$ & A$_{3}$ & 3 & 1 & $\begin{pmatrix} - \frac{1}{2} & \frac{2}{5} & 0 \end{pmatrix}@\begin{pmatrix} \frac{13}{20} & \frac{1}{4} & 0 \end{pmatrix}$ & [-3] \\
+& b$_{10}$ & A$_{2}$ & A$_{4}$ & 3 & 1 & $\begin{pmatrix} \frac{1}{2} & - \frac{2}{5} & 0 \end{pmatrix}@\begin{pmatrix} \frac{7}{20} & \frac{3}{4} & 0 \end{pmatrix}$ & [-4] \\
+\end{longtable}
+\end{center}
+
+ \hfil \hrule height 1mm width \textwidth \hfil
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SAMB.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item SAMB:
+
+\vspace{4mm}
+\noindent \fbox{No. {1}} $\,\,\,\hat{\mathbb{Q}}_{0}^{(A_{1})}$ [M$_{1}$,\,S$_{1}$]
+\begin{dmath*}
+\hat{\mathbb{Z}}_{1}=\mathbb{X}_{1}[\mathbb{Q}_{0}^{(a,A_{1})}] \otimes\mathbb{Y}_{1}[\mathbb{Q}_{0}^{(s,A_{1})}]
+\end{dmath*}
+\begin{dmath*}
+\hat{\mathbb{Z}}_{1}(\bm{k})=\mathbb{X}_{1}[\mathbb{Q}_{0}^{(a,A_{1})}] \otimes\mathbb{U}_{1}[\mathbb{Q}_{0}^{(s,A_{1})}]
+\end{dmath*}
+\vspace{4mm}
+\noindent \fbox{No. {2}} $\,\,\,\hat{\mathbb{Q}}_{0}^{(A_{1})}$ [M$_{1}$,\,B$_{1}$]
+\begin{dmath*}
+\hat{\mathbb{Z}}_{2}=\mathbb{X}_{1}[\mathbb{Q}_{0}^{(a,A_{1})}] \otimes\mathbb{Y}_{2}[\mathbb{Q}_{0}^{(b,A_{1})}]
+\end{dmath*}
+\begin{dmath*}
+\hat{\mathbb{Z}}_{2}(\bm{k})=\frac{\mathbb{X}_{1}[\mathbb{Q}_{0}^{(a,A_{1})}] \otimes\mathbb{U}_{2}[\mathbb{Q}_{0}^{(u,A_{1})}] \otimes\mathbb{F}_{1}[\mathbb{Q}_{0}^{(k,A_{1})}]}{2} + \frac{\mathbb{X}_{1}[\mathbb{Q}_{0}^{(a,A_{1})}] \otimes\mathbb{U}_{3}[\mathbb{Q}_{2}^{(u,A_{2})}] \otimes\mathbb{F}_{2}[\mathbb{Q}_{2}^{(k,A_{2})}]}{2} - \frac{\mathbb{X}_{1}[\mathbb{Q}_{0}^{(a,A_{1})}] \otimes\mathbb{U}_{4}[\mathbb{T}_{1}^{(u,B_{1})}] \otimes\mathbb{F}_{3}[\mathbb{T}_{1}^{(k,B_{1})}]}{2} - \frac{\mathbb{X}_{1}[\mathbb{Q}_{0}^{(a,A_{1})}] \otimes\mathbb{U}_{5}[\mathbb{T}_{1}^{(u,B_{2})}] \otimes\mathbb{F}_{4}[\mathbb{T}_{1}^{(k,B_{2})}]}{2}
+\end{dmath*}
+\vspace{4mm}
+\noindent \fbox{No. {3}} $\,\,\,\hat{\mathbb{Q}}_{1}^{(A_{1})}(1,-1)$ [M$_{1}$,\,B$_{1}$]
+\begin{dmath*}
+\hat{\mathbb{Z}}_{3}=- \frac{\sqrt{2} \mathbb{X}_{3}[\mathbb{M}_{1}^{(a,B_{1})}(1,-1)] \otimes\mathbb{Y}_{3}[\mathbb{T}_{1}^{(b,B_{1})}]}{2} + \frac{\sqrt{2} \mathbb{X}_{4}[\mathbb{M}_{1}^{(a,B_{2})}(1,-1)] \otimes\mathbb{Y}_{4}[\mathbb{T}_{1}^{(b,B_{2})}]}{2}
+\end{dmath*}
+\begin{dmath*}
+\hat{\mathbb{Z}}_{3}(\bm{k})=- \frac{\sqrt{2} \mathbb{X}_{3}[\mathbb{M}_{1}^{(a,B_{1})}(1,-1)] \otimes\mathbb{U}_{2}[\mathbb{Q}_{0}^{(u,A_{1})}] \otimes\mathbb{F}_{3}[\mathbb{T}_{1}^{(k,B_{1})}]}{4} - \frac{\sqrt{2} \mathbb{X}_{3}[\mathbb{M}_{1}^{(a,B_{1})}(1,-1)] \otimes\mathbb{U}_{3}[\mathbb{Q}_{2}^{(u,A_{2})}] \otimes\mathbb{F}_{4}[\mathbb{T}_{1}^{(k,B_{2})}]}{4} - \frac{\sqrt{2} \mathbb{X}_{3}[\mathbb{M}_{1}^{(a,B_{1})}(1,-1)] \otimes\mathbb{U}_{4}[\mathbb{T}_{1}^{(u,B_{1})}] \otimes\mathbb{F}_{1}[\mathbb{Q}_{0}^{(k,A_{1})}]}{4} - \frac{\sqrt{2} \mathbb{X}_{3}[\mathbb{M}_{1}^{(a,B_{1})}(1,-1)] \otimes\mathbb{U}_{5}[\mathbb{T}_{1}^{(u,B_{2})}] \otimes\mathbb{F}_{2}[\mathbb{Q}_{2}^{(k,A_{2})}]}{4} + \frac{\sqrt{2} \mathbb{X}_{4}[\mathbb{M}_{1}^{(a,B_{2})}(1,-1)] \otimes\mathbb{U}_{2}[\mathbb{Q}_{0}^{(u,A_{1})}] \otimes\mathbb{F}_{4}[\mathbb{T}_{1}^{(k,B_{2})}]}{4} + \frac{\sqrt{2} \mathbb{X}_{4}[\mathbb{M}_{1}^{(a,B_{2})}(1,-1)] \otimes\mathbb{U}_{3}[\mathbb{Q}_{2}^{(u,A_{2})}] \otimes\mathbb{F}_{3}[\mathbb{T}_{1}^{(k,B_{1})}]}{4} + \frac{\sqrt{2} \mathbb{X}_{4}[\mathbb{M}_{1}^{(a,B_{2})}(1,-1)] \otimes\mathbb{U}_{4}[\mathbb{T}_{1}^{(u,B_{1})}] \otimes\mathbb{F}_{2}[\mathbb{Q}_{2}^{(k,A_{2})}]}{4} + \frac{\sqrt{2} \mathbb{X}_{4}[\mathbb{M}_{1}^{(a,B_{2})}(1,-1)] \otimes\mathbb{U}_{5}[\mathbb{T}_{1}^{(u,B_{2})}] \otimes\mathbb{F}_{1}[\mathbb{Q}_{0}^{(k,A_{1})}]}{4}
+\end{dmath*}
+\vspace{4mm}
+\noindent \fbox{No. {4}} $\,\,\,\hat{\mathbb{G}}_{2}^{(A_{1})}(1,-1)$ [M$_{1}$,\,B$_{1}$]
+\begin{dmath*}
+\hat{\mathbb{Z}}_{4}=\frac{\sqrt{2} \mathbb{X}_{3}[\mathbb{M}_{1}^{(a,B_{1})}(1,-1)] \otimes\mathbb{Y}_{3}[\mathbb{T}_{1}^{(b,B_{1})}]}{2} + \frac{\sqrt{2} \mathbb{X}_{4}[\mathbb{M}_{1}^{(a,B_{2})}(1,-1)] \otimes\mathbb{Y}_{4}[\mathbb{T}_{1}^{(b,B_{2})}]}{2}
+\end{dmath*}
+\begin{dmath*}
+\hat{\mathbb{Z}}_{4}(\bm{k})=\frac{\sqrt{2} \mathbb{X}_{3}[\mathbb{M}_{1}^{(a,B_{1})}(1,-1)] \otimes\mathbb{U}_{2}[\mathbb{Q}_{0}^{(u,A_{1})}] \otimes\mathbb{F}_{3}[\mathbb{T}_{1}^{(k,B_{1})}]}{4} + \frac{\sqrt{2} \mathbb{X}_{3}[\mathbb{M}_{1}^{(a,B_{1})}(1,-1)] \otimes\mathbb{U}_{3}[\mathbb{Q}_{2}^{(u,A_{2})}] \otimes\mathbb{F}_{4}[\mathbb{T}_{1}^{(k,B_{2})}]}{4} + \frac{\sqrt{2} \mathbb{X}_{3}[\mathbb{M}_{1}^{(a,B_{1})}(1,-1)] \otimes\mathbb{U}_{4}[\mathbb{T}_{1}^{(u,B_{1})}] \otimes\mathbb{F}_{1}[\mathbb{Q}_{0}^{(k,A_{1})}]}{4} + \frac{\sqrt{2} \mathbb{X}_{3}[\mathbb{M}_{1}^{(a,B_{1})}(1,-1)] \otimes\mathbb{U}_{5}[\mathbb{T}_{1}^{(u,B_{2})}] \otimes\mathbb{F}_{2}[\mathbb{Q}_{2}^{(k,A_{2})}]}{4} + \frac{\sqrt{2} \mathbb{X}_{4}[\mathbb{M}_{1}^{(a,B_{2})}(1,-1)] \otimes\mathbb{U}_{2}[\mathbb{Q}_{0}^{(u,A_{1})}] \otimes\mathbb{F}_{4}[\mathbb{T}_{1}^{(k,B_{2})}]}{4} + \frac{\sqrt{2} \mathbb{X}_{4}[\mathbb{M}_{1}^{(a,B_{2})}(1,-1)] \otimes\mathbb{U}_{3}[\mathbb{Q}_{2}^{(u,A_{2})}] \otimes\mathbb{F}_{3}[\mathbb{T}_{1}^{(k,B_{1})}]}{4} + \frac{\sqrt{2} \mathbb{X}_{4}[\mathbb{M}_{1}^{(a,B_{2})}(1,-1)] \otimes\mathbb{U}_{4}[\mathbb{T}_{1}^{(u,B_{1})}] \otimes\mathbb{F}_{2}[\mathbb{Q}_{2}^{(k,A_{2})}]}{4} + \frac{\sqrt{2} \mathbb{X}_{4}[\mathbb{M}_{1}^{(a,B_{2})}(1,-1)] \otimes\mathbb{U}_{5}[\mathbb{T}_{1}^{(u,B_{2})}] \otimes\mathbb{F}_{1}[\mathbb{Q}_{0}^{(k,A_{1})}]}{4}
+\end{dmath*}
+\vspace{4mm}
+\noindent \fbox{No. {5}} $\,\,\,\hat{\mathbb{Q}}_{0}^{(A_{1})}$ [M$_{1}$,\,B$_{2}$]
+\begin{dmath*}
+\hat{\mathbb{Z}}_{5}=\mathbb{X}_{1}[\mathbb{Q}_{0}^{(a,A_{1})}] \otimes\mathbb{Y}_{5}[\mathbb{Q}_{0}^{(b,A_{1})}]
+\end{dmath*}
+\begin{dmath*}
+\hat{\mathbb{Z}}_{5}(\bm{k})=\frac{\sqrt{2} \mathbb{X}_{1}[\mathbb{Q}_{0}^{(a,A_{1})}] \otimes\mathbb{U}_{6}[\mathbb{Q}_{0}^{(u,A_{1})}] \otimes\mathbb{F}_{5}[\mathbb{Q}_{0}^{(k,A_{1})}]}{2} - \frac{\sqrt{2} \mathbb{X}_{1}[\mathbb{Q}_{0}^{(a,A_{1})}] \otimes\mathbb{U}_{8}[\mathbb{T}_{1}^{(u,B_{1})}] \otimes\mathbb{F}_{7}[\mathbb{T}_{1}^{(k,B_{1})}]}{2}
+\end{dmath*}
+\vspace{4mm}
+\noindent \fbox{No. {6}} $\,\,\,\hat{\mathbb{Q}}_{1}^{(A_{1})}(1,-1)$ [M$_{1}$,\,B$_{2}$]
+\begin{dmath*}
+\hat{\mathbb{Z}}_{6}=- \frac{\sqrt{2} \mathbb{X}_{3}[\mathbb{M}_{1}^{(a,B_{1})}(1,-1)] \otimes\mathbb{Y}_{6}[\mathbb{T}_{1}^{(b,B_{1})}]}{2} + \frac{\sqrt{2} \mathbb{X}_{4}[\mathbb{M}_{1}^{(a,B_{2})}(1,-1)] \otimes\mathbb{Y}_{7}[\mathbb{T}_{1}^{(b,B_{2})}]}{2}
+\end{dmath*}
+\begin{dmath*}
+\hat{\mathbb{Z}}_{6}(\bm{k})=- \frac{\mathbb{X}_{3}[\mathbb{M}_{1}^{(a,B_{1})}(1,-1)] \otimes\mathbb{U}_{6}[\mathbb{Q}_{0}^{(u,A_{1})}] \otimes\mathbb{F}_{7}[\mathbb{T}_{1}^{(k,B_{1})}]}{2} - \frac{\mathbb{X}_{3}[\mathbb{M}_{1}^{(a,B_{1})}(1,-1)] \otimes\mathbb{U}_{8}[\mathbb{T}_{1}^{(u,B_{1})}] \otimes\mathbb{F}_{5}[\mathbb{Q}_{0}^{(k,A_{1})}]}{2} + \frac{\mathbb{X}_{4}[\mathbb{M}_{1}^{(a,B_{2})}(1,-1)] \otimes\mathbb{U}_{6}[\mathbb{Q}_{0}^{(u,A_{1})}] \otimes\mathbb{F}_{8}[\mathbb{T}_{1}^{(k,B_{2})}]}{2} + \frac{\mathbb{X}_{4}[\mathbb{M}_{1}^{(a,B_{2})}(1,-1)] \otimes\mathbb{U}_{8}[\mathbb{T}_{1}^{(u,B_{1})}] \otimes\mathbb{F}_{6}[\mathbb{Q}_{2}^{(k,A_{2})}]}{2}
+\end{dmath*}
+\vspace{4mm}
+\noindent \fbox{No. {7}} $\,\,\,\hat{\mathbb{G}}_{2}^{(A_{1})}(1,-1)$ [M$_{1}$,\,B$_{2}$]
+\begin{dmath*}
+\hat{\mathbb{Z}}_{7}=\frac{\sqrt{2} \mathbb{X}_{3}[\mathbb{M}_{1}^{(a,B_{1})}(1,-1)] \otimes\mathbb{Y}_{6}[\mathbb{T}_{1}^{(b,B_{1})}]}{2} + \frac{\sqrt{2} \mathbb{X}_{4}[\mathbb{M}_{1}^{(a,B_{2})}(1,-1)] \otimes\mathbb{Y}_{7}[\mathbb{T}_{1}^{(b,B_{2})}]}{2}
+\end{dmath*}
+\begin{dmath*}
+\hat{\mathbb{Z}}_{7}(\bm{k})=\frac{\mathbb{X}_{3}[\mathbb{M}_{1}^{(a,B_{1})}(1,-1)] \otimes\mathbb{U}_{6}[\mathbb{Q}_{0}^{(u,A_{1})}] \otimes\mathbb{F}_{7}[\mathbb{T}_{1}^{(k,B_{1})}]}{2} + \frac{\mathbb{X}_{3}[\mathbb{M}_{1}^{(a,B_{1})}(1,-1)] \otimes\mathbb{U}_{8}[\mathbb{T}_{1}^{(u,B_{1})}] \otimes\mathbb{F}_{5}[\mathbb{Q}_{0}^{(k,A_{1})}]}{2} + \frac{\mathbb{X}_{4}[\mathbb{M}_{1}^{(a,B_{2})}(1,-1)] \otimes\mathbb{U}_{6}[\mathbb{Q}_{0}^{(u,A_{1})}] \otimes\mathbb{F}_{8}[\mathbb{T}_{1}^{(k,B_{2})}]}{2} + \frac{\mathbb{X}_{4}[\mathbb{M}_{1}^{(a,B_{2})}(1,-1)] \otimes\mathbb{U}_{8}[\mathbb{T}_{1}^{(u,B_{1})}] \otimes\mathbb{F}_{6}[\mathbb{Q}_{2}^{(k,A_{2})}]}{2}
+\end{dmath*}
+\vspace{4mm}
+\noindent \fbox{No. {8}} $\,\,\,\hat{\mathbb{Q}}_{2}^{(A_{1},2)}(1,-1)$ [M$_{1}$,\,B$_{2}$]
+\begin{dmath*}
+\hat{\mathbb{Z}}_{8}=- \mathbb{X}_{2}[\mathbb{M}_{1}^{(a,A_{2})}(1,-1)] \otimes\mathbb{Y}_{8}[\mathbb{T}_{2}^{(b,A_{2})}]
+\end{dmath*}
+\begin{dmath*}
+\hat{\mathbb{Z}}_{8}(\bm{k})=- \frac{\sqrt{2} \mathbb{X}_{2}[\mathbb{M}_{1}^{(a,A_{2})}(1,-1)] \otimes\mathbb{U}_{7}[\mathbb{Q}_{1}^{(u,B_{2})}] \otimes\mathbb{F}_{7}[\mathbb{T}_{1}^{(k,B_{1})}]}{2} - \frac{\sqrt{2} \mathbb{X}_{2}[\mathbb{M}_{1}^{(a,A_{2})}(1,-1)] \otimes\mathbb{U}_{9}[\mathbb{T}_{2}^{(u,A_{2})}] \otimes\mathbb{F}_{5}[\mathbb{Q}_{0}^{(k,A_{1})}]}{2}
+\end{dmath*}
+\vspace{4mm}
+\noindent \fbox{No. {9}} $\,\,\,\hat{\mathbb{Q}}_{0}^{(A_{1})}$ [M$_{1}$,\,B$_{3}$]
+\begin{dmath*}
+\hat{\mathbb{Z}}_{9}=\mathbb{X}_{1}[\mathbb{Q}_{0}^{(a,A_{1})}] \otimes\mathbb{Y}_{9}[\mathbb{Q}_{0}^{(b,A_{1})}]
+\end{dmath*}
+\begin{dmath*}
+\hat{\mathbb{Z}}_{9}(\bm{k})=\frac{\sqrt{2} \mathbb{X}_{1}[\mathbb{Q}_{0}^{(a,A_{1})}] \otimes\mathbb{U}_{10}[\mathbb{Q}_{0}^{(u,A_{1})}] \otimes\mathbb{F}_{9}[\mathbb{Q}_{0}^{(k,A_{1})}]}{2} - \frac{\sqrt{2} \mathbb{X}_{1}[\mathbb{Q}_{0}^{(a,A_{1})}] \otimes\mathbb{U}_{12}[\mathbb{T}_{1}^{(u,B_{2})}] \otimes\mathbb{F}_{12}[\mathbb{T}_{1}^{(k,B_{2})}]}{2}
+\end{dmath*}
+\vspace{4mm}
+\noindent \fbox{No. {10}} $\,\,\,\hat{\mathbb{Q}}_{1}^{(A_{1})}(1,-1)$ [M$_{1}$,\,B$_{3}$]
+\begin{dmath*}
+\hat{\mathbb{Z}}_{10}=- \frac{\sqrt{2} \mathbb{X}_{3}[\mathbb{M}_{1}^{(a,B_{1})}(1,-1)] \otimes\mathbb{Y}_{10}[\mathbb{T}_{1}^{(b,B_{1})}]}{2} + \frac{\sqrt{2} \mathbb{X}_{4}[\mathbb{M}_{1}^{(a,B_{2})}(1,-1)] \otimes\mathbb{Y}_{11}[\mathbb{T}_{1}^{(b,B_{2})}]}{2}
+\end{dmath*}
+\begin{dmath*}
+\hat{\mathbb{Z}}_{10}(\bm{k})=- \frac{\mathbb{X}_{3}[\mathbb{M}_{1}^{(a,B_{1})}(1,-1)] \otimes\mathbb{U}_{10}[\mathbb{Q}_{0}^{(u,A_{1})}] \otimes\mathbb{F}_{11}[\mathbb{T}_{1}^{(k,B_{1})}]}{2} - \frac{\mathbb{X}_{3}[\mathbb{M}_{1}^{(a,B_{1})}(1,-1)] \otimes\mathbb{U}_{12}[\mathbb{T}_{1}^{(u,B_{2})}] \otimes\mathbb{F}_{10}[\mathbb{Q}_{2}^{(k,A_{2})}]}{2} + \frac{\mathbb{X}_{4}[\mathbb{M}_{1}^{(a,B_{2})}(1,-1)] \otimes\mathbb{U}_{10}[\mathbb{Q}_{0}^{(u,A_{1})}] \otimes\mathbb{F}_{12}[\mathbb{T}_{1}^{(k,B_{2})}]}{2} + \frac{\mathbb{X}_{4}[\mathbb{M}_{1}^{(a,B_{2})}(1,-1)] \otimes\mathbb{U}_{12}[\mathbb{T}_{1}^{(u,B_{2})}] \otimes\mathbb{F}_{9}[\mathbb{Q}_{0}^{(k,A_{1})}]}{2}
+\end{dmath*}
+\vspace{4mm}
+\noindent \fbox{No. {11}} $\,\,\,\hat{\mathbb{G}}_{2}^{(A_{1})}(1,-1)$ [M$_{1}$,\,B$_{3}$]
+\begin{dmath*}
+\hat{\mathbb{Z}}_{11}=\frac{\sqrt{2} \mathbb{X}_{3}[\mathbb{M}_{1}^{(a,B_{1})}(1,-1)] \otimes\mathbb{Y}_{10}[\mathbb{T}_{1}^{(b,B_{1})}]}{2} + \frac{\sqrt{2} \mathbb{X}_{4}[\mathbb{M}_{1}^{(a,B_{2})}(1,-1)] \otimes\mathbb{Y}_{11}[\mathbb{T}_{1}^{(b,B_{2})}]}{2}
+\end{dmath*}
+\begin{dmath*}
+\hat{\mathbb{Z}}_{11}(\bm{k})=\frac{\mathbb{X}_{3}[\mathbb{M}_{1}^{(a,B_{1})}(1,-1)] \otimes\mathbb{U}_{10}[\mathbb{Q}_{0}^{(u,A_{1})}] \otimes\mathbb{F}_{11}[\mathbb{T}_{1}^{(k,B_{1})}]}{2} + \frac{\mathbb{X}_{3}[\mathbb{M}_{1}^{(a,B_{1})}(1,-1)] \otimes\mathbb{U}_{12}[\mathbb{T}_{1}^{(u,B_{2})}] \otimes\mathbb{F}_{10}[\mathbb{Q}_{2}^{(k,A_{2})}]}{2} + \frac{\mathbb{X}_{4}[\mathbb{M}_{1}^{(a,B_{2})}(1,-1)] \otimes\mathbb{U}_{10}[\mathbb{Q}_{0}^{(u,A_{1})}] \otimes\mathbb{F}_{12}[\mathbb{T}_{1}^{(k,B_{2})}]}{2} + \frac{\mathbb{X}_{4}[\mathbb{M}_{1}^{(a,B_{2})}(1,-1)] \otimes\mathbb{U}_{12}[\mathbb{T}_{1}^{(u,B_{2})}] \otimes\mathbb{F}_{9}[\mathbb{Q}_{0}^{(k,A_{1})}]}{2}
+\end{dmath*}
+\vspace{4mm}
+\noindent \fbox{No. {12}} $\,\,\,\hat{\mathbb{Q}}_{2}^{(A_{1},2)}(1,-1)$ [M$_{1}$,\,B$_{3}$]
+\begin{dmath*}
+\hat{\mathbb{Z}}_{12}=- \mathbb{X}_{2}[\mathbb{M}_{1}^{(a,A_{2})}(1,-1)] \otimes\mathbb{Y}_{12}[\mathbb{T}_{2}^{(b,A_{2})}]
+\end{dmath*}
+\begin{dmath*}
+\hat{\mathbb{Z}}_{12}(\bm{k})=- \frac{\sqrt{2} \mathbb{X}_{2}[\mathbb{M}_{1}^{(a,A_{2})}(1,-1)] \otimes\mathbb{U}_{11}[\mathbb{Q}_{1}^{(u,B_{1})}] \otimes\mathbb{F}_{12}[\mathbb{T}_{1}^{(k,B_{2})}]}{2} - \frac{\sqrt{2} \mathbb{X}_{2}[\mathbb{M}_{1}^{(a,A_{2})}(1,-1)] \otimes\mathbb{U}_{13}[\mathbb{T}_{2}^{(u,A_{2})}] \otimes\mathbb{F}_{9}[\mathbb{Q}_{0}^{(k,A_{1})}]}{2}
+\end{dmath*}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% atomic SAMB group.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{longtable}{c|c|c}
+\caption{Atomic SAMB group.}
+ \\
+ \hline \hline
+group & bra & ket \\ \hline \endfirsthead
+
+\multicolumn{2}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+group & bra & ket \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{2}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{2}{r}{} \\ \endlastfoot
+
+M$_{1}$ & $(s,\uparrow), (s,\downarrow)$ & $(s,\uparrow), (s,\downarrow)$ \\
+\end{longtable}
+\end{center}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% atomic SAMB.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{longtable}{c|c|c|c}
+\caption{Atomic SAMB.}
+ \\
+ \hline \hline
+symbol & type & group & form \\ \hline \endfirsthead
+
+\multicolumn{3}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+symbol & type & group & form \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{3}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{3}{r}{} \\ \endlastfoot
+
+$ \mathbb{X}_{1} $ & $\mathbb{Q}_{0}^{(a,A_{1})}$ & M$_{1}$ & $\begin{pmatrix} \frac{\sqrt{2}}{2} & 0 \\ 0 & \frac{\sqrt{2}}{2} \end{pmatrix}$ \\
+$ \mathbb{X}_{2} $ & $\mathbb{M}_{1}^{(a,A_{2})}(1,-1)$ & M$_{1}$ & $\begin{pmatrix} \frac{\sqrt{2}}{2} & 0 \\ 0 & - \frac{\sqrt{2}}{2} \end{pmatrix}$ \\
+$ \mathbb{X}_{3} $ & $\mathbb{M}_{1}^{(a,B_{1})}(1,-1)$ & M$_{1}$ & $\begin{pmatrix} 0 & - \frac{\sqrt{2} i}{2} \\ \frac{\sqrt{2} i}{2} & 0 \end{pmatrix}$ \\
+$ \mathbb{X}_{4} $ & $\mathbb{M}_{1}^{(a,B_{2})}(1,-1)$ & M$_{1}$ & $\begin{pmatrix} 0 & \frac{\sqrt{2}}{2} \\ \frac{\sqrt{2}}{2} & 0 \end{pmatrix}$ \\
+\end{longtable}
+\end{center}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% cluster SAMB.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{longtable}{c|c|c|c}
+\caption{Cluster SAMB.}
+ \\
+ \hline \hline
+symbol & type & cluster & form \\ \hline \endfirsthead
+
+\multicolumn{3}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+symbol & type & cluster & form \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{3}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{3}{r}{} \\ \endlastfoot
+
+$ \mathbb{Y}_{1} $ & $\mathbb{Q}_{0}^{(s,A_{1})}$ & S$_{1}$ & $\begin{pmatrix} \frac{1}{2} & \frac{1}{2} & \frac{1}{2} & \frac{1}{2} \end{pmatrix}$ \\ \hline
+$ \mathbb{Y}_{2} $ & $\mathbb{Q}_{0}^{(b,A_{1})}$ & B$_{1}$ & $\begin{pmatrix} \frac{\sqrt{2}}{2} & \frac{\sqrt{2}}{2} \end{pmatrix}$ \\
+$ \mathbb{Y}_{3} $ & $\mathbb{T}_{1}^{(b,B_{1})}$ & B$_{1}$ & $\begin{pmatrix} \frac{\sqrt{2} i}{2} & \frac{\sqrt{2} i}{2} \end{pmatrix}$ \\
+$ \mathbb{Y}_{4} $ & $\mathbb{T}_{1}^{(b,B_{2})}$ & B$_{1}$ & $\begin{pmatrix} \frac{\sqrt{2} i}{2} & - \frac{\sqrt{2} i}{2} \end{pmatrix}$ \\ \hline
+$ \mathbb{Y}_{5} $ & $\mathbb{Q}_{0}^{(b,A_{1})}$ & B$_{2}$ & $\begin{pmatrix} \frac{1}{2} & \frac{1}{2} & \frac{1}{2} & \frac{1}{2} \end{pmatrix}$ \\
+$ \mathbb{Y}_{6} $ & $\mathbb{T}_{1}^{(b,B_{1})}$ & B$_{2}$ & $\begin{pmatrix} \frac{i}{2} & - \frac{i}{2} & - \frac{i}{2} & \frac{i}{2} \end{pmatrix}$ \\
+$ \mathbb{Y}_{7} $ & $\mathbb{T}_{1}^{(b,B_{2})}$ & B$_{2}$ & $\begin{pmatrix} \frac{i}{2} & - \frac{i}{2} & \frac{i}{2} & - \frac{i}{2} \end{pmatrix}$ \\
+$ \mathbb{Y}_{8} $ & $\mathbb{T}_{2}^{(b,A_{2})}$ & B$_{2}$ & $\begin{pmatrix} \frac{i}{2} & \frac{i}{2} & \frac{i}{2} & \frac{i}{2} \end{pmatrix}$ \\ \hline
+$ \mathbb{Y}_{9} $ & $\mathbb{Q}_{0}^{(b,A_{1})}$ & B$_{3}$ & $\begin{pmatrix} \frac{1}{2} & \frac{1}{2} & \frac{1}{2} & \frac{1}{2} \end{pmatrix}$ \\
+$ \mathbb{Y}_{10} $ & $\mathbb{T}_{1}^{(b,B_{1})}$ & B$_{3}$ & $\begin{pmatrix} \frac{i}{2} & - \frac{i}{2} & - \frac{i}{2} & \frac{i}{2} \end{pmatrix}$ \\
+$ \mathbb{Y}_{11} $ & $\mathbb{T}_{1}^{(b,B_{2})}$ & B$_{3}$ & $\begin{pmatrix} \frac{i}{2} & - \frac{i}{2} & \frac{i}{2} & - \frac{i}{2} \end{pmatrix}$ \\
+$ \mathbb{Y}_{12} $ & $\mathbb{T}_{2}^{(b,A_{2})}$ & B$_{3}$ & $\begin{pmatrix} \frac{i}{2} & \frac{i}{2} & \frac{i}{2} & \frac{i}{2} \end{pmatrix}$ \\
+\end{longtable}
+\end{center}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% uniform SAMB.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{longtable}{c|c|c|c}
+\caption{Uniform SAMB.}
+ \\
+ \hline \hline
+symbol & type & cluster & form \\ \hline \endfirsthead
+
+\multicolumn{3}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+symbol & type & cluster & form \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{3}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{3}{r}{} \\ \endlastfoot
+
+$ \mathbb{U}_{1} $ & $\mathbb{Q}_{0}^{(s,A_{1})}$ & S$_{1}$ & $\begin{pmatrix} \frac{1}{2} & 0 & 0 & 0 \\ 0 & \frac{1}{2} & 0 & 0 \\ 0 & 0 & \frac{1}{2} & 0 \\ 0 & 0 & 0 & \frac{1}{2} \end{pmatrix}$ \\ \hline
+$ \mathbb{U}_{2} $ & $\mathbb{Q}_{0}^{(u,A_{1})}$ & B$_{1}$ & $\begin{pmatrix} 0 & \frac{1}{2} & 0 & 0 \\ \frac{1}{2} & 0 & 0 & 0 \\ 0 & 0 & 0 & \frac{1}{2} \\ 0 & 0 & \frac{1}{2} & 0 \end{pmatrix}$ \\
+$ \mathbb{U}_{3} $ & $\mathbb{Q}_{2}^{(u,A_{2})}$ & B$_{1}$ & $\begin{pmatrix} 0 & \frac{1}{2} & 0 & 0 \\ \frac{1}{2} & 0 & 0 & 0 \\ 0 & 0 & 0 & - \frac{1}{2} \\ 0 & 0 & - \frac{1}{2} & 0 \end{pmatrix}$ \\
+$ \mathbb{U}_{4} $ & $\mathbb{T}_{1}^{(u,B_{1})}$ & B$_{1}$ & $\begin{pmatrix} 0 & \frac{i}{2} & 0 & 0 \\ - \frac{i}{2} & 0 & 0 & 0 \\ 0 & 0 & 0 & \frac{i}{2} \\ 0 & 0 & - \frac{i}{2} & 0 \end{pmatrix}$ \\
+$ \mathbb{U}_{5} $ & $\mathbb{T}_{1}^{(u,B_{2})}$ & B$_{1}$ & $\begin{pmatrix} 0 & \frac{i}{2} & 0 & 0 \\ - \frac{i}{2} & 0 & 0 & 0 \\ 0 & 0 & 0 & - \frac{i}{2} \\ 0 & 0 & \frac{i}{2} & 0 \end{pmatrix}$ \\ \hline
+$ \mathbb{U}_{6} $ & $\mathbb{Q}_{0}^{(u,A_{1})}$ & B$_{2}$ & $\begin{pmatrix} 0 & 0 & 0 & \frac{1}{2} \\ 0 & 0 & \frac{1}{2} & 0 \\ 0 & \frac{1}{2} & 0 & 0 \\ \frac{1}{2} & 0 & 0 & 0 \end{pmatrix}$ \\
+$ \mathbb{U}_{7} $ & $\mathbb{Q}_{1}^{(u,B_{2})}$ & B$_{2}$ & $\begin{pmatrix} 0 & 0 & 0 & \frac{1}{2} \\ 0 & 0 & - \frac{1}{2} & 0 \\ 0 & - \frac{1}{2} & 0 & 0 \\ \frac{1}{2} & 0 & 0 & 0 \end{pmatrix}$ \\
+$ \mathbb{U}_{8} $ & $\mathbb{T}_{1}^{(u,B_{1})}$ & B$_{2}$ & $\begin{pmatrix} 0 & 0 & 0 & \frac{i}{2} \\ 0 & 0 & - \frac{i}{2} & 0 \\ 0 & \frac{i}{2} & 0 & 0 \\ - \frac{i}{2} & 0 & 0 & 0 \end{pmatrix}$ \\
+$ \mathbb{U}_{9} $ & $\mathbb{T}_{2}^{(u,A_{2})}$ & B$_{2}$ & $\begin{pmatrix} 0 & 0 & 0 & \frac{i}{2} \\ 0 & 0 & \frac{i}{2} & 0 \\ 0 & - \frac{i}{2} & 0 & 0 \\ - \frac{i}{2} & 0 & 0 & 0 \end{pmatrix}$ \\ \hline
+$ \mathbb{U}_{10} $ & $\mathbb{Q}_{0}^{(u,A_{1})}$ & B$_{3}$ & $\begin{pmatrix} 0 & 0 & \frac{1}{2} & 0 \\ 0 & 0 & 0 & \frac{1}{2} \\ \frac{1}{2} & 0 & 0 & 0 \\ 0 & \frac{1}{2} & 0 & 0 \end{pmatrix}$ \\
+$ \mathbb{U}_{11} $ & $\mathbb{Q}_{1}^{(u,B_{1})}$ & B$_{3}$ & $\begin{pmatrix} 0 & 0 & \frac{1}{2} & 0 \\ 0 & 0 & 0 & - \frac{1}{2} \\ \frac{1}{2} & 0 & 0 & 0 \\ 0 & - \frac{1}{2} & 0 & 0 \end{pmatrix}$ \\
+$ \mathbb{U}_{12} $ & $\mathbb{T}_{1}^{(u,B_{2})}$ & B$_{3}$ & $\begin{pmatrix} 0 & 0 & \frac{i}{2} & 0 \\ 0 & 0 & 0 & - \frac{i}{2} \\ - \frac{i}{2} & 0 & 0 & 0 \\ 0 & \frac{i}{2} & 0 & 0 \end{pmatrix}$ \\
+$ \mathbb{U}_{13} $ & $\mathbb{T}_{2}^{(u,A_{2})}$ & B$_{3}$ & $\begin{pmatrix} 0 & 0 & \frac{i}{2} & 0 \\ 0 & 0 & 0 & \frac{i}{2} \\ - \frac{i}{2} & 0 & 0 & 0 \\ 0 & - \frac{i}{2} & 0 & 0 \end{pmatrix}$ \\
+\end{longtable}
+\end{center}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% structure SAMB.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{longtable}{c|c|c|c}
+\caption{Structure SAMB.}
+ \\
+ \hline \hline
+symbol & type & cluster & form \\ \hline \endfirsthead
+
+\multicolumn{3}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+symbol & type & cluster & form \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{3}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{3}{r}{} \\ \endlastfoot
+
+$ \mathbb{F}_{1} $ & $\mathbb{Q}_{0}^{(k,A_{1})}$ & B$_{1}$ & $c_{001} + c_{002}$ \\
+$ \mathbb{F}_{2} $ & $\mathbb{Q}_{2}^{(k,A_{2})}$ & B$_{1}$ & $c_{001} - c_{002}$ \\
+$ \mathbb{F}_{3} $ & $\mathbb{T}_{1}^{(k,B_{1})}$ & B$_{1}$ & $s_{001} + s_{002}$ \\
+$ \mathbb{F}_{4} $ & $\mathbb{T}_{1}^{(k,B_{2})}$ & B$_{1}$ & $s_{001} - s_{002}$ \\ \hline
+$ \mathbb{F}_{5} $ & $\mathbb{Q}_{0}^{(k,A_{1})}$ & B$_{2}$ & $c_{003} + c_{005}$ \\
+$ \mathbb{F}_{6} $ & $\mathbb{Q}_{2}^{(k,A_{2})}$ & B$_{2}$ & $c_{003} - c_{005}$ \\
+$ \mathbb{F}_{7} $ & $\mathbb{T}_{1}^{(k,B_{1})}$ & B$_{2}$ & $s_{003} - s_{005}$ \\
+$ \mathbb{F}_{8} $ & $\mathbb{T}_{1}^{(k,B_{2})}$ & B$_{2}$ & $s_{003} + s_{005}$ \\ \hline
+$ \mathbb{F}_{9} $ & $\mathbb{Q}_{0}^{(k,A_{1})}$ & B$_{3}$ & $c_{007} + c_{009}$ \\
+$ \mathbb{F}_{10} $ & $\mathbb{Q}_{2}^{(k,A_{2})}$ & B$_{3}$ & $c_{007} - c_{009}$ \\
+$ \mathbb{F}_{11} $ & $\mathbb{T}_{1}^{(k,B_{1})}$ & B$_{3}$ & $s_{007} - s_{009}$ \\
+$ \mathbb{F}_{12} $ & $\mathbb{T}_{1}^{(k,B_{2})}$ & B$_{3}$ & $s_{007} + s_{009}$ \\
+\end{longtable}
+\end{center}
+
+ \hfil \hrule height 1mm width \textwidth \hfil
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% harmonics.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{longtable}{ccccccc}
+\caption{Polar harmonics.}
+ \\
+ \hline \hline
+No. & symbol & rank & irrep. & mul. & comp. & form \\ \hline \endfirsthead
+
+\multicolumn{6}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+No. & symbol & rank & irrep. & mul. & comp. & form \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{6}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{6}{r}{} \\ \endlastfoot
+
+$ 1 $ & $ \mathbb{Q}_{0}^{(A_{1})} $ & $ 0 $ & $ A_{1} $ & $ - $ & $ - $ & $ 1 $ \\ \hline
+$ 2 $ & $ \mathbb{Q}_{1}^{(B_{1})} $ & $ 1 $ & $ B_{1} $ & $ - $ & $ - $ & $ x $ \\
+$ 3 $ & $ \mathbb{Q}_{1}^{(B_{2})} $ & $ 1 $ & $ B_{2} $ & $ - $ & $ - $ & $ y $ \\ \hline
+$ 4 $ & $ \mathbb{Q}_{2}^{(A_{2})} $ & $ 2 $ & $ A_{2} $ & $ - $ & $ - $ & $ \sqrt{3} x y $ \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{longtable}{ccccccc}
+\caption{Axial harmonics.}
+ \\
+ \hline \hline
+No. & symbol & rank & irrep. & mul. & comp. & form \\ \hline \endfirsthead
+
+\multicolumn{6}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+No. & symbol & rank & irrep. & mul. & comp. & form \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{6}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{6}{r}{} \\ \endlastfoot
+
+$ 1 $ & $ \mathbb{G}_{1}^{(A_{2})} $ & $ 1 $ & $ A_{2} $ & $ - $ & $ - $ & $ Z $ \\
+$ 2 $ & $ \mathbb{G}_{1}^{(B_{1})} $ & $ 1 $ & $ B_{1} $ & $ - $ & $ - $ & $ Y $ \\
+$ 3 $ & $ \mathbb{G}_{1}^{(B_{2})} $ & $ 1 $ & $ B_{2} $ & $ - $ & $ - $ & $ X $ \\
+\end{longtable}
+\end{center}
+
+ \hfil \hrule height 1mm width \textwidth \hfil
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% group information.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Group info.: Generator = $\{2{}_{001}|0\},\,\,\{{\rm m}_{010}|\frac{1}{2} \frac{1}{2} 0\}$
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{longtable}{c|l}
+\caption{Conjugacy class (point-group part).}
+ \\
+ \hline \hline
+rep. SO & symmetry operations \\ \hline \endfirsthead
+
+\multicolumn{1}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+rep. SO & symmetry operations \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{1}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{1}{r}{} \\ \endlastfoot
+
+$\{1|0\}$ & $\{1|0\}$ \\ \hline
+$\{2{}_{001}|0\}$ & $\{2{}_{001}|0\}$ \\ \hline
+$\{{\rm m}_{010}|\frac{1}{2} \frac{1}{2} 0\}$ & $\{{\rm m}_{010}|\frac{1}{2} \frac{1}{2} 0\}$ \\ \hline
+$\{{\rm m}_{100}|\frac{1}{2} \frac{1}{2} 0\}$ & $\{{\rm m}_{100}|\frac{1}{2} \frac{1}{2} 0\}$ \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{longtable}{c|cc|cc|cc|cc|cc}
+\caption{Symmetry operations.}
+ \\
+ \hline \hline
+ & No. & SO & No. & SO & No. & SO & No. & SO & No. & SO \\ \hline \endfirsthead
+
+\multicolumn{10}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+ & No. & SO & No. & SO & No. & SO & No. & SO & No. & SO \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{10}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{10}{r}{} \\ \endlastfoot
+
+ & 1 & $\{1|0\}$ & 2 & $\{2{}_{001}|0\}$ & 3 & $\{{\rm m}_{010}|\frac{1}{2} \frac{1}{2} 0\}$ & 4 & $\{{\rm m}_{100}|\frac{1}{2} \frac{1}{2} 0\}$ \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.0}
+\begin{longtable}{c|rrrr}
+\caption{Character table (point-group part).}
+ \\
+ \hline \hline
+ & $ 1 $ & $ 2{}_{001} $ & $ {\rm m}_{010} $ & $ {\rm m}_{100} $ \\ \hline \endfirsthead
+
+\multicolumn{4}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+ & $ 1 $ & $ 2{}_{001} $ & $ {\rm m}_{010} $ & $ {\rm m}_{100} $ \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{4}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{4}{r}{} \\ \endlastfoot
+
+$ A_{1} $ & $ 1 $ & $ 1 $ & $ 1 $ & $ 1 $ \\
+$ A_{2} $ & $ 1 $ & $ 1 $ & $ -1 $ & $ -1 $ \\
+$ B_{1} $ & $ 1 $ & $ -1 $ & $ 1 $ & $ -1 $ \\
+$ B_{2} $ & $ 1 $ & $ -1 $ & $ -1 $ & $ 1 $ \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.0}
+\begin{longtable}{ccccc}
+\caption{Parity conversion.}
+ \\
+ \hline \hline
+ & $\leftrightarrow$ & $\leftrightarrow$ & $\leftrightarrow$ & $\leftrightarrow$ \\ \hline \endfirsthead
+
+\multicolumn{4}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+ & $\leftrightarrow$ & $\leftrightarrow$ & $\leftrightarrow$ & $\leftrightarrow$ \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{4}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{4}{r}{} \\ \endlastfoot
+
+ & $ A_{1}\,\,(A_{2}) $ & $ B_{2}\,\,(B_{1}) $ & $ B_{1}\,\,(B_{2}) $ & $ A_{2}\,\,(A_{1}) $ \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.0}
+\begin{longtable}{c|cccc}
+\caption{Symmetric product, $[\Gamma\otimes\Gamma']_+.$}
+ \\
+ \hline \hline
+ & $ A_{1} $ & $ A_{2} $ & $ B_{1} $ & $ B_{2} $ \\ \hline \endfirsthead
+
+\multicolumn{4}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+ & $ A_{1} $ & $ A_{2} $ & $ B_{1} $ & $ B_{2} $ \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{4}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{4}{r}{} \\ \endlastfoot
+
+$ A_{1} $ & $ A_{1} $ & $ A_{2} $ & $ B_{1} $ & $ B_{2} $ \\
+$ A_{2} $ & $  $ & $ A_{1} $ & $ B_{2} $ & $ B_{1} $ \\
+$ B_{1} $ & $  $ & $  $ & $ A_{1} $ & $ A_{2} $ \\
+$ B_{2} $ & $  $ & $  $ & $  $ & $ A_{1} $ \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.0}
+\begin{longtable}{ccccc}
+\caption{Anti-symmetric product, $[\Gamma\otimes\Gamma]_-$.}
+ \\
+ \hline \hline
+ & $ A_{1} $ & $ A_{2} $ & $ B_{1} $ & $ B_{2} $ \\ \hline \endfirsthead
+
+\multicolumn{4}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+ & $ A_{1} $ & $ A_{2} $ & $ B_{1} $ & $ B_{2} $ \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{4}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{4}{r}{} \\ \endlastfoot
+
+$  $ & $ - $ & $ - $ & $ - $ & $ - $ \\
+\end{longtable}
+\end{center}
+
+ \hfil \hrule height 1mm width \textwidth \hfil
+
+{
+\scriptsize
+\begin{center}
+\renewcommand{\arraystretch}{1.7}
+\begin{longtable}{ccccccccc}
+\caption{Virtual-cluster sites.}
+ \\
+ \hline \hline
+ & No. & position & No. & position & No. & position & No. & position \\ \hline \endfirsthead
+
+\multicolumn{8}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+ & No. & position & No. & position & No. & position & No. & position \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{8}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{8}{r}{} \\ \endlastfoot
+
+ & $ 1 $ & $ \begin{pmatrix} 1 & 1 & 0 \end{pmatrix} $ & $ 2 $ & $ \begin{pmatrix} -1 & -1 & 0 \end{pmatrix} $ & $ 3 $ & $ \begin{pmatrix} 1 & -1 & 0 \end{pmatrix} $ & $ 4 $ & $ \begin{pmatrix} -1 & 1 & 0 \end{pmatrix} $ \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.7}
+\begin{longtable}{ccccc}
+\caption{Virtual-cluster basis.}
+ \\
+ \hline \hline
+symbol & 1 & 2 & 3 & 4 \\ \hline \endfirsthead
+
+\multicolumn{4}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+symbol & 1 & 2 & 3 & 4 \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{4}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{4}{r}{} \\ \endlastfoot
+
+$\mathbb{Q}_{0}^{(A_{1})}$ & $ \frac{1}{2} $ & $ \frac{1}{2} $ & $ \frac{1}{2} $ & $ \frac{1}{2} $ \\ \hline
+$\mathbb{Q}_{1}^{(B_{1})}$ & $ \frac{1}{2} $ & $ - \frac{1}{2} $ & $ \frac{1}{2} $ & $ - \frac{1}{2} $ \\ \hline
+$\mathbb{Q}_{1}^{(B_{2})}$ & $ \frac{1}{2} $ & $ - \frac{1}{2} $ & $ - \frac{1}{2} $ & $ \frac{1}{2} $ \\ \hline
+$\mathbb{Q}_{2}^{(A_{2})}$ & $ \frac{1}{2} $ & $ \frac{1}{2} $ & $ - \frac{1}{2} $ & $ - \frac{1}{2} $ \\
+\end{longtable}
+\end{center}
+}
+\end{itemize}
+
+\end{document}

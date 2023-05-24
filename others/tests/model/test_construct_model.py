@@ -5,7 +5,7 @@ from multipie.model.multipie_manager import MultiPieManager
 from multipie.model.construct_model import construct_basis, convert_basis_to_matrix
 from gcoreutils.plot_util import init_plot, plot_dispersion
 
-data_dir = __top_dir__ + "multipie/model/tests/material_model"
+data_dir = __top_dir__ + "others/tests/model/material_model"
 
 
 # ==================================================

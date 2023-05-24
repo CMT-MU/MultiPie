@@ -5,7 +5,7 @@ from models.cm import CM
 from models.graphene import graphene
 from models.te import Te
 
-topdir = __top_dir__ + "multipie/examples/material_model"
+topdir = __top_dir__ + "others/examples/material_model"
 
 
 models = [CM, graphene, Te]

@@ -1,8 +1,8 @@
 from qtdraw.qt_draw import QtDraw
 from multipie import __top_dir__
-from multipie.model.tests.model_example import models
+from model_example import models
 
-create_dir = __top_dir__ + "multipie/model/tests/material_model/"
+create_dir = __top_dir__ + "others/tests/model/material_model/"
 
 
 # ==================================================
