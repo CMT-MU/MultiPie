@@ -1,8 +1,7 @@
-from multipie import __top_dir__
 from model_example import models
 from multipie.model.create_model import create_model
 
-create_dir = __top_dir__ + "others/tests/model/material_model"
+create_dir = __file__[: __file__.rfind("/")] + "/material_model"
 
 
 # ==================================================
