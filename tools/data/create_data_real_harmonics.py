@@ -7,11 +7,9 @@ from gcoreutils.nsarray import NSArray
 from gcoreutils.string_util import remove_space
 
 from multipie.data.data_harmonics import _data_harmonics_polar, _data_harmonics_axial
-from tools.data.util.output_util import write_data
+from util.output_util import write_data
 
-from multipie import __top_dir__
-
-create_dir = __top_dir__ + "tools/data"
+create_dir = __file__[: __file__.rfind("/")]
 
 
 # ==================================================

@@ -4,9 +4,9 @@ create harmonics.
 from gcoreutils.pdf_via_latex import PDFviaLaTeX
 from gcoreutils.nsarray import NSArray
 from multipie.harmonics.harmonics_pg_set import HarmonicsPGSet
-from multipie import __top_dir__, get_binary
+from multipie import get_binary
 
-harmonics_dir = __top_dir__ + "docs/pdf/harmonics"
+harmonics_dir = __file__[: __file__.rfind("/")] + "/../../docs/pdf/harmonics"
 
 
 # ==================================================

@@ -5,10 +5,10 @@ from gcoreutils.pdf_via_latex import PDFviaLaTeX
 from multipie.tag.tag_group import TagGroup
 from multipie.wyckoff.wyckoff_g_set import WyckoffGSet
 from multipie.symmetry_operation.symmetry_operation_g_set import SymmetryOperationGSet
-from multipie import __top_dir__, get_binary
+from multipie import get_binary
 
-point_group_dir = __top_dir__ + "docs/pdf/point_group"
-space_group_dir = __top_dir__ + "docs/pdf/space_group"
+point_group_dir = __file__[: __file__.rfind("/")] + "/../../docs/pdf/point_group"
+space_group_dir = __file__[: __file__.rfind("/")] + "/../../docs/pdf/space_group"
 
 
 # ==================================================

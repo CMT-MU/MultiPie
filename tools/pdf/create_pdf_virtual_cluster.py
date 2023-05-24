@@ -5,9 +5,9 @@ from gcoreutils.pdf_via_latex import PDFviaLaTeX
 from gcoreutils.nsarray import NSArray
 from multipie.tag.tag_group import TagGroup
 from multipie.virtual_cluster.virtual_cluster_pg_set import VirtualClusterPGSet
-from multipie import __top_dir__, get_binary
+from multipie import get_binary
 
-point_group_dir = __top_dir__ + "docs/pdf/point_group"
+point_group_dir = __file__[: __file__.rfind("/")] + "/../../docs/pdf/point_group"
 
 
 # ==================================================

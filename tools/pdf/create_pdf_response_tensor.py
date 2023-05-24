@@ -5,9 +5,9 @@ from gcoreutils.pdf_via_latex import PDFviaLaTeX
 from gcoreutils.convert_util import sympy_to_latex
 from multipie.tag.tag_group import TagGroup
 from multipie.response_tensor.response_tensor_pg_set import ResponseTensorPGSet
-from multipie import __top_dir__, get_binary
+from multipie import get_binary
 
-rt_dir = __top_dir__ + "docs/pdf/response_tensor"
+rt_dir = __file__[: __file__.rfind("/")] + "/../../docs/pdf/response_tensor"
 
 
 # ==================================================

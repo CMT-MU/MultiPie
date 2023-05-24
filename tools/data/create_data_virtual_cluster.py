@@ -4,11 +4,10 @@ create virtual-cluster basis.
 import os
 from multipie.group.point_group import PointGroup
 from multipie.tag.tag_group import TagGroup
-from tools.data.util.output_util import write_data
+from util.output_util import write_data
+from multipie import get_binary
 
-from multipie import __top_dir__, get_binary
-
-create_dir = __top_dir__ + "tools/data"
+create_dir = __file__[: __file__.rfind("/")]
 core = get_binary()
 
 # ==================================================

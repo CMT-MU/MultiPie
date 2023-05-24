@@ -5,12 +5,10 @@ import os
 import sympy as sp
 from sympy.physics.quantum import TensorProduct
 from joblib import Parallel, delayed
-from tools.data.util.atomic_multipole_matrix import create_atomic_multipole, create_atomic_multipole_harmonics_basis
-from tools.data.util.output_util import write_data
+from util.atomic_multipole_matrix import create_atomic_multipole, create_atomic_multipole_harmonics_basis
+from util.output_util import write_data
 
-from multipie import __top_dir__
-
-create_dir = __top_dir__ + "tools/data"
+create_dir = __file__[: __file__.rfind("/")]
 
 
 # ==================================================

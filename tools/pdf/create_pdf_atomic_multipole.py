@@ -9,13 +9,11 @@ $ code /usr/local/texlive/2021/texmf.cnf
 $ sudo fmtutil-sys --all
 """
 from gcoreutils.pdf_via_latex import PDFviaLaTeX
-from multipie import __top_dir__
 from multipie.multipole.util.spin_orbital_basis import _standard_spinless_basis, _standard_spinful_basis
 from multipie.multipole.util.atomic_orbital_util import split_orb_list_rank_block
 from multipie.group.point_group import PointGroup
 
-
-multipole_dir = __top_dir__ + "docs/pdf/atomic_multipole"
+multipole_dir = __file__[: __file__.rfind("/")] + "/../../docs/pdf/atomic_multipole"
 
 
 # ==================================================
