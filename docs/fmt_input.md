@@ -15,4 +15,4 @@
   - **time_reversal_type*** : time-reversal type (str), ("electric"/"magnetic"/"both"), ["electric"].
   - **irrep*** : irrep. (str list), [identity irrep.].
 - **k_point*** : k-point (dict) {name: "position"}, [{ "Γ": "[0,0,0]", "X": "[1/2,0,0]" }].
-- **k_path*** : k-path (str) (concatenate by - or |), ["Γ-X"].
+- **k_path*** : k-path (str) (concatenate by "-" or "|"), ["Γ-X"].
