@@ -99,6 +99,7 @@ See for more detail, try **create_samb --help** command.
     - **_view.qtdw** : molecular or crystal structure file for QtDraw.
 
 The detailed file formats are given as follows:
+- [input.py](fmt_input.md)
 - [_model.py](fmt_model.md)
 - [_samb.py](fmt_samb.md)
 - [_matrix.py](fmt_matrix.md)
