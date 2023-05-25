@@ -50,7 +50,7 @@ url = {https://link.aps.org/doi/10.1103/PhysRevB.107.195118}
 
 ## Basis Construction
 
-1. Prepare input file. Example input files for C3v molecule and graphene are given here.
+1. Prepare input file. Example input files for [C3v](C3v.py) molecule and [graphene](graphene.py) are given here.
     ```python
     # C3v.py
     C3v = {
@@ -97,3 +97,8 @@ See for more detail, try **create_samb --help** command.
     - **_matrix.py** : full-matrix form of SAMB.
     - **_samb.tex** and **_samb.pdf** : detailed information on SAMB in LaTeX and PDF format.
     - **_view.qtdw** : molecular or crystal structure file for QtDraw.
+
+The detailed file formats are given as follows:
+- [_model.py](fmt_model.md)
+- [_samb.py](fmt_samb.md)
+- [_matrix.py](fmt_matrix.md)
