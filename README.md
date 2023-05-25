@@ -21,7 +21,7 @@ If you are using MultiPie and/or QtDraw in your scientific research, please help
 
 > Hiroaki Kusunose, Rikuto Oiwa, and Satoru Hayami, _Symmetry-adapted modeling for molecules and crystals_, Phys. Rev. B <b>107</b>, 195118 (2023).
 >
-> DOI: https://doi.org/10.1103/PhysRevB.107.195118
+> DOI: [https://doi.org/10.1103/PhysRevB.107.195118](https://doi.org/10.1103/PhysRevB.107.195118)
 
 BibTex:
 ```
