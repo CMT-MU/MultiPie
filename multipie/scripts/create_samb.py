@@ -4,7 +4,7 @@ create SAMB from model input.
 import os
 import click
 from multipie.model.create_model import create_model
-from multipie.model.material_model import header_str
+from multipie.model.material_model import input_str
 
 
 # ================================================== create_samb
@@ -25,7 +25,7 @@ def cmd(models, parallel, verbose, latex, formatter, mode, qtdraw, output, input
         MODELS : base file names without `.py`.
     """
     if input:
-        click.echo(header_str)
+        click.echo(input_str)
         exit()
     if len(models) < 1:
         exit()
