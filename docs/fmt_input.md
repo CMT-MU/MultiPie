@@ -1,3 +1,7 @@
+<img width="128" src="multipie_logo.png">
+
+# MultiPie
+
 ## Input for SAMB construction (* optional [default])
 - **model** : model name (str).
 - **group** : group name (Schoenflies notation) or group number (space group) (str/int).

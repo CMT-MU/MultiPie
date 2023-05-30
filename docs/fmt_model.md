@@ -1,3 +1,7 @@
+<img width="128" src="multipie_logo.png">
+
+# MultiPie
+
 ## Molecule or Crystal Model (* only for crystal)
 - **info**
     - **model** : model name.

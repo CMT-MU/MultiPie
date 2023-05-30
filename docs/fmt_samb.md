@@ -1,3 +1,7 @@
+<img width="128" src="multipie_logo.png">
+
+# MultiPie
+
 ## SAMB (* only for crystal)
 - **info**
     - **atomic** : { "M_#" : ["amp_#"] }

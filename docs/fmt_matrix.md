@@ -1,3 +1,7 @@
+<img width="128" src="multipie_logo.png">
+
+# MultiPie
+
 ## SAMB in full matrix form (* only for crystal)
 - **model** : model name.
 - **molecule** : molecule or crystal ?
