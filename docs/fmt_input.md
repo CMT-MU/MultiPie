@@ -3,7 +3,7 @@
 - **group** : group name (Schoenflies notation) or group number (space group) (str/int).
 - **site** : site position, orbital info. (dict) { name: ("position", orbital or orbital list) }.
 - **bond** : bond (list) [ ("tail", "head", (list of) neighbors) ].
-- **spinful*** : spinfule basis ? (bool), [False].
+- **spinful*** : spinful basis ? (bool), [False].
 - **cell*** : unit-cell constants (dict) { "a", "b", "c", "alpha", "beta", "gamma" }, [a=b=c=1,alpha=beta=gamma=90].
 - **option***
   - **view*** : view point (int list), [None].
