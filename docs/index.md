@@ -103,3 +103,7 @@ The detailed file formats are given as follows:
 - [_model.py](fmt_model.md)
 - [_samb.py](fmt_samb.md)
 - [_matrix.py](fmt_matrix.md)
+
+## Changes
+- [version 1.1.2](ver1.1.2.md)
+- [version 1.1.1](ver1.1.1.md)
