@@ -107,7 +107,7 @@ def to_spinless(orb_list):
                 idx = sp.S(idx) / 2 if idx % 2 == 0 else sp.S(idx - 1) / 2
                 sl_orb_list.append(_standard_basis[0][b_type][idx])
 
-        sl_orb_list = list(sorted(set(sl_orb_list), key=sl_orb_list.index))
+        sl_orb_list = list(sorted(sl_orb_list, key=sl_orb_list.index))
         return sl_orb_list
 
 
@@ -441,28 +441,27 @@ def to_latex(orb_list, spinful, crystal):
     """
 
     def f(orb):
-        if len(orb) > 1:
-            head, sub = orb[0], orb[1:]
-            orb = head + "_{" + sub + "}"
+        if spinful:
+            orb, UD = orb[1:-1].split(",")
+            if len(orb) > 1:
+                head, sub = orb[0], orb[1:]
+                orb = head + "_{" + sub + "}"
+            orb = f"({orb},{UD})"
+        else:
+            if len(orb) > 1:
+                head, sub = orb[0], orb[1:]
+                orb = head + "_{" + sub + "}"
         return orb
 
-    orb_list = to_spinless(orb_list)
     b_type = basis_type(orb_list, crystal)
 
     if b_type in "jm":
         return orb_list
     elif b_type in "lm":
-        if spinful:
-            return to_spinful(orb_list)
-        else:
-            return orb_list
+        return orb_list
     else:
         if type(orb_list) == str:
             orb_list = f(orb_list)
         elif type(orb_list) == list:
             orb_list = [f(orb) for orb in orb_list]
-
-        if spinful:
-            orb_list = to_spinful(orb_list)
-
         return orb_list
