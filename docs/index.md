@@ -104,7 +104,7 @@ The detailed file formats are given as follows:
 - [_samb.py](fmt_samb.md)
 - [_matrix.py](fmt_matrix.md)
 
-## Example usage of `_matrix.py`
+## Example usage of "_matrix.py"
 
 See, the example of plot for [plot_C3v.py](plot_C3v.py) and [plot_graphene.py](plot_graphene.py).
 Put these example files in the parent folder of **C3v** and **graphene**, and try the following shell commands,

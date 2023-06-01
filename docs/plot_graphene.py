@@ -43,11 +43,14 @@ def plot_graphene():
     # parameters for graphene.
     param = [-0.163, -7.274, 0.880, -0.693, 0.0761, 0.202, -0.080]
 
+    # construct matrices, and diagonalize them.
     matrix_dict = mpm.read("graphene/graphene_matrix.py")
     M, k_linear, k_name = construct_model(matrix_dict, param)
     E, U = np.linalg.eigh(M)
 
-    print(f"(#k points, #energy) = {E.shape}")
+    # plot results.
+    mpm.log(f"  parameters (zj) = {param}", None)
+    mpm.log(f"  (#k points, #energies) = {E.shape}", None)
     plot_model(k_linear, E, k_name)
 
 
