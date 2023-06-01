@@ -255,7 +255,9 @@ def create_uniform_samb_set(cluster_samb_set, braket_indexes_dict, dim, parallel
                 tag = tag.replace(m_type="u")
             d[(SB_i, tag)] = U
 
-        um_orthogonalized = {(SB_i, tag): NSArray(mat, style="matrix", fmt="sympy", real=False) for (SB_i, tag), mat in d.items()}
+        um_orthogonalized = {
+            (SB_i, tag): NSArray(mat, style="matrix", fmt="sympy", real=False) for (SB_i, tag), mat in d.items()
+        }
         return i, um_orthogonalized
 
     head_list = ["Q", "T"]
@@ -403,7 +405,9 @@ def _check_complete_relation(x_tag_dict, y_tag_dict, z_info, z_data):
 
 
 # ==================================================
-def create_z_samb_set(g, x_tag_dict, y_tag_dict, M_SB_list, toroidal_priority=False, parallel=True, **kwargs):
+def create_z_samb_set(
+    g, x_tag_dict, y_tag_dict, M_SB_list, atomic_braket, toroidal_priority=False, parallel=True, **kwargs
+):
     """
     create combined multipole basis set.
 
@@ -412,6 +416,7 @@ def create_z_samb_set(g, x_tag_dict, y_tag_dict, M_SB_list, toroidal_priority=Fa
         x_tag_dict (dict): atomic multipole tag dict, {(M_#, TagMultipole): amp_i}.
         y_tag_dict (dict): site/bond-cluster tag dict, {(S_#/B_#, TagMultipole): smp_i/bmp_i/ump_i}.
         M_SB_list (list): [("M_#", "S_#"/"B_#")].
+        atomic_braket (dict): { matrix_tag : (bra_list, ket_list) }.
         toroidal_priority (bool): create toroidal multipoles (G,T) in priority? else prioritize conventional multipoles (Q,M).
         parallel (bool, optional): use parallel code.
         kwargs (dict, optional): select conditions for multipoles,
@@ -423,6 +428,14 @@ def create_z_samb_set(g, x_tag_dict, y_tag_dict, M_SB_list, toroidal_priority=Fa
         z_info = { ("S_#"/"B_#", "M_#"): ["z_#"] }
         z_data = { "z_#" : [(coefficient, "amp_#", "smp_#"/"bmp_#"/"ump_#")] }
     """
+    E_am_dict = {}
+    for M_i, SB_i in M_SB_list:
+        o1, o2 = atomic_braket[M_i]
+        if SB_i[0] == "B" and o1 != o2:
+            E_am_dict[(M_i, SB_i)] = True
+        else:
+            E_am_dict[(M_i, SB_i)] = False
+
     M_SB_num = len(M_SB_list)
     n_jobs = max(abs(min(M_SB_num + 1, _cpu_num - 2)), 1) if parallel else 1
 
@@ -437,6 +450,8 @@ def create_z_samb_set(g, x_tag_dict, y_tag_dict, M_SB_list, toroidal_priority=Fa
 
     def proc(i, irrep, M_i, SB_i):
         x_tag_list = TagList([tag for (M_i_, tag) in x_tag_dict.keys() if M_i_ == M_i])
+        if E_am_dict[(M_i, SB_i)]:
+            x_tag_list = TagList([tag for tag in x_tag_list if tag.head in ("Q", "G")])
         y_tag_list = TagList([tag for (SB_i_, tag) in y_tag_dict.keys() if SB_i_ == SB_i])
         z_samb = g.z_samb(x_tag_list, y_tag_list, toroidal_priority, irrep=irrep, **kwargs)
         return i, irrep, M_i, SB_i, z_samb
@@ -454,7 +469,9 @@ def create_z_samb_set(g, x_tag_dict, y_tag_dict, M_SB_list, toroidal_priority=Fa
         for tags, c_xtag_ytag_list in z_samb.items():
             tag, _, _ = tags
             lst.append(f"z_{i:03d}")
-            c_amp_cmp_list = [(c, x_tag_dict[(M_i, xtag)], y_tag_dict[(SB_i, ytag)]) for c, xtag, ytag in c_xtag_ytag_list]
+            c_amp_cmp_list = [
+                (c, x_tag_dict[(M_i, xtag)], y_tag_dict[(SB_i, ytag)]) for c, xtag, ytag in c_xtag_ytag_list
+            ]
             z_data[f"z_{i:03d}"] = (tag, c_amp_cmp_list)
             i += 1
         if lst != []:
@@ -560,13 +577,17 @@ def fourier_transform_bond_cluster_samb(bc_samb_set, u_samb_set, k_samb_set, clu
     B_num = len(bc_samb_set)
     n_jobs = max(abs(min(B_num + 1, _cpu_num - 2)), 1) if parallel else 1
 
-    braket_indexes_dict = {B_i: [bond[bond_tag][2] for bond_tag in bond_list] for B_i, bond_list in cluster_bond.items()}
+    braket_indexes_dict = {
+        B_i: [bond[bond_tag][2] for bond_tag in bond_list] for B_i, bond_list in cluster_bond.items()
+    }
 
     def proc(i, B_i):
         bc_samb = bc_samb_set[B_i]
         braket_indexes = braket_indexes_dict[B_i]
         bond_list = cluster_bond[B_i]
-        bck_samb = _fourier_transform_bond_cluster_samb(bc_samb, u_samb_set, k_samb_set, braket_indexes, bond_list, bond, dim)
+        bck_samb = _fourier_transform_bond_cluster_samb(
+            bc_samb, u_samb_set, k_samb_set, braket_indexes, bond_list, bond, dim
+        )
         return i, bck_samb
 
     B_i_list = list(cluster_bond.keys())
