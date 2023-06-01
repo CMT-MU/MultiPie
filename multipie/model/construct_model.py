@@ -6,9 +6,9 @@ from gcoreutils.nsarray import NSArray
 
 
 # ==================================================
-def construct_basis(matrix_dict, k_grid=None):
+def construct_samb_matrix(matrix_dict, k_grid=None):
     """
-    construct basis matrix from matrix dict.
+    construct SAMB matrix from matrix dict.
 
     Args:
         matrix_dict (dict): matrix dict from _matrix.py file.
@@ -44,17 +44,15 @@ def construct_basis(matrix_dict, k_grid=None):
     vmultiple_replace = np.vectorize(multiple_replace)
 
     Z_list = [Zj.replace("I", "1j") for Zj in z_mat.values()]
-    Z = np.array(
-        [np.array([np.array(eval(m), dtype="complex64") for m in vmultiple_replace(Zj, bond)]) for Zj in Z_list]
-    )
+    Z = np.array([np.array([np.array(eval(m), dtype="complex64") for m in vmultiple_replace(Zj, bond)]) for Zj in Z_list])
 
     return Z
 
 
 # ==================================================
-def convert_samb_to_matrix(Z, param=None):
+def convert_samb_to_matrix_set(Z, param=None):
     """
-    convert samb to matrix.
+    convert SAMB to a set of matrix.
 
     Args:
         Z (ndarray): samb matrix, [#bases, #k, dim, dim].
