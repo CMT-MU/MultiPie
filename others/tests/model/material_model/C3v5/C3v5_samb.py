@@ -157,7 +157,7 @@ C3v5 = {
                 "z_060",
             ],
         },
-        "version": "1.1.1",
+        "version": "1.1.2",
         "structure": {"B_001": ["kmp_001", "kmp_002", "kmp_003", "kmp_004", "kmp_005", "kmp_006"]},
         "harmonics": {
             "Q": [

@@ -247,6 +247,6 @@ D3 = {
             ]
         },
         "max_neighbor": 10,
-        "version": "1.1.1",
+        "version": "1.1.2",
     },
 }
