@@ -126,23 +126,13 @@ def _orthogonalize(am_set, bra_list, ket_list, crystal):
 
     b_type = basis_type(bra_list, crystal)
     if b_type == "jm":
-        if bra_list == ket_list:
-            tags = [(tag.t_type, tag.irrep) for tag in am_set.keys()]
-            tags = sorted(set(tags), key=tags.index)
-            kwargs_lst = [{"t_type": t_type, "irrep": irrep} for t_type, irrep in tags]
-        else:
-            tags = [tag.irrep for tag in am_set.keys()]
-            tags = sorted(set(tags), key=tags.index)
-            kwargs_lst = [{"irrep": irrep} for irrep in tags]
+        tags = [(tag.t_type, tag.irrep) for tag in am_set.keys()]
+        tags = sorted(set(tags), key=tags.index)
+        kwargs_lst = [{"t_type": t_type, "irrep": irrep} for t_type, irrep in tags]
     else:
-        if bra_list == ket_list:
-            tags = [(tag.t_type, tag.s, tag.irrep) for tag in am_set.keys()]
-            tags = sorted(set(tags), key=tags.index)
-            kwargs_lst = [{"t_type": t_type, "s": s, "irrep": irrep} for t_type, s, irrep in tags]
-        else:
-            tags = [(tag.s, tag.irrep) for tag in am_set.keys()]
-            tags = sorted(set(tags), key=tags.index)
-            kwargs_lst = [{"s": s, "irrep": irrep} for s, irrep in tags]
+        tags = [(tag.t_type, tag.s, tag.irrep) for tag in am_set.keys()]
+        tags = sorted(set(tags), key=tags.index)
+        kwargs_lst = [{"t_type": t_type, "s": s, "irrep": irrep} for t_type, s, irrep in tags]
 
     sub = [_ortho(**kwargs) for kwargs in kwargs_lst]
     am_set = {}
