@@ -1,7 +1,7 @@
 import numpy as np
 from gcoreutils.nsarray import NSArray
 from multipie.model.multipie_manager import MultiPieManager
-from multipie.model.construct_model import construct_basis, convert_basis_to_matrix
+from multipie.model.construct_model import construct_basis, convert_samb_to_matrix
 from gcoreutils.plot_util import init_plot, plot_dispersion
 
 data_dir = __file__[: __file__.rfind("/")] + "/material_model"
@@ -26,19 +26,16 @@ def construct_model(matrix_dict, param, N1=50):
 
     if molecule:
         Z = construct_basis(matrix_dict)
-        k_linear, k_name = None, None
+        M = convert_samb_to_matrix(Z, param)
+        return M
     else:
         k_point = {name: eval(val) for name, val in matrix_dict["k_point"].items()}
         k_path = matrix_dict["k_path"]
         B = NSArray(matrix_dict["A"], fmt="value").inverse().T
         k_grid, k_linear, k_name = NSArray.grid_path(k_point, k_path, N1, B)
         Z = construct_basis(matrix_dict, k_grid)
-
-    M = convert_basis_to_matrix(Z, param)
-
-    E, U = np.linalg.eigh(M)
-
-    return E, U, k_linear, k_name
+        M = convert_samb_to_matrix(Z, param)
+        return M, k_linear, k_name
 
 
 # ================================================== test

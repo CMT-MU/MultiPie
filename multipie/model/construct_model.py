@@ -52,12 +52,12 @@ def construct_basis(matrix_dict, k_grid=None):
 
 
 # ==================================================
-def convert_basis_to_matrix(Z, param=None):
+def convert_samb_to_matrix(Z, param=None):
     """
-    convert basis to matrix.
+    convert samb to matrix.
 
     Args:
-        Z (ndarray): basis matrix, [#bases, #k, dim, dim].
+        Z (ndarray): samb matrix, [#bases, #k, dim, dim].
         param (list, optional): parameter set(s).
 
     Returns:
