@@ -54,30 +54,30 @@ url = {https://link.aps.org/doi/10.1103/PhysRevB.107.195118}
     ```python
     # C3v.py
     C3v = {
-        "model": "C3v",
-        "group": "C3v-1",
-        "cell": {"c": 10},
+        "model": "C3v",  # name of model.
+        "group": "C3v-1",  # name of point group.
+        "cell": {"c": 10},  # set large enough interlayer distance.
         #
-        "site": {"A": ("[-1/6,-1/6,0]", "s"), "B": ("[-2/3,0,0]", "p")},
-        "bond": [("A", "A", 1), ("A", "B", 1)],
+        "site": {"A": ("[-1/6,-1/6,0]", "s"), "B": ("[-2/3,0,0]", "p")},  # positions of A and B sites and their orbitals.
+        "bond": [("A", "A", 1), ("A", "B", 1)],  # nearest-neighbor A-A and B-B bonds.
         #
-        "spinful": False,
+        "spinful": False,  # spinless.
     }
     ```
     ```python
     # graphene.py
     graphene = {
-        "model": "graphene",
-        "group": 191,
-        "cell": {"c": 4},
+        "model": "graphene",  #  name of model.
+        "group": 191,  # No. of space group.
+        "cell": {"c": 4},  # set large enough interlayer distance.
         #
-        "site": {"C": ("[1/3,2/3,0]", "pz")},
-        "bond": [("C", "C", [1, 2, 3, 4, 5, 6])],
+        "site": {"C": ("[1/3,2/3,0]", "pz")},  # positions of C site and its orbital.
+        "bond": [("C", "C", [1, 2, 3, 4, 5, 6])],  # C-C bonds up to 6th neighbors.
         #
-        "spinful": False,
+        "spinful": False,  # spinless.
         #
-        "k_point": {"Γ": "[0, 0, 0]", "M": "[1/2, 0, 0]", "K": "[1/3, 1/3, 0]", "K'": "[-1/3, -1/3, 0]"},
-        "k_path": "Γ-M-K-Γ-K'",
+        "k_point": {"Γ": "[0, 0, 0]", "M": "[1/2, 0, 0]", "K": "[1/3, 1/3, 0]"},  # def. of k points.
+        "k_path": "Γ-K-M-Γ",  # high-symmetry line.
     }
     ```
 2. At the folder where these two input files exist, do the following to create SAMB.
@@ -103,6 +103,16 @@ The detailed file formats are given as follows:
 - [_model.py](fmt_model.md)
 - [_samb.py](fmt_samb.md)
 - [_matrix.py](fmt_matrix.md)
+
+## Example usage of `_matrix.py`
+
+See, the example of plot for [plot_C3v.py](plot_C3v.py) and [plot_graphene.py](plot_graphene.py).
+Put these example files in the parent folder of **C3v** and **graphene**, and try the following shell commands,
+```
+python plot_C3v.py
+python plot_graphene.py
+```
+
 
 ## Changes
 - [version 1.1.2](ver1.1.2.md)
