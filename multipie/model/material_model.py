@@ -89,9 +89,9 @@ header_str = """
     - plus_set* : [ plus_set list ]
     - cluster_site : { cluster_tag: site_list }
     - cluster_bond : { cluster_tag: bond_list }
-    - site : { site_tag: (position, SO, (ket_site_no, bra_site_no)) }
-    - bond : { bond_tag: (vector@center, SO, (ket_site_no, bra_site_no), vector, tail;head) }
-    - cluster_atomic : { (ket_site_no, bra_site_no): [(bra_no, ket_no, matrix_tag)] }
+    - site : { site_tag: (position, SO, (bra_site_no, ket_site_no)) }
+    - bond : { bond_tag: (vector@center, SO, (bra_site_no, ket_site_no), vector, tail;head) }
+    - cluster_atomic : { (bra_site_no, ket_site_no): [(bra_no, ket_no, matrix_tag)] }
     - atomic_braket : { matrix_tag : (bra_list, ket_list) }
 
 - detail
@@ -593,10 +593,10 @@ class MaterialModel(dict):
                 else:
                     tail_name = site_to_name[str(t.shift())][0]
                     head_name = site_to_name[str(h.shift())][0]
-                th_no = (int(tail_name.split("_")[1]) - 1, int(head_name.split("_")[1]) - 1)
-                assert th_no[0] <= th_no[1], f"site indices are wrong, {th_no}"
+                ht_no = (int(head_name.split("_")[1]) - 1, int(tail_name.split("_")[1]) - 1)
+                assert ht_no[0] >= ht_no[1], f"site indices are wrong, {ht_no}"
                 vc = f"{v}@{c}"
-                data_bond[bname] = (vc, mp, th_no, str(v), b)
+                data_bond[bname] = (vc, mp, ht_no, str(v), b)
                 br = str(NSArray(vc).regular_direction()).split("@")[0]
                 b_vector[br] = b_vector.get(br, []) + [bname]
                 if n_pset > 1:
@@ -622,9 +622,9 @@ class MaterialModel(dict):
                 top = lst[0]
                 v0 = data_bond[top][3]
                 for i in lst[1:]:
-                    b, mp, th_no, v, th = data_bond[i]
+                    b, mp, ht_no, v, th = data_bond[i]
                     nv = top if v0 == v else "-" + top
-                    data_bond[i] = (b, mp, th_no, nv, th)
+                    data_bond[i] = (b, mp, ht_no, nv, th)
             data["bond"].update(data_bond)
 
         info["cell_bond"].update(cell_bond)
