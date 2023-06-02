@@ -35,7 +35,7 @@ graphene = {
     },
     "matrix": {
         "z_001": "[[sqrt(2)/2, 0], [0, sqrt(2)/2]]",
-        "z_002": "[[0, sqrt(6)*c001/6 + sqrt(6)*c002/6 + sqrt(6)*c003/6 - sqrt(6)*I*s001/6 - sqrt(6)*I*s002/6 - sqrt(6)*I*s003/6], [sqrt(6)*c001/6 + sqrt(6)*c002/6 + sqrt(6)*c003/6 + sqrt(6)*I*s001/6 + sqrt(6)*I*s002/6 + sqrt(6)*I*s003/6, 0]]",
+        "z_002": "[[0, sqrt(6)*c001/6 + sqrt(6)*c002/6 + sqrt(6)*c003/6 + sqrt(6)*I*s001/6 + sqrt(6)*I*s002/6 + sqrt(6)*I*s003/6], [sqrt(6)*c001/6 + sqrt(6)*c002/6 + sqrt(6)*c003/6 - sqrt(6)*I*s001/6 - sqrt(6)*I*s002/6 - sqrt(6)*I*s003/6, 0]]",
         "z_003": "[[sqrt(3)*c004/3 + sqrt(3)*c006/3 + sqrt(3)*c007/3, 0], [0, sqrt(3)*c004/3 + sqrt(3)*c006/3 + sqrt(3)*c007/3]]",
     },
 }

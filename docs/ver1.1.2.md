@@ -6,3 +6,4 @@ Changes in version 1.1.2
 
 - bug fix for output in Hilbert space in _samb.pdf.
 - bug fix for missing of some atomic SAMBs for hybrid orbitals.
+- bug fix for opposite mapping between bra-ket and aomic sites.
