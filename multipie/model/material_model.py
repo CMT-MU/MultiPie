@@ -89,9 +89,9 @@ header_str = """
     - plus_set* : [ plus_set list ]
     - cluster_site : { cluster_tag: site_list }
     - cluster_bond : { cluster_tag: bond_list }
-    - site : { site_tag: (position, SO, (bra_site_no, ket_site_no)) }
-    - bond : { bond_tag: (vector@center, SO, (bra_site_no, ket_site_no), vector, tail;head) }
-    - cluster_atomic : { (bra_site_no, ket_site_no): [(bra_no, ket_no, matrix_tag)] }
+    - site : { site_tag: (position, SO, (ket_site_no, bra_site_no)) }
+    - bond : { bond_tag: (vector@center, SO, (ket_site_no, bra_site_no), vector, tail;head) }
+    - cluster_atomic : { (ket_site_no, bra_site_no): [(bra_no, ket_no, matrix_tag)] }
     - atomic_braket : { matrix_tag : (bra_list, ket_list) }
 
 - detail
@@ -328,7 +328,9 @@ class MaterialModel(dict):
                 label = f"b{bond_no}/{n}th: " + self._mapping_str(mp)
             v, c = bond.split("@")
             opa = opacity * 0.5 if mode != "standard" else opacity
-            qtdraw.plot_bond(c, v, color=color1, color2=color2, width=width * scale, opacity=opa, name=cluster_name, label=label)
+            qtdraw.plot_bond(
+                c, v, color=color1, color2=color2, width=width * scale, opacity=opa, name=cluster_name, label=label
+            )
             if mode != "standard":
                 v = NSArray(v).transform(self.A)
                 v_len = v.norm() * 0.25
