@@ -1,3 +1,4 @@
+import math
 import numpy as np
 from gcoreutils.nsarray import NSArray
 from multipie.model.multipie_manager import MultiPieManager
@@ -6,14 +7,16 @@ from gcoreutils.plot_util import init_plot, plot_dispersion
 
 
 # ==================================================
-def plot_model(k_linear, E, k_name):
+def plot_model(k_linear, E, k_name, title):
     # initialize plot.
     plt, figure = init_plot()
     grid = plt.GridSpec(1, 1, hspace=0.1, wspace=0.07, width_ratios=[1], height_ratios=[1])
     ax = figure.add_subplot(grid[0, 0])
 
     # plot dispersion relation.
-    plot_dispersion(k_linear, E[:, :], k_name, title="dispersion relation for graphene", ax=ax)
+    rm = max(abs(math.floor(E.min())), abs(math.ceil(E.max())))
+    E_range = [-rm, rm]
+    plot_dispersion(k_linear, E[:, :], k_name, title=title, ax=ax, E_range=E_range)
     plt.show()
 
 
@@ -36,23 +39,26 @@ def construct_model(matrix_dict, param, N1=50):
 
 
 # ==================================================
-def plot_graphene():
+def plot():
+    # model name.
+    model = "graphene"
+
+    # parameters for model.
+    param = [-0.163, -7.274, 0.880, -0.693, 0.0761, 0.202, -0.080]
+
     # initialize manager.
     mpm = MultiPieManager(verbose=True)
 
-    # parameters for graphene.
-    param = [-0.163, -7.274, 0.880, -0.693, 0.0761, 0.202, -0.080]
-
     # construct matrices, and diagonalize them.
-    matrix_dict = mpm.read("graphene/graphene_matrix.py")
+    matrix_dict = mpm.read(f"{model}/{model}_matrix.py")
     M, k_linear, k_name = construct_model(matrix_dict, param)
     E, U = np.linalg.eigh(M)
 
     # plot results.
     mpm.log(f"  parameters (zj) = {param}", None)
     mpm.log(f"  (#k points, #energies) = {E.shape}", None)
-    plot_model(k_linear, E, k_name)
+    plot_model(k_linear, E, k_name, f"dispersion relation for {model}")
 
 
 # ==================================================
-plot_graphene()
+plot()

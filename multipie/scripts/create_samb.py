@@ -22,7 +22,7 @@ def cmd(models, parallel, verbose, latex, formatter, mode, qtdraw, output, input
     """
     create SAMB from input files.
 
-        MODELS : base file names without `.py`.
+        MODELS : file names (w or w/o `.py`).
     """
     if input:
         click.echo(input_str)
@@ -32,7 +32,8 @@ def cmd(models, parallel, verbose, latex, formatter, mode, qtdraw, output, input
 
     rel = os.path.relpath(".", "./" + output)
 
-    models = [os.path.join(rel, i + ".py") for i in models if i[-3:] != ".py"]
+    models = [i[:-3] for i in models if i[-3:] == ".py"]
+    models = [os.path.join(rel, i + ".py") for i in models]
     create_model(
         models,
         topdir=output,
