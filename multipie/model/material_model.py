@@ -4,7 +4,7 @@ MaterialModel manages model information of cluster or crystal system.
 import numpy as np
 from gcoreutils.nsarray import NSArray
 from gcoreutils.crystal_util import cell_transform_matrix
-from multipie.multipole.util.atomic_orbital_util import parse_orb_list, sort_orb_list, split_orb_list_rank_block
+from multipie.multipole.util.atomic_orbital_util import parse_orb_list, sort_orb_list, split_orb_list_rank_block, rank
 from multipie import __version__
 
 try:
@@ -429,6 +429,24 @@ class MaterialModel(dict):
                     s = position[pset * basic_num + rsite_no]
                     site_to_name[s] = (sname, pset + 1)
             site_no = site_no + basic_num
+
+        # check orbitals
+        d = {}
+        spinful = info["spinful"]
+        crystal = info["crystal"]
+        for sname, orb_list in orbital.items():
+            for orbs in orb_list:
+                o = orbs[0]
+                l = rank(o, spinful, crystal)
+                if l in d:
+                    d[l] += [(sname, orbs)]
+                else:
+                    d[l] = [(sname, orbs)]
+        for l, lst in d.items():
+            sname, orbs = lst[0]
+            if len(lst) > 1:
+                for sname_, orbs_ in lst[1:]:
+                    assert orbs == orbs_, f"invalid orbitals are given, {orbs} ({sname}) != {orbs_} ({sname_})"
 
         info["cell_site"].update(cell_site)
 
