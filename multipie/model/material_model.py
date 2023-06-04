@@ -328,9 +328,7 @@ class MaterialModel(dict):
                 label = f"b{bond_no}/{n}th: " + self._mapping_str(mp)
             v, c = bond.split("@")
             opa = opacity * 0.5 if mode != "standard" else opacity
-            qtdraw.plot_bond(
-                c, v, color=color1, color2=color2, width=width * scale, opacity=opa, name=cluster_name, label=label
-            )
+            qtdraw.plot_bond(c, v, color=color1, color2=color2, width=width * scale, opacity=opa, name=cluster_name, label=label)
             if mode != "standard":
                 v = NSArray(v).transform(self.A)
                 v_len = v.norm() * 0.25
@@ -446,7 +444,10 @@ class MaterialModel(dict):
             sname, orbs = lst[0]
             if len(lst) > 1:
                 for sname_, orbs_ in lst[1:]:
-                    assert orbs == orbs_, f"invalid orbitals are given, {orbs} ({sname}) != {orbs_} ({sname_})"
+                    if orbs != orbs_:
+                        s1 = name_site[sname][0]
+                        s2 = name_site[sname_][0]
+                        raise Exception(f"invalid orbitals are given, {s1} {orbs} != {s2} {orbs_}.")
 
         info["cell_site"].update(cell_site)
 

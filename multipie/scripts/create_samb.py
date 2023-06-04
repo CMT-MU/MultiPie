@@ -32,7 +32,7 @@ def cmd(models, parallel, verbose, latex, formatter, mode, qtdraw, output, input
 
     rel = os.path.relpath(".", "./" + output)
 
-    models = [i[:-3] for i in models if i[-3:] == ".py"]
+    models = [i[:-3] if i[-3:] == ".py" else i for i in models]
     models = [os.path.join(rel, i + ".py") for i in models]
     create_model(
         models,
