@@ -50,7 +50,7 @@ url = {https://link.aps.org/doi/10.1103/PhysRevB.107.195118}
 
 ## Basis Construction
 
-1. Prepare input file. Example input files for [C3v](https://github.com/CMT-MU/MultiPie/docs/example/C3v.py) molecule and [graphene](https://github.com/CMT-MU/MultiPie/docs/example/graphene.py) are given here.
+1. Prepare input file. Example input files for [C3v](example/C3v.py) molecule and [graphene](example/graphene.py) are given here.
     ```python
     # C3v.py
     C3v = {
