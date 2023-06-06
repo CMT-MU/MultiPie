@@ -106,7 +106,7 @@ The detailed file formats are given as follows:
 
 ## Example usage of "_matrix.py"
 
-See, the example of plot for **C3v** and **graphene** in [example](https://github.com/CMT-MU/MultiPie/docs/example).
+See, the example of plot for **C3v** and **graphene** in [example](https://github.com/CMT-MU/MultiPie/tree/main/docs/example).
 Download files in example, and try "**python create_plot.py**" command.
 
 
