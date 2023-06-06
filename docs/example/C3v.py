@@ -1,5 +1,5 @@
 """
-sample input file for C3v molecule.
+input file for C3v molecule.
 """
 C3v = {
     "model": "C3v",  # name of model.

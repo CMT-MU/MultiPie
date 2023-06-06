@@ -56,10 +56,10 @@ def convert_samb_to_matrix_set(Z, param=None):
 
     Args:
         Z (ndarray): samb matrix, [#bases, #k, dim, dim].
-        param (list, optional): parameter set(s).
+        param (list, optional): parameter set(s), [z_j] for crystal or [z_j]/[[z_j]] for molecule.
 
     Returns:
-        ndarray: matrix, [#params, #k, dim, dim].
+        ndarray: matrix, [#params/#k, dim, dim].
     """
     if param is None:
         param = [1.0] * Z.shape[0]

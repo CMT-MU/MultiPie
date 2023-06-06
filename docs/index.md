@@ -50,7 +50,7 @@ url = {https://link.aps.org/doi/10.1103/PhysRevB.107.195118}
 
 ## Basis Construction
 
-1. Prepare input file. Example input files for [C3v](C3v.py) molecule and [graphene](graphene.py) are given here.
+1. Prepare input file. Example input files for [C3v](example/C3v.py) molecule and [graphene](example/graphene.py) are given here.
     ```python
     # C3v.py
     C3v = {
@@ -81,7 +81,7 @@ url = {https://link.aps.org/doi/10.1103/PhysRevB.107.195118}
     }
     ```
 2. At the folder where these two input files exist, do the following to create SAMB.
-See for more detail, try **create_samb --help** command.
+See for more detail, try "**create_samb --help**" command.
     ```
     $ create_samb C3v graphene
     ```
@@ -106,12 +106,8 @@ The detailed file formats are given as follows:
 
 ## Example usage of "_matrix.py"
 
-See, the example of plot for [plot_C3v.py](plot_C3v.py) and [plot_graphene.py](plot_graphene.py).
-Put these example files in the parent folder of **C3v** and **graphene**, and try the following shell commands,
-```
-python plot_C3v.py
-python plot_graphene.py
-```
+See, the example of plot for **C3v** and **graphene** in [example](example).
+Download files in example, and try "**python create_plot.py**" command.
 
 
 ## Change Log

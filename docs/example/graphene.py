@@ -1,5 +1,5 @@
 """
-sample input file for graphene.
+input file for graphene.
 """
 graphene = {
     "model": "graphene",  #  name of model.
