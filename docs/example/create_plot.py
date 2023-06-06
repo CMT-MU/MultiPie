@@ -1,5 +1,5 @@
 """
-example of SAMB construction and plot for C3v and graphene.
+example of SAMB construction and plot for C3v molecule and graphene.
 """
 import numpy as np
 from multipie.model.create_model import create_model
@@ -7,7 +7,7 @@ from utility import plot_model
 
 
 # ==================================================
-# C3v parameters.
+# C3v molecule parameters.
 N = 100
 C3v_params = {
     "x_name": "$z_8$",
@@ -24,7 +24,7 @@ C3v_params = {
 }
 
 # ==================================================
-# graphene_ab parameters.
+# graphene parameters.
 graphene_params = {
     "z_001": -0.163,
     "z_002": -7.274,
