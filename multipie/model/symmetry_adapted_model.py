@@ -107,12 +107,14 @@ class SymmetryAdaptedModel(dict):
         cluster_atomic = model["data"]["cluster_atomic"]
         atomic_braket = model["data"]["atomic_braket"]
 
+        is_phonon = model["info"]["generate"]["model_type"] == "phonon"
+
         g = mpm.group
         pg = mpm.point_group
 
         # atomic
         func = create_atomic_samb_set
-        args = [pg, atomic_braket, spinful, self._parallel]
+        args = [pg, atomic_braket, spinful, is_phonon, self._parallel]
         atomic_info, atomic_data = _run("atomic", mpm, func, *args)
 
         # site/bond-cluster
@@ -121,16 +123,20 @@ class SymmetryAdaptedModel(dict):
 
         func = create_cluster_samb_set
         args = [g, rep_site_dict, rep_bond_dict, self._parallel]
-        site_cluster_info, site_cluster_data, bond_cluster_info, bond_cluster_data = _run("site/bond-cluster", mpm, func, *args)
+        site_cluster_info, site_cluster_data, bond_cluster_info, bond_cluster_data = _run(
+            "site/bond-cluster", mpm, func, *args
+        )
 
         # uniform
         cluster_samb_set = {S_i: [site_cluster_data[smp_i] for smp_i in lst] for S_i, lst in site_cluster_info.items()}
         cluster_samb_set |= {B_i: [bond_cluster_data[bmp_i] for bmp_i in lst] for B_i, lst in bond_cluster_info.items()}
         braket_indexes_dict = {
-            cluster_tag: [site[site_tag][2] for site_tag in site_list] for cluster_tag, site_list in cluster_site.items()
+            cluster_tag: [site[site_tag][2] for site_tag in site_list]
+            for cluster_tag, site_list in cluster_site.items()
         }
         braket_indexes_dict |= {
-            cluster_tag: [bond[bond_tag][2] for bond_tag in bond_list] for cluster_tag, bond_list in cluster_bond.items()
+            cluster_tag: [bond[bond_tag][2] for bond_tag in bond_list]
+            for cluster_tag, bond_list in cluster_bond.items()
         }
         dim = len(site)
 
@@ -143,8 +149,12 @@ class SymmetryAdaptedModel(dict):
         if molecule:
             y_tag_dict = {(SB_i, uniform_data[ump_i][0]): ump_i for SB_i, lst in uniform_info.items() for ump_i in lst}
         else:
-            y_tag_dict = {(S_i, site_cluster_data[smp_i][0]): smp_i for S_i, lst in site_cluster_info.items() for smp_i in lst}
-            y_tag_dict |= {(B_i, bond_cluster_data[bmp_i][0]): bmp_i for B_i, lst in bond_cluster_info.items() for bmp_i in lst}
+            y_tag_dict = {
+                (S_i, site_cluster_data[smp_i][0]): smp_i for S_i, lst in site_cluster_info.items() for smp_i in lst
+            }
+            y_tag_dict |= {
+                (B_i, bond_cluster_data[bmp_i][0]): bmp_i for B_i, lst in bond_cluster_info.items() for bmp_i in lst
+            }
 
         cluster_site_bond = cluster_site | cluster_bond
         braket_site_no_dict = {S_i: site[site_list[0]][2] for S_i, site_list in cluster_site.items()}
@@ -167,7 +177,9 @@ class SymmetryAdaptedModel(dict):
             structure_info, structure_data = _run("structure", mpm, func, *args)
 
             # Zk
-            bc_samb_set = {B_i: [(bmp_i, bond_cluster_data[bmp_i][1]) for bmp_i in lst] for B_i, lst in bond_cluster_info.items()}
+            bc_samb_set = {
+                B_i: [(bmp_i, bond_cluster_data[bmp_i][1]) for bmp_i in lst] for B_i, lst in bond_cluster_info.items()
+            }
             u_samb_set = [(ump_i, m) for ump_i, (_, m) in uniform_data.items()]
             k_samb_set = [(kmp_i, fk) for kmp_i, (_, fk) in structure_data.items()]
 
@@ -265,7 +277,9 @@ class SymmetryAdaptedModel(dict):
             structure_data = {
                 kmp_i: (str(tag), str(fk).replace("'", "")) for kmp_i, (tag, fk) in self["data"]["structure"].items()
             }
-            zk_data = {z_i: (str(tag), [tuple(map(str, v)) for v in lst]) for z_i, (tag, lst) in self["data"]["Zk"].items()}
+            zk_data = {
+                z_i: (str(tag), [tuple(map(str, v)) for v in lst]) for z_i, (tag, lst) in self["data"]["Zk"].items()
+            }
             data["structure"] = structure_data
             data["Zk"] = zk_data
 

@@ -17,7 +17,7 @@ _cpu_num = multiprocessing.cpu_count()
 
 
 # ==================================================
-def create_atomic_samb_set(pg, atomic_braket, spinful, parallel=True):
+def create_atomic_samb_set(pg, atomic_braket, spinful, is_phonon, parallel=True):
     """
     create atomic multipole basis set for each atomic subspaces.
 
@@ -25,6 +25,7 @@ def create_atomic_samb_set(pg, atomic_braket, spinful, parallel=True):
         pg (PointGroup): point group.
         atomic_braket (dict): { "M_#": (bra_list, ket_list) }.
         spinful (bool): spinful ?
+        is_phonon (bool): phonon system ?
         parallel (bool, optional): use parallel code ?
 
     Returns:
@@ -40,6 +41,8 @@ def create_atomic_samb_set(pg, atomic_braket, spinful, parallel=True):
     def proc(i, M_i):
         bra_list, ket_list = atomic_braket[M_i]
         atomic_samb = pg.atomic_samb(bra_list, ket_list, spinful)
+        if is_phonon:
+            atomic_samb = {tag: m for tag, m in atomic_samb.items() if tag.head == "Q"}
         return i, M_i, atomic_samb
 
     M_i_list = list(atomic_braket.keys())
@@ -128,7 +131,6 @@ def create_cluster_samb_set(g, rep_site_dict, rep_bond_dict, parallel=True):
     Args:
         g (PointGroup/SpaceGroup): point/space group.
         rep_site_dict (dict): { cluster_tag: position }.
-
         rep_bond_dict (dict): { cluster_tag: vector@center }.
         parallel (bool, optional): use parallel code ?
 
