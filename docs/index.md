@@ -111,6 +111,7 @@ Download files in example, and try "**python create_plot.py**" command.
 
 
 ## Change Log
+- [version 1.1.6](ver1.1.6.md)
 - [version 1.1.5](ver1.1.5.md)
 - [version 1.1.4](ver1.1.4.md)
 - [version 1.1.3](ver1.1.3.md)
