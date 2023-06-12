@@ -8,14 +8,14 @@
     - structure* : { "B_#" : ["kmp_#"] }
     - Z : { ("M_#", "S_#"/"B_#") : ["z_#"] }
     - version : MultiPie version
-    - harmonics : { head : { "harm_tag" } }
+    - harmonics : { head : [TagMultipole] }
 
 - data
     - atomic : { "amp_#" : ( TagMultipole, shape, [(i, j, matrix element)] ) }
     - site_cluster : { "smp_#" : ( TagMultipole, [vector component] ) }
     - bond_cluster : { "bmp_#" : ( TagMultipole, [vector component] ) }
     - uniform : { "ump_#" : ( TagMultipole, shape, [(i, j, matrix element)] ) }
-    - structure* : { "kmp_#" : (TagMultipole, "formfactor") }
+    - structure* : { "kmp_#" : (TagMultipole, "structure factor") }
     - Z : {"z_#" : ( TagMultipole, [(coeff, "amp_#", "smp_#"/"bmp_#/ump_#")] ) }
     - Zk* : {"z_#" : ( TagMultipole, [(coeff, "amp_#", "ump_#", "kmp_#")] ) }
 """
@@ -50,7 +50,7 @@ C3h = {
             ("A'", "M_001", "B_002"): ["z_027", "z_028"],
             ("A'", "M_002", "B_002"): ["z_029", "z_030", "z_031", "z_032", "z_033", "z_034"],
         },
-        "version": "1.1.2",
+        "version": "1.1.7",
         "harmonics": {
             "Q": ["Qh(0,A',,)", "Qh(1,E',,0)", "Qh(1,E',,1)", "Qh(2,A',,)", "Qh(2,E',,0)", "Qh(2,E',,1)"],
             "G": ["Gh(1,A',,)", "Gh(2,E',,0)", "Gh(2,E',,1)"],

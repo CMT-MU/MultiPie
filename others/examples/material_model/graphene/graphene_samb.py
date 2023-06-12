@@ -8,14 +8,14 @@
     - structure* : { "B_#" : ["kmp_#"] }
     - Z : { ("M_#", "S_#"/"B_#") : ["z_#"] }
     - version : MultiPie version
-    - harmonics : { head : { "harm_tag" } }
+    - harmonics : { head : [TagMultipole] }
 
 - data
     - atomic : { "amp_#" : ( TagMultipole, shape, [(i, j, matrix element)] ) }
     - site_cluster : { "smp_#" : ( TagMultipole, [vector component] ) }
     - bond_cluster : { "bmp_#" : ( TagMultipole, [vector component] ) }
     - uniform : { "ump_#" : ( TagMultipole, shape, [(i, j, matrix element)] ) }
-    - structure* : { "kmp_#" : (TagMultipole, "formfactor") }
+    - structure* : { "kmp_#" : (TagMultipole, "structure factor") }
     - Z : {"z_#" : ( TagMultipole, [(coeff, "amp_#", "smp_#"/"bmp_#/ump_#")] ) }
     - Zk* : {"z_#" : ( TagMultipole, [(coeff, "amp_#", "ump_#", "kmp_#")] ) }
 """
@@ -26,7 +26,7 @@ graphene = {
         "bond_cluster": {"B_001": ["bmp_002"]},
         "uniform": {"S_001": ["ump_001"], "B_001": ["ump_002", "ump_003"]},
         "Z": {("A1g", "M_001", "S_001"): ["z_001"], ("A1g", "M_001", "B_001"): ["z_002"]},
-        "version": "1.1.2",
+        "version": "1.1.7",
         "structure": {"B_001": ["kmp_001", "kmp_002"]},
         "harmonics": {"Q": ["Qh(0,A1g,,)", "Qh(3,B1u,,)"], "G": []},
     },

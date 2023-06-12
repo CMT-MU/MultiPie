@@ -18,7 +18,7 @@ GaAs = {
     "group": ("Td^2", "space group No. 216 : Td^2 / F-43m : PG Td"),
     "dimension": 6,
     "ket": ["px@Ga_1", "py@Ga_1", "pz@Ga_1", "px@As_1", "py@As_1", "pz@As_1"],
-    "version": "1.1.2",
+    "version": "1.1.7",
     "k_point": {"Γ": "[0, 0, 0]", "X": "[1/2, 0, 0]"},
     "k_path": "Γ-X",
     "A": "[[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]]",

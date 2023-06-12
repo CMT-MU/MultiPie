@@ -8,14 +8,14 @@
     - structure* : { "B_#" : ["kmp_#"] }
     - Z : { ("M_#", "S_#"/"B_#") : ["z_#"] }
     - version : MultiPie version
-    - harmonics : { head : { "harm_tag" } }
+    - harmonics : { head : [TagMultipole] }
 
 - data
     - atomic : { "amp_#" : ( TagMultipole, shape, [(i, j, matrix element)] ) }
     - site_cluster : { "smp_#" : ( TagMultipole, [vector component] ) }
     - bond_cluster : { "bmp_#" : ( TagMultipole, [vector component] ) }
     - uniform : { "ump_#" : ( TagMultipole, shape, [(i, j, matrix element)] ) }
-    - structure* : { "kmp_#" : (TagMultipole, "formfactor") }
+    - structure* : { "kmp_#" : (TagMultipole, "structure factor") }
     - Z : {"z_#" : ( TagMultipole, [(coeff, "amp_#", "smp_#"/"bmp_#/ump_#")] ) }
     - Zk* : {"z_#" : ( TagMultipole, [(coeff, "amp_#", "ump_#", "kmp_#")] ) }
 """
@@ -69,7 +69,7 @@ UPt2Si2 = {
             ("A1g", "M_004", "B_001"): ["z_019", "z_020", "z_021", "z_022", "z_023", "z_024", "z_025", "z_026"],
             ("A1g", "M_004", "B_002"): ["z_027", "z_028", "z_029", "z_030", "z_031", "z_032", "z_033", "z_034"],
         },
-        "version": "1.1.2",
+        "version": "1.1.7",
         "structure": {
             "B_001": ["kmp_001", "kmp_002", "kmp_003", "kmp_004", "kmp_005", "kmp_006", "kmp_007", "kmp_008"],
             "B_002": ["kmp_009", "kmp_010", "kmp_011", "kmp_012", "kmp_013", "kmp_014", "kmp_015", "kmp_016"],

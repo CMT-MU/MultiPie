@@ -18,7 +18,7 @@ Te = {
     "group": ("D3^4", "space group No. 152 : D3^4 / P3_121 : PG D3-1"),
     "dimension": 9,
     "ket": ["px@A_1", "py@A_1", "pz@A_1", "px@A_2", "py@A_2", "pz@A_2", "px@A_3", "py@A_3", "pz@A_3"],
-    "version": "1.1.5",
+    "version": "1.1.7",
     "k_point": {
         "Γ": "[0, 0, 0]",
         "A": "[0, 0, 1/2]",

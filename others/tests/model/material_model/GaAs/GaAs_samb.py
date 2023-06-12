@@ -8,14 +8,14 @@
     - structure* : { "B_#" : ["kmp_#"] }
     - Z : { ("M_#", "S_#"/"B_#") : ["z_#"] }
     - version : MultiPie version
-    - harmonics : { head : { "harm_tag" } }
+    - harmonics : { head : [TagMultipole] }
 
 - data
     - atomic : { "amp_#" : ( TagMultipole, shape, [(i, j, matrix element)] ) }
     - site_cluster : { "smp_#" : ( TagMultipole, [vector component] ) }
     - bond_cluster : { "bmp_#" : ( TagMultipole, [vector component] ) }
     - uniform : { "ump_#" : ( TagMultipole, shape, [(i, j, matrix element)] ) }
-    - structure* : { "kmp_#" : (TagMultipole, "formfactor") }
+    - structure* : { "kmp_#" : (TagMultipole, "structure factor") }
     - Z : {"z_#" : ( TagMultipole, [(coeff, "amp_#", "smp_#"/"bmp_#/ump_#")] ) }
     - Zk* : {"z_#" : ( TagMultipole, [(coeff, "amp_#", "ump_#", "kmp_#")] ) }
 """
@@ -30,7 +30,7 @@ GaAs = {
             ("A1", "M_001", "S_002"): ["z_002"],
             ("A1", "M_001", "B_001"): ["z_003", "z_004"],
         },
-        "version": "1.1.2",
+        "version": "1.1.7",
         "structure": {"B_001": ["kmp_001", "kmp_002", "kmp_003", "kmp_004", "kmp_005", "kmp_006", "kmp_007", "kmp_008"]},
         "harmonics": {
             "Q": ["Qh(0,A1,,)", "Qh(1,T2,,0)", "Qh(1,T2,,1)", "Qh(1,T2,,2)", "Qh(2,T2,,0)", "Qh(2,T2,,1)", "Qh(2,T2,,2)"],

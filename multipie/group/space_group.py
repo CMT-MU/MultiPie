@@ -342,23 +342,25 @@ class SpaceGroup:
             raise KeyError(f"{type(site)} is not accepted for vector/site.")
 
         s = self.symmetry_operation._equivalent_vector(site, primitive=True, shift=True)
-        so_num = len(self.symmetry_operation.full)
 
         lst = {}
         for i in range(len(s)):
             si = str(s[i])
-            lst[si] = lst.get(si, []) + [i % so_num]
+            lst[si] = lst.get(si, []) + [i]
 
         # sort in order of 1st component of SO.
         lst = dict(sorted(lst.items(), key=lambda i: i[1][0]))
 
         # convert to conventional cell.
         s = NSArray.from_str(lst.keys())
-        s = to_conventional(self.symmetry_operation.lattice, s, plus_set=plus_set).shift()
+        s = to_conventional(self.symmetry_operation.lattice, s, plus_set=True).shift()
 
         if plus_set:
             mpp = list(lst.values()) * len(self.symmetry_operation.plus_set)
             lst = {str(s[i]): mpp[i] for i in range(len(s))}
+        else:
+            mpp = list(lst.values())
+            lst = {str(s[i]): mpp[i] for i in range(len(lst))}
 
         return lst
 

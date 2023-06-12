@@ -302,6 +302,6 @@ Th = {
             ]
         },
         "max_neighbor": 10,
-        "version": "1.1.2",
+        "version": "1.1.7",
     },
 }
