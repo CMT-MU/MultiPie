@@ -189,25 +189,32 @@ class SymmetryAdaptedModel(dict):
 
         # delete unused samb and redefine the serial number of multipoles.
         if model["info"]["option"]["minimal_samb"]:
-            atomic_info_, atomic_data_, z_data = redefine_index(atomic_info, atomic_data, z_data, molecule=molecule)
-            site_cluster_info, site_cluster_data, z_data = redefine_index(
-                site_cluster_info, site_cluster_data, z_data, molecule=molecule
-            )
+            if len(site_cluster_data) > 0:
+                site_cluster_info, site_cluster_data, z_data = redefine_index(
+                    site_cluster_info, site_cluster_data, z_data, molecule=molecule
+                )
             if len(site_cluster_info) > 0:
                 init_idx = int(list(site_cluster_info.values())[-1][-1].split("_")[1]) + 1
             else:
                 init_idx = 1
-            bond_cluster_info, bond_cluster_data, z_data = redefine_index(
-                bond_cluster_info, bond_cluster_data, z_data, molecule=molecule, init_idx=init_idx
-            )
-            uniform_info_, uniform_data_, z_data = redefine_index(uniform_info, uniform_data, z_data, molecule=molecule)
+            if len(bond_cluster_data) > 0:
+                bond_cluster_info, bond_cluster_data, z_data = redefine_index(
+                    bond_cluster_info, bond_cluster_data, z_data, molecule=molecule, init_idx=init_idx
+                )
             if molecule:
-                atomic_info, atomic_data = atomic_info_, atomic_data_
-                uniform_info, uniform_data = uniform_info_, uniform_data_
+                if len(atomic_data) > 0:
+                    atomic_info, atomic_data, z_data = redefine_index(atomic_info, atomic_data, z_data, molecule=True)
+                if len(uniform_data) > 0:
+                    uniform_info, uniform_data, z_data = redefine_index(
+                        uniform_info, uniform_data, z_data, molecule=True
+                    )
             if not molecule:
-                atomic_info, atomic_data, zk_data = redefine_index(atomic_info, atomic_data, zk_data)
-                uniform_info, uniform_data, zk_data = redefine_index(uniform_info, uniform_data, zk_data)
-                structure_info, structure_data, zk_data = redefine_index(structure_info, structure_data, zk_data)
+                if len(atomic_data) > 0:
+                    atomic_info, atomic_data, zk_data = redefine_index(atomic_info, atomic_data, zk_data)
+                if len(uniform_data) > 0:
+                    uniform_info, uniform_data, zk_data = redefine_index(uniform_info, uniform_data, zk_data)
+                if len(structure_data) > 0:
+                    structure_info, structure_data, zk_data = redefine_index(structure_info, structure_data, zk_data)
 
         # harmonics
         head_list = ["Q", "G", "M", "T"]
