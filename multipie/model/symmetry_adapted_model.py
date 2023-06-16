@@ -208,8 +208,9 @@ class SymmetryAdaptedModel(dict):
                     uniform_info, uniform_data, z_data = redefine_index(
                         uniform_info, uniform_data, z_data, molecule=True
                     )
-            if not molecule:
+            else:
                 if len(atomic_data) > 0:
+                    _, _, z_data = redefine_index(atomic_info, atomic_data, z_data)
                     atomic_info, atomic_data, zk_data = redefine_index(atomic_info, atomic_data, zk_data)
                 if len(uniform_data) > 0:
                     uniform_info, uniform_data, zk_data = redefine_index(uniform_info, uniform_data, zk_data)
