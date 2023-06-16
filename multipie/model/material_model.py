@@ -26,7 +26,7 @@ input_str = """
 - model : model name (str).
 - group : group name (Schoenflies notation) or group number (space group) (str/int).
 - site : site position, orbital info. (dict) { name: ("position", orbital or orbital list) }.
-- bond : bond (list) [ ("tail", "head", (list of) neighbors) ].
+- bond* : bond (list) [ ("tail", "head", (list of) neighbors) ], [[]].
 - spinful* : spinful basis ? (bool), [False].
 - cell* : unit-cell constants (dict) { "a", "b", "c", "alpha", "beta", "gamma" }, [a=b=c=1,alpha=beta=gamma=90].
 - option*
@@ -823,6 +823,11 @@ class MaterialModel(dict):
             d["cell"] = None
 
         model = d["model"]
+
+        if "site" not in d.keys():
+            d["site"] = {}
+        if "bond" not in d.keys():
+            d["bond"] = []
 
         if "option" not in d.keys():
             d["option"] = {"view": None, "view_mode": "standard", "output": model, "minimal_samb": True}

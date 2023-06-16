@@ -75,11 +75,8 @@ class ModelPDF:
             self.lattice_info(pdf, info, name, data)
             self.hr(pdf)
         self.ket_space(pdf, info, name, data)
-        self.hr(pdf)
         self.basis_info(pdf, info, data, samb_dict)
-        self.hr(pdf)
         self.harmonics_info(pdf, info, samb_dict)
-        self.hr(pdf)
         self.group_info(pdf, info, name, data)
         pdf.text(r"\end{itemize}")
 
@@ -120,6 +117,9 @@ class ModelPDF:
 
     # ==================================================
     def ket_space(self, pdf, info, name, data):
+        if not info["site"]:  # no sites.
+            return
+
         self.comment(pdf, "ket hilbert space.")
         pdf.text(r"\item Kets: dimension = " + str(len(info["ket"])))
         orb = to_latex([i.split("@")[0] for i in info["ket"]], info["spinful"], info["crystal"])
@@ -177,6 +177,9 @@ class ModelPDF:
             hl=True,
         )
 
+        if not info["bond"]:  # no bonds.
+            return
+
         pdf.text()
         self.comment(pdf, "bonds in unit cell.")
         pdf.text(r"\item Bonds in (primitive) unit cell:")
@@ -216,9 +219,13 @@ class ModelPDF:
             long=True,
             hl=True,
         )
+        self.hr(pdf)
 
     # ==================================================
     def basis_info(self, pdf, info, data, samb):
+        if not samb["info"]["Z"]:  # no SAMBs.
+            return
+
         # SAMB.
         self.comment(pdf, "SAMB.")
         pdf.text(r"\item SAMB:" + "\n")
@@ -447,6 +454,8 @@ class ModelPDF:
         )
 
         if not info["molecule"]:
+            if not samb["info"]["structure"]:  # no structure SAMBs.
+                return
             # structure SAMB.
             self.comment(pdf, "structure SAMB.")
             row = []
@@ -477,9 +486,13 @@ class ModelPDF:
                 rmath=True,
                 hl=hl[1:],
             )
+        self.hr(pdf)
 
     # ==================================================
     def harmonics_info(self, pdf, info, samb):
+        if len(samb["info"]["harmonics"]["Q"]) == 0 and len(samb["info"]["harmonics"]["G"]) == 0:  # no harmonics.
+            return
+
         self.comment(pdf, "harmonics.")
         group = self._mpm.point_group
 
@@ -525,6 +538,7 @@ class ModelPDF:
                 long=True,
                 hl=hl[1:],
             )
+        self.hr(pdf)
 
     # ==================================================
     def lattice_info(self, pdf, info, name, data):
