@@ -7,7 +7,7 @@ from multipie.tag.tag_group import TagGroup
 from multipie.response_tensor.response_tensor_pg_set import ResponseTensorPGSet
 from multipie import get_binary
 
-rt_dir = __file__[: __file__.rfind("/")] + "/../../docs/pdf/response_tensor"
+rt_dir = __file__[: __file__.rfind("/")] + "/../../../docs/pdf/response_tensor"
 
 
 # ==================================================

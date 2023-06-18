@@ -72,10 +72,10 @@ header_str = """
     - ket : ket basis list, orbital@site
     - ket_site : list of sites
     - site : input for "site" { name: (position, orbitals) }
-    - rep_site : representative site { name: (position, wp, orbitals) }
+    - rep_site : representative site { name: (position, wp, orbitals, site-symmetry) }
     - cell_site : { name_idx(pset): (position, SOs) }
     - bond : input for "bond" [ (tail, head, neighbors) ]
-    - rep_bond : representative bond { name: (vector@center, wp, directional, neighbor) }
+    - rep_bond : representative bond { name: (vector@center, wp, directional, neighbor, site-symmetry) }
     - cell_bond : { name_idx(pset): (vector@center, SOs) }
 
 - name
@@ -320,7 +320,7 @@ class MaterialModel(dict):
 
             bond_alias_name = name["bond"][bond_name][0]
             bond_no = int(bond_name.split("_")[1])
-            _, _, nd, n = info["rep_bond"][bond_alias_name]
+            _, _, nd, n, _ = info["rep_bond"][bond_alias_name]
             color1, color2 = (c1, c1) if nd == "ND" else (c1, c2)
             if mode == "debug":
                 label = f"b{bond_no} ({ij[0]+1},{ij[1]+1})"
@@ -365,9 +365,10 @@ class MaterialModel(dict):
             orb_list = split_orb_list_rank_block(
                 sort_orb_list(parse_orb_list(orb_list, spinful, crystal), spinful, crystal), spinful, crystal
             )
+            sym = self._mpm.group.wyckoff.site_symmetry(wp)
             if not info["molecule"]:
                 pos = str(self._mpm.group.shift_home_unit_cell(pos))
-            rep_site[name] = (pos, wp, orb_list)
+            rep_site[name] = (pos, wp, orb_list, sym)
 
         info["rep_site"].update(rep_site)
 
@@ -391,7 +392,7 @@ class MaterialModel(dict):
             n_pset = 1
 
         site_no = 0
-        for no, (site, (pos, _, orb_list)) in enumerate(info["rep_site"].items()):
+        for no, (site, (pos, _, orb_list, _)) in enumerate(info["rep_site"].items()):
             if info["molecule"]:
                 s_map = self._mpm.group.site_mapping(pos)
                 basic_num = len(s_map)
@@ -516,7 +517,8 @@ class MaterialModel(dict):
                     b = f"{v}@{c}"
                     b = self._rep_bond_site_order(b, info, name)
                     bond_name = f"{tail}:{head}:{n+1}:{i+1}"
-                    n_rep_bond[bond_name] = (b, wp, nd, n + 1)
+                    sym = self._mpm.group.wyckoff.site_symmetry(wp)
+                    n_rep_bond[bond_name] = (b, wp, nd, n + 1, sym)
                 rep_bond_list.append(n_rep_bond)
 
             bond_th = f"{tail}_{head}"
@@ -584,7 +586,7 @@ class MaterialModel(dict):
             n_pset = 1
 
         bond_no = 1  # no=0 is for null vector.
-        for no, (rbname, (bond, _, _, _)) in enumerate(info["rep_bond"].items()):
+        for no, (rbname, (bond, _, _, _, _)) in enumerate(info["rep_bond"].items()):
             if info["molecule"]:
                 b_map, _ = self._mpm.group.bond_mapping(bond)
                 basic_num = len(b_map)

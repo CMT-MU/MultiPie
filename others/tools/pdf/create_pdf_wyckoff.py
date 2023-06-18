@@ -7,8 +7,8 @@ from multipie.wyckoff.wyckoff_g_set import WyckoffGSet
 from multipie.symmetry_operation.symmetry_operation_g_set import SymmetryOperationGSet
 from multipie import get_binary
 
-point_group_dir = __file__[: __file__.rfind("/")] + "/../../docs/pdf/point_group"
-space_group_dir = __file__[: __file__.rfind("/")] + "/../../docs/pdf/space_group"
+point_group_dir = __file__[: __file__.rfind("/")] + "/../../../docs/pdf/point_group"
+space_group_dir = __file__[: __file__.rfind("/")] + "/../../../docs/pdf/space_group"
 
 
 # ==================================================
@@ -33,12 +33,13 @@ def create_wyckoff(wset, soset, t_pg):
         row = []
         tbl = []
         for w in p.keys():
-            row.append(r"{\tt " + str(w) + "}")
+            sym = p.site_symmetry(w)
+            row.append(r"{\tt " + str(w) + "}" + r" ({\tt " + sym + "})")
             tbl.append(p.position(w).latex())
 
         pdf.text(name)
         col = [str(i + 1) for i in range(6)]
-        pdf.table(tbl, row, col, "WL", hl=True, stretch=1.2, tmath=True, long=True)
+        pdf.table(tbl, row, col, "WL (SS)", hl=True, stretch=1.2, tmath=True, long=True)
 
         if t_pg:
             tbl = []

@@ -153,7 +153,8 @@ class ModelPDF:
         row = []
         tbl = []
         for cluster, lst in data["cluster_site"].items():
-            cluster_name = self.ubar_name(cluster)
+            _, wp, _, sym = info["rep_site"][name["alias"][cluster]]
+            cluster_name = self.ubar_name(cluster) + f" [{str(wp)}: {sym}]"
             row.append(cluster_name)
             tbl1 = []
             for site in lst:
@@ -186,7 +187,8 @@ class ModelPDF:
         row = []
         tbl = []
         for cluster, lst in data["cluster_bond"].items():
-            cluster_name = self.ubar_name(cluster)
+            _, wp, _, _, sym = info["rep_bond"][name["alias"][cluster]]
+            cluster_name = self.ubar_name(cluster) + f" [{str(wp)}: {sym}]"
             row.append(cluster_name)
             tbl1 = []
             for bond in lst:

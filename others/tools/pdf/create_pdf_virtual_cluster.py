@@ -7,7 +7,7 @@ from multipie.tag.tag_group import TagGroup
 from multipie.virtual_cluster.virtual_cluster_pg_set import VirtualClusterPGSet
 from multipie import get_binary
 
-point_group_dir = __file__[: __file__.rfind("/")] + "/../../docs/pdf/point_group"
+point_group_dir = __file__[: __file__.rfind("/")] + "/../../../docs/pdf/point_group"
 
 
 # ==================================================

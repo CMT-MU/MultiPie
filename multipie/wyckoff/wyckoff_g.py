@@ -21,6 +21,7 @@ class WyckoffG(dict):  # dict of (wyckoff tag, wyckoff), {TagWyckoff: NSArray}.
 
     #
     #     __default (dict): default position for point group, {TagWyckoff: NSArray}.
+    #     __sym (dict): {wyckoff letter: site symmetry}
     #
     # ==================================================
     def __init__(self, g_tag):
@@ -37,18 +38,21 @@ class WyckoffG(dict):  # dict of (wyckoff tag, wyckoff), {TagWyckoff: NSArray}.
         self.v = NSArray.vector3d()
         """(x,y,z) vector."""
 
+        self.__sym = {}
         if self.tag.is_point_group():
             self.__default = {}
-            for w, pos, d in _data_wyckoff_pg[str(g_tag)]:
+            for w, pos, d, sym in _data_wyckoff_pg[str(g_tag)]:
                 v = dict(zip(["x", "y", "z"], self.v))
                 self[TagWyckoff(w)] = NSArray(pos).subs(v)
                 v = dict(zip(["x", "y", "z"], NSArray(d)))
                 self.__default[TagWyckoff(w)] = NSArray(pos).subs(v)
+                self.__sym[TagWyckoff(w)] = sym
         else:
             self.__default = None
-            for w, pos in _data_wyckoff_sg[str(g_tag)]:
+            for w, pos, sym in _data_wyckoff_sg[str(g_tag)]:
                 v = dict(zip(["x", "y", "z"], self.v))
                 self[TagWyckoff(w)] = NSArray(pos).subs(v)
+                self.__sym[TagWyckoff(w)] = sym
 
     # ==================================================
     def __str__(self):
@@ -100,3 +104,19 @@ class WyckoffG(dict):  # dict of (wyckoff tag, wyckoff), {TagWyckoff: NSArray}.
     # ==================================================
     def key_list(self):
         return TagList(self.keys())
+
+    # ==================================================
+    def site_symmetry(self, wp):
+        """
+        site symmetry.
+
+        Args:
+            wp (TagWyckoff or str): Wyckoff position tag.
+
+        Returns:
+            str: site symmetry.
+        """
+        if type(wp) == str:
+            wp = TagWyckoff(wp)
+
+        return self.__sym[wp]

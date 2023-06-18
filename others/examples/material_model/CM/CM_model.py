@@ -27,10 +27,10 @@
     - ket : ket basis list, orbital@site
     - ket_site : list of sites
     - site : input for "site" { name: (position, orbitals) }
-    - rep_site : representative site { name: (position, wp, orbitals) }
+    - rep_site : representative site { name: (position, wp, orbitals, site-symmetry) }
     - cell_site : { name_idx(pset): (position, SOs) }
     - bond : input for "bond" [ (tail, head, neighbors) ]
-    - rep_bond : representative bond { name: (vector@center, wp, directional, neighbor) }
+    - rep_bond : representative bond { name: (vector@center, wp, directional, neighbor, site-symmetry) }
     - cell_bond : { name_idx(pset): (vector@center, SOs) }
 
 - name
@@ -70,7 +70,10 @@ CM = {
         "ket": ["s@C_1", "px@C_1", "py@C_1", "pz@C_1", "s@H_1", "s@H_2", "s@H_3", "s@H_4"],
         "ket_site": ["C_1", "H_1", "H_2", "H_3", "H_4"],
         "site": {"C": ("[0,0,0]", "s p"), "H": ("[1/3,1/3,1/3]", "s")},
-        "rep_site": {"C": ("[0, 0, 0]", "1o", [["s"], ["px", "py", "pz"]]), "H": ("[1/3, 1/3, 1/3]", "4a", [["s"]])},
+        "rep_site": {
+            "C": ("[0, 0, 0]", "1o", [["s"], ["px", "py", "pz"]], "-43m"),
+            "H": ("[1/3, 1/3, 1/3]", "4a", [["s"]], ".3m"),
+        },
         "cell_site": {
             "C_1": ("[0, 0, 0]", "[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24]"),
             "H_1": ("[1/3, 1/3, 1/3]", "[1,5,9,16,17,18]"),
@@ -80,8 +83,8 @@ CM = {
         },
         "bond": [("C", "H", 1), ("H", "H", 1)],
         "rep_bond": {
-            "C:H:1:1": ("[0, 0, 0];[1/3, 1/3, 1/3]", "4a", "D", 1),
-            "H:H:1:1": ("[1/3, 1/3, 1/3];[-1/3, -1/3, 1/3]", "6b", "ND", 1),
+            "C:H:1:1": ("[0, 0, 0];[1/3, 1/3, 1/3]", "4a", "D", 1, ".3m"),
+            "H:H:1:1": ("[1/3, 1/3, 1/3];[-1/3, -1/3, 1/3]", "6b", "ND", 1, "2.mm"),
         },
         "cell_bond": {
             "C:H:1:1_1": ("[1/3, 1/3, 1/3]@[1/6, 1/6, 1/6]", "[1,5,9,16,17,18]"),
@@ -254,10 +257,10 @@ CM = {
     },
     "detail": {
         "rep_bond_all": {
-            "C_H": [{}, {"C:H:1:1": ("[0, 0, 0];[1/3, 1/3, 1/3]", "4a", "D", 1)}],
-            "H_H": [{}, {"H:H:1:1": ("[1/3, 1/3, 1/3];[-1/3, -1/3, 1/3]", "6b", "ND", 1)}],
+            "C_H": [{}, {"C:H:1:1": ("[0, 0, 0];[1/3, 1/3, 1/3]", "4a", "D", 1, ".3m")}],
+            "H_H": [{}, {"H:H:1:1": ("[1/3, 1/3, 1/3];[-1/3, -1/3, 1/3]", "6b", "ND", 1, "2.mm")}],
         },
         "max_neighbor": 10,
-        "version": "1.1.8",
+        "version": "1.1.10",
     },
 }

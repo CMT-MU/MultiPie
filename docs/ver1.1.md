@@ -2,6 +2,9 @@
 
 # MultiPie
 
+- Changes in version 1.1.10
+  - add site symmetry for Wyckoff position of point and space groups.
+
 - Changes in version 1.1.9
   - bug fix to create atomic data (minimal_samb=True) for no bonds are in input.
 

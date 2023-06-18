@@ -8,8 +8,8 @@ from multipie.symmetry_operation.symmetry_operation_g_set import SymmetryOperati
 from multipie.tag.tag_group import TagGroup
 from multipie import get_binary
 
-point_group_dir = __file__[: __file__.rfind("/")] + "/../../docs/pdf/point_group"
-space_group_dir = __file__[: __file__.rfind("/")] + "/../../docs/pdf/space_group"
+point_group_dir = __file__[: __file__.rfind("/")] + "/../../../docs/pdf/point_group"
+space_group_dir = __file__[: __file__.rfind("/")] + "/../../../docs/pdf/space_group"
 
 
 # ==================================================

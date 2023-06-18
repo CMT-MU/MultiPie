@@ -27,10 +27,10 @@
     - ket : ket basis list, orbital@site
     - ket_site : list of sites
     - site : input for "site" { name: (position, orbitals) }
-    - rep_site : representative site { name: (position, wp, orbitals) }
+    - rep_site : representative site { name: (position, wp, orbitals, site-symmetry) }
     - cell_site : { name_idx(pset): (position, SOs) }
     - bond : input for "bond" [ (tail, head, neighbors) ]
-    - rep_bond : representative bond { name: (vector@center, wp, directional, neighbor) }
+    - rep_bond : representative bond { name: (vector@center, wp, directional, neighbor, site-symmetry) }
     - cell_bond : { name_idx(pset): (vector@center, SOs) }
 
 - name
@@ -136,7 +136,7 @@ Th = {
         "ket_site": ["A_1", "A_2", "A_3", "A_4", "A_5", "A_6", "A_7", "A_8"],
         "site": {"A": ("[1,1,1]", "s p")},
         "rep_site": {
-            "A": ("[1, 1, 1]", "8b", [["(s,U)", "(s,D)"], ["(px,U)", "(px,D)", "(py,U)", "(py,D)", "(pz,U)", "(pz,D)"]])
+            "A": ("[1, 1, 1]", "8b", [["(s,U)", "(s,D)"], ["(px,U)", "(px,D)", "(py,U)", "(py,D)", "(pz,U)", "(pz,D)"]], ".3.")
         },
         "cell_site": {
             "A_1": ("[1, 1, 1]", "[1,5,9]"),
@@ -149,7 +149,7 @@ Th = {
             "A_8": ("[1, -1, 1]", "[16,20,22]"),
         },
         "bond": [("A", "A", 1)],
-        "rep_bond": {"A:A:1:1": ("[1, 1, 1];[1, 1, -1]", "12c", "ND", 1)},
+        "rep_bond": {"A:A:1:1": ("[1, 1, 1];[1, 1, -1]", "12c", "ND", 1, "m..")},
         "cell_bond": {
             "A:A:1:1_1": ("[0, 0, -2]@[1, 1, 0]", "[1,-14]"),
             "A:A:1:1_2": ("[0, 0, -2]@[-1, -1, 0]", "[2,-13]"),
@@ -296,12 +296,12 @@ Th = {
         "rep_bond_all": {
             "A_A": [
                 {},
-                {"A:A:1:1": ("[1, 1, 1];[1, 1, -1]", "12c", "ND", 1)},
-                {"A:A:2:1": ("[1, 1, 1];[-1, -1, 1]", "6a", "ND", 2)},
-                {"A:A:3:1": ("[1, 1, 1];[-1, -1, -1]", "1o", "ND", 3)},
+                {"A:A:1:1": ("[1, 1, 1];[1, 1, -1]", "12c", "ND", 1, "m..")},
+                {"A:A:2:1": ("[1, 1, 1];[-1, -1, 1]", "6a", "ND", 2, "2mm..")},
+                {"A:A:3:1": ("[1, 1, 1];[-1, -1, -1]", "1o", "ND", 3, "m-3")},
             ]
         },
         "max_neighbor": 10,
-        "version": "1.1.7",
+        "version": "1.1.10",
     },
 }

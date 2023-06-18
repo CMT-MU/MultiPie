@@ -13,7 +13,7 @@ from multipie.multipole.util.spin_orbital_basis import _standard_spinless_basis,
 from multipie.multipole.util.atomic_orbital_util import split_orb_list_rank_block
 from multipie.group.point_group import PointGroup
 
-multipole_dir = __file__[: __file__.rfind("/")] + "/../../docs/pdf/atomic_multipole"
+multipole_dir = __file__[: __file__.rfind("/")] + "/../../../docs/pdf/atomic_multipole"
 
 
 # ==================================================

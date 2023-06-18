@@ -27,10 +27,10 @@
     - ket : ket basis list, orbital@site
     - ket_site : list of sites
     - site : input for "site" { name: (position, orbitals) }
-    - rep_site : representative site { name: (position, wp, orbitals) }
+    - rep_site : representative site { name: (position, wp, orbitals, site-symmetry) }
     - cell_site : { name_idx(pset): (position, SOs) }
     - bond : input for "bond" [ (tail, head, neighbors) ]
-    - rep_bond : representative bond { name: (vector@center, wp, directional, neighbor) }
+    - rep_bond : representative bond { name: (vector@center, wp, directional, neighbor, site-symmetry) }
     - cell_bond : { name_idx(pset): (vector@center, SOs) }
 
 - name
@@ -78,15 +78,15 @@ D4h1 = {
         "ket_site": ["A_1"],
         "site": {"A": ("[0,0,0]", "s p")},
         "rep_site": {
-            "A": ("[0, 0, 0]", "1a", [["(s,U)", "(s,D)"], ["(px,U)", "(px,D)", "(py,U)", "(py,D)", "(pz,U)", "(pz,D)"]])
+            "A": ("[0, 0, 0]", "1a", [["(s,U)", "(s,D)"], ["(px,U)", "(px,D)", "(py,U)", "(py,D)", "(pz,U)", "(pz,D)"]], "4/mmm")
         },
         "cell_site": {"A_1": ("[0, 0, 0]", "[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]")},
         "bond": [("A", "A", [1, 2, 3, 4])],
         "rep_bond": {
-            "A:A:1:1": ("[0, 0, 0];[0, 1, 0]", "2f", "ND", 1),
-            "A:A:2:1": ("[0, 0, 0];[1, 1, 0]", "1c", "ND", 2),
-            "A:A:3:1": ("[0, 0, 0];[0, 0, 1]", "1b", "ND", 3),
-            "A:A:4:1": ("[0, 0, 0];[0, 1, 1]", "2e", "ND", 4),
+            "A:A:1:1": ("[0, 0, 0];[0, 1, 0]", "2f", "ND", 1, "mmm."),
+            "A:A:2:1": ("[0, 0, 0];[1, 1, 0]", "1c", "ND", 2, "4/mmm"),
+            "A:A:3:1": ("[0, 0, 0];[0, 0, 1]", "1b", "ND", 3, "4/mmm"),
+            "A:A:4:1": ("[0, 0, 0];[0, 1, 1]", "2e", "ND", 4, "mmm."),
         },
         "cell_bond": {
             "A:A:1:1_1": ("[0, 1, 0]@[0, 1/2, 0]", "[1,-2,-3,4,-9,10,11,-12]"),
@@ -185,20 +185,20 @@ D4h1 = {
         "rep_bond_all": {
             "A_A": [
                 {},
-                {"A:A:1:1": ("[0, 0, 0];[0, 1, 0]", "2f", "ND", 1)},
-                {"A:A:2:1": ("[0, 0, 0];[1, 1, 0]", "1c", "ND", 2)},
-                {"A:A:3:1": ("[0, 0, 0];[0, 0, 1]", "1b", "ND", 3)},
-                {"A:A:4:1": ("[0, 0, 0];[0, 1, 1]", "2e", "ND", 4)},
-                {"A:A:5:1": ("[-1, 0, 0];[1, 0, 0]", "1a", "ND", 5)},
-                {"A:A:6:1": ("[0, 0, 0];[1, 1, 1]", "1d", "ND", 6)},
-                {"A:A:7:1": ("[-1, 0, 0];[1, 1, 0]", "2f", "ND", 7)},
-                {"A:A:8:1": ("[-1, 0, 0];[1, 0, 1]", "1b", "ND", 8)},
-                {"A:A:9:1": ("[-1, 0, 0];[1, 1, 1]", "2e", "ND", 9)},
+                {"A:A:1:1": ("[0, 0, 0];[0, 1, 0]", "2f", "ND", 1, "mmm.")},
+                {"A:A:2:1": ("[0, 0, 0];[1, 1, 0]", "1c", "ND", 2, "4/mmm")},
+                {"A:A:3:1": ("[0, 0, 0];[0, 0, 1]", "1b", "ND", 3, "4/mmm")},
+                {"A:A:4:1": ("[0, 0, 0];[0, 1, 1]", "2e", "ND", 4, "mmm.")},
+                {"A:A:5:1": ("[-1, 0, 0];[1, 0, 0]", "1a", "ND", 5, "4/mmm")},
+                {"A:A:6:1": ("[0, 0, 0];[1, 1, 1]", "1d", "ND", 6, "4/mmm")},
+                {"A:A:7:1": ("[-1, 0, 0];[1, 1, 0]", "2f", "ND", 7, "mmm.")},
+                {"A:A:8:1": ("[-1, 0, 0];[1, 0, 1]", "1b", "ND", 8, "4/mmm")},
+                {"A:A:9:1": ("[-1, 0, 0];[1, 1, 1]", "2e", "ND", 9, "mmm.")},
             ]
         },
         "cell_range": (-2, 3, -2, 3, -2, 3),
         "max_neighbor": 10,
         "A": "[[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.5]]",
-        "version": "1.1.7",
+        "version": "1.1.10",
     },
 }

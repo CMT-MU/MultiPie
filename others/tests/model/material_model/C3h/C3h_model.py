@@ -27,10 +27,10 @@
     - ket : ket basis list, orbital@site
     - ket_site : list of sites
     - site : input for "site" { name: (position, orbitals) }
-    - rep_site : representative site { name: (position, wp, orbitals) }
+    - rep_site : representative site { name: (position, wp, orbitals, site-symmetry) }
     - cell_site : { name_idx(pset): (position, SOs) }
     - bond : input for "bond" [ (tail, head, neighbors) ]
-    - rep_bond : representative bond { name: (vector@center, wp, directional, neighbor) }
+    - rep_bond : representative bond { name: (vector@center, wp, directional, neighbor, site-symmetry) }
     - cell_bond : { name_idx(pset): (vector@center, SOs) }
 
 - name
@@ -104,9 +104,9 @@ C3h = {
         "ket_site": ["H1_1", "O_1", "O_2", "O_3", "H2_1", "H2_2", "H2_3"],
         "site": {"H1": ("[0,0,0]", "s"), "O": ("[1/3,0,0]", "s p"), "H2": ("[1/2,1/6,0]", "s")},
         "rep_site": {
-            "H1": ("[0, 0, 0]", "1o", [["(s,U)", "(s,D)"]]),
-            "O": ("[1/3, 0, 0]", "3b", [["(s,U)", "(s,D)"], ["(px,U)", "(px,D)", "(py,U)", "(py,D)", "(pz,U)", "(pz,D)"]]),
-            "H2": ("[1/2, 1/6, 0]", "3b", [["(s,U)", "(s,D)"]]),
+            "H1": ("[0, 0, 0]", "1o", [["(s,U)", "(s,D)"]], "-6"),
+            "O": ("[1/3, 0, 0]", "3b", [["(s,U)", "(s,D)"], ["(px,U)", "(px,D)", "(py,U)", "(py,D)", "(pz,U)", "(pz,D)"]], "m.."),
+            "H2": ("[1/2, 1/6, 0]", "3b", [["(s,U)", "(s,D)"]], "m.."),
         },
         "cell_site": {
             "H1_1": ("[0, 0, 0]", "[1,2,3,4,5,6]"),
@@ -119,8 +119,8 @@ C3h = {
         },
         "bond": [("H1", "O", 1), ("O", "H2", 1)],
         "rep_bond": {
-            "H1:O:1:1": ("[0, 0, 0];[1/3, 0, 0]", "3b", "D", 1),
-            "O:H2:1:1": ("[1/3, 0, 0];[1/2, 1/6, 0]", "3b", "D", 1),
+            "H1:O:1:1": ("[0, 0, 0];[1/3, 0, 0]", "3b", "D", 1, "m.."),
+            "O:H2:1:1": ("[1/3, 0, 0];[1/2, 1/6, 0]", "3b", "D", 1, "m.."),
         },
         "cell_bond": {
             "H1:O:1:1_1": ("[1/3, 0, 0]@[1/6, 0, 0]", "[1,4]"),
@@ -230,15 +230,15 @@ C3h = {
     },
     "detail": {
         "rep_bond_all": {
-            "H1_O": [{}, {"H1:O:1:1": ("[0, 0, 0];[1/3, 0, 0]", "3b", "D", 1)}],
+            "H1_O": [{}, {"H1:O:1:1": ("[0, 0, 0];[1/3, 0, 0]", "3b", "D", 1, "m..")}],
             "O_H2": [
                 {},
-                {"O:H2:1:1": ("[1/3, 0, 0];[1/2, 1/6, 0]", "3b", "D", 1)},
-                {"O:H2:2:1": ("[1/3, 0, 0];[-1/3, -1/2, 0]", "3b", "D", 2)},
-                {"O:H2:3:1": ("[1/3, 0, 0];[-1/6, 1/3, 0]", "3b", "D", 3)},
+                {"O:H2:1:1": ("[1/3, 0, 0];[1/2, 1/6, 0]", "3b", "D", 1, "m..")},
+                {"O:H2:2:1": ("[1/3, 0, 0];[-1/3, -1/2, 0]", "3b", "D", 2, "m..")},
+                {"O:H2:3:1": ("[1/3, 0, 0];[-1/6, 1/3, 0]", "3b", "D", 3, "m..")},
             ],
         },
         "max_neighbor": 10,
-        "version": "1.1.7",
+        "version": "1.1.10",
     },
 }

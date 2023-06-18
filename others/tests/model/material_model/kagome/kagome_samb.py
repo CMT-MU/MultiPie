@@ -185,7 +185,7 @@ kagome = {
                 "z_080",
             ],
         },
-        "version": "1.1.7",
+        "version": "1.1.10",
         "structure": {"B_001": ["kmp_001", "kmp_002", "kmp_003", "kmp_004", "kmp_005", "kmp_006"]},
         "harmonics": {
             "Q": [

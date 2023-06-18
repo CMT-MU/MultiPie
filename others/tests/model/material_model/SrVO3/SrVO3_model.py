@@ -27,10 +27,10 @@
     - ket : ket basis list, orbital@site
     - ket_site : list of sites
     - site : input for "site" { name: (position, orbitals) }
-    - rep_site : representative site { name: (position, wp, orbitals) }
+    - rep_site : representative site { name: (position, wp, orbitals, site-symmetry) }
     - cell_site : { name_idx(pset): (position, SOs) }
     - bond : input for "bond" [ (tail, head, neighbors) ]
-    - rep_bond : representative bond { name: (vector@center, wp, directional, neighbor) }
+    - rep_bond : representative bond { name: (vector@center, wp, directional, neighbor, site-symmetry) }
     - cell_bond : { name_idx(pset): (vector@center, SOs) }
 
 - name
@@ -77,7 +77,7 @@ SrVO3 = {
         "ket": ["dyz@V_1", "dzx@V_1", "dxy@V_1"],
         "ket_site": ["V_1"],
         "site": {"V": ("[0.0, 0.0, 0.0]", ["dyz", "dzx", "dxy"])},
-        "rep_site": {"V": ("[0, 0, 0]", "1a", [["dyz", "dzx", "dxy"]])},
+        "rep_site": {"V": ("[0, 0, 0]", "1a", [["dyz", "dzx", "dxy"]], "m-3m")},
         "cell_site": {
             "V_1": (
                 "[0, 0, 0]",
@@ -85,7 +85,10 @@ SrVO3 = {
             )
         },
         "bond": [("V", "V", [1, 2])],
-        "rep_bond": {"V:V:1:1": ("[0, 0, 0];[0, 0, 1]", "3d", "ND", 1), "V:V:2:1": ("[0, 0, 0];[0, 1, 1]", "3c", "ND", 2)},
+        "rep_bond": {
+            "V:V:1:1": ("[0, 0, 0];[0, 0, 1]", "3d", "ND", 1, "4/mm.m"),
+            "V:V:2:1": ("[0, 0, 0];[0, 1, 1]", "3c", "ND", 2, "4/mm.m"),
+        },
         "cell_bond": {
             "V:V:1:1_1": ("[0, 0, 1]@[0, 0, 1/2]", "[1,2,-3,-4,-5,-8,19,22,-25,-26,27,28,29,32,-43,-46]"),
             "V:V:1:1_2": ("[1, 0, 0]@[1/2, 0, 0]", "[6,-9,11,-12,13,-14,21,-24,-30,33,-35,36,-37,38,-45,48]"),
@@ -254,20 +257,20 @@ SrVO3 = {
         "rep_bond_all": {
             "V_V": [
                 {},
-                {"V:V:1:1": ("[0, 0, 0];[0, 0, 1]", "3d", "ND", 1)},
-                {"V:V:2:1": ("[0, 0, 0];[0, 1, 1]", "3c", "ND", 2)},
-                {"V:V:3:1": ("[0, 0, 0];[1, 1, 1]", "1b", "ND", 3)},
-                {"V:V:4:1": ("[-1, 0, 0];[1, 0, 0]", "1a", "ND", 4)},
-                {"V:V:5:1": ("[-1, 0, 0];[1, 0, 1]", "3d", "ND", 5)},
-                {"V:V:6:1": ("[-1, 0, 0];[1, 1, 1]", "3c", "ND", 6)},
-                {"V:V:7:1": ("[-1, -1, 0];[1, 1, 0]", "1a", "ND", 7)},
-                {"V:V:8:1": ("[-1, -1, 0];[1, 1, 1]", "3d", "ND", 8)},
-                {"V:V:9:1": ("[-1, -1, -1];[1, 1, 1]", "1a", "ND", 9)},
+                {"V:V:1:1": ("[0, 0, 0];[0, 0, 1]", "3d", "ND", 1, "4/mm.m")},
+                {"V:V:2:1": ("[0, 0, 0];[0, 1, 1]", "3c", "ND", 2, "4/mm.m")},
+                {"V:V:3:1": ("[0, 0, 0];[1, 1, 1]", "1b", "ND", 3, "m-3m")},
+                {"V:V:4:1": ("[-1, 0, 0];[1, 0, 0]", "1a", "ND", 4, "m-3m")},
+                {"V:V:5:1": ("[-1, 0, 0];[1, 0, 1]", "3d", "ND", 5, "4/mm.m")},
+                {"V:V:6:1": ("[-1, 0, 0];[1, 1, 1]", "3c", "ND", 6, "4/mm.m")},
+                {"V:V:7:1": ("[-1, -1, 0];[1, 1, 0]", "1a", "ND", 7, "m-3m")},
+                {"V:V:8:1": ("[-1, -1, 0];[1, 1, 1]", "3d", "ND", 8, "4/mm.m")},
+                {"V:V:9:1": ("[-1, -1, -1];[1, 1, 1]", "1a", "ND", 9, "m-3m")},
             ]
         },
         "cell_range": (-2, 3, -2, 3, -2, 3),
         "max_neighbor": 10,
         "A": "[[3.8409, 0.0, 0.0], [0.0, 3.8409, 0.0], [0.0, 0.0, 3.8409]]",
-        "version": "1.1.7",
+        "version": "1.1.10",
     },
 }
