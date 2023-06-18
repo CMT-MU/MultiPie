@@ -30,10 +30,10 @@
     - **ket** : ket basis list, orbital@site
     - **ket_site** : list of sites
     - **site** : input for "site" { name: (position, orbitals) }
-    - **rep_site** : representative site { name: (position, wp, orbitals) }
+    - **rep_site** : representative site { name: (position, wp, orbitals, site-symmetry) }
     - **cell_site** : { name_idx(pset): (position, SOs) }
     - **bond** : input for "bond" [ (tail, head, neighbors) ]
-    - **rep_bond** : representative bond { name: (vector@center, wp, directional, neighbor) }
+    - **rep_bond** : representative bond { name: (vector@center, wp, directional, neighbor, site-symmetry) }
     - **cell_bond** : { name_idx(pset): (vector@center, SOs) }
 
 - **name**
