@@ -6,7 +6,7 @@ from multipie.tag.tag_multipole import TagMultipole
 from multipie.tag.tag_list import TagList
 from multipie.data.data_atomic_multipoles import (
     _data_atomic_multipoles_lm,
-    _data_atomic_multipoles_lm,
+    _data_atomic_multipoles_jm,
     _data_atomic_multipoles_cubic,
     _data_atomic_multipoles_hexagonal,
 )
@@ -14,7 +14,7 @@ from multipie.data.data_atomic_multipoles import (
 
 _data_atomic_multipoles_set = {
     "lm": _data_atomic_multipoles_lm,
-    "jm": _data_atomic_multipoles_lm,
+    "jm": _data_atomic_multipoles_jm,
     "cubic": _data_atomic_multipoles_cubic,
     "hexagonal": _data_atomic_multipoles_hexagonal,
 }
