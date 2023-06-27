@@ -474,13 +474,20 @@ class SpaceGroup:
             return tags[0]
 
         wps = [self.wyckoff.position(tag) for tag in tags]
+        if len(self.symmetry_operation.plus_set) > 1:
+            wps = [
+                NSArray(sum([[(i + ps).shift() for i in wp] for ps in self.symmetry_operation.plus_set], []), "vector")
+                for wp in wps
+            ]
+
         wpv0 = self.symmetry_operation._equivalent_vector(site, primitive=True, shift=True, remove_duplicate=True)
         w0 = to_conventional(self.symmetry_operation.lattice, wpv0[0:1])[0]
-        sht = [[0, 0, 0], [0, 0, 1], [0, 1, 0], [0, 1, 1], [1, 0, 0], [1, 0, 1], [1, 1, 0], [1, 1, 1]]
+        sht = NSArray("{[0, 0, 0], [0, 0, 1], [0, 1, 0], [0, 1, 1], [1, 0, 0], [1, 0, 1], [1, 1, 0], [1, 1, 1]}")
+
         for tag, wp in zip(tags, wps):
             for i in wp:
                 for s in sht:
-                    s = NSArray(s, "vector")
+                    # s = NSArray(s, "vector")
                     if str(i) == str(w0 + s):
                         return tag
                     if sp.solve(list(i - w0 + s), self.wyckoff.v.tolist(), manual=True):

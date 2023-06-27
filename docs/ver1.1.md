@@ -2,6 +2,10 @@
 
 # MultiPie
 
+- Changes in version 1.1.11
+  - bug fix for jm atomic basis binary data.
+  - bug fix in find_wyckoff_position for conventional cell.
+
 - Changes in version 1.1.10
   - add site symmetry for Wyckoff position of point and space groups.
 
