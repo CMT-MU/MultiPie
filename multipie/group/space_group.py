@@ -450,6 +450,9 @@ class SpaceGroup:
         if plus_set:
             mp = list(lsts.values()) * len(self.symmetry_operation.plus_set)
             lsts = {str(b[i]): mp[i] for i in range(len(b))}
+        else:
+            mp = list(lsts.values())
+            lsts = {str(b[i]): mp[i] for i in range(len(lst))}
 
         return lsts, nd
 
