@@ -7,7 +7,7 @@ Molecular or crystal structures are best drawn by using [QtDraw](https://github.
 
 ## Installation
 
-MultiPie can be installed from PyPI using pip on Python >= 3.8:
+MultiPie can be installed from PyPI using pip on Python >= 3.9:
 ```
 pip install multipie
 ```
