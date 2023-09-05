@@ -5,7 +5,7 @@ Molecular or crystal structures are best drawn by using [QtDraw](https://github.
 
 ## Installation
 
-MultiPie can be installed from PyPI using pip on Python >= 3.8:
+MultiPie can be installed from PyPI using pip on Python >= 3.9:
 ```
 pip install multipie
 ```
@@ -47,4 +47,5 @@ url = {https://link.aps.org/doi/10.1103/PhysRevB.107.195118}
 
 ## Documentation
 
-Refer to the [documentation](https://cmt-mu.github.io/MultiPie/) for detailed installation and usage details.
+Refer to the [documentation](https://cmt-mu.github.io/MultiPie/) for detailed installation and usage.
+See also, [Manual](https://github.com/CMT-MU/QtDraw/blob/main/docs/manual.pdf).

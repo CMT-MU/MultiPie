@@ -2,6 +2,9 @@
 
 # MultiPie
 
+- Changes in version 1.1.12
+  - see GitHub log for changes of this and later versions.
+
 - Changes in version 1.1.11
   - bug fix for jm atomic basis binary data.
   - bug fix in find_wyckoff_position for conventional cell.
