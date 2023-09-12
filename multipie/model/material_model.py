@@ -276,6 +276,7 @@ class MaterialModel(dict):
             axis_type="abc",
             cluster=molecule,
             clip=False,
+            background=True,
         )
         qtdraw.set_crystal(info["crystal"])
         if scale:
