@@ -73,8 +73,8 @@ def inner_product(f1, f2):
     Notes:
         - F1 and F2 are polynomials in terms of c### and s### (### are given by lst) only without const. terms.
     """
-    f1 = str(to_symbol(f1))
-    f2 = str(to_symbol(f2))
+    f1 = str(f1)
+    f2 = str(f2)
 
     ip_str = {}
     for csi in cs_list(f1):
@@ -143,14 +143,16 @@ def decompose_fk(fk, k_samb_set):
     Returns:
         dict: dictionary of expansion coefficient {"smp_#": coeff}.
     """
-    fk = sp.expand(to_symbol(fk))
+    if type(fk) == "str":
+        fk = sp.expand(to_symbol(fk))
+    else:
+        fk = sp.expand(fk)
+
     if fk == sp.S(0):
         return {}
 
-    sm_set = {kmp_i: sp.expand(fk_) for kmp_i, fk_ in k_samb_set}
-
     coeffs = {}
-    for kmp_i, fk_ in sm_set.items():
+    for kmp_i, fk_ in k_samb_set:
         c = inner_product(fk, fk_)
         if c != 0:
             coeffs[kmp_i] = c
@@ -158,6 +160,7 @@ def decompose_fk(fk, k_samb_set):
     return coeffs
 
 
+# ==================================================
 def test():
     c1, s1, c2, s2 = sp.symbols("c001 s001 c002 s002")
     eq = sp.expand(sp.sqrt(2) * (c1 - sp.I * s1) + sp.sqrt(3) * (c2 + sp.I * s2))
