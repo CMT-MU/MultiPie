@@ -92,25 +92,28 @@ class SymmetryAdaptedModel(dict):
             irrep (list or str): irreps. of SAMB to be created.
             toroidal_priority (bool): create toroidal multipoles (G,T) in priority? else prioritize conventional multipoles (Q,M).
         """
+        # model
         self._model = model
         self._parallel = mpm.parallel
         self._verbose = mpm.verbose
 
-        molecule = model["info"]["molecule"]
-        spinful = model["info"]["spinful"]
-
-        cluster_site = model["data"]["cluster_site"]
         site = model["data"]["site"]
-        cluster_bond = model["data"]["cluster_bond"]
+        cluster_site = model["data"]["cluster_site"]
+
         bond = model["data"]["bond"]
+        cluster_bond = model["data"]["cluster_bond"]
 
         cluster_atomic = model["data"]["cluster_atomic"]
         atomic_braket = model["data"]["atomic_braket"]
-
-        is_phonon = model["info"]["generate"]["model_type"] == "phonon"
+        alias = model["name"]["alias"]
 
         g = mpm.group
         pg = mpm.point_group
+
+        spinful = model["info"]["spinful"]
+        molecule = model["info"]["molecule"]
+        is_phonon = model["info"]["generate"]["model_type"] == "phonon"
+        minimal_samb = model["info"]["option"]["minimal_samb"]
 
         # atomic
         func = create_atomic_samb_set
@@ -165,7 +168,7 @@ class SymmetryAdaptedModel(dict):
                 M_SB_list.append((M_i, SB_i))
 
         func = create_z_samb_set
-        args = [g, x_tag_dict, y_tag_dict, M_SB_list, atomic_braket, toroidal_priority, self._parallel]
+        args = [g, x_tag_dict, y_tag_dict, M_SB_list, atomic_braket, alias, toroidal_priority, self._parallel]
         z_info, z_data = _run("Z", mpm, func, *args, head=head, irrep=irrep)
 
         if not molecule:
@@ -188,7 +191,7 @@ class SymmetryAdaptedModel(dict):
             zk_data = _run("Zk", mpm, func, *args)
 
         # delete unused samb and redefine the serial number of multipoles.
-        if model["info"]["option"]["minimal_samb"]:
+        if minimal_samb:
             if len(site_cluster_data) > 0:
                 site_cluster_info, site_cluster_data, z_data = redefine_index(
                     site_cluster_info, site_cluster_data, z_data, molecule=molecule
@@ -315,6 +318,7 @@ class SymmetryAdaptedModel(dict):
         molecule = self._model["info"]["molecule"]
         cluster_atomic = self._model["data"]["cluster_atomic"]
         atomic_braket = self._model["data"]["atomic_braket"]
+        alias = self._model["name"]["alias"]
         dim_full = self._model["info"]["dimension"]
 
         atomic_data = self["data"]["atomic"]
@@ -344,7 +348,12 @@ class SymmetryAdaptedModel(dict):
             z_samb["bond"] = bond
 
         z_full = {}
-        for (_, M_i, _), z_i_list in z_info.items():
+        for (_, M_i, SB_i), z_i_list in z_info.items():
+            if SB_i[0] == "S":
+                S1 = S2 = alias[SB_i]
+            else:
+                S1, S2, _, _ = alias[SB_i].split(":")
+
             bra_orb_list, ket_orb_list = atomic_braket[M_i]
             dim_r, dim_c = len(bra_orb_list), len(ket_orb_list)
             for z_i in z_i_list:
@@ -365,8 +374,18 @@ class SymmetryAdaptedModel(dict):
                             for bra_no, ket_no, M_i_ in lst2:
                                 if M_i_ != M_i:
                                     continue
-                                m = c * u * F * sp.Matrix(X)
-                                Z[bra_no : bra_no + dim_r, ket_no : ket_no + dim_c] += m
+                                Z[bra_no : bra_no + dim_r, ket_no : ket_no + dim_c] += c * u * F * sp.Matrix(X)
+
+                                if S1 == S2 and bra_orb_list != ket_orb_list:
+                                    bra_no += dim_r
+                                    ket_no -= dim_r
+                                    Z[bra_no : bra_no + dim_c, ket_no : ket_no + dim_r] += (
+                                        c * u * F * sp.Matrix(X).adjoint()
+                                    )
+
+                if S1 == S2 and bra_orb_list != ket_orb_list:
+                    Z /= sp.sqrt(2)
+
                 if not Z.is_hermitian:
                     Z = Z + Z.adjoint()
                 z_full[z_i] = sp.expand(Z)
@@ -380,19 +399,19 @@ class SymmetryAdaptedModel(dict):
                 for z_i, Z in z_full.items():
                     Z_val = sp.Matrix.zeros(dim_full, dim_full)
                     for i, j in product(range(dim_full), range(dim_full)):
-                        v1 = Z[i, j]
-                        if v1 != 0:
+                        vij = Z[i, j]
+                        if vij != 0:
                             if len(z_data[z_i][1][0]) == 3:
-                                c = complex(v1)
-                                c = round(c.real, DIGIT) + round(c.imag, DIGIT) * 1j
-                                Z_val[i, j] += c
+                                vij = complex(vij)
+                                vij = round(vij.real, DIGIT) + round(vij.imag, DIGIT) * 1j
+                                Z_val[i, j] += vij
                             else:
-                                d = {csn: v1.coeff(csn) for csn in cs_list(v1, real=True)}
-                                for csn, c in d.items():
-                                    if c != sp.S(0):
-                                        c = complex(c)
-                                        c = round(c.real, DIGIT) + round(c.imag, DIGIT) * 1j
-                                        Z_val[i, j] += c * csn
+                                d = {csn: vij.coeff(csn) for csn in cs_list(vij, real=True)}
+                                for csn, vij in d.items():
+                                    if vij != sp.S(0):
+                                        vij = complex(vij)
+                                        vij = round(vij.real, DIGIT) + round(vij.imag, DIGIT) * 1j
+                                        Z_val[i, j] += vij * csn
                     z_full_val[z_i] = Z_val
                 z_full = {z_i: str(NSArray(mat.tolist(), "matrix")) for z_i, mat in z_full_val.items()}
             z_samb["matrix"] = z_full
@@ -402,21 +421,184 @@ class SymmetryAdaptedModel(dict):
             for z_i, Z in z_full.items():
                 mat = []
                 for i, j in product(range(dim_full), range(dim_full)):
-                    v1 = Z[i, j]
-                    if v1 != 0:
+                    vij = Z[i, j]
+                    if vij != 0:
                         if len(z_data[z_i][1][0]) == 3:
-                            mat.append((i, j, "", str(v1)))
+                            mat.append((i, j, "", str(vij)))
                         else:
-                            d = {str(csn): v1.coeff(csn) for csn in cs_list(v1, real=True)}
-                            for csn_str, c in d.items():
-                                if c != sp.S(0):
+                            d = {str(csn): vij.coeff(csn) for csn in cs_list(vij, real=True)}
+                            for csn_str, vij in d.items():
+                                if vij != sp.S(0):
                                     if fmt == "value":
-                                        c = complex(c)
-                                        c = round(c.real, DIGIT) + round(c.imag, DIGIT) * 1j
-                                    mat.append((i, j, csn_str, str(c)))
+                                        vij = complex(vij)
+                                        vij = round(vij.real, DIGIT) + round(vij.imag, DIGIT) * 1j
+                                    mat.append((i, j, csn_str, str(vij)))
                 z_dict[z_i] = mat
+
             z_samb["matrix"] = z_dict
+
             return z_samb
+
+    # ==================================================
+    def create_matrix_real(self, fmt="sympy"):
+        """
+        convert combined multipoles from dictionary to numerical matrix form (real-space).
+
+        Args:
+            fmt (str, optional): sympy/value.
+
+        Returns:
+            dict: matrix form of combined multipoles, z_dict/z_full.
+
+        Note:
+            z_dict = { "z_#" : [(n1, n2, n3, i, j, v)] }, R=(n1,n2,n3) is a lattice vector.
+        """
+        if fmt not in ["sympy", "value"]:
+            raise KeyError(f"unknown format = {fmt} is given.")
+
+        if self._model["info"]["molecule"]:
+            return self.create_matrix(self, full=False, fmt=fmt)
+
+        site = self._model["data"]["site"]
+        cluster_site = self._model["data"]["cluster_site"]
+
+        bond = self._model["data"]["bond"]
+        cluster_bond = self._model["data"]["cluster_bond"]
+
+        n_sgn_dict = {}
+        for B_i, bond_list in cluster_bond.items():
+            n_sgn_list = []
+            for bond_n in bond_list:
+                vec = bond[bond_n][3]
+                if "bond" in vec:
+                    n = int(vec.split("_")[1])
+                else:
+                    n = int(bond_n.split("_")[1])
+
+                if vec[0] == "-":
+                    n_sgn_list.append((n, -1))
+                else:
+                    n_sgn_list.append((n, +1))
+
+            n_sgn_dict[B_i] = n_sgn_list
+
+        cluster_atomic = self._model["data"]["cluster_atomic"]
+        atomic_braket = self._model["data"]["atomic_braket"]
+        alias = self._model["name"]["alias"]
+        dim_full = self._model["info"]["dimension"]
+
+        atomic_data = self["data"]["atomic"]
+        site_cluster_data = self["data"]["site_cluster"]
+        bond_cluster_data = self["data"]["bond_cluster"]
+        z_info, z_data = self["info"]["Z"], self["data"]["Z"]
+
+        z_samb = {}
+        z_samb["model"] = self._model["info"]["model"]
+        z_samb["group"] = self._model["info"]["group"]
+        z_samb["dimension"] = self._model["info"]["dimension"]
+        z_samb["ket"] = self._model["info"]["ket"]
+        z_samb["cell_site"] = self._model["info"]["cell_site"]
+        z_samb["version"] = __version__
+
+        z_full = {}
+        for (_, M_i, SB_i), z_i_list in z_info.items():
+            bra_orb_list, ket_orb_list = atomic_braket[M_i]
+            dim_r, dim_c = len(bra_orb_list), len(ket_orb_list)
+            for z_i in z_i_list:
+                lst1 = z_data[z_i][1]
+
+                # site × atomic
+                if SB_i[0] == "S":
+                    site_i_list = cluster_site[SB_i]
+                    Z = sp.Matrix.zeros(dim_full, dim_full)
+                    for c, amp_i, smp_i in lst1:
+                        X = atomic_data[amp_i][1]
+                        v = list(site_cluster_data[smp_i][1])
+                        for i in range(len(v)):
+                            vi = v[i]
+                            if vi == 0:
+                                continue
+                            bra_idx, ket_idx = site[site_i_list[i]][2]
+                            for bra_no, ket_no, M_i_ in cluster_atomic[(bra_idx, ket_idx)]:
+                                if M_i_ != M_i:
+                                    continue
+                                Z[bra_no : bra_no + dim_r, ket_no : ket_no + dim_c] += c * vi * sp.Matrix(X)
+
+                    if bra_orb_list != ket_orb_list:
+                        Z = (Z + Z.adjoint()) / sp.sqrt(2)
+
+                    Z = Z / Z.norm()
+                    z_full[z_i] = {
+                        (0, 0, 0, a, b): Z[a, b] for a in range(dim_full) for b in range(dim_full) if Z[a, b] != 0
+                    }
+
+                # bond × atomic
+                else:
+                    if SB_i[0] == "S":
+                        S1 = S2 = alias[SB_i]
+                    else:
+                        S1, S2, _, _ = alias[SB_i].split(":")
+
+                    z_full[z_i] = {}
+                    n_sgn_list = n_sgn_dict[SB_i]
+                    bond_i_list = cluster_bond[SB_i]
+                    for v in lst1:
+                        c, amp_i, bmp_i = v
+                        X = atomic_data[amp_i][1]
+                        v = list(bond_cluster_data[bmp_i][1])
+                        for i in range(len(v)):
+                            vi = v[i]
+                            if vi == 0:
+                                continue
+
+                            n, sgn = n_sgn_list[i]
+                            bra_idx, ket_idx = bond[bond_i_list[i]][2]
+                            bv = sgn * NSArray(bond[f"bond_{n:03d}"][3], style="vector")
+                            s1 = NSArray(list(site.values())[bra_idx][0], style="vector")
+                            s2 = NSArray(list(site.values())[ket_idx][0], style="vector")
+                            n1, n2, n3 = bv - (s1 - s2)
+                            n1, n2, n3 = int(n1), int(n2), int(n3)
+
+                            for bra_no, ket_no, M_i_ in cluster_atomic[(bra_idx, ket_idx)]:
+                                if M_i_ != M_i:
+                                    continue
+                                Z = sp.Matrix.zeros(dim_full, dim_full)
+                                Z[bra_no : bra_no + dim_r, ket_no : ket_no + dim_c] += c * vi * sp.Matrix(X)
+
+                                if S1 == S2 and bra_orb_list != ket_orb_list:
+                                    bra_no += dim_r
+                                    ket_no -= dim_r
+                                    Z[bra_no : bra_no + dim_c, ket_no : ket_no + dim_r] += (
+                                        c * vi * sp.Matrix(X).adjoint()
+                                    )
+
+                                    Z /= sp.sqrt(2)
+
+                                for a in range(dim_full):
+                                    for b in range(dim_full):
+                                        z = sp.expand(Z[a, b])
+                                        if z == sp.S(0):
+                                            continue
+
+                                        if (n1, n2, n3, a, b) not in z_full[z_i]:
+                                            z_full[z_i][(n1, n2, n3, a, b)] = z / sp.sqrt(2)
+                                            z_full[z_i][(-n1, -n2, -n3, b, a)] = sp.conjugate(z) / sp.sqrt(2)
+                                        else:
+                                            z_full[z_i][(n1, n2, n3, a, b)] += z / sp.sqrt(2)
+                                            z_full[z_i][(-n1, -n2, -n3, b, a)] += sp.conjugate(z) / sp.sqrt(2)
+
+        if fmt == "value":
+            DIGIT = 14
+            z_full = {
+                z_i: {k: str(round(complex(v).real, DIGIT) + round(complex(v).imag, DIGIT) * 1j) for k, v in d.items()}
+                for z_i, d in z_full.items()
+            }
+        else:
+            z_full = {z_i: {k: str(v) for k, v in d.items()} for z_i, d in z_full.items()}
+
+        z_samb["matrix"] = z_full
+
+        return z_samb
 
     # ==================================================
     @classmethod
