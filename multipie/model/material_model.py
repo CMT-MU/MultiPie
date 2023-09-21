@@ -229,7 +229,7 @@ class MaterialModel(dict):
             self._set_rep_bond(info, name, detail)
             self._set_bond(info, name, data)
 
-        self._set_matrix(data, orbital, ket_dict)
+        self._set_matrix(name, data, orbital, ket_dict)
 
         self["info"] = info
         self["name"] = name
@@ -276,7 +276,6 @@ class MaterialModel(dict):
             axis_type="abc",
             cluster=molecule,
             clip=False,
-            background=True,
         )
         qtdraw.set_crystal(info["crystal"])
         if scale:
@@ -329,7 +328,9 @@ class MaterialModel(dict):
                 label = f"b{bond_no}/{n}th: " + self._mapping_str(mp)
             v, c = bond.split("@")
             opa = opacity * 0.5 if mode != "standard" else opacity
-            qtdraw.plot_bond(c, v, color=color1, color2=color2, width=width * scale, opacity=opa, name=cluster_name, label=label)
+            qtdraw.plot_bond(
+                c, v, color=color1, color2=color2, width=width * scale, opacity=opa, name=cluster_name, label=label
+            )
             if mode != "standard":
                 v = NSArray(v).transform(self.A)
                 v_len = v.norm() * 0.25
@@ -659,7 +660,7 @@ class MaterialModel(dict):
         data["bond"].update(data_bond)
 
     # ==================================================
-    def _set_matrix(self, data, orbital, ket_dict):
+    def _set_matrix(self, name, data, orbital, ket_dict):
         cluster_atomic = {}
         atomic_braket = {}
 
@@ -669,8 +670,9 @@ class MaterialModel(dict):
             i, j = ij
             site_i = f"site_{i+1:03d}"
             site_j = f"site_{j+1:03d}"
-            cluster_atomic[ij] = []
-            if i == j:
+            Si = name["site"][list(data["site"].keys())[i]][0]
+            Sj = name["site"][list(data["site"].keys())[j]][0]
+            if Si == Sj:
                 orbs_i = orbital[site_i]
                 orbs_j = orbs_i
                 braket = sum([[(orb, orbs_j[j]) for j in range(i, len(orbs_i))] for i, orb in enumerate(orbs_i)], [])
