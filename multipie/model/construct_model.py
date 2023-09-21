@@ -1,6 +1,7 @@
 """
 construct model from matrx dict.
 """
+import sympy as sp
 import numpy as np
 from gcoreutils.nsarray import NSArray
 
@@ -44,7 +45,49 @@ def construct_samb_matrix(matrix_dict, k_grid=None):
     vmultiple_replace = np.vectorize(multiple_replace)
 
     Z_list = [Zj.replace("I", "1j") for Zj in z_mat.values()]
-    Z = np.array([np.array([np.array(eval(m), dtype="complex64") for m in vmultiple_replace(Zj, bond)]) for Zj in Z_list])
+    Z = np.array(
+        [np.array([np.array(eval(m), dtype="complex64") for m in vmultiple_replace(Zj, bond)]) for Zj in Z_list]
+    )
+
+    return Z
+
+
+# ==================================================
+def construct_samb_matrix_k(matrix_dict, k_grid=None):
+    """
+    construct SAMB matrix from matrix dict.
+
+    Args:
+        matrix_dict (dict): matrix dict from _matrix.py file.
+        k_grid (NSArray, optional): k_grid points (reduced coordinate).
+
+    Returns:
+        ndarray: basis matrix, [#bases, #k, dim, dim].
+    """
+    if k_grid is None:
+        k_grid = np.array([[0, 0, 0]])
+
+    z_samb = matrix_dict["matrix"]
+    cell_site = matrix_dict["cell_site"]
+    ket = matrix_dict["ket"]
+    dim = matrix_dict["dimension"]
+
+    atoms_frac = [
+        NSArray(cell_site[ket[a].split("@")[1]][0], style="vector", fmt="value").tolist() for a in range(len(ket))
+    ]
+
+    Nz = len(list(z_samb.keys()))
+    Nk = len(k_grid)
+
+    Z = np.zeros((Nz, Nk, dim, dim), dtype=np.complex128)
+    for j, Zj_dict in enumerate(z_samb.values()):
+        for (n1, n2, n3, a, b), v in Zj_dict.items():
+            n_r = NSArray([n1, n2, n3], style="vector", fmt="value").numpy()
+            ra = NSArray(atoms_frac[a], style="vector", fmt="value").numpy()
+            rb = NSArray(atoms_frac[b], style="vector", fmt="value").numpy()
+            v = complex(sp.sympify(v))
+            phase = -2 * np.pi * k_grid @ (n_r + ra - rb).T
+            Z[j, :, a, b] += v * np.exp(1j * phase)
 
     return Z
 
