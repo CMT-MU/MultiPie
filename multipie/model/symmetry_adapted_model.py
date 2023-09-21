@@ -190,7 +190,7 @@ class SymmetryAdaptedModel(dict):
             bc_samb_set = {B_i: [bond_cluster_data[bmp_i] for bmp_i in lst] for B_i, lst in bond_cluster_info.items()}
 
             func = create_structure_samb_set
-            args = [bc_samb_set, cluster_bond, bond, False]
+            args = [bc_samb_set, cluster_bond, bond, self._parallel]
             structure_info, structure_data = _run("structure", mpm, func, *args)
 
             # Zk
