@@ -457,7 +457,7 @@ class SymmetryAdaptedModel(dict):
             raise KeyError(f"unknown format = {fmt} is given.")
 
         if self._model["info"]["molecule"]:
-            return self.create_matrix(self, full=False, fmt=fmt)
+            return self.create_matrix(full=False, fmt=fmt)
 
         site = self._model["data"]["site"]
         cluster_site = self._model["data"]["cluster_site"]
