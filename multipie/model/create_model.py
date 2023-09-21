@@ -54,6 +54,10 @@ def _create_single_model(model_dict, mpm, view_mode):
     samb_matrix = samb.create_matrix(full=True, fmt="sympy")
     mpm.write(model_name + "_matrix.py", samb_matrix, SymmetryAdaptedModel._matrix_header(), model_name)
 
+    # create matrix (real space)
+    samb_matrix_real = samb.create_matrix_real(fmt="sympy")
+    mpm.write(model_name + "_matrix_real.py", samb_matrix_real, SymmetryAdaptedModel._matrix_header(), model_name)
+
     # create LaTeX and PDF.
     if mpm.pdf:
         mpm.log("creating LaTeX and PDF ... ", None)
@@ -65,7 +69,15 @@ def _create_single_model(model_dict, mpm, view_mode):
 
 # ==================================================
 def create_model(
-    model_list, topdir=None, symbolic=True, parallel=True, verbose=False, pdf=True, formatter=True, view_mode=None, qtdraw=True
+    model_list,
+    topdir=None,
+    symbolic=True,
+    parallel=True,
+    verbose=False,
+    pdf=True,
+    formatter=True,
+    view_mode=None,
+    qtdraw=True,
 ):
     """
     create model view, info, and basis.
