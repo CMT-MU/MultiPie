@@ -538,11 +538,8 @@ def _fourier_transform_bond_cluster_samb(bc_samb, u_samb_set, k_samb_set, braket
         Mk = (Mk + Mk.adjoint()) / sp.sqrt(2)
         Mfk_set[bmp_i] = sp.expand(Mk)
 
-    num = len(list(Mfk_set.items()))
-
     bck_samb = {}
     for i, (bmp_i, Mk) in enumerate(Mfk_set.items()):
-        print(f"{i+1}/{num}")
         coeff_ump_smp_list = []
         for ump_i, m in u_samb_set:
             fk = (sp.Matrix(m).adjoint() * Mk).trace()
