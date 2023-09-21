@@ -56,7 +56,7 @@ def _create_single_model(model_dict, mpm, view_mode):
 
     # create matrix (real space)
     samb_matrix_real = samb.create_matrix_real(fmt="sympy")
-    mpm.write(model_name + "_matrix_real.py", samb_matrix_real, SymmetryAdaptedModel._matrix_header(), model_name)
+    mpm.write(model_name + "_matrix_real.py", samb_matrix_real, SymmetryAdaptedModel._matrix_real_header(), model_name)
 
     # create LaTeX and PDF.
     if mpm.pdf:

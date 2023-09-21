@@ -58,6 +58,20 @@ matrix_header_str = """
 - matrix : { "z_#": "matrix" }
 """
 
+# ==================================================
+matrix_real_header_str = """
+== SAMB in full matrix form in real space (* only for crystal) ===
+- model : model name.
+- molecule : molecule or crystal ?
+- group : (tag, detailed str)
+- dimension : dimension of full matrix
+- ket : ket basis list, orbital@site
+- version : MultiPie version
+- cell_site : { name_idx(pset): (position, SOs) }
+- A* : transform matrix, [a1,a2,a3]
+- matrix : { "z_#": {(n1, n2, n3, a, b): matrix element} }
+"""
+
 
 # ==================================================
 def _run(msg, mpm, func, *args, **kwargs):
@@ -117,7 +131,7 @@ class SymmetryAdaptedModel(dict):
 
         # atomic
         func = create_atomic_samb_set
-        args = [pg, atomic_braket, spinful, is_phonon, self._parallel]
+        args = [pg, atomic_braket, spinful, is_phonon, False]
         atomic_info, atomic_data = _run("atomic", mpm, func, *args)
 
         # site/bond-cluster
@@ -125,7 +139,7 @@ class SymmetryAdaptedModel(dict):
         rep_bond_dict = {cluster_tag: bond[bond_list[0]][0] for cluster_tag, bond_list in cluster_bond.items()}
 
         func = create_cluster_samb_set
-        args = [g, rep_site_dict, rep_bond_dict, self._parallel]
+        args = [g, rep_site_dict, rep_bond_dict, False]
         site_cluster_info, site_cluster_data, bond_cluster_info, bond_cluster_data = _run(
             "site/bond-cluster", mpm, func, *args
         )
@@ -144,7 +158,7 @@ class SymmetryAdaptedModel(dict):
         dim = len(site)
 
         func = create_uniform_samb_set
-        args = [cluster_samb_set, braket_indexes_dict, dim, self._parallel]
+        args = [cluster_samb_set, braket_indexes_dict, dim, False]
         uniform_info, uniform_data = _run("uniform", mpm, func, *args)
 
         # Z
@@ -168,7 +182,7 @@ class SymmetryAdaptedModel(dict):
                 M_SB_list.append((M_i, SB_i))
 
         func = create_z_samb_set
-        args = [g, x_tag_dict, y_tag_dict, M_SB_list, atomic_braket, alias, toroidal_priority, self._parallel]
+        args = [g, x_tag_dict, y_tag_dict, M_SB_list, atomic_braket, alias, toroidal_priority, False]
         z_info, z_data = _run("Z", mpm, func, *args, head=head, irrep=irrep)
 
         if not molecule:
@@ -176,7 +190,7 @@ class SymmetryAdaptedModel(dict):
             bc_samb_set = {B_i: [bond_cluster_data[bmp_i] for bmp_i in lst] for B_i, lst in bond_cluster_info.items()}
 
             func = create_structure_samb_set
-            args = [bc_samb_set, cluster_bond, bond, self._parallel]
+            args = [bc_samb_set, cluster_bond, bond, False]
             structure_info, structure_data = _run("structure", mpm, func, *args)
 
             # Zk
@@ -451,7 +465,7 @@ class SymmetryAdaptedModel(dict):
             dict: matrix form of combined multipoles, z_dict/z_full.
 
         Note:
-            z_dict = { "z_#" : [(n1, n2, n3, i, j, v)] }, R=(n1,n2,n3) is a lattice vector.
+            z_dict = { "z_#" : {(n1, n2, n3, a, b): matrix element}, R=(n1,n2,n3) is a lattice vector.
         """
         if fmt not in ["sympy", "value"]:
             raise KeyError(f"unknown format = {fmt} is given.")
@@ -494,11 +508,15 @@ class SymmetryAdaptedModel(dict):
 
         z_samb = {}
         z_samb["model"] = self._model["info"]["model"]
+        z_samb["molecule"] = self._model["info"]["molecule"]
         z_samb["group"] = self._model["info"]["group"]
         z_samb["dimension"] = self._model["info"]["dimension"]
         z_samb["ket"] = self._model["info"]["ket"]
         z_samb["cell_site"] = self._model["info"]["cell_site"]
         z_samb["version"] = __version__
+
+        if not z_samb["molecule"]:
+            z_samb["A"] = self._model["detail"]["A"]
 
         z_full = {}
         for (_, M_i, SB_i), z_i_list in z_info.items():
@@ -609,3 +627,8 @@ class SymmetryAdaptedModel(dict):
     @classmethod
     def _matrix_header(cls):
         return matrix_header_str
+
+    # ==================================================
+    @classmethod
+    def _matrix_real_header(cls):
+        return matrix_real_header_str
