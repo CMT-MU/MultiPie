@@ -2,8 +2,8 @@
 This file functions to create data of atomic multipoles.
 """
 import os
+import numpy as np
 import sympy as sp
-from sympy.physics.quantum import TensorProduct
 from joblib import Parallel, delayed
 from util.atomic_multipole_matrix import create_atomic_multipole, create_atomic_multipole_harmonics_basis
 from util.output_util import write_data
@@ -123,20 +123,16 @@ def check_completeness(b_type="lm"):
     else:
         Xlmsk = create_atomic_multipole(b_type)
 
-    # normalize
-    Xlmsk = {tag: M / M.norm() for tag, M in Xlmsk.items()}
-
     print(f"=== check completeness (btype={b_type}) ===")
 
-    diag_matrix = sp.zeros(1024)
-    for M in Xlmsk.values():
-        diag_matrix += TensorProduct(M, M.adjoint())
+    # normalize
+    M_list = [np.array(M / M.norm()).reshape(1024, 1) for M in Xlmsk.values()]
+    diag_matrix = sum([M @ M.transpose().conjugate() for M in M_list])
+    diag_matrix = sp.Matrix(diag_matrix)
 
-    print(diag_matrix)
-
-    diag_matrix = sp.simplify(diag_matrix)
     if not diag_matrix.is_Identity:
-        raise Exception("atomic multipoles are not complete.")
+        # print(diag_matrix)
+        raise Exception(f"atomic multipoles are not complete (btype={b_type}).")
 
     print("success !")
 
