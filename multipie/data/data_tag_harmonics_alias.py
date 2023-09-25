@@ -1,3 +1,6 @@
+"""
+{PAO: (TagMultipole, sign)}
+"""
 _data_alias_oh = {
     "s": ("Qh(0,A1g,,)", +1),
     #
