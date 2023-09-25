@@ -432,8 +432,8 @@ def create_atomic_multipole_harmonics_basis(Xlmsk_lm, harmonics_type):
     U_mat = sp.Matrix.zeros(16, 1)
     for i, o in enumerate(spdf_basis):
         l = rank(o, spinful=False, crystal=harmonics_type)
-        h_tag, sgn = spdf_harmonics_dict[o]
-        u = sgn * hs[h_tag].u_matrix()
+        h_tag, _ = spdf_harmonics_dict[o]
+        u = hs[h_tag].u_matrix()
         u = u.tolist()
         if l == 0:
             m = u + [0] * 15
