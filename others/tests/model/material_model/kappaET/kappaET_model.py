@@ -19,6 +19,8 @@
         - model_type : tight_binding/phonon
         - time_reversal_type : electric/magnetic/both
         - irrep : irrep list
+        - fourier_transform* : create fourier transformed SAMB ?
+        - toroidal_priority : create toroidal multipoles (G,T) in priority ?
     - k_point* : representative k points
     - k_path* : high-symmetry line in k space
     - dimension : dimension of full matrix
@@ -68,7 +70,13 @@ kappaET = {
         "a2": "[0.0, 1.2, 0.0]",
         "a3": "[0.0, 0.0, 1.0]",
         "option": {"view": [0, 0, 1], "view_mode": "standard", "output": "kappaET", "minimal_samb": True},
-        "generate": {"model_type": "tight_binding", "time_reversal_type": "electric", "irrep": ["A1"]},
+        "generate": {
+            "fourier_transform": False,
+            "model_type": "tight_binding",
+            "time_reversal_type": "electric",
+            "irrep": ["A1"],
+            "toroidal_priority": False,
+        },
         "k_point": {"Γ": "[0, 0, 0]", "X": "[1/2, 0, 0]"},
         "k_path": "Γ-X",
         "dimension": 8,
@@ -197,7 +205,7 @@ kappaET = {
                 {"A:A:5:1": ("[-1/10, 21/20, 0];[2/5, 9/20, 0]", "4c", "D", 5, "1")},
                 {"A:A:6:1": ("[-1/10, 1/20, 0];[3/5, 11/20, 0]", "4c", "D", 6, "1")},
                 {
-                    "A:A:7:1": ("[9/10, 1/20, 0];[-1/10, 1/20, 0]", "4c", "D", 7, "1"),
+                    "A:A:7:1": ("[-1/10, 1/20, 0];[9/10, 1/20, 0]", "4c", "D", 7, "1"),
                     "A:A:7:2": ("[9/10, 1/20, 0];[9/10, 1/20, 1]", "4c", "D", 7, "1"),
                 },
                 {"A:A:8:1": ("[-1/10, 1/20, 0];[1/10, -1/20, 1]", "2a", "D", 8, "..2")},
@@ -207,6 +215,6 @@ kappaET = {
         "cell_range": (-2, 3, -2, 3, -2, 3),
         "max_neighbor": 10,
         "A": "[[1.0, 0.0, 0.0], [0.0, 1.2, 0.0], [0.0, 0.0, 1.0]]",
-        "version": "1.1.10",
+        "version": "1.1.14",
     },
 }

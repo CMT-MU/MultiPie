@@ -19,6 +19,8 @@
         - model_type : tight_binding/phonon
         - time_reversal_type : electric/magnetic/both
         - irrep : irrep list
+        - fourier_transform* : create fourier transformed SAMB ?
+        - toroidal_priority : create toroidal multipoles (G,T) in priority ?
     - k_point* : representative k points
     - k_path* : high-symmetry line in k space
     - dimension : dimension of full matrix
@@ -68,7 +70,13 @@ SrVO3 = {
         "a2": "[0.0, 3.8409, 0.0]",
         "a3": "[0.0, 0.0, 3.8409]",
         "option": {"view": None, "view_mode": "standard", "output": "SrVO3", "minimal_samb": True},
-        "generate": {"model_type": "tight_binding", "time_reversal_type": "electric", "irrep": ["A1g"]},
+        "generate": {
+            "fourier_transform": False,
+            "model_type": "tight_binding",
+            "time_reversal_type": "electric",
+            "irrep": ["A1g"],
+            "toroidal_priority": False,
+        },
         "k_point": {"R": "[1/2,1/2,1/2]", "Γ": "[0,0,0]", "X": "[1/2,0,0]", "M": "[1/2,1/2,0]"},
         "k_path": "R-Γ-X-R-M-Γ",
         "dimension": 3,
@@ -271,6 +279,6 @@ SrVO3 = {
         "cell_range": (-2, 3, -2, 3, -2, 3),
         "max_neighbor": 10,
         "A": "[[3.8409, 0.0, 0.0], [0.0, 3.8409, 0.0], [0.0, 0.0, 3.8409]]",
-        "version": "1.1.10",
+        "version": "1.1.14",
     },
 }

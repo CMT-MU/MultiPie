@@ -19,6 +19,8 @@
         - model_type : tight_binding/phonon
         - time_reversal_type : electric/magnetic/both
         - irrep : irrep list
+        - fourier_transform* : create fourier transformed SAMB ?
+        - toroidal_priority : create toroidal multipoles (G,T) in priority ?
     - k_point* : representative k points
     - k_path* : high-symmetry line in k space
     - dimension : dimension of full matrix
@@ -68,7 +70,13 @@ MoS2 = {
         "a2": "[-1.58305, 2.74192303092191, 0.0]",
         "a3": "[0.0, 0.0, 20.0]",
         "option": {"view": None, "view_mode": "standard", "output": "MoS2", "minimal_samb": True},
-        "generate": {"model_type": "tight_binding", "time_reversal_type": "electric", "irrep": ["A1'"]},
+        "generate": {
+            "fourier_transform": False,
+            "model_type": "tight_binding",
+            "time_reversal_type": "electric",
+            "irrep": ["A1'"],
+            "toroidal_priority": False,
+        },
         "k_point": {"Γ": "[0, 0, 0]", "M": "[1/2, 0, 0]", "K": "[1/3, 1/3, 0]", "K'": "[-1/3, -1/3, 0]"},
         "k_path": "Γ-M-K-Γ-K'",
         "dimension": 11,
@@ -296,9 +304,9 @@ MoS2 = {
             "Mo_Mo": [
                 {},
                 {"Mo:Mo:1:1": ("[0, 0, 0];[0, 1, 0]", "3j", "ND", 1, "mm2")},
-                {"Mo:Mo:2:1": ("[-1, 0, 0];[1, 1, 0]", "3j", "D", 2, "mm2")},
+                {"Mo:Mo:2:1": ("[0, -1, 0];[1, 1, 0]", "3j", "D", 2, "mm2")},
                 {"Mo:Mo:3:1": ("[-1, -1, 0];[1, 1, 0]", "1a", "ND", 3, "-6m2")},
-                {"Mo:Mo:4:1": ("[-1, -1, 0];[2, 1, 0]", "3j", "D", 4, "mm2")},
+                {"Mo:Mo:4:1": ("[-1, -1, 0];[1, 2, 0]", "3j", "D", 4, "mm2")},
                 {"Mo:Mo:5:1": ("[-1, -2, 0];[1, 2, 0]", "1a", "D", 5, "-6m2")},
                 {"Mo:Mo:6:1": ("[0, 0, 0];[0, 0, 1]", "1b", "ND", 6, "-6m2")},
                 {"Mo:Mo:7:1": ("[0, 0, 0];[0, 1, 1]", "3k", "ND", 7, "mm2")},
@@ -321,7 +329,7 @@ MoS2 = {
                 {},
                 {"S:S:1:1": ("[-1/3, 1/3, 497/4000];[2/3, 1/3, 497/4000]", "6n", "ND", 1, ".m.")},
                 {"S:S:2:1": ("[2/3, 1/3, 497/4000];[2/3, 1/3, -497/4000]", "1e", "ND", 2, "-6m2")},
-                {"S:S:3:1": ("[-1/3, -2/3, 497/4000];[2/3, 4/3, 497/4000]", "6n", "D", 3, ".m.")},
+                {"S:S:3:1": ("[-1/3, 1/3, 497/4000];[5/3, 4/3, 497/4000]", "6n", "D", 3, ".m.")},
                 {"S:S:4:1": ("[-1/3, 1/3, 497/4000];[2/3, 1/3, -497/4000]", "3j", "ND", 4, "mm2")},
                 {"S:S:5:1": ("[-1/3, -2/3, 497/4000];[5/3, 4/3, 497/4000]", "2i", "ND", 5, "3m.")},
                 {"S:S:6:1": ("[-1/3, -2/3, 497/4000];[2/3, 4/3, -497/4000]", "3j", "D", 6, "mm2")},
@@ -333,6 +341,6 @@ MoS2 = {
         "cell_range": (-2, 3, -2, 3, -2, 3),
         "max_neighbor": 10,
         "A": "[[3.1661, -1.58305, 0.0], [0.0, 2.74192303092191, 0.0], [0.0, 0.0, 20.0]]",
-        "version": "1.1.10",
+        "version": "1.1.14",
     },
 }

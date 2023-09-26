@@ -19,6 +19,8 @@
         - model_type : tight_binding/phonon
         - time_reversal_type : electric/magnetic/both
         - irrep : irrep list
+        - fourier_transform* : create fourier transformed SAMB ?
+        - toroidal_priority : create toroidal multipoles (G,T) in priority ?
     - k_point* : representative k points
     - k_path* : high-symmetry line in k space
     - dimension : dimension of full matrix
@@ -63,7 +65,12 @@ CH4 = {
         "group": ("Td", "point group No. 31 : Td / -43m"),
         "crystal": "cubic",
         "option": {"view": None, "view_mode": "standard", "output": "CH4", "minimal_samb": True},
-        "generate": {"irrep": ["A1", "A2"], "model_type": "tight_binding", "time_reversal_type": "electric"},
+        "generate": {
+            "irrep": ["A1", "A2"],
+            "model_type": "tight_binding",
+            "time_reversal_type": "electric",
+            "toroidal_priority": False,
+        },
         "dimension": 16,
         "spinful": True,
         "orbital": ["(s,U)", "(s,D)", "(px,U)", "(px,D)", "(py,U)", "(py,D)", "(pz,U)", "(pz,D)"],
@@ -192,6 +199,7 @@ CH4 = {
     "detail": {
         "rep_bond_all": {"C_H": [{}, {"C:H:1:1": ("[0, 0, 0];[1/3, 1/3, 1/3]", "4a", "D", 1, ".3m")}]},
         "max_neighbor": 10,
-        "version": "1.1.10",
+        "version": "1.1.14",
+        "cell_range": (-2, 3, -2, 3, -2, 3),
     },
 }

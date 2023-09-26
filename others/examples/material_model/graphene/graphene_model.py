@@ -20,7 +20,7 @@
         - time_reversal_type : electric/magnetic/both
         - irrep : irrep list
         - fourier_transform* : create fourier transformed SAMB ?
-        - prioritize_toroidal : create toroidal multipoles (G,T) in priority ?
+        - toroidal_priority : create toroidal multipoles (G,T) in priority ?
     - k_point* : representative k points
     - k_path* : high-symmetry line in k space
     - dimension : dimension of full matrix
@@ -75,7 +75,7 @@ graphene = {
             "model_type": "tight_binding",
             "time_reversal_type": "electric",
             "irrep": ["A1g"],
-            "prioritize_toroidal": False,
+            "toroidal_priority": False,
         },
         "k_point": {"Γ": "[0, 0, 0]", "M": "[1/2, 0, 0]", "K": "[1/3, 1/3, 0]", "K'": "[-1/3, -1/3, 0]"},
         "k_path": "Γ-M-K-Γ-K'",
@@ -153,8 +153,8 @@ graphene = {
                     "A:A:2:2": ("[1/3, 2/3, 0];[1/3, 2/3, 1]", "2d", "ND", 2, "-6m2"),
                 },
                 {
-                    "A:A:3:1": ("[1/3, -1/3, 0];[2/3, 1/3, 1]", "3g", "ND", 3, "mmm"),
-                    "A:A:3:2": ("[-2/3, -1/3, 0];[2/3, 1/3, 0]", "1a", "ND", 3, "6/mmm"),
+                    "A:A:3:1": ("[-2/3, -1/3, 0];[2/3, 1/3, 0]", "1a", "ND", 3, "6/mmm"),
+                    "A:A:3:2": ("[1/3, -1/3, 0];[2/3, 1/3, 1]", "3g", "ND", 3, "mmm"),
                 },
                 {"A:A:4:1": ("[1/3, -1/3, 0];[1/3, 2/3, 1]", "6m", "ND", 4, "mm2")},
                 {
@@ -164,13 +164,13 @@ graphene = {
                 {"A:A:6:1": ("[1/3, -1/3, 0];[4/3, 5/3, 0]", "6l", "D", 6, "mm2")},
                 {"A:A:7:1": ("[-2/3, -1/3, 0];[2/3, 4/3, 1]", "3g", "ND", 7, "mmm")},
                 {
-                    "A:A:8:1": ("[1/3, -1/3, 0];[4/3, 5/3, 1]", "6m", "D", 8, "mm2"),
+                    "A:A:8:1": ("[-2/3, -1/3, 0];[4/3, 2/3, 1]", "6m", "D", 8, "mm2"),
                     "A:A:8:2": ("[-2/3, -1/3, 0];[4/3, 5/3, 0]", "2c", "ND", 8, "-6m2"),
                     "A:A:8:3": ("[1/3, 2/3, -1];[1/3, 2/3, 1]", "2c", "ND", 8, "-6m2"),
                 },
                 {
-                    "A:A:9:1": ("[1/3, -1/3, -1];[2/3, 1/3, 1]", "3f", "ND", 9, "mmm"),
-                    "A:A:9:2": ("[-2/3, -1/3, 0];[5/3, 1/3, 0]", "3f", "ND", 9, "mmm"),
+                    "A:A:9:1": ("[-2/3, -1/3, 0];[5/3, 1/3, 0]", "3f", "ND", 9, "mmm"),
+                    "A:A:9:2": ("[1/3, -1/3, -1];[2/3, 1/3, 1]", "3f", "ND", 9, "mmm"),
                 },
             ]
         },

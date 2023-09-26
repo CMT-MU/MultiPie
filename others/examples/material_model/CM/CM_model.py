@@ -20,7 +20,7 @@
         - time_reversal_type : electric/magnetic/both
         - irrep : irrep list
         - fourier_transform* : create fourier transformed SAMB ?
-        - prioritize_toroidal : create toroidal multipoles (G,T) in priority ?
+        - toroidal_priority : create toroidal multipoles (G,T) in priority ?
     - k_point* : representative k points
     - k_path* : high-symmetry line in k space
     - dimension : dimension of full matrix
@@ -69,7 +69,7 @@ CM = {
             "model_type": "tight_binding",
             "time_reversal_type": "electric",
             "irrep": ["A1"],
-            "prioritize_toroidal": False,
+            "toroidal_priority": False,
         },
         "dimension": 8,
         "spinful": False,
