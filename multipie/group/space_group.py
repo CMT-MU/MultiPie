@@ -258,7 +258,9 @@ class SpaceGroup:
         assert len(site_list) > 0, "empty site list is given."
 
         lattice = self.symmetry_operation.lattice
-        site_list = set(to_conventional(lattice, to_primitive(lattice, site_list).shift().remove_duplicate()).shift().str())
+        site_list = set(
+            to_conventional(lattice, to_primitive(lattice, site_list).shift().remove_duplicate()).shift().str()
+        )
 
         rep_site = []
         rep_site = remove_equivalent_site(site_list, rep_site)
@@ -294,7 +296,9 @@ class SpaceGroup:
         # remove equivalent bonds.
         tail = bond_list[0].convert_bond("bond_th")[0]
         lattice = self.symmetry_operation.lattice
-        bond_list = set(to_conventional(lattice, to_primitive(lattice, bond_list).shift().remove_duplicate()).shift().str())
+        bond_list = set(
+            to_conventional(lattice, to_primitive(lattice, bond_list).shift().remove_duplicate()).shift().str()
+        )
 
         # find representative bonds.
         rep_bond = []
@@ -583,14 +587,14 @@ class SpaceGroup:
         return bc_samb, bond
 
     # ==================================================
-    def z_samb(self, x_tag_list, y_tag_list, toroidal_priority=False, **kwargs):
+    def z_samb(self, x_tag_list, y_tag_list, prioritize_toroidal=False, **kwargs):
         """
         create combined multipole basis set.
 
         Args:
             x_tag_list (str/TagMultipole/[TagMultipole]):  multipole/harmonics tag list.
             y_tag_list (str/TagMultipole/[TagMultipole]):  multipole/harmonics tag list.
-            toroidal_priority (bool, optional): create toroidal multipoles (G,T) in priority? else prioritize conventional multipoles (Q,M).
+            prioritize_toroidal (bool, optional): create toroidal multipoles (G,T) in priority? else prioritize conventional multipoles (Q,M).
             kwargs (dict, optional): select condition for multipoles, keywords in TagMultipole except for head.
 
         Returns:
@@ -609,6 +613,6 @@ class SpaceGroup:
         cg = self.pg.clebsch_gordan
         hs = self.pg.harmonics
 
-        z_samb = create_z_samb(cg, hs, x_tag_list, y_tag_list, toroidal_priority, **kwargs)
+        z_samb = create_z_samb(cg, hs, x_tag_list, y_tag_list, prioritize_toroidal, **kwargs)
 
         return z_samb

@@ -308,7 +308,9 @@ class PointGroup:
         if remove_duplicate and nondirectional:
             b = NSArray.from_str(self.bond_mapping(bond)[0].keys())
         else:
-            b = self.symmetry_operation._equivalent_bond(bond, nondirectional=nondirectional, remove_duplicate=remove_duplicate)
+            b = self.symmetry_operation._equivalent_bond(
+                bond, nondirectional=nondirectional, remove_duplicate=remove_duplicate
+            )
 
         return b
 
@@ -353,7 +355,9 @@ class PointGroup:
         h = NSArray(orbital).subs({"x": v[0], "y": v[1], "z": v[2]})
         if axial:
             so = self.symmetry_operation.mat(axial=False, cc_only=False).det()
-            t_orb = [(so[i] * self.symmetry_operation._transform_variable(h, v, tr[i])).tolist() for i in range(len(tr))]
+            t_orb = [
+                (so[i] * self.symmetry_operation._transform_variable(h, v, tr[i])).tolist() for i in range(len(tr))
+            ]
         else:
             t_orb = [self.symmetry_operation._transform_variable(h, v, tr[i]).tolist() for i in range(len(tr))]
 
@@ -760,14 +764,14 @@ class PointGroup:
         return a_samb
 
     # ==================================================
-    def z_samb(self, x_tag_list, y_tag_list, toroidal_priority=False, **kwargs):
+    def z_samb(self, x_tag_list, y_tag_list, prioritize_toroidal=False, **kwargs):
         """
         create combined multipole basis set.
 
         Args:
             x_tag_list (str/TagMultipole/[TagMultipole]):  multipole/harmonics tag list.
             y_tag_list (str/TagMultipole/[TagMultipole]):  multipole/harmonics tag list.
-            toroidal_priority (bool, optional): create toroidal multipoles (G,T) in priority? else prioritize conventional multipoles (Q,M).
+            prioritize_toroidal (bool, optional): create toroidal multipoles (G,T) in priority? else prioritize conventional multipoles (Q,M).
             kwargs (dict, optional): select condition for multipoles, keywords in TagMultipole except for head.
 
         Returns:
@@ -786,13 +790,15 @@ class PointGroup:
         cg = self.clebsch_gordan
         hs = self.harmonics
 
-        z_samb = create_z_samb(cg, hs, x_tag_list, y_tag_list, toroidal_priority, **kwargs)
+        z_samb = create_z_samb(cg, hs, x_tag_list, y_tag_list, prioritize_toroidal, **kwargs)
 
         return z_samb
 
     # ==================================================
     @classmethod
-    def spherical_atomic_multipole_basis(cls, bra_list, ket_list, spinful=False, crystal="cubic", core=None, verbose=False):
+    def spherical_atomic_multipole_basis(
+        cls, bra_list, ket_list, spinful=False, crystal="cubic", core=None, verbose=False
+    ):
         """
         create spherical atomic multipole basis set.
 
