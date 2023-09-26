@@ -193,7 +193,7 @@ def uniform_samb(sbc_samb, braket_indexes, dim):
         if not sp.Matrix(U).is_diagonal():
             U = (U + U.transpose().conjugate()) / sp.sqrt(2)
 
-        U = U.simplify()
+        U = U.expand()
         if not np.all(U == 0):
             u_samb[tag] = U
 
