@@ -186,14 +186,14 @@ def uniform_samb(sbc_samb, braket_indexes, dim):
     """
     u_samb = {}
     for tag, v in sbc_samb:
-        U = sp.Matrix.zeros(dim, dim)
+        U = NSArray.zeros((dim, dim), "matrix", fmt="sympy")
         for vi, (bra_idx, ket_idx) in zip(v, braket_indexes):
             U[bra_idx, ket_idx] += vi
 
-        if not U.is_diagonal():
-            U = (U + U.adjoint()) / sp.sqrt(2)
+        if not sp.Matrix(U).is_diagonal():
+            U = (U + U.transpose().conjugate()) / sp.sqrt(2)
 
-        U = NSArray(str(U.tolist()), style="matrix", fmt="sympy").expand()
+        U = U.simplify()
         if not np.all(U == 0):
             u_samb[tag] = U
 
@@ -356,7 +356,7 @@ def create_structure_samb_set(bc_samb_set, cluster_bond, bond, parallel=True):
         lst = []
         for tag, fk in k_samb.items():
             lst.append(f"kmp_{i:03d}")
-            structure_data[f"kmp_{i:03d}"] = (tag, sp.expand(fk))
+            structure_data[f"kmp_{i:03d}"] = (tag, fk)
             i += 1
         structure_info[B_i] = lst
 
@@ -497,13 +497,14 @@ def _fourier_transform_bond_cluster_samb(bc_samb, u_samb_set, k_samb_set, braket
         dict: fourier series of bond-cluster multipoles, { "bmp_#" : [(coefficient, "ump_#", "kmp_#")] }.
     """
 
-    def _check_fourier_transform(coeff_list):
+    def _check_fourier_transform(bmp_i, coeff_list):
         v = sp.Matrix(coeff_list)
         v = sp.adjoint(v).dot(v)
         norm = sp.sqrt(sp.expand(v))
 
         if norm != 1:
-            raise Exception(f"invalid fourier expansion coefficient = {v}, norm = {norm}.")
+            print(coeff_list)
+            raise Exception(f"({bmp_i}) invalid fourier expansion coefficient = {v}, norm = {norm}.")
 
     n_sgn_list = []
     for bond_n in bond_list:
@@ -527,20 +528,22 @@ def _fourier_transform_bond_cluster_samb(bc_samb, u_samb_set, k_samb_set, braket
             Mk[bra_idx, ket_idx] += vi * (cn + sgn * sp.I * sn)
 
         Mk = (Mk + Mk.adjoint()) / sp.sqrt(2)
-        Mfk_set[bmp_i] = sp.expand(Mk)
+        Mfk_set[bmp_i] = sp.simplify(Mk)
 
     bck_samb = {}
     for i, (bmp_i, Mk) in enumerate(Mfk_set.items()):
         coeff_ump_smp_list = []
         for ump_i, m in u_samb_set:
             fk = (sp.Matrix(m).adjoint() * Mk).trace()
-            coeffs = decompose_fk(fk, k_samb_set)
-            for kmp_i, c in coeffs.items():
-                coeff_ump_smp_list.append((c, ump_i, kmp_i))
+            fk = sp.simplify(fk)
+            if fk != sp.S(0):
+                coeffs = decompose_fk(fk, k_samb_set)
+                for kmp_i, c in coeffs.items():
+                    coeff_ump_smp_list.append((c, ump_i, kmp_i))
 
         # check normalization
-        # coeff_list = [c for c, _, _ in coeff_ump_smp_list]
-        # _check_fourier_transform(coeff_list)
+        coeff_list = [c for c, _, _ in coeff_ump_smp_list]
+        _check_fourier_transform(bmp_i, coeff_list)
 
         bck_samb[bmp_i] = coeff_ump_smp_list
 
