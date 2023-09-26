@@ -94,6 +94,20 @@ def inner_product(f1, f2):
 
 
 # ==================================================
+def normalize_fk(fk):
+    """
+    normalize k function.
+
+    Args:
+        fk (str/Symbol): function of k.
+
+    Returns:
+        Symbol: normalized k function.
+    """
+    return fk / sp.sqrt(inner_product(fk, fk))
+
+
+# ==================================================
 def orthogonalize_fk(v, nmax=None):
     """
     orthogonalize list of function of k by Gram-Schmidt orthogonalization method.
@@ -143,16 +157,14 @@ def decompose_fk(fk, k_samb_set):
     Returns:
         dict: dictionary of expansion coefficient {"smp_#": coeff}.
     """
-    if type(fk) == "str":
-        fk = sp.expand(to_symbol(fk))
-    else:
-        fk = sp.expand(fk)
+    fk = sp.expand(to_symbol(fk))
 
     if fk == sp.S(0):
         return {}
 
     coeffs = {}
     for kmp_i, fk_ in k_samb_set:
+        fk_ = sp.expand(to_symbol(fk_))
         c = inner_product(fk, fk_)
         if c != 0:
             coeffs[kmp_i] = c
