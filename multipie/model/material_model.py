@@ -248,6 +248,12 @@ class MaterialModel(dict):
 
         self._set_matrix(name, data, orbital, ket_dict)
 
+        if "detail" in dic.keys():
+            if "cell_range" in dic["detail"]:
+                detail["cell_range"] = dic["detail"]["cell_range"]
+            if "max_neighbor" in dic["detail"]:
+                detail["max_neighbor"] = dic["detail"]["max_neighbor"]
+
         self["info"] = info
         self["name"] = name
         self["data"] = data
@@ -882,6 +888,20 @@ class MaterialModel(dict):
                 d["generate"]["fourier_transform"] = False
             if "prioritize_toroidal" not in d["generate"].keys():
                 d["generate"]["prioritize_toroidal"] = False
+
+        if "detail" not in d.keys():
+            d["detail"] = {
+                "rep_bond_all": {},
+                "cell_range": _default_search_cell_range,
+                "max_neighbor": _default_max_neighbor,
+                "A": "[[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]]",
+                "version": __version__,
+            }
+        else:
+            if "cell_range" not in d["detail"].keys():
+                d["detail"]["cell_range"] = _default_search_cell_range
+            if "max_neighbor" not in d["detail"].keys():
+                d["detail"]["max_neighbor"] = _default_max_neighbor
 
         if "spinful" not in d.keys():
             d["spinful"] = False
