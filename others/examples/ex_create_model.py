@@ -9,7 +9,6 @@ topdir = __top_dir__ + "others/examples/material_model"
 
 
 models = [CM, graphene, Te]
-# models = [graphene, Te]
 create_model(
     models,
     topdir=topdir,
