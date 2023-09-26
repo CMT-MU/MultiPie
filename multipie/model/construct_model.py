@@ -7,12 +7,12 @@ from gcoreutils.nsarray import NSArray
 
 
 # ==================================================
-def construct_samb_matrix(matrix_dict, k_grid=None):
+def construct_samb_matrix_k(matrix_dict, k_grid=None):
     """
     construct SAMB matrix from matrix dict.
 
     Args:
-        matrix_dict (dict): matrix dict from _matrix.py file.
+        matrix_dict (dict): matrix dict from _matrix_k.py file.
         k_grid (NSArray, optional): k_grid points (reduced coordinate).
 
     Returns:
@@ -53,7 +53,7 @@ def construct_samb_matrix(matrix_dict, k_grid=None):
 
 
 # ==================================================
-def construct_samb_matrix_k(matrix_dict, k_grid=None):
+def construct_samb_matrix(matrix_dict, k_grid=None):
     """
     construct SAMB matrix from matrix dict.
 
@@ -72,7 +72,7 @@ def construct_samb_matrix_k(matrix_dict, k_grid=None):
     ket = matrix_dict["ket"]
     dim = matrix_dict["dimension"]
 
-    atoms_frac = [
+    atoms_positions = [
         NSArray(cell_site[ket[a].split("@")[1]][0], style="vector", fmt="value").tolist() for a in range(len(ket))
     ]
 
@@ -83,8 +83,8 @@ def construct_samb_matrix_k(matrix_dict, k_grid=None):
     for j, Zj_dict in enumerate(z_samb.values()):
         for (n1, n2, n3, a, b), v in Zj_dict.items():
             n_r = NSArray([n1, n2, n3], style="vector", fmt="value").numpy()
-            ra = NSArray(atoms_frac[a], style="vector", fmt="value").numpy()
-            rb = NSArray(atoms_frac[b], style="vector", fmt="value").numpy()
+            ra = NSArray(atoms_positions[a], style="vector", fmt="value").numpy()
+            rb = NSArray(atoms_positions[b], style="vector", fmt="value").numpy()
             v = complex(sp.sympify(v))
             phase = -2 * np.pi * k_grid @ (n_r + ra - rb).T
             Z[j, :, a, b] += v * np.exp(1j * phase)
