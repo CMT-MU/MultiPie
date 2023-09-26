@@ -39,7 +39,7 @@ input_str = """
   - time_reversal_type* : time-reversal type (str), ("electric"/"magnetic"/"both"), ["electric"].
   - irrep* : irrep. (str list), [identity irrep.].
   - fourier_transform* : create fourier transformed SAMB ?
-  - toroidal_priority* : create toroidal multipoles (G,T) in priority ?
+  - prioritize_toroidal* : create toroidal multipoles (G,T) in priority ?
 - k_point* : k-point (dict) {name: "position"}, [{ "Γ": "[0,0,0]", "X": "[1/2,0,0]" }].
 - k_path* : k-path (str) (concatenate by "-" or "\|"), ["Γ-X"].
 """
