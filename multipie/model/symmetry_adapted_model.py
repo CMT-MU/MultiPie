@@ -117,7 +117,7 @@ class SymmetryAdaptedModel(dict):
         self._parallel = self._mpm.parallel
         self._verbose = self._mpm.verbose
 
-        prioritize_toroidal = model["info"]["generate"]["prioritize_toroidal"]
+        toroidal_priority = model["info"]["generate"]["toroidal_priority"]
         irrep = model["info"]["generate"]["irrep"]
 
         site = model["data"]["site"]
@@ -194,7 +194,7 @@ class SymmetryAdaptedModel(dict):
                 M_SB_list.append((M_i, SB_i))
 
         func = create_z_samb_set
-        args = [g, x_tag_dict, y_tag_dict, M_SB_list, atomic_braket, alias, prioritize_toroidal, False]
+        args = [g, x_tag_dict, y_tag_dict, M_SB_list, atomic_braket, alias, toroidal_priority, False]
         z_info, z_data = _run("Z", self._mpm, func, *args, head=head, irrep=irrep)
 
         # info and data

@@ -39,7 +39,7 @@ input_str = """
   - time_reversal_type* : time-reversal type (str), ("electric"/"magnetic"/"both"), ["electric"].
   - irrep* : irrep. (str list), [identity irrep.].
   - fourier_transform* : create fourier transformed SAMB ?
-  - prioritize_toroidal* : create toroidal multipoles (G,T) in priority ?
+  - toroidal_priority* : create toroidal multipoles (G,T) in priority ?
 - k_point* : k-point (dict) {name: "position"}, [{ "Γ": "[0,0,0]", "X": "[1/2,0,0]" }].
 - k_path* : k-path (str) (concatenate by "-" or "\|"), ["Γ-X"].
 """
@@ -67,7 +67,7 @@ header_str = """
         - time_reversal_type : electric/magnetic/both
         - irrep : irrep list
         - fourier_transform* : create fourier transformed SAMB ?
-        - prioritize_toroidal : create toroidal multipoles (G,T) in priority ?
+        - toroidal_priority : create toroidal multipoles (G,T) in priority ?
     - k_point* : representative k points
     - k_path* : high-symmetry line in k space
     - dimension : dimension of full matrix
@@ -145,7 +145,7 @@ class MaterialModel(dict):
                 "time_reversal_type": "electric",
                 "irrep": ["A"],
                 "fourier_transform": False,
-                "prioritize_toroidal": False,
+                "toroidal_priority": False,
             },
             "k_point": {},
             "k_path": "",
@@ -875,7 +875,7 @@ class MaterialModel(dict):
                 "time_reversal_type": "electric",
                 "irrep": None,
                 "fourier_transform": False,
-                "prioritize_toroidal": False,
+                "toroidal_priority": False,
             }
         else:
             if "model_type" not in d["generate"].keys():
@@ -886,8 +886,8 @@ class MaterialModel(dict):
                 d["generate"]["irrep"] = None
             if "fourier_transform" not in d["generate"].keys():
                 d["generate"]["fourier_transform"] = False
-            if "prioritize_toroidal" not in d["generate"].keys():
-                d["generate"]["prioritize_toroidal"] = False
+            if "toroidal_priority" not in d["generate"].keys():
+                d["generate"]["toroidal_priority"] = False
 
         if "detail" not in d.keys():
             d["detail"] = {

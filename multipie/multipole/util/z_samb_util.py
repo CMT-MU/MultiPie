@@ -10,7 +10,7 @@ from multipie.const import is_electric
 
 
 # ==================================================
-def create_z_samb(cg, hs, tag1_list, tag2_list, prioritize_toroidal=False, **kwargs):
+def create_z_samb(cg, hs, tag1_list, tag2_list, toroidal_priority=False, **kwargs):
     """
     initialize combined multipoles.
 
@@ -19,7 +19,7 @@ def create_z_samb(cg, hs, tag1_list, tag2_list, prioritize_toroidal=False, **kwa
         hs (HarmonicsPG): the class to manage harmonics.
         tag1_list (TagList): multipole/harmonics tag list.
         tag2_list (TagList): multipole/harmonics tag list.
-        prioritize_toroidal (bool): create toroidal multipoles (G,T) in priority? else prioritize conventional multipoles (Q,M).
+        toroidal_priority (bool): create toroidal multipoles (G,T) in priority? else prioritize conventional multipoles (Q,M).
         kwargs (dict, optional): select conditions for multipoles,
                                  keywords in ["head", "rank", "irrep", "mul", "comp", "s", "k"].
     Returns:
@@ -35,7 +35,7 @@ def create_z_samb(cg, hs, tag1_list, tag2_list, prioritize_toroidal=False, **kwa
     idx_pairs = product(*[range(len(v_list)) for v_list in values])
     kwargs_list = [{keys[i]: values[i][j] for i, j in enumerate(idx_pair)} for idx_pair in idx_pairs]
 
-    head_list = ["G", "Q", "T", "M"] if prioritize_toroidal else ["Q", "G", "M", "T"]
+    head_list = ["G", "Q", "T", "M"] if toroidal_priority else ["Q", "G", "M", "T"]
     Ztag_list = [tag.replace(m_type="") for tag in hs.key_list()]
     Ztag_list += [tag.replace(head="M") for tag in TagList(Ztag_list).select(head="G")]
     Ztag_list += [tag.replace(head="T") for tag in TagList(Ztag_list).select(head="Q")]

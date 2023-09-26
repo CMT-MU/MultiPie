@@ -397,7 +397,7 @@ def _check_complete_relation(x_tag_dict, y_tag_dict, z_info, z_data):
 
 # ==================================================
 def create_z_samb_set(
-    g, x_tag_dict, y_tag_dict, M_SB_list, atomic_braket, alias, prioritize_toroidal=False, parallel=True, **kwargs
+    g, x_tag_dict, y_tag_dict, M_SB_list, atomic_braket, alias, toroidal_priority=False, parallel=True, **kwargs
 ):
     """
     create combined multipole basis set.
@@ -409,7 +409,7 @@ def create_z_samb_set(
         M_SB_list (list): [("M_#", "S_#"/"B_#")].
         atomic_braket (dict): { matrix_tag : (bra_list, ket_list) }.
         alias (dict): { cluster_tag: name or name: cluster_tag }.
-        prioritize_toroidal (bool): create toroidal multipoles (G,T) in priority? else prioritize conventional multipoles (Q,M).
+        toroidal_priority (bool): create toroidal multipoles (G,T) in priority? else prioritize conventional multipoles (Q,M).
         parallel (bool, optional): use parallel code.
         kwargs (dict, optional): select conditions for multipoles,
                                  keywords in ["head", "rank", "irrep", "mul", "comp", "s", "k"].
@@ -446,7 +446,7 @@ def create_z_samb_set(
         if E_am_dict[(M_i, SB_i)]:
             x_tag_list = TagList([tag for tag in x_tag_list if tag.head in ("Q", "G")])
         y_tag_list = TagList([tag for (SB_i_, tag) in y_tag_dict.keys() if SB_i_ == SB_i])
-        z_samb = g.z_samb(x_tag_list, y_tag_list, prioritize_toroidal, irrep=irrep, **kwargs)
+        z_samb = g.z_samb(x_tag_list, y_tag_list, toroidal_priority, irrep=irrep, **kwargs)
         return i, irrep, M_i, SB_i, z_samb
 
     res = Parallel(n_jobs=n_jobs, verbose=0)(

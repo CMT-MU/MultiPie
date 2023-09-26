@@ -587,14 +587,14 @@ class SpaceGroup:
         return bc_samb, bond
 
     # ==================================================
-    def z_samb(self, x_tag_list, y_tag_list, prioritize_toroidal=False, **kwargs):
+    def z_samb(self, x_tag_list, y_tag_list, toroidal_priority=False, **kwargs):
         """
         create combined multipole basis set.
 
         Args:
             x_tag_list (str/TagMultipole/[TagMultipole]):  multipole/harmonics tag list.
             y_tag_list (str/TagMultipole/[TagMultipole]):  multipole/harmonics tag list.
-            prioritize_toroidal (bool, optional): create toroidal multipoles (G,T) in priority? else prioritize conventional multipoles (Q,M).
+            toroidal_priority (bool, optional): create toroidal multipoles (G,T) in priority? else prioritize conventional multipoles (Q,M).
             kwargs (dict, optional): select condition for multipoles, keywords in TagMultipole except for head.
 
         Returns:
@@ -613,6 +613,6 @@ class SpaceGroup:
         cg = self.pg.clebsch_gordan
         hs = self.pg.harmonics
 
-        z_samb = create_z_samb(cg, hs, x_tag_list, y_tag_list, prioritize_toroidal, **kwargs)
+        z_samb = create_z_samb(cg, hs, x_tag_list, y_tag_list, toroidal_priority, **kwargs)
 
         return z_samb
