@@ -55,7 +55,7 @@ def _create_single_model(model_dict, mpm, view_mode):
     mpm.write(model_name + "_matrix.py", samb_matrix_real, SymmetryAdaptedModel._matrix_header(), model_name)
 
     # create matrix (momentum space)
-    if not cmodel["info"]["molecule"] and cmodel["info"]["generate"].get("fourier_transform", False):
+    if not cmodel["info"]["molecule"] and cmodel["info"]["generate"]["fourier_transform"]:
         mpm.log("creating SAMB matrix (momentum space) ... ", None)
         samb_matrix = samb.create_matrix_k(full=True, fmt="sympy")
         mpm.write(model_name + "_matrix_k.py", samb_matrix, SymmetryAdaptedModel._matrix_header_k(), model_name)

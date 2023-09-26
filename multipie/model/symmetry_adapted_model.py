@@ -216,7 +216,7 @@ class SymmetryAdaptedModel(dict):
         self["info"] |= {"Z": z_info, "version": __version__}
         self["data"] |= {"Z": z_data}
 
-        if not self._model["info"]["molecule"] and self._model["info"]["generate"].get("fourier_transform", False):
+        if not self._model["info"]["molecule"] and self._model["info"]["generate"]["fourier_transform"]:
             self["info"] |= {"uniform": uniform_info}
             self["data"] |= {"uniform": uniform_data}
             self.fourier_transform()
@@ -332,7 +332,7 @@ class SymmetryAdaptedModel(dict):
         self["info"] |= {"Z": z_info, "version": __version__}
         self["data"] |= {"Z": z_data}
 
-        if self._model["info"]["generate"].get("fourier_transform", False):
+        if not self._model["info"]["molecule"] and self._model["info"]["generate"]["fourier_transform"]:
             self["info"] |= {"uniform": uniform_info}
             self["data"] |= {"uniform": uniform_data}
             self["info"] |= {"structure": structure_info}
@@ -425,7 +425,7 @@ class SymmetryAdaptedModel(dict):
 
         data |= {"Z": z_data}
 
-        if self._model["info"]["generate"].get("fourier_transform", False):
+        if not self._model["info"]["molecule"] and self._model["info"]["generate"]["fourier_transform"]:
             uniform_data = {
                 ump_i: (str(tag), *matrix_to_dict(m)) for ump_i, (tag, m) in self["data"]["uniform"].items()
             }
