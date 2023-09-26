@@ -19,6 +19,8 @@
         - model_type : tight_binding/phonon
         - time_reversal_type : electric/magnetic/both
         - irrep : irrep list
+        - fourier_transform* : create fourier transformed SAMB ?
+        - prioritize_toroidal : create toroidal multipoles (G,T) in priority ?
     - k_point* : representative k points
     - k_path* : high-symmetry line in k space
     - dimension : dimension of full matrix
@@ -62,8 +64,13 @@ CM = {
         "molecule": True,
         "group": ("Td", "point group No. 31 : Td / -43m"),
         "crystal": "cubic",
-        "option": {"view_mode": "debug", "view": None, "output": "CM", "minimal_samb": True},
-        "generate": {"model_type": "tight_binding", "time_reversal_type": "electric", "irrep": ["A1"]},
+        "option": {"view_mode": "debug", "minimal_samb": True, "view": None, "output": "CM"},
+        "generate": {
+            "model_type": "tight_binding",
+            "time_reversal_type": "electric",
+            "irrep": ["A1"],
+            "prioritize_toroidal": False,
+        },
         "dimension": 8,
         "spinful": False,
         "orbital": ["s", "px", "py", "pz"],
@@ -261,6 +268,7 @@ CM = {
             "H_H": [{}, {"H:H:1:1": ("[1/3, 1/3, 1/3];[-1/3, -1/3, 1/3]", "6b", "ND", 1, "2.mm")}],
         },
         "max_neighbor": 10,
-        "version": "1.1.10",
+        "version": "1.1.14",
+        "cell_range": (-2, 3, -2, 3, -2, 3),
     },
 }

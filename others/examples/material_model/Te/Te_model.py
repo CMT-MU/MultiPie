@@ -19,6 +19,8 @@
         - model_type : tight_binding/phonon
         - time_reversal_type : electric/magnetic/both
         - irrep : irrep list
+        - fourier_transform* : create fourier transformed SAMB ?
+        - prioritize_toroidal : create toroidal multipoles (G,T) in priority ?
     - k_point* : representative k points
     - k_path* : high-symmetry line in k space
     - dimension : dimension of full matrix
@@ -68,7 +70,13 @@ Te = {
         "a2": "[-2.229, 3.86074125007103, 0.0]",
         "a3": "[0.0, 0.0, 5.925]",
         "option": {"view": None, "view_mode": "standard", "output": "Te", "minimal_samb": True},
-        "generate": {"model_type": "phonon", "time_reversal_type": "electric", "irrep": ["A1"]},
+        "generate": {
+            "model_type": "phonon",
+            "fourier_transform": False,
+            "time_reversal_type": "electric",
+            "irrep": ["A1"],
+            "prioritize_toroidal": False,
+        },
         "k_point": {
             "Γ": "[0, 0, 0]",
             "A": "[0, 0, 1/2]",
@@ -162,8 +170,8 @@ Te = {
                 {"A:A:1:1": ("[137/500, 1, 1/3];[-137/500, 363/500, 0]", "3b", "ND", 1, ".2.")},
                 {"A:A:2:1": ("[137/500, 0, 1/3];[363/500, 363/500, 0]", "6c", "D", 2, "1")},
                 {
-                    "A:A:3:1": ("[137/500, 0, 1/3];[137/500, 1, 1/3]", "6c", "D", 3, "1"),
-                    "A:A:3:2": ("[137/500, 0, 1/3];[637/500, 0, 1/3]", "3a", "D", 3, ".2."),
+                    "A:A:3:1": ("[637/500, 0, 1/3];[137/500, 0, 1/3]", "3a", "D", 3, ".2."),
+                    "A:A:3:2": ("[137/500, 0, 1/3];[637/500, 1, 1/3]", "6c", "D", 3, "1"),
                 },
                 {"A:A:4:1": ("[137/500, 1, 1/3];[-137/500, 363/500, 1]", "3a", "ND", 4, ".2.")},
                 {"A:A:5:1": ("[137/500, 0, 1/3];[363/500, 363/500, 1]", "6c", "D", 5, "1")},
@@ -173,9 +181,9 @@ Te = {
                 {"A:A:9:1": ("[137/500, 0, 1/3];[-137/500, 363/500, 1]", "3a", "D", 9, ".2.")},
             ]
         },
-        "cell_range": (-2, 3, -2, 3, -2, 3),
-        "max_neighbor": 10,
+        "cell_range": (-5, 5, -5, 5, -5, 5),
+        "max_neighbor": 15,
         "A": "[[4.458, -2.229, 0.0], [0.0, 3.86074125007103, 0.0], [0.0, 0.0, 5.925]]",
-        "version": "1.1.10",
+        "version": "1.1.14",
     },
 }

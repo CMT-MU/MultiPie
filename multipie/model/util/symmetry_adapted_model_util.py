@@ -201,7 +201,7 @@ def uniform_samb(sbc_samb, braket_indexes, dim):
 
 
 # ==================================================
-def create_uniform_samb_set(cluster_samb_set, braket_indexes_dict, dim, parallel=True):
+def create_uniform_samb_set(cluster_samb_set, braket_indexes_dict, dim):
     """
     create uniform multipole basis set.
 
@@ -209,7 +209,6 @@ def create_uniform_samb_set(cluster_samb_set, braket_indexes_dict, dim, parallel
         cluster_samb_set (dict): { "S_#"/"B_#": [(TagMultipole, NSArray)] }.
         braket_indexes_dict (dict): { cluster_tag: [(bra_site_no, ket_site_no)] }.
         dim (int): dimension of matrix.
-        parallel (bool, optional): use parallel code ?
 
     Returns:
         tuple: information of uniform multipoles, uniform_info, uniform_data.
@@ -218,65 +217,57 @@ def create_uniform_samb_set(cluster_samb_set, braket_indexes_dict, dim, parallel
         uniform_info = { "S_#"/"B_#": ["ump_#"] }
         uniform_data = { "ump_#" : (TagMultipole, NSArray(matrix)) }
     """
-    SB_num = len(cluster_samb_set)
-    n_jobs = max(abs(min(SB_num + 1, _cpu_num - 2)), 1) if parallel else 1
-
-    def proc(i, SB_i, braket_indexes):
+    dic = {}
+    for SB_i, braket_indexes in braket_indexes_dict.items():
         sbc_samb = cluster_samb_set[SB_i]
         is_diagonal = all([bra_idx == ket_idx for (bra_idx, ket_idx) in braket_indexes])
         head_list = ["Q"] if is_diagonal else ["Q", "T"]
         sbc_samb = [(tag, v) for tag, v in sbc_samb if tag.head in head_list]
         if len(sbc_samb) == 0:
-            return i, SB_i, {}
-
-        u_samb = uniform_samb(sbc_samb, braket_indexes, dim)
-        return i, SB_i, u_samb
-
-    res = Parallel(n_jobs=n_jobs, verbose=0)(
-        delayed(proc)(i, SB_i, braket_indexes) for i, (SB_i, braket_indexes) in enumerate(braket_indexes_dict.items())
-    )
-    res.sort(key=lambda x: x[0])
-
-    dic = {SB_i: u_samb for _, SB_i, u_samb in res}
+            dic[SB_i] = {}
+        else:
+            u_samb = uniform_samb(sbc_samb, braket_indexes, dim)
+            dic[SB_i] = u_samb
 
     # orthogonalization
-    def proc_ortho(i, head):
+    res = []
+    for head in ("Q", "T"):
         tags = [(SB_i, tag) for SB_i, u_samb in dic.items() for tag in u_samb.keys() if tag.head == head]
         mats = [dic[SB_i][tag] for (SB_i, tag) in tags]
         if len(mats) == 0:
-            return i, {}
+            res.append({})
+        else:
+            mats = NSArray(mats, style="matrix", fmt="sympy", real=False)
+            mats, idx = NSArray.orthogonalize(mats)
+            tags, mats = [tags[j] for j in idx], [mats[j] for j in idx]
+            d = {}
+            for (SB_i, tag), U in zip(tags, mats):
+                if sp.Matrix(U).is_diagonal():
+                    tag = tag.replace(m_type="s")
+                else:
+                    tag = tag.replace(m_type="u")
+                d[(SB_i, tag)] = U
 
-        mats = NSArray(mats, style="matrix", fmt="sympy", real=False)
-        mats, idx = NSArray.orthogonalize(mats)
-        tags, mats = [tags[j] for j in idx], [mats[j] for j in idx]
-        d = {}
-        for (SB_i, tag), U in zip(tags, mats):
-            if sp.Matrix(U).is_diagonal():
-                tag = tag.replace(m_type="s")
-            else:
-                tag = tag.replace(m_type="u")
-            d[(SB_i, tag)] = U
-
-        um_orthogonalized = {
-            (SB_i, tag): NSArray(mat, style="matrix", fmt="sympy", real=False) for (SB_i, tag), mat in d.items()
-        }
-        return i, um_orthogonalized
-
-    head_list = ["Q", "T"]
-    res = Parallel(n_jobs=n_jobs, verbose=0)(delayed(proc_ortho)(i, head) for i, head in enumerate(head_list))
-    res.sort(key=lambda x: x[0])
+            um_orthogonalized = {
+                (SB_i, tag): NSArray(mat, style="matrix", fmt="sympy", real=False) for (SB_i, tag), mat in d.items()
+            }
+            res.append(um_orthogonalized)
 
     uniform_info = {}
     uniform_data = {}
     i = 1
-    for _, u_samb in res:
-        for (SB_i, tag), v in u_samb.items():
-            uniform_data[f"ump_{i:03d}"] = (tag, v)
-            if SB_i in uniform_info:
-                uniform_info[SB_i] += [f"ump_{i:03d}"]
-            else:
-                uniform_info[SB_i] = [f"ump_{i:03d}"]
-            i += 1
+    SB_i_list = [SB_i for SB_i in cluster_samb_set.keys()]
+    for SB_i in SB_i_list:
+        for u_samb in res:
+            for (SB_i_, tag), v in u_samb.items():
+                if SB_i != SB_i_:
+                    continue
+                uniform_data[f"ump_{i:03d}"] = (tag, v)
+                if SB_i in uniform_info:
+                    uniform_info[SB_i] += [f"ump_{i:03d}"]
+                else:
+                    uniform_info[SB_i] = [f"ump_{i:03d}"]
+                i += 1
 
     return uniform_info, uniform_data
 
@@ -406,7 +397,7 @@ def _check_complete_relation(x_tag_dict, y_tag_dict, z_info, z_data):
 
 # ==================================================
 def create_z_samb_set(
-    g, x_tag_dict, y_tag_dict, M_SB_list, atomic_braket, alias, toroidal_priority=False, parallel=True, **kwargs
+    g, x_tag_dict, y_tag_dict, M_SB_list, atomic_braket, alias, prioritize_toroidal=False, parallel=True, **kwargs
 ):
     """
     create combined multipole basis set.
@@ -418,7 +409,7 @@ def create_z_samb_set(
         M_SB_list (list): [("M_#", "S_#"/"B_#")].
         atomic_braket (dict): { matrix_tag : (bra_list, ket_list) }.
         alias (dict): { cluster_tag: name or name: cluster_tag }.
-        toroidal_priority (bool): create toroidal multipoles (G,T) in priority? else prioritize conventional multipoles (Q,M).
+        prioritize_toroidal (bool): create toroidal multipoles (G,T) in priority? else prioritize conventional multipoles (Q,M).
         parallel (bool, optional): use parallel code.
         kwargs (dict, optional): select conditions for multipoles,
                                  keywords in ["head", "rank", "irrep", "mul", "comp", "s", "k"].
@@ -455,7 +446,7 @@ def create_z_samb_set(
         if E_am_dict[(M_i, SB_i)]:
             x_tag_list = TagList([tag for tag in x_tag_list if tag.head in ("Q", "G")])
         y_tag_list = TagList([tag for (SB_i_, tag) in y_tag_dict.keys() if SB_i_ == SB_i])
-        z_samb = g.z_samb(x_tag_list, y_tag_list, toroidal_priority, irrep=irrep, **kwargs)
+        z_samb = g.z_samb(x_tag_list, y_tag_list, prioritize_toroidal, irrep=irrep, **kwargs)
         return i, irrep, M_i, SB_i, z_samb
 
     res = Parallel(n_jobs=n_jobs, verbose=0)(

@@ -238,7 +238,8 @@ class ModelPDF:
                 Zinfo[z_tag] = k
         Zdict = samb["data"]["Z"]
 
-        if not info["molecule"]:
+        # Z basis.
+        if not info["molecule"] and "Zk" in samb["data"]:
             Zkdict = samb["data"]["Zk"]
             for no, (ztag, zj, zkj) in enumerate(zip(Zdict.keys(), Zdict.values(), Zkdict.values())):
                 # Z basis.
@@ -306,7 +307,6 @@ class ModelPDF:
                 pdf.equation(eqk, long=True)
         else:
             for no, (ztag, zj) in enumerate(zip(Zdict.keys(), Zdict.values())):
-                # Z basis.
                 tag = TagMultipole(zj[0]).latex()
                 _, m_block, c_block = Zinfo[ztag]
                 pdf.text(r"\vspace{4mm}")
@@ -326,13 +326,33 @@ class ModelPDF:
                     a_no = str(int(at.split("_")[1]))
                     c_no = str(int(ct.split("_")[1]))
                     rdict["a" + a_no] = TagMultipole(samb["data"]["atomic"][at][0]).latex()
-                    rdict["u" + c_no] = TagMultipole(samb["data"]["uniform"][ct][0]).latex()
-                    eq += (
-                        NSArray(c)
-                        * sp.symbols(r"A_{" + a_no + "}[a" + a_no + "]")
-                        * sp.symbols(r"B_{" + c_no + "}[u" + c_no + "]")
-                    )
-                eq = sp.latex(eq).replace("A", r"\mathbb{X}").replace("B", r"\otimes\mathbb{U}")
+                    if info["molecule"]:
+                        rdict["u" + c_no] = TagMultipole(samb["data"]["uniform"][ct][0]).latex()
+                        eq += (
+                            NSArray(c)
+                            * sp.symbols(r"A_{" + a_no + "}[a" + a_no + "]")
+                            * sp.symbols(r"B_{" + c_no + "}[u" + c_no + "]")
+                        )
+                    else:
+                        if str(ct)[0] == "s":
+                            rdict["s" + c_no] = TagMultipole(samb["data"]["site_cluster"][ct][0]).latex()
+                            eq += (
+                                NSArray(c)
+                                * sp.symbols(r"A_{" + a_no + "}[a" + a_no + "]")
+                                * sp.symbols(r"B_{" + c_no + "}[s" + c_no + "]")
+                            )
+                        else:
+                            rdict["b" + c_no] = TagMultipole(samb["data"]["bond_cluster"][ct][0]).latex()
+                            eq += (
+                                NSArray(c)
+                                * sp.symbols(r"A_{" + a_no + "}[a" + a_no + "]")
+                                * sp.symbols(r"B_{" + c_no + "}[b" + c_no + "]")
+                            )
+
+                if info["molecule"]:
+                    eq = sp.latex(eq).replace("A", r"\mathbb{X}").replace("B", r"\otimes\mathbb{U}")
+                else:
+                    eq = sp.latex(eq).replace("A", r"\mathbb{X}").replace("B", r"\otimes\mathbb{Y}")
                 for r, s in rdict.items():
                     eq = eq.replace(r, s)
                 eq = r"\hat{\mathbb{Z}}_{" + str(no + 1) + "}=" + eq
@@ -425,40 +445,40 @@ class ModelPDF:
             )
 
         # uniform SAMB.
-        self.comment(pdf, "uniform SAMB.")
-        row = []
-        tbl = []
-        hl_no = -1
-        hl = []
-        for c_group, u_lst in samb["info"]["uniform"].items():
-            hl.append(hl_no)
-            c_group = self.ubar_name(c_group)
-            for ump in u_lst:
-                tag, shape, mat = samb["data"]["uniform"][ump]
-                tag = "$" + TagMultipole(tag).latex() + "$"
-                no = str(int(ump.split("_")[1]))
-                no = "\mathbb{U}_{" + no + "}"
-                mat = "$" + convert_to_matrix(shape[0], shape[1], mat).latex() + "$"
-                row.append(no)
-                tbl.append([tag, c_group, mat])
-                hl_no = hl_no + 1
-        pdf.table(
-            tbl,
-            row,
-            ["type", "cluster", "form"],
-            rc="symbol",
-            caption="Uniform SAMB.",
-            cpos="c|c|c|c",
-            stretch=1.3,
-            long=True,
-            rmath=True,
-            hl=hl[1:],
-        )
+        if "uniform" in samb["info"]:
+            self.comment(pdf, "uniform SAMB.")
+            row = []
+            tbl = []
+            hl_no = -1
+            hl = []
+            for c_group, u_lst in samb["info"]["uniform"].items():
+                hl.append(hl_no)
+                c_group = self.ubar_name(c_group)
+                for ump in u_lst:
+                    tag, shape, mat = samb["data"]["uniform"][ump]
+                    tag = "$" + TagMultipole(tag).latex() + "$"
+                    no = str(int(ump.split("_")[1]))
+                    no = "\mathbb{U}_{" + no + "}"
+                    mat = "$" + convert_to_matrix(shape[0], shape[1], mat).latex() + "$"
+                    row.append(no)
+                    tbl.append([tag, c_group, mat])
+                    hl_no = hl_no + 1
 
-        if not info["molecule"]:
-            if not samb["info"]["structure"]:  # no structure SAMBs.
-                return
-            # structure SAMB.
+            pdf.table(
+                tbl,
+                row,
+                ["type", "cluster", "form"],
+                rc="symbol",
+                caption="Uniform SAMB.",
+                cpos="c|c|c|c",
+                stretch=1.3,
+                long=True,
+                rmath=True,
+                hl=hl[1:],
+            )
+
+        # structure SAMB.
+        if "structure" in samb["info"]:
             self.comment(pdf, "structure SAMB.")
             row = []
             tbl = []
@@ -522,7 +542,9 @@ class ModelPDF:
                     comp = "-"
                 harm = group.harmonics[h_tag]
                 harm_ltx = harm.latex().replace("h,", "")
-                tbl.append([harm_ltx, str(rank), irrep.latex(), mul, comp, harm.expression(v=NSArray.vector3d(head)).latex()])
+                tbl.append(
+                    [harm_ltx, str(rank), irrep.latex(), mul, comp, harm.expression(v=NSArray.vector3d(head)).latex()]
+                )
                 row.append(str(no + 1))
                 if rank != old_rank:
                     old_rank = rank
@@ -570,7 +592,9 @@ class ModelPDF:
 
         self.comment(pdf, "k path.")
         kpath = info["k_path"].replace("Γ", "$\Gamma$")
-        tbl = sum([[k.replace("Γ", "$\Gamma$"), "$" + NSArray(v).latex() + "$"] for k, v in info["k_point"].items()], [])
+        tbl = sum(
+            [[k.replace("Γ", "$\Gamma$"), "$" + NSArray(v).latex() + "$"] for k, v in info["k_point"].items()], []
+        )
         ncol = min(3, len(info["k_point"]))
         pdf.table(
             tbl,
@@ -645,7 +669,9 @@ class ModelPDF:
 
         # parity conversion.
         tbl = [i.latex() + "\\,\\,(" + j.latex() + ")" for i, j in ch.parity_conversion().items()]
-        pdf.table(tbl, [""], ["$\leftrightarrow$"] * min(len(tbl), 5), caption="Parity conversion.", tmath=True, long=True)
+        pdf.table(
+            tbl, [""], ["$\leftrightarrow$"] * min(len(tbl), 5), caption="Parity conversion.", tmath=True, long=True
+        )
 
         # symmetric product.
         tbl = []
@@ -706,6 +732,8 @@ class ModelPDF:
             row.append("$" + info.latex().replace("s,", "") + "$")
             basis = NSArray(basis.tolist(), "scalar")
             tbl.append(basis.latex())
-        pdf.table(tbl, row, col, "symbol", hl=True, caption="Virtual-cluster basis.", tmath=True, stretch=1.7, long=True)
+        pdf.table(
+            tbl, row, col, "symbol", hl=True, caption="Virtual-cluster basis.", tmath=True, stretch=1.7, long=True
+        )
 
         pdf.text("}")

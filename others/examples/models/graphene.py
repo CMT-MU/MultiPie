@@ -11,4 +11,6 @@ graphene = {
     "k_path": "Γ-M-K-Γ-K'",
     #
     "option": {"view": [0, 0, 1]},
+    "generate": {"fourier_transform": False},
+    "detail": {"max_neighbor": 15, "cell_range": (-5, 5, -5, 5, -5, 5)},
 }

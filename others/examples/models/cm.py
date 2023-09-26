@@ -6,5 +6,5 @@ CM = {
     "bond": [("C", "H", 1), ("H", "H", 1)],
     #
     "spinful": False,
-    "option": {"view_mode": "debug"},
+    "option": {"view_mode": "debug", "minimal_samb": True},
 }
