@@ -38,6 +38,8 @@ input_str = """
   - model_type* : model type (str), ("tight_binding"/"phonon"), ["tight_binding"].
   - time_reversal_type* : time-reversal type (str), ("electric"/"magnetic"/"both"), ["electric"].
   - irrep* : irrep. (str list), [identity irrep.].
+  - fourier_transform* : create fourier transformed SAMB ?
+  - toroidal_priority* : create toroidal multipoles (G,T) in priority ?
 - k_point* : k-point (dict) {name: "position"}, [{ "Γ": "[0,0,0]", "X": "[1/2,0,0]" }].
 - k_path* : k-path (str) (concatenate by "-" or "\|"), ["Γ-X"].
 """
@@ -64,6 +66,8 @@ header_str = """
         - model_type : tight_binding/phonon
         - time_reversal_type : electric/magnetic/both
         - irrep : irrep list
+        - fourier_transform* : create fourier transformed SAMB ?
+        - prioritize_toroidal : create toroidal multipoles (G,T) in priority ?
     - k_point* : representative k points
     - k_path* : high-symmetry line in k space
     - dimension : dimension of full matrix
@@ -136,7 +140,13 @@ class MaterialModel(dict):
             "a2": "[0.0, 1.0, 0.0]",
             "a3": "[0.0, 0.0, 1.0]",
             "option": {"view": [0, 0, 1], "view_mode": "standard", "output": "material_model", "minimal_samb": True},
-            "generate": {"model_type": "tight_binding", "time_reversal_type": "electric", "irrep": ["A"]},
+            "generate": {
+                "model_type": "tight_binding",
+                "time_reversal_type": "electric",
+                "irrep": ["A"],
+                "fourier_transform": False,
+                "prioritize_toroidal": False,
+            },
             "k_point": {},
             "k_path": "",
             "dimension": 1,
@@ -181,12 +191,6 @@ class MaterialModel(dict):
 
         info["spinful"] = dic["spinful"]
         info["option"] = dic["option"]
-
-        if info["molecule"]:
-            del info["cell"], info["volume"], info["a1"], info["a2"], info["a3"], info["k_point"], info["k_path"]
-            del data["plus_set"]
-            del detail["cell_range"], detail["A"]
-
         info["model"] = dic["model"]
         info["group"] = (str(self._mpm.group), self._group_str(info["molecule"]))
         info["crystal"] = self._mpm.group.tag.crystal
@@ -212,7 +216,20 @@ class MaterialModel(dict):
             irrep = [irrep]
         info["generate"]["irrep"] = irrep
 
-        if not info["molecule"]:
+        if info["molecule"]:
+            del (
+                info["cell"],
+                info["volume"],
+                info["a1"],
+                info["a2"],
+                info["a3"],
+                info["k_point"],
+                info["k_path"],
+                info["generate"]["fourier_transform"],
+            )
+            del data["plus_set"]
+            del detail["cell_range"], detail["A"]
+        else:
             info["k_point"] = dic["k_point"]
             info["k_path"] = dic["k_path"]
             detail["A"] = str(self.A)
@@ -847,7 +864,13 @@ class MaterialModel(dict):
                 d["option"]["minimal_samb"] = True
 
         if "generate" not in d.keys():
-            d["generate"] = {"model_type": "tight_binding", "time_reversal_type": "electric", "irrep": None}
+            d["generate"] = {
+                "model_type": "tight_binding",
+                "time_reversal_type": "electric",
+                "irrep": None,
+                "fourier_transform": False,
+                "prioritize_toroidal": False,
+            }
         else:
             if "model_type" not in d["generate"].keys():
                 d["generate"]["model_type"] = "tight_binding"
@@ -855,6 +878,10 @@ class MaterialModel(dict):
                 d["generate"]["time_reversal_type"] = "electric"
             if "irrep" not in d["generate"].keys():
                 d["generate"]["irrep"] = None
+            if "fourier_transform" not in d["generate"].keys():
+                d["generate"]["fourier_transform"] = False
+            if "prioritize_toroidal" not in d["generate"].keys():
+                d["generate"]["prioritize_toroidal"] = False
 
         if "spinful" not in d.keys():
             d["spinful"] = False
