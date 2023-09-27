@@ -20,7 +20,7 @@
         - time_reversal_type : electric/magnetic/both
         - irrep : irrep list
         - fourier_transform* : create fourier transformed SAMB ?
-        - toroidal_priority : create toroidal multipoles (G,T) in priority ?
+        - toroidal_priority : create toroidal multipoles (G,T) in high priority ?
     - k_point* : representative k points
     - k_path* : high-symmetry line in k space
     - dimension : dimension of full matrix
@@ -268,7 +268,7 @@ CM = {
             "H_H": [{}, {"H:H:1:1": ("[1/3, 1/3, 1/3];[-1/3, -1/3, 1/3]", "6b", "ND", 1, "2.mm")}],
         },
         "max_neighbor": 10,
-        "version": "1.1.14",
+        "version": "1.1.15",
         "cell_range": (-2, 3, -2, 3, -2, 3),
     },
 }

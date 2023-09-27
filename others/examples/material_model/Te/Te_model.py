@@ -20,7 +20,7 @@
         - time_reversal_type : electric/magnetic/both
         - irrep : irrep list
         - fourier_transform* : create fourier transformed SAMB ?
-        - toroidal_priority : create toroidal multipoles (G,T) in priority ?
+        - toroidal_priority : create toroidal multipoles (G,T) in high priority ?
     - k_point* : representative k points
     - k_path* : high-symmetry line in k space
     - dimension : dimension of full matrix
@@ -170,8 +170,8 @@ Te = {
                 {"A:A:1:1": ("[137/500, 1, 1/3];[-137/500, 363/500, 0]", "3b", "ND", 1, ".2.")},
                 {"A:A:2:1": ("[137/500, 0, 1/3];[363/500, 363/500, 0]", "6c", "D", 2, "1")},
                 {
-                    "A:A:3:1": ("[137/500, 0, 1/3];[637/500, 1, 1/3]", "6c", "D", 3, "1"),
-                    "A:A:3:2": ("[637/500, 0, 1/3];[137/500, 0, 1/3]", "3a", "D", 3, ".2."),
+                    "A:A:3:1": ("[637/500, 0, 1/3];[137/500, 0, 1/3]", "3a", "D", 3, ".2."),
+                    "A:A:3:2": ("[137/500, 0, 1/3];[637/500, 1, 1/3]", "6c", "D", 3, "1"),
                 },
                 {"A:A:4:1": ("[137/500, 1, 1/3];[-137/500, 363/500, 1]", "3a", "ND", 4, ".2.")},
                 {"A:A:5:1": ("[137/500, 0, 1/3];[363/500, 363/500, 1]", "6c", "D", 5, "1")},
@@ -184,6 +184,6 @@ Te = {
         "cell_range": (-5, 5, -5, 5, -5, 5),
         "max_neighbor": 15,
         "A": "[[4.458, -2.229, 0.0], [0.0, 3.86074125007103, 0.0], [0.0, 0.0, 5.925]]",
-        "version": "1.1.14",
+        "version": "1.1.15",
     },
 }

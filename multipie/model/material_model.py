@@ -37,9 +37,9 @@ input_str = """
 - generate*
   - model_type* : model type (str), ("tight_binding"/"phonon"), ["tight_binding"].
   - time_reversal_type* : time-reversal type (str), ("electric"/"magnetic"/"both"), ["electric"].
-  - irrep* : irrep. (str list), [identity irrep.].
+  - irrep* : irrep. (str list), [identity irrep.] (empty list is for all irreps.).
   - fourier_transform* : create fourier transformed SAMB ?
-  - toroidal_priority* : create toroidal multipoles (G,T) in priority ?
+  - toroidal_priority* : create toroidal multipoles (G,T) in high priority ?
 - k_point* : k-point (dict) {name: "position"}, [{ "Γ": "[0,0,0]", "X": "[1/2,0,0]" }].
 - k_path* : k-path (str) (concatenate by "-" or "\|"), ["Γ-X"].
 """
@@ -67,7 +67,7 @@ header_str = """
         - time_reversal_type : electric/magnetic/both
         - irrep : irrep list
         - fourier_transform* : create fourier transformed SAMB ?
-        - toroidal_priority : create toroidal multipoles (G,T) in priority ?
+        - toroidal_priority : create toroidal multipoles (G,T) in high priority ?
     - k_point* : representative k points
     - k_path* : high-symmetry line in k space
     - dimension : dimension of full matrix
@@ -212,6 +212,8 @@ class MaterialModel(dict):
         irrep = info["generate"]["irrep"]
         if irrep is None:
             irrep = self._mpm.point_group.identity_irrep
+        elif len(irrep) == 0:
+            irrep = [str(i) for i in self._mpm.point_group.character.irrep_list]
         if type(irrep) == str:
             irrep = [irrep]
         info["generate"]["irrep"] = irrep
@@ -299,6 +301,7 @@ class MaterialModel(dict):
             axis_type="abc",
             cluster=molecule,
             clip=False,
+            background=True,
         )
         qtdraw.set_crystal(info["crystal"])
         if scale:
@@ -351,9 +354,7 @@ class MaterialModel(dict):
                 label = f"b{bond_no}/{n}th: " + self._mapping_str(mp)
             v, c = bond.split("@")
             opa = opacity * 0.5 if mode != "standard" else opacity
-            qtdraw.plot_bond(
-                c, v, color=color1, color2=color2, width=width * scale, opacity=opa, name=cluster_name, label=label
-            )
+            qtdraw.plot_bond(c, v, color=color1, color2=color2, width=width * scale, opacity=opa, name=cluster_name, label=label)
             if mode != "standard":
                 v = NSArray(v).transform(self.A)
                 v_len = v.norm() * 0.25
