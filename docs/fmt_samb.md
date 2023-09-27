@@ -7,7 +7,7 @@
     - **atomic** : { "M_#" : ["amp_#"] }
     - **site_cluster** : { "S_#" : ["smp_#"] }
     - **bond_cluster** : { "B_#" : ["bmp_#"] }
-    - **uniform** : { "S_#"/"B_#" : ["ump_#"] }
+    - **uniform*** : { "S_#"/"B_#" : ["ump_#"] }
     - **structure*** : { "B_#" : ["kmp_#"] }
     - **Z** : { ("M_#", "S_#"/"B_#") : ["z_#"] }
     - **version** : MultiPie version

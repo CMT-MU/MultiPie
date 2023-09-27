@@ -36,7 +36,7 @@ header_str = """
     - atomic : { "amp_#" : ( TagMultipole, shape, [(i, j, matrix element)] ) }
     - site_cluster : { "smp_#" : ( TagMultipole, [vector component] ) }
     - bond_cluster : { "bmp_#" : ( TagMultipole, [vector component] ) }
-    - uniform : { "ump_#" : ( TagMultipole, shape, [(i, j, matrix element)] ) }
+    - uniform* : { "ump_#" : ( TagMultipole, shape, [(i, j, matrix element)] ) }
     - structure* : { "kmp_#" : (TagMultipole, "structure factor") }
     - Z : {"z_#" : ( TagMultipole, [(coeff, "amp_#", "smp_#"/"bmp_#/ump_#")] ) }
     - Zk* : {"z_#" : ( TagMultipole, [(coeff, "amp_#", "ump_#", "kmp_#")] ) }
@@ -56,7 +56,7 @@ matrix_header_str = """
 - k_path* : high-symmetry line in k space
 - cell_site : { name_idx(pset): (position, SOs) }
 - A* : transform matrix, [a1,a2,a3]
-- matrix : { "z_#": {(n1, n2, n3, a, b): matrix element} }
+- matrix : { "z_#": "matrix"}
 """
 
 # ==================================================
