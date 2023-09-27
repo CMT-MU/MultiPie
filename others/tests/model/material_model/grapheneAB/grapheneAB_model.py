@@ -19,6 +19,8 @@
         - model_type : tight_binding/phonon
         - time_reversal_type : electric/magnetic/both
         - irrep : irrep list
+        - fourier_transform* : create fourier transformed SAMB ?
+        - toroidal_priority : create toroidal multipoles (G,T) in priority ?
     - k_point* : representative k points
     - k_path* : high-symmetry line in k space
     - dimension : dimension of full matrix
@@ -68,7 +70,13 @@ grapheneAB = {
         "a2": "[-1.2175, 2.10877185821511, 0.0]",
         "a3": "[0.0, 0.0, 10.0]",
         "option": {"view": [0, 0, 1], "view_mode": "standard", "output": "grapheneAB", "minimal_samb": True},
-        "generate": {"model_type": "tight_binding", "time_reversal_type": "electric", "irrep": ["A1'"]},
+        "generate": {
+            "fourier_transform": False,
+            "model_type": "tight_binding",
+            "time_reversal_type": "electric",
+            "irrep": ["A1'"],
+            "toroidal_priority": False,
+        },
         "k_point": {"Γ": "[0, 0, 0]", "X": "[1/2, 0, 0]"},
         "k_path": "Γ-X",
         "dimension": 3,
@@ -195,7 +203,7 @@ grapheneAB = {
                 {"B:B:1:1": ("[-1/3, 1/3, 0];[2/3, 1/3, 0]", "3j", "ND", 1, "mm2")},
                 {"B:B:2:1": ("[-1/3, -2/3, 0];[2/3, 4/3, 0]", "3j", "D", 2, "mm2")},
                 {"B:B:3:1": ("[-1/3, -2/3, 0];[5/3, 4/3, 0]", "1e", "ND", 3, "-6m2")},
-                {"B:B:4:1": ("[-4/3, -2/3, 0];[5/3, 4/3, 0]", "3j", "D", 4, "mm2")},
+                {"B:B:4:1": ("[-1/3, -2/3, 0];[2/3, 7/3, 0]", "3j", "D", 4, "mm2")},
                 {"B:B:5:1": ("[-1/3, -5/3, 0];[5/3, 7/3, 0]", "1e", "D", 5, "-6m2")},
                 {"B:B:6:1": ("[2/3, 1/3, 0];[2/3, 1/3, 1]", "1f", "ND", 6, "-6m2")},
                 {"B:B:7:1": ("[-1/3, 1/3, 0];[2/3, 1/3, 1]", "3k", "ND", 7, "mm2")},
@@ -206,6 +214,6 @@ grapheneAB = {
         "cell_range": (-2, 3, -2, 3, -2, 3),
         "max_neighbor": 10,
         "A": "[[2.435, -1.2175, 0.0], [0.0, 2.10877185821511, 0.0], [0.0, 0.0, 10.0]]",
-        "version": "1.1.10",
+        "version": "1.1.14",
     },
 }

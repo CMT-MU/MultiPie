@@ -186,14 +186,14 @@ def uniform_samb(sbc_samb, braket_indexes, dim):
     """
     u_samb = {}
     for tag, v in sbc_samb:
-        U = sp.Matrix.zeros(dim, dim)
+        U = NSArray.zeros((dim, dim), "matrix", fmt="sympy")
         for vi, (bra_idx, ket_idx) in zip(v, braket_indexes):
             U[bra_idx, ket_idx] += vi
 
-        if not U.is_diagonal():
-            U = (U + U.adjoint()) / sp.sqrt(2)
+        if not sp.Matrix(U).is_diagonal():
+            U = (U + U.transpose().conjugate()) / sp.sqrt(2)
 
-        U = NSArray(str(U.tolist()), style="matrix", fmt="sympy").simplify()
+        U = U.expand()
         if not np.all(U == 0):
             u_samb[tag] = U
 
@@ -201,7 +201,7 @@ def uniform_samb(sbc_samb, braket_indexes, dim):
 
 
 # ==================================================
-def create_uniform_samb_set(cluster_samb_set, braket_indexes_dict, dim, parallel=True):
+def create_uniform_samb_set(cluster_samb_set, braket_indexes_dict, dim):
     """
     create uniform multipole basis set.
 
@@ -209,7 +209,6 @@ def create_uniform_samb_set(cluster_samb_set, braket_indexes_dict, dim, parallel
         cluster_samb_set (dict): { "S_#"/"B_#": [(TagMultipole, NSArray)] }.
         braket_indexes_dict (dict): { cluster_tag: [(bra_site_no, ket_site_no)] }.
         dim (int): dimension of matrix.
-        parallel (bool, optional): use parallel code ?
 
     Returns:
         tuple: information of uniform multipoles, uniform_info, uniform_data.
@@ -218,65 +217,57 @@ def create_uniform_samb_set(cluster_samb_set, braket_indexes_dict, dim, parallel
         uniform_info = { "S_#"/"B_#": ["ump_#"] }
         uniform_data = { "ump_#" : (TagMultipole, NSArray(matrix)) }
     """
-    SB_num = len(cluster_samb_set)
-    n_jobs = max(abs(min(SB_num + 1, _cpu_num - 2)), 1) if parallel else 1
-
-    def proc(i, SB_i, braket_indexes):
+    dic = {}
+    for SB_i, braket_indexes in braket_indexes_dict.items():
         sbc_samb = cluster_samb_set[SB_i]
         is_diagonal = all([bra_idx == ket_idx for (bra_idx, ket_idx) in braket_indexes])
         head_list = ["Q"] if is_diagonal else ["Q", "T"]
         sbc_samb = [(tag, v) for tag, v in sbc_samb if tag.head in head_list]
         if len(sbc_samb) == 0:
-            return i, SB_i, {}
-
-        u_samb = uniform_samb(sbc_samb, braket_indexes, dim)
-        return i, SB_i, u_samb
-
-    res = Parallel(n_jobs=n_jobs, verbose=0)(
-        delayed(proc)(i, SB_i, braket_indexes) for i, (SB_i, braket_indexes) in enumerate(braket_indexes_dict.items())
-    )
-    res.sort(key=lambda x: x[0])
-
-    dic = {SB_i: u_samb for _, SB_i, u_samb in res}
+            dic[SB_i] = {}
+        else:
+            u_samb = uniform_samb(sbc_samb, braket_indexes, dim)
+            dic[SB_i] = u_samb
 
     # orthogonalization
-    def proc_ortho(i, head):
+    res = []
+    for head in ("Q", "T"):
         tags = [(SB_i, tag) for SB_i, u_samb in dic.items() for tag in u_samb.keys() if tag.head == head]
         mats = [dic[SB_i][tag] for (SB_i, tag) in tags]
         if len(mats) == 0:
-            return i, {}
+            res.append({})
+        else:
+            mats = NSArray(mats, style="matrix", fmt="sympy", real=False)
+            mats, idx = NSArray.orthogonalize(mats)
+            tags, mats = [tags[j] for j in idx], [mats[j] for j in idx]
+            d = {}
+            for (SB_i, tag), U in zip(tags, mats):
+                if sp.Matrix(U).is_diagonal():
+                    tag = tag.replace(m_type="s")
+                else:
+                    tag = tag.replace(m_type="u")
+                d[(SB_i, tag)] = U
 
-        mats = NSArray(mats, style="matrix", fmt="sympy", real=False)
-        mats, idx = NSArray.orthogonalize(mats)
-        tags, mats = [tags[j] for j in idx], [mats[j] for j in idx]
-        d = {}
-        for (SB_i, tag), U in zip(tags, mats):
-            if sp.Matrix(U).is_diagonal():
-                tag = tag.replace(m_type="s")
-            else:
-                tag = tag.replace(m_type="u")
-            d[(SB_i, tag)] = U
-
-        um_orthogonalized = {
-            (SB_i, tag): NSArray(mat, style="matrix", fmt="sympy", real=False) for (SB_i, tag), mat in d.items()
-        }
-        return i, um_orthogonalized
-
-    head_list = ["Q", "T"]
-    res = Parallel(n_jobs=n_jobs, verbose=0)(delayed(proc_ortho)(i, head) for i, head in enumerate(head_list))
-    res.sort(key=lambda x: x[0])
+            um_orthogonalized = {
+                (SB_i, tag): NSArray(mat, style="matrix", fmt="sympy", real=False) for (SB_i, tag), mat in d.items()
+            }
+            res.append(um_orthogonalized)
 
     uniform_info = {}
     uniform_data = {}
     i = 1
-    for _, u_samb in res:
-        for (SB_i, tag), v in u_samb.items():
-            uniform_data[f"ump_{i:03d}"] = (tag, v)
-            if SB_i in uniform_info:
-                uniform_info[SB_i] += [f"ump_{i:03d}"]
-            else:
-                uniform_info[SB_i] = [f"ump_{i:03d}"]
-            i += 1
+    SB_i_list = [SB_i for SB_i in cluster_samb_set.keys()]
+    for SB_i in SB_i_list:
+        for u_samb in res:
+            for (SB_i_, tag), v in u_samb.items():
+                if SB_i != SB_i_:
+                    continue
+                uniform_data[f"ump_{i:03d}"] = (tag, v)
+                if SB_i in uniform_info:
+                    uniform_info[SB_i] += [f"ump_{i:03d}"]
+                else:
+                    uniform_info[SB_i] = [f"ump_{i:03d}"]
+                i += 1
 
     return uniform_info, uniform_data
 
@@ -307,16 +298,14 @@ def structure_samb(bc_samb, bond_list, bond):
         else:
             n_sgn_list.append((n, -1))
 
+    tags = [tag for tag, _ in bc_samb]
     fk_list = []
-    tags = []
-    for tag, v in bc_samb:
+    for _, v in bc_samb:
         fk = sp.S(0)
         for vn, (n, sgn) in zip(v, n_sgn_list):
             cn = sp.Symbol(f"c{n:03d}", real=True)
             sn = sp.Symbol(f"s{n:03d}", real=True)
-            v = vn * (cn + sgn * sp.I * sn)
-            fk += v + sp.conjugate(v)
-        tags.append(tag)
+            fk += vn * (cn + sgn * sp.I * sn) + sp.conjugate(vn) * (cn - sgn * sp.I * sn)
         fk_list.append(sp.expand(fk))
 
     # orthogonalization
@@ -367,7 +356,7 @@ def create_structure_samb_set(bc_samb_set, cluster_bond, bond, parallel=True):
         lst = []
         for tag, fk in k_samb.items():
             lst.append(f"kmp_{i:03d}")
-            structure_data[f"kmp_{i:03d}"] = (tag, sp.expand(fk))
+            structure_data[f"kmp_{i:03d}"] = (tag, fk)
             i += 1
         structure_info[B_i] = lst
 
@@ -382,13 +371,13 @@ def _check_complete_relation(x_tag_dict, y_tag_dict, z_info, z_data):
     Args:
         x_tag_dict (dict): multipole/harmonics tag dict, {M_#: TagList}.
         y_tag_dict (dict): multipole/harmonics tag dict, {S_#/B_#: TagList}.
-        z_info (dict): { ("S_#"/"B_#", "M_#"): ["z_#"] }.
+        z_info (dict): { ("M_#", "S_#"/"B_#"): ["z_#"] }.
         z_data (dict): { "z_#" : [(coefficient, "amp_#", "smp_#"/"bmp_#"/"ump_#")] }.
     """
-    for M_i, SB_i in z_info.keys():
+    for irrep, M_i, SB_i in z_info.keys():
         tag1_list = x_tag_dict[M_i]
         tag2_list = y_tag_dict[SB_i]
-        Z_lst = [z_data[z_i] for z_i in z_info[(M_i, SB_i)]]
+        Z_lst = [z_data[z_i] for z_i in z_info[(irrep, M_i, SB_i)]]
         n, n1, n2 = len(Z_lst), len(tag1_list), len(tag2_list)
         if n != n1 * n2:
             s = f"(M_i, SB_i) = {(M_i, SB_i)} \n"
@@ -408,7 +397,7 @@ def _check_complete_relation(x_tag_dict, y_tag_dict, z_info, z_data):
 
 # ==================================================
 def create_z_samb_set(
-    g, x_tag_dict, y_tag_dict, M_SB_list, atomic_braket, toroidal_priority=False, parallel=True, **kwargs
+    g, x_tag_dict, y_tag_dict, M_SB_list, atomic_braket, alias, toroidal_priority=False, parallel=True, **kwargs
 ):
     """
     create combined multipole basis set.
@@ -419,6 +408,7 @@ def create_z_samb_set(
         y_tag_dict (dict): site/bond-cluster tag dict, {(S_#/B_#, TagMultipole): smp_i/bmp_i/ump_i}.
         M_SB_list (list): [("M_#", "S_#"/"B_#")].
         atomic_braket (dict): { matrix_tag : (bra_list, ket_list) }.
+        alias (dict): { cluster_tag: name or name: cluster_tag }.
         toroidal_priority (bool): create toroidal multipoles (G,T) in priority? else prioritize conventional multipoles (Q,M).
         parallel (bool, optional): use parallel code.
         kwargs (dict, optional): select conditions for multipoles,
@@ -427,16 +417,17 @@ def create_z_samb_set(
         tuple: information of combined multipoles, z_info, z_data.
 
     Note:
-        z_info = { ("S_#"/"B_#", "M_#"): ["z_#"] }
+        z_info = { ("irrep", "M_#", "S_#"/"B_#"): ["z_#"] }
         z_data = { "z_#" : [(coefficient, "amp_#", "smp_#"/"bmp_#"/"ump_#")] }
     """
     E_am_dict = {}
     for M_i, SB_i in M_SB_list:
+        E_am_dict[(M_i, SB_i)] = False
         o1, o2 = atomic_braket[M_i]
-        if SB_i[0] == "B" and o1 != o2:
-            E_am_dict[(M_i, SB_i)] = True
-        else:
-            E_am_dict[(M_i, SB_i)] = False
+        if SB_i[0] == "B":
+            S1, S2, _, _ = alias[SB_i].split(":")
+            if o1 != o2 and S1 != S2:
+                E_am_dict[(M_i, SB_i)] = True
 
     M_SB_num = len(M_SB_list)
     n_jobs = max(abs(min(M_SB_num + 1, _cpu_num - 2)), 1) if parallel else 1
@@ -506,13 +497,14 @@ def _fourier_transform_bond_cluster_samb(bc_samb, u_samb_set, k_samb_set, braket
         dict: fourier series of bond-cluster multipoles, { "bmp_#" : [(coefficient, "ump_#", "kmp_#")] }.
     """
 
-    def _check_fourier_transform(coeff_list):
+    def _check_fourier_transform(bmp_i, coeff_list):
         v = sp.Matrix(coeff_list)
         v = sp.adjoint(v).dot(v)
-        norm = sp.sqrt(sp.simplify(v))
+        norm = sp.sqrt(sp.expand(v))
 
         if norm != 1:
-            raise Exception(f"invalid fourier expansion coefficient = {v}, norm = {norm}.")
+            print(coeff_list)
+            raise Exception(f"({bmp_i}) invalid fourier expansion coefficient = {v}, norm = {norm}.")
 
     n_sgn_list = []
     for bond_n in bond_list:
@@ -539,18 +531,19 @@ def _fourier_transform_bond_cluster_samb(bc_samb, u_samb_set, k_samb_set, braket
         Mfk_set[bmp_i] = sp.simplify(Mk)
 
     bck_samb = {}
-    for bmp_i, Mk in Mfk_set.items():
+    for i, (bmp_i, Mk) in enumerate(Mfk_set.items()):
         coeff_ump_smp_list = []
         for ump_i, m in u_samb_set:
             fk = (sp.Matrix(m).adjoint() * Mk).trace()
             fk = sp.simplify(fk)
-            coeffs = decompose_fk(fk, k_samb_set)
-            for kmp_i, c in coeffs.items():
-                coeff_ump_smp_list.append((c, ump_i, kmp_i))
+            if fk != sp.S(0):
+                coeffs = decompose_fk(fk, k_samb_set)
+                for kmp_i, c in coeffs.items():
+                    coeff_ump_smp_list.append((c, ump_i, kmp_i))
 
         # check normalization
         coeff_list = [c for c, _, _ in coeff_ump_smp_list]
-        _check_fourier_transform(coeff_list)
+        _check_fourier_transform(bmp_i, coeff_list)
 
         bck_samb[bmp_i] = coeff_ump_smp_list
 
@@ -633,7 +626,7 @@ def create_zk_samb_set(z_data, bc_samb_set, u_samb_set, k_samb_set, cluster_bond
         for c1, amp_i, cmp_i in lst:
             if cmp_i[0] == "b":
                 for c2, ump_i, kmp_i in bond_cluster_k_data[cmp_i]:
-                    c = sp.simplify(sp.sympify(c1) * sp.sympify(c2))
+                    c = sp.expand(sp.sympify(c1) * sp.sympify(c2))
                     lst_k.append((c, amp_i, ump_i, kmp_i))
             else:
                 ump_i = cmp_i.replace("s", "u")

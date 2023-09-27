@@ -8,8 +8,6 @@ Te = {
     #
     "spinful": False,
     #
-    "generate": {"model_type": "phonon"},
-    #
     "k_point": {
         "Γ": "[0, 0, 0]",
         "A": "[0, 0, 1/2]",
@@ -19,4 +17,7 @@ Te = {
         "L": "[1/2, 0, 1/2]",
     },
     "k_path": "A-Γ-H-A-L-H-K-Γ-M-K",
+    #
+    "generate": {"model_type": "phonon", "fourier_transform": False},
+    "detail": {"max_neighbor": 15, "cell_range": (-5, 5, -5, 5, -5, 5)},
 }

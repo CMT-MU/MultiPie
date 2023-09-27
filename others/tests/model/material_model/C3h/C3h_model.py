@@ -19,6 +19,8 @@
         - model_type : tight_binding/phonon
         - time_reversal_type : electric/magnetic/both
         - irrep : irrep list
+        - fourier_transform* : create fourier transformed SAMB ?
+        - toroidal_priority : create toroidal multipoles (G,T) in priority ?
     - k_point* : representative k points
     - k_path* : high-symmetry line in k space
     - dimension : dimension of full matrix
@@ -63,7 +65,12 @@ C3h = {
         "group": ("C3h", "point group No. 22 : C3h / -6"),
         "crystal": "hexagonal",
         "option": {"view": [0, 0, 1], "view_mode": "standard", "output": "C3h", "minimal_samb": True},
-        "generate": {"model_type": "tight_binding", "time_reversal_type": "electric", "irrep": ["A'"]},
+        "generate": {
+            "model_type": "tight_binding",
+            "time_reversal_type": "electric",
+            "irrep": ["A'"],
+            "toroidal_priority": False,
+        },
         "dimension": 32,
         "spinful": True,
         "orbital": ["(s,U)", "(s,D)", "(px,U)", "(px,D)", "(py,U)", "(py,D)", "(pz,U)", "(pz,D)"],
@@ -239,6 +246,7 @@ C3h = {
             ],
         },
         "max_neighbor": 10,
-        "version": "1.1.10",
+        "version": "1.1.14",
+        "cell_range": (-2, 3, -2, 3, -2, 3),
     },
 }

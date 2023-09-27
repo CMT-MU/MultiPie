@@ -1,5 +1,5 @@
 """
-=== SAMB (* only for crystal) ===
+=== SAMB (* only for crystal with fourier_transform==True) ===
 - info
     - atomic : { "M_#" : ["amp_#"] }
     - site_cluster : { "S_#" : ["smp_#"] }
@@ -29,8 +29,8 @@ C3h = {
         },
         "site_cluster": {"S_001": ["smp_001"], "S_002": ["smp_002", "smp_003", "smp_004"], "S_003": ["smp_005"]},
         "bond_cluster": {
-            "B_001": ["bmp_006", "bmp_007", "bmp_008", "bmp_009", "bmp_010", "bmp_011"],
-            "B_002": ["bmp_012", "bmp_013"],
+            "B_001": ["bmp_006", "bmp_007", "bmp_008", "bmp_009"],
+            "B_002": ["bmp_010", "bmp_011", "bmp_012", "bmp_013"],
         },
         "uniform": {
             "S_001": ["ump_001"],
@@ -50,7 +50,7 @@ C3h = {
             ("A'", "M_001", "B_002"): ["z_027", "z_028"],
             ("A'", "M_002", "B_002"): ["z_029", "z_030", "z_031", "z_032", "z_033", "z_034"],
         },
-        "version": "1.1.10",
+        "version": "1.1.14",
         "harmonics": {
             "Q": ["Qh(0,A',,)", "Qh(1,E',,0)", "Qh(1,E',,1)", "Qh(2,A',,)", "Qh(2,E',,0)", "Qh(2,E',,1)"],
             "G": ["Gh(1,A',,)", "Gh(2,E',,0)", "Gh(2,E',,1)"],
@@ -189,9 +189,9 @@ C3h = {
             "bmp_007": ("Qb(1,E',,0)", "[-sqrt(6)/6, sqrt(6)/3, -sqrt(6)/6]"),
             "bmp_008": ("Qb(1,E',,1)", "[-sqrt(2)/2, 0, sqrt(2)/2]"),
             "bmp_009": ("Tb(0,A',,)", "[sqrt(3)*I/3, sqrt(3)*I/3, sqrt(3)*I/3]"),
-            "bmp_010": ("Tb(1,E',,0)", "[-sqrt(6)*I/6, sqrt(6)*I/3, -sqrt(6)*I/6]"),
-            "bmp_011": ("Tb(1,E',,1)", "[-sqrt(2)*I/2, 0, sqrt(2)*I/2]"),
-            "bmp_012": ("Qb(0,A',,)", "[sqrt(3)/3, sqrt(3)/3, sqrt(3)/3]"),
+            "bmp_010": ("Qb(0,A',,)", "[sqrt(3)/3, sqrt(3)/3, sqrt(3)/3]"),
+            "bmp_011": ("Qb(1,E',,0)", "[-sqrt(6)/6, sqrt(6)/3, -sqrt(6)/6]"),
+            "bmp_012": ("Qb(1,E',,1)", "[-sqrt(2)/2, 0, sqrt(2)/2]"),
             "bmp_013": ("Tb(0,A',,)", "[sqrt(3)*I/3, sqrt(3)*I/3, sqrt(3)*I/3]"),
         },
         "uniform": {

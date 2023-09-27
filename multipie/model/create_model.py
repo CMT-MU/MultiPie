@@ -18,6 +18,7 @@ def _create_single_model(model_dict, mpm, view_mode):
         view_mode (str): mode for QtDraw.
     """
     model_dict = mpm.read(model_dict)
+
     model_dict = MaterialModel.regularize(model_dict)
     model_name = model_dict["model"]
     mpm.set_group(model_dict["group"])
@@ -38,21 +39,26 @@ def _create_single_model(model_dict, mpm, view_mode):
 
     # create SAMB.
     mpm.log("creating SAMB ... ", None)
-    irrep = cmodel["info"]["generate"]["irrep"]
     if cmodel["info"]["generate"]["time_reversal_type"] == "electric":
         head = ["Q", "G"]
     elif cmodel["info"]["generate"]["time_reversal_type"] == "magnetic":
         head = ["T", "M"]
     else:
         head = ["Q", "G", "T", "M"]
-    samb = SymmetryAdaptedModel(cmodel, mpm=mpm, head=head, irrep=irrep, toroidal_priority=False)
+    samb = SymmetryAdaptedModel(cmodel, mpm=mpm, head=head)
     samb_dict = samb.create_dict()
     mpm.write(model_name + "_samb.py", samb_dict, SymmetryAdaptedModel._header(), model_name)
 
-    # create matrix.
-    mpm.log("creating SAMB matrix ... ", None)
-    samb_matrix = samb.create_matrix(full=True, fmt="sympy")
-    mpm.write(model_name + "_matrix.py", samb_matrix, SymmetryAdaptedModel._matrix_header(), model_name)
+    # create matrix (real space)
+    mpm.log("creating SAMB matrix (real space) ... ", None)
+    samb_matrix_real = samb.create_matrix(fmt="sympy")
+    mpm.write(model_name + "_matrix.py", samb_matrix_real, SymmetryAdaptedModel._matrix_header(), model_name)
+
+    # create matrix (momentum space)
+    if not cmodel["info"]["molecule"] and cmodel["info"]["generate"]["fourier_transform"]:
+        mpm.log("creating SAMB matrix (momentum space) ... ", None)
+        samb_matrix = samb.create_matrix_k(full=True, fmt="sympy")
+        mpm.write(model_name + "_matrix_k.py", samb_matrix, SymmetryAdaptedModel._matrix_header_k(), model_name)
 
     # create LaTeX and PDF.
     if mpm.pdf:
@@ -65,7 +71,15 @@ def _create_single_model(model_dict, mpm, view_mode):
 
 # ==================================================
 def create_model(
-    model_list, topdir=None, symbolic=True, parallel=True, verbose=False, pdf=True, formatter=True, view_mode=None, qtdraw=True
+    model_list,
+    topdir=None,
+    symbolic=True,
+    parallel=True,
+    verbose=False,
+    pdf=True,
+    formatter=True,
+    view_mode=None,
+    qtdraw=True,
 ):
     """
     create model view, info, and basis.
