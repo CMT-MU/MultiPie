@@ -1,5 +1,5 @@
 """
-=== SAMB (* only for crystal with fourier_transform==True) ===
+=== SAMB (* only for crystal with fourier transform) ===
 - info
     - atomic : { "M_#" : ["amp_#"] }
     - site_cluster : { "S_#" : ["smp_#"] }
@@ -40,7 +40,7 @@ graphene = {
             ("A1g", "M_001", "B_005"): ["z_006"],
             ("A1g", "M_001", "B_006"): ["z_007"],
         },
-        "version": "1.1.14",
+        "version": "1.1.15",
         "harmonics": {"Q": ["Qh(0,A1g,,)"], "G": []},
     },
     "data": {

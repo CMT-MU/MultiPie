@@ -2,7 +2,7 @@
 
 # MultiPie
 
-## SAMB (* only for crystal)
+## SAMB (* only for crystal with fourier transform)
 - **info**
     - **atomic** : { "M_#" : ["amp_#"] }
     - **site_cluster** : { "S_#" : ["smp_#"] }

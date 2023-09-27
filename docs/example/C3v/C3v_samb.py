@@ -1,5 +1,5 @@
 """
-=== SAMB (* only for crystal with fourier_transform==True) ===
+=== SAMB (* only for crystal with fourier transform) ===
 - info
     - atomic : { "M_#" : ["amp_#"] }
     - site_cluster : { "S_#" : ["smp_#"] }
@@ -40,7 +40,7 @@ C3v = {
             ("A1", "M_001", "B_001"): ["z_006"],
             ("A1", "M_003", "B_002"): ["z_007", "z_008", "z_009"],
         },
-        "version": "1.1.14",
+        "version": "1.1.15",
         "harmonics": {
             "Q": [
                 "Qh(0,A1,,)",
