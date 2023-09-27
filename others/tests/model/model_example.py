@@ -16,6 +16,7 @@ C3h = {
     "option": {"view": [0, 0, 1]},
 }
 
+
 C3v = {
     "model": "C3v",
     "group": "C3v-1",
@@ -29,6 +30,7 @@ C3v = {
     "option": {"view": [0, 0, 1]},
 }
 
+
 CH4 = {
     "model": "CH4",
     "group": "Td",
@@ -40,6 +42,7 @@ CH4 = {
     "generate": {"irrep": ["A1", "A2"]},
 }
 
+
 D3 = {
     "model": "D3",
     "group": "D3-1",
@@ -49,6 +52,7 @@ D3 = {
     #
     "spinful": True,
 }
+
 
 Th = {
     "model": "Th",
@@ -60,6 +64,7 @@ Th = {
     "spinful": True,
     #
 }
+
 
 cluster_models = [C3h, C3v, CH4, D3, Th]
 
@@ -76,7 +81,9 @@ C2h1 = {
     "spinful": True,
     #
     "option": {"view": [0, 0, 1]},
+    "generate": {"fourier_transform": False},
 }
+
 
 C3v1 = {
     "model": "C3v1",
@@ -88,7 +95,9 @@ C3v1 = {
     "spinful": True,
     #
     "option": {"view": [0, 0, 1]},
+    "generate": {"fourier_transform": False},
 }
+
 
 C4v1 = {
     "model": "C4v1",
@@ -98,7 +107,9 @@ C4v1 = {
     "bond": [("A", "A", 1)],
     #
     "spinful": True,
+    "generate": {"fourier_transform": False},
 }
+
 
 CeCoSi = {
     "model": "CeCoSi",
@@ -109,7 +120,9 @@ CeCoSi = {
     "bond": [("Ce", "Co", [1]), ("Ce", "Si", [1]), ("Co", "Si", [1])],
     #
     "spinful": True,
+    "generate": {"fourier_transform": False},
 }
+
 
 Cs1 = {
     "model": "Cs1",
@@ -121,7 +134,9 @@ Cs1 = {
     "spinful": True,
     #
     "option": {"view": [0, 0, 1]},
+    "generate": {"fourier_transform": False},
 }
+
 
 D2h1 = {
     "model": "D2h1",
@@ -132,7 +147,9 @@ D2h1 = {
     "bond": [("A", "A", [1, 2, 3, 4])],
     #
     "spinful": True,
+    "generate": {"fourier_transform": False},
 }
+
 
 D4h1 = {
     "model": "D4h1",
@@ -143,7 +160,9 @@ D4h1 = {
     "bond": [("A", "A", [1, 2, 3, 4])],
     #
     "spinful": True,
+    "generate": {"fourier_transform": False},
 }
+
 
 grapheneAB = {
     "model": "grapheneAB",
@@ -156,7 +175,9 @@ grapheneAB = {
     "spinful": False,
     #
     "option": {"view": [0, 0, 1]},
+    "generate": {"fourier_transform": False},
 }
+
 
 graphene = {
     "model": "graphene",
@@ -171,8 +192,8 @@ graphene = {
     "k_point": {"Γ": "[0, 0, 0]", "M": "[1/2, 0, 0]", "K": "[1/3, 1/3, 0]", "K'": "[-1/3, -1/3, 0]"},
     "k_path": "Γ-M-K-Γ-K'",
     #
-    # "option": {"view": [0, 0, 1]},
     "option": {"view": [0, 0, 1]},
+    "generate": {"fourier_transform": False},
 }
 
 
@@ -187,7 +208,9 @@ kappaET = {
     "spinful": True,
     #
     "option": {"view": [0, 0, 1]},
+    "generate": {"fourier_transform": False},
 }
+
 
 Mn3Sn = {
     "model": "Mn3Sn",
@@ -199,7 +222,9 @@ Mn3Sn = {
     "spinful": False,
     #
     "option": {"view": [0, 0, 1]},
+    "generate": {"fourier_transform": False},
 }
+
 
 MoS2 = {
     "model": "MoS2",
@@ -213,7 +238,9 @@ MoS2 = {
     #
     "k_point": {"Γ": "[0, 0, 0]", "M": "[1/2, 0, 0]", "K": "[1/3, 1/3, 0]", "K'": "[-1/3, -1/3, 0]"},
     "k_path": "Γ-M-K-Γ-K'",
+    "generate": {"fourier_transform": False},
 }
+
 
 O1 = {
     "model": "O1",
@@ -224,7 +251,9 @@ O1 = {
     "bond": [("A", "A", [1, 2])],
     #
     "spinful": True,
+    "generate": {"fourier_transform": False},
 }
+
 
 Oh1 = {
     "model": "Oh1",
@@ -235,7 +264,9 @@ Oh1 = {
     "bond": [("A", "A", [1, 2])],
     #
     "spinful": True,
+    "generate": {"fourier_transform": False},
 }
+
 
 SnTe = {
     "model": "SnTe",
@@ -248,7 +279,9 @@ SnTe = {
     "spinful": True,
     #
     "option": {"view": [0, 0, 1]},
+    "generate": {"fourier_transform": False},
 }
+
 
 SrVO3 = {
     "model": "SrVO3",
@@ -267,7 +300,9 @@ SrVO3 = {
         "M": "[1/2,1/2,0]",
     },
     "k_path": "R-Γ-X-R-M-Γ",
+    "generate": {"fourier_transform": False},
 }
+
 
 Te = {
     "model": "Te",
@@ -290,7 +325,9 @@ Te = {
         "H": "[1/3, 1/3, 1/2]",
         "L": "[1/2, 0, 1/2]",
     },
+    "generate": {"fourier_transform": False},
 }
+
 
 UPt2Si2 = {
     "model": "UPt2Si2",
@@ -309,6 +346,7 @@ UPt2Si2 = {
     "spinful": False,
     #
     "option": {"view": [0, 0, 1]},
+    "generate": {"fourier_transform": False},
 }
 
 
@@ -333,6 +371,7 @@ primitive_models = [
     UPt2Si2,
 ]
 
+
 # ================================================== conventional models.
 BCT = {
     "model": "BCT",
@@ -343,7 +382,9 @@ BCT = {
     "bond": [("A", "A", [1, 2, 7])],
     #
     "spinful": True,
+    "generate": {"fourier_transform": False},
 }
+
 
 GaAs = {
     "model": "GaAs",
@@ -353,7 +394,9 @@ GaAs = {
     "bond": [("Ga", "As", [1])],
     #
     "spinful": False,
+    "generate": {"fourier_transform": False},
 }
+
 
 C3v5 = {
     "model": "C3v5",
@@ -363,7 +406,9 @@ C3v5 = {
     "bond": [("A", "B", 1)],
     #
     "spinful": True,
+    "generate": {"fourier_transform": False},
 }
+
 
 conventional_models = [BCT, GaAs, C3v5]
 
@@ -379,7 +424,9 @@ kagome = {
     "spinful": True,
     #
     "option": {"view": [0, 0, 1]},
+    "generate": {"fourier_transform": False},
 }
+
 
 Th1 = {
     "model": "Th1",
@@ -390,9 +437,12 @@ Th1 = {
     "bond": [("A", "A", [1, 2])],
     #
     "spinful": True,
+    "generate": {"fourier_transform": False},
 }
 
+
 complex_models = [kagome, Th1]
+
 
 # ================================================== all models.
 models = cluster_models + primitive_models + conventional_models + complex_models

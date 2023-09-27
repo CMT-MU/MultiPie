@@ -19,6 +19,8 @@
         - model_type : tight_binding/phonon
         - time_reversal_type : electric/magnetic/both
         - irrep : irrep list
+        - fourier_transform* : create fourier transformed SAMB ?
+        - toroidal_priority : create toroidal multipoles (G,T) in priority ?
     - k_point* : representative k points
     - k_path* : high-symmetry line in k space
     - dimension : dimension of full matrix
@@ -63,7 +65,12 @@ C3v = {
         "group": ("C3v-1", "point group No. 19 : C3v-1 / 31m (31m)"),
         "crystal": "trigonal",
         "option": {"view": [0, 0, 1], "view_mode": "standard", "output": "C3v", "minimal_samb": True},
-        "generate": {"model_type": "tight_binding", "time_reversal_type": "electric", "irrep": ["A1"]},
+        "generate": {
+            "model_type": "tight_binding",
+            "time_reversal_type": "electric",
+            "irrep": ["A1"],
+            "toroidal_priority": False,
+        },
         "dimension": 12,
         "spinful": False,
         "orbital": ["s", "px", "py", "pz"],
@@ -217,6 +224,7 @@ C3v = {
             ],
         },
         "max_neighbor": 10,
-        "version": "1.1.10",
+        "version": "1.1.14",
+        "cell_range": (-2, 3, -2, 3, -2, 3),
     },
 }

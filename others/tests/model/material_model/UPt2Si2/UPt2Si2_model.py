@@ -19,6 +19,8 @@
         - model_type : tight_binding/phonon
         - time_reversal_type : electric/magnetic/both
         - irrep : irrep list
+        - fourier_transform* : create fourier transformed SAMB ?
+        - toroidal_priority : create toroidal multipoles (G,T) in priority ?
     - k_point* : representative k points
     - k_path* : high-symmetry line in k space
     - dimension : dimension of full matrix
@@ -68,7 +70,13 @@ UPt2Si2 = {
         "a2": "[0.0, 4.1972, 0.0]",
         "a3": "[0.0, 0.0, 9.6906]",
         "option": {"view": [0, 0, 1], "view_mode": "standard", "output": "UPt2Si2", "minimal_samb": True},
-        "generate": {"model_type": "tight_binding", "time_reversal_type": "electric", "irrep": ["A1g"]},
+        "generate": {
+            "fourier_transform": False,
+            "model_type": "tight_binding",
+            "time_reversal_type": "electric",
+            "irrep": ["A1g"],
+            "toroidal_priority": False,
+        },
         "k_point": {"Γ": "[0, 0, 0]", "X": "[1/2, 0, 0]"},
         "k_path": "Γ-X",
         "dimension": 46,
@@ -444,8 +452,8 @@ UPt2Si2 = {
                 {"Pt2:Si1:6:1": ("[1/4, 1/4, 2757/2000];[-1/4, 1/4, 1/2]", "8i", "D", 6, ".m.")},
                 {"Pt2:Si1:7:1": ("[1/4, 1/4, 2757/2000];[-1/4, 5/4, 1/2]", "8i", "D", 7, ".m.")},
                 {
-                    "Pt2:Si1:8:1": ("[-3/4, 1/4, 757/2000];[7/4, 1/4, 1/2]", "8i", "D", 8, ".m."),
-                    "Pt2:Si1:8:2": ("[-3/4, -3/4, 757/2000];[3/4, 5/4, 1/2]", "8i", "D", 8, ".m."),
+                    "Pt2:Si1:8:1": ("[-3/4, -3/4, 757/2000];[3/4, 5/4, 1/2]", "8i", "D", 8, ".m."),
+                    "Pt2:Si1:8:2": ("[-3/4, 1/4, 757/2000];[7/4, 1/4, 1/2]", "8i", "D", 8, ".m."),
                 },
                 {"Pt2:Si1:9:1": ("[-3/4, 1/4, 2757/2000];[3/4, 1/4, 1/2]", "8i", "D", 9, ".m.")},
             ],
@@ -453,6 +461,6 @@ UPt2Si2 = {
         "cell_range": (-2, 3, -2, 3, -2, 3),
         "max_neighbor": 10,
         "A": "[[4.1972, 0.0, 0.0], [0.0, 4.1972, 0.0], [0.0, 0.0, 9.6906]]",
-        "version": "1.1.10",
+        "version": "1.1.14",
     },
 }

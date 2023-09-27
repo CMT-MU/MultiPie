@@ -17,6 +17,11 @@
 - **generate***
   - **model_type*** : model type (str), ("tight_binding"/"phonon"), ["tight_binding"].
   - **time_reversal_type*** : time-reversal type (str), ("electric"/"magnetic"/"both"), ["electric"].
-  - **irrep*** : irrep. (str list), [identity irrep.].
+  - **irrep*** : irrep. (str list), [identity irrep.] (empty list is for all irreps.) [None].
+  - **fourier_transform*** : create fourier transformed SAMB ? [False].
+  - **toroidal_priority*** : create toroidal multipoles (G,T) in high priority ? [False].
 - **k_point*** : k-point (dict) {name: "position"}, [{ "Γ": "[0,0,0]", "X": "[1/2,0,0]" }].
 - **k_path*** : k-path (str) (concatenate by "-" or "\|"), ["Γ-X"].
+- **detail***
+  - **cell_range*** : search range for bonds, [(-2, 3, -2, 3, -2, 3)].
+  - **max_neighbor*** : max. of neighbors to search, [10].

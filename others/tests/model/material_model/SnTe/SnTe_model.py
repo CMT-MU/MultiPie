@@ -19,6 +19,8 @@
         - model_type : tight_binding/phonon
         - time_reversal_type : electric/magnetic/both
         - irrep : irrep list
+        - fourier_transform* : create fourier transformed SAMB ?
+        - toroidal_priority : create toroidal multipoles (G,T) in priority ?
     - k_point* : representative k points
     - k_path* : high-symmetry line in k space
     - dimension : dimension of full matrix
@@ -68,7 +70,13 @@ SnTe = {
         "a2": "[0.0, 6.0, 0.0]",
         "a3": "[0.0, 0.0, 4.57]",
         "option": {"view": [0, 0, 1], "view_mode": "standard", "output": "SnTe", "minimal_samb": True},
-        "generate": {"model_type": "tight_binding", "time_reversal_type": "electric", "irrep": ["A1"]},
+        "generate": {
+            "fourier_transform": False,
+            "model_type": "tight_binding",
+            "time_reversal_type": "electric",
+            "irrep": ["A1"],
+            "toroidal_priority": False,
+        },
         "k_point": {"Γ": "[0, 0, 0]", "X": "[1/2, 0, 0]"},
         "k_path": "Γ-X",
         "dimension": 24,
@@ -340,10 +348,10 @@ SnTe = {
                 {"Sn:Sn:3:1": ("[1/2, 3/5, -2/5];[1/2, 3/5, 3/5]", "2a", "D", 3, "m..")},
                 {"Sn:Sn:4:1": ("[1/2, -2/5, 3/5];[0, 2/5, 1/10]", "4b", "D", 4, "1")},
                 {"Sn:Sn:5:1": ("[1/2, 3/5, 3/5];[1/2, -2/5, 3/5]", "2a", "D", 5, "m..")},
-                {"Sn:Sn:6:1": ("[-1/2, 3/5, -2/5];[1/2, 3/5, 3/5]", "2a", "D", 6, "m..")},
+                {"Sn:Sn:6:1": ("[-1/2, 3/5, 3/5];[1/2, 3/5, -2/5]", "2a", "D", 6, "m..")},
                 {"Sn:Sn:7:1": ("[-1/2, 3/5, 3/5];[1, 2/5, 1/10]", "4b", "D", 7, "1")},
                 {"Sn:Sn:8:1": ("[1/2, 3/5, -2/5];[0, 2/5, 11/10]", "4b", "D", 8, "1")},
-                {"Sn:Sn:9:1": ("[-1/2, 3/5, 3/5];[1/2, -2/5, 3/5]", "2a", "D", 9, "m..")},
+                {"Sn:Sn:9:1": ("[-1/2, -2/5, 3/5];[1/2, 3/5, 3/5]", "2a", "D", 9, "m..")},
             ],
             "Te_Te": [
                 {},
@@ -351,7 +359,7 @@ SnTe = {
                 {"Te:Te:2:1": ("[-1/2, 7/20, 2/5];[1/2, 7/20, 2/5]", "2a", "ND", 2, "m..")},
                 {"Te:Te:3:1": ("[1/2, 7/20, 2/5];[1/2, 7/20, 7/5]", "2a", "D", 3, "m..")},
                 {"Te:Te:4:1": ("[1/2, 7/20, 2/5];[0, -7/20, -1/10]", "4b", "D", 4, "1")},
-                {"Te:Te:5:1": ("[1/2, 27/20, 2/5];[1/2, 7/20, 2/5]", "2a", "D", 5, "m..")},
+                {"Te:Te:5:1": ("[1/2, 7/20, 2/5];[1/2, 27/20, 2/5]", "2a", "D", 5, "m..")},
                 {"Te:Te:6:1": ("[-1/2, 7/20, 2/5];[1/2, 7/20, 7/5]", "2a", "D", 6, "m..")},
                 {"Te:Te:7:1": ("[-1/2, 7/20, 2/5];[1, 13/20, -1/10]", "4b", "D", 7, "1")},
                 {"Te:Te:8:1": ("[1/2, 7/20, -3/5];[0, 13/20, 9/10]", "4b", "D", 8, "1")},
@@ -361,6 +369,6 @@ SnTe = {
         "cell_range": (-2, 3, -2, 3, -2, 3),
         "max_neighbor": 10,
         "A": "[[4.559, 0.0, 0.0], [0.0, 6.0, 0.0], [0.0, 0.0, 4.57]]",
-        "version": "1.1.10",
+        "version": "1.1.14",
     },
 }

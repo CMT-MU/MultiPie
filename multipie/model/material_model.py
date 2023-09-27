@@ -37,9 +37,14 @@ input_str = """
 - generate*
   - model_type* : model type (str), ("tight_binding"/"phonon"), ["tight_binding"].
   - time_reversal_type* : time-reversal type (str), ("electric"/"magnetic"/"both"), ["electric"].
-  - irrep* : irrep. (str list), [identity irrep.].
+  - irrep* : irrep. (str list), [identity irrep.] (empty list is for all irreps.), [None].
+  - fourier_transform* : create fourier transformed SAMB ? [False].
+  - toroidal_priority* : create toroidal multipoles (G,T) in high priority ? [False].
 - k_point* : k-point (dict) {name: "position"}, [{ "Γ": "[0,0,0]", "X": "[1/2,0,0]" }].
 - k_path* : k-path (str) (concatenate by "-" or "\|"), ["Γ-X"].
+- detail*
+  - cell_range* : search range for bonds, [(-2, 3, -2, 3, -2, 3)].
+  - max_neighbor* : max. of neighbors to search, [10].
 """
 
 # ==================================================
@@ -64,6 +69,8 @@ header_str = """
         - model_type : tight_binding/phonon
         - time_reversal_type : electric/magnetic/both
         - irrep : irrep list
+        - fourier_transform* : create fourier transformed SAMB ?
+        - toroidal_priority : create toroidal multipoles (G,T) in high priority ?
     - k_point* : representative k points
     - k_path* : high-symmetry line in k space
     - dimension : dimension of full matrix
@@ -136,7 +143,13 @@ class MaterialModel(dict):
             "a2": "[0.0, 1.0, 0.0]",
             "a3": "[0.0, 0.0, 1.0]",
             "option": {"view": [0, 0, 1], "view_mode": "standard", "output": "material_model", "minimal_samb": True},
-            "generate": {"model_type": "tight_binding", "time_reversal_type": "electric", "irrep": ["A"]},
+            "generate": {
+                "model_type": "tight_binding",
+                "time_reversal_type": "electric",
+                "irrep": ["A"],
+                "fourier_transform": False,
+                "toroidal_priority": False,
+            },
             "k_point": {},
             "k_path": "",
             "dimension": 1,
@@ -181,12 +194,6 @@ class MaterialModel(dict):
 
         info["spinful"] = dic["spinful"]
         info["option"] = dic["option"]
-
-        if info["molecule"]:
-            del info["cell"], info["volume"], info["a1"], info["a2"], info["a3"], info["k_point"], info["k_path"]
-            del data["plus_set"]
-            del detail["cell_range"], detail["A"]
-
         info["model"] = dic["model"]
         info["group"] = (str(self._mpm.group), self._group_str(info["molecule"]))
         info["crystal"] = self._mpm.group.tag.crystal
@@ -208,15 +215,36 @@ class MaterialModel(dict):
         irrep = info["generate"]["irrep"]
         if irrep is None:
             irrep = self._mpm.point_group.identity_irrep
+        elif len(irrep) == 0:
+            irrep = [str(i) for i in self._mpm.point_group.character.irrep_list]
         if type(irrep) == str:
             irrep = [irrep]
         info["generate"]["irrep"] = irrep
 
-        if not info["molecule"]:
+        if info["molecule"]:
+            del (
+                info["cell"],
+                info["volume"],
+                info["a1"],
+                info["a2"],
+                info["a3"],
+                info["k_point"],
+                info["k_path"],
+                info["generate"]["fourier_transform"],
+            )
+            del data["plus_set"]
+            del detail["cell_range"], detail["A"]
+        else:
             info["k_point"] = dic["k_point"]
             info["k_path"] = dic["k_path"]
             detail["A"] = str(self.A)
             data["plus_set"] = self._mpm.group.symmetry_operation.plus_set.str()
+
+        if "detail" in dic.keys():
+            if "cell_range" in dic["detail"]:
+                detail["cell_range"] = dic["detail"]["cell_range"]
+            if "max_neighbor" in dic["detail"]:
+                detail["max_neighbor"] = dic["detail"]["max_neighbor"]
 
         if "site" in dic.keys():
             info["site"] = dic["site"]
@@ -229,7 +257,7 @@ class MaterialModel(dict):
             self._set_rep_bond(info, name, detail)
             self._set_bond(info, name, data)
 
-        self._set_matrix(data, orbital, ket_dict)
+        self._set_matrix(name, data, orbital, ket_dict)
 
         self["info"] = info
         self["name"] = name
@@ -329,7 +357,9 @@ class MaterialModel(dict):
                 label = f"b{bond_no}/{n}th: " + self._mapping_str(mp)
             v, c = bond.split("@")
             opa = opacity * 0.5 if mode != "standard" else opacity
-            qtdraw.plot_bond(c, v, color=color1, color2=color2, width=width * scale, opacity=opa, name=cluster_name, label=label)
+            qtdraw.plot_bond(
+                c, v, color=color1, color2=color2, width=width * scale, opacity=opa, name=cluster_name, label=label
+            )
             if mode != "standard":
                 v = NSArray(v).transform(self.A)
                 v_len = v.norm() * 0.25
@@ -659,7 +689,7 @@ class MaterialModel(dict):
         data["bond"].update(data_bond)
 
     # ==================================================
-    def _set_matrix(self, data, orbital, ket_dict):
+    def _set_matrix(self, name, data, orbital, ket_dict):
         cluster_atomic = {}
         atomic_braket = {}
 
@@ -669,8 +699,9 @@ class MaterialModel(dict):
             i, j = ij
             site_i = f"site_{i+1:03d}"
             site_j = f"site_{j+1:03d}"
-            cluster_atomic[ij] = []
-            if i == j:
+            Si = name["site"][list(data["site"].keys())[i]][0]
+            Sj = name["site"][list(data["site"].keys())[j]][0]
+            if Si == Sj:
                 orbs_i = orbital[site_i]
                 orbs_j = orbs_i
                 braket = sum([[(orb, orbs_j[j]) for j in range(i, len(orbs_i))] for i, orb in enumerate(orbs_i)], [])
@@ -845,7 +876,13 @@ class MaterialModel(dict):
                 d["option"]["minimal_samb"] = True
 
         if "generate" not in d.keys():
-            d["generate"] = {"model_type": "tight_binding", "time_reversal_type": "electric", "irrep": None}
+            d["generate"] = {
+                "model_type": "tight_binding",
+                "time_reversal_type": "electric",
+                "irrep": None,
+                "fourier_transform": False,
+                "toroidal_priority": False,
+            }
         else:
             if "model_type" not in d["generate"].keys():
                 d["generate"]["model_type"] = "tight_binding"
@@ -853,6 +890,24 @@ class MaterialModel(dict):
                 d["generate"]["time_reversal_type"] = "electric"
             if "irrep" not in d["generate"].keys():
                 d["generate"]["irrep"] = None
+            if "fourier_transform" not in d["generate"].keys():
+                d["generate"]["fourier_transform"] = False
+            if "toroidal_priority" not in d["generate"].keys():
+                d["generate"]["toroidal_priority"] = False
+
+        if "detail" not in d.keys():
+            d["detail"] = {
+                "rep_bond_all": {},
+                "cell_range": _default_search_cell_range,
+                "max_neighbor": _default_max_neighbor,
+                "A": "[[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]]",
+                "version": __version__,
+            }
+        else:
+            if "cell_range" not in d["detail"].keys():
+                d["detail"]["cell_range"] = _default_search_cell_range
+            if "max_neighbor" not in d["detail"].keys():
+                d["detail"]["max_neighbor"] = _default_max_neighbor
 
         if "spinful" not in d.keys():
             d["spinful"] = False

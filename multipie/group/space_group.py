@@ -258,7 +258,9 @@ class SpaceGroup:
         assert len(site_list) > 0, "empty site list is given."
 
         lattice = self.symmetry_operation.lattice
-        site_list = set(to_conventional(lattice, to_primitive(lattice, site_list).shift().remove_duplicate()).shift().str())
+        site_list = set(
+            to_conventional(lattice, to_primitive(lattice, site_list).shift().remove_duplicate()).shift().str()
+        )
 
         rep_site = []
         rep_site = remove_equivalent_site(site_list, rep_site)
@@ -294,7 +296,9 @@ class SpaceGroup:
         # remove equivalent bonds.
         tail = bond_list[0].convert_bond("bond_th")[0]
         lattice = self.symmetry_operation.lattice
-        bond_list = set(to_conventional(lattice, to_primitive(lattice, bond_list).shift().remove_duplicate()).shift().str())
+        bond_list = set(
+            to_conventional(lattice, to_primitive(lattice, bond_list).shift().remove_duplicate()).shift().str()
+        )
 
         # find representative bonds.
         rep_bond = []

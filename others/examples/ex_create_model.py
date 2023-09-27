@@ -10,5 +10,13 @@ topdir = __top_dir__ + "others/examples/material_model"
 
 models = [CM, graphene, Te]
 create_model(
-    models, topdir=topdir, symbolic=True, parallel=True, verbose=True, pdf=True, formatter=True, view_mode=None, qtdraw=True
+    models,
+    topdir=topdir,
+    symbolic=True,
+    parallel=True,
+    verbose=True,
+    pdf=True,
+    formatter=True,
+    view_mode=None,
+    qtdraw=True,
 )

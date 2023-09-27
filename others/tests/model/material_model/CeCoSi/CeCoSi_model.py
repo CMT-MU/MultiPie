@@ -19,6 +19,8 @@
         - model_type : tight_binding/phonon
         - time_reversal_type : electric/magnetic/both
         - irrep : irrep list
+        - fourier_transform* : create fourier transformed SAMB ?
+        - toroidal_priority : create toroidal multipoles (G,T) in priority ?
     - k_point* : representative k points
     - k_path* : high-symmetry line in k space
     - dimension : dimension of full matrix
@@ -68,7 +70,13 @@ CeCoSi = {
         "a2": "[0.0, 4.057, 0.0]",
         "a3": "[0.0, 0.0, 6.987]",
         "option": {"view": None, "view_mode": "standard", "output": "CeCoSi", "minimal_samb": True},
-        "generate": {"model_type": "tight_binding", "time_reversal_type": "electric", "irrep": ["A1g"]},
+        "generate": {
+            "fourier_transform": False,
+            "model_type": "tight_binding",
+            "time_reversal_type": "electric",
+            "irrep": ["A1g"],
+            "toroidal_priority": False,
+        },
         "k_point": {"Γ": "[0, 0, 0]", "X": "[1/2, 0, 0]"},
         "k_path": "Γ-X",
         "dimension": 36,
@@ -467,12 +475,12 @@ CeCoSi = {
                 {},
                 {"Ce:Si:1:1": ("[1/4, 1/4, 339/500];[-1/4, -1/4, 411/500]", "8j", "D", 1, "..m")},
                 {
-                    "Ce:Si:2:1": ("[1/4, 1/4, 339/500];[1/4, 1/4, 89/500]", "2c", "D", 2, "4mm"),
-                    "Ce:Si:2:2": ("[1/4, 1/4, 339/500];[1/4, 1/4, 589/500]", "2c", "D", 2, "4mm"),
+                    "Ce:Si:2:1": ("[1/4, 1/4, 339/500];[1/4, 1/4, 589/500]", "2c", "D", 2, "4mm"),
+                    "Ce:Si:2:2": ("[1/4, 1/4, 339/500];[1/4, 1/4, 89/500]", "2c", "D", 2, "4mm"),
                 },
                 {
-                    "Ce:Si:3:1": ("[1/4, 1/4, 339/500];[1/4, 5/4, 89/500]", "4f", "D", 3, "2mm."),
-                    "Ce:Si:3:2": ("[1/4, 1/4, 339/500];[1/4, 5/4, 589/500]", "4f", "D", 3, "2mm."),
+                    "Ce:Si:3:1": ("[1/4, 1/4, 339/500];[1/4, 5/4, 589/500]", "4f", "D", 3, "2mm."),
+                    "Ce:Si:3:2": ("[1/4, 1/4, 339/500];[1/4, 5/4, 89/500]", "4f", "D", 3, "2mm."),
                 },
                 {"Ce:Si:4:1": ("[-3/4, 1/4, 339/500];[3/4, -1/4, 411/500]", "8j", "D", 4, "..m")},
                 {"Ce:Si:5:1": ("[1/4, 1/4, 339/500];[-1/4, -1/4, -89/500]", "8j", "D", 5, "..m")},
@@ -500,6 +508,6 @@ CeCoSi = {
         "cell_range": (-2, 3, -2, 3, -2, 3),
         "max_neighbor": 10,
         "A": "[[4.057, 0.0, 0.0], [0.0, 4.057, 0.0], [0.0, 0.0, 6.987]]",
-        "version": "1.1.10",
+        "version": "1.1.14",
     },
 }

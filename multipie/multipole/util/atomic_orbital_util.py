@@ -310,6 +310,44 @@ def rank(o, spinful, crystal):
 
 
 # ==================================================
+def sort_orb_list(orb_list, spinful, crystal):
+    """
+    sort given orbital list.
+
+    Args:
+        orb_list (str/[str]): orbital list.
+        spinful (bool): spinful ?
+        crystal (str): seven crystal systems, triclinic/monoclinic/orthorhombic/tetragonal/trigonal/hexagonal/cubic.
+
+    Returns:
+        ([str]): sorted orbital list.
+                ["px", "py", "s"] => ["s", "px", "py"]
+    """
+    if type(orb_list) == str:  # abbreviation form
+        orb_list = [o for o in orb_list.split(" ") if o != ""]
+    elif type(orb_list) == list:  # standard form
+        orb_list = [remove_space(str(o)) for o in orb_list]
+    else:
+        raise Exception(f"invalid type of orb_list = {type(orb_list)} is given.")
+
+    orb_list = to_spinless(orb_list)
+
+    b_type = basis_type(orb_list, crystal)
+    spinful_ = True if b_type == "jm" else False
+
+    orb_list_data = _standard_basis[spinful_][b_type]
+
+    max_l = 3
+    orb_list_sorted = [o for l in range(max_l + 1) for o in orb_list if l == rank(o, spinful_, crystal)]
+    orb_list_sorted = [o for o in orb_list_data if o in orb_list_sorted]
+
+    if spinful:
+        orb_list_sorted = to_spinful(orb_list_sorted)
+
+    return orb_list_sorted
+
+
+# ==================================================
 def parse_orb_list(orb_list, spinful, crystal):
     """
     parse given orbital list.
@@ -364,45 +402,10 @@ def parse_orb_list(orb_list, spinful, crystal):
     if spinful:
         orb_list = to_spinful(orb_list)
 
+    # sort orbital list.
+    orb_list = sort_orb_list(orb_list, spinful, crystal)
+
     return orb_list
-
-
-# ==================================================
-def sort_orb_list(orb_list, spinful, crystal):
-    """
-    sort given orbital list.
-
-    Args:
-        orb_list (str/[str]): orbital list.
-        spinful (bool): spinful ?
-        crystal (str): seven crystal systems, triclinic/monoclinic/orthorhombic/tetragonal/trigonal/hexagonal/cubic.
-
-    Returns:
-        ([str]): sorted orbital list.
-                ["px", "py", "s"] => ["s", "px", "py"]
-    """
-    if type(orb_list) == str:  # abbreviation form
-        orb_list = [o for o in orb_list.split(" ") if o != ""]
-    elif type(orb_list) == list:  # standard form
-        orb_list = [remove_space(str(o)) for o in orb_list]
-    else:
-        raise Exception(f"invalid type of orb_list = {type(orb_list)} is given.")
-
-    orb_list = to_spinless(orb_list)
-
-    b_type = basis_type(orb_list, crystal)
-    spinful_ = True if b_type == "jm" else False
-
-    orb_list_data = _standard_basis[spinful_][b_type]
-
-    max_l = 3
-    orb_list_sorted = [o for l in range(max_l + 1) for o in orb_list if l == rank(o, spinful_, crystal)]
-    orb_list_sorted = [o for o in orb_list_data if o in orb_list_sorted]
-
-    if spinful:
-        orb_list_sorted = to_spinful(orb_list_sorted)
-
-    return orb_list_sorted
 
 
 # ==================================================

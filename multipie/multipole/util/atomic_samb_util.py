@@ -5,7 +5,8 @@ import numpy as np
 
 from gcoreutils.nsarray import NSArray
 
-from multipie.multipole.util.atomic_orbital_util import rank, basis_type
+from multipie.data.data_tag_harmonics_alias import _data_alias_oh, _data_alias_d6h
+from multipie.multipole.util.atomic_orbital_util import to_spinless, rank, basis_type
 from multipie.multipole.util.spin_orbital_basis import _standard_basis
 from multipie.multipole.util.multipole_util import matrix_sum
 from multipie.tag.tag_list import TagList
@@ -47,6 +48,26 @@ def _extract_subspace(am_data, bra_list, ket_list, spinful, crystal):
 
         if not np.all(Xlm_extracted == 0):
             am_extracted[TagMultipole(str(tag))] = Xlm_extracted
+
+    if crystal in ("trigonal", "hexagonal"):
+        orb_sgn_dic = {o: sgn for o, (_, sgn) in _data_alias_d6h.items()}
+    else:
+        orb_sgn_dic = {o: sgn for o, (_, sgn) in _data_alias_oh.items()}
+
+    am_extracted = {
+        tag: NSArray(
+            [
+                [
+                    orb_sgn_dic[to_spinless(oi)[0]] * orb_sgn_dic[to_spinless(oj)[0]] * Xlm[i, j]
+                    for j, oj in enumerate(ket_list)
+                ]
+                for i, oi in enumerate(bra_list)
+            ],
+            "matrix",
+            fmt="sympy",
+        )
+        for tag, Xlm in am_extracted.items()
+    }
 
     return am_extracted
 

@@ -22,6 +22,8 @@
         - **model_type** : tight_binding/phonon
         - **time_reversal_type** : electric/magnetic/both
         - **irrep** : irrep list
+        - **fourier_transform*** : create fourier transformed SAMB ?
+        - **toroidal_priority** : create toroidal multipoles (G,T) in high priority ?
     - **k_point*** : representative k points
     - **k_path*** : high-symmetry line in k space
     - **dimension** : dimension of full matrix
