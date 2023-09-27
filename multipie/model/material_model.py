@@ -240,6 +240,12 @@ class MaterialModel(dict):
             detail["A"] = str(self.A)
             data["plus_set"] = self._mpm.group.symmetry_operation.plus_set.str()
 
+        if "detail" in dic.keys():
+            if "cell_range" in dic["detail"]:
+                detail["cell_range"] = dic["detail"]["cell_range"]
+            if "max_neighbor" in dic["detail"]:
+                detail["max_neighbor"] = dic["detail"]["max_neighbor"]
+
         if "site" in dic.keys():
             info["site"] = dic["site"]
             self._set_rep_site(info)
@@ -252,12 +258,6 @@ class MaterialModel(dict):
             self._set_bond(info, name, data)
 
         self._set_matrix(name, data, orbital, ket_dict)
-
-        if "detail" in dic.keys():
-            if "cell_range" in dic["detail"]:
-                detail["cell_range"] = dic["detail"]["cell_range"]
-            if "max_neighbor" in dic["detail"]:
-                detail["max_neighbor"] = dic["detail"]["max_neighbor"]
 
         self["info"] = info
         self["name"] = name
@@ -357,7 +357,9 @@ class MaterialModel(dict):
                 label = f"b{bond_no}/{n}th: " + self._mapping_str(mp)
             v, c = bond.split("@")
             opa = opacity * 0.5 if mode != "standard" else opacity
-            qtdraw.plot_bond(c, v, color=color1, color2=color2, width=width * scale, opacity=opa, name=cluster_name, label=label)
+            qtdraw.plot_bond(
+                c, v, color=color1, color2=color2, width=width * scale, opacity=opa, name=cluster_name, label=label
+            )
             if mode != "standard":
                 v = NSArray(v).transform(self.A)
                 v_len = v.norm() * 0.25
