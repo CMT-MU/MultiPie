@@ -153,13 +153,19 @@ class SymmetryAdaptedModel(dict):
 
         # uniform
         if self._model["info"]["molecule"] or self._model["info"]["generate"].get("fourier_transform", False):
-            cluster_samb_set = {S_i: [site_cluster_data[smp_i] for smp_i in lst] for S_i, lst in site_cluster_info.items()}
-            cluster_samb_set |= {B_i: [bond_cluster_data[bmp_i] for bmp_i in lst] for B_i, lst in bond_cluster_info.items()}
+            cluster_samb_set = {
+                S_i: [site_cluster_data[smp_i] for smp_i in lst] for S_i, lst in site_cluster_info.items()
+            }
+            cluster_samb_set |= {
+                B_i: [bond_cluster_data[bmp_i] for bmp_i in lst] for B_i, lst in bond_cluster_info.items()
+            }
             braket_indexes_dict = {
-                cluster_tag: [site[site_tag][2] for site_tag in site_list] for cluster_tag, site_list in cluster_site.items()
+                cluster_tag: [site[site_tag][2] for site_tag in site_list]
+                for cluster_tag, site_list in cluster_site.items()
             }
             braket_indexes_dict |= {
-                cluster_tag: [bond[bond_tag][2] for bond_tag in bond_list] for cluster_tag, bond_list in cluster_bond.items()
+                cluster_tag: [bond[bond_tag][2] for bond_tag in bond_list]
+                for cluster_tag, bond_list in cluster_bond.items()
             }
             dim = len(site)
 
@@ -172,8 +178,12 @@ class SymmetryAdaptedModel(dict):
         if self._model["info"]["molecule"]:
             y_tag_dict = {(SB_i, uniform_data[ump_i][0]): ump_i for SB_i, lst in uniform_info.items() for ump_i in lst}
         else:
-            y_tag_dict = {(S_i, site_cluster_data[smp_i][0]): smp_i for S_i, lst in site_cluster_info.items() for smp_i in lst}
-            y_tag_dict |= {(B_i, bond_cluster_data[bmp_i][0]): bmp_i for B_i, lst in bond_cluster_info.items() for bmp_i in lst}
+            y_tag_dict = {
+                (S_i, site_cluster_data[smp_i][0]): smp_i for S_i, lst in site_cluster_info.items() for smp_i in lst
+            }
+            y_tag_dict |= {
+                (B_i, bond_cluster_data[bmp_i][0]): bmp_i for B_i, lst in bond_cluster_info.items() for bmp_i in lst
+            }
 
         cluster_site_bond = cluster_site | cluster_bond
         braket_site_no_dict = {S_i: site[site_list[0]][2] for S_i, site_list in cluster_site.items()}
@@ -358,6 +368,10 @@ class SymmetryAdaptedModel(dict):
         bond = self._model["data"]["bond"]
         dim = len(self._model["data"]["site"])
 
+        if len(bond) == 0:
+            self._model["info"]["generate"]["fourier_transform"] = False
+            return
+
         # structure
         bc_samb_set = {B_i: [bond_cluster_data[bmp_i] for bmp_i in lst] for B_i, lst in bond_cluster_info.items()}
 
@@ -366,7 +380,9 @@ class SymmetryAdaptedModel(dict):
         structure_info, structure_data = _run("structure", self._mpm, func, *args)
 
         # Zk
-        bc_samb_set = {B_i: [(bmp_i, bond_cluster_data[bmp_i][1]) for bmp_i in lst] for B_i, lst in bond_cluster_info.items()}
+        bc_samb_set = {
+            B_i: [(bmp_i, bond_cluster_data[bmp_i][1]) for bmp_i in lst] for B_i, lst in bond_cluster_info.items()
+        }
         u_samb_set = [(ump_i, m) for ump_i, (_, m) in uniform_data.items()]
         k_samb_set = [(kmp_i, fk) for kmp_i, (_, fk) in structure_data.items()]
 
@@ -406,17 +422,23 @@ class SymmetryAdaptedModel(dict):
         }
 
         if self._model["info"]["molecule"]:
-            uniform_data = {ump_i: (str(tag), *matrix_to_dict(m)) for ump_i, (tag, m) in self["data"]["uniform"].items()}
+            uniform_data = {
+                ump_i: (str(tag), *matrix_to_dict(m)) for ump_i, (tag, m) in self["data"]["uniform"].items()
+            }
             data |= {"uniform": uniform_data}
 
         data |= {"Z": z_data}
 
         if not self._model["info"]["molecule"] and self._model["info"]["generate"]["fourier_transform"]:
-            uniform_data = {ump_i: (str(tag), *matrix_to_dict(m)) for ump_i, (tag, m) in self["data"]["uniform"].items()}
+            uniform_data = {
+                ump_i: (str(tag), *matrix_to_dict(m)) for ump_i, (tag, m) in self["data"]["uniform"].items()
+            }
             structure_data = {
                 kmp_i: (str(tag), str(fk).replace("'", "")) for kmp_i, (tag, fk) in self["data"]["structure"].items()
             }
-            zk_data = {z_i: (str(tag), [tuple(map(str, v)) for v in lst]) for z_i, (tag, lst) in self["data"]["Zk"].items()}
+            zk_data = {
+                z_i: (str(tag), [tuple(map(str, v)) for v in lst]) for z_i, (tag, lst) in self["data"]["Zk"].items()
+            }
             data |= {"uniform": uniform_data}
             data |= {"structure": structure_data}
             data |= {"Zk": zk_data}
@@ -517,7 +539,9 @@ class SymmetryAdaptedModel(dict):
                         Z = (Z + Z.adjoint()) / sp.sqrt(2)
 
                     Z = Z / Z.norm()
-                    z_full[z_i] = {(0, 0, 0, a, b): Z[a, b] for a in range(dim_full) for b in range(dim_full) if Z[a, b] != 0}
+                    z_full[z_i] = {
+                        (0, 0, 0, a, b): Z[a, b] for a in range(dim_full) for b in range(dim_full) if Z[a, b] != 0
+                    }
 
                 # bond × atomic
                 else:
@@ -557,7 +581,9 @@ class SymmetryAdaptedModel(dict):
                                 if S1 == S2 and bra_orb_list != ket_orb_list:
                                     bra_no += dim_r
                                     ket_no -= dim_r
-                                    Z[bra_no : bra_no + dim_c, ket_no : ket_no + dim_r] += c * vi * sp.Matrix(X).adjoint()
+                                    Z[bra_no : bra_no + dim_c, ket_no : ket_no + dim_r] += (
+                                        c * vi * sp.Matrix(X).adjoint()
+                                    )
 
                                     Z /= sp.sqrt(2)
 
@@ -670,7 +696,9 @@ class SymmetryAdaptedModel(dict):
                                 if S1 == S2 and bra_orb_list != ket_orb_list:
                                     bra_no += dim_r
                                     ket_no -= dim_r
-                                    Z[bra_no : bra_no + dim_c, ket_no : ket_no + dim_r] += c * u * F * sp.Matrix(X).adjoint()
+                                    Z[bra_no : bra_no + dim_c, ket_no : ket_no + dim_r] += (
+                                        c * u * F * sp.Matrix(X).adjoint()
+                                    )
 
                 if S1 == S2 and bra_orb_list != ket_orb_list:
                     Z /= sp.sqrt(2)
