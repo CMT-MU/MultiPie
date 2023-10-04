@@ -148,7 +148,7 @@ class SymmetryOperationG(
         if primitive:
             ops = to_primitive(self.lattice, ops)
         if cartesian:
-            ops = to_cartesian(self.crystal, ops)
+            ops = to_cartesian(self.crystal, ops, self.tag.is_point_group())
 
         return ops
 
