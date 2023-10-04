@@ -1,11 +1,13 @@
 import numpy as np
 import sympy as sp
 from gcoreutils.nsarray import NSArray
-from multipie.data.data_transform_matrix import _data_trans_Ah, _data_trans_lattice_p, _data_trans_lattice_t
+from multipie.data.data_transform_matrix import _data_trans_Ah, _data_trans_Ah4, _data_trans_lattice_p, _data_trans_lattice_t
 
 
 # 3x3 matrix to convert from reduced to cartesian coordinate.
 Ah = (NSArray(_data_trans_Ah), NSArray(_data_trans_Ah).inverse())
+# 4x4 matrix to convert from reduced to cartesian coordinate.
+Ah4 = (NSArray(_data_trans_Ah4), NSArray(_data_trans_Ah4).inverse())
 
 # 4x4 matrix to convert from conventioanl to primitive coordinate.
 latticeP = {lat: (NSArray(d), NSArray(d).inverse()) for lat, d in _data_trans_lattice_p.items()}
@@ -15,18 +17,22 @@ latticeT = {lat: NSArray(d) for lat, d in _data_trans_lattice_t.items()}
 
 
 # ==================================================
-def to_cartesian(crystal, vm):
+def to_cartesian(crystal, vm, pg=True):
     """
     convert from reduced to cartesian coordinates.
 
     Args:
         vm (NSArray): vector/matrix/bond to convert.
+        pg (bool, optional): point group ?
 
     Returns:
         NSArray: converted array.
     """
     if crystal in ["hexagonal", "trigonal"]:
-        return vm.transform(Ah[0], Ah[1])
+        if pg:
+            return vm.transform(Ah[0], Ah[1])
+        else:
+            return vm.transform(Ah4[0], Ah4[1])
     else:
         return vm
 
