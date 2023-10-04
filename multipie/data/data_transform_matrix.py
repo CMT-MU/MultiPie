@@ -2,6 +2,7 @@
 from reduced to catesian coordinate for hexagonal system
 """
 _data_trans_Ah = "[[1,-1/2,0],[0,sqrt(3)/2,0],[0,0,1]]"
+_data_trans_Ah4 = "[[1,-1/2,0,0],[0,sqrt(3)/2,0,0],[0,0,1,0],[0,0,0,1]]"
 
 """
 transformation matrix, P (4x4)
