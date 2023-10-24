@@ -621,21 +621,6 @@ class SymmetryAdaptedModel(dict):
 
         z_samb["matrix"] = z_full
 
-        print("check SAMBs")
-
-        import numpy as np
-
-        z_full = {z_i: {k: complex(sp.sympify(v)) for k, v in d.items()} for z_i, d in z_full.items()}
-        eps = 1e-8
-        for z1, d1 in z_full.items():
-            for z2, d2 in z_full.items():
-                v = np.real(np.sum([v * d1.get((-k[0], -k[1], -k[2], k[4], k[3]), 0) for k, v in d2.items()]))
-                print(z1, z2, v)
-                if z1 != z2 and v > eps:
-                    raise Exception(z1, z2, v)
-                if z1 == z2 and 1.0 - v > eps:
-                    raise Exception(z1, z2, 1.0 - v)
-
         return z_samb
 
     # ==================================================
