@@ -68,9 +68,20 @@ def construct_samb_matrix(matrix_dict, k_grid=None):
         k_grid = np.array([[0, 0, 0]])
 
     z_samb = matrix_dict["matrix"]
-    cell_site = matrix_dict["cell_site"]
     ket = matrix_dict["ket"]
     dim = matrix_dict["dimension"]
+
+    lattice = matrix_dict["group"][1].split("/")[1].replace(" ", "")[0]
+    if lattice != "P":
+        cell_site = {}
+        for site, v in matrix_dict["cell_site"].items():
+            if "(" in site and ")" in site:
+                if "(1)" in site:
+                    cell_site[site[:-3]] = v
+            else:
+                cell_site[site] = v
+    else:
+        cell_site = matrix_dict["cell_site"]
 
     atoms_positions = [
         NSArray(cell_site[ket[a].split("@")[1]][0], style="vector", fmt="value").tolist() for a in range(len(ket))
