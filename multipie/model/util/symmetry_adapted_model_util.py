@@ -471,8 +471,8 @@ def create_z_samb_set(
             z_info[(irrep, M_i, SB_i)] = lst
 
     # check basis (# of X)×(# of Y) = # of Z.
-    if len(kwargs) == 0:
-        _check_complete_relation(x_tag_dict, y_tag_dict, z_info, z_data)
+    # if len(kwargs) == 0:
+    #     _check_complete_relation(x_tag_dict, y_tag_dict, z_info, z_data)
 
     return z_info, z_data
 

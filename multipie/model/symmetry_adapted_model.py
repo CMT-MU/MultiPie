@@ -580,19 +580,23 @@ class SymmetryAdaptedModel(dict):
                                 Z = sp.Matrix.zeros(dim_full, dim_full)
                                 Z[bra_no : bra_no + dim_r, ket_no : ket_no + dim_c] += c * vi * sp.Matrix(X)
 
-                                if S1 == S2 and bra_orb_list != ket_orb_list and bra_idx != ket_idx:
-                                    bra_no += dim_r
-                                    ket_no -= dim_r
-                                    Z[bra_no : bra_no + dim_c, ket_no : ket_no + dim_r] += (
-                                        c * vi * sp.Matrix(X).adjoint()
-                                    )
-
+                                if S1 == S2 and bra_orb_list != ket_orb_list:
+                                    if bra_idx == ket_idx:
+                                        Z[ket_no : ket_no + dim_c, bra_no : bra_no + dim_r] += (
+                                            c * vi * sp.Matrix(X).adjoint()
+                                        )
+                                    else:
+                                        bra_no += dim_r
+                                        ket_no -= dim_r
+                                        Z[bra_no : bra_no + dim_c, ket_no : ket_no + dim_r] += (
+                                            c * vi * sp.Matrix(X).adjoint()
+                                        )
                                     Z /= sp.sqrt(2)
 
                                 for a in range(dim_full):
                                     for b in range(dim_full):
                                         z = sp.expand(Z[a, b])
-                                        if z == sp.S(0):
+                                        if z == sp.S(0) or z == 0:
                                             continue
 
                                         if (n1, n2, n3, a, b) not in z_full[z_i]:
@@ -605,13 +609,32 @@ class SymmetryAdaptedModel(dict):
         if fmt == "value":
             DIGIT = 14
             z_full = {
-                z_i: {k: str(round(complex(v).real, DIGIT) + round(complex(v).imag, DIGIT) * 1j) for k, v in d.items()}
+                z_i: {
+                    k: str(round(complex(v).real, DIGIT) + round(complex(v).imag, DIGIT) * 1j)
+                    for k, v in d.items()
+                    if sp.expand(v) != 0
+                }
                 for z_i, d in z_full.items()
             }
         else:
-            z_full = {z_i: {k: str(v) for k, v in d.items()} for z_i, d in z_full.items()}
+            z_full = {z_i: {k: str(v) for k, v in d.items() if sp.expand(v) != 0} for z_i, d in z_full.items()}
 
         z_samb["matrix"] = z_full
+
+        print("check SAMBs")
+
+        import numpy as np
+
+        z_full = {z_i: {k: complex(sp.sympify(v)) for k, v in d.items()} for z_i, d in z_full.items()}
+        eps = 1e-8
+        for z1, d1 in z_full.items():
+            for z2, d2 in z_full.items():
+                v = np.real(np.sum([v * d1.get((-k[0], -k[1], -k[2], k[4], k[3]), 0) for k, v in d2.items()]))
+                print(z1, z2, v)
+                if z1 != z2 and v > eps:
+                    raise Exception(z1, z2, v)
+                if z1 == z2 and 1.0 - v > eps:
+                    raise Exception(z1, z2, 1.0 - v)
 
         return z_samb
 
@@ -694,15 +717,20 @@ class SymmetryAdaptedModel(dict):
                                 if M_i_ != M_i:
                                     continue
 
-                                if S1 == S2 and bra_orb_list != ket_orb_list and bra_idx != ket_idx:
+                                if S1 == S2 and bra_orb_list != ket_orb_list:
                                     Z[bra_no : bra_no + dim_r, ket_no : ket_no + dim_c] += (
                                         c * u * F * sp.Matrix(X) / sp.sqrt(2)
                                     )
-                                    bra_no += dim_r
-                                    ket_no -= dim_r
-                                    Z[bra_no : bra_no + dim_c, ket_no : ket_no + dim_r] += (
-                                        c * u * F * sp.Matrix(X).adjoint()
-                                    ) / sp.sqrt(2)
+                                    if bra_idx == ket_idx:
+                                        Z[ket_no : ket_no + dim_c, bra_no : bra_no + dim_r] += (
+                                            c * u * F * sp.Matrix(X).adjoint()
+                                        ) / sp.sqrt(2)
+                                    else:
+                                        bra_no += dim_r
+                                        ket_no -= dim_r
+                                        Z[bra_no : bra_no + dim_c, ket_no : ket_no + dim_r] += (
+                                            c * u * F * sp.Matrix(X).adjoint()
+                                        ) / sp.sqrt(2)
                                 else:
                                     Z[bra_no : bra_no + dim_r, ket_no : ket_no + dim_c] += c * u * F * sp.Matrix(X)
 
