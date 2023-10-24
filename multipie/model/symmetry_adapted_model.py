@@ -7,6 +7,7 @@ from gcoreutils.nsarray import NSArray
 from multipie.tag.tag_list import TagList
 from multipie.multipole.util.multipole_util import matrix_to_dict
 from multipie.multipole.util.structure_samb_util import cs_list
+from multipie.symmetry_operation.util.symmetry_operation_util import to_primitive
 from multipie.model.util.symmetry_adapted_model_util import (
     create_atomic_samb_set,
     create_cluster_samb_set,
@@ -545,10 +546,7 @@ class SymmetryAdaptedModel(dict):
 
                 # bond × atomic
                 else:
-                    if SB_i[0] == "S":
-                        S1 = S2 = alias[SB_i]
-                    else:
-                        S1, S2, _, _ = alias[SB_i].split(":")
+                    S1, S2, _, _ = alias[SB_i].split(":")
 
                     z_full[z_i] = {}
                     n_sgn_list = n_sgn_dict[SB_i]
@@ -569,8 +567,14 @@ class SymmetryAdaptedModel(dict):
                             bv = sgn * NSArray(bond[f"bond_{n:03d}"][3], style="vector")
                             s1 = NSArray(list(site.values())[bra_idx][0], style="vector")
                             s2 = NSArray(list(site.values())[ket_idx][0], style="vector")
+
+                            lattice = self._model["info"]["group"][1].split("/")[1].replace(" ", "")[0]
+                            bv_ = to_primitive(lattice, bv)
+
+                            bv = bv_
+
                             n1, n2, n3 = bv - (s1 - s2)
-                            n1, n2, n3 = int(n1), int(n2), int(n3)
+                            n1, n2, n3 = round(n1), round(n2), round(n3)
 
                             for bra_no, ket_no, M_i_ in cluster_atomic[(bra_idx, ket_idx)]:
                                 if M_i_ != M_i:
