@@ -542,8 +542,8 @@ def _fourier_transform_bond_cluster_samb(bc_samb, u_samb_set, k_samb_set, braket
                     coeff_ump_smp_list.append((c, ump_i, kmp_i))
 
         # check normalization
-        # coeff_list = [c for c, _, _ in coeff_ump_smp_list]
-        # _check_fourier_transform(bmp_i, coeff_list)
+        coeff_list = [c for c, _, _ in coeff_ump_smp_list]
+        _check_fourier_transform(bmp_i, coeff_list)
 
         bck_samb[bmp_i] = coeff_ump_smp_list
 
