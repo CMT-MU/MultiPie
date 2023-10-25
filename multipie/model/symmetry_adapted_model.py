@@ -569,7 +569,9 @@ class SymmetryAdaptedModel(dict):
                             s2 = NSArray(list(site.values())[ket_idx][0], style="vector")
 
                             lattice = self._model["info"]["group"][1].split("/")[1].replace(" ", "")[0]
-                            bv = to_primitive(lattice, bv)
+                            bv_ = to_primitive(lattice, bv)
+
+                            bv = bv_
 
                             n1, n2, n3 = bv - (s1 - s2)
                             n1, n2, n3 = round(n1), round(n2), round(n3)
@@ -580,7 +582,7 @@ class SymmetryAdaptedModel(dict):
                                 Z = sp.Matrix.zeros(dim_full, dim_full)
                                 Z[bra_no : bra_no + dim_r, ket_no : ket_no + dim_c] += c * vi * sp.Matrix(X)
 
-                                if S1 == S2 and bra_orb_list != ket_orb_list and bra_idx != ket_idx:
+                                if S1 == S2 and bra_orb_list != ket_orb_list:
                                     bra_no += dim_r
                                     ket_no -= dim_r
                                     Z[bra_no : bra_no + dim_c, ket_no : ket_no + dim_r] += (
@@ -612,21 +614,6 @@ class SymmetryAdaptedModel(dict):
             z_full = {z_i: {k: str(v) for k, v in d.items()} for z_i, d in z_full.items()}
 
         z_samb["matrix"] = z_full
-
-        import numpy as np
-
-        print("check SAMBs")
-
-        z_full = {z_i: {k: complex(sp.sympify(v)) for k, v in d.items()} for z_i, d in z_full.items()}
-        eps = 1e-6
-        for z1, d1 in z_full.items():
-            for z2, d2 in z_full.items():
-                v = np.real(np.sum([v * d1.get((-k[0], -k[1], -k[2], k[4], k[3]), 0) for k, v in d2.items()]))
-                print(z1, z2, v)
-                if z1 != z2 and v > eps:
-                    raise Exception(z1, z2, v)
-                if z1 == z2 and 1.0 - v > eps:
-                    raise Exception(z1, z2, 1.0 - v)
 
         return z_samb
 
@@ -702,24 +689,23 @@ class SymmetryAdaptedModel(dict):
                         F = structure_data[kmp_i][1]
                     X = atomic_data[amp_i][1]
                     U = uniform_data[ump_i][1]
-                    for (bra_idx, ket_idx), lst2 in cluster_atomic.items():
-                        u = U[bra_idx, ket_idx]
+                    for (bra_site_no, ket_site_no), lst2 in cluster_atomic.items():
+                        u = U[bra_site_no, ket_site_no]
                         if u != 0:
                             for bra_no, ket_no, M_i_ in lst2:
                                 if M_i_ != M_i:
                                     continue
+                                Z[bra_no : bra_no + dim_r, ket_no : ket_no + dim_c] += c * u * F * sp.Matrix(X)
 
-                                if S1 == S2 and bra_orb_list != ket_orb_list and bra_idx != ket_idx:
-                                    Z[bra_no : bra_no + dim_r, ket_no : ket_no + dim_c] += (
-                                        c * u * F * sp.Matrix(X) / sp.sqrt(2)
-                                    )
+                                if S1 == S2 and bra_orb_list != ket_orb_list:
                                     bra_no += dim_r
                                     ket_no -= dim_r
                                     Z[bra_no : bra_no + dim_c, ket_no : ket_no + dim_r] += (
                                         c * u * F * sp.Matrix(X).adjoint()
-                                    ) / sp.sqrt(2)
-                                else:
-                                    Z[bra_no : bra_no + dim_r, ket_no : ket_no + dim_c] += c * u * F * sp.Matrix(X)
+                                    )
+
+                if S1 == S2 and bra_orb_list != ket_orb_list:
+                    Z /= sp.sqrt(2)
 
                 if not Z.is_hermitian:
                     Z = Z + Z.adjoint()
