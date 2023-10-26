@@ -787,10 +787,11 @@ class MaterialModel(dict):
         if repeat:
             offset = detail["cell_range"][::2]
             N = [i - j for i, j in zip(detail["cell_range"][1::2], offset)]
-            igrid = NSArray.igrid(N, offset)
-            igrid = np.tile(igrid.numpy(), (len(site), 1))
-
             ns = N[0] * N[1] * N[2]
+
+            igrid = NSArray.igrid(N, offset)
+            igrid = np.array([np.tile(v, (len(site), 1)) for v in igrid])
+            igrid = igrid.reshape(ns * len(site), 3)
             all_site = NSArray(np.tile(site.numpy(), (ns, 1)) + igrid, "vector")
         else:
             all_site = site
@@ -811,11 +812,12 @@ class MaterialModel(dict):
         """
         tail = NSArray("{" + tail + "}")
         head = self._site_grid(head, info, detail, repeat=True)
+
         all_bond = NSArray.distance(tail, head, self._G)
         if info["molecule"]:
             all_bond = list(all_bond.values())[1:]
         else:
-            all_bond = list(all_bond.values())[1 : detail["max_neighbor"]]
+            all_bond = list(all_bond.values())[1 : detail["max_neighbor"] + 1]
         rep_bond = []
         for lst in all_bond:
             th = [f"{tail[0]};{head[i]}" for _, i in lst]
