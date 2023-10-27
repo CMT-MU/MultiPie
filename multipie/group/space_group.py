@@ -258,9 +258,7 @@ class SpaceGroup:
         assert len(site_list) > 0, "empty site list is given."
 
         lattice = self.symmetry_operation.lattice
-        site_list = set(
-            to_conventional(lattice, to_primitive(lattice, site_list).shift().remove_duplicate()).shift().str()
-        )
+        site_list = set(to_conventional(lattice, to_primitive(lattice, site_list).shift().remove_duplicate()).shift().str())
 
         rep_site = []
         rep_site = remove_equivalent_site(site_list, rep_site)
@@ -296,9 +294,7 @@ class SpaceGroup:
         # remove equivalent bonds.
         tail = bond_list[0].convert_bond("bond_th")[0]
         lattice = self.symmetry_operation.lattice
-        bond_list = set(
-            to_conventional(lattice, to_primitive(lattice, bond_list).shift().remove_duplicate()).shift().str()
-        )
+        bond_list = set(to_conventional(lattice, to_primitive(lattice, bond_list).shift().remove_duplicate()).shift().str())
 
         # find representative bonds.
         rep_bond = []
@@ -474,33 +470,33 @@ class SpaceGroup:
         if not isinstance(site, (str, NSArray)):
             raise KeyError(f"{type(site)} is not accepted for site.")
 
-        wpv = self.symmetry_operation._equivalent_vector(site, plus_set=True, shift=True, remove_duplicate=True)
+        # equivalent sites in conventional unit cell.
+        wpv = self.transform_site(site, shift=True, plus_set=True, remove_duplicate=True).sort().tolist()
+
+        # candidate Wyckoff positions.
         n = len(wpv)
-        tags = [i for i in self.wyckoff.keys() if i.n == n]
-        if len(tags) == 1:
-            return tags[0]
+        wps = [i for i in self.wyckoff.key_list() if i.n == n]
 
-        wps = [self.wyckoff.position(tag) for tag in tags]
-        if len(self.symmetry_operation.plus_set) > 1:
-            wps = [
-                NSArray(sum([[(i + ps).shift() for i in wp] for ps in self.symmetry_operation.plus_set], []), "vector")
-                for wp in wps
-            ]
+        # list of Wyckoff position sites.
+        lst = [
+            NSArray.concat([(self.wyckoff.position(i) + p).shift() for p in self.symmetry_operation.plus_set]).remove_duplicate()
+            for i in wps
+        ]
 
-        wpv0 = self.symmetry_operation._equivalent_vector(site, primitive=True, shift=True, remove_duplicate=True)
-        w0 = to_conventional(self.symmetry_operation.lattice, wpv0[0:1])[0]
+        # find Wyckoff position to match with given site.
         sht = NSArray("{[0, 0, 0], [0, 0, 1], [0, 1, 0], [0, 1, 1], [1, 0, 0], [1, 0, 1], [1, 1, 0], [1, 1, 1]}")
-
-        for tag, wp in zip(tags, wps):
-            for i in wp:
+        w0 = wpv[0]
+        wp = "-"
+        for tag, p in zip(wps, lst):
+            for i in p:
                 for s in sht:
-                    # s = NSArray(s, "vector")
                     if str(i) == str(w0 + s):
-                        return tag
-                    if sp.solve(list(i - w0 + s), self.wyckoff.v.tolist(), manual=True):
-                        return tag
-
-        raise Exception(f"{str(site)} cannot be found.")
+                        wp = tag
+                        break
+                    elif sp.solve(list(i - w0 + s), self.wyckoff.v.tolist(), manual=True):
+                        wp = tag
+                        break
+        return str(wp)
 
     # ==================================================
     def site_cluster_samb(self, site):

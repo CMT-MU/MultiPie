@@ -308,9 +308,7 @@ class PointGroup:
         if remove_duplicate and nondirectional:
             b = NSArray.from_str(self.bond_mapping(bond)[0].keys())
         else:
-            b = self.symmetry_operation._equivalent_bond(
-                bond, nondirectional=nondirectional, remove_duplicate=remove_duplicate
-            )
+            b = self.symmetry_operation._equivalent_bond(bond, nondirectional=nondirectional, remove_duplicate=remove_duplicate)
 
         return b
 
@@ -355,9 +353,7 @@ class PointGroup:
         h = NSArray(orbital).subs({"x": v[0], "y": v[1], "z": v[2]})
         if axial:
             so = self.symmetry_operation.mat(axial=False, cc_only=False).det()
-            t_orb = [
-                (so[i] * self.symmetry_operation._transform_variable(h, v, tr[i])).tolist() for i in range(len(tr))
-            ]
+            t_orb = [(so[i] * self.symmetry_operation._transform_variable(h, v, tr[i])).tolist() for i in range(len(tr))]
         else:
             t_orb = [self.symmetry_operation._transform_variable(h, v, tr[i]).tolist() for i in range(len(tr))]
 
@@ -592,22 +588,28 @@ class PointGroup:
         if not isinstance(site, (str, NSArray)):
             raise KeyError(f"{type(site)} is not accepted for site.")
 
-        wpv = self.symmetry_operation._equivalent_vector(site, remove_duplicate=True)
+        # equivalent sites.
+        wpv = self.transform_site(site, remove_duplicate=True).sort().tolist()
+
+        # candidate Wyckoff positions.
         n = len(wpv)
-        tags = [i for i in self.wyckoff.keys() if i.n == n]
-        if len(tags) == 1:
-            return tags[0]
+        wps = [i for i in self.wyckoff.key_list() if i.n == n]
 
-        wps = [self.wyckoff.position(tag) for tag in tags]
+        # list of Wyckoff position sites.
+        lst = [self.wyckoff.position(i) for i in wps]
+
+        # find Wyckoff position to match with given site.
         w0 = wpv[0]
-        for tag, wp in zip(tags, wps):
-            for i in wp:
+        wp = "-"
+        for tag, p in zip(wps, lst):
+            for i in p:
                 if str(i) == str(w0):
-                    return tag
-                if sp.solve(list(i - w0), self.wyckoff.v.tolist(), manual=True):
-                    return tag
-
-        raise Exception(f"{str(site)} cannot be found.")
+                    wp = tag
+                    break
+                elif sp.solve(list(i - w0), self.wyckoff.v.tolist(), manual=True):
+                    wp = tag
+                    break
+        return str(wp)
 
     # ==================================================
     def virtual_cluster_basis(self, wyckoff=None, ortho=True, create=False):
@@ -796,9 +798,7 @@ class PointGroup:
 
     # ==================================================
     @classmethod
-    def spherical_atomic_multipole_basis(
-        cls, bra_list, ket_list, spinful=False, crystal="cubic", core=None, verbose=False
-    ):
+    def spherical_atomic_multipole_basis(cls, bra_list, ket_list, spinful=False, crystal="cubic", core=None, verbose=False):
         """
         create spherical atomic multipole basis set.
 
