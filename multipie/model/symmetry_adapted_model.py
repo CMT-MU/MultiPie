@@ -565,12 +565,12 @@ class SymmetryAdaptedModel(dict):
                             n, sgn = n_sgn_list[i]
                             bra_idx, ket_idx = bond[bond_i_list[i]][2]
                             bv = sgn * NSArray(bond[f"bond_{n:03d}"][3], style="vector")
+                            if not self._model["info"]["molecule"]:
+                                lattice = self._model["info"]["group"][1].split("/")[1].replace(" ", "")[0]
+                                bv = to_primitive(lattice, bv)
+
                             s1 = NSArray(list(site.values())[bra_idx][0], style="vector")
                             s2 = NSArray(list(site.values())[ket_idx][0], style="vector")
-
-                            lattice = self._model["info"]["group"][1].split("/")[1].replace(" ", "")[0]
-                            bv = to_primitive(lattice, bv)
-
                             n1, n2, n3 = bv - (s1 - s2)
                             n1, n2, n3 = round(n1), round(n2), round(n3)
 
