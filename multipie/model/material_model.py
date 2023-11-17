@@ -4,7 +4,12 @@ MaterialModel manages model information of cluster or crystal system.
 import numpy as np
 from gcoreutils.nsarray import NSArray
 from gcoreutils.crystal_util import cell_transform_matrix
-from multipie.multipole.util.atomic_orbital_util import parse_orb_list, sort_orb_list, split_orb_list_rank_block, rank
+from multipie.multipole.util.atomic_orbital_util import (
+    parse_orb_list,
+    sort_orb_list,
+    split_orb_list_rank_block,
+    rank,
+)
 from multipie import __version__
 
 try:
@@ -137,12 +142,24 @@ class MaterialModel(dict):
             "molecule": False,
             "group": (1, ""),
             "crystal": "monoclinic",
-            "cell": {"a": 1.0, "b": 1.0, "c": 1.0, "alpha": 90.0, "beta": 90.0, "gamma": 90.0},
+            "cell": {
+                "a": 1.0,
+                "b": 1.0,
+                "c": 1.0,
+                "alpha": 90.0,
+                "beta": 90.0,
+                "gamma": 90.0,
+            },
             "volume": 1.0,
             "a1": "[1.0, 0.0, 0.0]",
             "a2": "[0.0, 1.0, 0.0]",
             "a3": "[0.0, 0.0, 1.0]",
-            "option": {"view": [0, 0, 1], "view_mode": "standard", "output": "material_model", "minimal_samb": True},
+            "option": {
+                "view": [0, 0, 1],
+                "view_mode": "standard",
+                "output": "material_model",
+                "minimal_samb": True,
+            },
             "generate": {
                 "model_type": "tight_binding",
                 "time_reversal_type": "electric",
@@ -198,7 +215,9 @@ class MaterialModel(dict):
         info["group"] = (str(self._mpm.group), self._group_str(info["molecule"]))
         info["crystal"] = self._mpm.group.tag.crystal
 
-        cell_info = cell_transform_matrix(cell=dic["cell"], crystal=info["crystal"], translation=False)
+        cell_info = cell_transform_matrix(
+            cell=dic["cell"], crystal=info["crystal"], translation=False
+        )
         self._cell = cell_info[0]
         self._volume = cell_info[1]
         self._A = cell_info[2]
@@ -219,6 +238,7 @@ class MaterialModel(dict):
             irrep = [str(i) for i in self._mpm.point_group.character.irrep_list]
         if type(irrep) == str:
             irrep = [irrep]
+        irrep = sorted(list(set([i.replace("a", "").replace("b", "") for i in irrep])))
         info["generate"]["irrep"] = irrep
 
         if info["molecule"]:
@@ -319,7 +339,9 @@ class MaterialModel(dict):
         for pos, (site_name, pset) in name["site_name"].items():
             head, idx = name["site"][site_name]
             cluster_no = int(name["alias"][head].split("_")[1])
-            prop_no = cluster_no - 1 if cluster_no < cluster_site_n else cluster_site_n - 1
+            prop_no = (
+                cluster_no - 1 if cluster_no < cluster_site_n else cluster_site_n - 1
+            )
             color, size, opacity = default_style["site"][prop_no]
             if n_pset > 1:
                 cluster_name = f"S{cluster_no}({pset})"
@@ -331,15 +353,31 @@ class MaterialModel(dict):
                 label = f"s{site_no}"
             else:
                 label = f"{head}_{idx}: " + self._mapping_str(mp)
-            qtdraw.plot_site(pos, name=cluster_name, label=label, color=color, size=size * scale, opacity=opacity)
+            qtdraw.plot_site(
+                pos,
+                name=cluster_name,
+                label=label,
+                color=color,
+                size=size * scale,
+                opacity=opacity,
+            )
             if mode != "standard" and idx == 1 and pset == 1:
-                qtdraw.plot_site(pos, name="Z", label=label, color="yellow", size=size * scale * 1.2, opacity=0.3)
+                qtdraw.plot_site(
+                    pos,
+                    name="Z",
+                    label=label,
+                    color="yellow",
+                    size=size * scale * 1.2,
+                    opacity=0.3,
+                )
 
         # plot bonds.
         for bond, (bond_name, pset) in name["bond_name"].items():
             head, idx = name["bond"][bond_name]
             cluster_no = int(name["alias"][head].split("_")[1])
-            prop_no = cluster_no - 1 if cluster_no < cluster_bond_n else cluster_bond_n - 1
+            prop_no = (
+                cluster_no - 1 if cluster_no < cluster_bond_n else cluster_bond_n - 1
+            )
             (c1, c2), width, opacity = default_style["bond"][prop_no]
             if n_pset > 1:
                 cluster_name = f"B{cluster_no}({pset})"
@@ -358,7 +396,14 @@ class MaterialModel(dict):
             v, c = bond.split("@")
             opa = opacity * 0.5 if mode != "standard" else opacity
             qtdraw.plot_bond(
-                c, v, color=color1, color2=color2, width=width * scale, opacity=opa, name=cluster_name, label=label
+                c,
+                v,
+                color=color1,
+                color2=color2,
+                width=width * scale,
+                opacity=opa,
+                name=cluster_name,
+                label=label,
             )
             if mode != "standard":
                 v = NSArray(v).transform(self.A)
@@ -394,7 +439,11 @@ class MaterialModel(dict):
             wp = str(self._mpm.group.find_wyckoff_position(str(pos)))
             pos = str(NSArray(pos))
             orb_list = split_orb_list_rank_block(
-                sort_orb_list(parse_orb_list(orb_list, spinful, crystal), spinful, crystal), spinful, crystal
+                sort_orb_list(
+                    parse_orb_list(orb_list, spinful, crystal), spinful, crystal
+                ),
+                spinful,
+                crystal,
             )
             sym = self._mpm.group.wyckoff.site_symmetry(wp)
             if not info["molecule"]:
@@ -437,7 +486,10 @@ class MaterialModel(dict):
             alias[site] = cluster
             cluster_site[cluster] = []
             for rsite_no in range(basic_num):
-                s, mp = position[rsite_no], prop[rsite_no]  # as sorted by pset group in s_map.
+                s, mp = (
+                    position[rsite_no],
+                    prop[rsite_no],
+                )  # as sorted by pset group in s_map.
                 s_no = site_no + rsite_no
                 sname = f"site_{s_no+1:03d}"
                 cluster_site[cluster].append(sname)
@@ -446,12 +498,17 @@ class MaterialModel(dict):
                 if n_pset > 1:
                     for pset in range(n_pset):
                         ss = position[pset * basic_num + rsite_no]
-                        cell_site[f"{site}_{rsite_no+1}({pset+1})"] = (ss, self._mapping_str(mp))
+                        cell_site[f"{site}_{rsite_no+1}({pset+1})"] = (
+                            ss,
+                            self._mapping_str(mp),
+                        )
                 else:
                     cell_site[f"{site}_{rsite_no+1}"] = (s, self._mapping_str(mp))
                 name_site[sname] = (site, rsite_no + 1)
                 orbital[sname] = orb_list
-            assert data_site[f"site_{site_no+1:03d}"][1][0] == 0, f"first SO is not identity operation, {mp}"
+            assert (
+                data_site[f"site_{site_no+1:03d}"][1][0] == 0
+            ), f"first SO is not identity operation, {mp}"
             for rsite_no in range(basic_num):
                 s_no = site_no + rsite_no
                 sname = f"site_{s_no+1:03d}"
@@ -479,7 +536,9 @@ class MaterialModel(dict):
                     if orbs != orbs_:
                         s1 = name_site[sname][0]
                         s2 = name_site[sname_][0]
-                        raise Exception(f"invalid orbitals are given, {s1} {orbs} != {s2} {orbs_}.")
+                        raise Exception(
+                            f"invalid orbitals are given, {s1} {orbs} != {s2} {orbs_}."
+                        )
 
         info["cell_site"].update(cell_site)
 
@@ -589,7 +648,10 @@ class MaterialModel(dict):
             else:
                 tail_name = site_to_name[str(t.shift())][0]
                 head_name = site_to_name[str(h.shift())][0]
-            t_no, h_no = (int(tail_name.split("_")[1]) - 1, int(head_name.split("_")[1]) - 1)
+            t_no, h_no = (
+                int(tail_name.split("_")[1]) - 1,
+                int(head_name.split("_")[1]) - 1,
+            )
             lst.append((t_no, h_no, b))
         lst = sorted(lst)
 
@@ -632,7 +694,10 @@ class MaterialModel(dict):
             cluster_bond[cluster] = []
             b_vector = {}
             for rbond_no in range(basic_num):
-                b, mp = bonds[rbond_no], prop[rbond_no]  # as sorted by pset group in s_map.
+                b, mp = (
+                    bonds[rbond_no],
+                    prop[rbond_no],
+                )  # as sorted by pset group in s_map.
                 b_no = bond_no + rbond_no
                 bname = f"bond_{b_no:03d}"
                 cluster_bond[cluster].append(bname)
@@ -645,7 +710,10 @@ class MaterialModel(dict):
                 else:
                     tail_name = site_to_name[str(t.shift())][0]
                     head_name = site_to_name[str(h.shift())][0]
-                ht_no = (int(head_name.split("_")[1]) - 1, int(tail_name.split("_")[1]) - 1)
+                ht_no = (
+                    int(head_name.split("_")[1]) - 1,
+                    int(tail_name.split("_")[1]) - 1,
+                )
                 assert ht_no[0] >= ht_no[1], f"site indices are wrong, {ht_no}"
                 vc = f"{v}@{c}"
                 data_bond[bname] = (vc, mp, ht_no, str(v), b)
@@ -653,18 +721,27 @@ class MaterialModel(dict):
                 b_vector[br] = b_vector.get(br, []) + [bname]
                 if n_pset > 1:
                     for pset in range(n_pset):
-                        v, c = NSArray(bonds[pset * basic_num + rbond_no]).convert_bond("bond")
+                        v, c = NSArray(bonds[pset * basic_num + rbond_no]).convert_bond(
+                            "bond"
+                        )
                         vc1 = f"{v}@{c}"
-                        cell_bond[f"{rbname}_{rbond_no+1}({pset+1})"] = (vc1, self._mapping_str(mp))
+                        cell_bond[f"{rbname}_{rbond_no+1}({pset+1})"] = (
+                            vc1,
+                            self._mapping_str(mp),
+                        )
                 else:
                     cell_bond[f"{rbname}_{rbond_no+1}"] = (vc, self._mapping_str(mp))
                 name_bond[bname] = (rbname, rbond_no + 1)
-            assert data_bond[f"bond_{bond_no:03d}"][1][0] == 0, f"first SO is not identity operation, {mp}"
+            assert (
+                data_bond[f"bond_{bond_no:03d}"][1][0] == 0
+            ), f"first SO is not identity operation, {mp}"
             for rbond_no in range(basic_num):
                 b_no = bond_no + rbond_no
                 bname = f"bond_{b_no:03d}"
                 for pset in range(n_pset):
-                    v, c = NSArray(bonds[pset * basic_num + rbond_no]).convert_bond("bond")
+                    v, c = NSArray(bonds[pset * basic_num + rbond_no]).convert_bond(
+                        "bond"
+                    )
                     b = f"{v}@{c}"
                     bond_to_name[b] = (bname, pset + 1)
             bond_no = bond_no + basic_num
@@ -693,7 +770,9 @@ class MaterialModel(dict):
         cluster_atomic = {}
         atomic_braket = {}
 
-        ij_list = [v[2] for v in data["site"].values()] + [v[2] for v in data["bond"].values()]
+        ij_list = [v[2] for v in data["site"].values()] + [
+            v[2] for v in data["bond"].values()
+        ]
 
         for ij in ij_list:
             i, j = ij
@@ -704,12 +783,20 @@ class MaterialModel(dict):
             if Si == Sj:
                 orbs_i = orbital[site_i]
                 orbs_j = orbs_i
-                braket = sum([[(orb, orbs_j[j]) for j in range(i, len(orbs_i))] for i, orb in enumerate(orbs_i)], [])
+                braket = sum(
+                    [
+                        [(orb, orbs_j[j]) for j in range(i, len(orbs_i))]
+                        for i, orb in enumerate(orbs_i)
+                    ],
+                    [],
+                )
             else:
                 orbs_i = orbital[site_i]
                 orbs_j = orbital[site_j]
                 braket = sum([[(orbi, orbj) for orbj in orbs_j] for orbi in orbs_i], [])
-            cluster_atomic[ij] = [(f"{bra}:{ket}", (bra[0], i), (ket[0], j)) for bra, ket in braket]
+            cluster_atomic[ij] = [
+                (f"{bra}:{ket}", (bra[0], i), (ket[0], j)) for bra, ket in braket
+            ]
             for bra, ket in braket:
                 atomic_braket[f"{bra}:{ket}"] = (bra, ket)
 
@@ -782,7 +869,9 @@ class MaterialModel(dict):
             site = self._mpm.group.transform_site(site, remove_duplicate=True)
             return site
 
-        site = self._mpm.group.transform_site(site, shift=True, remove_duplicate=True, plus_set=True)
+        site = self._mpm.group.transform_site(
+            site, shift=True, remove_duplicate=True, plus_set=True
+        )
 
         if repeat:
             offset = detail["cell_range"][::2]
@@ -866,7 +955,12 @@ class MaterialModel(dict):
             d["bond"] = []
 
         if "option" not in d.keys():
-            d["option"] = {"view": None, "view_mode": "standard", "output": model, "minimal_samb": True}
+            d["option"] = {
+                "view": None,
+                "view_mode": "standard",
+                "output": model,
+                "minimal_samb": True,
+            }
         else:
             if "view" not in d["option"].keys():
                 d["option"]["view"] = None
