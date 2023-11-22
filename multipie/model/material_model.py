@@ -39,6 +39,7 @@ input_str = """
   - view_mode* : mode for QtDraw file (str) ("standard"/"arrow"/"debug"), ["standard"].
   - output* : output folder (str), [model name].
   - minimal_samb* (bool) : minimal output in _samb.pdf ? [True].
+  - binary_output* (bool) : output matrix data in binary format ? [False].
 - generate*
   - model_type* : model type (str), ("tight_binding"/"phonon"), ["tight_binding"].
   - time_reversal_type* : time-reversal type (str), ("electric"/"magnetic"/"both"), ["electric"].
@@ -70,6 +71,7 @@ header_str = """
         - view_mode : QtDraw mode, standard/arrow/debug
         - output : output directory.
         - minimal_samb : output minimal SAMB ?
+        - binary_output : output matrix data in binary format ?
     - generate :
         - model_type : tight_binding/phonon
         - time_reversal_type : electric/magnetic/both
@@ -159,6 +161,7 @@ class MaterialModel(dict):
                 "view_mode": "standard",
                 "output": "material_model",
                 "minimal_samb": True,
+                "binary_output": False,
             },
             "generate": {
                 "model_type": "tight_binding",
@@ -215,9 +218,7 @@ class MaterialModel(dict):
         info["group"] = (str(self._mpm.group), self._group_str(info["molecule"]))
         info["crystal"] = self._mpm.group.tag.crystal
 
-        cell_info = cell_transform_matrix(
-            cell=dic["cell"], crystal=info["crystal"], translation=False
-        )
+        cell_info = cell_transform_matrix(cell=dic["cell"], crystal=info["crystal"], translation=False)
         self._cell = cell_info[0]
         self._volume = cell_info[1]
         self._A = cell_info[2]
@@ -339,9 +340,7 @@ class MaterialModel(dict):
         for pos, (site_name, pset) in name["site_name"].items():
             head, idx = name["site"][site_name]
             cluster_no = int(name["alias"][head].split("_")[1])
-            prop_no = (
-                cluster_no - 1 if cluster_no < cluster_site_n else cluster_site_n - 1
-            )
+            prop_no = cluster_no - 1 if cluster_no < cluster_site_n else cluster_site_n - 1
             color, size, opacity = default_style["site"][prop_no]
             if n_pset > 1:
                 cluster_name = f"S{cluster_no}({pset})"
@@ -375,9 +374,7 @@ class MaterialModel(dict):
         for bond, (bond_name, pset) in name["bond_name"].items():
             head, idx = name["bond"][bond_name]
             cluster_no = int(name["alias"][head].split("_")[1])
-            prop_no = (
-                cluster_no - 1 if cluster_no < cluster_bond_n else cluster_bond_n - 1
-            )
+            prop_no = cluster_no - 1 if cluster_no < cluster_bond_n else cluster_bond_n - 1
             (c1, c2), width, opacity = default_style["bond"][prop_no]
             if n_pset > 1:
                 cluster_name = f"B{cluster_no}({pset})"
@@ -439,9 +436,7 @@ class MaterialModel(dict):
             wp = str(self._mpm.group.find_wyckoff_position(str(pos)))
             pos = str(NSArray(pos))
             orb_list = split_orb_list_rank_block(
-                sort_orb_list(
-                    parse_orb_list(orb_list, spinful, crystal), spinful, crystal
-                ),
+                sort_orb_list(parse_orb_list(orb_list, spinful, crystal), spinful, crystal),
                 spinful,
                 crystal,
             )
@@ -506,9 +501,7 @@ class MaterialModel(dict):
                     cell_site[f"{site}_{rsite_no+1}"] = (s, self._mapping_str(mp))
                 name_site[sname] = (site, rsite_no + 1)
                 orbital[sname] = orb_list
-            assert (
-                data_site[f"site_{site_no+1:03d}"][1][0] == 0
-            ), f"first SO is not identity operation, {mp}"
+            assert data_site[f"site_{site_no+1:03d}"][1][0] == 0, f"first SO is not identity operation, {mp}"
             for rsite_no in range(basic_num):
                 s_no = site_no + rsite_no
                 sname = f"site_{s_no+1:03d}"
@@ -536,9 +529,7 @@ class MaterialModel(dict):
                     if orbs != orbs_:
                         s1 = name_site[sname][0]
                         s2 = name_site[sname_][0]
-                        raise Exception(
-                            f"invalid orbitals are given, {s1} {orbs} != {s2} {orbs_}."
-                        )
+                        raise Exception(f"invalid orbitals are given, {s1} {orbs} != {s2} {orbs_}.")
 
         info["cell_site"].update(cell_site)
 
@@ -721,9 +712,7 @@ class MaterialModel(dict):
                 b_vector[br] = b_vector.get(br, []) + [bname]
                 if n_pset > 1:
                     for pset in range(n_pset):
-                        v, c = NSArray(bonds[pset * basic_num + rbond_no]).convert_bond(
-                            "bond"
-                        )
+                        v, c = NSArray(bonds[pset * basic_num + rbond_no]).convert_bond("bond")
                         vc1 = f"{v}@{c}"
                         cell_bond[f"{rbname}_{rbond_no+1}({pset+1})"] = (
                             vc1,
@@ -732,16 +721,12 @@ class MaterialModel(dict):
                 else:
                     cell_bond[f"{rbname}_{rbond_no+1}"] = (vc, self._mapping_str(mp))
                 name_bond[bname] = (rbname, rbond_no + 1)
-            assert (
-                data_bond[f"bond_{bond_no:03d}"][1][0] == 0
-            ), f"first SO is not identity operation, {mp}"
+            assert data_bond[f"bond_{bond_no:03d}"][1][0] == 0, f"first SO is not identity operation, {mp}"
             for rbond_no in range(basic_num):
                 b_no = bond_no + rbond_no
                 bname = f"bond_{b_no:03d}"
                 for pset in range(n_pset):
-                    v, c = NSArray(bonds[pset * basic_num + rbond_no]).convert_bond(
-                        "bond"
-                    )
+                    v, c = NSArray(bonds[pset * basic_num + rbond_no]).convert_bond("bond")
                     b = f"{v}@{c}"
                     bond_to_name[b] = (bname, pset + 1)
             bond_no = bond_no + basic_num
@@ -770,9 +755,7 @@ class MaterialModel(dict):
         cluster_atomic = {}
         atomic_braket = {}
 
-        ij_list = [v[2] for v in data["site"].values()] + [
-            v[2] for v in data["bond"].values()
-        ]
+        ij_list = [v[2] for v in data["site"].values()] + [v[2] for v in data["bond"].values()]
 
         for ij in ij_list:
             i, j = ij
@@ -784,19 +767,14 @@ class MaterialModel(dict):
                 orbs_i = orbital[site_i]
                 orbs_j = orbs_i
                 braket = sum(
-                    [
-                        [(orb, orbs_j[j]) for j in range(i, len(orbs_i))]
-                        for i, orb in enumerate(orbs_i)
-                    ],
+                    [[(orb, orbs_j[j]) for j in range(i, len(orbs_i))] for i, orb in enumerate(orbs_i)],
                     [],
                 )
             else:
                 orbs_i = orbital[site_i]
                 orbs_j = orbital[site_j]
                 braket = sum([[(orbi, orbj) for orbj in orbs_j] for orbi in orbs_i], [])
-            cluster_atomic[ij] = [
-                (f"{bra}:{ket}", (bra[0], i), (ket[0], j)) for bra, ket in braket
-            ]
+            cluster_atomic[ij] = [(f"{bra}:{ket}", (bra[0], i), (ket[0], j)) for bra, ket in braket]
             for bra, ket in braket:
                 atomic_braket[f"{bra}:{ket}"] = (bra, ket)
 
@@ -869,9 +847,7 @@ class MaterialModel(dict):
             site = self._mpm.group.transform_site(site, remove_duplicate=True)
             return site
 
-        site = self._mpm.group.transform_site(
-            site, shift=True, remove_duplicate=True, plus_set=True
-        )
+        site = self._mpm.group.transform_site(site, shift=True, remove_duplicate=True, plus_set=True)
 
         if repeat:
             offset = detail["cell_range"][::2]
@@ -960,6 +936,7 @@ class MaterialModel(dict):
                 "view_mode": "standard",
                 "output": model,
                 "minimal_samb": True,
+                "binary_output": False,
             }
         else:
             if "view" not in d["option"].keys():
