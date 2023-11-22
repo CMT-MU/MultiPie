@@ -1,6 +1,8 @@
 """
 create model view, info, and basis.
 """
+import pickle
+
 from multipie.model.material_model import MaterialModel
 from multipie.model.multipie_manager import MultiPieManager
 from multipie.model.symmetry_adapted_model import SymmetryAdaptedModel
@@ -52,13 +54,31 @@ def _create_single_model(model_dict, mpm, view_mode):
     # create matrix (real space)
     mpm.log("creating SAMB matrix (real space) ... ", None)
     samb_matrix_real = samb.create_matrix(fmt="sympy")
-    mpm.write(model_name + "_matrix.py", samb_matrix_real, SymmetryAdaptedModel._matrix_header(), model_name)
+
+    if model_dict["option"]["binary_output"]:
+        filename = model_name + "_matrix.pkl"
+        full = mpm.filename(filename)
+        f = open(full, "wb")
+        pickle.dump(samb_matrix_real, f)
+        f.close()
+        mpm.log(f"  * wrote '{filename}'.", None)
+    else:
+        mpm.write(model_name + "_matrix.py", samb_matrix_real, SymmetryAdaptedModel._matrix_header(), model_name)
 
     # create matrix (momentum space)
     if not cmodel["info"]["molecule"] and cmodel["info"]["generate"]["fourier_transform"]:
         mpm.log("creating SAMB matrix (momentum space) ... ", None)
         samb_matrix = samb.create_matrix_k(full=True, fmt="sympy")
-        mpm.write(model_name + "_matrix_k.py", samb_matrix, SymmetryAdaptedModel._matrix_header_k(), model_name)
+
+        if model_dict["option"]["binary_output"]:
+            filename = model_name + "_matrix_k.pkl"
+            full = mpm.filename(filename)
+            f = open(full, "wb")
+            pickle.dump(samb_matrix, f)
+            f.close()
+            mpm.log(f"  * wrote '{filename}'.", None)
+        else:
+            mpm.write(model_name + "_matrix_k.py", samb_matrix, SymmetryAdaptedModel._matrix_header_k(), model_name)
 
     # create LaTeX and PDF.
     if mpm.pdf:
