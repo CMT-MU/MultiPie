@@ -14,6 +14,7 @@
   - **view_mode*** : mode for QtDraw file (str) ("standard"/"arrow"/"debug"), ["standard"].
   - **output*** : output folder (str), [model name].
   - **minimal_samb*** (bool) : minimal output in _samb.pdf ? [True].
+  - **binary_output*** (bool) : output matrix data in binary format ? [False].
 - **generate***
   - **model_type*** : model type (str), ("tight_binding"/"phonon"), ["tight_binding"].
   - **time_reversal_type*** : time-reversal type (str), ("electric"/"magnetic"/"both"), ["electric"].
