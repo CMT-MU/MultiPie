@@ -54,20 +54,21 @@ def _extract_subspace(am_data, bra_list, ket_list, spinful, crystal):
     else:
         orb_sgn_dic = {o: sgn for o, (_, sgn) in _data_alias_oh.items()}
 
-    am_extracted = {
-        tag: NSArray(
-            [
+    if b_type not in ("lm", "jm"):
+        am_extracted = {
+            tag: NSArray(
                 [
-                    orb_sgn_dic[to_spinless(oi)[0]] * orb_sgn_dic[to_spinless(oj)[0]] * Xlm[i, j]
-                    for j, oj in enumerate(ket_list)
-                ]
-                for i, oi in enumerate(bra_list)
-            ],
-            "matrix",
-            fmt="sympy",
-        )
-        for tag, Xlm in am_extracted.items()
-    }
+                    [
+                        orb_sgn_dic[to_spinless(oi)[0]] * orb_sgn_dic[to_spinless(oj)[0]] * Xlm[i, j]
+                        for j, oj in enumerate(ket_list)
+                    ]
+                    for i, oi in enumerate(bra_list)
+                ],
+                "matrix",
+                fmt="sympy",
+            )
+            for tag, Xlm in am_extracted.items()
+        }
 
     return am_extracted
 
