@@ -308,7 +308,9 @@ class PointGroup:
         if remove_duplicate and nondirectional:
             b = NSArray.from_str(self.bond_mapping(bond)[0].keys())
         else:
-            b = self.symmetry_operation._equivalent_bond(bond, nondirectional=nondirectional, remove_duplicate=remove_duplicate)
+            b = self.symmetry_operation._equivalent_bond(
+                bond, nondirectional=nondirectional, remove_duplicate=remove_duplicate
+            )
 
         return b
 
@@ -353,7 +355,9 @@ class PointGroup:
         h = NSArray(orbital).subs({"x": v[0], "y": v[1], "z": v[2]})
         if axial:
             so = self.symmetry_operation.mat(axial=False, cc_only=False).det()
-            t_orb = [(so[i] * self.symmetry_operation._transform_variable(h, v, tr[i])).tolist() for i in range(len(tr))]
+            t_orb = [
+                (so[i] * self.symmetry_operation._transform_variable(h, v, tr[i])).tolist() for i in range(len(tr))
+            ]
         else:
             t_orb = [self.symmetry_operation._transform_variable(h, v, tr[i]).tolist() for i in range(len(tr))]
 
@@ -744,7 +748,7 @@ class PointGroup:
         return bc_samb, bond
 
     # ==================================================
-    def atomic_samb(self, bra_list, ket_list, spinful=False):
+    def atomic_samb(self, bra_list, ket_list, spinful=False, u_matrix=None):
         """
         create atomic multipole basis set.
 
@@ -752,6 +756,7 @@ class PointGroup:
             bra_list ([str]): atomic basis set for bra. see the examples in :class:`.AtomicBasisSet`
             ket_list ([str]): atomic basis set for ket. see the examples in :class:`.AtomicBasisSet`
             spinful (bool, optional): spinful ?
+            u_matrix (NSArray/[NSArray]): unitary transformation matrix from ket_list to arbitrary ket list.
 
         Returns:
             dict: atomic SAMB, {TagMultipole: NSArray(matrix)}.
@@ -761,7 +766,7 @@ class PointGroup:
         bam = self.mp_dataset[b_type]
         hs = self.harmonics
 
-        a_samb = create_atomic_samb(bra_list, ket_list, spinful, self.tag.crystal, bam, hs, ortho=True)
+        a_samb = create_atomic_samb(bra_list, ket_list, spinful, self.tag.crystal, bam, hs, u_matrix, ortho=True)
 
         return a_samb
 
@@ -798,7 +803,9 @@ class PointGroup:
 
     # ==================================================
     @classmethod
-    def spherical_atomic_multipole_basis(cls, bra_list, ket_list, spinful=False, crystal="cubic", core=None, verbose=False):
+    def spherical_atomic_multipole_basis(
+        cls, bra_list, ket_list, spinful=False, crystal="cubic", core=None, verbose=False
+    ):
         """
         create spherical atomic multipole basis set.
 
