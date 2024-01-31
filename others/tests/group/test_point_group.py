@@ -1,4 +1,5 @@
 from multipie.group.point_group import PointGroup
+from gcoreutils.nsarray import NSArray
 
 
 # ==================================================
@@ -85,6 +86,45 @@ def test_point_group():
     print("sites:", s)
     for i, b in d.items():
         print(i, b)
+
+    print("--- atomic SAMB ---")
+    pg = PointGroup("O", verbose=False)
+    bra_list = ket_list = [
+        "(5/2,5/2,3)",
+        "(5/2,3/2,3)",
+        "(5/2,1/2,3)",
+        "(5/2,-1/2,3)",
+        "(5/2,-3/2,3)",
+        "(5/2,-5/2,3)",
+    ]
+
+    atomic_samb = pg.atomic_samb(bra_list, ket_list, spinful=True, u_matrix=None)
+
+    print(f"- J = 5/2: ({len(atomic_samb)} active atomic multipoles)")
+    for tag, mat in atomic_samb.items():
+        print(str(tag) + " = " + str(mat))
+
+    # <gamma|m> (G7,G8|+5/2,+3/2,+1/2,-1/2,-3/2,-5/2).
+    U = "[[1/sqrt(6),0,sqrt(5/6),0,0,0],[0,-sqrt(5/6),0,1/sqrt(6),0,0],[0,0,0,0,1,0],[0,0,0,0,0,1],[-sqrt(5/6),0,1/sqrt(6),0,0,0],[0, 1/sqrt(6),0,sqrt(5/6),0,0]]"
+    U = NSArray(U)
+
+    U7 = U[:, :2]
+    atomic_samb = pg.atomic_samb(bra_list, ket_list, spinful=True, u_matrix=U7)
+
+    print(f"\n - Γ7 (J = 5/2): ({len(atomic_samb)} active atomic multipoles)")
+    for tag, mat in atomic_samb.items():
+        print(str(tag) + " = " + str(mat))
+
+    U8 = U[:, 2:]
+    atomic_samb = pg.atomic_samb(bra_list, ket_list, spinful=True, u_matrix=U8)
+    print(f"\n - Γ8 (J = 5/2): ({len(atomic_samb)} active atomic multipoles)")
+    for tag, mat in atomic_samb.items():
+        print(str(tag) + " = " + str(mat))
+
+    atomic_samb = pg.atomic_samb(bra_list, ket_list, spinful=True, u_matrix=[U7, U8])
+    print(f"\n - Γ7,Γ8 (J = 5/2): ({len(atomic_samb)} active atomic multipoles)")
+    for tag, mat in atomic_samb.items():
+        print(str(tag) + " = " + str(mat))
 
 
 # ================================================== main

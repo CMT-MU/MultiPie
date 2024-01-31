@@ -165,7 +165,7 @@ def _orthogonalize(am_set, bra_list, ket_list, crystal):
 
 
 # ==================================================
-def create_atomic_samb(bra_list, ket_list, spinful, crystal, bam, hs=None, ortho=True):
+def create_atomic_samb(bra_list, ket_list, spinful, crystal, bam, hs=None, u_matrix=None, ortho=True):
     """
     create atomic multipole basis set.
 
@@ -176,8 +176,7 @@ def create_atomic_samb(bra_list, ket_list, spinful, crystal, bam, hs=None, ortho
         crystal (str): seven crystal systems, triclinic/monoclinic/orthorhombic/tetragonal/trigonal/hexagonal/cubic.
         bam (BaseAtomicMultipoleDataset): atomic-multipole dataset for all four basis.
         hs (HarmonicsPG, optional): a set of point-group harmonics.
-        parallel (bool, optional): use parallel code ?
-        verbose (bool, optional): verbose parallel info ?
+        u_matrix (NSArray/[NSArray]): unitary transformation matrix from ket_list to arbitrary ket list.
         ortho (bool, optional): orthogonalize ?
 
     Returns:
@@ -193,11 +192,22 @@ def create_atomic_samb(bra_list, ket_list, spinful, crystal, bam, hs=None, ortho
     # extract subspace
     am_lm_set = _extract_subspace(am_data, bra_list, ket_list, spinful, crystal)
 
-    # unitary transform
+    # unitary transform multipole operators from Xlm to Xlγ.
     if hs is None:
         am_set = am_lm_set
     else:
         am_set = _unitary_transform(am_lm_set, hs)
+
+    # unitary transform basis functions from ket_list to arbitrary ket list.
+    if u_matrix is not None:
+        if isinstance(u_matrix, list):
+            U = np.concatenate([ui for ui in u_matrix], 1)
+        else:
+            U = np.array(u_matrix)
+
+        assert np.abs(np.trace(U.T.conjugate() @ U) - U.shape[1]) < 1e-8, "u_matrix is not orthonormal."
+
+        am_set = {tag: U.T.conjugate() @ mat @ U for tag, mat in am_set.items()}
 
     # orthogonalization
     if ortho:
