@@ -1,4 +1,5 @@
 from multipie.group.point_group import PointGroup
+import sympy as sp
 
 
 # ==================================================
@@ -85,6 +86,49 @@ def test_point_group():
     print("sites:", s)
     for i, b in d.items():
         print(i, b)
+
+    print("--- atomic SAMB ---")
+    pg = PointGroup("O", verbose=False)
+    bra_list = ket_list = ["(5/2,5/2,3)", "(5/2,3/2,3)", "(5/2,1/2,3)", "(5/2,-1/2,3)", "(5/2,-3/2,3)", "(5/2,-5/2,3)"]
+
+    atomic_samb = pg.atomic_samb(bra_list, ket_list, spinful=True, u_matrix=None)
+
+    print(f"- J = 5/2: ({len(atomic_samb)} active atomic multipoles)")
+    for tag, mat in atomic_samb.items():
+        print(str(tag) + " = " + str(mat))
+
+    U = (
+        1
+        / sp.sqrt(6)
+        * sp.Matrix(
+            [
+                [1, 0, sp.sqrt(5), 0, 0, 0],  # +5/2
+                [0, -sp.sqrt(5), 0, 1, 0, 0],  # +3/2
+                [0, 0, 0, 0, sp.sqrt(6), 0],  # +1/2
+                [0, 0, 0, 0, 0, sp.sqrt(6)],  # -1/2
+                [-sp.sqrt(5), 0, 1, 0, 0, 0],  # -3/2
+                [0, 1, 0, sp.sqrt(5), 0, 0],  # -5/2
+            ]
+        )
+    )
+
+    U7 = U[:, :2]
+    atomic_samb = pg.atomic_samb(bra_list, ket_list, spinful=True, u_matrix=U7)
+
+    print(f"\n - Γ7 (J = 5/2): ({len(atomic_samb)} active atomic multipoles)")
+    for tag, mat in atomic_samb.items():
+        print(str(tag) + " = " + str(mat))
+
+    U8 = U[:, 2:]
+    atomic_samb = pg.atomic_samb(bra_list, ket_list, spinful=True, u_matrix=U8)
+    print(f"\n - Γ8 (J = 5/2): ({len(atomic_samb)} active atomic multipoles)")
+    for tag, mat in atomic_samb.items():
+        print(str(tag) + " = " + str(mat))
+
+    atomic_samb = pg.atomic_samb(bra_list, ket_list, spinful=True, u_matrix=[U7, U8])
+    print(f"\n - Γ7,Γ8 (J = 5/2): ({len(atomic_samb)} active atomic multipoles)")
+    for tag, mat in atomic_samb.items():
+        print(str(tag) + " = " + str(mat))
 
 
 # ================================================== main
