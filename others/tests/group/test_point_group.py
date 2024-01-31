@@ -1,5 +1,5 @@
 from multipie.group.point_group import PointGroup
-import sympy as sp
+from gcoreutils.nsarray import NSArray
 
 
 # ==================================================
@@ -89,7 +89,14 @@ def test_point_group():
 
     print("--- atomic SAMB ---")
     pg = PointGroup("O", verbose=False)
-    bra_list = ket_list = ["(5/2,5/2,3)", "(5/2,3/2,3)", "(5/2,1/2,3)", "(5/2,-1/2,3)", "(5/2,-3/2,3)", "(5/2,-5/2,3)"]
+    bra_list = ket_list = [
+        "(5/2,5/2,3)",
+        "(5/2,3/2,3)",
+        "(5/2,1/2,3)",
+        "(5/2,-1/2,3)",
+        "(5/2,-3/2,3)",
+        "(5/2,-5/2,3)",
+    ]
 
     atomic_samb = pg.atomic_samb(bra_list, ket_list, spinful=True, u_matrix=None)
 
@@ -97,20 +104,9 @@ def test_point_group():
     for tag, mat in atomic_samb.items():
         print(str(tag) + " = " + str(mat))
 
-    U = (
-        1
-        / sp.sqrt(6)
-        * sp.Matrix(
-            [
-                [1, 0, sp.sqrt(5), 0, 0, 0],  # +5/2
-                [0, -sp.sqrt(5), 0, 1, 0, 0],  # +3/2
-                [0, 0, 0, 0, sp.sqrt(6), 0],  # +1/2
-                [0, 0, 0, 0, 0, sp.sqrt(6)],  # -1/2
-                [-sp.sqrt(5), 0, 1, 0, 0, 0],  # -3/2
-                [0, 1, 0, sp.sqrt(5), 0, 0],  # -5/2
-            ]
-        )
-    )
+    # <gamma|m> (G7,G8|+5/2,+3/2,+1/2,-1/2,-3/2,-5/2).
+    U = "[[1/sqrt(6),0,sqrt(5/6),0,0,0],[0,-sqrt(5/6),0,1/sqrt(6),0,0],[0,0,0,0,1,0],[0,0,0,0,0,1],[-sqrt(5/6),0,1/sqrt(6),0,0,0],[0, 1/sqrt(6),0,sqrt(5/6),0,0]]"
+    U = NSArray(U)
 
     U7 = U[:, :2]
     atomic_samb = pg.atomic_samb(bra_list, ket_list, spinful=True, u_matrix=U7)
