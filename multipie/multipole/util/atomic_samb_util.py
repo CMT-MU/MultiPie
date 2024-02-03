@@ -1,7 +1,9 @@
 """
 This file provides utility functions for calculation of atomic multipole basis set.
 """
+
 import numpy as np
+import sympy as sp
 
 from gcoreutils.nsarray import NSArray
 
@@ -199,18 +201,39 @@ def create_atomic_samb(bra_list, ket_list, spinful, crystal, bam, hs=None, u_mat
         am_set = _unitary_transform(am_lm_set, hs)
 
     # unitary transform basis functions from ket_list to arbitrary ket list.
-    if u_matrix is not None:
+    if u_matrix is None:
+        if ortho:
+            am_set = _orthogonalize(am_set, bra_list, ket_list, crystal)
+    else:
         if isinstance(u_matrix, list):
-            U = np.concatenate([ui for ui in u_matrix], 1)
+            U_list = [np.array(U) for U in u_matrix]
+            dim_list = [U.shape[1] for U in U_list]
+            shape = (len(bra_list), len(ket_list))
+            am_set_ = {}
+            for brai, U_bra in enumerate(U_list):
+                for keti, U_ket in enumerate(U_list):
+                    if brai > keti:
+                        continue
+
+                    d = {tag: U_bra.T.conjugate() @ mat @ U_ket for tag, mat in am_set.items()}
+
+                    if ortho:
+                        d = _orthogonalize(d, bra_list, ket_list, crystal)
+
+                    bra_start = sum(dim_list[:brai])
+                    ket_start = sum(dim_list[:keti])
+                    am_set_[(brai, keti)] = {}
+                    for tag, mat_ in d.items():
+                        mat = NSArray.zeros(shape=shape, style="matrix", fmt="sympy")
+                        mat[bra_start : bra_start + dim_list[brai], ket_start : ket_start + dim_list[keti]] = mat_
+                        if brai != keti:
+                            mat = (mat + mat.conj().T) / sp.sqrt(2)
+                        am_set_[(brai, keti)][tag] = mat
+
+            am_set = am_set_
         else:
             U = np.array(u_matrix)
-
-        assert np.abs(np.trace(U.T.conjugate() @ U) - U.shape[1]) < 1e-8, "u_matrix is not orthonormal."
-
-        am_set = {tag: U.T.conjugate() @ mat @ U for tag, mat in am_set.items()}
-
-    # orthogonalization
-    if ortho:
-        am_set = _orthogonalize(am_set, bra_list, ket_list, crystal)
+            d = {tag: U.T.conjugate() @ mat @ U for tag, mat in am_set.items()}
+            am_set = _orthogonalize(d, bra_list, ket_list, crystal)
 
     return am_set
