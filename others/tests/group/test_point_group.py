@@ -123,8 +123,10 @@ def test_point_group():
 
     atomic_samb = pg.atomic_samb(bra_list, ket_list, spinful=True, u_matrix=[U7, U8])
     print(f"\n - Γ7,Γ8 (J = 5/2): ({len(atomic_samb)} active atomic multipoles)")
-    for tag, mat in atomic_samb.items():
-        print(str(tag) + " = " + str(mat))
+    for (brai, keti), d in atomic_samb.items():
+        print(brai, keti)
+        for tag, mat in d.items():
+            print(str(tag) + " = " + str(mat))
 
 
 # ================================================== main
