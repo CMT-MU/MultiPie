@@ -31,7 +31,7 @@ def construct_samb_matrix_k(matrix_dict, k_grid=None):
             ex = NSArray(ex, fmt="value")
             ex = np.broadcast_to(ex, (Nk, 3))
             k_grid = np.array(k_grid)
-            p = 2 * np.pi * np.sum(ex * np.array(k_grid), axis=1)
+            p = -2 * np.pi * np.sum(ex * np.array(k_grid), axis=1)
             d[name.replace("bond_", "c")] = np.cos(p)
             d[name.replace("bond_", "s")] = np.sin(p)
 
@@ -97,7 +97,7 @@ def construct_samb_matrix(matrix_dict, k_grid=None):
             ra = NSArray(atoms_positions[a], style="vector", fmt="value").numpy()
             rb = NSArray(atoms_positions[b], style="vector", fmt="value").numpy()
             v = complex(sp.sympify(v))
-            phase = -2 * np.pi * k_grid @ (n_r + ra - rb).T
+            phase = -2 * np.pi * k_grid @ (ra - (n_r + rb)).T
             Z[j, :, a, b] += v * np.exp(1j * phase)
 
     return Z
