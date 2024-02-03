@@ -571,7 +571,7 @@ class SymmetryAdaptedModel(dict):
 
                             s1 = NSArray(list(site.values())[bra_idx][0], style="vector")
                             s2 = NSArray(list(site.values())[ket_idx][0], style="vector")
-                            n1, n2, n3 = bv - (s1 - s2)
+                            n1, n2, n3 = -(bv - (s1 - s2))
                             n1, n2, n3 = round(n1), round(n2), round(n3)
 
                             for bra_no, ket_no, M_i_ in cluster_atomic[(bra_idx, ket_idx)]:
