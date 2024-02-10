@@ -2,12 +2,10 @@
 
 1. Prepare input file. Example input files for C3v molecule and graphene are given as follows.
     - C3v molecule
-    ```{eval-rst}
-    .. literalinclude:: ../examples/C3v.py
+    ```{literalinclude} ../examples/C3v.py
     ```
     - graphene
-    ```{eval-rst}
-    .. literalinclude:: ../examples/graphene.py
+    ```{literalinclude} ../examples/graphene.py
     ```
 
 1. At the folder where the input file exists, do the following to create SAMB.

@@ -4,7 +4,7 @@
 # Book settings
 title: MultiPie
 author: Hiroaki Kusunose and Rikuto Oiwa
-copyright: '2021-2024'
+copyright: "2021-2024"
 logo: multipie_logo.png
 
 # ==================================================
@@ -63,17 +63,18 @@ sphinx:
   root_doc: "README.md"
   recursive_update: true
   extra_extensions:
-  - 'sphinx.ext.autodoc'
-  - 'sphinx.ext.napoleon'
-  - 'sphinx.ext.viewcode'
+  - "sphinx.ext.autosummary"
+  - "sphinx.ext.autodoc"
+  - "sphinx.ext.napoleon"
+  - "sphinx.ext.viewcode"
   config:
     add_module_names: false
     autodoc_default_options:
       members: true
-      # member-order: 'bysource'
+      # member-order: "bysource"
       undoc-members": false
       show-inheritance: true,
-      special-members: '__init__'
+      special-members: "__init__"
     html_theme: sphinx_book_theme
     html_theme_options:
       show_prev_next: false
@@ -86,6 +87,6 @@ sphinx:
     mathjax_path: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
     mathjax3_config:
       loader:
-        load: ['[tex]/physics']
+        load: ["[tex]/physics"]
       tex:
-        packages: { '[+]': ['physics'] }
+        packages: { "[+]": ["physics"] }
