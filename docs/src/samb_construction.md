@@ -2,37 +2,15 @@
 
 1. Prepare input file. Example input files for C3v molecule and graphene are given as follows.
     - C3v molecule
-    ```python
-    # C3v.py
-    C3v = {
-        "model": "C3v",  # name of model.
-        "group": "C3v-1",  # name of point group.
-        "cell": {"c": 10},  # set large enough interlayer distance.
-        #
-        "site": {"A": ("[-1/6,-1/6,0]", "s"), "B": ("[-2/3,0,0]", "p")},  # positions of A and B sites and their orbitals.
-        "bond": [("A", "A", 1), ("A", "B", 1)],  # nearest-neighbor A-A and B-B bonds.
-        #
-        "spinful": False,  # spinless.
-    }
+    ```{eval-rst}
+    .. literalinclude:: ../examples/C3v.py
     ```
     - graphene
-    ```python
-    # graphene.py
-    graphene = {
-        "model": "graphene",  #  name of model.
-        "group": 191,  # No. of space group.
-        "cell": {"c": 4},  # set large enough interlayer distance.
-        #
-        "site": {"C": ("[1/3,2/3,0]", "pz")},  # positions of C site and its orbital.
-        "bond": [("C", "C", [1, 2, 3, 4, 5, 6])],  # C-C bonds up to 6th neighbors.
-        #
-        "spinful": False,  # spinless.
-        #
-        "k_point": {"Γ": "[0, 0, 0]", "M": "[1/2, 0, 0]", "K": "[1/3, 1/3, 0]"},  # def. of k points.
-        "k_path": "Γ-K-M-Γ",  # high-symmetry line.
-    }
+    ```{eval-rst}
+    .. literalinclude:: ../examples/graphene.py
     ```
-2. At the folder where the input file exists, do the following to create SAMB.
+
+1. At the folder where the input file exists, do the following to create SAMB.
 See for more detail, try `create_samb --help` command.
     ```
     $ create_samb C3v graphene
