@@ -1,8 +1,7 @@
-<img width="128" src="multipie_logo.png">
+# Molecule or Crystal Model
 
-# MultiPie
+The output file format for model in constructing SAMB is the following. The keywords with * is only for crystal.
 
-## Molecule or Crystal Model (* only for crystal)
 - **info**
     - **model** : model name.
     - **molecule** : molecule or crystal ?

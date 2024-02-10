@@ -1,5 +1,90 @@
-remote_theme: pages-themes/leap-day@v0.2.0
-plugins:
-- jekyll-remote-theme # add this line to the plugins list if you already have one
+# Learn more at https://jupyterbook.org/customize/config.html
+
+# ==================================================
+# Book settings
 title: MultiPie
-description: A Python library for crystallographic symmetry operations and Symmetry-Adapted Multipole Basis (SAMB).
+author: Hiroaki Kusunose and Rikuto Oiwa
+copyright: '2021-2024'
+logo: multipie_logo.png
+
+# ==================================================
+# Execution settings
+execute:
+  execute_notebooks: cache
+  stderr_output: "remove"
+  allow_errors: true
+  timeout: 120
+
+# ==================================================
+# Parse and render settings
+parse:
+  myst_substitutions:
+      sub3: My _global_ value!
+  myst_enable_extensions:
+    - amsmath
+    - colon_fence
+    - deflist
+    - dollarmath
+    - html_admonition
+    - html_image
+    - linkify
+    - replacements
+    - smartquotes
+    - substitution
+
+# ==================================================
+# HTML-specific settings
+html:
+  home_page_in_navbar: false
+  use_edit_page_button: false
+  use_repository_button: true
+  use_issues_button: false
+  collapse_navigation: true
+
+# ==================================================
+# LaTeX-specific settings
+latex:
+  latex_engine: "xelatex"
+  latex_documents:
+    targetname: book.tex
+
+bibtex_bibfiles:
+  - "references.bib"
+
+# ==================================================
+# Information about where the book exists on the web
+repository:
+  url: https://github.com/CMT-MU/MultiPie.git
+  branch: main
+
+# ==================================================
+# Sphinx setting
+sphinx:
+  recursive_update: true
+  extra_extensions:
+  - 'sphinx.ext.autodoc'
+  - 'sphinx.ext.napoleon'
+  - 'sphinx.ext.viewcode'
+  config:
+    add_module_names: false
+    autodoc_default_options:
+      members: true
+      # member-order: 'bysource'
+      undoc-members": false
+      show-inheritance: true,
+      special-members: '__init__'
+    html_theme: sphinx_book_theme
+    html_theme_options:
+      show_prev_next: false
+      navigation_with_keys: false
+    html_show_sourcelink: false
+    html_copy_source : false
+    bibtex_reference_style: label
+    bibtex_default_style: "unsrt"
+    language: jp
+    mathjax_path: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    mathjax3_config:
+      loader:
+        load: ['[tex]/physics']
+      tex:
+        packages: { '[+]': ['physics'] }

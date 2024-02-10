@@ -1,8 +1,7 @@
-<img width="128" src="multipie_logo.png">
+# SAMB
 
-# MultiPie
+The output file format for SAMB is the following. The keywords with * is only for crystal with fourier transform.
 
-## SAMB (* only for crystal with fourier transform)
 - **info**
     - **atomic** : { "M_#" : ["amp_#"] }
     - **site_cluster** : { "S_#" : ["smp_#"] }
