@@ -23,3 +23,5 @@ Molecular or crystal structures are best drawn by using [QtDraw](https://github.
 - **See also**:
   - [Manual](https://github.com/CMT-MU/QtDraw/blob/main/docs/manual.pdf).
   - [MyST syntax cheat sheet](https://jupyterbook.org/en/stable/reference/cheatsheet.html)
+  - [MultiPie tutorial (in Japanese)](https://cmt-mu.github.io/MultiPieTutorial/)
+  - [QtDraw tutorial (in Japanese)](https://cmt-mu.github.io/QtDrawTutorial/)
