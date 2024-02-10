@@ -5,16 +5,16 @@ Molecular or crystal structures are best drawn by using [QtDraw](https://github.
 
 - **Authors**: Hiroaki Kusunose and Rikuto Oiwa
 
-- **Citing MultiPie and QtDraw**: If you are using MultiPie and/or QtDraw in your scientific research, please help our scientific visibility by citing our work{cite}`PhysRevB.107.195118`.
-    ```{bibliography}
-    ```
+- **Citing MultiPie and QtDraw**: If you are using MultiPie and/or QtDraw in your scientific research, please help our scientific visibility by citing our work:
+  > Hiroaki Kusunose, Rikuto Oiwa, and Satoru Hayami, Symmetry-adapted modeling for molecules and crystals, Phys. Rev. B <b>107</b>, 195118 (2023).<br>
+  > DOI: [https://doi.org/10.1103/PhysRevB.107.195118](https://doi.org/10.1103/PhysRevB.107.195118)
 
 - **Installation**: MultiPie can be installed from PyPI using pip on Python >= 3.9:
-    ```
-    pip install multipie
-    ```
-    You can also visit
-    [PyPI](https://pypi.org/project/multipie/) or [GitHub](https://github.com/CMT-MU/MultiPie) to download the source.
+  ```
+  pip install multipie
+  ```
+  You can also visit
+  [PyPI](https://pypi.org/project/multipie/) or [GitHub](https://github.com/CMT-MU/MultiPie) to download the source.
 
 - **Requirements**:
   - This library optionally requires [TeXLive](https://www.tug.org/texlive/) environment to create LaTeX and PDF files.
