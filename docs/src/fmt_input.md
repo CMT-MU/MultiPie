@@ -1,8 +1,7 @@
-<img width="128" src="multipie_logo.png">
+# SAMB construction
 
-# MultiPie
+The input file format for SAMB construction is the following. The keywords with * is optional. The values in the bracket are default.
 
-## Input for SAMB construction (* optional [default])
 - **model** : model name (str).
 - **group** : group name (Schoenflies notation) or group number (space group) (str/int).
 - **site** : site position, orbital info. (dict) { name: ("position", orbital or orbital list) }.
