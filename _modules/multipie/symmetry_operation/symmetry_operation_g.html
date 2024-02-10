@@ -1,0 +1,798 @@
+
+<!DOCTYPE html>
+
+
+<html lang="jp" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>multipie.symmetry_operation.symmetry_operation_g &#8212; MultiPie</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../../../_static/documentation_options.js?v=8cf54648"></script>
+    <script src="../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=afe5de03"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/multipie/symmetry_operation/symmetry_operation_g';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="jp"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/multipie_logo.png" class="logo__image only-light" alt="MultiPie - Home"/>
+    <script>document.write(`<img src="../../../_static/multipie_logo.png" class="logo__image only-dark" alt="MultiPie - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">SAMB Construction</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../src/samb_construction.html">Example for SAMB Construction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/use_matrix.html">Example usage of full matrix</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">File Format</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../src/fmt_input.html">SAMB construction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/fmt_model.html">Molecule or Crystal Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/fmt_samb.html">SAMB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/fmt_matrix.html">SAMB in full matrix</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API References</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../src/api_character.html">Character Table</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/api_group.html">Group</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/api_harmonics.html">Harmonics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/api_model.html">Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/api_multipole.html">Multipole</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/api_response_tensor.html">Response tensor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/api_symmetry_operation.html">Symmetry operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/api_tag.html">Tag</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/api_virtual_cluster.html">Virtual cluster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/api_wyckoff.html">Wyckoff position</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Change Log</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../src/change_log.html">Change logs (not in tags)</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/CMT-MU/MultiPie.git" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for multipie.symmetry_operation.symmetry_operation_g</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">SymmetryOperationG manages point/space-group symmetry operations.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="kn">from</span> <span class="nn">gcoreutils.nsarray</span> <span class="kn">import</span> <span class="n">NSArray</span>
+<span class="kn">from</span> <span class="nn">multipie.tag.tag_list</span> <span class="kn">import</span> <span class="n">TagList</span>
+<span class="kn">from</span> <span class="nn">multipie.tag.tag_group</span> <span class="kn">import</span> <span class="n">TagGroup</span>
+<span class="kn">from</span> <span class="nn">multipie.tag.tag_symmetry_operation</span> <span class="kn">import</span> <span class="n">TagSymmetryOperation</span>
+<span class="kn">from</span> <span class="nn">multipie.symmetry_operation.util.symmetry_operation_util</span> <span class="kn">import</span> <span class="n">latticeT</span><span class="p">,</span> <span class="n">to_cartesian</span><span class="p">,</span> <span class="n">to_primitive</span><span class="p">,</span> <span class="n">to_conventional</span>
+<span class="kn">from</span> <span class="nn">multipie.symmetry_operation.symmetry_operation</span> <span class="kn">import</span> <span class="n">SymmetryOperation</span>
+<span class="kn">from</span> <span class="nn">multipie.data.data_symmetry_operation_pg</span> <span class="kn">import</span> <span class="n">_data_symmetry_operation_pg</span>
+<span class="kn">from</span> <span class="nn">multipie.data.data_symmetry_operation_sg</span> <span class="kn">import</span> <span class="n">_data_symmetry_operation_sg</span>
+
+
+<span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="SymmetryOperationG">
+<a class="viewcode-back" href="../../../src/api_symmetry_operation.html#multipie.symmetry_operation.symmetry_operation_g.SymmetryOperationG">[docs]</a>
+<span class="k">class</span> <span class="nc">SymmetryOperationG</span><span class="p">(</span>
+    <span class="nb">dict</span>
+<span class="p">):</span>  <span class="c1"># dict of (symmetry operation tag, symmetry operation), {TagSymmetryOperation: SymmetryOperation}.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    point/space-group symmetry operations.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        tag (TagGroup): point-group tag.</span>
+<span class="sd">        gen ([TagSymmetryOperation]): generators.</span>
+<span class="sd">        cc ([[TagSymmetryOperation]]): symmetry operations categorized by conjugacy class.</span>
+<span class="sd">        cc1 ([TagSymmetryOperation]): representative symmetry operations in conjugacy class.</span>
+<span class="sd">        full ([TagSymmetryOperation]): all symmetry operations.</span>
+<span class="sd">        cc_num ([int]): the number of symmetry operations in conjugacy class.</span>
+<span class="sd">        crystal (str): crystal type, (triclinic/monoclinic/orthorhombic/tetragonal/trigonal/hexagonal/cubic).</span>
+<span class="sd">        lattice (str): lattice type, (A/B/C/P/I/F/R/null).</span>
+<span class="sd">        translation (NSArray): partial translation vectors (reduced coordinate).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1">#</span>
+    <span class="c1">#     __idx_cc1 ([int]): index of top of conjugacy class.</span>
+    <span class="c1">#     __product ({(TagSymmetryOperation,TagSymmetryOperation): TagSymmetryOperation}): product table (point-group only).</span>
+    <span class="c1">#     __inv ({TagSymmetryOperation:TagSymmetryOperation}): inverse operation.</span>
+    <span class="c1">#</span>
+    <span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="SymmetryOperationG.__init__">
+<a class="viewcode-back" href="../../../src/api_symmetry_operation.html#multipie.symmetry_operation.symmetry_operation_g.SymmetryOperationG.__init__">[docs]</a>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">g_tag</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        initialize the class.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            g_tag (TagGroup or str): tag of point/space group.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">g_tag</span> <span class="o">=</span> <span class="n">TagGroup</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">g_tag</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tag</span> <span class="o">=</span> <span class="n">g_tag</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;point-group tag.&quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tag</span><span class="o">.</span><span class="n">is_point_group</span><span class="p">():</span>
+            <span class="n">gen</span><span class="p">,</span> <span class="n">cc</span> <span class="o">=</span> <span class="n">_data_symmetry_operation_pg</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">g_tag</span><span class="p">)]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">gen</span><span class="p">,</span> <span class="n">cc</span> <span class="o">=</span> <span class="n">_data_symmetry_operation_sg</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">g_tag</span><span class="p">)]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">gen</span> <span class="o">=</span> <span class="n">TagList</span><span class="o">.</span><span class="n">from_str</span><span class="p">(</span><span class="n">TagSymmetryOperation</span><span class="p">,</span> <span class="n">gen</span><span class="p">)</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;generators.&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">cc</span> <span class="o">=</span> <span class="p">[</span><span class="n">TagList</span><span class="o">.</span><span class="n">from_str</span><span class="p">(</span><span class="n">TagSymmetryOperation</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">cc</span><span class="p">]</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;symmetry operations categorized by conjugacy class.&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">cc1</span> <span class="o">=</span> <span class="n">TagList</span><span class="o">.</span><span class="n">from_str</span><span class="p">(</span><span class="n">TagSymmetryOperation</span><span class="p">,</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">cc</span><span class="p">])</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;representative symmetry operations in conjugacy class.&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">cc_num</span> <span class="o">=</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cc</span><span class="p">]</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;the number of symmetry operations in conjugacy class.&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">full</span> <span class="o">=</span> <span class="n">TagList</span><span class="o">.</span><span class="n">from_str</span><span class="p">(</span><span class="n">TagSymmetryOperation</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">cc</span><span class="p">,</span> <span class="p">[]))</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;all symmetry operations.&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__idx_cc1</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">full</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cc1</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">crystal</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tag</span><span class="o">.</span><span class="n">crystal</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;crystal type, (triclinic/monoclinic/orthorhombic/tetragonal/trigonal/hexagonal/cubic).&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">lattice</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tag</span><span class="o">.</span><span class="n">lattice</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;lattice type, (A/B/C/P/I/F/R/null).&quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">lattice</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">translation</span> <span class="o">=</span> <span class="n">latticeT</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">lattice</span><span class="p">]</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;partial translation vectors (reduced coordinate).&quot;&quot;&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">translation</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">full</span><span class="p">:</span>
+            <span class="bp">self</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">=</span> <span class="n">SymmetryOperation</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">crystal</span><span class="p">)</span>
+
+        <span class="c1"># product table.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__product</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__inv</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tag</span><span class="o">.</span><span class="n">is_point_group</span><span class="p">():</span>
+            <span class="n">so</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mat</span><span class="p">()</span>
+            <span class="n">so_inv</span> <span class="o">=</span> <span class="n">so</span><span class="o">.</span><span class="n">inverse</span><span class="p">()</span>
+            <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_list</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">so</span><span class="p">)):</span>
+                <span class="n">soi</span> <span class="o">=</span> <span class="n">so</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__inv</span><span class="p">[</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="n">so</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">so_inv</span><span class="p">[</span><span class="n">i</span><span class="p">])]</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">so</span><span class="p">)):</span>
+                    <span class="n">soj</span> <span class="o">=</span> <span class="n">so</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__product</span><span class="p">[(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="n">j</span><span class="p">])]</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="n">so</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">soi</span> <span class="o">@</span> <span class="n">soj</span><span class="p">)]</span></div>
+
+
+    <span class="c1"># ==================================================</span>
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tag</span><span class="p">)</span>
+
+    <span class="c1"># ==================================================</span>
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">repr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tag</span><span class="p">)</span>
+
+    <span class="c1"># ==================================================</span>
+    <span class="k">def</span> <span class="nf">latex</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tag</span><span class="o">.</span><span class="n">latex</span><span class="p">()</span>
+
+    <span class="c1"># ==================================================</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">plus_set</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        additional partial translation vectors in space group.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            NSArray: translation vectors.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">tag</span><span class="o">.</span><span class="n">is_point_group</span><span class="p">(),</span> <span class="s2">&quot;plus_set is only for space group.&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">translation</span>
+
+    <span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="SymmetryOperationG.mat">
+<a class="viewcode-back" href="../../../src/api_symmetry_operation.html#multipie.symmetry_operation.symmetry_operation_g.SymmetryOperationG.mat">[docs]</a>
+    <span class="k">def</span> <span class="nf">mat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">axial</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">cc_only</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">primitive</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">cartesian</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        matrix for symmetry operatoins.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            axial (bool, optional): matrix for axial vector ?</span>
+<span class="sd">            cc_only (bool, optional): conjugacy-class operations only ?</span>
+<span class="sd">            primitive (bool, optional): for primitive cell ? (space group only)</span>
+<span class="sd">            cartesian (bool, optional): in cartesian coordinate ?</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list: list of operations (3x3: point group) or (4x4: space group), [NSArray].</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">cc_only</span><span class="p">:</span>
+            <span class="n">idx</span> <span class="o">=</span> <span class="n">TagList</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">full</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__idx_cc1</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">idx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">full</span>
+        <span class="k">if</span> <span class="n">axial</span><span class="p">:</span>
+            <span class="n">ops</span> <span class="o">=</span> <span class="n">NSArray</span><span class="p">([</span><span class="bp">self</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">m_axial</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">idx</span><span class="p">],</span> <span class="s2">&quot;matrix&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ops</span> <span class="o">=</span> <span class="n">NSArray</span><span class="p">([</span><span class="bp">self</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">m_polar</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">idx</span><span class="p">],</span> <span class="s2">&quot;matrix&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">primitive</span><span class="p">:</span>
+            <span class="n">ops</span> <span class="o">=</span> <span class="n">to_primitive</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lattice</span><span class="p">,</span> <span class="n">ops</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">cartesian</span><span class="p">:</span>
+            <span class="n">ops</span> <span class="o">=</span> <span class="n">to_cartesian</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">crystal</span><span class="p">,</span> <span class="n">ops</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tag</span><span class="o">.</span><span class="n">is_point_group</span><span class="p">())</span>
+
+        <span class="k">return</span> <span class="n">ops</span></div>
+
+
+    <span class="c1"># ==================================================</span>
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">TagSymmetryOperation</span><span class="p">(</span><span class="n">item</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+
+    <span class="c1"># ==================================================</span>
+    <span class="k">def</span> <span class="nf">key_list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">TagList</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+
+    <span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="SymmetryOperationG.inverse">
+<a class="viewcode-back" href="../../../src/api_symmetry_operation.html#multipie.symmetry_operation.symmetry_operation_g.SymmetryOperationG.inverse">[docs]</a>
+    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        inverse of symmetry operation (point group only).</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            i (TagSymmetryOperation): symmetry operation.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            TagSymmetryOperation: inverse of symmetry operation.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">tag</span><span class="o">.</span><span class="n">is_point_group</span><span class="p">(),</span> <span class="s2">&quot;product table is available only for point group.&quot;</span>
+
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">TagSymmetryOperation</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__inv</span><span class="p">[</span><span class="n">i</span><span class="p">]</span></div>
+
+
+    <span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="SymmetryOperationG.product">
+<a class="viewcode-back" href="../../../src/api_symmetry_operation.html#multipie.symmetry_operation.symmetry_operation_g.SymmetryOperationG.product">[docs]</a>
+    <span class="k">def</span> <span class="nf">product</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        product of symmetry operations (point group only).</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            i (TagSymmetryOperation): symmetry operation (left).</span>
+<span class="sd">            j (TagSymmetryOperation): symmetry operation (right).</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            TagSymmetryOperation: product of symmetry operations.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">tag</span><span class="o">.</span><span class="n">is_point_group</span><span class="p">(),</span> <span class="s2">&quot;product table is available only for point group.&quot;</span>
+
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">TagSymmetryOperation</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">j</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="n">TagSymmetryOperation</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__product</span><span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)]</span></div>
+
+
+    <span class="c1"># ==================================================</span>
+    <span class="k">def</span> <span class="nf">_transform_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">phi_p</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">vs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        transform matrix for polynomial basis (phi_i&#39; = T_ij phi_j).</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            phi_p (NSArray): transformed polynomials.</span>
+<span class="sd">            phi (NSArray): polynomials to be transformed.</span>
+<span class="sd">            vs (NSArray): list of variables in polynomials.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            NSArray: transform matrix (phi&#39; = M.phi).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cv</span> <span class="o">=</span> <span class="n">NSArray</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;coeffvar0:</span><span class="si">{</span><span class="n">phi</span><span class="o">.</span><span class="n">size</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)),</span> <span class="s2">&quot;vector&quot;</span><span class="p">)</span>
+        <span class="n">eqs</span> <span class="o">=</span> <span class="p">[</span><span class="n">phi_p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="o">-</span> <span class="n">phi</span> <span class="o">@</span> <span class="n">cv</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">phi_p</span><span class="o">.</span><span class="n">size</span><span class="p">)]</span>
+        <span class="n">eqs</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">expand</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">eqs</span><span class="p">]</span>
+        <span class="n">tm</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">conjugate</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">Matrix</span><span class="p">([</span><span class="nb">list</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">linsolve</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">Poly</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="n">vs</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span><span class="o">.</span><span class="n">coeffs</span><span class="p">(),</span> <span class="n">cv</span><span class="o">.</span><span class="n">tolist</span><span class="p">()))[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">eq</span> <span class="ow">in</span> <span class="n">eqs</span><span class="p">]))</span>
+
+        <span class="k">return</span> <span class="n">NSArray</span><span class="p">(</span><span class="n">tm</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="s2">&quot;matrix&quot;</span><span class="p">)</span>
+
+    <span class="c1"># ==================================================</span>
+    <span class="k">def</span> <span class="nf">_transform_variable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">v_old</span><span class="p">,</span> <span class="n">v_new</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        transform polynomials by substituting transformed variables.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            phi (NSArray): polynomials to be transformed.</span>
+<span class="sd">            v_old (NSArray): list of variables in polynomials.</span>
+<span class="sd">            v_new (NSArray): list of transformed variables.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            NSArray: transformed polynomial or list of polynomials.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">phi</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">v_old</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span> <span class="n">v_new</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">v_old</span><span class="o">.</span><span class="n">size</span><span class="p">)})</span>
+
+    <span class="c1"># ==================================================</span>
+    <span class="k">def</span> <span class="nf">_transform_matrix_orbital_basis</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">vp</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">pdet</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        transform matrix for polynomial basis, (phi_i&#39; = T_ij phi_j).</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            v (NSArray): polar vector variable (cartesian coordinate).</span>
+<span class="sd">            vp (NSArray): list of transformed polar vectors, r&#39; (cartesian coordinate).</span>
+<span class="sd">            phi (NSArray): list of basis (cartesian coordinate).</span>
+<span class="sd">            pdet (NSArray, optional): list of determinant.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            NSArray: list of transform matrices.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">tm</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="n">pdet</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vp</span><span class="p">)):</span>
+                <span class="n">phi_p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transform_variable</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">vp</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                <span class="n">tm</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_transform_matrix</span><span class="p">(</span><span class="n">phi_p</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vp</span><span class="p">)):</span>
+                <span class="n">phi_p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transform_variable</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">vp</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                <span class="n">phi_p</span> <span class="o">=</span> <span class="p">[</span><span class="n">phi_p</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="n">pdet</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">phi_p</span><span class="p">))]</span>
+                <span class="n">tm</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_transform_matrix</span><span class="p">(</span><span class="n">phi_p</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+
+        <span class="k">return</span> <span class="n">NSArray</span><span class="p">(</span><span class="n">tm</span><span class="p">,</span> <span class="s2">&quot;matrix&quot;</span><span class="p">)</span>
+
+    <span class="c1"># ==================================================</span>
+    <span class="k">def</span> <span class="nf">_equivalent_vector</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">cc_only</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">axial</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">remove_duplicate</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">cartesian</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">primitive</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">plus_set</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="kc">False</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        create symmetry-operation equivalent vectors.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            v (str or NSArray): vector/site position, &quot;[x,y,z]&quot;.</span>
+<span class="sd">            cc_only (bool, optional): conjugacy-class operations only ?</span>
+<span class="sd">            axial (bool, optional): axial vector ?</span>
+<span class="sd">            remove_duplicate (bool, optional): remove the same sites ?</span>
+<span class="sd">            cartesian (bool, optional): cartesian coordinate ? (point group only).</span>
+<span class="sd">            primitive (bool, optional): primitive cell ? (space group only).</span>
+<span class="sd">            plus_set (bool, optional): add partial translations ? (space group only).</span>
+<span class="sd">            shift (bool, optional): move into unit cell ? (space group only).</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            NSArray: equivalent vectors.</span>
+
+<span class="sd">        Notes:</span>
+<span class="sd">            - if remove_duplicate is True, return values are sorted.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">NSArray</span><span class="p">)):</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="si">}</span><span class="s2"> is not accepted for vector/site.&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="n">v</span> <span class="o">=</span> <span class="n">NSArray</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tag</span><span class="o">.</span><span class="n">is_point_group</span><span class="p">():</span>
+            <span class="n">ops</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mat</span><span class="p">(</span><span class="n">axial</span><span class="o">=</span><span class="n">axial</span><span class="p">,</span> <span class="n">cc_only</span><span class="o">=</span><span class="n">cc_only</span><span class="p">,</span> <span class="n">cartesian</span><span class="o">=</span><span class="n">cartesian</span><span class="p">)</span>
+
+            <span class="n">ev</span> <span class="o">=</span> <span class="n">ops</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">remove_duplicate</span><span class="p">:</span>
+                <span class="n">ev</span> <span class="o">=</span> <span class="n">ev</span><span class="o">.</span><span class="n">remove_duplicate</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ops</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mat</span><span class="p">(</span><span class="n">axial</span><span class="o">=</span><span class="n">axial</span><span class="p">,</span> <span class="n">cc_only</span><span class="o">=</span><span class="n">cc_only</span><span class="p">)</span>
+            <span class="n">ops</span> <span class="o">=</span> <span class="n">to_primitive</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lattice</span><span class="p">,</span> <span class="n">ops</span><span class="p">)</span>
+            <span class="n">v</span> <span class="o">=</span> <span class="n">to_primitive</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lattice</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+            <span class="n">ev</span> <span class="o">=</span> <span class="n">ops</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">shift</span><span class="p">:</span>
+                <span class="n">ev</span> <span class="o">=</span> <span class="n">ev</span><span class="o">.</span><span class="n">shift</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="n">remove_duplicate</span><span class="p">:</span>
+                <span class="n">ev</span> <span class="o">=</span> <span class="n">ev</span><span class="o">.</span><span class="n">remove_duplicate</span><span class="p">()</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">primitive</span><span class="p">:</span>
+                <span class="n">ev</span> <span class="o">=</span> <span class="n">to_conventional</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lattice</span><span class="p">,</span> <span class="n">ev</span><span class="p">,</span> <span class="n">plus_set</span><span class="o">=</span><span class="n">plus_set</span><span class="p">)</span>
+                <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">ev</span><span class="p">)</span> <span class="o">==</span> <span class="nb">list</span><span class="p">:</span>
+                    <span class="n">ev</span> <span class="o">=</span> <span class="n">NSArray</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">ev</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">shift</span><span class="p">:</span>
+                    <span class="n">ev</span> <span class="o">=</span> <span class="n">ev</span><span class="o">.</span><span class="n">shift</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">remove_duplicate</span><span class="p">:</span>
+                    <span class="n">ev</span> <span class="o">=</span> <span class="n">ev</span><span class="o">.</span><span class="n">remove_duplicate</span><span class="p">()</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">ev</span>
+
+    <span class="c1"># ==================================================</span>
+    <span class="k">def</span> <span class="nf">_equivalent_bond</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">bond</span><span class="p">,</span>
+        <span class="n">cc_only</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">remove_duplicate</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">cartesian</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">primitive</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">plus_set</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">shift</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">nondirectional</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        create SO-equivalent bonds.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            bond (str or NSArray): bond, &quot;vector@center&quot;, &quot;tail;head&quot;, &quot;start:vector&quot;.</span>
+<span class="sd">            cc_only (bool, optional): conjugacy-class operations only ?</span>
+<span class="sd">            remove_duplicate (bool, optional): remove the same bonds ?</span>
+<span class="sd">            cartesian (bool, optional): cartesian coordinate ? (point group only).</span>
+<span class="sd">            primitive (bool, optional): primitive cell ? (space group only).</span>
+<span class="sd">            plus_set (bool, optional): add partial translations ? (space group only).</span>
+<span class="sd">            shift (bool, optional): move into unit cell ? (space group only).</span>
+<span class="sd">            nondirectional (bool, optional): ignore directional property ?</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            NSArray: equivalent bonds.</span>
+
+<span class="sd">        Notes:</span>
+<span class="sd">            - if bond is string, vector-center &quot;[vx,vy,vz]@[cx,cy,cz]&quot;, tail-head &quot;[tx,ty,tz];[hx,hy,hz], or start-vector &quot;[sx,sy,sz]:[vx,vy,vz]&quot; style is accepted.</span>
+<span class="sd">            - if remove_duplicate is True, return values are sorted.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">bond</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">NSArray</span><span class="p">)):</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">bond</span><span class="p">)</span><span class="si">}</span><span class="s2"> is not accepted for bond.&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">bond</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="n">bond</span> <span class="o">=</span> <span class="n">NSArray</span><span class="p">(</span><span class="n">bond</span><span class="p">)</span>
+
+        <span class="n">t</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">bond</span><span class="o">.</span><span class="n">convert_bond</span><span class="p">(</span><span class="s2">&quot;bond_th&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tag</span><span class="o">.</span><span class="n">is_point_group</span><span class="p">():</span>
+            <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_equivalent_vector</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">cc_only</span><span class="o">=</span><span class="n">cc_only</span><span class="p">,</span> <span class="n">cartesian</span><span class="o">=</span><span class="n">cartesian</span><span class="p">)</span>
+            <span class="n">h</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_equivalent_vector</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">cc_only</span><span class="o">=</span><span class="n">cc_only</span><span class="p">,</span> <span class="n">cartesian</span><span class="o">=</span><span class="n">cartesian</span><span class="p">)</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="n">NSArray</span><span class="o">.</span><span class="n">create_bond_from_pair</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="s2">&quot;bond_th&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">nondirectional</span><span class="p">:</span>
+                <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">regular_direction</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">remove_duplicate</span><span class="p">:</span>
+                <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">remove_duplicate</span><span class="p">()</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_equivalent_vector</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">cc_only</span><span class="o">=</span><span class="n">cc_only</span><span class="p">)</span>
+            <span class="n">h</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_equivalent_vector</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">cc_only</span><span class="o">=</span><span class="n">cc_only</span><span class="p">)</span>
+            <span class="n">t</span> <span class="o">=</span> <span class="n">to_primitive</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lattice</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+            <span class="n">h</span> <span class="o">=</span> <span class="n">to_primitive</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lattice</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="n">NSArray</span><span class="o">.</span><span class="n">create_bond_from_pair</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="s2">&quot;bond_th&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">shift</span><span class="p">:</span>
+                <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">shift</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">nondirectional</span><span class="p">:</span>
+                <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">regular_direction</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">remove_duplicate</span><span class="p">:</span>
+                <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">remove_duplicate</span><span class="p">()</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">primitive</span><span class="p">:</span>
+                <span class="n">t</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">convert_bond</span><span class="p">(</span><span class="s2">&quot;bond_th&quot;</span><span class="p">)</span>
+                <span class="n">t</span> <span class="o">=</span> <span class="n">to_conventional</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lattice</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">plus_set</span><span class="o">=</span><span class="n">plus_set</span><span class="p">)</span>
+                <span class="n">h</span> <span class="o">=</span> <span class="n">to_conventional</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lattice</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">plus_set</span><span class="o">=</span><span class="n">plus_set</span><span class="p">)</span>
+                <span class="n">b</span> <span class="o">=</span> <span class="n">NSArray</span><span class="o">.</span><span class="n">create_bond_from_pair</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="s2">&quot;bond_th&quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">shift</span><span class="p">:</span>
+                    <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">shift</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">nondirectional</span><span class="p">:</span>
+                    <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">regular_direction</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">remove_duplicate</span><span class="p">:</span>
+                    <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">remove_duplicate</span><span class="p">()</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">b</span></div>
+
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Hiroaki Kusunose and Rikuto Oiwa
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2021-2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

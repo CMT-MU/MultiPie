@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>SAMB &#8212; MultiPie</title>
+    <title>Wyckoff position &#8212; MultiPie</title>
   
   
   
@@ -65,11 +65,11 @@ const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'src/fmt_samb';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'src/api_wyckoff';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="SAMB in full matrix" href="fmt_matrix.html" />
-    <link rel="prev" title="Molecule or Crystal Model" href="fmt_model.html" />
+    <link rel="next" title="Change logs (not in tags)" href="change_log.html" />
+    <link rel="prev" title="Virtual cluster" href="api_virtual_cluster.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="jp"/>
   </head>
@@ -182,14 +182,14 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="use_matrix.html">Example usage of full matrix</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">File Format</span></p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="fmt_input.html">SAMB construction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fmt_model.html">Molecule or Crystal Model</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">SAMB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fmt_samb.html">SAMB</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fmt_matrix.html">SAMB in full matrix</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API References</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="api_character.html">Character Table</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api_group.html">Group</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api_harmonics.html">Harmonics</a></li>
@@ -199,7 +199,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="api_symmetry_operation.html">Symmetry operations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api_tag.html">Tag</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api_virtual_cluster.html">Virtual cluster</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api_wyckoff.html">Wyckoff position</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Wyckoff position</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Change Log</span></p>
 <ul class="nav bd-sidenav">
@@ -344,7 +344,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -355,11 +357,31 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>SAMB</h1>
+    <h1>Wyckoff position</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-multipie.wyckoff.wyckoff_g">WyckoffG</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.wyckoff.wyckoff_g.WyckoffG"><code class="docutils literal notranslate"><span class="pre">WyckoffG</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.wyckoff.wyckoff_g.WyckoffG.tag"><code class="docutils literal notranslate"><span class="pre">WyckoffG.tag</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.wyckoff.wyckoff_g.WyckoffG.v"><code class="docutils literal notranslate"><span class="pre">WyckoffG.v</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.wyckoff.wyckoff_g.WyckoffG.__init__"><code class="docutils literal notranslate"><span class="pre">WyckoffG.__init__()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.wyckoff.wyckoff_g.WyckoffG.position"><code class="docutils literal notranslate"><span class="pre">WyckoffG.position()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.wyckoff.wyckoff_g.WyckoffG.site_symmetry"><code class="docutils literal notranslate"><span class="pre">WyckoffG.site_symmetry()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id0"><code class="docutils literal notranslate"><span class="pre">WyckoffG.tag</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><code class="docutils literal notranslate"><span class="pre">WyckoffG.v</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -369,34 +391,103 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="samb">
-<h1>SAMB<a class="headerlink" href="#samb" title="Link to this heading">#</a></h1>
-<p>The output file format for SAMB is the following. The keywords with * is only for crystal with fourier transform.</p>
-<ul class="simple">
-<li><p><strong>info</strong></p>
-<ul>
-<li><p><strong>atomic</strong> : { “M_#” : [“amp_#”] }</p></li>
-<li><p><strong>site_cluster</strong> : { “S_#” : [“smp_#”] }</p></li>
-<li><p><strong>bond_cluster</strong> : { “B_#” : [“bmp_#”] }</p></li>
-<li><p><strong>uniform</strong>* : { “S_#”/“B_#” : [“ump_#”] }</p></li>
-<li><p><strong>structure</strong>* : { “B_#” : [“kmp_#”] }</p></li>
-<li><p><strong>Z</strong> : { (“M_#”, “S_#”/“B_#”) : [“z_#”] }</p></li>
-<li><p><strong>version</strong> : MultiPie version</p></li>
-<li><p><strong>harmonics</strong> : { head : [TagMultipole] }</p></li>
+  <section class="tex2jax_ignore mathjax_ignore" id="wyckoff-position">
+<h1>Wyckoff position<a class="headerlink" href="#wyckoff-position" title="Link to this heading">#</a></h1>
+<p>Utilities for Wyckoff positions.</p>
+<section id="module-multipie.wyckoff.wyckoff_g">
+<span id="wyckoffg"></span><h2>WyckoffG<a class="headerlink" href="#module-multipie.wyckoff.wyckoff_g" title="Link to this heading">#</a></h2>
+<p>WyckoffG manages point/space-group Wyckoff positions (conventional, reduced coordinate).</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="multipie.wyckoff.wyckoff_g.WyckoffG">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">WyckoffG</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g_tag</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/multipie/wyckoff/wyckoff_g.html#WyckoffG"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.wyckoff.wyckoff_g.WyckoffG" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></p>
+<p>point/space-group Wyckoff positions.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="multipie.wyckoff.wyckoff_g.WyckoffG.tag">
+<span class="sig-name descname"><span class="pre">tag</span></span><a class="headerlink" href="#multipie.wyckoff.wyckoff_g.WyckoffG.tag" title="Link to this definition">#</a></dt>
+<dd><p>group tag.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="api_tag.html#multipie.tag.tag_group.TagGroup" title="multipie.tag.tag_group.TagGroup">TagGroup</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="multipie.wyckoff.wyckoff_g.WyckoffG.v">
+<span class="sig-name descname"><span class="pre">v</span></span><a class="headerlink" href="#multipie.wyckoff.wyckoff_g.WyckoffG.v" title="Link to this definition">#</a></dt>
+<dd><p>vector variable</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>sp.Matrix</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multipie.wyckoff.wyckoff_g.WyckoffG.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g_tag</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/multipie/wyckoff/wyckoff_g.html#WyckoffG.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.wyckoff.wyckoff_g.WyckoffG.__init__" title="Link to this definition">#</a></dt>
+<dd><p>initialize the class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>g_tag</strong> (<a class="reference internal" href="api_tag.html#multipie.tag.tag_group.TagGroup" title="multipie.tag.tag_group.TagGroup"><em>TagGroup</em></a><em> or </em><em>str</em>) -- tag of group.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multipie.wyckoff.wyckoff_g.WyckoffG.position">
+<span class="sig-name descname"><span class="pre">position</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/multipie/wyckoff/wyckoff_g.html#WyckoffG.position"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.wyckoff.wyckoff_g.WyckoffG.position" title="Link to this definition">#</a></dt>
+<dd><p>wyckoff position (reduced coordinate).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>wp</strong> (<a class="reference internal" href="api_tag.html#multipie.tag.tag_wyckoff.TagWyckoff" title="multipie.tag.tag_wyckoff.TagWyckoff"><em>TagWyckoff</em></a><em> or </em><em>str</em>) -- Wyckoff position tag.</p></li>
+<li><p><strong>v</strong> (<em>str</em><em> or </em><em>NSArray</em><em>, </em><em>optional</em>) -- vector variable.</p></li>
+<li><p><strong>default</strong> (<em>bool</em><em>, </em><em>optional</em>) -- use default value ? (point group only).</p></li>
 </ul>
-</li>
-<li><p><strong>data</strong></p>
-<ul>
-<li><p><strong>atomic</strong> : { “amp_#” : ( TagMultipole, shape, [(i, j, matrix element)] ) }</p></li>
-<li><p><strong>site_cluster</strong> : { “smp_#” : ( TagMultipole, [vector component] ) }</p></li>
-<li><p><strong>bond_cluster</strong> : { “bmp_#” : ( TagMultipole, [vector component] ) }</p></li>
-<li><p><strong>uniform</strong> : { “ump_#” : ( TagMultipole, shape, [(i, j, matrix element)] ) }</p></li>
-<li><p><strong>structure</strong>* : { “kmp_#” : (TagMultipole, “structure factor”) }</p></li>
-<li><p><strong>Z</strong> : {“z_#” : ( TagMultipole, [(coeff, “amp_#”, “smp_#”/“bmp_#/ump_#”)] ) }</p></li>
-<li><p><strong>Zk</strong>* : {“z_#” : ( TagMultipole, [(coeff, “amp_#”, “ump_#”, “kmp_#”)] ) }</p></li>
-</ul>
-</li>
-</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>wyckoff positions.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>NSArray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multipie.wyckoff.wyckoff_g.WyckoffG.site_symmetry">
+<span class="sig-name descname"><span class="pre">site_symmetry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wp</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/multipie/wyckoff/wyckoff_g.html#WyckoffG.site_symmetry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.wyckoff.wyckoff_g.WyckoffG.site_symmetry" title="Link to this definition">#</a></dt>
+<dd><p>site symmetry.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>wp</strong> (<a class="reference internal" href="api_tag.html#multipie.tag.tag_wyckoff.TagWyckoff" title="multipie.tag.tag_wyckoff.TagWyckoff"><em>TagWyckoff</em></a><em> or </em><em>str</em>) -- Wyckoff position tag.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>site symmetry.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">tag</span></span><a class="headerlink" href="#id0" title="Link to this definition">#</a></dt>
+<dd><p>group tag.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id1">
+<span class="sig-name descname"><span class="pre">v</span></span><a class="headerlink" href="#id1" title="Link to this definition">#</a></dt>
+<dd><p>(x,y,z) vector.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -430,7 +521,32 @@ document.write(`
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"></div>
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-multipie.wyckoff.wyckoff_g">WyckoffG</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.wyckoff.wyckoff_g.WyckoffG"><code class="docutils literal notranslate"><span class="pre">WyckoffG</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.wyckoff.wyckoff_g.WyckoffG.tag"><code class="docutils literal notranslate"><span class="pre">WyckoffG.tag</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.wyckoff.wyckoff_g.WyckoffG.v"><code class="docutils literal notranslate"><span class="pre">WyckoffG.v</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.wyckoff.wyckoff_g.WyckoffG.__init__"><code class="docutils literal notranslate"><span class="pre">WyckoffG.__init__()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.wyckoff.wyckoff_g.WyckoffG.position"><code class="docutils literal notranslate"><span class="pre">WyckoffG.position()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.wyckoff.wyckoff_g.WyckoffG.site_symmetry"><code class="docutils literal notranslate"><span class="pre">WyckoffG.site_symmetry()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id0"><code class="docutils literal notranslate"><span class="pre">WyckoffG.tag</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><code class="docutils literal notranslate"><span class="pre">WyckoffG.v</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

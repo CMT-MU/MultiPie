@@ -1,0 +1,1194 @@
+
+<!DOCTYPE html>
+
+
+<html lang="jp" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>multipie.model.symmetry_adapted_model &#8212; MultiPie</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../../../_static/documentation_options.js?v=8cf54648"></script>
+    <script src="../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=afe5de03"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/multipie/model/symmetry_adapted_model';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="jp"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/multipie_logo.png" class="logo__image only-light" alt="MultiPie - Home"/>
+    <script>document.write(`<img src="../../../_static/multipie_logo.png" class="logo__image only-dark" alt="MultiPie - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">SAMB Construction</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../src/samb_construction.html">Example for SAMB Construction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/use_matrix.html">Example usage of full matrix</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">File Format</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../src/fmt_input.html">SAMB construction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/fmt_model.html">Molecule or Crystal Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/fmt_samb.html">SAMB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/fmt_matrix.html">SAMB in full matrix</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API References</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../src/api_character.html">Character Table</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/api_group.html">Group</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/api_harmonics.html">Harmonics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/api_model.html">Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/api_multipole.html">Multipole</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/api_response_tensor.html">Response tensor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/api_symmetry_operation.html">Symmetry operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/api_tag.html">Tag</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/api_virtual_cluster.html">Virtual cluster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/api_wyckoff.html">Wyckoff position</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Change Log</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../src/change_log.html">Change logs (not in tags)</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/CMT-MU/MultiPie.git" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for multipie.model.symmetry_adapted_model</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">SymmetryAdaptedModel manages symmetry adapted multipole basis set for cluster or crystal system.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">product</span>
+<span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="kn">from</span> <span class="nn">gcoreutils.nsarray</span> <span class="kn">import</span> <span class="n">NSArray</span>
+<span class="kn">from</span> <span class="nn">multipie.tag.tag_list</span> <span class="kn">import</span> <span class="n">TagList</span>
+<span class="kn">from</span> <span class="nn">multipie.multipole.util.multipole_util</span> <span class="kn">import</span> <span class="n">matrix_to_dict</span>
+<span class="kn">from</span> <span class="nn">multipie.multipole.util.structure_samb_util</span> <span class="kn">import</span> <span class="n">cs_list</span>
+<span class="kn">from</span> <span class="nn">multipie.symmetry_operation.util.symmetry_operation_util</span> <span class="kn">import</span> <span class="n">to_primitive</span>
+<span class="kn">from</span> <span class="nn">multipie.model.util.symmetry_adapted_model_util</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">create_atomic_samb_set</span><span class="p">,</span>
+    <span class="n">create_cluster_samb_set</span><span class="p">,</span>
+    <span class="n">create_uniform_samb_set</span><span class="p">,</span>
+    <span class="n">create_structure_samb_set</span><span class="p">,</span>
+    <span class="n">create_z_samb_set</span><span class="p">,</span>
+    <span class="n">create_zk_samb_set</span><span class="p">,</span>
+    <span class="n">redefine_index</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">multipie</span> <span class="kn">import</span> <span class="n">__version__</span>
+
+
+<span class="c1"># ==================================================</span>
+<span class="n">header_str</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">=== SAMB (* only for crystal with fourier transform) ===</span>
+<span class="s2">- info</span>
+<span class="s2">    - atomic : { &quot;M_#&quot; : [&quot;amp_#&quot;] }</span>
+<span class="s2">    - site_cluster : { &quot;S_#&quot; : [&quot;smp_#&quot;] }</span>
+<span class="s2">    - bond_cluster : { &quot;B_#&quot; : [&quot;bmp_#&quot;] }</span>
+<span class="s2">    - uniform : { &quot;S_#&quot;/&quot;B_#&quot; : [&quot;ump_#&quot;] }</span>
+<span class="s2">    - structure* : { &quot;B_#&quot; : [&quot;kmp_#&quot;] }</span>
+<span class="s2">    - Z : { (&quot;M_#&quot;, &quot;S_#&quot;/&quot;B_#&quot;) : [&quot;z_#&quot;] }</span>
+<span class="s2">    - version : MultiPie version</span>
+<span class="s2">    - harmonics : { head : [TagMultipole] }</span>
+
+<span class="s2">- data</span>
+<span class="s2">    - atomic : { &quot;amp_#&quot; : ( TagMultipole, shape, [(i, j, matrix element)] ) }</span>
+<span class="s2">    - site_cluster : { &quot;smp_#&quot; : ( TagMultipole, [vector component] ) }</span>
+<span class="s2">    - bond_cluster : { &quot;bmp_#&quot; : ( TagMultipole, [vector component] ) }</span>
+<span class="s2">    - uniform* : { &quot;ump_#&quot; : ( TagMultipole, shape, [(i, j, matrix element)] ) }</span>
+<span class="s2">    - structure* : { &quot;kmp_#&quot; : (TagMultipole, &quot;structure factor&quot;) }</span>
+<span class="s2">    - Z : {&quot;z_#&quot; : ( TagMultipole, [(coeff, &quot;amp_#&quot;, &quot;smp_#&quot;/&quot;bmp_#/ump_#&quot;)] ) }</span>
+<span class="s2">    - Zk* : {&quot;z_#&quot; : ( TagMultipole, [(coeff, &quot;amp_#&quot;, &quot;ump_#&quot;, &quot;kmp_#&quot;)] ) }</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+
+<span class="c1"># ==================================================</span>
+<span class="n">matrix_header_str</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">== SAMB in full matrix form in real space (* only for crystal) ===</span>
+<span class="s2">- model : model name.</span>
+<span class="s2">- molecule : molecule or crystal ?</span>
+<span class="s2">- group : (tag, detailed str)</span>
+<span class="s2">- dimension : dimension of full matrix</span>
+<span class="s2">- ket : ket basis list, orbital@site</span>
+<span class="s2">- version : MultiPie version</span>
+<span class="s2">- k_point* : representative k points</span>
+<span class="s2">- k_path* : high-symmetry line in k space</span>
+<span class="s2">- cell_site : { name_idx(pset): (position, SOs) }</span>
+<span class="s2">- A* : transform matrix, [a1,a2,a3]</span>
+<span class="s2">- matrix : { &quot;z_#&quot;: &quot;matrix&quot;}</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="c1"># ==================================================</span>
+<span class="n">matrix_header_k_str</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">== SAMB in full matrix form with fourier transform ===</span>
+<span class="s2">- model : model name.</span>
+<span class="s2">- molecule : molecule or crystal ?</span>
+<span class="s2">- group : (tag, detailed str)</span>
+<span class="s2">- dimension : dimension of full matrix</span>
+<span class="s2">- ket : ket basis list, orbital@site</span>
+<span class="s2">- version : MultiPie version</span>
+<span class="s2">- k_point : representative k points</span>
+<span class="s2">- k_path : high-symmetry line in k space</span>
+<span class="s2">- A : transform matrix, [a1,a2,a3]</span>
+<span class="s2">- bond : { &quot;bond_#&quot;: &quot;vector&quot; }</span>
+<span class="s2">- matrix : { &quot;z_#&quot;: &quot;matrix&quot; }</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+
+<span class="c1"># ==================================================</span>
+<span class="k">def</span> <span class="nf">_run</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">mpm</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">mpm</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  * </span><span class="si">{</span><span class="n">msg</span><span class="si">}</span><span class="s2"> ... &quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="n">mpm</span><span class="o">.</span><span class="n">set_stamp</span><span class="p">()</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="n">mpm</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;done&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">res</span>
+
+
+<span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="SymmetryAdaptedModel">
+<a class="viewcode-back" href="../../../src/api_model.html#multipie.model.symmetry_adapted_model.SymmetryAdaptedModel">[docs]</a>
+<span class="k">class</span> <span class="nc">SymmetryAdaptedModel</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    symmetry adapted multipole basis set for molecule or crystal.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Attributes:</span>
+    <span class="c1">#     _model (dict): molecule or crystal model information.</span>
+    <span class="c1">#     _mpm (MultiPieManager): MultiPie manager.</span>
+    <span class="c1">#     _fourier_transform (bool): fourier transform combined multipole?</span>
+    <span class="c1">#     _parallel (bool): use parallel code.</span>
+    <span class="c1">#     _verbose (bool): verbose parallel info.</span>
+    <span class="c1">#</span>
+    <span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="SymmetryAdaptedModel.__init__">
+<a class="viewcode-back" href="../../../src/api_model.html#multipie.model.symmetry_adapted_model.SymmetryAdaptedModel.__init__">[docs]</a>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">mpm</span><span class="p">,</span> <span class="n">head</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        initialize the class.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            model (dict): model information of cluster or crystal system.</span>
+<span class="sd">            mpm (MultiPieManager): MultiPie manager.</span>
+<span class="sd">            head (list or str): heads of SAMB to be created.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="c1"># model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_model</span> <span class="o">=</span> <span class="n">model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_mpm</span> <span class="o">=</span> <span class="n">mpm</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_parallel</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mpm</span><span class="o">.</span><span class="n">parallel</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_verbose</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mpm</span><span class="o">.</span><span class="n">verbose</span>
+
+        <span class="n">toroidal_priority</span> <span class="o">=</span> <span class="n">model</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;generate&quot;</span><span class="p">][</span><span class="s2">&quot;toroidal_priority&quot;</span><span class="p">]</span>
+        <span class="n">irrep</span> <span class="o">=</span> <span class="n">model</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;generate&quot;</span><span class="p">][</span><span class="s2">&quot;irrep&quot;</span><span class="p">]</span>
+
+        <span class="n">site</span> <span class="o">=</span> <span class="n">model</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="s2">&quot;site&quot;</span><span class="p">]</span>
+        <span class="n">cluster_site</span> <span class="o">=</span> <span class="n">model</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="s2">&quot;cluster_site&quot;</span><span class="p">]</span>
+
+        <span class="n">bond</span> <span class="o">=</span> <span class="n">model</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="s2">&quot;bond&quot;</span><span class="p">]</span>
+        <span class="n">cluster_bond</span> <span class="o">=</span> <span class="n">model</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="s2">&quot;cluster_bond&quot;</span><span class="p">]</span>
+
+        <span class="n">cluster_atomic</span> <span class="o">=</span> <span class="n">model</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="s2">&quot;cluster_atomic&quot;</span><span class="p">]</span>
+        <span class="n">atomic_braket</span> <span class="o">=</span> <span class="n">model</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="s2">&quot;atomic_braket&quot;</span><span class="p">]</span>
+        <span class="n">alias</span> <span class="o">=</span> <span class="n">model</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">][</span><span class="s2">&quot;alias&quot;</span><span class="p">]</span>
+
+        <span class="n">spinful</span> <span class="o">=</span> <span class="n">model</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;spinful&quot;</span><span class="p">]</span>
+        <span class="n">is_phonon</span> <span class="o">=</span> <span class="n">model</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;generate&quot;</span><span class="p">][</span><span class="s2">&quot;model_type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;phonon&quot;</span>
+
+        <span class="n">g</span> <span class="o">=</span> <span class="n">mpm</span><span class="o">.</span><span class="n">group</span>
+        <span class="n">pg</span> <span class="o">=</span> <span class="n">mpm</span><span class="o">.</span><span class="n">point_group</span>
+
+        <span class="c1"># atomic</span>
+        <span class="n">func</span> <span class="o">=</span> <span class="n">create_atomic_samb_set</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">pg</span><span class="p">,</span> <span class="n">atomic_braket</span><span class="p">,</span> <span class="n">spinful</span><span class="p">,</span> <span class="n">is_phonon</span><span class="p">,</span> <span class="kc">False</span><span class="p">]</span>
+        <span class="n">atomic_info</span><span class="p">,</span> <span class="n">atomic_data</span> <span class="o">=</span> <span class="n">_run</span><span class="p">(</span><span class="s2">&quot;atomic&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mpm</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+
+        <span class="c1"># site/bond-cluster</span>
+        <span class="n">rep_site_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">cluster_tag</span><span class="p">:</span> <span class="n">site</span><span class="p">[</span><span class="n">site_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">cluster_tag</span><span class="p">,</span> <span class="n">site_list</span> <span class="ow">in</span> <span class="n">cluster_site</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+        <span class="n">rep_bond_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">cluster_tag</span><span class="p">:</span> <span class="n">bond</span><span class="p">[</span><span class="n">bond_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">cluster_tag</span><span class="p">,</span> <span class="n">bond_list</span> <span class="ow">in</span> <span class="n">cluster_bond</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+
+        <span class="n">func</span> <span class="o">=</span> <span class="n">create_cluster_samb_set</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">g</span><span class="p">,</span> <span class="n">rep_site_dict</span><span class="p">,</span> <span class="n">rep_bond_dict</span><span class="p">,</span> <span class="kc">False</span><span class="p">]</span>
+        <span class="n">site_cluster_info</span><span class="p">,</span> <span class="n">site_cluster_data</span><span class="p">,</span> <span class="n">bond_cluster_info</span><span class="p">,</span> <span class="n">bond_cluster_data</span> <span class="o">=</span> <span class="n">_run</span><span class="p">(</span>
+            <span class="s2">&quot;site/bond-cluster&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mpm</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span>
+        <span class="p">)</span>
+
+        <span class="c1"># uniform</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;molecule&quot;</span><span class="p">]</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;generate&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;fourier_transform&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+            <span class="n">cluster_samb_set</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="n">S_i</span><span class="p">:</span> <span class="p">[</span><span class="n">site_cluster_data</span><span class="p">[</span><span class="n">smp_i</span><span class="p">]</span> <span class="k">for</span> <span class="n">smp_i</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">]</span> <span class="k">for</span> <span class="n">S_i</span><span class="p">,</span> <span class="n">lst</span> <span class="ow">in</span> <span class="n">site_cluster_info</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+            <span class="p">}</span>
+            <span class="n">cluster_samb_set</span> <span class="o">|=</span> <span class="p">{</span>
+                <span class="n">B_i</span><span class="p">:</span> <span class="p">[</span><span class="n">bond_cluster_data</span><span class="p">[</span><span class="n">bmp_i</span><span class="p">]</span> <span class="k">for</span> <span class="n">bmp_i</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">]</span> <span class="k">for</span> <span class="n">B_i</span><span class="p">,</span> <span class="n">lst</span> <span class="ow">in</span> <span class="n">bond_cluster_info</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+            <span class="p">}</span>
+            <span class="n">braket_indexes_dict</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="n">cluster_tag</span><span class="p">:</span> <span class="p">[</span><span class="n">site</span><span class="p">[</span><span class="n">site_tag</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="k">for</span> <span class="n">site_tag</span> <span class="ow">in</span> <span class="n">site_list</span><span class="p">]</span>
+                <span class="k">for</span> <span class="n">cluster_tag</span><span class="p">,</span> <span class="n">site_list</span> <span class="ow">in</span> <span class="n">cluster_site</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+            <span class="p">}</span>
+            <span class="n">braket_indexes_dict</span> <span class="o">|=</span> <span class="p">{</span>
+                <span class="n">cluster_tag</span><span class="p">:</span> <span class="p">[</span><span class="n">bond</span><span class="p">[</span><span class="n">bond_tag</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="k">for</span> <span class="n">bond_tag</span> <span class="ow">in</span> <span class="n">bond_list</span><span class="p">]</span>
+                <span class="k">for</span> <span class="n">cluster_tag</span><span class="p">,</span> <span class="n">bond_list</span> <span class="ow">in</span> <span class="n">cluster_bond</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+            <span class="p">}</span>
+            <span class="n">dim</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">site</span><span class="p">)</span>
+
+            <span class="n">func</span> <span class="o">=</span> <span class="n">create_uniform_samb_set</span>
+            <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">cluster_samb_set</span><span class="p">,</span> <span class="n">braket_indexes_dict</span><span class="p">,</span> <span class="n">dim</span><span class="p">]</span>
+            <span class="n">uniform_info</span><span class="p">,</span> <span class="n">uniform_data</span> <span class="o">=</span> <span class="n">_run</span><span class="p">(</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mpm</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+
+        <span class="c1"># Z</span>
+        <span class="n">x_tag_dict</span> <span class="o">=</span> <span class="p">{(</span><span class="n">M_i</span><span class="p">,</span> <span class="n">atomic_data</span><span class="p">[</span><span class="n">amp_i</span><span class="p">][</span><span class="mi">0</span><span class="p">]):</span> <span class="n">amp_i</span> <span class="k">for</span> <span class="n">M_i</span><span class="p">,</span> <span class="n">lst</span> <span class="ow">in</span> <span class="n">atomic_info</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">for</span> <span class="n">amp_i</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">}</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;molecule&quot;</span><span class="p">]:</span>
+            <span class="n">y_tag_dict</span> <span class="o">=</span> <span class="p">{(</span><span class="n">SB_i</span><span class="p">,</span> <span class="n">uniform_data</span><span class="p">[</span><span class="n">ump_i</span><span class="p">][</span><span class="mi">0</span><span class="p">]):</span> <span class="n">ump_i</span> <span class="k">for</span> <span class="n">SB_i</span><span class="p">,</span> <span class="n">lst</span> <span class="ow">in</span> <span class="n">uniform_info</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">for</span> <span class="n">ump_i</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">}</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">y_tag_dict</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="p">(</span><span class="n">S_i</span><span class="p">,</span> <span class="n">site_cluster_data</span><span class="p">[</span><span class="n">smp_i</span><span class="p">][</span><span class="mi">0</span><span class="p">]):</span> <span class="n">smp_i</span> <span class="k">for</span> <span class="n">S_i</span><span class="p">,</span> <span class="n">lst</span> <span class="ow">in</span> <span class="n">site_cluster_info</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">for</span> <span class="n">smp_i</span> <span class="ow">in</span> <span class="n">lst</span>
+            <span class="p">}</span>
+            <span class="n">y_tag_dict</span> <span class="o">|=</span> <span class="p">{</span>
+                <span class="p">(</span><span class="n">B_i</span><span class="p">,</span> <span class="n">bond_cluster_data</span><span class="p">[</span><span class="n">bmp_i</span><span class="p">][</span><span class="mi">0</span><span class="p">]):</span> <span class="n">bmp_i</span> <span class="k">for</span> <span class="n">B_i</span><span class="p">,</span> <span class="n">lst</span> <span class="ow">in</span> <span class="n">bond_cluster_info</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">for</span> <span class="n">bmp_i</span> <span class="ow">in</span> <span class="n">lst</span>
+            <span class="p">}</span>
+
+        <span class="n">cluster_site_bond</span> <span class="o">=</span> <span class="n">cluster_site</span> <span class="o">|</span> <span class="n">cluster_bond</span>
+        <span class="n">braket_site_no_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">S_i</span><span class="p">:</span> <span class="n">site</span><span class="p">[</span><span class="n">site_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="mi">2</span><span class="p">]</span> <span class="k">for</span> <span class="n">S_i</span><span class="p">,</span> <span class="n">site_list</span> <span class="ow">in</span> <span class="n">cluster_site</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+        <span class="n">braket_site_no_dict</span> <span class="o">|=</span> <span class="p">{</span><span class="n">B_i</span><span class="p">:</span> <span class="n">bond</span><span class="p">[</span><span class="n">bond_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="mi">2</span><span class="p">]</span> <span class="k">for</span> <span class="n">B_i</span><span class="p">,</span> <span class="n">bond_list</span> <span class="ow">in</span> <span class="n">cluster_bond</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+        <span class="n">M_SB_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">SB_i</span> <span class="ow">in</span> <span class="n">cluster_site_bond</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">M_i</span> <span class="ow">in</span> <span class="n">cluster_atomic</span><span class="p">[</span><span class="n">braket_site_no_dict</span><span class="p">[</span><span class="n">SB_i</span><span class="p">]]:</span>
+                <span class="n">M_SB_list</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">M_i</span><span class="p">,</span> <span class="n">SB_i</span><span class="p">))</span>
+
+        <span class="n">func</span> <span class="o">=</span> <span class="n">create_z_samb_set</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">g</span><span class="p">,</span> <span class="n">x_tag_dict</span><span class="p">,</span> <span class="n">y_tag_dict</span><span class="p">,</span> <span class="n">M_SB_list</span><span class="p">,</span> <span class="n">atomic_braket</span><span class="p">,</span> <span class="n">alias</span><span class="p">,</span> <span class="n">toroidal_priority</span><span class="p">,</span> <span class="kc">False</span><span class="p">]</span>
+        <span class="n">z_info</span><span class="p">,</span> <span class="n">z_data</span> <span class="o">=</span> <span class="n">_run</span><span class="p">(</span><span class="s2">&quot;Z&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mpm</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">head</span><span class="o">=</span><span class="n">head</span><span class="p">,</span> <span class="n">irrep</span><span class="o">=</span><span class="n">irrep</span><span class="p">)</span>
+
+        <span class="c1"># info and data</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;atomic&quot;</span><span class="p">:</span> <span class="n">atomic_info</span><span class="p">,</span>
+            <span class="s2">&quot;site_cluster&quot;</span><span class="p">:</span> <span class="n">site_cluster_info</span><span class="p">,</span>
+            <span class="s2">&quot;bond_cluster&quot;</span><span class="p">:</span> <span class="n">bond_cluster_info</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;atomic&quot;</span><span class="p">:</span> <span class="n">atomic_data</span><span class="p">,</span>
+            <span class="s2">&quot;site_cluster&quot;</span><span class="p">:</span> <span class="n">site_cluster_data</span><span class="p">,</span>
+            <span class="s2">&quot;bond_cluster&quot;</span><span class="p">:</span> <span class="n">bond_cluster_data</span><span class="p">,</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;molecule&quot;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">]</span> <span class="o">|=</span> <span class="p">{</span><span class="s2">&quot;uniform&quot;</span><span class="p">:</span> <span class="n">uniform_info</span><span class="p">}</span>
+            <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span> <span class="o">|=</span> <span class="p">{</span><span class="s2">&quot;uniform&quot;</span><span class="p">:</span> <span class="n">uniform_data</span><span class="p">}</span>
+
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">]</span> <span class="o">|=</span> <span class="p">{</span><span class="s2">&quot;Z&quot;</span><span class="p">:</span> <span class="n">z_info</span><span class="p">,</span> <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="n">__version__</span><span class="p">}</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span> <span class="o">|=</span> <span class="p">{</span><span class="s2">&quot;Z&quot;</span><span class="p">:</span> <span class="n">z_data</span><span class="p">}</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;molecule&quot;</span><span class="p">]</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;generate&quot;</span><span class="p">][</span><span class="s2">&quot;fourier_transform&quot;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">]</span> <span class="o">|=</span> <span class="p">{</span><span class="s2">&quot;uniform&quot;</span><span class="p">:</span> <span class="n">uniform_info</span><span class="p">}</span>
+            <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span> <span class="o">|=</span> <span class="p">{</span><span class="s2">&quot;uniform&quot;</span><span class="p">:</span> <span class="n">uniform_data</span><span class="p">}</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fourier_transform</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;option&quot;</span><span class="p">][</span><span class="s2">&quot;minimal_samb&quot;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_minimal_samb</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;harmonics&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_harmonics_info</span><span class="p">()</span></div>
+
+
+    <span class="c1"># ==================================================</span>
+    <span class="k">def</span> <span class="nf">_harmonics_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        convert combined multipoles from dictionary to numerical matrix form (real-space).</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            fmt (str, optional): sympy/value.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: matrix form of combined multipoles, z_dict/z_full.</span>
+
+<span class="sd">        Note:</span>
+<span class="sd">            z_dict = { &quot;z_#&quot; : {(n1, n2, n3, a, b): matrix element}, R=(n1,n2,n3) is a lattice vector.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">atomic_data</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="s2">&quot;atomic&quot;</span><span class="p">]</span>
+        <span class="n">site_cluster_data</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="s2">&quot;site_cluster&quot;</span><span class="p">]</span>
+        <span class="n">bond_cluster_data</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="s2">&quot;bond_cluster&quot;</span><span class="p">]</span>
+        <span class="n">uniform_data</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">structure_data</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;structure&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+        <span class="n">head_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Q&quot;</span><span class="p">,</span> <span class="s2">&quot;G&quot;</span><span class="p">,</span> <span class="s2">&quot;M&quot;</span><span class="p">,</span> <span class="s2">&quot;T&quot;</span><span class="p">]</span>
+        <span class="n">harmonics_info</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Q&quot;</span><span class="p">:</span> <span class="p">[],</span> <span class="s2">&quot;G&quot;</span><span class="p">:</span> <span class="p">[]}</span>
+        <span class="k">for</span> <span class="n">X</span> <span class="ow">in</span> <span class="n">head_list</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">atomic_data</span> <span class="o">|</span> <span class="n">site_cluster_data</span> <span class="o">|</span> <span class="n">bond_cluster_data</span>
+            <span class="k">if</span> <span class="n">uniform_data</span><span class="p">:</span>
+                <span class="n">data</span> <span class="o">|=</span> <span class="n">uniform_data</span>
+            <span class="k">if</span> <span class="n">structure_data</span><span class="p">:</span>
+                <span class="n">data</span> <span class="o">|=</span> <span class="n">structure_data</span>
+            <span class="n">tag_list</span> <span class="o">=</span> <span class="n">TagList</span><span class="p">([</span><span class="n">tag</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="n">_</span><span class="p">)</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">()])</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">head</span><span class="o">=</span><span class="n">X</span><span class="p">)</span>
+            <span class="n">harmonics_list</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span><span class="n">tag</span><span class="o">.</span><span class="n">to_harmonics</span><span class="p">()</span> <span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">tag_list</span><span class="p">]))</span>
+
+            <span class="n">X</span> <span class="o">=</span> <span class="s2">&quot;G&quot;</span> <span class="k">if</span> <span class="n">X</span> <span class="o">==</span> <span class="s2">&quot;M&quot;</span> <span class="k">else</span> <span class="n">X</span>
+            <span class="n">X</span> <span class="o">=</span> <span class="s2">&quot;Q&quot;</span> <span class="k">if</span> <span class="n">X</span> <span class="o">==</span> <span class="s2">&quot;T&quot;</span> <span class="k">else</span> <span class="n">X</span>
+            <span class="n">harmonics_info</span><span class="p">[</span><span class="n">X</span><span class="p">]</span> <span class="o">+=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">htag</span><span class="p">)</span> <span class="k">for</span> <span class="n">htag</span> <span class="ow">in</span> <span class="n">harmonics_list</span><span class="p">]</span>
+
+        <span class="n">harmonics_info</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Q&quot;</span><span class="p">:</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">harmonics_info</span><span class="p">[</span><span class="s2">&quot;Q&quot;</span><span class="p">])),</span> <span class="s2">&quot;G&quot;</span><span class="p">:</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">harmonics_info</span><span class="p">[</span><span class="s2">&quot;G&quot;</span><span class="p">]))}</span>
+
+        <span class="k">return</span> <span class="n">harmonics_info</span>
+
+    <span class="c1"># ==================================================</span>
+    <span class="k">def</span> <span class="nf">_minimal_samb</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        delete unused samb and redefine the serial number of multipoles.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">molecule</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;molecule&quot;</span><span class="p">]</span>
+
+        <span class="n">atomic_info</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;atomic&quot;</span><span class="p">]</span>
+        <span class="n">site_cluster_info</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;site_cluster&quot;</span><span class="p">]</span>
+        <span class="n">bond_cluster_info</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;bond_cluster&quot;</span><span class="p">]</span>
+        <span class="n">z_info</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;Z&quot;</span><span class="p">]</span>
+        <span class="n">uniform_info</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">structure_info</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;structure&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+        <span class="n">atomic_data</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="s2">&quot;atomic&quot;</span><span class="p">]</span>
+        <span class="n">site_cluster_data</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="s2">&quot;site_cluster&quot;</span><span class="p">]</span>
+        <span class="n">bond_cluster_data</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="s2">&quot;bond_cluster&quot;</span><span class="p">]</span>
+        <span class="n">z_data</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="s2">&quot;Z&quot;</span><span class="p">]</span>
+        <span class="n">uniform_data</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">structure_data</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;structure&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">zk_data</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Zk&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">site_cluster_data</span><span class="p">:</span>
+            <span class="n">site_cluster_info</span><span class="p">,</span> <span class="n">site_cluster_data</span><span class="p">,</span> <span class="n">z_data</span> <span class="o">=</span> <span class="n">redefine_index</span><span class="p">(</span>
+                <span class="n">site_cluster_info</span><span class="p">,</span> <span class="n">site_cluster_data</span><span class="p">,</span> <span class="n">z_data</span><span class="p">,</span> <span class="n">molecule</span><span class="o">=</span><span class="n">molecule</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">site_cluster_info</span><span class="p">:</span>
+            <span class="n">init_idx</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">site_cluster_info</span><span class="o">.</span><span class="n">values</span><span class="p">())[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">init_idx</span> <span class="o">=</span> <span class="mi">1</span>
+
+        <span class="k">if</span> <span class="n">bond_cluster_data</span><span class="p">:</span>
+            <span class="n">bond_cluster_info</span><span class="p">,</span> <span class="n">bond_cluster_data</span><span class="p">,</span> <span class="n">z_data</span> <span class="o">=</span> <span class="n">redefine_index</span><span class="p">(</span>
+                <span class="n">bond_cluster_info</span><span class="p">,</span> <span class="n">bond_cluster_data</span><span class="p">,</span> <span class="n">z_data</span><span class="p">,</span> <span class="n">molecule</span><span class="o">=</span><span class="n">molecule</span><span class="p">,</span> <span class="n">init_idx</span><span class="o">=</span><span class="n">init_idx</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">molecule</span><span class="p">:</span>
+            <span class="n">atomic_info</span><span class="p">,</span> <span class="n">atomic_data</span><span class="p">,</span> <span class="n">z_data</span> <span class="o">=</span> <span class="n">redefine_index</span><span class="p">(</span><span class="n">atomic_info</span><span class="p">,</span> <span class="n">atomic_data</span><span class="p">,</span> <span class="n">z_data</span><span class="p">,</span> <span class="n">molecule</span><span class="o">=</span><span class="n">molecule</span><span class="p">)</span>
+            <span class="n">uniform_info</span><span class="p">,</span> <span class="n">uniform_data</span><span class="p">,</span> <span class="n">z_data</span> <span class="o">=</span> <span class="n">redefine_index</span><span class="p">(</span><span class="n">uniform_info</span><span class="p">,</span> <span class="n">uniform_data</span><span class="p">,</span> <span class="n">z_data</span><span class="p">,</span> <span class="n">molecule</span><span class="o">=</span><span class="n">molecule</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;generate&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;fourier_transform&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+                <span class="n">atomic_info</span><span class="p">,</span> <span class="n">atomic_data</span><span class="p">,</span> <span class="n">z_data</span> <span class="o">=</span> <span class="n">redefine_index</span><span class="p">(</span><span class="n">atomic_info</span><span class="p">,</span> <span class="n">atomic_data</span><span class="p">,</span> <span class="n">z_data</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">z_data</span> <span class="o">=</span> <span class="n">redefine_index</span><span class="p">(</span><span class="n">atomic_info</span><span class="p">,</span> <span class="n">atomic_data</span><span class="p">,</span> <span class="n">z_data</span><span class="p">)</span>
+                <span class="n">atomic_info</span><span class="p">,</span> <span class="n">atomic_data</span><span class="p">,</span> <span class="n">zk_data</span> <span class="o">=</span> <span class="n">redefine_index</span><span class="p">(</span><span class="n">atomic_info</span><span class="p">,</span> <span class="n">atomic_data</span><span class="p">,</span> <span class="n">zk_data</span><span class="p">)</span>
+                <span class="n">uniform_info</span><span class="p">,</span> <span class="n">uniform_data</span><span class="p">,</span> <span class="n">zk_data</span> <span class="o">=</span> <span class="n">redefine_index</span><span class="p">(</span><span class="n">uniform_info</span><span class="p">,</span> <span class="n">uniform_data</span><span class="p">,</span> <span class="n">zk_data</span><span class="p">)</span>
+                <span class="n">structure_info</span><span class="p">,</span> <span class="n">structure_data</span><span class="p">,</span> <span class="n">zk_data</span> <span class="o">=</span> <span class="n">redefine_index</span><span class="p">(</span><span class="n">structure_info</span><span class="p">,</span> <span class="n">structure_data</span><span class="p">,</span> <span class="n">zk_data</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;atomic&quot;</span><span class="p">:</span> <span class="n">atomic_info</span><span class="p">,</span>
+            <span class="s2">&quot;site_cluster&quot;</span><span class="p">:</span> <span class="n">site_cluster_info</span><span class="p">,</span>
+            <span class="s2">&quot;bond_cluster&quot;</span><span class="p">:</span> <span class="n">bond_cluster_info</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;atomic&quot;</span><span class="p">:</span> <span class="n">atomic_data</span><span class="p">,</span>
+            <span class="s2">&quot;site_cluster&quot;</span><span class="p">:</span> <span class="n">site_cluster_data</span><span class="p">,</span>
+            <span class="s2">&quot;bond_cluster&quot;</span><span class="p">:</span> <span class="n">bond_cluster_data</span><span class="p">,</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;molecule&quot;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">]</span> <span class="o">|=</span> <span class="p">{</span><span class="s2">&quot;uniform&quot;</span><span class="p">:</span> <span class="n">uniform_info</span><span class="p">}</span>
+            <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span> <span class="o">|=</span> <span class="p">{</span><span class="s2">&quot;uniform&quot;</span><span class="p">:</span> <span class="n">uniform_data</span><span class="p">}</span>
+
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">]</span> <span class="o">|=</span> <span class="p">{</span><span class="s2">&quot;Z&quot;</span><span class="p">:</span> <span class="n">z_info</span><span class="p">,</span> <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="n">__version__</span><span class="p">}</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span> <span class="o">|=</span> <span class="p">{</span><span class="s2">&quot;Z&quot;</span><span class="p">:</span> <span class="n">z_data</span><span class="p">}</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;molecule&quot;</span><span class="p">]</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;generate&quot;</span><span class="p">][</span><span class="s2">&quot;fourier_transform&quot;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">]</span> <span class="o">|=</span> <span class="p">{</span><span class="s2">&quot;uniform&quot;</span><span class="p">:</span> <span class="n">uniform_info</span><span class="p">}</span>
+            <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span> <span class="o">|=</span> <span class="p">{</span><span class="s2">&quot;uniform&quot;</span><span class="p">:</span> <span class="n">uniform_data</span><span class="p">}</span>
+            <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">]</span> <span class="o">|=</span> <span class="p">{</span><span class="s2">&quot;structure&quot;</span><span class="p">:</span> <span class="n">structure_info</span><span class="p">}</span>
+            <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span> <span class="o">|=</span> <span class="p">{</span><span class="s2">&quot;structure&quot;</span><span class="p">:</span> <span class="n">structure_data</span><span class="p">}</span>
+            <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span> <span class="o">|=</span> <span class="p">{</span><span class="s2">&quot;Zk&quot;</span><span class="p">:</span> <span class="n">zk_data</span><span class="p">}</span>
+
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;harmonics&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_harmonics_info</span><span class="p">()</span>
+
+    <span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="SymmetryAdaptedModel.fourier_transform">
+<a class="viewcode-back" href="../../../src/api_model.html#multipie.model.symmetry_adapted_model.SymmetryAdaptedModel.fourier_transform">[docs]</a>
+    <span class="k">def</span> <span class="nf">fourier_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        convert combined multipoles from dictionary to numerical matrix form (real-space).</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: matrix form of combined multipoles, z_dict/z_full.</span>
+
+<span class="sd">        Note:</span>
+<span class="sd">            z_dict = { &quot;z_#&quot; : {(n1, n2, n3, a, b): matrix element}, R=(n1,n2,n3) is a lattice vector.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;molecule&quot;</span><span class="p">]:</span>
+            <span class="k">return</span>
+        <span class="k">if</span> <span class="s2">&quot;Zk&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]:</span>
+            <span class="k">return</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;generate&quot;</span><span class="p">][</span><span class="s2">&quot;fourier_transform&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="n">bond_cluster_info</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;bond_cluster&quot;</span><span class="p">]</span>
+        <span class="n">bond_cluster_data</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="s2">&quot;bond_cluster&quot;</span><span class="p">]</span>
+        <span class="n">uniform_data</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="s2">&quot;uniform&quot;</span><span class="p">]</span>
+        <span class="n">z_data</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="s2">&quot;Z&quot;</span><span class="p">]</span>
+
+        <span class="n">cluster_bond</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="s2">&quot;cluster_bond&quot;</span><span class="p">]</span>
+        <span class="n">bond</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="s2">&quot;bond&quot;</span><span class="p">]</span>
+        <span class="n">dim</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="s2">&quot;site&quot;</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">bond</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;generate&quot;</span><span class="p">][</span><span class="s2">&quot;fourier_transform&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">return</span>
+
+        <span class="c1"># structure</span>
+        <span class="n">bc_samb_set</span> <span class="o">=</span> <span class="p">{</span><span class="n">B_i</span><span class="p">:</span> <span class="p">[</span><span class="n">bond_cluster_data</span><span class="p">[</span><span class="n">bmp_i</span><span class="p">]</span> <span class="k">for</span> <span class="n">bmp_i</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">]</span> <span class="k">for</span> <span class="n">B_i</span><span class="p">,</span> <span class="n">lst</span> <span class="ow">in</span> <span class="n">bond_cluster_info</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+
+        <span class="n">func</span> <span class="o">=</span> <span class="n">create_structure_samb_set</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">bc_samb_set</span><span class="p">,</span> <span class="n">cluster_bond</span><span class="p">,</span> <span class="n">bond</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parallel</span><span class="p">]</span>
+        <span class="n">structure_info</span><span class="p">,</span> <span class="n">structure_data</span> <span class="o">=</span> <span class="n">_run</span><span class="p">(</span><span class="s2">&quot;structure&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mpm</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+
+        <span class="c1"># Zk</span>
+        <span class="n">bc_samb_set</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">B_i</span><span class="p">:</span> <span class="p">[(</span><span class="n">bmp_i</span><span class="p">,</span> <span class="n">bond_cluster_data</span><span class="p">[</span><span class="n">bmp_i</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">bmp_i</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">]</span> <span class="k">for</span> <span class="n">B_i</span><span class="p">,</span> <span class="n">lst</span> <span class="ow">in</span> <span class="n">bond_cluster_info</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+        <span class="p">}</span>
+        <span class="n">u_samb_set</span> <span class="o">=</span> <span class="p">[(</span><span class="n">ump_i</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span> <span class="k">for</span> <span class="n">ump_i</span><span class="p">,</span> <span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span> <span class="ow">in</span> <span class="n">uniform_data</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
+        <span class="n">k_samb_set</span> <span class="o">=</span> <span class="p">[(</span><span class="n">kmp_i</span><span class="p">,</span> <span class="n">fk</span><span class="p">)</span> <span class="k">for</span> <span class="n">kmp_i</span><span class="p">,</span> <span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="n">fk</span><span class="p">)</span> <span class="ow">in</span> <span class="n">structure_data</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
+
+        <span class="n">func</span> <span class="o">=</span> <span class="n">create_zk_samb_set</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">z_data</span><span class="p">,</span> <span class="n">bc_samb_set</span><span class="p">,</span> <span class="n">u_samb_set</span><span class="p">,</span> <span class="n">k_samb_set</span><span class="p">,</span> <span class="n">cluster_bond</span><span class="p">,</span> <span class="n">bond</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parallel</span><span class="p">]</span>
+        <span class="n">zk_data</span> <span class="o">=</span> <span class="n">_run</span><span class="p">(</span><span class="s2">&quot;Zk&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mpm</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;structure&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">structure_info</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="s2">&quot;structure&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">structure_data</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="s2">&quot;Zk&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">zk_data</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;option&quot;</span><span class="p">][</span><span class="s2">&quot;minimal_samb&quot;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_minimal_samb</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;harmonics&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_harmonics_info</span><span class="p">()</span></div>
+
+
+    <span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="SymmetryAdaptedModel.create_dict">
+<a class="viewcode-back" href="../../../src/api_model.html#multipie.model.symmetry_adapted_model.SymmetryAdaptedModel.create_dict">[docs]</a>
+    <span class="k">def</span> <span class="nf">create_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        create dictionary containing information and data of atomic, site-cluster, bond-cluster,</span>
+<span class="sd">        uniform, (structure), Z(combined), Zk(fourier transform of Z).</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: information and data of multipole bases.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">info</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">]</span>
+
+        <span class="n">atomic_data</span> <span class="o">=</span> <span class="p">{</span><span class="n">amp_i</span><span class="p">:</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">tag</span><span class="p">),</span> <span class="o">*</span><span class="n">matrix_to_dict</span><span class="p">(</span><span class="n">m</span><span class="p">))</span> <span class="k">for</span> <span class="n">amp_i</span><span class="p">,</span> <span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="s2">&quot;atomic&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+        <span class="n">site_cluster_data</span> <span class="o">=</span> <span class="p">{</span><span class="n">smp_i</span><span class="p">:</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">tag</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">))</span> <span class="k">for</span> <span class="n">smp_i</span><span class="p">,</span> <span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="s2">&quot;site_cluster&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+        <span class="n">bond_cluster_data</span> <span class="o">=</span> <span class="p">{</span><span class="n">bmp_i</span><span class="p">:</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">tag</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">))</span> <span class="k">for</span> <span class="n">bmp_i</span><span class="p">,</span> <span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="s2">&quot;bond_cluster&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+        <span class="n">z_data</span> <span class="o">=</span> <span class="p">{</span><span class="n">z_i</span><span class="p">:</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">tag</span><span class="p">),</span> <span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">v</span><span class="p">))</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">])</span> <span class="k">for</span> <span class="n">z_i</span><span class="p">,</span> <span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="n">lst</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="s2">&quot;Z&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;atomic&quot;</span><span class="p">:</span> <span class="n">atomic_data</span><span class="p">,</span>
+            <span class="s2">&quot;site_cluster&quot;</span><span class="p">:</span> <span class="n">site_cluster_data</span><span class="p">,</span>
+            <span class="s2">&quot;bond_cluster&quot;</span><span class="p">:</span> <span class="n">bond_cluster_data</span><span class="p">,</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;molecule&quot;</span><span class="p">]:</span>
+            <span class="n">uniform_data</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="n">ump_i</span><span class="p">:</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">tag</span><span class="p">),</span> <span class="o">*</span><span class="n">matrix_to_dict</span><span class="p">(</span><span class="n">m</span><span class="p">))</span> <span class="k">for</span> <span class="n">ump_i</span><span class="p">,</span> <span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="s2">&quot;uniform&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+            <span class="p">}</span>
+            <span class="n">data</span> <span class="o">|=</span> <span class="p">{</span><span class="s2">&quot;uniform&quot;</span><span class="p">:</span> <span class="n">uniform_data</span><span class="p">}</span>
+
+        <span class="n">data</span> <span class="o">|=</span> <span class="p">{</span><span class="s2">&quot;Z&quot;</span><span class="p">:</span> <span class="n">z_data</span><span class="p">}</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;molecule&quot;</span><span class="p">]</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;generate&quot;</span><span class="p">][</span><span class="s2">&quot;fourier_transform&quot;</span><span class="p">]:</span>
+            <span class="n">uniform_data</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="n">ump_i</span><span class="p">:</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">tag</span><span class="p">),</span> <span class="o">*</span><span class="n">matrix_to_dict</span><span class="p">(</span><span class="n">m</span><span class="p">))</span> <span class="k">for</span> <span class="n">ump_i</span><span class="p">,</span> <span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="s2">&quot;uniform&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+            <span class="p">}</span>
+            <span class="n">structure_data</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="n">kmp_i</span><span class="p">:</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">tag</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">fk</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&#39;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">))</span> <span class="k">for</span> <span class="n">kmp_i</span><span class="p">,</span> <span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="n">fk</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="s2">&quot;structure&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+            <span class="p">}</span>
+            <span class="n">zk_data</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="n">z_i</span><span class="p">:</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">tag</span><span class="p">),</span> <span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">v</span><span class="p">))</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">])</span> <span class="k">for</span> <span class="n">z_i</span><span class="p">,</span> <span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="n">lst</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="s2">&quot;Zk&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+            <span class="p">}</span>
+            <span class="n">data</span> <span class="o">|=</span> <span class="p">{</span><span class="s2">&quot;uniform&quot;</span><span class="p">:</span> <span class="n">uniform_data</span><span class="p">}</span>
+            <span class="n">data</span> <span class="o">|=</span> <span class="p">{</span><span class="s2">&quot;structure&quot;</span><span class="p">:</span> <span class="n">structure_data</span><span class="p">}</span>
+            <span class="n">data</span> <span class="o">|=</span> <span class="p">{</span><span class="s2">&quot;Zk&quot;</span><span class="p">:</span> <span class="n">zk_data</span><span class="p">}</span>
+
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;info&quot;</span><span class="p">:</span> <span class="n">info</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">}</span></div>
+
+
+    <span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="SymmetryAdaptedModel.create_matrix">
+<a class="viewcode-back" href="../../../src/api_model.html#multipie.model.symmetry_adapted_model.SymmetryAdaptedModel.create_matrix">[docs]</a>
+    <span class="k">def</span> <span class="nf">create_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;sympy&quot;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        convert combined multipoles from dictionary to numerical matrix form (real-space).</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            fmt (str, optional): sympy/value.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: matrix form of combined multipoles, z_dict/z_full.</span>
+
+<span class="sd">        Note:</span>
+<span class="sd">            z_dict = { &quot;z_#&quot; : {(n1, n2, n3, a, b): matrix element}, R=(n1,n2,n3) is a lattice vector.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">fmt</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;sympy&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;unknown format = </span><span class="si">{</span><span class="n">fmt</span><span class="si">}</span><span class="s2"> is given.&quot;</span><span class="p">)</span>
+
+        <span class="n">site</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="s2">&quot;site&quot;</span><span class="p">]</span>
+        <span class="n">cluster_site</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="s2">&quot;cluster_site&quot;</span><span class="p">]</span>
+
+        <span class="n">bond</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="s2">&quot;bond&quot;</span><span class="p">]</span>
+        <span class="n">cluster_bond</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="s2">&quot;cluster_bond&quot;</span><span class="p">]</span>
+
+        <span class="n">n_sgn_dict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">B_i</span><span class="p">,</span> <span class="n">bond_list</span> <span class="ow">in</span> <span class="n">cluster_bond</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">n_sgn_list</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">bond_n</span> <span class="ow">in</span> <span class="n">bond_list</span><span class="p">:</span>
+                <span class="n">vec</span> <span class="o">=</span> <span class="n">bond</span><span class="p">[</span><span class="n">bond_n</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span>
+                <span class="k">if</span> <span class="s2">&quot;bond&quot;</span> <span class="ow">in</span> <span class="n">vec</span><span class="p">:</span>
+                    <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">vec</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">bond_n</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+
+                <span class="k">if</span> <span class="n">vec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;-&quot;</span><span class="p">:</span>
+                    <span class="n">n_sgn_list</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">n_sgn_list</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+
+            <span class="n">n_sgn_dict</span><span class="p">[</span><span class="n">B_i</span><span class="p">]</span> <span class="o">=</span> <span class="n">n_sgn_list</span>
+
+        <span class="n">cluster_atomic</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="s2">&quot;cluster_atomic&quot;</span><span class="p">]</span>
+        <span class="n">atomic_braket</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="s2">&quot;atomic_braket&quot;</span><span class="p">]</span>
+        <span class="n">alias</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">][</span><span class="s2">&quot;alias&quot;</span><span class="p">]</span>
+        <span class="n">dim_full</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;dimension&quot;</span><span class="p">]</span>
+
+        <span class="n">atomic_data</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="s2">&quot;atomic&quot;</span><span class="p">]</span>
+        <span class="n">site_cluster_data</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="s2">&quot;site_cluster&quot;</span><span class="p">]</span>
+        <span class="n">bond_cluster_data</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="s2">&quot;bond_cluster&quot;</span><span class="p">]</span>
+        <span class="n">z_info</span><span class="p">,</span> <span class="n">z_data</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;Z&quot;</span><span class="p">],</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="s2">&quot;Z&quot;</span><span class="p">]</span>
+
+        <span class="n">z_samb</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">z_samb</span><span class="p">[</span><span class="s2">&quot;model&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;model&quot;</span><span class="p">]</span>
+        <span class="n">z_samb</span><span class="p">[</span><span class="s2">&quot;molecule&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;molecule&quot;</span><span class="p">]</span>
+        <span class="n">z_samb</span><span class="p">[</span><span class="s2">&quot;group&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;group&quot;</span><span class="p">]</span>
+        <span class="n">z_samb</span><span class="p">[</span><span class="s2">&quot;dimension&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;dimension&quot;</span><span class="p">]</span>
+        <span class="n">z_samb</span><span class="p">[</span><span class="s2">&quot;ket&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;ket&quot;</span><span class="p">]</span>
+        <span class="n">z_samb</span><span class="p">[</span><span class="s2">&quot;cell_site&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;cell_site&quot;</span><span class="p">]</span>
+        <span class="n">z_samb</span><span class="p">[</span><span class="s2">&quot;version&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">__version__</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">z_samb</span><span class="p">[</span><span class="s2">&quot;molecule&quot;</span><span class="p">]:</span>
+            <span class="n">z_samb</span><span class="p">[</span><span class="s2">&quot;k_point&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;k_point&quot;</span><span class="p">]</span>
+            <span class="n">z_samb</span><span class="p">[</span><span class="s2">&quot;k_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;k_path&quot;</span><span class="p">]</span>
+            <span class="n">z_samb</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">[</span><span class="s2">&quot;detail&quot;</span><span class="p">][</span><span class="s2">&quot;A&quot;</span><span class="p">]</span>
+
+        <span class="n">z_full</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="n">M_i</span><span class="p">,</span> <span class="n">SB_i</span><span class="p">),</span> <span class="n">z_i_list</span> <span class="ow">in</span> <span class="n">z_info</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">bra_orb_list</span><span class="p">,</span> <span class="n">ket_orb_list</span> <span class="o">=</span> <span class="n">atomic_braket</span><span class="p">[</span><span class="n">M_i</span><span class="p">]</span>
+            <span class="n">dim_r</span><span class="p">,</span> <span class="n">dim_c</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">bra_orb_list</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">ket_orb_list</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">z_i</span> <span class="ow">in</span> <span class="n">z_i_list</span><span class="p">:</span>
+                <span class="n">lst1</span> <span class="o">=</span> <span class="n">z_data</span><span class="p">[</span><span class="n">z_i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+
+                <span class="c1"># site × atomic</span>
+                <span class="k">if</span> <span class="n">SB_i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;S&quot;</span><span class="p">:</span>
+                    <span class="n">site_i_list</span> <span class="o">=</span> <span class="n">cluster_site</span><span class="p">[</span><span class="n">SB_i</span><span class="p">]</span>
+                    <span class="n">Z</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Matrix</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">dim_full</span><span class="p">,</span> <span class="n">dim_full</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">c</span><span class="p">,</span> <span class="n">amp_i</span><span class="p">,</span> <span class="n">smp_i</span> <span class="ow">in</span> <span class="n">lst1</span><span class="p">:</span>
+                        <span class="n">X</span> <span class="o">=</span> <span class="n">atomic_data</span><span class="p">[</span><span class="n">amp_i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+                        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;molecule&quot;</span><span class="p">]:</span>
+                            <span class="n">smp_i</span> <span class="o">=</span> <span class="n">smp_i</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;u&quot;</span><span class="p">,</span> <span class="s2">&quot;s&quot;</span><span class="p">)</span>
+                        <span class="n">v</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">site_cluster_data</span><span class="p">[</span><span class="n">smp_i</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+                        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">)):</span>
+                            <span class="n">vi</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                            <span class="k">if</span> <span class="n">vi</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                                <span class="k">continue</span>
+                            <span class="n">bra_idx</span><span class="p">,</span> <span class="n">ket_idx</span> <span class="o">=</span> <span class="n">site</span><span class="p">[</span><span class="n">site_i_list</span><span class="p">[</span><span class="n">i</span><span class="p">]][</span><span class="mi">2</span><span class="p">]</span>
+                            <span class="k">for</span> <span class="n">bra_no</span><span class="p">,</span> <span class="n">ket_no</span><span class="p">,</span> <span class="n">M_i_</span> <span class="ow">in</span> <span class="n">cluster_atomic</span><span class="p">[(</span><span class="n">bra_idx</span><span class="p">,</span> <span class="n">ket_idx</span><span class="p">)]:</span>
+                                <span class="k">if</span> <span class="n">M_i_</span> <span class="o">!=</span> <span class="n">M_i</span><span class="p">:</span>
+                                    <span class="k">continue</span>
+                                <span class="n">Z</span><span class="p">[</span><span class="n">bra_no</span> <span class="p">:</span> <span class="n">bra_no</span> <span class="o">+</span> <span class="n">dim_r</span><span class="p">,</span> <span class="n">ket_no</span> <span class="p">:</span> <span class="n">ket_no</span> <span class="o">+</span> <span class="n">dim_c</span><span class="p">]</span> <span class="o">+=</span> <span class="n">c</span> <span class="o">*</span> <span class="n">vi</span> <span class="o">*</span> <span class="n">sp</span><span class="o">.</span><span class="n">Matrix</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+                    <span class="k">if</span> <span class="n">bra_orb_list</span> <span class="o">!=</span> <span class="n">ket_orb_list</span><span class="p">:</span>
+                        <span class="n">Z</span> <span class="o">=</span> <span class="p">(</span><span class="n">Z</span> <span class="o">+</span> <span class="n">Z</span><span class="o">.</span><span class="n">adjoint</span><span class="p">())</span> <span class="o">/</span> <span class="n">sp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+                    <span class="n">Z</span> <span class="o">=</span> <span class="n">Z</span> <span class="o">/</span> <span class="n">Z</span><span class="o">.</span><span class="n">norm</span><span class="p">()</span>
+                    <span class="n">z_full</span><span class="p">[</span><span class="n">z_i</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                        <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span> <span class="n">Z</span><span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">]</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dim_full</span><span class="p">)</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dim_full</span><span class="p">)</span> <span class="k">if</span> <span class="n">Z</span><span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span>
+                    <span class="p">}</span>
+
+                <span class="c1"># bond × atomic</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">S1</span><span class="p">,</span> <span class="n">S2</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">alias</span><span class="p">[</span><span class="n">SB_i</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)</span>
+
+                    <span class="n">z_full</span><span class="p">[</span><span class="n">z_i</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+                    <span class="n">n_sgn_list</span> <span class="o">=</span> <span class="n">n_sgn_dict</span><span class="p">[</span><span class="n">SB_i</span><span class="p">]</span>
+                    <span class="n">bond_i_list</span> <span class="o">=</span> <span class="n">cluster_bond</span><span class="p">[</span><span class="n">SB_i</span><span class="p">]</span>
+                    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">lst1</span><span class="p">:</span>
+                        <span class="n">c</span><span class="p">,</span> <span class="n">amp_i</span><span class="p">,</span> <span class="n">bmp_i</span> <span class="o">=</span> <span class="n">v</span>
+                        <span class="n">X</span> <span class="o">=</span> <span class="n">atomic_data</span><span class="p">[</span><span class="n">amp_i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+                        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;molecule&quot;</span><span class="p">]:</span>
+                            <span class="n">bmp_i</span> <span class="o">=</span> <span class="n">bmp_i</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;u&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">)</span>
+                        <span class="n">v</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">bond_cluster_data</span><span class="p">[</span><span class="n">bmp_i</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+                        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">)):</span>
+                            <span class="n">vi</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                            <span class="k">if</span> <span class="n">vi</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                                <span class="k">continue</span>
+
+                            <span class="n">n</span><span class="p">,</span> <span class="n">sgn</span> <span class="o">=</span> <span class="n">n_sgn_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                            <span class="n">bra_idx</span><span class="p">,</span> <span class="n">ket_idx</span> <span class="o">=</span> <span class="n">bond</span><span class="p">[</span><span class="n">bond_i_list</span><span class="p">[</span><span class="n">i</span><span class="p">]][</span><span class="mi">2</span><span class="p">]</span>
+                            <span class="n">bv</span> <span class="o">=</span> <span class="n">sgn</span> <span class="o">*</span> <span class="n">NSArray</span><span class="p">(</span><span class="n">bond</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;bond_</span><span class="si">{</span><span class="n">n</span><span class="si">:</span><span class="s2">03d</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">][</span><span class="mi">3</span><span class="p">],</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;vector&quot;</span><span class="p">)</span>
+                            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;molecule&quot;</span><span class="p">]:</span>
+                                <span class="n">lattice</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;group&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+                                <span class="n">bv</span> <span class="o">=</span> <span class="n">to_primitive</span><span class="p">(</span><span class="n">lattice</span><span class="p">,</span> <span class="n">bv</span><span class="p">)</span>
+
+                            <span class="n">s1</span> <span class="o">=</span> <span class="n">NSArray</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">site</span><span class="o">.</span><span class="n">values</span><span class="p">())[</span><span class="n">bra_idx</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;vector&quot;</span><span class="p">)</span>
+                            <span class="n">s2</span> <span class="o">=</span> <span class="n">NSArray</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">site</span><span class="o">.</span><span class="n">values</span><span class="p">())[</span><span class="n">ket_idx</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;vector&quot;</span><span class="p">)</span>
+                            <span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="n">n3</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">bv</span> <span class="o">-</span> <span class="p">(</span><span class="n">s1</span> <span class="o">-</span> <span class="n">s2</span><span class="p">))</span>
+                            <span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="n">n3</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">n1</span><span class="p">),</span> <span class="nb">round</span><span class="p">(</span><span class="n">n2</span><span class="p">),</span> <span class="nb">round</span><span class="p">(</span><span class="n">n3</span><span class="p">)</span>
+
+                            <span class="k">for</span> <span class="n">bra_no</span><span class="p">,</span> <span class="n">ket_no</span><span class="p">,</span> <span class="n">M_i_</span> <span class="ow">in</span> <span class="n">cluster_atomic</span><span class="p">[(</span><span class="n">bra_idx</span><span class="p">,</span> <span class="n">ket_idx</span><span class="p">)]:</span>
+                                <span class="k">if</span> <span class="n">M_i_</span> <span class="o">!=</span> <span class="n">M_i</span><span class="p">:</span>
+                                    <span class="k">continue</span>
+                                <span class="n">Z</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Matrix</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">dim_full</span><span class="p">,</span> <span class="n">dim_full</span><span class="p">)</span>
+                                <span class="n">Z</span><span class="p">[</span><span class="n">bra_no</span> <span class="p">:</span> <span class="n">bra_no</span> <span class="o">+</span> <span class="n">dim_r</span><span class="p">,</span> <span class="n">ket_no</span> <span class="p">:</span> <span class="n">ket_no</span> <span class="o">+</span> <span class="n">dim_c</span><span class="p">]</span> <span class="o">+=</span> <span class="n">c</span> <span class="o">*</span> <span class="n">vi</span> <span class="o">*</span> <span class="n">sp</span><span class="o">.</span><span class="n">Matrix</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+                                <span class="k">if</span> <span class="n">S1</span> <span class="o">==</span> <span class="n">S2</span> <span class="ow">and</span> <span class="n">bra_orb_list</span> <span class="o">!=</span> <span class="n">ket_orb_list</span><span class="p">:</span>
+                                    <span class="k">if</span> <span class="n">bra_idx</span> <span class="o">==</span> <span class="n">ket_idx</span><span class="p">:</span>
+                                        <span class="n">Z</span><span class="p">[</span><span class="n">ket_no</span> <span class="p">:</span> <span class="n">ket_no</span> <span class="o">+</span> <span class="n">dim_c</span><span class="p">,</span> <span class="n">bra_no</span> <span class="p">:</span> <span class="n">bra_no</span> <span class="o">+</span> <span class="n">dim_r</span><span class="p">]</span> <span class="o">+=</span> <span class="p">(</span>
+                                            <span class="n">c</span> <span class="o">*</span> <span class="n">vi</span> <span class="o">*</span> <span class="n">sp</span><span class="o">.</span><span class="n">Matrix</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">adjoint</span><span class="p">()</span>
+                                        <span class="p">)</span>
+                                    <span class="k">else</span><span class="p">:</span>
+                                        <span class="n">bra_no</span> <span class="o">+=</span> <span class="n">dim_r</span>
+                                        <span class="n">ket_no</span> <span class="o">-=</span> <span class="n">dim_r</span>
+                                        <span class="n">Z</span><span class="p">[</span><span class="n">bra_no</span> <span class="p">:</span> <span class="n">bra_no</span> <span class="o">+</span> <span class="n">dim_c</span><span class="p">,</span> <span class="n">ket_no</span> <span class="p">:</span> <span class="n">ket_no</span> <span class="o">+</span> <span class="n">dim_r</span><span class="p">]</span> <span class="o">+=</span> <span class="p">(</span>
+                                            <span class="n">c</span> <span class="o">*</span> <span class="n">vi</span> <span class="o">*</span> <span class="n">sp</span><span class="o">.</span><span class="n">Matrix</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">adjoint</span><span class="p">()</span>
+                                        <span class="p">)</span>
+                                    <span class="n">Z</span> <span class="o">/=</span> <span class="n">sp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+                                <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dim_full</span><span class="p">):</span>
+                                    <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dim_full</span><span class="p">):</span>
+                                        <span class="n">z</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">Z</span><span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">])</span>
+                                        <span class="k">if</span> <span class="n">z</span> <span class="o">==</span> <span class="n">sp</span><span class="o">.</span><span class="n">S</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="n">z</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                                            <span class="k">continue</span>
+
+                                        <span class="k">if</span> <span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="n">n3</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">z_full</span><span class="p">[</span><span class="n">z_i</span><span class="p">]:</span>
+                                            <span class="n">z_full</span><span class="p">[</span><span class="n">z_i</span><span class="p">][(</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="n">n3</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)]</span> <span class="o">=</span> <span class="n">z</span> <span class="o">/</span> <span class="n">sp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+                                            <span class="n">z_full</span><span class="p">[</span><span class="n">z_i</span><span class="p">][(</span><span class="o">-</span><span class="n">n1</span><span class="p">,</span> <span class="o">-</span><span class="n">n2</span><span class="p">,</span> <span class="o">-</span><span class="n">n3</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">)]</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">conjugate</span><span class="p">(</span><span class="n">z</span><span class="p">)</span> <span class="o">/</span> <span class="n">sp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+                                        <span class="k">else</span><span class="p">:</span>
+                                            <span class="n">z_full</span><span class="p">[</span><span class="n">z_i</span><span class="p">][(</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="n">n3</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)]</span> <span class="o">+=</span> <span class="n">z</span> <span class="o">/</span> <span class="n">sp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+                                            <span class="n">z_full</span><span class="p">[</span><span class="n">z_i</span><span class="p">][(</span><span class="o">-</span><span class="n">n1</span><span class="p">,</span> <span class="o">-</span><span class="n">n2</span><span class="p">,</span> <span class="o">-</span><span class="n">n3</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">)]</span> <span class="o">+=</span> <span class="n">sp</span><span class="o">.</span><span class="n">conjugate</span><span class="p">(</span><span class="n">z</span><span class="p">)</span> <span class="o">/</span> <span class="n">sp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">fmt</span> <span class="o">==</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span>
+            <span class="n">DIGIT</span> <span class="o">=</span> <span class="mi">14</span>
+            <span class="n">z_full</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="n">z_i</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="n">k</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="nb">complex</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="n">DIGIT</span><span class="p">)</span> <span class="o">+</span> <span class="nb">round</span><span class="p">(</span><span class="nb">complex</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">.</span><span class="n">imag</span><span class="p">,</span> <span class="n">DIGIT</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1</span><span class="n">j</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+                    <span class="k">if</span> <span class="n">sp</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span>
+                <span class="p">}</span>
+                <span class="k">for</span> <span class="n">z_i</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">z_full</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+            <span class="p">}</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">z_full</span> <span class="o">=</span> <span class="p">{</span><span class="n">z_i</span><span class="p">:</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">sp</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">}</span> <span class="k">for</span> <span class="n">z_i</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">z_full</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+
+        <span class="n">z_samb</span><span class="p">[</span><span class="s2">&quot;matrix&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">z_full</span>
+
+        <span class="k">return</span> <span class="n">z_samb</span></div>
+
+
+    <span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="SymmetryAdaptedModel.create_matrix_k">
+<a class="viewcode-back" href="../../../src/api_model.html#multipie.model.symmetry_adapted_model.SymmetryAdaptedModel.create_matrix_k">[docs]</a>
+    <span class="k">def</span> <span class="nf">create_matrix_k</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">full</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;sympy&quot;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        convert combined multipoles from dictionary to numerical matrix form (momentum-space).</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            full (bool, optional): full matrix format ?</span>
+<span class="sd">            fmt (str, optional): sympy/value.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: matrix form of combined multipoles, z_dict/z_full.</span>
+
+<span class="sd">        Note:</span>
+<span class="sd">            z_dict = { &quot;z_#&quot; : [(i, j, &quot;&quot;/c###/s###, v)] }</span>
+<span class="sd">            z_full = { &quot;z_#&quot; : NSArray(matrix) }</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">fmt</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;sympy&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;unknown format = </span><span class="si">{</span><span class="n">fmt</span><span class="si">}</span><span class="s2"> is given.&quot;</span><span class="p">)</span>
+
+        <span class="n">molecule</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;molecule&quot;</span><span class="p">]</span>
+        <span class="n">cluster_atomic</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="s2">&quot;cluster_atomic&quot;</span><span class="p">]</span>
+        <span class="n">atomic_braket</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="s2">&quot;atomic_braket&quot;</span><span class="p">]</span>
+        <span class="n">alias</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">][</span><span class="s2">&quot;alias&quot;</span><span class="p">]</span>
+        <span class="n">dim_full</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;dimension&quot;</span><span class="p">]</span>
+
+        <span class="n">atomic_data</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="s2">&quot;atomic&quot;</span><span class="p">]</span>
+        <span class="n">uniform_data</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="s2">&quot;uniform&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">molecule</span><span class="p">:</span>
+            <span class="n">z_info</span><span class="p">,</span> <span class="n">z_data</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;Z&quot;</span><span class="p">],</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="s2">&quot;Z&quot;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">structure_data</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="s2">&quot;structure&quot;</span><span class="p">]</span>
+            <span class="n">z_info</span><span class="p">,</span> <span class="n">z_data</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;Z&quot;</span><span class="p">],</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="s2">&quot;Zk&quot;</span><span class="p">]</span>
+
+        <span class="n">z_samb</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">z_samb</span><span class="p">[</span><span class="s2">&quot;model&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;model&quot;</span><span class="p">]</span>
+        <span class="n">z_samb</span><span class="p">[</span><span class="s2">&quot;molecule&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;molecule&quot;</span><span class="p">]</span>
+        <span class="n">z_samb</span><span class="p">[</span><span class="s2">&quot;group&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;group&quot;</span><span class="p">]</span>
+        <span class="n">z_samb</span><span class="p">[</span><span class="s2">&quot;dimension&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;dimension&quot;</span><span class="p">]</span>
+        <span class="n">z_samb</span><span class="p">[</span><span class="s2">&quot;ket&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;ket&quot;</span><span class="p">]</span>
+        <span class="n">z_samb</span><span class="p">[</span><span class="s2">&quot;version&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">__version__</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">molecule</span><span class="p">:</span>
+            <span class="n">z_samb</span><span class="p">[</span><span class="s2">&quot;k_point&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;k_point&quot;</span><span class="p">]</span>
+            <span class="n">z_samb</span><span class="p">[</span><span class="s2">&quot;k_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;k_path&quot;</span><span class="p">]</span>
+            <span class="n">z_samb</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">[</span><span class="s2">&quot;detail&quot;</span><span class="p">][</span><span class="s2">&quot;A&quot;</span><span class="p">]</span>
+            <span class="n">bond</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">ex</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="s2">&quot;bond&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">ex</span> <span class="o">=</span> <span class="n">ex</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;@&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">bond</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">ex</span>
+            <span class="n">z_samb</span><span class="p">[</span><span class="s2">&quot;bond&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">bond</span>
+
+        <span class="n">z_full</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="n">M_i</span><span class="p">,</span> <span class="n">SB_i</span><span class="p">),</span> <span class="n">z_i_list</span> <span class="ow">in</span> <span class="n">z_info</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">SB_i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;S&quot;</span><span class="p">:</span>
+                <span class="n">S1</span> <span class="o">=</span> <span class="n">S2</span> <span class="o">=</span> <span class="n">alias</span><span class="p">[</span><span class="n">SB_i</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">S1</span><span class="p">,</span> <span class="n">S2</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">alias</span><span class="p">[</span><span class="n">SB_i</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)</span>
+
+            <span class="n">bra_orb_list</span><span class="p">,</span> <span class="n">ket_orb_list</span> <span class="o">=</span> <span class="n">atomic_braket</span><span class="p">[</span><span class="n">M_i</span><span class="p">]</span>
+            <span class="n">dim_r</span><span class="p">,</span> <span class="n">dim_c</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">bra_orb_list</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">ket_orb_list</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">z_i</span> <span class="ow">in</span> <span class="n">z_i_list</span><span class="p">:</span>
+                <span class="n">lst1</span> <span class="o">=</span> <span class="n">z_data</span><span class="p">[</span><span class="n">z_i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">Z</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Matrix</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">dim_full</span><span class="p">,</span> <span class="n">dim_full</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">lst1</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+                        <span class="n">c</span><span class="p">,</span> <span class="n">amp_i</span><span class="p">,</span> <span class="n">ump_i</span> <span class="o">=</span> <span class="n">v</span>
+                        <span class="n">F</span> <span class="o">=</span> <span class="mi">1</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">c</span><span class="p">,</span> <span class="n">amp_i</span><span class="p">,</span> <span class="n">ump_i</span><span class="p">,</span> <span class="n">kmp_i</span> <span class="o">=</span> <span class="n">v</span>
+                        <span class="n">F</span> <span class="o">=</span> <span class="n">structure_data</span><span class="p">[</span><span class="n">kmp_i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+                    <span class="n">X</span> <span class="o">=</span> <span class="n">atomic_data</span><span class="p">[</span><span class="n">amp_i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+                    <span class="n">U</span> <span class="o">=</span> <span class="n">uniform_data</span><span class="p">[</span><span class="n">ump_i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+                    <span class="k">for</span> <span class="p">(</span><span class="n">bra_idx</span><span class="p">,</span> <span class="n">ket_idx</span><span class="p">),</span> <span class="n">lst2</span> <span class="ow">in</span> <span class="n">cluster_atomic</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                        <span class="n">u</span> <span class="o">=</span> <span class="n">U</span><span class="p">[</span><span class="n">bra_idx</span><span class="p">,</span> <span class="n">ket_idx</span><span class="p">]</span>
+                        <span class="k">if</span> <span class="n">u</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                            <span class="k">for</span> <span class="n">bra_no</span><span class="p">,</span> <span class="n">ket_no</span><span class="p">,</span> <span class="n">M_i_</span> <span class="ow">in</span> <span class="n">lst2</span><span class="p">:</span>
+                                <span class="k">if</span> <span class="n">M_i_</span> <span class="o">!=</span> <span class="n">M_i</span><span class="p">:</span>
+                                    <span class="k">continue</span>
+
+                                <span class="k">if</span> <span class="n">S1</span> <span class="o">==</span> <span class="n">S2</span> <span class="ow">and</span> <span class="n">bra_orb_list</span> <span class="o">!=</span> <span class="n">ket_orb_list</span><span class="p">:</span>
+                                    <span class="n">Z</span><span class="p">[</span><span class="n">bra_no</span> <span class="p">:</span> <span class="n">bra_no</span> <span class="o">+</span> <span class="n">dim_r</span><span class="p">,</span> <span class="n">ket_no</span> <span class="p">:</span> <span class="n">ket_no</span> <span class="o">+</span> <span class="n">dim_c</span><span class="p">]</span> <span class="o">+=</span> <span class="p">(</span>
+                                        <span class="n">c</span> <span class="o">*</span> <span class="n">u</span> <span class="o">*</span> <span class="n">F</span> <span class="o">*</span> <span class="n">sp</span><span class="o">.</span><span class="n">Matrix</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="o">/</span> <span class="n">sp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+                                    <span class="p">)</span>
+                                    <span class="k">if</span> <span class="n">bra_idx</span> <span class="o">==</span> <span class="n">ket_idx</span><span class="p">:</span>
+                                        <span class="n">Z</span><span class="p">[</span><span class="n">ket_no</span> <span class="p">:</span> <span class="n">ket_no</span> <span class="o">+</span> <span class="n">dim_c</span><span class="p">,</span> <span class="n">bra_no</span> <span class="p">:</span> <span class="n">bra_no</span> <span class="o">+</span> <span class="n">dim_r</span><span class="p">]</span> <span class="o">+=</span> <span class="p">(</span>
+                                            <span class="n">c</span> <span class="o">*</span> <span class="n">u</span> <span class="o">*</span> <span class="n">F</span> <span class="o">*</span> <span class="n">sp</span><span class="o">.</span><span class="n">Matrix</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">adjoint</span><span class="p">()</span>
+                                        <span class="p">)</span> <span class="o">/</span> <span class="n">sp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+                                    <span class="k">else</span><span class="p">:</span>
+                                        <span class="n">bra_no</span> <span class="o">+=</span> <span class="n">dim_r</span>
+                                        <span class="n">ket_no</span> <span class="o">-=</span> <span class="n">dim_r</span>
+                                        <span class="n">Z</span><span class="p">[</span><span class="n">bra_no</span> <span class="p">:</span> <span class="n">bra_no</span> <span class="o">+</span> <span class="n">dim_c</span><span class="p">,</span> <span class="n">ket_no</span> <span class="p">:</span> <span class="n">ket_no</span> <span class="o">+</span> <span class="n">dim_r</span><span class="p">]</span> <span class="o">+=</span> <span class="p">(</span>
+                                            <span class="n">c</span> <span class="o">*</span> <span class="n">u</span> <span class="o">*</span> <span class="n">F</span> <span class="o">*</span> <span class="n">sp</span><span class="o">.</span><span class="n">Matrix</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">adjoint</span><span class="p">()</span>
+                                        <span class="p">)</span> <span class="o">/</span> <span class="n">sp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+                                <span class="k">else</span><span class="p">:</span>
+                                    <span class="n">Z</span><span class="p">[</span><span class="n">bra_no</span> <span class="p">:</span> <span class="n">bra_no</span> <span class="o">+</span> <span class="n">dim_r</span><span class="p">,</span> <span class="n">ket_no</span> <span class="p">:</span> <span class="n">ket_no</span> <span class="o">+</span> <span class="n">dim_c</span><span class="p">]</span> <span class="o">+=</span> <span class="n">c</span> <span class="o">*</span> <span class="n">u</span> <span class="o">*</span> <span class="n">F</span> <span class="o">*</span> <span class="n">sp</span><span class="o">.</span><span class="n">Matrix</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">Z</span><span class="o">.</span><span class="n">is_hermitian</span><span class="p">:</span>
+                    <span class="n">Z</span> <span class="o">=</span> <span class="n">Z</span> <span class="o">+</span> <span class="n">Z</span><span class="o">.</span><span class="n">adjoint</span><span class="p">()</span>
+                <span class="n">z_full</span><span class="p">[</span><span class="n">z_i</span><span class="p">]</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">Z</span><span class="p">)</span>
+
+        <span class="n">DIGIT</span> <span class="o">=</span> <span class="mi">14</span>
+        <span class="k">if</span> <span class="n">full</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">fmt</span> <span class="o">==</span> <span class="s2">&quot;sympy&quot;</span><span class="p">:</span>
+                <span class="n">z_full</span> <span class="o">=</span> <span class="p">{</span><span class="n">z_i</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">mat</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span> <span class="k">for</span> <span class="n">z_i</span><span class="p">,</span> <span class="n">mat</span> <span class="ow">in</span> <span class="n">z_full</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">z_full_val</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="k">for</span> <span class="n">z_i</span><span class="p">,</span> <span class="n">Z</span> <span class="ow">in</span> <span class="n">z_full</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="n">Z_val</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Matrix</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">dim_full</span><span class="p">,</span> <span class="n">dim_full</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">dim_full</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="n">dim_full</span><span class="p">)):</span>
+                        <span class="n">vij</span> <span class="o">=</span> <span class="n">Z</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+                        <span class="k">if</span> <span class="n">vij</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">z_data</span><span class="p">[</span><span class="n">z_i</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+                                <span class="n">vij</span> <span class="o">=</span> <span class="nb">complex</span><span class="p">(</span><span class="n">vij</span><span class="p">)</span>
+                                <span class="n">vij</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">vij</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="n">DIGIT</span><span class="p">)</span> <span class="o">+</span> <span class="nb">round</span><span class="p">(</span><span class="n">vij</span><span class="o">.</span><span class="n">imag</span><span class="p">,</span> <span class="n">DIGIT</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1</span><span class="n">j</span>
+                                <span class="n">Z_val</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="n">vij</span>
+                            <span class="k">else</span><span class="p">:</span>
+                                <span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="n">csn</span><span class="p">:</span> <span class="n">vij</span><span class="o">.</span><span class="n">coeff</span><span class="p">(</span><span class="n">csn</span><span class="p">)</span> <span class="k">for</span> <span class="n">csn</span> <span class="ow">in</span> <span class="n">cs_list</span><span class="p">(</span><span class="n">vij</span><span class="p">,</span> <span class="n">real</span><span class="o">=</span><span class="kc">True</span><span class="p">)}</span>
+                                <span class="k">for</span> <span class="n">csn</span><span class="p">,</span> <span class="n">vij</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                                    <span class="k">if</span> <span class="n">vij</span> <span class="o">!=</span> <span class="n">sp</span><span class="o">.</span><span class="n">S</span><span class="p">(</span><span class="mi">0</span><span class="p">):</span>
+                                        <span class="n">vij</span> <span class="o">=</span> <span class="nb">complex</span><span class="p">(</span><span class="n">vij</span><span class="p">)</span>
+                                        <span class="n">vij</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">vij</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="n">DIGIT</span><span class="p">)</span> <span class="o">+</span> <span class="nb">round</span><span class="p">(</span><span class="n">vij</span><span class="o">.</span><span class="n">imag</span><span class="p">,</span> <span class="n">DIGIT</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1</span><span class="n">j</span>
+                                        <span class="n">Z_val</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="n">vij</span> <span class="o">*</span> <span class="n">csn</span>
+                    <span class="n">z_full_val</span><span class="p">[</span><span class="n">z_i</span><span class="p">]</span> <span class="o">=</span> <span class="n">Z_val</span>
+                <span class="n">z_full</span> <span class="o">=</span> <span class="p">{</span><span class="n">z_i</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">NSArray</span><span class="p">(</span><span class="n">mat</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="s2">&quot;matrix&quot;</span><span class="p">))</span> <span class="k">for</span> <span class="n">z_i</span><span class="p">,</span> <span class="n">mat</span> <span class="ow">in</span> <span class="n">z_full_val</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+            <span class="n">z_samb</span><span class="p">[</span><span class="s2">&quot;matrix&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">z_full</span>
+            <span class="k">return</span> <span class="n">z_samb</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">z_dict</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">z_i</span><span class="p">,</span> <span class="n">Z</span> <span class="ow">in</span> <span class="n">z_full</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">mat</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">dim_full</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="n">dim_full</span><span class="p">)):</span>
+                    <span class="n">vij</span> <span class="o">=</span> <span class="n">Z</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="n">vij</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">z_data</span><span class="p">[</span><span class="n">z_i</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+                            <span class="n">mat</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">vij</span><span class="p">)))</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="nb">str</span><span class="p">(</span><span class="n">csn</span><span class="p">):</span> <span class="n">vij</span><span class="o">.</span><span class="n">coeff</span><span class="p">(</span><span class="n">csn</span><span class="p">)</span> <span class="k">for</span> <span class="n">csn</span> <span class="ow">in</span> <span class="n">cs_list</span><span class="p">(</span><span class="n">vij</span><span class="p">,</span> <span class="n">real</span><span class="o">=</span><span class="kc">True</span><span class="p">)}</span>
+                            <span class="k">for</span> <span class="n">csn_str</span><span class="p">,</span> <span class="n">vij</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                                <span class="k">if</span> <span class="n">vij</span> <span class="o">!=</span> <span class="n">sp</span><span class="o">.</span><span class="n">S</span><span class="p">(</span><span class="mi">0</span><span class="p">):</span>
+                                    <span class="k">if</span> <span class="n">fmt</span> <span class="o">==</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span>
+                                        <span class="n">vij</span> <span class="o">=</span> <span class="nb">complex</span><span class="p">(</span><span class="n">vij</span><span class="p">)</span>
+                                        <span class="n">vij</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">vij</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="n">DIGIT</span><span class="p">)</span> <span class="o">+</span> <span class="nb">round</span><span class="p">(</span><span class="n">vij</span><span class="o">.</span><span class="n">imag</span><span class="p">,</span> <span class="n">DIGIT</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1</span><span class="n">j</span>
+                                    <span class="n">mat</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">csn_str</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">vij</span><span class="p">)))</span>
+                <span class="n">z_dict</span><span class="p">[</span><span class="n">z_i</span><span class="p">]</span> <span class="o">=</span> <span class="n">mat</span>
+
+            <span class="n">z_samb</span><span class="p">[</span><span class="s2">&quot;matrix&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">z_dict</span>
+
+            <span class="k">return</span> <span class="n">z_samb</span></div>
+
+
+    <span class="c1"># ==================================================</span>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_header</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">header_str</span>
+
+    <span class="c1"># ==================================================</span>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_matrix_header_k</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">matrix_header_k_str</span>
+
+    <span class="c1"># ==================================================</span>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_matrix_header</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">matrix_header_str</span></div>
+
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Hiroaki Kusunose and Rikuto Oiwa
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2021-2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

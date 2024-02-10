@@ -1,0 +1,1401 @@
+
+<!DOCTYPE html>
+
+
+<html lang="jp" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>multipie.model.material_model &#8212; MultiPie</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../../../_static/documentation_options.js?v=8cf54648"></script>
+    <script src="../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=afe5de03"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/multipie/model/material_model';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="jp"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/multipie_logo.png" class="logo__image only-light" alt="MultiPie - Home"/>
+    <script>document.write(`<img src="../../../_static/multipie_logo.png" class="logo__image only-dark" alt="MultiPie - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">SAMB Construction</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../src/samb_construction.html">Example for SAMB Construction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/use_matrix.html">Example usage of full matrix</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">File Format</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../src/fmt_input.html">SAMB construction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/fmt_model.html">Molecule or Crystal Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/fmt_samb.html">SAMB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/fmt_matrix.html">SAMB in full matrix</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API References</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../src/api_character.html">Character Table</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/api_group.html">Group</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/api_harmonics.html">Harmonics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/api_model.html">Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/api_multipole.html">Multipole</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/api_response_tensor.html">Response tensor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/api_symmetry_operation.html">Symmetry operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/api_tag.html">Tag</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/api_virtual_cluster.html">Virtual cluster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/api_wyckoff.html">Wyckoff position</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Change Log</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../src/change_log.html">Change logs (not in tags)</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/CMT-MU/MultiPie.git" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for multipie.model.material_model</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">MaterialModel manages model information of cluster or crystal system.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">gcoreutils.nsarray</span> <span class="kn">import</span> <span class="n">NSArray</span>
+<span class="kn">from</span> <span class="nn">gcoreutils.crystal_util</span> <span class="kn">import</span> <span class="n">cell_transform_matrix</span>
+<span class="kn">from</span> <span class="nn">multipie.multipole.util.atomic_orbital_util</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">parse_orb_list</span><span class="p">,</span>
+    <span class="n">sort_orb_list</span><span class="p">,</span>
+    <span class="n">split_orb_list_rank_block</span><span class="p">,</span>
+    <span class="n">rank</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">multipie</span> <span class="kn">import</span> <span class="n">__version__</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">qtdraw.qt_draw</span> <span class="kn">import</span> <span class="n">QtDraw</span>
+    <span class="kn">from</span> <span class="nn">qtdraw.multipie.setting</span> <span class="kn">import</span> <span class="n">default_style</span>
+
+    <span class="n">_qtdraw_available</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="n">_qtdraw_available</span> <span class="o">=</span> <span class="kc">False</span>
+
+
+<span class="n">_default_max_neighbor</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">_default_search_cell_range</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+
+<span class="c1"># ==================================================</span>
+<span class="n">input_str</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">=== Input for SAMB construction (* optional [default]) ===</span>
+<span class="s2">- model : model name (str).</span>
+<span class="s2">- group : group name (Schoenflies notation) or group number (space group) (str/int).</span>
+<span class="s2">- site : site position, orbital info. (dict) { name: (&quot;position&quot;, orbital or orbital list) }.</span>
+<span class="s2">- bond* : bond (list) [ (&quot;tail&quot;, &quot;head&quot;, (list of) neighbors) ], [[]].</span>
+<span class="s2">- spinful* : spinful basis ? (bool), [False].</span>
+<span class="s2">- cell* : unit-cell constants (dict) { &quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;alpha&quot;, &quot;beta&quot;, &quot;gamma&quot; }, [a=b=c=1,alpha=beta=gamma=90].</span>
+<span class="s2">- option*</span>
+<span class="s2">  - view* : view point (int list), [None].</span>
+<span class="s2">  - view_mode* : mode for QtDraw file (str) (&quot;standard&quot;/&quot;arrow&quot;/&quot;debug&quot;), [&quot;standard&quot;].</span>
+<span class="s2">  - output* : output folder (str), [model name].</span>
+<span class="s2">  - minimal_samb* (bool) : minimal output in _samb.pdf ? [True].</span>
+<span class="s2">  - binary_output* (bool) : output matrix data in binary format ? [False].</span>
+<span class="s2">- generate*</span>
+<span class="s2">  - model_type* : model type (str), (&quot;tight_binding&quot;/&quot;phonon&quot;), [&quot;tight_binding&quot;].</span>
+<span class="s2">  - time_reversal_type* : time-reversal type (str), (&quot;electric&quot;/&quot;magnetic&quot;/&quot;both&quot;), [&quot;electric&quot;].</span>
+<span class="s2">  - irrep* : irrep. (str list), [identity irrep.] (empty list is for all irreps.), [None].</span>
+<span class="s2">  - fourier_transform* : create fourier transformed SAMB ? [False].</span>
+<span class="s2">  - toroidal_priority* : create toroidal multipoles (G,T) in high priority ? [False].</span>
+<span class="s2">- k_point* : k-point (dict) {name: &quot;position&quot;}, [{ &quot;Γ&quot;: &quot;[0,0,0]&quot;, &quot;X&quot;: &quot;[1/2,0,0]&quot; }].</span>
+<span class="s2">- k_path* : k-path (str) (concatenate by &quot;-&quot; or &quot;\|&quot;), [&quot;Γ-X&quot;].</span>
+<span class="s2">- detail*</span>
+<span class="s2">  - cell_range* : search range for bonds, [(-2, 3, -2, 3, -2, 3)].</span>
+<span class="s2">  - max_neighbor* : max. of neighbors to search, [10].</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="c1"># ==================================================</span>
+<span class="n">header_str</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">=== Molecule or Crystal Model (* only for crystal) ===</span>
+<span class="s2">- info</span>
+<span class="s2">    - model : model name.</span>
+<span class="s2">    - molecule : molecule or crystal ?</span>
+<span class="s2">    - group : (tag, detailed str)</span>
+<span class="s2">    - crystal : crystal class</span>
+<span class="s2">    - cell* : {a, b, c, alpha, beta, gamma}</span>
+<span class="s2">    - volume* : unit cell volume</span>
+<span class="s2">    - a1* : unit cell a1 vector</span>
+<span class="s2">    - a2* : unit cell a2 vector</span>
+<span class="s2">    - a3* : unit cell a3 vector</span>
+<span class="s2">    - option :</span>
+<span class="s2">        - view : view index</span>
+<span class="s2">        - view_mode : QtDraw mode, standard/arrow/debug</span>
+<span class="s2">        - output : output directory.</span>
+<span class="s2">        - minimal_samb : output minimal SAMB ?</span>
+<span class="s2">        - binary_output : output matrix data in binary format ?</span>
+<span class="s2">    - generate :</span>
+<span class="s2">        - model_type : tight_binding/phonon</span>
+<span class="s2">        - time_reversal_type : electric/magnetic/both</span>
+<span class="s2">        - irrep : irrep list</span>
+<span class="s2">        - fourier_transform* : create fourier transformed SAMB ?</span>
+<span class="s2">        - toroidal_priority : create toroidal multipoles (G,T) in high priority ?</span>
+<span class="s2">    - k_point* : representative k points</span>
+<span class="s2">    - k_path* : high-symmetry line in k space</span>
+<span class="s2">    - dimension : dimension of full matrix</span>
+<span class="s2">    - spinful : spinful or not</span>
+<span class="s2">    - orbital : list of orbitals (U,D: up/down spin)</span>
+<span class="s2">    - ket : ket basis list, orbital@site</span>
+<span class="s2">    - ket_site : list of sites</span>
+<span class="s2">    - site : input for &quot;site&quot; { name: (position, orbitals) }</span>
+<span class="s2">    - rep_site : representative site { name: (position, wp, orbitals, site-symmetry) }</span>
+<span class="s2">    - cell_site : { name_idx(pset): (position, SOs) }</span>
+<span class="s2">    - bond : input for &quot;bond&quot; [ (tail, head, neighbors) ]</span>
+<span class="s2">    - rep_bond : representative bond { name: (vector@center, wp, directional, neighbor, site-symmetry) }</span>
+<span class="s2">    - cell_bond : { name_idx(pset): (vector@center, SOs) }</span>
+
+<span class="s2">- name</span>
+<span class="s2">    - alias : { cluster_tag: name or name: cluster_tag }</span>
+<span class="s2">    - site : { site_tag: (name, no) }</span>
+<span class="s2">    - site_name : { position : (site_tag, pset) }</span>
+<span class="s2">    - bond : { bond_tag: (tail:head:n:multiplicity, no) }</span>
+<span class="s2">    - bond_name : { vector@center : (bond_tag, pset) }</span>
+
+<span class="s2">- data</span>
+<span class="s2">    - plus_set* : [ plus_set list ]</span>
+<span class="s2">    - cluster_site : { cluster_tag: site_list }</span>
+<span class="s2">    - cluster_bond : { cluster_tag: bond_list }</span>
+<span class="s2">    - site : { site_tag: (position, SO, (bra_site_no, ket_site_no)) }</span>
+<span class="s2">    - bond : { bond_tag: (vector@center, SO, (bra_site_no, ket_site_no), vector, tail;head) }</span>
+<span class="s2">    - cluster_atomic : { (bra_site_no, ket_site_no): [(bra_no, ket_no, matrix_tag)] }</span>
+<span class="s2">    - atomic_braket : { matrix_tag : (bra_list, ket_list) }</span>
+
+<span class="s2">- detail</span>
+<span class="s2">    - rep_bond_all : { tail_head: [rep_bond in 0-9th neighbors] }</span>
+<span class="s2">    - cell_range* : search range for bonds</span>
+<span class="s2">    - max_neighbor : max. of neighbors to search</span>
+<span class="s2">    - A* : transform matrix, [a1,a2,a3]</span>
+<span class="s2">    - version : MultiPie version</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+
+<span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="MaterialModel">
+<a class="viewcode-back" href="../../../src/api_model.html#multipie.model.material_model.MaterialModel">[docs]</a>
+<span class="k">class</span> <span class="nc">MaterialModel</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    molecule or crystal model information.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Attributes:</span>
+    <span class="c1">#     _mpm (MultiPieManager): MultiPieManager.</span>
+    <span class="c1">#     _cell (dict): cell info.</span>
+    <span class="c1">#     _volume (float): cell volume.</span>
+    <span class="c1">#     _A (NSArray): unit vectors in each column (3x3).</span>
+    <span class="c1">#     _G (NSArray): metric tensor (3x3).</span>
+    <span class="c1">#     _A_norm (NSArray): normalized unit vectors.</span>
+    <span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="MaterialModel.__init__">
+<a class="viewcode-back" href="../../../src/api_model.html#multipie.model.material_model.MaterialModel.__init__">[docs]</a>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dic</span><span class="p">,</span> <span class="n">mpm</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        initialize the class.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            dic (dict): model info. dict.</span>
+<span class="sd">            mpm (MultiPieManager): MultiPie manager.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">info</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;molecule&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s2">&quot;group&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+            <span class="s2">&quot;crystal&quot;</span><span class="p">:</span> <span class="s2">&quot;monoclinic&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;cell&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+                <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+                <span class="s2">&quot;c&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+                <span class="s2">&quot;alpha&quot;</span><span class="p">:</span> <span class="mf">90.0</span><span class="p">,</span>
+                <span class="s2">&quot;beta&quot;</span><span class="p">:</span> <span class="mf">90.0</span><span class="p">,</span>
+                <span class="s2">&quot;gamma&quot;</span><span class="p">:</span> <span class="mf">90.0</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;volume&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+            <span class="s2">&quot;a1&quot;</span><span class="p">:</span> <span class="s2">&quot;[1.0, 0.0, 0.0]&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;a2&quot;</span><span class="p">:</span> <span class="s2">&quot;[0.0, 1.0, 0.0]&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;a3&quot;</span><span class="p">:</span> <span class="s2">&quot;[0.0, 0.0, 1.0]&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;option&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;view&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                <span class="s2">&quot;view_mode&quot;</span><span class="p">:</span> <span class="s2">&quot;standard&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;output&quot;</span><span class="p">:</span> <span class="s2">&quot;material_model&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;minimal_samb&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                <span class="s2">&quot;binary_output&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;generate&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;model_type&quot;</span><span class="p">:</span> <span class="s2">&quot;tight_binding&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;time_reversal_type&quot;</span><span class="p">:</span> <span class="s2">&quot;electric&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;irrep&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;fourier_transform&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+                <span class="s2">&quot;toroidal_priority&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;k_point&quot;</span><span class="p">:</span> <span class="p">{},</span>
+            <span class="s2">&quot;k_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;dimension&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s2">&quot;spinful&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s2">&quot;orbital&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;ket&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;ket_site&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;site&quot;</span><span class="p">:</span> <span class="p">{},</span>
+            <span class="s2">&quot;rep_site&quot;</span><span class="p">:</span> <span class="p">{},</span>
+            <span class="s2">&quot;cell_site&quot;</span><span class="p">:</span> <span class="p">{},</span>
+            <span class="s2">&quot;bond&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;rep_bond&quot;</span><span class="p">:</span> <span class="p">{},</span>
+            <span class="s2">&quot;cell_bond&quot;</span><span class="p">:</span> <span class="p">{},</span>
+        <span class="p">}</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;alias&quot;</span><span class="p">:</span> <span class="p">{},</span>
+            <span class="s2">&quot;site&quot;</span><span class="p">:</span> <span class="p">{},</span>
+            <span class="s2">&quot;site_name&quot;</span><span class="p">:</span> <span class="p">{},</span>
+            <span class="s2">&quot;bond&quot;</span><span class="p">:</span> <span class="p">{},</span>
+            <span class="s2">&quot;bond_name&quot;</span><span class="p">:</span> <span class="p">{},</span>
+        <span class="p">}</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;plus_set&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;cluster_site&quot;</span><span class="p">:</span> <span class="p">{},</span>
+            <span class="s2">&quot;cluster_bond&quot;</span><span class="p">:</span> <span class="p">{},</span>
+            <span class="s2">&quot;site&quot;</span><span class="p">:</span> <span class="p">{},</span>
+            <span class="s2">&quot;bond&quot;</span><span class="p">:</span> <span class="p">{},</span>
+            <span class="s2">&quot;cluster_atomic&quot;</span><span class="p">:</span> <span class="p">{},</span>
+            <span class="s2">&quot;atomic_braket&quot;</span><span class="p">:</span> <span class="p">{},</span>
+        <span class="p">}</span>
+        <span class="n">detail</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;rep_bond_all&quot;</span><span class="p">:</span> <span class="p">{},</span>
+            <span class="s2">&quot;cell_range&quot;</span><span class="p">:</span> <span class="n">_default_search_cell_range</span><span class="p">,</span>
+            <span class="s2">&quot;max_neighbor&quot;</span><span class="p">:</span> <span class="n">_default_max_neighbor</span><span class="p">,</span>
+            <span class="s2">&quot;A&quot;</span><span class="p">:</span> <span class="s2">&quot;[[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]]&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="n">__version__</span><span class="p">,</span>
+        <span class="p">}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_mpm</span> <span class="o">=</span> <span class="n">mpm</span>
+
+        <span class="n">info</span><span class="p">[</span><span class="s2">&quot;molecule&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mpm</span><span class="o">.</span><span class="n">molecule</span>
+
+        <span class="n">info</span><span class="p">[</span><span class="s2">&quot;spinful&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dic</span><span class="p">[</span><span class="s2">&quot;spinful&quot;</span><span class="p">]</span>
+        <span class="n">info</span><span class="p">[</span><span class="s2">&quot;option&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dic</span><span class="p">[</span><span class="s2">&quot;option&quot;</span><span class="p">]</span>
+        <span class="n">info</span><span class="p">[</span><span class="s2">&quot;model&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dic</span><span class="p">[</span><span class="s2">&quot;model&quot;</span><span class="p">]</span>
+        <span class="n">info</span><span class="p">[</span><span class="s2">&quot;group&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_mpm</span><span class="o">.</span><span class="n">group</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_group_str</span><span class="p">(</span><span class="n">info</span><span class="p">[</span><span class="s2">&quot;molecule&quot;</span><span class="p">]))</span>
+        <span class="n">info</span><span class="p">[</span><span class="s2">&quot;crystal&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mpm</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">tag</span><span class="o">.</span><span class="n">crystal</span>
+
+        <span class="n">cell_info</span> <span class="o">=</span> <span class="n">cell_transform_matrix</span><span class="p">(</span><span class="n">cell</span><span class="o">=</span><span class="n">dic</span><span class="p">[</span><span class="s2">&quot;cell&quot;</span><span class="p">],</span> <span class="n">crystal</span><span class="o">=</span><span class="n">info</span><span class="p">[</span><span class="s2">&quot;crystal&quot;</span><span class="p">],</span> <span class="n">translation</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cell</span> <span class="o">=</span> <span class="n">cell_info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_volume</span> <span class="o">=</span> <span class="n">cell_info</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_A</span> <span class="o">=</span> <span class="n">cell_info</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_G</span> <span class="o">=</span> <span class="n">cell_info</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_A_norm</span> <span class="o">=</span> <span class="n">cell_info</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;molecule&quot;</span><span class="p">]:</span>
+            <span class="n">info</span><span class="p">[</span><span class="s2">&quot;cell&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cell</span>
+            <span class="n">info</span><span class="p">[</span><span class="s2">&quot;volume&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_volume</span>
+            <span class="n">info</span><span class="p">[</span><span class="s2">&quot;a1&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_A</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>
+            <span class="n">info</span><span class="p">[</span><span class="s2">&quot;a2&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_A</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
+            <span class="n">info</span><span class="p">[</span><span class="s2">&quot;a3&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_A</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">])</span>
+
+        <span class="n">info</span><span class="p">[</span><span class="s2">&quot;generate&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dic</span><span class="p">[</span><span class="s2">&quot;generate&quot;</span><span class="p">]</span>
+        <span class="n">irrep</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;generate&quot;</span><span class="p">][</span><span class="s2">&quot;irrep&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">irrep</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">irrep</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mpm</span><span class="o">.</span><span class="n">point_group</span><span class="o">.</span><span class="n">identity_irrep</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">irrep</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">irrep</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mpm</span><span class="o">.</span><span class="n">point_group</span><span class="o">.</span><span class="n">character</span><span class="o">.</span><span class="n">irrep_list</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">irrep</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="n">irrep</span> <span class="o">=</span> <span class="p">[</span><span class="n">irrep</span><span class="p">]</span>
+        <span class="n">irrep</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span><span class="n">i</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">irrep</span><span class="p">])))</span>
+        <span class="n">info</span><span class="p">[</span><span class="s2">&quot;generate&quot;</span><span class="p">][</span><span class="s2">&quot;irrep&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">irrep</span>
+
+        <span class="k">if</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;molecule&quot;</span><span class="p">]:</span>
+            <span class="k">del</span> <span class="p">(</span>
+                <span class="n">info</span><span class="p">[</span><span class="s2">&quot;cell&quot;</span><span class="p">],</span>
+                <span class="n">info</span><span class="p">[</span><span class="s2">&quot;volume&quot;</span><span class="p">],</span>
+                <span class="n">info</span><span class="p">[</span><span class="s2">&quot;a1&quot;</span><span class="p">],</span>
+                <span class="n">info</span><span class="p">[</span><span class="s2">&quot;a2&quot;</span><span class="p">],</span>
+                <span class="n">info</span><span class="p">[</span><span class="s2">&quot;a3&quot;</span><span class="p">],</span>
+                <span class="n">info</span><span class="p">[</span><span class="s2">&quot;k_point&quot;</span><span class="p">],</span>
+                <span class="n">info</span><span class="p">[</span><span class="s2">&quot;k_path&quot;</span><span class="p">],</span>
+                <span class="n">info</span><span class="p">[</span><span class="s2">&quot;generate&quot;</span><span class="p">][</span><span class="s2">&quot;fourier_transform&quot;</span><span class="p">],</span>
+            <span class="p">)</span>
+            <span class="k">del</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;plus_set&quot;</span><span class="p">]</span>
+            <span class="k">del</span> <span class="n">detail</span><span class="p">[</span><span class="s2">&quot;cell_range&quot;</span><span class="p">],</span> <span class="n">detail</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">info</span><span class="p">[</span><span class="s2">&quot;k_point&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dic</span><span class="p">[</span><span class="s2">&quot;k_point&quot;</span><span class="p">]</span>
+            <span class="n">info</span><span class="p">[</span><span class="s2">&quot;k_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dic</span><span class="p">[</span><span class="s2">&quot;k_path&quot;</span><span class="p">]</span>
+            <span class="n">detail</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">A</span><span class="p">)</span>
+            <span class="n">data</span><span class="p">[</span><span class="s2">&quot;plus_set&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mpm</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">symmetry_operation</span><span class="o">.</span><span class="n">plus_set</span><span class="o">.</span><span class="n">str</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="s2">&quot;detail&quot;</span> <span class="ow">in</span> <span class="n">dic</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">if</span> <span class="s2">&quot;cell_range&quot;</span> <span class="ow">in</span> <span class="n">dic</span><span class="p">[</span><span class="s2">&quot;detail&quot;</span><span class="p">]:</span>
+                <span class="n">detail</span><span class="p">[</span><span class="s2">&quot;cell_range&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dic</span><span class="p">[</span><span class="s2">&quot;detail&quot;</span><span class="p">][</span><span class="s2">&quot;cell_range&quot;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="s2">&quot;max_neighbor&quot;</span> <span class="ow">in</span> <span class="n">dic</span><span class="p">[</span><span class="s2">&quot;detail&quot;</span><span class="p">]:</span>
+                <span class="n">detail</span><span class="p">[</span><span class="s2">&quot;max_neighbor&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dic</span><span class="p">[</span><span class="s2">&quot;detail&quot;</span><span class="p">][</span><span class="s2">&quot;max_neighbor&quot;</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="s2">&quot;site&quot;</span> <span class="ow">in</span> <span class="n">dic</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">info</span><span class="p">[</span><span class="s2">&quot;site&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dic</span><span class="p">[</span><span class="s2">&quot;site&quot;</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_set_rep_site</span><span class="p">(</span><span class="n">info</span><span class="p">)</span>
+            <span class="n">orbital</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_set_site</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+            <span class="n">ket_dict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_set_orbital</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">orbital</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="s2">&quot;bond&quot;</span> <span class="ow">in</span> <span class="n">dic</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">info</span><span class="p">[</span><span class="s2">&quot;bond&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dic</span><span class="p">[</span><span class="s2">&quot;bond&quot;</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_set_rep_bond</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">detail</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_set_bond</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_matrix</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">orbital</span><span class="p">,</span> <span class="n">ket_dict</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">info</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;detail&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">detail</span></div>
+
+
+    <span class="c1"># ==================================================</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">model</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;model&quot;</span><span class="p">]</span>
+
+    <span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="MaterialModel.create_view">
+<a class="viewcode-back" href="../../../src/api_model.html#multipie.model.material_model.MaterialModel.create_view">[docs]</a>
+    <span class="k">def</span> <span class="nf">create_view</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        create QtDraw file.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            scale (bool, optional): objects are scaled by means of volume.</span>
+<span class="sd">            mode (str, optional): view mode, standard/arrow/debug. if None, option in the model is used.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: QtDraw dict.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">_qtdraw_available</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;QtDraw is not installed.&quot;</span><span class="p">)</span>
+
+        <span class="n">info</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">]</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span>
+        <span class="n">molecule</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;molecule&quot;</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">mode</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">mode</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;option&quot;</span><span class="p">][</span><span class="s2">&quot;view_mode&quot;</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">molecule</span><span class="p">:</span>
+            <span class="n">n_pset</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">n_pset</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;plus_set&quot;</span><span class="p">])</span>
+
+        <span class="n">qtdraw</span> <span class="o">=</span> <span class="n">QtDraw</span><span class="p">(</span>
+            <span class="n">model</span><span class="o">=</span><span class="n">info</span><span class="p">[</span><span class="s2">&quot;model&quot;</span><span class="p">],</span>
+            <span class="n">cell</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_cell</span><span class="p">,</span>
+            <span class="n">view</span><span class="o">=</span><span class="n">info</span><span class="p">[</span><span class="s2">&quot;option&quot;</span><span class="p">][</span><span class="s2">&quot;view&quot;</span><span class="p">],</span>
+            <span class="n">axis_type</span><span class="o">=</span><span class="s2">&quot;abc&quot;</span><span class="p">,</span>
+            <span class="n">cluster</span><span class="o">=</span><span class="n">molecule</span><span class="p">,</span>
+            <span class="n">clip</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">background</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">qtdraw</span><span class="o">.</span><span class="n">set_crystal</span><span class="p">(</span><span class="n">info</span><span class="p">[</span><span class="s2">&quot;crystal&quot;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">scale</span><span class="p">:</span>
+            <span class="n">scale</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_volume</span> <span class="o">**</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">scale</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+        <span class="n">cluster_site_n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">default_style</span><span class="p">[</span><span class="s2">&quot;site&quot;</span><span class="p">])</span>
+        <span class="n">cluster_bond_n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">default_style</span><span class="p">[</span><span class="s2">&quot;bond&quot;</span><span class="p">])</span>
+
+        <span class="c1"># plot sites.</span>
+        <span class="k">for</span> <span class="n">pos</span><span class="p">,</span> <span class="p">(</span><span class="n">site_name</span><span class="p">,</span> <span class="n">pset</span><span class="p">)</span> <span class="ow">in</span> <span class="n">name</span><span class="p">[</span><span class="s2">&quot;site_name&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">head</span><span class="p">,</span> <span class="n">idx</span> <span class="o">=</span> <span class="n">name</span><span class="p">[</span><span class="s2">&quot;site&quot;</span><span class="p">][</span><span class="n">site_name</span><span class="p">]</span>
+            <span class="n">cluster_no</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">name</span><span class="p">[</span><span class="s2">&quot;alias&quot;</span><span class="p">][</span><span class="n">head</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">prop_no</span> <span class="o">=</span> <span class="n">cluster_no</span> <span class="o">-</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">cluster_no</span> <span class="o">&lt;</span> <span class="n">cluster_site_n</span> <span class="k">else</span> <span class="n">cluster_site_n</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="n">color</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">opacity</span> <span class="o">=</span> <span class="n">default_style</span><span class="p">[</span><span class="s2">&quot;site&quot;</span><span class="p">][</span><span class="n">prop_no</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">n_pset</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">cluster_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;S</span><span class="si">{</span><span class="n">cluster_no</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="n">pset</span><span class="si">}</span><span class="s2">)&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">cluster_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;S</span><span class="si">{</span><span class="n">cluster_no</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="n">mp</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;site&quot;</span><span class="p">][</span><span class="n">site_name</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;debug&quot;</span><span class="p">:</span>
+                <span class="n">site_no</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">site_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+                <span class="n">label</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;s</span><span class="si">{</span><span class="n">site_no</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">label</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">head</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2">: &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mapping_str</span><span class="p">(</span><span class="n">mp</span><span class="p">)</span>
+            <span class="n">qtdraw</span><span class="o">.</span><span class="n">plot_site</span><span class="p">(</span>
+                <span class="n">pos</span><span class="p">,</span>
+                <span class="n">name</span><span class="o">=</span><span class="n">cluster_name</span><span class="p">,</span>
+                <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">,</span>
+                <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span>
+                <span class="n">size</span><span class="o">=</span><span class="n">size</span> <span class="o">*</span> <span class="n">scale</span><span class="p">,</span>
+                <span class="n">opacity</span><span class="o">=</span><span class="n">opacity</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="n">mode</span> <span class="o">!=</span> <span class="s2">&quot;standard&quot;</span> <span class="ow">and</span> <span class="n">idx</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">pset</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">qtdraw</span><span class="o">.</span><span class="n">plot_site</span><span class="p">(</span>
+                    <span class="n">pos</span><span class="p">,</span>
+                    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Z&quot;</span><span class="p">,</span>
+                    <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">,</span>
+                    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;yellow&quot;</span><span class="p">,</span>
+                    <span class="n">size</span><span class="o">=</span><span class="n">size</span> <span class="o">*</span> <span class="n">scale</span> <span class="o">*</span> <span class="mf">1.2</span><span class="p">,</span>
+                    <span class="n">opacity</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+                <span class="p">)</span>
+
+        <span class="c1"># plot bonds.</span>
+        <span class="k">for</span> <span class="n">bond</span><span class="p">,</span> <span class="p">(</span><span class="n">bond_name</span><span class="p">,</span> <span class="n">pset</span><span class="p">)</span> <span class="ow">in</span> <span class="n">name</span><span class="p">[</span><span class="s2">&quot;bond_name&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">head</span><span class="p">,</span> <span class="n">idx</span> <span class="o">=</span> <span class="n">name</span><span class="p">[</span><span class="s2">&quot;bond&quot;</span><span class="p">][</span><span class="n">bond_name</span><span class="p">]</span>
+            <span class="n">cluster_no</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">name</span><span class="p">[</span><span class="s2">&quot;alias&quot;</span><span class="p">][</span><span class="n">head</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">prop_no</span> <span class="o">=</span> <span class="n">cluster_no</span> <span class="o">-</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">cluster_no</span> <span class="o">&lt;</span> <span class="n">cluster_bond_n</span> <span class="k">else</span> <span class="n">cluster_bond_n</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">),</span> <span class="n">width</span><span class="p">,</span> <span class="n">opacity</span> <span class="o">=</span> <span class="n">default_style</span><span class="p">[</span><span class="s2">&quot;bond&quot;</span><span class="p">][</span><span class="n">prop_no</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">n_pset</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">cluster_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;B</span><span class="si">{</span><span class="n">cluster_no</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="n">pset</span><span class="si">}</span><span class="s2">)&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">cluster_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;B</span><span class="si">{</span><span class="n">cluster_no</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="n">_</span><span class="p">,</span> <span class="n">mp</span><span class="p">,</span> <span class="n">ij</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;bond&quot;</span><span class="p">][</span><span class="n">bond_name</span><span class="p">]</span>
+
+            <span class="n">bond_alias_name</span> <span class="o">=</span> <span class="n">name</span><span class="p">[</span><span class="s2">&quot;bond&quot;</span><span class="p">][</span><span class="n">bond_name</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">bond_no</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">bond_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">nd</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;rep_bond&quot;</span><span class="p">][</span><span class="n">bond_alias_name</span><span class="p">]</span>
+            <span class="n">color1</span><span class="p">,</span> <span class="n">color2</span> <span class="o">=</span> <span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">c1</span><span class="p">)</span> <span class="k">if</span> <span class="n">nd</span> <span class="o">==</span> <span class="s2">&quot;ND&quot;</span> <span class="k">else</span> <span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;debug&quot;</span><span class="p">:</span>
+                <span class="n">label</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;b</span><span class="si">{</span><span class="n">bond_no</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">ij</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">ij</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">)&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">label</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;b</span><span class="si">{</span><span class="n">bond_no</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">th: &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mapping_str</span><span class="p">(</span><span class="n">mp</span><span class="p">)</span>
+            <span class="n">v</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">bond</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;@&quot;</span><span class="p">)</span>
+            <span class="n">opa</span> <span class="o">=</span> <span class="n">opacity</span> <span class="o">*</span> <span class="mf">0.5</span> <span class="k">if</span> <span class="n">mode</span> <span class="o">!=</span> <span class="s2">&quot;standard&quot;</span> <span class="k">else</span> <span class="n">opacity</span>
+            <span class="n">qtdraw</span><span class="o">.</span><span class="n">plot_bond</span><span class="p">(</span>
+                <span class="n">c</span><span class="p">,</span>
+                <span class="n">v</span><span class="p">,</span>
+                <span class="n">color</span><span class="o">=</span><span class="n">color1</span><span class="p">,</span>
+                <span class="n">color2</span><span class="o">=</span><span class="n">color2</span><span class="p">,</span>
+                <span class="n">width</span><span class="o">=</span><span class="n">width</span> <span class="o">*</span> <span class="n">scale</span><span class="p">,</span>
+                <span class="n">opacity</span><span class="o">=</span><span class="n">opa</span><span class="p">,</span>
+                <span class="n">name</span><span class="o">=</span><span class="n">cluster_name</span><span class="p">,</span>
+                <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="n">mode</span> <span class="o">!=</span> <span class="s2">&quot;standard&quot;</span><span class="p">:</span>
+                <span class="n">v</span> <span class="o">=</span> <span class="n">NSArray</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">A</span><span class="p">)</span>
+                <span class="n">v_len</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">norm</span><span class="p">()</span> <span class="o">*</span> <span class="mf">0.25</span>
+                <span class="n">acolor</span> <span class="o">=</span> <span class="s2">&quot;red&quot;</span> <span class="k">if</span> <span class="n">idx</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">pset</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="s2">&quot;black&quot;</span>
+                <span class="n">qtdraw</span><span class="o">.</span><span class="n">plot_vector</span><span class="p">(</span>
+                    <span class="n">c</span><span class="p">,</span>
+                    <span class="n">v</span><span class="p">,</span>
+                    <span class="n">length</span><span class="o">=</span><span class="n">v_len</span><span class="p">,</span>
+                    <span class="n">width</span><span class="o">=</span><span class="n">width</span> <span class="o">*</span> <span class="n">scale</span> <span class="o">*</span> <span class="mf">0.3</span><span class="p">,</span>
+                    <span class="n">color</span><span class="o">=</span><span class="n">acolor</span><span class="p">,</span>
+                    <span class="n">opacity</span><span class="o">=</span><span class="n">opacity</span><span class="p">,</span>
+                    <span class="n">name</span><span class="o">=</span><span class="n">cluster_name</span><span class="p">,</span>
+                    <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">,</span>
+                <span class="p">)</span>
+
+        <span class="n">dic</span> <span class="o">=</span> <span class="n">qtdraw</span><span class="o">.</span><span class="n">create_dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">)</span>
+        <span class="n">qtdraw</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">del</span> <span class="n">qtdraw</span>
+
+        <span class="k">return</span> <span class="n">dic</span></div>
+
+
+    <span class="c1"># ==================================================</span>
+    <span class="k">def</span> <span class="nf">_set_rep_site</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">info</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        set representative site.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">spinful</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;spinful&quot;</span><span class="p">]</span>
+        <span class="n">crystal</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;crystal&quot;</span><span class="p">]</span>
+
+        <span class="n">rep_site</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">orb_list</span><span class="p">)</span> <span class="ow">in</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;site&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">wp</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_mpm</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">find_wyckoff_position</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">pos</span><span class="p">)))</span>
+            <span class="n">pos</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">NSArray</span><span class="p">(</span><span class="n">pos</span><span class="p">))</span>
+            <span class="n">orb_list</span> <span class="o">=</span> <span class="n">split_orb_list_rank_block</span><span class="p">(</span>
+                <span class="n">sort_orb_list</span><span class="p">(</span><span class="n">parse_orb_list</span><span class="p">(</span><span class="n">orb_list</span><span class="p">,</span> <span class="n">spinful</span><span class="p">,</span> <span class="n">crystal</span><span class="p">),</span> <span class="n">spinful</span><span class="p">,</span> <span class="n">crystal</span><span class="p">),</span>
+                <span class="n">spinful</span><span class="p">,</span>
+                <span class="n">crystal</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">sym</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mpm</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">wyckoff</span><span class="o">.</span><span class="n">site_symmetry</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;molecule&quot;</span><span class="p">]:</span>
+                <span class="n">pos</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_mpm</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">shift_home_unit_cell</span><span class="p">(</span><span class="n">pos</span><span class="p">))</span>
+            <span class="n">rep_site</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">wp</span><span class="p">,</span> <span class="n">orb_list</span><span class="p">,</span> <span class="n">sym</span><span class="p">)</span>
+
+        <span class="n">info</span><span class="p">[</span><span class="s2">&quot;rep_site&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">rep_site</span><span class="p">)</span>
+
+    <span class="c1"># ==================================================</span>
+    <span class="k">def</span> <span class="nf">_set_site</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">info</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        set sites in cluster or cell.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">alias</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">cluster_site</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">cell_site</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">data_site</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">name_site</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">site_to_name</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">orbital</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;molecule&quot;</span><span class="p">]:</span>
+            <span class="n">plus_set</span> <span class="o">=</span> <span class="n">NSArray</span><span class="o">.</span><span class="n">from_str</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;plus_set&quot;</span><span class="p">])</span>
+            <span class="n">n_pset</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">plus_set</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">n_pset</span> <span class="o">=</span> <span class="mi">1</span>
+
+        <span class="n">site_no</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">no</span><span class="p">,</span> <span class="p">(</span><span class="n">site</span><span class="p">,</span> <span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">orb_list</span><span class="p">,</span> <span class="n">_</span><span class="p">))</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">info</span><span class="p">[</span><span class="s2">&quot;rep_site&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+            <span class="k">if</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;molecule&quot;</span><span class="p">]:</span>
+                <span class="n">s_map</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mpm</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">site_mapping</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
+                <span class="n">basic_num</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">s_map</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">s_map</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mpm</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">site_mapping</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">plus_set</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="n">basic_num</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">s_map</span><span class="p">)</span> <span class="o">//</span> <span class="n">n_pset</span>
+            <span class="n">position</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">s_map</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+            <span class="n">prop</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">s_map</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+            <span class="n">cluster</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;S_</span><span class="si">{</span><span class="n">no</span><span class="o">+</span><span class="mi">1</span><span class="si">:</span><span class="s2">03d</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="n">alias</span><span class="p">[</span><span class="n">cluster</span><span class="p">]</span> <span class="o">=</span> <span class="n">site</span>
+            <span class="n">alias</span><span class="p">[</span><span class="n">site</span><span class="p">]</span> <span class="o">=</span> <span class="n">cluster</span>
+            <span class="n">cluster_site</span><span class="p">[</span><span class="n">cluster</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">rsite_no</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">basic_num</span><span class="p">):</span>
+                <span class="n">s</span><span class="p">,</span> <span class="n">mp</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="n">position</span><span class="p">[</span><span class="n">rsite_no</span><span class="p">],</span>
+                    <span class="n">prop</span><span class="p">[</span><span class="n">rsite_no</span><span class="p">],</span>
+                <span class="p">)</span>  <span class="c1"># as sorted by pset group in s_map.</span>
+                <span class="n">s_no</span> <span class="o">=</span> <span class="n">site_no</span> <span class="o">+</span> <span class="n">rsite_no</span>
+                <span class="n">sname</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;site_</span><span class="si">{</span><span class="n">s_no</span><span class="o">+</span><span class="mi">1</span><span class="si">:</span><span class="s2">03d</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="n">cluster_site</span><span class="p">[</span><span class="n">cluster</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sname</span><span class="p">)</span>
+                <span class="n">ij</span> <span class="o">=</span> <span class="p">(</span><span class="n">s_no</span><span class="p">,</span> <span class="n">s_no</span><span class="p">)</span>
+                <span class="n">data_site</span><span class="p">[</span><span class="n">sname</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">mp</span><span class="p">,</span> <span class="n">ij</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">n_pset</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">pset</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_pset</span><span class="p">):</span>
+                        <span class="n">ss</span> <span class="o">=</span> <span class="n">position</span><span class="p">[</span><span class="n">pset</span> <span class="o">*</span> <span class="n">basic_num</span> <span class="o">+</span> <span class="n">rsite_no</span><span class="p">]</span>
+                        <span class="n">cell_site</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">site</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">rsite_no</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="n">pset</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                            <span class="n">ss</span><span class="p">,</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">_mapping_str</span><span class="p">(</span><span class="n">mp</span><span class="p">),</span>
+                        <span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">cell_site</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">site</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">rsite_no</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mapping_str</span><span class="p">(</span><span class="n">mp</span><span class="p">))</span>
+                <span class="n">name_site</span><span class="p">[</span><span class="n">sname</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">site</span><span class="p">,</span> <span class="n">rsite_no</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="n">orbital</span><span class="p">[</span><span class="n">sname</span><span class="p">]</span> <span class="o">=</span> <span class="n">orb_list</span>
+            <span class="k">assert</span> <span class="n">data_site</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;site_</span><span class="si">{</span><span class="n">site_no</span><span class="o">+</span><span class="mi">1</span><span class="si">:</span><span class="s2">03d</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;first SO is not identity operation, </span><span class="si">{</span><span class="n">mp</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="k">for</span> <span class="n">rsite_no</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">basic_num</span><span class="p">):</span>
+                <span class="n">s_no</span> <span class="o">=</span> <span class="n">site_no</span> <span class="o">+</span> <span class="n">rsite_no</span>
+                <span class="n">sname</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;site_</span><span class="si">{</span><span class="n">s_no</span><span class="o">+</span><span class="mi">1</span><span class="si">:</span><span class="s2">03d</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="k">for</span> <span class="n">pset</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_pset</span><span class="p">):</span>
+                    <span class="n">s</span> <span class="o">=</span> <span class="n">position</span><span class="p">[</span><span class="n">pset</span> <span class="o">*</span> <span class="n">basic_num</span> <span class="o">+</span> <span class="n">rsite_no</span><span class="p">]</span>
+                    <span class="n">site_to_name</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">sname</span><span class="p">,</span> <span class="n">pset</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">site_no</span> <span class="o">=</span> <span class="n">site_no</span> <span class="o">+</span> <span class="n">basic_num</span>
+
+        <span class="c1"># check orbitals</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">spinful</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;spinful&quot;</span><span class="p">]</span>
+        <span class="n">crystal</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;crystal&quot;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">sname</span><span class="p">,</span> <span class="n">orb_list</span> <span class="ow">in</span> <span class="n">orbital</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">orbs</span> <span class="ow">in</span> <span class="n">orb_list</span><span class="p">:</span>
+                <span class="n">o</span> <span class="o">=</span> <span class="n">orbs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">l</span> <span class="o">=</span> <span class="n">rank</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="n">spinful</span><span class="p">,</span> <span class="n">crystal</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
+                    <span class="n">d</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">+=</span> <span class="p">[(</span><span class="n">sname</span><span class="p">,</span> <span class="n">orbs</span><span class="p">)]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">d</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">=</span> <span class="p">[(</span><span class="n">sname</span><span class="p">,</span> <span class="n">orbs</span><span class="p">)]</span>
+        <span class="k">for</span> <span class="n">l</span><span class="p">,</span> <span class="n">lst</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">sname</span><span class="p">,</span> <span class="n">orbs</span> <span class="o">=</span> <span class="n">lst</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">sname_</span><span class="p">,</span> <span class="n">orbs_</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+                    <span class="k">if</span> <span class="n">orbs</span> <span class="o">!=</span> <span class="n">orbs_</span><span class="p">:</span>
+                        <span class="n">s1</span> <span class="o">=</span> <span class="n">name_site</span><span class="p">[</span><span class="n">sname</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+                        <span class="n">s2</span> <span class="o">=</span> <span class="n">name_site</span><span class="p">[</span><span class="n">sname_</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+                        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;invalid orbitals are given, </span><span class="si">{</span><span class="n">s1</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">orbs</span><span class="si">}</span><span class="s2"> != </span><span class="si">{</span><span class="n">s2</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">orbs_</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
+        <span class="n">info</span><span class="p">[</span><span class="s2">&quot;cell_site&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">cell_site</span><span class="p">)</span>
+
+        <span class="n">name</span><span class="p">[</span><span class="s2">&quot;alias&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">alias</span><span class="p">),</span>
+        <span class="n">name</span><span class="p">[</span><span class="s2">&quot;site&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">name_site</span><span class="p">)</span>
+        <span class="n">name</span><span class="p">[</span><span class="s2">&quot;site_name&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">site_to_name</span><span class="p">)</span>
+
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;cluster_site&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">cluster_site</span><span class="p">)</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;site&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">data_site</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">orbital</span>
+
+    <span class="c1"># ==================================================</span>
+    <span class="k">def</span> <span class="nf">_set_orbital</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">info</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">orbital</span><span class="p">):</span>
+        <span class="n">ket_site</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">head</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">head</span><span class="p">,</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">name</span><span class="p">[</span><span class="s2">&quot;site&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">()]</span>
+
+        <span class="n">unique_orb</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="n">ket</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">ket_dict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">ket_no</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">no</span><span class="p">,</span> <span class="n">site</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">name</span><span class="p">[</span><span class="s2">&quot;site&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">ket_site</span><span class="p">[</span><span class="n">no</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">orb</span> <span class="ow">in</span> <span class="nb">sum</span><span class="p">(</span><span class="n">orbital</span><span class="p">[</span><span class="n">site</span><span class="p">],</span> <span class="p">[]):</span>
+                <span class="n">ket</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">orb</span><span class="si">}</span><span class="s2">@</span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">ket_dict</span><span class="p">[(</span><span class="n">orb</span><span class="p">,</span> <span class="n">no</span><span class="p">)]</span> <span class="o">=</span> <span class="n">ket_no</span>
+                <span class="n">ket_no</span> <span class="o">=</span> <span class="n">ket_no</span> <span class="o">+</span> <span class="mi">1</span>
+                <span class="n">unique_orb</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">orb</span><span class="p">)</span>
+
+        <span class="n">dimension</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ket</span><span class="p">)</span>
+        <span class="n">orbital</span> <span class="o">=</span> <span class="n">sort_orb_list</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">unique_orb</span><span class="p">),</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;spinful&quot;</span><span class="p">],</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;crystal&quot;</span><span class="p">])</span>
+
+        <span class="n">info</span><span class="p">[</span><span class="s2">&quot;dimension&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dimension</span>
+        <span class="n">info</span><span class="p">[</span><span class="s2">&quot;ket&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ket</span>
+        <span class="n">info</span><span class="p">[</span><span class="s2">&quot;ket_site&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ket_site</span>
+        <span class="n">info</span><span class="p">[</span><span class="s2">&quot;orbital&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">orbital</span>
+
+        <span class="k">return</span> <span class="n">ket_dict</span>
+
+    <span class="c1"># ==================================================</span>
+    <span class="k">def</span> <span class="nf">_set_rep_bond</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">info</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">detail</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        set representative bond.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">rep_bond_all</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">tail</span><span class="p">,</span> <span class="n">head</span><span class="p">,</span> <span class="n">neighbor</span> <span class="ow">in</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;bond&quot;</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">neighbor</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="nb">list</span><span class="p">:</span>
+                <span class="n">neighbor</span> <span class="o">=</span> <span class="p">[</span><span class="n">neighbor</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">tail</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;rep_site&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">tail</span><span class="si">}</span><span class="s2"> is not found in sites.&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">head</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;rep_site&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">head</span><span class="si">}</span><span class="s2"> is not found in sites.&quot;</span><span class="p">)</span>
+
+            <span class="c1"># create rep. bond.</span>
+            <span class="n">tail_pos</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;rep_site&quot;</span><span class="p">][</span><span class="n">tail</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">head_pos</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;rep_site&quot;</span><span class="p">][</span><span class="n">head</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">rep_bond</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_representative_bond</span><span class="p">(</span><span class="n">tail_pos</span><span class="p">,</span> <span class="n">head_pos</span><span class="p">,</span> <span class="n">info</span><span class="p">,</span> <span class="n">detail</span><span class="p">)</span>
+            <span class="n">rep_bond_list</span> <span class="o">=</span> <span class="p">[{}]</span>
+            <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">lst</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">rep_bond</span><span class="p">):</span>
+                <span class="n">n_rep_bond</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">lst</span><span class="p">):</span>
+                    <span class="n">bb</span> <span class="o">=</span> <span class="n">NSArray</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+                    <span class="n">v</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">bb</span><span class="o">.</span><span class="n">convert_bond</span><span class="p">(</span><span class="s2">&quot;bond&quot;</span><span class="p">)</span>
+                    <span class="n">wp</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_mpm</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">find_wyckoff_position</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">c</span><span class="p">)))</span>
+                    <span class="n">_</span><span class="p">,</span> <span class="n">nd</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mpm</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">bond_mapping</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+                    <span class="n">nd</span> <span class="o">=</span> <span class="s2">&quot;ND&quot;</span> <span class="k">if</span> <span class="n">nd</span> <span class="k">else</span> <span class="s2">&quot;D&quot;</span>
+                    <span class="n">b</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">@</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">&quot;</span>
+                    <span class="n">b</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rep_bond_site_order</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">info</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+                    <span class="n">bond_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">tail</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">head</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">&quot;</span>
+                    <span class="n">sym</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mpm</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">wyckoff</span><span class="o">.</span><span class="n">site_symmetry</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span>
+                    <span class="n">n_rep_bond</span><span class="p">[</span><span class="n">bond_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">wp</span><span class="p">,</span> <span class="n">nd</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">sym</span><span class="p">)</span>
+                <span class="n">rep_bond_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n_rep_bond</span><span class="p">)</span>
+
+            <span class="n">bond_th</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">tail</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">head</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="n">rep_bond_all</span><span class="p">[</span><span class="n">bond_th</span><span class="p">]</span> <span class="o">=</span> <span class="n">rep_bond_list</span>
+
+            <span class="c1"># set rep. bond for required neighbors.</span>
+            <span class="n">rep_bond_selected</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">neighbor</span><span class="p">:</span>
+                <span class="n">b</span> <span class="o">=</span> <span class="n">rep_bond_all</span><span class="p">[</span><span class="n">bond_th</span><span class="p">][</span><span class="n">n</span><span class="p">]</span>
+                <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">b</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="n">rep_bond_selected</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+
+            <span class="n">info</span><span class="p">[</span><span class="s2">&quot;rep_bond&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">rep_bond_selected</span><span class="p">)</span>
+
+        <span class="n">detail</span><span class="p">[</span><span class="s2">&quot;rep_bond_all&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">rep_bond_all</span><span class="p">)</span>
+
+    <span class="c1"># ==================================================</span>
+    <span class="k">def</span> <span class="nf">_rep_bond_site_order</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bond</span><span class="p">,</span> <span class="n">info</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        get rep_bond in order of site numbers.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">site_to_name</span> <span class="o">=</span> <span class="n">name</span><span class="p">[</span><span class="s2">&quot;site_name&quot;</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;molecule&quot;</span><span class="p">]:</span>
+            <span class="n">b_map</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mpm</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">bond_mapping</span><span class="p">(</span><span class="n">bond</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">b_map</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mpm</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">bond_mapping</span><span class="p">(</span><span class="n">bond</span><span class="p">,</span> <span class="n">plus_set</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">lst</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">b_map</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">bb</span> <span class="o">=</span> <span class="n">NSArray</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+            <span class="n">t</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">bb</span><span class="o">.</span><span class="n">convert_bond</span><span class="p">(</span><span class="s2">&quot;bond_th&quot;</span><span class="p">)</span>
+            <span class="n">v</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">bb</span><span class="o">.</span><span class="n">convert_bond</span><span class="p">(</span><span class="s2">&quot;bond&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;molecule&quot;</span><span class="p">]:</span>
+                <span class="n">tail_name</span> <span class="o">=</span> <span class="n">site_to_name</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">t</span><span class="p">)][</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">head_name</span> <span class="o">=</span> <span class="n">site_to_name</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">h</span><span class="p">)][</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">tail_name</span> <span class="o">=</span> <span class="n">site_to_name</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">shift</span><span class="p">())][</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">head_name</span> <span class="o">=</span> <span class="n">site_to_name</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">shift</span><span class="p">())][</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">t_no</span><span class="p">,</span> <span class="n">h_no</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="nb">int</span><span class="p">(</span><span class="n">tail_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="nb">int</span><span class="p">(</span><span class="n">head_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">lst</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">t_no</span><span class="p">,</span> <span class="n">h_no</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span>
+        <span class="n">lst</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">lst</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
+
+    <span class="c1"># ==================================================</span>
+    <span class="k">def</span> <span class="nf">_set_bond</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">info</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        set bonds in cell.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># set bond in cluster or cell for required neighbors.</span>
+        <span class="n">alias</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">cluster_bond</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">cell_bond</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">data_bond</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">name_bond</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">bond_to_name</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="n">site_to_name</span> <span class="o">=</span> <span class="n">name</span><span class="p">[</span><span class="s2">&quot;site_name&quot;</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;molecule&quot;</span><span class="p">]:</span>
+            <span class="n">plus_set</span> <span class="o">=</span> <span class="n">NSArray</span><span class="o">.</span><span class="n">from_str</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;plus_set&quot;</span><span class="p">])</span>
+            <span class="n">n_pset</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">plus_set</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">n_pset</span> <span class="o">=</span> <span class="mi">1</span>
+
+        <span class="n">bond_no</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># no=0 is for null vector.</span>
+        <span class="k">for</span> <span class="n">no</span><span class="p">,</span> <span class="p">(</span><span class="n">rbname</span><span class="p">,</span> <span class="p">(</span><span class="n">bond</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">))</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">info</span><span class="p">[</span><span class="s2">&quot;rep_bond&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+            <span class="k">if</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;molecule&quot;</span><span class="p">]:</span>
+                <span class="n">b_map</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mpm</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">bond_mapping</span><span class="p">(</span><span class="n">bond</span><span class="p">)</span>
+                <span class="n">basic_num</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">b_map</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">b_map</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mpm</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">bond_mapping</span><span class="p">(</span><span class="n">bond</span><span class="p">,</span> <span class="n">plus_set</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="n">basic_num</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">b_map</span><span class="p">)</span> <span class="o">//</span> <span class="n">n_pset</span>
+            <span class="n">bonds</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">b_map</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+            <span class="n">prop</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">b_map</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+            <span class="n">cluster</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;B_</span><span class="si">{</span><span class="n">no</span><span class="o">+</span><span class="mi">1</span><span class="si">:</span><span class="s2">03d</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="n">alias</span><span class="p">[</span><span class="n">cluster</span><span class="p">]</span> <span class="o">=</span> <span class="n">rbname</span>
+            <span class="n">alias</span><span class="p">[</span><span class="n">rbname</span><span class="p">]</span> <span class="o">=</span> <span class="n">cluster</span>
+            <span class="n">cluster_bond</span><span class="p">[</span><span class="n">cluster</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">b_vector</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">rbond_no</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">basic_num</span><span class="p">):</span>
+                <span class="n">b</span><span class="p">,</span> <span class="n">mp</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="n">bonds</span><span class="p">[</span><span class="n">rbond_no</span><span class="p">],</span>
+                    <span class="n">prop</span><span class="p">[</span><span class="n">rbond_no</span><span class="p">],</span>
+                <span class="p">)</span>  <span class="c1"># as sorted by pset group in s_map.</span>
+                <span class="n">b_no</span> <span class="o">=</span> <span class="n">bond_no</span> <span class="o">+</span> <span class="n">rbond_no</span>
+                <span class="n">bname</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;bond_</span><span class="si">{</span><span class="n">b_no</span><span class="si">:</span><span class="s2">03d</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="n">cluster_bond</span><span class="p">[</span><span class="n">cluster</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bname</span><span class="p">)</span>
+                <span class="n">bb</span> <span class="o">=</span> <span class="n">NSArray</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+                <span class="n">t</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">bb</span><span class="o">.</span><span class="n">convert_bond</span><span class="p">(</span><span class="s2">&quot;bond_th&quot;</span><span class="p">)</span>
+                <span class="n">v</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">bb</span><span class="o">.</span><span class="n">convert_bond</span><span class="p">(</span><span class="s2">&quot;bond&quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;molecule&quot;</span><span class="p">]:</span>
+                    <span class="n">tail_name</span> <span class="o">=</span> <span class="n">site_to_name</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">t</span><span class="p">)][</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="n">head_name</span> <span class="o">=</span> <span class="n">site_to_name</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">h</span><span class="p">)][</span><span class="mi">0</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">tail_name</span> <span class="o">=</span> <span class="n">site_to_name</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">shift</span><span class="p">())][</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="n">head_name</span> <span class="o">=</span> <span class="n">site_to_name</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">shift</span><span class="p">())][</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">ht_no</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="nb">int</span><span class="p">(</span><span class="n">head_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
+                    <span class="nb">int</span><span class="p">(</span><span class="n">tail_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="k">assert</span> <span class="n">ht_no</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">ht_no</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="sa">f</span><span class="s2">&quot;site indices are wrong, </span><span class="si">{</span><span class="n">ht_no</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="n">vc</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">@</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="n">data_bond</span><span class="p">[</span><span class="n">bname</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">vc</span><span class="p">,</span> <span class="n">mp</span><span class="p">,</span> <span class="n">ht_no</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">),</span> <span class="n">b</span><span class="p">)</span>
+                <span class="n">br</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">NSArray</span><span class="p">(</span><span class="n">vc</span><span class="p">)</span><span class="o">.</span><span class="n">regular_direction</span><span class="p">())</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;@&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">b_vector</span><span class="p">[</span><span class="n">br</span><span class="p">]</span> <span class="o">=</span> <span class="n">b_vector</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">br</span><span class="p">,</span> <span class="p">[])</span> <span class="o">+</span> <span class="p">[</span><span class="n">bname</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">n_pset</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">pset</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_pset</span><span class="p">):</span>
+                        <span class="n">v</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">NSArray</span><span class="p">(</span><span class="n">bonds</span><span class="p">[</span><span class="n">pset</span> <span class="o">*</span> <span class="n">basic_num</span> <span class="o">+</span> <span class="n">rbond_no</span><span class="p">])</span><span class="o">.</span><span class="n">convert_bond</span><span class="p">(</span><span class="s2">&quot;bond&quot;</span><span class="p">)</span>
+                        <span class="n">vc1</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">@</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">&quot;</span>
+                        <span class="n">cell_bond</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">rbname</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">rbond_no</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="n">pset</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                            <span class="n">vc1</span><span class="p">,</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">_mapping_str</span><span class="p">(</span><span class="n">mp</span><span class="p">),</span>
+                        <span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">cell_bond</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">rbname</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">rbond_no</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">vc</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mapping_str</span><span class="p">(</span><span class="n">mp</span><span class="p">))</span>
+                <span class="n">name_bond</span><span class="p">[</span><span class="n">bname</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">rbname</span><span class="p">,</span> <span class="n">rbond_no</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="k">assert</span> <span class="n">data_bond</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;bond_</span><span class="si">{</span><span class="n">bond_no</span><span class="si">:</span><span class="s2">03d</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;first SO is not identity operation, </span><span class="si">{</span><span class="n">mp</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="k">for</span> <span class="n">rbond_no</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">basic_num</span><span class="p">):</span>
+                <span class="n">b_no</span> <span class="o">=</span> <span class="n">bond_no</span> <span class="o">+</span> <span class="n">rbond_no</span>
+                <span class="n">bname</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;bond_</span><span class="si">{</span><span class="n">b_no</span><span class="si">:</span><span class="s2">03d</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="k">for</span> <span class="n">pset</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_pset</span><span class="p">):</span>
+                    <span class="n">v</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">NSArray</span><span class="p">(</span><span class="n">bonds</span><span class="p">[</span><span class="n">pset</span> <span class="o">*</span> <span class="n">basic_num</span> <span class="o">+</span> <span class="n">rbond_no</span><span class="p">])</span><span class="o">.</span><span class="n">convert_bond</span><span class="p">(</span><span class="s2">&quot;bond&quot;</span><span class="p">)</span>
+                    <span class="n">b</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">@</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">&quot;</span>
+                    <span class="n">bond_to_name</span><span class="p">[</span><span class="n">b</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">bname</span><span class="p">,</span> <span class="n">pset</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">bond_no</span> <span class="o">=</span> <span class="n">bond_no</span> <span class="o">+</span> <span class="n">basic_num</span>
+
+            <span class="c1"># replace same bond vector.</span>
+            <span class="k">for</span> <span class="n">lst</span> <span class="ow">in</span> <span class="n">b_vector</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+                <span class="n">top</span> <span class="o">=</span> <span class="n">lst</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">v0</span> <span class="o">=</span> <span class="n">data_bond</span><span class="p">[</span><span class="n">top</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+                    <span class="n">b</span><span class="p">,</span> <span class="n">mp</span><span class="p">,</span> <span class="n">ht_no</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">th</span> <span class="o">=</span> <span class="n">data_bond</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                    <span class="n">nv</span> <span class="o">=</span> <span class="n">top</span> <span class="k">if</span> <span class="n">v0</span> <span class="o">==</span> <span class="n">v</span> <span class="k">else</span> <span class="s2">&quot;-&quot;</span> <span class="o">+</span> <span class="n">top</span>
+                    <span class="n">data_bond</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">mp</span><span class="p">,</span> <span class="n">ht_no</span><span class="p">,</span> <span class="n">nv</span><span class="p">,</span> <span class="n">th</span><span class="p">)</span>
+            <span class="n">data</span><span class="p">[</span><span class="s2">&quot;bond&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">data_bond</span><span class="p">)</span>
+
+        <span class="n">info</span><span class="p">[</span><span class="s2">&quot;cell_bond&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">cell_bond</span><span class="p">)</span>
+
+        <span class="n">name</span><span class="p">[</span><span class="s2">&quot;alias&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">alias</span><span class="p">)</span>
+        <span class="n">name</span><span class="p">[</span><span class="s2">&quot;bond&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">name_bond</span><span class="p">)</span>
+        <span class="n">name</span><span class="p">[</span><span class="s2">&quot;bond_name&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">bond_to_name</span><span class="p">)</span>
+
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;cluster_bond&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">cluster_bond</span><span class="p">)</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;bond&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">data_bond</span><span class="p">)</span>
+
+    <span class="c1"># ==================================================</span>
+    <span class="k">def</span> <span class="nf">_set_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">orbital</span><span class="p">,</span> <span class="n">ket_dict</span><span class="p">):</span>
+        <span class="n">cluster_atomic</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">atomic_braket</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="n">ij_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;site&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">()]</span> <span class="o">+</span> <span class="p">[</span><span class="n">v</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;bond&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">()]</span>
+
+        <span class="k">for</span> <span class="n">ij</span> <span class="ow">in</span> <span class="n">ij_list</span><span class="p">:</span>
+            <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">ij</span>
+            <span class="n">site_i</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;site_</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">:</span><span class="s2">03d</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="n">site_j</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;site_</span><span class="si">{</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="si">:</span><span class="s2">03d</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="n">Si</span> <span class="o">=</span> <span class="n">name</span><span class="p">[</span><span class="s2">&quot;site&quot;</span><span class="p">][</span><span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;site&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="n">i</span><span class="p">]][</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">Sj</span> <span class="o">=</span> <span class="n">name</span><span class="p">[</span><span class="s2">&quot;site&quot;</span><span class="p">][</span><span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;site&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="n">j</span><span class="p">]][</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">Si</span> <span class="o">==</span> <span class="n">Sj</span><span class="p">:</span>
+                <span class="n">orbs_i</span> <span class="o">=</span> <span class="n">orbital</span><span class="p">[</span><span class="n">site_i</span><span class="p">]</span>
+                <span class="n">orbs_j</span> <span class="o">=</span> <span class="n">orbs_i</span>
+                <span class="n">braket</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span>
+                    <span class="p">[[(</span><span class="n">orb</span><span class="p">,</span> <span class="n">orbs_j</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">orbs_i</span><span class="p">))]</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">orb</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">orbs_i</span><span class="p">)],</span>
+                    <span class="p">[],</span>
+                <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">orbs_i</span> <span class="o">=</span> <span class="n">orbital</span><span class="p">[</span><span class="n">site_i</span><span class="p">]</span>
+                <span class="n">orbs_j</span> <span class="o">=</span> <span class="n">orbital</span><span class="p">[</span><span class="n">site_j</span><span class="p">]</span>
+                <span class="n">braket</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([[(</span><span class="n">orbi</span><span class="p">,</span> <span class="n">orbj</span><span class="p">)</span> <span class="k">for</span> <span class="n">orbj</span> <span class="ow">in</span> <span class="n">orbs_j</span><span class="p">]</span> <span class="k">for</span> <span class="n">orbi</span> <span class="ow">in</span> <span class="n">orbs_i</span><span class="p">],</span> <span class="p">[])</span>
+            <span class="n">cluster_atomic</span><span class="p">[</span><span class="n">ij</span><span class="p">]</span> <span class="o">=</span> <span class="p">[(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">bra</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">ket</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">bra</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">i</span><span class="p">),</span> <span class="p">(</span><span class="n">ket</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">j</span><span class="p">))</span> <span class="k">for</span> <span class="n">bra</span><span class="p">,</span> <span class="n">ket</span> <span class="ow">in</span> <span class="n">braket</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">bra</span><span class="p">,</span> <span class="n">ket</span> <span class="ow">in</span> <span class="n">braket</span><span class="p">:</span>
+                <span class="n">atomic_braket</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">bra</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">ket</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">bra</span><span class="p">,</span> <span class="n">ket</span><span class="p">)</span>
+
+        <span class="n">rs</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;M_</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">:</span><span class="s2">03d</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">atomic_braket</span><span class="o">.</span><span class="n">keys</span><span class="p">())}</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="n">rs</span><span class="p">[</span><span class="n">k</span><span class="p">]:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">atomic_braket</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+        <span class="n">atomic_braket</span> <span class="o">=</span> <span class="n">d</span>
+
+        <span class="n">dca</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">lst</span> <span class="ow">in</span> <span class="n">cluster_atomic</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">nlst</span> <span class="o">=</span> <span class="p">[(</span><span class="n">ket_dict</span><span class="p">[</span><span class="n">k1</span><span class="p">],</span> <span class="n">ket_dict</span><span class="p">[</span><span class="n">k2</span><span class="p">],</span> <span class="n">rs</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">k1</span><span class="p">,</span> <span class="n">k2</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">]</span>
+            <span class="n">dca</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">nlst</span>
+        <span class="n">cluster_atomic</span> <span class="o">=</span> <span class="n">dca</span>
+
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;cluster_atomic&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">cluster_atomic</span><span class="p">)</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;atomic_braket&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">atomic_braket</span><span class="p">)</span>
+
+    <span class="c1"># ==================================================</span>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_mapping_str</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">mp</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        modify SO mapping (+1).</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            mp (list): mapping list.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: modified mapping list.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">mp</span><span class="p">]</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+    <span class="c1"># ==================================================</span>
+    <span class="k">def</span> <span class="nf">_group_str</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">molecule</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        create group string.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            molecule (bool): molecule or crystal ?</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: info. for group.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">no</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">IS</span><span class="p">,</span> <span class="n">setting</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mpm</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">tag</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">setting</span><span class="p">:</span>
+            <span class="n">setting</span> <span class="o">=</span> <span class="s2">&quot;(&quot;</span> <span class="o">+</span> <span class="n">setting</span> <span class="o">+</span> <span class="s2">&quot;)&quot;</span>
+        <span class="n">SS</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_mpm</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">tag</span><span class="p">)</span>
+        <span class="n">group_str</span> <span class="o">=</span> <span class="s2">&quot;point&quot;</span> <span class="k">if</span> <span class="n">molecule</span> <span class="k">else</span> <span class="s2">&quot;space&quot;</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">group_str</span><span class="si">}</span><span class="s2"> group No. </span><span class="si">{</span><span class="n">no</span><span class="si">}</span><span class="s2"> : </span><span class="si">{</span><span class="n">SS</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="n">IS</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">if</span> <span class="n">setting</span><span class="p">:</span>
+            <span class="n">ret</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot; </span><span class="si">{</span><span class="n">setting</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">molecule</span><span class="p">:</span>
+            <span class="n">ret</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot; : PG </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_mpm</span><span class="o">.</span><span class="n">point_group</span><span class="si">}</span><span class="s2">&quot;</span>
+
+        <span class="k">return</span> <span class="n">ret</span>
+
+    <span class="c1"># ==================================================</span>
+    <span class="k">def</span> <span class="nf">_site_grid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">site</span><span class="p">,</span> <span class="n">info</span><span class="p">,</span> <span class="n">detail</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        site grid.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            site (str): representative site.</span>
+<span class="sd">            info (dict): info. dict.</span>
+<span class="sd">            detail (dict): detail dict.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            NSArray: all sites for given grid.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;molecule&quot;</span><span class="p">]:</span>
+            <span class="n">site</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mpm</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">transform_site</span><span class="p">(</span><span class="n">site</span><span class="p">,</span> <span class="n">remove_duplicate</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">site</span>
+
+        <span class="n">site</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mpm</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">transform_site</span><span class="p">(</span><span class="n">site</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">remove_duplicate</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">plus_set</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">repeat</span><span class="p">:</span>
+            <span class="n">offset</span> <span class="o">=</span> <span class="n">detail</span><span class="p">[</span><span class="s2">&quot;cell_range&quot;</span><span class="p">][::</span><span class="mi">2</span><span class="p">]</span>
+            <span class="n">N</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="n">j</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">detail</span><span class="p">[</span><span class="s2">&quot;cell_range&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">],</span> <span class="n">offset</span><span class="p">)]</span>
+            <span class="n">ns</span> <span class="o">=</span> <span class="n">N</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">N</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">N</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+
+            <span class="n">igrid</span> <span class="o">=</span> <span class="n">NSArray</span><span class="o">.</span><span class="n">igrid</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">offset</span><span class="p">)</span>
+            <span class="n">igrid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">site</span><span class="p">),</span> <span class="mi">1</span><span class="p">))</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">igrid</span><span class="p">])</span>
+            <span class="n">igrid</span> <span class="o">=</span> <span class="n">igrid</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">ns</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">site</span><span class="p">),</span> <span class="mi">3</span><span class="p">)</span>
+            <span class="n">all_site</span> <span class="o">=</span> <span class="n">NSArray</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">site</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span> <span class="o">+</span> <span class="n">igrid</span><span class="p">,</span> <span class="s2">&quot;vector&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">all_site</span> <span class="o">=</span> <span class="n">site</span>
+
+        <span class="k">return</span> <span class="n">all_site</span>
+
+    <span class="c1"># ==================================================</span>
+    <span class="k">def</span> <span class="nf">_representative_bond</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tail</span><span class="p">,</span> <span class="n">head</span><span class="p">,</span> <span class="n">info</span><span class="p">,</span> <span class="n">detail</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        generate representative bonds.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            tail (str): tail position.</span>
+<span class="sd">            head (str): head position.</span>
+<span class="sd">            info (dict): info dict.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            list: list of representative bonds in each neighbor.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">tail</span> <span class="o">=</span> <span class="n">NSArray</span><span class="p">(</span><span class="s2">&quot;{&quot;</span> <span class="o">+</span> <span class="n">tail</span> <span class="o">+</span> <span class="s2">&quot;}&quot;</span><span class="p">)</span>
+        <span class="n">head</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_site_grid</span><span class="p">(</span><span class="n">head</span><span class="p">,</span> <span class="n">info</span><span class="p">,</span> <span class="n">detail</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">all_bond</span> <span class="o">=</span> <span class="n">NSArray</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">tail</span><span class="p">,</span> <span class="n">head</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_G</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;molecule&quot;</span><span class="p">]:</span>
+            <span class="n">all_bond</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">all_bond</span><span class="o">.</span><span class="n">values</span><span class="p">())[</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">all_bond</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">all_bond</span><span class="o">.</span><span class="n">values</span><span class="p">())[</span><span class="mi">1</span> <span class="p">:</span> <span class="n">detail</span><span class="p">[</span><span class="s2">&quot;max_neighbor&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="n">rep_bond</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">lst</span> <span class="ow">in</span> <span class="n">all_bond</span><span class="p">:</span>
+            <span class="n">th</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">tail</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">;</span><span class="si">{</span><span class="n">head</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">]</span>
+            <span class="n">bs</span> <span class="o">=</span> <span class="n">NSArray</span><span class="o">.</span><span class="n">from_str</span><span class="p">(</span><span class="n">th</span><span class="p">)</span>
+            <span class="n">rb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mpm</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">find_rep_bond</span><span class="p">(</span><span class="n">bs</span><span class="p">)</span>
+            <span class="n">rep_bond</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rb</span><span class="o">.</span><span class="n">str</span><span class="p">())</span>
+
+        <span class="k">return</span> <span class="n">rep_bond</span>
+
+    <span class="c1"># ==================================================</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">A</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_A</span>
+
+    <span class="c1"># ==================================================</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">G</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_G</span>
+
+    <span class="c1"># ==================================================</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">A_norm</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_A_norm</span>
+
+    <span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="MaterialModel.regularize">
+<a class="viewcode-back" href="../../../src/api_model.html#multipie.model.material_model.MaterialModel.regularize">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">regularize</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        regularize minimal model dict.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            d (dict): dict of model.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: regularized model dict.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># default setting.</span>
+        <span class="k">if</span> <span class="s2">&quot;cell&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">d</span><span class="p">[</span><span class="s2">&quot;cell&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="n">model</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;model&quot;</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="s2">&quot;site&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">d</span><span class="p">[</span><span class="s2">&quot;site&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">if</span> <span class="s2">&quot;bond&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">d</span><span class="p">[</span><span class="s2">&quot;bond&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">if</span> <span class="s2">&quot;option&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">d</span><span class="p">[</span><span class="s2">&quot;option&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;view&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="s2">&quot;view_mode&quot;</span><span class="p">:</span> <span class="s2">&quot;standard&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;output&quot;</span><span class="p">:</span> <span class="n">model</span><span class="p">,</span>
+                <span class="s2">&quot;minimal_samb&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                <span class="s2">&quot;binary_output&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="p">}</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s2">&quot;view&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;option&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">d</span><span class="p">[</span><span class="s2">&quot;option&quot;</span><span class="p">][</span><span class="s2">&quot;view&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">if</span> <span class="s2">&quot;view_mode&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;option&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">d</span><span class="p">[</span><span class="s2">&quot;option&quot;</span><span class="p">][</span><span class="s2">&quot;view_mode&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;standard&quot;</span>
+            <span class="k">if</span> <span class="s2">&quot;output&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;option&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">d</span><span class="p">[</span><span class="s2">&quot;option&quot;</span><span class="p">][</span><span class="s2">&quot;output&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">model</span>
+            <span class="k">if</span> <span class="s2">&quot;minimal_samb&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;option&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">d</span><span class="p">[</span><span class="s2">&quot;option&quot;</span><span class="p">][</span><span class="s2">&quot;minimal_samb&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="k">if</span> <span class="s2">&quot;generate&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">d</span><span class="p">[</span><span class="s2">&quot;generate&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;model_type&quot;</span><span class="p">:</span> <span class="s2">&quot;tight_binding&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;time_reversal_type&quot;</span><span class="p">:</span> <span class="s2">&quot;electric&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;irrep&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="s2">&quot;fourier_transform&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+                <span class="s2">&quot;toroidal_priority&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="p">}</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s2">&quot;model_type&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;generate&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">d</span><span class="p">[</span><span class="s2">&quot;generate&quot;</span><span class="p">][</span><span class="s2">&quot;model_type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;tight_binding&quot;</span>
+            <span class="k">if</span> <span class="s2">&quot;time_reversal_type&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;generate&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">d</span><span class="p">[</span><span class="s2">&quot;generate&quot;</span><span class="p">][</span><span class="s2">&quot;time_reversal_type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;electric&quot;</span>
+            <span class="k">if</span> <span class="s2">&quot;irrep&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;generate&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">d</span><span class="p">[</span><span class="s2">&quot;generate&quot;</span><span class="p">][</span><span class="s2">&quot;irrep&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">if</span> <span class="s2">&quot;fourier_transform&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;generate&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">d</span><span class="p">[</span><span class="s2">&quot;generate&quot;</span><span class="p">][</span><span class="s2">&quot;fourier_transform&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">if</span> <span class="s2">&quot;toroidal_priority&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;generate&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">d</span><span class="p">[</span><span class="s2">&quot;generate&quot;</span><span class="p">][</span><span class="s2">&quot;toroidal_priority&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="k">if</span> <span class="s2">&quot;detail&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">d</span><span class="p">[</span><span class="s2">&quot;detail&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;rep_bond_all&quot;</span><span class="p">:</span> <span class="p">{},</span>
+                <span class="s2">&quot;cell_range&quot;</span><span class="p">:</span> <span class="n">_default_search_cell_range</span><span class="p">,</span>
+                <span class="s2">&quot;max_neighbor&quot;</span><span class="p">:</span> <span class="n">_default_max_neighbor</span><span class="p">,</span>
+                <span class="s2">&quot;A&quot;</span><span class="p">:</span> <span class="s2">&quot;[[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]]&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="n">__version__</span><span class="p">,</span>
+            <span class="p">}</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s2">&quot;cell_range&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;detail&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">d</span><span class="p">[</span><span class="s2">&quot;detail&quot;</span><span class="p">][</span><span class="s2">&quot;cell_range&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_default_search_cell_range</span>
+            <span class="k">if</span> <span class="s2">&quot;max_neighbor&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;detail&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">d</span><span class="p">[</span><span class="s2">&quot;detail&quot;</span><span class="p">][</span><span class="s2">&quot;max_neighbor&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_default_max_neighbor</span>
+
+        <span class="k">if</span> <span class="s2">&quot;spinful&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">d</span><span class="p">[</span><span class="s2">&quot;spinful&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;generate&quot;</span><span class="p">][</span><span class="s2">&quot;model_type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;phonon&quot;</span><span class="p">:</span>
+                <span class="n">d</span><span class="p">[</span><span class="s2">&quot;spinful&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="k">if</span> <span class="s2">&quot;k_point&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">d</span><span class="p">[</span><span class="s2">&quot;k_point&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Γ&quot;</span><span class="p">:</span> <span class="s2">&quot;[0, 0, 0]&quot;</span><span class="p">,</span> <span class="s2">&quot;X&quot;</span><span class="p">:</span> <span class="s2">&quot;[1/2, 0, 0]&quot;</span><span class="p">}</span>
+        <span class="k">if</span> <span class="s2">&quot;k_path&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">d</span><span class="p">[</span><span class="s2">&quot;k_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Γ-X&quot;</span>
+
+        <span class="k">return</span> <span class="n">d</span></div>
+
+
+    <span class="c1"># ==================================================</span>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_header</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">header_str</span></div>
+
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Hiroaki Kusunose and Rikuto Oiwa
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2021-2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

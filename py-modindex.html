@@ -6,9 +6,8 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <title>MultiPie &#8212; MultiPie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Python Module Index &#8212; MultiPie</title>
   
   
   
@@ -65,12 +64,14 @@ const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'index';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'py-modindex';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Example for SAMB Construction" href="src/samb_construction.html" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="jp"/>
+
+
   </head>
   
   
@@ -148,7 +149,7 @@ const thebe_selector_output = ".output, .cell_output"
 
   
 
-<a class="navbar-brand logo" href="#">
+<a class="navbar-brand logo" href="index.html">
   
   
   
@@ -264,54 +265,6 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
-
-
-<div class="dropdown dropdown-download-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
-    <i class="fas fa-download"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="_sources/" target="_blank"
-   class="btn btn-sm btn-download-source-button dropdown-item"
-   title="Download source file"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="btn__text-container">.md</span>
-</a>
-</li>
-      
-      
-      
-      
-      <li>
-<button onclick="window.print()"
-  class="btn btn-sm btn-download-pdf-button dropdown-item"
-  title="Print to PDF"
-  data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="btn__text-container">.pdf</span>
-</button>
-</li>
-      
-  </ul>
-</div>
-
-
-
-
 <button onclick="toggleFullScreen()"
   class="btn btn-sm btn-fullscreen-button"
   title="Fullscreen mode"
@@ -356,7 +309,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>MultiPie</h1>
+    <h1></h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -370,73 +323,175 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="multipie">
-<h1>MultiPie<a class="headerlink" href="#multipie" title="Link to this heading">#</a></h1>
-<p>A Python library for crystallographic symmetry operations and Symmetry-Adapted Multipole Basis (SAMB).
-Molecular or crystal structures are best drawn by using <a class="reference external" href="https://github.com/CMT-MU/QtDraw">QtDraw</a>.</p>
-<ul>
-<li><p><strong>Authors</strong>: Hiroaki Kusunose and Rikuto Oiwa</p></li>
-<li><p><strong>Citing MultiPie and QtDraw</strong>: If you are using MultiPie and/or QtDraw in your scientific research, please help our scientific visibility by citing our work<span id="id1">[<a class="reference internal" href="#id3" title="Hiroaki Kusunose, Rikuto Oiwa, and Satoru Hayami. Symmetry-adapted modeling for molecules and crystals. Phys. Rev. B, 107:195118, May 2023. URL: https://link.aps.org/doi/10.1103/PhysRevB.107.195118, doi:10.1103/PhysRevB.107.195118.">1</a>]</span>.</p>
-<div class="docutils container" id="id2">
-<div role="list" class="citation-list">
-<div class="citation" id="id3" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
-<p>Hiroaki Kusunose, Rikuto Oiwa, and Satoru Hayami. Symmetry-adapted modeling for molecules and crystals. <em>Phys. Rev. B</em>, 107:195118, May 2023. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevB.107.195118">https://link.aps.org/doi/10.1103/PhysRevB.107.195118</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevB.107.195118">doi:10.1103/PhysRevB.107.195118</a>.</p>
-</div>
-</div>
-</div>
-</li>
-<li><p><strong>Installation</strong>: MultiPie can be installed from PyPI using pip on Python &gt;= 3.9:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">multipie</span>
-</pre></div>
-</div>
-<p>You can also visit
-<a class="reference external" href="https://pypi.org/project/multipie/">PyPI</a> or <a class="reference external" href="https://github.com/CMT-MU/MultiPie">GitHub</a> to download the source.</p>
-</li>
-<li><p><strong>Requirements</strong>:</p>
-<ul class="simple">
-<li><p>This library optionally requires <a class="reference external" href="https://www.tug.org/texlive/">TeXLive</a> environment to create LaTeX and PDF files.</p></li>
-<li><p>Molecular or crystal structure files are optionally generated by <a class="reference external" href="https://github.com/CMT-MU/QtDraw">QtDraw</a>.</p></li>
-</ul>
-</li>
-<li><p><strong>See also</strong>:</p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://github.com/CMT-MU/QtDraw/blob/main/docs/manual.pdf">Manual</a>.</p></li>
-<li><p><a class="reference external" href="https://jupyterbook.org/en/stable/reference/cheatsheet.html">MyST syntax cheat sheet</a></p></li>
-<li><p><a class="reference external" href="https://cmt-mu.github.io/MultiPieTutorial/">MultiPie tutorial (in Japanese)</a></p></li>
-<li><p><a class="reference external" href="https://cmt-mu.github.io/QtDrawTutorial/">QtDraw tutorial (in Japanese)</a></p></li>
-</ul>
-</li>
-</ul>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
-</section>
 
-    <script type="text/x-thebe-config">
-    {
-        requestKernel: true,
-        binderOptions: {
-            repo: "binder-examples/jupyter-stacks-datascience",
-            ref: "master",
-        },
-        codeMirrorConfig: {
-            theme: "abcdef",
-            mode: "python"
-        },
-        kernelOptions: {
-            name: "python3",
-            path: "./."
-        },
-        predefinedOutput: true
-    }
-    </script>
-    <script>kernelName = 'python3'</script>
+   <h1>Python Module Index</h1>
+
+   <div class="modindex-jumpbox">
+   <a href="#cap-m"><strong>m</strong></a>
+   </div>
+
+   <table class="indextable modindextable">
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-m"><td></td><td>
+       <strong>m</strong></td><td></td></tr>
+     <tr>
+       <td><img src="_static/minus.png" class="toggler"
+              id="toggle-1" style="display: none" alt="-" /></td>
+       <td>
+       <code class="xref">multipie</code></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="src/api_character.html#module-multipie.character.character_pg"><code class="xref">multipie.character.character_pg</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="src/api_group.html#module-multipie.group.point_group"><code class="xref">multipie.group.point_group</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="src/api_group.html#module-multipie.group.space_group"><code class="xref">multipie.group.space_group</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="src/api_harmonics.html#module-multipie.harmonics.harmonics"><code class="xref">multipie.harmonics.harmonics</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="src/api_harmonics.html#module-multipie.harmonics.harmonics_pg"><code class="xref">multipie.harmonics.harmonics_pg</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="src/api_model.html#module-multipie.model.construct_model"><code class="xref">multipie.model.construct_model</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="src/api_model.html#module-multipie.model.create_model"><code class="xref">multipie.model.create_model</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="src/api_model.html#module-multipie.model.material_model"><code class="xref">multipie.model.material_model</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="src/api_model.html#module-multipie.model.multipie_manager"><code class="xref">multipie.model.multipie_manager</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="src/api_model.html#module-multipie.model.symmetry_adapted_model"><code class="xref">multipie.model.symmetry_adapted_model</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="src/api_multipole.html#module-multipie.multipole.base.base_atomic_multipole_set"><code class="xref">multipie.multipole.base.base_atomic_multipole_set</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="src/api_multipole.html#module-multipie.multipole.util.atomic_orbital_util"><code class="xref">multipie.multipole.util.atomic_orbital_util</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="src/api_multipole.html#module-multipie.multipole.util.atomic_samb_util"><code class="xref">multipie.multipole.util.atomic_samb_util</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="src/api_multipole.html#module-multipie.multipole.util.multipole_util"><code class="xref">multipie.multipole.util.multipole_util</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="src/api_multipole.html#module-multipie.multipole.util.pauli"><code class="xref">multipie.multipole.util.pauli</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="src/api_multipole.html#module-multipie.multipole.util.spin_orbital_basis"><code class="xref">multipie.multipole.util.spin_orbital_basis</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="src/api_multipole.html#module-multipie.multipole.util.structure_samb_util"><code class="xref">multipie.multipole.util.structure_samb_util</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="src/api_multipole.html#module-multipie.multipole.util.z_samb_util"><code class="xref">multipie.multipole.util.z_samb_util</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="src/api_response_tensor.html#module-multipie.response_tensor.response_tensor_pg"><code class="xref">multipie.response_tensor.response_tensor_pg</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="src/api_symmetry_operation.html#module-multipie.symmetry_operation.symmetry_operation"><code class="xref">multipie.symmetry_operation.symmetry_operation</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="src/api_symmetry_operation.html#module-multipie.symmetry_operation.symmetry_operation_g"><code class="xref">multipie.symmetry_operation.symmetry_operation_g</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="src/api_tag.html#module-multipie.tag.tag_group"><code class="xref">multipie.tag.tag_group</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="src/api_tag.html#module-multipie.tag.tag_irrep"><code class="xref">multipie.tag.tag_irrep</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="src/api_tag.html#module-multipie.tag.tag_list"><code class="xref">multipie.tag.tag_list</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="src/api_tag.html#module-multipie.tag.tag_multipole"><code class="xref">multipie.tag.tag_multipole</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="src/api_tag.html#module-multipie.tag.tag_response_tensor"><code class="xref">multipie.tag.tag_response_tensor</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="src/api_tag.html#module-multipie.tag.tag_symmetry_operation"><code class="xref">multipie.tag.tag_symmetry_operation</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="src/api_tag.html#module-multipie.tag.tag_wyckoff"><code class="xref">multipie.tag.tag_wyckoff</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="src/api_virtual_cluster.html#module-multipie.virtual_cluster.virtual_cluster_pg"><code class="xref">multipie.virtual_cluster.virtual_cluster_pg</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="src/api_wyckoff.html#module-multipie.wyckoff.wyckoff_g"><code class="xref">multipie.wyckoff.wyckoff_g</code></a></td><td>
+       <em></em></td></tr>
+   </table>
+
 
                 </article>
               
