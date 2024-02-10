@@ -1,8 +1,8 @@
-<img width="128" src="multipie_logo.png">
+# SAMB in full matrix
 
-# MultiPie
+The output file format for SAMB in full-matrix form is the following. The keywords with * is only for crystal.
 
-## SAMB in full matrix form (* only for crystal)
+## SAMB in full matrix form
 - **model** : model name.
 - **molecule** : molecule or crystal ?
 - **group** : (tag, detailed str)

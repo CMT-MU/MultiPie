@@ -1,10 +1,9 @@
 import os
 import sys
 
-__version__ = "1.2.12"
+__version__ = "1.2.13"
 __top_dir__ = os.path.normpath(os.path.dirname(__file__) + "/../") + "/"
 __bin_dir__ = __top_dir__ + "multipie/binary_data/"
-
 
 # ==================================================
 from gcoreutils.string_util import class_name

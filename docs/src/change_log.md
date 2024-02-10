@@ -1,6 +1,4 @@
-<img width="128" src="multipie_logo.png">
-
-# MultiPie
+# Change logs (not in tags)
 
 - Changes in version 1.1.12
   - see GitHub log for changes of this and later versions.

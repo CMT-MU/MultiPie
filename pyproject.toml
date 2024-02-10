@@ -1,0 +1,69 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "multipie"
+dependencies = [
+    "black",
+    "joblib",
+    "gmpy2",
+    "click",
+    "gcoreutils",
+]
+dynamic = ["version"]
+requires-python = ">=3.9"
+authors = [
+  { name="Hiroaki Kusunose", email="hiroaki.kusunose@gmail.com" },
+  { name="Rikuto Oiwa", email="ro.qp.07@gmail.com" },
+]
+description = "A python library for crystallographic symmetry operations and Symmetry-Adapted Multipole Basis (SAMB)."
+readme = "README.md"
+license = {text = "MIT"}
+keywords = ["group theory", "condensed matter", "materials science", "symmetry-adapted basis"]
+classifiers = [
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: POSIX",
+    "Operating System :: MacOS",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+[project.urls]
+Homepage = "https://github.com/CMT-MU/MultiPie"
+Issues = "https://github.com/CMT-MU/MultiPie/issues"
+
+[project.scripts]
+"create_samb" = "multipie.scripts.create_samb:cmd"
+"create_binary" = "multipie.scripts.create_binary:cmd"
+
+[project.optional-dependencies]
+dev = [
+    "jupyter-book",
+    "ghp-import",
+    "jupytext",
+    "qtdraw",
+]
+
+[tool.setuptools.dynamic]
+version = {attr = "multipie.__version__"}
+
+[tool.setuptools.packages.find]
+include = ["multipie", "multipie.*"]
+exclude = ["build", "tests"]
+
+[tool.black]
+line-length = 130
+
+[tool.build_sphinx]
+source-dir = "docs"
+build-dir  = "./docs/_build"
+all_files  = 1
+
+[tool.upload_sphinx]
+upload-dir = "docs/_build/html"
