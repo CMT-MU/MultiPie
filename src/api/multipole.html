@@ -1,0 +1,1142 @@
+
+<!DOCTYPE html>
+
+
+<html lang="jp" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Multipole &#8212; MultiPie</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../../_static/documentation_options.js?v=8cf54648"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=afe5de03"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'src/api/multipole';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Response tensor" href="response_tensor.html" />
+    <link rel="prev" title="Model" href="model.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="jp"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../README.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/multipie_logo.png" class="logo__image only-light" alt="MultiPie - Home"/>
+    <script>document.write(`<img src="../../_static/multipie_logo.png" class="logo__image only-dark" alt="MultiPie - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">SAMB Construction</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../samb_construction.html">Example for SAMB Construction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../use_matrix.html">Example usage of full matrix</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">File Format</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../format/input.html">SAMB construction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../format/model.html">Molecule or Crystal Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../format/samb.html">SAMB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../format/matrix.html">SAMB in full matrix</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API References</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../api.html">Module</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="character.html">Character Table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group.html">Group</a></li>
+<li class="toctree-l2"><a class="reference internal" href="harmonics.html">Harmonics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="model.html">Model</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Multipole</a></li>
+<li class="toctree-l2"><a class="reference internal" href="response_tensor.html">Response tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="symmetry_operation.html">Symmetry operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tag.html">Tag</a></li>
+<li class="toctree-l2"><a class="reference internal" href="virtual_cluster.html">Virtual cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wyckoff.html">Wyckoff position</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Change Log</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../change_log.html">Change logs (not in tags)</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/CMT-MU/MultiPie.git" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Multipole</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-multipie.multipole.base.base_atomic_multipole_set">BaseAtomicMultipole</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.multipole.base.base_atomic_multipole_set.BaseAtomicMultipoleSet"><code class="docutils literal notranslate"><span class="pre">BaseAtomicMultipoleSet</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.multipole.base.base_atomic_multipole_set.BaseAtomicMultipoleSet.tag"><code class="docutils literal notranslate"><span class="pre">BaseAtomicMultipoleSet.tag</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.multipole.base.base_atomic_multipole_set.BaseAtomicMultipoleSet.__init__"><code class="docutils literal notranslate"><span class="pre">BaseAtomicMultipoleSet.__init__()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id0"><code class="docutils literal notranslate"><span class="pre">BaseAtomicMultipoleSet.tag</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-multipie.multipole.util.atomic_orbital_util">utility</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.multipole.util.atomic_orbital_util.basis_type"><code class="docutils literal notranslate"><span class="pre">basis_type()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.multipole.util.atomic_orbital_util.invalid_f_orb_list"><code class="docutils literal notranslate"><span class="pre">invalid_f_orb_list()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.multipole.util.atomic_orbital_util.invalid_orb_list"><code class="docutils literal notranslate"><span class="pre">invalid_orb_list()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.multipole.util.atomic_orbital_util.is_insufficient"><code class="docutils literal notranslate"><span class="pre">is_insufficient()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.multipole.util.atomic_orbital_util.is_spinful"><code class="docutils literal notranslate"><span class="pre">is_spinful()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.multipole.util.atomic_orbital_util.parse_orb_list"><code class="docutils literal notranslate"><span class="pre">parse_orb_list()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.multipole.util.atomic_orbital_util.rank"><code class="docutils literal notranslate"><span class="pre">rank()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.multipole.util.atomic_orbital_util.sort_orb_list"><code class="docutils literal notranslate"><span class="pre">sort_orb_list()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.multipole.util.atomic_orbital_util.split_orb_list_rank_block"><code class="docutils literal notranslate"><span class="pre">split_orb_list_rank_block()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.multipole.util.atomic_orbital_util.to_latex"><code class="docutils literal notranslate"><span class="pre">to_latex()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.multipole.util.atomic_orbital_util.to_spinful"><code class="docutils literal notranslate"><span class="pre">to_spinful()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.multipole.util.atomic_orbital_util.to_spinless"><code class="docutils literal notranslate"><span class="pre">to_spinless()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.multipole.util.atomic_orbital_util.to_standard_form"><code class="docutils literal notranslate"><span class="pre">to_standard_form()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.multipole.util.atomic_samb_util.create_atomic_samb"><code class="docutils literal notranslate"><span class="pre">create_atomic_samb()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.multipole.util.multipole_util.dict_to_matrix"><code class="docutils literal notranslate"><span class="pre">dict_to_matrix()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.multipole.util.multipole_util.matrix_sum"><code class="docutils literal notranslate"><span class="pre">matrix_sum()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.multipole.util.multipole_util.matrix_to_dict"><code class="docutils literal notranslate"><span class="pre">matrix_to_dict()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.multipole.util.pauli.pauli_matrix"><code class="docutils literal notranslate"><span class="pre">pauli_matrix()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.multipole.util.pauli.pauli_matrix_n"><code class="docutils literal notranslate"><span class="pre">pauli_matrix_n()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.multipole.util.structure_samb_util.cs_list"><code class="docutils literal notranslate"><span class="pre">cs_list()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.multipole.util.structure_samb_util.decompose_fk"><code class="docutils literal notranslate"><span class="pre">decompose_fk()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.multipole.util.structure_samb_util.inner_product"><code class="docutils literal notranslate"><span class="pre">inner_product()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.multipole.util.structure_samb_util.normalize_fk"><code class="docutils literal notranslate"><span class="pre">normalize_fk()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.multipole.util.structure_samb_util.orthogonalize_fk"><code class="docutils literal notranslate"><span class="pre">orthogonalize_fk()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.multipole.util.structure_samb_util.to_symbol"><code class="docutils literal notranslate"><span class="pre">to_symbol()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.multipole.util.z_samb_util.create_z_samb"><code class="docutils literal notranslate"><span class="pre">create_z_samb()</span></code></a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="multipole">
+<h1>Multipole<a class="headerlink" href="#multipole" title="Link to this heading">#</a></h1>
+<p>Utilities for multipoes.</p>
+<section id="module-multipie.multipole.base.base_atomic_multipole_set">
+<span id="baseatomicmultipole"></span><h2>BaseAtomicMultipole<a class="headerlink" href="#module-multipie.multipole.base.base_atomic_multipole_set" title="Link to this heading">#</a></h2>
+<p>BaseAtomicMultipoleSet manages a set of atomic multipoles for lm, jm, cubic, and hexagonal basis.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="multipie.multipole.base.base_atomic_multipole_set.BaseAtomicMultipoleSet">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">BaseAtomicMultipoleSet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">b_type</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/multipole/base/base_atomic_multipole_set.html#BaseAtomicMultipoleSet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.multipole.base.base_atomic_multipole_set.BaseAtomicMultipoleSet" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></p>
+<p>a set of atomic multipoles for lm, jm, cubic, and hexagonal basis.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="multipie.multipole.base.base_atomic_multipole_set.BaseAtomicMultipoleSet.tag">
+<span class="sig-name descname"><span class="pre">tag</span></span><a class="headerlink" href="#multipie.multipole.base.base_atomic_multipole_set.BaseAtomicMultipoleSet.tag" title="Link to this definition">#</a></dt>
+<dd><p>tag</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multipie.multipole.base.base_atomic_multipole_set.BaseAtomicMultipoleSet.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">b_type</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/multipole/base/base_atomic_multipole_set.html#BaseAtomicMultipoleSet.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.multipole.base.base_atomic_multipole_set.BaseAtomicMultipoleSet.__init__" title="Link to this definition">#</a></dt>
+<dd><p>initialize the class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>b_type</strong> (<em>str</em>) -- basis type, (lm/jm/cubic/hexagonal).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">tag</span></span><a class="headerlink" href="#id0" title="Link to this definition">#</a></dt>
+<dd><p>basis type, (lm/jm/cubic/hexagonal).</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-multipie.multipole.util.atomic_orbital_util">
+<span id="utility"></span><h2>utility<a class="headerlink" href="#module-multipie.multipole.util.atomic_orbital_util" title="Link to this heading">#</a></h2>
+<p>This file provides utility functions for atomic orbital.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.multipole.util.atomic_orbital_util.basis_type">
+<span class="sig-name descname"><span class="pre">basis_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">orb_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crystal</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/multipole/util/atomic_orbital_util.html#basis_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.multipole.util.atomic_orbital_util.basis_type" title="Link to this definition">#</a></dt>
+<dd><p>identify the type of basis.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>orb_list</strong> (<em>str/</em><em>[</em><em>str</em><em>]</em>) -- orbital list.</p></li>
+<li><p><strong>crystal</strong> (<em>str</em>) -- seven crystal systems, triclinic/monoclinic/orthorhombic/tetragonal/trigonal/hexagonal/cubic.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>type of basis (jm/lm/cubic/hexagonal).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>(tuple/NoneType)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.multipole.util.atomic_orbital_util.invalid_f_orb_list">
+<span class="sig-name descname"><span class="pre">invalid_f_orb_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">orb_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crystal</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/multipole/util/atomic_orbital_util.html#invalid_f_orb_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.multipole.util.atomic_orbital_util.invalid_f_orb_list" title="Link to this definition">#</a></dt>
+<dd><p>list of invalid f orbital list included in given orbital list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>orb_list</strong> (<em>str/</em><em>[</em><em>str</em><em>]</em>) -- orbital list.</p></li>
+<li><p><strong>crystal</strong> (<em>str</em>) -- seven crystal systems, triclinic/monoclinic/orthorhombic/tetragonal/trigonal/hexagonal/cubic.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>invalid f orbital list.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.multipole.util.atomic_orbital_util.invalid_orb_list">
+<span class="sig-name descname"><span class="pre">invalid_orb_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">orb_list</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/multipole/util/atomic_orbital_util.html#invalid_orb_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.multipole.util.atomic_orbital_util.invalid_orb_list" title="Link to this definition">#</a></dt>
+<dd><p>list of orbital list with the invalid forms included in given orbital list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>orb_list</strong> (<em>str/</em><em>[</em><em>str</em><em>]</em>) -- orbital list.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>invalid orbital list.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.multipole.util.atomic_orbital_util.is_insufficient">
+<span class="sig-name descname"><span class="pre">is_insufficient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">orb_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crystal</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/multipole/util/atomic_orbital_util.html#is_insufficient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.multipole.util.atomic_orbital_util.is_insufficient" title="Link to this definition">#</a></dt>
+<dd><p>check if same irrep pair is not included in given orbital list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>orb_list</strong> (<em>str/</em><em>[</em><em>str</em><em>]</em>) -- orbital list.</p></li>
+<li><p><strong>crystal</strong> (<em>str</em>) -- seven crystal systems, triclinic/monoclinic/orthorhombic/tetragonal/trigonal/hexagonal/cubic.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>same irrep pair is not included in given orbital list ?, orbit list that must be included at the same time.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool, str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.multipole.util.atomic_orbital_util.is_spinful">
+<span class="sig-name descname"><span class="pre">is_spinful</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">orb_list</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/multipole/util/atomic_orbital_util.html#is_spinful"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.multipole.util.atomic_orbital_util.is_spinful" title="Link to this definition">#</a></dt>
+<dd><p>spinful ?</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>orb_list</strong> (<em>str/</em><em>[</em><em>str</em><em>]</em>) -- orbital.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>spinful ?</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.multipole.util.atomic_orbital_util.parse_orb_list">
+<span class="sig-name descname"><span class="pre">parse_orb_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">orb_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spinful</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crystal</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/multipole/util/atomic_orbital_util.html#parse_orb_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.multipole.util.atomic_orbital_util.parse_orb_list" title="Link to this definition">#</a></dt>
+<dd><p>parse given orbital list.
+convert orbital list from an abbreviation form to a standard form.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>orb_list</strong> (<em>str/</em><em>[</em><em>str</em><em>]</em>) -- orbital list.</p></li>
+<li><p><strong>spinful</strong> (<em>bool</em>) -- spinful ?</p></li>
+<li><p><strong>crystal</strong> (<em>str</em>) -- seven crystal systems, triclinic/monoclinic/orthorhombic/tetragonal/trigonal/hexagonal/cubic.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>orbital list.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>([str])</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.multipole.util.atomic_orbital_util.rank">
+<span class="sig-name descname"><span class="pre">rank</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">o</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spinful</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crystal</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/multipole/util/atomic_orbital_util.html#rank"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.multipole.util.atomic_orbital_util.rank" title="Link to this definition">#</a></dt>
+<dd><p>rank of given orbital.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>o</strong> (<em>str</em>) -- orbital.</p></li>
+<li><p><strong>spinful</strong> (<em>bool</em>) -- spinful ?</p></li>
+<li><p><strong>crystal</strong> (<em>str</em>) -- seven crystal systems, triclinic/monoclinic/orthorhombic/tetragonal/trigonal/hexagonal/cubic.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>rank.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.multipole.util.atomic_orbital_util.sort_orb_list">
+<span class="sig-name descname"><span class="pre">sort_orb_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">orb_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spinful</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crystal</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/multipole/util/atomic_orbital_util.html#sort_orb_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.multipole.util.atomic_orbital_util.sort_orb_list" title="Link to this definition">#</a></dt>
+<dd><p>sort given orbital list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>orb_list</strong> (<em>str/</em><em>[</em><em>str</em><em>]</em>) -- orbital list.</p></li>
+<li><p><strong>spinful</strong> (<em>bool</em>) -- spinful ?</p></li>
+<li><p><strong>crystal</strong> (<em>str</em>) -- seven crystal systems, triclinic/monoclinic/orthorhombic/tetragonal/trigonal/hexagonal/cubic.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>sorted orbital list.</dt><dd><p>[&quot;px&quot;, &quot;py&quot;, &quot;s&quot;] =&gt; [&quot;s&quot;, &quot;px&quot;, &quot;py&quot;]</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>([str])</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.multipole.util.atomic_orbital_util.split_orb_list_rank_block">
+<span class="sig-name descname"><span class="pre">split_orb_list_rank_block</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">orb_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spinful</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crystal</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/multipole/util/atomic_orbital_util.html#split_orb_list_rank_block"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.multipole.util.atomic_orbital_util.split_orb_list_rank_block" title="Link to this definition">#</a></dt>
+<dd><p>split given orbital list into rank block.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>orb_list</strong> (<em>str/</em><em>[</em><em>str</em><em>]</em>) -- orbital list.</p></li>
+<li><p><strong>spinful</strong> (<em>bool</em>) -- spinful ?</p></li>
+<li><p><strong>crystal</strong> (<em>str</em>) -- seven crystal systems, triclinic/monoclinic/orthorhombic/tetragonal/trigonal/hexagonal/cubic.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>splitted orbital list.</dt><dd><p>[&quot;s&quot;,&quot;px&quot;,&quot;py&quot;] =&gt; [[&quot;s&quot;], [&quot;px&quot;,&quot;py&quot;]].</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>[[str]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.multipole.util.atomic_orbital_util.to_latex">
+<span class="sig-name descname"><span class="pre">to_latex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">orb_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spinful</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crystal</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/multipole/util/atomic_orbital_util.html#to_latex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.multipole.util.atomic_orbital_util.to_latex" title="Link to this definition">#</a></dt>
+<dd><p>convert string to latex format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>orb_list</strong> (<em>str/</em><em>[</em><em>str</em><em>]</em>) -- orbital list.</p></li>
+<li><p><strong>spinful</strong> (<em>bool</em>) -- spinful ?</p></li>
+<li><p><strong>crystal</strong> (<em>str</em>) -- seven crystal systems, triclinic/monoclinic/orthorhombic/tetragonal/trigonal/hexagonal/cubic.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>orbital in latex format.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.multipole.util.atomic_orbital_util.to_spinful">
+<span class="sig-name descname"><span class="pre">to_spinful</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">orb_list</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/multipole/util/atomic_orbital_util.html#to_spinful"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.multipole.util.atomic_orbital_util.to_spinful" title="Link to this definition">#</a></dt>
+<dd><p>convert from spinless orbital list to spinful orbital list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>orb_list</strong> (<em>str/</em><em>[</em><em>str</em><em>]</em>) -- orbital list.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>spinful orbital list.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.multipole.util.atomic_orbital_util.to_spinless">
+<span class="sig-name descname"><span class="pre">to_spinless</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">orb_list</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/multipole/util/atomic_orbital_util.html#to_spinless"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.multipole.util.atomic_orbital_util.to_spinless" title="Link to this definition">#</a></dt>
+<dd><p>convert from spinful orbital list to spinless orbital list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>orb_list</strong> (<em>str/</em><em>[</em><em>str</em><em>]</em>) -- orbital list.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>spinless orbital list.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.multipole.util.atomic_orbital_util.to_standard_form">
+<span class="sig-name descname"><span class="pre">to_standard_form</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">orb_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crystal</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/multipole/util/atomic_orbital_util.html#to_standard_form"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.multipole.util.atomic_orbital_util.to_standard_form" title="Link to this definition">#</a></dt>
+<dd><p>convert from an abbreviation form to a standard form.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>orb_list</strong> (<em>str/</em><em>[</em><em>str</em><em>]</em>) -- orbital list.</p></li>
+<li><p><strong>b_type</strong> (<em>str</em>) -- type of basis, &quot;lm/jm/cubic/hexagonal&quot;.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>orbital list in standard format.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>ex) [&quot;p&quot;] -&gt; [&quot;px&quot;, &quot;py&quot;, &quot;pz&quot;].</p>
+</div>
+</dd></dl>
+
+<p id="module-multipie.multipole.util.atomic_samb_util">This file provides utility functions for calculation of atomic multipole basis set.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.multipole.util.atomic_samb_util.create_atomic_samb">
+<span class="sig-name descname"><span class="pre">create_atomic_samb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bra_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ket_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spinful</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crystal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bam</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u_matrix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ortho</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/multipole/util/atomic_samb_util.html#create_atomic_samb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.multipole.util.atomic_samb_util.create_atomic_samb" title="Link to this definition">#</a></dt>
+<dd><p>create atomic multipole basis set.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bra_list</strong> (<em>[</em><em>str</em><em>]</em>) -- orbital list of bra.</p></li>
+<li><p><strong>ket_list</strong> (<em>[</em><em>str</em><em>]</em>) -- orbital list of ket.</p></li>
+<li><p><strong>spinful</strong> (<em>bool</em>) -- spinful ?</p></li>
+<li><p><strong>crystal</strong> (<em>str</em>) -- seven crystal systems, triclinic/monoclinic/orthorhombic/tetragonal/trigonal/hexagonal/cubic.</p></li>
+<li><p><strong>bam</strong> (<em>BaseAtomicMultipoleDataset</em>) -- atomic-multipole dataset for all four basis.</p></li>
+<li><p><strong>hs</strong> (<a class="reference internal" href="harmonics.html#multipie.harmonics.harmonics_pg.HarmonicsPG" title="multipie.harmonics.harmonics_pg.HarmonicsPG"><em>HarmonicsPG</em></a><em>, </em><em>optional</em>) -- a set of point-group harmonics.</p></li>
+<li><p><strong>u_matrix</strong> (<em>NSArray/</em><em>[</em><em>NSArray</em><em>]</em>) -- unitary transformation matrix from ket_list to arbitrary ket list.</p></li>
+<li><p><strong>ortho</strong> (<em>bool</em><em>, </em><em>optional</em>) -- orthogonalize ?</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>atomic SAMB, {TagMultipole: NSArray(matrix)}.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p id="module-multipie.multipole.util.multipole_util">This file provides utility functions for multipole basis set.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.multipole.util.multipole_util.dict_to_matrix">
+<span class="sig-name descname"><span class="pre">dict_to_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shape</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">elements</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/multipole/util/multipole_util.html#dict_to_matrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.multipole.util.multipole_util.dict_to_matrix" title="Link to this definition">#</a></dt>
+<dd><p>convert dict to full matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>shape</strong> (<em>tuple</em>) -- matrix shape.</p></li>
+<li><p><strong>elements</strong> (<em>list</em>) -- matrix elements, [(i,j,v)].</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>full matrix.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>NSArray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.multipole.util.multipole_util.matrix_sum">
+<span class="sig-name descname"><span class="pre">matrix_sum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ml</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/multipole/util/multipole_util.html#matrix_sum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.multipole.util.multipole_util.matrix_sum" title="Link to this definition">#</a></dt>
+<dd><p>sum of matrices.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ml</strong> (<em>list</em>) -- matrix [Matrix].</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>sum of matrices</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Matrix</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.multipole.util.multipole_util.matrix_to_dict">
+<span class="sig-name descname"><span class="pre">matrix_to_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">m</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/multipole/util/multipole_util.html#matrix_to_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.multipole.util.multipole_util.matrix_to_dict" title="Link to this definition">#</a></dt>
+<dd><p>convert matrix to list of matrix elements.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>m</strong> (<em>Matrix</em>) -- matrix.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple of matrix shape and elements, (shape, [(i,j,v)]).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p id="module-multipie.multipole.util.pauli">This file provides Pauli matices.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.multipole.util.pauli.pauli_matrix">
+<span class="sig-name descname"><span class="pre">pauli_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matrix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/multipole/util/pauli.html#pauli_matrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.multipole.util.pauli.pauli_matrix" title="Link to this definition">#</a></dt>
+<dd><p>Pauli matrices (σ0, σx, σy, σz)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>i</strong> (<em>int</em><em>, </em><em>optional</em>) -- = 0(0), 1(x), 2(y), 3(z), other(all)</p></li>
+<li><p><strong>matrix</strong> (<em>bool</em><em>, </em><em>optional</em>) -- Matrix ?</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>matrix or symbol or dict { str: Matrix }</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Matrix or sympy or dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.multipole.util.pauli.pauli_matrix_n">
+<span class="sig-name descname"><span class="pre">pauli_matrix_n</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/multipole/util/pauli.html#pauli_matrix_n"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.multipole.util.pauli.pauli_matrix_n" title="Link to this definition">#</a></dt>
+<dd><p>Pauli matrices (σ00, σ11, σ10, σ1-1)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s</strong> (<em>int</em>) -- 0/1</p></li>
+<li><p><strong>n</strong> (<em>int</em>) -- 0/+1/-1</p></li>
+<li><p><strong>s1</strong> (<em>sympy</em>) -- ±1/2</p></li>
+<li><p><strong>s2</strong> (<em>sympy</em>) -- ±1/2</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>matrix element</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>sympy</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p id="module-multipie.multipole.util.spin_orbital_basis">This file provides basis list of spin-orbital space.</p>
+<p id="module-multipie.multipole.util.structure_samb_util">This file provides utility functions for calculation of structure multipole basis set.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.multipole.util.structure_samb_util.cs_list">
+<span class="sig-name descname"><span class="pre">cs_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">real</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/multipole/util/structure_samb_util.html#cs_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.multipole.util.structure_samb_util.cs_list" title="Link to this definition">#</a></dt>
+<dd><p>list of c### and s### contained in the given equation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s</strong> (<em>str/Symbol</em>) -- string object to be converted to symbol.</p></li>
+<li><p><strong>real</strong> (<em>bool</em>) -- real symbol ? If real=True, the object is recognized as a real number.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>[c###/s###]</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.multipole.util.structure_samb_util.decompose_fk">
+<span class="sig-name descname"><span class="pre">decompose_fk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fk</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_samb_set</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/multipole/util/structure_samb_util.html#decompose_fk"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.multipole.util.structure_samb_util.decompose_fk" title="Link to this definition">#</a></dt>
+<dd><p>decompose k function into linear combination of structure multipoles.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fk</strong> (<em>str/Symbol</em>) -- function of k.</p></li>
+<li><p><strong>k_samb_set</strong> (<em>list</em>) -- [ (&quot;kmp_#&quot;, &quot;formfactor&quot;) ].</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>dictionary of expansion coefficient {&quot;smp_#&quot;: coeff}.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.multipole.util.structure_samb_util.inner_product">
+<span class="sig-name descname"><span class="pre">inner_product</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/multipole/util/structure_samb_util.html#inner_product"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.multipole.util.structure_samb_util.inner_product" title="Link to this definition">#</a></dt>
+<dd><p>inner product of two structure factors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f1</strong> (<em>str/Symbol</em>) -- F1.</p></li>
+<li><p><strong>f2</strong> (<em>str/Symbol</em>) -- F2.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>inner product of F1 and F2.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>NSArray</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>F1 and F2 are polynomials in terms of c### and s### (### are given by lst) only without const. terms.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.multipole.util.structure_samb_util.normalize_fk">
+<span class="sig-name descname"><span class="pre">normalize_fk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fk</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/multipole/util/structure_samb_util.html#normalize_fk"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.multipole.util.structure_samb_util.normalize_fk" title="Link to this definition">#</a></dt>
+<dd><p>normalize k function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>fk</strong> (<em>str/Symbol</em>) -- function of k.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>normalized k function.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Symbol</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.multipole.util.structure_samb_util.orthogonalize_fk">
+<span class="sig-name descname"><span class="pre">orthogonalize_fk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nmax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/multipole/util/structure_samb_util.html#orthogonalize_fk"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.multipole.util.structure_samb_util.orthogonalize_fk" title="Link to this definition">#</a></dt>
+<dd><p>orthogonalize list of function of k by Gram-Schmidt orthogonalization method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>v</strong> (<em>NSArray</em>) -- list of function of k to be orthogonalized.</p></li>
+<li><p><strong>nmax</strong> (<em>int</em><em>, </em><em>optional</em>) -- max. number of nonzero basis.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>orthogonalized list of function of k.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>NSArray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.multipole.util.structure_samb_util.to_symbol">
+<span class="sig-name descname"><span class="pre">to_symbol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">real</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/multipole/util/structure_samb_util.html#to_symbol"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.multipole.util.structure_samb_util.to_symbol" title="Link to this definition">#</a></dt>
+<dd><p>convert string to symbol.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s</strong> (<em>str</em>) -- string object to be converted to symbol.</p></li>
+<li><p><strong>real</strong> (<em>bool</em>) -- real symbol ? If real=True, the object is recognized as a real number.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>symbol.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Symbol</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p id="module-multipie.multipole.util.z_samb_util">This file provides utility functions for combined multipole set.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.multipole.util.z_samb_util.create_z_samb">
+<span class="sig-name descname"><span class="pre">create_z_samb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag1_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag2_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toroidal_priority</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/multipole/util/z_samb_util.html#create_z_samb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.multipole.util.z_samb_util.create_z_samb" title="Link to this definition">#</a></dt>
+<dd><p>initialize combined multipoles.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cg</strong> (<em>clebsch_gordan_pg</em>) -- Clebsh-Gordan coefficients.</p></li>
+<li><p><strong>hs</strong> (<a class="reference internal" href="harmonics.html#multipie.harmonics.harmonics_pg.HarmonicsPG" title="multipie.harmonics.harmonics_pg.HarmonicsPG"><em>HarmonicsPG</em></a>) -- the class to manage harmonics.</p></li>
+<li><p><strong>tag1_list</strong> (<a class="reference internal" href="tag.html#multipie.tag.tag_list.TagList" title="multipie.tag.tag_list.TagList"><em>TagList</em></a>) -- multipole/harmonics tag list.</p></li>
+<li><p><strong>tag2_list</strong> (<a class="reference internal" href="tag.html#multipie.tag.tag_list.TagList" title="multipie.tag.tag_list.TagList"><em>TagList</em></a>) -- multipole/harmonics tag list.</p></li>
+<li><p><strong>toroidal_priority</strong> (<em>bool</em>) -- create toroidal multipoles (G,T) in priority? else prioritize conventional multipoles (Q,M).</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em><em>, </em><em>optional</em>) -- select conditions for multipoles,
+keywords in [&quot;head&quot;, &quot;rank&quot;, &quot;irrep&quot;, &quot;mul&quot;, &quot;comp&quot;, &quot;s&quot;, &quot;k&quot;].</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>{TagMultipole: [(coefficient, TagMultipole(atomic), TagMultipole(site/bond)] }.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./src/api"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-multipie.multipole.base.base_atomic_multipole_set">BaseAtomicMultipole</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.multipole.base.base_atomic_multipole_set.BaseAtomicMultipoleSet"><code class="docutils literal notranslate"><span class="pre">BaseAtomicMultipoleSet</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.multipole.base.base_atomic_multipole_set.BaseAtomicMultipoleSet.tag"><code class="docutils literal notranslate"><span class="pre">BaseAtomicMultipoleSet.tag</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.multipole.base.base_atomic_multipole_set.BaseAtomicMultipoleSet.__init__"><code class="docutils literal notranslate"><span class="pre">BaseAtomicMultipoleSet.__init__()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id0"><code class="docutils literal notranslate"><span class="pre">BaseAtomicMultipoleSet.tag</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-multipie.multipole.util.atomic_orbital_util">utility</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.multipole.util.atomic_orbital_util.basis_type"><code class="docutils literal notranslate"><span class="pre">basis_type()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.multipole.util.atomic_orbital_util.invalid_f_orb_list"><code class="docutils literal notranslate"><span class="pre">invalid_f_orb_list()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.multipole.util.atomic_orbital_util.invalid_orb_list"><code class="docutils literal notranslate"><span class="pre">invalid_orb_list()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.multipole.util.atomic_orbital_util.is_insufficient"><code class="docutils literal notranslate"><span class="pre">is_insufficient()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.multipole.util.atomic_orbital_util.is_spinful"><code class="docutils literal notranslate"><span class="pre">is_spinful()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.multipole.util.atomic_orbital_util.parse_orb_list"><code class="docutils literal notranslate"><span class="pre">parse_orb_list()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.multipole.util.atomic_orbital_util.rank"><code class="docutils literal notranslate"><span class="pre">rank()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.multipole.util.atomic_orbital_util.sort_orb_list"><code class="docutils literal notranslate"><span class="pre">sort_orb_list()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.multipole.util.atomic_orbital_util.split_orb_list_rank_block"><code class="docutils literal notranslate"><span class="pre">split_orb_list_rank_block()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.multipole.util.atomic_orbital_util.to_latex"><code class="docutils literal notranslate"><span class="pre">to_latex()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.multipole.util.atomic_orbital_util.to_spinful"><code class="docutils literal notranslate"><span class="pre">to_spinful()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.multipole.util.atomic_orbital_util.to_spinless"><code class="docutils literal notranslate"><span class="pre">to_spinless()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.multipole.util.atomic_orbital_util.to_standard_form"><code class="docutils literal notranslate"><span class="pre">to_standard_form()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.multipole.util.atomic_samb_util.create_atomic_samb"><code class="docutils literal notranslate"><span class="pre">create_atomic_samb()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.multipole.util.multipole_util.dict_to_matrix"><code class="docutils literal notranslate"><span class="pre">dict_to_matrix()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.multipole.util.multipole_util.matrix_sum"><code class="docutils literal notranslate"><span class="pre">matrix_sum()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.multipole.util.multipole_util.matrix_to_dict"><code class="docutils literal notranslate"><span class="pre">matrix_to_dict()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.multipole.util.pauli.pauli_matrix"><code class="docutils literal notranslate"><span class="pre">pauli_matrix()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.multipole.util.pauli.pauli_matrix_n"><code class="docutils literal notranslate"><span class="pre">pauli_matrix_n()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.multipole.util.structure_samb_util.cs_list"><code class="docutils literal notranslate"><span class="pre">cs_list()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.multipole.util.structure_samb_util.decompose_fk"><code class="docutils literal notranslate"><span class="pre">decompose_fk()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.multipole.util.structure_samb_util.inner_product"><code class="docutils literal notranslate"><span class="pre">inner_product()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.multipole.util.structure_samb_util.normalize_fk"><code class="docutils literal notranslate"><span class="pre">normalize_fk()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.multipole.util.structure_samb_util.orthogonalize_fk"><code class="docutils literal notranslate"><span class="pre">orthogonalize_fk()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.multipole.util.structure_samb_util.to_symbol"><code class="docutils literal notranslate"><span class="pre">to_symbol()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.multipole.util.z_samb_util.create_z_samb"><code class="docutils literal notranslate"><span class="pre">create_z_samb()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Hiroaki Kusunose and Rikuto Oiwa
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2021-2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

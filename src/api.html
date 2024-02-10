@@ -1,0 +1,682 @@
+
+<!DOCTYPE html>
+
+
+<html lang="jp" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Module &#8212; MultiPie</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../_static/documentation_options.js?v=8cf54648"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=afe5de03"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'src/api';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Character Table" href="api/character.html" />
+    <link rel="prev" title="SAMB in full matrix" href="format/matrix.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="jp"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../README.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/multipie_logo.png" class="logo__image only-light" alt="MultiPie - Home"/>
+    <script>document.write(`<img src="../_static/multipie_logo.png" class="logo__image only-dark" alt="MultiPie - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">SAMB Construction</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="samb_construction.html">Example for SAMB Construction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="use_matrix.html">Example usage of full matrix</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">File Format</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="format/input.html">SAMB construction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="format/model.html">Molecule or Crystal Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="format/samb.html">SAMB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="format/matrix.html">SAMB in full matrix</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API References</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Module</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/character.html">Character Table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/group.html">Group</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/harmonics.html">Harmonics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/model.html">Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/multipole.html">Multipole</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/response_tensor.html">Response tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/symmetry_operation.html">Symmetry operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/tag.html">Tag</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/virtual_cluster.html">Virtual cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/wyckoff.html">Wyckoff position</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Change Log</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="change_log.html">Change logs (not in tags)</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/CMT-MU/MultiPie.git" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Module</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#character-table">Character Table</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#group">Group</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#harmonics">Harmonics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model">Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipole">Multipole</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#base">base</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#utility">utility</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#response-tensor">Response tensor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#symmetry-operations">Symmetry operations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tag">Tag</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#virtual-cluster">Virtual cluster</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wyckoff-position">Wyckoff position</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="module">
+<h1>Module<a class="headerlink" href="#module" title="Link to this heading">#</a></h1>
+<section id="character-table">
+<h2>Character Table<a class="headerlink" href="#character-table" title="Link to this heading">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/character.html#module-multipie.character.character_pg" title="multipie.character.character_pg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">multipie.character.character_pg</span></code></a></p></td>
+<td><p>CharacterPG manages point-group character table.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="group">
+<h2>Group<a class="headerlink" href="#group" title="Link to this heading">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/group.html#module-multipie.group.point_group" title="multipie.group.point_group"><code class="xref py py-obj docutils literal notranslate"><span class="pre">multipie.group.point_group</span></code></a></p></td>
+<td><p>PointGroup manages point group.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/group.html#module-multipie.group.space_group" title="multipie.group.space_group"><code class="xref py py-obj docutils literal notranslate"><span class="pre">multipie.group.space_group</span></code></a></p></td>
+<td><p>SpaceGroup manages space group.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="harmonics">
+<h2>Harmonics<a class="headerlink" href="#harmonics" title="Link to this heading">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/harmonics.html#module-multipie.harmonics.harmonics_pg" title="multipie.harmonics.harmonics_pg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">multipie.harmonics.harmonics_pg</span></code></a></p></td>
+<td><p>HarmonicsPG manages a set of point-group harmonics (real).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/harmonics.html#module-multipie.harmonics.harmonics" title="multipie.harmonics.harmonics"><code class="xref py py-obj docutils literal notranslate"><span class="pre">multipie.harmonics.harmonics</span></code></a></p></td>
+<td><p>Harmonics manages point-group harmonics.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="model">
+<h2>Model<a class="headerlink" href="#model" title="Link to this heading">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/model.html#module-multipie.model.create_model" title="multipie.model.create_model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">multipie.model.create_model</span></code></a></p></td>
+<td><p>create model view, info, and basis.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/model.html#module-multipie.model.construct_model" title="multipie.model.construct_model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">multipie.model.construct_model</span></code></a></p></td>
+<td><p>construct model from matrx dict.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/model.html#module-multipie.model.material_model" title="multipie.model.material_model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">multipie.model.material_model</span></code></a></p></td>
+<td><p>MaterialModel manages model information of cluster or crystal system.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/model.html#module-multipie.model.symmetry_adapted_model" title="multipie.model.symmetry_adapted_model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">multipie.model.symmetry_adapted_model</span></code></a></p></td>
+<td><p>SymmetryAdaptedModel manages symmetry adapted multipole basis set for cluster or crystal system.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/model.html#module-multipie.model.multipie_manager" title="multipie.model.multipie_manager"><code class="xref py py-obj docutils literal notranslate"><span class="pre">multipie.model.multipie_manager</span></code></a></p></td>
+<td><p>FileManager manages current directory and formatter.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="multipole">
+<h2>Multipole<a class="headerlink" href="#multipole" title="Link to this heading">#</a></h2>
+<section id="base">
+<h3>base<a class="headerlink" href="#base" title="Link to this heading">#</a></h3>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/multipole.html#module-multipie.multipole.base.base_atomic_multipole_set" title="multipie.multipole.base.base_atomic_multipole_set"><code class="xref py py-obj docutils literal notranslate"><span class="pre">multipie.multipole.base.base_atomic_multipole_set</span></code></a></p></td>
+<td><p>BaseAtomicMultipoleSet manages a set of atomic multipoles for lm, jm, cubic, and hexagonal basis.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="utility">
+<h3>utility<a class="headerlink" href="#utility" title="Link to this heading">#</a></h3>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/multipole.html#module-multipie.multipole.util.atomic_orbital_util" title="multipie.multipole.util.atomic_orbital_util"><code class="xref py py-obj docutils literal notranslate"><span class="pre">multipie.multipole.util.atomic_orbital_util</span></code></a></p></td>
+<td><p>This file provides utility functions for atomic orbital.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/multipole.html#module-multipie.multipole.util.atomic_samb_util" title="multipie.multipole.util.atomic_samb_util"><code class="xref py py-obj docutils literal notranslate"><span class="pre">multipie.multipole.util.atomic_samb_util</span></code></a></p></td>
+<td><p>This file provides utility functions for calculation of atomic multipole basis set.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/multipole.html#module-multipie.multipole.util.multipole_util" title="multipie.multipole.util.multipole_util"><code class="xref py py-obj docutils literal notranslate"><span class="pre">multipie.multipole.util.multipole_util</span></code></a></p></td>
+<td><p>This file provides utility functions for multipole basis set.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/multipole.html#module-multipie.multipole.util.pauli" title="multipie.multipole.util.pauli"><code class="xref py py-obj docutils literal notranslate"><span class="pre">multipie.multipole.util.pauli</span></code></a></p></td>
+<td><p>This file provides Pauli matices.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/multipole.html#module-multipie.multipole.util.spin_orbital_basis" title="multipie.multipole.util.spin_orbital_basis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">multipie.multipole.util.spin_orbital_basis</span></code></a></p></td>
+<td><p>This file provides basis list of spin-orbital space.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/multipole.html#module-multipie.multipole.util.structure_samb_util" title="multipie.multipole.util.structure_samb_util"><code class="xref py py-obj docutils literal notranslate"><span class="pre">multipie.multipole.util.structure_samb_util</span></code></a></p></td>
+<td><p>This file provides utility functions for calculation of structure multipole basis set.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/multipole.html#module-multipie.multipole.util.z_samb_util" title="multipie.multipole.util.z_samb_util"><code class="xref py py-obj docutils literal notranslate"><span class="pre">multipie.multipole.util.z_samb_util</span></code></a></p></td>
+<td><p>This file provides utility functions for combined multipole set.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="response-tensor">
+<h2>Response tensor<a class="headerlink" href="#response-tensor" title="Link to this heading">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/response_tensor.html#module-multipie.response_tensor.response_tensor_pg" title="multipie.response_tensor.response_tensor_pg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">multipie.response_tensor.response_tensor_pg</span></code></a></p></td>
+<td><p>ResponseTensorPG manages physical response tensors upto rank 4.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="symmetry-operations">
+<h2>Symmetry operations<a class="headerlink" href="#symmetry-operations" title="Link to this heading">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/symmetry_operation.html#module-multipie.symmetry_operation.symmetry_operation_g" title="multipie.symmetry_operation.symmetry_operation_g"><code class="xref py py-obj docutils literal notranslate"><span class="pre">multipie.symmetry_operation.symmetry_operation_g</span></code></a></p></td>
+<td><p>SymmetryOperationG manages point/space-group symmetry operations.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/symmetry_operation.html#module-multipie.symmetry_operation.symmetry_operation" title="multipie.symmetry_operation.symmetry_operation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">multipie.symmetry_operation.symmetry_operation</span></code></a></p></td>
+<td><p>SymmetryOperation manages symmetry operation.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="tag">
+<h2>Tag<a class="headerlink" href="#tag" title="Link to this heading">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/tag.html#module-multipie.tag.tag_group" title="multipie.tag.tag_group"><code class="xref py py-obj docutils literal notranslate"><span class="pre">multipie.tag.tag_group</span></code></a></p></td>
+<td><p>TagGroup manages tag of group.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/tag.html#module-multipie.tag.tag_irrep" title="multipie.tag.tag_irrep"><code class="xref py py-obj docutils literal notranslate"><span class="pre">multipie.tag.tag_irrep</span></code></a></p></td>
+<td><p>TagIrrep manages tag of irreducible representation.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/tag.html#module-multipie.tag.tag_multipole" title="multipie.tag.tag_multipole"><code class="xref py py-obj docutils literal notranslate"><span class="pre">multipie.tag.tag_multipole</span></code></a></p></td>
+<td><p>TagMultipole manages tag of multipole.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/tag.html#module-multipie.tag.tag_response_tensor" title="multipie.tag.tag_response_tensor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">multipie.tag.tag_response_tensor</span></code></a></p></td>
+<td><p>TagResponseTensor manages tag of response tensor.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/tag.html#module-multipie.tag.tag_symmetry_operation" title="multipie.tag.tag_symmetry_operation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">multipie.tag.tag_symmetry_operation</span></code></a></p></td>
+<td><p>TagSymmetryOperation manages tag of symmetry operation.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/tag.html#module-multipie.tag.tag_wyckoff" title="multipie.tag.tag_wyckoff"><code class="xref py py-obj docutils literal notranslate"><span class="pre">multipie.tag.tag_wyckoff</span></code></a></p></td>
+<td><p>TagWyckoff manages tag of wyckoff position.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/tag.html#module-multipie.tag.tag_list" title="multipie.tag.tag_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">multipie.tag.tag_list</span></code></a></p></td>
+<td><p>This file provides utility functions for tag.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="virtual-cluster">
+<h2>Virtual cluster<a class="headerlink" href="#virtual-cluster" title="Link to this heading">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/virtual_cluster.html#module-multipie.virtual_cluster.virtual_cluster_pg" title="multipie.virtual_cluster.virtual_cluster_pg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">multipie.virtual_cluster.virtual_cluster_pg</span></code></a></p></td>
+<td><p>VirtualClusterPG manages point-group virtual cluster (real).</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="wyckoff-position">
+<h2>Wyckoff position<a class="headerlink" href="#wyckoff-position" title="Link to this heading">#</a></h2>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/wyckoff.html#module-multipie.wyckoff.wyckoff_g" title="multipie.wyckoff.wyckoff_g"><code class="xref py py-obj docutils literal notranslate"><span class="pre">multipie.wyckoff.wyckoff_g</span></code></a></p></td>
+<td><p>WyckoffG manages point/space-group Wyckoff positions (conventional, reduced coordinate).</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./src"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#character-table">Character Table</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#group">Group</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#harmonics">Harmonics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model">Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipole">Multipole</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#base">base</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#utility">utility</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#response-tensor">Response tensor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#symmetry-operations">Symmetry operations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tag">Tag</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#virtual-cluster">Virtual cluster</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wyckoff-position">Wyckoff position</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Hiroaki Kusunose and Rikuto Oiwa
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2021-2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
