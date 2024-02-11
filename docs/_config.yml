@@ -69,12 +69,12 @@ sphinx:
   - "sphinx.ext.viewcode"
   config:
     add_module_names: false
+    autoclass_content: "init"
     autodoc_default_options:
       members: true
-      # member-order: "bysource"
-      undoc-members": false
-      show-inheritance: true,
-      special-members: "__init__"
+      member-order: "groupwise"
+      undoc-members": true
+      show-inheritance: true
     html_theme: sphinx_book_theme
     html_theme_options:
       show_prev_next: false
