@@ -182,23 +182,26 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">File Format</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../../src/fmt_input.html">SAMB construction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../src/fmt_model.html">Molecule or Crystal Model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../src/fmt_samb.html">SAMB</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../src/fmt_matrix.html">SAMB in full matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/format/input.html">SAMB construction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/format/model.html">Molecule or Crystal Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/format/samb.html">SAMB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/format/matrix.html">SAMB in full matrix</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API References</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../../src/api_character.html">Character Table</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../src/api_group.html">Group</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../src/api_harmonics.html">Harmonics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../src/api_model.html">Model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../src/api_multipole.html">Multipole</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../src/api_response_tensor.html">Response tensor</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../src/api_symmetry_operation.html">Symmetry operations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../src/api_tag.html">Tag</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../src/api_virtual_cluster.html">Virtual cluster</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../src/api_wyckoff.html">Wyckoff position</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../src/api.html">Module</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api/character.html">Character Table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api/group.html">Group</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api/harmonics.html">Harmonics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api/model.html">Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api/multipole.html">Multipole</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api/response_tensor.html">Response tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api/symmetry_operation.html">Symmetry operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api/tag.html">Tag</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api/virtual_cluster.html">Virtual cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api/wyckoff.html">Wyckoff position</a></li>
+</ul>
+</li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Change Log</span></p>
 <ul class="nav bd-sidenav">
@@ -336,15 +339,13 @@ document.write(`
 
 <span class="c1"># ==================================================</span>
 <div class="viewcode-block" id="MultiPieManager">
-<a class="viewcode-back" href="../../../src/api_model.html#multipie.model.multipie_manager.MultiPieManager">[docs]</a>
+<a class="viewcode-back" href="../../../src/api/model.html#multipie.model.multipie_manager.MultiPieManager">[docs]</a>
 <span class="k">class</span> <span class="nc">MultiPieManager</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    manage directory, read, write etc.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># ==================================================</span>
-<div class="viewcode-block" id="MultiPieManager.__init__">
-<a class="viewcode-back" href="../../../src/api_model.html#multipie.model.multipie_manager.MultiPieManager.__init__">[docs]</a>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">topdir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">symbolic</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">formatter</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">pdf</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">qtdraw</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        initialize the class.</span>
@@ -386,8 +387,7 @@ document.write(`
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_group</span> <span class="o">=</span> <span class="n">PointGroup</span><span class="p">(</span><span class="s2">&quot;C1&quot;</span><span class="p">,</span> <span class="n">core</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_core</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_point_group</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_group</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_molecule</span> <span class="o">=</span> <span class="kc">True</span></div>
-
+        <span class="bp">self</span><span class="o">.</span><span class="n">_molecule</span> <span class="o">=</span> <span class="kc">True</span>
 
     <span class="c1"># ==================================================</span>
     <span class="nd">@property</span>
@@ -441,7 +441,7 @@ document.write(`
 
     <span class="c1"># ==================================================</span>
 <div class="viewcode-block" id="MultiPieManager.elapsed">
-<a class="viewcode-back" href="../../../src/api_model.html#multipie.model.multipie_manager.MultiPieManager.elapsed">[docs]</a>
+<a class="viewcode-back" href="../../../src/api/model.html#multipie.model.multipie_manager.MultiPieManager.elapsed">[docs]</a>
     <span class="k">def</span> <span class="nf">elapsed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">from_stamp</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        elapsed time.</span>
@@ -460,7 +460,7 @@ document.write(`
 
     <span class="c1"># ==================================================</span>
 <div class="viewcode-block" id="MultiPieManager.set_group">
-<a class="viewcode-back" href="../../../src/api_model.html#multipie.model.multipie_manager.MultiPieManager.set_group">[docs]</a>
+<a class="viewcode-back" href="../../../src/api/model.html#multipie.model.multipie_manager.MultiPieManager.set_group">[docs]</a>
     <span class="k">def</span> <span class="nf">set_group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        set group (and point group).</span>
@@ -485,7 +485,7 @@ document.write(`
 
     <span class="c1"># ==================================================</span>
 <div class="viewcode-block" id="MultiPieManager.set_stamp">
-<a class="viewcode-back" href="../../../src/api_model.html#multipie.model.multipie_manager.MultiPieManager.set_stamp">[docs]</a>
+<a class="viewcode-back" href="../../../src/api/model.html#multipie.model.multipie_manager.MultiPieManager.set_stamp">[docs]</a>
     <span class="k">def</span> <span class="nf">set_stamp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        set current time.</span>
@@ -495,7 +495,7 @@ document.write(`
 
     <span class="c1"># ==================================================</span>
 <div class="viewcode-block" id="MultiPieManager.log">
-<a class="viewcode-back" href="../../../src/api_model.html#multipie.model.multipie_manager.MultiPieManager.log">[docs]</a>
+<a class="viewcode-back" href="../../../src/api/model.html#multipie.model.multipie_manager.MultiPieManager.log">[docs]</a>
     <span class="k">def</span> <span class="nf">log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">stamp</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        write log if verbose is True.</span>
@@ -514,7 +514,7 @@ document.write(`
 
     <span class="c1"># ==================================================</span>
 <div class="viewcode-block" id="MultiPieManager.filename">
-<a class="viewcode-back" href="../../../src/api_model.html#multipie.model.multipie_manager.MultiPieManager.filename">[docs]</a>
+<a class="viewcode-back" href="../../../src/api/model.html#multipie.model.multipie_manager.MultiPieManager.filename">[docs]</a>
     <span class="k">def</span> <span class="nf">filename</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">full</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        get (full) file name.</span>
@@ -534,7 +534,7 @@ document.write(`
 
     <span class="c1"># ==================================================</span>
 <div class="viewcode-block" id="MultiPieManager.read">
-<a class="viewcode-back" href="../../../src/api_model.html#multipie.model.multipie_manager.MultiPieManager.read">[docs]</a>
+<a class="viewcode-back" href="../../../src/api/model.html#multipie.model.multipie_manager.MultiPieManager.read">[docs]</a>
     <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_dict</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        read dict file or dict itself.</span>
@@ -560,7 +560,7 @@ document.write(`
 
     <span class="c1"># ==================================================</span>
 <div class="viewcode-block" id="MultiPieManager.write">
-<a class="viewcode-back" href="../../../src/api_model.html#multipie.model.multipie_manager.MultiPieManager.write">[docs]</a>
+<a class="viewcode-back" href="../../../src/api/model.html#multipie.model.multipie_manager.MultiPieManager.write">[docs]</a>
     <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">dic</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">var</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        write dict to file.</span>
@@ -578,7 +578,7 @@ document.write(`
 
     <span class="c1"># ==================================================</span>
 <div class="viewcode-block" id="MultiPieManager.create_subdir">
-<a class="viewcode-back" href="../../../src/api_model.html#multipie.model.multipie_manager.MultiPieManager.create_subdir">[docs]</a>
+<a class="viewcode-back" href="../../../src/api/model.html#multipie.model.multipie_manager.MultiPieManager.create_subdir">[docs]</a>
     <span class="k">def</span> <span class="nf">create_subdir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subdir</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        create sub directory under topdir.</span>

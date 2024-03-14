@@ -182,23 +182,26 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">File Format</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../../src/fmt_input.html">SAMB construction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../src/fmt_model.html">Molecule or Crystal Model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../src/fmt_samb.html">SAMB</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../src/fmt_matrix.html">SAMB in full matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/format/input.html">SAMB construction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/format/model.html">Molecule or Crystal Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/format/samb.html">SAMB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/format/matrix.html">SAMB in full matrix</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API References</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../../src/api_character.html">Character Table</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../src/api_group.html">Group</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../src/api_harmonics.html">Harmonics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../src/api_model.html">Model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../src/api_multipole.html">Multipole</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../src/api_response_tensor.html">Response tensor</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../src/api_symmetry_operation.html">Symmetry operations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../src/api_tag.html">Tag</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../src/api_virtual_cluster.html">Virtual cluster</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../src/api_wyckoff.html">Wyckoff position</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../src/api.html">Module</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api/character.html">Character Table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api/group.html">Group</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api/harmonics.html">Harmonics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api/model.html">Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api/multipole.html">Multipole</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api/response_tensor.html">Response tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api/symmetry_operation.html">Symmetry operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api/tag.html">Tag</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api/virtual_cluster.html">Virtual cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api/wyckoff.html">Wyckoff position</a></li>
+</ul>
+</li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Change Log</span></p>
 <ul class="nav bd-sidenav">
@@ -332,7 +335,7 @@ document.write(`
 
 <span class="c1"># ==================================================</span>
 <div class="viewcode-block" id="Harmonics">
-<a class="viewcode-back" href="../../../src/api_harmonics.html#multipie.harmonics.harmonics.Harmonics">[docs]</a>
+<a class="viewcode-back" href="../../../src/api/harmonics.html#multipie.harmonics.harmonics.Harmonics">[docs]</a>
 <span class="k">class</span> <span class="nc">Harmonics</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    point-group harmonics.</span>
@@ -348,8 +351,6 @@ document.write(`
     <span class="c1">#    __umat (NSArray): unitary matrix from Olm to harmonics (2l+1) descending order in m.</span>
     <span class="c1">#</span>
     <span class="c1"># ==================================================</span>
-<div class="viewcode-block" id="Harmonics.__init__">
-<a class="viewcode-back" href="../../../src/api_harmonics.html#multipie.harmonics.harmonics.Harmonics.__init__">[docs]</a>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">m_tag</span><span class="p">,</span> <span class="n">def_ex</span><span class="p">,</span> <span class="n">ex</span><span class="p">,</span> <span class="n">u</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        initialize the class.</span>
@@ -367,8 +368,7 @@ document.write(`
 
         <span class="bp">self</span><span class="o">.</span><span class="n">__def</span> <span class="o">=</span> <span class="n">NSArray</span><span class="p">(</span><span class="n">def_ex</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__ex</span> <span class="o">=</span> <span class="n">NSArray</span><span class="p">(</span><span class="n">ex</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__umat</span> <span class="o">=</span> <span class="n">NSArray</span><span class="p">(</span><span class="n">u</span><span class="p">)</span></div>
-
+        <span class="bp">self</span><span class="o">.</span><span class="n">__umat</span> <span class="o">=</span> <span class="n">NSArray</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
 
     <span class="c1"># ==================================================</span>
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -384,7 +384,7 @@ document.write(`
 
     <span class="c1"># ==================================================</span>
 <div class="viewcode-block" id="Harmonics.is_axial">
-<a class="viewcode-back" href="../../../src/api_harmonics.html#multipie.harmonics.harmonics.Harmonics.is_axial">[docs]</a>
+<a class="viewcode-back" href="../../../src/api/harmonics.html#multipie.harmonics.harmonics.Harmonics.is_axial">[docs]</a>
     <span class="k">def</span> <span class="nf">is_axial</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        axial harmonics ?</span>
@@ -397,7 +397,7 @@ document.write(`
 
     <span class="c1"># ==================================================</span>
 <div class="viewcode-block" id="Harmonics.is_complex">
-<a class="viewcode-back" href="../../../src/api_harmonics.html#multipie.harmonics.harmonics.Harmonics.is_complex">[docs]</a>
+<a class="viewcode-back" href="../../../src/api/harmonics.html#multipie.harmonics.harmonics.Harmonics.is_complex">[docs]</a>
     <span class="k">def</span> <span class="nf">is_complex</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        complex harmonics ?</span>
@@ -410,7 +410,7 @@ document.write(`
 
     <span class="c1"># ==================================================</span>
 <div class="viewcode-block" id="Harmonics.definition">
-<a class="viewcode-back" href="../../../src/api_harmonics.html#multipie.harmonics.harmonics.Harmonics.definition">[docs]</a>
+<a class="viewcode-back" href="../../../src/api/harmonics.html#multipie.harmonics.harmonics.Harmonics.definition">[docs]</a>
     <span class="k">def</span> <span class="nf">definition</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        definition of harmonics in terms of linear combination of Clm and Slm.</span>
@@ -423,7 +423,7 @@ document.write(`
 
     <span class="c1"># ==================================================</span>
 <div class="viewcode-block" id="Harmonics.expression">
-<a class="viewcode-back" href="../../../src/api_harmonics.html#multipie.harmonics.harmonics.Harmonics.expression">[docs]</a>
+<a class="viewcode-back" href="../../../src/api/harmonics.html#multipie.harmonics.harmonics.Harmonics.expression">[docs]</a>
     <span class="k">def</span> <span class="nf">expression</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        explicit expression of harmonics.</span>
@@ -448,7 +448,7 @@ document.write(`
 
     <span class="c1"># ==================================================</span>
 <div class="viewcode-block" id="Harmonics.u_matrix">
-<a class="viewcode-back" href="../../../src/api_harmonics.html#multipie.harmonics.harmonics.Harmonics.u_matrix">[docs]</a>
+<a class="viewcode-back" href="../../../src/api/harmonics.html#multipie.harmonics.harmonics.Harmonics.u_matrix">[docs]</a>
     <span class="k">def</span> <span class="nf">u_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        unitary matrix from (l,m) to the harmonics, :math:`X_{harm} = U^{\dagger}X_{lm}U`.</span>
@@ -461,7 +461,7 @@ document.write(`
 
     <span class="c1"># ==================================================</span>
 <div class="viewcode-block" id="Harmonics.to_vector">
-<a class="viewcode-back" href="../../../src/api_harmonics.html#multipie.harmonics.harmonics.Harmonics.to_vector">[docs]</a>
+<a class="viewcode-back" href="../../../src/api/harmonics.html#multipie.harmonics.harmonics.Harmonics.to_vector">[docs]</a>
     <span class="k">def</span> <span class="nf">to_vector</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        cartesian vector for rank-1 expression.</span>
@@ -483,7 +483,7 @@ document.write(`
 
     <span class="c1"># ==================================================</span>
 <div class="viewcode-block" id="Harmonics.equivalent_operator">
-<a class="viewcode-back" href="../../../src/api_harmonics.html#multipie.harmonics.harmonics.Harmonics.equivalent_operator">[docs]</a>
+<a class="viewcode-back" href="../../../src/api/harmonics.html#multipie.harmonics.harmonics.Harmonics.equivalent_operator">[docs]</a>
     <span class="k">def</span> <span class="nf">equivalent_operator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        equivalent operator in descending order in Jz.</span>
@@ -500,7 +500,7 @@ document.write(`
 
     <span class="c1"># ==================================================</span>
 <div class="viewcode-block" id="Harmonics.create_equivalent_operator">
-<a class="viewcode-back" href="../../../src/api_harmonics.html#multipie.harmonics.harmonics.Harmonics.create_equivalent_operator">[docs]</a>
+<a class="viewcode-back" href="../../../src/api/harmonics.html#multipie.harmonics.harmonics.Harmonics.create_equivalent_operator">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">create_equivalent_operator</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">poly</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>

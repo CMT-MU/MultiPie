@@ -182,23 +182,26 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">File Format</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../../../src/fmt_input.html">SAMB construction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../src/fmt_model.html">Molecule or Crystal Model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../src/fmt_samb.html">SAMB</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../src/fmt_matrix.html">SAMB in full matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../src/format/input.html">SAMB construction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../src/format/model.html">Molecule or Crystal Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../src/format/samb.html">SAMB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../src/format/matrix.html">SAMB in full matrix</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API References</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../../../src/api_character.html">Character Table</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../src/api_group.html">Group</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../src/api_harmonics.html">Harmonics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../src/api_model.html">Model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../src/api_multipole.html">Multipole</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../src/api_response_tensor.html">Response tensor</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../src/api_symmetry_operation.html">Symmetry operations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../src/api_tag.html">Tag</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../src/api_virtual_cluster.html">Virtual cluster</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../src/api_wyckoff.html">Wyckoff position</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../src/api.html">Module</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../src/api/character.html">Character Table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../src/api/group.html">Group</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../src/api/harmonics.html">Harmonics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../src/api/model.html">Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../src/api/multipole.html">Multipole</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../src/api/response_tensor.html">Response tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../src/api/symmetry_operation.html">Symmetry operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../src/api/tag.html">Tag</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../src/api/virtual_cluster.html">Virtual cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../src/api/wyckoff.html">Wyckoff position</a></li>
+</ul>
+</li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Change Log</span></p>
 <ul class="nav bd-sidenav">
@@ -491,7 +494,7 @@ document.write(`
 
 <span class="c1"># ==================================================</span>
 <div class="viewcode-block" id="create_atomic_samb">
-<a class="viewcode-back" href="../../../../src/api_multipole.html#multipie.multipole.util.atomic_samb_util.create_atomic_samb">[docs]</a>
+<a class="viewcode-back" href="../../../../src/api/multipole.html#multipie.multipole.util.atomic_samb_util.create_atomic_samb">[docs]</a>
 <span class="k">def</span> <span class="nf">create_atomic_samb</span><span class="p">(</span><span class="n">bra_list</span><span class="p">,</span> <span class="n">ket_list</span><span class="p">,</span> <span class="n">spinful</span><span class="p">,</span> <span class="n">crystal</span><span class="p">,</span> <span class="n">bam</span><span class="p">,</span> <span class="n">hs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">u_matrix</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ortho</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    create atomic multipole basis set.</span>

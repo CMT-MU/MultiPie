@@ -182,23 +182,26 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">File Format</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../../src/fmt_input.html">SAMB construction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../src/fmt_model.html">Molecule or Crystal Model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../src/fmt_samb.html">SAMB</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../src/fmt_matrix.html">SAMB in full matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/format/input.html">SAMB construction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/format/model.html">Molecule or Crystal Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/format/samb.html">SAMB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/format/matrix.html">SAMB in full matrix</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API References</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../../src/api_character.html">Character Table</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../src/api_group.html">Group</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../src/api_harmonics.html">Harmonics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../src/api_model.html">Model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../src/api_multipole.html">Multipole</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../src/api_response_tensor.html">Response tensor</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../src/api_symmetry_operation.html">Symmetry operations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../src/api_tag.html">Tag</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../src/api_virtual_cluster.html">Virtual cluster</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../src/api_wyckoff.html">Wyckoff position</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../src/api.html">Module</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api/character.html">Character Table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api/group.html">Group</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api/harmonics.html">Harmonics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api/model.html">Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api/multipole.html">Multipole</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api/response_tensor.html">Response tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api/symmetry_operation.html">Symmetry operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api/tag.html">Tag</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api/virtual_cluster.html">Virtual cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api/wyckoff.html">Wyckoff position</a></li>
+</ul>
+</li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Change Log</span></p>
 <ul class="nav bd-sidenav">
@@ -337,7 +340,7 @@ document.write(`
 
 <span class="c1"># ==================================================</span>
 <div class="viewcode-block" id="SymmetryOperationG">
-<a class="viewcode-back" href="../../../src/api_symmetry_operation.html#multipie.symmetry_operation.symmetry_operation_g.SymmetryOperationG">[docs]</a>
+<a class="viewcode-back" href="../../../src/api/symmetry_operation.html#multipie.symmetry_operation.symmetry_operation_g.SymmetryOperationG">[docs]</a>
 <span class="k">class</span> <span class="nc">SymmetryOperationG</span><span class="p">(</span>
     <span class="nb">dict</span>
 <span class="p">):</span>  <span class="c1"># dict of (symmetry operation tag, symmetry operation), {TagSymmetryOperation: SymmetryOperation}.</span>
@@ -362,8 +365,6 @@ document.write(`
     <span class="c1">#     __inv ({TagSymmetryOperation:TagSymmetryOperation}): inverse operation.</span>
     <span class="c1">#</span>
     <span class="c1"># ==================================================</span>
-<div class="viewcode-block" id="SymmetryOperationG.__init__">
-<a class="viewcode-back" href="../../../src/api_symmetry_operation.html#multipie.symmetry_operation.symmetry_operation_g.SymmetryOperationG.__init__">[docs]</a>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">g_tag</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        initialize the class.</span>
@@ -424,8 +425,7 @@ document.write(`
                 <span class="bp">self</span><span class="o">.</span><span class="n">__inv</span><span class="p">[</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="n">so</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">so_inv</span><span class="p">[</span><span class="n">i</span><span class="p">])]</span>
                 <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">so</span><span class="p">)):</span>
                     <span class="n">soj</span> <span class="o">=</span> <span class="n">so</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">__product</span><span class="p">[(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="n">j</span><span class="p">])]</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="n">so</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">soi</span> <span class="o">@</span> <span class="n">soj</span><span class="p">)]</span></div>
-
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__product</span><span class="p">[(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="n">j</span><span class="p">])]</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="n">so</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">soi</span> <span class="o">@</span> <span class="n">soj</span><span class="p">)]</span>
 
     <span class="c1"># ==================================================</span>
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -453,7 +453,7 @@ document.write(`
 
     <span class="c1"># ==================================================</span>
 <div class="viewcode-block" id="SymmetryOperationG.mat">
-<a class="viewcode-back" href="../../../src/api_symmetry_operation.html#multipie.symmetry_operation.symmetry_operation_g.SymmetryOperationG.mat">[docs]</a>
+<a class="viewcode-back" href="../../../src/api/symmetry_operation.html#multipie.symmetry_operation.symmetry_operation_g.SymmetryOperationG.mat">[docs]</a>
     <span class="k">def</span> <span class="nf">mat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">axial</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">cc_only</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">primitive</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">cartesian</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        matrix for symmetry operatoins.</span>
@@ -496,7 +496,7 @@ document.write(`
 
     <span class="c1"># ==================================================</span>
 <div class="viewcode-block" id="SymmetryOperationG.inverse">
-<a class="viewcode-back" href="../../../src/api_symmetry_operation.html#multipie.symmetry_operation.symmetry_operation_g.SymmetryOperationG.inverse">[docs]</a>
+<a class="viewcode-back" href="../../../src/api/symmetry_operation.html#multipie.symmetry_operation.symmetry_operation_g.SymmetryOperationG.inverse">[docs]</a>
     <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        inverse of symmetry operation (point group only).</span>
@@ -516,7 +516,7 @@ document.write(`
 
     <span class="c1"># ==================================================</span>
 <div class="viewcode-block" id="SymmetryOperationG.product">
-<a class="viewcode-back" href="../../../src/api_symmetry_operation.html#multipie.symmetry_operation.symmetry_operation_g.SymmetryOperationG.product">[docs]</a>
+<a class="viewcode-back" href="../../../src/api/symmetry_operation.html#multipie.symmetry_operation.symmetry_operation_g.SymmetryOperationG.product">[docs]</a>
     <span class="k">def</span> <span class="nf">product</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        product of symmetry operations (point group only).</span>

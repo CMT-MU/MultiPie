@@ -182,23 +182,26 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">File Format</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../../src/fmt_input.html">SAMB construction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../src/fmt_model.html">Molecule or Crystal Model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../src/fmt_samb.html">SAMB</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../src/fmt_matrix.html">SAMB in full matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/format/input.html">SAMB construction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/format/model.html">Molecule or Crystal Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/format/samb.html">SAMB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/format/matrix.html">SAMB in full matrix</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API References</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../../src/api_character.html">Character Table</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../src/api_group.html">Group</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../src/api_harmonics.html">Harmonics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../src/api_model.html">Model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../src/api_multipole.html">Multipole</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../src/api_response_tensor.html">Response tensor</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../src/api_symmetry_operation.html">Symmetry operations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../src/api_tag.html">Tag</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../src/api_virtual_cluster.html">Virtual cluster</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../src/api_wyckoff.html">Wyckoff position</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../src/api.html">Module</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api/character.html">Character Table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api/group.html">Group</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api/harmonics.html">Harmonics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api/model.html">Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api/multipole.html">Multipole</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api/response_tensor.html">Response tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api/symmetry_operation.html">Symmetry operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api/tag.html">Tag</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api/virtual_cluster.html">Virtual cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api/wyckoff.html">Wyckoff position</a></li>
+</ul>
+</li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Change Log</span></p>
 <ul class="nav bd-sidenav">
@@ -343,7 +346,7 @@ document.write(`
 
 <span class="c1"># ==================================================</span>
 <div class="viewcode-block" id="SpaceGroup">
-<a class="viewcode-back" href="../../../src/api_group.html#multipie.group.space_group.SpaceGroup">[docs]</a>
+<a class="viewcode-back" href="../../../src/api/group.html#multipie.group.space_group.SpaceGroup">[docs]</a>
 <span class="k">class</span> <span class="nc">SpaceGroup</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    space group.</span>
@@ -357,8 +360,6 @@ document.write(`
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># ==================================================</span>
-<div class="viewcode-block" id="SpaceGroup.__init__">
-<a class="viewcode-back" href="../../../src/api_group.html#multipie.group.space_group.SpaceGroup.__init__">[docs]</a>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sg_tag</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">core</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        initialize the class.</span>
@@ -395,8 +396,7 @@ document.write(`
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;associated point group.&quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">core</span> <span class="o">=</span> <span class="n">core</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;binary data.&quot;&quot;&quot;</span></div>
-
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;binary data.&quot;&quot;&quot;</span>
 
     <span class="c1"># ==================================================</span>
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -412,7 +412,7 @@ document.write(`
 
     <span class="c1"># ==================================================</span>
 <div class="viewcode-block" id="SpaceGroup.transform_matrix_site">
-<a class="viewcode-back" href="../../../src/api_group.html#multipie.group.space_group.SpaceGroup.transform_matrix_site">[docs]</a>
+<a class="viewcode-back" href="../../../src/api/group.html#multipie.group.space_group.SpaceGroup.transform_matrix_site">[docs]</a>
     <span class="k">def</span> <span class="nf">transform_matrix_site</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">site</span><span class="p">,</span> <span class="n">cc_only</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        transform matrix for site basis (reduced coordinate).</span>
@@ -448,7 +448,7 @@ document.write(`
 
     <span class="c1"># ==================================================</span>
 <div class="viewcode-block" id="SpaceGroup.transform_matrix_bond">
-<a class="viewcode-back" href="../../../src/api_group.html#multipie.group.space_group.SpaceGroup.transform_matrix_bond">[docs]</a>
+<a class="viewcode-back" href="../../../src/api/group.html#multipie.group.space_group.SpaceGroup.transform_matrix_bond">[docs]</a>
     <span class="k">def</span> <span class="nf">transform_matrix_bond</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bond</span><span class="p">,</span> <span class="n">nondirectional</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">cc_only</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        transform matrix for bond basis (reduced coordinate).</span>
@@ -493,7 +493,7 @@ document.write(`
 
     <span class="c1"># ==================================================</span>
 <div class="viewcode-block" id="SpaceGroup.transform_site">
-<a class="viewcode-back" href="../../../src/api_group.html#multipie.group.space_group.SpaceGroup.transform_site">[docs]</a>
+<a class="viewcode-back" href="../../../src/api/group.html#multipie.group.space_group.SpaceGroup.transform_site">[docs]</a>
     <span class="k">def</span> <span class="nf">transform_site</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">site</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">remove_duplicate</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">plus_set</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        set of transformed sites (reduced coordinate).</span>
@@ -525,7 +525,7 @@ document.write(`
 
     <span class="c1"># ==================================================</span>
 <div class="viewcode-block" id="SpaceGroup.transform_bond">
-<a class="viewcode-back" href="../../../src/api_group.html#multipie.group.space_group.SpaceGroup.transform_bond">[docs]</a>
+<a class="viewcode-back" href="../../../src/api/group.html#multipie.group.space_group.SpaceGroup.transform_bond">[docs]</a>
     <span class="k">def</span> <span class="nf">transform_bond</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bond</span><span class="p">,</span> <span class="n">nondirectional</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">remove_duplicate</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">plus_set</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        set of transformed bonds (reduced coordinate).</span>
@@ -558,7 +558,7 @@ document.write(`
 
     <span class="c1"># ==================================================</span>
 <div class="viewcode-block" id="SpaceGroup.shift_home_unit_cell">
-<a class="viewcode-back" href="../../../src/api_group.html#multipie.group.space_group.SpaceGroup.shift_home_unit_cell">[docs]</a>
+<a class="viewcode-back" href="../../../src/api/group.html#multipie.group.space_group.SpaceGroup.shift_home_unit_cell">[docs]</a>
     <span class="k">def</span> <span class="nf">shift_home_unit_cell</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">site</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        shift to home unit cell.</span>
@@ -579,7 +579,7 @@ document.write(`
 
     <span class="c1"># ==================================================</span>
 <div class="viewcode-block" id="SpaceGroup.find_rep_site">
-<a class="viewcode-back" href="../../../src/api_group.html#multipie.group.space_group.SpaceGroup.find_rep_site">[docs]</a>
+<a class="viewcode-back" href="../../../src/api/group.html#multipie.group.space_group.SpaceGroup.find_rep_site">[docs]</a>
     <span class="k">def</span> <span class="nf">find_rep_site</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">site_list</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        find representative sites from site_list.</span>
@@ -614,7 +614,7 @@ document.write(`
 
     <span class="c1"># ==================================================</span>
 <div class="viewcode-block" id="SpaceGroup.find_rep_bond">
-<a class="viewcode-back" href="../../../src/api_group.html#multipie.group.space_group.SpaceGroup.find_rep_bond">[docs]</a>
+<a class="viewcode-back" href="../../../src/api/group.html#multipie.group.space_group.SpaceGroup.find_rep_bond">[docs]</a>
     <span class="k">def</span> <span class="nf">find_rep_bond</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bond_list</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        find representative bonds from bond_list.</span>
@@ -673,7 +673,7 @@ document.write(`
 
     <span class="c1"># ==================================================</span>
 <div class="viewcode-block" id="SpaceGroup.site_mapping">
-<a class="viewcode-back" href="../../../src/api_group.html#multipie.group.space_group.SpaceGroup.site_mapping">[docs]</a>
+<a class="viewcode-back" href="../../../src/api/group.html#multipie.group.space_group.SpaceGroup.site_mapping">[docs]</a>
     <span class="k">def</span> <span class="nf">site_mapping</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">site</span><span class="p">,</span> <span class="n">plus_set</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        mapping between site and symmetry operations (reduced coordinate).</span>
@@ -718,7 +718,7 @@ document.write(`
 
     <span class="c1"># ==================================================</span>
 <div class="viewcode-block" id="SpaceGroup.bond_mapping">
-<a class="viewcode-back" href="../../../src/api_group.html#multipie.group.space_group.SpaceGroup.bond_mapping">[docs]</a>
+<a class="viewcode-back" href="../../../src/api/group.html#multipie.group.space_group.SpaceGroup.bond_mapping">[docs]</a>
     <span class="k">def</span> <span class="nf">bond_mapping</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bond</span><span class="p">,</span> <span class="n">plus_set</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        mapping between bond and symmetry operations (reduced coordinate).</span>
@@ -813,7 +813,7 @@ document.write(`
 
     <span class="c1"># ==================================================</span>
 <div class="viewcode-block" id="SpaceGroup.find_wyckoff_position">
-<a class="viewcode-back" href="../../../src/api_group.html#multipie.group.space_group.SpaceGroup.find_wyckoff_position">[docs]</a>
+<a class="viewcode-back" href="../../../src/api/group.html#multipie.group.space_group.SpaceGroup.find_wyckoff_position">[docs]</a>
     <span class="k">def</span> <span class="nf">find_wyckoff_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">site</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        find Wyckoff position for a given site (reduced coordinate).</span>
@@ -858,7 +858,7 @@ document.write(`
 
     <span class="c1"># ==================================================</span>
 <div class="viewcode-block" id="SpaceGroup.site_cluster_samb">
-<a class="viewcode-back" href="../../../src/api_group.html#multipie.group.space_group.SpaceGroup.site_cluster_samb">[docs]</a>
+<a class="viewcode-back" href="../../../src/api/group.html#multipie.group.space_group.SpaceGroup.site_cluster_samb">[docs]</a>
     <span class="k">def</span> <span class="nf">site_cluster_samb</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">site</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        create site-cluster multipole basis set.</span>
@@ -897,7 +897,7 @@ document.write(`
 
     <span class="c1"># ==================================================</span>
 <div class="viewcode-block" id="SpaceGroup.bond_cluster_samb">
-<a class="viewcode-back" href="../../../src/api_group.html#multipie.group.space_group.SpaceGroup.bond_cluster_samb">[docs]</a>
+<a class="viewcode-back" href="../../../src/api/group.html#multipie.group.space_group.SpaceGroup.bond_cluster_samb">[docs]</a>
     <span class="k">def</span> <span class="nf">bond_cluster_samb</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bond</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        create bond-cluster multipole basis set.</span>
@@ -948,7 +948,7 @@ document.write(`
 
     <span class="c1"># ==================================================</span>
 <div class="viewcode-block" id="SpaceGroup.z_samb">
-<a class="viewcode-back" href="../../../src/api_group.html#multipie.group.space_group.SpaceGroup.z_samb">[docs]</a>
+<a class="viewcode-back" href="../../../src/api/group.html#multipie.group.space_group.SpaceGroup.z_samb">[docs]</a>
     <span class="k">def</span> <span class="nf">z_samb</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_tag_list</span><span class="p">,</span> <span class="n">y_tag_list</span><span class="p">,</span> <span class="n">toroidal_priority</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        create combined multipole basis set.</span>
