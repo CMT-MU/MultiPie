@@ -1,6 +1,7 @@
 """
 MaterialModel manages model information of cluster or crystal system.
 """
+
 import numpy as np
 from gcoreutils.nsarray import NSArray
 from gcoreutils.crystal_util import cell_transform_matrix
@@ -947,6 +948,8 @@ class MaterialModel(dict):
                 d["option"]["output"] = model
             if "minimal_samb" not in d["option"].keys():
                 d["option"]["minimal_samb"] = True
+            if "binary_output" not in d["option"].keys():
+                d["option"]["binary_output"] = False
 
         if "generate" not in d.keys():
             d["generate"] = {
