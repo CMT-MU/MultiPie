@@ -1,6 +1,7 @@
 """
 MaterialModel manages model information of cluster or crystal system.
 """
+
 import datetime
 import sympy as sp
 from gcoreutils.nsarray import NSArray
@@ -259,8 +260,8 @@ class ModelPDF:
                 eq = sp.S(0)
                 rdict = {}
                 for c, at, ct in zj[1]:
-                    a_no = str(int(at.split("_")[1]))
-                    c_no = str(int(ct.split("_")[1]))
+                    a_no = str(at.split("_")[1])
+                    c_no = str(ct.split("_")[1])
                     rdict["a" + a_no] = TagMultipole(samb["data"]["atomic"][at][0]).latex()
                     rdict["c" + c_no] = TagMultipole(samb["data"]["cluster"][ct][0]).latex()
                     eq += (
@@ -282,14 +283,14 @@ class ModelPDF:
                     else:
                         c, at, ut = term
                         ft = ""
-                    a_no = str(int(at.split("_")[1]))
-                    u_no = str(int(ut.split("_")[1]))
+                    a_no = str(at.split("_")[1])
+                    u_no = str(ut.split("_")[1])
                     rdict["a" + a_no] = TagMultipole(samb["data"]["atomic"][at][0]).latex()
                     a_symbol = sp.symbols(r"A_{" + a_no + "}[a" + a_no + "]")
                     rdict["u" + u_no] = TagMultipole(samb["data"]["uniform"][ut][0]).latex()
                     u_symbol = sp.symbols(r"B_{" + u_no + "}[u" + u_no + "]")
                     if ft:
-                        f_no = str(int(ft.split("_")[1]))
+                        f_no = str(ft.split("_")[1])
                         f_symbol = sp.symbols(r"C_{" + f_no + "}[f" + f_no + "]")
                         rdict["f" + f_no] = TagMultipole(samb["data"]["structure"][ft][0]).latex()
                     else:
@@ -301,8 +302,10 @@ class ModelPDF:
                     .replace("B", r"\otimes\mathbb{U}")
                     .replace("C", r"\otimes\mathbb{F}")
                 )
+
                 for r, s in rdict.items():
                     eqk = eqk.replace(r, s)
+
                 eqk = r"\hat{\mathbb{Z}}_{" + str(no + 1) + r"}(\bm{k})=" + eqk
                 pdf.equation(eqk, long=True)
         else:
@@ -323,8 +326,8 @@ class ModelPDF:
                 eq = sp.S(0)
                 rdict = {}
                 for c, at, ct in zj[1]:
-                    a_no = str(int(at.split("_")[1]))
-                    c_no = str(int(ct.split("_")[1]))
+                    a_no = str(at.split("_")[1])
+                    c_no = str(ct.split("_")[1])
                     rdict["a" + a_no] = TagMultipole(samb["data"]["atomic"][at][0]).latex()
                     if info["molecule"]:
                         rdict["u" + c_no] = TagMultipole(samb["data"]["uniform"][ct][0]).latex()
