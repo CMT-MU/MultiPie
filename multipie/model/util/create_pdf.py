@@ -194,10 +194,10 @@ class ModelPDF:
             tbl1 = []
             for bond in lst:
                 pos, mp, th, _, _ = data["bond"][bond]
-                head_t, idx_t = name["site"][f"site_{th[0]+1:03d}"]
-                t = head_t + "$_{" + str(idx_t) + "}$"
-                head_h, idx_h = name["site"][f"site_{th[1]+1:03d}"]
+                head_h, idx_h = name["site"][f"site_{th[0]+1:03d}"]
                 h = head_h + "$_{" + str(idx_h) + "}$"
+                head_t, idx_t = name["site"][f"site_{th[1]+1:03d}"]
+                t = head_t + "$_{" + str(idx_t) + "}$"
                 head, idx = name["bond"][bond]
                 _, _, n, idx = head.split(":")
                 no = int(bond.split("_")[1])
