@@ -10,8 +10,9 @@
 - k_path* : high-symmetry line in k space
 - cell_site : { name_idx(pset): (position, SOs) }
 - A* : transform matrix, [a1,a2,a3]
-- matrix : { "z_#": {(n1, n2, n3, a, b): matrix element} }
+- matrix : { "z_#": "matrix"}
 """
+
 C3v = {
     "model": "C3v",
     "molecule": True,
@@ -26,7 +27,7 @@ C3v = {
         "B_2": ("[0, -2/3, 0]", "[2,6]"),
         "B_3": ("[2/3, 2/3, 0]", "[3,5]"),
     },
-    "version": "1.1.15",
+    "version": "1.2.18",
     "matrix": {
         "z_001": {(0, 0, 0, 0, 0): "sqrt(3)/3", (0, 0, 0, 1, 1): "sqrt(3)/3", (0, 0, 0, 2, 2): "sqrt(3)/3"},
         "z_002": {

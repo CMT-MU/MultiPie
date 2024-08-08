@@ -1,6 +1,7 @@
 """
 TagMultipole manages tag of multipole.
 """
+
 from dataclasses import dataclass
 from multipie.tag.tag import Tag
 from multipie.tag.tag_list import TagList
@@ -187,7 +188,7 @@ class TagMultipole(Tag):
     # ==================================================
     @property
     def m(self):
-        """
+        r"""
         component of multipole (:math:`-l\le m \le l` for spherical version).
 
         Returns:
