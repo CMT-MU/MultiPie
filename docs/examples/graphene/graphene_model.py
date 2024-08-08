@@ -15,6 +15,7 @@
         - view_mode : QtDraw mode, standard/arrow/debug
         - output : output directory.
         - minimal_samb : output minimal SAMB ?
+        - binary_output : output matrix data in binary format ?
     - generate :
         - model_type : tight_binding/phonon
         - time_reversal_type : electric/magnetic/both
@@ -58,6 +59,7 @@
     - A* : transform matrix, [a1,a2,a3]
     - version : MultiPie version
 """
+
 graphene = {
     "info": {
         "model": "graphene",
@@ -69,7 +71,7 @@ graphene = {
         "a1": "[1.0, 0.0, 0.0]",
         "a2": "[-0.5, 0.86602540378444, 0.0]",
         "a3": "[0.0, 0.0, 4.0]",
-        "option": {"view": None, "view_mode": "standard", "output": "graphene", "minimal_samb": True},
+        "option": {"view": None, "view_mode": "standard", "output": "graphene", "minimal_samb": True, "binary_output": False},
         "generate": {
             "model_type": "tight_binding",
             "time_reversal_type": "electric",
@@ -345,11 +347,12 @@ graphene = {
                 {"C:C:7:1": ("[-2/3, -1/3, 0];[5/3, 1/3, 0]", "3f", "ND", 7, "mmm")},
                 {"C:C:8:1": ("[-2/3, -4/3, 0];[2/3, 4/3, 0]", "1a", "ND", 8, "6/mmm")},
                 {"C:C:9:1": ("[-2/3, -4/3, 0];[5/3, 4/3, 0]", "3f", "ND", 9, "mmm")},
+                {"C:C:10:1": ("[-2/3, -4/3, 0];[4/3, 5/3, 0]", "6l", "D", 10, "mm2")},
             ]
         },
         "cell_range": (-2, 3, -2, 3, -2, 3),
         "max_neighbor": 10,
         "A": "[[1.0, -0.5, 0.0], [0.0, 0.86602540378444, 0.0], [0.0, 0.0, 4.0]]",
-        "version": "1.1.15",
+        "version": "1.2.18",
     },
 }

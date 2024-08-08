@@ -15,6 +15,7 @@
         - view_mode : QtDraw mode, standard/arrow/debug
         - output : output directory.
         - minimal_samb : output minimal SAMB ?
+        - binary_output : output matrix data in binary format ?
     - generate :
         - model_type : tight_binding/phonon
         - time_reversal_type : electric/magnetic/both
@@ -58,13 +59,14 @@
     - A* : transform matrix, [a1,a2,a3]
     - version : MultiPie version
 """
+
 C3v = {
     "info": {
         "model": "C3v",
         "molecule": True,
         "group": ("C3v-1", "point group No. 19 : C3v-1 / 31m (31m)"),
         "crystal": "trigonal",
-        "option": {"view": None, "view_mode": "standard", "output": "C3v", "minimal_samb": True},
+        "option": {"view": None, "view_mode": "standard", "output": "C3v", "minimal_samb": True, "binary_output": False},
         "generate": {
             "model_type": "tight_binding",
             "time_reversal_type": "electric",
@@ -224,7 +226,7 @@ C3v = {
             ],
         },
         "max_neighbor": 10,
-        "version": "1.1.15",
+        "version": "1.2.18",
         "cell_range": (-2, 3, -2, 3, -2, 3),
     },
 }

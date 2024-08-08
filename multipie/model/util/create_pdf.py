@@ -215,7 +215,7 @@ class ModelPDF:
         pdf.table(
             tbl,
             row,
-            ["bond", "tail", "head", "$n$", "\#", r"$\bm{b}@\bm{c}$", "mapping"],
+            ["bond", "tail", "head", "$n$", r"\#", r"$\bm{b}@\bm{c}$", "mapping"],
             caption="Bond-clusters.",
             cpos="cc|cc|c|c|c|l",
             stretch=1.3,
@@ -397,7 +397,7 @@ class ModelPDF:
                 tag, shape, mat = samb["data"]["atomic"][amp]
                 tag = "$" + TagMultipole(tag).latex() + "$"
                 no = str(int(amp.split("_")[1]))
-                no = "\mathbb{X}_{" + no + "}"
+                no = r"\mathbb{X}_{" + no + "}"
                 mat = "$" + convert_to_matrix(shape[0], shape[1], mat).latex() + "$"
                 row.append(no)
                 tbl.append([tag, m_group, mat])
@@ -429,7 +429,7 @@ class ModelPDF:
                     tag, vec = samb["data"]["cluster"][cmp]
                     tag = "$" + TagMultipole(tag).latex() + "$"
                     no = str(int(cmp.split("_")[1]))
-                    no = "\mathbb{Y}_{" + no + "}"
+                    no = r"\mathbb{Y}_{" + no + "}"
                     vec = "$" + NSArray(vec).latex() + "$"
                     row.append(no)
                     tbl.append([tag, c_group, vec])
@@ -461,7 +461,7 @@ class ModelPDF:
                     tag, shape, mat = samb["data"]["uniform"][ump]
                     tag = "$" + TagMultipole(tag).latex() + "$"
                     no = str(int(ump.split("_")[1]))
-                    no = "\mathbb{U}_{" + no + "}"
+                    no = r"\mathbb{U}_{" + no + "}"
                     mat = "$" + convert_to_matrix(shape[0], shape[1], mat).latex() + "$"
                     row.append(no)
                     tbl.append([tag, c_group, mat])
@@ -494,7 +494,7 @@ class ModelPDF:
                     tag, val = samb["data"]["structure"][smp]
                     tag = "$" + TagMultipole(tag).latex() + "$"
                     no = str(int(smp.split("_")[1]))
-                    no = "\mathbb{F}_{" + no + "}"
+                    no = r"\mathbb{F}_{" + no + "}"
                     val = "$" + NSArray(val).latex() + "$"
                     row.append(no)
                     tbl.append([tag, c_group, val])
@@ -545,9 +545,7 @@ class ModelPDF:
                     comp = "-"
                 harm = group.harmonics[h_tag]
                 harm_ltx = harm.latex().replace("h,", "")
-                tbl.append(
-                    [harm_ltx, str(rank), irrep.latex(), mul, comp, harm.expression(v=NSArray.vector3d(head)).latex()]
-                )
+                tbl.append([harm_ltx, str(rank), irrep.latex(), mul, comp, harm.expression(v=NSArray.vector3d(head)).latex()])
                 row.append(str(no + 1))
                 if rank != old_rank:
                     old_rank = rank
@@ -580,7 +578,7 @@ class ModelPDF:
             float(cell["beta"]),
             float(cell["gamma"]),
         )
-        txt = f"\quad $a={a},\,\, b={b},\,\, c={c},\,\, \\alpha={alpha},\,\, \\beta={beta},\,\, \\gamma={gamma}$\n"
+        txt = f"\\quad $a={a},\\,\\, b={b},\\,\\, c={c},\\,\\, \\alpha={alpha},\\,\\, \\beta={beta},\\,\\, \\gamma={gamma}$\n"
         pdf.text(txt)
 
         pdf.text(r"\item Lattice vectors:" + "\n")
@@ -594,10 +592,8 @@ class ModelPDF:
                 pdf.text(r"\quad $+" + NSArray(i).latex() + "$\n")
 
         self.comment(pdf, "k path.")
-        kpath = info["k_path"].replace("Γ", "$\Gamma$")
-        tbl = sum(
-            [[k.replace("Γ", "$\Gamma$"), "$" + NSArray(v).latex() + "$"] for k, v in info["k_point"].items()], []
-        )
+        kpath = info["k_path"].replace("Γ", r"$\Gamma$")
+        tbl = sum([[k.replace("Γ", r"$\Gamma$"), "$" + NSArray(v).latex() + "$"] for k, v in info["k_point"].items()], [])
         ncol = min(3, len(info["k_point"]))
         pdf.table(
             tbl,
@@ -615,7 +611,7 @@ class ModelPDF:
         so = group.symmetry_operation
 
         self.comment(pdf, "group information.")
-        pdf.text(r"\item Group info.: Generator = " + "$" + ",\,\,".join(so.gen.latex()) + "$" + "\n")
+        pdf.text(r"\item Group info.: Generator = " + "$" + r",\,\,".join(so.gen.latex()) + "$" + "\n")
 
         # conjugacy class.
         irop = [i.latex() for i in so.cc]
@@ -627,7 +623,7 @@ class ModelPDF:
         cap += "."
         for ir in irop:
             row.append("$" + ir[0] + "$")
-            tbl.append(["$" + "$,\,\, $".join(ir) + "$"])
+            tbl.append(["$" + r"$,\,\, $".join(ir) + "$"])
         pdf.table(
             tbl,
             row,
@@ -672,9 +668,7 @@ class ModelPDF:
 
         # parity conversion.
         tbl = [i.latex() + "\\,\\,(" + j.latex() + ")" for i, j in ch.parity_conversion().items()]
-        pdf.table(
-            tbl, [""], ["$\leftrightarrow$"] * min(len(tbl), 5), caption="Parity conversion.", tmath=True, long=True
-        )
+        pdf.table(tbl, [""], [r"$\leftrightarrow$"] * min(len(tbl), 5), caption="Parity conversion.", tmath=True, long=True)
 
         # symmetric product.
         tbl = []
@@ -693,7 +687,7 @@ class ModelPDF:
             cmath=True,
             tmath=True,
             cpos=cp,
-            caption="Symmetric product, $[\Gamma\otimes\Gamma']_+.$",
+            caption=r"Symmetric product, $[\Gamma\otimes\Gamma']_+.$",
             long=True,
         )
 
@@ -711,7 +705,7 @@ class ModelPDF:
             rmath=True,
             cmath=True,
             tmath=True,
-            caption="Anti-symmetric product, $[\Gamma\otimes\Gamma]_-$.",
+            caption=r"Anti-symmetric product, $[\Gamma\otimes\Gamma]_-$.",
             long=True,
         )
 
@@ -735,8 +729,6 @@ class ModelPDF:
             row.append("$" + info.latex().replace("s,", "") + "$")
             basis = NSArray(basis.tolist(), "scalar")
             tbl.append(basis.latex())
-        pdf.table(
-            tbl, row, col, "symbol", hl=True, caption="Virtual-cluster basis.", tmath=True, stretch=1.7, long=True
-        )
+        pdf.table(tbl, row, col, "symbol", hl=True, caption="Virtual-cluster basis.", tmath=True, stretch=1.7, long=True)
 
         pdf.text("}")

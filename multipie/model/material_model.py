@@ -14,8 +14,9 @@ from multipie.multipole.util.atomic_orbital_util import (
 from multipie import __version__
 
 try:
-    from qtdraw.qt_draw import QtDraw
-    from qtdraw.multipie.setting import default_style
+    from qtdraw.core.pyvista_widget import PyVistaWidget
+    from qtdraw.multipie.plugin_multipie_setting import plugin_detail
+    from qtdraw.util.qt_event_util import get_qt_application
 
     _qtdraw_available = True
 except ImportError:
@@ -27,7 +28,7 @@ _default_search_cell_range = (-2, 3, -2, 3, -2, 3)
 
 
 # ==================================================
-input_str = """
+input_str = r"""
 === Input for SAMB construction (* optional [default]) ===
 - model : model name (str).
 - group : group name (Schoenflies notation) or group number (space group) (str/int).
@@ -319,30 +320,31 @@ class MaterialModel(dict):
         else:
             n_pset = len(data["plus_set"])
 
-        qtdraw = QtDraw(
-            model=info["model"],
-            cell=self._cell,
-            view=info["option"]["view"],
-            axis_type="abc",
-            cluster=molecule,
-            clip=False,
-            background=True,
-        )
+        app = get_qt_application()
+        qtdraw = PyVistaWidget(off_screen=True)
+
+        qtdraw.set_model(info["model"])
+        qtdraw.set_unit_cell(self._cell)
+        qtdraw.set_view(info["option"]["view"])
         qtdraw.set_crystal(info["crystal"])
+        qtdraw.set_clip(False)
+        qtdraw.set_property(preference={"axis": {"label": "[a,b,c]"}})
+        qtdraw.set_cell("off")
+
         if scale:
             scale = self._volume ** (1 / 3)
         else:
             scale = 1.0
 
-        cluster_site_n = len(default_style["site"])
-        cluster_bond_n = len(default_style["bond"])
+        cluster_site_n = len(plugin_detail["site"])
+        cluster_bond_n = len(plugin_detail["bond"])
 
         # plot sites.
         for pos, (site_name, pset) in name["site_name"].items():
             head, idx = name["site"][site_name]
             cluster_no = int(name["alias"][head].split("_")[1])
             prop_no = cluster_no - 1 if cluster_no < cluster_site_n else cluster_site_n - 1
-            color, size, opacity = default_style["site"][prop_no]
+            color, size, opacity = plugin_detail["site"][prop_no]
             if n_pset > 1:
                 cluster_name = f"S{cluster_no}({pset})"
             else:
@@ -353,21 +355,21 @@ class MaterialModel(dict):
                 label = f"s{site_no}"
             else:
                 label = f"{head}_{idx}: " + self._mapping_str(mp)
-            qtdraw.plot_site(
-                pos,
+            qtdraw.add_site(
+                position=NSArray(pos).value(),
                 name=cluster_name,
                 label=label,
                 color=color,
-                size=size * scale,
+                size=size * scale * 0.04,
                 opacity=opacity,
             )
             if mode != "standard" and idx == 1 and pset == 1:
-                qtdraw.plot_site(
-                    pos,
+                qtdraw.add_site(
+                    position=NSArray(pos).value(),
                     name="Z",
                     label=label,
                     color="yellow",
-                    size=size * scale * 1.2,
+                    size=size * scale * 1.2 * 0.04,
                     opacity=0.3,
                 )
 
@@ -376,7 +378,7 @@ class MaterialModel(dict):
             head, idx = name["bond"][bond_name]
             cluster_no = int(name["alias"][head].split("_")[1])
             prop_no = cluster_no - 1 if cluster_no < cluster_bond_n else cluster_bond_n - 1
-            (c1, c2), width, opacity = default_style["bond"][prop_no]
+            (c1, c2), width, opacity = plugin_detail["bond"][prop_no]
             if n_pset > 1:
                 cluster_name = f"B{cluster_no}({pset})"
             else:
@@ -393,12 +395,12 @@ class MaterialModel(dict):
                 label = f"b{bond_no}/{n}th: " + self._mapping_str(mp)
             v, c = bond.split("@")
             opa = opacity * 0.5 if mode != "standard" else opacity
-            qtdraw.plot_bond(
-                c,
-                v,
+            qtdraw.add_bond(
+                position=NSArray(c).value(),
+                direction=NSArray(v).value(),
                 color=color1,
                 color2=color2,
-                width=width * scale,
+                width=width * scale * 0.016,
                 opacity=opa,
                 name=cluster_name,
                 label=label,
@@ -407,20 +409,26 @@ class MaterialModel(dict):
                 v = NSArray(v).transform(self.A)
                 v_len = v.norm() * 0.25
                 acolor = "red" if idx == 1 and pset == 1 else "black"
-                qtdraw.plot_vector(
-                    c,
-                    v,
+                qtdraw.add_vector(
+                    position=NSArray(c).value(),
+                    direction=NSArray(v, "vector").value(),
                     length=v_len,
-                    width=width * scale * 0.3,
+                    width=width * scale * 0.3 * 0.018,
                     color=acolor,
                     opacity=opacity,
                     name=cluster_name,
                     label=label,
                 )
 
-        dic = qtdraw.create_dict(self.model)
+        qtdraw.save_current()
+        dic = qtdraw._backup
+        # remove temp. info.
+        if "plus" in dic["status"].keys():
+            del dic["status"]["plus"]
+        if "multipie" in dic["status"].keys() and "plus" in dic["status"]["multipie"].keys():
+            del dic["status"]["multipie"]["plus"]
         qtdraw.close()
-        del qtdraw
+        app.quit()
 
         return dic
 

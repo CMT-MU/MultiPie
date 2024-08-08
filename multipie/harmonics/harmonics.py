@@ -1,6 +1,7 @@
 """
 Harmonics manages point-group harmonics.
 """
+
 import sympy as sp
 from gcoreutils.nsarray import NSArray
 from multipie.tag.tag_multipole import TagMultipole
@@ -108,7 +109,7 @@ class Harmonics:
 
     # ==================================================
     def u_matrix(self):
-        """
+        r"""
         unitary matrix from (l,m) to the harmonics, :math:`X_{harm} = U^{\dagger}X_{lm}U`.
 
         Returns:
