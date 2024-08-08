@@ -14,11 +14,12 @@
     - atomic : { "amp_#" : ( TagMultipole, shape, [(i, j, matrix element)] ) }
     - site_cluster : { "smp_#" : ( TagMultipole, [vector component] ) }
     - bond_cluster : { "bmp_#" : ( TagMultipole, [vector component] ) }
-    - uniform : { "ump_#" : ( TagMultipole, shape, [(i, j, matrix element)] ) }
+    - uniform* : { "ump_#" : ( TagMultipole, shape, [(i, j, matrix element)] ) }
     - structure* : { "kmp_#" : (TagMultipole, "structure factor") }
     - Z : {"z_#" : ( TagMultipole, [(coeff, "amp_#", "smp_#"/"bmp_#/ump_#")] ) }
     - Zk* : {"z_#" : ( TagMultipole, [(coeff, "amp_#", "ump_#", "kmp_#")] ) }
 """
+
 graphene = {
     "info": {
         "atomic": {"M_001": ["amp_001"]},
@@ -40,7 +41,7 @@ graphene = {
             ("A1g", "M_001", "B_005"): ["z_006"],
             ("A1g", "M_001", "B_006"): ["z_007"],
         },
-        "version": "1.1.15",
+        "version": "1.2.18",
         "harmonics": {"Q": ["Qh(0,A1g,,)"], "G": []},
     },
     "data": {
