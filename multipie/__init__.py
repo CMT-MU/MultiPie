@@ -1,7 +1,7 @@
 import os
 import sys
 
-__version__ = "1.2.3"
+__version__ = "1.3.0"
 __top_dir__ = os.path.normpath(os.path.dirname(__file__) + "/../") + "/"
 __bin_dir__ = __top_dir__ + "multipie/binary_data/"
 
