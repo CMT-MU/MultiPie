@@ -1,6 +1,7 @@
 """
 create Wyckoff positions.
 """
+
 from gcoreutils.pdf_via_latex import PDFviaLaTeX
 from multipie.tag.tag_group import TagGroup
 from multipie.wyckoff.wyckoff_g_set import WyckoffGSet
@@ -29,7 +30,7 @@ def create_wyckoff(wset, soset, t_pg):
         name = tag.info(latex=True)
         if not t_pg:
             so = soset[tag]
-            name += r"\quad" + ",\quad ".join(["$+" + i + "$" for i in so.plus_set.latex()])
+            name += r"\quad" + r",\quad ".join(["$+" + i + "$" for i in so.plus_set.latex()])
         row = []
         tbl = []
         for w in p.keys():
