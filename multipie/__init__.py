@@ -1,7 +1,7 @@
 import os
 import sys
 
-__version__ = "1.3.0"
+__version__ = "1.3.1"
 __top_dir__ = os.path.normpath(os.path.dirname(__file__) + "/../") + "/"
 __bin_dir__ = __top_dir__ + "multipie/binary_data/"
 
@@ -16,9 +16,7 @@ from multipie.symmetry_operation.symmetry_operation_g_set import SymmetryOperati
 from multipie.virtual_cluster.virtual_cluster_pg_set import VirtualClusterPGSet
 from multipie.clebsch_gordan.clebsch_gordan_pg_set import ClebschGordanPGSet
 from multipie.response_tensor.response_tensor_pg_set import ResponseTensorPGSet
-from multipie.multipole.base.base_atomic_multipole_dataset import (
-    BaseAtomicMultipoleDataset,
-)
+from multipie.multipole.base.base_atomic_multipole_dataset import BaseAtomicMultipoleDataset
 
 
 # ==================================================
