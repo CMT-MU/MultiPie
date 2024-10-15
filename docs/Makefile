@@ -1,5 +1,5 @@
 build:
-	jupyter book build --all -v .
+	jb build --all -v .
 
 upload:	build
 	ghp-import -n -p -f _build/html
