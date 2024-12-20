@@ -2,5 +2,17 @@
 
 The example use of the output file, `_matrix.py` is given here.
 
-See, the example of plot for `C3v` and `graphene` in [example](https://github.com/CMT-MU/MultiPie/tree/main/docs/examples).
-Download files in examples, and try `python create_plot.py` command.
+1. Prepare parameter file. Example parameter files for C3v molecule and graphene are given as follows.
+    - C3v molecule
+    ```{literalinclude} ../examples/p_C3v.py
+    ```
+    - graphene
+    ```{literalinclude} ../examples/p_graphene.py
+    ```
+
+2. At the folder where the parameter file exists, do the following to create energy plot.
+See for more detail, try `create_plot --help` command.
+    ```
+    $ create_plot p_C3v p_graphene
+    ```
+1. The `.png` files are created in the current folder.
