@@ -1,7 +1,9 @@
 """
 utility for model construction and plot.
 """
+
 import math
+import os
 import numpy as np
 from gcoreutils.nsarray import NSArray
 from gcoreutils.plot_util import init_plot, plot_dispersion
@@ -58,7 +60,7 @@ def _solve_model(matrix_dict, param, N1=50):
 
 
 # ==================================================
-def _plot_model(k_linear, E, k_name=None, title="", xlabel=None):
+def _plot_model(k_linear, E, k_name=None, title="", xlabel=None, model=None, verbose=False):
     """
     plot a model.
 
@@ -67,6 +69,9 @@ def _plot_model(k_linear, E, k_name=None, title="", xlabel=None):
         E (ndarray): eigen energy, [k_index, basis_index].
         k_name (dict, optional): name of k point, {disconnected linear position: label}.
         title (str, optional): title of plot.
+        xlabel (str, optional): x label.
+        model (str, optional): model name.
+        verbose (bool, optional): verbose ?
     """
     # initialize plot.
     plt, figure = init_plot()
@@ -77,33 +82,52 @@ def _plot_model(k_linear, E, k_name=None, title="", xlabel=None):
     rm = max(abs(math.floor(E.min())), abs(math.ceil(E.max())))
     E_range = [-rm, rm]
     plot_dispersion(k_linear, E, k_name, title=title, ax=ax, E_range=E_range, xlabel=xlabel)
-    plt.show()
+    # plt.show()
+    fname = model
+    fname = os.getcwd() + "/" + fname + ".png"
+    plt.savefig(fname, transparent=True)
+    if verbose:
+        print("  * create '" + fname + "'.")
 
 
 # ==================================================
-def _plot_single_model(topdir, model_param, verbose):
+def _plot_single_model(topdir, param_file, verbose):
     """
     plot a model with parameters.
 
     Args:
         topdir (str): top directory.
-        model_param (tuple): model name and parameters.
+        param_file (str): parameter file.
         verbose (bool): verbose parallel info.
+        no (int, optional): plot no.
     """
-    model, param = model_param
-    mpm = MultiPieManager(topdir=topdir + "/" + model, verbose=verbose)
+    mpm = MultiPieManager(topdir=topdir + "/", verbose=verbose)
+    pfile = mpm.read(param_file)
+    model = pfile["model"]
 
-    d = mpm.read(model + "_matrix.py")
+    # mpm = MultiPieManager(topdir=topdir + "/" , verbose=verbose)
+    d = mpm.read(model + "/" + model + "_matrix.py")
+
+    if "k_point" in pfile.keys():
+        d["k_point"] = pfile["k_point"]
+    if "k_path" in pfile.keys():
+        d["k_path"] = pfile["k_path"]
+
+    n_param = len(d["matrix"])
+    param = {f"z_{i+1:03d}": 0.0 for i in range(n_param)}
+    for zno, val in pfile["param"].items():
+        param[f"z_{zno:03d}"] = val
+
     if d["molecule"]:
         # construct matrices, and diagonalize them.
         E, _ = _solve_model(d, param)
         # plot energy.
-        _plot_model(param["x"], E, title=f"energy for {model} molecule", xlabel=param["x_name"])
+        _plot_model(pfile["x"], E, title=f"energy for {model} molecule", xlabel=pfile["x_name"], model=model, verbose=verbose)
     else:
         # construct matrices, and diagonalize them.
         E, _, k_linear, k_name, _ = _solve_model(d, param)
         # plot dispersion.
-        _plot_model(k_linear, E, k_name=k_name, title=f"energy dispersion for {model}")
+        _plot_model(k_linear, E, k_name=k_name, title=f"energy dispersion for {model}", model=model, verbose=verbose)
 
 
 # ==================================================
