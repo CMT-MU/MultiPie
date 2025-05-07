@@ -16,8 +16,8 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!-- 
-    this give us a css class that will be invisible only if js is disabled 
+  <!--
+    this give us a css class that will be invisible only if js is disabled
   -->
   <noscript>
     <style>
@@ -27,11 +27,11 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
@@ -39,10 +39,10 @@
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- So that users can add custom icons -->
-  <script src="../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="../../_static/documentation_options.js?v=8cf54648"></script>
     <script src="../../_static/doctools.js?v=9bcbadda"></script>
@@ -58,10 +58,6 @@
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>window.MathJax = {"loader": {"load": ["[tex]/physics"]}, "tex": {"packages": {"[+]": ["physics"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'src/api/tag';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -201,9 +197,14 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -348,80 +349,13 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-multipie.tag.tag_group">TagGroup</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_group.TagGroup"><code class="docutils literal notranslate"><span class="pre">TagGroup</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_group.TagGroup.create"><code class="docutils literal notranslate"><span class="pre">TagGroup.create()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_group.TagGroup.info"><code class="docutils literal notranslate"><span class="pre">TagGroup.info()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_group.TagGroup.is_hexagonal_subgroup"><code class="docutils literal notranslate"><span class="pre">TagGroup.is_hexagonal_subgroup()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_group.TagGroup.is_point_group"><code class="docutils literal notranslate"><span class="pre">TagGroup.is_point_group()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_group.TagGroup.latex"><code class="docutils literal notranslate"><span class="pre">TagGroup.latex()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_group.TagGroup.lattice"><code class="docutils literal notranslate"><span class="pre">TagGroup.lattice</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-multipie.tag.tag_irrep">TagIrrep</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_irrep.TagIrrep"><code class="docutils literal notranslate"><span class="pre">TagIrrep</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_irrep.TagIrrep.create"><code class="docutils literal notranslate"><span class="pre">TagIrrep.create()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_irrep.TagIrrep.latex"><code class="docutils literal notranslate"><span class="pre">TagIrrep.latex()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-multipie.tag.tag_multipole">TagMultipole</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_multipole.TagMultipole"><code class="docutils literal notranslate"><span class="pre">TagMultipole</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_multipole.TagMultipole.create"><code class="docutils literal notranslate"><span class="pre">TagMultipole.create()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_multipole.TagMultipole.create_spherical"><code class="docutils literal notranslate"><span class="pre">TagMultipole.create_spherical()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_multipole.TagMultipole.latex"><code class="docutils literal notranslate"><span class="pre">TagMultipole.latex()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_multipole.TagMultipole.reverse_i_type"><code class="docutils literal notranslate"><span class="pre">TagMultipole.reverse_i_type()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_multipole.TagMultipole.reverse_t_type"><code class="docutils literal notranslate"><span class="pre">TagMultipole.reverse_t_type()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_multipole.TagMultipole.tag_irrep"><code class="docutils literal notranslate"><span class="pre">TagMultipole.tag_irrep()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_multipole.TagMultipole.to_harmonics"><code class="docutils literal notranslate"><span class="pre">TagMultipole.to_harmonics()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_multipole.TagMultipole.to_polar"><code class="docutils literal notranslate"><span class="pre">TagMultipole.to_polar()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_multipole.TagMultipole.i_type"><code class="docutils literal notranslate"><span class="pre">TagMultipole.i_type</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_multipole.TagMultipole.l"><code class="docutils literal notranslate"><span class="pre">TagMultipole.l</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_multipole.TagMultipole.m"><code class="docutils literal notranslate"><span class="pre">TagMultipole.m</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_multipole.TagMultipole.t_type"><code class="docutils literal notranslate"><span class="pre">TagMultipole.t_type</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-multipie.tag.tag_response_tensor">TagResponseTensor</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_response_tensor.TagResponseTensor"><code class="docutils literal notranslate"><span class="pre">TagResponseTensor</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_response_tensor.TagResponseTensor.create"><code class="docutils literal notranslate"><span class="pre">TagResponseTensor.create()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_response_tensor.TagResponseTensor.latex"><code class="docutils literal notranslate"><span class="pre">TagResponseTensor.latex()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_response_tensor.TagResponseTensor.i_type"><code class="docutils literal notranslate"><span class="pre">TagResponseTensor.i_type</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_response_tensor.TagResponseTensor.t_type"><code class="docutils literal notranslate"><span class="pre">TagResponseTensor.t_type</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-multipie.tag.tag_symmetry_operation">TagSymmetryOperation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_symmetry_operation.TagSymmetryOperation"><code class="docutils literal notranslate"><span class="pre">TagSymmetryOperation</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_symmetry_operation.TagSymmetryOperation.latex"><code class="docutils literal notranslate"><span class="pre">TagSymmetryOperation.latex()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-multipie.tag.tag_wyckoff">TagWyckoff</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_wyckoff.TagWyckoff"><code class="docutils literal notranslate"><span class="pre">TagWyckoff</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_wyckoff.TagWyckoff.create"><code class="docutils literal notranslate"><span class="pre">TagWyckoff.create()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_wyckoff.TagWyckoff.latex"><code class="docutils literal notranslate"><span class="pre">TagWyckoff.latex()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-multipie.tag.tag_list">TagList</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_list.TagList"><code class="docutils literal notranslate"><span class="pre">TagList</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_list.TagList.from_str"><code class="docutils literal notranslate"><span class="pre">TagList.from_str()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_list.TagList.latex"><code class="docutils literal notranslate"><span class="pre">TagList.latex()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_list.TagList.select"><code class="docutils literal notranslate"><span class="pre">TagList.select()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_list.TagList.str_list"><code class="docutils literal notranslate"><span class="pre">TagList.str_list()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_list.TagList.symbol"><code class="docutils literal notranslate"><span class="pre">TagList.symbol()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#taggroup">TagGroup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tagirrep">TagIrrep</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tagmultipole">TagMultipole</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tagresponsetensor">TagResponseTensor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tagsymmetryoperation">TagSymmetryOperation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tagwyckoff">TagWyckoff</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#taglist">TagList</a></li>
 </ul>
             </nav>
         </div>
@@ -436,530 +370,26 @@
   <section class="tex2jax_ignore mathjax_ignore" id="tag">
 <h1>Tag<a class="headerlink" href="#tag" title="Link to this heading">#</a></h1>
 <p>Utilities for tags.</p>
-<section id="module-multipie.tag.tag_group">
-<span id="taggroup"></span><h2>TagGroup<a class="headerlink" href="#module-multipie.tag.tag_group" title="Link to this heading">#</a></h2>
-<p>TagGroup manages tag of group.</p>
-<dl class="py class">
-<dt class="sig sig-object py" id="multipie.tag.tag_group.TagGroup">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">TagGroup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tag_str</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dataclasses.InitVar</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SS</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'C_1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">IS</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'C_1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crystal</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'triclinic'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">setting</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subgroup</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'cubic'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/tag/tag_group.html#TagGroup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.tag.tag_group.TagGroup" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Tag</span></code></p>
-<p>tag of group.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="multipie.tag.tag_group.TagGroup.create">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">crystal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">space_group</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/tag/tag_group.html#TagGroup.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.tag.tag_group.TagGroup.create" title="Link to this definition">#</a></dt>
-<dd><p>create group tags.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>crystal</strong> (<em>str</em><em>, </em><em>optional</em>) -- crystal system, or &quot;complex/real/cubic_series/hexagonal_series&quot; for point group.</p></li>
-<li><p><strong>space_group</strong> (<em>bool</em><em>, </em><em>optional</em>) -- space group or point_group ?</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>tags.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="#multipie.tag.tag_list.TagList" title="multipie.tag.tag_list.TagList">TagList</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="multipie.tag.tag_group.TagGroup.info">
-<span class="sig-name descname"><span class="pre">info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">latex</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/tag/tag_group.html#TagGroup.info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.tag.tag_group.TagGroup.info" title="Link to this definition">#</a></dt>
-<dd><p>info. of point group.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>latex</strong> (<em>bool</em><em>, </em><em>optional</em>) -- in LaTeX ?</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>No. of group.
-- str: Schoenflies symbol.
-- str: International (short) symbol.
-- str: setting.
-or
-- str: info. string in LaTeX.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><ul class="simple">
-<li><p>int</p></li>
-</ul>
-</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="multipie.tag.tag_group.TagGroup.is_hexagonal_subgroup">
-<span class="sig-name descname"><span class="pre">is_hexagonal_subgroup</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/tag/tag_group.html#TagGroup.is_hexagonal_subgroup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.tag.tag_group.TagGroup.is_hexagonal_subgroup" title="Link to this definition">#</a></dt>
-<dd><p>is hexagonal subgroup ?</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>is hexagonal subgroup ?</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>bool</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="multipie.tag.tag_group.TagGroup.is_point_group">
-<span class="sig-name descname"><span class="pre">is_point_group</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/tag/tag_group.html#TagGroup.is_point_group"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.tag.tag_group.TagGroup.is_point_group" title="Link to this definition">#</a></dt>
-<dd><p>is point group ?</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>is point group ?</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>bool</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="multipie.tag.tag_group.TagGroup.latex">
-<span class="sig-name descname"><span class="pre">latex</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/tag/tag_group.html#TagGroup.latex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.tag.tag_group.TagGroup.latex" title="Link to this definition">#</a></dt>
-<dd><p>default function to convert latex format. impliment explicitly in each subclass.</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="multipie.tag.tag_group.TagGroup.lattice">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">lattice</span></span><a class="headerlink" href="#multipie.tag.tag_group.TagGroup.lattice" title="Link to this definition">#</a></dt>
-<dd><p>Bravais lattice, (A/B/C/P/I/F/R) or null for point group.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>lattice letter.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
+<section id="taggroup">
+<h2>TagGroup<a class="headerlink" href="#taggroup" title="Link to this heading">#</a></h2>
 </section>
-<section id="module-multipie.tag.tag_irrep">
-<span id="tagirrep"></span><h2>TagIrrep<a class="headerlink" href="#module-multipie.tag.tag_irrep" title="Link to this heading">#</a></h2>
-<p>TagIrrep manages tag of irreducible representation.</p>
-<dl class="py class">
-<dt class="sig sig-object py" id="multipie.tag.tag_irrep.TagIrrep">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">TagIrrep</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tag_str</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dataclasses.InitVar</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmplx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">head</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sub</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sup</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/tag/tag_irrep.html#TagIrrep"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.tag.tag_irrep.TagIrrep" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Tag</span></code></p>
-<p>tag of irreducible representation.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="multipie.tag.tag_irrep.TagIrrep.create">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/tag/tag_irrep.html#TagIrrep.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.tag.tag_irrep.TagIrrep.create" title="Link to this definition">#</a></dt>
-<dd><p>irrep. tags for point groups.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>all irrep. tags.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="#multipie.tag.tag_list.TagList" title="multipie.tag.tag_list.TagList">TagList</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="multipie.tag.tag_irrep.TagIrrep.latex">
-<span class="sig-name descname"><span class="pre">latex</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/tag/tag_irrep.html#TagIrrep.latex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.tag.tag_irrep.TagIrrep.latex" title="Link to this definition">#</a></dt>
-<dd><p>default function to convert latex format. impliment explicitly in each subclass.</p>
-</dd></dl>
-
-</dd></dl>
-
+<section id="tagirrep">
+<h2>TagIrrep<a class="headerlink" href="#tagirrep" title="Link to this heading">#</a></h2>
 </section>
-<section id="module-multipie.tag.tag_multipole">
-<span id="tagmultipole"></span><h2>TagMultipole<a class="headerlink" href="#module-multipie.tag.tag_multipole" title="Link to this heading">#</a></h2>
-<p>TagMultipole manages tag of multipole.</p>
-<dl class="py class">
-<dt class="sig sig-object py" id="multipie.tag.tag_multipole.TagMultipole">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">TagMultipole</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tag_str</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dataclasses.InitVar</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">head</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Q'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">m_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'h'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rank</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">irrep</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mul</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/tag/tag_multipole.html#TagMultipole"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.tag.tag_multipole.TagMultipole" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Tag</span></code></p>
-<p>tag of multipole.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="multipie.tag.tag_multipole.TagMultipole.create">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">axial</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/tag/tag_multipole.html#TagMultipole.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.tag.tag_multipole.TagMultipole.create" title="Link to this definition">#</a></dt>
-<dd><p>harmonics tags.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>axial</strong> (<em>bool</em><em>, </em><em>optional</em>) -- axial ?</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>tags.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="#multipie.tag.tag_list.TagList" title="multipie.tag.tag_list.TagList">TagList</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="multipie.tag.tag_multipole.TagMultipole.create_spherical">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">create_spherical</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">head</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Q'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rank</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mul</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/tag/tag_multipole.html#TagMultipole.create_spherical"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.tag.tag_multipole.TagMultipole.create_spherical" title="Link to this definition">#</a></dt>
-<dd><p>create tag for spherical (atomic) multipole.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>head</strong> (<em>str</em><em>, </em><em>optional</em>) -- _description_. Defaults to &quot;Q&quot;.</p></li>
-<li><p><strong>rank</strong> (<em>int</em><em>, </em><em>optional</em>) -- _description_. Defaults to 0.</p></li>
-<li><p><strong>mul</strong> (<em>int</em><em>, </em><em>optional</em>) -- _description_. Defaults to 0.</p></li>
-<li><p><strong>comp</strong> (<em>int</em><em>, </em><em>optional</em>) -- _description_. Defaults to 1.</p></li>
-<li><p><strong>s</strong> (<em>int</em><em>, </em><em>optional</em>) -- _description_. Defaults to -1.</p></li>
-<li><p><strong>k</strong> (<em>int</em><em>, </em><em>optional</em>) -- _description_. Defaults to -1.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>_description_</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>_type_</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="multipie.tag.tag_multipole.TagMultipole.latex">
-<span class="sig-name descname"><span class="pre">latex</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/tag/tag_multipole.html#TagMultipole.latex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.tag.tag_multipole.TagMultipole.latex" title="Link to this definition">#</a></dt>
-<dd><p>default function to convert latex format. impliment explicitly in each subclass.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="multipie.tag.tag_multipole.TagMultipole.reverse_i_type">
-<span class="sig-name descname"><span class="pre">reverse_i_type</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/tag/tag_multipole.html#TagMultipole.reverse_i_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.tag.tag_multipole.TagMultipole.reverse_i_type" title="Link to this definition">#</a></dt>
-<dd><p>space-reversal tag.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>space-reversal tag.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="#multipie.tag.tag_multipole.TagMultipole" title="multipie.tag.tag_multipole.TagMultipole">TagMultipole</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="multipie.tag.tag_multipole.TagMultipole.reverse_t_type">
-<span class="sig-name descname"><span class="pre">reverse_t_type</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/tag/tag_multipole.html#TagMultipole.reverse_t_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.tag.tag_multipole.TagMultipole.reverse_t_type" title="Link to this definition">#</a></dt>
-<dd><p>time-reversal tag.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>time-reversal tag.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="#multipie.tag.tag_multipole.TagMultipole" title="multipie.tag.tag_multipole.TagMultipole">TagMultipole</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="multipie.tag.tag_multipole.TagMultipole.tag_irrep">
-<span class="sig-name descname"><span class="pre">tag_irrep</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/tag/tag_multipole.html#TagMultipole.tag_irrep"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.tag.tag_multipole.TagMultipole.tag_irrep" title="Link to this definition">#</a></dt>
-<dd><p>tag of irrep.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>tag of irrep. or None (for spherical case).</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="#multipie.tag.tag_irrep.TagIrrep" title="multipie.tag.tag_irrep.TagIrrep">TagIrrep</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="multipie.tag.tag_multipole.TagMultipole.to_harmonics">
-<span class="sig-name descname"><span class="pre">to_harmonics</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/tag/tag_multipole.html#TagMultipole.to_harmonics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.tag.tag_multipole.TagMultipole.to_harmonics" title="Link to this definition">#</a></dt>
-<dd><p>convert tag to corresponding harmonics.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>converted tag.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="#multipie.tag.tag_multipole.TagMultipole" title="multipie.tag.tag_multipole.TagMultipole">TagMultipole</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="multipie.tag.tag_multipole.TagMultipole.to_polar">
-<span class="sig-name descname"><span class="pre">to_polar</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/tag/tag_multipole.html#TagMultipole.to_polar"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.tag.tag_multipole.TagMultipole.to_polar" title="Link to this definition">#</a></dt>
-<dd><p>convert tag to corresponding polar one.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>converted tag.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="#multipie.tag.tag_multipole.TagMultipole" title="multipie.tag.tag_multipole.TagMultipole">TagMultipole</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="multipie.tag.tag_multipole.TagMultipole.i_type">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">i_type</span></span><a class="headerlink" href="#multipie.tag.tag_multipole.TagMultipole.i_type" title="Link to this definition">#</a></dt>
-<dd><p>parity type.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>parity type, (polar/axial).</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="multipie.tag.tag_multipole.TagMultipole.l">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">l</span></span><a class="headerlink" href="#multipie.tag.tag_multipole.TagMultipole.l" title="Link to this definition">#</a></dt>
-<dd><p>rank of multipole.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>rank.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>int</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="multipie.tag.tag_multipole.TagMultipole.m">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">m</span></span><a class="headerlink" href="#multipie.tag.tag_multipole.TagMultipole.m" title="Link to this definition">#</a></dt>
-<dd><p>component of multipole (<span class="math notranslate nohighlight">\(-l\le m \le l\)</span> for spherical version).</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>component.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>int</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="multipie.tag.tag_multipole.TagMultipole.t_type">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">t_type</span></span><a class="headerlink" href="#multipie.tag.tag_multipole.TagMultipole.t_type" title="Link to this definition">#</a></dt>
-<dd><p>time-reversal type.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>time-reversal type, (electric/magnetic).</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
+<section id="tagmultipole">
+<h2>TagMultipole<a class="headerlink" href="#tagmultipole" title="Link to this heading">#</a></h2>
 </section>
-<section id="module-multipie.tag.tag_response_tensor">
-<span id="tagresponsetensor"></span><h2>TagResponseTensor<a class="headerlink" href="#module-multipie.tag.tag_response_tensor" title="Link to this heading">#</a></h2>
-<p>TagResponseTensor manages tag of response tensor.</p>
-<dl class="py class">
-<dt class="sig sig-object py" id="multipie.tag.tag_response_tensor.TagResponseTensor">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">TagResponseTensor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tag_str</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dataclasses.InitVar</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">head</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Q'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rank</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'s'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/tag/tag_response_tensor.html#TagResponseTensor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.tag.tag_response_tensor.TagResponseTensor" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Tag</span></code></p>
-<p>tag of response tensor.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="multipie.tag.tag_response_tensor.TagResponseTensor.create">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">head</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rank</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comp</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/tag/tag_response_tensor.html#TagResponseTensor.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.tag.tag_response_tensor.TagResponseTensor.create" title="Link to this definition">#</a></dt>
-<dd><p>create response tensor tag.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>head</strong> (<em>str</em>) -- head, (Q/G/T/M).</p></li>
-<li><p><strong>rank</strong> (<em>int</em>) -- rank, (0/1/2/3/4).</p></li>
-<li><p><strong>comp</strong> (<em>str</em>) -- (0):(s), (1):(s), (2):(s/a), (3):(s/a), (4):(sss/ssa/aas/aaa/sa/as).</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>tag.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="#multipie.tag.tag_response_tensor.TagResponseTensor" title="multipie.tag.tag_response_tensor.TagResponseTensor">TagResponseTensor</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="multipie.tag.tag_response_tensor.TagResponseTensor.latex">
-<span class="sig-name descname"><span class="pre">latex</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/tag/tag_response_tensor.html#TagResponseTensor.latex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.tag.tag_response_tensor.TagResponseTensor.latex" title="Link to this definition">#</a></dt>
-<dd><p>default function to convert latex format. impliment explicitly in each subclass.</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="multipie.tag.tag_response_tensor.TagResponseTensor.i_type">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">i_type</span></span><a class="headerlink" href="#multipie.tag.tag_response_tensor.TagResponseTensor.i_type" title="Link to this definition">#</a></dt>
-<dd><p>parity type.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>parity type, (polar/axial).</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="multipie.tag.tag_response_tensor.TagResponseTensor.t_type">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">t_type</span></span><a class="headerlink" href="#multipie.tag.tag_response_tensor.TagResponseTensor.t_type" title="Link to this definition">#</a></dt>
-<dd><p>time-reversal type.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>time-reversal type, (electric/magnetic).</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
+<section id="tagresponsetensor">
+<h2>TagResponseTensor<a class="headerlink" href="#tagresponsetensor" title="Link to this heading">#</a></h2>
 </section>
-<section id="module-multipie.tag.tag_symmetry_operation">
-<span id="tagsymmetryoperation"></span><h2>TagSymmetryOperation<a class="headerlink" href="#module-multipie.tag.tag_symmetry_operation" title="Link to this heading">#</a></h2>
-<p>TagSymmetryOperation manages tag of symmetry operation.</p>
-<dl class="py class">
-<dt class="sig sig-object py" id="multipie.tag.tag_symmetry_operation.TagSymmetryOperation">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">TagSymmetryOperation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tag_str</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dataclasses.InitVar</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mirror</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inversion</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'[0,0,1]'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'[0,0,0]'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/tag/tag_symmetry_operation.html#TagSymmetryOperation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.tag.tag_symmetry_operation.TagSymmetryOperation" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Tag</span></code></p>
-<p>tag of symmetry operation.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="multipie.tag.tag_symmetry_operation.TagSymmetryOperation.latex">
-<span class="sig-name descname"><span class="pre">latex</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/tag/tag_symmetry_operation.html#TagSymmetryOperation.latex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.tag.tag_symmetry_operation.TagSymmetryOperation.latex" title="Link to this definition">#</a></dt>
-<dd><p>default function to convert latex format. impliment explicitly in each subclass.</p>
-</dd></dl>
-
-</dd></dl>
-
+<section id="tagsymmetryoperation">
+<h2>TagSymmetryOperation<a class="headerlink" href="#tagsymmetryoperation" title="Link to this heading">#</a></h2>
 </section>
-<section id="module-multipie.tag.tag_wyckoff">
-<span id="tagwyckoff"></span><h2>TagWyckoff<a class="headerlink" href="#module-multipie.tag.tag_wyckoff" title="Link to this heading">#</a></h2>
-<p>TagWyckoff manages tag of wyckoff position.</p>
-<dl class="py class">
-<dt class="sig sig-object py" id="multipie.tag.tag_wyckoff.TagWyckoff">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">TagWyckoff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tag_str</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dataclasses.InitVar</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">letter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'a'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/tag/tag_wyckoff.html#TagWyckoff"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.tag.tag_wyckoff.TagWyckoff" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Tag</span></code></p>
-<p>tag of wyckoff position.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="multipie.tag.tag_wyckoff.TagWyckoff.create">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tag</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/tag/tag_wyckoff.html#TagWyckoff.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.tag.tag_wyckoff.TagWyckoff.create" title="Link to this definition">#</a></dt>
-<dd><p>point-group tags.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>tag</strong> (<em>str</em>) -- point-group/space-group tag.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>tags.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>[<a class="reference internal" href="#multipie.tag.tag_wyckoff.TagWyckoff" title="multipie.tag.tag_wyckoff.TagWyckoff">TagWyckoff</a>]</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="multipie.tag.tag_wyckoff.TagWyckoff.latex">
-<span class="sig-name descname"><span class="pre">latex</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/tag/tag_wyckoff.html#TagWyckoff.latex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.tag.tag_wyckoff.TagWyckoff.latex" title="Link to this definition">#</a></dt>
-<dd><p>default function to convert latex format. impliment explicitly in each subclass.</p>
-</dd></dl>
-
-</dd></dl>
-
+<section id="tagwyckoff">
+<h2>TagWyckoff<a class="headerlink" href="#tagwyckoff" title="Link to this heading">#</a></h2>
 </section>
-<section id="module-multipie.tag.tag_list">
-<span id="taglist"></span><h2>TagList<a class="headerlink" href="#module-multipie.tag.tag_list" title="Link to this heading">#</a></h2>
-<p>This file provides utility functions for tag.</p>
-<dl class="py class">
-<dt class="sig sig-object py" id="multipie.tag.tag_list.TagList">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">TagList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/tag/tag_list.html#TagList"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.tag.tag_list.TagList" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></p>
-<p>create tags.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>lst</strong> (<em>[</em><em>Tag</em><em>]</em>) -- list of tag class.</p>
-</dd>
-</dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="multipie.tag.tag_list.TagList.from_str">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tag_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag_list</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/tag/tag_list.html#TagList.from_str"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.tag.tag_list.TagList.from_str" title="Link to this definition">#</a></dt>
-<dd><p>create tags.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>tag_type</strong> (<em>Tag</em>) -- Tag class.</p></li>
-<li><p><strong>tag_list</strong> (<em>[</em><em>str</em><em>]</em>) -- tag list in str.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="multipie.tag.tag_list.TagList.latex">
-<span class="sig-name descname"><span class="pre">latex</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/tag/tag_list.html#TagList.latex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.tag.tag_list.TagList.latex" title="Link to this definition">#</a></dt>
-<dd><p>convert to list of LaTeX.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>latex string.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>[str] or str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="multipie.tag.tag_list.TagList.select">
-<span class="sig-name descname"><span class="pre">select</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/tag/tag_list.html#TagList.select"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.tag.tag_list.TagList.select" title="Link to this definition">#</a></dt>
-<dd><p>select tags with given keywords.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>kwargs</strong> (<em>dict</em>) -- field-value pairs to select.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>selected tag list.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="#multipie.tag.tag_list.TagList" title="multipie.tag.tag_list.TagList">TagList</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="multipie.tag.tag_list.TagList.str_list">
-<span class="sig-name descname"><span class="pre">str_list</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/tag/tag_list.html#TagList.str_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.tag.tag_list.TagList.str_list" title="Link to this definition">#</a></dt>
-<dd><p>convert to list of string.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>tag string.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>[str] or str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="multipie.tag.tag_list.TagList.symbol">
-<span class="sig-name descname"><span class="pre">symbol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">commutative</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/tag/tag_list.html#TagList.symbol"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.tag.tag_list.TagList.symbol" title="Link to this definition">#</a></dt>
-<dd><p>convert to list of non-commutative symbol.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>non-commutative symbol.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>[sympy]</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
+<section id="taglist">
+<h2>TagList<a class="headerlink" href="#taglist" title="Link to this heading">#</a></h2>
 </section>
 </section>
 
@@ -1004,80 +434,13 @@ or
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-multipie.tag.tag_group">TagGroup</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_group.TagGroup"><code class="docutils literal notranslate"><span class="pre">TagGroup</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_group.TagGroup.create"><code class="docutils literal notranslate"><span class="pre">TagGroup.create()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_group.TagGroup.info"><code class="docutils literal notranslate"><span class="pre">TagGroup.info()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_group.TagGroup.is_hexagonal_subgroup"><code class="docutils literal notranslate"><span class="pre">TagGroup.is_hexagonal_subgroup()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_group.TagGroup.is_point_group"><code class="docutils literal notranslate"><span class="pre">TagGroup.is_point_group()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_group.TagGroup.latex"><code class="docutils literal notranslate"><span class="pre">TagGroup.latex()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_group.TagGroup.lattice"><code class="docutils literal notranslate"><span class="pre">TagGroup.lattice</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-multipie.tag.tag_irrep">TagIrrep</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_irrep.TagIrrep"><code class="docutils literal notranslate"><span class="pre">TagIrrep</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_irrep.TagIrrep.create"><code class="docutils literal notranslate"><span class="pre">TagIrrep.create()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_irrep.TagIrrep.latex"><code class="docutils literal notranslate"><span class="pre">TagIrrep.latex()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-multipie.tag.tag_multipole">TagMultipole</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_multipole.TagMultipole"><code class="docutils literal notranslate"><span class="pre">TagMultipole</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_multipole.TagMultipole.create"><code class="docutils literal notranslate"><span class="pre">TagMultipole.create()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_multipole.TagMultipole.create_spherical"><code class="docutils literal notranslate"><span class="pre">TagMultipole.create_spherical()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_multipole.TagMultipole.latex"><code class="docutils literal notranslate"><span class="pre">TagMultipole.latex()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_multipole.TagMultipole.reverse_i_type"><code class="docutils literal notranslate"><span class="pre">TagMultipole.reverse_i_type()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_multipole.TagMultipole.reverse_t_type"><code class="docutils literal notranslate"><span class="pre">TagMultipole.reverse_t_type()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_multipole.TagMultipole.tag_irrep"><code class="docutils literal notranslate"><span class="pre">TagMultipole.tag_irrep()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_multipole.TagMultipole.to_harmonics"><code class="docutils literal notranslate"><span class="pre">TagMultipole.to_harmonics()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_multipole.TagMultipole.to_polar"><code class="docutils literal notranslate"><span class="pre">TagMultipole.to_polar()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_multipole.TagMultipole.i_type"><code class="docutils literal notranslate"><span class="pre">TagMultipole.i_type</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_multipole.TagMultipole.l"><code class="docutils literal notranslate"><span class="pre">TagMultipole.l</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_multipole.TagMultipole.m"><code class="docutils literal notranslate"><span class="pre">TagMultipole.m</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_multipole.TagMultipole.t_type"><code class="docutils literal notranslate"><span class="pre">TagMultipole.t_type</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-multipie.tag.tag_response_tensor">TagResponseTensor</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_response_tensor.TagResponseTensor"><code class="docutils literal notranslate"><span class="pre">TagResponseTensor</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_response_tensor.TagResponseTensor.create"><code class="docutils literal notranslate"><span class="pre">TagResponseTensor.create()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_response_tensor.TagResponseTensor.latex"><code class="docutils literal notranslate"><span class="pre">TagResponseTensor.latex()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_response_tensor.TagResponseTensor.i_type"><code class="docutils literal notranslate"><span class="pre">TagResponseTensor.i_type</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_response_tensor.TagResponseTensor.t_type"><code class="docutils literal notranslate"><span class="pre">TagResponseTensor.t_type</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-multipie.tag.tag_symmetry_operation">TagSymmetryOperation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_symmetry_operation.TagSymmetryOperation"><code class="docutils literal notranslate"><span class="pre">TagSymmetryOperation</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_symmetry_operation.TagSymmetryOperation.latex"><code class="docutils literal notranslate"><span class="pre">TagSymmetryOperation.latex()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-multipie.tag.tag_wyckoff">TagWyckoff</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_wyckoff.TagWyckoff"><code class="docutils literal notranslate"><span class="pre">TagWyckoff</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_wyckoff.TagWyckoff.create"><code class="docutils literal notranslate"><span class="pre">TagWyckoff.create()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_wyckoff.TagWyckoff.latex"><code class="docutils literal notranslate"><span class="pre">TagWyckoff.latex()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-multipie.tag.tag_list">TagList</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_list.TagList"><code class="docutils literal notranslate"><span class="pre">TagList</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_list.TagList.from_str"><code class="docutils literal notranslate"><span class="pre">TagList.from_str()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_list.TagList.latex"><code class="docutils literal notranslate"><span class="pre">TagList.latex()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_list.TagList.select"><code class="docutils literal notranslate"><span class="pre">TagList.select()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_list.TagList.str_list"><code class="docutils literal notranslate"><span class="pre">TagList.str_list()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.tag.tag_list.TagList.symbol"><code class="docutils literal notranslate"><span class="pre">TagList.symbol()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#taggroup">TagGroup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tagirrep">TagIrrep</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tagmultipole">TagMultipole</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tagresponsetensor">TagResponseTensor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tagsymmetryoperation">TagSymmetryOperation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tagwyckoff">TagWyckoff</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#taglist">TagList</a></li>
 </ul>
   </nav></div>
 
@@ -1126,8 +489,8 @@ By Hiroaki Kusunose and Rikuto Oiwa
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
-<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
   </footer>
