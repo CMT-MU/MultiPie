@@ -1,6 +1,7 @@
 """
 SpaceGroup manages space group.
 """
+
 import sympy as sp
 import numpy as np
 from gcoreutils.nsarray import NSArray
@@ -486,7 +487,7 @@ class SpaceGroup:
         # find Wyckoff position to match with given site.
         sht = NSArray("{[0, 0, 0], [0, 0, 1], [0, 1, 0], [0, 1, 1], [1, 0, 0], [1, 0, 1], [1, 1, 0], [1, 1, 1]}")
         w0 = wpv[0]
-        wp = "-"
+        wp = wps[-1]
         for tag, p in zip(wps, lst):
             for i in p:
                 for s in sht:
