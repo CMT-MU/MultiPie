@@ -1,6 +1,7 @@
 """
 PointGroup manages point group.
 """
+
 import sympy as sp
 import numpy as np
 from gcoreutils.nsarray import NSArray
@@ -308,9 +309,7 @@ class PointGroup:
         if remove_duplicate and nondirectional:
             b = NSArray.from_str(self.bond_mapping(bond)[0].keys())
         else:
-            b = self.symmetry_operation._equivalent_bond(
-                bond, nondirectional=nondirectional, remove_duplicate=remove_duplicate
-            )
+            b = self.symmetry_operation._equivalent_bond(bond, nondirectional=nondirectional, remove_duplicate=remove_duplicate)
 
         return b
 
@@ -355,9 +354,7 @@ class PointGroup:
         h = NSArray(orbital).subs({"x": v[0], "y": v[1], "z": v[2]})
         if axial:
             so = self.symmetry_operation.mat(axial=False, cc_only=False).det()
-            t_orb = [
-                (so[i] * self.symmetry_operation._transform_variable(h, v, tr[i])).tolist() for i in range(len(tr))
-            ]
+            t_orb = [(so[i] * self.symmetry_operation._transform_variable(h, v, tr[i])).tolist() for i in range(len(tr))]
         else:
             t_orb = [self.symmetry_operation._transform_variable(h, v, tr[i]).tolist() for i in range(len(tr))]
 
@@ -604,7 +601,7 @@ class PointGroup:
 
         # find Wyckoff position to match with given site.
         w0 = wpv[0]
-        wp = "-"
+        wp = wps[-1]
         for tag, p in zip(wps, lst):
             for i in p:
                 if str(i) == str(w0):
@@ -803,9 +800,7 @@ class PointGroup:
 
     # ==================================================
     @classmethod
-    def spherical_atomic_multipole_basis(
-        cls, bra_list, ket_list, spinful=False, crystal="cubic", core=None, verbose=False
-    ):
+    def spherical_atomic_multipole_basis(cls, bra_list, ket_list, spinful=False, crystal="cubic", core=None, verbose=False):
         """
         create spherical atomic multipole basis set.
 
