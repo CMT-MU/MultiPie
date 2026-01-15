@@ -16,7 +16,7 @@ from multipie import __version__
 try:
     from qtdraw.core.pyvista_widget import PyVistaWidget
     from qtdraw.multipie.plugin_multipie_setting import plugin_detail
-    from qtdraw.util.qt_event_util import get_qt_application
+    from qtdraw.widget.qt_event_util import get_qt_application
 
     _qtdraw_available = True
 except ImportError:
