@@ -1,5 +1,5 @@
 """
-Create command.
+Create command for model, matrix, and qtdraw.
 """
 
 import os
