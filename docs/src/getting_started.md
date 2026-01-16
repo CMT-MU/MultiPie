@@ -4,7 +4,7 @@
 
 As a tutorial, we describe the procedure for generating models and SAMBs.
 
-1. Download the contents of the [examples](https://github.com/CMT-MU/MultiPie/tree/main/docs/examples) directory.
+1. Download the contents of the [examples](https://github.com/CMT-MU/MultiPie/tree/main/docs/src/examples) directory.
 2. Inside the `examples` directory, run the `create_model.py` script:
 
     ```bash
