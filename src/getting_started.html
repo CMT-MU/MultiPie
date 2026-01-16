@@ -1,0 +1,670 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Getting Started &#8212; MultiPie</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=34ddd5e8" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=a8e58a58"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'src/getting_started';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Group information" href="group_doc.html" />
+    <link rel="prev" title="Installing MultiPie" href="install.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../README.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/multipie_logo.png" class="logo__image only-light" alt="MultiPie - Home"/>
+    <img src="../_static/multipie_logo.png" class="logo__image only-dark pst-js-only" alt="MultiPie - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installing MultiPie</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Getting Started</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="group_doc.html">Group information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tech_note.html">Technical Note</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="api_core.html">Core</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="api_core/group.html">Group</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_core/material_model.html">Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_core/cmd.html">Create function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_core/init.html">Type</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="api_util.html">Utility</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_binary.html">Binary data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_crystal.html">Crystal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_dict.html">Dict</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_tag.html">Tag</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_wyckoff.html">Wyckoff position</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_harmonics.html">Harmonics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util.html">Versatile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_gram_schmidt.html">Grad-Schmidt orthonormalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_material_model.html">Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_material_model_pdf.html">PDF creator for Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_pdf_latex.html">PDF creator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_plot.html">Plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_response_tensor.html">Response tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_samb.html">SAMB</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/CMT-MU/MultiPie.git" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Getting Started</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tutorial">Tutorial</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#samb-construction-detail">SAMB construction (detail)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-input-file">model input file</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-information-files">model information files</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selection-and-parameter-file">selection and parameter file</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-element-files">matrix element files</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qtdraw-samb-files">QtDraw SAMB files</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="getting-started">
+<h1>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading">#</a></h1>
+<section id="tutorial">
+<h2>Tutorial<a class="headerlink" href="#tutorial" title="Link to this heading">#</a></h2>
+<p>As a tutorial, we describe the procedure for generating models and SAMBs.</p>
+<ol class="arabic">
+<li><p>Download the contents of the <a class="reference external" href="https://github.com/CMT-MU/MultiPie/tree/main/docs/examples">examples</a> directory.</p></li>
+<li><p>Inside the <code class="docutils literal notranslate"><span class="pre">examples</span></code> directory, run the <code class="docutils literal notranslate"><span class="pre">create_model.py</span></code> script:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>create_model.py
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># create_model.py</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">multipie.util.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">setup_logging</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">multipie</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_samb</span><span class="p">,</span> <span class="n">create_samb_qtdraw</span><span class="p">,</span> <span class="n">create_samb_matrix</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">C3v</span><span class="w"> </span><span class="kn">import</span> <span class="n">C3v</span>  <span class="c1"># C3v model input.</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">C3v_param</span><span class="w"> </span><span class="kn">import</span> <span class="n">C3v_sel_par</span>  <span class="c1"># C3v SAMB selection and parameters.</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">graphene</span><span class="w"> </span><span class="kn">import</span> <span class="n">graphene</span>  <span class="c1"># graphene model input.</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">graphene_param</span><span class="w"> </span><span class="kn">import</span> <span class="n">graphene_sel_par</span>  <span class="c1"># graphene SAMB selection and parameters.</span>
+
+<span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="c1"># ==================================================</span>
+<span class="n">models</span> <span class="o">=</span> <span class="p">[</span><span class="n">C3v</span><span class="p">,</span> <span class="n">graphene</span><span class="p">]</span>  <span class="c1"># model input files.</span>
+<span class="n">select_inputs</span> <span class="o">=</span> <span class="p">[</span><span class="n">C3v_sel_par</span><span class="p">,</span> <span class="n">graphene_sel_par</span><span class="p">]</span>  <span class="c1"># selection and paramter files.</span>
+
+<span class="n">setup_logging</span><span class="p">()</span>
+<span class="n">create_samb</span><span class="p">(</span><span class="n">models</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>  <span class="c1"># create model.</span>
+<span class="n">create_samb_matrix</span><span class="p">(</span><span class="n">select_inputs</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>  <span class="c1"># create full matrix.</span>
+<span class="n">create_samb_qtdraw</span><span class="p">(</span><span class="n">models</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>  <span class="c1"># create full matrix with parameters.</span>
+</pre></div>
+</div>
+<p>This will create the <code class="docutils literal notranslate"><span class="pre">C3v</span></code> and <code class="docutils literal notranslate"><span class="pre">graphene</span></code> directories. Each directory will contain six files and a samb subdirectory.
+For <code class="docutils literal notranslate"><span class="pre">C3v</span></code>, the generated files are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">C3v.pkl</span></code> : Model information file (binary)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">C3v.tex</span></code>, <code class="docutils literal notranslate"><span class="pre">C3v.pdf</span></code> : Summary of the model information</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">C3v.qtdw</span></code> : QtDraw file of the model structure</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">C3v_matrix.py</span></code> : Matrix element data of the SAMB</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">C3v_hr.dat</span></code> : Numerical matrix element data with SAMB weight parameters applied</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">samb</span></code> : QtDraw files for the SAMB</p></li>
+</ul>
+<p>The same set of files is generated for <code class="docutils literal notranslate"><span class="pre">graphene</span></code>.</p>
+</li>
+<li><p>For details on how to load and analyze the model information binary file, <code class="docutils literal notranslate"><span class="pre">.pkl</span></code>, see <a class="reference internal" href="examples/read_model.html"><span class="std std-doc">read_model.ipynb</span></a></p></li>
+</ol>
+</section>
+<section id="samb-construction-detail">
+<h2>SAMB construction (detail)<a class="headerlink" href="#samb-construction-detail" title="Link to this heading">#</a></h2>
+<section id="model-input-file">
+<h3>model input file<a class="headerlink" href="#model-input-file" title="Link to this heading">#</a></h3>
+<p>The default values of model input file is the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># default model input.</span>
+<span class="n">default_model</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="s2">&quot;unknown&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;group&quot;</span><span class="p">:</span> <span class="s2">&quot;C1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;cell&quot;</span><span class="p">:</span> <span class="p">{},</span>
+    <span class="s2">&quot;spinful&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s2">&quot;site&quot;</span><span class="p">:</span> <span class="p">{},</span>
+    <span class="s2">&quot;bond&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">&quot;SAMB_select&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;X&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Q&quot;</span><span class="p">,</span> <span class="s2">&quot;G&quot;</span><span class="p">],</span>  <span class="c1"># type, &quot;Q/G/T/M&quot;.</span>
+        <span class="s2">&quot;l&quot;</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># rank, []=all.</span>
+        <span class="s2">&quot;Gamma&quot;</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># &quot;IR&quot;=identity, []=all, &quot;...&quot;/[&quot;...&quot;,&quot;...&quot;]=specified irreps.</span>
+        <span class="s2">&quot;s&quot;</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># spin, []=all.</span>
+    <span class="p">},</span>  <span class="c1"># X, l, Gamma, s.</span>
+    <span class="s2">&quot;toroidal_priority&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s2">&quot;max_neighbor&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>  <span class="c1"># for DFT fitting, e.g. =200.</span>
+    <span class="s2">&quot;search_cell_range&quot;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>  <span class="c1"># (a1, a2, a3) range. for DFT fitting, e.g.=(-10, 10, -10, 10, -10, 10).</span>
+    <span class="s2">&quot;qtdraw&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;create&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>  <span class="c1"># create QtDraw file ?</span>
+        <span class="s2">&quot;mode&quot;</span><span class="p">:</span> <span class="s2">&quot;standard&quot;</span><span class="p">,</span>  <span class="c1"># mode, &quot;standard/detail&quot;.</span>
+        <span class="s2">&quot;view&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># [a,b,c], if None, default=[6,5,1].</span>
+        <span class="c1">#</span>
+        <span class="s2">&quot;rep_site&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>  <span class="c1"># show representative site ?</span>
+        <span class="s2">&quot;rep_bond&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>  <span class="c1"># show representative bond ?</span>
+        <span class="c1">#</span>
+        <span class="s2">&quot;max_neighbor&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>  <span class="c1"># max. neighbor to draw.</span>
+        <span class="s2">&quot;cell_mode&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># &quot;off/single/all&quot;, if None, single for SG, off for PG.</span>
+        <span class="s2">&quot;scale&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># default or magnification scale.</span>
+        <span class="s2">&quot;site_radius&quot;</span><span class="p">:</span> <span class="mf">0.07</span><span class="p">,</span>  <span class="c1"># base site radius.</span>
+        <span class="s2">&quot;bond_width&quot;</span><span class="p">:</span> <span class="mf">0.02</span><span class="p">,</span>  <span class="c1"># base bond width.</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;pdf&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;create&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>  <span class="c1"># create PDF file ?</span>
+        <span class="s2">&quot;common_samb&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>  <span class="c1"># display common SAMB ?</span>
+        <span class="s2">&quot;harmonics&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>  <span class="c1"># display harmonics ?</span>
+        <span class="s2">&quot;max_neighbor&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>  <span class="c1"># max. neighbor to write (None: all).</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>You can overwrite whatever you want.</p>
+</section>
+<section id="model-information-files">
+<h3>model information files<a class="headerlink" href="#model-information-files" title="Link to this heading">#</a></h3>
+<p>Using the following input file, you can construct the model information files by running:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mp_create_samb<span class="w"> </span>C3v
+</pre></div>
+</div>
+<p>This command generates <code class="docutils literal notranslate"><span class="pre">C3v.pkl</span></code>, <code class="docutils literal notranslate"><span class="pre">C3v.tex</span></code>, <code class="docutils literal notranslate"><span class="pre">C3v.pdf</span></code>, and <code class="docutils literal notranslate"><span class="pre">C3v.qtdw</span></code>.
+Example input file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># C3v.py</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">input file for C3v molecule.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">C3v</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="s2">&quot;C3v&quot;</span><span class="p">,</span>  <span class="c1"># name of model.</span>
+    <span class="s2">&quot;group&quot;</span><span class="p">:</span> <span class="s2">&quot;C3v-1&quot;</span><span class="p">,</span>  <span class="c1"># name of point group.</span>
+    <span class="s2">&quot;cell&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;c&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">},</span>  <span class="c1"># set large enough interlayer distance.</span>
+    <span class="c1">#</span>
+    <span class="s2">&quot;site&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;A&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;[-1/6,-1/6,0]&quot;</span><span class="p">,</span> <span class="s2">&quot;s&quot;</span><span class="p">),</span> <span class="s2">&quot;B&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;[-2/3,0,0]&quot;</span><span class="p">,</span> <span class="s2">&quot;p&quot;</span><span class="p">)},</span>  <span class="c1"># positions of A and B sites and their orbitals.</span>
+    <span class="s2">&quot;bond&quot;</span><span class="p">:</span> <span class="p">[(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)],</span>  <span class="c1"># nearest-neighbor A-A and B-B bonds.</span>
+    <span class="c1">#</span>
+    <span class="s2">&quot;spinful&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>  <span class="c1"># spinless.</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="selection-and-parameter-file">
+<h3>selection and parameter file<a class="headerlink" href="#selection-and-parameter-file" title="Link to this heading">#</a></h3>
+<p>The constructed SAMBs can be selected by selection file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># selection and parameter example.</span>
+<span class="n">selection_paramter</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1"># model pkl name (w/o .pkl).</span>
+    <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="s2">&quot;model_pkl_name&quot;</span><span class="p">,</span>
+    <span class="c1"># selection for SAMB.</span>
+    <span class="s2">&quot;select&quot;</span><span class="p">:</span> <span class="p">{</span>  <span class="c1"># S=site, R=orbital rank.</span>
+        <span class="s2">&quot;site&quot;</span><span class="p">:</span> <span class="p">[(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])],</span>  <span class="c1"># S or (S, [R]).</span>
+        <span class="s2">&quot;bond&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+        <span class="p">],</span>  <span class="c1"># S1;S2, [neighbor], (S1;S2, [neighbor]), (S1;S2, R;R2), (S1;S2, [neighbor]) or (S1;S2, R1;R2, [neighbor]).</span>
+        <span class="s2">&quot;X&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Q&quot;</span><span class="p">,</span> <span class="s2">&quot;G&quot;</span><span class="p">],</span>  <span class="c1"># combined SAMB type Q/G/T/M.</span>
+        <span class="s2">&quot;l&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>  <span class="c1"># combined SAMB rank.</span>
+        <span class="s2">&quot;Gamma&quot;</span><span class="p">:</span> <span class="s2">&quot;A1g&quot;</span><span class="p">,</span>  <span class="c1"># combined SAMB irreps.</span>
+        <span class="s2">&quot;s&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>  <span class="c1"># combined SAMB s=0, 1.</span>
+    <span class="p">},</span>
+    <span class="c1"># weight for SAMBs, non-specified parameters are zero. (float or sympy const.)</span>
+    <span class="s2">&quot;parameter&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;z1&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;z2&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The typical usage is the following: you first create the SAMBs for all irreps., and then select the desired SAMBs in order to create matrix elements with necessary bases, such as the symmetry-breaking terms in addition to the identity irreps.</p>
+</section>
+<section id="matrix-element-files">
+<h3>matrix element files<a class="headerlink" href="#matrix-element-files" title="Link to this heading">#</a></h3>
+<p>To generate full matrix file, <code class="docutils literal notranslate"><span class="pre">_matrix.py</span></code> by selection (and <code class="docutils literal notranslate"><span class="pre">_hr.dat</span></code> for given parameters) file, run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mp_create_samb_matrix<span class="w"> </span>C3v_param
+</pre></div>
+</div>
+<p>This command generates two files, <code class="docutils literal notranslate"><span class="pre">C3v_matrix.py</span></code>, and <code class="docutils literal notranslate"><span class="pre">C3v_hr.dat</span></code>.
+Example input file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># C3v_param.py</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">selection_parameter file for C3v.</span>
+<span class="sd">if parameter is omitted, no hr.dat file is created.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">C3v_sel_par</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1"># model pkl name (w/o .pkl).</span>
+    <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="s2">&quot;C3v&quot;</span><span class="p">,</span>
+    <span class="c1"># selection for SAMB.</span>
+    <span class="s2">&quot;select&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;bond&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]],</span>
+    <span class="p">},</span>
+    <span class="c1"># weight for SAMBs, non-specified parameters are zero. (float or sympy const.)</span>
+    <span class="s2">&quot;parameter&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;z3&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;z4&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="qtdraw-samb-files">
+<h3>QtDraw SAMB files<a class="headerlink" href="#qtdraw-samb-files" title="Link to this heading">#</a></h3>
+<p>To generate QtDraw files for the constructed SAMB, run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mp_create_samb_qtdraw<span class="w"> </span>C3v<span class="w"> </span>graphene
+</pre></div>
+</div>
+<p>The generated SAMB QtDraw files are saved in the <code class="docutils literal notranslate"><span class="pre">samb</span></code> directory.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./src"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tutorial">Tutorial</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#samb-construction-detail">SAMB construction (detail)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-input-file">model input file</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-information-files">model information files</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selection-and-parameter-file">selection and parameter file</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-element-files">matrix element files</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qtdraw-samb-files">QtDraw SAMB files</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Hiroaki Kusunose and Rikuto Oiwa
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2021-2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1119 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Material Model &#8212; MultiPie</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=34ddd5e8" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=a8e58a58"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'src/api_util/util_material_model';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="PDF creator for Material Model" href="util_material_model_pdf.html" />
+    <link rel="prev" title="Grad-Schmidt orthonormalization" href="util_gram_schmidt.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../README.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/multipie_logo.png" class="logo__image only-light" alt="MultiPie - Home"/>
+    <img src="../../_static/multipie_logo.png" class="logo__image only-dark pst-js-only" alt="MultiPie - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installing MultiPie</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../group_doc.html">Group information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tech_note.html">Technical Note</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API reference</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../api_core.html">Core</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api_core/group.html">Group</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_core/material_model.html">Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_core/cmd.html">Create function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_core/init.html">Type</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../api_util.html">Utility</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="util_binary.html">Binary data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="util_crystal.html">Crystal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="util_dict.html">Dict</a></li>
+<li class="toctree-l2"><a class="reference internal" href="util_tag.html">Tag</a></li>
+<li class="toctree-l2"><a class="reference internal" href="util_wyckoff.html">Wyckoff position</a></li>
+<li class="toctree-l2"><a class="reference internal" href="util_harmonics.html">Harmonics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="util.html">Versatile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="util_gram_schmidt.html">Grad-Schmidt orthonormalization</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="util_material_model_pdf.html">PDF creator for Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="util_pdf_latex.html">PDF creator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="util_plot.html">Plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="util_response_tensor.html">Response tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="util_samb.html">SAMB</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/CMT-MU/MultiPie.git" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Material Model</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.convert_orbital_index"><code class="docutils literal notranslate"><span class="pre">convert_orbital_index()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.create_atomic_samb_qtdraw"><code class="docutils literal notranslate"><span class="pre">create_atomic_samb_qtdraw()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.create_braket_dict"><code class="docutils literal notranslate"><span class="pre">create_braket_dict()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.create_cluster_samb_qtdraw"><code class="docutils literal notranslate"><span class="pre">create_cluster_samb_qtdraw()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.create_equivalent_bond"><code class="docutils literal notranslate"><span class="pre">create_equivalent_bond()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.create_full_matrix_info"><code class="docutils literal notranslate"><span class="pre">create_full_matrix_info()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.create_qtdraw"><code class="docutils literal notranslate"><span class="pre">create_qtdraw()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.create_representative_bond"><code class="docutils literal notranslate"><span class="pre">create_representative_bond()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.create_site_grid"><code class="docutils literal notranslate"><span class="pre">create_site_grid()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.create_site_so"><code class="docutils literal notranslate"><span class="pre">create_site_so()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.create_wyckoff_dict"><code class="docutils literal notranslate"><span class="pre">create_wyckoff_dict()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.get_basis_type"><code class="docutils literal notranslate"><span class="pre">get_basis_type()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.get_bond"><code class="docutils literal notranslate"><span class="pre">get_bond()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.get_neighbor_info"><code class="docutils literal notranslate"><span class="pre">get_neighbor_info()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.get_tail_head"><code class="docutils literal notranslate"><span class="pre">get_tail_head()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.get_unique_bond"><code class="docutils literal notranslate"><span class="pre">get_unique_bond()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.parse_neighbor"><code class="docutils literal notranslate"><span class="pre">parse_neighbor()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.parse_orbital"><code class="docutils literal notranslate"><span class="pre">parse_orbital()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.parse_representative_bond"><code class="docutils literal notranslate"><span class="pre">parse_representative_bond()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.parse_representative_site"><code class="docutils literal notranslate"><span class="pre">parse_representative_site()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.parse_samb_select"><code class="docutils literal notranslate"><span class="pre">parse_samb_select()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.qtdraw_bond"><code class="docutils literal notranslate"><span class="pre">qtdraw_bond()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.qtdraw_site"><code class="docutils literal notranslate"><span class="pre">qtdraw_site()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.remove_equivalent_representative_bond"><code class="docutils literal notranslate"><span class="pre">remove_equivalent_representative_bond()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.unique_bond_index"><code class="docutils literal notranslate"><span class="pre">unique_bond_index()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.unique_vector_index"><code class="docutils literal notranslate"><span class="pre">unique_vector_index()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.write_bond_dict"><code class="docutils literal notranslate"><span class="pre">write_bond_dict()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.write_site_dict"><code class="docutils literal notranslate"><span class="pre">write_site_dict()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.write_site_grid"><code class="docutils literal notranslate"><span class="pre">write_site_grid()</span></code></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="module-multipie.util.util_material_model">
+<span id="material-model"></span><h1>Material Model<a class="headerlink" href="#module-multipie.util.util_material_model" title="Link to this heading">#</a></h1>
+<p>Utility for MaterialModel calss.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_material_model.convert_orbital_index">
+<span class="sig-name descname"><span class="pre">convert_orbital_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">basis_set</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basis_info_type</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_material_model.html#convert_orbital_index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_material_model.convert_orbital_index" title="Link to this definition">#</a></dt>
+<dd><p>Convert to orbital index.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>basis_set</strong> (<em>[</em><em>[</em><em>str</em><em>]</em><em>]</em>) – atomic basis.</p></li>
+<li><p><strong>basis_info_type</strong> (<em>dict</em>) – basis info. of given basis_type.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>([[int]]) – orbital index corresponding to basis set.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_material_model.create_atomic_samb_qtdraw">
+<span class="sig-name descname"><span class="pre">create_atomic_samb_qtdraw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qtdraw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_material_model.html#create_atomic_samb_qtdraw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_material_model.create_atomic_samb_qtdraw" title="Link to this definition">#</a></dt>
+<dd><p>Create atomic SAMB QtDraw file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>qtdraw</strong> (<em>PyVistaWidget</em>) – PyVistaWidget.</p></li>
+<li><p><strong>mm</strong> (<a class="reference internal" href="../api_core/material_model.html#multipie.core.material_model.MaterialModel" title="multipie.core.material_model.MaterialModel"><em>MaterialModel</em></a>) – material model.</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – model name.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_material_model.create_braket_dict">
+<span class="sig-name descname"><span class="pre">create_braket_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rep_site</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rep_bond</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basis_info_type</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_material_model.html#create_braket_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_material_model.create_braket_dict" title="Link to this definition">#</a></dt>
+<dd><p>Create site_bond to braket dict.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rep_site</strong> (<em>dict</em>) – representative site dict.</p></li>
+<li><p><strong>rep_bond</strong> (<em>dict</em>) – representative bond dict.</p></li>
+<li><p><strong>basis_info_type</strong> (<em>str</em>) – basis info type.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(dict) – site_bond to braket dict, Dict[site_bond, [BraketInfoType]].</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_material_model.create_cluster_samb_qtdraw">
+<span class="sig-name descname"><span class="pre">create_cluster_samb_qtdraw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qtdraw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">site_bond</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_material_model.html#create_cluster_samb_qtdraw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_material_model.create_cluster_samb_qtdraw" title="Link to this definition">#</a></dt>
+<dd><p>Create cluster SAMB QtDraw file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>qtdraw</strong> (<em>PyVistaWidget</em>) – PyVistaWidget.</p></li>
+<li><p><strong>mm</strong> (<a class="reference internal" href="../api_core/material_model.html#multipie.core.material_model.MaterialModel" title="multipie.core.material_model.MaterialModel"><em>MaterialModel</em></a>) – material model.</p></li>
+<li><p><strong>site_bond</strong> (<em>str</em><em> or </em><em>list</em>) – (list of) site or bond.</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – model name.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_material_model.create_equivalent_bond">
+<span class="sig-name descname"><span class="pre">create_equivalent_bond</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">so</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bond</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_material_model.html#create_equivalent_bond"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_material_model.create_equivalent_bond" title="Link to this definition">#</a></dt>
+<dd><p>Create unique bonds.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>so</strong> (<em>ndarray</em>) – symmetry operation (conventional) (PG:3x3) or (SG:4x4).</p></li>
+<li><p><strong>pset</strong> (<em>ndarray</em>) – plus set.</p></li>
+<li><p><strong>bond</strong> (<em>ndarray</em>) – source bond.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(ndarray) – unique bonds.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_material_model.create_full_matrix_info">
+<span class="sig-name descname"><span class="pre">create_full_matrix_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">site_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_material_model.html#create_full_matrix_info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_material_model.create_full_matrix_info" title="Link to this definition">#</a></dt>
+<dd><p>Create full matrix info.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>site_dict</strong> (<em>dict</em>) – site dict.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>[(name, sublattice, rank, orbital)], “index”: Dict[(atom,sublattice,rank), (top_idx, size)].</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p>(dict) – full matrix info, “ket”</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_material_model.create_qtdraw">
+<span class="sig-name descname"><span class="pre">create_qtdraw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qtdraw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cell_info</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">site_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bond_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prop</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_material_model.html#create_qtdraw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_material_model.create_qtdraw" title="Link to this definition">#</a></dt>
+<dd><p>Create QtDraw.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>qtdraw</strong> (<em>PyVistaWidget</em>) – PyVistaWidget.</p></li>
+<li><p><strong>group</strong> (<em>dict</em>) – group dict.</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – model name.</p></li>
+<li><p><strong>cell_info</strong> (<em>dict</em>) – cell info. dict.</p></li>
+<li><p><strong>site_dict</strong> (<em>dict</em>) – site dict.</p></li>
+<li><p><strong>bond_dict</strong> (<em>dict</em>) – bond dict.</p></li>
+<li><p><strong>prop</strong> (<em>dict</em>) – property dict.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_material_model.create_representative_bond">
+<span class="sig-name descname"><span class="pre">create_representative_bond</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">so</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tail</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">heads</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_neighbor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_material_model.html#create_representative_bond"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_material_model.create_representative_bond" title="Link to this definition">#</a></dt>
+<dd><p>Create representative bonds.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>group</strong> (<em>dict</em>) – group dict.</p></li>
+<li><p><strong>G</strong> (<em>ndarray</em>) – metric tensor (3x3).</p></li>
+<li><p><strong>so</strong> (<em>ndarray</em>) – symmetry operations (nx3x3).</p></li>
+<li><p><strong>tail</strong> (<em>ndarray</em>) – tail position.</p></li>
+<li><p><strong>heads</strong> (<em>ndarray</em>) – head positions over symmetry related with grid.</p></li>
+<li><p><strong>max_neighbor</strong> (<em>int</em>) – max. neighbor.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(list) – representative bonds for each neighbor.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_material_model.create_site_grid">
+<span class="sig-name descname"><span class="pre">create_site_grid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">site_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">igrid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_material_model.html#create_site_grid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_material_model.create_site_grid" title="Link to this definition">#</a></dt>
+<dd><p>Create site grid.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>site_dict</strong> (<em>dict</em>) – site dict.</p></li>
+<li><p><strong>igrid</strong> (<em>ndarray</em><em>, </em><em>optional</em>) – integer grid.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(dict) – site grid (sorted), Dict[name, Dict[(#sublattice,#plus_set,i1,i2,i3), position]].</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>if igrid is None, [[0,0,0]] is used.</p></li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_material_model.create_site_so">
+<span class="sig-name descname"><span class="pre">create_site_so</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">site_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_material_model.html#create_site_so"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_material_model.create_site_so" title="Link to this definition">#</a></dt>
+<dd><p>Create symmetry operations for first Wyckoff site.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>group</strong> (<em>dict</em>) – group dict.</p></li>
+<li><p><strong>site_dict</strong> (<em>dict</em>) – site dict.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(dict) – symmetry operations except identity, Dict[name, SOs].</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_material_model.create_wyckoff_dict">
+<span class="sig-name descname"><span class="pre">create_wyckoff_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rep_site</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rep_bond</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_material_model.html#create_wyckoff_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_material_model.create_wyckoff_dict" title="Link to this definition">#</a></dt>
+<dd><p>Create site_bond to wyckoff dict.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rep_site</strong> (<em>dict</em>) – representative site dict.</p></li>
+<li><p><strong>rep_bond</strong> (<em>dict</em>) – representative bond dict.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(dict) – site_bond to wyckoff dict, Dict[site_bond, wyckoff].</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_material_model.get_basis_type">
+<span class="sig-name descname"><span class="pre">get_basis_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">site_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spinful</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_material_model.html#get_basis_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_material_model.get_basis_type" title="Link to this definition">#</a></dt>
+<dd><p>Get atomic basis type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>site_data</strong> (<em>dict</em>) – site data.</p></li>
+<li><p><strong>spinful</strong> (<em>bool</em>) – spinful basis ?</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(str) – atomic basis type, “jml/lgs/lg”.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_material_model.get_bond">
+<span class="sig-name descname"><span class="pre">get_bond</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tail</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">head</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_material_model.html#get_bond"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_material_model.get_bond" title="Link to this definition">#</a></dt>
+<dd><p>Get bond name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tail</strong> (<em>str</em>) – tail atom.</p></li>
+<li><p><strong>head</strong> (<em>str</em>) – head atom.</p></li>
+<li><p><strong>n</strong> (<em>int</em>) – neighbor (from 1).</p></li>
+<li><p><strong>no</strong> (<em>int</em>) – multiplicity (from 1).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(str) – bond name.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_material_model.get_neighbor_info">
+<span class="sig-name descname"><span class="pre">get_neighbor_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">site_bond</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_material_model.html#get_neighbor_info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_material_model.get_neighbor_info" title="Link to this definition">#</a></dt>
+<dd><p>Get neighbor info.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>site_bond</strong> (<em>str</em>) – site or bond tag.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(int) – neighbor (0 for site).</p></li>
+<li><p>(int) – multiplicity (-1 for site).</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_material_model.get_tail_head">
+<span class="sig-name descname"><span class="pre">get_tail_head</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">site_bond</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_material_model.html#get_tail_head"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_material_model.get_tail_head" title="Link to this definition">#</a></dt>
+<dd><p>Get tail and head atoms.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>site_bond</strong> (<em>str</em>) – site or bond tag.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(str) – tail atom.</p></li>
+<li><p>(str) – head atom.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_material_model.get_unique_bond">
+<span class="sig-name descname"><span class="pre">get_unique_bond</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bond</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-06</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_material_model.html#get_unique_bond"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_material_model.get_unique_bond" title="Link to this definition">#</a></dt>
+<dd><p>Get unique bond.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bond</strong> (<em>ndarray</em>) – set of bonds.</p></li>
+<li><p><strong>tol</strong> (<em>float</em><em>, </em><em>optional</em>) – tolerance.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(ndarray) – unique bonds.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_material_model.parse_neighbor">
+<span class="sig-name descname"><span class="pre">parse_neighbor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">neighbor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tail_rank</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">head_rank</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_material_model.html#parse_neighbor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_material_model.parse_neighbor" title="Link to this definition">#</a></dt>
+<dd><p>Parse neighbor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>neighbor</strong> (<em>int</em><em> or </em><em>[</em><em>int</em><em>] or </em><em>tuple</em>) – neighbor info., (int or [int], [tail rank], [head rank]).</p></li>
+<li><p><strong>tail_rank</strong> (<em>[</em><em>int</em><em>] or </em><em>[</em><em>str</em><em>]</em>) – tail rank.</p></li>
+<li><p><strong>head_rank</strong> (<em>[</em><em>int</em><em>] or </em><em>[</em><em>str</em><em>]</em>) – head rank.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(tuple) – ([neighbor], [tail rank], [head rank]).</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_material_model.parse_orbital">
+<span class="sig-name descname"><span class="pre">parse_orbital</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">orbital</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basis_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basis_info</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_material_model.html#parse_orbital"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_material_model.parse_orbital" title="Link to this definition">#</a></dt>
+<dd><p>Parse atomic orbital information. ### input check needs to be implemented!!!</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>orbital</strong> (<em>str</em><em> or </em><em>list</em>) – orbital information.</p></li>
+<li><p><strong>basis_type</strong> (<em>str</em>) – atomic orbital type.</p></li>
+<li><p><strong>basis_info</strong> (<em>dict</em>) – basis info.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>([[str]]) – atomic basis in order of rank, s,p,d,f.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>orbital format (str), each orbital (px, dxz, …) or orbital set (p, (3/2,p), …).</p></li>
+<li><p>orbital format (list), set of the above format.</p></li>
+<li><p>returned list is in full expression in fixed order compatible with atomic matrix element.</p></li>
+<li><p>coexistence of spinless and spinfull, or different basis types (jml, lgs, lg) is not allowed.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_material_model.parse_representative_bond">
+<span class="sig-name descname"><span class="pre">parse_representative_bond</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">G</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">site_grid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">site_so</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">site_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bond_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_neighbor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_material_model.html#parse_representative_bond"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_material_model.parse_representative_bond" title="Link to this definition">#</a></dt>
+<dd><p>Parse representative bond.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>group</strong> (<em>dict</em>) – group dict.</p></li>
+<li><p><strong>G</strong> (<em>ndarray</em>) – metric tensor (3x3).</p></li>
+<li><p><strong>site_grid</strong> (<em>dict</em>) – site grid dict.</p></li>
+<li><p><strong>site_so</strong> (<em>dict</em>) – site SO dict.</p></li>
+<li><p><strong>site_dict</strong> (<em>dict</em>) – site dict.</p></li>
+<li><p><strong>bond_data</strong> (<em>list</em>) – bond data.</p></li>
+<li><p><strong>max_neighbor</strong> (<em>int</em>) – max. neighbor.</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – verbose progress bar ?</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(dict) – bond dict.</p></li>
+<li><p>(list) – atomic orbital rank list, [(tail,head,tail_rank,head_rank)].</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>“representative”: representative bond, Dict[name, RepBondType].</p></li>
+<li><p>“cell”: cell bond, Dict[name, [CellBondType] ].</p></li>
+<li><p>“neighbor”: Dict[name, Dict[#neighbor, [rep_bond_tag] ]].</p></li>
+<li><p>“info”: [BondInfoType].</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_material_model.parse_representative_site">
+<span class="sig-name descname"><span class="pre">parse_representative_site</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">site_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basis_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basis_info</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_material_model.html#parse_representative_site"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_material_model.parse_representative_site" title="Link to this definition">#</a></dt>
+<dd><p>Parse representative site.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>group</strong> (<em>dict</em>) – group dict.</p></li>
+<li><p><strong>site_data</strong> (<em>dict</em>) – site data.</p></li>
+<li><p><strong>basis_type</strong> (<em>str</em>) – atomic basis type, “jml/lgs/lg”.</p></li>
+<li><p><strong>basis_info</strong> (<em>dict</em>) – basis info dict.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(dict) – site dict.</p></li>
+<li><p>(list) – atomic orbital rank list, [(tail,head,tail_rank,head_rank)].</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>“representative”: representative site, Dict[name, RepSiteType].</p></li>
+<li><p>“cell”: cell site, Dict[name, [CellSiteType] ].</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_material_model.parse_samb_select">
+<span class="sig-name descname"><span class="pre">parse_samb_select</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dic</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">irreps</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_material_model.html#parse_samb_select"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_material_model.parse_samb_select" title="Link to this definition">#</a></dt>
+<dd><p>Parse SAMB select dict.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dic</strong> (<em>dict</em>) – select condition dict.</p></li>
+<li><p><strong>irreps</strong> (<em>list</em>) – list of irreps.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(dict) – full form of dict.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>dict keys are “X”, “l”, “Gamma”, “s”.</p></li>
+<li><p>null list represents all possible values.</p></li>
+<li><p>“IR” in “Gamma” indicates the identity representation.</p></li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_material_model.qtdraw_bond">
+<span class="sig-name descname"><span class="pre">qtdraw_bond</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qtdraw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bond_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_neighbor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_rep_bond</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_material_model.html#qtdraw_bond"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_material_model.qtdraw_bond" title="Link to this definition">#</a></dt>
+<dd><p>Draw bond by QtDraw.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>qtdraw</strong> (<em>QtDraw</em>) – QtDraw widget or application.</p></li>
+<li><p><strong>bond_dict</strong> (<em>dict</em>) – bond dict.</p></li>
+<li><p><strong>max_neighbor</strong> (<em>int</em>) – max. neighbor to draw.</p></li>
+<li><p><strong>scale</strong> (<em>float</em>) – scale.</p></li>
+<li><p><strong>mode</strong> (<em>str</em>) – draw mode, “standard/detail”.</p></li>
+<li><p><strong>width</strong> (<em>float</em>) – base width.</p></li>
+<li><p><strong>show_rep_bond</strong> (<em>bool</em>) – show representative bond?</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_material_model.qtdraw_site">
+<span class="sig-name descname"><span class="pre">qtdraw_site</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qtdraw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">site_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radius</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_rep_site</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_material_model.html#qtdraw_site"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_material_model.qtdraw_site" title="Link to this definition">#</a></dt>
+<dd><p>Draw site by QtDraw.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>qtdraw</strong> (<em>QtDraw</em>) – QtDraw widget or application.</p></li>
+<li><p><strong>site_dict</strong> (<em>dict</em>) – site dict.</p></li>
+<li><p><strong>scale</strong> (<em>float</em>) – scale.</p></li>
+<li><p><strong>mode</strong> (<em>str</em>) – draw mode, “standard/detail”.</p></li>
+<li><p><strong>radius</strong> (<em>float</em>) – base radius.</p></li>
+<li><p><strong>show_rep_site</strong> (<em>bool</em>) – show representative site?</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_material_model.remove_equivalent_representative_bond">
+<span class="sig-name descname"><span class="pre">remove_equivalent_representative_bond</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">so</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bonds</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_material_model.html#remove_equivalent_representative_bond"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_material_model.remove_equivalent_representative_bond" title="Link to this definition">#</a></dt>
+<dd><p>Remove equivalnet representative bond.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>so</strong> (<em>ndarray</em>) – symmetry operation (conventional, fractional, 3x3 or 4x4).</p></li>
+<li><p><strong>pset</strong> (<em>ndarray</em>) – plus set.</p></li>
+<li><p><strong>bonds</strong> (<em>ndarray</em>) – set of representative bonds.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(ndarray) unique representative bonds.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_material_model.unique_bond_index">
+<span class="sig-name descname"><span class="pre">unique_bond_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bond</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-06</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_material_model.html#unique_bond_index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_material_model.unique_bond_index" title="Link to this definition">#</a></dt>
+<dd><p>Unique bond index.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bond</strong> (<em>ndarray</em>) – bond set.</p></li>
+<li><p><strong>tol</strong> (<em>float</em><em>, </em><em>optional</em>) – tolerance.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(list) – unique index.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_material_model.unique_vector_index">
+<span class="sig-name descname"><span class="pre">unique_vector_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vectors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">so</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-06</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_material_model.html#unique_vector_index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_material_model.unique_vector_index" title="Link to this definition">#</a></dt>
+<dd><p>Get unique vector indices (remove SO related vecrors).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vectors</strong> (<em>ndarray</em>) – vectors.</p></li>
+<li><p><strong>so</strong> (<em>ndarray</em>) – set of symmetry operations (3x3) except for identity.</p></li>
+<li><p><strong>tol</strong> (<em>float</em><em>, </em><em>optional</em>) – tolerance to check same vector.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(ndarray) – unique vector indices.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_material_model.write_bond_dict">
+<span class="sig-name descname"><span class="pre">write_bond_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bond_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_material_model.html#write_bond_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_material_model.write_bond_dict" title="Link to this definition">#</a></dt>
+<dd><p>Write bond dict.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>bond_dict</strong> (<em>dict</em>) – bond dict.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_material_model.write_site_dict">
+<span class="sig-name descname"><span class="pre">write_site_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">site_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_material_model.html#write_site_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_material_model.write_site_dict" title="Link to this definition">#</a></dt>
+<dd><p>Write site dict.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>site_dict</strong> (<em>dict</em>) – site dict.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_material_model.write_site_grid">
+<span class="sig-name descname"><span class="pre">write_site_grid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">site_grid</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_material_model.html#write_site_grid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_material_model.write_site_grid" title="Link to this definition">#</a></dt>
+<dd><p>Write site grid.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>site_grid</strong> (<em>dict</em>) – site grid.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./src/api_util"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.convert_orbital_index"><code class="docutils literal notranslate"><span class="pre">convert_orbital_index()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.create_atomic_samb_qtdraw"><code class="docutils literal notranslate"><span class="pre">create_atomic_samb_qtdraw()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.create_braket_dict"><code class="docutils literal notranslate"><span class="pre">create_braket_dict()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.create_cluster_samb_qtdraw"><code class="docutils literal notranslate"><span class="pre">create_cluster_samb_qtdraw()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.create_equivalent_bond"><code class="docutils literal notranslate"><span class="pre">create_equivalent_bond()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.create_full_matrix_info"><code class="docutils literal notranslate"><span class="pre">create_full_matrix_info()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.create_qtdraw"><code class="docutils literal notranslate"><span class="pre">create_qtdraw()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.create_representative_bond"><code class="docutils literal notranslate"><span class="pre">create_representative_bond()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.create_site_grid"><code class="docutils literal notranslate"><span class="pre">create_site_grid()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.create_site_so"><code class="docutils literal notranslate"><span class="pre">create_site_so()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.create_wyckoff_dict"><code class="docutils literal notranslate"><span class="pre">create_wyckoff_dict()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.get_basis_type"><code class="docutils literal notranslate"><span class="pre">get_basis_type()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.get_bond"><code class="docutils literal notranslate"><span class="pre">get_bond()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.get_neighbor_info"><code class="docutils literal notranslate"><span class="pre">get_neighbor_info()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.get_tail_head"><code class="docutils literal notranslate"><span class="pre">get_tail_head()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.get_unique_bond"><code class="docutils literal notranslate"><span class="pre">get_unique_bond()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.parse_neighbor"><code class="docutils literal notranslate"><span class="pre">parse_neighbor()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.parse_orbital"><code class="docutils literal notranslate"><span class="pre">parse_orbital()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.parse_representative_bond"><code class="docutils literal notranslate"><span class="pre">parse_representative_bond()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.parse_representative_site"><code class="docutils literal notranslate"><span class="pre">parse_representative_site()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.parse_samb_select"><code class="docutils literal notranslate"><span class="pre">parse_samb_select()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.qtdraw_bond"><code class="docutils literal notranslate"><span class="pre">qtdraw_bond()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.qtdraw_site"><code class="docutils literal notranslate"><span class="pre">qtdraw_site()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.remove_equivalent_representative_bond"><code class="docutils literal notranslate"><span class="pre">remove_equivalent_representative_bond()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.unique_bond_index"><code class="docutils literal notranslate"><span class="pre">unique_bond_index()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.unique_vector_index"><code class="docutils literal notranslate"><span class="pre">unique_vector_index()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.write_bond_dict"><code class="docutils literal notranslate"><span class="pre">write_bond_dict()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.write_site_dict"><code class="docutils literal notranslate"><span class="pre">write_site_dict()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.write_site_grid"><code class="docutils literal notranslate"><span class="pre">write_site_grid()</span></code></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Hiroaki Kusunose and Rikuto Oiwa
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2021-2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

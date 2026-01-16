@@ -1,0 +1,1429 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Group information &#8212; MultiPie</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=34ddd5e8" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=a8e58a58"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>window.MathJax = {"loader": {"load": ["[tex]/physics"]}, "tex": {"packages": {"[+]": ["physics"]}, "macros": {"bm": ["\\boldsymbol{#1}", 1]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'src/group_doc';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Technical Note" href="tech_note.html" />
+    <link rel="prev" title="Getting Started" href="getting_started.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../README.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/multipie_logo.png" class="logo__image only-light" alt="MultiPie - Home"/>
+    <img src="../_static/multipie_logo.png" class="logo__image only-dark pst-js-only" alt="MultiPie - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installing MultiPie</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Group information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tech_note.html">Technical Note</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="api_core.html">Core</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="api_core/group.html">Group</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_core/material_model.html">Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_core/cmd.html">Create function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_core/init.html">Type</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="api_util.html">Utility</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_binary.html">Binary data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_crystal.html">Crystal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_dict.html">Dict</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_tag.html">Tag</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_wyckoff.html">Wyckoff position</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_harmonics.html">Harmonics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util.html">Versatile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_gram_schmidt.html">Grad-Schmidt orthonormalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_material_model.html">Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_material_model_pdf.html">PDF creator for Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_pdf_latex.html">PDF creator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_plot.html">Plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_response_tensor.html">Response tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_samb.html">SAMB</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/CMT-MU/MultiPie.git" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Group information</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#point-group">Point group</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#space-group">Space group</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#magnetic-point-group">Magnetic point group</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#magnetic-space-group-by-sg">Magnetic space group (by SG)</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="group-information">
+<h1>Group information<a class="headerlink" href="#group-information" title="Link to this heading">#</a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Group information</strong></p>
+<ul>
+<li><p>Point group :
+<a class="reference download internal" download="" href="../_downloads/24ce465058f267993f811963083970e5/PG.pdf"><span class="xref download myst">PDF</span></a></p></li>
+<li><p>Space group :
+<a class="reference download internal" download="" href="../_downloads/9a4933779fd643ece27d7ab683fbb561/SG.pdf"><span class="xref download myst">PDF</span></a></p></li>
+<li><p>Magnetic point group :
+<a class="reference download internal" download="" href="../_downloads/1aabed670a8e9271ebb766f956c36a80/MPG.pdf"><span class="xref download myst">PDF</span></a></p></li>
+<li><p>Magnetic space group :
+<a class="reference download internal" download="" href="../_downloads/13fe10321b18f69693904a0fb8654973/MSG.pdf"><span class="xref download myst">PDF</span></a></p></li>
+<li><p>Compatibility relation :
+<a class="reference download internal" download="" href="../_downloads/70787beeab9e52eb5eef85faadde5673/compatibility_relation.pdf"><span class="xref download myst">PDF</span></a></p></li>
+<li><p>Active multipole :
+<a class="reference download internal" download="" href="../_downloads/c134ce4697d4ba190333ad9fd38463bf/active_multipole.pdf"><span class="xref download myst">PDF</span></a></p></li>
+</ul>
+</li>
+<li><p><strong>Atomic multipole</strong></p>
+<ul>
+<li><p>JML basis : <a class="reference download internal" download="" href="../_downloads/fba260707e43943ff242bc1ca76a0462/atomic_multipole_jml.pdf"><span class="xref download myst">PDF</span></a></p></li>
+<li><p>LM basis : <a class="reference download internal" download="" href="../_downloads/942bbc97ea79bd0e1233032fb8188fed/atomic_multipole_lm.pdf"><span class="xref download myst">PDF</span></a></p></li>
+</ul>
+</li>
+<li><p><strong>Harmonics (in terms of tesseral harmonics)</strong></p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(D_{\rm 6h}\)</span></p>
+<ul>
+<li><p>polar : <a class="reference download internal" download="" href="../_downloads/c0bcb8210ea63b4138bb227b8b285ea0/harmonics_D6h_polar.pdf"><span class="xref download myst">PDF</span></a></p></li>
+<li><p>axial : <a class="reference download internal" download="" href="../_downloads/ee4ad753959b47ce416df43de23d8c70/harmonics_D6h_axial.pdf"><span class="xref download myst">PDF</span></a></p></li>
+</ul>
+</li>
+<li><p><span class="math notranslate nohighlight">\(O_{\rm h}\)</span></p>
+<ul>
+<li><p>polar : <a class="reference download internal" download="" href="../_downloads/6af0ba0cfd7195f0e2b5800ac3712528/harmonics_Oh_polar.pdf"><span class="xref download myst">PDF</span></a></p></li>
+<li><p>axial : <a class="reference download internal" download="" href="../_downloads/46c2ada8fa7e18b4f15934e2b9cf25cc/harmonics_Oh_axial.pdf"><span class="xref download myst">PDF</span></a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="point-group">
+<h2>Point group<a class="headerlink" href="#point-group" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>tag</p></th>
+<th class="head text-left"><p></p></th>
+<th class="head text-left"><p></p></th>
+<th class="head text-left"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>1: <a class="reference internal" href="PG/No_1.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 1}\)</span> (<span class="math notranslate nohighlight">\(1\)</span>)</span></a></p></td>
+<td class="text-left"><p>2: <a class="reference internal" href="PG/No_2.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm i}\)</span> (<span class="math notranslate nohighlight">\(\bar{1}\)</span>)</span></a></p></td>
+<td class="text-left"><p>3: <a class="reference internal" href="PG/No_3.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 2}\)</span> (<span class="math notranslate nohighlight">\(2\)</span>)</span></a></p></td>
+<td class="text-left"><p>4: <a class="reference internal" href="PG/No_4.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm s}\)</span> (<span class="math notranslate nohighlight">\(m\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>5: <a class="reference internal" href="PG/No_5.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 2h}\)</span> (<span class="math notranslate nohighlight">\(2/m\)</span>)</span></a></p></td>
+<td class="text-left"><p>6: <a class="reference internal" href="PG/No_6.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 2}\)</span> (<span class="math notranslate nohighlight">\(222\)</span>)</span></a></p></td>
+<td class="text-left"><p>7: <a class="reference internal" href="PG/No_7.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 2v}\)</span> (<span class="math notranslate nohighlight">\(mm2\)</span>)</span></a></p></td>
+<td class="text-left"><p>8: <a class="reference internal" href="PG/No_8.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 2h}\)</span> (<span class="math notranslate nohighlight">\(mmm\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>9: <a class="reference internal" href="PG/No_9.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 4}\)</span> (<span class="math notranslate nohighlight">\(4\)</span>)</span></a></p></td>
+<td class="text-left"><p>10: <a class="reference internal" href="PG/No_10.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,S_{\rm 4}\)</span> (<span class="math notranslate nohighlight">\(\bar{4}\)</span>)</span></a></p></td>
+<td class="text-left"><p>11: <a class="reference internal" href="PG/No_11.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 4h}\)</span> (<span class="math notranslate nohighlight">\(4/m\)</span>)</span></a></p></td>
+<td class="text-left"><p>12: <a class="reference internal" href="PG/No_12.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 4}\)</span> (<span class="math notranslate nohighlight">\(422\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>13: <a class="reference internal" href="PG/No_13.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 4v}\)</span> (<span class="math notranslate nohighlight">\(4mm\)</span>)</span></a></p></td>
+<td class="text-left"><p>14: <a class="reference internal" href="PG/No_14.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 2d}\)</span> (<span class="math notranslate nohighlight">\(\bar{4}2m\)</span>)</span></a></p></td>
+<td class="text-left"><p>15: <a class="reference internal" href="PG/No_15.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 4h}\)</span> (<span class="math notranslate nohighlight">\(4/mmm\)</span>)</span></a></p></td>
+<td class="text-left"><p>16: <a class="reference internal" href="PG/No_16.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 3}\)</span> (<span class="math notranslate nohighlight">\(3\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>17: <a class="reference internal" href="PG/No_17.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 3i}\)</span> (<span class="math notranslate nohighlight">\(\bar{3}\)</span>)</span></a></p></td>
+<td class="text-left"><p>18: <a class="reference internal" href="PG/No_18.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 3}\)</span> (<span class="math notranslate nohighlight">\(32\)</span>)</span></a></p></td>
+<td class="text-left"><p>19: <a class="reference internal" href="PG/No_19.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 3v}\)</span> (<span class="math notranslate nohighlight">\(3m\)</span>)</span></a></p></td>
+<td class="text-left"><p>20: <a class="reference internal" href="PG/No_20.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 3d}\)</span> (<span class="math notranslate nohighlight">\(\bar{3}m\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>21: <a class="reference internal" href="PG/No_21.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 6}\)</span> (<span class="math notranslate nohighlight">\(6\)</span>)</span></a></p></td>
+<td class="text-left"><p>22: <a class="reference internal" href="PG/No_22.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 3h}\)</span> (<span class="math notranslate nohighlight">\(\bar{6}\)</span>)</span></a></p></td>
+<td class="text-left"><p>23: <a class="reference internal" href="PG/No_23.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 6h}\)</span> (<span class="math notranslate nohighlight">\(6/m\)</span>)</span></a></p></td>
+<td class="text-left"><p>24: <a class="reference internal" href="PG/No_24.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 6}\)</span> (<span class="math notranslate nohighlight">\(622\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>25: <a class="reference internal" href="PG/No_25.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 6v}\)</span> (<span class="math notranslate nohighlight">\(6mm\)</span>)</span></a></p></td>
+<td class="text-left"><p>26: <a class="reference internal" href="PG/No_26.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 3h}\)</span> (<span class="math notranslate nohighlight">\(\bar{6}m2\)</span>)</span></a></p></td>
+<td class="text-left"><p>27: <a class="reference internal" href="PG/No_27.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 6h}\)</span> (<span class="math notranslate nohighlight">\(6/mmm\)</span>)</span></a></p></td>
+<td class="text-left"><p>28: <a class="reference internal" href="PG/No_28.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,T_{\rm }\)</span> (<span class="math notranslate nohighlight">\(23\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>29: <a class="reference internal" href="PG/No_29.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,T_{\rm h}\)</span> (<span class="math notranslate nohighlight">\(m\bar{3}\)</span>)</span></a></p></td>
+<td class="text-left"><p>30: <a class="reference internal" href="PG/No_30.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,O_{\rm }\)</span> (<span class="math notranslate nohighlight">\(432\)</span>)</span></a></p></td>
+<td class="text-left"><p>31: <a class="reference internal" href="PG/No_31.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,T_{\rm d}\)</span> (<span class="math notranslate nohighlight">\(\bar{4}3m\)</span>)</span></a></p></td>
+<td class="text-left"><p>32: <a class="reference internal" href="PG/No_32.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,O_{\rm h}\)</span> (<span class="math notranslate nohighlight">\(m\bar{3}m\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>33: <a class="reference internal" href="PG/No_33.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 2d}(1)\)</span> (<span class="math notranslate nohighlight">\(\bar{4}2m\)</span>)</span></a></p></td>
+<td class="text-left"><p>34: <a class="reference internal" href="PG/No_34.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 3}(1)\)</span> (<span class="math notranslate nohighlight">\(32\)</span>)</span></a></p></td>
+<td class="text-left"><p>35: <a class="reference internal" href="PG/No_35.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 3v}(1)\)</span> (<span class="math notranslate nohighlight">\(3m\)</span>)</span></a></p></td>
+<td class="text-left"><p>36: <a class="reference internal" href="PG/No_36.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 3d}(1)\)</span> (<span class="math notranslate nohighlight">\(\bar{3}m\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>37: <a class="reference internal" href="PG/No_37.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 3h}(1)\)</span> (<span class="math notranslate nohighlight">\(\bar{6}m2\)</span>)</span></a></p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>38 :<a class="reference internal" href="PG/No_38.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 4}(c)\)</span> (<span class="math notranslate nohighlight">\(4\)</span>)</span></a></p></td>
+<td class="text-left"><p>39 :<a class="reference internal" href="PG/No_39.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,S_{\rm 4}(c)\)</span> (<span class="math notranslate nohighlight">\(\bar{4}\)</span>)</span></a></p></td>
+<td class="text-left"><p>40 :<a class="reference internal" href="PG/No_40.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 4h}(c)\)</span> (<span class="math notranslate nohighlight">\(4/m\)</span>)</span></a></p></td>
+<td class="text-left"><p>41 :<a class="reference internal" href="PG/No_41.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 3}(c)\)</span> (<span class="math notranslate nohighlight">\(3\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>42 :<a class="reference internal" href="PG/No_42.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 3i}(c)\)</span> (<span class="math notranslate nohighlight">\(\bar{3}\)</span>)</span></a></p></td>
+<td class="text-left"><p>43 :<a class="reference internal" href="PG/No_43.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 6}(c)\)</span> (<span class="math notranslate nohighlight">\(6\)</span>)</span></a></p></td>
+<td class="text-left"><p>44 :<a class="reference internal" href="PG/No_44.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 3h}(c)\)</span> (<span class="math notranslate nohighlight">\(\bar{6}\)</span>)</span></a></p></td>
+<td class="text-left"><p>45 :<a class="reference internal" href="PG/No_45.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 6h}(c)\)</span> (<span class="math notranslate nohighlight">\(6/m\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>46 :<a class="reference internal" href="PG/No_46.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,T_{\rm }(c)\)</span> (<span class="math notranslate nohighlight">\(23\)</span>)</span></a></p></td>
+<td class="text-left"><p>47 :<a class="reference internal" href="PG/No_47.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,T_{\rm h}(c)\)</span> (<span class="math notranslate nohighlight">\(m\bar{3}\)</span>)</span></a></p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="space-group">
+<h2>Space group<a class="headerlink" href="#space-group" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>tag</p></th>
+<th class="head text-left"><p></p></th>
+<th class="head text-left"><p></p></th>
+<th class="head text-left"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>1: <a class="reference internal" href="SG/No_1.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 1}^{1}\)</span> (<span class="math notranslate nohighlight">\(P1\)</span>)</span></a></p></td>
+<td class="text-left"><p>2: <a class="reference internal" href="SG/No_2.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm i}^{1}\)</span> (<span class="math notranslate nohighlight">\(P\bar{1}\)</span>)</span></a></p></td>
+<td class="text-left"><p>3: <a class="reference internal" href="SG/No_3.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 2}^{1}\)</span> (<span class="math notranslate nohighlight">\(P2\)</span>)</span></a></p></td>
+<td class="text-left"><p>4: <a class="reference internal" href="SG/No_4.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 2}^{2}\)</span> (<span class="math notranslate nohighlight">\(P2_1\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>5: <a class="reference internal" href="SG/No_5.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 2}^{3}\)</span> (<span class="math notranslate nohighlight">\(C2\)</span>)</span></a></p></td>
+<td class="text-left"><p>6: <a class="reference internal" href="SG/No_6.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm s}^{1}\)</span> (<span class="math notranslate nohighlight">\(Pm\)</span>)</span></a></p></td>
+<td class="text-left"><p>7: <a class="reference internal" href="SG/No_7.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm s}^{2}\)</span> (<span class="math notranslate nohighlight">\(Pc\)</span>)</span></a></p></td>
+<td class="text-left"><p>8: <a class="reference internal" href="SG/No_8.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm s}^{3}\)</span> (<span class="math notranslate nohighlight">\(Cm\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>9: <a class="reference internal" href="SG/No_9.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm s}^{4}\)</span> (<span class="math notranslate nohighlight">\(Cc\)</span>)</span></a></p></td>
+<td class="text-left"><p>10: <a class="reference internal" href="SG/No_10.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 2h}^{1}\)</span> (<span class="math notranslate nohighlight">\(P2/m\)</span>)</span></a></p></td>
+<td class="text-left"><p>11: <a class="reference internal" href="SG/No_11.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 2h}^{2}\)</span> (<span class="math notranslate nohighlight">\(P2_1/m\)</span>)</span></a></p></td>
+<td class="text-left"><p>12: <a class="reference internal" href="SG/No_12.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 2h}^{3}\)</span> (<span class="math notranslate nohighlight">\(C2/m\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>13: <a class="reference internal" href="SG/No_13.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 2h}^{4}\)</span> (<span class="math notranslate nohighlight">\(P2/c\)</span>)</span></a></p></td>
+<td class="text-left"><p>14: <a class="reference internal" href="SG/No_14.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 2h}^{5}\)</span> (<span class="math notranslate nohighlight">\(P2_1/c\)</span>)</span></a></p></td>
+<td class="text-left"><p>15: <a class="reference internal" href="SG/No_15.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 2h}^{6}\)</span> (<span class="math notranslate nohighlight">\(C2/c\)</span>)</span></a></p></td>
+<td class="text-left"><p>16: <a class="reference internal" href="SG/No_16.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 2}^{1}\)</span> (<span class="math notranslate nohighlight">\(P222\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>17: <a class="reference internal" href="SG/No_17.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 2}^{2}\)</span> (<span class="math notranslate nohighlight">\(P222_1\)</span>)</span></a></p></td>
+<td class="text-left"><p>18: <a class="reference internal" href="SG/No_18.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 2}^{3}\)</span> (<span class="math notranslate nohighlight">\(P2_12_12\)</span>)</span></a></p></td>
+<td class="text-left"><p>19: <a class="reference internal" href="SG/No_19.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 2}^{4}\)</span> (<span class="math notranslate nohighlight">\(P2_12_12_1\)</span>)</span></a></p></td>
+<td class="text-left"><p>20: <a class="reference internal" href="SG/No_20.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 2}^{5}\)</span> (<span class="math notranslate nohighlight">\(C222_1\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>21: <a class="reference internal" href="SG/No_21.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 2}^{6}\)</span> (<span class="math notranslate nohighlight">\(C222\)</span>)</span></a></p></td>
+<td class="text-left"><p>22: <a class="reference internal" href="SG/No_22.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 2}^{7}\)</span> (<span class="math notranslate nohighlight">\(F222\)</span>)</span></a></p></td>
+<td class="text-left"><p>23: <a class="reference internal" href="SG/No_23.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 2}^{8}\)</span> (<span class="math notranslate nohighlight">\(I222\)</span>)</span></a></p></td>
+<td class="text-left"><p>24: <a class="reference internal" href="SG/No_24.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 2}^{9}\)</span> (<span class="math notranslate nohighlight">\(I2_12_12_1\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>25: <a class="reference internal" href="SG/No_25.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 2v}^{1}\)</span> (<span class="math notranslate nohighlight">\(Pmm2\)</span>)</span></a></p></td>
+<td class="text-left"><p>26: <a class="reference internal" href="SG/No_26.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 2v}^{2}\)</span> (<span class="math notranslate nohighlight">\(Pmc2_1\)</span>)</span></a></p></td>
+<td class="text-left"><p>27: <a class="reference internal" href="SG/No_27.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 2v}^{3}\)</span> (<span class="math notranslate nohighlight">\(Pcc2\)</span>)</span></a></p></td>
+<td class="text-left"><p>28: <a class="reference internal" href="SG/No_28.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 2v}^{4}\)</span> (<span class="math notranslate nohighlight">\(Pma2\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>29: <a class="reference internal" href="SG/No_29.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 2v}^{5}\)</span> (<span class="math notranslate nohighlight">\(Pca2_1\)</span>)</span></a></p></td>
+<td class="text-left"><p>30: <a class="reference internal" href="SG/No_30.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 2v}^{6}\)</span> (<span class="math notranslate nohighlight">\(Pnc2\)</span>)</span></a></p></td>
+<td class="text-left"><p>31: <a class="reference internal" href="SG/No_31.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 2v}^{7}\)</span> (<span class="math notranslate nohighlight">\(Pmn2_1\)</span>)</span></a></p></td>
+<td class="text-left"><p>32: <a class="reference internal" href="SG/No_32.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 2v}^{8}\)</span> (<span class="math notranslate nohighlight">\(Pba2\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>33: <a class="reference internal" href="SG/No_33.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 2v}^{9}\)</span> (<span class="math notranslate nohighlight">\(Pna2_1\)</span>)</span></a></p></td>
+<td class="text-left"><p>34: <a class="reference internal" href="SG/No_34.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 2v}^{10}\)</span> (<span class="math notranslate nohighlight">\(Pnn2\)</span>)</span></a></p></td>
+<td class="text-left"><p>35: <a class="reference internal" href="SG/No_35.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 2v}^{11}\)</span> (<span class="math notranslate nohighlight">\(Cmm2\)</span>)</span></a></p></td>
+<td class="text-left"><p>36: <a class="reference internal" href="SG/No_36.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 2v}^{12}\)</span> (<span class="math notranslate nohighlight">\(Cmc2_1\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>37: <a class="reference internal" href="SG/No_37.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 2v}^{13}\)</span> (<span class="math notranslate nohighlight">\(Ccc2\)</span>)</span></a></p></td>
+<td class="text-left"><p>38: <a class="reference internal" href="SG/No_38.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 2v}^{14}\)</span> (<span class="math notranslate nohighlight">\(Amm2\)</span>)</span></a></p></td>
+<td class="text-left"><p>39: <a class="reference internal" href="SG/No_39.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 2v}^{15}\)</span> (<span class="math notranslate nohighlight">\(Aem2\)</span>)</span></a></p></td>
+<td class="text-left"><p>40: <a class="reference internal" href="SG/No_40.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 2v}^{16}\)</span> (<span class="math notranslate nohighlight">\(Ama2\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>41: <a class="reference internal" href="SG/No_41.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 2v}^{17}\)</span> (<span class="math notranslate nohighlight">\(Aea2\)</span>)</span></a></p></td>
+<td class="text-left"><p>42: <a class="reference internal" href="SG/No_42.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 2v}^{18}\)</span> (<span class="math notranslate nohighlight">\(Fmm2\)</span>)</span></a></p></td>
+<td class="text-left"><p>43: <a class="reference internal" href="SG/No_43.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 2v}^{19}\)</span> (<span class="math notranslate nohighlight">\(Fdd2\)</span>)</span></a></p></td>
+<td class="text-left"><p>44: <a class="reference internal" href="SG/No_44.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 2v}^{20}\)</span> (<span class="math notranslate nohighlight">\(Imm2\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>45: <a class="reference internal" href="SG/No_45.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 2v}^{21}\)</span> (<span class="math notranslate nohighlight">\(Iba2\)</span>)</span></a></p></td>
+<td class="text-left"><p>46: <a class="reference internal" href="SG/No_46.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 2v}^{22}\)</span> (<span class="math notranslate nohighlight">\(Ima2\)</span>)</span></a></p></td>
+<td class="text-left"><p>47: <a class="reference internal" href="SG/No_47.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 2h}^{1}\)</span> (<span class="math notranslate nohighlight">\(Pmmm\)</span>)</span></a></p></td>
+<td class="text-left"><p>48: <a class="reference internal" href="SG/No_48.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 2h}^{2}\)</span> (<span class="math notranslate nohighlight">\(Pnnn\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>49: <a class="reference internal" href="SG/No_49.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 2h}^{3}\)</span> (<span class="math notranslate nohighlight">\(Pccm\)</span>)</span></a></p></td>
+<td class="text-left"><p>50: <a class="reference internal" href="SG/No_50.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 2h}^{4}\)</span> (<span class="math notranslate nohighlight">\(Pban\)</span>)</span></a></p></td>
+<td class="text-left"><p>51: <a class="reference internal" href="SG/No_51.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 2h}^{5}\)</span> (<span class="math notranslate nohighlight">\(Pmma\)</span>)</span></a></p></td>
+<td class="text-left"><p>52: <a class="reference internal" href="SG/No_52.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 2h}^{6}\)</span> (<span class="math notranslate nohighlight">\(Pnna\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>53: <a class="reference internal" href="SG/No_53.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 2h}^{7}\)</span> (<span class="math notranslate nohighlight">\(Pmna\)</span>)</span></a></p></td>
+<td class="text-left"><p>54: <a class="reference internal" href="SG/No_54.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 2h}^{8}\)</span> (<span class="math notranslate nohighlight">\(Pcca\)</span>)</span></a></p></td>
+<td class="text-left"><p>55: <a class="reference internal" href="SG/No_55.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 2h}^{9}\)</span> (<span class="math notranslate nohighlight">\(Pbam\)</span>)</span></a></p></td>
+<td class="text-left"><p>56: <a class="reference internal" href="SG/No_56.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 2h}^{10}\)</span> (<span class="math notranslate nohighlight">\(Pccn\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>57: <a class="reference internal" href="SG/No_57.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 2h}^{11}\)</span> (<span class="math notranslate nohighlight">\(Pbcm\)</span>)</span></a></p></td>
+<td class="text-left"><p>58: <a class="reference internal" href="SG/No_58.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 2h}^{12}\)</span> (<span class="math notranslate nohighlight">\(Pnnm\)</span>)</span></a></p></td>
+<td class="text-left"><p>59: <a class="reference internal" href="SG/No_59.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 2h}^{13}\)</span> (<span class="math notranslate nohighlight">\(Pmmn\)</span>)</span></a></p></td>
+<td class="text-left"><p>60: <a class="reference internal" href="SG/No_60.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 2h}^{14}\)</span> (<span class="math notranslate nohighlight">\(Pbcn\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>61: <a class="reference internal" href="SG/No_61.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 2h}^{15}\)</span> (<span class="math notranslate nohighlight">\(Pbca\)</span>)</span></a></p></td>
+<td class="text-left"><p>62: <a class="reference internal" href="SG/No_62.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 2h}^{16}\)</span> (<span class="math notranslate nohighlight">\(Pnma\)</span>)</span></a></p></td>
+<td class="text-left"><p>63: <a class="reference internal" href="SG/No_63.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 2h}^{17}\)</span> (<span class="math notranslate nohighlight">\(Cmcm\)</span>)</span></a></p></td>
+<td class="text-left"><p>64: <a class="reference internal" href="SG/No_64.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 2h}^{18}\)</span> (<span class="math notranslate nohighlight">\(Cmce\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>65: <a class="reference internal" href="SG/No_65.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 2h}^{19}\)</span> (<span class="math notranslate nohighlight">\(Cmmm\)</span>)</span></a></p></td>
+<td class="text-left"><p>66: <a class="reference internal" href="SG/No_66.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 2h}^{20}\)</span> (<span class="math notranslate nohighlight">\(Cccm\)</span>)</span></a></p></td>
+<td class="text-left"><p>67: <a class="reference internal" href="SG/No_67.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 2h}^{21}\)</span> (<span class="math notranslate nohighlight">\(Cmme\)</span>)</span></a></p></td>
+<td class="text-left"><p>68: <a class="reference internal" href="SG/No_68.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 2h}^{22}\)</span> (<span class="math notranslate nohighlight">\(Ccce\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>69: <a class="reference internal" href="SG/No_69.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 2h}^{23}\)</span> (<span class="math notranslate nohighlight">\(Fmmm\)</span>)</span></a></p></td>
+<td class="text-left"><p>70: <a class="reference internal" href="SG/No_70.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 2h}^{24}\)</span> (<span class="math notranslate nohighlight">\(Fddd\)</span>)</span></a></p></td>
+<td class="text-left"><p>71: <a class="reference internal" href="SG/No_71.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 2h}^{25}\)</span> (<span class="math notranslate nohighlight">\(Immm\)</span>)</span></a></p></td>
+<td class="text-left"><p>72: <a class="reference internal" href="SG/No_72.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 2h}^{26}\)</span> (<span class="math notranslate nohighlight">\(Ibam\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>73: <a class="reference internal" href="SG/No_73.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 2h}^{27}\)</span> (<span class="math notranslate nohighlight">\(Ibca\)</span>)</span></a></p></td>
+<td class="text-left"><p>74: <a class="reference internal" href="SG/No_74.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 2h}^{28}\)</span> (<span class="math notranslate nohighlight">\(Imma\)</span>)</span></a></p></td>
+<td class="text-left"><p>75: <a class="reference internal" href="SG/No_75.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 4}^{1}\)</span> (<span class="math notranslate nohighlight">\(P4\)</span>)</span></a></p></td>
+<td class="text-left"><p>76: <a class="reference internal" href="SG/No_76.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 4}^{2}\)</span> (<span class="math notranslate nohighlight">\(P4_1\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>77: <a class="reference internal" href="SG/No_77.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 4}^{3}\)</span> (<span class="math notranslate nohighlight">\(P4_2\)</span>)</span></a></p></td>
+<td class="text-left"><p>78: <a class="reference internal" href="SG/No_78.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 4}^{4}\)</span> (<span class="math notranslate nohighlight">\(P4_3\)</span>)</span></a></p></td>
+<td class="text-left"><p>79: <a class="reference internal" href="SG/No_79.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 4}^{5}\)</span> (<span class="math notranslate nohighlight">\(I4\)</span>)</span></a></p></td>
+<td class="text-left"><p>80: <a class="reference internal" href="SG/No_80.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 4}^{6}\)</span> (<span class="math notranslate nohighlight">\(I4_1\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>81: <a class="reference internal" href="SG/No_81.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,S_{\rm 4}^{1}\)</span> (<span class="math notranslate nohighlight">\(P\bar{4}\)</span>)</span></a></p></td>
+<td class="text-left"><p>82: <a class="reference internal" href="SG/No_82.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,S_{\rm 4}^{2}\)</span> (<span class="math notranslate nohighlight">\(I\bar{4}\)</span>)</span></a></p></td>
+<td class="text-left"><p>83: <a class="reference internal" href="SG/No_83.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 4h}^{1}\)</span> (<span class="math notranslate nohighlight">\(P4/m\)</span>)</span></a></p></td>
+<td class="text-left"><p>84: <a class="reference internal" href="SG/No_84.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 4h}^{2}\)</span> (<span class="math notranslate nohighlight">\(P4_2/m\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>85: <a class="reference internal" href="SG/No_85.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 4h}^{3}\)</span> (<span class="math notranslate nohighlight">\(P4/n\)</span>)</span></a></p></td>
+<td class="text-left"><p>86: <a class="reference internal" href="SG/No_86.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 4h}^{4}\)</span> (<span class="math notranslate nohighlight">\(P4_2/n\)</span>)</span></a></p></td>
+<td class="text-left"><p>87: <a class="reference internal" href="SG/No_87.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 4h}^{5}\)</span> (<span class="math notranslate nohighlight">\(I4/m\)</span>)</span></a></p></td>
+<td class="text-left"><p>88: <a class="reference internal" href="SG/No_88.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 4h}^{6}\)</span> (<span class="math notranslate nohighlight">\(I4_1/a\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>89: <a class="reference internal" href="SG/No_89.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 4}^{1}\)</span> (<span class="math notranslate nohighlight">\(P422\)</span>)</span></a></p></td>
+<td class="text-left"><p>90: <a class="reference internal" href="SG/No_90.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 4}^{2}\)</span> (<span class="math notranslate nohighlight">\(P42_12\)</span>)</span></a></p></td>
+<td class="text-left"><p>91: <a class="reference internal" href="SG/No_91.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 4}^{3}\)</span> (<span class="math notranslate nohighlight">\(P4_122\)</span>)</span></a></p></td>
+<td class="text-left"><p>92: <a class="reference internal" href="SG/No_92.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 4}^{4}\)</span> (<span class="math notranslate nohighlight">\(P4_12_12\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>93: <a class="reference internal" href="SG/No_93.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 4}^{5}\)</span> (<span class="math notranslate nohighlight">\(P4_222\)</span>)</span></a></p></td>
+<td class="text-left"><p>94: <a class="reference internal" href="SG/No_94.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 4}^{6}\)</span> (<span class="math notranslate nohighlight">\(P4_22_12\)</span>)</span></a></p></td>
+<td class="text-left"><p>95: <a class="reference internal" href="SG/No_95.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 4}^{7}\)</span> (<span class="math notranslate nohighlight">\(P4_322\)</span>)</span></a></p></td>
+<td class="text-left"><p>96: <a class="reference internal" href="SG/No_96.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 4}^{8}\)</span> (<span class="math notranslate nohighlight">\(P4_32_12\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>97: <a class="reference internal" href="SG/No_97.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 4}^{9}\)</span> (<span class="math notranslate nohighlight">\(I422\)</span>)</span></a></p></td>
+<td class="text-left"><p>98: <a class="reference internal" href="SG/No_98.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 4}^{10}\)</span> (<span class="math notranslate nohighlight">\(I4_122\)</span>)</span></a></p></td>
+<td class="text-left"><p>99: <a class="reference internal" href="SG/No_99.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 4v}^{1}\)</span> (<span class="math notranslate nohighlight">\(P4mm\)</span>)</span></a></p></td>
+<td class="text-left"><p>100: <a class="reference internal" href="SG/No_100.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 4v}^{2}\)</span> (<span class="math notranslate nohighlight">\(P4bm\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>101: <a class="reference internal" href="SG/No_101.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 4v}^{3}\)</span> (<span class="math notranslate nohighlight">\(P4_2cm\)</span>)</span></a></p></td>
+<td class="text-left"><p>102: <a class="reference internal" href="SG/No_102.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 4v}^{4}\)</span> (<span class="math notranslate nohighlight">\(P4_2nm\)</span>)</span></a></p></td>
+<td class="text-left"><p>103: <a class="reference internal" href="SG/No_103.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 4v}^{5}\)</span> (<span class="math notranslate nohighlight">\(P4cc\)</span>)</span></a></p></td>
+<td class="text-left"><p>104: <a class="reference internal" href="SG/No_104.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 4v}^{6}\)</span> (<span class="math notranslate nohighlight">\(P4nc\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>105: <a class="reference internal" href="SG/No_105.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 4v}^{7}\)</span> (<span class="math notranslate nohighlight">\(P4_2mc\)</span>)</span></a></p></td>
+<td class="text-left"><p>106: <a class="reference internal" href="SG/No_106.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 4v}^{8}\)</span> (<span class="math notranslate nohighlight">\(P4_2bc\)</span>)</span></a></p></td>
+<td class="text-left"><p>107: <a class="reference internal" href="SG/No_107.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 4v}^{9}\)</span> (<span class="math notranslate nohighlight">\(I4mm\)</span>)</span></a></p></td>
+<td class="text-left"><p>108: <a class="reference internal" href="SG/No_108.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 4v}^{10}\)</span> (<span class="math notranslate nohighlight">\(I4cm\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>109: <a class="reference internal" href="SG/No_109.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 4v}^{11}\)</span> (<span class="math notranslate nohighlight">\(I4_1md\)</span>)</span></a></p></td>
+<td class="text-left"><p>110: <a class="reference internal" href="SG/No_110.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 4v}^{12}\)</span> (<span class="math notranslate nohighlight">\(I4_1cd\)</span>)</span></a></p></td>
+<td class="text-left"><p>111: <a class="reference internal" href="SG/No_111.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 2d}^{1}\)</span> (<span class="math notranslate nohighlight">\(P\bar{4}2m\)</span>)</span></a></p></td>
+<td class="text-left"><p>112: <a class="reference internal" href="SG/No_112.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 2d}^{2}\)</span> (<span class="math notranslate nohighlight">\(P\bar{4}2c\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>113: <a class="reference internal" href="SG/No_113.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 2d}^{3}\)</span> (<span class="math notranslate nohighlight">\(P\bar{4}2_1m\)</span>)</span></a></p></td>
+<td class="text-left"><p>114: <a class="reference internal" href="SG/No_114.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 2d}^{4}\)</span> (<span class="math notranslate nohighlight">\(P\bar{4}2_1c\)</span>)</span></a></p></td>
+<td class="text-left"><p>115: <a class="reference internal" href="SG/No_115.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 2d}^{5}\)</span> (<span class="math notranslate nohighlight">\(P\bar{4}m2\)</span>)</span></a></p></td>
+<td class="text-left"><p>116: <a class="reference internal" href="SG/No_116.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 2d}^{6}\)</span> (<span class="math notranslate nohighlight">\(P\bar{4}c2\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>117: <a class="reference internal" href="SG/No_117.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 2d}^{7}\)</span> (<span class="math notranslate nohighlight">\(P\bar{4}b2\)</span>)</span></a></p></td>
+<td class="text-left"><p>118: <a class="reference internal" href="SG/No_118.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 2d}^{8}\)</span> (<span class="math notranslate nohighlight">\(P\bar{4}n2\)</span>)</span></a></p></td>
+<td class="text-left"><p>119: <a class="reference internal" href="SG/No_119.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 2d}^{9}\)</span> (<span class="math notranslate nohighlight">\(I\bar{4}m2\)</span>)</span></a></p></td>
+<td class="text-left"><p>120: <a class="reference internal" href="SG/No_120.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 2d}^{10}\)</span> (<span class="math notranslate nohighlight">\(I\bar{4}c2\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>121: <a class="reference internal" href="SG/No_121.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 2d}^{11}\)</span> (<span class="math notranslate nohighlight">\(I\bar{4}2m\)</span>)</span></a></p></td>
+<td class="text-left"><p>122: <a class="reference internal" href="SG/No_122.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 2d}^{12}\)</span> (<span class="math notranslate nohighlight">\(I\bar{4}2d\)</span>)</span></a></p></td>
+<td class="text-left"><p>123: <a class="reference internal" href="SG/No_123.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 4h}^{1}\)</span> (<span class="math notranslate nohighlight">\(P4/mmm\)</span>)</span></a></p></td>
+<td class="text-left"><p>124: <a class="reference internal" href="SG/No_124.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 4h}^{2}\)</span> (<span class="math notranslate nohighlight">\(P4/mcc\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>125: <a class="reference internal" href="SG/No_125.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 4h}^{3}\)</span> (<span class="math notranslate nohighlight">\(P4/nbm\)</span>)</span></a></p></td>
+<td class="text-left"><p>126: <a class="reference internal" href="SG/No_126.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 4h}^{4}\)</span> (<span class="math notranslate nohighlight">\(P4/nnc\)</span>)</span></a></p></td>
+<td class="text-left"><p>127: <a class="reference internal" href="SG/No_127.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 4h}^{5}\)</span> (<span class="math notranslate nohighlight">\(P4/mbm\)</span>)</span></a></p></td>
+<td class="text-left"><p>128: <a class="reference internal" href="SG/No_128.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 4h}^{6}\)</span> (<span class="math notranslate nohighlight">\(P4/mnc\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>129: <a class="reference internal" href="SG/No_129.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 4h}^{7}\)</span> (<span class="math notranslate nohighlight">\(P4/nmm\)</span>)</span></a></p></td>
+<td class="text-left"><p>130: <a class="reference internal" href="SG/No_130.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 4h}^{8}\)</span> (<span class="math notranslate nohighlight">\(P4/ncc\)</span>)</span></a></p></td>
+<td class="text-left"><p>131: <a class="reference internal" href="SG/No_131.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 4h}^{9}\)</span> (<span class="math notranslate nohighlight">\(P4_2/mmc\)</span>)</span></a></p></td>
+<td class="text-left"><p>132: <a class="reference internal" href="SG/No_132.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 4h}^{10}\)</span> (<span class="math notranslate nohighlight">\(P4_2/mcm\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>133: <a class="reference internal" href="SG/No_133.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 4h}^{11}\)</span> (<span class="math notranslate nohighlight">\(P4_2/nbc\)</span>)</span></a></p></td>
+<td class="text-left"><p>134: <a class="reference internal" href="SG/No_134.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 4h}^{12}\)</span> (<span class="math notranslate nohighlight">\(P4_2/nnm\)</span>)</span></a></p></td>
+<td class="text-left"><p>135: <a class="reference internal" href="SG/No_135.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 4h}^{13}\)</span> (<span class="math notranslate nohighlight">\(P4_2/mbc\)</span>)</span></a></p></td>
+<td class="text-left"><p>136: <a class="reference internal" href="SG/No_136.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 4h}^{14}\)</span> (<span class="math notranslate nohighlight">\(P4_2/mnm\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>137: <a class="reference internal" href="SG/No_137.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 4h}^{15}\)</span> (<span class="math notranslate nohighlight">\(P4_2/nmc\)</span>)</span></a></p></td>
+<td class="text-left"><p>138: <a class="reference internal" href="SG/No_138.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 4h}^{16}\)</span> (<span class="math notranslate nohighlight">\(P4_2/ncm\)</span>)</span></a></p></td>
+<td class="text-left"><p>139: <a class="reference internal" href="SG/No_139.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 4h}^{17}\)</span> (<span class="math notranslate nohighlight">\(I4/mmm\)</span>)</span></a></p></td>
+<td class="text-left"><p>140: <a class="reference internal" href="SG/No_140.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 4h}^{18}\)</span> (<span class="math notranslate nohighlight">\(I4/mcm\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>141: <a class="reference internal" href="SG/No_141.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 4h}^{19}\)</span> (<span class="math notranslate nohighlight">\(I4_1/amd\)</span>)</span></a></p></td>
+<td class="text-left"><p>142: <a class="reference internal" href="SG/No_142.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 4h}^{20}\)</span> (<span class="math notranslate nohighlight">\(I4_1/acd\)</span>)</span></a></p></td>
+<td class="text-left"><p>143: <a class="reference internal" href="SG/No_143.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 3}^{1}\)</span> (<span class="math notranslate nohighlight">\(P3\)</span>)</span></a></p></td>
+<td class="text-left"><p>144: <a class="reference internal" href="SG/No_144.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 3}^{2}\)</span> (<span class="math notranslate nohighlight">\(P3_1\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>145: <a class="reference internal" href="SG/No_145.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 3}^{3}\)</span> (<span class="math notranslate nohighlight">\(P3_2\)</span>)</span></a></p></td>
+<td class="text-left"><p>146: <a class="reference internal" href="SG/No_146.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 3}^{4}\)</span> (<span class="math notranslate nohighlight">\(R3\)</span>)</span></a></p></td>
+<td class="text-left"><p>147: <a class="reference internal" href="SG/No_147.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 3i}^{1}\)</span> (<span class="math notranslate nohighlight">\(P\bar{3}\)</span>)</span></a></p></td>
+<td class="text-left"><p>148: <a class="reference internal" href="SG/No_148.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 3i}^{2}\)</span> (<span class="math notranslate nohighlight">\(R\bar{3}\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>149: <a class="reference internal" href="SG/No_149.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 3}^{1}\)</span> (<span class="math notranslate nohighlight">\(P312\)</span>)</span></a></p></td>
+<td class="text-left"><p>150: <a class="reference internal" href="SG/No_150.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 3}^{2}\)</span> (<span class="math notranslate nohighlight">\(P321\)</span>)</span></a></p></td>
+<td class="text-left"><p>151: <a class="reference internal" href="SG/No_151.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 3}^{3}\)</span> (<span class="math notranslate nohighlight">\(P3_112\)</span>)</span></a></p></td>
+<td class="text-left"><p>152: <a class="reference internal" href="SG/No_152.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 3}^{4}\)</span> (<span class="math notranslate nohighlight">\(P3_121\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>153: <a class="reference internal" href="SG/No_153.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 3}^{5}\)</span> (<span class="math notranslate nohighlight">\(P3_212\)</span>)</span></a></p></td>
+<td class="text-left"><p>154: <a class="reference internal" href="SG/No_154.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 3}^{6}\)</span> (<span class="math notranslate nohighlight">\(P3_221\)</span>)</span></a></p></td>
+<td class="text-left"><p>155: <a class="reference internal" href="SG/No_155.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 3}^{7}\)</span> (<span class="math notranslate nohighlight">\(R32\)</span>)</span></a></p></td>
+<td class="text-left"><p>156: <a class="reference internal" href="SG/No_156.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 3v}^{1}\)</span> (<span class="math notranslate nohighlight">\(P3m1\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>157: <a class="reference internal" href="SG/No_157.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 3v}^{2}\)</span> (<span class="math notranslate nohighlight">\(P31m\)</span>)</span></a></p></td>
+<td class="text-left"><p>158: <a class="reference internal" href="SG/No_158.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 3v}^{3}\)</span> (<span class="math notranslate nohighlight">\(P3c1\)</span>)</span></a></p></td>
+<td class="text-left"><p>159: <a class="reference internal" href="SG/No_159.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 3v}^{4}\)</span> (<span class="math notranslate nohighlight">\(P31c\)</span>)</span></a></p></td>
+<td class="text-left"><p>160: <a class="reference internal" href="SG/No_160.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 3v}^{5}\)</span> (<span class="math notranslate nohighlight">\(R3m\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>161: <a class="reference internal" href="SG/No_161.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 3v}^{6}\)</span> (<span class="math notranslate nohighlight">\(R3c\)</span>)</span></a></p></td>
+<td class="text-left"><p>162: <a class="reference internal" href="SG/No_162.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 3d}^{1}\)</span> (<span class="math notranslate nohighlight">\(P\bar{3}1m\)</span>)</span></a></p></td>
+<td class="text-left"><p>163: <a class="reference internal" href="SG/No_163.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 3d}^{2}\)</span> (<span class="math notranslate nohighlight">\(P\bar{3}1c\)</span>)</span></a></p></td>
+<td class="text-left"><p>164: <a class="reference internal" href="SG/No_164.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 3d}^{3}\)</span> (<span class="math notranslate nohighlight">\(P\bar{3}m1\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>165: <a class="reference internal" href="SG/No_165.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 3d}^{4}\)</span> (<span class="math notranslate nohighlight">\(P\bar{3}c1\)</span>)</span></a></p></td>
+<td class="text-left"><p>166: <a class="reference internal" href="SG/No_166.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 3d}^{5}\)</span> (<span class="math notranslate nohighlight">\(R\bar{3}m\)</span>)</span></a></p></td>
+<td class="text-left"><p>167: <a class="reference internal" href="SG/No_167.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 3d}^{6}\)</span> (<span class="math notranslate nohighlight">\(R\bar{3}c\)</span>)</span></a></p></td>
+<td class="text-left"><p>168: <a class="reference internal" href="SG/No_168.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 6}^{1}\)</span> (<span class="math notranslate nohighlight">\(P6\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>169: <a class="reference internal" href="SG/No_169.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 6}^{2}\)</span> (<span class="math notranslate nohighlight">\(P6_1\)</span>)</span></a></p></td>
+<td class="text-left"><p>170: <a class="reference internal" href="SG/No_170.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 6}^{3}\)</span> (<span class="math notranslate nohighlight">\(P6_5\)</span>)</span></a></p></td>
+<td class="text-left"><p>171: <a class="reference internal" href="SG/No_171.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 6}^{4}\)</span> (<span class="math notranslate nohighlight">\(P6_2\)</span>)</span></a></p></td>
+<td class="text-left"><p>172: <a class="reference internal" href="SG/No_172.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 6}^{5}\)</span> (<span class="math notranslate nohighlight">\(P6_4\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>173: <a class="reference internal" href="SG/No_173.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 6}^{6}\)</span> (<span class="math notranslate nohighlight">\(P6_3\)</span>)</span></a></p></td>
+<td class="text-left"><p>174: <a class="reference internal" href="SG/No_174.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 3h}^{1}\)</span> (<span class="math notranslate nohighlight">\(P\bar{6}\)</span>)</span></a></p></td>
+<td class="text-left"><p>175: <a class="reference internal" href="SG/No_175.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 6h}^{1}\)</span> (<span class="math notranslate nohighlight">\(P6/m\)</span>)</span></a></p></td>
+<td class="text-left"><p>176: <a class="reference internal" href="SG/No_176.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 6h}^{2}\)</span> (<span class="math notranslate nohighlight">\(P6_3/m\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>177: <a class="reference internal" href="SG/No_177.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 6}^{1}\)</span> (<span class="math notranslate nohighlight">\(P622\)</span>)</span></a></p></td>
+<td class="text-left"><p>178: <a class="reference internal" href="SG/No_178.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 6}^{2}\)</span> (<span class="math notranslate nohighlight">\(P6_122\)</span>)</span></a></p></td>
+<td class="text-left"><p>179: <a class="reference internal" href="SG/No_179.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 6}^{3}\)</span> (<span class="math notranslate nohighlight">\(P6_522\)</span>)</span></a></p></td>
+<td class="text-left"><p>180: <a class="reference internal" href="SG/No_180.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 6}^{4}\)</span> (<span class="math notranslate nohighlight">\(P6_222\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>181: <a class="reference internal" href="SG/No_181.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 6}^{5}\)</span> (<span class="math notranslate nohighlight">\(P6_422\)</span>)</span></a></p></td>
+<td class="text-left"><p>182: <a class="reference internal" href="SG/No_182.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 6}^{6}\)</span> (<span class="math notranslate nohighlight">\(P6_322\)</span>)</span></a></p></td>
+<td class="text-left"><p>183: <a class="reference internal" href="SG/No_183.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 6v}^{1}\)</span> (<span class="math notranslate nohighlight">\(P6mm\)</span>)</span></a></p></td>
+<td class="text-left"><p>184: <a class="reference internal" href="SG/No_184.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 6v}^{2}\)</span> (<span class="math notranslate nohighlight">\(P6cc\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>185: <a class="reference internal" href="SG/No_185.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 6v}^{3}\)</span> (<span class="math notranslate nohighlight">\(P6_3cm\)</span>)</span></a></p></td>
+<td class="text-left"><p>186: <a class="reference internal" href="SG/No_186.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C_{\rm 6v}^{4}\)</span> (<span class="math notranslate nohighlight">\(P6_3mc\)</span>)</span></a></p></td>
+<td class="text-left"><p>187: <a class="reference internal" href="SG/No_187.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 3h}^{1}\)</span> (<span class="math notranslate nohighlight">\(P\bar{6}m2\)</span>)</span></a></p></td>
+<td class="text-left"><p>188: <a class="reference internal" href="SG/No_188.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 3h}^{2}\)</span> (<span class="math notranslate nohighlight">\(P\bar{6}c2\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>189: <a class="reference internal" href="SG/No_189.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 3h}^{3}\)</span> (<span class="math notranslate nohighlight">\(P\bar{6}2m\)</span>)</span></a></p></td>
+<td class="text-left"><p>190: <a class="reference internal" href="SG/No_190.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 3h}^{4}\)</span> (<span class="math notranslate nohighlight">\(P\bar{6}2c\)</span>)</span></a></p></td>
+<td class="text-left"><p>191: <a class="reference internal" href="SG/No_191.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 6h}^{1}\)</span> (<span class="math notranslate nohighlight">\(P6/mmm\)</span>)</span></a></p></td>
+<td class="text-left"><p>192: <a class="reference internal" href="SG/No_192.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 6h}^{2}\)</span> (<span class="math notranslate nohighlight">\(P6/mcc\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>193: <a class="reference internal" href="SG/No_193.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 6h}^{3}\)</span> (<span class="math notranslate nohighlight">\(P6_3/mcm\)</span>)</span></a></p></td>
+<td class="text-left"><p>194: <a class="reference internal" href="SG/No_194.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,D_{\rm 6h}^{4}\)</span> (<span class="math notranslate nohighlight">\(P6_3/mmc\)</span>)</span></a></p></td>
+<td class="text-left"><p>195: <a class="reference internal" href="SG/No_195.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,T_{\rm }^{1}\)</span> (<span class="math notranslate nohighlight">\(P23\)</span>)</span></a></p></td>
+<td class="text-left"><p>196: <a class="reference internal" href="SG/No_196.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,T_{\rm }^{2}\)</span> (<span class="math notranslate nohighlight">\(F23\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>197: <a class="reference internal" href="SG/No_197.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,T_{\rm }^{3}\)</span> (<span class="math notranslate nohighlight">\(I23\)</span>)</span></a></p></td>
+<td class="text-left"><p>198: <a class="reference internal" href="SG/No_198.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,T_{\rm }^{4}\)</span> (<span class="math notranslate nohighlight">\(P2_13\)</span>)</span></a></p></td>
+<td class="text-left"><p>199: <a class="reference internal" href="SG/No_199.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,T_{\rm }^{5}\)</span> (<span class="math notranslate nohighlight">\(I2_13\)</span>)</span></a></p></td>
+<td class="text-left"><p>200: <a class="reference internal" href="SG/No_200.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,T_{\rm h}^{1}\)</span> (<span class="math notranslate nohighlight">\(Pm\bar{3}\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>201: <a class="reference internal" href="SG/No_201.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,T_{\rm h}^{2}\)</span> (<span class="math notranslate nohighlight">\(Pn\bar{3}\)</span>)</span></a></p></td>
+<td class="text-left"><p>202: <a class="reference internal" href="SG/No_202.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,T_{\rm h}^{3}\)</span> (<span class="math notranslate nohighlight">\(Fm\bar{3}\)</span>)</span></a></p></td>
+<td class="text-left"><p>203: <a class="reference internal" href="SG/No_203.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,T_{\rm h}^{4}\)</span> (<span class="math notranslate nohighlight">\(Fd\bar{3}\)</span>)</span></a></p></td>
+<td class="text-left"><p>204: <a class="reference internal" href="SG/No_204.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,T_{\rm h}^{5}\)</span> (<span class="math notranslate nohighlight">\(Im\bar{3}\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>205: <a class="reference internal" href="SG/No_205.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,T_{\rm h}^{6}\)</span> (<span class="math notranslate nohighlight">\(Pa\bar{3}\)</span>)</span></a></p></td>
+<td class="text-left"><p>206: <a class="reference internal" href="SG/No_206.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,T_{\rm h}^{7}\)</span> (<span class="math notranslate nohighlight">\(Ia\bar{3}\)</span>)</span></a></p></td>
+<td class="text-left"><p>207: <a class="reference internal" href="SG/No_207.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,O_{\rm }^{1}\)</span> (<span class="math notranslate nohighlight">\(P432\)</span>)</span></a></p></td>
+<td class="text-left"><p>208: <a class="reference internal" href="SG/No_208.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,O_{\rm }^{2}\)</span> (<span class="math notranslate nohighlight">\(P4_232\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>209: <a class="reference internal" href="SG/No_209.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,O_{\rm }^{3}\)</span> (<span class="math notranslate nohighlight">\(F432\)</span>)</span></a></p></td>
+<td class="text-left"><p>210: <a class="reference internal" href="SG/No_210.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,O_{\rm }^{4}\)</span> (<span class="math notranslate nohighlight">\(F4_132\)</span>)</span></a></p></td>
+<td class="text-left"><p>211: <a class="reference internal" href="SG/No_211.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,O_{\rm }^{5}\)</span> (<span class="math notranslate nohighlight">\(I432\)</span>)</span></a></p></td>
+<td class="text-left"><p>212: <a class="reference internal" href="SG/No_212.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,O_{\rm }^{6}\)</span> (<span class="math notranslate nohighlight">\(P4_332\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>213: <a class="reference internal" href="SG/No_213.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,O_{\rm }^{7}\)</span> (<span class="math notranslate nohighlight">\(P4_132\)</span>)</span></a></p></td>
+<td class="text-left"><p>214: <a class="reference internal" href="SG/No_214.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,O_{\rm }^{8}\)</span> (<span class="math notranslate nohighlight">\(I4_132\)</span>)</span></a></p></td>
+<td class="text-left"><p>215: <a class="reference internal" href="SG/No_215.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,T_{\rm d}^{1}\)</span> (<span class="math notranslate nohighlight">\(P\bar{4}3m\)</span>)</span></a></p></td>
+<td class="text-left"><p>216: <a class="reference internal" href="SG/No_216.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,T_{\rm d}^{2}\)</span> (<span class="math notranslate nohighlight">\(F\bar{4}3m\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>217: <a class="reference internal" href="SG/No_217.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,T_{\rm d}^{3}\)</span> (<span class="math notranslate nohighlight">\(I\bar{4}3m\)</span>)</span></a></p></td>
+<td class="text-left"><p>218: <a class="reference internal" href="SG/No_218.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,T_{\rm d}^{4}\)</span> (<span class="math notranslate nohighlight">\(P\bar{4}3n\)</span>)</span></a></p></td>
+<td class="text-left"><p>219: <a class="reference internal" href="SG/No_219.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,T_{\rm d}^{5}\)</span> (<span class="math notranslate nohighlight">\(F\bar{4}3c\)</span>)</span></a></p></td>
+<td class="text-left"><p>220: <a class="reference internal" href="SG/No_220.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,T_{\rm d}^{6}\)</span> (<span class="math notranslate nohighlight">\(I\bar{4}3d\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>221: <a class="reference internal" href="SG/No_221.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,O_{\rm h}^{1}\)</span> (<span class="math notranslate nohighlight">\(Pm\bar{3}m\)</span>)</span></a></p></td>
+<td class="text-left"><p>222: <a class="reference internal" href="SG/No_222.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,O_{\rm h}^{2}\)</span> (<span class="math notranslate nohighlight">\(Pn\bar{3}n\)</span>)</span></a></p></td>
+<td class="text-left"><p>223: <a class="reference internal" href="SG/No_223.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,O_{\rm h}^{3}\)</span> (<span class="math notranslate nohighlight">\(Pm\bar{3}n\)</span>)</span></a></p></td>
+<td class="text-left"><p>224: <a class="reference internal" href="SG/No_224.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,O_{\rm h}^{4}\)</span> (<span class="math notranslate nohighlight">\(Pn\bar{3}m\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>225: <a class="reference internal" href="SG/No_225.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,O_{\rm h}^{5}\)</span> (<span class="math notranslate nohighlight">\(Fm\bar{3}m\)</span>)</span></a></p></td>
+<td class="text-left"><p>226: <a class="reference internal" href="SG/No_226.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,O_{\rm h}^{6}\)</span> (<span class="math notranslate nohighlight">\(Fm\bar{3}c\)</span>)</span></a></p></td>
+<td class="text-left"><p>227: <a class="reference internal" href="SG/No_227.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,O_{\rm h}^{7}\)</span> (<span class="math notranslate nohighlight">\(Fd\bar{3}m\)</span>)</span></a></p></td>
+<td class="text-left"><p>228: <a class="reference internal" href="SG/No_228.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,O_{\rm h}^{8}\)</span> (<span class="math notranslate nohighlight">\(Fd\bar{3}c\)</span>)</span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>229: <a class="reference internal" href="SG/No_229.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,O_{\rm h}^{9}\)</span> (<span class="math notranslate nohighlight">\(Im\bar{3}m\)</span>)</span></a></p></td>
+<td class="text-left"><p>230: <a class="reference internal" href="SG/No_230.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,O_{\rm h}^{10}\)</span> (<span class="math notranslate nohighlight">\(Ia\bar{3}d\)</span>)</span></a></p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="magnetic-point-group">
+<h2>Magnetic point group<a class="headerlink" href="#magnetic-point-group" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>tag</p></th>
+<th class="head text-left"><p></p></th>
+<th class="head text-left"><p></p></th>
+<th class="head text-left"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>1.1.1 :<a class="reference internal" href="MPG/No_1.1.1.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,1\)</span></span></a></p></td>
+<td class="text-left"><p>1.2.2 :<a class="reference internal" href="MPG/No_1.2.2.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,11'\)</span></span></a></p></td>
+<td class="text-left"><p>2.1.3 :<a class="reference internal" href="MPG/No_2.1.3.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,\bar{1}\)</span></span></a></p></td>
+<td class="text-left"><p>2.2.4 :<a class="reference internal" href="MPG/No_2.2.4.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,\bar{1}1'\)</span></span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>2.3.5 :<a class="reference internal" href="MPG/No_2.3.5.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,\bar{1}'\)</span></span></a></p></td>
+<td class="text-left"><p>3.1.6 :<a class="reference internal" href="MPG/No_3.1.6.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,2\)</span></span></a></p></td>
+<td class="text-left"><p>3.2.7 :<a class="reference internal" href="MPG/No_3.2.7.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,21'\)</span></span></a></p></td>
+<td class="text-left"><p>3.3.8 :<a class="reference internal" href="MPG/No_3.3.8.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,2'\)</span></span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>4.1.9 :<a class="reference internal" href="MPG/No_4.1.9.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,m\)</span></span></a></p></td>
+<td class="text-left"><p>4.2.10 :<a class="reference internal" href="MPG/No_4.2.10.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,m1'\)</span></span></a></p></td>
+<td class="text-left"><p>4.3.11 :<a class="reference internal" href="MPG/No_4.3.11.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,m'\)</span></span></a></p></td>
+<td class="text-left"><p>5.1.12 :<a class="reference internal" href="MPG/No_5.1.12.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,2/m\)</span></span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>5.2.13 :<a class="reference internal" href="MPG/No_5.2.13.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,2/m1'\)</span></span></a></p></td>
+<td class="text-left"><p>5.3.14 :<a class="reference internal" href="MPG/No_5.3.14.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,2'/m\)</span></span></a></p></td>
+<td class="text-left"><p>5.4.15 :<a class="reference internal" href="MPG/No_5.4.15.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,2/m'\)</span></span></a></p></td>
+<td class="text-left"><p>5.5.16 :<a class="reference internal" href="MPG/No_5.5.16.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,2'/m'\)</span></span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>6.1.17 :<a class="reference internal" href="MPG/No_6.1.17.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,222\)</span></span></a></p></td>
+<td class="text-left"><p>6.2.18 :<a class="reference internal" href="MPG/No_6.2.18.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,2221'\)</span></span></a></p></td>
+<td class="text-left"><p>6.3.19 :<a class="reference internal" href="MPG/No_6.3.19.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,2'2'2\)</span></span></a></p></td>
+<td class="text-left"><p>6.4.123 :<a class="reference internal" href="MPG/No_6.4.123.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,2'2'2\)</span></span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>7.1.20 :<a class="reference internal" href="MPG/No_7.1.20.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,mm2\)</span></span></a></p></td>
+<td class="text-left"><p>7.2.21 :<a class="reference internal" href="MPG/No_7.2.21.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,mm21'\)</span></span></a></p></td>
+<td class="text-left"><p>7.3.22 :<a class="reference internal" href="MPG/No_7.3.22.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,m'm2'\)</span></span></a></p></td>
+<td class="text-left"><p>7.4.23 :<a class="reference internal" href="MPG/No_7.4.23.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,m'm'2\)</span></span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>7.5.124 :<a class="reference internal" href="MPG/No_7.5.124.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,m'm2'\)</span></span></a></p></td>
+<td class="text-left"><p>8.1.24 :<a class="reference internal" href="MPG/No_8.1.24.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,mmm\)</span></span></a></p></td>
+<td class="text-left"><p>8.2.25 :<a class="reference internal" href="MPG/No_8.2.25.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,mmm1'\)</span></span></a></p></td>
+<td class="text-left"><p>8.3.26 :<a class="reference internal" href="MPG/No_8.3.26.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,m'mm\)</span></span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>8.4.27 :<a class="reference internal" href="MPG/No_8.4.27.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,m'm'm\)</span></span></a></p></td>
+<td class="text-left"><p>8.5.28 :<a class="reference internal" href="MPG/No_8.5.28.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,m'm'm'\)</span></span></a></p></td>
+<td class="text-left"><p>8.6.125 :<a class="reference internal" href="MPG/No_8.6.125.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,m'mm\)</span></span></a></p></td>
+<td class="text-left"><p>8.7.126 :<a class="reference internal" href="MPG/No_8.7.126.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,m'mm\)</span></span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>8.8.127 :<a class="reference internal" href="MPG/No_8.8.127.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,m'm'm\)</span></span></a></p></td>
+<td class="text-left"><p>8.9.128 :<a class="reference internal" href="MPG/No_8.9.128.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,m'm'm\)</span></span></a></p></td>
+<td class="text-left"><p>9.1.29 :<a class="reference internal" href="MPG/No_9.1.29.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,4\)</span></span></a></p></td>
+<td class="text-left"><p>9.2.30 :<a class="reference internal" href="MPG/No_9.2.30.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,41'\)</span></span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>9.3.31 :<a class="reference internal" href="MPG/No_9.3.31.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,4'\)</span></span></a></p></td>
+<td class="text-left"><p>10.1.32 :<a class="reference internal" href="MPG/No_10.1.32.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,\bar{4}\)</span></span></a></p></td>
+<td class="text-left"><p>10.2.33 :<a class="reference internal" href="MPG/No_10.2.33.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,\bar{4}1'\)</span></span></a></p></td>
+<td class="text-left"><p>10.3.34 :<a class="reference internal" href="MPG/No_10.3.34.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,\bar{4}'\)</span></span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>11.1.35 :<a class="reference internal" href="MPG/No_11.1.35.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,4/m\)</span></span></a></p></td>
+<td class="text-left"><p>11.2.36 :<a class="reference internal" href="MPG/No_11.2.36.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,4/m1'\)</span></span></a></p></td>
+<td class="text-left"><p>11.3.37 :<a class="reference internal" href="MPG/No_11.3.37.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,4'/m\)</span></span></a></p></td>
+<td class="text-left"><p>11.4.38 :<a class="reference internal" href="MPG/No_11.4.38.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,4/m'\)</span></span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>11.5.39 :<a class="reference internal" href="MPG/No_11.5.39.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,4'/m'\)</span></span></a></p></td>
+<td class="text-left"><p>12.1.40 :<a class="reference internal" href="MPG/No_12.1.40.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,422\)</span></span></a></p></td>
+<td class="text-left"><p>12.2.41 :<a class="reference internal" href="MPG/No_12.2.41.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,4221'\)</span></span></a></p></td>
+<td class="text-left"><p>12.3.42 :<a class="reference internal" href="MPG/No_12.3.42.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,4'22'\)</span></span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>12.4.43 :<a class="reference internal" href="MPG/No_12.4.43.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,42'2'\)</span></span></a></p></td>
+<td class="text-left"><p>12.5.129 :<a class="reference internal" href="MPG/No_12.5.129.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,4'22'\)</span></span></a></p></td>
+<td class="text-left"><p>13.1.44 :<a class="reference internal" href="MPG/No_13.1.44.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,4mm\)</span></span></a></p></td>
+<td class="text-left"><p>13.2.45 :<a class="reference internal" href="MPG/No_13.2.45.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,4mm1'\)</span></span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>13.3.46 :<a class="reference internal" href="MPG/No_13.3.46.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,4'm'm\)</span></span></a></p></td>
+<td class="text-left"><p>13.4.47 :<a class="reference internal" href="MPG/No_13.4.47.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,4m'm'\)</span></span></a></p></td>
+<td class="text-left"><p>13.5.130 :<a class="reference internal" href="MPG/No_13.5.130.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,4'm'm\)</span></span></a></p></td>
+<td class="text-left"><p>14.1.48 :<a class="reference internal" href="MPG/No_14.1.48.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,\bar{4}2m\)</span></span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>14.2.49 :<a class="reference internal" href="MPG/No_14.2.49.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,\bar{4}2m1'\)</span></span></a></p></td>
+<td class="text-left"><p>14.3.50 :<a class="reference internal" href="MPG/No_14.3.50.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,\bar{4}'2'm\)</span></span></a></p></td>
+<td class="text-left"><p>14.4.51 :<a class="reference internal" href="MPG/No_14.4.51.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,\bar{4}'2m'\)</span></span></a></p></td>
+<td class="text-left"><p>14.5.52 :<a class="reference internal" href="MPG/No_14.5.52.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,\bar{4}2'm'\)</span></span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>15.1.53 :<a class="reference internal" href="MPG/No_15.1.53.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,4/mmm\)</span></span></a></p></td>
+<td class="text-left"><p>15.2.54 :<a class="reference internal" href="MPG/No_15.2.54.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,4/mmm1'\)</span></span></a></p></td>
+<td class="text-left"><p>15.3.55 :<a class="reference internal" href="MPG/No_15.3.55.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,4/m'mm\)</span></span></a></p></td>
+<td class="text-left"><p>15.4.56 :<a class="reference internal" href="MPG/No_15.4.56.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,4'/mm'm\)</span></span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>15.5.57 :<a class="reference internal" href="MPG/No_15.5.57.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,4'/m'm'm\)</span></span></a></p></td>
+<td class="text-left"><p>15.6.58 :<a class="reference internal" href="MPG/No_15.6.58.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,4/mm'm'\)</span></span></a></p></td>
+<td class="text-left"><p>15.7.59 :<a class="reference internal" href="MPG/No_15.7.59.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,4/m'm'm'\)</span></span></a></p></td>
+<td class="text-left"><p>15.8.136 :<a class="reference internal" href="MPG/No_15.8.136.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,4'/mm'm\)</span></span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>15.9.137 :<a class="reference internal" href="MPG/No_15.9.137.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,4'/m'm'm\)</span></span></a></p></td>
+<td class="text-left"><p>16.1.60 :<a class="reference internal" href="MPG/No_16.1.60.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,3\)</span></span></a></p></td>
+<td class="text-left"><p>16.2.61 :<a class="reference internal" href="MPG/No_16.2.61.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,31'\)</span></span></a></p></td>
+<td class="text-left"><p>17.1.62 :<a class="reference internal" href="MPG/No_17.1.62.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,\bar{3}\)</span></span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>17.2.63 :<a class="reference internal" href="MPG/No_17.2.63.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,\bar{3}1'\)</span></span></a></p></td>
+<td class="text-left"><p>17.3.64 :<a class="reference internal" href="MPG/No_17.3.64.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,\bar{3}'\)</span></span></a></p></td>
+<td class="text-left"><p>18.1.65 :<a class="reference internal" href="MPG/No_18.1.65.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,32\)</span></span></a></p></td>
+<td class="text-left"><p>18.2.66 :<a class="reference internal" href="MPG/No_18.2.66.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,321'\)</span></span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>18.3.67 :<a class="reference internal" href="MPG/No_18.3.67.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,32'\)</span></span></a></p></td>
+<td class="text-left"><p>19.1.68 :<a class="reference internal" href="MPG/No_19.1.68.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,3m\)</span></span></a></p></td>
+<td class="text-left"><p>19.2.69 :<a class="reference internal" href="MPG/No_19.2.69.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,3m1'\)</span></span></a></p></td>
+<td class="text-left"><p>19.3.70 :<a class="reference internal" href="MPG/No_19.3.70.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,3m'\)</span></span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>20.1.71 :<a class="reference internal" href="MPG/No_20.1.71.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,\bar{3}m\)</span></span></a></p></td>
+<td class="text-left"><p>20.2.72 :<a class="reference internal" href="MPG/No_20.2.72.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,\bar{3}m1'\)</span></span></a></p></td>
+<td class="text-left"><p>20.3.73 :<a class="reference internal" href="MPG/No_20.3.73.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,\bar{3}'m\)</span></span></a></p></td>
+<td class="text-left"><p>20.4.74 :<a class="reference internal" href="MPG/No_20.4.74.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,\bar{3}'m'\)</span></span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>20.5.75 :<a class="reference internal" href="MPG/No_20.5.75.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,\bar{3}m'\)</span></span></a></p></td>
+<td class="text-left"><p>21.1.76 :<a class="reference internal" href="MPG/No_21.1.76.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,6\)</span></span></a></p></td>
+<td class="text-left"><p>21.2.77 :<a class="reference internal" href="MPG/No_21.2.77.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,61'\)</span></span></a></p></td>
+<td class="text-left"><p>21.3.78 :<a class="reference internal" href="MPG/No_21.3.78.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,6'\)</span></span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>22.1.79 :<a class="reference internal" href="MPG/No_22.1.79.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,\bar{6}\)</span></span></a></p></td>
+<td class="text-left"><p>22.2.80 :<a class="reference internal" href="MPG/No_22.2.80.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,\bar{6}1'\)</span></span></a></p></td>
+<td class="text-left"><p>22.3.81 :<a class="reference internal" href="MPG/No_22.3.81.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,\bar{6}'\)</span></span></a></p></td>
+<td class="text-left"><p>23.1.82 :<a class="reference internal" href="MPG/No_23.1.82.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,6/m\)</span></span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>23.2.83 :<a class="reference internal" href="MPG/No_23.2.83.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,6/m1'\)</span></span></a></p></td>
+<td class="text-left"><p>23.3.84 :<a class="reference internal" href="MPG/No_23.3.84.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,6'/m\)</span></span></a></p></td>
+<td class="text-left"><p>23.4.85 :<a class="reference internal" href="MPG/No_23.4.85.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,6/m'\)</span></span></a></p></td>
+<td class="text-left"><p>23.5.86 :<a class="reference internal" href="MPG/No_23.5.86.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,6'/m'\)</span></span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>24.1.87 :<a class="reference internal" href="MPG/No_24.1.87.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,622\)</span></span></a></p></td>
+<td class="text-left"><p>24.2.88 :<a class="reference internal" href="MPG/No_24.2.88.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,6221'\)</span></span></a></p></td>
+<td class="text-left"><p>24.3.89 :<a class="reference internal" href="MPG/No_24.3.89.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,6'22'\)</span></span></a></p></td>
+<td class="text-left"><p>24.4.90 :<a class="reference internal" href="MPG/No_24.4.90.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,62'2'\)</span></span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>24.5.149 :<a class="reference internal" href="MPG/No_24.5.149.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,6'22'\)</span></span></a></p></td>
+<td class="text-left"><p>25.1.91 :<a class="reference internal" href="MPG/No_25.1.91.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,6mm\)</span></span></a></p></td>
+<td class="text-left"><p>25.2.92 :<a class="reference internal" href="MPG/No_25.2.92.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,6mm1'\)</span></span></a></p></td>
+<td class="text-left"><p>25.3.93 :<a class="reference internal" href="MPG/No_25.3.93.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,6'mm'\)</span></span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>25.4.94 :<a class="reference internal" href="MPG/No_25.4.94.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,6m'm'\)</span></span></a></p></td>
+<td class="text-left"><p>25.5.150 :<a class="reference internal" href="MPG/No_25.5.150.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,6'mm'\)</span></span></a></p></td>
+<td class="text-left"><p>26.1.95 :<a class="reference internal" href="MPG/No_26.1.95.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,\bar{6}m2\)</span></span></a></p></td>
+<td class="text-left"><p>26.2.96 :<a class="reference internal" href="MPG/No_26.2.96.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,\bar{6}m21'\)</span></span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>26.3.97 :<a class="reference internal" href="MPG/No_26.3.97.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,\bar{6}'m'2\)</span></span></a></p></td>
+<td class="text-left"><p>26.4.98 :<a class="reference internal" href="MPG/No_26.4.98.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,\bar{6}'m2'\)</span></span></a></p></td>
+<td class="text-left"><p>26.5.99 :<a class="reference internal" href="MPG/No_26.5.99.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,\bar{6}m'2'\)</span></span></a></p></td>
+<td class="text-left"><p>27.1.100 :<a class="reference internal" href="MPG/No_27.1.100.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,6/mmm\)</span></span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>27.2.101 :<a class="reference internal" href="MPG/No_27.2.101.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,6/mmm1'\)</span></span></a></p></td>
+<td class="text-left"><p>27.3.102 :<a class="reference internal" href="MPG/No_27.3.102.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,6/m'mm\)</span></span></a></p></td>
+<td class="text-left"><p>27.4.103 :<a class="reference internal" href="MPG/No_27.4.103.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,6'/mmm'\)</span></span></a></p></td>
+<td class="text-left"><p>27.5.104 :<a class="reference internal" href="MPG/No_27.5.104.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,6'/m'mm'\)</span></span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>27.6.105 :<a class="reference internal" href="MPG/No_27.6.105.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,6/mm'm'\)</span></span></a></p></td>
+<td class="text-left"><p>27.7.106 :<a class="reference internal" href="MPG/No_27.7.106.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,6/m'm'm'\)</span></span></a></p></td>
+<td class="text-left"><p>27.8.156 :<a class="reference internal" href="MPG/No_27.8.156.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,6'/mmm'\)</span></span></a></p></td>
+<td class="text-left"><p>27.9.157 :<a class="reference internal" href="MPG/No_27.9.157.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,6'/m'mm'\)</span></span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>28.1.107 :<a class="reference internal" href="MPG/No_28.1.107.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,23\)</span></span></a></p></td>
+<td class="text-left"><p>28.2.108 :<a class="reference internal" href="MPG/No_28.2.108.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,231'\)</span></span></a></p></td>
+<td class="text-left"><p>29.1.109 :<a class="reference internal" href="MPG/No_29.1.109.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,m\bar{3}\)</span></span></a></p></td>
+<td class="text-left"><p>29.2.110 :<a class="reference internal" href="MPG/No_29.2.110.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,m\bar{3}1'\)</span></span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>29.3.111 :<a class="reference internal" href="MPG/No_29.3.111.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,m'\bar{3}'\)</span></span></a></p></td>
+<td class="text-left"><p>30.1.112 :<a class="reference internal" href="MPG/No_30.1.112.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,432\)</span></span></a></p></td>
+<td class="text-left"><p>30.2.113 :<a class="reference internal" href="MPG/No_30.2.113.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,4321'\)</span></span></a></p></td>
+<td class="text-left"><p>30.3.114 :<a class="reference internal" href="MPG/No_30.3.114.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,4'32'\)</span></span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>31.1.115 :<a class="reference internal" href="MPG/No_31.1.115.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,\bar{4}3m\)</span></span></a></p></td>
+<td class="text-left"><p>31.2.116 :<a class="reference internal" href="MPG/No_31.2.116.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,\bar{4}3m1'\)</span></span></a></p></td>
+<td class="text-left"><p>31.3.117 :<a class="reference internal" href="MPG/No_31.3.117.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,\bar{4}'3m'\)</span></span></a></p></td>
+<td class="text-left"><p>32.1.118 :<a class="reference internal" href="MPG/No_32.1.118.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,m\bar{3}m\)</span></span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>32.2.119 :<a class="reference internal" href="MPG/No_32.2.119.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,m\bar{3}m1'\)</span></span></a></p></td>
+<td class="text-left"><p>32.3.120 :<a class="reference internal" href="MPG/No_32.3.120.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,m'\bar{3}'m\)</span></span></a></p></td>
+<td class="text-left"><p>32.4.121 :<a class="reference internal" href="MPG/No_32.4.121.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,m\bar{3}m'\)</span></span></a></p></td>
+<td class="text-left"><p>32.5.122 :<a class="reference internal" href="MPG/No_32.5.122.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,m'\bar{3}'m'\)</span></span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>33.1.131 :<a class="reference internal" href="MPG/No_33.1.131.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,\bar{4}2m\)</span></span></a></p></td>
+<td class="text-left"><p>33.2.132 :<a class="reference internal" href="MPG/No_33.2.132.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,\bar{4}2m1'\)</span></span></a></p></td>
+<td class="text-left"><p>33.3.133 :<a class="reference internal" href="MPG/No_33.3.133.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,\bar{4}'2'm\)</span></span></a></p></td>
+<td class="text-left"><p>33.4.134 :<a class="reference internal" href="MPG/No_33.4.134.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,\bar{4}'2m'\)</span></span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>33.5.135 :<a class="reference internal" href="MPG/No_33.5.135.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,\bar{4}2'm'\)</span></span></a></p></td>
+<td class="text-left"><p>34.1.138 :<a class="reference internal" href="MPG/No_34.1.138.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,32\)</span></span></a></p></td>
+<td class="text-left"><p>34.2.139 :<a class="reference internal" href="MPG/No_34.2.139.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,321'\)</span></span></a></p></td>
+<td class="text-left"><p>34.3.140 :<a class="reference internal" href="MPG/No_34.3.140.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,32'\)</span></span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>35.1.141 :<a class="reference internal" href="MPG/No_35.1.141.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,3m\)</span></span></a></p></td>
+<td class="text-left"><p>35.2.142 :<a class="reference internal" href="MPG/No_35.2.142.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,3m1'\)</span></span></a></p></td>
+<td class="text-left"><p>35.3.143 :<a class="reference internal" href="MPG/No_35.3.143.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,3m'\)</span></span></a></p></td>
+<td class="text-left"><p>36.1.144 :<a class="reference internal" href="MPG/No_36.1.144.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,\bar{3}m\)</span></span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>36.2.145 :<a class="reference internal" href="MPG/No_36.2.145.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,\bar{3}m1'\)</span></span></a></p></td>
+<td class="text-left"><p>36.3.146 :<a class="reference internal" href="MPG/No_36.3.146.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,\bar{3}'m\)</span></span></a></p></td>
+<td class="text-left"><p>36.4.147 :<a class="reference internal" href="MPG/No_36.4.147.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,\bar{3}'m'\)</span></span></a></p></td>
+<td class="text-left"><p>36.5.148 :<a class="reference internal" href="MPG/No_36.5.148.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,\bar{3}m'\)</span></span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>37.1.151 :<a class="reference internal" href="MPG/No_37.1.151.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,\bar{6}m2\)</span></span></a></p></td>
+<td class="text-left"><p>37.2.152 :<a class="reference internal" href="MPG/No_37.2.152.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,\bar{6}m21'\)</span></span></a></p></td>
+<td class="text-left"><p>37.3.153 :<a class="reference internal" href="MPG/No_37.3.153.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,\bar{6}'m'2\)</span></span></a></p></td>
+<td class="text-left"><p>37.4.154 :<a class="reference internal" href="MPG/No_37.4.154.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,\bar{6}'m2'\)</span></span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>37.5.155 :<a class="reference internal" href="MPG/No_37.5.155.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,\bar{6}m'2'\)</span></span></a></p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="magnetic-space-group-by-sg">
+<h2>Magnetic space group (by SG)<a class="headerlink" href="#magnetic-space-group-by-sg" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>tag (SG)</p></th>
+<th class="head text-left"><p></p></th>
+<th class="head text-left"><p></p></th>
+<th class="head text-left"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>1 :<a class="reference internal" href="MSG/No_1.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P1\)</span></span></a></p></td>
+<td class="text-left"><p>2 :<a class="reference internal" href="MSG/No_2.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P\bar{1}\)</span></span></a></p></td>
+<td class="text-left"><p>3 :<a class="reference internal" href="MSG/No_3.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P2\)</span></span></a></p></td>
+<td class="text-left"><p>4 :<a class="reference internal" href="MSG/No_4.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P2_1\)</span></span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>5 :<a class="reference internal" href="MSG/No_5.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C2\)</span></span></a></p></td>
+<td class="text-left"><p>6 :<a class="reference internal" href="MSG/No_6.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Pm\)</span></span></a></p></td>
+<td class="text-left"><p>7 :<a class="reference internal" href="MSG/No_7.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Pc\)</span></span></a></p></td>
+<td class="text-left"><p>8 :<a class="reference internal" href="MSG/No_8.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Cm\)</span></span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>9 :<a class="reference internal" href="MSG/No_9.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Cc\)</span></span></a></p></td>
+<td class="text-left"><p>10 :<a class="reference internal" href="MSG/No_10.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P2/m\)</span></span></a></p></td>
+<td class="text-left"><p>11 :<a class="reference internal" href="MSG/No_11.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P2_1/m\)</span></span></a></p></td>
+<td class="text-left"><p>12 :<a class="reference internal" href="MSG/No_12.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C2/m\)</span></span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>13 :<a class="reference internal" href="MSG/No_13.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P2/c\)</span></span></a></p></td>
+<td class="text-left"><p>14 :<a class="reference internal" href="MSG/No_14.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P2_1/c\)</span></span></a></p></td>
+<td class="text-left"><p>15 :<a class="reference internal" href="MSG/No_15.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C2/c\)</span></span></a></p></td>
+<td class="text-left"><p>16 :<a class="reference internal" href="MSG/No_16.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P222\)</span></span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>17 :<a class="reference internal" href="MSG/No_17.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P222_1\)</span></span></a></p></td>
+<td class="text-left"><p>18 :<a class="reference internal" href="MSG/No_18.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P2_12_12\)</span></span></a></p></td>
+<td class="text-left"><p>19 :<a class="reference internal" href="MSG/No_19.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P2_12_12_1\)</span></span></a></p></td>
+<td class="text-left"><p>20 :<a class="reference internal" href="MSG/No_20.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C222_1\)</span></span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>21 :<a class="reference internal" href="MSG/No_21.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,C222\)</span></span></a></p></td>
+<td class="text-left"><p>22 :<a class="reference internal" href="MSG/No_22.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,F222\)</span></span></a></p></td>
+<td class="text-left"><p>23 :<a class="reference internal" href="MSG/No_23.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,I222\)</span></span></a></p></td>
+<td class="text-left"><p>24 :<a class="reference internal" href="MSG/No_24.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,I2_12_12_1\)</span></span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>25 :<a class="reference internal" href="MSG/No_25.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Pmm2\)</span></span></a></p></td>
+<td class="text-left"><p>26 :<a class="reference internal" href="MSG/No_26.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Pmc2_1\)</span></span></a></p></td>
+<td class="text-left"><p>27 :<a class="reference internal" href="MSG/No_27.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Pcc2\)</span></span></a></p></td>
+<td class="text-left"><p>28 :<a class="reference internal" href="MSG/No_28.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Pma2\)</span></span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>29 :<a class="reference internal" href="MSG/No_29.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Pca2_1\)</span></span></a></p></td>
+<td class="text-left"><p>30 :<a class="reference internal" href="MSG/No_30.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Pnc2\)</span></span></a></p></td>
+<td class="text-left"><p>31 :<a class="reference internal" href="MSG/No_31.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Pmn2_1\)</span></span></a></p></td>
+<td class="text-left"><p>32 :<a class="reference internal" href="MSG/No_32.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Pba2\)</span></span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>33 :<a class="reference internal" href="MSG/No_33.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Pna2_1\)</span></span></a></p></td>
+<td class="text-left"><p>34 :<a class="reference internal" href="MSG/No_34.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Pnn2\)</span></span></a></p></td>
+<td class="text-left"><p>35 :<a class="reference internal" href="MSG/No_35.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Cmm2\)</span></span></a></p></td>
+<td class="text-left"><p>36 :<a class="reference internal" href="MSG/No_36.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Cmc2_1\)</span></span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>37 :<a class="reference internal" href="MSG/No_37.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Ccc2\)</span></span></a></p></td>
+<td class="text-left"><p>38 :<a class="reference internal" href="MSG/No_38.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Amm2\)</span></span></a></p></td>
+<td class="text-left"><p>39 :<a class="reference internal" href="MSG/No_39.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Aem2\)</span></span></a></p></td>
+<td class="text-left"><p>40 :<a class="reference internal" href="MSG/No_40.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Ama2\)</span></span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>41 :<a class="reference internal" href="MSG/No_41.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Aea2\)</span></span></a></p></td>
+<td class="text-left"><p>42 :<a class="reference internal" href="MSG/No_42.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Fmm2\)</span></span></a></p></td>
+<td class="text-left"><p>43 :<a class="reference internal" href="MSG/No_43.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Fdd2\)</span></span></a></p></td>
+<td class="text-left"><p>44 :<a class="reference internal" href="MSG/No_44.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Imm2\)</span></span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>45 :<a class="reference internal" href="MSG/No_45.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Iba2\)</span></span></a></p></td>
+<td class="text-left"><p>46 :<a class="reference internal" href="MSG/No_46.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Ima2\)</span></span></a></p></td>
+<td class="text-left"><p>47 :<a class="reference internal" href="MSG/No_47.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Pmmm\)</span></span></a></p></td>
+<td class="text-left"><p>48 :<a class="reference internal" href="MSG/No_48.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Pnnn\)</span></span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>49 :<a class="reference internal" href="MSG/No_49.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Pccm\)</span></span></a></p></td>
+<td class="text-left"><p>50 :<a class="reference internal" href="MSG/No_50.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Pban\)</span></span></a></p></td>
+<td class="text-left"><p>51 :<a class="reference internal" href="MSG/No_51.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Pmma\)</span></span></a></p></td>
+<td class="text-left"><p>52 :<a class="reference internal" href="MSG/No_52.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Pnna\)</span></span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>53 :<a class="reference internal" href="MSG/No_53.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Pmna\)</span></span></a></p></td>
+<td class="text-left"><p>54 :<a class="reference internal" href="MSG/No_54.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Pcca\)</span></span></a></p></td>
+<td class="text-left"><p>55 :<a class="reference internal" href="MSG/No_55.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Pbam\)</span></span></a></p></td>
+<td class="text-left"><p>56 :<a class="reference internal" href="MSG/No_56.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Pccn\)</span></span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>57 :<a class="reference internal" href="MSG/No_57.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Pbcm\)</span></span></a></p></td>
+<td class="text-left"><p>58 :<a class="reference internal" href="MSG/No_58.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Pnnm\)</span></span></a></p></td>
+<td class="text-left"><p>59 :<a class="reference internal" href="MSG/No_59.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Pmmn\)</span></span></a></p></td>
+<td class="text-left"><p>60 :<a class="reference internal" href="MSG/No_60.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Pbcn\)</span></span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>61 :<a class="reference internal" href="MSG/No_61.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Pbca\)</span></span></a></p></td>
+<td class="text-left"><p>62 :<a class="reference internal" href="MSG/No_62.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Pnma\)</span></span></a></p></td>
+<td class="text-left"><p>63 :<a class="reference internal" href="MSG/No_63.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Cmcm\)</span></span></a></p></td>
+<td class="text-left"><p>64 :<a class="reference internal" href="MSG/No_64.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Cmce\)</span></span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>65 :<a class="reference internal" href="MSG/No_65.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Cmmm\)</span></span></a></p></td>
+<td class="text-left"><p>66 :<a class="reference internal" href="MSG/No_66.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Cccm\)</span></span></a></p></td>
+<td class="text-left"><p>67 :<a class="reference internal" href="MSG/No_67.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Cmme\)</span></span></a></p></td>
+<td class="text-left"><p>68 :<a class="reference internal" href="MSG/No_68.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Ccce\)</span></span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>69 :<a class="reference internal" href="MSG/No_69.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Fmmm\)</span></span></a></p></td>
+<td class="text-left"><p>70 :<a class="reference internal" href="MSG/No_70.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Fddd\)</span></span></a></p></td>
+<td class="text-left"><p>71 :<a class="reference internal" href="MSG/No_71.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Immm\)</span></span></a></p></td>
+<td class="text-left"><p>72 :<a class="reference internal" href="MSG/No_72.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Ibam\)</span></span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>73 :<a class="reference internal" href="MSG/No_73.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Ibca\)</span></span></a></p></td>
+<td class="text-left"><p>74 :<a class="reference internal" href="MSG/No_74.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Imma\)</span></span></a></p></td>
+<td class="text-left"><p>75 :<a class="reference internal" href="MSG/No_75.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P4\)</span></span></a></p></td>
+<td class="text-left"><p>76 :<a class="reference internal" href="MSG/No_76.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P4_1\)</span></span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>77 :<a class="reference internal" href="MSG/No_77.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P4_2\)</span></span></a></p></td>
+<td class="text-left"><p>78 :<a class="reference internal" href="MSG/No_78.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P4_3\)</span></span></a></p></td>
+<td class="text-left"><p>79 :<a class="reference internal" href="MSG/No_79.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,I4\)</span></span></a></p></td>
+<td class="text-left"><p>80 :<a class="reference internal" href="MSG/No_80.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,I4_1\)</span></span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>81 :<a class="reference internal" href="MSG/No_81.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P\bar{4}\)</span></span></a></p></td>
+<td class="text-left"><p>82 :<a class="reference internal" href="MSG/No_82.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,I\bar{4}\)</span></span></a></p></td>
+<td class="text-left"><p>83 :<a class="reference internal" href="MSG/No_83.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P4/m\)</span></span></a></p></td>
+<td class="text-left"><p>84 :<a class="reference internal" href="MSG/No_84.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P4_2/m\)</span></span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>85 :<a class="reference internal" href="MSG/No_85.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P4/n\)</span></span></a></p></td>
+<td class="text-left"><p>86 :<a class="reference internal" href="MSG/No_86.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P4_2/n\)</span></span></a></p></td>
+<td class="text-left"><p>87 :<a class="reference internal" href="MSG/No_87.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,I4/m\)</span></span></a></p></td>
+<td class="text-left"><p>88 :<a class="reference internal" href="MSG/No_88.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,I4_1/a\)</span></span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>89 :<a class="reference internal" href="MSG/No_89.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P422\)</span></span></a></p></td>
+<td class="text-left"><p>90 :<a class="reference internal" href="MSG/No_90.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P42_12\)</span></span></a></p></td>
+<td class="text-left"><p>91 :<a class="reference internal" href="MSG/No_91.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P4_122\)</span></span></a></p></td>
+<td class="text-left"><p>92 :<a class="reference internal" href="MSG/No_92.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P4_12_12\)</span></span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>93 :<a class="reference internal" href="MSG/No_93.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P4_222\)</span></span></a></p></td>
+<td class="text-left"><p>94 :<a class="reference internal" href="MSG/No_94.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P4_22_12\)</span></span></a></p></td>
+<td class="text-left"><p>95 :<a class="reference internal" href="MSG/No_95.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P4_322\)</span></span></a></p></td>
+<td class="text-left"><p>96 :<a class="reference internal" href="MSG/No_96.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P4_32_12\)</span></span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>97 :<a class="reference internal" href="MSG/No_97.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,I422\)</span></span></a></p></td>
+<td class="text-left"><p>98 :<a class="reference internal" href="MSG/No_98.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,I4_122\)</span></span></a></p></td>
+<td class="text-left"><p>99 :<a class="reference internal" href="MSG/No_99.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P4mm\)</span></span></a></p></td>
+<td class="text-left"><p>100 :<a class="reference internal" href="MSG/No_100.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P4bm\)</span></span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>101 :<a class="reference internal" href="MSG/No_101.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P4_2cm\)</span></span></a></p></td>
+<td class="text-left"><p>102 :<a class="reference internal" href="MSG/No_102.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P4_2nm\)</span></span></a></p></td>
+<td class="text-left"><p>103 :<a class="reference internal" href="MSG/No_103.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P4cc\)</span></span></a></p></td>
+<td class="text-left"><p>104 :<a class="reference internal" href="MSG/No_104.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P4nc\)</span></span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>105 :<a class="reference internal" href="MSG/No_105.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P4_2mc\)</span></span></a></p></td>
+<td class="text-left"><p>106 :<a class="reference internal" href="MSG/No_106.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P4_2bc\)</span></span></a></p></td>
+<td class="text-left"><p>107 :<a class="reference internal" href="MSG/No_107.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,I4mm\)</span></span></a></p></td>
+<td class="text-left"><p>108 :<a class="reference internal" href="MSG/No_108.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,I4cm\)</span></span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>109 :<a class="reference internal" href="MSG/No_109.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,I4_1md\)</span></span></a></p></td>
+<td class="text-left"><p>110 :<a class="reference internal" href="MSG/No_110.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,I4_1cd\)</span></span></a></p></td>
+<td class="text-left"><p>111 :<a class="reference internal" href="MSG/No_111.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P\bar{4}2m\)</span></span></a></p></td>
+<td class="text-left"><p>112 :<a class="reference internal" href="MSG/No_112.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P\bar{4}2c\)</span></span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>113 :<a class="reference internal" href="MSG/No_113.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P\bar{4}2_1m\)</span></span></a></p></td>
+<td class="text-left"><p>114 :<a class="reference internal" href="MSG/No_114.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P\bar{4}2_1c\)</span></span></a></p></td>
+<td class="text-left"><p>115 :<a class="reference internal" href="MSG/No_115.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P\bar{4}m2\)</span></span></a></p></td>
+<td class="text-left"><p>116 :<a class="reference internal" href="MSG/No_116.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P\bar{4}c2\)</span></span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>117 :<a class="reference internal" href="MSG/No_117.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P\bar{4}b2\)</span></span></a></p></td>
+<td class="text-left"><p>118 :<a class="reference internal" href="MSG/No_118.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P\bar{4}n2\)</span></span></a></p></td>
+<td class="text-left"><p>119 :<a class="reference internal" href="MSG/No_119.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,I\bar{4}m2\)</span></span></a></p></td>
+<td class="text-left"><p>120 :<a class="reference internal" href="MSG/No_120.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,I\bar{4}c2\)</span></span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>121 :<a class="reference internal" href="MSG/No_121.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,I\bar{4}2m\)</span></span></a></p></td>
+<td class="text-left"><p>122 :<a class="reference internal" href="MSG/No_122.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,I\bar{4}2d\)</span></span></a></p></td>
+<td class="text-left"><p>123 :<a class="reference internal" href="MSG/No_123.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P4/mmm\)</span></span></a></p></td>
+<td class="text-left"><p>124 :<a class="reference internal" href="MSG/No_124.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P4/mcc\)</span></span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>125 :<a class="reference internal" href="MSG/No_125.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P4/nbm\)</span></span></a></p></td>
+<td class="text-left"><p>126 :<a class="reference internal" href="MSG/No_126.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P4/nnc\)</span></span></a></p></td>
+<td class="text-left"><p>127 :<a class="reference internal" href="MSG/No_127.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P4/mbm\)</span></span></a></p></td>
+<td class="text-left"><p>128 :<a class="reference internal" href="MSG/No_128.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P4/mnc\)</span></span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>129 :<a class="reference internal" href="MSG/No_129.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P4/nmm\)</span></span></a></p></td>
+<td class="text-left"><p>130 :<a class="reference internal" href="MSG/No_130.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P4/ncc\)</span></span></a></p></td>
+<td class="text-left"><p>131 :<a class="reference internal" href="MSG/No_131.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P4_2/mmc\)</span></span></a></p></td>
+<td class="text-left"><p>132 :<a class="reference internal" href="MSG/No_132.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P4_2/mcm\)</span></span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>133 :<a class="reference internal" href="MSG/No_133.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P4_2/nbc\)</span></span></a></p></td>
+<td class="text-left"><p>134 :<a class="reference internal" href="MSG/No_134.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P4_2/nnm\)</span></span></a></p></td>
+<td class="text-left"><p>135 :<a class="reference internal" href="MSG/No_135.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P4_2/mbc\)</span></span></a></p></td>
+<td class="text-left"><p>136 :<a class="reference internal" href="MSG/No_136.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P4_2/mnm\)</span></span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>137 :<a class="reference internal" href="MSG/No_137.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P4_2/nmc\)</span></span></a></p></td>
+<td class="text-left"><p>138 :<a class="reference internal" href="MSG/No_138.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P4_2/ncm\)</span></span></a></p></td>
+<td class="text-left"><p>139 :<a class="reference internal" href="MSG/No_139.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,I4/mmm\)</span></span></a></p></td>
+<td class="text-left"><p>140 :<a class="reference internal" href="MSG/No_140.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,I4/mcm\)</span></span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>141 :<a class="reference internal" href="MSG/No_141.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,I4_1/amd\)</span></span></a></p></td>
+<td class="text-left"><p>142 :<a class="reference internal" href="MSG/No_142.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,I4_1/acd\)</span></span></a></p></td>
+<td class="text-left"><p>143 :<a class="reference internal" href="MSG/No_143.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P3\)</span></span></a></p></td>
+<td class="text-left"><p>144 :<a class="reference internal" href="MSG/No_144.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P3_1\)</span></span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>145 :<a class="reference internal" href="MSG/No_145.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P3_2\)</span></span></a></p></td>
+<td class="text-left"><p>146 :<a class="reference internal" href="MSG/No_146.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,R3\)</span></span></a></p></td>
+<td class="text-left"><p>147 :<a class="reference internal" href="MSG/No_147.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P\bar{3}\)</span></span></a></p></td>
+<td class="text-left"><p>148 :<a class="reference internal" href="MSG/No_148.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,R\bar{3}\)</span></span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>149 :<a class="reference internal" href="MSG/No_149.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P312\)</span></span></a></p></td>
+<td class="text-left"><p>150 :<a class="reference internal" href="MSG/No_150.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P321\)</span></span></a></p></td>
+<td class="text-left"><p>151 :<a class="reference internal" href="MSG/No_151.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P3_112\)</span></span></a></p></td>
+<td class="text-left"><p>152 :<a class="reference internal" href="MSG/No_152.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P3_121\)</span></span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>153 :<a class="reference internal" href="MSG/No_153.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P3_212\)</span></span></a></p></td>
+<td class="text-left"><p>154 :<a class="reference internal" href="MSG/No_154.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P3_221\)</span></span></a></p></td>
+<td class="text-left"><p>155 :<a class="reference internal" href="MSG/No_155.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,R32\)</span></span></a></p></td>
+<td class="text-left"><p>156 :<a class="reference internal" href="MSG/No_156.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P3m1\)</span></span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>157 :<a class="reference internal" href="MSG/No_157.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P31m\)</span></span></a></p></td>
+<td class="text-left"><p>158 :<a class="reference internal" href="MSG/No_158.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P3c1\)</span></span></a></p></td>
+<td class="text-left"><p>159 :<a class="reference internal" href="MSG/No_159.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P31c\)</span></span></a></p></td>
+<td class="text-left"><p>160 :<a class="reference internal" href="MSG/No_160.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,R3m\)</span></span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>161 :<a class="reference internal" href="MSG/No_161.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,R3c\)</span></span></a></p></td>
+<td class="text-left"><p>162 :<a class="reference internal" href="MSG/No_162.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P\bar{3}1m\)</span></span></a></p></td>
+<td class="text-left"><p>163 :<a class="reference internal" href="MSG/No_163.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P\bar{3}1c\)</span></span></a></p></td>
+<td class="text-left"><p>164 :<a class="reference internal" href="MSG/No_164.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P\bar{3}m1\)</span></span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>165 :<a class="reference internal" href="MSG/No_165.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P\bar{3}c1\)</span></span></a></p></td>
+<td class="text-left"><p>166 :<a class="reference internal" href="MSG/No_166.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,R\bar{3}m\)</span></span></a></p></td>
+<td class="text-left"><p>167 :<a class="reference internal" href="MSG/No_167.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,R\bar{3}c\)</span></span></a></p></td>
+<td class="text-left"><p>168 :<a class="reference internal" href="MSG/No_168.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P6\)</span></span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>169 :<a class="reference internal" href="MSG/No_169.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P6_1\)</span></span></a></p></td>
+<td class="text-left"><p>170 :<a class="reference internal" href="MSG/No_170.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P6_5\)</span></span></a></p></td>
+<td class="text-left"><p>171 :<a class="reference internal" href="MSG/No_171.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P6_2\)</span></span></a></p></td>
+<td class="text-left"><p>172 :<a class="reference internal" href="MSG/No_172.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P6_4\)</span></span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>173 :<a class="reference internal" href="MSG/No_173.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P6_3\)</span></span></a></p></td>
+<td class="text-left"><p>174 :<a class="reference internal" href="MSG/No_174.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P\bar{6}\)</span></span></a></p></td>
+<td class="text-left"><p>175 :<a class="reference internal" href="MSG/No_175.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P6/m\)</span></span></a></p></td>
+<td class="text-left"><p>176 :<a class="reference internal" href="MSG/No_176.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P6_3/m\)</span></span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>177 :<a class="reference internal" href="MSG/No_177.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P622\)</span></span></a></p></td>
+<td class="text-left"><p>178 :<a class="reference internal" href="MSG/No_178.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P6_122\)</span></span></a></p></td>
+<td class="text-left"><p>179 :<a class="reference internal" href="MSG/No_179.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P6_522\)</span></span></a></p></td>
+<td class="text-left"><p>180 :<a class="reference internal" href="MSG/No_180.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P6_222\)</span></span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>181 :<a class="reference internal" href="MSG/No_181.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P6_422\)</span></span></a></p></td>
+<td class="text-left"><p>182 :<a class="reference internal" href="MSG/No_182.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P6_322\)</span></span></a></p></td>
+<td class="text-left"><p>183 :<a class="reference internal" href="MSG/No_183.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P6mm\)</span></span></a></p></td>
+<td class="text-left"><p>184 :<a class="reference internal" href="MSG/No_184.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P6cc\)</span></span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>185 :<a class="reference internal" href="MSG/No_185.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P6_3cm\)</span></span></a></p></td>
+<td class="text-left"><p>186 :<a class="reference internal" href="MSG/No_186.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P6_3mc\)</span></span></a></p></td>
+<td class="text-left"><p>187 :<a class="reference internal" href="MSG/No_187.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P\bar{6}m2\)</span></span></a></p></td>
+<td class="text-left"><p>188 :<a class="reference internal" href="MSG/No_188.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P\bar{6}c2\)</span></span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>189 :<a class="reference internal" href="MSG/No_189.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P\bar{6}2m\)</span></span></a></p></td>
+<td class="text-left"><p>190 :<a class="reference internal" href="MSG/No_190.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P\bar{6}2c\)</span></span></a></p></td>
+<td class="text-left"><p>191 :<a class="reference internal" href="MSG/No_191.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P6/mmm\)</span></span></a></p></td>
+<td class="text-left"><p>192 :<a class="reference internal" href="MSG/No_192.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P6/mcc\)</span></span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>193 :<a class="reference internal" href="MSG/No_193.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P6_3/mcm\)</span></span></a></p></td>
+<td class="text-left"><p>194 :<a class="reference internal" href="MSG/No_194.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P6_3/mmc\)</span></span></a></p></td>
+<td class="text-left"><p>195 :<a class="reference internal" href="MSG/No_195.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P23\)</span></span></a></p></td>
+<td class="text-left"><p>196 :<a class="reference internal" href="MSG/No_196.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,F23\)</span></span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>197 :<a class="reference internal" href="MSG/No_197.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,I23\)</span></span></a></p></td>
+<td class="text-left"><p>198 :<a class="reference internal" href="MSG/No_198.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P2_13\)</span></span></a></p></td>
+<td class="text-left"><p>199 :<a class="reference internal" href="MSG/No_199.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,I2_13\)</span></span></a></p></td>
+<td class="text-left"><p>200 :<a class="reference internal" href="MSG/No_200.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Pm\bar{3}\)</span></span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>201 :<a class="reference internal" href="MSG/No_201.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Pn\bar{3}\)</span></span></a></p></td>
+<td class="text-left"><p>202 :<a class="reference internal" href="MSG/No_202.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Fm\bar{3}\)</span></span></a></p></td>
+<td class="text-left"><p>203 :<a class="reference internal" href="MSG/No_203.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Fd\bar{3}\)</span></span></a></p></td>
+<td class="text-left"><p>204 :<a class="reference internal" href="MSG/No_204.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Im\bar{3}\)</span></span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>205 :<a class="reference internal" href="MSG/No_205.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Pa\bar{3}\)</span></span></a></p></td>
+<td class="text-left"><p>206 :<a class="reference internal" href="MSG/No_206.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Ia\bar{3}\)</span></span></a></p></td>
+<td class="text-left"><p>207 :<a class="reference internal" href="MSG/No_207.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P432\)</span></span></a></p></td>
+<td class="text-left"><p>208 :<a class="reference internal" href="MSG/No_208.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P4_232\)</span></span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>209 :<a class="reference internal" href="MSG/No_209.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,F432\)</span></span></a></p></td>
+<td class="text-left"><p>210 :<a class="reference internal" href="MSG/No_210.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,F4_132\)</span></span></a></p></td>
+<td class="text-left"><p>211 :<a class="reference internal" href="MSG/No_211.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,I432\)</span></span></a></p></td>
+<td class="text-left"><p>212 :<a class="reference internal" href="MSG/No_212.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P4_332\)</span></span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>213 :<a class="reference internal" href="MSG/No_213.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P4_132\)</span></span></a></p></td>
+<td class="text-left"><p>214 :<a class="reference internal" href="MSG/No_214.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,I4_132\)</span></span></a></p></td>
+<td class="text-left"><p>215 :<a class="reference internal" href="MSG/No_215.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P\bar{4}3m\)</span></span></a></p></td>
+<td class="text-left"><p>216 :<a class="reference internal" href="MSG/No_216.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,F\bar{4}3m\)</span></span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>217 :<a class="reference internal" href="MSG/No_217.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,I\bar{4}3m\)</span></span></a></p></td>
+<td class="text-left"><p>218 :<a class="reference internal" href="MSG/No_218.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,P\bar{4}3n\)</span></span></a></p></td>
+<td class="text-left"><p>219 :<a class="reference internal" href="MSG/No_219.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,F\bar{4}3c\)</span></span></a></p></td>
+<td class="text-left"><p>220 :<a class="reference internal" href="MSG/No_220.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,I\bar{4}3d\)</span></span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>221 :<a class="reference internal" href="MSG/No_221.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Pm\bar{3}m\)</span></span></a></p></td>
+<td class="text-left"><p>222 :<a class="reference internal" href="MSG/No_222.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Pn\bar{3}n\)</span></span></a></p></td>
+<td class="text-left"><p>223 :<a class="reference internal" href="MSG/No_223.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Pm\bar{3}n\)</span></span></a></p></td>
+<td class="text-left"><p>224 :<a class="reference internal" href="MSG/No_224.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Pn\bar{3}m\)</span></span></a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>225 :<a class="reference internal" href="MSG/No_225.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Fm\bar{3}m\)</span></span></a></p></td>
+<td class="text-left"><p>226 :<a class="reference internal" href="MSG/No_226.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Fm\bar{3}c\)</span></span></a></p></td>
+<td class="text-left"><p>227 :<a class="reference internal" href="MSG/No_227.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Fd\bar{3}m\)</span></span></a></p></td>
+<td class="text-left"><p>228 :<a class="reference internal" href="MSG/No_228.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Fd\bar{3}c\)</span></span></a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>229 :<a class="reference internal" href="MSG/No_229.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Im\bar{3}m\)</span></span></a></p></td>
+<td class="text-left"><p>230 :<a class="reference internal" href="MSG/No_230.html"><span class="std std-doc"><span class="math notranslate nohighlight">\(\,\,Ia\bar{3}d\)</span></span></a></p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./src"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#point-group">Point group</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#space-group">Space group</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#magnetic-point-group">Magnetic point group</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#magnetic-space-group-by-sg">Magnetic space group (by SG)</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Hiroaki Kusunose and Rikuto Oiwa
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2021-2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

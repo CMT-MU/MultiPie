@@ -1,0 +1,1156 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Read model .pkl and display &#8212; MultiPie</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=34ddd5e8" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=a8e58a58"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>window.MathJax = {"loader": {"load": ["[tex]/physics"]}, "tex": {"packages": {"[+]": ["physics"]}, "macros": {"bm": ["\\boldsymbol{#1}", 1]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'src/examples/read_model';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../README.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/multipie_logo.png" class="logo__image only-light" alt="MultiPie - Home"/>
+    <img src="../../_static/multipie_logo.png" class="logo__image only-dark pst-js-only" alt="MultiPie - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installing MultiPie</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../group_doc.html">Group information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tech_note.html">Technical Note</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../api_core.html">Core</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api_core/group.html">Group</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_core/material_model.html">Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_core/cmd.html">Create function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_core/init.html">Type</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../api_util.html">Utility</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_binary.html">Binary data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_crystal.html">Crystal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_dict.html">Dict</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_tag.html">Tag</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_wyckoff.html">Wyckoff position</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_harmonics.html">Harmonics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util.html">Versatile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_gram_schmidt.html">Grad-Schmidt orthonormalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_material_model.html">Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_material_model_pdf.html">PDF creator for Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_pdf_latex.html">PDF creator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_plot.html">Plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_response_tensor.html">Response tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_samb.html">SAMB</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/CMT-MU/MultiPie.git" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Read model .pkl and display</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#site-cluster-samb">Site-cluster SAMB</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bond-cluster-samb">Bond-cluster SAMB</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#atomic-samb-for-bh-rank-bh-idx-kt-rank-kt-idx">Atomic SAMB for (bh_rank, bh_idx, kt_rank, kt_idx)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#combined-samb-for-head-tail-wyckoff-bh-rank-bh-idx-kt-rank-kt-idx">Combined SAMB for (head, tail, wyckoff, (bh_rank, bh_idx, kt_rank, kt_idx))</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contents-in-mm-site-representative-or-mm-site-cell">contents in mm[“site”][“representative”] or mm[“site”][“cell”]</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contents-in-mm-bond-representative-or-mm-bond-cell">contents in mm[“bond”][“representative”] or mm[“bond”][“cell”]</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#symmetry-of-multipoles">Symmetry of multipoles</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#combined-id-head-tail-wyckoff-bh-rank-bh-idx-kt-rank-kt-idx-neighbor-n">Combined ID: (head, tail, wyckoff, (bh_rank, bh_idx, kt_rank, kt_idx), neighbor, n)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-samb-head-tail-wyckoff-bh-rank-bh-idx-kt-rank-kt-idx-combined-id">Common SAMB (head, tail, wyckoff, (bh_rank, bh_idx, kt_rank, kt_idx)): combined_id</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="read-model-pkl-and-display">
+<h1>Read model .pkl and display<a class="headerlink" href="#read-model-pkl-and-display" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sp</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">multipie</span><span class="w"> </span><span class="kn">import</span> <span class="n">MaterialModel</span>
+<span class="n">to_tuple</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">to_tuple</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)</span> <span class="k">else</span> <span class="n">x</span>
+
+<span class="n">mm</span> <span class="o">=</span> <span class="n">MaterialModel</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># initialize material model.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="s2">&quot;graphene&quot;</span> <span class="c1"># model name.</span>
+<span class="n">mm</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">model</span><span class="p">)</span> <span class="c1"># load model pkl.</span>
+<span class="n">group</span> <span class="o">=</span> <span class="n">mm</span><span class="o">.</span><span class="n">group</span> <span class="c1"># alias for group object.</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>load binary from &#39;/Users/hk/Library/CloudStorage/Dropbox/working/GitHub/MultiPie/docs/src/examples/graphene/graphene.pkl&#39;.
+&quot;&quot;&quot;
+Model: graphene
+* Group: D_6h^1
+* SAMB selection: {&#39;X&#39;: [&#39;Q&#39;, &#39;G&#39;], &#39;l&#39;: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], &#39;Gamma&#39;: [&#39;A1g&#39;, &#39;A2g&#39;, &#39;B1g&#39;, &#39;B2g&#39;, &#39;E1g&#39;, &#39;E2g&#39;, &#39;A1u&#39;, &#39;A2u&#39;, &#39;B1u&#39;, &#39;B2u&#39;, &#39;E1u&#39;, &#39;E2u&#39;], &#39;s&#39;: [0, 1]}
+  22 (all 32) basis set
+&quot;&quot;&quot;
+</pre></div>
+</div>
+</div>
+</div>
+<section id="site-cluster-samb">
+<h2>Site-cluster SAMB<a class="headerlink" href="#site-cluster-samb" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cluster_samb</span> <span class="o">=</span> <span class="n">mm</span><span class="p">[</span><span class="s2">&quot;cluster_samb&quot;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">wp</span><span class="p">,</span> <span class="n">samb</span> <span class="ow">in</span> <span class="n">cluster_samb</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">if</span> <span class="s2">&quot;@&quot;</span> <span class="ow">in</span> <span class="n">wp</span><span class="p">:</span>
+        <span class="k">continue</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;== </span><span class="si">{</span><span class="n">wp</span><span class="si">}</span><span class="s2"> ==&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="p">(</span><span class="n">mat</span><span class="p">,</span> <span class="n">ex</span><span class="p">)</span> <span class="ow">in</span> <span class="n">samb</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">tag</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">tag_multipole</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span><span class="n">latex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">superscript</span><span class="o">=</span><span class="s2">&quot;s&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">e</span><span class="p">,</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span><span class="n">mat</span><span class="p">):</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="n">e</span><span class="p">),</span><span class="n">sp</span><span class="o">.</span><span class="n">Matrix</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">display</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>== 2c ==
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{0}^{(s)}(A_{1g}) = \left[\begin{matrix}\frac{\sqrt{2}}{2} &amp; \frac{\sqrt{2}}{2}\end{matrix}\right]\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{3}^{(s)}(B_{1u}) = \left[\begin{matrix}\frac{\sqrt{2}}{2} &amp; - \frac{\sqrt{2}}{2}\end{matrix}\right]\]</div>
+</div>
+</div>
+</section>
+<section id="bond-cluster-samb">
+<h2>Bond-cluster SAMB<a class="headerlink" href="#bond-cluster-samb" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">wp</span><span class="p">,</span> <span class="n">samb</span> <span class="ow">in</span> <span class="n">cluster_samb</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">if</span> <span class="s2">&quot;@&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">wp</span><span class="p">:</span>
+        <span class="k">continue</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;== </span><span class="si">{</span><span class="n">wp</span><span class="si">}</span><span class="s2"> ==&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="p">(</span><span class="n">mat</span><span class="p">,</span> <span class="n">ex</span><span class="p">)</span> <span class="ow">in</span> <span class="n">samb</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">tag</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">tag_multipole</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span><span class="n">latex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">superscript</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">e</span><span class="p">,</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span><span class="n">mat</span><span class="p">):</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="n">e</span><span class="p">),</span><span class="n">sp</span><span class="o">.</span><span class="n">Matrix</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">display</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>== 3a@3f ==
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{0}^{(b)}(A_{1g}) = \left[\begin{matrix}\frac{\sqrt{3}}{3} &amp; \frac{\sqrt{3}}{3} &amp; \frac{\sqrt{3}}{3}\end{matrix}\right]\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{T}_{3}^{(b)}(B_{1u}) = \left[\begin{matrix}\frac{\sqrt{3} i}{3} &amp; \frac{\sqrt{3} i}{3} &amp; \frac{\sqrt{3} i}{3}\end{matrix}\right]\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{T}_{1,1}^{(b)}(E_{1u}) = \left[\begin{matrix}0 &amp; - \frac{\sqrt{2} i}{2} &amp; \frac{\sqrt{2} i}{2}\end{matrix}\right]\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{T}_{1,2}^{(b)}(E_{1u}) = \left[\begin{matrix}\frac{\sqrt{6} i}{3} &amp; - \frac{\sqrt{6} i}{6} &amp; - \frac{\sqrt{6} i}{6}\end{matrix}\right]\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{2,1}^{(b)}(E_{2g}) = \left[\begin{matrix}\frac{\sqrt{6}}{3} &amp; - \frac{\sqrt{6}}{6} &amp; - \frac{\sqrt{6}}{6}\end{matrix}\right]\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{2,2}^{(b)}(E_{2g}) = \left[\begin{matrix}0 &amp; \frac{\sqrt{2}}{2} &amp; - \frac{\sqrt{2}}{2}\end{matrix}\right]\]</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>== 3b@1a ==
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{0}^{(b)}(A_{1g}) = \left[\begin{matrix}\frac{\sqrt{3}}{3} &amp; \frac{\sqrt{3}}{3} &amp; \frac{\sqrt{3}}{3}\end{matrix}\right]\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{T}_{3}^{(b)}(B_{1u}) = \left[\begin{matrix}\frac{\sqrt{3} i}{3} &amp; \frac{\sqrt{3} i}{3} &amp; \frac{\sqrt{3} i}{3}\end{matrix}\right]\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{T}_{1,1}^{(b)}(E_{1u}) = \left[\begin{matrix}0 &amp; - \frac{\sqrt{2} i}{2} &amp; \frac{\sqrt{2} i}{2}\end{matrix}\right]\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{T}_{1,2}^{(b)}(E_{1u}) = \left[\begin{matrix}\frac{\sqrt{6} i}{3} &amp; - \frac{\sqrt{6} i}{6} &amp; - \frac{\sqrt{6} i}{6}\end{matrix}\right]\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{2,1}^{(b)}(E_{2g}) = \left[\begin{matrix}\frac{\sqrt{6}}{3} &amp; - \frac{\sqrt{6}}{6} &amp; - \frac{\sqrt{6}}{6}\end{matrix}\right]\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{2,2}^{(b)}(E_{2g}) = \left[\begin{matrix}0 &amp; \frac{\sqrt{2}}{2} &amp; - \frac{\sqrt{2}}{2}\end{matrix}\right]\]</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>== 6c@2c ==
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{0}^{(b)}(A_{1g}) = \left[\begin{matrix}\frac{\sqrt{6}}{6} &amp; \frac{\sqrt{6}}{6} &amp; \frac{\sqrt{6}}{6} &amp; \frac{\sqrt{6}}{6} &amp; \frac{\sqrt{6}}{6} &amp; \frac{\sqrt{6}}{6}\end{matrix}\right]\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{M}_{1}^{(b)}(A_{2g}) = \left[\begin{matrix}\frac{\sqrt{6} i}{6} &amp; \frac{\sqrt{6} i}{6} &amp; \frac{\sqrt{6} i}{6} &amp; \frac{\sqrt{6} i}{6} &amp; \frac{\sqrt{6} i}{6} &amp; \frac{\sqrt{6} i}{6}\end{matrix}\right]\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{3}^{(b)}(B_{1u}) = \left[\begin{matrix}\frac{\sqrt{6}}{6} &amp; \frac{\sqrt{6}}{6} &amp; \frac{\sqrt{6}}{6} &amp; - \frac{\sqrt{6}}{6} &amp; - \frac{\sqrt{6}}{6} &amp; - \frac{\sqrt{6}}{6}\end{matrix}\right]\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{T}_{3}^{(b)}(B_{2u}) = \left[\begin{matrix}\frac{\sqrt{6} i}{6} &amp; \frac{\sqrt{6} i}{6} &amp; \frac{\sqrt{6} i}{6} &amp; - \frac{\sqrt{6} i}{6} &amp; - \frac{\sqrt{6} i}{6} &amp; - \frac{\sqrt{6} i}{6}\end{matrix}\right]\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{1,1}^{(b)}(E_{1u}) = \left[\begin{matrix}0 &amp; - \frac{1}{2} &amp; \frac{1}{2} &amp; 0 &amp; \frac{1}{2} &amp; - \frac{1}{2}\end{matrix}\right]\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{1,2}^{(b)}(E_{1u}) = \left[\begin{matrix}\frac{\sqrt{3}}{3} &amp; - \frac{\sqrt{3}}{6} &amp; - \frac{\sqrt{3}}{6} &amp; - \frac{\sqrt{3}}{3} &amp; \frac{\sqrt{3}}{6} &amp; \frac{\sqrt{3}}{6}\end{matrix}\right]\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{T}_{1,1}^{(b)}(E_{1u}) = \left[\begin{matrix}\frac{\sqrt{3} i}{3} &amp; - \frac{\sqrt{3} i}{6} &amp; - \frac{\sqrt{3} i}{6} &amp; - \frac{\sqrt{3} i}{3} &amp; \frac{\sqrt{3} i}{6} &amp; \frac{\sqrt{3} i}{6}\end{matrix}\right]\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{T}_{1,2}^{(b)}(E_{1u}) = \left[\begin{matrix}0 &amp; \frac{i}{2} &amp; - \frac{i}{2} &amp; 0 &amp; - \frac{i}{2} &amp; \frac{i}{2}\end{matrix}\right]\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{2,1}^{(b)}(E_{2g}) = \left[\begin{matrix}\frac{\sqrt{3}}{3} &amp; - \frac{\sqrt{3}}{6} &amp; - \frac{\sqrt{3}}{6} &amp; \frac{\sqrt{3}}{3} &amp; - \frac{\sqrt{3}}{6} &amp; - \frac{\sqrt{3}}{6}\end{matrix}\right]\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{2,2}^{(b)}(E_{2g}) = \left[\begin{matrix}0 &amp; \frac{1}{2} &amp; - \frac{1}{2} &amp; 0 &amp; \frac{1}{2} &amp; - \frac{1}{2}\end{matrix}\right]\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{T}_{2,1}^{(b)}(E_{2g}) = \left[\begin{matrix}0 &amp; \frac{i}{2} &amp; - \frac{i}{2} &amp; 0 &amp; \frac{i}{2} &amp; - \frac{i}{2}\end{matrix}\right]\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{T}_{2,2}^{(b)}(E_{2g}) = \left[\begin{matrix}- \frac{\sqrt{3} i}{3} &amp; \frac{\sqrt{3} i}{6} &amp; \frac{\sqrt{3} i}{6} &amp; - \frac{\sqrt{3} i}{3} &amp; \frac{\sqrt{3} i}{6} &amp; \frac{\sqrt{3} i}{6}\end{matrix}\right]\]</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>== 6b@6l ==
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{0}^{(b)}(A_{1g}) = \left[\begin{matrix}\frac{\sqrt{6}}{6} &amp; \frac{\sqrt{6}}{6} &amp; \frac{\sqrt{6}}{6} &amp; \frac{\sqrt{6}}{6} &amp; \frac{\sqrt{6}}{6} &amp; \frac{\sqrt{6}}{6}\end{matrix}\right]\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{M}_{1}^{(b)}(A_{2g}) = \left[\begin{matrix}\frac{\sqrt{6} i}{6} &amp; \frac{\sqrt{6} i}{6} &amp; \frac{\sqrt{6} i}{6} &amp; \frac{\sqrt{6} i}{6} &amp; \frac{\sqrt{6} i}{6} &amp; \frac{\sqrt{6} i}{6}\end{matrix}\right]\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{3}^{(b)}(B_{1u}) = \left[\begin{matrix}\frac{\sqrt{6}}{6} &amp; \frac{\sqrt{6}}{6} &amp; \frac{\sqrt{6}}{6} &amp; - \frac{\sqrt{6}}{6} &amp; - \frac{\sqrt{6}}{6} &amp; - \frac{\sqrt{6}}{6}\end{matrix}\right]\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{T}_{3}^{(b)}(B_{2u}) = \left[\begin{matrix}\frac{\sqrt{6} i}{6} &amp; \frac{\sqrt{6} i}{6} &amp; \frac{\sqrt{6} i}{6} &amp; - \frac{\sqrt{6} i}{6} &amp; - \frac{\sqrt{6} i}{6} &amp; - \frac{\sqrt{6} i}{6}\end{matrix}\right]\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{1,1}^{(b)}(E_{1u}) = \left[\begin{matrix}0 &amp; - \frac{1}{2} &amp; \frac{1}{2} &amp; 0 &amp; \frac{1}{2} &amp; - \frac{1}{2}\end{matrix}\right]\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{1,2}^{(b)}(E_{1u}) = \left[\begin{matrix}\frac{\sqrt{3}}{3} &amp; - \frac{\sqrt{3}}{6} &amp; - \frac{\sqrt{3}}{6} &amp; - \frac{\sqrt{3}}{3} &amp; \frac{\sqrt{3}}{6} &amp; \frac{\sqrt{3}}{6}\end{matrix}\right]\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{T}_{1,1}^{(b)}(E_{1u}) = \left[\begin{matrix}\frac{\sqrt{3} i}{3} &amp; - \frac{\sqrt{3} i}{6} &amp; - \frac{\sqrt{3} i}{6} &amp; - \frac{\sqrt{3} i}{3} &amp; \frac{\sqrt{3} i}{6} &amp; \frac{\sqrt{3} i}{6}\end{matrix}\right]\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{T}_{1,2}^{(b)}(E_{1u}) = \left[\begin{matrix}0 &amp; \frac{i}{2} &amp; - \frac{i}{2} &amp; 0 &amp; - \frac{i}{2} &amp; \frac{i}{2}\end{matrix}\right]\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{2,1}^{(b)}(E_{2g}) = \left[\begin{matrix}\frac{\sqrt{3}}{3} &amp; - \frac{\sqrt{3}}{6} &amp; - \frac{\sqrt{3}}{6} &amp; \frac{\sqrt{3}}{3} &amp; - \frac{\sqrt{3}}{6} &amp; - \frac{\sqrt{3}}{6}\end{matrix}\right]\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{2,2}^{(b)}(E_{2g}) = \left[\begin{matrix}0 &amp; \frac{1}{2} &amp; - \frac{1}{2} &amp; 0 &amp; \frac{1}{2} &amp; - \frac{1}{2}\end{matrix}\right]\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{T}_{2,1}^{(b)}(E_{2g}) = \left[\begin{matrix}0 &amp; \frac{i}{2} &amp; - \frac{i}{2} &amp; 0 &amp; \frac{i}{2} &amp; - \frac{i}{2}\end{matrix}\right]\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{T}_{2,2}^{(b)}(E_{2g}) = \left[\begin{matrix}- \frac{\sqrt{3} i}{3} &amp; \frac{\sqrt{3} i}{6} &amp; \frac{\sqrt{3} i}{6} &amp; - \frac{\sqrt{3} i}{3} &amp; \frac{\sqrt{3} i}{6} &amp; \frac{\sqrt{3} i}{6}\end{matrix}\right]\]</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>== 6a@6l ==
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{0}^{(b)}(A_{1g}) = \left[\begin{matrix}\frac{\sqrt{6}}{6} &amp; \frac{\sqrt{6}}{6} &amp; \frac{\sqrt{6}}{6} &amp; \frac{\sqrt{6}}{6} &amp; \frac{\sqrt{6}}{6} &amp; \frac{\sqrt{6}}{6}\end{matrix}\right]\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{T}_{0}^{(b)}(A_{1g}) = \left[\begin{matrix}\frac{\sqrt{6} i}{6} &amp; \frac{\sqrt{6} i}{6} &amp; \frac{\sqrt{6} i}{6} &amp; \frac{\sqrt{6} i}{6} &amp; \frac{\sqrt{6} i}{6} &amp; \frac{\sqrt{6} i}{6}\end{matrix}\right]\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{3}^{(b)}(B_{1u}) = \left[\begin{matrix}\frac{\sqrt{6}}{6} &amp; \frac{\sqrt{6}}{6} &amp; \frac{\sqrt{6}}{6} &amp; - \frac{\sqrt{6}}{6} &amp; - \frac{\sqrt{6}}{6} &amp; - \frac{\sqrt{6}}{6}\end{matrix}\right]\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{T}_{3}^{(b)}(B_{1u}) = \left[\begin{matrix}\frac{\sqrt{6} i}{6} &amp; \frac{\sqrt{6} i}{6} &amp; \frac{\sqrt{6} i}{6} &amp; - \frac{\sqrt{6} i}{6} &amp; - \frac{\sqrt{6} i}{6} &amp; - \frac{\sqrt{6} i}{6}\end{matrix}\right]\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{1,1}^{(b)}(E_{1u}) = \left[\begin{matrix}0 &amp; - \frac{1}{2} &amp; \frac{1}{2} &amp; 0 &amp; \frac{1}{2} &amp; - \frac{1}{2}\end{matrix}\right]\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{1,2}^{(b)}(E_{1u}) = \left[\begin{matrix}\frac{\sqrt{3}}{3} &amp; - \frac{\sqrt{3}}{6} &amp; - \frac{\sqrt{3}}{6} &amp; - \frac{\sqrt{3}}{3} &amp; \frac{\sqrt{3}}{6} &amp; \frac{\sqrt{3}}{6}\end{matrix}\right]\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{T}_{1,1}^{(b)}(E_{1u}) = \left[\begin{matrix}0 &amp; - \frac{i}{2} &amp; \frac{i}{2} &amp; 0 &amp; \frac{i}{2} &amp; - \frac{i}{2}\end{matrix}\right]\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{T}_{1,2}^{(b)}(E_{1u}) = \left[\begin{matrix}\frac{\sqrt{3} i}{3} &amp; - \frac{\sqrt{3} i}{6} &amp; - \frac{\sqrt{3} i}{6} &amp; - \frac{\sqrt{3} i}{3} &amp; \frac{\sqrt{3} i}{6} &amp; \frac{\sqrt{3} i}{6}\end{matrix}\right]\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{2,1}^{(b)}(E_{2g}) = \left[\begin{matrix}\frac{\sqrt{3}}{3} &amp; - \frac{\sqrt{3}}{6} &amp; - \frac{\sqrt{3}}{6} &amp; \frac{\sqrt{3}}{3} &amp; - \frac{\sqrt{3}}{6} &amp; - \frac{\sqrt{3}}{6}\end{matrix}\right]\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{2,2}^{(b)}(E_{2g}) = \left[\begin{matrix}0 &amp; \frac{1}{2} &amp; - \frac{1}{2} &amp; 0 &amp; \frac{1}{2} &amp; - \frac{1}{2}\end{matrix}\right]\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{T}_{2,1}^{(b)}(E_{2g}) = \left[\begin{matrix}\frac{\sqrt{3} i}{3} &amp; - \frac{\sqrt{3} i}{6} &amp; - \frac{\sqrt{3} i}{6} &amp; \frac{\sqrt{3} i}{3} &amp; - \frac{\sqrt{3} i}{6} &amp; - \frac{\sqrt{3} i}{6}\end{matrix}\right]\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{T}_{2,2}^{(b)}(E_{2g}) = \left[\begin{matrix}0 &amp; \frac{i}{2} &amp; - \frac{i}{2} &amp; 0 &amp; \frac{i}{2} &amp; - \frac{i}{2}\end{matrix}\right]\]</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>== 6d@3f ==
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{0}^{(b)}(A_{1g}) = \left[\begin{matrix}\frac{\sqrt{6}}{6} &amp; \frac{\sqrt{6}}{6} &amp; \frac{\sqrt{6}}{6} &amp; \frac{\sqrt{6}}{6} &amp; \frac{\sqrt{6}}{6} &amp; \frac{\sqrt{6}}{6}\end{matrix}\right]\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{6}^{(b)}(A_{2g}) = \left[\begin{matrix}\frac{\sqrt{6}}{6} &amp; \frac{\sqrt{6}}{6} &amp; \frac{\sqrt{6}}{6} &amp; - \frac{\sqrt{6}}{6} &amp; - \frac{\sqrt{6}}{6} &amp; - \frac{\sqrt{6}}{6}\end{matrix}\right]\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{T}_{3}^{(b)}(B_{1u}) = \left[\begin{matrix}\frac{\sqrt{6} i}{6} &amp; \frac{\sqrt{6} i}{6} &amp; \frac{\sqrt{6} i}{6} &amp; - \frac{\sqrt{6} i}{6} &amp; - \frac{\sqrt{6} i}{6} &amp; - \frac{\sqrt{6} i}{6}\end{matrix}\right]\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{T}_{3}^{(b)}(B_{2u}) = \left[\begin{matrix}\frac{\sqrt{6} i}{6} &amp; \frac{\sqrt{6} i}{6} &amp; \frac{\sqrt{6} i}{6} &amp; \frac{\sqrt{6} i}{6} &amp; \frac{\sqrt{6} i}{6} &amp; \frac{\sqrt{6} i}{6}\end{matrix}\right]\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{T}_{1,1}^{(b)}(E_{1u},a) = \left[\begin{matrix}\frac{5 \sqrt{21} i}{42} &amp; - \frac{2 \sqrt{21} i}{21} &amp; - \frac{\sqrt{21} i}{42} &amp; - \frac{\sqrt{21} i}{42} &amp; \frac{5 \sqrt{21} i}{42} &amp; - \frac{2 \sqrt{21} i}{21}\end{matrix}\right]\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{T}_{1,2}^{(b)}(E_{1u},a) = \left[\begin{matrix}\frac{\sqrt{7} i}{14} &amp; \frac{\sqrt{7} i}{7} &amp; - \frac{3 \sqrt{7} i}{14} &amp; \frac{3 \sqrt{7} i}{14} &amp; - \frac{\sqrt{7} i}{14} &amp; - \frac{\sqrt{7} i}{7}\end{matrix}\right]\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{T}_{1,1}^{(b)}(E_{1u},b) = \left[\begin{matrix}\frac{\sqrt{7} i}{14} &amp; \frac{\sqrt{7} i}{7} &amp; - \frac{3 \sqrt{7} i}{14} &amp; - \frac{3 \sqrt{7} i}{14} &amp; \frac{\sqrt{7} i}{14} &amp; \frac{\sqrt{7} i}{7}\end{matrix}\right]\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{T}_{1,2}^{(b)}(E_{1u},b) = \left[\begin{matrix}- \frac{5 \sqrt{21} i}{42} &amp; \frac{2 \sqrt{21} i}{21} &amp; \frac{\sqrt{21} i}{42} &amp; - \frac{\sqrt{21} i}{42} &amp; \frac{5 \sqrt{21} i}{42} &amp; - \frac{2 \sqrt{21} i}{21}\end{matrix}\right]\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{2,1}^{(b)}(E_{2g}) = \left[\begin{matrix}\frac{11 \sqrt{3}}{42} &amp; \frac{\sqrt{3}}{21} &amp; - \frac{13 \sqrt{3}}{42} &amp; - \frac{13 \sqrt{3}}{42} &amp; \frac{11 \sqrt{3}}{42} &amp; \frac{\sqrt{3}}{21}\end{matrix}\right]\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{2,2}^{(b)}(E_{2g}) = \left[\begin{matrix}- \frac{5}{14} &amp; \frac{4}{7} &amp; - \frac{3}{14} &amp; \frac{3}{14} &amp; \frac{5}{14} &amp; - \frac{4}{7}\end{matrix}\right]\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{4,1}^{(b)}(E_{2g},1) = \left[\begin{matrix}\frac{5}{14} &amp; - \frac{4}{7} &amp; \frac{3}{14} &amp; \frac{3}{14} &amp; \frac{5}{14} &amp; - \frac{4}{7}\end{matrix}\right]\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{4,2}^{(b)}(E_{2g},1) = \left[\begin{matrix}\frac{11 \sqrt{3}}{42} &amp; \frac{\sqrt{3}}{21} &amp; - \frac{13 \sqrt{3}}{42} &amp; \frac{13 \sqrt{3}}{42} &amp; - \frac{11 \sqrt{3}}{42} &amp; - \frac{\sqrt{3}}{21}\end{matrix}\right]\]</div>
+</div>
+</div>
+</section>
+<section id="atomic-samb-for-bh-rank-bh-idx-kt-rank-kt-idx">
+<h2>Atomic SAMB for (bh_rank, bh_idx, kt_rank, kt_idx)<a class="headerlink" href="#atomic-samb-for-bh-rank-bh-idx-kt-rank-kt-idx" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">atomic_samb</span> <span class="o">=</span> <span class="n">mm</span><span class="p">[</span><span class="s2">&quot;atomic_samb&quot;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">am</span><span class="p">,</span> <span class="n">samb</span> <span class="ow">in</span> <span class="n">atomic_samb</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;== </span><span class="si">{</span><span class="n">to_tuple</span><span class="p">(</span><span class="n">am</span><span class="p">)</span><span class="si">}</span><span class="s2"> ==&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="p">(</span><span class="n">mat</span><span class="p">,</span><span class="n">ex</span><span class="p">)</span> <span class="ow">in</span> <span class="n">samb</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">tag</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">tag_multipole</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span><span class="n">latex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">superscript</span><span class="o">=</span><span class="s2">&quot;a&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">e</span><span class="p">,</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span><span class="n">mat</span><span class="p">):</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="n">e</span><span class="p">),</span><span class="n">sp</span><span class="o">.</span><span class="n">Matrix</span><span class="p">(</span><span class="n">m</span><span class="p">),</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">display</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>== (1, (2,), 1, (2,)) ==
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{0}^{(a)}(A_{1g}) = \left[\begin{matrix}1\end{matrix}\right]\]</div>
+</div>
+</div>
+</section>
+<section id="combined-samb-for-head-tail-wyckoff-bh-rank-bh-idx-kt-rank-kt-idx">
+<h2>Combined SAMB for (head, tail, wyckoff, (bh_rank, bh_idx, kt_rank, kt_idx))<a class="headerlink" href="#combined-samb-for-head-tail-wyckoff-bh-rank-bh-idx-kt-rank-kt-idx" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">combined_samb</span> <span class="o">=</span> <span class="n">mm</span><span class="p">[</span><span class="s2">&quot;combined_samb&quot;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">comb</span><span class="p">,</span> <span class="n">samb</span> <span class="ow">in</span> <span class="n">combined_samb</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;== </span><span class="si">{</span><span class="n">to_tuple</span><span class="p">(</span><span class="n">comb</span><span class="p">)</span><span class="si">}</span><span class="s2"> ==&quot;</span><span class="p">)</span>
+    <span class="n">clustar_str</span> <span class="o">=</span> <span class="s2">&quot;b&quot;</span> <span class="k">if</span> <span class="n">comb</span><span class="o">.</span><span class="n">wyckoff</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;@&quot;</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span> <span class="k">else</span> <span class="s2">&quot;s&quot;</span>
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="p">(</span><span class="n">cl</span><span class="p">,</span> <span class="n">ex</span><span class="p">)</span> <span class="ow">in</span> <span class="n">samb</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">tag</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">tag_multipole</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span><span class="n">latex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">t</span><span class="p">,</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span><span class="n">cl</span><span class="p">):</span>
+            <span class="n">ex</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">cg</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">c1</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="n">c2</span> <span class="ow">in</span> <span class="n">m</span><span class="p">:</span>
+                <span class="n">t1</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">tag_multipole</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span><span class="n">c1</span><span class="p">,</span><span class="n">latex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">superscript</span><span class="o">=</span><span class="s2">&quot;a&quot;</span><span class="p">)</span>
+                <span class="n">t2</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">tag_multipole</span><span class="p">(</span><span class="n">t2</span><span class="p">,</span><span class="n">c2</span><span class="p">,</span><span class="n">latex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">superscript</span><span class="o">=</span><span class="n">clustar_str</span><span class="p">)</span>
+                <span class="n">ex</span> <span class="o">+=</span> <span class="n">cg</span> <span class="o">*</span> <span class="n">sp</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span> <span class="n">commutative</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">*</span> <span class="n">sp</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="n">t2</span><span class="p">,</span> <span class="n">commutative</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="n">t</span><span class="p">),</span><span class="n">ex</span><span class="p">,</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">display</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>== (&#39;C&#39;, &#39;C&#39;, &#39;2c&#39;, (1, (2,), 1, (2,))) ==
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{0}(A_{1g}) = \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{0}^{(s)}(A_{1g})\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{3}(B_{1u}) = \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{3}^{(s)}(B_{1u})\]</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>== (&#39;C&#39;, &#39;C&#39;, &#39;3a@3f&#39;, (1, (2,), 1, (2,))) ==
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{0}(A_{1g}) = \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{0}^{(b)}(A_{1g})\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{2,1}(E_{2g}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,1}^{(b)}(E_{2g})}{2}\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{2,2}(E_{2g}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,2}^{(b)}(E_{2g})}{2}\]</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>== (&#39;C&#39;, &#39;C&#39;, &#39;6b@6l&#39;, (1, (2,), 1, (2,))) ==
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{0}(A_{1g}) = \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{0}^{(b)}(A_{1g})\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{3}(B_{1u}) = \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{3}^{(b)}(B_{1u})\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{1,1}(E_{1u}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{1,1}^{(b)}(E_{1u})}{2}\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{1,2}(E_{1u}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{1,2}^{(b)}(E_{1u})}{2}\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{2,1}(E_{2g}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,1}^{(b)}(E_{2g})}{2}\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{2,2}(E_{2g}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,2}^{(b)}(E_{2g})}{2}\]</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>== (&#39;C&#39;, &#39;C&#39;, &#39;3b@1a&#39;, (1, (2,), 1, (2,))) ==
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{0}(A_{1g}) = \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{0}^{(b)}(A_{1g})\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{2,1}(E_{2g}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,1}^{(b)}(E_{2g})}{2}\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{2,2}(E_{2g}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,2}^{(b)}(E_{2g})}{2}\]</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>== (&#39;C&#39;, &#39;C&#39;, &#39;6d@3f&#39;, (1, (2,), 1, (2,))) ==
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{0}(A_{1g}) = \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{0}^{(b)}(A_{1g})\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{6}(A_{2g}) = \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{6}^{(b)}(A_{2g})\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{2,1}(E_{2g}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,1}^{(b)}(E_{2g})}{2}\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{2,2}(E_{2g}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,2}^{(b)}(E_{2g})}{2}\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{4,1}(E_{2g},1) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{4,1}^{(b)}(E_{2g},1)}{2}\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{4,2}(E_{2g},1) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{4,2}^{(b)}(E_{2g},1)}{2}\]</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>== (&#39;C&#39;, &#39;C&#39;, &#39;6a@6l&#39;, (1, (2,), 1, (2,))) ==
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{0}(A_{1g}) = \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{0}^{(b)}(A_{1g})\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{3}(B_{1u}) = \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{3}^{(b)}(B_{1u})\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{1,1}(E_{1u}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{1,1}^{(b)}(E_{1u})}{2}\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{1,2}(E_{1u}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{1,2}^{(b)}(E_{1u})}{2}\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{2,1}(E_{2g}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,1}^{(b)}(E_{2g})}{2}\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{2,2}(E_{2g}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,2}^{(b)}(E_{2g})}{2}\]</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>== (&#39;C&#39;, &#39;C&#39;, &#39;6c@2c&#39;, (1, (2,), 1, (2,))) ==
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{0}(A_{1g}) = \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{0}^{(b)}(A_{1g})\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{3}(B_{1u}) = \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{3}^{(b)}(B_{1u})\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{1,1}(E_{1u}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{1,1}^{(b)}(E_{1u})}{2}\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{1,2}(E_{1u}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{1,2}^{(b)}(E_{1u})}{2}\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{2,1}(E_{2g}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,1}^{(b)}(E_{2g})}{2}\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{2,2}(E_{2g}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,2}^{(b)}(E_{2g})}{2}\]</div>
+</div>
+</div>
+</section>
+<section id="contents-in-mm-site-representative-or-mm-site-cell">
+<h2>contents in mm[“site”][“representative”] or mm[“site”][“cell”]<a class="headerlink" href="#contents-in-mm-site-representative-or-mm-site-cell" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mm</span><span class="o">.</span><span class="n">_write_site</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- representative site ---
+C: #1, wyckoff = 2c, symmetry = -6m2, 1st = [0.3333333333333333, 0.6666666666666666, 0.0], orbital = [[], [&#39;pz&#39;], [], []]
+--- cell site ---
+tag = C
+#1: position = [0.3333333333333333, 0.6666666666666666, 0.0], mapping = [1, 2, 3, 10, 11, 12, 16, 17, 18, 19, 20, 21], sublattice = 1, plus set = 1
+#2: position = [0.6666666666666666, 0.3333333333333333, 0.0], mapping = [4, 5, 6, 7, 8, 9, 13, 14, 15, 22, 23, 24], sublattice = 2, plus set = 1
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="contents-in-mm-bond-representative-or-mm-bond-cell">
+<h2>contents in mm[“bond”][“representative”] or mm[“bond”][“cell”]<a class="headerlink" href="#contents-in-mm-bond-representative-or-mm-bond-cell" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mm</span><span class="o">.</span><span class="n">_write_bond</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- info ---
+C-C: neighbor=[1, 2, 3, 4, 5, 6], head rank=[1], tail rank=[1]
+--- representative bond ---
+C;C_001_1: #1, 1th, directional = False, wyckoff = 3a@3f, 1st = [0.33333333, 0.66666666, 0.0]@[0.5, 0.0, 0.0], distance = 0.5773502595671213
+C;C_002_1: #2, 2th, directional = False, wyckoff = 6b@6l, 1st = [1.0, 0.0, 0.0]@[0.83333333, 0.66666666, 0.0], distance = 1.0
+C;C_003_1: #3, 3th, directional = False, wyckoff = 3b@1a, 1st = [-0.66666667, -1.33333334, 0.0]@[0.0, 0.0, 0.0], distance = 1.1547005364547505
+C;C_004_1: #4, 4th, directional = False, wyckoff = 6d@3f, 1st = [-1.66666667, -1.33333333, 0.0]@[0.5, 0.0, 0.0], distance = 1.5275252269238924
+C;C_005_1: #5, 5th, directional = True, wyckoff = 6a@6l, 1st = [1.0, 2.0, 0.0]@[0.83333333, 0.66666666, 0.0], distance = 1.7320507960218718
+C;C_006_1: #6, 6th, directional = False, wyckoff = 6c@2c, 1st = [2.0, 0.0, 0.0]@[0.3333333333333333, 0.6666666666666666, 0.0], distance = 2.0
+--- cell bond ---
+tag = C;C_001_1
+#1: bond = [0.33333333, 0.66666666, 0.0]@[0.5, 0.0, 0.0], mapping = [1, -4, -8, 11, -13, 16, 20, -23], sublattice = 1, plus set = 1, head(sublattice,plus_set) = (2, 1), tail(sublattice,plus_set) = (1, 1)
+#2: bond = [-0.66666666, -0.33333333, 0.0]@[0.0, 0.5, 0.0], mapping = [2, -5, -7, 10, -14, 17, 19, -22], sublattice = 2, plus set = 1, head(sublattice,plus_set) = (2, 1), tail(sublattice,plus_set) = (1, 1)
+#3: bond = [0.33333333, -0.33333333, 0.0]@[0.5, 0.5, 0.0], mapping = [3, -6, -9, 12, -15, 18, 21, -24], sublattice = 3, plus set = 1, head(sublattice,plus_set) = (2, 1), tail(sublattice,plus_set) = (1, 1)
+tag = C;C_002_1
+#1: bond = [1.0, 0.0, 0.0]@[0.83333333, 0.66666666, 0.0], mapping = [1, -11, 16, -20], sublattice = 1, plus set = 1, head(sublattice,plus_set) = (1, 1), tail(sublattice,plus_set) = (1, 1)
+#2: bond = [0.0, 1.0, 0.0]@[0.33333334000000003, 0.16666667000000002, 0.0], mapping = [2, -10, 17, -19], sublattice = 2, plus set = 1, head(sublattice,plus_set) = (1, 1), tail(sublattice,plus_set) = (1, 1)
+#3: bond = [-1.0, -1.0, 0.0]@[0.83333333, 0.16666667000000002, 0.0], mapping = [3, -12, 18, -21], sublattice = 3, plus set = 1, head(sublattice,plus_set) = (1, 1), tail(sublattice,plus_set) = (1, 1)
+#4: bond = [-1.0, 0.0, 0.0]@[0.16666667000000002, 0.33333334000000003, 0.0], mapping = [4, -8, 13, -23], sublattice = 4, plus set = 1, head(sublattice,plus_set) = (2, 1), tail(sublattice,plus_set) = (2, 1)
+#5: bond = [0.0, -1.0, 0.0]@[0.66666666, 0.83333333, 0.0], mapping = [5, -7, 14, -22], sublattice = 5, plus set = 1, head(sublattice,plus_set) = (2, 1), tail(sublattice,plus_set) = (2, 1)
+#6: bond = [1.0, 1.0, 0.0]@[0.16666667000000002, 0.83333333, 0.0], mapping = [6, -9, 15, -24], sublattice = 6, plus set = 1, head(sublattice,plus_set) = (2, 1), tail(sublattice,plus_set) = (2, 1)
+tag = C;C_003_1
+#1: bond = [-0.66666667, -1.33333334, 0.0]@[0.0, 0.0, 0.0], mapping = [1, -4, -8, 11, -13, 16, 20, -23], sublattice = 1, plus set = 1, head(sublattice,plus_set) = (2, 1), tail(sublattice,plus_set) = (1, 1)
+#2: bond = [1.33333334, 0.66666667, 0.0]@[0.0, 0.0, 0.0], mapping = [2, -5, -7, 10, -14, 17, 19, -22], sublattice = 2, plus set = 1, head(sublattice,plus_set) = (2, 1), tail(sublattice,plus_set) = (1, 1)
+#3: bond = [-0.66666667, 0.66666667, 0.0]@[0.0, 0.0, 0.0], mapping = [3, -6, -9, 12, -15, 18, 21, -24], sublattice = 3, plus set = 1, head(sublattice,plus_set) = (2, 1), tail(sublattice,plus_set) = (1, 1)
+tag = C;C_004_1
+#1: bond = [-1.66666667, -1.33333333, 0.0]@[0.5, 0.0, 0.0], mapping = [1, -4, -13, 16], sublattice = 1, plus set = 1, head(sublattice,plus_set) = (2, 1), tail(sublattice,plus_set) = (1, 1)
+#2: bond = [1.33333333, -0.3333333399999998, 0.0]@[0.0, 0.5, 0.0], mapping = [2, -5, -14, 17], sublattice = 2, plus set = 1, head(sublattice,plus_set) = (2, 1), tail(sublattice,plus_set) = (1, 1)
+#3: bond = [0.3333333399999998, 1.66666667, 0.0]@[0.5, 0.5, 0.0], mapping = [3, -6, -15, 18], sublattice = 3, plus set = 1, head(sublattice,plus_set) = (2, 1), tail(sublattice,plus_set) = (1, 1)
+#4: bond = [-1.33333333, -1.66666667, 0.0]@[0.0, 0.5, 0.0], mapping = [7, -10, -19, 22], sublattice = 4, plus set = 1, head(sublattice,plus_set) = (1, 1), tail(sublattice,plus_set) = (2, 1)
+#5: bond = [-0.3333333399999998, 1.33333333, 0.0]@[0.5, 0.0, 0.0], mapping = [8, -11, -20, 23], sublattice = 5, plus set = 1, head(sublattice,plus_set) = (1, 1), tail(sublattice,plus_set) = (2, 1)
+#6: bond = [1.66666667, 0.3333333399999998, 0.0]@[0.5, 0.5, 0.0], mapping = [9, -12, -21, 24], sublattice = 6, plus set = 1, head(sublattice,plus_set) = (1, 1), tail(sublattice,plus_set) = (2, 1)
+tag = C;C_005_1
+#1: bond = [1.0, 2.0, 0.0]@[0.83333333, 0.66666666, 0.0], mapping = [1, 11, 16, 20], sublattice = 1, plus set = 1, head(sublattice,plus_set) = (1, 1), tail(sublattice,plus_set) = (1, 1)
+#2: bond = [-2.0, -1.0, 0.0]@[0.33333334, 0.16666667, 0.0], mapping = [2, 10, 17, 19], sublattice = 2, plus set = 1, head(sublattice,plus_set) = (1, 1), tail(sublattice,plus_set) = (1, 1)
+#3: bond = [1.0, -1.0, 0.0]@[0.83333333, 0.16666667, 0.0], mapping = [3, 12, 18, 21], sublattice = 3, plus set = 1, head(sublattice,plus_set) = (1, 1), tail(sublattice,plus_set) = (1, 1)
+#4: bond = [-1.0, -2.0, 0.0]@[0.16666667, 0.33333334, 0.0], mapping = [4, 8, 13, 23], sublattice = 4, plus set = 1, head(sublattice,plus_set) = (2, 1), tail(sublattice,plus_set) = (2, 1)
+#5: bond = [2.0, 1.0, 0.0]@[0.66666666, 0.83333333, 0.0], mapping = [5, 7, 14, 22], sublattice = 5, plus set = 1, head(sublattice,plus_set) = (2, 1), tail(sublattice,plus_set) = (2, 1)
+#6: bond = [-1.0, 1.0, 0.0]@[0.16666667, 0.83333333, 0.0], mapping = [6, 9, 15, 24], sublattice = 6, plus set = 1, head(sublattice,plus_set) = (2, 1), tail(sublattice,plus_set) = (2, 1)
+tag = C;C_006_1
+#1: bond = [2.0, 0.0, 0.0]@[0.3333333333333333, 0.6666666666666666, 0.0], mapping = [1, -11, 16, -20], sublattice = 1, plus set = 1, head(sublattice,plus_set) = (1, 1), tail(sublattice,plus_set) = (1, 1)
+#2: bond = [0.0, 2.0, 0.0]@[0.3333333333333333, 0.6666666666666666, 0.0], mapping = [2, -10, 17, -19], sublattice = 2, plus set = 1, head(sublattice,plus_set) = (1, 1), tail(sublattice,plus_set) = (1, 1)
+#3: bond = [-2.0, -2.0, 0.0]@[0.3333333333333333, 0.6666666666666666, 0.0], mapping = [3, -12, 18, -21], sublattice = 3, plus set = 1, head(sublattice,plus_set) = (1, 1), tail(sublattice,plus_set) = (1, 1)
+#4: bond = [-2.0, 0.0, 0.0]@[0.6666666666666666, 0.3333333333333333, 0.0], mapping = [4, -8, 13, -23], sublattice = 4, plus set = 1, head(sublattice,plus_set) = (2, 1), tail(sublattice,plus_set) = (2, 1)
+#5: bond = [0.0, -2.0, 0.0]@[0.6666666666666666, 0.3333333333333333, 0.0], mapping = [5, -7, 14, -22], sublattice = 5, plus set = 1, head(sublattice,plus_set) = (2, 1), tail(sublattice,plus_set) = (2, 1)
+#6: bond = [2.0, 2.0, 0.0]@[0.6666666666666666, 0.3333333333333333, 0.0], mapping = [6, -9, 15, -24], sublattice = 6, plus set = 1, head(sublattice,plus_set) = (2, 1), tail(sublattice,plus_set) = (2, 1)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="symmetry-of-multipoles">
+<h2>Symmetry of multipoles<a class="headerlink" href="#symmetry-of-multipoles" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">ex</span> <span class="ow">in</span> <span class="n">mm</span><span class="o">.</span><span class="n">get_multipole_expression</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">Gamma</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">idx</span>
+    <span class="n">idx</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">Gamma</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;q&quot;</span><span class="p">)</span>
+    <span class="n">tag</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">tag_multipole</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">latex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">t</span><span class="p">,</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="n">ex</span><span class="p">):</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="n">t</span><span class="p">),</span><span class="n">e</span><span class="p">,</span><span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">display</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{0}(A_{1g}) = 1\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{G}_{1}(A_{2g}) = z\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{6}(A_{2g}) = \frac{\sqrt{462} x y \left(x^{2} - 3 y^{2}\right) \left(3 x^{2} - y^{2}\right)}{16}\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{3}(B_{1u}) = \frac{\sqrt{10} y \left(3 x^{2} - y^{2}\right)}{4}\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{3}(B_{2u}) = \frac{\sqrt{10} x \left(x^{2} - 3 y^{2}\right)}{4}\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{1,1}(E_{1u}) = x\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{1,2}(E_{1u}) = y\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{2,1}(E_{2g}) = \frac{\sqrt{3} \left(x - y\right) \left(x + y\right)}{2}\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{2,2}(E_{2g}) = - \sqrt{3} x y\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{4,1}(E_{2g},1) = \frac{\sqrt{35} \left(x^{2} - 2 x y - y^{2}\right) \left(x^{2} + 2 x y - y^{2}\right)}{8}\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{Q}_{4,2}(E_{2g},1) = \frac{\sqrt{35} x y \left(x - y\right) \left(x + y\right)}{2}\]</div>
+</div>
+</div>
+</section>
+<section id="combined-id-head-tail-wyckoff-bh-rank-bh-idx-kt-rank-kt-idx-neighbor-n">
+<h2>Combined ID: (head, tail, wyckoff, (bh_rank, bh_idx, kt_rank, kt_idx), neighbor, n)<a class="headerlink" href="#combined-id-head-tail-wyckoff-bh-rank-bh-idx-kt-rank-kt-idx-neighbor-n" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">z</span><span class="p">,</span> <span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="n">samb_info</span><span class="p">)</span> <span class="ow">in</span> <span class="n">mm</span><span class="p">[</span><span class="s2">&quot;combined_id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="s2">&quot;z_{&quot;</span><span class="o">+</span><span class="n">z</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="o">+</span><span class="s2">&quot;}&quot;</span><span class="p">),</span><span class="n">sp</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="n">tag</span><span class="p">),</span><span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">to_tuple</span><span class="p">(</span><span class="n">samb_info</span><span class="p">),</span> <span class="n">d</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((&#39;C&#39;, &#39;C&#39;, &#39;2c&#39;, (1, (2,), 1, (2,))), 0, -1)
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle z_{1} = \mathbb{Q}_{0}^{(c)}(A_{1g})\]</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((&#39;C&#39;, &#39;C&#39;, &#39;3a@3f&#39;, (1, (2,), 1, (2,))), 1, 1)
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle z_{2} = \mathbb{Q}_{0}^{(c)}(A_{1g})\]</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((&#39;C&#39;, &#39;C&#39;, &#39;6b@6l&#39;, (1, (2,), 1, (2,))), 2, 1)
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle z_{3} = \mathbb{Q}_{0}^{(c)}(A_{1g})\]</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((&#39;C&#39;, &#39;C&#39;, &#39;3b@1a&#39;, (1, (2,), 1, (2,))), 3, 1)
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle z_{4} = \mathbb{Q}_{0}^{(c)}(A_{1g})\]</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((&#39;C&#39;, &#39;C&#39;, &#39;6d@3f&#39;, (1, (2,), 1, (2,))), 4, 1)
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle z_{5} = \mathbb{Q}_{0}^{(c)}(A_{1g})\]</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((&#39;C&#39;, &#39;C&#39;, &#39;6a@6l&#39;, (1, (2,), 1, (2,))), 5, 1)
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle z_{6} = \mathbb{Q}_{0}^{(c)}(A_{1g})\]</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((&#39;C&#39;, &#39;C&#39;, &#39;6c@2c&#39;, (1, (2,), 1, (2,))), 6, 1)
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle z_{7} = \mathbb{Q}_{0}^{(c)}(A_{1g})\]</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((&#39;C&#39;, &#39;C&#39;, &#39;6d@3f&#39;, (1, (2,), 1, (2,))), 4, 1)
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle z_{8} = \mathbb{Q}_{6}^{(c)}(A_{2g})\]</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((&#39;C&#39;, &#39;C&#39;, &#39;3a@3f&#39;, (1, (2,), 1, (2,))), 1, 1)
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle z_{9} = \mathbb{Q}_{2,1}^{(c)}(E_{2g})\]</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((&#39;C&#39;, &#39;C&#39;, &#39;3a@3f&#39;, (1, (2,), 1, (2,))), 1, 1)
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle z_{10} = \mathbb{Q}_{2,2}^{(c)}(E_{2g})\]</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((&#39;C&#39;, &#39;C&#39;, &#39;6b@6l&#39;, (1, (2,), 1, (2,))), 2, 1)
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle z_{11} = \mathbb{Q}_{2,1}^{(c)}(E_{2g})\]</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((&#39;C&#39;, &#39;C&#39;, &#39;6b@6l&#39;, (1, (2,), 1, (2,))), 2, 1)
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle z_{12} = \mathbb{Q}_{2,2}^{(c)}(E_{2g})\]</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((&#39;C&#39;, &#39;C&#39;, &#39;3b@1a&#39;, (1, (2,), 1, (2,))), 3, 1)
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle z_{13} = \mathbb{Q}_{2,1}^{(c)}(E_{2g})\]</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((&#39;C&#39;, &#39;C&#39;, &#39;3b@1a&#39;, (1, (2,), 1, (2,))), 3, 1)
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle z_{14} = \mathbb{Q}_{2,2}^{(c)}(E_{2g})\]</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((&#39;C&#39;, &#39;C&#39;, &#39;6d@3f&#39;, (1, (2,), 1, (2,))), 4, 1)
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle z_{15} = \mathbb{Q}_{2,1}^{(c)}(E_{2g})\]</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((&#39;C&#39;, &#39;C&#39;, &#39;6d@3f&#39;, (1, (2,), 1, (2,))), 4, 1)
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle z_{16} = \mathbb{Q}_{2,2}^{(c)}(E_{2g})\]</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((&#39;C&#39;, &#39;C&#39;, &#39;6d@3f&#39;, (1, (2,), 1, (2,))), 4, 1)
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle z_{17} = \mathbb{Q}_{4,1}^{(c)}(E_{2g},1)\]</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((&#39;C&#39;, &#39;C&#39;, &#39;6d@3f&#39;, (1, (2,), 1, (2,))), 4, 1)
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle z_{18} = \mathbb{Q}_{4,2}^{(c)}(E_{2g},1)\]</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((&#39;C&#39;, &#39;C&#39;, &#39;6a@6l&#39;, (1, (2,), 1, (2,))), 5, 1)
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle z_{19} = \mathbb{Q}_{2,1}^{(c)}(E_{2g})\]</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((&#39;C&#39;, &#39;C&#39;, &#39;6a@6l&#39;, (1, (2,), 1, (2,))), 5, 1)
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle z_{20} = \mathbb{Q}_{2,2}^{(c)}(E_{2g})\]</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((&#39;C&#39;, &#39;C&#39;, &#39;6c@2c&#39;, (1, (2,), 1, (2,))), 6, 1)
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle z_{21} = \mathbb{Q}_{2,1}^{(c)}(E_{2g})\]</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((&#39;C&#39;, &#39;C&#39;, &#39;6c@2c&#39;, (1, (2,), 1, (2,))), 6, 1)
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle z_{22} = \mathbb{Q}_{2,2}^{(c)}(E_{2g})\]</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((&#39;C&#39;, &#39;C&#39;, &#39;2c&#39;, (1, (2,), 1, (2,))), 0, -1)
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle z_{23} = \mathbb{Q}_{3}^{(c)}(B_{1u})\]</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((&#39;C&#39;, &#39;C&#39;, &#39;6b@6l&#39;, (1, (2,), 1, (2,))), 2, 1)
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle z_{24} = \mathbb{Q}_{3}^{(c)}(B_{1u})\]</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((&#39;C&#39;, &#39;C&#39;, &#39;6a@6l&#39;, (1, (2,), 1, (2,))), 5, 1)
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle z_{25} = \mathbb{Q}_{3}^{(c)}(B_{1u})\]</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((&#39;C&#39;, &#39;C&#39;, &#39;6c@2c&#39;, (1, (2,), 1, (2,))), 6, 1)
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle z_{26} = \mathbb{Q}_{3}^{(c)}(B_{1u})\]</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((&#39;C&#39;, &#39;C&#39;, &#39;6b@6l&#39;, (1, (2,), 1, (2,))), 2, 1)
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle z_{27} = \mathbb{Q}_{1,1}^{(c)}(E_{1u})\]</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((&#39;C&#39;, &#39;C&#39;, &#39;6b@6l&#39;, (1, (2,), 1, (2,))), 2, 1)
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle z_{28} = \mathbb{Q}_{1,2}^{(c)}(E_{1u})\]</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((&#39;C&#39;, &#39;C&#39;, &#39;6a@6l&#39;, (1, (2,), 1, (2,))), 5, 1)
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle z_{29} = \mathbb{Q}_{1,1}^{(c)}(E_{1u})\]</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((&#39;C&#39;, &#39;C&#39;, &#39;6a@6l&#39;, (1, (2,), 1, (2,))), 5, 1)
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle z_{30} = \mathbb{Q}_{1,2}^{(c)}(E_{1u})\]</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((&#39;C&#39;, &#39;C&#39;, &#39;6c@2c&#39;, (1, (2,), 1, (2,))), 6, 1)
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle z_{31} = \mathbb{Q}_{1,1}^{(c)}(E_{1u})\]</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((&#39;C&#39;, &#39;C&#39;, &#39;6c@2c&#39;, (1, (2,), 1, (2,))), 6, 1)
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle z_{32} = \mathbb{Q}_{1,2}^{(c)}(E_{1u})\]</div>
+</div>
+</div>
+</section>
+<section id="common-samb-head-tail-wyckoff-bh-rank-bh-idx-kt-rank-kt-idx-combined-id">
+<h2>Common SAMB (head, tail, wyckoff, (bh_rank, bh_idx, kt_rank, kt_idx)): combined_id<a class="headerlink" href="#common-samb-head-tail-wyckoff-bh-rank-bh-idx-kt-rank-kt-idx-combined-id" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">info</span><span class="p">,</span> <span class="n">lst</span> <span class="ow">in</span> <span class="n">mm</span><span class="p">[</span><span class="s2">&quot;common_id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">to_tuple</span><span class="p">(</span><span class="n">info</span><span class="p">),</span> <span class="n">lst</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;C&#39;, &#39;C&#39;, &#39;2c&#39;, (1, (2,), 1, (2,))) [[&#39;z1&#39;, &#39;z23&#39;]]
+(&#39;C&#39;, &#39;C&#39;, &#39;3a@3f&#39;, (1, (2,), 1, (2,))) [[&#39;z2&#39;, &#39;z9&#39;, &#39;z10&#39;]]
+(&#39;C&#39;, &#39;C&#39;, &#39;6b@6l&#39;, (1, (2,), 1, (2,))) [[&#39;z3&#39;, &#39;z11&#39;, &#39;z12&#39;, &#39;z24&#39;, &#39;z27&#39;, &#39;z28&#39;]]
+(&#39;C&#39;, &#39;C&#39;, &#39;3b@1a&#39;, (1, (2,), 1, (2,))) [[&#39;z4&#39;, &#39;z13&#39;, &#39;z14&#39;]]
+(&#39;C&#39;, &#39;C&#39;, &#39;6d@3f&#39;, (1, (2,), 1, (2,))) [[&#39;z5&#39;, &#39;z8&#39;, &#39;z15&#39;, &#39;z16&#39;, &#39;z17&#39;, &#39;z18&#39;]]
+(&#39;C&#39;, &#39;C&#39;, &#39;6a@6l&#39;, (1, (2,), 1, (2,))) [[&#39;z6&#39;, &#39;z19&#39;, &#39;z20&#39;, &#39;z25&#39;, &#39;z29&#39;, &#39;z30&#39;]]
+(&#39;C&#39;, &#39;C&#39;, &#39;6c@2c&#39;, (1, (2,), 1, (2,))) [[&#39;z7&#39;, &#39;z21&#39;, &#39;z22&#39;, &#39;z26&#39;, &#39;z31&#39;, &#39;z32&#39;]]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./src/examples"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#site-cluster-samb">Site-cluster SAMB</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bond-cluster-samb">Bond-cluster SAMB</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#atomic-samb-for-bh-rank-bh-idx-kt-rank-kt-idx">Atomic SAMB for (bh_rank, bh_idx, kt_rank, kt_idx)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#combined-samb-for-head-tail-wyckoff-bh-rank-bh-idx-kt-rank-kt-idx">Combined SAMB for (head, tail, wyckoff, (bh_rank, bh_idx, kt_rank, kt_idx))</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contents-in-mm-site-representative-or-mm-site-cell">contents in mm[“site”][“representative”] or mm[“site”][“cell”]</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contents-in-mm-bond-representative-or-mm-bond-cell">contents in mm[“bond”][“representative”] or mm[“bond”][“cell”]</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#symmetry-of-multipoles">Symmetry of multipoles</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#combined-id-head-tail-wyckoff-bh-rank-bh-idx-kt-rank-kt-idx-neighbor-n">Combined ID: (head, tail, wyckoff, (bh_rank, bh_idx, kt_rank, kt_idx), neighbor, n)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-samb-head-tail-wyckoff-bh-rank-bh-idx-kt-rank-kt-idx-combined-id">Common SAMB (head, tail, wyckoff, (bh_rank, bh_idx, kt_rank, kt_idx)): combined_id</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Hiroaki Kusunose and Rikuto Oiwa
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2021-2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
