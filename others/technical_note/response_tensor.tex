@@ -1,0 +1,1416 @@
+\documentclass[11pt]{easymemo3}
+
+%\SectionNumber
+%\BlackAndWhite
+
+
+\begin{document}
+
+\MakeTitle{2021.11.1}{物性テンソルの多極子表現}{明大理工 楠瀬博明}
+
+\section{基本事項}
+
+\subsection{基本要素}
+
+極性および軸性のテンソルを分解するために基本となる要素はKroneckerの$\delta_{12}$とLevi-Civitaの$\epsilon^{123}$である。
+$\delta_{12}$は対称極性2階テンソル($P_2$)、$\epsilon^{123}$は完全反対称軸性3階テンソル($A_3$)である。
+また、テンソル積の組み合わせにより、$極性(P)\times 極性(P)=極性(P)$, $軸性(A)\times 軸性(A)=極性(P)$, $極性(P)\times 軸性(A)=軸性(A)$のように性質が変換される。
+
+\subsection{完全対称・反対称テンソルの縮約公式}
+
+$\delta_{12}$と$\epsilon^{123}$を組み合わた縮約公式は以下のようになる。
+対称なラベルを下添字、反対称なラベルを上添字とした。
+\begin{align}
+&
+\delta_{12}=\delta_{21}
+\\&
+\epsilon^{123}=-\epsilon^{213}
+\\&
+\delta_{12;34}
+=\delta_{13}\delta_{24}+\delta_{14}\delta_{23}
+=\delta_{21;34}=\delta_{12;43}=\delta_{34;12}
+\cr&
+\epsilon^{12;34}
+=\epsilon^{125}\epsilon^{345}
+=\delta_{13}\delta_{24}-\delta_{14}\delta_{23}
+=-\epsilon^{21;34}=-\epsilon^{12;43}=\epsilon^{34;12}
+\\&
+\delta_{12;34}^5
+=\delta_{13}\epsilon^{245}+\delta_{23}\epsilon^{145}+\delta_{14}\epsilon^{235}+\delta_{24}\epsilon^{135}
+=\delta_{21;34}^5=\delta_{12;43}^5=-\delta_{34;12}^5
+\cr&
+\gamma_{12;5}^{34}
+=\delta_{15}\epsilon^{234}+\delta_{25}\epsilon^{134}
+=\gamma_{21;5}^{34}=-\gamma_{12;5}^{43}
+\cr&
+\epsilon_5^{12;34}
+=\frac{1}{2}[\delta_{15}\epsilon^{234}-\delta_{25}\epsilon^{134}-\delta_{35}\epsilon^{124}+\delta_{45}\epsilon^{123}]
+=-\epsilon_{5}^{21;34}=-\epsilon_{5}^{12;43}=-\epsilon_{5}^{34;12}
+\\&
+\delta_{12;34;56}
+=\frac{1}{2}[\delta_{12}\delta_{34;56}+\delta_{34}\delta_{12;56}]
+=\delta_{21;34;56}=\delta_{12;43;56}=\delta_{12;34;65}=\delta_{34;12;56}
+\cr&
+\delta_{12;34;56}'
+=\frac{1}{2}[\delta_{13}\delta_{24;56}+\delta_{23}\delta_{14;56}+\delta_{14}\delta_{23;56}+\delta_{24}\delta_{13;56}]
+=\delta_{21;34;56}'=\delta_{12;43;56}'=\delta_{12;34;65}'=\delta_{34;12;56}'
+\cr&
+\delta_{12;34;56}''=\frac{1}{2}[
+\delta_{12}\delta_{34;56}-\delta_{34}\delta_{12;56}
+]
+=\delta_{21;34;56}''=\delta_{12;43;56}''=\delta_{12;34;65}''=-\delta_{34;12;56}''
+\cr&
+\gamma_{12;56}^{34}
+=\frac{1}{2}[\delta_{35}\delta_{12;46}+\delta_{36}\delta_{12;45}-\delta_{45}\delta_{12;36}-\delta_{46}\delta_{12;35}]
+=\gamma_{21;56}^{34}=\gamma_{12;65}^{34}=-\gamma_{12;56}^{43}
+\cr&
+\epsilon_{56}^{12;34}
+=\frac{1}{2}[\epsilon^{125}\epsilon^{346}+\epsilon^{126}\epsilon^{345}]
+=-\epsilon_{56}^{21;34}=-\epsilon_{56}^{12;43}=\epsilon_{56}^{34;12}=\epsilon_{65}^{12;34}
+\\&
+\delta_{12;34;56}^{7}
+=\frac{1}{2}[\epsilon^{137}\delta_{24;56} +\epsilon^{237}\delta_{14;56} +\epsilon^{247}\delta_{13;56} +\epsilon^{147}\delta_{23;56}]
+\cr&\quad
+=\delta_{21;34;56}^{7}=\delta_{12;43;56}^{7}=-\delta_{34;12;56}^{7}=\delta_{12;34;65}^{7}
+\end{align}
+
+
+\section{テンソル分解}
+
+極性($P$)テンソルの分解のみを示す。
+軸性($A$)テンソルの分解は、極性($P$)テンソルの分解式において、極性($P$)と軸性($A$)の役割を入れ替えればよい。
+
+電気的なiテンソルでは、$P$テンソルの分解式に現れる$Q$, $G$を$G$, $Q$に置き換えれば$A$テンソルの分解式が得られる。
+一方、磁気的なcテンソルでは、$P$テンソルの分解式に現れる$T$, $M$を$M$, $T$に置き換えれば$A$テンソルの分解式が得られる。
+
+ランク4までの分解式は、以下の(\ref{decomp0}), (\ref{decomp1}), (\ref{decomp2}), (\ref{decomp3}), (\ref{decomp4})である。
+物性テンソルは、($P/A$, i/c)とランクの組み合わせ、つまり$X=Q/G/T/M$とランクによって指定できる。
+また、対称テンソル、非線形テンソルなどの情報はテンソルのタイプ(s/a/sssなど)と添字の並び(例えば、入力234, 出力1なら$P_{234;1}^t$など)を指定すればよい。
+代表的な物性テンソルと分解式との関係を表\ref{tbl:phystensor}にまとめておく。
+
+\begin{table}[ht!]
+\begin{center}
+\caption{代表的な物性テンソル。(調べて埋める)
+\label{tbl:phystensor}}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{cccccc} \hline \hline
+名称 & 出力 & 入力 & ランク & タイプ & 添字の順序 \\ \hline
+伝導率 $\sigma_{12}$ & $j_1$ & $E_2$ & 2 & ($Q$,-) & $12$ \\
+\hline\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+
+\subsection{0階}
+
+極性単極子$Q$ (1成分)を用いて
+\begin{align}
+P=Q^{(1)}
+\label{decomp0}
+\end{align}
+
+\subsection{1階}
+
+極性双極子$Q_1$ (3成分)を用いて
+\begin{align}
+P_1=Q_1^{(1)}
+\label{decomp1}
+\end{align}
+
+\subsection{2階}
+
+2階テンソル$P_{12}$は$3^2=9$成分ある。
+このうち、$(1,2)$の入れ替えに対して対称な成分$P^s_{12}$は6、反対称な成分$P_{12}^a$は3である。
+したがって、極性単極子$Q$ (1成分), 軸性双極子$G_1$ (3成分)および極性四極子$Q_{12}$ (5成分)を用いて
+\begin{align}
+&
+P_{12}=P_{12}^s+P_{12}^a
+\cr&\quad
+P_{12}^s=\delta_{12}Q^{(1)}+Q_{12}^{(1)}=P_{21}^s
+\cr&\quad
+P_{12}^a=\epsilon^{123}G_3^{(1)}=-P_{21}^a
+\label{decomp2}
+\end{align}
+のように分解することができる。
+ここで、$Q_{12}$は$(1,2)$の入れ替えに対して対称(6成分)であり、対称和(トレース)は$Q_{11}=0$。
+この拘束条件(1個)により$6-1=5$成分となる。
+$(1,2)$の入れ替えについて対称なら$G_1^{(1)}=0$、反対称なら$Q^{(1)}=Q_{12}^{(1)}=0$である。
+$P_{12}$を表すための独立なパラメータ数は$Q^{(1)}$, $G_3^{(1)}$, $Q_{12}^{(1)}$の$1+3+5=9$個で、全成分数と一致している。
+拘束条件を具体的に書くと$Q_{xx}^{(1)}+Q_{yy}^{(1)}+Q_{zz}^{(1)}=0$。
+
+行列形式$(x,y,z)\times(x,y,z)$で書くと、対称成分と反対称成分は
+\begin{align}
+\hat{P}^s=
+\begin{pmatrix}
+S_{xx} & S_{xy} & S_{xz} \\
+* & S_{yy} & S_{yz} \\
+* & * & S_{zz}
+\end{pmatrix},
+\quad
+\hat{P}^a=\begin{pmatrix}
+0 & A_{xy} & -A_{zx} \\
+** & 0 & A_{yz} \\
+** & ** & 0
+\end{pmatrix}
+\end{align}
+ここで$*$は上三角の対応する要素と同じ符号、$**$は反対符号を表す。
+成分の内容は付録\ref{app1}にまとめた。
+
+
+\subsection{3階}
+
+3階テンソル$P_{12;3}$は$3^3=27$成分ある。
+このうち、$(1,2)$の入れ替えに対して対称な成分$P_{12;3}^s$は$6\times3=18$、反対称な成分$P_{12;3}^a$は$3\times3=9$である。
+$(1,2)$の入れ替えに対して対称な$\delta_{12}$, $\delta_{12:34}$, $\gamma_{12;5}^{34}$と反対称な$\epsilon^{123}$, $\epsilon^{12:34}$および軸性単極子$G$ (1成分), 極性双極子$Q_1$ (3成分), 軸性四極子$G_{12}$ (5成分), 極性八極子$Q_{123}$ (7成分)を用いて
+\begin{align}
+&
+P_{123}=P_{12;3}^s+P_{12;3}^a
+\cr&\quad
+P_{12;3}^s=\delta_{12}Q_3^{(1)}+\delta_{12:34}Q_4^{(2)}+\gamma_{12;5}^{34}G_{45}^{(1)}
++Q_{123}^{(1)}
+=P_{21;3}^s
+\cr&\quad
+P_{12;3}^a=\epsilon^{123}G^{(1)}+\epsilon^{12;34}Q_4^{(3)}
++\epsilon^{124}G_{34}^{(2)}
+=-P_{21;3}^a
+\label{decomp3}
+\end{align}
+ここで、$Q_{123}$は$(1,2,3)$の入れ替えに対して完全対称(10成分)であり、$Q_{122}=0$。
+この拘束条件(3個)により$10-3=7$成分となる。
+$(1,2)$の入れ替えについて対称であれば$G^{(1)}=Q_1^{(3)}=G_{12}^{(2)}=0$。
+反対称なら$Q_1^{(1)}=Q_1^{(2)}=G_{12}^{(1)}=Q_{123}^{(1)}=0$。
+$P_{123}$を表すための独立なパラメータ数は$G^{(1)}$, $Q_1^{(1,2,3)}$, $G_{12}^{(1,2)}$, $Q_{123}^{(1)}$の$1+3\cdot 3+2\cdot 5+7=27$個で、全成分数と一致している。
+拘束条件を具体的に書くと$Q_{xxx}^{(1)}+Q_{xyy}^{(1)}+Q_{xzz}^{(1)}=0$, $Q_{xxy}^{(1)}+Q_{yyy}^{(1)}+Q_{yzz}^{(1)}=0$, $Q_{xxz}^{(1)}+Q_{yyz}^{(1)}+Q_{zzz}^{(1)}=0$。
+
+
+Voigt表記($1=xx$, $2=yy$, $3=zz$, $4=yz$, $5=zx$, $6=xy$)を用いて、行列形式$(1,2,3,4,5,6)\times(x,y,z)$および$(4,5,6)\times(x,y,z)$で書くと、対称成分と反対称成分は
+\begin{align}
+&
+\hat{P}^s=\begin{pmatrix}
+S_{1x} & S_{1y} & S_{1z} \\
+S_{2x} & S_{2y} & S_{2z} \\
+S_{3x} & S_{3y} & S_{3z} \\
+S_{4x} & S_{4y} & S_{4z} \\
+S_{5x} & S_{5y} & S_{5z} \\
+S_{6x} & S_{6y} & S_{6z}
+\end{pmatrix},
+\quad
+\hat{P}^a=\begin{pmatrix}
+A_{4x} & A_{4y} & A_{4z} \\
+A_{5x} & A_{5y} & A_{5z} \\
+A_{6x} & A_{6y} & A_{6z}
+\end{pmatrix}
+\end{align}
+
+\subsection{4階}
+
+4階テンソル$P_{12;34}$は$3^4=81$成分ある。
+$(1,2)$, $(3,4)$, $((1,2),(3,4))$の入れ替えについて、対称・対称・対称な成分$P_{12;34}^{sss}$は21、対称・対称・反対称な成分$P_{12;34}^{ssa}$は15、反対称・反対称・対称な成分$P_{12;34}^{aas}$は6、反対称・反対称・反対称な成分$P_{12;34}^{aaa}$は3、対称・反対称な成分$P_{12;34}^{sa}$は18、反対称・対称な成分$P_{12;34}^{as}$は18である。
+それぞれ
+\begin{align}
+&
+P_{1234}=P^{sss}_{12;34}+P^{ssa}_{12;34}+P^{aas}_{12;34}+P^{aaa}_{12;34}+P^{sa}_{12;34}+P^{as}_{12;34}
+\cr&\quad
+P^{sss}_{12;34}=\delta_{12}\delta_{34}Q^{(1)}+\delta_{12;34}Q^{(2)}
++\delta_{12;34;56}Q_{56}^{(1)}+\delta_{12;34;56}'Q_{56}^{(2)}
++Q_{1234}^{(1)}
+\cr&\quad
+P^{ssa}_{12;34}=\delta_{12;34}^5G_5^{(1)}+\delta_{12;34;56}''Q_{56}^{(3)}+\delta_{12;34;56}^7G_{567}^{(1)}
+\cr&\quad
+P^{aas}_{12;34}=\epsilon^{12;34}Q^{(3)}+\epsilon_{56}^{12;34}Q_{56}^{(4)}
+\cr&\quad
+P^{aaa}_{12;34}=\epsilon_5^{12;34}G_5^{(2)}
+\cr&\quad
+P^{sa}_{12;34}=\delta_{12}\epsilon^{345}G_5^{(3)}+\gamma_{12;5}^{34}G_5^{(4)}+\gamma_{12;56}^{34}Q_{56}^{(5)}+\epsilon^{345}G_{125}^{(2)}
+\cr&\quad
+P^{as}_{12;34}=\delta_{34}\epsilon^{125}G_5^{(5)}+\gamma_{34;5}^{12}G_5^{(6)}+\gamma_{34;56}^{12}Q_{56}^{(6)}+\epsilon^{125}G_{345}^{(3)}
+\label{decomp4}
+\end{align}
+である。
+ここで、$Q_{1234}$は$(1,2,3,4)$の入れ替えに対して完全対称(15成分)であり、$Q_{1233}=0$。
+この拘束条件(6個)により$15-6=9$成分となる。
+$P_{1234}$を表すための独立なパラメータ数は$Q^{(1,2,3)}$, $G_1^{(1,2,3,4,5,6)}$, $Q_{12}^{(1,2,3,4,5,6)}$, $G_{123}^{(1,2,3)}$, $Q_{1234}^{(1)}$の$3\cdot1+6\cdot 3+6\cdot 5+3\cdot7+9=81$個で、全成分数と一致している。
+拘束条件を具体的に書くと$Q_{xxxx}^{(1)}+Q_{xxyy}^{(1)}+Q_{xxzz}^{(1)}=0$, $Q_{xxyy}^{(1)}+Q_{yyyy}^{(1)}+Q_{yyzz}^{(1)}=0$, $Q_{xxzz}^{(1)}+Q_{yyzz}^{(1)}+Q_{zzzz}^{(1)}=0$, $Q_{xxyz}^{(1)}+Q_{yyyz}^{(1)}+Q_{yzzz}^{(1)}=0$, $Q_{xxxz}^{(1)}+Q_{xyyz}^{(1)}+Q_{xzzz}^{(1)}=0$, $Q_{xxxy}^{(1)}+Q_{xyyy}^{(1)}+Q_{xyzz}^{(1)}=0$。
+
+
+$P_{1234}$のうち、$P_{12;3;4}=P_{21;3;4}$を満たすものを$P_{12;3;4}^{s}$, $P_{12;3;4}=-P_{21;3;4}$を満たすものを$P_{12;3;4}^{a}$と表すと
+\begin{align}
+&
+P_{12;3;4}^{s}=P_{12;34}^{sss}+P_{12;34}^{ssa}+P_{12;34}^{sa}
+\cr&
+P_{12;3;4}^{a}=P_{12;34}^{aas}+P_{12;34}^{aaa}+P_{12;34}^{as}
+\end{align}
+である。
+
+また、$P_{1234}$のうち$(1,2,3)$の入れ替えに関して完全対称なものを$P_{123;4}^t$と表すと
+\begin{align}
+P_{123;4}^t&
+=(\delta_{12}\delta_{34}+\delta_{12;34})Q^{(1)}
++\delta_{12;34;56}Q_{56}^{(1)}+\delta_{12;34;56}'Q_{56}^{(2)}+\delta_{12;34;56}''Q_{56}^{(3)}+\gamma_{12;56}^{34}Q_{56}^{(5)}
++Q_{1234}^{(1)}
+\cr&
+=(\delta_{12}\delta_{34}+\delta_{13}\delta_{24}+\delta_{14}\delta_{23})Q^{(1)}
++\delta_{12;34;56}Q_{56}^{(1)}+\delta_{12;34;56}'Q_{56}^{(2)}+\delta_{12;34;56}''Q_{56}^{(3)}+\gamma_{12;56}^{34}Q_{56}^{(5)}
+\cr&
++Q_{1234}^{(1)}
+\end{align}
+である。
+$(1,2,3)$に関して完全対称なものはsss, ssa, saに含まれる計54個のパラメータで表されるが、反対称成分が消える条件から$Q^{(2)}=Q^{(1)}$, $G_1^{(1)}=G_1^{(3)}=G_1^{(4)}=0$, $G_{123}^{(1)}=G_{123}^{(2)}=0$が成り立つので、独立なものはそのうちの30個である。
+
+行列形式$(1,2,3,4,5,6)\times(1,2,3,4,5,6)$で書くと、sss成分とssa成分は
+\begin{align}
+\hat{P}^{sss}=\begin{pmatrix}
+S_{11} & S_{12} & S_{13} & S_{14} & S_{15} & S_{16} \\
+*      & S_{22} & S_{23} & S_{24} & S_{25} & S_{26} \\
+*      & *      & S_{33} & S_{34} & S_{35} & S_{36} \\
+*      & *      & *      & S_{44} & S_{45} & S_{46} \\
+*      & *      & *      & *      & S_{55} & S_{56} \\
+*      & *      & *      & *      & *      & S_{66}
+\end{pmatrix},
+\quad
+\hat{P}^{ssa}=\begin{pmatrix}
+0 & \bar{S}_{12} & \bar{S}_{13} & \bar{S}_{14} & \bar{S}_{15} & \bar{S}_{16} \\
+**      & 0 & \bar{S}_{23} & \bar{S}_{24} & \bar{S}_{25} & \bar{S}_{26} \\
+**      & **      & 0 & \bar{S}_{34} & \bar{S}_{35} & \bar{S}_{36} \\
+**      & **      & **      & 0 & \bar{S}_{45} & \bar{S}_{46} \\
+**      & **      & **      & **      & 0 & \bar{S}_{56} \\
+**      & **      & **      & **      & **      & 0
+\end{pmatrix}
+\end{align}
+
+aas成分とaaa成分は、行列形式$(4,5,6)\times(4,5,6)$で書くと
+\begin{align}
+\hat{P}^{aas}=\begin{pmatrix}
+A_{44} & A_{45} & A_{46} \\
+*      & A_{55} & A_{56} \\
+*      & *      & A_{66}
+\end{pmatrix},
+\quad
+\hat{P}^{aaa}=\begin{pmatrix}
+0  & \bar{A}_{45} & \bar{A}_{46} \\
+** & 0            & \bar{A}_{56} \\
+** & **           & 0
+\end{pmatrix}
+\end{align}
+
+行列形式$(1,2,3,4,5,6)\times(4,5,6)$または$(4,5,6)\times(1,2,3,4,5,6)$で書くと、sa成分とas成分は
+\begin{align}
+\hat{P}^{sa}=\begin{pmatrix}
+M_{14} & M_{15} & M_{16} \\
+M_{24} & M_{25} & M_{26} \\
+M_{34} & M_{35} & M_{36} \\
+M_{44} & M_{45} & M_{46} \\
+M_{54} & M_{55} & M_{56} \\
+M_{64} & M_{65} & M_{66}
+\end{pmatrix},
+\quad
+\hat{P}^{as}=\begin{pmatrix}
+\bar{M}_{41} & \bar{M}_{42} & \bar{M}_{43} & \bar{M}_{44} & \bar{M}_{45} & \bar{M}_{46} \\
+\bar{M}_{51} & \bar{M}_{52} & \bar{M}_{53} & \bar{M}_{54} & \bar{M}_{55} & \bar{M}_{56} \\
+\bar{M}_{61} & \bar{M}_{62} & \bar{M}_{63} & \bar{M}_{64} & \bar{M}_{65} & \bar{M}_{66}
+\end{pmatrix}
+\end{align}
+
+同様に$s,a$は、行列形式$(1,2,3,4,5,6)\times(1,2,3,4,5,6,7,8,9)$, $(4,5,6)\times(1,2,3,4,5,6,7,8,9)$ [$7=zy,8=xz,9=yx$]で書くと
+\begin{align}
+P^s_{12;3;4}=\begin{pmatrix}
+U_{11} & U_{12} & U_{13} & U_{14} & U_{15} & U_{16} & U_{17} & U_{18} & U_{19} \\
+U_{21} & U_{22} & U_{23} & U_{24} & U_{25} & U_{26} & U_{27} & U_{28} & U_{29} \\
+U_{31} & U_{32} & U_{33} & U_{34} & U_{35} & U_{36} & U_{37} & U_{38} & U_{39} \\
+U_{41} & U_{42} & U_{43} & U_{44} & U_{45} & U_{46} & U_{47} & U_{48} & U_{49} \\
+U_{51} & U_{52} & U_{53} & U_{54} & U_{55} & U_{56} & U_{57} & U_{58} & U_{59} \\
+U_{61} & U_{62} & U_{63} & U_{64} & U_{65} & U_{66} & U_{67} & U_{68} & U_{69}
+\end{pmatrix}
+\end{align}
+\begin{align}
+P^a_{12;3;4}=\begin{pmatrix}
+V_{41} & V_{42} & V_{43} & V_{44} & V_{45} & V_{46} & V_{47} & V_{48} & V_{49} \\
+V_{51} & V_{52} & V_{53} & V_{54} & V_{55} & V_{56} & V_{57} & V_{58} & V_{59} \\
+V_{61} & V_{62} & V_{63} & V_{64} & V_{65} & V_{66} & V_{67} & V_{68} & V_{69}
+\end{pmatrix}
+\end{align}
+またtは、行列形式$(\textbf{1}=(xxx),\textbf{2}=(yyy),\textbf{3}=(zzz),\textbf{4}=(yyz),\textbf{5}=(zzx),\textbf{6}=(xxy),\textbf{7}=(yzz),\textbf{8}=(zxx),\textbf{9}=(xyy),\textbf{10}=(xyz))\times(x,y,z)$で書くと
+\begin{align}
+P^t_{123;4}=\begin{pmatrix}
+W_{\textbf{1}x} & W_{\textbf{1}y} & W_{\textbf{1}z} \\
+W_{\textbf{2}x} & W_{\textbf{2}y} & W_{\textbf{2}z} \\
+W_{\textbf{3}x} & W_{\textbf{3}y} & W_{\textbf{3}z} \\
+W_{\textbf{4}x} & W_{\textbf{4}y} & W_{\textbf{4}z} \\
+W_{\textbf{5}x} & W_{\textbf{5}y} & W_{\textbf{5}z} \\
+W_{\textbf{6}x} & W_{\textbf{6}y} & W_{\textbf{6}z} \\
+W_{\textbf{7}x} & W_{\textbf{7}y} & W_{\textbf{7}z} \\
+W_{\textbf{8}x} & W_{\textbf{8}y} & W_{\textbf{8}z} \\
+W_{\textbf{9}x} & W_{\textbf{9}y} & W_{\textbf{9}z} \\
+W_{\textbf{10}x} & W_{\textbf{10}y} & W_{\textbf{10}z}
+\end{pmatrix}
+\end{align}
+
+以上の分解に現れる独立な多極子の自由度数を表\ref{tbl:mulcomp}にまとめておく。
+
+\begin{table}[ht!]
+\begin{center}
+\caption{極性iテンソルにおける独立な自由度数。
+$c$テンソルなら$(Q,G)\to(T,M)$に置き換える。
+軸性テンソルなら$Q\leftrightarrow G$, $T\leftrightarrow M$に置き換える。
+\label{tbl:mulcomp}}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{cclcl} \hline \hline
+ランク & タイプ & 多極子 & 個数 & 対称性 \\ \hline
+0 & - & $Q^{(1)}$ & 1 & - \\ \hline
+1 & - & $Q_1^{(1)}$ & 3 & - \\ \hline
+2 & s & $Q^{(1)}$, $Q_{12}^{(1)}$ & 6 & $P_{12}^s=P_{21}^s$ \\
+  & a & $G_1^{(1)}$ & 3 & $P_{12}^a=-P_{21}^a$ \\ \hline
+3 & s & $Q_1^{(1)}$, $Q_1^{(2)}$, $G_{12}^{(1)}$, $Q_{123}^{(1)}$ & 18 & $P_{12;3}^s=P_{21;3}^s$ \\
+  & a & $G^{(1)}$, $Q_1^{(3)}$, $G_{12}^{(2)}$ & 9 & $P_{12;3}^a=-P_{21;3}^a$ \\ \hline
+4 & sss & $Q^{(1)}$, $Q^{(2)}$, $Q_{12}^{(1)}$, $Q_{12}^{(2)}$, $Q_{1234}^{(1)}$ & 21 & $P_{12;34}^{sss}=P_{21;34}^{sss}=P_{12;43}^{sss}=P_{34;12}^{sss}$ \\
+  & ssa & $G_1^{(1)}$, $Q_{12}^{(3)}$, $G_{123}^{(1)}$ & 15 & $P_{12;34}^{ssa}=P_{21;34}^{ssa}=P_{12;43}^{ssa}=-P_{34;12}^{ssa}$ \\
+  & aas & $Q^{(3)}$, $Q_{12}^{(4)}$ & 6 & $P_{12;34}^{aas}=-P_{21;34}^{aas}=-P_{12;43}^{aas}=P_{34;12}^{aas}$ \\
+  & aaa & $G_1^{(2)}$ & 3 & $P_{12;34}^{aaa}=-P_{21;34}^{aaa}=-P_{12;43}^{aaa}=-P_{34;12}^{aaa}$ \\
+  & sa & $G_1^{(3)}$, $G_1^{(4)}$, $Q_{12}^{(5)}$, $G_{123}^{(2)}$ & 18 & $P_{12;34}^{sa}=P_{21;34}^{sa}=-P_{12;43}^{sa}$ \\
+  & as & $G_1^{(5)}$, $G_1^{(6)}$, $Q_{12}^{(6)}$, $G_{123}^{(3)}$ & 18 & $P_{12;34}^{as}=-P_{21;34}^{as}=P_{12;43}^{as}$ \\
+  & s & $Q^{(1)}$, $Q^{(2)}$, $Q_{12}^{(1)}$, $Q_{12}^{(2)}$, $Q_{1234}^{(1)}$, & 54 & $P_{12;3;4}^{s}=P_{21;3;4}^{s}$ \\
+  &   & $G_1^{(1)}$, $Q_{12}^{(3)}$, $G_{123}^{(1)}$ \\
+  &   & $G_1^{(3)}$, $G_1^{(4)}$, $Q_{12}^{(5)}$, $G_{123}^{(2)}$ \\
+  & a & $Q^{(3)}$, $Q_{12}^{(4)}$, $G_1^{(2)}$, & 27 & $P_{12;3;4}^{a}=-P_{21;3;4}^{a}$ \\
+  &   & $G_1^{(5)}$, $G_1^{(6)}$, $Q_{12}^{(6)}$, $G_{123}^{(3)}$ & \\
+  & t & $Q^{(1)}$, $Q_{12}^{(1)}$, $Q_{12}^{(2)}$, $Q_{12}^{(3)}$, $Q_{12}^{(5)}$, & 30 & $P_{123;4}^{t}=P_{132;4}^{t}=P_{213;4}^{t}$ \\
+  &   & $Q_{1234}^{(1)}$ &    & $=P_{231;4}^{t}=P_{312;4}^{t}=P_{321;4}^{t}$ \\
+  \hline\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+
+\section{各成分の多極子表示}
+
+テンソルの成分はCartesian座標系で表されている。
+各(磁気)点群は、活性化した多極子の成分で特徴づけられるので、テンソル成分を極座標表示の多極子と関係づけておくと、有限なテンソル成分や成分間の関係が見通し良くなる。
+
+テンソル成分の多極子表示においては、1次元の恒等表現に落ちる多極子成分を用いるので、より高対称な点群での$E$, $T$表現の成分間の相対符号や係数は重要でない。そこで、以下の関係式(\ref{cmprel1}), (\ref{cmprel2})のように係数がシンプルになるように多極子の定義における全体の係数を調整した(表\ref{tbl:muldef})。
+また、$r^2\to0$, $(x,y,z)r^2\to0$, $(x^2,y^2,z^2,xy,xz,yz)r^2\to0$の関係が成り立つことに注意する。
+
+\subsection{立方晶系}
+Cartesian座標系と多極子の関係
+\begin{align}
+&
+x=\texttt{px},
+\quad
+y=\texttt{py},
+\quad
+z=\texttt{pz}
+\cr&
+xx=-\texttt{du} + \texttt{dv},
+\quad
+yy=-\texttt{du} - \texttt{dv},
+\quad
+zz=2 \texttt{du}
+\cr&
+yz=\texttt{dyz},
+\quad
+xz=\texttt{dxz},
+\quad
+xy=\texttt{dxy}
+\cr&
+xxx=2 \texttt{fax},
+\quad
+yyy=2 \texttt{fay},
+\quad
+zzz=2 \texttt{faz}
+\cr&
+xzz=-\texttt{fax} - \texttt{fbx},
+\quad
+xxy=-\texttt{fay} - \texttt{fby},
+\quad
+yyz=-\texttt{faz} - \texttt{fbz}
+\cr&
+xyy= -\texttt{fax} + \texttt{fbx},
+\quad
+yzz= -\texttt{fay} + \texttt{fby},
+\quad
+xxz=-\texttt{faz} + \texttt{fbz}
+\cr&
+xyz=\texttt{f3}
+\cr&
+xxxx= 2 \texttt{g} - \texttt{gu} + \texttt{gv},
+\quad
+yyyy=2 \texttt{g} - \texttt{gu} -\texttt{gv},
+\quad
+zzzz= 2 \texttt{g} + 2\texttt{gu}
+\cr&
+yyzz= - \texttt{g} - \texttt{gu} + \texttt{gv},
+\quad
+xxzz = -\texttt{g} -\texttt{gu} -\texttt{gv},
+\quad
+xxyy= -\texttt{g} + 2 \texttt{gu}
+\cr&
+xxyz= 2 \texttt{gbx},
+\quad
+xyyz= 2 \texttt{gby},
+\quad
+xyzz = 2 \texttt{gbz}
+\cr&
+yyyz= \texttt{gax} - \texttt{gbx},
+\quad
+xzzz= \texttt{gay} - \texttt{gby},
+\quad
+xxxy= \texttt{gaz} - \texttt{gbz}
+\cr&
+yzzz= -\texttt{gax} - \texttt{gbx},
+\quad
+xxxz= -\texttt{gay} - \texttt{gby},
+\quad
+xyyy= -\texttt{gaz} - \texttt{gbz}
+\label{cmprel1}
+\end{align}
+
+\subsection{六方晶系}
+Cartesian座標系と多極子の関係
+\begin{align}
+&
+xxx= -3 \texttt{f3x} + \texttt{f2},
+\quad
+xxy= -\texttt{f3y} + \texttt{f1},
+\quad
+xyy= -\texttt{f3x} - \texttt{f2},
+\quad
+yyy= -3 \texttt{f3y} - \texttt{f1}
+\cr&
+xzz= 4 \texttt{f3x},
+\quad
+yzz= 4 \texttt{f3y}
+\cr&
+xxxx= 3 \texttt{g0} + \texttt{gc} + \texttt{gv},
+\quad
+yyyy= 3 \texttt{g0} + \texttt{gc} - \texttt{gv},
+\cr&
+xxzz= -4 \texttt{g0} - \texttt{gv},
+\quad
+yyzz= -4 \texttt{g0} + \texttt{gv},
+\quad
+xxyy= \texttt{g0} - \texttt{gc}
+\cr&
+xxyz= -\texttt{gau} + \texttt{gb},
+\quad
+yyyz= -3 \texttt{gau} - \texttt{gb}
+\cr&
+xxxz= \texttt{ga} - 3 \texttt{gav}
+\quad
+xyyz= -\texttt{ga} - \texttt{gav}
+\cr&
+zzzz= 8 \texttt{g0}
+\quad
+xzzz= 4 \texttt{gav}
+\quad
+yzzz= 4 \texttt{gau}
+\label{cmprel2}
+\end{align}
+以下の成分は立方晶系と共通である。
+\begin{align}
+&
+x,
+\quad
+y,
+\quad
+z,
+\quad
+xx,
+\quad
+yy,
+\quad
+zz,
+\quad
+yz,
+\quad
+xz,
+\quad
+xy,
+\quad
+xxz,
+\quad
+yyz,
+\quad
+xyz,
+\quad
+zzz,
+\quad
+xxxy,
+\quad
+xyyy,
+\quad
+xyzz
+\end{align}
+また、六方晶系のすべての磁気点群で2次元表現に属する
+\begin{align}
+(\texttt{px},
+\texttt{py}),
+(\texttt{dv},
+\texttt{dxy}),
+(\texttt{dyz},
+\texttt{dxz}),
+(\texttt{f3},
+\texttt{fbz}),
+(\texttt{f3x},
+\texttt{f3y}),
+(\texttt{gau},
+\texttt{gav}),
+(\texttt{gc},
+\texttt{gaz}),
+(\texttt{gv},
+\texttt{gbz})
+\end{align}
+は常に不活性であり、考慮しなくてよい。
+
+
+\begin{table}[ht!]
+\begin{center}
+\caption{立方晶系(C)と六方晶系(H)の多極子の定義。略称は\cite{Hayami18,Yatsushiro22}の表記に従った。
+記号は、MultiPieに登録されている基底調和関数を表し、係数$\times$記号が略称の定義に等しい。
+*は不活性。
+$Q_{4v}^{\beta1}=Q_{4z}^\alpha$, $Q_{4u}^{\beta2}=Q_{4v}$, $Q_{4v}^{\beta2}=Q_{4z}^\beta$。
+\label{tbl:muldef}}
+\renewcommand{\arraystretch}{1.3}
+\scriptsize
+\begin{tabular}{c||c|c|c|l||c|c|c|l} \hline \hline
+$l$ & 略称 & 係数 & 記号 & 定義 & 略称 & 係数 & 記号 & 定義 \\
+& (C) & & & & (H) & & & \\ \hline
+0 & $Q$ & $1$ & \texttt{s} & $ 1 $ & 同左 & & & \\
+\hline
+1 & $Q_x$ & $1$ & \texttt{px} & $ x $ & 同左* & & & \\
+  & $Q_y$ & $1$ & \texttt{py} & $ y $ & 同左* & & & \\
+  & $Q_z$ & $1$ & \texttt{pz} & $ z $ & 同左 & & & \\
+\hline
+2 & $Q_u$ & $\frac{1}{3}$ & \texttt{du} & $\to\frac{z^2}{2}$, $-\frac{x^2+y^2}{2}$ & 同左 & & & \\
+  & $Q_v$ & $\frac{1}{\sqrt{3}}$ & \texttt{dv} & $ \frac{x^2 - y^2}{2} $ & 同左* & & & \\
+  & $Q_{yz}$ & $\frac{1}{\sqrt{3}}$ & \texttt{dyz} & $ y z $ & 同左* & & & \\
+  & $Q_{xz}$ & $\frac{1}{\sqrt{3}}$ & \texttt{dxz} & $ z x $ & 同左* & & & \\
+  & $Q_{xy}$ & $\frac{1}{\sqrt{3}}$ & \texttt{dxy} & $ x y $ & 同左* & & & \\
+ \hline
+3 & $Q_{xyz}$ & $\frac{1}{\sqrt{15}}$ & \texttt{f3} & $ x y z $ & 同左* & & & \\
+  & $Q_x^\alpha$ & $\frac{1}{5}$ & \texttt{fax} & $\to\frac{x^3}{2}$, $-\frac{x(y^2+z^2)}{2}$ &
+$Q_{3a}$ & $\frac{1}{\sqrt{10}}$ & \texttt{f2} & $ \frac{x(x^{2}-3y^{2})}{4}$ \\
+  & $Q_y^\alpha$ & $\frac{1}{5}$ & \texttt{fay} & $\to\frac{y^3}{2}$, $-\frac{y(z^2+x^2)}{2}$ &
+$Q_{3b}$ & $\frac{1}{\sqrt{10}}$ & \texttt{f1} & $ \frac{y(3x^{2}-y^{2})}{4}$ \\
+  & $Q_z^\alpha$ & $\frac{1}{5}$ & \texttt{faz} & $\to\frac{z^3}{2}$, $-\frac{z(x^2+y^2)}{2}$ & 同左 & & & \\
+  & $Q_x^\beta$ & $\frac{1}{\sqrt{15}}$ & \texttt{fbx} & $ \frac{x(y^2-z^2)}{2}$ &
+$Q_{3u}*$ & $\frac{1}{5\sqrt{6}}$ & \texttt{f3x} & $\to\frac{xz^2}{4}$, $-\frac{x(x^2+y^2)}{4}$ \\
+  & $Q_y^\beta$ & $\frac{1}{\sqrt{15}}$ & \texttt{fby} & $ \frac{y(z^2-x^2)}{2}$ &
+$Q_{3v}*$ & $\frac{1}{5\sqrt{6}}$ & \texttt{f3y} & $\to\frac{yz^2}{4}$, $-\frac{y(x^2+y^2)}{4}$ \\
+  & $Q_z^\beta$ & $\frac{1}{\sqrt{15}}$ & \texttt{fbz} & $ \frac{z(x^2-y^2)}{2}$ & 同左* & & & \\
+ \hline
+4 & $Q_4$ & $\frac{2}{5\sqrt{21}}$ & \texttt{g} & $\to\frac{x^{4}+y^4+z^4}{6}$, $-\frac{y^2z^2+z^2x^2+x^2y^2}{3}$ &
+$Q_{40}$ & $\frac{1}{35}$ & \texttt{g0} & $\to\frac{z^4}{8}$, $-\frac{(x^2+y^2)z^2}{8}$ \\
+  & $Q_{4u}$ & $\frac{2}{7\sqrt{15}}$ & \texttt{gu} & $\to\frac{2z^4-x^4-y^4}{6}$, $\frac{2x^2y^2-y^2z^2-z^2x^2}{6}$ &
+$Q_{4a}$ & $\frac{1}{\sqrt{70}}$ & \texttt{gb} & $\frac{yz(3x^{2}-y^{2})}{4}$ \\
+  & $Q_{4v}$ & $-\frac{2}{7\sqrt{5}}$ & \texttt{gv} & $\to\frac{x^4-y^4}{2}$, $-\frac{(x^2-y^2)z^2}{2}$ &
+$Q_{4u}^{\beta2}$* & 同左 & & \\
+  & $Q_{4x}^\alpha$ & $\frac{1}{\sqrt{35}}$ & \texttt{gax} & $ \frac{yz(y^2-z^2)}{2} $ &
+$Q_{4u}^\alpha$* & $-\frac{1}{7\sqrt{10}}$ & \texttt{gav} & $\to\frac{xz^3}{4}$, $-\frac{xz(x^2+y^2)}{4}$ \\
+  &$ Q_{4y}^\alpha$ & $\frac{1}{\sqrt{35}}$ & \texttt{gay} & $\frac{zx(z^2-x^2)}{2} $ &
+$Q_{4v}^\alpha$* & $\frac{1}{7\sqrt{10}}$ & \texttt{gau} & $\to\frac{yz^3}{4}$, $-\frac{yz(x^2+y^2)}{4}$ \\
+  & $Q_{4z}^\alpha$ & $\frac{1}{\sqrt{35}}$ & \texttt{gaz} & $\frac{xy(x^2-y^2)}{2} $ &
+$Q_{4v}^{\beta1}$* & 同左 & & \\
+  & $Q_{4x}^\beta$ & $\frac{1}{7\sqrt{5}}$ & \texttt{gbx} & $\to\frac{yzx^2}{2}$, $-\frac{yz(y^2+z^2)}{2}$ &
+$Q_{4u}^{\beta1}$* & $\frac{1}{\sqrt{35}}$ & \texttt{gc} & $\frac{4(x^4+y^4)-3z^4}{8}$, $-\frac{(x^2+y^2)z^2+8x^2y^2}{8}$ \\
+  & $Q_{4y}^\beta$ & $\frac{1}{7\sqrt{5}}$ & \texttt{gby} & $\to\frac{zxy^2}{2}$, $-\frac{zx(z^2+x^2)}{2}$ &
+$Q_{4b}$ & $\frac{1}{\sqrt{70}}$ & \texttt{ga} & $\frac{xz(x^{2}-3y^{2})}{4}$ \\
+  & $Q_{4z}^\beta$ & $\frac{1}{7\sqrt{5}}$ & \texttt{gbz} & $\to\frac{xyz^2}{2}$, $-\frac{xy(x^2+y^2)}{2}$ &
+$Q_{4v}^{\beta2}$* & 同左 & & \\
+ \hline \hline
+\end{tabular}
+\end{center}
+\end{table}
+
+
+\newpage
+\appendix
+
+\section{テンソル成分}\label{app1}
+
+\subsection{2階テンソル}
+\begin{align}
+&
+S_{xx}=Q^{(1)} + Q^{(1)}_{xx},
+\quad
+S_{yy}=Q^{(1)} + Q^{(1)}_{yy},
+\quad
+S_{zz}=Q^{(1)} + Q^{(1)}_{zz}
+\cr&
+S_{xy}=Q^{(1)}_{xy},
+\quad
+S_{xz}=Q^{(1)}_{xz},
+\quad
+S_{yz}=Q^{(1)}_{yz}
+\\&
+A_{yz}=G^{(1)}_{x},
+\quad
+A_{zx}=G^{(1)}_{y},
+\quad
+A_{xy}=G^{(1)}_{z}
+\end{align}
+
+\subsection{3階テンソル}
+\begin{align}
+&
+S_{1x}=Q^{(1)}_{xxx} + Q^{(1)}_{x} + 2Q^{(2)}_{x},
+\quad
+S_{1y}=2G^{(1)}_{xz} + Q^{(1)}_{xxy} + Q^{(1)}_{y},
+\quad
+S_{1z}=-2G^{(1)}_{xy} + Q^{(1)}_{xxz} + Q^{(1)}_{z}
+\cr&
+S_{2x}=-2G^{(1)}_{yz} + Q^{(1)}_{xyy} + Q^{(1)}_{x},
+\quad
+S_{2y}=Q^{(1)}_{yyy} + Q^{(1)}_{y} + 2Q^{(2)}_{y},
+\quad
+S_{2z}=2G^{(1)}_{xy} + Q^{(1)}_{yyz} + Q^{(1)}_{z}
+\cr&
+S_{3x}=2G^{(1)}_{yz} + Q^{(1)}_{xzz} + Q^{(1)}_{x},
+\quad
+S_{3y}=-2G^{(1)}_{xz} + Q^{(1)}_{yzz} + Q^{(1)}_{y},
+\quad
+S_{3z}=Q^{(1)}_{zzz} + Q^{(1)}_{z} + 2Q^{(2)}_{z}
+\cr&
+S_{4x}=G^{(1)}_{yy} - G^{(1)}_{zz} + Q^{(1)}_{xyz},
+\quad
+S_{4y}=-G^{(1)}_{xy} + Q^{(1)}_{yyz} + Q^{(2)}_{z},
+\quad
+S_{4z}=G^{(1)}_{xz} + Q^{(1)}_{yzz} + Q^{(2)}_{y}
+\cr&
+S_{5x}=G^{(1)}_{xy} + Q^{(1)}_{xxz} + Q^{(2)}_{z},
+\quad
+S_{5y}=-G^{(1)}_{xx} + G^{(1)}_{zz} + Q^{(1)}_{xyz},
+\quad
+S_{5z}=-G^{(1)}_{yz} + Q^{(1)}_{xzz} + Q^{(2)}_{x}
+\cr&
+S_{6x}=-G^{(1)}_{xz} + Q^{(1)}_{xxy} + Q^{(2)}_{y},
+\quad
+S_{6y}=G^{(1)}_{yz} + Q^{(1)}_{xyy} + Q^{(2)}_{x},
+\quad
+S_{6z}=G^{(1)}_{xx} - G^{(1)}_{yy} + Q^{(1)}_{xyz}
+\\&
+A_{4x}=G^{(1)} + G^{(2)}_{xx},
+\quad
+A_{4y}=G^{(2)}_{xy} + Q^{(3)}_{z},
+\quad
+A_{4z}=G^{(2)}_{xz} - Q^{(3)}_{y}
+\cr&
+A_{5x}=G^{(2)}_{xy} - Q^{(3)}_{z},
+\quad
+A_{5y}=G^{(1)} + G^{(2)}_{yy},
+\quad
+A_{5z}=G^{(2)}_{yz} + Q^{(3)}_{x}
+\cr&
+A_{6x}=G^{(2)}_{xz} + Q^{(3)}_{y},
+\quad
+A_{6y}=G^{(2)}_{yz} - Q^{(3)}_{x},
+\quad
+A_{6z}=G^{(1)} + G^{(2)}_{zz}
+\end{align}
+
+\subsection{4階テンソル}
+\begin{align}
+&
+S_{11}=Q^{(1)} + Q^{(1)}_{xxxx} + 2Q^{(1)}_{xx} + 2Q^{(2)} + 4Q^{(2)}_{xx},
+\quad
+S_{12}=Q^{(1)} + Q^{(1)}_{xxyy} + Q^{(1)}_{xx} + Q^{(1)}_{yy}
+\cr&
+S_{13}=Q^{(1)} + Q^{(1)}_{xxzz} + Q^{(1)}_{xx} + Q^{(1)}_{zz},
+\quad
+S_{14}=Q^{(1)}_{xxyz} + Q^{(1)}_{yz}
+\cr&
+S_{15}=Q^{(1)}_{xxxz} + Q^{(1)}_{xz} + 2Q^{(2)}_{xz},
+\quad
+S_{16}=Q^{(1)}_{xxxy} + Q^{(1)}_{xy} + 2Q^{(2)}_{xy}
+\cr&
+S_{22}=Q^{(1)} + Q^{(1)}_{yyyy} + 2Q^{(1)}_{yy} + 2Q^{(2)} + 4Q^{(2)}_{yy},
+\quad
+S_{23}=Q^{(1)} + Q^{(1)}_{yyzz} + Q^{(1)}_{yy} + Q^{(1)}_{zz}
+\cr&
+S_{24}=Q^{(1)}_{yyyz} + Q^{(1)}_{yz} + 2Q^{(2)}_{yz},
+\quad
+S_{25}=Q^{(1)}_{xyyz} + Q^{(1)}_{xz},
+\quad
+S_{26}=Q^{(1)}_{xyyy} + Q^{(1)}_{xy} + 2Q^{(2)}_{xy}
+\cr&
+S_{33}=Q^{(1)} + Q^{(1)}_{zzzz} + 2Q^{(1)}_{zz} + 2Q^{(2)} + 4Q^{(2)}_{zz},
+\quad
+S_{34}=Q^{(1)}_{yzzz} + Q^{(1)}_{yz} + 2Q^{(2)}_{yz}
+\cr&
+S_{35}=Q^{(1)}_{xzzz} + Q^{(1)}_{xz} + 2Q^{(2)}_{xz},
+\quad
+S_{36}=Q^{(1)}_{xyzz} + Q^{(1)}_{xy}
+\cr&
+S_{44}=Q^{(1)}_{eyes} + Q^{(2)} + Q^{(2)}_{yy} + Q^{(2)}_{zz},
+\quad
+S_{45}=Q^{(1)}_{xyzz} + Q^{(2)}_{xy},
+\quad
+S_{46}=Q^{(1)}_{xyyz} + Q^{(2)}_{xz}
+\cr&
+S_{55}=Q^{(1)}_{xxzz} + Q^{(2)} + Q^{(2)}_{xx} + Q^{(2)}_{zz},
+\quad
+S_{56}=Q^{(1)}_{xxyz} + Q^{(2)}_{yz}
+\cr&
+S_{66}=Q^{(1)}_{xxyy} + Q^{(2)} + Q^{(2)}_{xx} + Q^{(2)}_{yy}
+\\&
+\bar{S}_{12}=4G^{(1)}_{xyz} - Q^{(3)}_{xx} + Q^{(3)}_{yy},
+\quad
+\bar{S}_{13}=-4G^{(1)}_{xyz} - Q^{(3)}_{xx} + Q^{(3)}_{zz},
+\quad
+\bar{S}_{14}=-2G^{(1)}_{xyy} + 2G^{(1)}_{xzz} + Q^{(3)}_{yz}
+\cr&
+\bar{S}_{15}=-2G^{(1)}_{xxy} - 2G^{(1)}_{y} + Q^{(3)}_{xz},
+\quad
+\bar{S}_{16}=2G^{(1)}_{xxz} + 2G^{(1)}_{z} + Q^{(3)}_{xy}
+\cr&
+\bar{S}_{23}=4G^{(1)}_{xyz} - Q^{(3)}_{yy} + Q^{(3)}_{zz},
+\quad
+\bar{S}_{24}=2G^{(1)}_{xyy} + 2G^{(1)}_{x} + Q^{(3)}_{yz}
+\cr&
+\bar{S}_{25}=2G^{(1)}_{xxy} - 2G^{(1)}_{yzz} + Q^{(3)}_{xz},
+\quad
+\bar{S}_{26}=-2G^{(1)}_{yyz} - 2G^{(1)}_{z} + Q^{(3)}_{xy}
+\cr&
+\bar{S}_{34}=-2G^{(1)}_{xzz} - 2G^{(1)}_{x} + Q^{(3)}_{yz},
+\quad
+\bar{S}_{35}=2G^{(1)}_{yzz} + 2G^{(1)}_{y} + Q^{(3)}_{xz},
+\quad
+\bar{S}_{36}=-2G^{(1)}_{xxz} + 2G^{(1)}_{yyz} + Q^{(3)}_{xy}
+\cr&
+\bar{S}_{45}=G^{(1)}_{xxz} + G^{(1)}_{yyz} - G^{(1)}_{zzz} - G^{(1)}_{z},
+\quad
+\bar{S}_{46}=-G^{(1)}_{xxy} + G^{(1)}_{yyy} - G^{(1)}_{yzz} + G^{(1)}_{y}
+\cr&
+\bar{S}_{56}=-G^{(1)}_{xxx} + G^{(1)}_{xyy} + G^{(1)}_{xzz} - G^{(1)}_{x}
+\\&
+A_{44}=Q^{(3)} + 2Q^{(4)}_{xx},
+\quad
+A_{45}=2Q^{(4)}_{xy},
+\quad
+A_{46}=2Q^{(4)}_{xz}
+\cr&
+A_{55}=Q^{(3)} + 2Q^{(4)}_{yy},
+\quad
+A_{56}=2Q^{(4)}_{yz}
+\cr&
+A_{66}=Q^{(3)} + 2Q^{(4)}_{zz}
+\\&
+\bar{A}_{45}=-G^{(2)}_{z},
+\quad
+\bar{A}_{46}=G^{(2)}_{y},
+\quad
+\bar{A}_{56}=-G^{(2)}_{x}
+\\&
+M_{14}=G^{(2)}_{xxx} + G^{(3)}_{x} + 2G^{(4)}_{x},
+\quad
+M_{15}=G^{(2)}_{xxy} + G^{(3)}_{y} + 2Q^{(5)}_{xz},
+\quad
+M_{16}=G^{(2)}_{xxz} + G^{(3)}_{z} - 2Q^{(5)}_{xy}
+\cr&
+M_{24}=G^{(2)}_{xyy} + G^{(3)}_{x} - 2Q^{(5)}_{yz},
+\quad
+M_{25}=G^{(2)}_{yyy} + G^{(3)}_{y} + 2G^{(4)}_{y},
+\quad
+M_{26}=G^{(2)}_{yyz} + G^{(3)}_{z} + 2Q^{(5)}_{xy}
+\cr&
+M_{34}=G^{(2)}_{xzz} + G^{(3)}_{x} + 2Q^{(5)}_{yz},
+\quad
+M_{35}=G^{(2)}_{yzz} + G^{(3)}_{y} - 2Q^{(5)}_{xz},
+\quad
+M_{36}=G^{(2)}_{zzz} + G^{(3)}_{z} + 2G^{(4)}_{z}
+\cr&
+M_{44}=G^{(2)}_{xyz} + Q^{(5)}_{yy} - Q^{(5)}_{zz},
+\quad
+M_{45}=G^{(2)}_{yyz} + G^{(4)}_{z} - Q^{(5)}_{xy},
+\quad
+M_{46}=G^{(2)}_{yzz} + G^{(4)}_{y} + Q^{(5)}_{xz}
+\cr&
+M_{54}=G^{(2)}_{xxz} + G^{(4)}_{z} + Q^{(5)}_{xy},
+\quad
+M_{55}=G^{(2)}_{xyz} - Q^{(5)}_{xx} + Q^{(5)}_{zz},
+\quad
+M_{56}=G^{(2)}_{xzz} + G^{(4)}_{x} - Q^{(5)}_{yz}
+\cr&
+M_{64}=G^{(2)}_{xxy} + G^{(4)}_{y} - Q^{(5)}_{xz},
+\quad
+M_{65}=G^{(2)}_{xyy} + G^{(4)}_{x} + Q^{(5)}_{yz},
+\quad
+M_{66}=G^{(2)}_{xyz} + Q^{(5)}_{xx} - Q^{(5)}_{yy}
+\\&
+\bar{M}_{41}=G^{(3)}_{xxx} + G^{(5)}_{x} + 2G^{(6)}_{x},
+\quad
+\bar{M}_{42}=G^{(3)}_{xyy} + G^{(5)}_{x} - 2Q^{(6)}_{yz},
+\quad
+\bar{M}_{43}=G^{(3)}_{xzz} + G^{(5)}_{x} + 2Q^{(6)}_{yz}
+\cr&
+\bar{M}_{44}=G^{(3)}_{xyz} + Q^{(6)}_{yy} - Q^{(6)}_{zz},
+\quad
+\bar{M}_{45}=G^{(3)}_{xxz} + G^{(6)}_{z} + Q^{(6)}_{xy},
+\quad
+\bar{M}_{46}=G^{(3)}_{xxy} + G^{(6)}_{y} - Q^{(6)}_{xz}
+\cr&
+\bar{M}_{51}=G^{(3)}_{xxy} + G^{(5)}_{y} + 2Q^{(6)}_{xz},
+\quad
+\bar{M}_{52}=G^{(3)}_{yyy} + G^{(5)}_{y} + 2G^{(6)}_{y},
+\quad
+\bar{M}_{53}=G^{(3)}_{yzz} + G^{(5)}_{y} - 2Q^{(6)}_{xz}
+\cr&
+\bar{M}_{54}=G^{(3)}_{yyz} + G^{(6)}_{z} - Q^{(6)}_{xy},
+\quad
+\bar{M}_{55}=G^{(3)}_{xyz} - Q^{(6)}_{xx} + Q^{(6)}_{zz},
+\quad
+\bar{M}_{56}=G^{(3)}_{xyy} + G^{(6)}_{x} + Q^{(6)}_{yz}
+\cr&
+\bar{M}_{61}=G^{(3)}_{xxz} + G^{(5)}_{z} - 2Q^{(6)}_{xy},
+\quad
+\bar{M}_{62}=G^{(3)}_{yyz} + G^{(5)}_{z} + 2Q^{(6)}_{xy},
+\quad
+\bar{M}_{63}=G^{(3)}_{zzz} + G^{(5)}_{z} + 2G^{(6)}_{z}
+\cr&
+\bar{M}_{64}=G^{(3)}_{yzz} + G^{(6)}_{y} + Q^{(6)}_{xz},
+\quad
+\bar{M}_{65}=G^{(3)}_{xzz} + G^{(6)}_{x} - Q^{(6)}_{yz},
+\quad
+\bar{M}_{66}=G^{(3)}_{xyz} + Q^{(6)}_{xx} - Q^{(6)}_{yy}
+\\&
+W_{\textbf{1}x}=3Q^{(1)} + Q^{(1)}_{xxxx} + 2Q^{(1)}_{xx} + 4Q^{(2)}_{xx}
+\cr&
+W_{\textbf{1}y}=Q^{(1)}_{xxxy} + Q^{(1)}_{xy} + 2Q^{(2)}_{xy} + Q^{(3)}_{xy} - 2Q^{(5)}_{xy}
+\cr&
+W_{\textbf{1}z}=Q^{(1)}_{xxxz} + Q^{(1)}_{xz} + 2Q^{(2)}_{xz} + Q^{(3)}_{xz} - 2Q^{(5)}_{xz}
+\cr&
+W_{\textbf{2}x}=Q^{(1)}_{xyyy} + Q^{(1)}_{xy} + 2Q^{(2)}_{xy} + Q^{(3)}_{xy} - 2Q^{(5)}_{xy}
+\cr&
+W_{\textbf{2}y}=3Q^{(1)} + Q^{(1)}_{yyyy} + 2Q^{(1)}_{yy} + 4Q^{(2)}_{yy}
+\cr&
+W_{\textbf{2}z}=Q^{(1)}_{yyyz} + Q^{(1)}_{yz} + 2Q^{(2)}_{yz} + Q^{(3)}_{yz} - 2Q^{(5)}_{yz}
+\cr&
+W_{\textbf{3}x}=Q^{(1)}_{xzzz} + Q^{(1)}_{xz} + 2Q^{(2)}_{xz} + Q^{(3)}_{xz} - 2Q^{(5)}_{xz}
+\cr&
+W_{\textbf{3}y}=Q^{(1)}_{yzzz} + Q^{(1)}_{yz} + 2Q^{(2)}_{yz} + Q^{(3)}_{yz} - 2Q^{(5)}_{yz}
+\cr&
+W_{\textbf{3}z}=3Q^{(1)} + Q^{(1)}_{zzzz} + 2Q^{(1)}_{zz} + 4Q^{(2)}_{zz}
+\cr&
+W_{\textbf{4}x}=Q^{(1)}_{xyyz} + Q^{(1)}_{xz} + Q^{(3)}_{xz}
+\cr&
+W_{\textbf{4}y}=Q^{(1)}_{yyyz} + Q^{(1)}_{yz} + 2Q^{(2)}_{yz} + Q^{(3)}_{yz} + 2Q^{(5)}_{yz}
+\cr&
+W_{\textbf{4}z}=Q^{(1)} + Q^{(1)}_{yyzz} + Q^{(1)}_{yy} + Q^{(1)}_{zz} - Q^{(3)}_{yy} + Q^{(3)}_{zz}
+\cr&
+W_{\textbf{5}x}=Q^{(1)} + Q^{(1)}_{xxzz} + Q^{(1)}_{xx} + Q^{(1)}_{zz} + Q^{(3)}_{xx} - Q^{(3)}_{zz}
+\cr&
+W_{\textbf{5}y}=Q^{(1)}_{xyzz} + Q^{(1)}_{xy} + Q^{(3)}_{xy}
+\cr&
+W_{\textbf{5}z}=Q^{(1)}_{xzzz} + Q^{(1)}_{xz} + 2Q^{(2)}_{xz} + Q^{(3)}_{xz} + 2Q^{(5)}_{xz}
+\cr&
+W_{\textbf{6}x}=Q^{(1)}_{xxxy} + Q^{(1)}_{xy} + 2Q^{(2)}_{xy} + Q^{(3)}_{xy} + 2Q^{(5)}_{xy}
+\cr&
+W_{\textbf{6}y}=Q^{(1)} + Q^{(1)}_{xxyy} + Q^{(1)}_{xx} + Q^{(1)}_{yy} - Q^{(3)}_{xx} + Q^{(3)}_{yy}
+\cr&
+W_{\textbf{6}z}=Q^{(1)}_{xxyz} + Q^{(1)}_{yz} + Q^{(3)}_{yz}
+\cr&
+W_{\textbf{7}x}=Q^{(1)}_{xyzz} + Q^{(2)}_{xy} - Q^{(5)}_{xy}
+\cr&
+W_{\textbf{7}y}=Q^{(1)} + Q^{(1)}_{yyzz} + Q^{(2)}_{yy} + Q^{(2)}_{zz} - Q^{(5)}_{yy} + Q^{(5)}_{zz}
+\cr&
+W_{\textbf{7}z}=Q^{(1)}_{yzzz} + Q^{(1)}_{yz} + 2Q^{(2)}_{yz} - Q^{(3)}_{yz}
+\cr&
+W_{\textbf{8}x}=Q^{(1)}_{xxxz} + Q^{(1)}_{xz} + 2Q^{(2)}_{xz} - Q^{(3)}_{xz}
+\cr&
+W_{\textbf{8}y}=Q^{(1)}_{xxyz} + Q^{(2)}_{yz} - Q^{(5)}_{yz}
+\cr&
+W_{\textbf{8}z}=Q^{(1)} + Q^{(1)}_{xxzz} + Q^{(2)}_{xx} + Q^{(2)}_{zz} + Q^{(5)}_{xx} - Q^{(5)}_{zz}
+\cr&
+W_{\textbf{9}x}=Q^{(1)} + Q^{(1)}_{xxyy} + Q^{(2)}_{xx} + Q^{(2)}_{yy} - Q^{(5)}_{xx} + Q^{(5)}_{yy}
+\cr&
+W_{\textbf{9}y}=Q^{(1)}_{xyyy} + Q^{(1)}_{xy} + 2Q^{(2)}_{xy} - Q^{(3)}_{xy}
+\cr&
+W_{\textbf{9}z}=Q^{(1)}_{xyyz} + Q^{(2)}_{xz} - Q^{(5)}_{xz}
+\cr&
+W_{\textbf{10}x}=Q^{(1)}_{xxyz} + Q^{(2)}_{yz} + Q^{(5)}_{yz}
+\cr&
+W_{\textbf{10}y}=Q^{(1)}_{xyyz} + Q^{(2)}_{xz} + Q^{(5)}_{xz}
+\cr&
+W_{\textbf{10}z}=Q^{(1)}_{xyzz} + Q^{(1)}_{xy} - Q^{(3)}_{xy}
+\\&
+U_{11}=Q^{(1)} + Q^{(1)}_{xxxx} + 2Q^{(1)}_{xx} + 2Q^{(2)} + 4Q^{(2)}_{xx}
+\cr&
+U_{12}=4G^{(1)}_{xyz} + Q^{(1)} + Q^{(1)}_{xxyy} + Q^{(1)}_{xx} + Q^{(1)}_{yy} - Q^{(3)}_{xx} + Q^{(3)}_{yy}
+\cr&
+U_{13}=-4G^{(1)}_{xyz} + Q^{(1)} + Q^{(1)}_{xxzz} + Q^{(1)}_{xx} + Q^{(1)}_{zz} - Q^{(3)}_{xx} + Q^{(3)}_{zz}
+\cr&
+U_{14}=-2G^{(1)}_{xyy} + 2G^{(1)}_{xzz} + G^{(2)}_{xxx} + G^{(3)}_{x} + 2G^{(4)}_{x} + Q^{(1)}_{xxyz} + Q^{(1)}_{yz} + Q^{(3)}_{yz}
+\cr&
+U_{15}=-2G^{(1)}_{xxy} - 2G^{(1)}_{y} + G^{(2)}_{xxy} + G^{(3)}_{y} + Q^{(1)}_{xxxz} + Q^{(1)}_{xz} + 2Q^{(2)}_{xz} + Q^{(3)}_{xz} + 2Q^{(5)}_{xz}
+\cr&
+U_{16}=2G^{(1)}_{xxz} + 2G^{(1)}_{z} + G^{(2)}_{xxz} + G^{(3)}_{z} + Q^{(1)}_{xxxy} + Q^{(1)}_{xy} + 2Q^{(2)}_{xy} + Q^{(3)}_{xy} - 2Q^{(5)}_{xy}
+\cr&
+U_{17}=-2G^{(1)}_{xyy} + 2G^{(1)}_{xzz} - G^{(2)}_{xxx} - G^{(3)}_{x} - 2G^{(4)}_{x} + Q^{(1)}_{xxyz} + Q^{(1)}_{yz} + Q^{(3)}_{yz}
+\cr&
+U_{18}=-2G^{(1)}_{xxy} - 2G^{(1)}_{y} - G^{(2)}_{xxy} - G^{(3)}_{y} + Q^{(1)}_{xxxz} + Q^{(1)}_{xz} + 2Q^{(2)}_{xz} + Q^{(3)}_{xz} - 2Q^{(5)}_{xz}
+\cr&
+U_{19}=2G^{(1)}_{xxz} + 2G^{(1)}_{z} - G^{(2)}_{xxz} - G^{(3)}_{z} + Q^{(1)}_{xxxy} + Q^{(1)}_{xy} + 2Q^{(2)}_{xy} + Q^{(3)}_{xy} + 2Q^{(5)}_{xy}
+\cr&
+U_{21}=-4G^{(1)}_{xyz} + Q^{(1)} + Q^{(1)}_{xxyy} + Q^{(1)}_{xx} + Q^{(1)}_{yy} + Q^{(3)}_{xx} - Q^{(3)}_{yy}
+\cr&
+U_{22}=Q^{(1)} + Q^{(1)}_{yyyy} + 2Q^{(1)}_{yy} + 2Q^{(2)} + 4Q^{(2)}_{yy}
+\cr&
+U_{23}=4G^{(1)}_{xyz} + Q^{(1)} + Q^{(1)}_{yyzz} + Q^{(1)}_{yy} + Q^{(1)}_{zz} - Q^{(3)}_{yy} + Q^{(3)}_{zz}
+\cr&
+U_{24}=2G^{(1)}_{xyy} + 2G^{(1)}_{x} + G^{(2)}_{xyy} + G^{(3)}_{x} + Q^{(1)}_{yyyz} + Q^{(1)}_{yz} + 2Q^{(2)}_{yz} + Q^{(3)}_{yz} - 2Q^{(5)}_{yz}
+\cr&
+U_{25}=2G^{(1)}_{xxy} - 2G^{(1)}_{yzz} + G^{(2)}_{yyy} + G^{(3)}_{y} + 2G^{(4)}_{y} + Q^{(1)}_{xyyz} + Q^{(1)}_{xz} + Q^{(3)}_{xz}
+\cr&
+U_{26}=-2G^{(1)}_{yyz} - 2G^{(1)}_{z} + G^{(2)}_{yyz} + G^{(3)}_{z} + Q^{(1)}_{xyyy} + Q^{(1)}_{xy} + 2Q^{(2)}_{xy} + Q^{(3)}_{xy} + 2Q^{(5)}_{xy}
+\cr&
+U_{27}=2G^{(1)}_{xyy} + 2G^{(1)}_{x} - G^{(2)}_{xyy} - G^{(3)}_{x} + Q^{(1)}_{yyyz} + Q^{(1)}_{yz} + 2Q^{(2)}_{yz} + Q^{(3)}_{yz} + 2Q^{(5)}_{yz}
+\cr&
+U_{28}=2G^{(1)}_{xxy} - 2G^{(1)}_{yzz} - G^{(2)}_{yyy} - G^{(3)}_{y} - 2G^{(4)}_{y} + Q^{(1)}_{xyyz} + Q^{(1)}_{xz} + Q^{(3)}_{xz}
+\cr&
+U_{29}=-2G^{(1)}_{yyz} - 2G^{(1)}_{z} - G^{(2)}_{yyz} - G^{(3)}_{z} + Q^{(1)}_{xyyy} + Q^{(1)}_{xy} + 2Q^{(2)}_{xy} + Q^{(3)}_{xy} - 2Q^{(5)}_{xy}
+\cr&
+U_{31}=4G^{(1)}_{xyz} + Q^{(1)} + Q^{(1)}_{xxzz} + Q^{(1)}_{xx} + Q^{(1)}_{zz} + Q^{(3)}_{xx} - Q^{(3)}_{zz}
+\cr&
+U_{32}=-4G^{(1)}_{xyz} + Q^{(1)} + Q^{(1)}_{yyzz} + Q^{(1)}_{yy} + Q^{(1)}_{zz} + Q^{(3)}_{yy} - Q^{(3)}_{zz}
+\cr&
+U_{33}=Q^{(1)} + Q^{(1)}_{zzzz} + 2Q^{(1)}_{zz} + 2Q^{(2)} + 4Q^{(2)}_{zz}
+\cr&
+U_{34}=-2G^{(1)}_{xzz} - 2G^{(1)}_{x} + G^{(2)}_{xzz} + G^{(3)}_{x} + Q^{(1)}_{yzzz} + Q^{(1)}_{yz} + 2Q^{(2)}_{yz} + Q^{(3)}_{yz} + 2Q^{(5)}_{yz}
+\cr&
+U_{35}=2G^{(1)}_{yzz} + 2G^{(1)}_{y} + G^{(2)}_{yzz} + G^{(3)}_{y} + Q^{(1)}_{xzzz} + Q^{(1)}_{xz} + 2Q^{(2)}_{xz} + Q^{(3)}_{xz} - 2Q^{(5)}_{xz}
+\cr&
+U_{36}=-2G^{(1)}_{xxz} + 2G^{(1)}_{yyz} + G^{(2)}_{zzz} + G^{(3)}_{z} + 2G^{(4)}_{z} + Q^{(1)}_{xyzz} + Q^{(1)}_{xy} + Q^{(3)}_{xy}
+\cr&
+U_{37}=-2G^{(1)}_{xzz} - 2G^{(1)}_{x} - G^{(2)}_{xzz} - G^{(3)}_{x} + Q^{(1)}_{yzzz} + Q^{(1)}_{yz} + 2Q^{(2)}_{yz} + Q^{(3)}_{yz} - 2Q^{(5)}_{yz}
+\cr&
+U_{38}=2G^{(1)}_{yzz} + 2G^{(1)}_{y} - G^{(2)}_{yzz} - G^{(3)}_{y} + Q^{(1)}_{xzzz} + Q^{(1)}_{xz} + 2Q^{(2)}_{xz} + Q^{(3)}_{xz} + 2Q^{(5)}_{xz}
+\cr&
+U_{39}=-2G^{(1)}_{xxz} + 2G^{(1)}_{yyz} - G^{(2)}_{zzz} - G^{(3)}_{z} - 2G^{(4)}_{z} + Q^{(1)}_{xyzz} + Q^{(1)}_{xy} + Q^{(3)}_{xy}
+\cr&
+U_{41}=2G^{(1)}_{xyy} - 2G^{(1)}_{xzz} + Q^{(1)}_{xxyz} + Q^{(1)}_{yz} - Q^{(3)}_{yz}
+\cr&
+U_{42}=-2G^{(1)}_{xyy} - 2G^{(1)}_{x} + Q^{(1)}_{yyyz} + Q^{(1)}_{yz} + 2Q^{(2)}_{yz} - Q^{(3)}_{yz}
+\cr&
+U_{43}=2G^{(1)}_{xzz} + 2G^{(1)}_{x} + Q^{(1)}_{yzzz} + Q^{(1)}_{yz} + 2Q^{(2)}_{yz} - Q^{(3)}_{yz}
+\cr&
+U_{44}=G^{(2)}_{xyz} + Q^{(1)}_{yyzz} + Q^{(2)} + Q^{(2)}_{yy} + Q^{(2)}_{zz} + Q^{(5)}_{yy} - Q^{(5)}_{zz}
+\cr&
+U_{45}=G^{(1)}_{xxz} + G^{(1)}_{yyz} - G^{(1)}_{zzz} - G^{(1)}_{z} + G^{(2)}_{yyz} + G^{(4)}_{z} + Q^{(1)}_{xyzz} + Q^{(2)}_{xy} - Q^{(5)}_{xy}
+\cr&
+U_{46}=-G^{(1)}_{xxy} + G^{(1)}_{yyy} - G^{(1)}_{yzz} + G^{(1)}_{y} + G^{(2)}_{yzz} + G^{(4)}_{y} + Q^{(1)}_{xyyz} + Q^{(2)}_{xz} + Q^{(5)}_{xz}
+\cr&
+U_{47}=-G^{(2)}_{xyz} + Q^{(1)}_{yyzz} + Q^{(2)} + Q^{(2)}_{yy} + Q^{(2)}_{zz} - Q^{(5)}_{yy} + Q^{(5)}_{zz}
+\cr&
+U_{48}=G^{(1)}_{xxz} + G^{(1)}_{yyz} - G^{(1)}_{zzz} - G^{(1)}_{z} - G^{(2)}_{yyz} - G^{(4)}_{z} + Q^{(1)}_{xyzz} + Q^{(2)}_{xy} + Q^{(5)}_{xy}
+\cr&
+U_{49}=-G^{(1)}_{xxy} + G^{(1)}_{yyy} - G^{(1)}_{yzz} + G^{(1)}_{y} - G^{(2)}_{yzz} - G^{(4)}_{y} + Q^{(1)}_{xyyz} + Q^{(2)}_{xz} - Q^{(5)}_{xz}
+\cr&
+U_{51}=2G^{(1)}_{xxy} + 2G^{(1)}_{y} + Q^{(1)}_{xxxz} + Q^{(1)}_{xz} + 2Q^{(2)}_{xz} - Q^{(3)}_{xz}
+\cr&
+U_{52}=-2G^{(1)}_{xxy} + 2G^{(1)}_{yzz} + Q^{(1)}_{xyyz} + Q^{(1)}_{xz} - Q^{(3)}_{xz}
+\cr&
+U_{53}=-2G^{(1)}_{yzz} - 2G^{(1)}_{y} + Q^{(1)}_{xzzz} + Q^{(1)}_{xz} + 2Q^{(2)}_{xz} - Q^{(3)}_{xz}
+\cr&
+U_{54}=-G^{(1)}_{xxz} - G^{(1)}_{yyz} + G^{(1)}_{zzz} + G^{(1)}_{z} + G^{(2)}_{xxz} + G^{(4)}_{z} + Q^{(1)}_{xyzz} + Q^{(2)}_{xy} + Q^{(5)}_{xy}
+\cr&
+U_{55}=G^{(2)}_{xyz} + Q^{(1)}_{xxzz} + Q^{(2)} + Q^{(2)}_{xx} + Q^{(2)}_{zz} - Q^{(5)}_{xx} + Q^{(5)}_{zz}
+\cr&
+U_{56}=-G^{(1)}_{xxx} + G^{(1)}_{xyy} + G^{(1)}_{xzz} - G^{(1)}_{x} + G^{(2)}_{xzz} + G^{(4)}_{x} + Q^{(1)}_{xxyz} + Q^{(2)}_{yz} - Q^{(5)}_{yz}
+\cr&
+U_{57}=-G^{(1)}_{xxz} - G^{(1)}_{yyz} + G^{(1)}_{zzz} + G^{(1)}_{z} - G^{(2)}_{xxz} - G^{(4)}_{z} + Q^{(1)}_{xyzz} + Q^{(2)}_{xy} - Q^{(5)}_{xy}
+\cr&
+U_{58}=-G^{(2)}_{xyz} + Q^{(1)}_{xxzz} + Q^{(2)} + Q^{(2)}_{xx} + Q^{(2)}_{zz} + Q^{(5)}_{xx} - Q^{(5)}_{zz}
+\cr&
+U_{59}=-G^{(1)}_{xxx} + G^{(1)}_{xyy} + G^{(1)}_{xzz} - G^{(1)}_{x} - G^{(2)}_{xzz} - G^{(4)}_{x} + Q^{(1)}_{xxyz} + Q^{(2)}_{yz} + Q^{(5)}_{yz}
+\cr&
+U_{61}=-2G^{(1)}_{xxz} - 2G^{(1)}_{z} + Q^{(1)}_{xxxy} + Q^{(1)}_{xy} + 2Q^{(2)}_{xy} - Q^{(3)}_{xy}
+\cr&
+U_{62}=2G^{(1)}_{yyz} + 2G^{(1)}_{z} + Q^{(1)}_{xyyy} + Q^{(1)}_{xy} + 2Q^{(2)}_{xy} - Q^{(3)}_{xy}
+\cr&
+U_{63}=2G^{(1)}_{xxz} - 2G^{(1)}_{yyz} + Q^{(1)}_{xyzz} + Q^{(1)}_{xy} - Q^{(3)}_{xy}
+\cr&
+U_{64}=G^{(1)}_{xxy} - G^{(1)}_{yyy} + G^{(1)}_{yzz} - G^{(1)}_{y} + G^{(2)}_{xxy} + G^{(4)}_{y} + Q^{(1)}_{xyyz} + Q^{(2)}_{xz} - Q^{(5)}_{xz}
+\cr&
+U_{65}=G^{(1)}_{xxx} - G^{(1)}_{xyy} - G^{(1)}_{xzz} + G^{(1)}_{x} + G^{(2)}_{xyy} + G^{(4)}_{x} + Q^{(1)}_{xxyz} + Q^{(2)}_{yz} + Q^{(5)}_{yz}
+\cr&
+U_{66}=G^{(2)}_{xyz} + Q^{(1)}_{xxyy} + Q^{(2)} + Q^{(2)}_{xx} + Q^{(2)}_{yy} + Q^{(5)}_{xx} - Q^{(5)}_{yy}
+\cr&
+U_{67}=G^{(1)}_{xxy} - G^{(1)}_{yyy} + G^{(1)}_{yzz} - G^{(1)}_{y} - G^{(2)}_{xxy} - G^{(4)}_{y} + Q^{(1)}_{xyyz} + Q^{(2)}_{xz} + Q^{(5)}_{xz}
+\cr&
+U_{68}=G^{(1)}_{xxx} - G^{(1)}_{xyy} - G^{(1)}_{xzz} + G^{(1)}_{x} - G^{(2)}_{xyy} - G^{(4)}_{x} + Q^{(1)}_{xxyz} + Q^{(2)}_{yz} - Q^{(5)}_{yz}
+\cr&
+U_{69}=-G^{(2)}_{xyz} + Q^{(1)}_{xxyy} + Q^{(2)} + Q^{(2)}_{xx} + Q^{(2)}_{yy} - Q^{(5)}_{xx} + Q^{(5)}_{yy}
+\\&
+V_{41}=G^{(3)}_{xxx} + G^{(5)}_{x} + 2G^{(6)}_{x}
+\cr&
+V_{42}=G^{(3)}_{xyy} + G^{(5)}_{x} - 2Q^{(6)}_{yz}
+\cr&
+V_{43}=G^{(3)}_{xzz} + G^{(5)}_{x} + 2Q^{(6)}_{yz}
+\cr&
+V_{44}=G^{(3)}_{xyz} + Q^{(3)} + 2Q^{(4)}_{xx} + Q^{(6)}_{yy} - Q^{(6)}_{zz}
+\cr&
+V_{45}=-G^{(2)}_{z} + G^{(3)}_{xxz} + G^{(6)}_{z} + 2Q^{(4)}_{xy} + Q^{(6)}_{xy}
+\cr&
+V_{46}=G^{(2)}_{y} + G^{(3)}_{xxy} + G^{(6)}_{y} + 2Q^{(4)}_{xz} - Q^{(6)}_{xz}
+\cr&
+V_{47}=G^{(3)}_{xyz} - Q^{(3)} - 2Q^{(4)}_{xx} + Q^{(6)}_{yy} - Q^{(6)}_{zz}
+\cr&
+V_{48}=G^{(2)}_{z} + G^{(3)}_{xxz} + G^{(6)}_{z} - 2Q^{(4)}_{xy} + Q^{(6)}_{xy}
+\cr&
+V_{49}=-G^{(2)}_{y} + G^{(3)}_{xxy} + G^{(6)}_{y} - 2Q^{(4)}_{xz} - Q^{(6)}_{xz}
+\cr&
+V_{51}=G^{(3)}_{xxy} + G^{(5)}_{y} + 2Q^{(6)}_{xz}
+\cr&
+V_{52}=G^{(3)}_{yyy} + G^{(5)}_{y} + 2G^{(6)}_{y}
+\cr&
+V_{53}=G^{(3)}_{yzz} + G^{(5)}_{y} - 2Q^{(6)}_{xz}
+\cr&
+V_{54}=G^{(2)}_{z} + G^{(3)}_{yyz} + G^{(6)}_{z} + 2Q^{(4)}_{xy} - Q^{(6)}_{xy}
+\cr&
+V_{55}=G^{(3)}_{xyz} + Q^{(3)} + 2Q^{(4)}_{yy} - Q^{(6)}_{xx} + Q^{(6)}_{zz}
+\cr&
+V_{56}=-G^{(2)}_{x} + G^{(3)}_{xyy} + G^{(6)}_{x} + 2Q^{(4)}_{yz} + Q^{(6)}_{yz}
+\cr&
+V_{57}=-G^{(2)}_{z} + G^{(3)}_{yyz} + G^{(6)}_{z} - 2Q^{(4)}_{xy} - Q^{(6)}_{xy}
+\cr&
+V_{58}=G^{(3)}_{xyz} - Q^{(3)} - 2Q^{(4)}_{yy} - Q^{(6)}_{xx} + Q^{(6)}_{zz}
+\cr&
+V_{59}=G^{(2)}_{x} + G^{(3)}_{xyy} + G^{(6)}_{x} - 2Q^{(4)}_{yz} + Q^{(6)}_{yz}
+\cr&
+V_{61}=G^{(3)}_{xxz} + G^{(5)}_{z} - 2Q^{(6)}_{xy}
+\cr&
+V_{62}=G^{(3)}_{yyz} + G^{(5)}_{z} + 2Q^{(6)}_{xy}
+\cr&
+V_{63}=G^{(3)}_{zzz} + G^{(5)}_{z} + 2G^{(6)}_{z}
+\cr&
+V_{64}=-G^{(2)}_{y} + G^{(3)}_{yzz} + G^{(6)}_{y} + 2Q^{(4)}_{xz} + Q^{(6)}_{xz}
+\cr&
+V_{65}=G^{(2)}_{x} + G^{(3)}_{xzz} + G^{(6)}_{x} + 2Q^{(4)}_{yz} - Q^{(6)}_{yz}
+\cr&
+V_{66}=G^{(3)}_{xyz} + Q^{(3)} + 2Q^{(4)}_{zz} + Q^{(6)}_{xx} - Q^{(6)}_{yy}
+\cr&
+V_{67}=G^{(2)}_{y} + G^{(3)}_{yzz} + G^{(6)}_{y} - 2Q^{(4)}_{xz} + Q^{(6)}_{xz}
+\cr&
+V_{68}=-G^{(2)}_{x} + G^{(3)}_{xzz} + G^{(6)}_{x} - 2Q^{(4)}_{yz} - Q^{(6)}_{yz}
+\cr&
+V_{69}=G^{(3)}_{xyz} - Q^{(3)} - 2Q^{(4)}_{zz} + Q^{(6)}_{xx} - Q^{(6)}_{yy}
+\end{align}
+
+
+\begin{thebibliography}{99}%
+\bibitem{Hayami18} S. Hayami, M. Yatsushiro, Y. Yanagi, and H. Kusunose, Phys. Rev. B \textbf{98} 165110 (2018). 表XV, XVI
+\bibitem{Yatsushiro22} M. Yatsushiro, \textit{Classification of Multipole in Magnetic Point Group and Exploration of Augmented Odd-Parity Multipole Physics}, Ph.D thesis (Hokkaido University, 2022.3).
+\end{thebibliography}
+
+\end{document}
+
+
+
+\section{前のやつ(自動生成した上記のものをチェック)}
+
+\subsection{2階テンソル}
+\begin{align}
+&
+S_{xx}=Q^{(1)}+Q_{xx}^{(1)},
+\quad
+S_{yy}=Q^{(1)}+Q_{yy}^{(1)},
+\quad
+S_{zz}=Q^{(1)}+Q_{zz}^{(1)}
+\cr&
+S_{xy}= Q_{xy}^{(1)},
+\quad
+S_{xz}=Q_{xz}^{(1)},
+\quad
+S_{yz}=Q_{yz}^{(1)}
+\\&
+A_{yz}=G_x^{(1)},
+\quad
+A_{zx}=G_y^{(1)},
+\quad
+A_{xy}=G_z^{(1)}
+\end{align}
+
+\subsection{3階テンソル}
+\begin{align}
+&
+S_{1x} = Q_{x}^{(1)} + 2Q_{x}^{(2)} + Q_{xxx}^{(1)},
+\quad
+S_{1y} = Q_{y}^{(1)} + 2G_{xz}^{(1)} + Q_{xxy}^{(1)},
+\quad
+S_{1z} = Q_{z}^{(1)} - 2G_{xy}^{(1)} + Q_{xxz}^{(1)},
+\cr&
+S_{2x} = Q_{x}^{(1)} - 2G_{yz}^{(1)} + Q_{xyy}^{(1)},
+\quad
+S_{2y} = Q_{y}^{(1)} + 2Q_{y}^{(2)} + Q_{yyy}^{(1)},
+\quad
+S_{2z} = Q_{z}^{(1)} + 2G_{xy}^{(1)} + Q_{yyz}^{(1)},
+\cr&
+S_{3x} = Q_{x}^{(1)} + 2G_{yz}^{(1)} + Q_{xzz}^{(1)},
+\quad
+S_{3y} = Q_{y}^{(1)} - 2G_{xz}^{(1)} + Q_{yzz}^{(1)},
+\quad
+S_{3z} = Q_{z}^{(1)} + 2Q_{z}^{(2)} + Q_{zzz}^{(1)},
+\cr&
+S_{4x} = G_{yy}^{(1)} - G_{zz}^{(1)} + Q_{xyz}^{(1)},
+\quad
+S_{4y} = Q_{z}^{(2)} - G_{xy}^{(1)} + Q_{yyz}^{(1)},
+\quad
+S_{4z} = Q_{y}^{(2)}  + G_{xz}^{(1)} + Q_{yzz}^{(1)},
+\cr&
+S_{5x} = Q_{z}^{(2)} + G_{xy}^{(1)} + Q_{xxz}^{(1)},
+\quad
+S_{5y} = - G_{xx}^{(1)} + G_{zz}^{(1)} + Q_{xyz}^{(1)},
+\quad
+S_{5z} = Q_{x}^{(2)} - G_{yz}^{(1)} + Q_{xzz}^{(1)},
+\cr&
+S_{6x} = Q_{y}^{(2)} - G_{xz}^{(1)} + Q_{xxy}^{(1)},
+\quad
+S_{6y} = Q_{x}^{(2)} + G_{yz}^{(1)} + Q_{xyy}^{(1)},
+\quad
+S_{6z} = G_{xx}^{(1)} - G_{yy}^{(1)} + Q_{xyz}^{(1)}
+\\&
+A_{4x} = G^{(1)} + G_{xx}^{(2)},
+\quad
+A_{4y} = Q_{z}^{(3)} + G_{xy}^{(2)},
+\quad
+A_{4z} = - Q_{y}^{(3)} + G_{xz}^{(2)},
+\cr&
+A_{5x} = - Q_{z}^{(3)} + G_{xy}^{(2)},
+\quad
+A_{5y} = G^{(1)} + G_{yy}^{(2)},
+\quad
+A_{5z} = Q_{x}^{(3)} + G_{yz}^{(2)},
+\cr&
+A_{6x} = Q_{y}^{(3)} + G_{xz}^{(2)},
+\quad
+A_{6y} = - Q_{x}^{(3)} + G_{yz}^{(2)},
+\quad
+A_{6z} = G^{(1)} + G_{zz}^{(2)}
+\end{align}
+
+\subsection{4階テンソル}
+\begin{align}
+&
+S_{11} = Q^{(1)} + 2Q^{(2)} + 2Q^{(1)}_{xx} + 4Q^{(2)}_{xx} + Q^{(1)}_{xxxx},
+\quad
+S_{12} = Q^{(1)} + Q^{(1)}_{xx} + Q^{(1)}_{yy} + Q^{(1)}_{xxyy}
+\cr&
+S_{13} = Q^{(1)} + Q^{(1)}_{xx} + Q^{(1)}_{zz} + Q^{(1)}_{xxzz},
+\quad
+S_{14} = Q^{(1)}_{yz} + Q^{(1)}_{xxyz}
+\cr&
+S_{15} = Q^{(1)}_{xz} + 2Q^{(2)}_{xz} + Q^{(1)}_{xxxz},
+\quad
+S_{16} = Q^{(1)}_{xy} + 2Q^{(2)}_{xy} + Q^{(1)}_{xxxy}
+\cr&
+S_{22} = Q^{(1)} + 2Q^{(2)} + 2Q^{(1)}_{yy} + 4Q^{(2)}_{yy} + Q^{(1)}_{yyyy},
+\quad
+S_{23} = Q^{(1)} + Q^{(1)}_{yy} + Q^{(1)}_{zz} + Q^{(1)}_{yyzz}
+\cr&
+S_{24} = Q^{(1)}_{yz} + 2Q^{(2)}_{yz} + Q^{(1)}_{yyyz},
+\quad
+S_{25} = Q^{(1)}_{xz} + Q^{(1)}_{xyyz},
+\quad
+S_{26} = Q^{(1)}_{xy} + 2Q^{(2)}_{xy} + Q^{(1)}_{xyyy}
+\cr&
+S_{33} = Q^{(1)} + 2Q^{(2)} + 2Q^{(1)}_{zz} + 4Q^{(2)}_{zz} + Q^{(1)}_{zzzz},
+\quad
+S_{34} = Q^{(1)}_{yz} + 2Q^{(2)}_{yz} + Q^{(1)}_{yzzz}
+\cr&
+S_{35} = Q^{(1)}_{xz} + 2Q^{(2)}_{xz} + Q^{(1)}_{xzzz},
+\quad
+S_{36} = Q^{(1)}_{xy} + Q^{(1)}_{xyzz}
+\cr&
+S_{44} = Q^{(2)} + Q^{(2)}_{yy} + Q^{(2)}_{zz} + Q^{(1)}_{yyzz},
+\quad
+S_{45} = Q^{(2)}_{xy} + Q^{(1)}_{xyzz},
+\quad
+S_{46} = Q^{(2)}_{xz} + Q^{(1)}_{xyyz}
+\cr&
+S_{55} = Q^{(2)} + Q^{(2)}_{xx} + Q^{(2)}_{zz} + Q^{(1)}_{xxzz},
+\quad
+S_{56} = Q^{(2)}_{yz} + Q^{(1)}_{xxyz}
+\cr&
+S_{66} = Q^{(2)} + Q^{(2)}_{xx} + Q^{(2)}_{yy} + Q^{(1)}_{xxyy}
+\\&
+\bar{S}_{12} = - Q^{(3)}_{xx} + Q^{(3)}_{yy} + 4G^{(1)}_{xyz},
+\quad
+\bar{S}_{13} = - Q^{(3)}_{xx} + Q^{(3)}_{zz} - 4G^{(1)}_{xyz}
+\cr&
+\bar{S}_{14} = Q^{(3)}_{yz} -2G^{(1)}_{xyy} + 2G^{(1)}_{xzz},
+\quad
+\bar{S}_{15} = - 2G^{(1)}_{y} + Q^{(3)}_{xz} -2G^{(1)}_{xxy}
+\cr&
+\bar{S}_{16} = 2G^{(1)}_{z} + Q^{(3)}_{xy} + 2G^{(1)}_{xxz}
+\cr&
+\bar{S}_{23} = - Q^{(3)}_{yy} + Q^{(3)}_{zz} + 4G^{(1)}_{xyz},
+\quad
+\bar{S}_{24} = 2G^{(1)}_{x} + Q^{(3)}_{yz} + 2G^{(1)}_{xyy}
+\cr&
+\bar{S}_{25} = Q^{(3)}_{xz} + 2G^{(1)}_{xxy} - 2G^{(1)}_{yzz},
+\quad
+\bar{S}_{26} = -2G^{(1)}_{z} + Q^{(3)}_{xy} -2G^{(1)}_{yyz}
+\cr&
+\bar{S}_{34} = -2G^{(1)}_{x} + Q^{(3)}_{yz} -2G^{(1)}_{xzz},
+\quad
+\bar{S}_{35} = 2G^{(1)}_{y} + Q^{(3)}_{xz} + 2G^{(1)}_{yzz}
+\cr&
+\bar{S}_{36} = Q^{(3)}_{xy} -2G^{(1)}_{xxz} + 2G^{(1)}_{yyz}
+\cr&
+\bar{S}_{45} = -G^{(1)}_{z} + G^{(1)}_{xxz} + G^{(1)}_{yyz} - G^{(1)}_{zzz},
+\quad
+\bar{S}_{46} = G^{(1)}_{y} -G^{(1)}_{xxy} + G^{(1)}_{yyy} - G^{(1)}_{yzz}
+\cr&
+\bar{S}_{56} = -G^{(1)}_{x} -G^{(1)}_{xxx} + G^{(1)}_{xyy} + G^{(1)}_{xzz}
+\\&
+A_{44} = Q^{(3)} + Q^{(4)}_{xx},
+\quad
+A_{45} = Q^{(4)}_{xy},
+\quad
+A_{46} = Q^{(4)}_{xz}
+\cr&
+A_{55} = Q^{(3)} + Q^{(4)}_{yy},
+\quad
+A_{56} = Q^{(4)}_{yz}
+\cr&
+A_{66} = Q^{(3)} + Q^{(4)}_{zz}
+\\&
+\bar{A}_{45} = -G^{(2)}_{z},
+\quad
+\bar{A}_{46} = G^{(2)}_{y},
+\quad
+\bar{A}_{56} = -G^{(2)}_{x}
+\\&
+M_{14} = G^{(3)}_{x} + 2G^{(4)}_{x} + G^{(3)}_{xxx},
+\quad
+M_{15} = G^{(3)}_{y} + 2Q^{(6)}_{xz} + G^{(3)}_{xxy},
+\quad
+M_{16} = G^{(3)}_{z} - 2Q^{(6)}_{xy} + G^{(3)}_{xxz}
+\cr&
+M_{24} = G^{(3)}_{x} - 2Q^{(6)}_{yz} + G^{(3)}_{xyy},
+\quad
+M_{25} = G^{(3)}_{y} + 2G^{(4)}_{y} + G^{(3)}_{yyy},
+\quad
+M_{26} = G^{(3)}_{z} + 2Q^{(6)}_{xy} + G^{(3)}_{yyz}
+\cr&
+M_{34} = G^{(3)}_{x} + 2Q^{(6)}_{yz} + G^{(3)}_{xzz},
+\quad
+M_{35} = G^{(3)}_{y} - 2Q^{(6)}_{xz} + G^{(3)}_{yzz},
+\quad
+M_{36} = G^{(3)}_{z} + 2G^{(4)}_{z} + G^{(3)}_{zzz}
+\cr&
+M_{44} = Q^{(6)}_{yy} - Q^{(6)}_{zz} + G^{(3)}_{xyz},
+\quad
+M_{45} = G^{(4)}_{z} - Q^{(6)}_{xy} + G^{(3)}_{yyz},
+\quad
+M_{46} = G^{(4)}_{y} + Q^{(6)}_{xz} + G^{(3)}_{yzz}
+\cr&
+M_{54} = G^{(4)}_{z} + Q^{(6)}_{xy} + G^{(3)}_{xxz},
+\quad
+M_{55} = - Q^{(6)}_{xx} + Q^{(6)}_{zz} + G^{(3)}_{xyz},
+\quad
+M_{56} = G^{(4)}_{x} - Q^{(6)}_{yz} + G^{(3)}_{xzz}
+\cr&
+M_{64} = G^{(4)}_{y} - Q^{(6)}_{xz} + G^{(3)}_{xxy},
+\quad
+M_{65} = G^{(4)}_{x} + Q^{(6)}_{yz} + G^{(3)}_{xyy},
+\quad
+M_{66} = Q^{(6)}_{xx} - Q^{(6)}_{yy} + G^{(3)}_{xyz}
+\\&
+\bar{M}_{41} = G^{(5)}_{x} + 2G^{(6)}_{x} + G^{(3)}_{xxx},
+\quad
+\bar{M}_{42} = G^{(5)}_{x} - 2Q^{(6)}_{yz} + G^{(3)}_{xyy},
+\quad
+\bar{M}_{43} = G^{(5)}_{x} + 2Q^{(6)}_{yz} + G^{(3)}_{xzz}
+\cr&
+\bar{M}_{44} = Q^{(6)}_{yy} - Q^{(6)}_{zz} + G^{(3)}_{xyz},
+\quad
+\bar{M}_{45} = G^{(6)}_{z} + Q^{(6)}_{xy} + G^{(3)}_{xxz},
+\quad
+\bar{M}_{46} = G^{(6)}_{y} - Q^{(6)}_{xz} + G^{(3)}_{xxy}
+\cr&
+\bar{M}_{51} = G^{(5)}_{y} + 2Q^{(6)}_{xz} + G^{(3)}_{xxy},
+\quad
+\bar{M}_{52} = G^{(5)}_{y} + 2G^{(6)}_{y} + G^{(3)}_{yyy},
+\quad
+\bar{M}_{53} = G^{(5)}_{y} - 2Q^{(6)}_{xz} + G^{(3)}_{yzz}
+\cr&
+\bar{M}_{54} = G^{(6)}_{z} - Q^{(6)}_{xy} + G^{(3)}_{yyz},
+\quad
+\bar{M}_{55} = - Q^{(6)}_{xx} + Q^{(6)}_{zz} + G^{(3)}_{xyz},
+\quad
+\bar{M}_{56} = G^{(6)}_{x} + Q^{(6)}_{yz} + G^{(3)}_{xyy}
+\cr&
+\bar{M}_{61} = G^{(5)}_{z} - 2Q^{(6)}_{xy} + G^{(3)}_{xxz},
+\quad
+\bar{M}_{62} = G^{(5)}_{z} + 2Q^{(6)}_{xy} + G^{(3)}_{yyz},
+\quad
+\bar{M}_{63} = G^{(5)}_{z} + 2G^{(6)}_{z} + G^{(3)}_{zzz}
+\cr&
+\bar{M}_{64} = G^{(6)}_{y} + Q^{(6)}_{xz} + G^{(3)}_{yzz},
+\quad
+\bar{M}_{65} = G^{(6)}_{x} - Q^{(6)}_{yz} + G^{(3)}_{xzz},
+\quad
+\bar{M}_{66} = Q^{(6)}_{xx} - Q^{(6)}_{yy} + G^{(3)}_{xyz}
+\\&
+W_{\textbf{1}x}=3Q^{(1)} + Q^{(1)}_{xxxx} + 2Q^{(1)}_{xx} + 4Q^{(2)}_{xx}
+\cr&
+W_{\textbf{1}y}=Q^{(1)}_{xxxy} + Q^{(1)}_{xy} + 2Q^{(2)}_{xy} + Q^{(3)}_{xy} - 2Q^{(5)}_{xy}
+\cr&
+W_{\textbf{1}z}=Q^{(1)}_{xxxz} + Q^{(1)}_{xz} + 2Q^{(2)}_{xz} + Q^{(3)}_{xz} - 2Q^{(5)}_{xz}
+\cr&
+W_{\textbf{2}x}=Q^{(1)}_{xyyy} + Q^{(1)}_{xy} + 2Q^{(2)}_{xy} + Q^{(3)}_{xy} - 2Q^{(5)}_{xy}
+\cr&
+W_{\textbf{2}y}=3Q^{(1)} + Q^{(1)}_{yyyy} + 2Q^{(1)}_{yy} + 4Q^{(2)}_{yy}
+\cr&
+W_{\textbf{2}z}=Q^{(1)}_{yyyz} + Q^{(1)}_{yz} + 2Q^{(2)}_{yz} + Q^{(3)}_{yz} - 2Q^{(5)}_{yz}
+\cr&
+W_{\textbf{3}x}=Q^{(1)}_{xzzz} + Q^{(1)}_{xz} + 2Q^{(2)}_{xz} + Q^{(3)}_{xz} - 2Q^{(5)}_{xz}
+\cr&
+W_{\textbf{3}y}=Q^{(1)}_{yzzz} + Q^{(1)}_{yz} + 2Q^{(2)}_{yz} + Q^{(3)}_{yz} - 2Q^{(5)}_{yz}
+\cr&
+W_{\textbf{3}z}=3Q^{(1)} + Q^{(1)}_{zzzz} + 2Q^{(1)}_{zz} + 4Q^{(2)}_{zz}
+\cr&
+W_{\textbf{4}x}=Q^{(1)}_{xyyz} + Q^{(1)}_{xz} + Q^{(3)}_{xz}
+\cr&
+W_{\textbf{4}y}=Q^{(1)}_{yyyz} + Q^{(1)}_{yz} + 2Q^{(2)}_{yz} + Q^{(3)}_{yz} + 2Q^{(5)}_{yz}
+\cr&
+W_{\textbf{4}z}=Q^{(1)} + Q^{(1)}_{yyzz} + Q^{(1)}_{yy} + Q^{(1)}_{zz} - Q^{(3)}_{yy} + Q^{(3)}_{zz}
+\cr&
+W_{\textbf{5}x}=Q^{(1)} + Q^{(1)}_{xxzz} + Q^{(1)}_{xx} + Q^{(1)}_{zz} + Q^{(3)}_{xx} - Q^{(3)}_{zz}
+\cr&
+W_{\textbf{5}y}=Q^{(1)}_{xyzz} + Q^{(1)}_{xy} + Q^{(3)}_{xy}
+\cr&
+W_{\textbf{5}z}=Q^{(1)}_{xzzz} + Q^{(1)}_{xz} + 2Q^{(2)}_{xz} + Q^{(3)}_{xz} + 2Q^{(5)}_{xz}
+\cr&
+W_{\textbf{6}x}=Q^{(1)}_{xxxy} + Q^{(1)}_{xy} + 2Q^{(2)}_{xy} + Q^{(3)}_{xy} + 2Q^{(5)}_{xy}
+\cr&
+W_{\textbf{6}y}=Q^{(1)} + Q^{(1)}_{xxyy} + Q^{(1)}_{xx} + Q^{(1)}_{yy} - Q^{(3)}_{xx} + Q^{(3)}_{yy}
+\cr&
+W_{\textbf{6}z}=Q^{(1)}_{xxyz} + Q^{(1)}_{yz} + Q^{(3)}_{yz}
+\cr&
+W_{\textbf{7}x}=Q^{(1)}_{xyzz} + Q^{(2)}_{xy} - Q^{(5)}_{xy}
+\cr&
+W_{\textbf{7}y}=Q^{(1)} + Q^{(1)}_{yyzz} + Q^{(2)}_{yy} + Q^{(2)}_{zz} - Q^{(5)}_{yy} + Q^{(5)}_{zz}
+\cr&
+W_{\textbf{7}z}=Q^{(1)}_{yzzz} + Q^{(1)}_{yz} + 2Q^{(2)}_{yz} - Q^{(3)}_{yz}
+\cr&
+W_{\textbf{8}x}=Q^{(1)}_{xxxz} + Q^{(1)}_{xz} + 2Q^{(2)}_{xz} - Q^{(3)}_{xz}
+\cr&
+W_{\textbf{8}y}=Q^{(1)}_{xxyz} + Q^{(2)}_{yz} - Q^{(5)}_{yz}
+\cr&
+W_{\textbf{8}z}=Q^{(1)} + Q^{(1)}_{xxzz} + Q^{(2)}_{xx} + Q^{(2)}_{zz} + Q^{(5)}_{xx} - Q^{(5)}_{zz}
+\cr&
+W_{\textbf{9}x}=Q^{(1)} + Q^{(1)}_{xxyy} + Q^{(2)}_{xx} + Q^{(2)}_{yy} - Q^{(5)}_{xx} + Q^{(5)}_{yy}
+\cr&
+W_{\textbf{9}y}=Q^{(1)}_{xyyy} + Q^{(1)}_{xy} + 2Q^{(2)}_{xy} - Q^{(3)}_{xy}
+\cr&
+W_{\textbf{9}z}=Q^{(1)}_{xyyz} + Q^{(2)}_{xz} - Q^{(5)}_{xz}
+\cr&
+W_{\textbf{10}x}=Q^{(1)}_{xxyz} + Q^{(2)}_{yz} + Q^{(5)}_{yz}
+\cr&
+W_{\textbf{10}y}=Q^{(1)}_{xyyz} + Q^{(2)}_{xz} + Q^{(5)}_{xz}
+\cr&
+W_{\textbf{10}z}=Q^{(1)}_{xyzz} + Q^{(1)}_{xy} - Q^{(3)}_{xy}
+\end{align}
+$U_{ij}$, $V_{ij}$は$S_{ij}$, $\bar{S}_{ij}$, $A_{ij}$, $\bar{A}_{ij}$, $M_{ij}$, $\bar{M}_{ij}$の組み合わせで表現できるので省略した。
+

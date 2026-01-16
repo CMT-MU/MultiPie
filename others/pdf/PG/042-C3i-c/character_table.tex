@@ -1,0 +1,94 @@
+\documentclass[fleqn,8pt,landscape]{jsarticle}
+\special{papersize=\the\paperwidth,\the\paperheight}
+
+%%% package
+
+\usepackage[usenames]{color}
+\usepackage{amsmath}
+\usepackage{breqn}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{enumitem}
+\usepackage{braket}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+%%% layout setting
+
+\paperwidth=356.4truemm
+\paperheight=252.0truemm
+\textwidth=335.59999999999997truemm
+\textheight=224.2truemm
+\oddsidemargin=-15truemm
+\topmargin=-15truemm
+\footskip=7truemm
+
+%%% fixed
+
+\hoffset=0truemm
+\voffset=0truemm
+\headheight=0truemm
+\headsep=0truemm
+\marginparsep=0truemm
+\marginparwidth=0truemm
+
+%%% main text
+
+\begin{document}
+
+\setcounter{MaxMatrixCols}{32}
+
+\renewcommand{\tablename}{Table~}
+\renewcommand{\figurename}{Figure~}
+\begin{center}
+\LARGE
+PG No. 42\quad$C_{\rm 3i}(c)$\quad$\bar{3}$\quad[ trigonal ]
+\end{center}
+
+* character table ($\omega=e^{2\pi i/3}$)
+\begin{quote}
+\begin{tabular}{crrrrrr} \hline \hline
+$ C_{\rm 3i}(c) $ & $ 1(1) $ & $ 3^{+}_{\,\,001}(1) $ & $ 3^{-}_{\,\,001}(1) $ & $ -1(1) $ & $ -3^{+}_{\,\,001}(1) $ & $ -3^{-}_{\,\,001}(1) $ \\ \hline
+$ A_{g} $ & $ 1 $ & $ 1 $ & $ 1 $ & $ 1 $ & $ 1 $ & $ 1 $ \\
+$ E_{g}^{(a)} $ & $ 1 $ & $ \omega^{*} $ & $ \omega $ & $ 1 $ & $ \omega^{*} $ & $ \omega $ \\
+$ E_{g}^{(b)} $ & $ 1 $ & $ \omega $ & $ \omega^{*} $ & $ 1 $ & $ \omega $ & $ \omega^{*} $ \\
+$ A_{u} $ & $ 1 $ & $ 1 $ & $ 1 $ & $ -1 $ & $ -1 $ & $ -1 $ \\
+$ E_{u}^{(a)} $ & $ 1 $ & $ \omega^{*} $ & $ \omega $ & $ -1 $ & $ - \omega^{*} $ & $ - \omega $ \\
+$ E_{u}^{(b)} $ & $ 1 $ & $ \omega $ & $ \omega^{*} $ & $ -1 $ & $ - \omega $ & $ - \omega^{*} $ \\
+ \hline \hline
+\end{tabular}
+\end{quote}
+
+* polar $\leftrightarrow$ axial conversion
+\begin{quote}
+\begin{tabular}{cccccc}
+$ A_{g}\,\,(A_{u}) $ & $ E_{g}^{(a)}\,\,(E_{u}^{(a)}) $ & $ E_{g}^{(b)}\,\,(E_{u}^{(b)}) $ & $ A_{u}\,\,(A_{g}) $ & $ E_{u}^{(a)}\,\,(E_{g}^{(a)}) $ & $ E_{u}^{(b)}\,\,(E_{g}^{(b)}) $
+\end{tabular}
+\end{quote}
+
+* symmetric product
+\begin{quote}
+\begin{tabular}{c|cccccc} \hline \hline
+ & $ A_{g} $ & $ E_{g}^{(a)} $ & $ E_{g}^{(b)} $ & $ A_{u} $ & $ E_{u}^{(a)} $ & $ E_{u}^{(b)} $ \\ \hline
+$ A_{g} $ & $ A_{g} $ & $ E_{g}^{(a)} $ & $ E_{g}^{(b)} $ & $ A_{u} $ & $ E_{u}^{(a)} $ & $ E_{u}^{(b)} $ \\
+$ E_{g}^{(a)} $ & $  $ & $ E_{g}^{(b)} $ & $ A_{g} $ & $ E_{u}^{(a)} $ & $ E_{u}^{(b)} $ & $ A_{u} $ \\
+$ E_{g}^{(b)} $ & $  $ & $  $ & $ E_{g}^{(a)} $ & $ E_{u}^{(b)} $ & $ A_{u} $ & $ E_{u}^{(a)} $ \\
+$ A_{u} $ & $  $ & $  $ & $  $ & $ A_{g} $ & $ E_{g}^{(a)} $ & $ E_{g}^{(b)} $ \\
+$ E_{u}^{(a)} $ & $  $ & $  $ & $  $ & $  $ & $ E_{g}^{(b)} $ & $ A_{g} $ \\
+$ E_{u}^{(b)} $ & $  $ & $  $ & $  $ & $  $ & $  $ & $ E_{g}^{(a)} $ \\
+ \hline \hline
+\end{tabular}
+\end{quote}
+
+* anti-symmetric product
+\begin{quote}
+\begin{tabular}{ccccccc} \hline \hline
+ & $ A_{g} $ & $ E_{g}^{(a)} $ & $ E_{g}^{(b)} $ & $ A_{u} $ & $ E_{u}^{(a)} $ & $ E_{u}^{(b)} $ \\ \hline
+$  $ & $ - $ & $ - $ & $ - $ & $ - $ & $ - $ & $ - $ \\
+ \hline \hline
+\end{tabular}
+\end{quote}
+
+\end{document}

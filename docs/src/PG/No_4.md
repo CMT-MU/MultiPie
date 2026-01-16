@@ -1,0 +1,20 @@
+# #4: $C_{\rm s}$
+
+- **Symmetry operation** : [PDF](../../../others/pdf/PG/004-Cs/symmetry_operation.pdf)
+- **Character table** : [PDF](../../../others/pdf/PG/004-Cs/character_table.pdf)
+- **Wyckoff**
+  - site : [PDF](../../../others/pdf/PG/004-Cs/wyckoff_site.pdf)
+  - bond : [PDF](../../../others/pdf/PG/004-Cs/wyckoff_bond.pdf)
+- **Atomic multipole**
+  - JML basis : [PDF](../../../others/pdf/PG/004-Cs/atomic_multipole_jml.pdf)
+  - L$\Gamma\sigma$ basis : [PDF](../../../others/pdf/PG/004-Cs/atomic_multipole_lgs.pdf)
+  - L$\Gamma$ basis : [PDF](../../../others/pdf/PG/004-Cs/atomic_multipole_lg.pdf)
+- **Harmonics**
+  - polar : [PDF](../../../others/pdf/PG/004-Cs/harmonics_polar.pdf)
+  - axial : [PDF](../../../others/pdf/PG/004-Cs/harmonics_axial.pdf)
+- **Response tensor**
+  - Q : [PDF](../../../others/pdf/MPG/4.2.10/response_tensor_Q.pdf)
+  - G : [PDF](../../../others/pdf/MPG/4.2.10/response_tensor_G.pdf)
+  - T : [PDF](../../../others/pdf/MPG/4.2.10/response_tensor_T.pdf)
+  - M : [PDF](../../../others/pdf/MPG/4.2.10/response_tensor_M.pdf)
+

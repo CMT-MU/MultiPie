@@ -1,0 +1,145 @@
+\documentclass[fleqn,9pt,landscape]{jsarticle}
+\special{papersize=\the\paperwidth,\the\paperheight}
+
+%%% package
+
+\usepackage[usenames]{color}
+\usepackage{amsmath}
+\usepackage{breqn}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{enumitem}
+\usepackage{braket}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+%%% layout setting
+
+\paperwidth=324.06truemm
+\paperheight=229.13333333333333truemm
+\textwidth=303.26truemm
+\textheight=201.33333333333331truemm
+\oddsidemargin=-15truemm
+\topmargin=-15truemm
+\footskip=7truemm
+
+%%% fixed
+
+\hoffset=0truemm
+\voffset=0truemm
+\headheight=0truemm
+\headsep=0truemm
+\marginparsep=0truemm
+\marginparwidth=0truemm
+
+%%% main text
+
+\begin{document}
+
+\setcounter{MaxMatrixCols}{32}
+
+\renewcommand{\tablename}{Table~}
+\renewcommand{\figurename}{Figure~}
+\begin{center}
+\LARGE
+Compatibility Relation for Point Groups
+\end{center}
+\begin{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.0}
+\begin{longtable}{ccccccccccccccccccccc}
+\caption{$O_{\rm h}$ subgroup.}
+ \\
+ \hline \hline
+$O_{\rm h}$ & $A_{1g}$ & $A_{2g}$ & $E_{g}(x)$ & $E_{g}(y)$ & $T_{1g}(x)$ & $T_{1g}(y)$ & $T_{1g}(z)$ & $T_{2g}(x)$ & $T_{2g}(y)$ & $T_{2g}(z)$ & $A_{1u}$ & $A_{2u}$ & $E_{u}(x)$ & $E_{u}(y)$ & $T_{1u}(x)$ & $T_{1u}(y)$ & $T_{1u}(z)$ & $T_{2u}(x)$ & $T_{2u}(y)$ & $T_{2u}(z)$ \\ \hline \endfirsthead
+
+\multicolumn{20}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+$O_{\rm h}$ & $A_{1g}$ & $A_{2g}$ & $E_{g}(x)$ & $E_{g}(y)$ & $T_{1g}(x)$ & $T_{1g}(y)$ & $T_{1g}(z)$ & $T_{2g}(x)$ & $T_{2g}(y)$ & $T_{2g}(z)$ & $A_{1u}$ & $A_{2u}$ & $E_{u}(x)$ & $E_{u}(y)$ & $T_{1u}(x)$ & $T_{1u}(y)$ & $T_{1u}(z)$ & $T_{2u}(x)$ & $T_{2u}(y)$ & $T_{2u}(z)$ \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{20}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{20}{r}{} \\ \endlastfoot
+
+ & \texttt{s} & \texttt{i} & \texttt{du} & \texttt{dv} & \texttt{gax} & \texttt{gay} & \texttt{gaz} & \texttt{dyz} & \texttt{dxz} & \texttt{dxy} & \texttt{l} & \texttt{f3} & \texttt{hu} & \texttt{hv} & \texttt{px} & \texttt{py} & \texttt{pz} & \texttt{fbx} & \texttt{fby} & \texttt{fbz} \\ \hline
+$O_{\rm h}$ & $A_{1g}$ & $A_{2g}$ & $E_{g}(x)$ & $E_{g}(y)$ & $T_{1g}(x)$ & $T_{1g}(y)$ & $T_{1g}(z)$ & $T_{2g}(x)$ & $T_{2g}(y)$ & $T_{2g}(z)$ & $A_{1u}$ & $A_{2u}$ & $E_{u}(x)$ & $E_{u}(y)$ & $T_{1u}(x)$ & $T_{1u}(y)$ & $T_{1u}(z)$ & $T_{2u}(x)$ & $T_{2u}(y)$ & $T_{2u}(z)$ \\
+$T_{\rm d}$ & $A_{1}$ & $A_{2}$ & $E(x)$ & $E(y)$ & $T_{1}(x)$ & $T_{1}(y)$ & $T_{1}(z)$ & $T_{2}(x)$ & $T_{2}(y)$ & $T_{2}(z)$ & $A_{2}$ & $A_{1}$ & $E(y)$ & $-E(x)$ & $T_{2}(x)$ & $T_{2}(y)$ & $T_{2}(z)$ & $T_{1}(x)$ & $T_{1}(y)$ & $T_{1}(z)$ \\
+$O_{\rm }$ & $A_{1}$ & $A_{2}$ & $E(x)$ & $E(y)$ & $T_{1}(x)$ & $T_{1}(y)$ & $T_{1}(z)$ & $T_{2}(x)$ & $T_{2}(y)$ & $T_{2}(z)$ & $A_{1}$ & $A_{2}$ & $E(x)$ & $E(y)$ & $T_{1}(x)$ & $T_{1}(y)$ & $T_{1}(z)$ & $T_{2}(x)$ & $T_{2}(y)$ & $T_{2}(z)$ \\
+$T_{\rm h}$ & $A_{g}$ & $A_{g}$ & $E_{g}(x)$ & $E_{g}(y)$ & $T_{g}(x)$ & $T_{g}(y)$ & $T_{g}(z)$ & $T_{g}(x)$ & $T_{g}(y)$ & $T_{g}(z)$ & $A_{u}$ & $A_{u}$ & $E_{u}(x)$ & $E_{u}(y)$ & $T_{u}(x)$ & $T_{u}(y)$ & $T_{u}(z)$ & $T_{u}(x)$ & $T_{u}(y)$ & $T_{u}(z)$ \\
+$T_{\rm h}$(c) & $A_{g}$ & $A_{g}$ & $E_{g}^{(a)}$ & $E_{g}^{(b)}$ & $T_{g}(x)$ & $T_{g}(y)$ & $T_{g}(z)$ & $T_{g}(x)$ & $T_{g}(y)$ & $T_{g}(z)$ & $A_{u}$ & $A_{u}$ & $E_{u}^{(a)}$ & $E_{u}^{(b)}$ & $T_{u}(x)$ & $T_{u}(y)$ & $T_{u}(z)$ & $T_{u}(x)$ & $T_{u}(y)$ & $T_{u}(z)$ \\
+$T_{\rm }$ & $A$ & $A$ & $E(x)$ & $E(y)$ & $T(x)$ & $T(y)$ & $T(z)$ & $T(x)$ & $T(y)$ & $T(z)$ & $A$ & $A$ & $E(x)$ & $E(y)$ & $T(x)$ & $T(y)$ & $T(z)$ & $T(x)$ & $T(y)$ & $T(z)$ \\
+$T_{\rm }$(c) & $A$ & $A$ & $E^{(a)}$ & $E^{(b)}$ & $T(x)$ & $T(y)$ & $T(z)$ & $T(x)$ & $T(y)$ & $T(z)$ & $A$ & $A$ & $E^{(a)}$ & $E^{(b)}$ & $T(x)$ & $T(y)$ & $T(z)$ & $T(x)$ & $T(y)$ & $T(z)$ \\ \hline
+$D_{\rm 4h}$ & $A_{1g}$ & $B_{1g}$ & $A_{1g}$ & $B_{1g}$ & $E_{g}(x)$ & $-E_{g}(y)$ & $A_{2g}$ & $E_{g}(x)$ & $E_{g}(y)$ & $B_{2g}$ & $A_{1u}$ & $B_{1u}$ & $A_{1u}$ & $B_{1u}$ & $E_{u}(x)$ & $E_{u}(y)$ & $A_{2u}$ & $E_{u}(x)$ & $-E_{u}(y)$ & $B_{2u}$ \\
+$D_{\rm 2d}$ & $A_{1}$ & $B_{1}$ & $A_{1}$ & $B_{1}$ & $E(x)$ & $-E(y)$ & $A_{2}$ & $E(x)$ & $E(y)$ & $B_{2}$ & $B_{1}$ & $A_{1}$ & $B_{1}$ & $A_{1}$ & $E(x)$ & $E(y)$ & $B_{2}$ & $E(x)$ & $-E(y)$ & $A_{2}$ \\
+$D_{\rm 2d}$(1) & $A_{1}$ & $B_{2}$ & $A_{1}$ & $B_{2}$ & $E(y)$ & $E(x)$ & $A_{2}$ & $E(y)$ & $-E(x)$ & $B_{1}$ & $B_{1}$ & $A_{2}$ & $B_{1}$ & $A_{2}$ & $E(x)$ & $E(y)$ & $B_{2}$ & $E(x)$ & $-E(y)$ & $A_{1}$ \\
+$C_{\rm 4v}$ & $A_{1}$ & $B_{1}$ & $A_{1}$ & $B_{1}$ & $E(y)$ & $-E(x)$ & $A_{2}$ & $E(y)$ & $E(x)$ & $B_{2}$ & $A_{2}$ & $B_{2}$ & $A_{2}$ & $B_{2}$ & $E(x)$ & $E(y)$ & $A_{1}$ & $E(x)$ & $-E(y)$ & $B_{1}$ \\
+$D_{\rm 4}$ & $A_{1}$ & $B_{1}$ & $A_{1}$ & $B_{1}$ & $E(x)$ & $E(y)$ & $A_{2}$ & $E(x)$ & $-E(y)$ & $B_{2}$ & $A_{1}$ & $B_{1}$ & $A_{1}$ & $B_{1}$ & $E(x)$ & $E(y)$ & $A_{2}$ & $E(x)$ & $-E(y)$ & $B_{2}$ \\
+$C_{\rm 4h}$ & $A_{g}$ & $B_{g}$ & $A_{g}$ & $B_{g}$ & $E_{g}(y)$ & $E_{g}(x)$ & $A_{g}$ & $E_{g}(x)$ & $E_{g}(y)$ & $B_{g}$ & $A_{u}$ & $B_{u}$ & $A_{u}$ & $B_{u}$ & $E_{u}(x)$ & $E_{u}(y)$ & $A_{u}$ & $E_{u}(y)$ & $E_{u}(x)$ & $B_{u}$ \\
+$C_{\rm 4h}$(c) & $A_{g}$ & $B_{g}$ & $A_{g}$ & $B_{g}$ & $E_{g}^{(a)}$ & $E_{g}^{(b)}$ & $A_{g}$ & $E_{g}^{(b)}$ & $E_{g}^{(a)}$ & $B_{g}$ & $A_{u}$ & $B_{u}$ & $A_{u}$ & $B_{u}$ & $E_{u}^{(a)}$ & $E_{u}^{(b)}$ & $A_{u}$ & $E_{u}^{(b)}$ & $E_{u}^{(a)}$ & $B_{u}$ \\
+$S_{\rm 4}$ & $A$ & $B$ & $A$ & $B$ & $E(y)$ & $E(x)$ & $A$ & $E(x)$ & $E(y)$ & $B$ & $B$ & $A$ & $B$ & $A$ & $E(x)$ & $E(y)$ & $B$ & $E(y)$ & $E(x)$ & $A$ \\
+$S_{\rm 4}$(c) & $A$ & $B$ & $A$ & $B$ & $E^{(b)}$ & $E^{(a)}$ & $A$ & $E^{(a)}$ & $E^{(b)}$ & $B$ & $B$ & $A$ & $B$ & $A$ & $E^{(a)}$ & $E^{(b)}$ & $B$ & $E^{(b)}$ & $E^{(a)}$ & $A$ \\
+$C_{\rm 4}$ & $A$ & $B$ & $A$ & $B$ & $E(x)$ & $E(y)$ & $A$ & $E(y)$ & $E(x)$ & $B$ & $A$ & $B$ & $A$ & $B$ & $E(x)$ & $E(y)$ & $A$ & $E(y)$ & $E(x)$ & $B$ \\
+$C_{\rm 4}$(c) & $A$ & $B$ & $A$ & $B$ & $E^{(a)}$ & $E^{(b)}$ & $A$ & $E^{(b)}$ & $E^{(a)}$ & $B$ & $A$ & $B$ & $A$ & $B$ & $E^{(a)}$ & $E^{(b)}$ & $A$ & $E^{(b)}$ & $E^{(a)}$ & $B$ \\ \hline
+$D_{\rm 2h}$ & $A_{g}$ & $A_{g}$ & $A_{g}$ & $A_{g}$ & $B_{3g}$ & $B_{2g}$ & $B_{1g}$ & $B_{3g}$ & $B_{2g}$ & $B_{1g}$ & $A_{u}$ & $A_{u}$ & $A_{u}$ & $A_{u}$ & $B_{3u}$ & $B_{2u}$ & $B_{1u}$ & $B_{3u}$ & $B_{2u}$ & $B_{1u}$ \\
+$C_{\rm 2v}$ & $A_{1}$ & $A_{1}$ & $A_{1}$ & $A_{1}$ & $B_{2}$ & $B_{1}$ & $A_{2}$ & $B_{2}$ & $B_{1}$ & $A_{2}$ & $A_{2}$ & $A_{2}$ & $A_{2}$ & $A_{2}$ & $B_{1}$ & $B_{2}$ & $A_{1}$ & $B_{1}$ & $B_{2}$ & $A_{1}$ \\
+$D_{\rm 2}$ & $A$ & $A$ & $A$ & $A$ & $B_{3}$ & $B_{2}$ & $B_{1}$ & $B_{3}$ & $B_{2}$ & $B_{1}$ & $A$ & $A$ & $A$ & $A$ & $B_{3}$ & $B_{2}$ & $B_{1}$ & $B_{3}$ & $B_{2}$ & $B_{1}$ \\ \hline
+$C_{\rm 2h}$ & $A_{g}$ & $A_{g}$ & $A_{g}$ & $A_{g}$ & $B_{g}$ & $A_{g}$ & $B_{g}$ & $B_{g}$ & $A_{g}$ & $B_{g}$ & $A_{u}$ & $A_{u}$ & $A_{u}$ & $A_{u}$ & $B_{u}$ & $A_{u}$ & $B_{u}$ & $B_{u}$ & $A_{u}$ & $B_{u}$ \\
+$C_{\rm s}$ & $A^{\prime}$ & $A^{\prime}$ & $A^{\prime}$ & $A^{\prime}$ & $A^{\prime\prime}$ & $A^{\prime}$ & $A^{\prime\prime}$ & $A^{\prime\prime}$ & $A^{\prime}$ & $A^{\prime\prime}$ & $A^{\prime\prime}$ & $A^{\prime\prime}$ & $A^{\prime\prime}$ & $A^{\prime\prime}$ & $A^{\prime}$ & $A^{\prime\prime}$ & $A^{\prime}$ & $A^{\prime}$ & $A^{\prime\prime}$ & $A^{\prime}$ \\
+$C_{\rm 2}$ & $A$ & $A$ & $A$ & $A$ & $B$ & $A$ & $B$ & $B$ & $A$ & $B$ & $A$ & $A$ & $A$ & $A$ & $B$ & $A$ & $B$ & $B$ & $A$ & $B$ \\ \hline
+$C_{\rm i}$ & $A_{g}$ & $A_{g}$ & $A_{g}$ & $A_{g}$ & $A_{g}$ & $A_{g}$ & $A_{g}$ & $A_{g}$ & $A_{g}$ & $A_{g}$ & $A_{u}$ & $A_{u}$ & $A_{u}$ & $A_{u}$ & $A_{u}$ & $A_{u}$ & $A_{u}$ & $A_{u}$ & $A_{u}$ & $A_{u}$ \\
+$C_{\rm 1}$ & $A$ & $A$ & $A$ & $A$ & $A$ & $A$ & $A$ & $A$ & $A$ & $A$ & $A$ & $A$ & $A$ & $A$ & $A$ & $A$ & $A$ & $A$ & $A$ & $A$ \\
+\end{longtable}
+\end{center}
+\end{center}
+\newpage
+\begin{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.0}
+\begin{longtable}{ccccccccccccccccc}
+\caption{$D_{\rm 6h}$ subgroup.}
+ \\
+ \hline \hline
+$D_{\rm 6h}$ & $A_{1g}$ & $A_{2g}$ & $B_{1g}$ & $B_{2g}$ & $E_{1g}(x)$ & $E_{1g}(y)$ & $E_{2g}(x)$ & $E_{2g}(y)$ & $A_{1u}$ & $A_{2u}$ & $B_{1u}$ & $B_{2u}$ & $E_{1u}(x)$ & $E_{1u}(y)$ & $E_{2u}(x)$ & $E_{2u}(y)$ \\ \hline \endfirsthead
+
+\multicolumn{16}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+$D_{\rm 6h}$ & $A_{1g}$ & $A_{2g}$ & $B_{1g}$ & $B_{2g}$ & $E_{1g}(x)$ & $E_{1g}(y)$ & $E_{2g}(x)$ & $E_{2g}(y)$ & $A_{1u}$ & $A_{2u}$ & $B_{1u}$ & $B_{2u}$ & $E_{1u}(x)$ & $E_{1u}(y)$ & $E_{2u}(x)$ & $E_{2u}(y)$ \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{16}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{16}{r}{} \\ \endlastfoot
+
+ & \texttt{s} & \texttt{i0} & \texttt{ga} & \texttt{gb} & \texttt{dyz} & \texttt{dxz'} & \texttt{dv} & \texttt{dxy'} & \texttt{j} & \texttt{pz} & \texttt{f1} & \texttt{f2} & \texttt{px} & \texttt{py} & \texttt{f3} & \texttt{fbz} \\ \hline
+$D_{\rm 6h}$ & $A_{1g}$ & $A_{2g}$ & $B_{1g}$ & $B_{2g}$ & $E_{1g}(x)$ & $E_{1g}(y)$ & $E_{2g}(x)$ & $E_{2g}(y)$ & $A_{1u}$ & $A_{2u}$ & $B_{1u}$ & $B_{2u}$ & $E_{1u}(x)$ & $E_{1u}(y)$ & $E_{2u}(x)$ & $E_{2u}(y)$ \\
+$D_{\rm 3h}$ & $A_{1}^{\prime}$ & $A_{2}^{\prime}$ & $A_{1}^{\prime\prime}$ & $A_{2}^{\prime\prime}$ & $E^{\prime\prime}(x)$ & $E^{\prime\prime}(y)$ & $E^{\prime}(y)$ & $-E^{\prime}(x)$ & $A_{1}^{\prime\prime}$ & $A_{2}^{\prime\prime}$ & $A_{1}^{\prime}$ & $A_{2}^{\prime}$ & $E^{\prime}(x)$ & $E^{\prime}(y)$ & $E^{\prime\prime}(y)$ & $-E^{\prime\prime}(x)$ \\
+$D_{\rm 3h}$(1) & $A_{1}^{\prime}$ & $A_{2}^{\prime}$ & $A_{2}^{\prime\prime}$ & $A_{1}^{\prime\prime}$ & $E^{\prime\prime}(x)$ & $E^{\prime\prime}(y)$ & $E^{\prime}(x)$ & $E^{\prime}(y)$ & $A_{1}^{\prime\prime}$ & $A_{2}^{\prime\prime}$ & $A_{2}^{\prime}$ & $A_{1}^{\prime}$ & $E^{\prime}(x)$ & $E^{\prime}(y)$ & $E^{\prime\prime}(x)$ & $E^{\prime\prime}(y)$ \\
+$C_{\rm 6v}$ & $A_{1}$ & $A_{2}$ & $B_{2}$ & $B_{1}$ & $E_{1}(y)$ & $-E_{1}(x)$ & $E_{2}(x)$ & $E_{2}(y)$ & $A_{2}$ & $A_{1}$ & $B_{1}$ & $B_{2}$ & $E_{1}(x)$ & $E_{1}(y)$ & $E_{2}(y)$ & $-E_{2}(x)$ \\
+$D_{\rm 6}$ & $A_{1}$ & $A_{2}$ & $B_{1}$ & $B_{2}$ & $E_{1}(x)$ & $E_{1}(y)$ & $E_{2}(x)$ & $E_{2}(y)$ & $A_{1}$ & $A_{2}$ & $B_{1}$ & $B_{2}$ & $E_{1}(x)$ & $E_{1}(y)$ & $E_{2}(x)$ & $E_{2}(y)$ \\
+$C_{\rm 6h}$ & $A_{g}$ & $A_{g}$ & $B_{g}$ & $B_{g}$ & $E_{1g}(x)$ & $E_{1g}(y)$ & $E_{2g}(x)$ & $E_{2g}(y)$ & $A_{u}$ & $A_{u}$ & $B_{u}$ & $B_{u}$ & $E_{1u}(x)$ & $E_{1u}(y)$ & $E_{2u}(x)$ & $E_{2u}(y)$ \\
+$C_{\rm 6h}$(c) & $A_{g}$ & $A_{g}$ & $B_{g}$ & $B_{g}$ & $E_{1g}^{(a)}$ & $E_{1g}^{(b)}$ & $E_{2g}^{(a)}$ & $E_{2g}^{(b)}$ & $A_{u}$ & $A_{u}$ & $B_{u}$ & $B_{u}$ & $E_{1u}^{(a)}$ & $E_{1u}^{(b)}$ & $E_{2u}^{(a)}$ & $E_{2u}^{(b)}$ \\
+$C_{\rm 3h}$ & $A^{\prime}$ & $A^{\prime}$ & $A^{\prime\prime}$ & $A^{\prime\prime}$ & $E^{\prime\prime}(x)$ & $E^{\prime\prime}(y)$ & $E^{\prime}(x)$ & $E^{\prime}(y)$ & $A^{\prime\prime}$ & $A^{\prime\prime}$ & $A^{\prime}$ & $A^{\prime}$ & $E^{\prime}(x)$ & $E^{\prime}(y)$ & $E^{\prime\prime}(x)$ & $E^{\prime\prime}(y)$ \\
+$C_{\rm 3h}$(c) & $A^{\prime}$ & $A^{\prime}$ & $A^{\prime\prime}$ & $A^{\prime\prime}$ & $E^{\prime\prime(a)}$ & $E^{\prime\prime(b)}$ & $E^{\prime(a)}$ & $E^{\prime(b)}$ & $A^{\prime\prime}$ & $A^{\prime\prime}$ & $A^{\prime}$ & $A^{\prime}$ & $E^{\prime(a)}$ & $E^{\prime(b)}$ & $E^{\prime\prime(a)}$ & $E^{\prime\prime(b)}$ \\
+$C_{\rm 6}$ & $A$ & $A$ & $B$ & $B$ & $E_{1}(x)$ & $E_{1}(y)$ & $E_{2}(x)$ & $E_{2}(y)$ & $A$ & $A$ & $B$ & $B$ & $E_{1}(x)$ & $E_{1}(y)$ & $E_{2}(x)$ & $E_{2}(y)$ \\
+$C_{\rm 6}$(c) & $A$ & $A$ & $B$ & $B$ & $E_{1}^{(a)}$ & $E_{1}^{(b)}$ & $E_{2}^{(a)}$ & $E_{2}^{(b)}$ & $A$ & $A$ & $B$ & $B$ & $E_{1}^{(a)}$ & $E_{1}^{(b)}$ & $E_{2}^{(a)}$ & $E_{2}^{(b)}$ \\ \hline
+$D_{\rm 3d}$ & $A_{1g}$ & $A_{2g}$ & $A_{2g}$ & $A_{1g}$ & $E_{g}(x)$ & $E_{g}(y)$ & $E_{g}(x)$ & $E_{g}(y)$ & $A_{1u}$ & $A_{2u}$ & $A_{2u}$ & $A_{1u}$ & $E_{u}(x)$ & $E_{u}(y)$ & $E_{u}(x)$ & $E_{u}(y)$ \\
+$D_{\rm 3d}$(1) & $A_{1g}$ & $A_{2g}$ & $A_{1g}$ & $A_{2g}$ & $E_{g}(x)$ & $E_{g}(y)$ & $E_{g}(y)$ & $-E_{g}(x)$ & $A_{1u}$ & $A_{2u}$ & $A_{1u}$ & $A_{2u}$ & $E_{u}(x)$ & $E_{u}(y)$ & $E_{u}(y)$ & $-E_{u}(x)$ \\
+$C_{\rm 3v}$ & $A_{1}$ & $A_{2}$ & $A_{2}$ & $A_{1}$ & $E(y)$ & $-E(x)$ & $E(y)$ & $-E(x)$ & $A_{2}$ & $A_{1}$ & $A_{1}$ & $A_{2}$ & $E(x)$ & $E(y)$ & $E(x)$ & $E(y)$ \\
+$C_{\rm 3v}$(1) & $A_{1}$ & $A_{2}$ & $A_{1}$ & $A_{2}$ & $E(y)$ & $-E(x)$ & $E(x)$ & $E(y)$ & $A_{2}$ & $A_{1}$ & $A_{2}$ & $A_{1}$ & $E(x)$ & $E(y)$ & $E(y)$ & $-E(x)$ \\
+$D_{\rm 3}$ & $A_{1}$ & $A_{2}$ & $A_{2}$ & $A_{1}$ & $E(x)$ & $E(y)$ & $E(x)$ & $E(y)$ & $A_{1}$ & $A_{2}$ & $A_{2}$ & $A_{1}$ & $E(x)$ & $E(y)$ & $E(x)$ & $E(y)$ \\
+$D_{\rm 3}$(1) & $A_{1}$ & $A_{2}$ & $A_{1}$ & $A_{2}$ & $E(x)$ & $E(y)$ & $E(y)$ & $-E(x)$ & $A_{1}$ & $A_{2}$ & $A_{1}$ & $A_{2}$ & $E(x)$ & $E(y)$ & $E(y)$ & $-E(x)$ \\
+$C_{\rm 3i}$ & $A_{g}$ & $A_{g}$ & $A_{g}$ & $A_{g}$ & $E_{g}(x)$ & $E_{g}(y)$ & $E_{g}(x)$ & $E_{g}(y)$ & $A_{u}$ & $A_{u}$ & $A_{u}$ & $A_{u}$ & $E_{u}(x)$ & $E_{u}(y)$ & $E_{u}(x)$ & $E_{u}(y)$ \\
+$C_{\rm 3i}$(c) & $A_{g}$ & $A_{g}$ & $A_{g}$ & $A_{g}$ & $E_{g}^{(a)}$ & $E_{g}^{(b)}$ & $E_{g}^{(a)}$ & $E_{g}^{(b)}$ & $A_{u}$ & $A_{u}$ & $A_{u}$ & $A_{u}$ & $E_{u}^{(a)}$ & $E_{u}^{(b)}$ & $E_{u}^{(a)}$ & $E_{u}^{(b)}$ \\
+$C_{\rm 3}$ & $A$ & $A$ & $A$ & $A$ & $E(x)$ & $E(y)$ & $E(x)$ & $E(y)$ & $A$ & $A$ & $A$ & $A$ & $E(x)$ & $E(y)$ & $E(x)$ & $E(y)$ \\
+$C_{\rm 3}$(c) & $A$ & $A$ & $A$ & $A$ & $E^{(a)}$ & $E^{(b)}$ & $E^{(a)}$ & $E^{(b)}$ & $A$ & $A$ & $A$ & $A$ & $E^{(a)}$ & $E^{(b)}$ & $E^{(a)}$ & $E^{(b)}$ \\
+\end{longtable}
+\end{center}
+\end{center}
+\newpage
+
+\end{document}

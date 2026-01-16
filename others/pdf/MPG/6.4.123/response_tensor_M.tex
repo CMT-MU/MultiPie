@@ -1,0 +1,191 @@
+\documentclass[fleqn,8pt,landscape]{jsarticle}
+\special{papersize=\the\paperwidth,\the\paperheight}
+
+%%% package
+
+\usepackage[usenames]{color}
+\usepackage{amsmath}
+\usepackage{breqn}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{enumitem}
+\usepackage{braket}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+%%% layout setting
+
+\paperwidth=356.4truemm
+\paperheight=252.0truemm
+\textwidth=335.59999999999997truemm
+\textheight=224.2truemm
+\oddsidemargin=-15truemm
+\topmargin=-15truemm
+\footskip=7truemm
+
+%%% fixed
+
+\hoffset=0truemm
+\voffset=0truemm
+\headheight=0truemm
+\headsep=0truemm
+\marginparsep=0truemm
+\marginparwidth=0truemm
+
+%%% main text
+
+\begin{document}
+
+\setcounter{MaxMatrixCols}{32}
+
+\renewcommand{\tablename}{Table~}
+\renewcommand{\figurename}{Figure~}
+\begin{center}
+\LARGE
+MPG No. 6.4.123\quad$2'2'2$\quad(22'2' setting)\quad[ Type III, orthorhombic ] [M tensor]
+\end{center}
+* Rank 0 tensor.
+* Rank 1 tensor.
+\begin{align*}
+\begin{bmatrix} M_{x} & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{x} = M_{px}^{(1)}
+\end{align*}
+* Rank 2 tensor (s).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & 0 \\ 0 & 0 & M_{yz} \\ 0 & M_{yz} & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{yz} = M_{dyz}^{(1)}
+\end{align*}
+* Rank 2 tensor (a).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & 0 \\ 0 & 0 & M_{yz} \\ 0 & - M_{yz} & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{yz} = T_{px}^{(1)}
+\end{align*}
+* Rank 3 tensor (s).
+\begin{align*}
+\begin{bmatrix} M_{xxx} & 0 & 0 \\ M_{yyx} & 0 & 0 \\ M_{zzx} & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & M_{zxz} \\ 0 & M_{xyy} & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{xxx} = 2 M_{fax}^{(1)} + M_{px}^{(1)} + 2 M_{px}^{(2)} \\
+& M_{yyx} = - M_{fax}^{(1)} + M_{fbx}^{(1)} + M_{px}^{(1)} - 2 T_{dyz}^{(1)} \\
+& M_{zzx} = - M_{fax}^{(1)} - M_{fbx}^{(1)} + M_{px}^{(1)} + 2 T_{dyz}^{(1)} \\
+& M_{zxz} = - M_{fax}^{(1)} - M_{fbx}^{(1)} + M_{px}^{(2)} - T_{dyz}^{(1)} \\
+& M_{xyy} = - M_{fax}^{(1)} + M_{fbx}^{(1)} + M_{px}^{(2)} + T_{dyz}^{(1)}
+\end{align*}
+* Rank 3 tensor (a).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & 0 \\ 0 & 0 & M_{zxz} \\ 0 & M_{xyy} & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{zxz} = M_{px}^{(3)} + T_{dyz}^{(2)} \\
+& M_{xyy} = - M_{px}^{(3)} + T_{dyz}^{(2)}
+\end{align*}
+* Rank 4 tensor (sss).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & 0 & M_{xxyz} & 0 & 0 \\ 0 & 0 & 0 & M_{yyyz} & 0 & 0 \\ 0 & 0 & 0 & M_{zzyz} & 0 & 0 \\ M_{xxyz} & M_{yyyz} & M_{zzyz} & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & M_{zxxy} \\ 0 & 0 & 0 & 0 & M_{zxxy} & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{xxyz} = M_{dyz}^{(1)} + 2 M_{gbx}^{(1)} \\
+& M_{yyyz} = M_{dyz}^{(1)} + 2 M_{dyz}^{(2)} + M_{gax}^{(1)} - M_{gbx}^{(1)} \\
+& M_{zzyz} = M_{dyz}^{(1)} + 2 M_{dyz}^{(2)} - M_{gax}^{(1)} - M_{gbx}^{(1)} \\
+& M_{zxxy} = M_{dyz}^{(2)} + 2 M_{gbx}^{(1)}
+\end{align*}
+* Rank 4 tensor (ssa).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & 0 & M_{xxyz} & 0 & 0 \\ 0 & 0 & 0 & M_{yyyz} & 0 & 0 \\ 0 & 0 & 0 & M_{zzyz} & 0 & 0 \\ - M_{xxyz} & - M_{yyyz} & - M_{zzyz} & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & M_{zxxy} \\ 0 & 0 & 0 & 0 & - M_{zxxy} & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{xxyz} = M_{dyz}^{(3)} - 4 T_{fbx}^{(1)} \\
+& M_{yyyz} = M_{dyz}^{(3)} - 2 T_{fax}^{(1)} + 2 T_{fbx}^{(1)} + 2 T_{px}^{(1)} \\
+& M_{zzyz} = M_{dyz}^{(3)} + 2 T_{fax}^{(1)} + 2 T_{fbx}^{(1)} - 2 T_{px}^{(1)} \\
+& M_{zxxy} = - 4 T_{fax}^{(1)} - T_{px}^{(1)}
+\end{align*}
+* Rank 4 tensor (aas).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & 0 \\ 0 & 0 & M_{zxxy} \\ 0 & M_{zxxy} & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{zxxy} = 2 M_{dyz}^{(4)}
+\end{align*}
+* Rank 4 tensor (aaa).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & 0 \\ 0 & 0 & M_{zxxy} \\ 0 & - M_{zxxy} & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{zxxy} = - T_{px}^{(2)}
+\end{align*}
+* Rank 4 tensor (sa).
+\begin{align*}
+\begin{bmatrix} M_{xxyz} & 0 & 0 \\ M_{yyyz} & 0 & 0 \\ M_{zzyz} & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & M_{zxxy} \\ 0 & M_{xyzx} & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{xxyz} = 2 T_{fax}^{(2)} + T_{px}^{(3)} + 2 T_{px}^{(4)} \\
+& M_{yyyz} = - 2 M_{dyz}^{(5)} - T_{fax}^{(2)} + T_{fbx}^{(2)} + T_{px}^{(3)} \\
+& M_{zzyz} = 2 M_{dyz}^{(5)} - T_{fax}^{(2)} - T_{fbx}^{(2)} + T_{px}^{(3)} \\
+& M_{zxxy} = - M_{dyz}^{(5)} - T_{fax}^{(2)} - T_{fbx}^{(2)} + T_{px}^{(4)} \\
+& M_{xyzx} = M_{dyz}^{(5)} - T_{fax}^{(2)} + T_{fbx}^{(2)} + T_{px}^{(4)}
+\end{align*}
+* Rank 4 tensor (as).
+\begin{align*}
+\begin{bmatrix} M_{yzxx} & M_{yzyy} & M_{yzzz} & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & M_{zxxy} \\ 0 & 0 & 0 & 0 & M_{xyzx} & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{yzxx} = 2 T_{fax}^{(3)} + T_{px}^{(5)} + 2 T_{px}^{(6)} \\
+& M_{yzyy} = - 2 M_{dyz}^{(6)} - T_{fax}^{(3)} + T_{fbx}^{(3)} + T_{px}^{(5)} \\
+& M_{yzzz} = 2 M_{dyz}^{(6)} - T_{fax}^{(3)} - T_{fbx}^{(3)} + T_{px}^{(5)} \\
+& M_{zxxy} = M_{dyz}^{(6)} - T_{fax}^{(3)} + T_{fbx}^{(3)} + T_{px}^{(6)} \\
+& M_{xyzx} = - M_{dyz}^{(6)} - T_{fax}^{(3)} - T_{fbx}^{(3)} + T_{px}^{(6)}
+\end{align*}
+* Rank 4 tensor (s).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & 0 & M_{xxyz} & 0 & 0 & M_{xxzy} & 0 & 0 \\ 0 & 0 & 0 & M_{yyyz} & 0 & 0 & M_{yyzy} & 0 & 0 \\ 0 & 0 & 0 & M_{zzyz} & 0 & 0 & M_{zzzy} & 0 & 0 \\ M_{yzxx} & M_{yzyy} & M_{yzzz} & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & M_{zxxy} & 0 & 0 & M_{zxyx} \\ 0 & 0 & 0 & 0 & M_{xyzx} & 0 & 0 & M_{xyxz} & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{xxyz} = M_{dyz}^{(1)} + M_{dyz}^{(3)} + 2 M_{gbx}^{(1)} + 2 T_{fax}^{(2)} - 4 T_{fbx}^{(1)} + T_{px}^{(3)} + 2 T_{px}^{(4)} \\
+& M_{xxzy} = M_{dyz}^{(1)} + M_{dyz}^{(3)} + 2 M_{gbx}^{(1)} - 2 T_{fax}^{(2)} - 4 T_{fbx}^{(1)} - T_{px}^{(3)} - 2 T_{px}^{(4)} \\
+& M_{yyyz} = M_{dyz}^{(1)} + 2 M_{dyz}^{(2)} + M_{dyz}^{(3)} - 2 M_{dyz}^{(5)} + M_{gax}^{(1)} - M_{gbx}^{(1)} - 2 T_{fax}^{(1)} - T_{fax}^{(2)} + 2 T_{fbx}^{(1)} + T_{fbx}^{(2)} + 2 T_{px}^{(1)} + T_{px}^{(3)} \\
+& M_{yyzy} = M_{dyz}^{(1)} + 2 M_{dyz}^{(2)} + M_{dyz}^{(3)} + 2 M_{dyz}^{(5)} + M_{gax}^{(1)} - M_{gbx}^{(1)} - 2 T_{fax}^{(1)} + T_{fax}^{(2)} + 2 T_{fbx}^{(1)} - T_{fbx}^{(2)} + 2 T_{px}^{(1)} - T_{px}^{(3)} \\
+& M_{zzyz} = M_{dyz}^{(1)} + 2 M_{dyz}^{(2)} + M_{dyz}^{(3)} + 2 M_{dyz}^{(5)} - M_{gax}^{(1)} - M_{gbx}^{(1)} + 2 T_{fax}^{(1)} - T_{fax}^{(2)} + 2 T_{fbx}^{(1)} - T_{fbx}^{(2)} - 2 T_{px}^{(1)} + T_{px}^{(3)} \\
+& M_{zzzy} = M_{dyz}^{(1)} + 2 M_{dyz}^{(2)} + M_{dyz}^{(3)} - 2 M_{dyz}^{(5)} - M_{gax}^{(1)} - M_{gbx}^{(1)} + 2 T_{fax}^{(1)} + T_{fax}^{(2)} + 2 T_{fbx}^{(1)} + T_{fbx}^{(2)} - 2 T_{px}^{(1)} - T_{px}^{(3)} \\
+& M_{yzxx} = M_{dyz}^{(1)} - M_{dyz}^{(3)} + 2 M_{gbx}^{(1)} + 4 T_{fbx}^{(1)} \\
+& M_{yzyy} = M_{dyz}^{(1)} + 2 M_{dyz}^{(2)} - M_{dyz}^{(3)} + M_{gax}^{(1)} - M_{gbx}^{(1)} + 2 T_{fax}^{(1)} - 2 T_{fbx}^{(1)} - 2 T_{px}^{(1)} \\
+& M_{yzzz} = M_{dyz}^{(1)} + 2 M_{dyz}^{(2)} - M_{dyz}^{(3)} - M_{gax}^{(1)} - M_{gbx}^{(1)} - 2 T_{fax}^{(1)} - 2 T_{fbx}^{(1)} + 2 T_{px}^{(1)} \\
+& M_{zxxy} = M_{dyz}^{(2)} - M_{dyz}^{(5)} + 2 M_{gbx}^{(1)} - 4 T_{fax}^{(1)} - T_{fax}^{(2)} - T_{fbx}^{(2)} - T_{px}^{(1)} + T_{px}^{(4)} \\
+& M_{zxyx} = M_{dyz}^{(2)} + M_{dyz}^{(5)} + 2 M_{gbx}^{(1)} - 4 T_{fax}^{(1)} + T_{fax}^{(2)} + T_{fbx}^{(2)} - T_{px}^{(1)} - T_{px}^{(4)} \\
+& M_{xyzx} = M_{dyz}^{(2)} + M_{dyz}^{(5)} + 2 M_{gbx}^{(1)} + 4 T_{fax}^{(1)} - T_{fax}^{(2)} + T_{fbx}^{(2)} + T_{px}^{(1)} + T_{px}^{(4)} \\
+& M_{xyxz} = M_{dyz}^{(2)} - M_{dyz}^{(5)} + 2 M_{gbx}^{(1)} + 4 T_{fax}^{(1)} + T_{fax}^{(2)} - T_{fbx}^{(2)} + T_{px}^{(1)} - T_{px}^{(4)}
+\end{align*}
+* Rank 4 tensor (a).
+\begin{align*}
+\begin{bmatrix} M_{yzxx} & M_{yzyy} & M_{yzzz} & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & M_{zxxy} & 0 & 0 & M_{zxyx} \\ 0 & 0 & 0 & 0 & M_{xyzx} & 0 & 0 & M_{xyxz} & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{yzxx} = 2 T_{fax}^{(3)} + T_{px}^{(5)} + 2 T_{px}^{(6)} \\
+& M_{yzyy} = - 2 M_{dyz}^{(6)} - T_{fax}^{(3)} + T_{fbx}^{(3)} + T_{px}^{(5)} \\
+& M_{yzzz} = 2 M_{dyz}^{(6)} - T_{fax}^{(3)} - T_{fbx}^{(3)} + T_{px}^{(5)} \\
+& M_{zxxy} = 2 M_{dyz}^{(4)} + M_{dyz}^{(6)} - T_{fax}^{(3)} + T_{fbx}^{(3)} - T_{px}^{(2)} + T_{px}^{(6)} \\
+& M_{zxyx} = - 2 M_{dyz}^{(4)} + M_{dyz}^{(6)} - T_{fax}^{(3)} + T_{fbx}^{(3)} + T_{px}^{(2)} + T_{px}^{(6)} \\
+& M_{xyzx} = 2 M_{dyz}^{(4)} - M_{dyz}^{(6)} - T_{fax}^{(3)} - T_{fbx}^{(3)} + T_{px}^{(2)} + T_{px}^{(6)} \\
+& M_{xyxz} = - 2 M_{dyz}^{(4)} - M_{dyz}^{(6)} - T_{fax}^{(3)} - T_{fbx}^{(3)} - T_{px}^{(2)} + T_{px}^{(6)}
+\end{align*}
+* Rank 4 tensor (t).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & 0 \\ 0 & 0 & M_{yyyz} \\ 0 & M_{zzzy} & 0 \\ 0 & M_{yyzy} & 0 \\ 0 & 0 & 0 \\ 0 & 0 & M_{xxyz} \\ 0 & 0 & M_{yzzz} \\ 0 & M_{zxxy} & 0 \\ 0 & 0 & 0 \\ - \frac{M_{yyyz}}{2} + \frac{M_{yyzy}}{2} + M_{zxxy} & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{yyyz} = M_{dyz}^{(1)} + 2 M_{dyz}^{(2)} + M_{dyz}^{(3)} - 2 M_{dyz}^{(5)} + M_{gax}^{(1)} - M_{gbx}^{(1)} \\
+& M_{zzzy} = M_{dyz}^{(1)} + 2 M_{dyz}^{(2)} + M_{dyz}^{(3)} - 2 M_{dyz}^{(5)} - M_{gax}^{(1)} - M_{gbx}^{(1)} \\
+& M_{yyzy} = M_{dyz}^{(1)} + 2 M_{dyz}^{(2)} + M_{dyz}^{(3)} + 2 M_{dyz}^{(5)} + M_{gax}^{(1)} - M_{gbx}^{(1)} \\
+& M_{xxyz} = M_{dyz}^{(1)} + M_{dyz}^{(3)} + 2 M_{gbx}^{(1)} \\
+& M_{yzzz} = M_{dyz}^{(1)} + 2 M_{dyz}^{(2)} - M_{dyz}^{(3)} - M_{gax}^{(1)} - M_{gbx}^{(1)} \\
+& M_{zxxy} = M_{dyz}^{(2)} - M_{dyz}^{(5)} + 2 M_{gbx}^{(1)}
+\end{align*}
+
+\end{document}

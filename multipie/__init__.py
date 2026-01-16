@@ -1,75 +1,191 @@
-import os
-import sys
+"""
+Global definition.
 
-__version__ = "1.3.4"
-__top_dir__ = os.path.normpath(os.path.dirname(__file__) + "/../") + "/"
-__bin_dir__ = __top_dir__ + "multipie/binary_data/"
+This module provides global definitions for MultiPie.
+"""
 
-# ==================================================
-from gcoreutils.string_util import class_name
-from gcoreutils.binary_manager import BinaryManager
-
-from multipie.character.character_pg_set import CharacterPGSet
-from multipie.harmonics.harmonics_pg_set import HarmonicsPGSet
-from multipie.wyckoff.wyckoff_g_set import WyckoffGSet
-from multipie.symmetry_operation.symmetry_operation_g_set import SymmetryOperationGSet
-from multipie.virtual_cluster.virtual_cluster_pg_set import VirtualClusterPGSet
-from multipie.clebsch_gordan.clebsch_gordan_pg_set import ClebschGordanPGSet
-from multipie.response_tensor.response_tensor_pg_set import ResponseTensorPGSet
-from multipie.multipole.base.base_atomic_multipole_dataset import BaseAtomicMultipoleDataset
-
+from typing import TYPE_CHECKING
+from collections import namedtuple
+from multipie.core.multipie_info import __version__
 
 # ==================================================
-def create_binary(clean=False, verbose=True):
-    """
-    create binary data.
+PGInfoType = namedtuple(
+    "PGInfoType",
+    [
+        "tag",
+        "international",
+        "schoenflies",
+        "crystal",
+        "setting",
+        "PG",
+        "SG",
+        "MPG",
+        "MSG",
+        "lattice",
+        "hexagonal_g",
+        "SO",
+        "SO_gen",
+    ],
+)
+"""Point Group info type."""
 
-    Args:
-        clean (bool, optional): remove all binaries at beginning.
-        verbose (bool, optional): verbose progress ?
-    """
-    dataset = [
-        CharacterPGSet,
-        HarmonicsPGSet,
-        WyckoffGSet,
-        SymmetryOperationGSet,
-        VirtualClusterPGSet,
-        ClebschGordanPGSet,
-        ResponseTensorPGSet,
-        BaseAtomicMultipoleDataset,
-    ]
+SGInfoType = namedtuple(
+    "SGInfoType",
+    [
+        "tag",
+        "international",
+        "schoenflies",
+        "crystal",
+        "setting",
+        "PG",
+        "SG",
+        "MPG",
+        "MSG",
+        "lattice",
+        "hexagonal_g",
+        "SO",
+        "SO_gen",
+    ],
+)
+"""Space Group info type."""
 
-    def dprint(s, verbose):
-        if verbose:
-            print(s, file=sys.stderr)
+MPGInfoType = namedtuple(
+    "MPGInfoType",
+    [
+        "tag",
+        "international",
+        "schoenflies",
+        "crystal",
+        "setting",
+        "PG",
+        "SG",
+        "MPG",
+        "MSG",
+        "lattice",
+        "hexagonal_g",
+        "type",
+        "SO",
+    ],
+)
+"""Magnetic Point Group info type."""
 
-    if clean:
-        for ds in dataset:
-            name = class_name(ds) + ".pkl"
-            f = __bin_dir__ + name
-            if os.path.exists(f):
-                os.remove(f)
-                dprint("removed " + f, verbose)
-
-    dprint("creating binaries ...", verbose)
-    core = BinaryManager(__bin_dir__, verbose=True)
-    for ds in dataset:
-        core[ds]
-
+MSGInfoType = namedtuple(
+    "MSGInfoType",
+    [
+        "tag",
+        "BNS",
+        "OG",
+        "schoenflies",
+        "crystal",
+        "setting",
+        "PG",
+        "SG",
+        "MPG",
+        "MSG",
+        "lattice",
+        "hexagonal_g",
+        "type",
+        "SO",
+    ],
+)
+"""Magnetic Space Group info type."""
 
 # ==================================================
-def get_binary(load=False, verbose=False):
-    """
-    get binary data.
+SphericalMultipoleType = namedtuple("SphericalMultipoleType", ["X", "l", "s", "k", "x"])
+"""Spherical multipole type (type, rank, s, k, internal-type)."""
 
-    Args:
-        load (bool, optional): load all binaries ?
-        verbose (bool, optional): verbose progress ?
+PGMultipoleType = namedtuple("PGMultipoleType", ["X", "l", "Gamma", "n", "p", "s", "k", "x"])
+"""Point-group multipole type (type, rank, irrep, multiplicity, add_multiplicity, s, k, internal-type)."""
 
-    Returns:
-        BinaryManager: binary manager.
-    """
-    core = BinaryManager(__bin_dir__, verbose=verbose)
-    if load:
-        core.load()
-    return core
+RepSiteType = namedtuple("RepSiteType", ["no", "wyckoff", "symmetry", "position", "orbital"])
+"""Representative site type."""
+
+CellSiteType = namedtuple("CellSiteType", ["no", "position", "position_primitive", "mapping", "sublattice", "plus_set"])
+"""Cell site type."""
+
+BondInfoType = namedtuple("BondInfoType", ["tail", "head", "neighbor", "t_rank", "h_rank"])
+"""Bond info type."""
+
+RepBondType = namedtuple(
+    "RepBondType",
+    ["no", "tail", "head", "neighbor", "wyckoff", "directional", "vector", "center", "distance", "t_rank", "h_rank"],
+)
+"""Representative bond type."""
+
+CellBondType = namedtuple(
+    "CellBondType",
+    [
+        "no",
+        "vector",
+        "vector_primitive",
+        "center",
+        "center_primitive",
+        "mapping",
+        "sublattice",
+        "plus_set",
+        "t_idx",
+        "h_idx",
+        "R_primitive",
+    ],
+)
+"""Cell bond type."""
+
+BraketInfoType = namedtuple("BraketInfoType", ["bh_rank", "bh_idx", "kt_rank", "kt_idx"])
+"""Braket info type."""
+
+SAMBType = namedtuple("SAMBType", ["head", "tail", "wyckoff", "bk_info"])
+"""Combined SAMB type."""
+
+UniqueSAMBType = namedtuple("UniqueSAMBType", ["samb_type", "neighbor", "n"])
+"""Unique combined SAMB type."""
+
+SOMatrixType = namedtuple("SOMatrixType", ["X", "s"])
+"""Symmetry operation matrix type."""
+
+IrrepListType = namedtuple("IrrepListType", ["X", "Gamma"])
+"""Irrep list type."""
+
+InternalBasisType = namedtuple("InternalBasisType", ["s", "x"])
+"""Internal basis type."""
+
+RepMatrixType = namedtuple("RepMatrixType", ["Gamma"])
+"""Representation matrix type."""
+
+
+__all__ = ["Group", "MaterialModel", "create_samb", "create_samb_qtdraw", "create_samb_matrix"]
+
+if TYPE_CHECKING:
+    from multipie.core.group import Group
+    from multipie.core.cmd import create_samb
+    from multipie.core.cmd import create_samb_qtdraw
+    from multipie.core.cmd import create_samb_matrix
+    from multipie.core.material_model import MaterialModel
+
+
+def __getattr__(name):
+    if name == "Group":
+        from multipie.core.group import Group
+
+        return Group
+
+    if name == "create_samb":
+        from multipie.core.cmd import create_samb
+
+        return create_samb
+
+    if name == "create_samb_qtdraw":
+        from multipie.core.cmd import create_samb_qtdraw
+
+        return create_samb_qtdraw
+
+    if name == "create_samb_matrix":
+        from multipie.core.cmd import create_samb_matrix
+
+        return create_samb_matrix
+
+    if name == "MaterialModel":
+        from multipie.core.material_model import MaterialModel
+
+        return MaterialModel
+
+    raise AttributeError

@@ -5,33 +5,31 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "multipie"
 dependencies = [
-    "black",
     "joblib",
-    "gmpy2",
-    "click",
-    "gcoreutils",
+    "click"
 ]
 dynamic = ["version"]
-requires-python = ">=3.9"
+requires-python = ">=3.11"
 authors = [
   { name="Hiroaki Kusunose", email="hiroaki.kusunose@gmail.com" },
   { name="Rikuto Oiwa", email="ro.qp.07@gmail.com" },
 ]
 description = "A python library for crystallographic symmetry operations and Symmetry-Adapted Multipole Basis (SAMB)."
-readme = "docs/README.md"
-license = {text = "MIT"}
+readme = {file = "docs/README.md", content-type = "text/markdown"}
+license = {file = "LICENSE"}
 keywords = ["group theory", "condensed matter", "materials science", "symmetry-adapted basis"]
 classifiers = [
     "Intended Audience :: Science/Research",
     "Topic :: Scientific/Engineering :: Information Analysis",
+    "Topic :: Scientific/Engineering :: Physics",
+    "Topic :: Scientific/Engineering :: Mathematics",
     "License :: OSI Approved :: MIT License",
     "Operating System :: Microsoft :: Windows",
     "Operating System :: POSIX",
     "Operating System :: MacOS",
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
 ]
 
 [project.urls]
@@ -39,21 +37,23 @@ Homepage = "https://github.com/CMT-MU/MultiPie"
 Issues = "https://github.com/CMT-MU/MultiPie/issues"
 
 [project.scripts]
-"create_samb" = "multipie.scripts.create_samb:cmd"
-"create_binary" = "multipie.scripts.create_binary:cmd"
-"create_plot" = "multipie.scripts.create_plot:cmd"
+"mp_create_samb" = "multipie.scripts.mp_create_samb:cmd"
+"mp_create_samb_qtdraw" = "multipie.scripts.mp_create_samb_qtdraw:cmd"
+"mp_create_samb_matrix" = "multipie.scripts.mp_create_samb_matrix:cmd"
 
 [project.optional-dependencies]
 dev = [
+    "black",
     "jupyter-book",
     "ghp-import",
-    "jupytext",
     "qtdraw",
 ]
 
 [tool.setuptools.dynamic]
 version = {attr = "multipie.__version__"}
 
+[tool.setuptools.package-data]
+multipie = ["binary_data/**/*.pkl"]
 [tool.setuptools.packages.find]
 include = ["multipie", "multipie.*"]
 exclude = ["build", "tests"]

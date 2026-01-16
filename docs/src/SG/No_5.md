@@ -1,0 +1,7 @@
+# #5: $C_{\rm 2}^{3}$
+
+- **Symmetry operation** : [PDF](../../../others/pdf/SG/005-C2_3/symmetry_operation.pdf)
+- **Wyckoff**
+  - site : [PDF](../../../others/pdf/SG/005-C2_3/wyckoff_site.pdf)
+  - bond : [PDF](../../../others/pdf/SG/005-C2_3/wyckoff_bond.pdf)
+

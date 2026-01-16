@@ -1,0 +1,118 @@
+\documentclass[fleqn,8pt,landscape]{jsarticle}
+\special{papersize=\the\paperwidth,\the\paperheight}
+
+%%% package
+
+\usepackage[usenames]{color}
+\usepackage{amsmath}
+\usepackage{breqn}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{enumitem}
+\usepackage{braket}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+%%% layout setting
+
+\paperwidth=356.4truemm
+\paperheight=252.0truemm
+\textwidth=335.59999999999997truemm
+\textheight=224.2truemm
+\oddsidemargin=-15truemm
+\topmargin=-15truemm
+\footskip=7truemm
+
+%%% fixed
+
+\hoffset=0truemm
+\voffset=0truemm
+\headheight=0truemm
+\headsep=0truemm
+\marginparsep=0truemm
+\marginparwidth=0truemm
+
+%%% main text
+
+\begin{document}
+
+\setcounter{MaxMatrixCols}{32}
+
+\renewcommand{\tablename}{Table~}
+\renewcommand{\figurename}{Figure~}
+\begin{center}
+\LARGE
+MPG No. 30.3.114\quad$4'32'$\quad[ Type III, cubic ] [G tensor]
+\end{center}
+* Rank 0 tensor.
+\begin{align*}
+\begin{bmatrix} G \end{bmatrix}
+\end{align*}
+\begin{align*}
+& G = G_{s}^{(1)}
+\end{align*}
+* Rank 1 tensor.
+* Rank 2 tensor (s).
+\begin{align*}
+\begin{bmatrix} G_{xx} & 0 & 0 \\ 0 & G_{xx} & 0 \\ 0 & 0 & G_{xx} \end{bmatrix}
+\end{align*}
+\begin{align*}
+& G_{xx} = G_{s}^{(1)}
+\end{align*}
+* Rank 2 tensor (a).
+* Rank 3 tensor (s).
+* Rank 3 tensor (a).
+\begin{align*}
+\begin{bmatrix} G_{yzx} & 0 & 0 \\ 0 & G_{yzx} & 0 \\ 0 & 0 & G_{yzx} \end{bmatrix}
+\end{align*}
+\begin{align*}
+& G_{yzx} = Q_{s}^{(1)}
+\end{align*}
+* Rank 4 tensor (sss).
+\begin{align*}
+\begin{bmatrix} G_{xxxx} & G_{xxyy} & G_{xxyy} & 0 & 0 & 0 \\ G_{xxyy} & G_{xxxx} & G_{xxyy} & 0 & 0 & 0 \\ G_{xxyy} & G_{xxyy} & G_{xxxx} & 0 & 0 & 0 \\ 0 & 0 & 0 & G_{yzyz} & 0 & 0 \\ 0 & 0 & 0 & 0 & G_{yzyz} & 0 \\ 0 & 0 & 0 & 0 & 0 & G_{yzyz} \end{bmatrix}
+\end{align*}
+\begin{align*}
+& G_{xxxx} = 2 G_{g}^{(1)} + G_{s}^{(1)} + 2 G_{s}^{(2)} \\
+& G_{xxyy} = - G_{g}^{(1)} + G_{s}^{(1)} \\
+& G_{yzyz} = - G_{g}^{(1)} + G_{s}^{(2)}
+\end{align*}
+* Rank 4 tensor (ssa).
+* Rank 4 tensor (aas).
+\begin{align*}
+\begin{bmatrix} G_{yzyz} & 0 & 0 \\ 0 & G_{yzyz} & 0 \\ 0 & 0 & G_{yzyz} \end{bmatrix}
+\end{align*}
+\begin{align*}
+& G_{yzyz} = G_{s}^{(3)}
+\end{align*}
+* Rank 4 tensor (aaa).
+* Rank 4 tensor (sa).
+* Rank 4 tensor (as).
+* Rank 4 tensor (s).
+\begin{align*}
+\begin{bmatrix} G_{xxxx} & G_{xxyy} & G_{xxyy} & 0 & 0 & 0 & 0 & 0 & 0 \\ G_{xxyy} & G_{xxxx} & G_{xxyy} & 0 & 0 & 0 & 0 & 0 & 0 \\ G_{xxyy} & G_{xxyy} & G_{xxxx} & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & G_{yzyz} & 0 & 0 & G_{yzyz} & 0 & 0 \\ 0 & 0 & 0 & 0 & G_{yzyz} & 0 & 0 & G_{yzyz} & 0 \\ 0 & 0 & 0 & 0 & 0 & G_{yzyz} & 0 & 0 & G_{yzyz} \end{bmatrix}
+\end{align*}
+\begin{align*}
+& G_{xxxx} = 2 G_{g}^{(1)} + G_{s}^{(1)} + 2 G_{s}^{(2)} \\
+& G_{xxyy} = - G_{g}^{(1)} + G_{s}^{(1)} \\
+& G_{yzyz} = - G_{g}^{(1)} + G_{s}^{(2)}
+\end{align*}
+* Rank 4 tensor (a).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & 0 & G_{yzyz} & 0 & 0 & - G_{yzyz} & 0 & 0 \\ 0 & 0 & 0 & 0 & G_{yzyz} & 0 & 0 & - G_{yzyz} & 0 \\ 0 & 0 & 0 & 0 & 0 & G_{yzyz} & 0 & 0 & - G_{yzyz} \end{bmatrix}
+\end{align*}
+\begin{align*}
+& G_{yzyz} = G_{s}^{(3)}
+\end{align*}
+* Rank 4 tensor (t).
+\begin{align*}
+\begin{bmatrix} G_{xxxx} & 0 & 0 \\ 0 & G_{xxxx} & 0 \\ 0 & 0 & G_{xxxx} \\ 0 & 0 & G_{yyzz} \\ G_{yyzz} & 0 & 0 \\ 0 & G_{yyzz} & 0 \\ 0 & G_{yyzz} & 0 \\ 0 & 0 & G_{yyzz} \\ G_{yyzz} & 0 & 0 \\ 0 & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& G_{xxxx} = 2 G_{g}^{(1)} + 3 G_{s}^{(1)} \\
+& G_{yyzz} = - G_{g}^{(1)} + G_{s}^{(1)}
+\end{align*}
+
+\end{document}

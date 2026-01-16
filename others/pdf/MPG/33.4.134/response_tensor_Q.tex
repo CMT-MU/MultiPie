@@ -1,0 +1,160 @@
+\documentclass[fleqn,8pt,landscape]{jsarticle}
+\special{papersize=\the\paperwidth,\the\paperheight}
+
+%%% package
+
+\usepackage[usenames]{color}
+\usepackage{amsmath}
+\usepackage{breqn}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{enumitem}
+\usepackage{braket}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+%%% layout setting
+
+\paperwidth=356.4truemm
+\paperheight=252.0truemm
+\textwidth=335.59999999999997truemm
+\textheight=224.2truemm
+\oddsidemargin=-15truemm
+\topmargin=-15truemm
+\footskip=7truemm
+
+%%% fixed
+
+\hoffset=0truemm
+\voffset=0truemm
+\headheight=0truemm
+\headsep=0truemm
+\marginparsep=0truemm
+\marginparwidth=0truemm
+
+%%% main text
+
+\begin{document}
+
+\setcounter{MaxMatrixCols}{32}
+
+\renewcommand{\tablename}{Table~}
+\renewcommand{\figurename}{Figure~}
+\begin{center}
+\LARGE
+MPG No. 33.4.134\quad$\bar{4}'2m'$\quad(-4'm'2 setting)\quad[ Type III, tetragonal ] [Q tensor]
+\end{center}
+* Rank 0 tensor.
+\begin{align*}
+\begin{bmatrix} Q \end{bmatrix}
+\end{align*}
+\begin{align*}
+& Q = Q_{s}^{(1)}
+\end{align*}
+* Rank 1 tensor.
+* Rank 2 tensor (s).
+\begin{align*}
+\begin{bmatrix} Q_{xx} & 0 & 0 \\ 0 & Q_{xx} & 0 \\ 0 & 0 & Q_{zz} \end{bmatrix}
+\end{align*}
+\begin{align*}
+& Q_{xx} = - Q_{du}^{(1)} + Q_{s}^{(1)} \\
+& Q_{zz} = 2 Q_{du}^{(1)} + Q_{s}^{(1)}
+\end{align*}
+* Rank 2 tensor (a).
+* Rank 3 tensor (s).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & Q_{xxz} \\ 0 & 0 & - Q_{xxz} \\ 0 & 0 & 0 \\ 0 & Q_{yzy} & 0 \\ - Q_{yzy} & 0 & 0 \\ 0 & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& Q_{xxz} = - 2 G_{dxy}^{(1)} + Q_{fbz}^{(1)} \\
+& Q_{yzy} = - G_{dxy}^{(1)} - Q_{fbz}^{(1)}
+\end{align*}
+* Rank 3 tensor (a).
+\begin{align*}
+\begin{bmatrix} 0 & Q_{yzy} & 0 \\ Q_{yzy} & 0 & 0 \\ 0 & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& Q_{yzy} = G_{dxy}^{(2)}
+\end{align*}
+* Rank 4 tensor (sss).
+\begin{align*}
+\begin{bmatrix} Q_{xxxx} & Q_{xxyy} & Q_{xxzz} & 0 & 0 & 0 \\ Q_{xxyy} & Q_{xxxx} & Q_{xxzz} & 0 & 0 & 0 \\ Q_{xxzz} & Q_{xxzz} & Q_{zzzz} & 0 & 0 & 0 \\ 0 & 0 & 0 & Q_{yzyz} & 0 & 0 \\ 0 & 0 & 0 & 0 & Q_{yzyz} & 0 \\ 0 & 0 & 0 & 0 & 0 & Q_{xyxy} \end{bmatrix}
+\end{align*}
+\begin{align*}
+& Q_{xxxx} = - 2 Q_{du}^{(1)} - 4 Q_{du}^{(2)} - Q_{gu}^{(1)} + 2 Q_{g}^{(1)} + Q_{s}^{(1)} + 2 Q_{s}^{(2)} \\
+& Q_{xxyy} = - 2 Q_{du}^{(1)} + 2 Q_{gu}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(1)} \\
+& Q_{xxzz} = Q_{du}^{(1)} - Q_{gu}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(1)} \\
+& Q_{zzzz} = 4 Q_{du}^{(1)} + 8 Q_{du}^{(2)} + 2 Q_{gu}^{(1)} + 2 Q_{g}^{(1)} + Q_{s}^{(1)} + 2 Q_{s}^{(2)} \\
+& Q_{yzyz} = Q_{du}^{(2)} - Q_{gu}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(2)} \\
+& Q_{xyxy} = - 2 Q_{du}^{(2)} + 2 Q_{gu}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(2)}
+\end{align*}
+* Rank 4 tensor (ssa).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & Q_{xxzz} & 0 & 0 & 0 \\ 0 & 0 & Q_{xxzz} & 0 & 0 & 0 \\ - Q_{xxzz} & - Q_{xxzz} & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& Q_{xxzz} = 3 Q_{du}^{(3)}
+\end{align*}
+* Rank 4 tensor (aas).
+\begin{align*}
+\begin{bmatrix} Q_{yzyz} & 0 & 0 \\ 0 & Q_{yzyz} & 0 \\ 0 & 0 & Q_{xyxy} \end{bmatrix}
+\end{align*}
+\begin{align*}
+& Q_{yzyz} = - 2 Q_{du}^{(4)} + Q_{s}^{(3)} \\
+& Q_{xyxy} = 4 Q_{du}^{(4)} + Q_{s}^{(3)}
+\end{align*}
+* Rank 4 tensor (aaa).
+* Rank 4 tensor (sa).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \\ Q_{yzyz} & 0 & 0 \\ 0 & - Q_{yzyz} & 0 \\ 0 & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& Q_{yzyz} = - 3 Q_{du}^{(5)}
+\end{align*}
+* Rank 4 tensor (as).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & 0 & Q_{yzyz} & 0 & 0 \\ 0 & 0 & 0 & 0 & - Q_{yzyz} & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& Q_{yzyz} = - 3 Q_{du}^{(6)}
+\end{align*}
+* Rank 4 tensor (s).
+\begin{align*}
+\begin{bmatrix} Q_{xxxx} & Q_{xxyy} & Q_{xxzz} & 0 & 0 & 0 & 0 & 0 & 0 \\ Q_{xxyy} & Q_{xxxx} & Q_{xxzz} & 0 & 0 & 0 & 0 & 0 & 0 \\ Q_{zzxx} & Q_{zzxx} & Q_{zzzz} & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & Q_{yzyz} & 0 & 0 & Q_{yzzy} & 0 & 0 \\ 0 & 0 & 0 & 0 & Q_{yzzy} & 0 & 0 & Q_{yzyz} & 0 \\ 0 & 0 & 0 & 0 & 0 & Q_{xyxy} & 0 & 0 & Q_{xyxy} \end{bmatrix}
+\end{align*}
+\begin{align*}
+& Q_{xxxx} = - 2 Q_{du}^{(1)} - 4 Q_{du}^{(2)} - Q_{gu}^{(1)} + 2 Q_{g}^{(1)} + Q_{s}^{(1)} + 2 Q_{s}^{(2)} \\
+& Q_{xxyy} = - 2 Q_{du}^{(1)} + 2 Q_{gu}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(1)} \\
+& Q_{xxzz} = Q_{du}^{(1)} + 3 Q_{du}^{(3)} - Q_{gu}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(1)} \\
+& Q_{zzxx} = Q_{du}^{(1)} - 3 Q_{du}^{(3)} - Q_{gu}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(1)} \\
+& Q_{zzzz} = 4 Q_{du}^{(1)} + 8 Q_{du}^{(2)} + 2 Q_{gu}^{(1)} + 2 Q_{g}^{(1)} + Q_{s}^{(1)} + 2 Q_{s}^{(2)} \\
+& Q_{yzyz} = Q_{du}^{(2)} - 3 Q_{du}^{(5)} - Q_{gu}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(2)} \\
+& Q_{yzzy} = Q_{du}^{(2)} + 3 Q_{du}^{(5)} - Q_{gu}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(2)} \\
+& Q_{xyxy} = - 2 Q_{du}^{(2)} + 2 Q_{gu}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(2)}
+\end{align*}
+* Rank 4 tensor (a).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & 0 & Q_{yzyz} & 0 & 0 & Q_{yzzy} & 0 & 0 \\ 0 & 0 & 0 & 0 & - Q_{yzzy} & 0 & 0 & - Q_{yzyz} & 0 \\ 0 & 0 & 0 & 0 & 0 & Q_{xyxy} & 0 & 0 & - Q_{xyxy} \end{bmatrix}
+\end{align*}
+\begin{align*}
+& Q_{yzyz} = - 2 Q_{du}^{(4)} - 3 Q_{du}^{(6)} + Q_{s}^{(3)} \\
+& Q_{yzzy} = 2 Q_{du}^{(4)} - 3 Q_{du}^{(6)} - Q_{s}^{(3)} \\
+& Q_{xyxy} = 4 Q_{du}^{(4)} + Q_{s}^{(3)}
+\end{align*}
+* Rank 4 tensor (t).
+\begin{align*}
+\begin{bmatrix} Q_{xxxx} & 0 & 0 \\ 0 & Q_{xxxx} & 0 \\ 0 & 0 & Q_{zzzz} \\ 0 & 0 & Q_{yyzz} \\ Q_{zzxx} & 0 & 0 \\ 0 & Q_{xxyy} & 0 \\ 0 & Q_{yzzy} & 0 \\ 0 & 0 & Q_{zxxz} \\ Q_{xxyy} + Q_{yyzz} - Q_{yzzy} - Q_{zxxz} + Q_{zzxx} & 0 & 0 \\ 0 & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& Q_{xxxx} = - 2 Q_{du}^{(1)} - 4 Q_{du}^{(2)} - Q_{gu}^{(1)} + 2 Q_{g}^{(1)} + 3 Q_{s}^{(1)} \\
+& Q_{zzzz} = 4 Q_{du}^{(1)} + 8 Q_{du}^{(2)} + 2 Q_{gu}^{(1)} + 2 Q_{g}^{(1)} + 3 Q_{s}^{(1)} \\
+& Q_{yyzz} = Q_{du}^{(1)} + 3 Q_{du}^{(3)} - Q_{gu}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(1)} \\
+& Q_{zzxx} = Q_{du}^{(1)} - 3 Q_{du}^{(3)} - Q_{gu}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(1)} \\
+& Q_{xxyy} = - 2 Q_{du}^{(1)} + 2 Q_{gu}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(1)} \\
+& Q_{yzzy} = Q_{du}^{(2)} + 3 Q_{du}^{(5)} - Q_{gu}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(1)} \\
+& Q_{zxxz} = Q_{du}^{(2)} - 3 Q_{du}^{(5)} - Q_{gu}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(1)}
+\end{align*}
+
+\end{document}

@@ -1,0 +1,90 @@
+\documentclass[fleqn,8pt,landscape]{jsarticle}
+\special{papersize=\the\paperwidth,\the\paperheight}
+
+%%% package
+
+\usepackage[usenames]{color}
+\usepackage{amsmath}
+\usepackage{breqn}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{enumitem}
+\usepackage{braket}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+%%% layout setting
+
+\paperwidth=356.4truemm
+\paperheight=252.0truemm
+\textwidth=335.59999999999997truemm
+\textheight=224.2truemm
+\oddsidemargin=-15truemm
+\topmargin=-15truemm
+\footskip=7truemm
+
+%%% fixed
+
+\hoffset=0truemm
+\voffset=0truemm
+\headheight=0truemm
+\headsep=0truemm
+\marginparsep=0truemm
+\marginparwidth=0truemm
+
+%%% main text
+
+\begin{document}
+
+\setcounter{MaxMatrixCols}{32}
+
+\renewcommand{\tablename}{Table~}
+\renewcommand{\figurename}{Figure~}
+\begin{center}
+\LARGE
+PG No. 6\quad$D_{\rm 2}$\quad$222$\quad[ orthorhombic ]
+\end{center}
+
+* character table
+\begin{quote}
+\begin{tabular}{crrrr} \hline \hline
+$ D_{\rm 2} $ & $ 1(1) $ & $ 2{}_{001}(1) $ & $ 2{}_{010}(1) $ & $ 2{}_{100}(1) $ \\ \hline
+$ A $ & $ 1 $ & $ 1 $ & $ 1 $ & $ 1 $ \\
+$ B_{1} $ & $ 1 $ & $ 1 $ & $ -1 $ & $ -1 $ \\
+$ B_{2} $ & $ 1 $ & $ -1 $ & $ 1 $ & $ -1 $ \\
+$ B_{3} $ & $ 1 $ & $ -1 $ & $ -1 $ & $ 1 $ \\
+ \hline \hline
+\end{tabular}
+\end{quote}
+
+* polar $\leftrightarrow$ axial conversion
+\begin{quote}
+\begin{tabular}{cccc}
+$ A\,\,(A) $ & $ B_{3}\,\,(B_{3}) $ & $ B_{2}\,\,(B_{2}) $ & $ B_{1}\,\,(B_{1}) $
+\end{tabular}
+\end{quote}
+
+* symmetric product
+\begin{quote}
+\begin{tabular}{c|cccc} \hline \hline
+ & $ A $ & $ B_{1} $ & $ B_{2} $ & $ B_{3} $ \\ \hline
+$ A $ & $ A $ & $ B_{1} $ & $ B_{2} $ & $ B_{3} $ \\
+$ B_{1} $ & $  $ & $ A $ & $ B_{3} $ & $ B_{2} $ \\
+$ B_{2} $ & $  $ & $  $ & $ A $ & $ B_{1} $ \\
+$ B_{3} $ & $  $ & $  $ & $  $ & $ A $ \\
+ \hline \hline
+\end{tabular}
+\end{quote}
+
+* anti-symmetric product
+\begin{quote}
+\begin{tabular}{ccccc} \hline \hline
+ & $ A $ & $ B_{1} $ & $ B_{2} $ & $ B_{3} $ \\ \hline
+$  $ & $ - $ & $ - $ & $ - $ & $ - $ \\
+ \hline \hline
+\end{tabular}
+\end{quote}
+
+\end{document}

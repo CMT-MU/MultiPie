@@ -1,0 +1,35 @@
+# #7: $Pc$
+
+- **#7.24: $Pc$**
+  - Symmetry operation : [PDF](../../../others/pdf/MSG/7.24/symmetry_operation.pdf)
+  - Wyckoff
+    - site : [PDF](../../../others/pdf/MSG/7.24/wyckoff_site.pdf)
+- **#7.25: $Pc1'$**
+  - Symmetry operation : [PDF](../../../others/pdf/MSG/7.25/symmetry_operation.pdf)
+  - Wyckoff
+    - site : [PDF](../../../others/pdf/MSG/7.25/wyckoff_site.pdf)
+- **#7.26: $Pc'$**
+  - Symmetry operation : [PDF](../../../others/pdf/MSG/7.26/symmetry_operation.pdf)
+  - Wyckoff
+    - site : [PDF](../../../others/pdf/MSG/7.26/wyckoff_site.pdf)
+- **#7.27: $P_{a}c$**
+  - Symmetry operation : [PDF](../../../others/pdf/MSG/7.27/symmetry_operation.pdf)
+  - Wyckoff
+    - site : [PDF](../../../others/pdf/MSG/7.27/wyckoff_site.pdf)
+- **#7.28: $P_{c}c$**
+  - Symmetry operation : [PDF](../../../others/pdf/MSG/7.28/symmetry_operation.pdf)
+  - Wyckoff
+    - site : [PDF](../../../others/pdf/MSG/7.28/wyckoff_site.pdf)
+- **#7.29: $P_{b}c$**
+  - Symmetry operation : [PDF](../../../others/pdf/MSG/7.29/symmetry_operation.pdf)
+  - Wyckoff
+    - site : [PDF](../../../others/pdf/MSG/7.29/wyckoff_site.pdf)
+- **#7.30: $P_{C}c$**
+  - Symmetry operation : [PDF](../../../others/pdf/MSG/7.30/symmetry_operation.pdf)
+  - Wyckoff
+    - site : [PDF](../../../others/pdf/MSG/7.30/wyckoff_site.pdf)
+- **#7.31: $P_{A}c$**
+  - Symmetry operation : [PDF](../../../others/pdf/MSG/7.31/symmetry_operation.pdf)
+  - Wyckoff
+    - site : [PDF](../../../others/pdf/MSG/7.31/wyckoff_site.pdf)
+

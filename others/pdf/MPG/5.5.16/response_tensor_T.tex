@@ -1,0 +1,216 @@
+\documentclass[fleqn,8pt,landscape]{jsarticle}
+\special{papersize=\the\paperwidth,\the\paperheight}
+
+%%% package
+
+\usepackage[usenames]{color}
+\usepackage{amsmath}
+\usepackage{breqn}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{enumitem}
+\usepackage{braket}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+%%% layout setting
+
+\paperwidth=356.4truemm
+\paperheight=252.0truemm
+\textwidth=335.59999999999997truemm
+\textheight=224.2truemm
+\oddsidemargin=-15truemm
+\topmargin=-15truemm
+\footskip=7truemm
+
+%%% fixed
+
+\hoffset=0truemm
+\voffset=0truemm
+\headheight=0truemm
+\headsep=0truemm
+\marginparsep=0truemm
+\marginparwidth=0truemm
+
+%%% main text
+
+\begin{document}
+
+\setcounter{MaxMatrixCols}{32}
+
+\renewcommand{\tablename}{Table~}
+\renewcommand{\figurename}{Figure~}
+\begin{center}
+\LARGE
+MPG No. 5.5.16\quad$2'/m'$\quad[ Type III, monoclinic ] [T tensor]
+\end{center}
+* Rank 0 tensor.
+* Rank 1 tensor.
+* Rank 2 tensor (s).
+\begin{align*}
+\begin{bmatrix} 0 & T_{xy} & 0 \\ T_{xy} & 0 & T_{yz} \\ 0 & T_{yz} & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& T_{xy} = T_{dxy}^{(1)} \\
+& T_{yz} = T_{dyz}^{(1)}
+\end{align*}
+* Rank 2 tensor (a).
+\begin{align*}
+\begin{bmatrix} 0 & T_{xy} & 0 \\ - T_{xy} & 0 & T_{yz} \\ 0 & - T_{yz} & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& T_{xy} = M_{pz}^{(1)} \\
+& T_{yz} = M_{px}^{(1)}
+\end{align*}
+* Rank 3 tensor (s).
+* Rank 3 tensor (a).
+* Rank 4 tensor (sss).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & 0 & T_{xxyz} & 0 & T_{xxxy} \\ 0 & 0 & 0 & T_{yyyz} & 0 & T_{yyxy} \\ 0 & 0 & 0 & T_{zzyz} & 0 & T_{zzxy} \\ T_{xxyz} & T_{yyyz} & T_{zzyz} & 0 & T_{yzzx} & 0 \\ 0 & 0 & 0 & T_{yzzx} & 0 & T_{zxxy} \\ T_{xxxy} & T_{yyxy} & T_{zzxy} & 0 & T_{zxxy} & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& T_{xxyz} = T_{dyz}^{(1)} + 2 T_{gbx}^{(1)} \\
+& T_{xxxy} = T_{dxy}^{(1)} + 2 T_{dxy}^{(2)} + T_{gaz}^{(1)} - T_{gbz}^{(1)} \\
+& T_{yyyz} = T_{dyz}^{(1)} + 2 T_{dyz}^{(2)} + T_{gax}^{(1)} - T_{gbx}^{(1)} \\
+& T_{yyxy} = T_{dxy}^{(1)} + 2 T_{dxy}^{(2)} - T_{gaz}^{(1)} - T_{gbz}^{(1)} \\
+& T_{zzyz} = T_{dyz}^{(1)} + 2 T_{dyz}^{(2)} - T_{gax}^{(1)} - T_{gbx}^{(1)} \\
+& T_{zzxy} = T_{dxy}^{(1)} + 2 T_{gbz}^{(1)} \\
+& T_{yzzx} = T_{dxy}^{(2)} + 2 T_{gbz}^{(1)} \\
+& T_{zxxy} = T_{dyz}^{(2)} + 2 T_{gbx}^{(1)}
+\end{align*}
+* Rank 4 tensor (ssa).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & 0 & T_{xxyz} & 0 & T_{xxxy} \\ 0 & 0 & 0 & T_{yyyz} & 0 & T_{yyxy} \\ 0 & 0 & 0 & T_{zzyz} & 0 & T_{zzxy} \\ - T_{xxyz} & - T_{yyyz} & - T_{zzyz} & 0 & T_{yzzx} & 0 \\ 0 & 0 & 0 & - T_{yzzx} & 0 & T_{zxxy} \\ - T_{xxxy} & - T_{yyxy} & - T_{zzxy} & 0 & - T_{zxxy} & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& T_{xxyz} = - 4 M_{fbx}^{(1)} + T_{dyz}^{(3)} \\
+& T_{xxxy} = - 2 M_{faz}^{(1)} + 2 M_{fbz}^{(1)} + 2 M_{pz}^{(1)} + T_{dxy}^{(3)} \\
+& T_{yyyz} = - 2 M_{fax}^{(1)} + 2 M_{fbx}^{(1)} + 2 M_{px}^{(1)} + T_{dyz}^{(3)} \\
+& T_{yyxy} = 2 M_{faz}^{(1)} + 2 M_{fbz}^{(1)} - 2 M_{pz}^{(1)} + T_{dxy}^{(3)} \\
+& T_{zzyz} = 2 M_{fax}^{(1)} + 2 M_{fbx}^{(1)} - 2 M_{px}^{(1)} + T_{dyz}^{(3)} \\
+& T_{zzxy} = - 4 M_{fbz}^{(1)} + T_{dxy}^{(3)} \\
+& T_{yzzx} = - 4 M_{faz}^{(1)} - M_{pz}^{(1)} \\
+& T_{zxxy} = - 4 M_{fax}^{(1)} - M_{px}^{(1)}
+\end{align*}
+* Rank 4 tensor (aas).
+\begin{align*}
+\begin{bmatrix} 0 & T_{yzzx} & 0 \\ T_{yzzx} & 0 & T_{zxxy} \\ 0 & T_{zxxy} & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& T_{yzzx} = 2 T_{dxy}^{(4)} \\
+& T_{zxxy} = 2 T_{dyz}^{(4)}
+\end{align*}
+* Rank 4 tensor (aaa).
+\begin{align*}
+\begin{bmatrix} 0 & T_{yzzx} & 0 \\ - T_{yzzx} & 0 & T_{zxxy} \\ 0 & - T_{zxxy} & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& T_{yzzx} = - M_{pz}^{(2)} \\
+& T_{zxxy} = - M_{px}^{(2)}
+\end{align*}
+* Rank 4 tensor (sa).
+\begin{align*}
+\begin{bmatrix} T_{xxyz} & 0 & T_{xxxy} \\ T_{yyyz} & 0 & T_{yyxy} \\ T_{zzyz} & 0 & T_{zzxy} \\ 0 & T_{yzzx} & 0 \\ T_{zxyz} & 0 & T_{zxxy} \\ 0 & T_{xyzx} & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& T_{xxyz} = 2 M_{fax}^{(2)} + M_{px}^{(3)} + 2 M_{px}^{(4)} \\
+& T_{xxxy} = - M_{faz}^{(2)} + M_{fbz}^{(2)} + M_{pz}^{(3)} - 2 T_{dxy}^{(5)} \\
+& T_{yyyz} = - M_{fax}^{(2)} + M_{fbx}^{(2)} + M_{px}^{(3)} - 2 T_{dyz}^{(5)} \\
+& T_{yyxy} = - M_{faz}^{(2)} - M_{fbz}^{(2)} + M_{pz}^{(3)} + 2 T_{dxy}^{(5)} \\
+& T_{zzyz} = - M_{fax}^{(2)} - M_{fbx}^{(2)} + M_{px}^{(3)} + 2 T_{dyz}^{(5)} \\
+& T_{zzxy} = 2 M_{faz}^{(2)} + M_{pz}^{(3)} + 2 M_{pz}^{(4)} \\
+& T_{yzzx} = - M_{faz}^{(2)} - M_{fbz}^{(2)} + M_{pz}^{(4)} - T_{dxy}^{(5)} \\
+& T_{zxyz} = - M_{faz}^{(2)} + M_{fbz}^{(2)} + M_{pz}^{(4)} + T_{dxy}^{(5)} \\
+& T_{zxxy} = - M_{fax}^{(2)} - M_{fbx}^{(2)} + M_{px}^{(4)} - T_{dyz}^{(5)} \\
+& T_{xyzx} = - M_{fax}^{(2)} + M_{fbx}^{(2)} + M_{px}^{(4)} + T_{dyz}^{(5)}
+\end{align*}
+* Rank 4 tensor (as).
+\begin{align*}
+\begin{bmatrix} T_{yzxx} & T_{yzyy} & T_{yzzz} & 0 & T_{yzzx} & 0 \\ 0 & 0 & 0 & T_{zxyz} & 0 & T_{zxxy} \\ T_{xyxx} & T_{xyyy} & T_{xyzz} & 0 & T_{xyzx} & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& T_{yzxx} = 2 M_{fax}^{(3)} + M_{px}^{(5)} + 2 M_{px}^{(6)} \\
+& T_{yzyy} = - M_{fax}^{(3)} + M_{fbx}^{(3)} + M_{px}^{(5)} - 2 T_{dyz}^{(6)} \\
+& T_{yzzz} = - M_{fax}^{(3)} - M_{fbx}^{(3)} + M_{px}^{(5)} + 2 T_{dyz}^{(6)} \\
+& T_{yzzx} = - M_{faz}^{(3)} + M_{fbz}^{(3)} + M_{pz}^{(6)} + T_{dxy}^{(6)} \\
+& T_{zxyz} = - M_{faz}^{(3)} - M_{fbz}^{(3)} + M_{pz}^{(6)} - T_{dxy}^{(6)} \\
+& T_{zxxy} = - M_{fax}^{(3)} + M_{fbx}^{(3)} + M_{px}^{(6)} + T_{dyz}^{(6)} \\
+& T_{xyxx} = - M_{faz}^{(3)} + M_{fbz}^{(3)} + M_{pz}^{(5)} - 2 T_{dxy}^{(6)} \\
+& T_{xyyy} = - M_{faz}^{(3)} - M_{fbz}^{(3)} + M_{pz}^{(5)} + 2 T_{dxy}^{(6)} \\
+& T_{xyzz} = 2 M_{faz}^{(3)} + M_{pz}^{(5)} + 2 M_{pz}^{(6)} \\
+& T_{xyzx} = - M_{fax}^{(3)} - M_{fbx}^{(3)} + M_{px}^{(6)} - T_{dyz}^{(6)}
+\end{align*}
+* Rank 4 tensor (s).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & 0 & T_{xxyz} & 0 & T_{xxxy} & T_{xxzy} & 0 & T_{xxyx} \\ 0 & 0 & 0 & T_{yyyz} & 0 & T_{yyxy} & T_{yyzy} & 0 & T_{yyyx} \\ 0 & 0 & 0 & T_{zzyz} & 0 & T_{zzxy} & T_{zzzy} & 0 & T_{zzyx} \\ T_{yzxx} & T_{yzyy} & T_{yzzz} & 0 & T_{yzzx} & 0 & 0 & T_{yzxz} & 0 \\ 0 & 0 & 0 & T_{zxyz} & 0 & T_{zxxy} & T_{zxzy} & 0 & T_{zxyx} \\ T_{xyxx} & T_{xyyy} & T_{xyzz} & 0 & T_{xyzx} & 0 & 0 & T_{xyxz} & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& T_{xxyz} = 2 M_{fax}^{(2)} - 4 M_{fbx}^{(1)} + M_{px}^{(3)} + 2 M_{px}^{(4)} + T_{dyz}^{(1)} + T_{dyz}^{(3)} + 2 T_{gbx}^{(1)} \\
+& T_{xxxy} = - 2 M_{faz}^{(1)} - M_{faz}^{(2)} + 2 M_{fbz}^{(1)} + M_{fbz}^{(2)} + 2 M_{pz}^{(1)} + M_{pz}^{(3)} + T_{dxy}^{(1)} + 2 T_{dxy}^{(2)} + T_{dxy}^{(3)} - 2 T_{dxy}^{(5)} + T_{gaz}^{(1)} - T_{gbz}^{(1)} \\
+& T_{xxzy} = - 2 M_{fax}^{(2)} - 4 M_{fbx}^{(1)} - M_{px}^{(3)} - 2 M_{px}^{(4)} + T_{dyz}^{(1)} + T_{dyz}^{(3)} + 2 T_{gbx}^{(1)} \\
+& T_{xxyx} = - 2 M_{faz}^{(1)} + M_{faz}^{(2)} + 2 M_{fbz}^{(1)} - M_{fbz}^{(2)} + 2 M_{pz}^{(1)} - M_{pz}^{(3)} + T_{dxy}^{(1)} + 2 T_{dxy}^{(2)} + T_{dxy}^{(3)} + 2 T_{dxy}^{(5)} + T_{gaz}^{(1)} - T_{gbz}^{(1)} \\
+& T_{yyyz} = - 2 M_{fax}^{(1)} - M_{fax}^{(2)} + 2 M_{fbx}^{(1)} + M_{fbx}^{(2)} + 2 M_{px}^{(1)} + M_{px}^{(3)} + T_{dyz}^{(1)} + 2 T_{dyz}^{(2)} + T_{dyz}^{(3)} - 2 T_{dyz}^{(5)} + T_{gax}^{(1)} - T_{gbx}^{(1)} \\
+& T_{yyxy} = 2 M_{faz}^{(1)} - M_{faz}^{(2)} + 2 M_{fbz}^{(1)} - M_{fbz}^{(2)} - 2 M_{pz}^{(1)} + M_{pz}^{(3)} + T_{dxy}^{(1)} + 2 T_{dxy}^{(2)} + T_{dxy}^{(3)} + 2 T_{dxy}^{(5)} - T_{gaz}^{(1)} - T_{gbz}^{(1)} \\
+& T_{yyzy} = - 2 M_{fax}^{(1)} + M_{fax}^{(2)} + 2 M_{fbx}^{(1)} - M_{fbx}^{(2)} + 2 M_{px}^{(1)} - M_{px}^{(3)} + T_{dyz}^{(1)} + 2 T_{dyz}^{(2)} + T_{dyz}^{(3)} + 2 T_{dyz}^{(5)} + T_{gax}^{(1)} - T_{gbx}^{(1)} \\
+& T_{yyyx} = 2 M_{faz}^{(1)} + M_{faz}^{(2)} + 2 M_{fbz}^{(1)} + M_{fbz}^{(2)} - 2 M_{pz}^{(1)} - M_{pz}^{(3)} + T_{dxy}^{(1)} + 2 T_{dxy}^{(2)} + T_{dxy}^{(3)} - 2 T_{dxy}^{(5)} - T_{gaz}^{(1)} - T_{gbz}^{(1)} \\
+& T_{zzyz} = 2 M_{fax}^{(1)} - M_{fax}^{(2)} + 2 M_{fbx}^{(1)} - M_{fbx}^{(2)} - 2 M_{px}^{(1)} + M_{px}^{(3)} + T_{dyz}^{(1)} + 2 T_{dyz}^{(2)} + T_{dyz}^{(3)} + 2 T_{dyz}^{(5)} - T_{gax}^{(1)} - T_{gbx}^{(1)} \\
+& T_{zzxy} = 2 M_{faz}^{(2)} - 4 M_{fbz}^{(1)} + M_{pz}^{(3)} + 2 M_{pz}^{(4)} + T_{dxy}^{(1)} + T_{dxy}^{(3)} + 2 T_{gbz}^{(1)} \\
+& T_{zzzy} = 2 M_{fax}^{(1)} + M_{fax}^{(2)} + 2 M_{fbx}^{(1)} + M_{fbx}^{(2)} - 2 M_{px}^{(1)} - M_{px}^{(3)} + T_{dyz}^{(1)} + 2 T_{dyz}^{(2)} + T_{dyz}^{(3)} - 2 T_{dyz}^{(5)} - T_{gax}^{(1)} - T_{gbx}^{(1)} \\
+& T_{zzyx} = - 2 M_{faz}^{(2)} - 4 M_{fbz}^{(1)} - M_{pz}^{(3)} - 2 M_{pz}^{(4)} + T_{dxy}^{(1)} + T_{dxy}^{(3)} + 2 T_{gbz}^{(1)} \\
+& T_{yzxx} = 4 M_{fbx}^{(1)} + T_{dyz}^{(1)} - T_{dyz}^{(3)} + 2 T_{gbx}^{(1)} \\
+& T_{yzyy} = 2 M_{fax}^{(1)} - 2 M_{fbx}^{(1)} - 2 M_{px}^{(1)} + T_{dyz}^{(1)} + 2 T_{dyz}^{(2)} - T_{dyz}^{(3)} + T_{gax}^{(1)} - T_{gbx}^{(1)} \\
+& T_{yzzz} = - 2 M_{fax}^{(1)} - 2 M_{fbx}^{(1)} + 2 M_{px}^{(1)} + T_{dyz}^{(1)} + 2 T_{dyz}^{(2)} - T_{dyz}^{(3)} - T_{gax}^{(1)} - T_{gbx}^{(1)} \\
+& T_{yzzx} = - 4 M_{faz}^{(1)} - M_{faz}^{(2)} - M_{fbz}^{(2)} - M_{pz}^{(1)} + M_{pz}^{(4)} + T_{dxy}^{(2)} - T_{dxy}^{(5)} + 2 T_{gbz}^{(1)} \\
+& T_{yzxz} = - 4 M_{faz}^{(1)} + M_{faz}^{(2)} + M_{fbz}^{(2)} - M_{pz}^{(1)} - M_{pz}^{(4)} + T_{dxy}^{(2)} + T_{dxy}^{(5)} + 2 T_{gbz}^{(1)} \\
+& T_{zxyz} = 4 M_{faz}^{(1)} - M_{faz}^{(2)} + M_{fbz}^{(2)} + M_{pz}^{(1)} + M_{pz}^{(4)} + T_{dxy}^{(2)} + T_{dxy}^{(5)} + 2 T_{gbz}^{(1)} \\
+& T_{zxxy} = - 4 M_{fax}^{(1)} - M_{fax}^{(2)} - M_{fbx}^{(2)} - M_{px}^{(1)} + M_{px}^{(4)} + T_{dyz}^{(2)} - T_{dyz}^{(5)} + 2 T_{gbx}^{(1)} \\
+& T_{zxzy} = 4 M_{faz}^{(1)} + M_{faz}^{(2)} - M_{fbz}^{(2)} + M_{pz}^{(1)} - M_{pz}^{(4)} + T_{dxy}^{(2)} - T_{dxy}^{(5)} + 2 T_{gbz}^{(1)} \\
+& T_{zxyx} = - 4 M_{fax}^{(1)} + M_{fax}^{(2)} + M_{fbx}^{(2)} - M_{px}^{(1)} - M_{px}^{(4)} + T_{dyz}^{(2)} + T_{dyz}^{(5)} + 2 T_{gbx}^{(1)} \\
+& T_{xyxx} = 2 M_{faz}^{(1)} - 2 M_{fbz}^{(1)} - 2 M_{pz}^{(1)} + T_{dxy}^{(1)} + 2 T_{dxy}^{(2)} - T_{dxy}^{(3)} + T_{gaz}^{(1)} - T_{gbz}^{(1)} \\
+& T_{xyyy} = - 2 M_{faz}^{(1)} - 2 M_{fbz}^{(1)} + 2 M_{pz}^{(1)} + T_{dxy}^{(1)} + 2 T_{dxy}^{(2)} - T_{dxy}^{(3)} - T_{gaz}^{(1)} - T_{gbz}^{(1)} \\
+& T_{xyzz} = 4 M_{fbz}^{(1)} + T_{dxy}^{(1)} - T_{dxy}^{(3)} + 2 T_{gbz}^{(1)} \\
+& T_{xyzx} = 4 M_{fax}^{(1)} - M_{fax}^{(2)} + M_{fbx}^{(2)} + M_{px}^{(1)} + M_{px}^{(4)} + T_{dyz}^{(2)} + T_{dyz}^{(5)} + 2 T_{gbx}^{(1)} \\
+& T_{xyxz} = 4 M_{fax}^{(1)} + M_{fax}^{(2)} - M_{fbx}^{(2)} + M_{px}^{(1)} - M_{px}^{(4)} + T_{dyz}^{(2)} - T_{dyz}^{(5)} + 2 T_{gbx}^{(1)}
+\end{align*}
+* Rank 4 tensor (a).
+\begin{align*}
+\begin{bmatrix} T_{yzxx} & T_{yzyy} & T_{yzzz} & 0 & T_{yzzx} & 0 & 0 & T_{yzxz} & 0 \\ 0 & 0 & 0 & T_{zxyz} & 0 & T_{zxxy} & T_{zxzy} & 0 & T_{zxyx} \\ T_{xyxx} & T_{xyyy} & T_{xyzz} & 0 & T_{xyzx} & 0 & 0 & T_{xyxz} & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& T_{yzxx} = 2 M_{fax}^{(3)} + M_{px}^{(5)} + 2 M_{px}^{(6)} \\
+& T_{yzyy} = - M_{fax}^{(3)} + M_{fbx}^{(3)} + M_{px}^{(5)} - 2 T_{dyz}^{(6)} \\
+& T_{yzzz} = - M_{fax}^{(3)} - M_{fbx}^{(3)} + M_{px}^{(5)} + 2 T_{dyz}^{(6)} \\
+& T_{yzzx} = - M_{faz}^{(3)} + M_{fbz}^{(3)} - M_{pz}^{(2)} + M_{pz}^{(6)} + 2 T_{dxy}^{(4)} + T_{dxy}^{(6)} \\
+& T_{yzxz} = - M_{faz}^{(3)} + M_{fbz}^{(3)} + M_{pz}^{(2)} + M_{pz}^{(6)} - 2 T_{dxy}^{(4)} + T_{dxy}^{(6)} \\
+& T_{zxyz} = - M_{faz}^{(3)} - M_{fbz}^{(3)} + M_{pz}^{(2)} + M_{pz}^{(6)} + 2 T_{dxy}^{(4)} - T_{dxy}^{(6)} \\
+& T_{zxxy} = - M_{fax}^{(3)} + M_{fbx}^{(3)} - M_{px}^{(2)} + M_{px}^{(6)} + 2 T_{dyz}^{(4)} + T_{dyz}^{(6)} \\
+& T_{zxzy} = - M_{faz}^{(3)} - M_{fbz}^{(3)} - M_{pz}^{(2)} + M_{pz}^{(6)} - 2 T_{dxy}^{(4)} - T_{dxy}^{(6)} \\
+& T_{zxyx} = - M_{fax}^{(3)} + M_{fbx}^{(3)} + M_{px}^{(2)} + M_{px}^{(6)} - 2 T_{dyz}^{(4)} + T_{dyz}^{(6)} \\
+& T_{xyxx} = - M_{faz}^{(3)} + M_{fbz}^{(3)} + M_{pz}^{(5)} - 2 T_{dxy}^{(6)} \\
+& T_{xyyy} = - M_{faz}^{(3)} - M_{fbz}^{(3)} + M_{pz}^{(5)} + 2 T_{dxy}^{(6)} \\
+& T_{xyzz} = 2 M_{faz}^{(3)} + M_{pz}^{(5)} + 2 M_{pz}^{(6)} \\
+& T_{xyzx} = - M_{fax}^{(3)} - M_{fbx}^{(3)} + M_{px}^{(2)} + M_{px}^{(6)} + 2 T_{dyz}^{(4)} - T_{dyz}^{(6)} \\
+& T_{xyxz} = - M_{fax}^{(3)} - M_{fbx}^{(3)} - M_{px}^{(2)} + M_{px}^{(6)} - 2 T_{dyz}^{(4)} - T_{dyz}^{(6)}
+\end{align*}
+* Rank 4 tensor (t).
+\begin{align*}
+\begin{bmatrix} 0 & T_{xxxy} & 0 \\ T_{yyyx} & 0 & T_{yyyz} \\ 0 & T_{zzzy} & 0 \\ 0 & T_{yyzy} & 0 \\ 0 & T_{zzxy} & 0 \\ T_{xxyx} & 0 & T_{xxyz} \\ T_{yzzx} & 0 & T_{yzzz} \\ 0 & T_{zxxy} & 0 \\ 0 & T_{xyyy} & 0 \\ - \frac{T_{yyyz}}{2} + \frac{T_{yyzy}}{2} + T_{zxxy} & 0 & \frac{T_{xxxy}}{2} - \frac{T_{xxyx}}{2} + T_{xyyy} - T_{yyyx} + T_{zzxy} \end{bmatrix}
+\end{align*}
+\begin{align*}
+& T_{xxxy} = T_{dxy}^{(1)} + 2 T_{dxy}^{(2)} + T_{dxy}^{(3)} - 2 T_{dxy}^{(5)} + T_{gaz}^{(1)} - T_{gbz}^{(1)} \\
+& T_{yyyx} = T_{dxy}^{(1)} + 2 T_{dxy}^{(2)} + T_{dxy}^{(3)} - 2 T_{dxy}^{(5)} - T_{gaz}^{(1)} - T_{gbz}^{(1)} \\
+& T_{yyyz} = T_{dyz}^{(1)} + 2 T_{dyz}^{(2)} + T_{dyz}^{(3)} - 2 T_{dyz}^{(5)} + T_{gax}^{(1)} - T_{gbx}^{(1)} \\
+& T_{zzzy} = T_{dyz}^{(1)} + 2 T_{dyz}^{(2)} + T_{dyz}^{(3)} - 2 T_{dyz}^{(5)} - T_{gax}^{(1)} - T_{gbx}^{(1)} \\
+& T_{yyzy} = T_{dyz}^{(1)} + 2 T_{dyz}^{(2)} + T_{dyz}^{(3)} + 2 T_{dyz}^{(5)} + T_{gax}^{(1)} - T_{gbx}^{(1)} \\
+& T_{zzxy} = T_{dxy}^{(1)} + T_{dxy}^{(3)} + 2 T_{gbz}^{(1)} \\
+& T_{xxyx} = T_{dxy}^{(1)} + 2 T_{dxy}^{(2)} + T_{dxy}^{(3)} + 2 T_{dxy}^{(5)} + T_{gaz}^{(1)} - T_{gbz}^{(1)} \\
+& T_{xxyz} = T_{dyz}^{(1)} + T_{dyz}^{(3)} + 2 T_{gbx}^{(1)} \\
+& T_{yzzx} = T_{dxy}^{(2)} - T_{dxy}^{(5)} + 2 T_{gbz}^{(1)} \\
+& T_{yzzz} = T_{dyz}^{(1)} + 2 T_{dyz}^{(2)} - T_{dyz}^{(3)} - T_{gax}^{(1)} - T_{gbx}^{(1)} \\
+& T_{zxxy} = T_{dyz}^{(2)} - T_{dyz}^{(5)} + 2 T_{gbx}^{(1)} \\
+& T_{xyyy} = T_{dxy}^{(1)} + 2 T_{dxy}^{(2)} - T_{dxy}^{(3)} - T_{gaz}^{(1)} - T_{gbz}^{(1)}
+\end{align*}
+
+\end{document}

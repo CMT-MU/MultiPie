@@ -1,0 +1,167 @@
+\documentclass[fleqn,8pt,landscape]{jsarticle}
+\special{papersize=\the\paperwidth,\the\paperheight}
+
+%%% package
+
+\usepackage[usenames]{color}
+\usepackage{amsmath}
+\usepackage{breqn}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{enumitem}
+\usepackage{braket}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+%%% layout setting
+
+\paperwidth=356.4truemm
+\paperheight=252.0truemm
+\textwidth=335.59999999999997truemm
+\textheight=224.2truemm
+\oddsidemargin=-15truemm
+\topmargin=-15truemm
+\footskip=7truemm
+
+%%% fixed
+
+\hoffset=0truemm
+\voffset=0truemm
+\headheight=0truemm
+\headsep=0truemm
+\marginparsep=0truemm
+\marginparwidth=0truemm
+
+%%% main text
+
+\begin{document}
+
+\setcounter{MaxMatrixCols}{32}
+
+\renewcommand{\tablename}{Table~}
+\renewcommand{\figurename}{Figure~}
+\begin{center}
+\LARGE
+MPG No. 18.1.65\quad$32$\quad(321 setting)\quad[ Type I, trigonal ] [G tensor]
+\end{center}
+* Rank 0 tensor.
+\begin{align*}
+\begin{bmatrix} G \end{bmatrix}
+\end{align*}
+\begin{align*}
+& G = G_{s}^{(1)}
+\end{align*}
+* Rank 1 tensor.
+* Rank 2 tensor (s).
+\begin{align*}
+\begin{bmatrix} G_{xx} & 0 & 0 \\ 0 & G_{xx} & 0 \\ 0 & 0 & G_{zz} \end{bmatrix}
+\end{align*}
+\begin{align*}
+& G_{xx} = - G_{du}^{(1)} + G_{s}^{(1)} \\
+& G_{zz} = 2 G_{du}^{(1)} + G_{s}^{(1)}
+\end{align*}
+* Rank 2 tensor (a).
+* Rank 3 tensor (s).
+\begin{align*}
+\begin{bmatrix} G_{xxx} & 0 & 0 \\ - G_{xxx} & 0 & 0 \\ 0 & 0 & 0 \\ G_{yzx} & 0 & 0 \\ 0 & - G_{yzx} & 0 \\ 0 & - G_{xxx} & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& G_{xxx} = G_{f2}^{(1)} \\
+& G_{yzx} = - 3 Q_{du}^{(1)}
+\end{align*}
+* Rank 3 tensor (a).
+\begin{align*}
+\begin{bmatrix} G_{yzx} & 0 & 0 \\ 0 & G_{yzx} & 0 \\ 0 & 0 & G_{xyz} \end{bmatrix}
+\end{align*}
+\begin{align*}
+& G_{yzx} = - Q_{du}^{(2)} + Q_{s}^{(1)} \\
+& G_{xyz} = 2 Q_{du}^{(2)} + Q_{s}^{(1)}
+\end{align*}
+* Rank 4 tensor (sss).
+\begin{align*}
+\begin{bmatrix} G_{xxxx} & G_{xxyy} & G_{xxzz} & G_{xxyz} & 0 & 0 \\ G_{xxyy} & G_{xxxx} & G_{xxzz} & - G_{xxyz} & 0 & 0 \\ G_{xxzz} & G_{xxzz} & G_{zzzz} & 0 & 0 & 0 \\ G_{xxyz} & - G_{xxyz} & 0 & G_{yzyz} & 0 & 0 \\ 0 & 0 & 0 & 0 & G_{yzyz} & G_{xxyz} \\ 0 & 0 & 0 & 0 & G_{xxyz} & \frac{G_{xxxx}}{2} - \frac{G_{xxyy}}{2} \end{bmatrix}
+\end{align*}
+\begin{align*}
+& G_{xxxx} = - 2 G_{du}^{(1)} - 4 G_{du}^{(2)} + 3 G_{g0}^{(1)} + G_{s}^{(1)} + 2 G_{s}^{(2)} \\
+& G_{xxyy} = - 2 G_{du}^{(1)} + G_{g0}^{(1)} + G_{s}^{(1)} \\
+& G_{xxzz} = G_{du}^{(1)} - 4 G_{g0}^{(1)} + G_{s}^{(1)} \\
+& G_{xxyz} = G_{gb}^{(1)} \\
+& G_{zzzz} = 4 G_{du}^{(1)} + 8 G_{du}^{(2)} + 8 G_{g0}^{(1)} + G_{s}^{(1)} + 2 G_{s}^{(2)} \\
+& G_{yzyz} = G_{du}^{(2)} - 4 G_{g0}^{(1)} + G_{s}^{(2)}
+\end{align*}
+* Rank 4 tensor (ssa).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & G_{xxzz} & G_{xxyz} & 0 & 0 \\ 0 & 0 & G_{xxzz} & - G_{xxyz} & 0 & 0 \\ - G_{xxzz} & - G_{xxzz} & 0 & 0 & 0 & 0 \\ - G_{xxyz} & G_{xxyz} & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & - G_{xxyz} \\ 0 & 0 & 0 & 0 & G_{xxyz} & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& G_{xxzz} = 3 G_{du}^{(3)} \\
+& G_{xxyz} = 2 Q_{f2}^{(1)}
+\end{align*}
+* Rank 4 tensor (aas).
+\begin{align*}
+\begin{bmatrix} G_{yzyz} & 0 & 0 \\ 0 & G_{yzyz} & 0 \\ 0 & 0 & G_{xyxy} \end{bmatrix}
+\end{align*}
+\begin{align*}
+& G_{yzyz} = - 2 G_{du}^{(4)} + G_{s}^{(3)} \\
+& G_{xyxy} = 4 G_{du}^{(4)} + G_{s}^{(3)}
+\end{align*}
+* Rank 4 tensor (aaa).
+* Rank 4 tensor (sa).
+\begin{align*}
+\begin{bmatrix} G_{xxyz} & 0 & 0 \\ - G_{xxyz} & 0 & 0 \\ 0 & 0 & 0 \\ G_{yzyz} & 0 & 0 \\ 0 & - G_{yzyz} & 0 \\ 0 & - G_{xxyz} & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& G_{xxyz} = Q_{f2}^{(2)} \\
+& G_{yzyz} = - 3 G_{du}^{(5)}
+\end{align*}
+* Rank 4 tensor (as).
+\begin{align*}
+\begin{bmatrix} G_{yzxx} & - G_{yzxx} & 0 & G_{yzyz} & 0 & 0 \\ 0 & 0 & 0 & 0 & - G_{yzyz} & - G_{yzxx} \\ 0 & 0 & 0 & 0 & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& G_{yzxx} = Q_{f2}^{(3)} \\
+& G_{yzyz} = - 3 G_{du}^{(6)}
+\end{align*}
+* Rank 4 tensor (s).
+\begin{align*}
+\begin{bmatrix} G_{xxxx} & G_{xxyy} & G_{xxzz} & G_{xxyz} & 0 & 0 & G_{xxzy} & 0 & 0 \\ G_{xxyy} & G_{xxxx} & G_{xxzz} & - G_{xxyz} & 0 & 0 & - G_{xxzy} & 0 & 0 \\ G_{zzxx} & G_{zzxx} & G_{zzzz} & 0 & 0 & 0 & 0 & 0 & 0 \\ G_{yzxx} & - G_{yzxx} & 0 & G_{yzyz} & 0 & 0 & G_{yzzy} & 0 & 0 \\ 0 & 0 & 0 & 0 & G_{yzzy} & G_{yzxx} & 0 & G_{yzyz} & G_{yzxx} \\ 0 & 0 & 0 & 0 & G_{xxzy} & \frac{G_{xxxx}}{2} - \frac{G_{xxyy}}{2} & 0 & G_{xxyz} & \frac{G_{xxxx}}{2} - \frac{G_{xxyy}}{2} \end{bmatrix}
+\end{align*}
+\begin{align*}
+& G_{xxxx} = - 2 G_{du}^{(1)} - 4 G_{du}^{(2)} + 3 G_{g0}^{(1)} + G_{s}^{(1)} + 2 G_{s}^{(2)} \\
+& G_{xxyy} = - 2 G_{du}^{(1)} + G_{g0}^{(1)} + G_{s}^{(1)} \\
+& G_{xxzz} = G_{du}^{(1)} + 3 G_{du}^{(3)} - 4 G_{g0}^{(1)} + G_{s}^{(1)} \\
+& G_{xxyz} = G_{gb}^{(1)} + 2 Q_{f2}^{(1)} + Q_{f2}^{(2)} \\
+& G_{xxzy} = G_{gb}^{(1)} + 2 Q_{f2}^{(1)} - Q_{f2}^{(2)} \\
+& G_{zzxx} = G_{du}^{(1)} - 3 G_{du}^{(3)} - 4 G_{g0}^{(1)} + G_{s}^{(1)} \\
+& G_{zzzz} = 4 G_{du}^{(1)} + 8 G_{du}^{(2)} + 8 G_{g0}^{(1)} + G_{s}^{(1)} + 2 G_{s}^{(2)} \\
+& G_{yzxx} = G_{gb}^{(1)} - 2 Q_{f2}^{(1)} \\
+& G_{yzyz} = G_{du}^{(2)} - 3 G_{du}^{(5)} - 4 G_{g0}^{(1)} + G_{s}^{(2)} \\
+& G_{yzzy} = G_{du}^{(2)} + 3 G_{du}^{(5)} - 4 G_{g0}^{(1)} + G_{s}^{(2)}
+\end{align*}
+* Rank 4 tensor (a).
+\begin{align*}
+\begin{bmatrix} G_{yzxx} & - G_{yzxx} & 0 & G_{yzyz} & 0 & 0 & G_{yzzy} & 0 & 0 \\ 0 & 0 & 0 & 0 & - G_{yzzy} & - G_{yzxx} & 0 & - G_{yzyz} & - G_{yzxx} \\ 0 & 0 & 0 & 0 & 0 & G_{xyxy} & 0 & 0 & - G_{xyxy} \end{bmatrix}
+\end{align*}
+\begin{align*}
+& G_{yzxx} = Q_{f2}^{(3)} \\
+& G_{yzyz} = - 2 G_{du}^{(4)} - 3 G_{du}^{(6)} + G_{s}^{(3)} \\
+& G_{yzzy} = 2 G_{du}^{(4)} - 3 G_{du}^{(6)} - G_{s}^{(3)} \\
+& G_{xyxy} = 4 G_{du}^{(4)} + G_{s}^{(3)}
+\end{align*}
+* Rank 4 tensor (t).
+\begin{align*}
+\begin{bmatrix} G_{xxxx} & 0 & 0 \\ 0 & G_{xxxx} & G_{yyyz} \\ 0 & 0 & G_{zzzz} \\ 0 & G_{yyyz} & G_{yyzz} \\ G_{zzxx} & 0 & 0 \\ 0 & G_{xxyy} & - G_{yyyz} \\ 0 & G_{yzzy} & 0 \\ 0 & - G_{yyyz} & - \frac{G_{xxxx}}{2} + \frac{3 G_{xxyy}}{2} + G_{yyzz} - G_{yzzy} + G_{zzxx} \\ \frac{G_{xxxx}}{2} - \frac{G_{xxyy}}{2} & 0 & 0 \\ - G_{yyyz} & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& G_{xxxx} = - 2 G_{du}^{(1)} - 4 G_{du}^{(2)} + 3 G_{g0}^{(1)} + 3 G_{s}^{(1)} \\
+& G_{yyyz} = - G_{gb}^{(1)} \\
+& G_{zzzz} = 4 G_{du}^{(1)} + 8 G_{du}^{(2)} + 8 G_{g0}^{(1)} + 3 G_{s}^{(1)} \\
+& G_{yyzz} = G_{du}^{(1)} + 3 G_{du}^{(3)} - 4 G_{g0}^{(1)} + G_{s}^{(1)} \\
+& G_{zzxx} = G_{du}^{(1)} - 3 G_{du}^{(3)} - 4 G_{g0}^{(1)} + G_{s}^{(1)} \\
+& G_{xxyy} = - 2 G_{du}^{(1)} + G_{g0}^{(1)} + G_{s}^{(1)} \\
+& G_{yzzy} = G_{du}^{(2)} + 3 G_{du}^{(5)} - 4 G_{g0}^{(1)} + G_{s}^{(1)}
+\end{align*}
+
+\end{document}

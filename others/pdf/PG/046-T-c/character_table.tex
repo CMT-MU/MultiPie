@@ -1,0 +1,90 @@
+\documentclass[fleqn,8pt,landscape]{jsarticle}
+\special{papersize=\the\paperwidth,\the\paperheight}
+
+%%% package
+
+\usepackage[usenames]{color}
+\usepackage{amsmath}
+\usepackage{breqn}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{enumitem}
+\usepackage{braket}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+%%% layout setting
+
+\paperwidth=356.4truemm
+\paperheight=252.0truemm
+\textwidth=335.59999999999997truemm
+\textheight=224.2truemm
+\oddsidemargin=-15truemm
+\topmargin=-15truemm
+\footskip=7truemm
+
+%%% fixed
+
+\hoffset=0truemm
+\voffset=0truemm
+\headheight=0truemm
+\headsep=0truemm
+\marginparsep=0truemm
+\marginparwidth=0truemm
+
+%%% main text
+
+\begin{document}
+
+\setcounter{MaxMatrixCols}{32}
+
+\renewcommand{\tablename}{Table~}
+\renewcommand{\figurename}{Figure~}
+\begin{center}
+\LARGE
+PG No. 46\quad$T_{\rm }(c)$\quad$23$\quad[ cubic ]
+\end{center}
+
+* character table ($\omega=e^{2\pi i/3}$)
+\begin{quote}
+\begin{tabular}{crrrr} \hline \hline
+$ T_{\rm }(c) $ & $ 1(1) $ & $ 2{}_{001}(3) $ & $ 3^{+}_{\,\,111}(4) $ & $ 3^{-}_{\,\,111}(4) $ \\ \hline
+$ A $ & $ 1 $ & $ 1 $ & $ 1 $ & $ 1 $ \\
+$ E^{(a)} $ & $ 1 $ & $ 1 $ & $ \omega^{*} $ & $ \omega $ \\
+$ E^{(b)} $ & $ 1 $ & $ 1 $ & $ \omega $ & $ \omega^{*} $ \\
+$ T $ & $ 3 $ & $ -1 $ & $ 0 $ & $ 0 $ \\
+ \hline \hline
+\end{tabular}
+\end{quote}
+
+* polar $\leftrightarrow$ axial conversion
+\begin{quote}
+\begin{tabular}{cccc}
+$ A\,\,(A) $ & $ E^{(a)}\,\,(E^{(a)}) $ & $ E^{(b)}\,\,(E^{(b)}) $ & $ T\,\,(T) $
+\end{tabular}
+\end{quote}
+
+* symmetric product
+\begin{quote}
+\begin{tabular}{c|cccc} \hline \hline
+ & $ A $ & $ E^{(a)} $ & $ E^{(b)} $ & $ T $ \\ \hline
+$ A $ & $ A $ & $ E^{(a)} $ & $ E^{(b)} $ & $ T $ \\
+$ E^{(a)} $ & $  $ & $ E^{(b)} $ & $ A $ & $ T $ \\
+$ E^{(b)} $ & $  $ & $  $ & $ E^{(a)} $ & $ T $ \\
+$ T $ & $  $ & $  $ & $  $ & $ A + E^{(a)} + E^{(b)} + T $ \\
+ \hline \hline
+\end{tabular}
+\end{quote}
+
+* anti-symmetric product
+\begin{quote}
+\begin{tabular}{ccccc} \hline \hline
+ & $ A $ & $ E^{(a)} $ & $ E^{(b)} $ & $ T $ \\ \hline
+$  $ & $ - $ & $ - $ & $ - $ & $ T $ \\
+ \hline \hline
+\end{tabular}
+\end{quote}
+
+\end{document}

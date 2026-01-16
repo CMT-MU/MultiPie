@@ -1,0 +1,90 @@
+\documentclass[fleqn,8pt,landscape]{jsarticle}
+\special{papersize=\the\paperwidth,\the\paperheight}
+
+%%% package
+
+\usepackage[usenames]{color}
+\usepackage{amsmath}
+\usepackage{breqn}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{enumitem}
+\usepackage{braket}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+%%% layout setting
+
+\paperwidth=356.4truemm
+\paperheight=252.0truemm
+\textwidth=335.59999999999997truemm
+\textheight=224.2truemm
+\oddsidemargin=-15truemm
+\topmargin=-15truemm
+\footskip=7truemm
+
+%%% fixed
+
+\hoffset=0truemm
+\voffset=0truemm
+\headheight=0truemm
+\headsep=0truemm
+\marginparsep=0truemm
+\marginparwidth=0truemm
+
+%%% main text
+
+\begin{document}
+
+\setcounter{MaxMatrixCols}{32}
+
+\renewcommand{\tablename}{Table~}
+\renewcommand{\figurename}{Figure~}
+\begin{center}
+\LARGE
+PG No. 38\quad$C_{\rm 4}(c)$\quad$4$\quad[ tetragonal ]
+\end{center}
+
+* character table
+\begin{quote}
+\begin{tabular}{crrrr} \hline \hline
+$ C_{\rm 4}(c) $ & $ 1(1) $ & $ 2{}_{001}(1) $ & $ 4^{+}_{\,\,001}(1) $ & $ 4^{-}_{\,\,001}(1) $ \\ \hline
+$ A $ & $ 1 $ & $ 1 $ & $ 1 $ & $ 1 $ \\
+$ B $ & $ 1 $ & $ 1 $ & $ -1 $ & $ -1 $ \\
+$ E^{(a)} $ & $ 1 $ & $ -1 $ & $ - i $ & $ i $ \\
+$ E^{(b)} $ & $ 1 $ & $ -1 $ & $ i $ & $ - i $ \\
+ \hline \hline
+\end{tabular}
+\end{quote}
+
+* polar $\leftrightarrow$ axial conversion
+\begin{quote}
+\begin{tabular}{cccc}
+$ A\,\,(A) $ & $ B\,\,(B) $ & $ E^{(a)}\,\,(E^{(a)}) $ & $ E^{(b)}\,\,(E^{(b)}) $
+\end{tabular}
+\end{quote}
+
+* symmetric product
+\begin{quote}
+\begin{tabular}{c|cccc} \hline \hline
+ & $ A $ & $ B $ & $ E^{(a)} $ & $ E^{(b)} $ \\ \hline
+$ A $ & $ A $ & $ B $ & $ E^{(a)} $ & $ E^{(b)} $ \\
+$ B $ & $  $ & $ A $ & $ E^{(b)} $ & $ E^{(a)} $ \\
+$ E^{(a)} $ & $  $ & $  $ & $ B $ & $ A $ \\
+$ E^{(b)} $ & $  $ & $  $ & $  $ & $ B $ \\
+ \hline \hline
+\end{tabular}
+\end{quote}
+
+* anti-symmetric product
+\begin{quote}
+\begin{tabular}{ccccc} \hline \hline
+ & $ A $ & $ B $ & $ E^{(a)} $ & $ E^{(b)} $ \\ \hline
+$  $ & $ - $ & $ - $ & $ - $ & $ - $ \\
+ \hline \hline
+\end{tabular}
+\end{quote}
+
+\end{document}

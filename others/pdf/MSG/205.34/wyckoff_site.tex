@@ -1,0 +1,169 @@
+\documentclass[fleqn,8pt]{jsarticle}
+
+%%% package
+
+\usepackage[usenames]{color}
+\usepackage{amsmath}
+\usepackage{breqn}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{enumitem}
+\usepackage{braket}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+%%% layout setting
+
+\paperwidth=210truemm
+\paperheight=297truemm
+\textwidth=189.2truemm
+\textheight=269.2truemm
+\oddsidemargin=-15truemm
+\topmargin=-15truemm
+\footskip=7truemm
+
+%%% fixed
+
+\hoffset=0truemm
+\voffset=0truemm
+\headheight=0truemm
+\headsep=0truemm
+\marginparsep=0truemm
+\marginparwidth=0truemm
+
+%%% main text
+
+\begin{document}
+
+\setcounter{MaxMatrixCols}{32}
+
+\renewcommand{\tablename}{Table~}
+\renewcommand{\figurename}{Figure~}
+\begin{center}
+\LARGE
+MSG No. 205.34\quad$Pa\bar{3}1'$\quad[ Type II, cubic ]
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{ccc}
+\caption{Wyckoff site: {\tt 4a}, site symmetry: {\tt .-3'.1'}}
+ \\
+ \hline \hline
+No. & position & mapping \\ \hline \endfirsthead
+
+\multicolumn{2}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+No. & position & mapping \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{2}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{2}{r}{} \\ \endlastfoot
+
+1 & $\left[ 0,\, 0,\, 0 \right]$ & {\tt [1,5,6,13,17,18,25,29,30,37,41,42]} \\ \hline
+2 & $\left[ \frac{1}{2},\, \frac{1}{2},\, 0 \right]$ & {\tt [2,10,11,14,22,23,26,34,35,38,46,47]} \\ \hline
+3 & $\left[ 0,\, \frac{1}{2},\, \frac{1}{2} \right]$ & {\tt [3,7,12,15,19,24,27,31,36,39,43,48]} \\ \hline
+4 & $\left[ \frac{1}{2},\, 0,\, \frac{1}{2} \right]$ & {\tt [4,8,9,16,20,21,28,32,33,40,44,45]} \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{ccc}
+\caption{Wyckoff site: {\tt 4b}, site symmetry: {\tt .-3'.1'}}
+ \\
+ \hline \hline
+No. & position & mapping \\ \hline \endfirsthead
+
+\multicolumn{2}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+No. & position & mapping \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{2}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{2}{r}{} \\ \endlastfoot
+
+1 & $\left[ \frac{1}{2},\, \frac{1}{2},\, \frac{1}{2} \right]$ & {\tt [1,5,6,13,17,18,25,29,30,37,41,42]} \\ \hline
+2 & $\left[ 0,\, 0,\, \frac{1}{2} \right]$ & {\tt [2,10,11,14,22,23,26,34,35,38,46,47]} \\ \hline
+3 & $\left[ \frac{1}{2},\, 0,\, 0 \right]$ & {\tt [3,7,12,15,19,24,27,31,36,39,43,48]} \\ \hline
+4 & $\left[ 0,\, \frac{1}{2},\, 0 \right]$ & {\tt [4,8,9,16,20,21,28,32,33,40,44,45]} \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{ccc}
+\caption{Wyckoff site: {\tt 8c}, site symmetry: {\tt .3.1'}}
+ \\
+ \hline \hline
+No. & position & mapping \\ \hline \endfirsthead
+
+\multicolumn{2}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+No. & position & mapping \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{2}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{2}{r}{} \\ \endlastfoot
+
+1 & $\left[ x,\, x,\, x \right]$ & {\tt [1,5,6,25,29,30]} \\ \hline
+2 & $\left[ x + \frac{1}{2},\, \frac{1}{2} - x,\, - x \right]$ & {\tt [2,10,11,26,34,35]} \\ \hline
+3 & $\left[ - x,\, x + \frac{1}{2},\, \frac{1}{2} - x \right]$ & {\tt [3,7,12,27,31,36]} \\ \hline
+4 & $\left[ \frac{1}{2} - x,\, - x,\, x + \frac{1}{2} \right]$ & {\tt [4,8,9,28,32,33]} \\ \hline
+5 & $\left[ - x,\, - x,\, - x \right]$ & {\tt [13,17,18,37,41,42]} \\ \hline
+6 & $\left[ \frac{1}{2} - x,\, x + \frac{1}{2},\, x \right]$ & {\tt [14,22,23,38,46,47]} \\ \hline
+7 & $\left[ x,\, \frac{1}{2} - x,\, x + \frac{1}{2} \right]$ & {\tt [15,19,24,39,43,48]} \\ \hline
+8 & $\left[ x + \frac{1}{2},\, x,\, \frac{1}{2} - x \right]$ & {\tt [16,20,21,40,44,45]} \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{ccc}
+\caption{Wyckoff site: {\tt 24d}, site symmetry: {\tt 11'}}
+ \\
+ \hline \hline
+No. & position & mapping \\ \hline \endfirsthead
+
+\multicolumn{2}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+No. & position & mapping \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{2}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{2}{r}{} \\ \endlastfoot
+
+1 & $\left[ x,\, y,\, z \right]$ & {\tt [1,25]} \\ \hline
+2 & $\left[ x + \frac{1}{2},\, \frac{1}{2} - y,\, - z \right]$ & {\tt [2,26]} \\ \hline
+3 & $\left[ - x,\, y + \frac{1}{2},\, \frac{1}{2} - z \right]$ & {\tt [3,27]} \\ \hline
+4 & $\left[ \frac{1}{2} - x,\, - y,\, z + \frac{1}{2} \right]$ & {\tt [4,28]} \\ \hline
+5 & $\left[ z,\, x,\, y \right]$ & {\tt [5,29]} \\ \hline
+6 & $\left[ y,\, z,\, x \right]$ & {\tt [6,30]} \\ \hline
+7 & $\left[ - y,\, z + \frac{1}{2},\, \frac{1}{2} - x \right]$ & {\tt [7,31]} \\ \hline
+8 & $\left[ \frac{1}{2} - z,\, - x,\, y + \frac{1}{2} \right]$ & {\tt [8,32]} \\ \hline
+9 & $\left[ \frac{1}{2} - y,\, - z,\, x + \frac{1}{2} \right]$ & {\tt [9,33]} \\ \hline
+10 & $\left[ z + \frac{1}{2},\, \frac{1}{2} - x,\, - y \right]$ & {\tt [10,34]} \\ \hline
+11 & $\left[ y + \frac{1}{2},\, \frac{1}{2} - z,\, - x \right]$ & {\tt [11,35]} \\ \hline
+12 & $\left[ - z,\, x + \frac{1}{2},\, \frac{1}{2} - y \right]$ & {\tt [12,36]} \\ \hline
+13 & $\left[ - x,\, - y,\, - z \right]$ & {\tt [13,37]} \\ \hline
+14 & $\left[ \frac{1}{2} - x,\, y + \frac{1}{2},\, z \right]$ & {\tt [14,38]} \\ \hline
+15 & $\left[ x,\, \frac{1}{2} - y,\, z + \frac{1}{2} \right]$ & {\tt [15,39]} \\ \hline
+16 & $\left[ x + \frac{1}{2},\, y,\, \frac{1}{2} - z \right]$ & {\tt [16,40]} \\ \hline
+17 & $\left[ - z,\, - x,\, - y \right]$ & {\tt [17,41]} \\ \hline
+18 & $\left[ - y,\, - z,\, - x \right]$ & {\tt [18,42]} \\ \hline
+19 & $\left[ y,\, \frac{1}{2} - z,\, x + \frac{1}{2} \right]$ & {\tt [19,43]} \\ \hline
+20 & $\left[ z + \frac{1}{2},\, x,\, \frac{1}{2} - y \right]$ & {\tt [20,44]} \\ \hline
+21 & $\left[ y + \frac{1}{2},\, z,\, \frac{1}{2} - x \right]$ & {\tt [21,45]} \\ \hline
+22 & $\left[ \frac{1}{2} - z,\, x + \frac{1}{2},\, y \right]$ & {\tt [22,46]} \\ \hline
+23 & $\left[ \frac{1}{2} - y,\, z + \frac{1}{2},\, x \right]$ & {\tt [23,47]} \\ \hline
+24 & $\left[ z,\, \frac{1}{2} - x,\, y + \frac{1}{2} \right]$ & {\tt [24,48]} \\
+\end{longtable}
+\end{center}
+
+\end{document}

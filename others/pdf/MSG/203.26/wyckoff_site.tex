@@ -1,0 +1,413 @@
+\documentclass[fleqn,8pt]{jsarticle}
+
+%%% package
+
+\usepackage[usenames]{color}
+\usepackage{amsmath}
+\usepackage{breqn}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{enumitem}
+\usepackage{braket}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+%%% layout setting
+
+\paperwidth=210truemm
+\paperheight=297truemm
+\textwidth=189.2truemm
+\textheight=269.2truemm
+\oddsidemargin=-15truemm
+\topmargin=-15truemm
+\footskip=7truemm
+
+%%% fixed
+
+\hoffset=0truemm
+\voffset=0truemm
+\headheight=0truemm
+\headsep=0truemm
+\marginparsep=0truemm
+\marginparwidth=0truemm
+
+%%% main text
+
+\begin{document}
+
+\setcounter{MaxMatrixCols}{32}
+
+\renewcommand{\tablename}{Table~}
+\renewcommand{\figurename}{Figure~}
+\begin{center}
+\LARGE
+MSG No. 203.26\quad$Fd\bar{3}$\quad[ Type I, cubic ]
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{ccc}
+\caption{Wyckoff site: {\tt 8a}, site symmetry: {\tt 23.}}
+ \\
+ \hline \hline
+No. & position & mapping \\ \hline \endfirsthead
+
+\multicolumn{2}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+No. & position & mapping \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{2}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{2}{r}{} \\ \endlastfoot
+
+1 & $\left[ \frac{1}{8},\, \frac{1}{8},\, \frac{1}{8} \right]$ & {\tt [1,5,6,26,34,35,51,55,60,76,80,81]} \\ \hline
+2 & $\left[ \frac{1}{8},\, \frac{5}{8},\, \frac{5}{8} \right]$ & {\tt [2,10,11,25,29,30,52,56,57,75,79,84]} \\ \hline
+3 & $\left[ \frac{5}{8},\, \frac{1}{8},\, \frac{5}{8} \right]$ & {\tt [3,7,12,28,32,33,49,53,54,74,82,83]} \\ \hline
+4 & $\left[ \frac{5}{8},\, \frac{5}{8},\, \frac{1}{8} \right]$ & {\tt [4,8,9,27,31,36,50,58,59,73,77,78]} \\ \hline
+5 & $\left[ \frac{7}{8},\, \frac{7}{8},\, \frac{7}{8} \right]$ & {\tt [13,17,18,38,46,47,63,67,72,88,92,93]} \\ \hline
+6 & $\left[ \frac{7}{8},\, \frac{3}{8},\, \frac{3}{8} \right]$ & {\tt [14,22,23,37,41,42,64,68,69,87,91,96]} \\ \hline
+7 & $\left[ \frac{3}{8},\, \frac{7}{8},\, \frac{3}{8} \right]$ & {\tt [15,19,24,40,44,45,61,65,66,86,94,95]} \\ \hline
+8 & $\left[ \frac{3}{8},\, \frac{3}{8},\, \frac{7}{8} \right]$ & {\tt [16,20,21,39,43,48,62,70,71,85,89,90]} \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{ccc}
+\caption{Wyckoff site: {\tt 8b}, site symmetry: {\tt 23.}}
+ \\
+ \hline \hline
+No. & position & mapping \\ \hline \endfirsthead
+
+\multicolumn{2}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+No. & position & mapping \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{2}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{2}{r}{} \\ \endlastfoot
+
+1 & $\left[ \frac{5}{8},\, \frac{5}{8},\, \frac{5}{8} \right]$ & {\tt [1,5,6,26,34,35,51,55,60,76,80,81]} \\ \hline
+2 & $\left[ \frac{5}{8},\, \frac{1}{8},\, \frac{1}{8} \right]$ & {\tt [2,10,11,25,29,30,52,56,57,75,79,84]} \\ \hline
+3 & $\left[ \frac{1}{8},\, \frac{5}{8},\, \frac{1}{8} \right]$ & {\tt [3,7,12,28,32,33,49,53,54,74,82,83]} \\ \hline
+4 & $\left[ \frac{1}{8},\, \frac{1}{8},\, \frac{5}{8} \right]$ & {\tt [4,8,9,27,31,36,50,58,59,73,77,78]} \\ \hline
+5 & $\left[ \frac{3}{8},\, \frac{3}{8},\, \frac{3}{8} \right]$ & {\tt [13,17,18,38,46,47,63,67,72,88,92,93]} \\ \hline
+6 & $\left[ \frac{3}{8},\, \frac{7}{8},\, \frac{7}{8} \right]$ & {\tt [14,22,23,37,41,42,64,68,69,87,91,96]} \\ \hline
+7 & $\left[ \frac{7}{8},\, \frac{3}{8},\, \frac{7}{8} \right]$ & {\tt [15,19,24,40,44,45,61,65,66,86,94,95]} \\ \hline
+8 & $\left[ \frac{7}{8},\, \frac{7}{8},\, \frac{3}{8} \right]$ & {\tt [16,20,21,39,43,48,62,70,71,85,89,90]} \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{ccc}
+\caption{Wyckoff site: {\tt 16c}, site symmetry: {\tt .-3.}}
+ \\
+ \hline \hline
+No. & position & mapping \\ \hline \endfirsthead
+
+\multicolumn{2}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+No. & position & mapping \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{2}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{2}{r}{} \\ \endlastfoot
+
+1 & $\left[ 0,\, 0,\, 0 \right]$ & {\tt [1,5,6,13,17,18]} \\ \hline
+2 & $\left[ 0,\, \frac{3}{4},\, \frac{3}{4} \right]$ & {\tt [2,10,11,38,46,47]} \\ \hline
+3 & $\left[ \frac{3}{4},\, 0,\, \frac{3}{4} \right]$ & {\tt [3,7,12,63,67,72]} \\ \hline
+4 & $\left[ \frac{3}{4},\, \frac{3}{4},\, 0 \right]$ & {\tt [4,8,9,88,92,93]} \\ \hline
+5 & $\left[ 0,\, \frac{1}{4},\, \frac{1}{4} \right]$ & {\tt [14,22,23,26,34,35]} \\ \hline
+6 & $\left[ \frac{1}{4},\, 0,\, \frac{1}{4} \right]$ & {\tt [15,19,24,51,55,60]} \\ \hline
+7 & $\left[ \frac{1}{4},\, \frac{1}{4},\, 0 \right]$ & {\tt [16,20,21,76,80,81]} \\ \hline
+8 & $\left[ 0,\, \frac{1}{2},\, \frac{1}{2} \right]$ & {\tt [25,29,30,37,41,42]} \\ \hline
+9 & $\left[ \frac{3}{4},\, \frac{1}{2},\, \frac{1}{4} \right]$ & {\tt [27,31,36,87,91,96]} \\ \hline
+10 & $\left[ \frac{3}{4},\, \frac{1}{4},\, \frac{1}{2} \right]$ & {\tt [28,32,33,64,68,69]} \\ \hline
+11 & $\left[ \frac{1}{4},\, \frac{1}{2},\, \frac{3}{4} \right]$ & {\tt [39,43,48,75,79,84]} \\ \hline
+12 & $\left[ \frac{1}{4},\, \frac{3}{4},\, \frac{1}{2} \right]$ & {\tt [40,44,45,52,56,57]} \\ \hline
+13 & $\left[ \frac{1}{2},\, 0,\, \frac{1}{2} \right]$ & {\tt [49,53,54,61,65,66]} \\ \hline
+14 & $\left[ \frac{1}{2},\, \frac{3}{4},\, \frac{1}{4} \right]$ & {\tt [50,58,59,86,94,95]} \\ \hline
+15 & $\left[ \frac{1}{2},\, \frac{1}{4},\, \frac{3}{4} \right]$ & {\tt [62,70,71,74,82,83]} \\ \hline
+16 & $\left[ \frac{1}{2},\, \frac{1}{2},\, 0 \right]$ & {\tt [73,77,78,85,89,90]} \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{ccc}
+\caption{Wyckoff site: {\tt 16d}, site symmetry: {\tt .-3.}}
+ \\
+ \hline \hline
+No. & position & mapping \\ \hline \endfirsthead
+
+\multicolumn{2}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+No. & position & mapping \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{2}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{2}{r}{} \\ \endlastfoot
+
+1 & $\left[ \frac{1}{2},\, \frac{1}{2},\, \frac{1}{2} \right]$ & {\tt [1,5,6,13,17,18]} \\ \hline
+2 & $\left[ \frac{1}{2},\, \frac{1}{4},\, \frac{1}{4} \right]$ & {\tt [2,10,11,38,46,47]} \\ \hline
+3 & $\left[ \frac{1}{4},\, \frac{1}{2},\, \frac{1}{4} \right]$ & {\tt [3,7,12,63,67,72]} \\ \hline
+4 & $\left[ \frac{1}{4},\, \frac{1}{4},\, \frac{1}{2} \right]$ & {\tt [4,8,9,88,92,93]} \\ \hline
+5 & $\left[ \frac{1}{2},\, \frac{3}{4},\, \frac{3}{4} \right]$ & {\tt [14,22,23,26,34,35]} \\ \hline
+6 & $\left[ \frac{3}{4},\, \frac{1}{2},\, \frac{3}{4} \right]$ & {\tt [15,19,24,51,55,60]} \\ \hline
+7 & $\left[ \frac{3}{4},\, \frac{3}{4},\, \frac{1}{2} \right]$ & {\tt [16,20,21,76,80,81]} \\ \hline
+8 & $\left[ \frac{1}{2},\, 0,\, 0 \right]$ & {\tt [25,29,30,37,41,42]} \\ \hline
+9 & $\left[ \frac{1}{4},\, 0,\, \frac{3}{4} \right]$ & {\tt [27,31,36,87,91,96]} \\ \hline
+10 & $\left[ \frac{1}{4},\, \frac{3}{4},\, 0 \right]$ & {\tt [28,32,33,64,68,69]} \\ \hline
+11 & $\left[ \frac{3}{4},\, 0,\, \frac{1}{4} \right]$ & {\tt [39,43,48,75,79,84]} \\ \hline
+12 & $\left[ \frac{3}{4},\, \frac{1}{4},\, 0 \right]$ & {\tt [40,44,45,52,56,57]} \\ \hline
+13 & $\left[ 0,\, \frac{1}{2},\, 0 \right]$ & {\tt [49,53,54,61,65,66]} \\ \hline
+14 & $\left[ 0,\, \frac{1}{4},\, \frac{3}{4} \right]$ & {\tt [50,58,59,86,94,95]} \\ \hline
+15 & $\left[ 0,\, \frac{3}{4},\, \frac{1}{4} \right]$ & {\tt [62,70,71,74,82,83]} \\ \hline
+16 & $\left[ 0,\, 0,\, \frac{1}{2} \right]$ & {\tt [73,77,78,85,89,90]} \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{ccc}
+\caption{Wyckoff site: {\tt 32e}, site symmetry: {\tt .3.}}
+ \\
+ \hline \hline
+No. & position & mapping \\ \hline \endfirsthead
+
+\multicolumn{2}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+No. & position & mapping \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{2}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{2}{r}{} \\ \endlastfoot
+
+1 & $\left[ x,\, x,\, x \right]$ & {\tt [1,5,6]} \\ \hline
+2 & $\left[ x,\, \frac{3}{4} - x,\, \frac{3}{4} - x \right]$ & {\tt [2,10,11]} \\ \hline
+3 & $\left[ \frac{3}{4} - x,\, x,\, \frac{3}{4} - x \right]$ & {\tt [3,7,12]} \\ \hline
+4 & $\left[ \frac{3}{4} - x,\, \frac{3}{4} - x,\, x \right]$ & {\tt [4,8,9]} \\ \hline
+5 & $\left[ - x,\, - x,\, - x \right]$ & {\tt [13,17,18]} \\ \hline
+6 & $\left[ - x,\, x + \frac{1}{4},\, x + \frac{1}{4} \right]$ & {\tt [14,22,23]} \\ \hline
+7 & $\left[ x + \frac{1}{4},\, - x,\, x + \frac{1}{4} \right]$ & {\tt [15,19,24]} \\ \hline
+8 & $\left[ x + \frac{1}{4},\, x + \frac{1}{4},\, - x \right]$ & {\tt [16,20,21]} \\ \hline
+9 & $\left[ x,\, x + \frac{1}{2},\, x + \frac{1}{2} \right]$ & {\tt [25,29,30]} \\ \hline
+10 & $\left[ x,\, \frac{1}{4} - x,\, \frac{1}{4} - x \right]$ & {\tt [26,34,35]} \\ \hline
+11 & $\left[ \frac{3}{4} - x,\, x + \frac{1}{2},\, \frac{1}{4} - x \right]$ & {\tt [27,31,36]} \\ \hline
+12 & $\left[ \frac{3}{4} - x,\, \frac{1}{4} - x,\, x + \frac{1}{2} \right]$ & {\tt [28,32,33]} \\ \hline
+13 & $\left[ - x,\, \frac{1}{2} - x,\, \frac{1}{2} - x \right]$ & {\tt [37,41,42]} \\ \hline
+14 & $\left[ - x,\, x + \frac{3}{4},\, x + \frac{3}{4} \right]$ & {\tt [38,46,47]} \\ \hline
+15 & $\left[ x + \frac{1}{4},\, \frac{1}{2} - x,\, x + \frac{3}{4} \right]$ & {\tt [39,43,48]} \\ \hline
+16 & $\left[ x + \frac{1}{4},\, x + \frac{3}{4},\, \frac{1}{2} - x \right]$ & {\tt [40,44,45]} \\ \hline
+17 & $\left[ x + \frac{1}{2},\, x,\, x + \frac{1}{2} \right]$ & {\tt [49,53,54]} \\ \hline
+18 & $\left[ x + \frac{1}{2},\, \frac{3}{4} - x,\, \frac{1}{4} - x \right]$ & {\tt [50,58,59]} \\ \hline
+19 & $\left[ \frac{1}{4} - x,\, x,\, \frac{1}{4} - x \right]$ & {\tt [51,55,60]} \\ \hline
+20 & $\left[ \frac{1}{4} - x,\, \frac{3}{4} - x,\, x + \frac{1}{2} \right]$ & {\tt [52,56,57]} \\ \hline
+21 & $\left[ \frac{1}{2} - x,\, - x,\, \frac{1}{2} - x \right]$ & {\tt [61,65,66]} \\ \hline
+22 & $\left[ \frac{1}{2} - x,\, x + \frac{1}{4},\, x + \frac{3}{4} \right]$ & {\tt [62,70,71]} \\ \hline
+23 & $\left[ x + \frac{3}{4},\, - x,\, x + \frac{3}{4} \right]$ & {\tt [63,67,72]} \\ \hline
+24 & $\left[ x + \frac{3}{4},\, x + \frac{1}{4},\, \frac{1}{2} - x \right]$ & {\tt [64,68,69]} \\ \hline
+25 & $\left[ x + \frac{1}{2},\, x + \frac{1}{2},\, x \right]$ & {\tt [73,77,78]} \\ \hline
+26 & $\left[ x + \frac{1}{2},\, \frac{1}{4} - x,\, \frac{3}{4} - x \right]$ & {\tt [74,82,83]} \\ \hline
+27 & $\left[ \frac{1}{4} - x,\, x + \frac{1}{2},\, \frac{3}{4} - x \right]$ & {\tt [75,79,84]} \\ \hline
+28 & $\left[ \frac{1}{4} - x,\, \frac{1}{4} - x,\, x \right]$ & {\tt [76,80,81]} \\ \hline
+29 & $\left[ \frac{1}{2} - x,\, \frac{1}{2} - x,\, - x \right]$ & {\tt [85,89,90]} \\ \hline
+30 & $\left[ \frac{1}{2} - x,\, x + \frac{3}{4},\, x + \frac{1}{4} \right]$ & {\tt [86,94,95]} \\ \hline
+31 & $\left[ x + \frac{3}{4},\, \frac{1}{2} - x,\, x + \frac{1}{4} \right]$ & {\tt [87,91,96]} \\ \hline
+32 & $\left[ x + \frac{3}{4},\, x + \frac{3}{4},\, - x \right]$ & {\tt [88,92,93]} \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{ccc}
+\caption{Wyckoff site: {\tt 48f}, site symmetry: {\tt 2..}}
+ \\
+ \hline \hline
+No. & position & mapping \\ \hline \endfirsthead
+
+\multicolumn{2}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+No. & position & mapping \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{2}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{2}{r}{} \\ \endlastfoot
+
+1 & $\left[ x,\, \frac{1}{8},\, \frac{1}{8} \right]$ & {\tt [1,26]} \\ \hline
+2 & $\left[ x,\, \frac{5}{8},\, \frac{5}{8} \right]$ & {\tt [2,25]} \\ \hline
+3 & $\left[ \frac{3}{4} - x,\, \frac{1}{8},\, \frac{5}{8} \right]$ & {\tt [3,28]} \\ \hline
+4 & $\left[ \frac{3}{4} - x,\, \frac{5}{8},\, \frac{1}{8} \right]$ & {\tt [4,27]} \\ \hline
+5 & $\left[ \frac{1}{8},\, x,\, \frac{1}{8} \right]$ & {\tt [5,60]} \\ \hline
+6 & $\left[ \frac{1}{8},\, \frac{1}{8},\, x \right]$ & {\tt [6,81]} \\ \hline
+7 & $\left[ \frac{5}{8},\, \frac{1}{8},\, \frac{3}{4} - x \right]$ & {\tt [7,83]} \\ \hline
+8 & $\left[ \frac{5}{8},\, \frac{3}{4} - x,\, \frac{1}{8} \right]$ & {\tt [8,58]} \\ \hline
+9 & $\left[ \frac{5}{8},\, \frac{5}{8},\, x \right]$ & {\tt [9,78]} \\ \hline
+10 & $\left[ \frac{1}{8},\, \frac{3}{4} - x,\, \frac{5}{8} \right]$ & {\tt [10,56]} \\ \hline
+11 & $\left[ \frac{1}{8},\, \frac{5}{8},\, \frac{3}{4} - x \right]$ & {\tt [11,79]} \\ \hline
+12 & $\left[ \frac{5}{8},\, x,\, \frac{5}{8} \right]$ & {\tt [12,53]} \\ \hline
+13 & $\left[ - x,\, \frac{7}{8},\, \frac{7}{8} \right]$ & {\tt [13,38]} \\ \hline
+14 & $\left[ - x,\, \frac{3}{8},\, \frac{3}{8} \right]$ & {\tt [14,37]} \\ \hline
+15 & $\left[ x + \frac{1}{4},\, \frac{7}{8},\, \frac{3}{8} \right]$ & {\tt [15,40]} \\ \hline
+16 & $\left[ x + \frac{1}{4},\, \frac{3}{8},\, \frac{7}{8} \right]$ & {\tt [16,39]} \\ \hline
+17 & $\left[ \frac{7}{8},\, - x,\, \frac{7}{8} \right]$ & {\tt [17,72]} \\ \hline
+18 & $\left[ \frac{7}{8},\, \frac{7}{8},\, - x \right]$ & {\tt [18,93]} \\ \hline
+19 & $\left[ \frac{3}{8},\, \frac{7}{8},\, x + \frac{1}{4} \right]$ & {\tt [19,95]} \\ \hline
+20 & $\left[ \frac{3}{8},\, x + \frac{1}{4},\, \frac{7}{8} \right]$ & {\tt [20,70]} \\ \hline
+21 & $\left[ \frac{3}{8},\, \frac{3}{8},\, - x \right]$ & {\tt [21,90]} \\ \hline
+22 & $\left[ \frac{7}{8},\, x + \frac{1}{4},\, \frac{3}{8} \right]$ & {\tt [22,68]} \\ \hline
+23 & $\left[ \frac{7}{8},\, \frac{3}{8},\, x + \frac{1}{4} \right]$ & {\tt [23,91]} \\ \hline
+24 & $\left[ \frac{3}{8},\, - x,\, \frac{3}{8} \right]$ & {\tt [24,65]} \\ \hline
+25 & $\left[ \frac{1}{8},\, x + \frac{1}{2},\, \frac{5}{8} \right]$ & {\tt [29,84]} \\ \hline
+26 & $\left[ \frac{1}{8},\, \frac{5}{8},\, x + \frac{1}{2} \right]$ & {\tt [30,57]} \\ \hline
+27 & $\left[ \frac{5}{8},\, \frac{5}{8},\, \frac{1}{4} - x \right]$ & {\tt [31,59]} \\ \hline
+28 & $\left[ \frac{5}{8},\, \frac{1}{4} - x,\, \frac{5}{8} \right]$ & {\tt [32,82]} \\ \hline
+29 & $\left[ \frac{5}{8},\, \frac{1}{8},\, x + \frac{1}{2} \right]$ & {\tt [33,54]} \\ \hline
+30 & $\left[ \frac{1}{8},\, \frac{1}{4} - x,\, \frac{1}{8} \right]$ & {\tt [34,80]} \\ \hline
+31 & $\left[ \frac{1}{8},\, \frac{1}{8},\, \frac{1}{4} - x \right]$ & {\tt [35,55]} \\ \hline
+32 & $\left[ \frac{5}{8},\, x + \frac{1}{2},\, \frac{1}{8} \right]$ & {\tt [36,77]} \\ \hline
+33 & $\left[ \frac{7}{8},\, \frac{1}{2} - x,\, \frac{3}{8} \right]$ & {\tt [41,96]} \\ \hline
+34 & $\left[ \frac{7}{8},\, \frac{3}{8},\, \frac{1}{2} - x \right]$ & {\tt [42,69]} \\ \hline
+35 & $\left[ \frac{3}{8},\, \frac{3}{8},\, x + \frac{3}{4} \right]$ & {\tt [43,71]} \\ \hline
+36 & $\left[ \frac{3}{8},\, x + \frac{3}{4},\, \frac{3}{8} \right]$ & {\tt [44,94]} \\ \hline
+37 & $\left[ \frac{3}{8},\, \frac{7}{8},\, \frac{1}{2} - x \right]$ & {\tt [45,66]} \\ \hline
+38 & $\left[ \frac{7}{8},\, x + \frac{3}{4},\, \frac{7}{8} \right]$ & {\tt [46,92]} \\ \hline
+39 & $\left[ \frac{7}{8},\, \frac{7}{8},\, x + \frac{3}{4} \right]$ & {\tt [47,67]} \\ \hline
+40 & $\left[ \frac{3}{8},\, \frac{1}{2} - x,\, \frac{7}{8} \right]$ & {\tt [48,89]} \\ \hline
+41 & $\left[ x + \frac{1}{2},\, \frac{1}{8},\, \frac{5}{8} \right]$ & {\tt [49,74]} \\ \hline
+42 & $\left[ x + \frac{1}{2},\, \frac{5}{8},\, \frac{1}{8} \right]$ & {\tt [50,73]} \\ \hline
+43 & $\left[ \frac{1}{4} - x,\, \frac{1}{8},\, \frac{1}{8} \right]$ & {\tt [51,76]} \\ \hline
+44 & $\left[ \frac{1}{4} - x,\, \frac{5}{8},\, \frac{5}{8} \right]$ & {\tt [52,75]} \\ \hline
+45 & $\left[ \frac{1}{2} - x,\, \frac{7}{8},\, \frac{3}{8} \right]$ & {\tt [61,86]} \\ \hline
+46 & $\left[ \frac{1}{2} - x,\, \frac{3}{8},\, \frac{7}{8} \right]$ & {\tt [62,85]} \\ \hline
+47 & $\left[ x + \frac{3}{4},\, \frac{7}{8},\, \frac{7}{8} \right]$ & {\tt [63,88]} \\ \hline
+48 & $\left[ x + \frac{3}{4},\, \frac{3}{8},\, \frac{3}{8} \right]$ & {\tt [64,87]} \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{ccc}
+\caption{Wyckoff site: {\tt 96g}, site symmetry: {\tt 1}}
+ \\
+ \hline \hline
+No. & position & mapping \\ \hline \endfirsthead
+
+\multicolumn{2}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+No. & position & mapping \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{2}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{2}{r}{} \\ \endlastfoot
+
+1 & $\left[ x,\, y,\, z \right]$ & {\tt [1]} \\ \hline
+2 & $\left[ x,\, \frac{3}{4} - y,\, \frac{3}{4} - z \right]$ & {\tt [2]} \\ \hline
+3 & $\left[ \frac{3}{4} - x,\, y,\, \frac{3}{4} - z \right]$ & {\tt [3]} \\ \hline
+4 & $\left[ \frac{3}{4} - x,\, \frac{3}{4} - y,\, z \right]$ & {\tt [4]} \\ \hline
+5 & $\left[ z,\, x,\, y \right]$ & {\tt [5]} \\ \hline
+6 & $\left[ y,\, z,\, x \right]$ & {\tt [6]} \\ \hline
+7 & $\left[ \frac{3}{4} - y,\, z,\, \frac{3}{4} - x \right]$ & {\tt [7]} \\ \hline
+8 & $\left[ \frac{3}{4} - z,\, \frac{3}{4} - x,\, y \right]$ & {\tt [8]} \\ \hline
+9 & $\left[ \frac{3}{4} - y,\, \frac{3}{4} - z,\, x \right]$ & {\tt [9]} \\ \hline
+10 & $\left[ z,\, \frac{3}{4} - x,\, \frac{3}{4} - y \right]$ & {\tt [10]} \\ \hline
+11 & $\left[ y,\, \frac{3}{4} - z,\, \frac{3}{4} - x \right]$ & {\tt [11]} \\ \hline
+12 & $\left[ \frac{3}{4} - z,\, x,\, \frac{3}{4} - y \right]$ & {\tt [12]} \\ \hline
+13 & $\left[ - x,\, - y,\, - z \right]$ & {\tt [13]} \\ \hline
+14 & $\left[ - x,\, y + \frac{1}{4},\, z + \frac{1}{4} \right]$ & {\tt [14]} \\ \hline
+15 & $\left[ x + \frac{1}{4},\, - y,\, z + \frac{1}{4} \right]$ & {\tt [15]} \\ \hline
+16 & $\left[ x + \frac{1}{4},\, y + \frac{1}{4},\, - z \right]$ & {\tt [16]} \\ \hline
+17 & $\left[ - z,\, - x,\, - y \right]$ & {\tt [17]} \\ \hline
+18 & $\left[ - y,\, - z,\, - x \right]$ & {\tt [18]} \\ \hline
+19 & $\left[ y + \frac{1}{4},\, - z,\, x + \frac{1}{4} \right]$ & {\tt [19]} \\ \hline
+20 & $\left[ z + \frac{1}{4},\, x + \frac{1}{4},\, - y \right]$ & {\tt [20]} \\ \hline
+21 & $\left[ y + \frac{1}{4},\, z + \frac{1}{4},\, - x \right]$ & {\tt [21]} \\ \hline
+22 & $\left[ - z,\, x + \frac{1}{4},\, y + \frac{1}{4} \right]$ & {\tt [22]} \\ \hline
+23 & $\left[ - y,\, z + \frac{1}{4},\, x + \frac{1}{4} \right]$ & {\tt [23]} \\ \hline
+24 & $\left[ z + \frac{1}{4},\, - x,\, y + \frac{1}{4} \right]$ & {\tt [24]} \\ \hline
+25 & $\left[ x,\, y + \frac{1}{2},\, z + \frac{1}{2} \right]$ & {\tt [25]} \\ \hline
+26 & $\left[ x,\, \frac{1}{4} - y,\, \frac{1}{4} - z \right]$ & {\tt [26]} \\ \hline
+27 & $\left[ \frac{3}{4} - x,\, y + \frac{1}{2},\, \frac{1}{4} - z \right]$ & {\tt [27]} \\ \hline
+28 & $\left[ \frac{3}{4} - x,\, \frac{1}{4} - y,\, z + \frac{1}{2} \right]$ & {\tt [28]} \\ \hline
+29 & $\left[ z,\, x + \frac{1}{2},\, y + \frac{1}{2} \right]$ & {\tt [29]} \\ \hline
+30 & $\left[ y,\, z + \frac{1}{2},\, x + \frac{1}{2} \right]$ & {\tt [30]} \\ \hline
+31 & $\left[ \frac{3}{4} - y,\, z + \frac{1}{2},\, \frac{1}{4} - x \right]$ & {\tt [31]} \\ \hline
+32 & $\left[ \frac{3}{4} - z,\, \frac{1}{4} - x,\, y + \frac{1}{2} \right]$ & {\tt [32]} \\ \hline
+33 & $\left[ \frac{3}{4} - y,\, \frac{1}{4} - z,\, x + \frac{1}{2} \right]$ & {\tt [33]} \\ \hline
+34 & $\left[ z,\, \frac{1}{4} - x,\, \frac{1}{4} - y \right]$ & {\tt [34]} \\ \hline
+35 & $\left[ y,\, \frac{1}{4} - z,\, \frac{1}{4} - x \right]$ & {\tt [35]} \\ \hline
+36 & $\left[ \frac{3}{4} - z,\, x + \frac{1}{2},\, \frac{1}{4} - y \right]$ & {\tt [36]} \\ \hline
+37 & $\left[ - x,\, \frac{1}{2} - y,\, \frac{1}{2} - z \right]$ & {\tt [37]} \\ \hline
+38 & $\left[ - x,\, y + \frac{3}{4},\, z + \frac{3}{4} \right]$ & {\tt [38]} \\ \hline
+39 & $\left[ x + \frac{1}{4},\, \frac{1}{2} - y,\, z + \frac{3}{4} \right]$ & {\tt [39]} \\ \hline
+40 & $\left[ x + \frac{1}{4},\, y + \frac{3}{4},\, \frac{1}{2} - z \right]$ & {\tt [40]} \\ \hline
+41 & $\left[ - z,\, \frac{1}{2} - x,\, \frac{1}{2} - y \right]$ & {\tt [41]} \\ \hline
+42 & $\left[ - y,\, \frac{1}{2} - z,\, \frac{1}{2} - x \right]$ & {\tt [42]} \\ \hline
+43 & $\left[ y + \frac{1}{4},\, \frac{1}{2} - z,\, x + \frac{3}{4} \right]$ & {\tt [43]} \\ \hline
+44 & $\left[ z + \frac{1}{4},\, x + \frac{3}{4},\, \frac{1}{2} - y \right]$ & {\tt [44]} \\ \hline
+45 & $\left[ y + \frac{1}{4},\, z + \frac{3}{4},\, \frac{1}{2} - x \right]$ & {\tt [45]} \\ \hline
+46 & $\left[ - z,\, x + \frac{3}{4},\, y + \frac{3}{4} \right]$ & {\tt [46]} \\ \hline
+47 & $\left[ - y,\, z + \frac{3}{4},\, x + \frac{3}{4} \right]$ & {\tt [47]} \\ \hline
+48 & $\left[ z + \frac{1}{4},\, \frac{1}{2} - x,\, y + \frac{3}{4} \right]$ & {\tt [48]} \\ \hline
+49 & $\left[ x + \frac{1}{2},\, y,\, z + \frac{1}{2} \right]$ & {\tt [49]} \\ \hline
+50 & $\left[ x + \frac{1}{2},\, \frac{3}{4} - y,\, \frac{1}{4} - z \right]$ & {\tt [50]} \\ \hline
+51 & $\left[ \frac{1}{4} - x,\, y,\, \frac{1}{4} - z \right]$ & {\tt [51]} \\ \hline
+52 & $\left[ \frac{1}{4} - x,\, \frac{3}{4} - y,\, z + \frac{1}{2} \right]$ & {\tt [52]} \\ \hline
+53 & $\left[ z + \frac{1}{2},\, x,\, y + \frac{1}{2} \right]$ & {\tt [53]} \\ \hline
+54 & $\left[ y + \frac{1}{2},\, z,\, x + \frac{1}{2} \right]$ & {\tt [54]} \\ \hline
+55 & $\left[ \frac{1}{4} - y,\, z,\, \frac{1}{4} - x \right]$ & {\tt [55]} \\ \hline
+56 & $\left[ \frac{1}{4} - z,\, \frac{3}{4} - x,\, y + \frac{1}{2} \right]$ & {\tt [56]} \\ \hline
+57 & $\left[ \frac{1}{4} - y,\, \frac{3}{4} - z,\, x + \frac{1}{2} \right]$ & {\tt [57]} \\ \hline
+58 & $\left[ z + \frac{1}{2},\, \frac{3}{4} - x,\, \frac{1}{4} - y \right]$ & {\tt [58]} \\ \hline
+59 & $\left[ y + \frac{1}{2},\, \frac{3}{4} - z,\, \frac{1}{4} - x \right]$ & {\tt [59]} \\ \hline
+60 & $\left[ \frac{1}{4} - z,\, x,\, \frac{1}{4} - y \right]$ & {\tt [60]} \\ \hline
+61 & $\left[ \frac{1}{2} - x,\, - y,\, \frac{1}{2} - z \right]$ & {\tt [61]} \\ \hline
+62 & $\left[ \frac{1}{2} - x,\, y + \frac{1}{4},\, z + \frac{3}{4} \right]$ & {\tt [62]} \\ \hline
+63 & $\left[ x + \frac{3}{4},\, - y,\, z + \frac{3}{4} \right]$ & {\tt [63]} \\ \hline
+64 & $\left[ x + \frac{3}{4},\, y + \frac{1}{4},\, \frac{1}{2} - z \right]$ & {\tt [64]} \\ \hline
+65 & $\left[ \frac{1}{2} - z,\, - x,\, \frac{1}{2} - y \right]$ & {\tt [65]} \\ \hline
+66 & $\left[ \frac{1}{2} - y,\, - z,\, \frac{1}{2} - x \right]$ & {\tt [66]} \\ \hline
+67 & $\left[ y + \frac{3}{4},\, - z,\, x + \frac{3}{4} \right]$ & {\tt [67]} \\ \hline
+68 & $\left[ z + \frac{3}{4},\, x + \frac{1}{4},\, \frac{1}{2} - y \right]$ & {\tt [68]} \\ \hline
+69 & $\left[ y + \frac{3}{4},\, z + \frac{1}{4},\, \frac{1}{2} - x \right]$ & {\tt [69]} \\ \hline
+70 & $\left[ \frac{1}{2} - z,\, x + \frac{1}{4},\, y + \frac{3}{4} \right]$ & {\tt [70]} \\ \hline
+71 & $\left[ \frac{1}{2} - y,\, z + \frac{1}{4},\, x + \frac{3}{4} \right]$ & {\tt [71]} \\ \hline
+72 & $\left[ z + \frac{3}{4},\, - x,\, y + \frac{3}{4} \right]$ & {\tt [72]} \\ \hline
+73 & $\left[ x + \frac{1}{2},\, y + \frac{1}{2},\, z \right]$ & {\tt [73]} \\ \hline
+74 & $\left[ x + \frac{1}{2},\, \frac{1}{4} - y,\, \frac{3}{4} - z \right]$ & {\tt [74]} \\ \hline
+75 & $\left[ \frac{1}{4} - x,\, y + \frac{1}{2},\, \frac{3}{4} - z \right]$ & {\tt [75]} \\ \hline
+76 & $\left[ \frac{1}{4} - x,\, \frac{1}{4} - y,\, z \right]$ & {\tt [76]} \\ \hline
+77 & $\left[ z + \frac{1}{2},\, x + \frac{1}{2},\, y \right]$ & {\tt [77]} \\ \hline
+78 & $\left[ y + \frac{1}{2},\, z + \frac{1}{2},\, x \right]$ & {\tt [78]} \\ \hline
+79 & $\left[ \frac{1}{4} - y,\, z + \frac{1}{2},\, \frac{3}{4} - x \right]$ & {\tt [79]} \\ \hline
+80 & $\left[ \frac{1}{4} - z,\, \frac{1}{4} - x,\, y \right]$ & {\tt [80]} \\ \hline
+81 & $\left[ \frac{1}{4} - y,\, \frac{1}{4} - z,\, x \right]$ & {\tt [81]} \\ \hline
+82 & $\left[ z + \frac{1}{2},\, \frac{1}{4} - x,\, \frac{3}{4} - y \right]$ & {\tt [82]} \\ \hline
+83 & $\left[ y + \frac{1}{2},\, \frac{1}{4} - z,\, \frac{3}{4} - x \right]$ & {\tt [83]} \\ \hline
+84 & $\left[ \frac{1}{4} - z,\, x + \frac{1}{2},\, \frac{3}{4} - y \right]$ & {\tt [84]} \\ \hline
+85 & $\left[ \frac{1}{2} - x,\, \frac{1}{2} - y,\, - z \right]$ & {\tt [85]} \\ \hline
+86 & $\left[ \frac{1}{2} - x,\, y + \frac{3}{4},\, z + \frac{1}{4} \right]$ & {\tt [86]} \\ \hline
+87 & $\left[ x + \frac{3}{4},\, \frac{1}{2} - y,\, z + \frac{1}{4} \right]$ & {\tt [87]} \\ \hline
+88 & $\left[ x + \frac{3}{4},\, y + \frac{3}{4},\, - z \right]$ & {\tt [88]} \\ \hline
+89 & $\left[ \frac{1}{2} - z,\, \frac{1}{2} - x,\, - y \right]$ & {\tt [89]} \\ \hline
+90 & $\left[ \frac{1}{2} - y,\, \frac{1}{2} - z,\, - x \right]$ & {\tt [90]} \\ \hline
+91 & $\left[ y + \frac{3}{4},\, \frac{1}{2} - z,\, x + \frac{1}{4} \right]$ & {\tt [91]} \\ \hline
+92 & $\left[ z + \frac{3}{4},\, x + \frac{3}{4},\, - y \right]$ & {\tt [92]} \\ \hline
+93 & $\left[ y + \frac{3}{4},\, z + \frac{3}{4},\, - x \right]$ & {\tt [93]} \\ \hline
+94 & $\left[ \frac{1}{2} - z,\, x + \frac{3}{4},\, y + \frac{1}{4} \right]$ & {\tt [94]} \\ \hline
+95 & $\left[ \frac{1}{2} - y,\, z + \frac{3}{4},\, x + \frac{1}{4} \right]$ & {\tt [95]} \\ \hline
+96 & $\left[ z + \frac{3}{4},\, \frac{1}{2} - x,\, y + \frac{1}{4} \right]$ & {\tt [96]} \\
+\end{longtable}
+\end{center}
+
+\end{document}
