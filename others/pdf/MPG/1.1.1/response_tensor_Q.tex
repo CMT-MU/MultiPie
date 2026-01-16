@@ -1,0 +1,368 @@
+\documentclass[fleqn,8pt,landscape]{jsarticle}
+\special{papersize=\the\paperwidth,\the\paperheight}
+
+%%% package
+
+\usepackage[usenames]{color}
+\usepackage{amsmath}
+\usepackage{breqn}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{enumitem}
+\usepackage{braket}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+%%% layout setting
+
+\paperwidth=356.4truemm
+\paperheight=252.0truemm
+\textwidth=335.59999999999997truemm
+\textheight=224.2truemm
+\oddsidemargin=-15truemm
+\topmargin=-15truemm
+\footskip=7truemm
+
+%%% fixed
+
+\hoffset=0truemm
+\voffset=0truemm
+\headheight=0truemm
+\headsep=0truemm
+\marginparsep=0truemm
+\marginparwidth=0truemm
+
+%%% main text
+
+\begin{document}
+
+\setcounter{MaxMatrixCols}{32}
+
+\renewcommand{\tablename}{Table~}
+\renewcommand{\figurename}{Figure~}
+\begin{center}
+\LARGE
+MPG No. 1.1.1\quad$1$\quad[ Type I, triclinic ] [Q tensor]
+\end{center}
+* Rank 0 tensor.
+\begin{align*}
+\begin{bmatrix} Q \end{bmatrix}
+\end{align*}
+\begin{align*}
+& Q = Q_{s}^{(1)}
+\end{align*}
+* Rank 1 tensor.
+\begin{align*}
+\begin{bmatrix} Q_{x} & Q_{y} & Q_{z} \end{bmatrix}
+\end{align*}
+\begin{align*}
+& Q_{x} = Q_{px}^{(1)} \\
+& Q_{y} = Q_{py}^{(1)} \\
+& Q_{z} = Q_{pz}^{(1)}
+\end{align*}
+* Rank 2 tensor (s).
+\begin{align*}
+\begin{bmatrix} Q_{xx} & Q_{xy} & Q_{xz} \\ Q_{xy} & Q_{yy} & Q_{yz} \\ Q_{xz} & Q_{yz} & Q_{zz} \end{bmatrix}
+\end{align*}
+\begin{align*}
+& Q_{xx} = - Q_{du}^{(1)} + Q_{dv}^{(1)} + Q_{s}^{(1)} \\
+& Q_{xy} = Q_{dxy}^{(1)} \\
+& Q_{xz} = Q_{dxz}^{(1)} \\
+& Q_{yy} = - Q_{du}^{(1)} - Q_{dv}^{(1)} + Q_{s}^{(1)} \\
+& Q_{yz} = Q_{dyz}^{(1)} \\
+& Q_{zz} = 2 Q_{du}^{(1)} + Q_{s}^{(1)}
+\end{align*}
+* Rank 2 tensor (a).
+\begin{align*}
+\begin{bmatrix} 0 & Q_{xy} & Q_{xz} \\ - Q_{xy} & 0 & Q_{yz} \\ - Q_{xz} & - Q_{yz} & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& Q_{xy} = G_{pz}^{(1)} \\
+& Q_{xz} = - G_{py}^{(1)} \\
+& Q_{yz} = G_{px}^{(1)}
+\end{align*}
+* Rank 3 tensor (s).
+\begin{align*}
+\begin{bmatrix} Q_{xxx} & Q_{xxy} & Q_{xxz} \\ Q_{yyx} & Q_{yyy} & Q_{yyz} \\ Q_{zzx} & Q_{zzy} & Q_{zzz} \\ Q_{yzx} & Q_{yzy} & Q_{yzz} \\ Q_{zxx} & Q_{zxy} & Q_{zxz} \\ Q_{xyx} & Q_{xyy} & Q_{xyz} \end{bmatrix}
+\end{align*}
+\begin{align*}
+& Q_{xxx} = 2 Q_{fax}^{(1)} + Q_{px}^{(1)} + 2 Q_{px}^{(2)} \\
+& Q_{xxy} = 2 G_{dxz}^{(1)} - Q_{fay}^{(1)} - Q_{fby}^{(1)} + Q_{py}^{(1)} \\
+& Q_{xxz} = - 2 G_{dxy}^{(1)} - Q_{faz}^{(1)} + Q_{fbz}^{(1)} + Q_{pz}^{(1)} \\
+& Q_{yyx} = - 2 G_{dyz}^{(1)} - Q_{fax}^{(1)} + Q_{fbx}^{(1)} + Q_{px}^{(1)} \\
+& Q_{yyy} = 2 Q_{fay}^{(1)} + Q_{py}^{(1)} + 2 Q_{py}^{(2)} \\
+& Q_{yyz} = 2 G_{dxy}^{(1)} - Q_{faz}^{(1)} - Q_{fbz}^{(1)} + Q_{pz}^{(1)} \\
+& Q_{zzx} = 2 G_{dyz}^{(1)} - Q_{fax}^{(1)} - Q_{fbx}^{(1)} + Q_{px}^{(1)} \\
+& Q_{zzy} = - 2 G_{dxz}^{(1)} - Q_{fay}^{(1)} + Q_{fby}^{(1)} + Q_{py}^{(1)} \\
+& Q_{zzz} = 2 Q_{faz}^{(1)} + Q_{pz}^{(1)} + 2 Q_{pz}^{(2)} \\
+& Q_{yzx} = - 3 G_{du}^{(1)} - G_{dv}^{(1)} + Q_{f3}^{(1)} \\
+& Q_{yzy} = - G_{dxy}^{(1)} - Q_{faz}^{(1)} - Q_{fbz}^{(1)} + Q_{pz}^{(2)} \\
+& Q_{yzz} = G_{dxz}^{(1)} - Q_{fay}^{(1)} + Q_{fby}^{(1)} + Q_{py}^{(2)} \\
+& Q_{zxx} = G_{dxy}^{(1)} - Q_{faz}^{(1)} + Q_{fbz}^{(1)} + Q_{pz}^{(2)} \\
+& Q_{zxy} = 3 G_{du}^{(1)} - G_{dv}^{(1)} + Q_{f3}^{(1)} \\
+& Q_{zxz} = - G_{dyz}^{(1)} - Q_{fax}^{(1)} - Q_{fbx}^{(1)} + Q_{px}^{(2)} \\
+& Q_{xyx} = - G_{dxz}^{(1)} - Q_{fay}^{(1)} - Q_{fby}^{(1)} + Q_{py}^{(2)} \\
+& Q_{xyy} = G_{dyz}^{(1)} - Q_{fax}^{(1)} + Q_{fbx}^{(1)} + Q_{px}^{(2)} \\
+& Q_{xyz} = 2 G_{dv}^{(1)} + Q_{f3}^{(1)}
+\end{align*}
+* Rank 3 tensor (a).
+\begin{align*}
+\begin{bmatrix} Q_{yzx} & Q_{yzy} & Q_{yzz} \\ Q_{zxx} & Q_{zxy} & Q_{zxz} \\ Q_{xyx} & Q_{xyy} & Q_{xyz} \end{bmatrix}
+\end{align*}
+\begin{align*}
+& Q_{yzx} = - G_{du}^{(2)} + G_{dv}^{(2)} + G_{s}^{(1)} \\
+& Q_{yzy} = G_{dxy}^{(2)} + Q_{pz}^{(3)} \\
+& Q_{yzz} = G_{dxz}^{(2)} - Q_{py}^{(3)} \\
+& Q_{zxx} = G_{dxy}^{(2)} - Q_{pz}^{(3)} \\
+& Q_{zxy} = - G_{du}^{(2)} - G_{dv}^{(2)} + G_{s}^{(1)} \\
+& Q_{zxz} = G_{dyz}^{(2)} + Q_{px}^{(3)} \\
+& Q_{xyx} = G_{dxz}^{(2)} + Q_{py}^{(3)} \\
+& Q_{xyy} = G_{dyz}^{(2)} - Q_{px}^{(3)} \\
+& Q_{xyz} = 2 G_{du}^{(2)} + G_{s}^{(1)}
+\end{align*}
+* Rank 4 tensor (sss).
+\begin{align*}
+\begin{bmatrix} Q_{xxxx} & Q_{xxyy} & Q_{xxzz} & Q_{xxyz} & Q_{xxzx} & Q_{xxxy} \\ Q_{xxyy} & Q_{yyyy} & Q_{yyzz} & Q_{yyyz} & Q_{yyzx} & Q_{yyxy} \\ Q_{xxzz} & Q_{yyzz} & Q_{zzzz} & Q_{zzyz} & Q_{zzzx} & Q_{zzxy} \\ Q_{xxyz} & Q_{yyyz} & Q_{zzyz} & Q_{yzyz} & Q_{yzzx} & Q_{yzxy} \\ Q_{xxzx} & Q_{yyzx} & Q_{zzzx} & Q_{yzzx} & Q_{zxzx} & Q_{zxxy} \\ Q_{xxxy} & Q_{yyxy} & Q_{zzxy} & Q_{yzxy} & Q_{zxxy} & Q_{xyxy} \end{bmatrix}
+\end{align*}
+\begin{align*}
+& Q_{xxxx} = - 2 Q_{du}^{(1)} - 4 Q_{du}^{(2)} + 2 Q_{dv}^{(1)} + 4 Q_{dv}^{(2)} - Q_{gu}^{(1)} + Q_{gv}^{(1)} + 2 Q_{g}^{(1)} + Q_{s}^{(1)} + 2 Q_{s}^{(2)} \\
+& Q_{xxyy} = - 2 Q_{du}^{(1)} + 2 Q_{gu}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(1)} \\
+& Q_{xxzz} = Q_{du}^{(1)} + Q_{dv}^{(1)} - Q_{gu}^{(1)} - Q_{gv}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(1)} \\
+& Q_{xxyz} = Q_{dyz}^{(1)} + 2 Q_{gbx}^{(1)} \\
+& Q_{xxzx} = Q_{dxz}^{(1)} + 2 Q_{dxz}^{(2)} - Q_{gay}^{(1)} - Q_{gby}^{(1)} \\
+& Q_{xxxy} = Q_{dxy}^{(1)} + 2 Q_{dxy}^{(2)} + Q_{gaz}^{(1)} - Q_{gbz}^{(1)} \\
+& Q_{yyyy} = - 2 Q_{du}^{(1)} - 4 Q_{du}^{(2)} - 2 Q_{dv}^{(1)} - 4 Q_{dv}^{(2)} - Q_{gu}^{(1)} - Q_{gv}^{(1)} + 2 Q_{g}^{(1)} + Q_{s}^{(1)} + 2 Q_{s}^{(2)} \\
+& Q_{yyzz} = Q_{du}^{(1)} - Q_{dv}^{(1)} - Q_{gu}^{(1)} + Q_{gv}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(1)} \\
+& Q_{yyyz} = Q_{dyz}^{(1)} + 2 Q_{dyz}^{(2)} + Q_{gax}^{(1)} - Q_{gbx}^{(1)} \\
+& Q_{yyzx} = Q_{dxz}^{(1)} + 2 Q_{gby}^{(1)} \\
+& Q_{yyxy} = Q_{dxy}^{(1)} + 2 Q_{dxy}^{(2)} - Q_{gaz}^{(1)} - Q_{gbz}^{(1)} \\
+& Q_{zzzz} = 4 Q_{du}^{(1)} + 8 Q_{du}^{(2)} + 2 Q_{gu}^{(1)} + 2 Q_{g}^{(1)} + Q_{s}^{(1)} + 2 Q_{s}^{(2)} \\
+& Q_{zzyz} = Q_{dyz}^{(1)} + 2 Q_{dyz}^{(2)} - Q_{gax}^{(1)} - Q_{gbx}^{(1)} \\
+& Q_{zzzx} = Q_{dxz}^{(1)} + 2 Q_{dxz}^{(2)} + Q_{gay}^{(1)} - Q_{gby}^{(1)} \\
+& Q_{zzxy} = Q_{dxy}^{(1)} + 2 Q_{gbz}^{(1)} \\
+& Q_{yzyz} = Q_{du}^{(2)} - Q_{dv}^{(2)} - Q_{gu}^{(1)} + Q_{gv}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(2)} \\
+& Q_{yzzx} = Q_{dxy}^{(2)} + 2 Q_{gbz}^{(1)} \\
+& Q_{yzxy} = Q_{dxz}^{(2)} + 2 Q_{gby}^{(1)} \\
+& Q_{zxzx} = Q_{du}^{(2)} + Q_{dv}^{(2)} - Q_{gu}^{(1)} - Q_{gv}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(2)} \\
+& Q_{zxxy} = Q_{dyz}^{(2)} + 2 Q_{gbx}^{(1)} \\
+& Q_{xyxy} = - 2 Q_{du}^{(2)} + 2 Q_{gu}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(2)}
+\end{align*}
+* Rank 4 tensor (ssa).
+\begin{align*}
+\begin{bmatrix} 0 & Q_{xxyy} & Q_{xxzz} & Q_{xxyz} & Q_{xxzx} & Q_{xxxy} \\ - Q_{xxyy} & 0 & Q_{yyzz} & Q_{yyyz} & Q_{yyzx} & Q_{yyxy} \\ - Q_{xxzz} & - Q_{yyzz} & 0 & Q_{zzyz} & Q_{zzzx} & Q_{zzxy} \\ - Q_{xxyz} & - Q_{yyyz} & - Q_{zzyz} & 0 & Q_{yzzx} & Q_{yzxy} \\ - Q_{xxzx} & - Q_{yyzx} & - Q_{zzzx} & - Q_{yzzx} & 0 & Q_{zxxy} \\ - Q_{xxxy} & - Q_{yyxy} & - Q_{zzxy} & - Q_{yzxy} & - Q_{zxxy} & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& Q_{xxyy} = 4 G_{f3}^{(1)} - 2 Q_{dv}^{(3)} \\
+& Q_{xxzz} = - 4 G_{f3}^{(1)} + 3 Q_{du}^{(3)} - Q_{dv}^{(3)} \\
+& Q_{xxyz} = - 4 G_{fbx}^{(1)} + Q_{dyz}^{(3)} \\
+& Q_{xxzx} = 2 G_{fay}^{(1)} + 2 G_{fby}^{(1)} - 2 G_{py}^{(1)} + Q_{dxz}^{(3)} \\
+& Q_{xxxy} = - 2 G_{faz}^{(1)} + 2 G_{fbz}^{(1)} + 2 G_{pz}^{(1)} + Q_{dxy}^{(3)} \\
+& Q_{yyzz} = 4 G_{f3}^{(1)} + 3 Q_{du}^{(3)} + Q_{dv}^{(3)} \\
+& Q_{yyyz} = - 2 G_{fax}^{(1)} + 2 G_{fbx}^{(1)} + 2 G_{px}^{(1)} + Q_{dyz}^{(3)} \\
+& Q_{yyzx} = - 4 G_{fby}^{(1)} + Q_{dxz}^{(3)} \\
+& Q_{yyxy} = 2 G_{faz}^{(1)} + 2 G_{fbz}^{(1)} - 2 G_{pz}^{(1)} + Q_{dxy}^{(3)} \\
+& Q_{zzyz} = 2 G_{fax}^{(1)} + 2 G_{fbx}^{(1)} - 2 G_{px}^{(1)} + Q_{dyz}^{(3)} \\
+& Q_{zzzx} = - 2 G_{fay}^{(1)} + 2 G_{fby}^{(1)} + 2 G_{py}^{(1)} + Q_{dxz}^{(3)} \\
+& Q_{zzxy} = - 4 G_{fbz}^{(1)} + Q_{dxy}^{(3)} \\
+& Q_{yzzx} = - 4 G_{faz}^{(1)} - G_{pz}^{(1)} \\
+& Q_{yzxy} = 4 G_{fay}^{(1)} + G_{py}^{(1)} \\
+& Q_{zxxy} = - 4 G_{fax}^{(1)} - G_{px}^{(1)}
+\end{align*}
+* Rank 4 tensor (aas).
+\begin{align*}
+\begin{bmatrix} Q_{yzyz} & Q_{yzzx} & Q_{yzxy} \\ Q_{yzzx} & Q_{zxzx} & Q_{zxxy} \\ Q_{yzxy} & Q_{zxxy} & Q_{xyxy} \end{bmatrix}
+\end{align*}
+\begin{align*}
+& Q_{yzyz} = - 2 Q_{du}^{(4)} + 2 Q_{dv}^{(4)} + Q_{s}^{(3)} \\
+& Q_{yzzx} = 2 Q_{dxy}^{(4)} \\
+& Q_{yzxy} = 2 Q_{dxz}^{(4)} \\
+& Q_{zxzx} = - 2 Q_{du}^{(4)} - 2 Q_{dv}^{(4)} + Q_{s}^{(3)} \\
+& Q_{zxxy} = 2 Q_{dyz}^{(4)} \\
+& Q_{xyxy} = 4 Q_{du}^{(4)} + Q_{s}^{(3)}
+\end{align*}
+* Rank 4 tensor (aaa).
+\begin{align*}
+\begin{bmatrix} 0 & Q_{yzzx} & Q_{yzxy} \\ - Q_{yzzx} & 0 & Q_{zxxy} \\ - Q_{yzxy} & - Q_{zxxy} & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& Q_{yzzx} = - G_{pz}^{(2)} \\
+& Q_{yzxy} = G_{py}^{(2)} \\
+& Q_{zxxy} = - G_{px}^{(2)}
+\end{align*}
+* Rank 4 tensor (sa).
+\begin{align*}
+\begin{bmatrix} Q_{xxyz} & Q_{xxzx} & Q_{xxxy} \\ Q_{yyyz} & Q_{yyzx} & Q_{yyxy} \\ Q_{zzyz} & Q_{zzzx} & Q_{zzxy} \\ Q_{yzyz} & Q_{yzzx} & Q_{yzxy} \\ Q_{zxyz} & Q_{zxzx} & Q_{zxxy} \\ Q_{xyyz} & Q_{xyzx} & Q_{xyxy} \end{bmatrix}
+\end{align*}
+\begin{align*}
+& Q_{xxyz} = 2 G_{fax}^{(2)} + G_{px}^{(3)} + 2 G_{px}^{(4)} \\
+& Q_{xxzx} = - G_{fay}^{(2)} - G_{fby}^{(2)} + G_{py}^{(3)} + 2 Q_{dxz}^{(5)} \\
+& Q_{xxxy} = - G_{faz}^{(2)} + G_{fbz}^{(2)} + G_{pz}^{(3)} - 2 Q_{dxy}^{(5)} \\
+& Q_{yyyz} = - G_{fax}^{(2)} + G_{fbx}^{(2)} + G_{px}^{(3)} - 2 Q_{dyz}^{(5)} \\
+& Q_{yyzx} = 2 G_{fay}^{(2)} + G_{py}^{(3)} + 2 G_{py}^{(4)} \\
+& Q_{yyxy} = - G_{faz}^{(2)} - G_{fbz}^{(2)} + G_{pz}^{(3)} + 2 Q_{dxy}^{(5)} \\
+& Q_{zzyz} = - G_{fax}^{(2)} - G_{fbx}^{(2)} + G_{px}^{(3)} + 2 Q_{dyz}^{(5)} \\
+& Q_{zzzx} = - G_{fay}^{(2)} + G_{fby}^{(2)} + G_{py}^{(3)} - 2 Q_{dxz}^{(5)} \\
+& Q_{zzxy} = 2 G_{faz}^{(2)} + G_{pz}^{(3)} + 2 G_{pz}^{(4)} \\
+& Q_{yzyz} = G_{f3}^{(2)} - 3 Q_{du}^{(5)} - Q_{dv}^{(5)} \\
+& Q_{yzzx} = - G_{faz}^{(2)} - G_{fbz}^{(2)} + G_{pz}^{(4)} - Q_{dxy}^{(5)} \\
+& Q_{yzxy} = - G_{fay}^{(2)} + G_{fby}^{(2)} + G_{py}^{(4)} + Q_{dxz}^{(5)} \\
+& Q_{zxyz} = - G_{faz}^{(2)} + G_{fbz}^{(2)} + G_{pz}^{(4)} + Q_{dxy}^{(5)} \\
+& Q_{zxzx} = G_{f3}^{(2)} + 3 Q_{du}^{(5)} - Q_{dv}^{(5)} \\
+& Q_{zxxy} = - G_{fax}^{(2)} - G_{fbx}^{(2)} + G_{px}^{(4)} - Q_{dyz}^{(5)} \\
+& Q_{xyyz} = - G_{fay}^{(2)} - G_{fby}^{(2)} + G_{py}^{(4)} - Q_{dxz}^{(5)} \\
+& Q_{xyzx} = - G_{fax}^{(2)} + G_{fbx}^{(2)} + G_{px}^{(4)} + Q_{dyz}^{(5)} \\
+& Q_{xyxy} = G_{f3}^{(2)} + 2 Q_{dv}^{(5)}
+\end{align*}
+* Rank 4 tensor (as).
+\begin{align*}
+\begin{bmatrix} Q_{yzxx} & Q_{yzyy} & Q_{yzzz} & Q_{yzyz} & Q_{yzzx} & Q_{yzxy} \\ Q_{zxxx} & Q_{zxyy} & Q_{zxzz} & Q_{zxyz} & Q_{zxzx} & Q_{zxxy} \\ Q_{xyxx} & Q_{xyyy} & Q_{xyzz} & Q_{xyyz} & Q_{xyzx} & Q_{xyxy} \end{bmatrix}
+\end{align*}
+\begin{align*}
+& Q_{yzxx} = 2 G_{fax}^{(3)} + G_{px}^{(5)} + 2 G_{px}^{(6)} \\
+& Q_{yzyy} = - G_{fax}^{(3)} + G_{fbx}^{(3)} + G_{px}^{(5)} - 2 Q_{dyz}^{(6)} \\
+& Q_{yzzz} = - G_{fax}^{(3)} - G_{fbx}^{(3)} + G_{px}^{(5)} + 2 Q_{dyz}^{(6)} \\
+& Q_{yzyz} = G_{f3}^{(3)} - 3 Q_{du}^{(6)} - Q_{dv}^{(6)} \\
+& Q_{yzzx} = - G_{faz}^{(3)} + G_{fbz}^{(3)} + G_{pz}^{(6)} + Q_{dxy}^{(6)} \\
+& Q_{yzxy} = - G_{fay}^{(3)} - G_{fby}^{(3)} + G_{py}^{(6)} - Q_{dxz}^{(6)} \\
+& Q_{zxxx} = - G_{fay}^{(3)} - G_{fby}^{(3)} + G_{py}^{(5)} + 2 Q_{dxz}^{(6)} \\
+& Q_{zxyy} = 2 G_{fay}^{(3)} + G_{py}^{(5)} + 2 G_{py}^{(6)} \\
+& Q_{zxzz} = - G_{fay}^{(3)} + G_{fby}^{(3)} + G_{py}^{(5)} - 2 Q_{dxz}^{(6)} \\
+& Q_{zxyz} = - G_{faz}^{(3)} - G_{fbz}^{(3)} + G_{pz}^{(6)} - Q_{dxy}^{(6)} \\
+& Q_{zxzx} = G_{f3}^{(3)} + 3 Q_{du}^{(6)} - Q_{dv}^{(6)} \\
+& Q_{zxxy} = - G_{fax}^{(3)} + G_{fbx}^{(3)} + G_{px}^{(6)} + Q_{dyz}^{(6)} \\
+& Q_{xyxx} = - G_{faz}^{(3)} + G_{fbz}^{(3)} + G_{pz}^{(5)} - 2 Q_{dxy}^{(6)} \\
+& Q_{xyyy} = - G_{faz}^{(3)} - G_{fbz}^{(3)} + G_{pz}^{(5)} + 2 Q_{dxy}^{(6)} \\
+& Q_{xyzz} = 2 G_{faz}^{(3)} + G_{pz}^{(5)} + 2 G_{pz}^{(6)} \\
+& Q_{xyyz} = - G_{fay}^{(3)} + G_{fby}^{(3)} + G_{py}^{(6)} + Q_{dxz}^{(6)} \\
+& Q_{xyzx} = - G_{fax}^{(3)} - G_{fbx}^{(3)} + G_{px}^{(6)} - Q_{dyz}^{(6)} \\
+& Q_{xyxy} = G_{f3}^{(3)} + 2 Q_{dv}^{(6)}
+\end{align*}
+* Rank 4 tensor (s).
+\begin{align*}
+\begin{bmatrix} Q_{xxxx} & Q_{xxyy} & Q_{xxzz} & Q_{xxyz} & Q_{xxzx} & Q_{xxxy} & Q_{xxzy} & Q_{xxxz} & Q_{xxyx} \\ Q_{yyxx} & Q_{yyyy} & Q_{yyzz} & Q_{yyyz} & Q_{yyzx} & Q_{yyxy} & Q_{yyzy} & Q_{yyxz} & Q_{yyyx} \\ Q_{zzxx} & Q_{zzyy} & Q_{zzzz} & Q_{zzyz} & Q_{zzzx} & Q_{zzxy} & Q_{zzzy} & Q_{zzxz} & Q_{zzyx} \\ Q_{yzxx} & Q_{yzyy} & Q_{yzzz} & Q_{yzyz} & Q_{yzzx} & Q_{yzxy} & Q_{yzzy} & Q_{yzxz} & Q_{yzyx} \\ Q_{zxxx} & Q_{zxyy} & Q_{zxzz} & Q_{zxyz} & Q_{zxzx} & Q_{zxxy} & Q_{zxzy} & Q_{zxxz} & Q_{zxyx} \\ Q_{xyxx} & Q_{xyyy} & Q_{xyzz} & Q_{xyyz} & Q_{xyzx} & Q_{xyxy} & Q_{xyzy} & Q_{xyxz} & Q_{xyyx} \end{bmatrix}
+\end{align*}
+\begin{align*}
+& Q_{xxxx} = - 2 Q_{du}^{(1)} - 4 Q_{du}^{(2)} + 2 Q_{dv}^{(1)} + 4 Q_{dv}^{(2)} - Q_{gu}^{(1)} + Q_{gv}^{(1)} + 2 Q_{g}^{(1)} + Q_{s}^{(1)} + 2 Q_{s}^{(2)} \\
+& Q_{xxyy} = 4 G_{f3}^{(1)} - 2 Q_{du}^{(1)} - 2 Q_{dv}^{(3)} + 2 Q_{gu}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(1)} \\
+& Q_{xxzz} = - 4 G_{f3}^{(1)} + Q_{du}^{(1)} + 3 Q_{du}^{(3)} + Q_{dv}^{(1)} - Q_{dv}^{(3)} - Q_{gu}^{(1)} - Q_{gv}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(1)} \\
+& Q_{xxyz} = 2 G_{fax}^{(2)} - 4 G_{fbx}^{(1)} + G_{px}^{(3)} + 2 G_{px}^{(4)} + Q_{dyz}^{(1)} + Q_{dyz}^{(3)} + 2 Q_{gbx}^{(1)} \\
+& Q_{xxzx} = 2 G_{fay}^{(1)} - G_{fay}^{(2)} + 2 G_{fby}^{(1)} - G_{fby}^{(2)} - 2 G_{py}^{(1)} + G_{py}^{(3)} + Q_{dxz}^{(1)} + 2 Q_{dxz}^{(2)} + Q_{dxz}^{(3)} + 2 Q_{dxz}^{(5)} - Q_{gay}^{(1)} - Q_{gby}^{(1)} \\
+& Q_{xxxy} = - 2 G_{faz}^{(1)} - G_{faz}^{(2)} + 2 G_{fbz}^{(1)} + G_{fbz}^{(2)} + 2 G_{pz}^{(1)} + G_{pz}^{(3)} + Q_{dxy}^{(1)} + 2 Q_{dxy}^{(2)} + Q_{dxy}^{(3)} - 2 Q_{dxy}^{(5)} + Q_{gaz}^{(1)} - Q_{gbz}^{(1)} \\
+& Q_{xxzy} = - 2 G_{fax}^{(2)} - 4 G_{fbx}^{(1)} - G_{px}^{(3)} - 2 G_{px}^{(4)} + Q_{dyz}^{(1)} + Q_{dyz}^{(3)} + 2 Q_{gbx}^{(1)} \\
+& Q_{xxxz} = 2 G_{fay}^{(1)} + G_{fay}^{(2)} + 2 G_{fby}^{(1)} + G_{fby}^{(2)} - 2 G_{py}^{(1)} - G_{py}^{(3)} + Q_{dxz}^{(1)} + 2 Q_{dxz}^{(2)} + Q_{dxz}^{(3)} - 2 Q_{dxz}^{(5)} - Q_{gay}^{(1)} - Q_{gby}^{(1)} \\
+& Q_{xxyx} = - 2 G_{faz}^{(1)} + G_{faz}^{(2)} + 2 G_{fbz}^{(1)} - G_{fbz}^{(2)} + 2 G_{pz}^{(1)} - G_{pz}^{(3)} + Q_{dxy}^{(1)} + 2 Q_{dxy}^{(2)} + Q_{dxy}^{(3)} + 2 Q_{dxy}^{(5)} + Q_{gaz}^{(1)} - Q_{gbz}^{(1)} \\
+& Q_{yyxx} = - 4 G_{f3}^{(1)} - 2 Q_{du}^{(1)} + 2 Q_{dv}^{(3)} + 2 Q_{gu}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(1)} \\
+& Q_{yyyy} = - 2 Q_{du}^{(1)} - 4 Q_{du}^{(2)} - 2 Q_{dv}^{(1)} - 4 Q_{dv}^{(2)} - Q_{gu}^{(1)} - Q_{gv}^{(1)} + 2 Q_{g}^{(1)} + Q_{s}^{(1)} + 2 Q_{s}^{(2)} \\
+& Q_{yyzz} = 4 G_{f3}^{(1)} + Q_{du}^{(1)} + 3 Q_{du}^{(3)} - Q_{dv}^{(1)} + Q_{dv}^{(3)} - Q_{gu}^{(1)} + Q_{gv}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(1)} \\
+& Q_{yyyz} = - 2 G_{fax}^{(1)} - G_{fax}^{(2)} + 2 G_{fbx}^{(1)} + G_{fbx}^{(2)} + 2 G_{px}^{(1)} + G_{px}^{(3)} + Q_{dyz}^{(1)} + 2 Q_{dyz}^{(2)} + Q_{dyz}^{(3)} - 2 Q_{dyz}^{(5)} + Q_{gax}^{(1)} - Q_{gbx}^{(1)} \\
+& Q_{yyzx} = 2 G_{fay}^{(2)} - 4 G_{fby}^{(1)} + G_{py}^{(3)} + 2 G_{py}^{(4)} + Q_{dxz}^{(1)} + Q_{dxz}^{(3)} + 2 Q_{gby}^{(1)} \\
+& Q_{yyxy} = 2 G_{faz}^{(1)} - G_{faz}^{(2)} + 2 G_{fbz}^{(1)} - G_{fbz}^{(2)} - 2 G_{pz}^{(1)} + G_{pz}^{(3)} + Q_{dxy}^{(1)} + 2 Q_{dxy}^{(2)} + Q_{dxy}^{(3)} + 2 Q_{dxy}^{(5)} - Q_{gaz}^{(1)} - Q_{gbz}^{(1)} \\
+& Q_{yyzy} = - 2 G_{fax}^{(1)} + G_{fax}^{(2)} + 2 G_{fbx}^{(1)} - G_{fbx}^{(2)} + 2 G_{px}^{(1)} - G_{px}^{(3)} + Q_{dyz}^{(1)} + 2 Q_{dyz}^{(2)} + Q_{dyz}^{(3)} + 2 Q_{dyz}^{(5)} + Q_{gax}^{(1)} - Q_{gbx}^{(1)} \\
+& Q_{yyxz} = - 2 G_{fay}^{(2)} - 4 G_{fby}^{(1)} - G_{py}^{(3)} - 2 G_{py}^{(4)} + Q_{dxz}^{(1)} + Q_{dxz}^{(3)} + 2 Q_{gby}^{(1)} \\
+& Q_{yyyx} = 2 G_{faz}^{(1)} + G_{faz}^{(2)} + 2 G_{fbz}^{(1)} + G_{fbz}^{(2)} - 2 G_{pz}^{(1)} - G_{pz}^{(3)} + Q_{dxy}^{(1)} + 2 Q_{dxy}^{(2)} + Q_{dxy}^{(3)} - 2 Q_{dxy}^{(5)} - Q_{gaz}^{(1)} - Q_{gbz}^{(1)} \\
+& Q_{zzxx} = 4 G_{f3}^{(1)} + Q_{du}^{(1)} - 3 Q_{du}^{(3)} + Q_{dv}^{(1)} + Q_{dv}^{(3)} - Q_{gu}^{(1)} - Q_{gv}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(1)} \\
+& Q_{zzyy} = - 4 G_{f3}^{(1)} + Q_{du}^{(1)} - 3 Q_{du}^{(3)} - Q_{dv}^{(1)} - Q_{dv}^{(3)} - Q_{gu}^{(1)} + Q_{gv}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(1)} \\
+& Q_{zzzz} = 4 Q_{du}^{(1)} + 8 Q_{du}^{(2)} + 2 Q_{gu}^{(1)} + 2 Q_{g}^{(1)} + Q_{s}^{(1)} + 2 Q_{s}^{(2)} \\
+& Q_{zzyz} = 2 G_{fax}^{(1)} - G_{fax}^{(2)} + 2 G_{fbx}^{(1)} - G_{fbx}^{(2)} - 2 G_{px}^{(1)} + G_{px}^{(3)} + Q_{dyz}^{(1)} + 2 Q_{dyz}^{(2)} + Q_{dyz}^{(3)} + 2 Q_{dyz}^{(5)} - Q_{gax}^{(1)} - Q_{gbx}^{(1)} \\
+& Q_{zzzx} = - 2 G_{fay}^{(1)} - G_{fay}^{(2)} + 2 G_{fby}^{(1)} + G_{fby}^{(2)} + 2 G_{py}^{(1)} + G_{py}^{(3)} + Q_{dxz}^{(1)} + 2 Q_{dxz}^{(2)} + Q_{dxz}^{(3)} - 2 Q_{dxz}^{(5)} + Q_{gay}^{(1)} - Q_{gby}^{(1)} \\
+& Q_{zzxy} = 2 G_{faz}^{(2)} - 4 G_{fbz}^{(1)} + G_{pz}^{(3)} + 2 G_{pz}^{(4)} + Q_{dxy}^{(1)} + Q_{dxy}^{(3)} + 2 Q_{gbz}^{(1)} \\
+& Q_{zzzy} = 2 G_{fax}^{(1)} + G_{fax}^{(2)} + 2 G_{fbx}^{(1)} + G_{fbx}^{(2)} - 2 G_{px}^{(1)} - G_{px}^{(3)} + Q_{dyz}^{(1)} + 2 Q_{dyz}^{(2)} + Q_{dyz}^{(3)} - 2 Q_{dyz}^{(5)} - Q_{gax}^{(1)} - Q_{gbx}^{(1)} \\
+& Q_{zzxz} = - 2 G_{fay}^{(1)} + G_{fay}^{(2)} + 2 G_{fby}^{(1)} - G_{fby}^{(2)} + 2 G_{py}^{(1)} - G_{py}^{(3)} + Q_{dxz}^{(1)} + 2 Q_{dxz}^{(2)} + Q_{dxz}^{(3)} + 2 Q_{dxz}^{(5)} + Q_{gay}^{(1)} - Q_{gby}^{(1)} \\
+& Q_{zzyx} = - 2 G_{faz}^{(2)} - 4 G_{fbz}^{(1)} - G_{pz}^{(3)} - 2 G_{pz}^{(4)} + Q_{dxy}^{(1)} + Q_{dxy}^{(3)} + 2 Q_{gbz}^{(1)} \\
+& Q_{yzxx} = 4 G_{fbx}^{(1)} + Q_{dyz}^{(1)} - Q_{dyz}^{(3)} + 2 Q_{gbx}^{(1)} \\
+& Q_{yzyy} = 2 G_{fax}^{(1)} - 2 G_{fbx}^{(1)} - 2 G_{px}^{(1)} + Q_{dyz}^{(1)} + 2 Q_{dyz}^{(2)} - Q_{dyz}^{(3)} + Q_{gax}^{(1)} - Q_{gbx}^{(1)} \\
+& Q_{yzzz} = - 2 G_{fax}^{(1)} - 2 G_{fbx}^{(1)} + 2 G_{px}^{(1)} + Q_{dyz}^{(1)} + 2 Q_{dyz}^{(2)} - Q_{dyz}^{(3)} - Q_{gax}^{(1)} - Q_{gbx}^{(1)} \\
+& Q_{yzyz} = G_{f3}^{(2)} + Q_{du}^{(2)} - 3 Q_{du}^{(5)} - Q_{dv}^{(2)} - Q_{dv}^{(5)} - Q_{gu}^{(1)} + Q_{gv}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(2)} \\
+& Q_{yzzx} = - 4 G_{faz}^{(1)} - G_{faz}^{(2)} - G_{fbz}^{(2)} - G_{pz}^{(1)} + G_{pz}^{(4)} + Q_{dxy}^{(2)} - Q_{dxy}^{(5)} + 2 Q_{gbz}^{(1)} \\
+& Q_{yzxy} = 4 G_{fay}^{(1)} - G_{fay}^{(2)} + G_{fby}^{(2)} + G_{py}^{(1)} + G_{py}^{(4)} + Q_{dxz}^{(2)} + Q_{dxz}^{(5)} + 2 Q_{gby}^{(1)} \\
+& Q_{yzzy} = - G_{f3}^{(2)} + Q_{du}^{(2)} + 3 Q_{du}^{(5)} - Q_{dv}^{(2)} + Q_{dv}^{(5)} - Q_{gu}^{(1)} + Q_{gv}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(2)} \\
+& Q_{yzxz} = - 4 G_{faz}^{(1)} + G_{faz}^{(2)} + G_{fbz}^{(2)} - G_{pz}^{(1)} - G_{pz}^{(4)} + Q_{dxy}^{(2)} + Q_{dxy}^{(5)} + 2 Q_{gbz}^{(1)} \\
+& Q_{yzyx} = 4 G_{fay}^{(1)} + G_{fay}^{(2)} - G_{fby}^{(2)} + G_{py}^{(1)} - G_{py}^{(4)} + Q_{dxz}^{(2)} - Q_{dxz}^{(5)} + 2 Q_{gby}^{(1)} \\
+& Q_{zxxx} = - 2 G_{fay}^{(1)} - 2 G_{fby}^{(1)} + 2 G_{py}^{(1)} + Q_{dxz}^{(1)} + 2 Q_{dxz}^{(2)} - Q_{dxz}^{(3)} - Q_{gay}^{(1)} - Q_{gby}^{(1)} \\
+& Q_{zxyy} = 4 G_{fby}^{(1)} + Q_{dxz}^{(1)} - Q_{dxz}^{(3)} + 2 Q_{gby}^{(1)} \\
+& Q_{zxzz} = 2 G_{fay}^{(1)} - 2 G_{fby}^{(1)} - 2 G_{py}^{(1)} + Q_{dxz}^{(1)} + 2 Q_{dxz}^{(2)} - Q_{dxz}^{(3)} + Q_{gay}^{(1)} - Q_{gby}^{(1)} \\
+& Q_{zxyz} = 4 G_{faz}^{(1)} - G_{faz}^{(2)} + G_{fbz}^{(2)} + G_{pz}^{(1)} + G_{pz}^{(4)} + Q_{dxy}^{(2)} + Q_{dxy}^{(5)} + 2 Q_{gbz}^{(1)} \\
+& Q_{zxzx} = G_{f3}^{(2)} + Q_{du}^{(2)} + 3 Q_{du}^{(5)} + Q_{dv}^{(2)} - Q_{dv}^{(5)} - Q_{gu}^{(1)} - Q_{gv}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(2)} \\
+& Q_{zxxy} = - 4 G_{fax}^{(1)} - G_{fax}^{(2)} - G_{fbx}^{(2)} - G_{px}^{(1)} + G_{px}^{(4)} + Q_{dyz}^{(2)} - Q_{dyz}^{(5)} + 2 Q_{gbx}^{(1)} \\
+& Q_{zxzy} = 4 G_{faz}^{(1)} + G_{faz}^{(2)} - G_{fbz}^{(2)} + G_{pz}^{(1)} - G_{pz}^{(4)} + Q_{dxy}^{(2)} - Q_{dxy}^{(5)} + 2 Q_{gbz}^{(1)} \\
+& Q_{zxxz} = - G_{f3}^{(2)} + Q_{du}^{(2)} - 3 Q_{du}^{(5)} + Q_{dv}^{(2)} + Q_{dv}^{(5)} - Q_{gu}^{(1)} - Q_{gv}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(2)} \\
+& Q_{zxyx} = - 4 G_{fax}^{(1)} + G_{fax}^{(2)} + G_{fbx}^{(2)} - G_{px}^{(1)} - G_{px}^{(4)} + Q_{dyz}^{(2)} + Q_{dyz}^{(5)} + 2 Q_{gbx}^{(1)} \\
+& Q_{xyxx} = 2 G_{faz}^{(1)} - 2 G_{fbz}^{(1)} - 2 G_{pz}^{(1)} + Q_{dxy}^{(1)} + 2 Q_{dxy}^{(2)} - Q_{dxy}^{(3)} + Q_{gaz}^{(1)} - Q_{gbz}^{(1)} \\
+& Q_{xyyy} = - 2 G_{faz}^{(1)} - 2 G_{fbz}^{(1)} + 2 G_{pz}^{(1)} + Q_{dxy}^{(1)} + 2 Q_{dxy}^{(2)} - Q_{dxy}^{(3)} - Q_{gaz}^{(1)} - Q_{gbz}^{(1)} \\
+& Q_{xyzz} = 4 G_{fbz}^{(1)} + Q_{dxy}^{(1)} - Q_{dxy}^{(3)} + 2 Q_{gbz}^{(1)} \\
+& Q_{xyyz} = - 4 G_{fay}^{(1)} - G_{fay}^{(2)} - G_{fby}^{(2)} - G_{py}^{(1)} + G_{py}^{(4)} + Q_{dxz}^{(2)} - Q_{dxz}^{(5)} + 2 Q_{gby}^{(1)} \\
+& Q_{xyzx} = 4 G_{fax}^{(1)} - G_{fax}^{(2)} + G_{fbx}^{(2)} + G_{px}^{(1)} + G_{px}^{(4)} + Q_{dyz}^{(2)} + Q_{dyz}^{(5)} + 2 Q_{gbx}^{(1)} \\
+& Q_{xyxy} = G_{f3}^{(2)} - 2 Q_{du}^{(2)} + 2 Q_{dv}^{(5)} + 2 Q_{gu}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(2)} \\
+& Q_{xyzy} = - 4 G_{fay}^{(1)} + G_{fay}^{(2)} + G_{fby}^{(2)} - G_{py}^{(1)} - G_{py}^{(4)} + Q_{dxz}^{(2)} + Q_{dxz}^{(5)} + 2 Q_{gby}^{(1)} \\
+& Q_{xyxz} = 4 G_{fax}^{(1)} + G_{fax}^{(2)} - G_{fbx}^{(2)} + G_{px}^{(1)} - G_{px}^{(4)} + Q_{dyz}^{(2)} - Q_{dyz}^{(5)} + 2 Q_{gbx}^{(1)} \\
+& Q_{xyyx} = - G_{f3}^{(2)} - 2 Q_{du}^{(2)} - 2 Q_{dv}^{(5)} + 2 Q_{gu}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(2)}
+\end{align*}
+* Rank 4 tensor (a).
+\begin{align*}
+\begin{bmatrix} Q_{yzxx} & Q_{yzyy} & Q_{yzzz} & Q_{yzyz} & Q_{yzzx} & Q_{yzxy} & Q_{yzzy} & Q_{yzxz} & Q_{yzyx} \\ Q_{zxxx} & Q_{zxyy} & Q_{zxzz} & Q_{zxyz} & Q_{zxzx} & Q_{zxxy} & Q_{zxzy} & Q_{zxxz} & Q_{zxyx} \\ Q_{xyxx} & Q_{xyyy} & Q_{xyzz} & Q_{xyyz} & Q_{xyzx} & Q_{xyxy} & Q_{xyzy} & Q_{xyxz} & Q_{xyyx} \end{bmatrix}
+\end{align*}
+\begin{align*}
+& Q_{yzxx} = 2 G_{fax}^{(3)} + G_{px}^{(5)} + 2 G_{px}^{(6)} \\
+& Q_{yzyy} = - G_{fax}^{(3)} + G_{fbx}^{(3)} + G_{px}^{(5)} - 2 Q_{dyz}^{(6)} \\
+& Q_{yzzz} = - G_{fax}^{(3)} - G_{fbx}^{(3)} + G_{px}^{(5)} + 2 Q_{dyz}^{(6)} \\
+& Q_{yzyz} = G_{f3}^{(3)} - 2 Q_{du}^{(4)} - 3 Q_{du}^{(6)} + 2 Q_{dv}^{(4)} - Q_{dv}^{(6)} + Q_{s}^{(3)} \\
+& Q_{yzzx} = - G_{faz}^{(3)} + G_{fbz}^{(3)} - G_{pz}^{(2)} + G_{pz}^{(6)} + 2 Q_{dxy}^{(4)} + Q_{dxy}^{(6)} \\
+& Q_{yzxy} = - G_{fay}^{(3)} - G_{fby}^{(3)} + G_{py}^{(2)} + G_{py}^{(6)} + 2 Q_{dxz}^{(4)} - Q_{dxz}^{(6)} \\
+& Q_{yzzy} = G_{f3}^{(3)} + 2 Q_{du}^{(4)} - 3 Q_{du}^{(6)} - 2 Q_{dv}^{(4)} - Q_{dv}^{(6)} - Q_{s}^{(3)} \\
+& Q_{yzxz} = - G_{faz}^{(3)} + G_{fbz}^{(3)} + G_{pz}^{(2)} + G_{pz}^{(6)} - 2 Q_{dxy}^{(4)} + Q_{dxy}^{(6)} \\
+& Q_{yzyx} = - G_{fay}^{(3)} - G_{fby}^{(3)} - G_{py}^{(2)} + G_{py}^{(6)} - 2 Q_{dxz}^{(4)} - Q_{dxz}^{(6)} \\
+& Q_{zxxx} = - G_{fay}^{(3)} - G_{fby}^{(3)} + G_{py}^{(5)} + 2 Q_{dxz}^{(6)} \\
+& Q_{zxyy} = 2 G_{fay}^{(3)} + G_{py}^{(5)} + 2 G_{py}^{(6)} \\
+& Q_{zxzz} = - G_{fay}^{(3)} + G_{fby}^{(3)} + G_{py}^{(5)} - 2 Q_{dxz}^{(6)} \\
+& Q_{zxyz} = - G_{faz}^{(3)} - G_{fbz}^{(3)} + G_{pz}^{(2)} + G_{pz}^{(6)} + 2 Q_{dxy}^{(4)} - Q_{dxy}^{(6)} \\
+& Q_{zxzx} = G_{f3}^{(3)} - 2 Q_{du}^{(4)} + 3 Q_{du}^{(6)} - 2 Q_{dv}^{(4)} - Q_{dv}^{(6)} + Q_{s}^{(3)} \\
+& Q_{zxxy} = - G_{fax}^{(3)} + G_{fbx}^{(3)} - G_{px}^{(2)} + G_{px}^{(6)} + 2 Q_{dyz}^{(4)} + Q_{dyz}^{(6)} \\
+& Q_{zxzy} = - G_{faz}^{(3)} - G_{fbz}^{(3)} - G_{pz}^{(2)} + G_{pz}^{(6)} - 2 Q_{dxy}^{(4)} - Q_{dxy}^{(6)} \\
+& Q_{zxxz} = G_{f3}^{(3)} + 2 Q_{du}^{(4)} + 3 Q_{du}^{(6)} + 2 Q_{dv}^{(4)} - Q_{dv}^{(6)} - Q_{s}^{(3)} \\
+& Q_{zxyx} = - G_{fax}^{(3)} + G_{fbx}^{(3)} + G_{px}^{(2)} + G_{px}^{(6)} - 2 Q_{dyz}^{(4)} + Q_{dyz}^{(6)} \\
+& Q_{xyxx} = - G_{faz}^{(3)} + G_{fbz}^{(3)} + G_{pz}^{(5)} - 2 Q_{dxy}^{(6)} \\
+& Q_{xyyy} = - G_{faz}^{(3)} - G_{fbz}^{(3)} + G_{pz}^{(5)} + 2 Q_{dxy}^{(6)} \\
+& Q_{xyzz} = 2 G_{faz}^{(3)} + G_{pz}^{(5)} + 2 G_{pz}^{(6)} \\
+& Q_{xyyz} = - G_{fay}^{(3)} + G_{fby}^{(3)} - G_{py}^{(2)} + G_{py}^{(6)} + 2 Q_{dxz}^{(4)} + Q_{dxz}^{(6)} \\
+& Q_{xyzx} = - G_{fax}^{(3)} - G_{fbx}^{(3)} + G_{px}^{(2)} + G_{px}^{(6)} + 2 Q_{dyz}^{(4)} - Q_{dyz}^{(6)} \\
+& Q_{xyxy} = G_{f3}^{(3)} + 4 Q_{du}^{(4)} + 2 Q_{dv}^{(6)} + Q_{s}^{(3)} \\
+& Q_{xyzy} = - G_{fay}^{(3)} + G_{fby}^{(3)} + G_{py}^{(2)} + G_{py}^{(6)} - 2 Q_{dxz}^{(4)} + Q_{dxz}^{(6)} \\
+& Q_{xyxz} = - G_{fax}^{(3)} - G_{fbx}^{(3)} - G_{px}^{(2)} + G_{px}^{(6)} - 2 Q_{dyz}^{(4)} - Q_{dyz}^{(6)} \\
+& Q_{xyyx} = G_{f3}^{(3)} - 4 Q_{du}^{(4)} + 2 Q_{dv}^{(6)} - Q_{s}^{(3)}
+\end{align*}
+* Rank 4 tensor (t).
+\begin{align*}
+\begin{bmatrix} Q_{xxxx} & Q_{xxxy} & Q_{xxxz} \\ Q_{yyyx} & Q_{yyyy} & Q_{yyyz} \\ Q_{zzzx} & Q_{zzzy} & Q_{zzzz} \\ Q_{yyzx} & Q_{yyzy} & Q_{yyzz} \\ Q_{zzxx} & Q_{zzxy} & Q_{zzxz} \\ Q_{xxyx} & Q_{xxyy} & Q_{xxyz} \\ Q_{yzzx} & Q_{yzzy} & Q_{yzzz} \\ Q_{zxxx} & Q_{zxxy} & Q_{zxxz} \\ Q_{xxyy} + Q_{yyzz} - Q_{yzzy} - Q_{zxxz} + Q_{zzxx} & Q_{xyyy} & Q_{xyyz} \\ - \frac{Q_{yyyz}}{2} + \frac{Q_{yyzy}}{2} + Q_{zxxy} & Q_{xyyz} + \frac{Q_{zzxz}}{2} - \frac{Q_{zzzx}}{2} & \frac{Q_{xxxy}}{2} - \frac{Q_{xxyx}}{2} + Q_{xyyy} - Q_{yyyx} + Q_{zzxy} \end{bmatrix}
+\end{align*}
+\begin{align*}
+& Q_{xxxx} = - 2 Q_{du}^{(1)} - 4 Q_{du}^{(2)} + 2 Q_{dv}^{(1)} + 4 Q_{dv}^{(2)} - Q_{gu}^{(1)} + Q_{gv}^{(1)} + 2 Q_{g}^{(1)} + 3 Q_{s}^{(1)} \\
+& Q_{xxxy} = Q_{dxy}^{(1)} + 2 Q_{dxy}^{(2)} + Q_{dxy}^{(3)} - 2 Q_{dxy}^{(5)} + Q_{gaz}^{(1)} - Q_{gbz}^{(1)} \\
+& Q_{xxxz} = Q_{dxz}^{(1)} + 2 Q_{dxz}^{(2)} + Q_{dxz}^{(3)} - 2 Q_{dxz}^{(5)} - Q_{gay}^{(1)} - Q_{gby}^{(1)} \\
+& Q_{yyyx} = Q_{dxy}^{(1)} + 2 Q_{dxy}^{(2)} + Q_{dxy}^{(3)} - 2 Q_{dxy}^{(5)} - Q_{gaz}^{(1)} - Q_{gbz}^{(1)} \\
+& Q_{yyyy} = - 2 Q_{du}^{(1)} - 4 Q_{du}^{(2)} - 2 Q_{dv}^{(1)} - 4 Q_{dv}^{(2)} - Q_{gu}^{(1)} - Q_{gv}^{(1)} + 2 Q_{g}^{(1)} + 3 Q_{s}^{(1)} \\
+& Q_{yyyz} = Q_{dyz}^{(1)} + 2 Q_{dyz}^{(2)} + Q_{dyz}^{(3)} - 2 Q_{dyz}^{(5)} + Q_{gax}^{(1)} - Q_{gbx}^{(1)} \\
+& Q_{zzzx} = Q_{dxz}^{(1)} + 2 Q_{dxz}^{(2)} + Q_{dxz}^{(3)} - 2 Q_{dxz}^{(5)} + Q_{gay}^{(1)} - Q_{gby}^{(1)} \\
+& Q_{zzzy} = Q_{dyz}^{(1)} + 2 Q_{dyz}^{(2)} + Q_{dyz}^{(3)} - 2 Q_{dyz}^{(5)} - Q_{gax}^{(1)} - Q_{gbx}^{(1)} \\
+& Q_{zzzz} = 4 Q_{du}^{(1)} + 8 Q_{du}^{(2)} + 2 Q_{gu}^{(1)} + 2 Q_{g}^{(1)} + 3 Q_{s}^{(1)} \\
+& Q_{yyzx} = Q_{dxz}^{(1)} + Q_{dxz}^{(3)} + 2 Q_{gby}^{(1)} \\
+& Q_{yyzy} = Q_{dyz}^{(1)} + 2 Q_{dyz}^{(2)} + Q_{dyz}^{(3)} + 2 Q_{dyz}^{(5)} + Q_{gax}^{(1)} - Q_{gbx}^{(1)} \\
+& Q_{yyzz} = Q_{du}^{(1)} + 3 Q_{du}^{(3)} - Q_{dv}^{(1)} + Q_{dv}^{(3)} - Q_{gu}^{(1)} + Q_{gv}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(1)} \\
+& Q_{zzxx} = Q_{du}^{(1)} - 3 Q_{du}^{(3)} + Q_{dv}^{(1)} + Q_{dv}^{(3)} - Q_{gu}^{(1)} - Q_{gv}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(1)} \\
+& Q_{zzxy} = Q_{dxy}^{(1)} + Q_{dxy}^{(3)} + 2 Q_{gbz}^{(1)} \\
+& Q_{zzxz} = Q_{dxz}^{(1)} + 2 Q_{dxz}^{(2)} + Q_{dxz}^{(3)} + 2 Q_{dxz}^{(5)} + Q_{gay}^{(1)} - Q_{gby}^{(1)} \\
+& Q_{xxyx} = Q_{dxy}^{(1)} + 2 Q_{dxy}^{(2)} + Q_{dxy}^{(3)} + 2 Q_{dxy}^{(5)} + Q_{gaz}^{(1)} - Q_{gbz}^{(1)} \\
+& Q_{xxyy} = - 2 Q_{du}^{(1)} - 2 Q_{dv}^{(3)} + 2 Q_{gu}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(1)} \\
+& Q_{xxyz} = Q_{dyz}^{(1)} + Q_{dyz}^{(3)} + 2 Q_{gbx}^{(1)} \\
+& Q_{yzzx} = Q_{dxy}^{(2)} - Q_{dxy}^{(5)} + 2 Q_{gbz}^{(1)} \\
+& Q_{yzzy} = Q_{du}^{(2)} + 3 Q_{du}^{(5)} - Q_{dv}^{(2)} + Q_{dv}^{(5)} - Q_{gu}^{(1)} + Q_{gv}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(1)} \\
+& Q_{yzzz} = Q_{dyz}^{(1)} + 2 Q_{dyz}^{(2)} - Q_{dyz}^{(3)} - Q_{gax}^{(1)} - Q_{gbx}^{(1)} \\
+& Q_{zxxx} = Q_{dxz}^{(1)} + 2 Q_{dxz}^{(2)} - Q_{dxz}^{(3)} - Q_{gay}^{(1)} - Q_{gby}^{(1)} \\
+& Q_{zxxy} = Q_{dyz}^{(2)} - Q_{dyz}^{(5)} + 2 Q_{gbx}^{(1)} \\
+& Q_{zxxz} = Q_{du}^{(2)} - 3 Q_{du}^{(5)} + Q_{dv}^{(2)} + Q_{dv}^{(5)} - Q_{gu}^{(1)} - Q_{gv}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(1)} \\
+& Q_{xyyy} = Q_{dxy}^{(1)} + 2 Q_{dxy}^{(2)} - Q_{dxy}^{(3)} - Q_{gaz}^{(1)} - Q_{gbz}^{(1)} \\
+& Q_{xyyz} = Q_{dxz}^{(2)} - Q_{dxz}^{(5)} + 2 Q_{gby}^{(1)}
+\end{align*}
+
+\end{document}

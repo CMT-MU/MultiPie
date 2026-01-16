@@ -1,0 +1,164 @@
+\documentclass[fleqn,8pt,landscape]{jsarticle}
+\special{papersize=\the\paperwidth,\the\paperheight}
+
+%%% package
+
+\usepackage[usenames]{color}
+\usepackage{amsmath}
+\usepackage{breqn}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{enumitem}
+\usepackage{braket}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+%%% layout setting
+
+\paperwidth=356.4truemm
+\paperheight=252.0truemm
+\textwidth=335.59999999999997truemm
+\textheight=224.2truemm
+\oddsidemargin=-15truemm
+\topmargin=-15truemm
+\footskip=7truemm
+
+%%% fixed
+
+\hoffset=0truemm
+\voffset=0truemm
+\headheight=0truemm
+\headsep=0truemm
+\marginparsep=0truemm
+\marginparwidth=0truemm
+
+%%% main text
+
+\begin{document}
+
+\setcounter{MaxMatrixCols}{32}
+
+\renewcommand{\tablename}{Table~}
+\renewcommand{\figurename}{Figure~}
+\begin{center}
+\LARGE
+MPG No. 25.4.94\quad$6m'm'$\quad[ Type III, hexagonal ] [M tensor]
+\end{center}
+* Rank 0 tensor.
+\begin{align*}
+\begin{bmatrix} M \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M = M_{s}^{(1)}
+\end{align*}
+* Rank 1 tensor.
+\begin{align*}
+\begin{bmatrix} 0 & 0 & M_{z} \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{z} = M_{pz}^{(1)}
+\end{align*}
+* Rank 2 tensor (s).
+\begin{align*}
+\begin{bmatrix} M_{xx} & 0 & 0 \\ 0 & M_{xx} & 0 \\ 0 & 0 & M_{zz} \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{xx} = - M_{du}^{(1)} + M_{s}^{(1)} \\
+& M_{zz} = 2 M_{du}^{(1)} + M_{s}^{(1)}
+\end{align*}
+* Rank 2 tensor (a).
+* Rank 3 tensor (s).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & M_{xxz} \\ 0 & 0 & M_{xxz} \\ 0 & 0 & M_{zzz} \\ 0 & M_{yzy} & 0 \\ M_{yzy} & 0 & 0 \\ 0 & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{xxz} = - M_{faz}^{(1)} + M_{pz}^{(1)} \\
+& M_{zzz} = 2 M_{faz}^{(1)} + M_{pz}^{(1)} + 2 M_{pz}^{(2)} \\
+& M_{yzy} = - M_{faz}^{(1)} + M_{pz}^{(2)}
+\end{align*}
+* Rank 3 tensor (a).
+\begin{align*}
+\begin{bmatrix} 0 & M_{yzy} & 0 \\ - M_{yzy} & 0 & 0 \\ 0 & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{yzy} = M_{pz}^{(3)}
+\end{align*}
+* Rank 4 tensor (sss).
+\begin{align*}
+\begin{bmatrix} M_{xxxx} & M_{xxyy} & M_{xxzz} & 0 & 0 & 0 \\ M_{xxyy} & M_{xxxx} & M_{xxzz} & 0 & 0 & 0 \\ M_{xxzz} & M_{xxzz} & M_{zzzz} & 0 & 0 & 0 \\ 0 & 0 & 0 & M_{yzyz} & 0 & 0 \\ 0 & 0 & 0 & 0 & M_{yzyz} & 0 \\ 0 & 0 & 0 & 0 & 0 & \frac{M_{xxxx}}{2} - \frac{M_{xxyy}}{2} \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{xxxx} = - 2 M_{du}^{(1)} - 4 M_{du}^{(2)} + 3 M_{g0}^{(1)} + M_{s}^{(1)} + 2 M_{s}^{(2)} \\
+& M_{xxyy} = - 2 M_{du}^{(1)} + M_{g0}^{(1)} + M_{s}^{(1)} \\
+& M_{xxzz} = M_{du}^{(1)} - 4 M_{g0}^{(1)} + M_{s}^{(1)} \\
+& M_{zzzz} = 4 M_{du}^{(1)} + 8 M_{du}^{(2)} + 8 M_{g0}^{(1)} + M_{s}^{(1)} + 2 M_{s}^{(2)} \\
+& M_{yzyz} = M_{du}^{(2)} - 4 M_{g0}^{(1)} + M_{s}^{(2)}
+\end{align*}
+* Rank 4 tensor (ssa).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & M_{xxzz} & 0 & 0 & 0 \\ 0 & 0 & M_{xxzz} & 0 & 0 & 0 \\ - M_{xxzz} & - M_{xxzz} & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{xxzz} = 3 M_{du}^{(3)}
+\end{align*}
+* Rank 4 tensor (aas).
+\begin{align*}
+\begin{bmatrix} M_{yzyz} & 0 & 0 \\ 0 & M_{yzyz} & 0 \\ 0 & 0 & M_{xyxy} \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{yzyz} = - 2 M_{du}^{(4)} + M_{s}^{(3)} \\
+& M_{xyxy} = 4 M_{du}^{(4)} + M_{s}^{(3)}
+\end{align*}
+* Rank 4 tensor (aaa).
+* Rank 4 tensor (sa).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \\ M_{yzyz} & 0 & 0 \\ 0 & - M_{yzyz} & 0 \\ 0 & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{yzyz} = - 3 M_{du}^{(5)}
+\end{align*}
+* Rank 4 tensor (as).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & 0 & M_{yzyz} & 0 & 0 \\ 0 & 0 & 0 & 0 & - M_{yzyz} & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{yzyz} = - 3 M_{du}^{(6)}
+\end{align*}
+* Rank 4 tensor (s).
+\begin{align*}
+\begin{bmatrix} M_{xxxx} & M_{xxyy} & M_{xxzz} & 0 & 0 & 0 & 0 & 0 & 0 \\ M_{xxyy} & M_{xxxx} & M_{xxzz} & 0 & 0 & 0 & 0 & 0 & 0 \\ M_{zzxx} & M_{zzxx} & M_{zzzz} & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & M_{yzyz} & 0 & 0 & M_{yzzy} & 0 & 0 \\ 0 & 0 & 0 & 0 & M_{yzzy} & 0 & 0 & M_{yzyz} & 0 \\ 0 & 0 & 0 & 0 & 0 & \frac{M_{xxxx}}{2} - \frac{M_{xxyy}}{2} & 0 & 0 & \frac{M_{xxxx}}{2} - \frac{M_{xxyy}}{2} \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{xxxx} = - 2 M_{du}^{(1)} - 4 M_{du}^{(2)} + 3 M_{g0}^{(1)} + M_{s}^{(1)} + 2 M_{s}^{(2)} \\
+& M_{xxyy} = - 2 M_{du}^{(1)} + M_{g0}^{(1)} + M_{s}^{(1)} \\
+& M_{xxzz} = M_{du}^{(1)} + 3 M_{du}^{(3)} - 4 M_{g0}^{(1)} + M_{s}^{(1)} \\
+& M_{zzxx} = M_{du}^{(1)} - 3 M_{du}^{(3)} - 4 M_{g0}^{(1)} + M_{s}^{(1)} \\
+& M_{zzzz} = 4 M_{du}^{(1)} + 8 M_{du}^{(2)} + 8 M_{g0}^{(1)} + M_{s}^{(1)} + 2 M_{s}^{(2)} \\
+& M_{yzyz} = M_{du}^{(2)} - 3 M_{du}^{(5)} - 4 M_{g0}^{(1)} + M_{s}^{(2)} \\
+& M_{yzzy} = M_{du}^{(2)} + 3 M_{du}^{(5)} - 4 M_{g0}^{(1)} + M_{s}^{(2)}
+\end{align*}
+* Rank 4 tensor (a).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & 0 & M_{yzyz} & 0 & 0 & M_{yzzy} & 0 & 0 \\ 0 & 0 & 0 & 0 & - M_{yzzy} & 0 & 0 & - M_{yzyz} & 0 \\ 0 & 0 & 0 & 0 & 0 & M_{xyxy} & 0 & 0 & - M_{xyxy} \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{yzyz} = - 2 M_{du}^{(4)} - 3 M_{du}^{(6)} + M_{s}^{(3)} \\
+& M_{yzzy} = 2 M_{du}^{(4)} - 3 M_{du}^{(6)} - M_{s}^{(3)} \\
+& M_{xyxy} = 4 M_{du}^{(4)} + M_{s}^{(3)}
+\end{align*}
+* Rank 4 tensor (t).
+\begin{align*}
+\begin{bmatrix} M_{xxxx} & 0 & 0 \\ 0 & M_{xxxx} & 0 \\ 0 & 0 & M_{zzzz} \\ 0 & 0 & M_{yyzz} \\ M_{zzxx} & 0 & 0 \\ 0 & M_{xxyy} & 0 \\ 0 & M_{yzzy} & 0 \\ 0 & 0 & - \frac{M_{xxxx}}{2} + \frac{3 M_{xxyy}}{2} + M_{yyzz} - M_{yzzy} + M_{zzxx} \\ \frac{M_{xxxx}}{2} - \frac{M_{xxyy}}{2} & 0 & 0 \\ 0 & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{xxxx} = - 2 M_{du}^{(1)} - 4 M_{du}^{(2)} + 3 M_{g0}^{(1)} + 3 M_{s}^{(1)} \\
+& M_{zzzz} = 4 M_{du}^{(1)} + 8 M_{du}^{(2)} + 8 M_{g0}^{(1)} + 3 M_{s}^{(1)} \\
+& M_{yyzz} = M_{du}^{(1)} + 3 M_{du}^{(3)} - 4 M_{g0}^{(1)} + M_{s}^{(1)} \\
+& M_{zzxx} = M_{du}^{(1)} - 3 M_{du}^{(3)} - 4 M_{g0}^{(1)} + M_{s}^{(1)} \\
+& M_{xxyy} = - 2 M_{du}^{(1)} + M_{g0}^{(1)} + M_{s}^{(1)} \\
+& M_{yzzy} = M_{du}^{(2)} + 3 M_{du}^{(5)} - 4 M_{g0}^{(1)} + M_{s}^{(1)}
+\end{align*}
+
+\end{document}

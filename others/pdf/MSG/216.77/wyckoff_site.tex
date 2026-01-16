@@ -1,0 +1,825 @@
+\documentclass[fleqn,8pt]{jsarticle}
+
+%%% package
+
+\usepackage[usenames]{color}
+\usepackage{amsmath}
+\usepackage{breqn}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{enumitem}
+\usepackage{braket}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+%%% layout setting
+
+\paperwidth=210truemm
+\paperheight=297truemm
+\textwidth=189.2truemm
+\textheight=269.2truemm
+\oddsidemargin=-15truemm
+\topmargin=-15truemm
+\footskip=7truemm
+
+%%% fixed
+
+\hoffset=0truemm
+\voffset=0truemm
+\headheight=0truemm
+\headsep=0truemm
+\marginparsep=0truemm
+\marginparwidth=0truemm
+
+%%% main text
+
+\begin{document}
+
+\setcounter{MaxMatrixCols}{32}
+
+\renewcommand{\tablename}{Table~}
+\renewcommand{\figurename}{Figure~}
+\begin{center}
+\LARGE
+MSG No. 216.77\quad$F_{S}\bar{4}3m$\quad[ Type IV, cubic ]
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{ccc}
+\caption{Wyckoff site: {\tt 8a}, site symmetry: {\tt -43m}}
+ \\
+ \hline \hline
+No. & position & mapping \\ \hline \endfirsthead
+
+\multicolumn{2}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+No. & position & mapping \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{2}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{2}{r}{} \\ \endlastfoot
+
+1 & $\left[ 0,\, 0,\, 0 \right]$ & {\tt [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24]} \\ \hline
+2 & $\left[ 0,\, \frac{1}{2},\, \frac{1}{2} \right]$ & {\tt [25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48]} \\ \hline
+3 & $\left[ \frac{1}{2},\, 0,\, \frac{1}{2} \right]$ & {\tt [49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72]} \\ \hline
+4 & $\left[ \frac{1}{2},\, \frac{1}{2},\, 0 \right]$ & {\tt [73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96]} \\ \hline
+5 & $\left[ 0,\, 0,\, \frac{1}{2} \right]$ & {\tt [97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120]} \\ \hline
+6 & $\left[ 0,\, \frac{1}{2},\, 0 \right]$ & {\tt [121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144]} \\ \hline
+7 & $\left[ \frac{1}{2},\, 0,\, 0 \right]$ & {\tt [145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168]} \\ \hline
+8 & $\left[ \frac{1}{2},\, \frac{1}{2},\, \frac{1}{2} \right]$ & {\tt [169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192]} \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{ccc}
+\caption{Wyckoff site: {\tt 8b}, site symmetry: {\tt -43m}}
+ \\
+ \hline \hline
+No. & position & mapping \\ \hline \endfirsthead
+
+\multicolumn{2}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+No. & position & mapping \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{2}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{2}{r}{} \\ \endlastfoot
+
+1 & $\left[ \frac{1}{4},\, \frac{1}{4},\, \frac{1}{4} \right]$ & {\tt [1,5,6,20,22,24,26,34,35,40,41,45,51,55,60,61,66,71,76,80,81,86,87,91]} \\ \hline
+2 & $\left[ \frac{1}{4},\, \frac{3}{4},\, \frac{3}{4} \right]$ & {\tt [2,10,11,16,17,21,25,29,30,44,46,48,52,56,57,62,63,67,75,79,84,85,90,95]} \\ \hline
+3 & $\left[ \frac{3}{4},\, \frac{1}{4},\, \frac{3}{4} \right]$ & {\tt [3,7,12,13,18,23,28,32,33,38,39,43,49,53,54,68,70,72,74,82,83,88,89,93]} \\ \hline
+4 & $\left[ \frac{3}{4},\, \frac{3}{4},\, \frac{1}{4} \right]$ & {\tt [4,8,9,14,15,19,27,31,36,37,42,47,50,58,59,64,65,69,73,77,78,92,94,96]} \\ \hline
+5 & $\left[ \frac{1}{4},\, \frac{1}{4},\, \frac{3}{4} \right]$ & {\tt [97,101,102,116,118,120,122,130,131,136,137,141,147,151,156,157,162,167,172,176,177,182,183,187]} \\ \hline
+6 & $\left[ \frac{1}{4},\, \frac{3}{4},\, \frac{1}{4} \right]$ & {\tt [98,106,107,112,113,117,121,125,126,140,142,144,148,152,153,158,159,163,171,175,180,181,186,191]} \\ \hline
+7 & $\left[ \frac{3}{4},\, \frac{1}{4},\, \frac{1}{4} \right]$ & {\tt [99,103,108,109,114,119,124,128,129,134,135,139,145,149,150,164,166,168,170,178,179,184,185,189]} \\ \hline
+8 & $\left[ \frac{3}{4},\, \frac{3}{4},\, \frac{3}{4} \right]$ & {\tt [100,104,105,110,111,115,123,127,132,133,138,143,146,154,155,160,161,165,169,173,174,188,190,192]} \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{ccc}
+\caption{Wyckoff site: {\tt 24c}, site symmetry: {\tt -4'2'.m}}
+ \\
+ \hline \hline
+No. & position & mapping \\ \hline \endfirsthead
+
+\multicolumn{2}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+No. & position & mapping \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{2}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{2}{r}{} \\ \endlastfoot
+
+1 & $\left[ 0,\, \frac{1}{4},\, \frac{1}{4} \right]$ & {\tt [1,22,26,45,99,109,124,134]} \\ \hline
+2 & $\left[ 0,\, \frac{3}{4},\, \frac{3}{4} \right]$ & {\tt [2,21,25,46,100,110,123,133]} \\ \hline
+3 & $\left[ 0,\, \frac{1}{4},\, \frac{3}{4} \right]$ & {\tt [3,13,28,38,97,118,122,141]} \\ \hline
+4 & $\left[ 0,\, \frac{3}{4},\, \frac{1}{4} \right]$ & {\tt [4,14,27,37,98,117,121,142]} \\ \hline
+5 & $\left[ \frac{1}{4},\, 0,\, \frac{1}{4} \right]$ & {\tt [5,20,60,66,106,113,152,163]} \\ \hline
+6 & $\left[ \frac{1}{4},\, \frac{1}{4},\, 0 \right]$ & {\tt [6,24,81,87,131,136,151,167]} \\ \hline
+7 & $\left[ \frac{3}{4},\, \frac{1}{4},\, 0 \right]$ & {\tt [7,23,83,88,129,135,150,168]} \\ \hline
+8 & $\left[ \frac{3}{4},\, 0,\, \frac{1}{4} \right]$ & {\tt [8,19,58,65,108,114,149,164]} \\ \hline
+9 & $\left[ \frac{3}{4},\, \frac{3}{4},\, 0 \right]$ & {\tt [9,15,78,96,127,143,155,160]} \\ \hline
+10 & $\left[ \frac{1}{4},\, 0,\, \frac{3}{4} \right]$ & {\tt [10,17,56,67,101,116,156,162]} \\ \hline
+11 & $\left[ \frac{1}{4},\, \frac{3}{4},\, 0 \right]$ & {\tt [11,16,79,95,126,144,153,159]} \\ \hline
+12 & $\left[ \frac{3}{4},\, 0,\, \frac{3}{4} \right]$ & {\tt [12,18,53,68,104,115,154,161]} \\ \hline
+13 & $\left[ \frac{1}{4},\, \frac{1}{2},\, \frac{3}{4} \right]$ & {\tt [29,44,84,90,130,137,176,187]} \\ \hline
+14 & $\left[ \frac{1}{4},\, \frac{3}{4},\, \frac{1}{2} \right]$ & {\tt [30,48,57,63,107,112,175,191]} \\ \hline
+15 & $\left[ \frac{3}{4},\, \frac{3}{4},\, \frac{1}{2} \right]$ & {\tt [31,47,59,64,105,111,174,192]} \\ \hline
+16 & $\left[ \frac{3}{4},\, \frac{1}{2},\, \frac{3}{4} \right]$ & {\tt [32,43,82,89,132,138,173,188]} \\ \hline
+17 & $\left[ \frac{3}{4},\, \frac{1}{4},\, \frac{1}{2} \right]$ & {\tt [33,39,54,72,103,119,179,184]} \\ \hline
+18 & $\left[ \frac{1}{4},\, \frac{1}{2},\, \frac{1}{4} \right]$ & {\tt [34,41,80,91,125,140,180,186]} \\ \hline
+19 & $\left[ \frac{1}{4},\, \frac{1}{4},\, \frac{1}{2} \right]$ & {\tt [35,40,55,71,102,120,177,183]} \\ \hline
+20 & $\left[ \frac{3}{4},\, \frac{1}{2},\, \frac{1}{4} \right]$ & {\tt [36,42,77,92,128,139,178,185]} \\ \hline
+21 & $\left[ \frac{1}{2},\, \frac{1}{4},\, \frac{3}{4} \right]$ & {\tt [49,70,74,93,147,157,172,182]} \\ \hline
+22 & $\left[ \frac{1}{2},\, \frac{3}{4},\, \frac{1}{4} \right]$ & {\tt [50,69,73,94,148,158,171,181]} \\ \hline
+23 & $\left[ \frac{1}{2},\, \frac{1}{4},\, \frac{1}{4} \right]$ & {\tt [51,61,76,86,145,166,170,189]} \\ \hline
+24 & $\left[ \frac{1}{2},\, \frac{3}{4},\, \frac{3}{4} \right]$ & {\tt [52,62,75,85,146,165,169,190]} \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{ccc}
+\caption{Wyckoff site: {\tt 24d}, site symmetry: {\tt -4'2'.m}}
+ \\
+ \hline \hline
+No. & position & mapping \\ \hline \endfirsthead
+
+\multicolumn{2}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+No. & position & mapping \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{2}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{2}{r}{} \\ \endlastfoot
+
+1 & $\left[ \frac{1}{4},\, 0,\, 0 \right]$ & {\tt [1,2,21,22,147,148,157,158]} \\ \hline
+2 & $\left[ \frac{3}{4},\, 0,\, 0 \right]$ & {\tt [3,4,13,14,145,146,165,166]} \\ \hline
+3 & $\left[ 0,\, \frac{1}{4},\, 0 \right]$ & {\tt [5,12,18,20,128,130,137,139]} \\ \hline
+4 & $\left[ 0,\, 0,\, \frac{1}{4} \right]$ & {\tt [6,9,15,24,103,107,112,119]} \\ \hline
+5 & $\left[ 0,\, 0,\, \frac{3}{4} \right]$ & {\tt [7,11,16,23,102,105,111,120]} \\ \hline
+6 & $\left[ 0,\, \frac{3}{4},\, 0 \right]$ & {\tt [8,10,17,19,125,132,138,140]} \\ \hline
+7 & $\left[ \frac{1}{4},\, \frac{1}{2},\, \frac{1}{2} \right]$ & {\tt [25,26,45,46,171,172,181,182]} \\ \hline
+8 & $\left[ \frac{3}{4},\, \frac{1}{2},\, \frac{1}{2} \right]$ & {\tt [27,28,37,38,169,170,189,190]} \\ \hline
+9 & $\left[ 0,\, \frac{3}{4},\, \frac{1}{2} \right]$ & {\tt [29,36,42,44,104,106,113,115]} \\ \hline
+10 & $\left[ 0,\, \frac{1}{2},\, \frac{3}{4} \right]$ & {\tt [30,33,39,48,127,131,136,143]} \\ \hline
+11 & $\left[ 0,\, \frac{1}{2},\, \frac{1}{4} \right]$ & {\tt [31,35,40,47,126,129,135,144]} \\ \hline
+12 & $\left[ 0,\, \frac{1}{4},\, \frac{1}{2} \right]$ & {\tt [32,34,41,43,101,108,114,116]} \\ \hline
+13 & $\left[ \frac{3}{4},\, 0,\, \frac{1}{2} \right]$ & {\tt [49,50,69,70,99,100,109,110]} \\ \hline
+14 & $\left[ \frac{1}{4},\, 0,\, \frac{1}{2} \right]$ & {\tt [51,52,61,62,97,98,117,118]} \\ \hline
+15 & $\left[ \frac{1}{2},\, \frac{1}{4},\, \frac{1}{2} \right]$ & {\tt [53,60,66,68,176,178,185,187]} \\ \hline
+16 & $\left[ \frac{1}{2},\, 0,\, \frac{3}{4} \right]$ & {\tt [54,57,63,72,151,155,160,167]} \\ \hline
+17 & $\left[ \frac{1}{2},\, 0,\, \frac{1}{4} \right]$ & {\tt [55,59,64,71,150,153,159,168]} \\ \hline
+18 & $\left[ \frac{1}{2},\, \frac{3}{4},\, \frac{1}{2} \right]$ & {\tt [56,58,65,67,173,180,186,188]} \\ \hline
+19 & $\left[ \frac{3}{4},\, \frac{1}{2},\, 0 \right]$ & {\tt [73,74,93,94,123,124,133,134]} \\ \hline
+20 & $\left[ \frac{1}{4},\, \frac{1}{2},\, 0 \right]$ & {\tt [75,76,85,86,121,122,141,142]} \\ \hline
+21 & $\left[ \frac{1}{2},\, \frac{3}{4},\, 0 \right]$ & {\tt [77,84,90,92,152,154,161,163]} \\ \hline
+22 & $\left[ \frac{1}{2},\, \frac{1}{2},\, \frac{1}{4} \right]$ & {\tt [78,81,87,96,175,179,184,191]} \\ \hline
+23 & $\left[ \frac{1}{2},\, \frac{1}{2},\, \frac{3}{4} \right]$ & {\tt [79,83,88,95,174,177,183,192]} \\ \hline
+24 & $\left[ \frac{1}{2},\, \frac{1}{4},\, 0 \right]$ & {\tt [80,82,89,91,149,156,162,164]} \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{ccc}
+\caption{Wyckoff site: {\tt 32e}, site symmetry: {\tt .3m}}
+ \\
+ \hline \hline
+No. & position & mapping \\ \hline \endfirsthead
+
+\multicolumn{2}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+No. & position & mapping \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{2}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{2}{r}{} \\ \endlastfoot
+
+1 & $\left[ x,\, x,\, x \right]$ & {\tt [1,5,6,20,22,24]} \\ \hline
+2 & $\left[ x,\, - x,\, - x \right]$ & {\tt [2,10,11,16,17,21]} \\ \hline
+3 & $\left[ - x,\, x,\, - x \right]$ & {\tt [3,7,12,13,18,23]} \\ \hline
+4 & $\left[ - x,\, - x,\, x \right]$ & {\tt [4,8,9,14,15,19]} \\ \hline
+5 & $\left[ x,\, x + \frac{1}{2},\, x + \frac{1}{2} \right]$ & {\tt [25,29,30,44,46,48]} \\ \hline
+6 & $\left[ x,\, \frac{1}{2} - x,\, \frac{1}{2} - x \right]$ & {\tt [26,34,35,40,41,45]} \\ \hline
+7 & $\left[ - x,\, x + \frac{1}{2},\, \frac{1}{2} - x \right]$ & {\tt [27,31,36,37,42,47]} \\ \hline
+8 & $\left[ - x,\, \frac{1}{2} - x,\, x + \frac{1}{2} \right]$ & {\tt [28,32,33,38,39,43]} \\ \hline
+9 & $\left[ x + \frac{1}{2},\, x,\, x + \frac{1}{2} \right]$ & {\tt [49,53,54,68,70,72]} \\ \hline
+10 & $\left[ x + \frac{1}{2},\, - x,\, \frac{1}{2} - x \right]$ & {\tt [50,58,59,64,65,69]} \\ \hline
+11 & $\left[ \frac{1}{2} - x,\, x,\, \frac{1}{2} - x \right]$ & {\tt [51,55,60,61,66,71]} \\ \hline
+12 & $\left[ \frac{1}{2} - x,\, - x,\, x + \frac{1}{2} \right]$ & {\tt [52,56,57,62,63,67]} \\ \hline
+13 & $\left[ x + \frac{1}{2},\, x + \frac{1}{2},\, x \right]$ & {\tt [73,77,78,92,94,96]} \\ \hline
+14 & $\left[ x + \frac{1}{2},\, \frac{1}{2} - x,\, - x \right]$ & {\tt [74,82,83,88,89,93]} \\ \hline
+15 & $\left[ \frac{1}{2} - x,\, x + \frac{1}{2},\, - x \right]$ & {\tt [75,79,84,85,90,95]} \\ \hline
+16 & $\left[ \frac{1}{2} - x,\, \frac{1}{2} - x,\, x \right]$ & {\tt [76,80,81,86,87,91]} \\ \hline
+17 & $\left[ x,\, x,\, x + \frac{1}{2} \right]$ & {\tt [97,101,102,116,118,120]} \\ \hline
+18 & $\left[ x,\, - x,\, \frac{1}{2} - x \right]$ & {\tt [98,106,107,112,113,117]} \\ \hline
+19 & $\left[ - x,\, x,\, \frac{1}{2} - x \right]$ & {\tt [99,103,108,109,114,119]} \\ \hline
+20 & $\left[ - x,\, - x,\, x + \frac{1}{2} \right]$ & {\tt [100,104,105,110,111,115]} \\ \hline
+21 & $\left[ x,\, x + \frac{1}{2},\, x \right]$ & {\tt [121,125,126,140,142,144]} \\ \hline
+22 & $\left[ x,\, \frac{1}{2} - x,\, - x \right]$ & {\tt [122,130,131,136,137,141]} \\ \hline
+23 & $\left[ - x,\, x + \frac{1}{2},\, - x \right]$ & {\tt [123,127,132,133,138,143]} \\ \hline
+24 & $\left[ - x,\, \frac{1}{2} - x,\, x \right]$ & {\tt [124,128,129,134,135,139]} \\ \hline
+25 & $\left[ x + \frac{1}{2},\, x,\, x \right]$ & {\tt [145,149,150,164,166,168]} \\ \hline
+26 & $\left[ x + \frac{1}{2},\, - x,\, - x \right]$ & {\tt [146,154,155,160,161,165]} \\ \hline
+27 & $\left[ \frac{1}{2} - x,\, x,\, - x \right]$ & {\tt [147,151,156,157,162,167]} \\ \hline
+28 & $\left[ \frac{1}{2} - x,\, - x,\, x \right]$ & {\tt [148,152,153,158,159,163]} \\ \hline
+29 & $\left[ x + \frac{1}{2},\, x + \frac{1}{2},\, x + \frac{1}{2} \right]$ & {\tt [169,173,174,188,190,192]} \\ \hline
+30 & $\left[ x + \frac{1}{2},\, \frac{1}{2} - x,\, \frac{1}{2} - x \right]$ & {\tt [170,178,179,184,185,189]} \\ \hline
+31 & $\left[ \frac{1}{2} - x,\, x + \frac{1}{2},\, \frac{1}{2} - x \right]$ & {\tt [171,175,180,181,186,191]} \\ \hline
+32 & $\left[ \frac{1}{2} - x,\, \frac{1}{2} - x,\, x + \frac{1}{2} \right]$ & {\tt [172,176,177,182,183,187]} \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{ccc}
+\caption{Wyckoff site: {\tt 48f}, site symmetry: {\tt 2.mm}}
+ \\
+ \hline \hline
+No. & position & mapping \\ \hline \endfirsthead
+
+\multicolumn{2}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+No. & position & mapping \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{2}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{2}{r}{} \\ \endlastfoot
+
+1 & $\left[ x,\, 0,\, 0 \right]$ & {\tt [1,2,21,22]} \\ \hline
+2 & $\left[ - x,\, 0,\, 0 \right]$ & {\tt [3,4,13,14]} \\ \hline
+3 & $\left[ 0,\, x,\, 0 \right]$ & {\tt [5,12,18,20]} \\ \hline
+4 & $\left[ 0,\, 0,\, x \right]$ & {\tt [6,9,15,24]} \\ \hline
+5 & $\left[ 0,\, 0,\, - x \right]$ & {\tt [7,11,16,23]} \\ \hline
+6 & $\left[ 0,\, - x,\, 0 \right]$ & {\tt [8,10,17,19]} \\ \hline
+7 & $\left[ x,\, \frac{1}{2},\, \frac{1}{2} \right]$ & {\tt [25,26,45,46]} \\ \hline
+8 & $\left[ - x,\, \frac{1}{2},\, \frac{1}{2} \right]$ & {\tt [27,28,37,38]} \\ \hline
+9 & $\left[ 0,\, x + \frac{1}{2},\, \frac{1}{2} \right]$ & {\tt [29,36,42,44]} \\ \hline
+10 & $\left[ 0,\, \frac{1}{2},\, x + \frac{1}{2} \right]$ & {\tt [30,33,39,48]} \\ \hline
+11 & $\left[ 0,\, \frac{1}{2},\, \frac{1}{2} - x \right]$ & {\tt [31,35,40,47]} \\ \hline
+12 & $\left[ 0,\, \frac{1}{2} - x,\, \frac{1}{2} \right]$ & {\tt [32,34,41,43]} \\ \hline
+13 & $\left[ x + \frac{1}{2},\, 0,\, \frac{1}{2} \right]$ & {\tt [49,50,69,70]} \\ \hline
+14 & $\left[ \frac{1}{2} - x,\, 0,\, \frac{1}{2} \right]$ & {\tt [51,52,61,62]} \\ \hline
+15 & $\left[ \frac{1}{2},\, x,\, \frac{1}{2} \right]$ & {\tt [53,60,66,68]} \\ \hline
+16 & $\left[ \frac{1}{2},\, 0,\, x + \frac{1}{2} \right]$ & {\tt [54,57,63,72]} \\ \hline
+17 & $\left[ \frac{1}{2},\, 0,\, \frac{1}{2} - x \right]$ & {\tt [55,59,64,71]} \\ \hline
+18 & $\left[ \frac{1}{2},\, - x,\, \frac{1}{2} \right]$ & {\tt [56,58,65,67]} \\ \hline
+19 & $\left[ x + \frac{1}{2},\, \frac{1}{2},\, 0 \right]$ & {\tt [73,74,93,94]} \\ \hline
+20 & $\left[ \frac{1}{2} - x,\, \frac{1}{2},\, 0 \right]$ & {\tt [75,76,85,86]} \\ \hline
+21 & $\left[ \frac{1}{2},\, x + \frac{1}{2},\, 0 \right]$ & {\tt [77,84,90,92]} \\ \hline
+22 & $\left[ \frac{1}{2},\, \frac{1}{2},\, x \right]$ & {\tt [78,81,87,96]} \\ \hline
+23 & $\left[ \frac{1}{2},\, \frac{1}{2},\, - x \right]$ & {\tt [79,83,88,95]} \\ \hline
+24 & $\left[ \frac{1}{2},\, \frac{1}{2} - x,\, 0 \right]$ & {\tt [80,82,89,91]} \\ \hline
+25 & $\left[ x,\, 0,\, \frac{1}{2} \right]$ & {\tt [97,98,117,118]} \\ \hline
+26 & $\left[ - x,\, 0,\, \frac{1}{2} \right]$ & {\tt [99,100,109,110]} \\ \hline
+27 & $\left[ 0,\, x,\, \frac{1}{2} \right]$ & {\tt [101,108,114,116]} \\ \hline
+28 & $\left[ 0,\, 0,\, x + \frac{1}{2} \right]$ & {\tt [102,105,111,120]} \\ \hline
+29 & $\left[ 0,\, 0,\, \frac{1}{2} - x \right]$ & {\tt [103,107,112,119]} \\ \hline
+30 & $\left[ 0,\, - x,\, \frac{1}{2} \right]$ & {\tt [104,106,113,115]} \\ \hline
+31 & $\left[ x,\, \frac{1}{2},\, 0 \right]$ & {\tt [121,122,141,142]} \\ \hline
+32 & $\left[ - x,\, \frac{1}{2},\, 0 \right]$ & {\tt [123,124,133,134]} \\ \hline
+33 & $\left[ 0,\, x + \frac{1}{2},\, 0 \right]$ & {\tt [125,132,138,140]} \\ \hline
+34 & $\left[ 0,\, \frac{1}{2},\, x \right]$ & {\tt [126,129,135,144]} \\ \hline
+35 & $\left[ 0,\, \frac{1}{2},\, - x \right]$ & {\tt [127,131,136,143]} \\ \hline
+36 & $\left[ 0,\, \frac{1}{2} - x,\, 0 \right]$ & {\tt [128,130,137,139]} \\ \hline
+37 & $\left[ x + \frac{1}{2},\, 0,\, 0 \right]$ & {\tt [145,146,165,166]} \\ \hline
+38 & $\left[ \frac{1}{2} - x,\, 0,\, 0 \right]$ & {\tt [147,148,157,158]} \\ \hline
+39 & $\left[ \frac{1}{2},\, x,\, 0 \right]$ & {\tt [149,156,162,164]} \\ \hline
+40 & $\left[ \frac{1}{2},\, 0,\, x \right]$ & {\tt [150,153,159,168]} \\ \hline
+41 & $\left[ \frac{1}{2},\, 0,\, - x \right]$ & {\tt [151,155,160,167]} \\ \hline
+42 & $\left[ \frac{1}{2},\, - x,\, 0 \right]$ & {\tt [152,154,161,163]} \\ \hline
+43 & $\left[ x + \frac{1}{2},\, \frac{1}{2},\, \frac{1}{2} \right]$ & {\tt [169,170,189,190]} \\ \hline
+44 & $\left[ \frac{1}{2} - x,\, \frac{1}{2},\, \frac{1}{2} \right]$ & {\tt [171,172,181,182]} \\ \hline
+45 & $\left[ \frac{1}{2},\, x + \frac{1}{2},\, \frac{1}{2} \right]$ & {\tt [173,180,186,188]} \\ \hline
+46 & $\left[ \frac{1}{2},\, \frac{1}{2},\, x + \frac{1}{2} \right]$ & {\tt [174,177,183,192]} \\ \hline
+47 & $\left[ \frac{1}{2},\, \frac{1}{2},\, \frac{1}{2} - x \right]$ & {\tt [175,179,184,191]} \\ \hline
+48 & $\left[ \frac{1}{2},\, \frac{1}{2} - x,\, \frac{1}{2} \right]$ & {\tt [176,178,185,187]} \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{ccc}
+\caption{Wyckoff site: {\tt 48g}, site symmetry: {\tt 2.mm}}
+ \\
+ \hline \hline
+No. & position & mapping \\ \hline \endfirsthead
+
+\multicolumn{2}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+No. & position & mapping \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{2}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{2}{r}{} \\ \endlastfoot
+
+1 & $\left[ x,\, \frac{1}{4},\, \frac{1}{4} \right]$ & {\tt [1,22,26,45]} \\ \hline
+2 & $\left[ x,\, \frac{3}{4},\, \frac{3}{4} \right]$ & {\tt [2,21,25,46]} \\ \hline
+3 & $\left[ - x,\, \frac{1}{4},\, \frac{3}{4} \right]$ & {\tt [3,13,28,38]} \\ \hline
+4 & $\left[ - x,\, \frac{3}{4},\, \frac{1}{4} \right]$ & {\tt [4,14,27,37]} \\ \hline
+5 & $\left[ \frac{1}{4},\, x,\, \frac{1}{4} \right]$ & {\tt [5,20,60,66]} \\ \hline
+6 & $\left[ \frac{1}{4},\, \frac{1}{4},\, x \right]$ & {\tt [6,24,81,87]} \\ \hline
+7 & $\left[ \frac{3}{4},\, \frac{1}{4},\, - x \right]$ & {\tt [7,23,83,88]} \\ \hline
+8 & $\left[ \frac{3}{4},\, - x,\, \frac{1}{4} \right]$ & {\tt [8,19,58,65]} \\ \hline
+9 & $\left[ \frac{3}{4},\, \frac{3}{4},\, x \right]$ & {\tt [9,15,78,96]} \\ \hline
+10 & $\left[ \frac{1}{4},\, - x,\, \frac{3}{4} \right]$ & {\tt [10,17,56,67]} \\ \hline
+11 & $\left[ \frac{1}{4},\, \frac{3}{4},\, - x \right]$ & {\tt [11,16,79,95]} \\ \hline
+12 & $\left[ \frac{3}{4},\, x,\, \frac{3}{4} \right]$ & {\tt [12,18,53,68]} \\ \hline
+13 & $\left[ \frac{1}{4},\, x + \frac{1}{2},\, \frac{3}{4} \right]$ & {\tt [29,44,84,90]} \\ \hline
+14 & $\left[ \frac{1}{4},\, \frac{3}{4},\, x + \frac{1}{2} \right]$ & {\tt [30,48,57,63]} \\ \hline
+15 & $\left[ \frac{3}{4},\, \frac{3}{4},\, \frac{1}{2} - x \right]$ & {\tt [31,47,59,64]} \\ \hline
+16 & $\left[ \frac{3}{4},\, \frac{1}{2} - x,\, \frac{3}{4} \right]$ & {\tt [32,43,82,89]} \\ \hline
+17 & $\left[ \frac{3}{4},\, \frac{1}{4},\, x + \frac{1}{2} \right]$ & {\tt [33,39,54,72]} \\ \hline
+18 & $\left[ \frac{1}{4},\, \frac{1}{2} - x,\, \frac{1}{4} \right]$ & {\tt [34,41,80,91]} \\ \hline
+19 & $\left[ \frac{1}{4},\, \frac{1}{4},\, \frac{1}{2} - x \right]$ & {\tt [35,40,55,71]} \\ \hline
+20 & $\left[ \frac{3}{4},\, x + \frac{1}{2},\, \frac{1}{4} \right]$ & {\tt [36,42,77,92]} \\ \hline
+21 & $\left[ x + \frac{1}{2},\, \frac{1}{4},\, \frac{3}{4} \right]$ & {\tt [49,70,74,93]} \\ \hline
+22 & $\left[ x + \frac{1}{2},\, \frac{3}{4},\, \frac{1}{4} \right]$ & {\tt [50,69,73,94]} \\ \hline
+23 & $\left[ \frac{1}{2} - x,\, \frac{1}{4},\, \frac{1}{4} \right]$ & {\tt [51,61,76,86]} \\ \hline
+24 & $\left[ \frac{1}{2} - x,\, \frac{3}{4},\, \frac{3}{4} \right]$ & {\tt [52,62,75,85]} \\ \hline
+25 & $\left[ x,\, \frac{1}{4},\, \frac{3}{4} \right]$ & {\tt [97,118,122,141]} \\ \hline
+26 & $\left[ x,\, \frac{3}{4},\, \frac{1}{4} \right]$ & {\tt [98,117,121,142]} \\ \hline
+27 & $\left[ - x,\, \frac{1}{4},\, \frac{1}{4} \right]$ & {\tt [99,109,124,134]} \\ \hline
+28 & $\left[ - x,\, \frac{3}{4},\, \frac{3}{4} \right]$ & {\tt [100,110,123,133]} \\ \hline
+29 & $\left[ \frac{1}{4},\, x,\, \frac{3}{4} \right]$ & {\tt [101,116,156,162]} \\ \hline
+30 & $\left[ \frac{1}{4},\, \frac{1}{4},\, x + \frac{1}{2} \right]$ & {\tt [102,120,177,183]} \\ \hline
+31 & $\left[ \frac{3}{4},\, \frac{1}{4},\, \frac{1}{2} - x \right]$ & {\tt [103,119,179,184]} \\ \hline
+32 & $\left[ \frac{3}{4},\, - x,\, \frac{3}{4} \right]$ & {\tt [104,115,154,161]} \\ \hline
+33 & $\left[ \frac{3}{4},\, \frac{3}{4},\, x + \frac{1}{2} \right]$ & {\tt [105,111,174,192]} \\ \hline
+34 & $\left[ \frac{1}{4},\, - x,\, \frac{1}{4} \right]$ & {\tt [106,113,152,163]} \\ \hline
+35 & $\left[ \frac{1}{4},\, \frac{3}{4},\, \frac{1}{2} - x \right]$ & {\tt [107,112,175,191]} \\ \hline
+36 & $\left[ \frac{3}{4},\, x,\, \frac{1}{4} \right]$ & {\tt [108,114,149,164]} \\ \hline
+37 & $\left[ \frac{1}{4},\, x + \frac{1}{2},\, \frac{1}{4} \right]$ & {\tt [125,140,180,186]} \\ \hline
+38 & $\left[ \frac{1}{4},\, \frac{3}{4},\, x \right]$ & {\tt [126,144,153,159]} \\ \hline
+39 & $\left[ \frac{3}{4},\, \frac{3}{4},\, - x \right]$ & {\tt [127,143,155,160]} \\ \hline
+40 & $\left[ \frac{3}{4},\, \frac{1}{2} - x,\, \frac{1}{4} \right]$ & {\tt [128,139,178,185]} \\ \hline
+41 & $\left[ \frac{3}{4},\, \frac{1}{4},\, x \right]$ & {\tt [129,135,150,168]} \\ \hline
+42 & $\left[ \frac{1}{4},\, \frac{1}{2} - x,\, \frac{3}{4} \right]$ & {\tt [130,137,176,187]} \\ \hline
+43 & $\left[ \frac{1}{4},\, \frac{1}{4},\, - x \right]$ & {\tt [131,136,151,167]} \\ \hline
+44 & $\left[ \frac{3}{4},\, x + \frac{1}{2},\, \frac{3}{4} \right]$ & {\tt [132,138,173,188]} \\ \hline
+45 & $\left[ x + \frac{1}{2},\, \frac{1}{4},\, \frac{1}{4} \right]$ & {\tt [145,166,170,189]} \\ \hline
+46 & $\left[ x + \frac{1}{2},\, \frac{3}{4},\, \frac{3}{4} \right]$ & {\tt [146,165,169,190]} \\ \hline
+47 & $\left[ \frac{1}{2} - x,\, \frac{1}{4},\, \frac{3}{4} \right]$ & {\tt [147,157,172,182]} \\ \hline
+48 & $\left[ \frac{1}{2} - x,\, \frac{3}{4},\, \frac{1}{4} \right]$ & {\tt [148,158,171,181]} \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{ccc}
+\caption{Wyckoff site: {\tt 96h}, site symmetry: {\tt 2'..}}
+ \\
+ \hline \hline
+No. & position & mapping \\ \hline \endfirsthead
+
+\multicolumn{2}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+No. & position & mapping \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{2}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{2}{r}{} \\ \endlastfoot
+
+1 & $\left[ x,\, \frac{1}{4},\, 0 \right]$ & {\tt [1,122]} \\ \hline
+2 & $\left[ x,\, \frac{3}{4},\, 0 \right]$ & {\tt [2,121]} \\ \hline
+3 & $\left[ - x,\, \frac{1}{4},\, 0 \right]$ & {\tt [3,124]} \\ \hline
+4 & $\left[ - x,\, \frac{3}{4},\, 0 \right]$ & {\tt [4,123]} \\ \hline
+5 & $\left[ 0,\, x,\, \frac{1}{4} \right]$ & {\tt [5,108]} \\ \hline
+6 & $\left[ \frac{1}{4},\, 0,\, x \right]$ & {\tt [6,153]} \\ \hline
+7 & $\left[ \frac{3}{4},\, 0,\, - x \right]$ & {\tt [7,155]} \\ \hline
+8 & $\left[ 0,\, - x,\, \frac{1}{4} \right]$ & {\tt [8,106]} \\ \hline
+9 & $\left[ \frac{3}{4},\, 0,\, x \right]$ & {\tt [9,150]} \\ \hline
+10 & $\left[ 0,\, - x,\, \frac{3}{4} \right]$ & {\tt [10,104]} \\ \hline
+11 & $\left[ \frac{1}{4},\, 0,\, - x \right]$ & {\tt [11,151]} \\ \hline
+12 & $\left[ 0,\, x,\, \frac{3}{4} \right]$ & {\tt [12,101]} \\ \hline
+13 & $\left[ - x,\, 0,\, \frac{3}{4} \right]$ & {\tt [13,110]} \\ \hline
+14 & $\left[ - x,\, 0,\, \frac{1}{4} \right]$ & {\tt [14,109]} \\ \hline
+15 & $\left[ 0,\, \frac{3}{4},\, x \right]$ & {\tt [15,144]} \\ \hline
+16 & $\left[ 0,\, \frac{3}{4},\, - x \right]$ & {\tt [16,143]} \\ \hline
+17 & $\left[ \frac{1}{4},\, - x,\, 0 \right]$ & {\tt [17,163]} \\ \hline
+18 & $\left[ \frac{3}{4},\, x,\, 0 \right]$ & {\tt [18,164]} \\ \hline
+19 & $\left[ \frac{3}{4},\, - x,\, 0 \right]$ & {\tt [19,161]} \\ \hline
+20 & $\left[ \frac{1}{4},\, x,\, 0 \right]$ & {\tt [20,162]} \\ \hline
+21 & $\left[ x,\, 0,\, \frac{3}{4} \right]$ & {\tt [21,118]} \\ \hline
+22 & $\left[ x,\, 0,\, \frac{1}{4} \right]$ & {\tt [22,117]} \\ \hline
+23 & $\left[ 0,\, \frac{1}{4},\, - x \right]$ & {\tt [23,136]} \\ \hline
+24 & $\left[ 0,\, \frac{1}{4},\, x \right]$ & {\tt [24,135]} \\ \hline
+25 & $\left[ x,\, \frac{3}{4},\, \frac{1}{2} \right]$ & {\tt [25,98]} \\ \hline
+26 & $\left[ x,\, \frac{1}{4},\, \frac{1}{2} \right]$ & {\tt [26,97]} \\ \hline
+27 & $\left[ - x,\, \frac{3}{4},\, \frac{1}{2} \right]$ & {\tt [27,100]} \\ \hline
+28 & $\left[ - x,\, \frac{1}{4},\, \frac{1}{2} \right]$ & {\tt [28,99]} \\ \hline
+29 & $\left[ 0,\, x + \frac{1}{2},\, \frac{3}{4} \right]$ & {\tt [29,132]} \\ \hline
+30 & $\left[ \frac{1}{4},\, \frac{1}{2},\, x + \frac{1}{2} \right]$ & {\tt [30,177]} \\ \hline
+31 & $\left[ \frac{3}{4},\, \frac{1}{2},\, \frac{1}{2} - x \right]$ & {\tt [31,179]} \\ \hline
+32 & $\left[ 0,\, \frac{1}{2} - x,\, \frac{3}{4} \right]$ & {\tt [32,130]} \\ \hline
+33 & $\left[ \frac{3}{4},\, \frac{1}{2},\, x + \frac{1}{2} \right]$ & {\tt [33,174]} \\ \hline
+34 & $\left[ 0,\, \frac{1}{2} - x,\, \frac{1}{4} \right]$ & {\tt [34,128]} \\ \hline
+35 & $\left[ \frac{1}{4},\, \frac{1}{2},\, \frac{1}{2} - x \right]$ & {\tt [35,175]} \\ \hline
+36 & $\left[ 0,\, x + \frac{1}{2},\, \frac{1}{4} \right]$ & {\tt [36,125]} \\ \hline
+37 & $\left[ - x,\, \frac{1}{2},\, \frac{1}{4} \right]$ & {\tt [37,134]} \\ \hline
+38 & $\left[ - x,\, \frac{1}{2},\, \frac{3}{4} \right]$ & {\tt [38,133]} \\ \hline
+39 & $\left[ 0,\, \frac{1}{4},\, x + \frac{1}{2} \right]$ & {\tt [39,120]} \\ \hline
+40 & $\left[ 0,\, \frac{1}{4},\, \frac{1}{2} - x \right]$ & {\tt [40,119]} \\ \hline
+41 & $\left[ \frac{1}{4},\, \frac{1}{2} - x,\, \frac{1}{2} \right]$ & {\tt [41,187]} \\ \hline
+42 & $\left[ \frac{3}{4},\, x + \frac{1}{2},\, \frac{1}{2} \right]$ & {\tt [42,188]} \\ \hline
+43 & $\left[ \frac{3}{4},\, \frac{1}{2} - x,\, \frac{1}{2} \right]$ & {\tt [43,185]} \\ \hline
+44 & $\left[ \frac{1}{4},\, x + \frac{1}{2},\, \frac{1}{2} \right]$ & {\tt [44,186]} \\ \hline
+45 & $\left[ x,\, \frac{1}{2},\, \frac{1}{4} \right]$ & {\tt [45,142]} \\ \hline
+46 & $\left[ x,\, \frac{1}{2},\, \frac{3}{4} \right]$ & {\tt [46,141]} \\ \hline
+47 & $\left[ 0,\, \frac{3}{4},\, \frac{1}{2} - x \right]$ & {\tt [47,112]} \\ \hline
+48 & $\left[ 0,\, \frac{3}{4},\, x + \frac{1}{2} \right]$ & {\tt [48,111]} \\ \hline
+49 & $\left[ x + \frac{1}{2},\, \frac{1}{4},\, \frac{1}{2} \right]$ & {\tt [49,170]} \\ \hline
+50 & $\left[ x + \frac{1}{2},\, \frac{3}{4},\, \frac{1}{2} \right]$ & {\tt [50,169]} \\ \hline
+51 & $\left[ \frac{1}{2} - x,\, \frac{1}{4},\, \frac{1}{2} \right]$ & {\tt [51,172]} \\ \hline
+52 & $\left[ \frac{1}{2} - x,\, \frac{3}{4},\, \frac{1}{2} \right]$ & {\tt [52,171]} \\ \hline
+53 & $\left[ \frac{1}{2},\, x,\, \frac{3}{4} \right]$ & {\tt [53,156]} \\ \hline
+54 & $\left[ \frac{3}{4},\, 0,\, x + \frac{1}{2} \right]$ & {\tt [54,105]} \\ \hline
+55 & $\left[ \frac{1}{4},\, 0,\, \frac{1}{2} - x \right]$ & {\tt [55,107]} \\ \hline
+56 & $\left[ \frac{1}{2},\, - x,\, \frac{3}{4} \right]$ & {\tt [56,154]} \\ \hline
+57 & $\left[ \frac{1}{4},\, 0,\, x + \frac{1}{2} \right]$ & {\tt [57,102]} \\ \hline
+58 & $\left[ \frac{1}{2},\, - x,\, \frac{1}{4} \right]$ & {\tt [58,152]} \\ \hline
+59 & $\left[ \frac{3}{4},\, 0,\, \frac{1}{2} - x \right]$ & {\tt [59,103]} \\ \hline
+60 & $\left[ \frac{1}{2},\, x,\, \frac{1}{4} \right]$ & {\tt [60,149]} \\ \hline
+61 & $\left[ \frac{1}{2} - x,\, 0,\, \frac{1}{4} \right]$ & {\tt [61,158]} \\ \hline
+62 & $\left[ \frac{1}{2} - x,\, 0,\, \frac{3}{4} \right]$ & {\tt [62,157]} \\ \hline
+63 & $\left[ \frac{1}{2},\, \frac{3}{4},\, x + \frac{1}{2} \right]$ & {\tt [63,192]} \\ \hline
+64 & $\left[ \frac{1}{2},\, \frac{3}{4},\, \frac{1}{2} - x \right]$ & {\tt [64,191]} \\ \hline
+65 & $\left[ \frac{3}{4},\, - x,\, \frac{1}{2} \right]$ & {\tt [65,115]} \\ \hline
+66 & $\left[ \frac{1}{4},\, x,\, \frac{1}{2} \right]$ & {\tt [66,116]} \\ \hline
+67 & $\left[ \frac{1}{4},\, - x,\, \frac{1}{2} \right]$ & {\tt [67,113]} \\ \hline
+68 & $\left[ \frac{3}{4},\, x,\, \frac{1}{2} \right]$ & {\tt [68,114]} \\ \hline
+69 & $\left[ x + \frac{1}{2},\, 0,\, \frac{1}{4} \right]$ & {\tt [69,166]} \\ \hline
+70 & $\left[ x + \frac{1}{2},\, 0,\, \frac{3}{4} \right]$ & {\tt [70,165]} \\ \hline
+71 & $\left[ \frac{1}{2},\, \frac{1}{4},\, \frac{1}{2} - x \right]$ & {\tt [71,184]} \\ \hline
+72 & $\left[ \frac{1}{2},\, \frac{1}{4},\, x + \frac{1}{2} \right]$ & {\tt [72,183]} \\ \hline
+73 & $\left[ x + \frac{1}{2},\, \frac{3}{4},\, 0 \right]$ & {\tt [73,146]} \\ \hline
+74 & $\left[ x + \frac{1}{2},\, \frac{1}{4},\, 0 \right]$ & {\tt [74,145]} \\ \hline
+75 & $\left[ \frac{1}{2} - x,\, \frac{3}{4},\, 0 \right]$ & {\tt [75,148]} \\ \hline
+76 & $\left[ \frac{1}{2} - x,\, \frac{1}{4},\, 0 \right]$ & {\tt [76,147]} \\ \hline
+77 & $\left[ \frac{1}{2},\, x + \frac{1}{2},\, \frac{1}{4} \right]$ & {\tt [77,180]} \\ \hline
+78 & $\left[ \frac{3}{4},\, \frac{1}{2},\, x \right]$ & {\tt [78,129]} \\ \hline
+79 & $\left[ \frac{1}{4},\, \frac{1}{2},\, - x \right]$ & {\tt [79,131]} \\ \hline
+80 & $\left[ \frac{1}{2},\, \frac{1}{2} - x,\, \frac{1}{4} \right]$ & {\tt [80,178]} \\ \hline
+81 & $\left[ \frac{1}{4},\, \frac{1}{2},\, x \right]$ & {\tt [81,126]} \\ \hline
+82 & $\left[ \frac{1}{2},\, \frac{1}{2} - x,\, \frac{3}{4} \right]$ & {\tt [82,176]} \\ \hline
+83 & $\left[ \frac{3}{4},\, \frac{1}{2},\, - x \right]$ & {\tt [83,127]} \\ \hline
+84 & $\left[ \frac{1}{2},\, x + \frac{1}{2},\, \frac{3}{4} \right]$ & {\tt [84,173]} \\ \hline
+85 & $\left[ \frac{1}{2} - x,\, \frac{1}{2},\, \frac{3}{4} \right]$ & {\tt [85,182]} \\ \hline
+86 & $\left[ \frac{1}{2} - x,\, \frac{1}{2},\, \frac{1}{4} \right]$ & {\tt [86,181]} \\ \hline
+87 & $\left[ \frac{1}{2},\, \frac{1}{4},\, x \right]$ & {\tt [87,168]} \\ \hline
+88 & $\left[ \frac{1}{2},\, \frac{1}{4},\, - x \right]$ & {\tt [88,167]} \\ \hline
+89 & $\left[ \frac{3}{4},\, \frac{1}{2} - x,\, 0 \right]$ & {\tt [89,139]} \\ \hline
+90 & $\left[ \frac{1}{4},\, x + \frac{1}{2},\, 0 \right]$ & {\tt [90,140]} \\ \hline
+91 & $\left[ \frac{1}{4},\, \frac{1}{2} - x,\, 0 \right]$ & {\tt [91,137]} \\ \hline
+92 & $\left[ \frac{3}{4},\, x + \frac{1}{2},\, 0 \right]$ & {\tt [92,138]} \\ \hline
+93 & $\left[ x + \frac{1}{2},\, \frac{1}{2},\, \frac{3}{4} \right]$ & {\tt [93,190]} \\ \hline
+94 & $\left[ x + \frac{1}{2},\, \frac{1}{2},\, \frac{1}{4} \right]$ & {\tt [94,189]} \\ \hline
+95 & $\left[ \frac{1}{2},\, \frac{3}{4},\, - x \right]$ & {\tt [95,160]} \\ \hline
+96 & $\left[ \frac{1}{2},\, \frac{3}{4},\, x \right]$ & {\tt [96,159]} \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{ccc}
+\caption{Wyckoff site: {\tt 96i}, site symmetry: {\tt ..m}}
+ \\
+ \hline \hline
+No. & position & mapping \\ \hline \endfirsthead
+
+\multicolumn{2}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+No. & position & mapping \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{2}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{2}{r}{} \\ \endlastfoot
+
+1 & $\left[ x,\, x,\, z \right]$ & {\tt [1,20]} \\ \hline
+2 & $\left[ x,\, - x,\, - z \right]$ & {\tt [2,17]} \\ \hline
+3 & $\left[ - x,\, x,\, - z \right]$ & {\tt [3,18]} \\ \hline
+4 & $\left[ - x,\, - x,\, z \right]$ & {\tt [4,19]} \\ \hline
+5 & $\left[ z,\, x,\, x \right]$ & {\tt [5,24]} \\ \hline
+6 & $\left[ x,\, z,\, x \right]$ & {\tt [6,22]} \\ \hline
+7 & $\left[ - x,\, z,\, - x \right]$ & {\tt [7,13]} \\ \hline
+8 & $\left[ - z,\, - x,\, x \right]$ & {\tt [8,15]} \\ \hline
+9 & $\left[ - x,\, - z,\, x \right]$ & {\tt [9,14]} \\ \hline
+10 & $\left[ z,\, - x,\, - x \right]$ & {\tt [10,16]} \\ \hline
+11 & $\left[ x,\, - z,\, - x \right]$ & {\tt [11,21]} \\ \hline
+12 & $\left[ - z,\, x,\, - x \right]$ & {\tt [12,23]} \\ \hline
+13 & $\left[ x,\, x + \frac{1}{2},\, z + \frac{1}{2} \right]$ & {\tt [25,44]} \\ \hline
+14 & $\left[ x,\, \frac{1}{2} - x,\, \frac{1}{2} - z \right]$ & {\tt [26,41]} \\ \hline
+15 & $\left[ - x,\, x + \frac{1}{2},\, \frac{1}{2} - z \right]$ & {\tt [27,42]} \\ \hline
+16 & $\left[ - x,\, \frac{1}{2} - x,\, z + \frac{1}{2} \right]$ & {\tt [28,43]} \\ \hline
+17 & $\left[ z,\, x + \frac{1}{2},\, x + \frac{1}{2} \right]$ & {\tt [29,48]} \\ \hline
+18 & $\left[ x,\, z + \frac{1}{2},\, x + \frac{1}{2} \right]$ & {\tt [30,46]} \\ \hline
+19 & $\left[ - x,\, z + \frac{1}{2},\, \frac{1}{2} - x \right]$ & {\tt [31,37]} \\ \hline
+20 & $\left[ - z,\, \frac{1}{2} - x,\, x + \frac{1}{2} \right]$ & {\tt [32,39]} \\ \hline
+21 & $\left[ - x,\, \frac{1}{2} - z,\, x + \frac{1}{2} \right]$ & {\tt [33,38]} \\ \hline
+22 & $\left[ z,\, \frac{1}{2} - x,\, \frac{1}{2} - x \right]$ & {\tt [34,40]} \\ \hline
+23 & $\left[ x,\, \frac{1}{2} - z,\, \frac{1}{2} - x \right]$ & {\tt [35,45]} \\ \hline
+24 & $\left[ - z,\, x + \frac{1}{2},\, \frac{1}{2} - x \right]$ & {\tt [36,47]} \\ \hline
+25 & $\left[ x + \frac{1}{2},\, x,\, z + \frac{1}{2} \right]$ & {\tt [49,68]} \\ \hline
+26 & $\left[ x + \frac{1}{2},\, - x,\, \frac{1}{2} - z \right]$ & {\tt [50,65]} \\ \hline
+27 & $\left[ \frac{1}{2} - x,\, x,\, \frac{1}{2} - z \right]$ & {\tt [51,66]} \\ \hline
+28 & $\left[ \frac{1}{2} - x,\, - x,\, z + \frac{1}{2} \right]$ & {\tt [52,67]} \\ \hline
+29 & $\left[ z + \frac{1}{2},\, x,\, x + \frac{1}{2} \right]$ & {\tt [53,72]} \\ \hline
+30 & $\left[ x + \frac{1}{2},\, z,\, x + \frac{1}{2} \right]$ & {\tt [54,70]} \\ \hline
+31 & $\left[ \frac{1}{2} - x,\, z,\, \frac{1}{2} - x \right]$ & {\tt [55,61]} \\ \hline
+32 & $\left[ \frac{1}{2} - z,\, - x,\, x + \frac{1}{2} \right]$ & {\tt [56,63]} \\ \hline
+33 & $\left[ \frac{1}{2} - x,\, - z,\, x + \frac{1}{2} \right]$ & {\tt [57,62]} \\ \hline
+34 & $\left[ z + \frac{1}{2},\, - x,\, \frac{1}{2} - x \right]$ & {\tt [58,64]} \\ \hline
+35 & $\left[ x + \frac{1}{2},\, - z,\, \frac{1}{2} - x \right]$ & {\tt [59,69]} \\ \hline
+36 & $\left[ \frac{1}{2} - z,\, x,\, \frac{1}{2} - x \right]$ & {\tt [60,71]} \\ \hline
+37 & $\left[ x + \frac{1}{2},\, x + \frac{1}{2},\, z \right]$ & {\tt [73,92]} \\ \hline
+38 & $\left[ x + \frac{1}{2},\, \frac{1}{2} - x,\, - z \right]$ & {\tt [74,89]} \\ \hline
+39 & $\left[ \frac{1}{2} - x,\, x + \frac{1}{2},\, - z \right]$ & {\tt [75,90]} \\ \hline
+40 & $\left[ \frac{1}{2} - x,\, \frac{1}{2} - x,\, z \right]$ & {\tt [76,91]} \\ \hline
+41 & $\left[ z + \frac{1}{2},\, x + \frac{1}{2},\, x \right]$ & {\tt [77,96]} \\ \hline
+42 & $\left[ x + \frac{1}{2},\, z + \frac{1}{2},\, x \right]$ & {\tt [78,94]} \\ \hline
+43 & $\left[ \frac{1}{2} - x,\, z + \frac{1}{2},\, - x \right]$ & {\tt [79,85]} \\ \hline
+44 & $\left[ \frac{1}{2} - z,\, \frac{1}{2} - x,\, x \right]$ & {\tt [80,87]} \\ \hline
+45 & $\left[ \frac{1}{2} - x,\, \frac{1}{2} - z,\, x \right]$ & {\tt [81,86]} \\ \hline
+46 & $\left[ z + \frac{1}{2},\, \frac{1}{2} - x,\, - x \right]$ & {\tt [82,88]} \\ \hline
+47 & $\left[ x + \frac{1}{2},\, \frac{1}{2} - z,\, - x \right]$ & {\tt [83,93]} \\ \hline
+48 & $\left[ \frac{1}{2} - z,\, x + \frac{1}{2},\, - x \right]$ & {\tt [84,95]} \\ \hline
+49 & $\left[ x,\, x,\, z + \frac{1}{2} \right]$ & {\tt [97,116]} \\ \hline
+50 & $\left[ x,\, - x,\, \frac{1}{2} - z \right]$ & {\tt [98,113]} \\ \hline
+51 & $\left[ - x,\, x,\, \frac{1}{2} - z \right]$ & {\tt [99,114]} \\ \hline
+52 & $\left[ - x,\, - x,\, z + \frac{1}{2} \right]$ & {\tt [100,115]} \\ \hline
+53 & $\left[ z,\, x,\, x + \frac{1}{2} \right]$ & {\tt [101,120]} \\ \hline
+54 & $\left[ x,\, z,\, x + \frac{1}{2} \right]$ & {\tt [102,118]} \\ \hline
+55 & $\left[ - x,\, z,\, \frac{1}{2} - x \right]$ & {\tt [103,109]} \\ \hline
+56 & $\left[ - z,\, - x,\, x + \frac{1}{2} \right]$ & {\tt [104,111]} \\ \hline
+57 & $\left[ - x,\, - z,\, x + \frac{1}{2} \right]$ & {\tt [105,110]} \\ \hline
+58 & $\left[ z,\, - x,\, \frac{1}{2} - x \right]$ & {\tt [106,112]} \\ \hline
+59 & $\left[ x,\, - z,\, \frac{1}{2} - x \right]$ & {\tt [107,117]} \\ \hline
+60 & $\left[ - z,\, x,\, \frac{1}{2} - x \right]$ & {\tt [108,119]} \\ \hline
+61 & $\left[ x,\, x + \frac{1}{2},\, z \right]$ & {\tt [121,140]} \\ \hline
+62 & $\left[ x,\, \frac{1}{2} - x,\, - z \right]$ & {\tt [122,137]} \\ \hline
+63 & $\left[ - x,\, x + \frac{1}{2},\, - z \right]$ & {\tt [123,138]} \\ \hline
+64 & $\left[ - x,\, \frac{1}{2} - x,\, z \right]$ & {\tt [124,139]} \\ \hline
+65 & $\left[ z,\, x + \frac{1}{2},\, x \right]$ & {\tt [125,144]} \\ \hline
+66 & $\left[ x,\, z + \frac{1}{2},\, x \right]$ & {\tt [126,142]} \\ \hline
+67 & $\left[ - x,\, z + \frac{1}{2},\, - x \right]$ & {\tt [127,133]} \\ \hline
+68 & $\left[ - z,\, \frac{1}{2} - x,\, x \right]$ & {\tt [128,135]} \\ \hline
+69 & $\left[ - x,\, \frac{1}{2} - z,\, x \right]$ & {\tt [129,134]} \\ \hline
+70 & $\left[ z,\, \frac{1}{2} - x,\, - x \right]$ & {\tt [130,136]} \\ \hline
+71 & $\left[ x,\, \frac{1}{2} - z,\, - x \right]$ & {\tt [131,141]} \\ \hline
+72 & $\left[ - z,\, x + \frac{1}{2},\, - x \right]$ & {\tt [132,143]} \\ \hline
+73 & $\left[ x + \frac{1}{2},\, x,\, z \right]$ & {\tt [145,164]} \\ \hline
+74 & $\left[ x + \frac{1}{2},\, - x,\, - z \right]$ & {\tt [146,161]} \\ \hline
+75 & $\left[ \frac{1}{2} - x,\, x,\, - z \right]$ & {\tt [147,162]} \\ \hline
+76 & $\left[ \frac{1}{2} - x,\, - x,\, z \right]$ & {\tt [148,163]} \\ \hline
+77 & $\left[ z + \frac{1}{2},\, x,\, x \right]$ & {\tt [149,168]} \\ \hline
+78 & $\left[ x + \frac{1}{2},\, z,\, x \right]$ & {\tt [150,166]} \\ \hline
+79 & $\left[ \frac{1}{2} - x,\, z,\, - x \right]$ & {\tt [151,157]} \\ \hline
+80 & $\left[ \frac{1}{2} - z,\, - x,\, x \right]$ & {\tt [152,159]} \\ \hline
+81 & $\left[ \frac{1}{2} - x,\, - z,\, x \right]$ & {\tt [153,158]} \\ \hline
+82 & $\left[ z + \frac{1}{2},\, - x,\, - x \right]$ & {\tt [154,160]} \\ \hline
+83 & $\left[ x + \frac{1}{2},\, - z,\, - x \right]$ & {\tt [155,165]} \\ \hline
+84 & $\left[ \frac{1}{2} - z,\, x,\, - x \right]$ & {\tt [156,167]} \\ \hline
+85 & $\left[ x + \frac{1}{2},\, x + \frac{1}{2},\, z + \frac{1}{2} \right]$ & {\tt [169,188]} \\ \hline
+86 & $\left[ x + \frac{1}{2},\, \frac{1}{2} - x,\, \frac{1}{2} - z \right]$ & {\tt [170,185]} \\ \hline
+87 & $\left[ \frac{1}{2} - x,\, x + \frac{1}{2},\, \frac{1}{2} - z \right]$ & {\tt [171,186]} \\ \hline
+88 & $\left[ \frac{1}{2} - x,\, \frac{1}{2} - x,\, z + \frac{1}{2} \right]$ & {\tt [172,187]} \\ \hline
+89 & $\left[ z + \frac{1}{2},\, x + \frac{1}{2},\, x + \frac{1}{2} \right]$ & {\tt [173,192]} \\ \hline
+90 & $\left[ x + \frac{1}{2},\, z + \frac{1}{2},\, x + \frac{1}{2} \right]$ & {\tt [174,190]} \\ \hline
+91 & $\left[ \frac{1}{2} - x,\, z + \frac{1}{2},\, \frac{1}{2} - x \right]$ & {\tt [175,181]} \\ \hline
+92 & $\left[ \frac{1}{2} - z,\, \frac{1}{2} - x,\, x + \frac{1}{2} \right]$ & {\tt [176,183]} \\ \hline
+93 & $\left[ \frac{1}{2} - x,\, \frac{1}{2} - z,\, x + \frac{1}{2} \right]$ & {\tt [177,182]} \\ \hline
+94 & $\left[ z + \frac{1}{2},\, \frac{1}{2} - x,\, \frac{1}{2} - x \right]$ & {\tt [178,184]} \\ \hline
+95 & $\left[ x + \frac{1}{2},\, \frac{1}{2} - z,\, \frac{1}{2} - x \right]$ & {\tt [179,189]} \\ \hline
+96 & $\left[ \frac{1}{2} - z,\, x + \frac{1}{2},\, \frac{1}{2} - x \right]$ & {\tt [180,191]} \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{ccc}
+\caption{Wyckoff site: {\tt 192j}, site symmetry: {\tt 1}}
+ \\
+ \hline \hline
+No. & position & mapping \\ \hline \endfirsthead
+
+\multicolumn{2}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+No. & position & mapping \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{2}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{2}{r}{} \\ \endlastfoot
+
+1 & $\left[ x,\, y,\, z \right]$ & {\tt [1]} \\ \hline
+2 & $\left[ x,\, - y,\, - z \right]$ & {\tt [2]} \\ \hline
+3 & $\left[ - x,\, y,\, - z \right]$ & {\tt [3]} \\ \hline
+4 & $\left[ - x,\, - y,\, z \right]$ & {\tt [4]} \\ \hline
+5 & $\left[ z,\, x,\, y \right]$ & {\tt [5]} \\ \hline
+6 & $\left[ y,\, z,\, x \right]$ & {\tt [6]} \\ \hline
+7 & $\left[ - y,\, z,\, - x \right]$ & {\tt [7]} \\ \hline
+8 & $\left[ - z,\, - x,\, y \right]$ & {\tt [8]} \\ \hline
+9 & $\left[ - y,\, - z,\, x \right]$ & {\tt [9]} \\ \hline
+10 & $\left[ z,\, - x,\, - y \right]$ & {\tt [10]} \\ \hline
+11 & $\left[ y,\, - z,\, - x \right]$ & {\tt [11]} \\ \hline
+12 & $\left[ - z,\, x,\, - y \right]$ & {\tt [12]} \\ \hline
+13 & $\left[ - x,\, z,\, - y \right]$ & {\tt [13]} \\ \hline
+14 & $\left[ - x,\, - z,\, y \right]$ & {\tt [14]} \\ \hline
+15 & $\left[ - z,\, - y,\, x \right]$ & {\tt [15]} \\ \hline
+16 & $\left[ z,\, - y,\, - x \right]$ & {\tt [16]} \\ \hline
+17 & $\left[ y,\, - x,\, - z \right]$ & {\tt [17]} \\ \hline
+18 & $\left[ - y,\, x,\, - z \right]$ & {\tt [18]} \\ \hline
+19 & $\left[ - y,\, - x,\, z \right]$ & {\tt [19]} \\ \hline
+20 & $\left[ y,\, x,\, z \right]$ & {\tt [20]} \\ \hline
+21 & $\left[ x,\, - z,\, - y \right]$ & {\tt [21]} \\ \hline
+22 & $\left[ x,\, z,\, y \right]$ & {\tt [22]} \\ \hline
+23 & $\left[ - z,\, y,\, - x \right]$ & {\tt [23]} \\ \hline
+24 & $\left[ z,\, y,\, x \right]$ & {\tt [24]} \\ \hline
+25 & $\left[ x,\, y + \frac{1}{2},\, z + \frac{1}{2} \right]$ & {\tt [25]} \\ \hline
+26 & $\left[ x,\, \frac{1}{2} - y,\, \frac{1}{2} - z \right]$ & {\tt [26]} \\ \hline
+27 & $\left[ - x,\, y + \frac{1}{2},\, \frac{1}{2} - z \right]$ & {\tt [27]} \\ \hline
+28 & $\left[ - x,\, \frac{1}{2} - y,\, z + \frac{1}{2} \right]$ & {\tt [28]} \\ \hline
+29 & $\left[ z,\, x + \frac{1}{2},\, y + \frac{1}{2} \right]$ & {\tt [29]} \\ \hline
+30 & $\left[ y,\, z + \frac{1}{2},\, x + \frac{1}{2} \right]$ & {\tt [30]} \\ \hline
+31 & $\left[ - y,\, z + \frac{1}{2},\, \frac{1}{2} - x \right]$ & {\tt [31]} \\ \hline
+32 & $\left[ - z,\, \frac{1}{2} - x,\, y + \frac{1}{2} \right]$ & {\tt [32]} \\ \hline
+33 & $\left[ - y,\, \frac{1}{2} - z,\, x + \frac{1}{2} \right]$ & {\tt [33]} \\ \hline
+34 & $\left[ z,\, \frac{1}{2} - x,\, \frac{1}{2} - y \right]$ & {\tt [34]} \\ \hline
+35 & $\left[ y,\, \frac{1}{2} - z,\, \frac{1}{2} - x \right]$ & {\tt [35]} \\ \hline
+36 & $\left[ - z,\, x + \frac{1}{2},\, \frac{1}{2} - y \right]$ & {\tt [36]} \\ \hline
+37 & $\left[ - x,\, z + \frac{1}{2},\, \frac{1}{2} - y \right]$ & {\tt [37]} \\ \hline
+38 & $\left[ - x,\, \frac{1}{2} - z,\, y + \frac{1}{2} \right]$ & {\tt [38]} \\ \hline
+39 & $\left[ - z,\, \frac{1}{2} - y,\, x + \frac{1}{2} \right]$ & {\tt [39]} \\ \hline
+40 & $\left[ z,\, \frac{1}{2} - y,\, \frac{1}{2} - x \right]$ & {\tt [40]} \\ \hline
+41 & $\left[ y,\, \frac{1}{2} - x,\, \frac{1}{2} - z \right]$ & {\tt [41]} \\ \hline
+42 & $\left[ - y,\, x + \frac{1}{2},\, \frac{1}{2} - z \right]$ & {\tt [42]} \\ \hline
+43 & $\left[ - y,\, \frac{1}{2} - x,\, z + \frac{1}{2} \right]$ & {\tt [43]} \\ \hline
+44 & $\left[ y,\, x + \frac{1}{2},\, z + \frac{1}{2} \right]$ & {\tt [44]} \\ \hline
+45 & $\left[ x,\, \frac{1}{2} - z,\, \frac{1}{2} - y \right]$ & {\tt [45]} \\ \hline
+46 & $\left[ x,\, z + \frac{1}{2},\, y + \frac{1}{2} \right]$ & {\tt [46]} \\ \hline
+47 & $\left[ - z,\, y + \frac{1}{2},\, \frac{1}{2} - x \right]$ & {\tt [47]} \\ \hline
+48 & $\left[ z,\, y + \frac{1}{2},\, x + \frac{1}{2} \right]$ & {\tt [48]} \\ \hline
+49 & $\left[ x + \frac{1}{2},\, y,\, z + \frac{1}{2} \right]$ & {\tt [49]} \\ \hline
+50 & $\left[ x + \frac{1}{2},\, - y,\, \frac{1}{2} - z \right]$ & {\tt [50]} \\ \hline
+51 & $\left[ \frac{1}{2} - x,\, y,\, \frac{1}{2} - z \right]$ & {\tt [51]} \\ \hline
+52 & $\left[ \frac{1}{2} - x,\, - y,\, z + \frac{1}{2} \right]$ & {\tt [52]} \\ \hline
+53 & $\left[ z + \frac{1}{2},\, x,\, y + \frac{1}{2} \right]$ & {\tt [53]} \\ \hline
+54 & $\left[ y + \frac{1}{2},\, z,\, x + \frac{1}{2} \right]$ & {\tt [54]} \\ \hline
+55 & $\left[ \frac{1}{2} - y,\, z,\, \frac{1}{2} - x \right]$ & {\tt [55]} \\ \hline
+56 & $\left[ \frac{1}{2} - z,\, - x,\, y + \frac{1}{2} \right]$ & {\tt [56]} \\ \hline
+57 & $\left[ \frac{1}{2} - y,\, - z,\, x + \frac{1}{2} \right]$ & {\tt [57]} \\ \hline
+58 & $\left[ z + \frac{1}{2},\, - x,\, \frac{1}{2} - y \right]$ & {\tt [58]} \\ \hline
+59 & $\left[ y + \frac{1}{2},\, - z,\, \frac{1}{2} - x \right]$ & {\tt [59]} \\ \hline
+60 & $\left[ \frac{1}{2} - z,\, x,\, \frac{1}{2} - y \right]$ & {\tt [60]} \\ \hline
+61 & $\left[ \frac{1}{2} - x,\, z,\, \frac{1}{2} - y \right]$ & {\tt [61]} \\ \hline
+62 & $\left[ \frac{1}{2} - x,\, - z,\, y + \frac{1}{2} \right]$ & {\tt [62]} \\ \hline
+63 & $\left[ \frac{1}{2} - z,\, - y,\, x + \frac{1}{2} \right]$ & {\tt [63]} \\ \hline
+64 & $\left[ z + \frac{1}{2},\, - y,\, \frac{1}{2} - x \right]$ & {\tt [64]} \\ \hline
+65 & $\left[ y + \frac{1}{2},\, - x,\, \frac{1}{2} - z \right]$ & {\tt [65]} \\ \hline
+66 & $\left[ \frac{1}{2} - y,\, x,\, \frac{1}{2} - z \right]$ & {\tt [66]} \\ \hline
+67 & $\left[ \frac{1}{2} - y,\, - x,\, z + \frac{1}{2} \right]$ & {\tt [67]} \\ \hline
+68 & $\left[ y + \frac{1}{2},\, x,\, z + \frac{1}{2} \right]$ & {\tt [68]} \\ \hline
+69 & $\left[ x + \frac{1}{2},\, - z,\, \frac{1}{2} - y \right]$ & {\tt [69]} \\ \hline
+70 & $\left[ x + \frac{1}{2},\, z,\, y + \frac{1}{2} \right]$ & {\tt [70]} \\ \hline
+71 & $\left[ \frac{1}{2} - z,\, y,\, \frac{1}{2} - x \right]$ & {\tt [71]} \\ \hline
+72 & $\left[ z + \frac{1}{2},\, y,\, x + \frac{1}{2} \right]$ & {\tt [72]} \\ \hline
+73 & $\left[ x + \frac{1}{2},\, y + \frac{1}{2},\, z \right]$ & {\tt [73]} \\ \hline
+74 & $\left[ x + \frac{1}{2},\, \frac{1}{2} - y,\, - z \right]$ & {\tt [74]} \\ \hline
+75 & $\left[ \frac{1}{2} - x,\, y + \frac{1}{2},\, - z \right]$ & {\tt [75]} \\ \hline
+76 & $\left[ \frac{1}{2} - x,\, \frac{1}{2} - y,\, z \right]$ & {\tt [76]} \\ \hline
+77 & $\left[ z + \frac{1}{2},\, x + \frac{1}{2},\, y \right]$ & {\tt [77]} \\ \hline
+78 & $\left[ y + \frac{1}{2},\, z + \frac{1}{2},\, x \right]$ & {\tt [78]} \\ \hline
+79 & $\left[ \frac{1}{2} - y,\, z + \frac{1}{2},\, - x \right]$ & {\tt [79]} \\ \hline
+80 & $\left[ \frac{1}{2} - z,\, \frac{1}{2} - x,\, y \right]$ & {\tt [80]} \\ \hline
+81 & $\left[ \frac{1}{2} - y,\, \frac{1}{2} - z,\, x \right]$ & {\tt [81]} \\ \hline
+82 & $\left[ z + \frac{1}{2},\, \frac{1}{2} - x,\, - y \right]$ & {\tt [82]} \\ \hline
+83 & $\left[ y + \frac{1}{2},\, \frac{1}{2} - z,\, - x \right]$ & {\tt [83]} \\ \hline
+84 & $\left[ \frac{1}{2} - z,\, x + \frac{1}{2},\, - y \right]$ & {\tt [84]} \\ \hline
+85 & $\left[ \frac{1}{2} - x,\, z + \frac{1}{2},\, - y \right]$ & {\tt [85]} \\ \hline
+86 & $\left[ \frac{1}{2} - x,\, \frac{1}{2} - z,\, y \right]$ & {\tt [86]} \\ \hline
+87 & $\left[ \frac{1}{2} - z,\, \frac{1}{2} - y,\, x \right]$ & {\tt [87]} \\ \hline
+88 & $\left[ z + \frac{1}{2},\, \frac{1}{2} - y,\, - x \right]$ & {\tt [88]} \\ \hline
+89 & $\left[ y + \frac{1}{2},\, \frac{1}{2} - x,\, - z \right]$ & {\tt [89]} \\ \hline
+90 & $\left[ \frac{1}{2} - y,\, x + \frac{1}{2},\, - z \right]$ & {\tt [90]} \\ \hline
+91 & $\left[ \frac{1}{2} - y,\, \frac{1}{2} - x,\, z \right]$ & {\tt [91]} \\ \hline
+92 & $\left[ y + \frac{1}{2},\, x + \frac{1}{2},\, z \right]$ & {\tt [92]} \\ \hline
+93 & $\left[ x + \frac{1}{2},\, \frac{1}{2} - z,\, - y \right]$ & {\tt [93]} \\ \hline
+94 & $\left[ x + \frac{1}{2},\, z + \frac{1}{2},\, y \right]$ & {\tt [94]} \\ \hline
+95 & $\left[ \frac{1}{2} - z,\, y + \frac{1}{2},\, - x \right]$ & {\tt [95]} \\ \hline
+96 & $\left[ z + \frac{1}{2},\, y + \frac{1}{2},\, x \right]$ & {\tt [96]} \\ \hline
+97 & $\left[ x,\, y,\, z + \frac{1}{2} \right]$ & {\tt [97]} \\ \hline
+98 & $\left[ x,\, - y,\, \frac{1}{2} - z \right]$ & {\tt [98]} \\ \hline
+99 & $\left[ - x,\, y,\, \frac{1}{2} - z \right]$ & {\tt [99]} \\ \hline
+100 & $\left[ - x,\, - y,\, z + \frac{1}{2} \right]$ & {\tt [100]} \\ \hline
+101 & $\left[ z,\, x,\, y + \frac{1}{2} \right]$ & {\tt [101]} \\ \hline
+102 & $\left[ y,\, z,\, x + \frac{1}{2} \right]$ & {\tt [102]} \\ \hline
+103 & $\left[ - y,\, z,\, \frac{1}{2} - x \right]$ & {\tt [103]} \\ \hline
+104 & $\left[ - z,\, - x,\, y + \frac{1}{2} \right]$ & {\tt [104]} \\ \hline
+105 & $\left[ - y,\, - z,\, x + \frac{1}{2} \right]$ & {\tt [105]} \\ \hline
+106 & $\left[ z,\, - x,\, \frac{1}{2} - y \right]$ & {\tt [106]} \\ \hline
+107 & $\left[ y,\, - z,\, \frac{1}{2} - x \right]$ & {\tt [107]} \\ \hline
+108 & $\left[ - z,\, x,\, \frac{1}{2} - y \right]$ & {\tt [108]} \\ \hline
+109 & $\left[ - x,\, z,\, \frac{1}{2} - y \right]$ & {\tt [109]} \\ \hline
+110 & $\left[ - x,\, - z,\, y + \frac{1}{2} \right]$ & {\tt [110]} \\ \hline
+111 & $\left[ - z,\, - y,\, x + \frac{1}{2} \right]$ & {\tt [111]} \\ \hline
+112 & $\left[ z,\, - y,\, \frac{1}{2} - x \right]$ & {\tt [112]} \\ \hline
+113 & $\left[ y,\, - x,\, \frac{1}{2} - z \right]$ & {\tt [113]} \\ \hline
+114 & $\left[ - y,\, x,\, \frac{1}{2} - z \right]$ & {\tt [114]} \\ \hline
+115 & $\left[ - y,\, - x,\, z + \frac{1}{2} \right]$ & {\tt [115]} \\ \hline
+116 & $\left[ y,\, x,\, z + \frac{1}{2} \right]$ & {\tt [116]} \\ \hline
+117 & $\left[ x,\, - z,\, \frac{1}{2} - y \right]$ & {\tt [117]} \\ \hline
+118 & $\left[ x,\, z,\, y + \frac{1}{2} \right]$ & {\tt [118]} \\ \hline
+119 & $\left[ - z,\, y,\, \frac{1}{2} - x \right]$ & {\tt [119]} \\ \hline
+120 & $\left[ z,\, y,\, x + \frac{1}{2} \right]$ & {\tt [120]} \\ \hline
+121 & $\left[ x,\, y + \frac{1}{2},\, z \right]$ & {\tt [121]} \\ \hline
+122 & $\left[ x,\, \frac{1}{2} - y,\, - z \right]$ & {\tt [122]} \\ \hline
+123 & $\left[ - x,\, y + \frac{1}{2},\, - z \right]$ & {\tt [123]} \\ \hline
+124 & $\left[ - x,\, \frac{1}{2} - y,\, z \right]$ & {\tt [124]} \\ \hline
+125 & $\left[ z,\, x + \frac{1}{2},\, y \right]$ & {\tt [125]} \\ \hline
+126 & $\left[ y,\, z + \frac{1}{2},\, x \right]$ & {\tt [126]} \\ \hline
+127 & $\left[ - y,\, z + \frac{1}{2},\, - x \right]$ & {\tt [127]} \\ \hline
+128 & $\left[ - z,\, \frac{1}{2} - x,\, y \right]$ & {\tt [128]} \\ \hline
+129 & $\left[ - y,\, \frac{1}{2} - z,\, x \right]$ & {\tt [129]} \\ \hline
+130 & $\left[ z,\, \frac{1}{2} - x,\, - y \right]$ & {\tt [130]} \\ \hline
+131 & $\left[ y,\, \frac{1}{2} - z,\, - x \right]$ & {\tt [131]} \\ \hline
+132 & $\left[ - z,\, x + \frac{1}{2},\, - y \right]$ & {\tt [132]} \\ \hline
+133 & $\left[ - x,\, z + \frac{1}{2},\, - y \right]$ & {\tt [133]} \\ \hline
+134 & $\left[ - x,\, \frac{1}{2} - z,\, y \right]$ & {\tt [134]} \\ \hline
+135 & $\left[ - z,\, \frac{1}{2} - y,\, x \right]$ & {\tt [135]} \\ \hline
+136 & $\left[ z,\, \frac{1}{2} - y,\, - x \right]$ & {\tt [136]} \\ \hline
+137 & $\left[ y,\, \frac{1}{2} - x,\, - z \right]$ & {\tt [137]} \\ \hline
+138 & $\left[ - y,\, x + \frac{1}{2},\, - z \right]$ & {\tt [138]} \\ \hline
+139 & $\left[ - y,\, \frac{1}{2} - x,\, z \right]$ & {\tt [139]} \\ \hline
+140 & $\left[ y,\, x + \frac{1}{2},\, z \right]$ & {\tt [140]} \\ \hline
+141 & $\left[ x,\, \frac{1}{2} - z,\, - y \right]$ & {\tt [141]} \\ \hline
+142 & $\left[ x,\, z + \frac{1}{2},\, y \right]$ & {\tt [142]} \\ \hline
+143 & $\left[ - z,\, y + \frac{1}{2},\, - x \right]$ & {\tt [143]} \\ \hline
+144 & $\left[ z,\, y + \frac{1}{2},\, x \right]$ & {\tt [144]} \\ \hline
+145 & $\left[ x + \frac{1}{2},\, y,\, z \right]$ & {\tt [145]} \\ \hline
+146 & $\left[ x + \frac{1}{2},\, - y,\, - z \right]$ & {\tt [146]} \\ \hline
+147 & $\left[ \frac{1}{2} - x,\, y,\, - z \right]$ & {\tt [147]} \\ \hline
+148 & $\left[ \frac{1}{2} - x,\, - y,\, z \right]$ & {\tt [148]} \\ \hline
+149 & $\left[ z + \frac{1}{2},\, x,\, y \right]$ & {\tt [149]} \\ \hline
+150 & $\left[ y + \frac{1}{2},\, z,\, x \right]$ & {\tt [150]} \\ \hline
+151 & $\left[ \frac{1}{2} - y,\, z,\, - x \right]$ & {\tt [151]} \\ \hline
+152 & $\left[ \frac{1}{2} - z,\, - x,\, y \right]$ & {\tt [152]} \\ \hline
+153 & $\left[ \frac{1}{2} - y,\, - z,\, x \right]$ & {\tt [153]} \\ \hline
+154 & $\left[ z + \frac{1}{2},\, - x,\, - y \right]$ & {\tt [154]} \\ \hline
+155 & $\left[ y + \frac{1}{2},\, - z,\, - x \right]$ & {\tt [155]} \\ \hline
+156 & $\left[ \frac{1}{2} - z,\, x,\, - y \right]$ & {\tt [156]} \\ \hline
+157 & $\left[ \frac{1}{2} - x,\, z,\, - y \right]$ & {\tt [157]} \\ \hline
+158 & $\left[ \frac{1}{2} - x,\, - z,\, y \right]$ & {\tt [158]} \\ \hline
+159 & $\left[ \frac{1}{2} - z,\, - y,\, x \right]$ & {\tt [159]} \\ \hline
+160 & $\left[ z + \frac{1}{2},\, - y,\, - x \right]$ & {\tt [160]} \\ \hline
+161 & $\left[ y + \frac{1}{2},\, - x,\, - z \right]$ & {\tt [161]} \\ \hline
+162 & $\left[ \frac{1}{2} - y,\, x,\, - z \right]$ & {\tt [162]} \\ \hline
+163 & $\left[ \frac{1}{2} - y,\, - x,\, z \right]$ & {\tt [163]} \\ \hline
+164 & $\left[ y + \frac{1}{2},\, x,\, z \right]$ & {\tt [164]} \\ \hline
+165 & $\left[ x + \frac{1}{2},\, - z,\, - y \right]$ & {\tt [165]} \\ \hline
+166 & $\left[ x + \frac{1}{2},\, z,\, y \right]$ & {\tt [166]} \\ \hline
+167 & $\left[ \frac{1}{2} - z,\, y,\, - x \right]$ & {\tt [167]} \\ \hline
+168 & $\left[ z + \frac{1}{2},\, y,\, x \right]$ & {\tt [168]} \\ \hline
+169 & $\left[ x + \frac{1}{2},\, y + \frac{1}{2},\, z + \frac{1}{2} \right]$ & {\tt [169]} \\ \hline
+170 & $\left[ x + \frac{1}{2},\, \frac{1}{2} - y,\, \frac{1}{2} - z \right]$ & {\tt [170]} \\ \hline
+171 & $\left[ \frac{1}{2} - x,\, y + \frac{1}{2},\, \frac{1}{2} - z \right]$ & {\tt [171]} \\ \hline
+172 & $\left[ \frac{1}{2} - x,\, \frac{1}{2} - y,\, z + \frac{1}{2} \right]$ & {\tt [172]} \\ \hline
+173 & $\left[ z + \frac{1}{2},\, x + \frac{1}{2},\, y + \frac{1}{2} \right]$ & {\tt [173]} \\ \hline
+174 & $\left[ y + \frac{1}{2},\, z + \frac{1}{2},\, x + \frac{1}{2} \right]$ & {\tt [174]} \\ \hline
+175 & $\left[ \frac{1}{2} - y,\, z + \frac{1}{2},\, \frac{1}{2} - x \right]$ & {\tt [175]} \\ \hline
+176 & $\left[ \frac{1}{2} - z,\, \frac{1}{2} - x,\, y + \frac{1}{2} \right]$ & {\tt [176]} \\ \hline
+177 & $\left[ \frac{1}{2} - y,\, \frac{1}{2} - z,\, x + \frac{1}{2} \right]$ & {\tt [177]} \\ \hline
+178 & $\left[ z + \frac{1}{2},\, \frac{1}{2} - x,\, \frac{1}{2} - y \right]$ & {\tt [178]} \\ \hline
+179 & $\left[ y + \frac{1}{2},\, \frac{1}{2} - z,\, \frac{1}{2} - x \right]$ & {\tt [179]} \\ \hline
+180 & $\left[ \frac{1}{2} - z,\, x + \frac{1}{2},\, \frac{1}{2} - y \right]$ & {\tt [180]} \\ \hline
+181 & $\left[ \frac{1}{2} - x,\, z + \frac{1}{2},\, \frac{1}{2} - y \right]$ & {\tt [181]} \\ \hline
+182 & $\left[ \frac{1}{2} - x,\, \frac{1}{2} - z,\, y + \frac{1}{2} \right]$ & {\tt [182]} \\ \hline
+183 & $\left[ \frac{1}{2} - z,\, \frac{1}{2} - y,\, x + \frac{1}{2} \right]$ & {\tt [183]} \\ \hline
+184 & $\left[ z + \frac{1}{2},\, \frac{1}{2} - y,\, \frac{1}{2} - x \right]$ & {\tt [184]} \\ \hline
+185 & $\left[ y + \frac{1}{2},\, \frac{1}{2} - x,\, \frac{1}{2} - z \right]$ & {\tt [185]} \\ \hline
+186 & $\left[ \frac{1}{2} - y,\, x + \frac{1}{2},\, \frac{1}{2} - z \right]$ & {\tt [186]} \\ \hline
+187 & $\left[ \frac{1}{2} - y,\, \frac{1}{2} - x,\, z + \frac{1}{2} \right]$ & {\tt [187]} \\ \hline
+188 & $\left[ y + \frac{1}{2},\, x + \frac{1}{2},\, z + \frac{1}{2} \right]$ & {\tt [188]} \\ \hline
+189 & $\left[ x + \frac{1}{2},\, \frac{1}{2} - z,\, \frac{1}{2} - y \right]$ & {\tt [189]} \\ \hline
+190 & $\left[ x + \frac{1}{2},\, z + \frac{1}{2},\, y + \frac{1}{2} \right]$ & {\tt [190]} \\ \hline
+191 & $\left[ \frac{1}{2} - z,\, y + \frac{1}{2},\, \frac{1}{2} - x \right]$ & {\tt [191]} \\ \hline
+192 & $\left[ z + \frac{1}{2},\, y + \frac{1}{2},\, x + \frac{1}{2} \right]$ & {\tt [192]} \\
+\end{longtable}
+\end{center}
+
+\end{document}

@@ -1,0 +1,314 @@
+\documentclass[fleqn,8pt,landscape]{jsarticle}
+\special{papersize=\the\paperwidth,\the\paperheight}
+
+%%% package
+
+\usepackage[usenames]{color}
+\usepackage{amsmath}
+\usepackage{breqn}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{enumitem}
+\usepackage{braket}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+%%% layout setting
+
+\paperwidth=356.4truemm
+\paperheight=252.0truemm
+\textwidth=335.59999999999997truemm
+\textheight=224.2truemm
+\oddsidemargin=-15truemm
+\topmargin=-15truemm
+\footskip=7truemm
+
+%%% fixed
+
+\hoffset=0truemm
+\voffset=0truemm
+\headheight=0truemm
+\headsep=0truemm
+\marginparsep=0truemm
+\marginparwidth=0truemm
+
+%%% main text
+
+\begin{document}
+
+\setcounter{MaxMatrixCols}{32}
+
+\renewcommand{\tablename}{Table~}
+\renewcommand{\figurename}{Figure~}
+\begin{center}
+\LARGE
+PG No. 32\quad$O_{\rm h}$\quad$m\bar{3}m$\quad[ cubic ]
+\end{center}
+\begin{table}[ht!]
+\begin{center}
+\caption{Harmonics for rank 0.}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{ccl} \hline \hline
+No. & multipole & expression \\ \hline
+$ 1 $ & $ \mathbb{Q}_{0}(A_{1g}) $ & $ 1 $ \\
+ \hline \hline
+\end{tabular}
+\end{center}
+\end{table}
+\begin{table}[ht!]
+\begin{center}
+\caption{Harmonics for rank 1.}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{ccl} \hline \hline
+No. & multipole & expression \\ \hline
+$ 2 $ & $ \mathbb{Q}_{1,1}(T_{1u}) $ & $ x $ \\
+$ 3 $ & $ \mathbb{Q}_{1,2}(T_{1u}) $ & $ y $ \\
+$ 4 $ & $ \mathbb{Q}_{1,3}(T_{1u}) $ & $ z $ \\
+ \hline \hline
+\end{tabular}
+\end{center}
+\end{table}
+\begin{table}[ht!]
+\begin{center}
+\caption{Harmonics for rank 2.}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{ccl} \hline \hline
+No. & multipole & expression \\ \hline
+$ 5 $ & $ \mathbb{Q}_{2,1}(E_{g}) $ & $ - \frac{x^{2}}{2} - \frac{y^{2}}{2} + z^{2} $ \\
+$ 6 $ & $ \mathbb{Q}_{2,2}(E_{g}) $ & $ \frac{\sqrt{3} \left(x - y\right) \left(x + y\right)}{2} $ \\
+$ 7 $ & $ \mathbb{Q}_{2,1}(T_{2g}) $ & $ \sqrt{3} y z $ \\
+$ 8 $ & $ \mathbb{Q}_{2,2}(T_{2g}) $ & $ \sqrt{3} x z $ \\
+$ 9 $ & $ \mathbb{Q}_{2,3}(T_{2g}) $ & $ \sqrt{3} x y $ \\
+ \hline \hline
+\end{tabular}
+\end{center}
+\end{table}
+\begin{table}[ht!]
+\begin{center}
+\caption{Harmonics for rank 3.}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{ccl} \hline \hline
+No. & multipole & expression \\ \hline
+$ 10 $ & $ \mathbb{Q}_{3}(A_{2u}) $ & $ \sqrt{15} x y z $ \\
+$ 11 $ & $ \mathbb{Q}_{3,1}(T_{1u}) $ & $ \frac{x \left(2 x^{2} - 3 y^{2} - 3 z^{2}\right)}{2} $ \\
+$ 12 $ & $ \mathbb{Q}_{3,2}(T_{1u}) $ & $ - \frac{y \left(3 x^{2} - 2 y^{2} + 3 z^{2}\right)}{2} $ \\
+$ 13 $ & $ \mathbb{Q}_{3,3}(T_{1u}) $ & $ - \frac{z \left(3 x^{2} + 3 y^{2} - 2 z^{2}\right)}{2} $ \\
+$ 14 $ & $ \mathbb{Q}_{3,1}(T_{2u}) $ & $ \frac{\sqrt{15} x \left(y - z\right) \left(y + z\right)}{2} $ \\
+$ 15 $ & $ \mathbb{Q}_{3,2}(T_{2u}) $ & $ - \frac{\sqrt{15} y \left(x - z\right) \left(x + z\right)}{2} $ \\
+$ 16 $ & $ \mathbb{Q}_{3,3}(T_{2u}) $ & $ \frac{\sqrt{15} z \left(x - y\right) \left(x + y\right)}{2} $ \\
+ \hline \hline
+\end{tabular}
+\end{center}
+\end{table}
+\begin{table}[ht!]
+\begin{center}
+\caption{Harmonics for rank 4.}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{ccl} \hline \hline
+No. & multipole & expression \\ \hline
+$ 17 $ & $ \mathbb{Q}_{4}(A_{1g}) $ & $ \frac{\sqrt{21} \left(x^{4} - 3 x^{2} y^{2} - 3 x^{2} z^{2} + y^{4} - 3 y^{2} z^{2} + z^{4}\right)}{6} $ \\
+$ 18 $ & $ \mathbb{Q}_{4,1}(E_{g}) $ & $ - \frac{\sqrt{15} \left(x^{4} - 12 x^{2} y^{2} + 6 x^{2} z^{2} + y^{4} + 6 y^{2} z^{2} - 2 z^{4}\right)}{12} $ \\
+$ 19 $ & $ \mathbb{Q}_{4,2}(E_{g}) $ & $ \frac{\sqrt{5} \left(x - y\right) \left(x + y\right) \left(x^{2} + y^{2} - 6 z^{2}\right)}{4} $ \\
+$ 20 $ & $ \mathbb{Q}_{4,1}(T_{1g}) $ & $ \frac{\sqrt{35} y z \left(y - z\right) \left(y + z\right)}{2} $ \\
+$ 21 $ & $ \mathbb{Q}_{4,2}(T_{1g}) $ & $ - \frac{\sqrt{35} x z \left(x - z\right) \left(x + z\right)}{2} $ \\
+$ 22 $ & $ \mathbb{Q}_{4,3}(T_{1g}) $ & $ \frac{\sqrt{35} x y \left(x - y\right) \left(x + y\right)}{2} $ \\
+$ 23 $ & $ \mathbb{Q}_{4,1}(T_{2g}) $ & $ \frac{\sqrt{5} y z \left(6 x^{2} - y^{2} - z^{2}\right)}{2} $ \\
+$ 24 $ & $ \mathbb{Q}_{4,2}(T_{2g}) $ & $ - \frac{\sqrt{5} x z \left(x^{2} - 6 y^{2} + z^{2}\right)}{2} $ \\
+$ 25 $ & $ \mathbb{Q}_{4,3}(T_{2g}) $ & $ - \frac{\sqrt{5} x y \left(x^{2} + y^{2} - 6 z^{2}\right)}{2} $ \\
+ \hline \hline
+\end{tabular}
+\end{center}
+\end{table}
+\begin{table}[ht!]
+\begin{center}
+\caption{Harmonics for rank 5.}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{ccl} \hline \hline
+No. & multipole & expression \\ \hline
+$ 26 $ & $ \mathbb{Q}_{5,1}(E_{u}) $ & $ \frac{3 \sqrt{35} x y z \left(x - y\right) \left(x + y\right)}{2} $ \\
+$ 27 $ & $ \mathbb{Q}_{5,2}(E_{u}) $ & $ \frac{\sqrt{105} x y z \left(x^{2} + y^{2} - 2 z^{2}\right)}{2} $ \\
+$ 28 $ & $ \mathbb{Q}_{5,1}(T_{1u},1) $ & $ \frac{x \left(8 x^{4} - 40 x^{2} y^{2} - 40 x^{2} z^{2} + 15 y^{4} + 30 y^{2} z^{2} + 15 z^{4}\right)}{8} $ \\
+$ 29 $ & $ \mathbb{Q}_{5,2}(T_{1u},1) $ & $ \frac{y \left(15 x^{4} - 40 x^{2} y^{2} + 30 x^{2} z^{2} + 8 y^{4} - 40 y^{2} z^{2} + 15 z^{4}\right)}{8} $ \\
+$ 30 $ & $ \mathbb{Q}_{5,3}(T_{1u},1) $ & $ \frac{z \left(15 x^{4} + 30 x^{2} y^{2} - 40 x^{2} z^{2} + 15 y^{4} - 40 y^{2} z^{2} + 8 z^{4}\right)}{8} $ \\
+$ 31 $ & $ \mathbb{Q}_{5,1}(T_{1u},2) $ & $ \frac{3 \sqrt{35} x \left(y^{2} - 2 y z - z^{2}\right) \left(y^{2} + 2 y z - z^{2}\right)}{8} $ \\
+$ 32 $ & $ \mathbb{Q}_{5,2}(T_{1u},2) $ & $ \frac{3 \sqrt{35} y \left(x^{2} - 2 x z - z^{2}\right) \left(x^{2} + 2 x z - z^{2}\right)}{8} $ \\
+$ 33 $ & $ \mathbb{Q}_{5,3}(T_{1u},2) $ & $ \frac{3 \sqrt{35} z \left(x^{2} - 2 x y - y^{2}\right) \left(x^{2} + 2 x y - y^{2}\right)}{8} $ \\
+$ 34 $ & $ \mathbb{Q}_{5,1}(T_{2u}) $ & $ \frac{\sqrt{105} x \left(y - z\right) \left(y + z\right) \left(2 x^{2} - y^{2} - z^{2}\right)}{4} $ \\
+$ 35 $ & $ \mathbb{Q}_{5,2}(T_{2u}) $ & $ \frac{\sqrt{105} y \left(x - z\right) \left(x + z\right) \left(x^{2} - 2 y^{2} + z^{2}\right)}{4} $ \\
+$ 36 $ & $ \mathbb{Q}_{5,3}(T_{2u}) $ & $ - \frac{\sqrt{105} z \left(x - y\right) \left(x + y\right) \left(x^{2} + y^{2} - 2 z^{2}\right)}{4} $ \\
+ \hline \hline
+\end{tabular}
+\end{center}
+\end{table}
+\begin{table}[ht!]
+\begin{center}
+\caption{Harmonics for rank 6.}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{ccl} \hline \hline
+No. & multipole & expression \\ \hline
+$ 37 $ & $ \mathbb{Q}_{6}(A_{1g}) $ & $ \frac{\sqrt{2} \left(2 x^{6} - 15 x^{4} y^{2} - 15 x^{4} z^{2} - 15 x^{2} y^{4} + 180 x^{2} y^{2} z^{2} - 15 x^{2} z^{4} + 2 y^{6} - 15 y^{4} z^{2} - 15 y^{2} z^{4} + 2 z^{6}\right)}{8} $ \\
+$ 38 $ & $ \mathbb{Q}_{6}(A_{2g}) $ & $ - \frac{\sqrt{2310} \left(x - y\right) \left(x + y\right) \left(x - z\right) \left(x + z\right) \left(y - z\right) \left(y + z\right)}{8} $ \\
+$ 39 $ & $ \mathbb{Q}_{6,1}(E_{g}) $ & $ - \frac{\sqrt{14} \left(x^{6} - 15 x^{4} z^{2} + 15 x^{2} z^{4} + y^{6} - 15 y^{4} z^{2} + 15 y^{2} z^{4} - 2 z^{6}\right)}{8} $ \\
+$ 40 $ & $ \mathbb{Q}_{6,2}(E_{g}) $ & $ \frac{\sqrt{42} \left(x - y\right) \left(x + y\right) \left(x^{4} - 9 x^{2} y^{2} - 5 x^{2} z^{2} + y^{4} - 5 y^{2} z^{2} + 5 z^{4}\right)}{8} $ \\
+$ 41 $ & $ \mathbb{Q}_{6,1}(T_{1g}) $ & $ \frac{3 \sqrt{7} y z \left(y - z\right) \left(y + z\right) \left(10 x^{2} - y^{2} - z^{2}\right)}{4} $ \\
+$ 42 $ & $ \mathbb{Q}_{6,2}(T_{1g}) $ & $ \frac{3 \sqrt{7} x z \left(x - z\right) \left(x + z\right) \left(x^{2} - 10 y^{2} + z^{2}\right)}{4} $ \\
+$ 43 $ & $ \mathbb{Q}_{6,3}(T_{1g}) $ & $ - \frac{3 \sqrt{7} x y \left(x - y\right) \left(x + y\right) \left(x^{2} + y^{2} - 10 z^{2}\right)}{4} $ \\
+$ 44 $ & $ \mathbb{Q}_{6,1}(T_{2g},1) $ & $ \frac{\sqrt{462} y z \left(y^{2} - 3 z^{2}\right) \left(3 y^{2} - z^{2}\right)}{16} $ \\
+$ 45 $ & $ \mathbb{Q}_{6,2}(T_{2g},1) $ & $ \frac{\sqrt{462} x z \left(x^{2} - 3 z^{2}\right) \left(3 x^{2} - z^{2}\right)}{16} $ \\
+$ 46 $ & $ \mathbb{Q}_{6,3}(T_{2g},1) $ & $ \frac{\sqrt{462} x y \left(x^{2} - 3 y^{2}\right) \left(3 x^{2} - y^{2}\right)}{16} $ \\
+$ 47 $ & $ \mathbb{Q}_{6,1}(T_{2g},2) $ & $ \frac{\sqrt{210} y z \left(16 x^{4} - 16 x^{2} y^{2} - 16 x^{2} z^{2} + y^{4} + 2 y^{2} z^{2} + z^{4}\right)}{16} $ \\
+$ 48 $ & $ \mathbb{Q}_{6,2}(T_{2g},2) $ & $ \frac{\sqrt{210} x z \left(x^{4} - 16 x^{2} y^{2} + 2 x^{2} z^{2} + 16 y^{4} - 16 y^{2} z^{2} + z^{4}\right)}{16} $ \\
+$ 49 $ & $ \mathbb{Q}_{6,3}(T_{2g},2) $ & $ \frac{\sqrt{210} x y \left(x^{4} + 2 x^{2} y^{2} - 16 x^{2} z^{2} + y^{4} - 16 y^{2} z^{2} + 16 z^{4}\right)}{16} $ \\
+ \hline \hline
+\end{tabular}
+\end{center}
+\end{table}
+\begin{table}[ht!]
+\begin{center}
+\caption{Harmonics for rank 7.}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{ccl} \hline \hline
+No. & multipole & expression \\ \hline
+$ 50 $ & $ \mathbb{Q}_{7}(A_{2u}) $ & $ \frac{\sqrt{91} x y z \left(3 x^{4} - 5 x^{2} y^{2} - 5 x^{2} z^{2} + 3 y^{4} - 5 y^{2} z^{2} + 3 z^{4}\right)}{2} $ \\
+$ 51 $ & $ \mathbb{Q}_{7,1}(E_{u}) $ & $ - \frac{\sqrt{231} x y z \left(x - y\right) \left(x + y\right) \left(3 x^{2} + 3 y^{2} - 10 z^{2}\right)}{4} $ \\
+$ 52 $ & $ \mathbb{Q}_{7,2}(E_{u}) $ & $ - \frac{\sqrt{77} x y z \left(3 x^{4} - 20 x^{2} y^{2} + 10 x^{2} z^{2} + 3 y^{4} + 10 y^{2} z^{2} - 6 z^{4}\right)}{4} $ \\
+$ 53 $ & $ \mathbb{Q}_{7,1}(T_{1u},1) $ & $ \frac{x \left(16 x^{6} - 168 x^{4} y^{2} - 168 x^{4} z^{2} + 210 x^{2} y^{4} + 420 x^{2} y^{2} z^{2} + 210 x^{2} z^{4} - 35 y^{6} - 105 y^{4} z^{2} - 105 y^{2} z^{4} - 35 z^{6}\right)}{16} $ \\
+$ 54 $ & $ \mathbb{Q}_{7,2}(T_{1u},1) $ & $ - \frac{y \left(35 x^{6} - 210 x^{4} y^{2} + 105 x^{4} z^{2} + 168 x^{2} y^{4} - 420 x^{2} y^{2} z^{2} + 105 x^{2} z^{4} - 16 y^{6} + 168 y^{4} z^{2} - 210 y^{2} z^{4} + 35 z^{6}\right)}{16} $ \\
+$ 55 $ & $ \mathbb{Q}_{7,3}(T_{1u},1) $ & $ - \frac{z \left(35 x^{6} + 105 x^{4} y^{2} - 210 x^{4} z^{2} + 105 x^{2} y^{4} - 420 x^{2} y^{2} z^{2} + 168 x^{2} z^{4} + 35 y^{6} - 210 y^{4} z^{2} + 168 y^{2} z^{4} - 16 z^{6}\right)}{16} $ \\
+$ 56 $ & $ \mathbb{Q}_{7,1}(T_{1u},2) $ & $ \frac{\sqrt{231} x \left(10 x^{2} - 3 y^{2} - 3 z^{2}\right) \left(y^{2} - 2 y z - z^{2}\right) \left(y^{2} + 2 y z - z^{2}\right)}{16} $ \\
+$ 57 $ & $ \mathbb{Q}_{7,2}(T_{1u},2) $ & $ - \frac{\sqrt{231} y \left(x^{2} - 2 x z - z^{2}\right) \left(x^{2} + 2 x z - z^{2}\right) \left(3 x^{2} - 10 y^{2} + 3 z^{2}\right)}{16} $ \\
+$ 58 $ & $ \mathbb{Q}_{7,3}(T_{1u},2) $ & $ - \frac{\sqrt{231} z \left(x^{2} - 2 x y - y^{2}\right) \left(x^{2} + 2 x y - y^{2}\right) \left(3 x^{2} + 3 y^{2} - 10 z^{2}\right)}{16} $ \\
+$ 59 $ & $ \mathbb{Q}_{7,1}(T_{2u},1) $ & $ \frac{\sqrt{6006} x \left(y - z\right) \left(y + z\right) \left(y^{2} - 4 y z + z^{2}\right) \left(y^{2} + 4 y z + z^{2}\right)}{32} $ \\
+$ 60 $ & $ \mathbb{Q}_{7,2}(T_{2u},1) $ & $ - \frac{\sqrt{6006} y \left(x - z\right) \left(x + z\right) \left(x^{2} - 4 x z + z^{2}\right) \left(x^{2} + 4 x z + z^{2}\right)}{32} $ \\
+$ 61 $ & $ \mathbb{Q}_{7,3}(T_{2u},1) $ & $ \frac{\sqrt{6006} z \left(x - y\right) \left(x + y\right) \left(x^{2} - 4 x y + y^{2}\right) \left(x^{2} + 4 x y + y^{2}\right)}{32} $ \\
+$ 62 $ & $ \mathbb{Q}_{7,1}(T_{2u},2) $ & $ \frac{\sqrt{42} x \left(y - z\right) \left(y + z\right) \left(48 x^{4} - 80 x^{2} y^{2} - 80 x^{2} z^{2} + 15 y^{4} + 30 y^{2} z^{2} + 15 z^{4}\right)}{32} $ \\
+$ 63 $ & $ \mathbb{Q}_{7,2}(T_{2u},2) $ & $ - \frac{\sqrt{42} y \left(x - z\right) \left(x + z\right) \left(15 x^{4} - 80 x^{2} y^{2} + 30 x^{2} z^{2} + 48 y^{4} - 80 y^{2} z^{2} + 15 z^{4}\right)}{32} $ \\
+$ 64 $ & $ \mathbb{Q}_{7,3}(T_{2u},2) $ & $ \frac{\sqrt{42} z \left(x - y\right) \left(x + y\right) \left(15 x^{4} + 30 x^{2} y^{2} - 80 x^{2} z^{2} + 15 y^{4} - 80 y^{2} z^{2} + 48 z^{4}\right)}{32} $ \\
+ \hline \hline
+\end{tabular}
+\end{center}
+\end{table}
+\begin{table}[ht!]
+\begin{center}
+\caption{Harmonics for rank 8.}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{ccl} \hline \hline
+No. & multipole & expression \\ \hline
+$ 65 $ & $ \mathbb{Q}_{8}(A_{1g}) $ & $ \frac{\sqrt{33} \left(x^{8} - 14 x^{6} y^{2} - 14 x^{6} z^{2} + 35 x^{4} y^{4} + 35 x^{4} z^{4} - 14 x^{2} y^{6} - 14 x^{2} z^{6} + y^{8} - 14 y^{6} z^{2} + 35 y^{4} z^{4} - 14 y^{2} z^{6} + z^{8}\right)}{8} $ \\
+$ 66 $ & $ \mathbb{Q}_{8,1}(E_{g},1) $ & $ \frac{\sqrt{286} \left(x^{8} - 14 x^{6} y^{2} - 14 x^{6} z^{2} + 210 x^{4} y^{2} z^{2} - 14 x^{2} y^{6} + 210 x^{2} y^{4} z^{2} - 420 x^{2} y^{2} z^{4} + 28 x^{2} z^{6} + y^{8} - 14 y^{6} z^{2} + 28 y^{2} z^{6} - 2 z^{8}\right)}{64} $ \\
+$ 67 $ & $ \mathbb{Q}_{8,2}(E_{g},1) $ & $ - \frac{\sqrt{858} \left(x - y\right) \left(x + y\right) \left(x^{2} + y^{2} - 14 z^{2}\right) \left(x^{2} - 4 x y + y^{2}\right) \left(x^{2} + 4 x y + y^{2}\right)}{64} $ \\
+$ 68 $ & $ \mathbb{Q}_{8,1}(E_{g},2) $ & $ \frac{\sqrt{210} \left(x^{8} - 62 x^{6} y^{2} + 34 x^{6} z^{2} + 160 x^{4} y^{4} - 30 x^{4} y^{2} z^{2} - 80 x^{4} z^{4} - 62 x^{2} y^{6} - 30 x^{2} y^{4} z^{2} + 60 x^{2} y^{2} z^{4} + 28 x^{2} z^{6} + y^{8} + 34 y^{6} z^{2} - 80 y^{4} z^{4} + 28 y^{2} z^{6} - 2 z^{8}\right)}{64} $ \\
+$ 69 $ & $ \mathbb{Q}_{8,2}(E_{g},2) $ & $ - \frac{3 \sqrt{70} \left(x - y\right) \left(x + y\right) \left(x^{6} + 3 x^{4} y^{2} - 30 x^{4} z^{2} + 3 x^{2} y^{4} - 60 x^{2} y^{2} z^{2} + 80 x^{2} z^{4} + y^{6} - 30 y^{4} z^{2} + 80 y^{2} z^{4} - 32 z^{6}\right)}{64} $ \\
+$ 70 $ & $ \mathbb{Q}_{8,1}(T_{1g},1) $ & $ \frac{3 \sqrt{715} y z \left(y - z\right) \left(y + z\right) \left(y^{2} - 2 y z - z^{2}\right) \left(y^{2} + 2 y z - z^{2}\right)}{16} $ \\
+$ 71 $ & $ \mathbb{Q}_{8,2}(T_{1g},1) $ & $ - \frac{3 \sqrt{715} x z \left(x - z\right) \left(x + z\right) \left(x^{2} - 2 x z - z^{2}\right) \left(x^{2} + 2 x z - z^{2}\right)}{16} $ \\
+$ 72 $ & $ \mathbb{Q}_{8,3}(T_{1g},1) $ & $ \frac{3 \sqrt{715} x y \left(x - y\right) \left(x + y\right) \left(x^{2} - 2 x y - y^{2}\right) \left(x^{2} + 2 x y - y^{2}\right)}{16} $ \\
+$ 73 $ & $ \mathbb{Q}_{8,1}(T_{1g},2) $ & $ \frac{3 \sqrt{77} y z \left(y - z\right) \left(y + z\right) \left(40 x^{4} - 24 x^{2} y^{2} - 24 x^{2} z^{2} + y^{4} + 2 y^{2} z^{2} + z^{4}\right)}{16} $ \\
+$ 74 $ & $ \mathbb{Q}_{8,2}(T_{1g},2) $ & $ - \frac{3 \sqrt{77} x z \left(x - z\right) \left(x + z\right) \left(x^{4} - 24 x^{2} y^{2} + 2 x^{2} z^{2} + 40 y^{4} - 24 y^{2} z^{2} + z^{4}\right)}{16} $ \\
+$ 75 $ & $ \mathbb{Q}_{8,3}(T_{1g},2) $ & $ \frac{3 \sqrt{77} x y \left(x - y\right) \left(x + y\right) \left(x^{4} + 2 x^{2} y^{2} - 24 x^{2} z^{2} + y^{4} - 24 y^{2} z^{2} + 40 z^{4}\right)}{16} $ \\
+$ 76 $ & $ \mathbb{Q}_{8,1}(T_{2g},1) $ & $ \frac{\sqrt{858} y z \left(y^{2} - 3 z^{2}\right) \left(3 y^{2} - z^{2}\right) \left(14 x^{2} - y^{2} - z^{2}\right)}{32} $ \\
+$ 77 $ & $ \mathbb{Q}_{8,2}(T_{2g},1) $ & $ - \frac{\sqrt{858} x z \left(x^{2} - 3 z^{2}\right) \left(3 x^{2} - z^{2}\right) \left(x^{2} - 14 y^{2} + z^{2}\right)}{32} $ \\
+$ 78 $ & $ \mathbb{Q}_{8,3}(T_{2g},1) $ & $ - \frac{\sqrt{858} x y \left(x^{2} - 3 y^{2}\right) \left(3 x^{2} - y^{2}\right) \left(x^{2} + y^{2} - 14 z^{2}\right)}{32} $ \\
+$ 79 $ & $ \mathbb{Q}_{8,1}(T_{2g},2) $ & $ \frac{3 \sqrt{70} y z \left(32 x^{6} - 80 x^{4} y^{2} - 80 x^{4} z^{2} + 30 x^{2} y^{4} + 60 x^{2} y^{2} z^{2} + 30 x^{2} z^{4} - y^{6} - 3 y^{4} z^{2} - 3 y^{2} z^{4} - z^{6}\right)}{32} $ \\
+$ 80 $ & $ \mathbb{Q}_{8,2}(T_{2g},2) $ & $ - \frac{3 \sqrt{70} x z \left(x^{6} - 30 x^{4} y^{2} + 3 x^{4} z^{2} + 80 x^{2} y^{4} - 60 x^{2} y^{2} z^{2} + 3 x^{2} z^{4} - 32 y^{6} + 80 y^{4} z^{2} - 30 y^{2} z^{4} + z^{6}\right)}{32} $ \\
+$ 81 $ & $ \mathbb{Q}_{8,3}(T_{2g},2) $ & $ - \frac{3 \sqrt{70} x y \left(x^{6} + 3 x^{4} y^{2} - 30 x^{4} z^{2} + 3 x^{2} y^{4} - 60 x^{2} y^{2} z^{2} + 80 x^{2} z^{4} + y^{6} - 30 y^{4} z^{2} + 80 y^{2} z^{4} - 32 z^{6}\right)}{32} $ \\
+ \hline \hline
+\end{tabular}
+\end{center}
+\end{table}
+\begin{table}[ht!]
+\begin{center}
+\caption{Harmonics for rank 9.}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{ccl} \hline \hline
+No. & multipole & expression \\ \hline
+$ 82 $ & $ \mathbb{Q}_{9}(A_{1u}) $ & $ - \frac{\sqrt{510510} x y z \left(x - y\right) \left(x + y\right) \left(x - z\right) \left(x + z\right) \left(y - z\right) \left(y + z\right)}{8} $ \\
+$ 83 $ & $ \mathbb{Q}_{9}(A_{2u}) $ & $ \frac{\sqrt{330} x y z \left(6 x^{6} - 21 x^{4} y^{2} - 21 x^{4} z^{2} - 21 x^{2} y^{4} + 140 x^{2} y^{2} z^{2} - 21 x^{2} z^{4} + 6 y^{6} - 21 y^{4} z^{2} - 21 y^{2} z^{4} + 6 z^{6}\right)}{8} $ \\
+$ 84 $ & $ \mathbb{Q}_{9,1}(E_{u}) $ & $ \frac{\sqrt{4290} x y z \left(x - y\right) \left(x + y\right) \left(3 x^{4} - 11 x^{2} y^{2} - 7 x^{2} z^{2} + 3 y^{4} - 7 y^{2} z^{2} + 7 z^{4}\right)}{8} $ \\
+$ 85 $ & $ \mathbb{Q}_{9,2}(E_{u}) $ & $ \frac{3 \sqrt{1430} x y z \left(x^{6} - 7 x^{4} z^{2} + 7 x^{2} z^{4} + y^{6} - 7 y^{4} z^{2} + 7 y^{2} z^{4} - 2 z^{6}\right)}{8} $ \\
+$ 86 $ & $ \mathbb{Q}_{9,1}(T_{1u},1) $ & $ \frac{x \left(128 x^{8} - 2304 x^{6} y^{2} - 2304 x^{6} z^{2} + 6048 x^{4} y^{4} + 12096 x^{4} y^{2} z^{2} + 6048 x^{4} z^{4} - 3360 x^{2} y^{6} - 10080 x^{2} y^{4} z^{2} - 10080 x^{2} y^{2} z^{4} - 3360 x^{2} z^{6} + 315 y^{8} + 1260 y^{6} z^{2} + 1890 y^{4} z^{4} + 1260 y^{2} z^{6} + 315 z^{8}\right)}{128} $ \\
+$ 87 $ & $ \mathbb{Q}_{9,2}(T_{1u},1) $ & $ \frac{y \left(315 x^{8} - 3360 x^{6} y^{2} + 1260 x^{6} z^{2} + 6048 x^{4} y^{4} - 10080 x^{4} y^{2} z^{2} + 1890 x^{4} z^{4} - 2304 x^{2} y^{6} + 12096 x^{2} y^{4} z^{2} - 10080 x^{2} y^{2} z^{4} + 1260 x^{2} z^{6} + 128 y^{8} - 2304 y^{6} z^{2} + 6048 y^{4} z^{4} - 3360 y^{2} z^{6} + 315 z^{8}\right)}{128} $ \\
+$ 88 $ & $ \mathbb{Q}_{9,3}(T_{1u},1) $ & $ \frac{z \left(315 x^{8} + 1260 x^{6} y^{2} - 3360 x^{6} z^{2} + 1890 x^{4} y^{4} - 10080 x^{4} y^{2} z^{2} + 6048 x^{4} z^{4} + 1260 x^{2} y^{6} - 10080 x^{2} y^{4} z^{2} + 12096 x^{2} y^{2} z^{4} - 2304 x^{2} z^{6} + 315 y^{8} - 3360 y^{6} z^{2} + 6048 y^{4} z^{4} - 2304 y^{2} z^{6} + 128 z^{8}\right)}{128} $ \\
+$ 89 $ & $ \mathbb{Q}_{9,1}(T_{1u},2) $ & $ \frac{3 \sqrt{12155} x \left(y^{4} - 4 y^{3} z - 6 y^{2} z^{2} + 4 y z^{3} + z^{4}\right) \left(y^{4} + 4 y^{3} z - 6 y^{2} z^{2} - 4 y z^{3} + z^{4}\right)}{128} $ \\
+$ 90 $ & $ \mathbb{Q}_{9,2}(T_{1u},2) $ & $ \frac{3 \sqrt{12155} y \left(x^{4} - 4 x^{3} z - 6 x^{2} z^{2} + 4 x z^{3} + z^{4}\right) \left(x^{4} + 4 x^{3} z - 6 x^{2} z^{2} - 4 x z^{3} + z^{4}\right)}{128} $ \\
+$ 91 $ & $ \mathbb{Q}_{9,3}(T_{1u},2) $ & $ \frac{3 \sqrt{12155} z \left(x^{4} - 4 x^{3} y - 6 x^{2} y^{2} + 4 x y^{3} + y^{4}\right) \left(x^{4} + 4 x^{3} y - 6 x^{2} y^{2} - 4 x y^{3} + y^{4}\right)}{128} $ \\
+$ 92 $ & $ \mathbb{Q}_{9,1}(T_{1u},3) $ & $ \frac{3 \sqrt{5005} x \left(y^{2} - 2 y z - z^{2}\right) \left(y^{2} + 2 y z - z^{2}\right) \left(8 x^{4} - 8 x^{2} y^{2} - 8 x^{2} z^{2} + y^{4} + 2 y^{2} z^{2} + z^{4}\right)}{64} $ \\
+$ 93 $ & $ \mathbb{Q}_{9,2}(T_{1u},3) $ & $ \frac{3 \sqrt{5005} y \left(x^{2} - 2 x z - z^{2}\right) \left(x^{2} + 2 x z - z^{2}\right) \left(x^{4} - 8 x^{2} y^{2} + 2 x^{2} z^{2} + 8 y^{4} - 8 y^{2} z^{2} + z^{4}\right)}{64} $ \\
+$ 94 $ & $ \mathbb{Q}_{9,3}(T_{1u},3) $ & $ \frac{3 \sqrt{5005} z \left(x^{2} - 2 x y - y^{2}\right) \left(x^{2} + 2 x y - y^{2}\right) \left(x^{4} + 2 x^{2} y^{2} - 8 x^{2} z^{2} + y^{4} - 8 y^{2} z^{2} + 8 z^{4}\right)}{64} $ \\
+$ 95 $ & $ \mathbb{Q}_{9,1}(T_{2u},1) $ & $ \frac{\sqrt{4290} x \left(y - z\right) \left(y + z\right) \left(14 x^{2} - 3 y^{2} - 3 z^{2}\right) \left(y^{2} - 4 y z + z^{2}\right) \left(y^{2} + 4 y z + z^{2}\right)}{64} $ \\
+$ 96 $ & $ \mathbb{Q}_{9,2}(T_{2u},1) $ & $ \frac{\sqrt{4290} y \left(x - z\right) \left(x + z\right) \left(x^{2} - 4 x z + z^{2}\right) \left(x^{2} + 4 x z + z^{2}\right) \left(3 x^{2} - 14 y^{2} + 3 z^{2}\right)}{64} $ \\
+$ 97 $ & $ \mathbb{Q}_{9,3}(T_{2u},1) $ & $ - \frac{\sqrt{4290} z \left(x - y\right) \left(x + y\right) \left(x^{2} - 4 x y + y^{2}\right) \left(x^{2} + 4 x y + y^{2}\right) \left(3 x^{2} + 3 y^{2} - 14 z^{2}\right)}{64} $ \\
+$ 98 $ & $ \mathbb{Q}_{9,1}(T_{2u},2) $ & $ \frac{3 \sqrt{110} x \left(y - z\right) \left(y + z\right) \left(32 x^{6} - 112 x^{4} y^{2} - 112 x^{4} z^{2} + 70 x^{2} y^{4} + 140 x^{2} y^{2} z^{2} + 70 x^{2} z^{4} - 7 y^{6} - 21 y^{4} z^{2} - 21 y^{2} z^{4} - 7 z^{6}\right)}{64} $ \\
+$ 99 $ & $ \mathbb{Q}_{9,2}(T_{2u},2) $ & $ \frac{3 \sqrt{110} y \left(x - z\right) \left(x + z\right) \left(7 x^{6} - 70 x^{4} y^{2} + 21 x^{4} z^{2} + 112 x^{2} y^{4} - 140 x^{2} y^{2} z^{2} + 21 x^{2} z^{4} - 32 y^{6} + 112 y^{4} z^{2} - 70 y^{2} z^{4} + 7 z^{6}\right)}{64} $ \\
+$ 100 $ & $ \mathbb{Q}_{9,3}(T_{2u},2) $ & $ - \frac{3 \sqrt{110} z \left(x - y\right) \left(x + y\right) \left(7 x^{6} + 21 x^{4} y^{2} - 70 x^{4} z^{2} + 21 x^{2} y^{4} - 140 x^{2} y^{2} z^{2} + 112 x^{2} z^{4} + 7 y^{6} - 70 y^{4} z^{2} + 112 y^{2} z^{4} - 32 z^{6}\right)}{64} $ \\
+ \hline \hline
+\end{tabular}
+\end{center}
+\end{table}
+\begin{table}[ht!]
+\begin{center}
+\caption{Harmonics for rank 10.}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{ccl} \hline \hline
+No. & multipole & expression \\ \hline
+$ 101 $ & $ \mathbb{Q}_{10}(A_{1g}) $ & $ \frac{\sqrt{390} \left(2 x^{10} - 45 x^{8} y^{2} - 45 x^{8} z^{2} + 42 x^{6} y^{4} + 1008 x^{6} y^{2} z^{2} + 42 x^{6} z^{4} + 42 x^{4} y^{6} - 1260 x^{4} y^{4} z^{2} - 1260 x^{4} y^{2} z^{4} + 42 x^{4} z^{6} - 45 x^{2} y^{8} + 1008 x^{2} y^{6} z^{2} - 1260 x^{2} y^{4} z^{4} + 1008 x^{2} y^{2} z^{6} - 45 x^{2} z^{8} + 2 y^{10} - 45 y^{8} z^{2} + 42 y^{6} z^{4} + 42 y^{4} z^{6} - 45 y^{2} z^{8} + 2 z^{10}\right)}{96} $ \\
+$ 102 $ & $ \mathbb{Q}_{10}(A_{2g}) $ & $ - \frac{\sqrt{27170} \left(x - y\right) \left(x + y\right) \left(x - z\right) \left(x + z\right) \left(y - z\right) \left(y + z\right) \left(3 x^{4} - 11 x^{2} y^{2} - 11 x^{2} z^{2} + 3 y^{4} - 11 y^{2} z^{2} + 3 z^{4}\right)}{32} $ \\
+$ 103 $ & $ \mathbb{Q}_{10,1}(E_{g},1) $ & $ - \frac{\sqrt{420189} \left(22 x^{10} + 45 x^{8} y^{2} - 1035 x^{8} z^{2} - 105 x^{6} y^{4} - 630 x^{6} y^{2} z^{2} + 4935 x^{6} z^{4} - 105 x^{4} y^{6} + 3150 x^{4} y^{4} z^{2} - 1575 x^{4} y^{2} z^{4} - 4830 x^{4} z^{6} + 45 x^{2} y^{8} - 630 x^{2} y^{6} z^{2} - 1575 x^{2} y^{4} z^{4} + 1260 x^{2} y^{2} z^{6} + 990 x^{2} z^{8} + 22 y^{10} - 1035 y^{8} z^{2} + 4935 y^{6} z^{4} - 4830 y^{4} z^{6} + 990 y^{2} z^{8} - 44 z^{10}\right)}{35952} $ \\
+$ 104 $ & $ \mathbb{Q}_{10,2}(E_{g},1) $ & $ \frac{\sqrt{140063} \left(x - y\right) \left(x + y\right) \left(22 x^{8} - 653 x^{6} y^{2} - 315 x^{6} z^{2} + 2602 x^{4} y^{4} - 945 x^{4} y^{2} z^{2} + 1575 x^{4} z^{4} - 653 x^{2} y^{6} - 945 x^{2} y^{4} z^{2} + 3150 x^{2} y^{2} z^{4} - 1680 x^{2} z^{6} + 22 y^{8} - 315 y^{6} z^{2} + 1575 y^{4} z^{4} - 1680 y^{2} z^{6} + 360 z^{8}\right)}{11984} $ \\
+$ 105 $ & $ \mathbb{Q}_{10,1}(E_{g},2) $ & $ - \frac{\sqrt{3213210} \left(3 x^{10} - 96 x^{8} y^{2} - 39 x^{8} z^{2} + 224 x^{6} y^{4} + 1344 x^{6} y^{2} z^{2} - 42 x^{6} z^{4} + 224 x^{4} y^{6} - 6720 x^{4} y^{4} z^{2} + 3360 x^{4} y^{2} z^{4} - 182 x^{4} z^{6} - 96 x^{2} y^{8} + 1344 x^{2} y^{6} z^{2} + 3360 x^{2} y^{4} z^{4} - 2688 x^{2} y^{2} z^{6} + 135 x^{2} z^{8} + 3 y^{10} - 39 y^{8} z^{2} - 42 y^{6} z^{4} - 182 y^{4} z^{6} + 135 y^{2} z^{8} - 6 z^{10}\right)}{23968} $ \\
+$ 106 $ & $ \mathbb{Q}_{10,2}(E_{g},2) $ & $ \frac{\sqrt{1071070} \left(x - y\right) \left(x + y\right) \left(9 x^{8} - 165 x^{6} y^{2} - 231 x^{6} z^{2} - 25 x^{4} y^{4} + 3801 x^{4} y^{2} z^{2} + 406 x^{4} z^{4} - 165 x^{2} y^{6} + 3801 x^{2} y^{4} z^{2} - 9674 x^{2} y^{2} z^{4} + 266 x^{2} z^{6} + 9 y^{8} - 231 y^{6} z^{2} + 406 y^{4} z^{4} + 266 y^{2} z^{6} - 57 z^{8}\right)}{23968} $ \\
+$ 107 $ & $ \mathbb{Q}_{10,1}(T_{1g},1) $ & $ \frac{\sqrt{12155} y z \left(y - z\right) \left(y + z\right) \left(18 x^{2} - y^{2} - z^{2}\right) \left(y^{2} - 2 y z - z^{2}\right) \left(y^{2} + 2 y z - z^{2}\right)}{32} $ \\
+$ 108 $ & $ \mathbb{Q}_{10,2}(T_{1g},1) $ & $ \frac{\sqrt{12155} x z \left(x - z\right) \left(x + z\right) \left(x^{2} - 18 y^{2} + z^{2}\right) \left(x^{2} - 2 x z - z^{2}\right) \left(x^{2} + 2 x z - z^{2}\right)}{32} $ \\
+$ 109 $ & $ \mathbb{Q}_{10,3}(T_{1g},1) $ & $ - \frac{\sqrt{12155} x y \left(x - y\right) \left(x + y\right) \left(x^{2} + y^{2} - 18 z^{2}\right) \left(x^{2} - 2 x y - y^{2}\right) \left(x^{2} + 2 x y - y^{2}\right)}{32} $ \\
+$ 110 $ & $ \mathbb{Q}_{10,1}(T_{1g},2) $ & $ \frac{\sqrt{2145} y z \left(y - z\right) \left(y + z\right) \left(112 x^{6} - 168 x^{4} y^{2} - 168 x^{4} z^{2} + 42 x^{2} y^{4} + 84 x^{2} y^{2} z^{2} + 42 x^{2} z^{4} - y^{6} - 3 y^{4} z^{2} - 3 y^{2} z^{4} - z^{6}\right)}{32} $ \\
+$ 111 $ & $ \mathbb{Q}_{10,2}(T_{1g},2) $ & $ \frac{\sqrt{2145} x z \left(x - z\right) \left(x + z\right) \left(x^{6} - 42 x^{4} y^{2} + 3 x^{4} z^{2} + 168 x^{2} y^{4} - 84 x^{2} y^{2} z^{2} + 3 x^{2} z^{4} - 112 y^{6} + 168 y^{4} z^{2} - 42 y^{2} z^{4} + z^{6}\right)}{32} $ \\
+$ 112 $ & $ \mathbb{Q}_{10,3}(T_{1g},2) $ & $ - \frac{\sqrt{2145} x y \left(x - y\right) \left(x + y\right) \left(x^{6} + 3 x^{4} y^{2} - 42 x^{4} z^{2} + 3 x^{2} y^{4} - 84 x^{2} y^{2} z^{2} + 168 x^{2} z^{4} + y^{6} - 42 y^{4} z^{2} + 168 y^{2} z^{4} - 112 z^{6}\right)}{32} $ \\
+$ 113 $ & $ \mathbb{Q}_{10,1}(T_{2g},1) $ & $ \frac{\sqrt{92378} y z \left(y^{4} - 10 y^{2} z^{2} + 5 z^{4}\right) \left(5 y^{4} - 10 y^{2} z^{2} + z^{4}\right)}{256} $ \\
+$ 114 $ & $ \mathbb{Q}_{10,2}(T_{2g},1) $ & $ \frac{\sqrt{92378} x z \left(x^{4} - 10 x^{2} z^{2} + 5 z^{4}\right) \left(5 x^{4} - 10 x^{2} z^{2} + z^{4}\right)}{256} $ \\
+$ 115 $ & $ \mathbb{Q}_{10,3}(T_{2g},1) $ & $ \frac{\sqrt{92378} x y \left(x^{4} - 10 x^{2} y^{2} + 5 y^{4}\right) \left(5 x^{4} - 10 x^{2} y^{2} + y^{4}\right)}{256} $ \\
+$ 116 $ & $ \mathbb{Q}_{10,1}(T_{2g},2) $ & $ \frac{\sqrt{4290} y z \left(y^{2} - 3 z^{2}\right) \left(3 y^{2} - z^{2}\right) \left(224 x^{4} - 96 x^{2} y^{2} - 96 x^{2} z^{2} + 3 y^{4} + 6 y^{2} z^{2} + 3 z^{4}\right)}{256} $ \\
+$ 117 $ & $ \mathbb{Q}_{10,2}(T_{2g},2) $ & $ \frac{\sqrt{4290} x z \left(x^{2} - 3 z^{2}\right) \left(3 x^{2} - z^{2}\right) \left(3 x^{4} - 96 x^{2} y^{2} + 6 x^{2} z^{2} + 224 y^{4} - 96 y^{2} z^{2} + 3 z^{4}\right)}{256} $ \\
+$ 118 $ & $ \mathbb{Q}_{10,3}(T_{2g},2) $ & $ \frac{\sqrt{4290} x y \left(x^{2} - 3 y^{2}\right) \left(3 x^{2} - y^{2}\right) \left(3 x^{4} + 6 x^{2} y^{2} - 96 x^{2} z^{2} + 3 y^{4} - 96 y^{2} z^{2} + 224 z^{4}\right)}{256} $ \\
+$ 119 $ & $ \mathbb{Q}_{10,1}(T_{2g},3) $ & $ \frac{\sqrt{165} y z \left(384 x^{8} - 1792 x^{6} y^{2} - 1792 x^{6} z^{2} + 1680 x^{4} y^{4} + 3360 x^{4} y^{2} z^{2} + 1680 x^{4} z^{4} - 336 x^{2} y^{6} - 1008 x^{2} y^{4} z^{2} - 1008 x^{2} y^{2} z^{4} - 336 x^{2} z^{6} + 7 y^{8} + 28 y^{6} z^{2} + 42 y^{4} z^{4} + 28 y^{2} z^{6} + 7 z^{8}\right)}{128} $ \\
+$ 120 $ & $ \mathbb{Q}_{10,2}(T_{2g},3) $ & $ \frac{\sqrt{165} x z \left(7 x^{8} - 336 x^{6} y^{2} + 28 x^{6} z^{2} + 1680 x^{4} y^{4} - 1008 x^{4} y^{2} z^{2} + 42 x^{4} z^{4} - 1792 x^{2} y^{6} + 3360 x^{2} y^{4} z^{2} - 1008 x^{2} y^{2} z^{4} + 28 x^{2} z^{6} + 384 y^{8} - 1792 y^{6} z^{2} + 1680 y^{4} z^{4} - 336 y^{2} z^{6} + 7 z^{8}\right)}{128} $ \\
+$ 121 $ & $ \mathbb{Q}_{10,3}(T_{2g},3) $ & $ \frac{\sqrt{165} x y \left(7 x^{8} + 28 x^{6} y^{2} - 336 x^{6} z^{2} + 42 x^{4} y^{4} - 1008 x^{4} y^{2} z^{2} + 1680 x^{4} z^{4} + 28 x^{2} y^{6} - 1008 x^{2} y^{4} z^{2} + 3360 x^{2} y^{2} z^{4} - 1792 x^{2} z^{6} + 7 y^{8} - 336 y^{6} z^{2} + 1680 y^{4} z^{4} - 1792 y^{2} z^{6} + 384 z^{8}\right)}{128} $ \\
+ \hline \hline
+\end{tabular}
+\end{center}
+\end{table}
+\begin{table}[ht!]
+\begin{center}
+\caption{Harmonics for rank 11.}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{ccl} \hline \hline
+No. & multipole & expression \\ \hline
+$ 122 $ & $ \mathbb{Q}_{11}(A_{2u}) $ & $ \frac{\sqrt{2431} x y z \left(5 x^{8} - 30 x^{6} y^{2} - 30 x^{6} z^{2} + 63 x^{4} y^{4} + 63 x^{4} z^{4} - 30 x^{2} y^{6} - 30 x^{2} z^{6} + 5 y^{8} - 30 y^{6} z^{2} + 63 y^{4} z^{4} - 30 y^{2} z^{6} + 5 z^{8}\right)}{8} $ \\
+$ 123 $ & $ \mathbb{Q}_{11,1}(E_{u},1) $ & $ - \frac{\sqrt{692835} x y z \left(x - y\right) \left(x + y\right) \left(x^{2} + y^{2} - 6 z^{2}\right) \left(x^{2} - 2 x y - y^{2}\right) \left(x^{2} + 2 x y - y^{2}\right)}{32} $ \\
+$ 124 $ & $ \mathbb{Q}_{11,2}(E_{u},1) $ & $ - \frac{\sqrt{230945} x y z \left(x^{8} - 6 x^{6} y^{2} - 6 x^{6} z^{2} + 42 x^{4} y^{2} z^{2} - 6 x^{2} y^{6} + 42 x^{2} y^{4} z^{2} - 84 x^{2} y^{2} z^{4} + 12 x^{2} z^{6} + y^{8} - 6 y^{6} z^{2} + 12 y^{2} z^{6} - 2 z^{8}\right)}{32} $ \\
+$ 125 $ & $ \mathbb{Q}_{11,1}(E_{u},2) $ & $ - \frac{3 \sqrt{1001} x y z \left(x - y\right) \left(x + y\right) \left(5 x^{6} + 15 x^{4} y^{2} - 70 x^{4} z^{2} + 15 x^{2} y^{4} - 140 x^{2} y^{2} z^{2} + 168 x^{2} z^{4} + 5 y^{6} - 70 y^{4} z^{2} + 168 y^{2} z^{4} - 80 z^{6}\right)}{32} $ \\
+$ 126 $ & $ \mathbb{Q}_{11,2}(E_{u},2) $ & $ - \frac{\sqrt{3003} x y z \left(5 x^{8} - 150 x^{6} y^{2} + 90 x^{6} z^{2} + 336 x^{4} y^{4} - 70 x^{4} y^{2} z^{2} - 168 x^{4} z^{4} - 150 x^{2} y^{6} - 70 x^{2} y^{4} z^{2} + 140 x^{2} y^{2} z^{4} + 60 x^{2} z^{6} + 5 y^{8} + 90 y^{6} z^{2} - 168 y^{4} z^{4} + 60 y^{2} z^{6} - 10 z^{8}\right)}{32} $ \\
+$ 127 $ & $ \mathbb{Q}_{11,1}(T_{1u},1) $ & $ \frac{x \left(256 x^{10} - 7040 x^{8} y^{2} - 7040 x^{8} z^{2} + 31680 x^{6} y^{4} + 63360 x^{6} y^{2} z^{2} + 31680 x^{6} z^{4} - 36960 x^{4} y^{6} - 110880 x^{4} y^{4} z^{2} - 110880 x^{4} y^{2} z^{4} - 36960 x^{4} z^{6} + 11550 x^{2} y^{8} + 46200 x^{2} y^{6} z^{2} + 69300 x^{2} y^{4} z^{4} + 46200 x^{2} y^{2} z^{6} + 11550 x^{2} z^{8} - 693 y^{10} - 3465 y^{8} z^{2} - 6930 y^{6} z^{4} - 6930 y^{4} z^{6} - 3465 y^{2} z^{8} - 693 z^{10}\right)}{256} $ \\
+$ 128 $ & $ \mathbb{Q}_{11,2}(T_{1u},1) $ & $ - \frac{y \left(693 x^{10} - 11550 x^{8} y^{2} + 3465 x^{8} z^{2} + 36960 x^{6} y^{4} - 46200 x^{6} y^{2} z^{2} + 6930 x^{6} z^{4} - 31680 x^{4} y^{6} + 110880 x^{4} y^{4} z^{2} - 69300 x^{4} y^{2} z^{4} + 6930 x^{4} z^{6} + 7040 x^{2} y^{8} - 63360 x^{2} y^{6} z^{2} + 110880 x^{2} y^{4} z^{4} - 46200 x^{2} y^{2} z^{6} + 3465 x^{2} z^{8} - 256 y^{10} + 7040 y^{8} z^{2} - 31680 y^{6} z^{4} + 36960 y^{4} z^{6} - 11550 y^{2} z^{8} + 693 z^{10}\right)}{256} $ \\
+$ 129 $ & $ \mathbb{Q}_{11,3}(T_{1u},1) $ & $ - \frac{z \left(693 x^{10} + 3465 x^{8} y^{2} - 11550 x^{8} z^{2} + 6930 x^{6} y^{4} - 46200 x^{6} y^{2} z^{2} + 36960 x^{6} z^{4} + 6930 x^{4} y^{6} - 69300 x^{4} y^{4} z^{2} + 110880 x^{4} y^{2} z^{4} - 31680 x^{4} z^{6} + 3465 x^{2} y^{8} - 46200 x^{2} y^{6} z^{2} + 110880 x^{2} y^{4} z^{4} - 63360 x^{2} y^{2} z^{6} + 7040 x^{2} z^{8} + 693 y^{10} - 11550 y^{8} z^{2} + 36960 y^{6} z^{4} - 31680 y^{4} z^{6} + 7040 y^{2} z^{8} - 256 z^{10}\right)}{256} $ \\
+$ 130 $ & $ \mathbb{Q}_{11,1}(T_{1u},2) $ & $ \frac{\sqrt{692835} x \left(6 x^{2} - y^{2} - z^{2}\right) \left(y^{4} - 4 y^{3} z - 6 y^{2} z^{2} + 4 y z^{3} + z^{4}\right) \left(y^{4} + 4 y^{3} z - 6 y^{2} z^{2} - 4 y z^{3} + z^{4}\right)}{256} $ \\
+$ 131 $ & $ \mathbb{Q}_{11,2}(T_{1u},2) $ & $ - \frac{\sqrt{692835} y \left(x^{2} - 6 y^{2} + z^{2}\right) \left(x^{4} - 4 x^{3} z - 6 x^{2} z^{2} + 4 x z^{3} + z^{4}\right) \left(x^{4} + 4 x^{3} z - 6 x^{2} z^{2} - 4 x z^{3} + z^{4}\right)}{256} $ \\
+$ 132 $ & $ \mathbb{Q}_{11,3}(T_{1u},2) $ & $ - \frac{\sqrt{692835} z \left(x^{2} + y^{2} - 6 z^{2}\right) \left(x^{4} - 4 x^{3} y - 6 x^{2} y^{2} + 4 x y^{3} + y^{4}\right) \left(x^{4} + 4 x^{3} y - 6 x^{2} y^{2} - 4 x y^{3} + y^{4}\right)}{256} $ \\
+$ 133 $ & $ \mathbb{Q}_{11,1}(T_{1u},3) $ & $ \frac{3 \sqrt{1001} x \left(y^{2} - 2 y z - z^{2}\right) \left(y^{2} + 2 y z - z^{2}\right) \left(80 x^{6} - 168 x^{4} y^{2} - 168 x^{4} z^{2} + 70 x^{2} y^{4} + 140 x^{2} y^{2} z^{2} + 70 x^{2} z^{4} - 5 y^{6} - 15 y^{4} z^{2} - 15 y^{2} z^{4} - 5 z^{6}\right)}{128} $ \\
+$ 134 $ & $ \mathbb{Q}_{11,2}(T_{1u},3) $ & $ - \frac{3 \sqrt{1001} y \left(x^{2} - 2 x z - z^{2}\right) \left(x^{2} + 2 x z - z^{2}\right) \left(5 x^{6} - 70 x^{4} y^{2} + 15 x^{4} z^{2} + 168 x^{2} y^{4} - 140 x^{2} y^{2} z^{2} + 15 x^{2} z^{4} - 80 y^{6} + 168 y^{4} z^{2} - 70 y^{2} z^{4} + 5 z^{6}\right)}{128} $ \\
+$ 135 $ & $ \mathbb{Q}_{11,3}(T_{1u},3) $ & $ - \frac{3 \sqrt{1001} z \left(x^{2} - 2 x y - y^{2}\right) \left(x^{2} + 2 x y - y^{2}\right) \left(5 x^{6} + 15 x^{4} y^{2} - 70 x^{4} z^{2} + 15 x^{2} y^{4} - 140 x^{2} y^{2} z^{2} + 168 x^{2} z^{4} + 5 y^{6} - 70 y^{4} z^{2} + 168 y^{2} z^{4} - 80 z^{6}\right)}{128} $ \\
+$ 136 $ & $ \mathbb{Q}_{11,1}(T_{2u},1) $ & $ \frac{\sqrt{1939938} x \left(y - z\right) \left(y + z\right) \left(y^{4} - 4 y^{3} z - 14 y^{2} z^{2} - 4 y z^{3} + z^{4}\right) \left(y^{4} + 4 y^{3} z - 14 y^{2} z^{2} + 4 y z^{3} + z^{4}\right)}{512} $ \\
+$ 137 $ & $ \mathbb{Q}_{11,2}(T_{2u},1) $ & $ - \frac{\sqrt{1939938} y \left(x - z\right) \left(x + z\right) \left(x^{4} - 4 x^{3} z - 14 x^{2} z^{2} - 4 x z^{3} + z^{4}\right) \left(x^{4} + 4 x^{3} z - 14 x^{2} z^{2} + 4 x z^{3} + z^{4}\right)}{512} $ \\
+$ 138 $ & $ \mathbb{Q}_{11,3}(T_{2u},1) $ & $ \frac{\sqrt{1939938} z \left(x - y\right) \left(x + y\right) \left(x^{4} - 4 x^{3} y - 14 x^{2} y^{2} - 4 x y^{3} + y^{4}\right) \left(x^{4} + 4 x^{3} y - 14 x^{2} y^{2} + 4 x y^{3} + y^{4}\right)}{512} $ \\
+$ 139 $ & $ \mathbb{Q}_{11,1}(T_{2u},2) $ & $ \frac{\sqrt{14586} x \left(y - z\right) \left(y + z\right) \left(y^{2} - 4 y z + z^{2}\right) \left(y^{2} + 4 y z + z^{2}\right) \left(224 x^{4} - 160 x^{2} y^{2} - 160 x^{2} z^{2} + 15 y^{4} + 30 y^{2} z^{2} + 15 z^{4}\right)}{512} $ \\
+$ 140 $ & $ \mathbb{Q}_{11,2}(T_{2u},2) $ & $ - \frac{\sqrt{14586} y \left(x - z\right) \left(x + z\right) \left(x^{2} - 4 x z + z^{2}\right) \left(x^{2} + 4 x z + z^{2}\right) \left(15 x^{4} - 160 x^{2} y^{2} + 30 x^{2} z^{2} + 224 y^{4} - 160 y^{2} z^{2} + 15 z^{4}\right)}{512} $ \\
+$ 141 $ & $ \mathbb{Q}_{11,3}(T_{2u},2) $ & $ \frac{\sqrt{14586} z \left(x - y\right) \left(x + y\right) \left(x^{2} - 4 x y + y^{2}\right) \left(x^{2} + 4 x y + y^{2}\right) \left(15 x^{4} + 30 x^{2} y^{2} - 160 x^{2} z^{2} + 15 y^{4} - 160 y^{2} z^{2} + 224 z^{4}\right)}{512} $ \\
+$ 142 $ & $ \mathbb{Q}_{11,1}(T_{2u},3) $ & $ \frac{\sqrt{2145} x \left(y - z\right) \left(y + z\right) \left(128 x^{8} - 768 x^{6} y^{2} - 768 x^{6} z^{2} + 1008 x^{4} y^{4} + 2016 x^{4} y^{2} z^{2} + 1008 x^{4} z^{4} - 336 x^{2} y^{6} - 1008 x^{2} y^{4} z^{2} - 1008 x^{2} y^{2} z^{4} - 336 x^{2} z^{6} + 21 y^{8} + 84 y^{6} z^{2} + 126 y^{4} z^{4} + 84 y^{2} z^{6} + 21 z^{8}\right)}{256} $ \\
+$ 143 $ & $ \mathbb{Q}_{11,2}(T_{2u},3) $ & $ - \frac{\sqrt{2145} y \left(x - z\right) \left(x + z\right) \left(21 x^{8} - 336 x^{6} y^{2} + 84 x^{6} z^{2} + 1008 x^{4} y^{4} - 1008 x^{4} y^{2} z^{2} + 126 x^{4} z^{4} - 768 x^{2} y^{6} + 2016 x^{2} y^{4} z^{2} - 1008 x^{2} y^{2} z^{4} + 84 x^{2} z^{6} + 128 y^{8} - 768 y^{6} z^{2} + 1008 y^{4} z^{4} - 336 y^{2} z^{6} + 21 z^{8}\right)}{256} $ \\
+$ 144 $ & $ \mathbb{Q}_{11,3}(T_{2u},3) $ & $ \frac{\sqrt{2145} z \left(x - y\right) \left(x + y\right) \left(21 x^{8} + 84 x^{6} y^{2} - 336 x^{6} z^{2} + 126 x^{4} y^{4} - 1008 x^{4} y^{2} z^{2} + 1008 x^{4} z^{4} + 84 x^{2} y^{6} - 1008 x^{2} y^{4} z^{2} + 2016 x^{2} y^{2} z^{4} - 768 x^{2} z^{6} + 21 y^{8} - 336 y^{6} z^{2} + 1008 y^{4} z^{4} - 768 y^{2} z^{6} + 128 z^{8}\right)}{256} $ \\
+ \hline \hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\end{document}

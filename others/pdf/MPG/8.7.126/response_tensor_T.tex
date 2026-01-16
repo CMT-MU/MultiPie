@@ -1,0 +1,88 @@
+\documentclass[fleqn,8pt,landscape]{jsarticle}
+\special{papersize=\the\paperwidth,\the\paperheight}
+
+%%% package
+
+\usepackage[usenames]{color}
+\usepackage{amsmath}
+\usepackage{breqn}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{enumitem}
+\usepackage{braket}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+%%% layout setting
+
+\paperwidth=356.4truemm
+\paperheight=252.0truemm
+\textwidth=335.59999999999997truemm
+\textheight=224.2truemm
+\oddsidemargin=-15truemm
+\topmargin=-15truemm
+\footskip=7truemm
+
+%%% fixed
+
+\hoffset=0truemm
+\voffset=0truemm
+\headheight=0truemm
+\headsep=0truemm
+\marginparsep=0truemm
+\marginparwidth=0truemm
+
+%%% main text
+
+\begin{document}
+
+\setcounter{MaxMatrixCols}{32}
+
+\renewcommand{\tablename}{Table~}
+\renewcommand{\figurename}{Figure~}
+\begin{center}
+\LARGE
+MPG No. 8.7.126\quad$m'mm$\quad(mm'm setting)\quad[ Type III, orthorhombic ] [T tensor]
+\end{center}
+* Rank 0 tensor.
+* Rank 1 tensor.
+\begin{align*}
+\begin{bmatrix} 0 & T_{y} & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& T_{y} = T_{py}^{(1)}
+\end{align*}
+* Rank 2 tensor (s).
+* Rank 2 tensor (a).
+* Rank 3 tensor (s).
+\begin{align*}
+\begin{bmatrix} 0 & T_{xxy} & 0 \\ 0 & T_{yyy} & 0 \\ 0 & T_{zzy} & 0 \\ 0 & 0 & T_{yzz} \\ 0 & 0 & 0 \\ T_{xyx} & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& T_{xxy} = 2 M_{dxz}^{(1)} - T_{fay}^{(1)} - T_{fby}^{(1)} + T_{py}^{(1)} \\
+& T_{yyy} = 2 T_{fay}^{(1)} + T_{py}^{(1)} + 2 T_{py}^{(2)} \\
+& T_{zzy} = - 2 M_{dxz}^{(1)} - T_{fay}^{(1)} + T_{fby}^{(1)} + T_{py}^{(1)} \\
+& T_{yzz} = M_{dxz}^{(1)} - T_{fay}^{(1)} + T_{fby}^{(1)} + T_{py}^{(2)} \\
+& T_{xyx} = - M_{dxz}^{(1)} - T_{fay}^{(1)} - T_{fby}^{(1)} + T_{py}^{(2)}
+\end{align*}
+* Rank 3 tensor (a).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & T_{yzz} \\ 0 & 0 & 0 \\ T_{xyx} & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& T_{yzz} = M_{dxz}^{(2)} - T_{py}^{(3)} \\
+& T_{xyx} = M_{dxz}^{(2)} + T_{py}^{(3)}
+\end{align*}
+* Rank 4 tensor (sss).
+* Rank 4 tensor (ssa).
+* Rank 4 tensor (aas).
+* Rank 4 tensor (aaa).
+* Rank 4 tensor (sa).
+* Rank 4 tensor (as).
+* Rank 4 tensor (s).
+* Rank 4 tensor (a).
+* Rank 4 tensor (t).
+
+\end{document}

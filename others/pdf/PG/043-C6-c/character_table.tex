@@ -1,0 +1,94 @@
+\documentclass[fleqn,8pt,landscape]{jsarticle}
+\special{papersize=\the\paperwidth,\the\paperheight}
+
+%%% package
+
+\usepackage[usenames]{color}
+\usepackage{amsmath}
+\usepackage{breqn}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{enumitem}
+\usepackage{braket}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+%%% layout setting
+
+\paperwidth=356.4truemm
+\paperheight=252.0truemm
+\textwidth=335.59999999999997truemm
+\textheight=224.2truemm
+\oddsidemargin=-15truemm
+\topmargin=-15truemm
+\footskip=7truemm
+
+%%% fixed
+
+\hoffset=0truemm
+\voffset=0truemm
+\headheight=0truemm
+\headsep=0truemm
+\marginparsep=0truemm
+\marginparwidth=0truemm
+
+%%% main text
+
+\begin{document}
+
+\setcounter{MaxMatrixCols}{32}
+
+\renewcommand{\tablename}{Table~}
+\renewcommand{\figurename}{Figure~}
+\begin{center}
+\LARGE
+PG No. 43\quad$C_{\rm 6}(c)$\quad$6$\quad[ hexagonal ]
+\end{center}
+
+* character table ($\omega=e^{2\pi i/3}$)
+\begin{quote}
+\begin{tabular}{crrrrrr} \hline \hline
+$ C_{\rm 6}(c) $ & $ 1(1) $ & $ 2{}_{001}(1) $ & $ 3^{+}_{\,\,001}(1) $ & $ 3^{-}_{\,\,001}(1) $ & $ 6^{+}_{\,\,001}(1) $ & $ 6^{-}_{\,\,001}(1) $ \\ \hline
+$ A $ & $ 1 $ & $ 1 $ & $ 1 $ & $ 1 $ & $ 1 $ & $ 1 $ \\
+$ B $ & $ 1 $ & $ -1 $ & $ 1 $ & $ 1 $ & $ -1 $ & $ -1 $ \\
+$ E_{1}^{(a)} $ & $ 1 $ & $ -1 $ & $ \omega^{*} $ & $ \omega $ & $ - \omega $ & $ - \omega^{*} $ \\
+$ E_{1}^{(b)} $ & $ 1 $ & $ -1 $ & $ \omega $ & $ \omega^{*} $ & $ - \omega^{*} $ & $ - \omega $ \\
+$ E_{2}^{(a)} $ & $ 1 $ & $ 1 $ & $ \omega^{*} $ & $ \omega $ & $ \omega $ & $ \omega^{*} $ \\
+$ E_{2}^{(b)} $ & $ 1 $ & $ 1 $ & $ \omega $ & $ \omega^{*} $ & $ \omega^{*} $ & $ \omega $ \\
+ \hline \hline
+\end{tabular}
+\end{quote}
+
+* polar $\leftrightarrow$ axial conversion
+\begin{quote}
+\begin{tabular}{cccccc}
+$ A\,\,(A) $ & $ B\,\,(B) $ & $ E_{1}^{(a)}\,\,(E_{1}^{(a)}) $ & $ E_{1}^{(b)}\,\,(E_{1}^{(b)}) $ & $ E_{2}^{(a)}\,\,(E_{2}^{(a)}) $ & $ E_{2}^{(b)}\,\,(E_{2}^{(b)}) $
+\end{tabular}
+\end{quote}
+
+* symmetric product
+\begin{quote}
+\begin{tabular}{c|cccccc} \hline \hline
+ & $ A $ & $ B $ & $ E_{1}^{(a)} $ & $ E_{1}^{(b)} $ & $ E_{2}^{(a)} $ & $ E_{2}^{(b)} $ \\ \hline
+$ A $ & $ A $ & $ B $ & $ E_{1}^{(a)} $ & $ E_{1}^{(b)} $ & $ E_{2}^{(a)} $ & $ E_{2}^{(b)} $ \\
+$ B $ & $  $ & $ A $ & $ E_{2}^{(a)} $ & $ E_{2}^{(b)} $ & $ E_{1}^{(a)} $ & $ E_{1}^{(b)} $ \\
+$ E_{1}^{(a)} $ & $  $ & $  $ & $ E_{2}^{(b)} $ & $ A $ & $ E_{1}^{(b)} $ & $ B $ \\
+$ E_{1}^{(b)} $ & $  $ & $  $ & $  $ & $ E_{2}^{(a)} $ & $ B $ & $ E_{1}^{(a)} $ \\
+$ E_{2}^{(a)} $ & $  $ & $  $ & $  $ & $  $ & $ E_{2}^{(b)} $ & $ A $ \\
+$ E_{2}^{(b)} $ & $  $ & $  $ & $  $ & $  $ & $  $ & $ E_{2}^{(a)} $ \\
+ \hline \hline
+\end{tabular}
+\end{quote}
+
+* anti-symmetric product
+\begin{quote}
+\begin{tabular}{ccccccc} \hline \hline
+ & $ A $ & $ B $ & $ E_{1}^{(a)} $ & $ E_{1}^{(b)} $ & $ E_{2}^{(a)} $ & $ E_{2}^{(b)} $ \\ \hline
+$  $ & $ - $ & $ - $ & $ - $ & $ - $ & $ - $ & $ - $ \\
+ \hline \hline
+\end{tabular}
+\end{quote}
+
+\end{document}

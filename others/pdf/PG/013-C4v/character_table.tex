@@ -1,0 +1,92 @@
+\documentclass[fleqn,8pt,landscape]{jsarticle}
+\special{papersize=\the\paperwidth,\the\paperheight}
+
+%%% package
+
+\usepackage[usenames]{color}
+\usepackage{amsmath}
+\usepackage{breqn}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{enumitem}
+\usepackage{braket}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+%%% layout setting
+
+\paperwidth=356.4truemm
+\paperheight=252.0truemm
+\textwidth=335.59999999999997truemm
+\textheight=224.2truemm
+\oddsidemargin=-15truemm
+\topmargin=-15truemm
+\footskip=7truemm
+
+%%% fixed
+
+\hoffset=0truemm
+\voffset=0truemm
+\headheight=0truemm
+\headsep=0truemm
+\marginparsep=0truemm
+\marginparwidth=0truemm
+
+%%% main text
+
+\begin{document}
+
+\setcounter{MaxMatrixCols}{32}
+
+\renewcommand{\tablename}{Table~}
+\renewcommand{\figurename}{Figure~}
+\begin{center}
+\LARGE
+PG No. 13\quad$C_{\rm 4v}$\quad$4mm$\quad[ tetragonal ]
+\end{center}
+
+* character table
+\begin{quote}
+\begin{tabular}{crrrrr} \hline \hline
+$ C_{\rm 4v} $ & $ 1(1) $ & $ 2{}_{001}(1) $ & $ 4^{+}_{\,\,001}(2) $ & $ {\rm m}_{100}(2) $ & $ {\rm m}_{110}(2) $ \\ \hline
+$ A_{1} $ & $ 1 $ & $ 1 $ & $ 1 $ & $ 1 $ & $ 1 $ \\
+$ A_{2} $ & $ 1 $ & $ 1 $ & $ 1 $ & $ -1 $ & $ -1 $ \\
+$ B_{1} $ & $ 1 $ & $ 1 $ & $ -1 $ & $ 1 $ & $ -1 $ \\
+$ B_{2} $ & $ 1 $ & $ 1 $ & $ -1 $ & $ -1 $ & $ 1 $ \\
+$ E $ & $ 2 $ & $ -2 $ & $ 0 $ & $ 0 $ & $ 0 $ \\
+ \hline \hline
+\end{tabular}
+\end{quote}
+
+* polar $\leftrightarrow$ axial conversion
+\begin{quote}
+\begin{tabular}{ccccc}
+$ A_{1}\,\,(A_{2}) $ & $ B_{1}\,\,(B_{2}) $ & $ E\,\,(E) $ & $ A_{2}\,\,(A_{1}) $ & $ B_{2}\,\,(B_{1}) $
+\end{tabular}
+\end{quote}
+
+* symmetric product
+\begin{quote}
+\begin{tabular}{c|ccccc} \hline \hline
+ & $ A_{1} $ & $ A_{2} $ & $ B_{1} $ & $ B_{2} $ & $ E $ \\ \hline
+$ A_{1} $ & $ A_{1} $ & $ A_{2} $ & $ B_{1} $ & $ B_{2} $ & $ E $ \\
+$ A_{2} $ & $  $ & $ A_{1} $ & $ B_{2} $ & $ B_{1} $ & $ E $ \\
+$ B_{1} $ & $  $ & $  $ & $ A_{1} $ & $ A_{2} $ & $ E $ \\
+$ B_{2} $ & $  $ & $  $ & $  $ & $ A_{1} $ & $ E $ \\
+$ E $ & $  $ & $  $ & $  $ & $  $ & $ A_{1} + B_{1} + B_{2} $ \\
+ \hline \hline
+\end{tabular}
+\end{quote}
+
+* anti-symmetric product
+\begin{quote}
+\begin{tabular}{cccccc} \hline \hline
+ & $ A_{1} $ & $ A_{2} $ & $ B_{1} $ & $ B_{2} $ & $ E $ \\ \hline
+$  $ & $ - $ & $ - $ & $ - $ & $ - $ & $ A_{2} $ \\
+ \hline \hline
+\end{tabular}
+\end{quote}
+
+\end{document}

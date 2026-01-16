@@ -1,0 +1,816 @@
+\documentclass[fleqn,10pt,landscape]{jsarticle}
+\special{papersize=\the\paperwidth,\the\paperheight}
+
+%%% package
+
+\usepackage[usenames]{color}
+\usepackage{amsmath}
+\usepackage{breqn}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{enumitem}
+\usepackage{braket}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+%%% layout setting
+
+\paperwidth=297.0truemm
+\paperheight=210.0truemm
+\textwidth=246.2truemm
+\textheight=152.2truemm
+\oddsidemargin=0truemm
+\topmargin=0truemm
+\footskip=7truemm
+
+%%% fixed
+
+\hoffset=0truemm
+\voffset=0truemm
+\headheight=0truemm
+\headsep=0truemm
+\marginparsep=0truemm
+\marginparwidth=0truemm
+
+%%% main text
+
+\begin{document}
+
+\setcounter{MaxMatrixCols}{32}
+
+\renewcommand{\tablename}{Table~}
+\renewcommand{\figurename}{Figure~}
+\setlength{\baselineskip}{16pt}
+\setlength{\parindent}{0pt}
+\setlength{\mathindent}{0pt}
+\footnotesize
+\begin{center}
+\LARGE
+Model for ``\texttt{CH4}''
+\end{center}
+\begin{flushright}
+Generated on 2026-01-16 09:09:14 by MultiPie 2.0.0
+\end{flushright}
+\setlength{\baselineskip}{16pt}
+\footnotesize
+\vspace{5mm}
+\noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{General Condition}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
+\vspace{3mm}
+
+\begin{itemize}
+\item Basis type: \texttt{lgs}
+
+\item SAMB selection:
+
+\, - Type: \texttt{[Q, G]}
+
+\, - Rank: \texttt{[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]}
+
+\, - Irrep.: [$A_{1}$, $A_{2}$]
+
+\, - Spin (s): \texttt{[0, 1]}
+
+\item Max. neighbor: \texttt{10}
+
+\item Search cell range: \texttt{(-2, 3), (-2, 3), (-2, 3)}
+
+\item Toroidal priority: \texttt{false}
+
+\end{itemize}
+\vspace{5mm}
+\noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{Group and Unit Cell}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
+\vspace{3mm}
+
+\begin{itemize}
+\item Group: PG No. 31\quad$T_{\rm d}$\quad$\bar{4}3m$\quad[ cubic ]
+\end{itemize}
+\begin{itemize}
+\item Unit cell:
+
+\quad $a=\texttt{ 1.00000},\,\, b=\texttt{ 1.00000},\,\, c=\texttt{ 1.00000},\,\, \alpha=\texttt{90.0},\,\, \beta=\texttt{90.0},\,\, \gamma=\texttt{90.0}$
+
+\item Lattice vectors (conventional cell):
+
+\quad $\bm{a}_1=\texttt{[ 1.00000, 0.00000, 0.00000]}$
+
+\quad $\bm{a}_2=\texttt{[ 0.00000, 1.00000, 0.00000]}$
+
+\quad $\bm{a}_3=\texttt{[ 0.00000, 0.00000, 1.00000]}$
+
+\end{itemize}
+\vspace{5mm}
+\noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{Symmetry Operation}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
+\vspace{3mm}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{longtable}{c|cl|cl|cl|cl|cl}
+\caption{Symmetry operation}
+ \\
+ \hline \hline
+ & \# & SO & \# & SO & \# & SO & \# & SO & \# & SO \\ \hline \endfirsthead
+
+\multicolumn{10}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+ & \# & SO & \# & SO & \# & SO & \# & SO & \# & SO \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{10}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{10}{r}{} \\ \endlastfoot
+
+ & 1 & $1$ & 2 & $2{}_{001}$ & 3 & $2{}_{010}$ & 4 & $2{}_{100}$ & 5 & $3^{+}_{\,\,111}$ \\
+& 6 & $3^{+}_{\,\,-11-1}$ & 7 & $3^{+}_{\,\,1-1-1}$ & 8 & $3^{+}_{\,\,-1-11}$ & 9 & $3^{-}_{\,\,111}$ & 10 & $3^{-}_{\,\,1-1-1}$ \\
+& 11 & $3^{-}_{\,\,-1-11}$ & 12 & $3^{-}_{\,\,-11-1}$ & 13 & ${\rm m}_{1-10}$ & 14 & ${\rm m}_{110}$ & 15 & $-4^{+}_{\,\,001}$ \\
+& 16 & $-4^{-}_{\,\,001}$ & 17 & ${\rm m}_{01-1}$ & 18 & $-4^{+}_{\,\,100}$ & 19 & $-4^{-}_{\,\,100}$ & 20 & ${\rm m}_{011}$ \\
+& 21 & ${\rm m}_{-101}$ & 22 & $-4^{-}_{\,\,010}$ & 23 & ${\rm m}_{101}$ & 24 & $-4^{+}_{\,\,010}$ &  &  \\
+\end{longtable}
+\end{center}
+\vspace{5mm}
+\noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{Harmonics}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
+\vspace{3mm}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{longtable}{clcccccl}
+\caption{Harmonics}
+ \\
+ \hline \hline
+\# & symbol & irrep. & rank & X & multiplicity & component & symmetry \\ \hline \endfirsthead
+
+\multicolumn{7}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+\# & symbol & irrep. & rank & X & multiplicity & component & symmetry \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{7}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{7}{r}{} \\ \endlastfoot
+
+1 & $\mathbb{Q}_{0}(A_{1})$ & $A_{1}$ & 0 & $Q$, $T$ & - & - & $1$ \\ \hline
+2 & $\mathbb{G}_{0}(A_{2})$ & $A_{2}$ & 0 & $G$, $M$ & - & - & $1$ \\ \hline
+3 & $\mathbb{G}_{3}(A_{2})$ & $A_{2}$ & 3 & $G$, $M$ & - & - & $\sqrt{15} x y z$ \\ \hline
+4 & $\mathbb{G}_{2,1}(E)$ & $E$ & 2 & $G$, $M$ & - & 1 & $- \frac{\sqrt{3} \left(x - y\right) \left(x + y\right)}{2}$ \\
+5 & $\mathbb{G}_{2,2}(E)$ &  &  &  &  & 2 & $- \frac{x^{2}}{2} - \frac{y^{2}}{2} + z^{2}$ \\ \hline
+6 & $\mathbb{Q}_{2,1}(E)$ & $E$ & 2 & $Q$, $T$ & - & 1 & $- \frac{x^{2}}{2} - \frac{y^{2}}{2} + z^{2}$ \\
+7 & $\mathbb{Q}_{2,2}(E)$ &  &  &  &  & 2 & $\frac{\sqrt{3} \left(x - y\right) \left(x + y\right)}{2}$ \\ \hline
+8 & $\mathbb{G}_{1,1}(T_{1})$ & $T_{1}$ & 1 & $G$, $M$ & - & 1 & $x$ \\
+9 & $\mathbb{G}_{1,2}(T_{1})$ &  &  &  &  & 2 & $y$ \\
+10 & $\mathbb{G}_{1,3}(T_{1})$ &  &  &  &  & 3 & $z$ \\ \hline
+11 & $\mathbb{G}_{2,1}(T_{1})$ & $T_{1}$ & 2 & $G$, $M$ & - & 1 & $\sqrt{3} y z$ \\
+12 & $\mathbb{G}_{2,2}(T_{1})$ &  &  &  &  & 2 & $\sqrt{3} x z$ \\
+13 & $\mathbb{G}_{2,3}(T_{1})$ &  &  &  &  & 3 & $\sqrt{3} x y$ \\ \hline
+14 & $\mathbb{G}_{3,1}(T_{1})$ & $T_{1}$ & 3 & $G$, $M$ & - & 1 & $\frac{x \left(2 x^{2} - 3 y^{2} - 3 z^{2}\right)}{2}$ \\
+15 & $\mathbb{G}_{3,2}(T_{1})$ &  &  &  &  & 2 & $- \frac{y \left(3 x^{2} - 2 y^{2} + 3 z^{2}\right)}{2}$ \\
+16 & $\mathbb{G}_{3,3}(T_{1})$ &  &  &  &  & 3 & $- \frac{z \left(3 x^{2} + 3 y^{2} - 2 z^{2}\right)}{2}$ \\ \hline
+17 & $\mathbb{Q}_{1,1}(T_{2})$ & $T_{2}$ & 1 & $Q$, $T$ & - & 1 & $x$ \\
+18 & $\mathbb{Q}_{1,2}(T_{2})$ &  &  &  &  & 2 & $y$ \\
+19 & $\mathbb{Q}_{1,3}(T_{2})$ &  &  &  &  & 3 & $z$ \\ \hline
+20 & $\mathbb{Q}_{2,1}(T_{2})$ & $T_{2}$ & 2 & $Q$, $T$ & - & 1 & $\sqrt{3} y z$ \\
+21 & $\mathbb{Q}_{2,2}(T_{2})$ &  &  &  &  & 2 & $\sqrt{3} x z$ \\
+22 & $\mathbb{Q}_{2,3}(T_{2})$ &  &  &  &  & 3 & $\sqrt{3} x y$ \\ \hline
+23 & $\mathbb{G}_{3,1}(T_{2})$ & $T_{2}$ & 3 & $G$, $M$ & - & 1 & $\frac{\sqrt{15} x \left(y - z\right) \left(y + z\right)}{2}$ \\
+24 & $\mathbb{G}_{3,2}(T_{2})$ &  &  &  &  & 2 & $- \frac{\sqrt{15} y \left(x - z\right) \left(x + z\right)}{2}$ \\
+25 & $\mathbb{G}_{3,3}(T_{2})$ &  &  &  &  & 3 & $\frac{\sqrt{15} z \left(x - y\right) \left(x + y\right)}{2}$ \\
+\end{longtable}
+\end{center}
+\vspace{5mm}
+\noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{Basis in full matrix}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
+\vspace{3mm}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{longtable}{c|cl|cl|cl|cl|cl}
+\caption{dimension = 16}
+ \\
+ \hline \hline
+ & \# & orbital@atom(SL) & \# & orbital@atom(SL) & \# & orbital@atom(SL) & \# & orbital@atom(SL) & \# & orbital@atom(SL) \\ \hline \endfirsthead
+
+\multicolumn{10}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+ & \# & orbital@atom(SL) & \# & orbital@atom(SL) & \# & orbital@atom(SL) & \# & orbital@atom(SL) & \# & orbital@atom(SL) \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{10}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{10}{r}{} \\ \endlastfoot
+
+ & 1 & $\ket{s_{},\uparrow}@{\rm C}(1)$ & 2 & $\ket{s_{},\downarrow}@{\rm C}(1)$ & 3 & $\ket{p_{x},\uparrow}@{\rm C}(1)$ & 4 & $\ket{p_{x},\downarrow}@{\rm C}(1)$ & 5 & $\ket{p_{y},\uparrow}@{\rm C}(1)$ \\
+& 6 & $\ket{p_{y},\downarrow}@{\rm C}(1)$ & 7 & $\ket{p_{z},\uparrow}@{\rm C}(1)$ & 8 & $\ket{p_{z},\downarrow}@{\rm C}(1)$ & 9 & $\ket{s_{},\uparrow}@{\rm H}(1)$ & 10 & $\ket{s_{},\downarrow}@{\rm H}(1)$ \\
+& 11 & $\ket{s_{},\uparrow}@{\rm H}(2)$ & 12 & $\ket{s_{},\downarrow}@{\rm H}(2)$ & 13 & $\ket{s_{},\uparrow}@{\rm H}(3)$ & 14 & $\ket{s_{},\downarrow}@{\rm H}(3)$ & 15 & $\ket{s_{},\uparrow}@{\rm H}(4)$ \\
+& 16 & $\ket{s_{},\downarrow}@{\rm H}(4)$ &  &  &  &  &  &  &  &  \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{longtable}{ll}
+\caption{Atomic basis (orbital part only)}
+ \\
+ \hline \hline
+orbital & definition \\ \hline \endfirsthead
+
+\multicolumn{1}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+orbital & definition \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{1}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{1}{r}{} \\ \endlastfoot
+
+$ \ket{s} $ & $ 1 $ \\ \hline
+$ \ket{p_{x}} $ & $ x $ \\
+$ \ket{p_{y}} $ & $ y $ \\
+$ \ket{p_{z}} $ & $ z $ \\
+\end{longtable}
+\end{center}
+\vspace{5mm}
+\noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{SAMB}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
+\vspace{3mm}
+
+\noindent11 (all 11) SAMBs
+
+\vspace{5mm}
+
+\noindent\textbullet\, '\texttt{C}' site-cluster
+
+\noindent\quad * bra: $\bra{s_{},\uparrow},\, \bra{s_{},\downarrow}$
+
+\noindent\quad * ket: $\ket{s_{},\uparrow},\, \ket{s_{},\downarrow}$
+
+\noindent\quad * wyckoff: \texttt{1o}
+
+\begin{dmath*}
+\fbox{z1}\quad \mathbb{Q}_{0}^{(c)}(A_{1})=\mathbb{Q}_{0}^{(a)}(A_{1}) \mathbb{Q}_{0}^{(s)}(A_{1})
+\end{dmath*}
+\vspace{5mm}
+
+\noindent\textbullet\, '\texttt{C}' site-cluster
+
+\noindent\quad * bra: $\bra{s_{},\uparrow},\, \bra{s_{},\downarrow}$
+
+\noindent\quad * ket: $\ket{p_{x},\uparrow},\, \ket{p_{x},\downarrow},\, \ket{p_{y},\uparrow},\, \ket{p_{y},\downarrow},\, \ket{p_{z},\uparrow},\, \ket{p_{z},\downarrow}$
+
+\noindent\quad * wyckoff: \texttt{1o}
+
+\begin{dmath*}
+\fbox{z8}\quad \mathbb{G}_{0}^{(1,1;c)}(A_{2})=\mathbb{G}_{0}^{(1,1;a)}(A_{2}) \mathbb{Q}_{0}^{(s)}(A_{1})
+\end{dmath*}
+\vspace{5mm}
+
+\noindent\textbullet\, '\texttt{C}' site-cluster
+
+\noindent\quad * bra: $\bra{p_{x},\uparrow},\, \bra{p_{x},\downarrow},\, \bra{p_{y},\uparrow},\, \bra{p_{y},\downarrow},\, \bra{p_{z},\uparrow},\, \bra{p_{z},\downarrow}$
+
+\noindent\quad * ket: $\ket{p_{x},\uparrow},\, \ket{p_{x},\downarrow},\, \ket{p_{y},\uparrow},\, \ket{p_{y},\downarrow},\, \ket{p_{z},\uparrow},\, \ket{p_{z},\downarrow}$
+
+\noindent\quad * wyckoff: \texttt{1o}
+
+\begin{dmath*}
+\fbox{z2}\quad \mathbb{Q}_{0}^{(c)}(A_{1})=\mathbb{Q}_{0}^{(a)}(A_{1}) \mathbb{Q}_{0}^{(s)}(A_{1})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z3}\quad \mathbb{Q}_{0}^{(1,1;c)}(A_{1})=\mathbb{Q}_{0}^{(1,1;a)}(A_{1}) \mathbb{Q}_{0}^{(s)}(A_{1})
+\end{dmath*}
+\vspace{5mm}
+
+\noindent\textbullet\, '\texttt{H}' site-cluster
+
+\noindent\quad * bra: $\bra{s_{},\uparrow},\, \bra{s_{},\downarrow}$
+
+\noindent\quad * ket: $\ket{s_{},\uparrow},\, \ket{s_{},\downarrow}$
+
+\noindent\quad * wyckoff: \texttt{4a}
+
+\begin{dmath*}
+\fbox{z4}\quad \mathbb{Q}_{0}^{(c)}(A_{1})=\mathbb{Q}_{0}^{(a)}(A_{1}) \mathbb{Q}_{0}^{(s)}(A_{1})
+\end{dmath*}
+\vspace{5mm}
+
+\noindent\textbullet\, '\texttt{C}'-'\texttt{H}' bond-cluster
+
+\noindent\quad * bra: $\bra{s_{},\uparrow},\, \bra{s_{},\downarrow}$
+
+\noindent\quad * ket: $\ket{s_{},\uparrow},\, \ket{s_{},\downarrow}$
+
+\noindent\quad * wyckoff: \texttt{4a@4a}
+
+\begin{dmath*}
+\fbox{z5}\quad \mathbb{Q}_{0}^{(c)}(A_{1})=\mathbb{Q}_{0}^{(a)}(A_{1}) \mathbb{Q}_{0}^{(b)}(A_{1})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z9}\quad \mathbb{G}_{0}^{(1,-1;c)}(A_{2})=\frac{\sqrt{3} \mathbb{M}_{1,1}^{(1,-1;a)}(T_{1}) \mathbb{T}_{1,1}^{(b)}(T_{2})}{3} + \frac{\sqrt{3} \mathbb{M}_{1,2}^{(1,-1;a)}(T_{1}) \mathbb{T}_{1,2}^{(b)}(T_{2})}{3} + \frac{\sqrt{3} \mathbb{M}_{1,3}^{(1,-1;a)}(T_{1}) \mathbb{T}_{1,3}^{(b)}(T_{2})}{3}
+\end{dmath*}
+\vspace{5mm}
+
+\noindent\textbullet\, '\texttt{C}'-'\texttt{H}' bond-cluster
+
+\noindent\quad * bra: $\bra{p_{x},\uparrow},\, \bra{p_{x},\downarrow},\, \bra{p_{y},\uparrow},\, \bra{p_{y},\downarrow},\, \bra{p_{z},\uparrow},\, \bra{p_{z},\downarrow}$
+
+\noindent\quad * ket: $\ket{s_{},\uparrow},\, \ket{s_{},\downarrow}$
+
+\noindent\quad * wyckoff: \texttt{4a@4a}
+
+\begin{dmath*}
+\fbox{z6}\quad \mathbb{Q}_{0}^{(c)}(A_{1})=\frac{\sqrt{3} \mathbb{Q}_{1,1}^{(a)}(T_{2}) \mathbb{Q}_{1,1}^{(b)}(T_{2})}{3} + \frac{\sqrt{3} \mathbb{Q}_{1,2}^{(a)}(T_{2}) \mathbb{Q}_{1,2}^{(b)}(T_{2})}{3} + \frac{\sqrt{3} \mathbb{Q}_{1,3}^{(a)}(T_{2}) \mathbb{Q}_{1,3}^{(b)}(T_{2})}{3}
+\end{dmath*}
+\begin{dmath*}
+\fbox{z7}\quad \mathbb{Q}_{0}^{(1,0;c)}(A_{1})=\frac{\sqrt{3} \mathbb{Q}_{1,1}^{(1,0;a)}(T_{2}) \mathbb{Q}_{1,1}^{(b)}(T_{2})}{3} + \frac{\sqrt{3} \mathbb{Q}_{1,2}^{(1,0;a)}(T_{2}) \mathbb{Q}_{1,2}^{(b)}(T_{2})}{3} + \frac{\sqrt{3} \mathbb{Q}_{1,3}^{(1,0;a)}(T_{2}) \mathbb{Q}_{1,3}^{(b)}(T_{2})}{3}
+\end{dmath*}
+\begin{dmath*}
+\fbox{z10}\quad \mathbb{G}_{3}^{(1,-1;c)}(A_{2})=\frac{\sqrt{3} \mathbb{G}_{2,1}^{(1,-1;a)}(T_{1}) \mathbb{Q}_{1,1}^{(b)}(T_{2})}{3} + \frac{\sqrt{3} \mathbb{G}_{2,2}^{(1,-1;a)}(T_{1}) \mathbb{Q}_{1,2}^{(b)}(T_{2})}{3} + \frac{\sqrt{3} \mathbb{G}_{2,3}^{(1,-1;a)}(T_{1}) \mathbb{Q}_{1,3}^{(b)}(T_{2})}{3}
+\end{dmath*}
+\begin{dmath*}
+\fbox{z11}\quad \mathbb{G}_{0}^{(1,1;c)}(A_{2})=\mathbb{G}_{0}^{(1,1;a)}(A_{2}) \mathbb{Q}_{0}^{(b)}(A_{1})
+\end{dmath*}
+\vspace{5mm}
+
+\vspace{5mm}
+\noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{Atomic SAMB}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
+\vspace{3mm}
+
+\vspace{5mm}
+
+\noindent\textbullet\, bra: $\bra{s_{},\uparrow},\, \bra{s_{},\downarrow}$
+
+\noindent\textbullet\, ket: $\ket{s_{},\uparrow},\, \ket{s_{},\downarrow}$
+
+\begin{dmath*}
+\fbox{x1}\quad \mathbb{Q}_{0}^{(a)}(A_{1})=\begin{bmatrix} \frac{\sqrt{2}}{2} & 0 \\ 0 & \frac{\sqrt{2}}{2} \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x2}\quad \mathbb{M}_{1,1}^{(1,-1;a)}(T_{1})=\begin{bmatrix} 0 & \frac{\sqrt{2}}{2} \\ \frac{\sqrt{2}}{2} & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x3}\quad \mathbb{M}_{1,2}^{(1,-1;a)}(T_{1})=\begin{bmatrix} 0 & - \frac{\sqrt{2} i}{2} \\ \frac{\sqrt{2} i}{2} & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x4}\quad \mathbb{M}_{1,3}^{(1,-1;a)}(T_{1})=\begin{bmatrix} \frac{\sqrt{2}}{2} & 0 \\ 0 & - \frac{\sqrt{2}}{2} \end{bmatrix}
+\end{dmath*}
+\vspace{5mm}
+
+\noindent\textbullet\, bra: $\bra{s_{},\uparrow},\, \bra{s_{},\downarrow}$
+
+\noindent\textbullet\, ket: $\ket{p_{x},\uparrow},\, \ket{p_{x},\downarrow},\, \ket{p_{y},\uparrow},\, \ket{p_{y},\downarrow},\, \ket{p_{z},\uparrow},\, \ket{p_{z},\downarrow}$
+
+\begin{dmath*}
+\fbox{x5}\quad \mathbb{Q}_{1,1}^{(a)}(T_{2})=\begin{bmatrix} \frac{1}{2} & 0 & 0 & 0 & 0 & 0 \\ 0 & \frac{1}{2} & 0 & 0 & 0 & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x6}\quad \mathbb{Q}_{1,2}^{(a)}(T_{2})=\begin{bmatrix} 0 & 0 & \frac{1}{2} & 0 & 0 & 0 \\ 0 & 0 & 0 & \frac{1}{2} & 0 & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x7}\quad \mathbb{Q}_{1,3}^{(a)}(T_{2})=\begin{bmatrix} 0 & 0 & 0 & 0 & \frac{1}{2} & 0 \\ 0 & 0 & 0 & 0 & 0 & \frac{1}{2} \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x8}\quad \mathbb{Q}_{1,1}^{(1,0;a)}(T_{2})=\begin{bmatrix} 0 & 0 & - \frac{\sqrt{2} i}{4} & 0 & 0 & \frac{\sqrt{2}}{4} \\ 0 & 0 & 0 & \frac{\sqrt{2} i}{4} & - \frac{\sqrt{2}}{4} & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x9}\quad \mathbb{Q}_{1,2}^{(1,0;a)}(T_{2})=\begin{bmatrix} \frac{\sqrt{2} i}{4} & 0 & 0 & 0 & 0 & - \frac{\sqrt{2} i}{4} \\ 0 & - \frac{\sqrt{2} i}{4} & 0 & 0 & - \frac{\sqrt{2} i}{4} & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x10}\quad \mathbb{Q}_{1,3}^{(1,0;a)}(T_{2})=\begin{bmatrix} 0 & - \frac{\sqrt{2}}{4} & 0 & \frac{\sqrt{2} i}{4} & 0 & 0 \\ \frac{\sqrt{2}}{4} & 0 & \frac{\sqrt{2} i}{4} & 0 & 0 & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x11}\quad \mathbb{G}_{2,1}^{(1,-1;a)}(E)=\begin{bmatrix} 0 & - \frac{\sqrt{2} i}{4} & 0 & \frac{\sqrt{2}}{4} & 0 & 0 \\ - \frac{\sqrt{2} i}{4} & 0 & - \frac{\sqrt{2}}{4} & 0 & 0 & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x12}\quad \mathbb{G}_{2,2}^{(1,-1;a)}(E)=\begin{bmatrix} 0 & - \frac{\sqrt{6} i}{12} & 0 & - \frac{\sqrt{6}}{12} & \frac{\sqrt{6} i}{6} & 0 \\ - \frac{\sqrt{6} i}{12} & 0 & \frac{\sqrt{6}}{12} & 0 & 0 & - \frac{\sqrt{6} i}{6} \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x13}\quad \mathbb{G}_{2,1}^{(1,-1;a)}(T_{1})=\begin{bmatrix} 0 & 0 & \frac{\sqrt{2} i}{4} & 0 & 0 & \frac{\sqrt{2}}{4} \\ 0 & 0 & 0 & - \frac{\sqrt{2} i}{4} & - \frac{\sqrt{2}}{4} & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x14}\quad \mathbb{G}_{2,2}^{(1,-1;a)}(T_{1})=\begin{bmatrix} \frac{\sqrt{2} i}{4} & 0 & 0 & 0 & 0 & \frac{\sqrt{2} i}{4} \\ 0 & - \frac{\sqrt{2} i}{4} & 0 & 0 & \frac{\sqrt{2} i}{4} & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x15}\quad \mathbb{G}_{2,3}^{(1,-1;a)}(T_{1})=\begin{bmatrix} 0 & \frac{\sqrt{2}}{4} & 0 & \frac{\sqrt{2} i}{4} & 0 & 0 \\ - \frac{\sqrt{2}}{4} & 0 & \frac{\sqrt{2} i}{4} & 0 & 0 & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x16}\quad \mathbb{G}_{0}^{(1,1;a)}(A_{2})=\begin{bmatrix} 0 & \frac{\sqrt{3} i}{6} & 0 & \frac{\sqrt{3}}{6} & \frac{\sqrt{3} i}{6} & 0 \\ \frac{\sqrt{3} i}{6} & 0 & - \frac{\sqrt{3}}{6} & 0 & 0 & - \frac{\sqrt{3} i}{6} \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x17}\quad \mathbb{M}_{2,1}^{(1,-1;a)}(E)=\begin{bmatrix} 0 & - \frac{\sqrt{2}}{4} & 0 & - \frac{\sqrt{2} i}{4} & 0 & 0 \\ - \frac{\sqrt{2}}{4} & 0 & \frac{\sqrt{2} i}{4} & 0 & 0 & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x18}\quad \mathbb{M}_{2,2}^{(1,-1;a)}(E)=\begin{bmatrix} 0 & - \frac{\sqrt{6}}{12} & 0 & \frac{\sqrt{6} i}{12} & \frac{\sqrt{6}}{6} & 0 \\ - \frac{\sqrt{6}}{12} & 0 & - \frac{\sqrt{6} i}{12} & 0 & 0 & - \frac{\sqrt{6}}{6} \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x19}\quad \mathbb{M}_{2,1}^{(1,-1;a)}(T_{1})=\begin{bmatrix} 0 & 0 & \frac{\sqrt{2}}{4} & 0 & 0 & - \frac{\sqrt{2} i}{4} \\ 0 & 0 & 0 & - \frac{\sqrt{2}}{4} & \frac{\sqrt{2} i}{4} & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x20}\quad \mathbb{M}_{2,2}^{(1,-1;a)}(T_{1})=\begin{bmatrix} \frac{\sqrt{2}}{4} & 0 & 0 & 0 & 0 & \frac{\sqrt{2}}{4} \\ 0 & - \frac{\sqrt{2}}{4} & 0 & 0 & \frac{\sqrt{2}}{4} & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x21}\quad \mathbb{M}_{2,3}^{(1,-1;a)}(T_{1})=\begin{bmatrix} 0 & - \frac{\sqrt{2} i}{4} & 0 & \frac{\sqrt{2}}{4} & 0 & 0 \\ \frac{\sqrt{2} i}{4} & 0 & \frac{\sqrt{2}}{4} & 0 & 0 & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x22}\quad \mathbb{M}_{0}^{(1,1;a)}(A_{2})=\begin{bmatrix} 0 & \frac{\sqrt{3}}{6} & 0 & - \frac{\sqrt{3} i}{6} & \frac{\sqrt{3}}{6} & 0 \\ \frac{\sqrt{3}}{6} & 0 & \frac{\sqrt{3} i}{6} & 0 & 0 & - \frac{\sqrt{3}}{6} \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x23}\quad \mathbb{T}_{1,1}^{(a)}(T_{2})=\begin{bmatrix} \frac{i}{2} & 0 & 0 & 0 & 0 & 0 \\ 0 & \frac{i}{2} & 0 & 0 & 0 & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x24}\quad \mathbb{T}_{1,2}^{(a)}(T_{2})=\begin{bmatrix} 0 & 0 & \frac{i}{2} & 0 & 0 & 0 \\ 0 & 0 & 0 & \frac{i}{2} & 0 & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x25}\quad \mathbb{T}_{1,3}^{(a)}(T_{2})=\begin{bmatrix} 0 & 0 & 0 & 0 & \frac{i}{2} & 0 \\ 0 & 0 & 0 & 0 & 0 & \frac{i}{2} \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x26}\quad \mathbb{T}_{1,1}^{(1,0;a)}(T_{2})=\begin{bmatrix} 0 & 0 & - \frac{\sqrt{2}}{4} & 0 & 0 & - \frac{\sqrt{2} i}{4} \\ 0 & 0 & 0 & \frac{\sqrt{2}}{4} & \frac{\sqrt{2} i}{4} & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x27}\quad \mathbb{T}_{1,2}^{(1,0;a)}(T_{2})=\begin{bmatrix} \frac{\sqrt{2}}{4} & 0 & 0 & 0 & 0 & - \frac{\sqrt{2}}{4} \\ 0 & - \frac{\sqrt{2}}{4} & 0 & 0 & - \frac{\sqrt{2}}{4} & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x28}\quad \mathbb{T}_{1,3}^{(1,0;a)}(T_{2})=\begin{bmatrix} 0 & \frac{\sqrt{2} i}{4} & 0 & \frac{\sqrt{2}}{4} & 0 & 0 \\ - \frac{\sqrt{2} i}{4} & 0 & \frac{\sqrt{2}}{4} & 0 & 0 & 0 \end{bmatrix}
+\end{dmath*}
+\vspace{5mm}
+
+\noindent\textbullet\, bra: $\bra{p_{x},\uparrow},\, \bra{p_{x},\downarrow},\, \bra{p_{y},\uparrow},\, \bra{p_{y},\downarrow},\, \bra{p_{z},\uparrow},\, \bra{p_{z},\downarrow}$
+
+\noindent\textbullet\, ket: $\ket{p_{x},\uparrow},\, \ket{p_{x},\downarrow},\, \ket{p_{y},\uparrow},\, \ket{p_{y},\downarrow},\, \ket{p_{z},\uparrow},\, \ket{p_{z},\downarrow}$
+
+\begin{dmath*}
+\fbox{x29}\quad \mathbb{Q}_{0}^{(a)}(A_{1})=\begin{bmatrix} \frac{\sqrt{6}}{6} & 0 & 0 & 0 & 0 & 0 \\ 0 & \frac{\sqrt{6}}{6} & 0 & 0 & 0 & 0 \\ 0 & 0 & \frac{\sqrt{6}}{6} & 0 & 0 & 0 \\ 0 & 0 & 0 & \frac{\sqrt{6}}{6} & 0 & 0 \\ 0 & 0 & 0 & 0 & \frac{\sqrt{6}}{6} & 0 \\ 0 & 0 & 0 & 0 & 0 & \frac{\sqrt{6}}{6} \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x30}\quad \mathbb{Q}_{2,1}^{(a)}(E)=\begin{bmatrix} - \frac{\sqrt{3}}{6} & 0 & 0 & 0 & 0 & 0 \\ 0 & - \frac{\sqrt{3}}{6} & 0 & 0 & 0 & 0 \\ 0 & 0 & - \frac{\sqrt{3}}{6} & 0 & 0 & 0 \\ 0 & 0 & 0 & - \frac{\sqrt{3}}{6} & 0 & 0 \\ 0 & 0 & 0 & 0 & \frac{\sqrt{3}}{3} & 0 \\ 0 & 0 & 0 & 0 & 0 & \frac{\sqrt{3}}{3} \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x31}\quad \mathbb{Q}_{2,2}^{(a)}(E)=\begin{bmatrix} \frac{1}{2} & 0 & 0 & 0 & 0 & 0 \\ 0 & \frac{1}{2} & 0 & 0 & 0 & 0 \\ 0 & 0 & - \frac{1}{2} & 0 & 0 & 0 \\ 0 & 0 & 0 & - \frac{1}{2} & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x32}\quad \mathbb{Q}_{2,1}^{(a)}(T_{2})=\begin{bmatrix} 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & \frac{1}{2} & 0 \\ 0 & 0 & 0 & 0 & 0 & \frac{1}{2} \\ 0 & 0 & \frac{1}{2} & 0 & 0 & 0 \\ 0 & 0 & 0 & \frac{1}{2} & 0 & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x33}\quad \mathbb{Q}_{2,2}^{(a)}(T_{2})=\begin{bmatrix} 0 & 0 & 0 & 0 & \frac{1}{2} & 0 \\ 0 & 0 & 0 & 0 & 0 & \frac{1}{2} \\ 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 \\ \frac{1}{2} & 0 & 0 & 0 & 0 & 0 \\ 0 & \frac{1}{2} & 0 & 0 & 0 & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x34}\quad \mathbb{Q}_{2,3}^{(a)}(T_{2})=\begin{bmatrix} 0 & 0 & \frac{1}{2} & 0 & 0 & 0 \\ 0 & 0 & 0 & \frac{1}{2} & 0 & 0 \\ \frac{1}{2} & 0 & 0 & 0 & 0 & 0 \\ 0 & \frac{1}{2} & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x35}\quad \mathbb{Q}_{2,1}^{(1,-1;a)}(E)=\begin{bmatrix} 0 & 0 & - \frac{\sqrt{6} i}{6} & 0 & 0 & - \frac{\sqrt{6}}{12} \\ 0 & 0 & 0 & \frac{\sqrt{6} i}{6} & \frac{\sqrt{6}}{12} & 0 \\ \frac{\sqrt{6} i}{6} & 0 & 0 & 0 & 0 & \frac{\sqrt{6} i}{12} \\ 0 & - \frac{\sqrt{6} i}{6} & 0 & 0 & \frac{\sqrt{6} i}{12} & 0 \\ 0 & \frac{\sqrt{6}}{12} & 0 & - \frac{\sqrt{6} i}{12} & 0 & 0 \\ - \frac{\sqrt{6}}{12} & 0 & - \frac{\sqrt{6} i}{12} & 0 & 0 & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x36}\quad \mathbb{Q}_{2,2}^{(1,-1;a)}(E)=\begin{bmatrix} 0 & 0 & 0 & 0 & 0 & - \frac{\sqrt{2}}{4} \\ 0 & 0 & 0 & 0 & \frac{\sqrt{2}}{4} & 0 \\ 0 & 0 & 0 & 0 & 0 & - \frac{\sqrt{2} i}{4} \\ 0 & 0 & 0 & 0 & - \frac{\sqrt{2} i}{4} & 0 \\ 0 & \frac{\sqrt{2}}{4} & 0 & \frac{\sqrt{2} i}{4} & 0 & 0 \\ - \frac{\sqrt{2}}{4} & 0 & \frac{\sqrt{2} i}{4} & 0 & 0 & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x37}\quad \mathbb{Q}_{2,1}^{(1,-1;a)}(T_{2})=\begin{bmatrix} 0 & 0 & 0 & - \frac{\sqrt{2}}{4} & \frac{\sqrt{2} i}{4} & 0 \\ 0 & 0 & \frac{\sqrt{2}}{4} & 0 & 0 & - \frac{\sqrt{2} i}{4} \\ 0 & \frac{\sqrt{2}}{4} & 0 & 0 & 0 & 0 \\ - \frac{\sqrt{2}}{4} & 0 & 0 & 0 & 0 & 0 \\ - \frac{\sqrt{2} i}{4} & 0 & 0 & 0 & 0 & 0 \\ 0 & \frac{\sqrt{2} i}{4} & 0 & 0 & 0 & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x38}\quad \mathbb{Q}_{2,2}^{(1,-1;a)}(T_{2})=\begin{bmatrix} 0 & 0 & 0 & - \frac{\sqrt{2} i}{4} & 0 & 0 \\ 0 & 0 & - \frac{\sqrt{2} i}{4} & 0 & 0 & 0 \\ 0 & \frac{\sqrt{2} i}{4} & 0 & 0 & - \frac{\sqrt{2} i}{4} & 0 \\ \frac{\sqrt{2} i}{4} & 0 & 0 & 0 & 0 & \frac{\sqrt{2} i}{4} \\ 0 & 0 & \frac{\sqrt{2} i}{4} & 0 & 0 & 0 \\ 0 & 0 & 0 & - \frac{\sqrt{2} i}{4} & 0 & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x39}\quad \mathbb{Q}_{2,3}^{(1,-1;a)}(T_{2})=\begin{bmatrix} 0 & 0 & 0 & 0 & 0 & \frac{\sqrt{2} i}{4} \\ 0 & 0 & 0 & 0 & \frac{\sqrt{2} i}{4} & 0 \\ 0 & 0 & 0 & 0 & 0 & - \frac{\sqrt{2}}{4} \\ 0 & 0 & 0 & 0 & \frac{\sqrt{2}}{4} & 0 \\ 0 & - \frac{\sqrt{2} i}{4} & 0 & \frac{\sqrt{2}}{4} & 0 & 0 \\ - \frac{\sqrt{2} i}{4} & 0 & - \frac{\sqrt{2}}{4} & 0 & 0 & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x40}\quad \mathbb{Q}_{0}^{(1,1;a)}(A_{1})=\begin{bmatrix} 0 & 0 & - \frac{\sqrt{3} i}{6} & 0 & 0 & \frac{\sqrt{3}}{6} \\ 0 & 0 & 0 & \frac{\sqrt{3} i}{6} & - \frac{\sqrt{3}}{6} & 0 \\ \frac{\sqrt{3} i}{6} & 0 & 0 & 0 & 0 & - \frac{\sqrt{3} i}{6} \\ 0 & - \frac{\sqrt{3} i}{6} & 0 & 0 & - \frac{\sqrt{3} i}{6} & 0 \\ 0 & - \frac{\sqrt{3}}{6} & 0 & \frac{\sqrt{3} i}{6} & 0 & 0 \\ \frac{\sqrt{3}}{6} & 0 & \frac{\sqrt{3} i}{6} & 0 & 0 & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x41}\quad \mathbb{G}_{1,1}^{(1,0;a)}(T_{1})=\begin{bmatrix} 0 & 0 & 0 & - \frac{\sqrt{2}}{4} & - \frac{\sqrt{2} i}{4} & 0 \\ 0 & 0 & \frac{\sqrt{2}}{4} & 0 & 0 & \frac{\sqrt{2} i}{4} \\ 0 & \frac{\sqrt{2}}{4} & 0 & 0 & 0 & 0 \\ - \frac{\sqrt{2}}{4} & 0 & 0 & 0 & 0 & 0 \\ \frac{\sqrt{2} i}{4} & 0 & 0 & 0 & 0 & 0 \\ 0 & - \frac{\sqrt{2} i}{4} & 0 & 0 & 0 & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x42}\quad \mathbb{G}_{1,2}^{(1,0;a)}(T_{1})=\begin{bmatrix} 0 & 0 & 0 & \frac{\sqrt{2} i}{4} & 0 & 0 \\ 0 & 0 & \frac{\sqrt{2} i}{4} & 0 & 0 & 0 \\ 0 & - \frac{\sqrt{2} i}{4} & 0 & 0 & - \frac{\sqrt{2} i}{4} & 0 \\ - \frac{\sqrt{2} i}{4} & 0 & 0 & 0 & 0 & \frac{\sqrt{2} i}{4} \\ 0 & 0 & \frac{\sqrt{2} i}{4} & 0 & 0 & 0 \\ 0 & 0 & 0 & - \frac{\sqrt{2} i}{4} & 0 & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x43}\quad \mathbb{G}_{1,3}^{(1,0;a)}(T_{1})=\begin{bmatrix} 0 & 0 & 0 & 0 & 0 & \frac{\sqrt{2} i}{4} \\ 0 & 0 & 0 & 0 & \frac{\sqrt{2} i}{4} & 0 \\ 0 & 0 & 0 & 0 & 0 & \frac{\sqrt{2}}{4} \\ 0 & 0 & 0 & 0 & - \frac{\sqrt{2}}{4} & 0 \\ 0 & - \frac{\sqrt{2} i}{4} & 0 & - \frac{\sqrt{2}}{4} & 0 & 0 \\ - \frac{\sqrt{2} i}{4} & 0 & \frac{\sqrt{2}}{4} & 0 & 0 & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x44}\quad \mathbb{M}_{1,1}^{(a)}(T_{1})=\begin{bmatrix} 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & - \frac{i}{2} & 0 \\ 0 & 0 & 0 & 0 & 0 & - \frac{i}{2} \\ 0 & 0 & \frac{i}{2} & 0 & 0 & 0 \\ 0 & 0 & 0 & \frac{i}{2} & 0 & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x45}\quad \mathbb{M}_{1,2}^{(a)}(T_{1})=\begin{bmatrix} 0 & 0 & 0 & 0 & \frac{i}{2} & 0 \\ 0 & 0 & 0 & 0 & 0 & \frac{i}{2} \\ 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 \\ - \frac{i}{2} & 0 & 0 & 0 & 0 & 0 \\ 0 & - \frac{i}{2} & 0 & 0 & 0 & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x46}\quad \mathbb{M}_{1,3}^{(a)}(T_{1})=\begin{bmatrix} 0 & 0 & - \frac{i}{2} & 0 & 0 & 0 \\ 0 & 0 & 0 & - \frac{i}{2} & 0 & 0 \\ \frac{i}{2} & 0 & 0 & 0 & 0 & 0 \\ 0 & \frac{i}{2} & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x47}\quad \mathbb{M}_{3}^{(1,-1;a)}(A_{2})=\begin{bmatrix} 0 & 0 & \frac{\sqrt{3}}{6} & 0 & 0 & - \frac{\sqrt{3} i}{6} \\ 0 & 0 & 0 & - \frac{\sqrt{3}}{6} & \frac{\sqrt{3} i}{6} & 0 \\ \frac{\sqrt{3}}{6} & 0 & 0 & 0 & 0 & \frac{\sqrt{3}}{6} \\ 0 & - \frac{\sqrt{3}}{6} & 0 & 0 & \frac{\sqrt{3}}{6} & 0 \\ 0 & - \frac{\sqrt{3} i}{6} & 0 & \frac{\sqrt{3}}{6} & 0 & 0 \\ \frac{\sqrt{3} i}{6} & 0 & \frac{\sqrt{3}}{6} & 0 & 0 & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x48}\quad \mathbb{M}_{1,1}^{(1,-1;a)}(T_{1})=\begin{bmatrix} 0 & \frac{\sqrt{6}}{6} & 0 & 0 & 0 & 0 \\ \frac{\sqrt{6}}{6} & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & \frac{\sqrt{6}}{6} & 0 & 0 \\ 0 & 0 & \frac{\sqrt{6}}{6} & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & \frac{\sqrt{6}}{6} \\ 0 & 0 & 0 & 0 & \frac{\sqrt{6}}{6} & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x49}\quad \mathbb{M}_{1,2}^{(1,-1;a)}(T_{1})=\begin{bmatrix} 0 & - \frac{\sqrt{6} i}{6} & 0 & 0 & 0 & 0 \\ \frac{\sqrt{6} i}{6} & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & - \frac{\sqrt{6} i}{6} & 0 & 0 \\ 0 & 0 & \frac{\sqrt{6} i}{6} & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & - \frac{\sqrt{6} i}{6} \\ 0 & 0 & 0 & 0 & \frac{\sqrt{6} i}{6} & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x50}\quad \mathbb{M}_{1,3}^{(1,-1;a)}(T_{1})=\begin{bmatrix} \frac{\sqrt{6}}{6} & 0 & 0 & 0 & 0 & 0 \\ 0 & - \frac{\sqrt{6}}{6} & 0 & 0 & 0 & 0 \\ 0 & 0 & \frac{\sqrt{6}}{6} & 0 & 0 & 0 \\ 0 & 0 & 0 & - \frac{\sqrt{6}}{6} & 0 & 0 \\ 0 & 0 & 0 & 0 & \frac{\sqrt{6}}{6} & 0 \\ 0 & 0 & 0 & 0 & 0 & - \frac{\sqrt{6}}{6} \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x51}\quad \mathbb{M}_{3,1}^{(1,-1;a)}(T_{1})=\begin{bmatrix} 0 & \frac{\sqrt{5}}{5} & 0 & \frac{\sqrt{5} i}{10} & - \frac{\sqrt{5}}{10} & 0 \\ \frac{\sqrt{5}}{5} & 0 & - \frac{\sqrt{5} i}{10} & 0 & 0 & \frac{\sqrt{5}}{10} \\ 0 & \frac{\sqrt{5} i}{10} & 0 & - \frac{\sqrt{5}}{10} & 0 & 0 \\ - \frac{\sqrt{5} i}{10} & 0 & - \frac{\sqrt{5}}{10} & 0 & 0 & 0 \\ - \frac{\sqrt{5}}{10} & 0 & 0 & 0 & 0 & - \frac{\sqrt{5}}{10} \\ 0 & \frac{\sqrt{5}}{10} & 0 & 0 & - \frac{\sqrt{5}}{10} & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x52}\quad \mathbb{M}_{3,2}^{(1,-1;a)}(T_{1})=\begin{bmatrix} 0 & \frac{\sqrt{5} i}{10} & 0 & - \frac{\sqrt{5}}{10} & 0 & 0 \\ - \frac{\sqrt{5} i}{10} & 0 & - \frac{\sqrt{5}}{10} & 0 & 0 & 0 \\ 0 & - \frac{\sqrt{5}}{10} & 0 & - \frac{\sqrt{5} i}{5} & - \frac{\sqrt{5}}{10} & 0 \\ - \frac{\sqrt{5}}{10} & 0 & \frac{\sqrt{5} i}{5} & 0 & 0 & \frac{\sqrt{5}}{10} \\ 0 & 0 & - \frac{\sqrt{5}}{10} & 0 & 0 & \frac{\sqrt{5} i}{10} \\ 0 & 0 & 0 & \frac{\sqrt{5}}{10} & - \frac{\sqrt{5} i}{10} & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x53}\quad \mathbb{M}_{3,3}^{(1,-1;a)}(T_{1})=\begin{bmatrix} - \frac{\sqrt{5}}{10} & 0 & 0 & 0 & 0 & - \frac{\sqrt{5}}{10} \\ 0 & \frac{\sqrt{5}}{10} & 0 & 0 & - \frac{\sqrt{5}}{10} & 0 \\ 0 & 0 & - \frac{\sqrt{5}}{10} & 0 & 0 & \frac{\sqrt{5} i}{10} \\ 0 & 0 & 0 & \frac{\sqrt{5}}{10} & - \frac{\sqrt{5} i}{10} & 0 \\ 0 & - \frac{\sqrt{5}}{10} & 0 & \frac{\sqrt{5} i}{10} & \frac{\sqrt{5}}{5} & 0 \\ - \frac{\sqrt{5}}{10} & 0 & - \frac{\sqrt{5} i}{10} & 0 & 0 & - \frac{\sqrt{5}}{5} \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x54}\quad \mathbb{M}_{3,1}^{(1,-1;a)}(T_{2})=\begin{bmatrix} 0 & 0 & 0 & - \frac{\sqrt{3} i}{6} & - \frac{\sqrt{3}}{6} & 0 \\ 0 & 0 & \frac{\sqrt{3} i}{6} & 0 & 0 & \frac{\sqrt{3}}{6} \\ 0 & - \frac{\sqrt{3} i}{6} & 0 & \frac{\sqrt{3}}{6} & 0 & 0 \\ \frac{\sqrt{3} i}{6} & 0 & \frac{\sqrt{3}}{6} & 0 & 0 & 0 \\ - \frac{\sqrt{3}}{6} & 0 & 0 & 0 & 0 & - \frac{\sqrt{3}}{6} \\ 0 & \frac{\sqrt{3}}{6} & 0 & 0 & - \frac{\sqrt{3}}{6} & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x55}\quad \mathbb{M}_{3,2}^{(1,-1;a)}(T_{2})=\begin{bmatrix} 0 & \frac{\sqrt{3} i}{6} & 0 & - \frac{\sqrt{3}}{6} & 0 & 0 \\ - \frac{\sqrt{3} i}{6} & 0 & - \frac{\sqrt{3}}{6} & 0 & 0 & 0 \\ 0 & - \frac{\sqrt{3}}{6} & 0 & 0 & \frac{\sqrt{3}}{6} & 0 \\ - \frac{\sqrt{3}}{6} & 0 & 0 & 0 & 0 & - \frac{\sqrt{3}}{6} \\ 0 & 0 & \frac{\sqrt{3}}{6} & 0 & 0 & - \frac{\sqrt{3} i}{6} \\ 0 & 0 & 0 & - \frac{\sqrt{3}}{6} & \frac{\sqrt{3} i}{6} & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x56}\quad \mathbb{M}_{3,3}^{(1,-1;a)}(T_{2})=\begin{bmatrix} \frac{\sqrt{3}}{6} & 0 & 0 & 0 & 0 & \frac{\sqrt{3}}{6} \\ 0 & - \frac{\sqrt{3}}{6} & 0 & 0 & \frac{\sqrt{3}}{6} & 0 \\ 0 & 0 & - \frac{\sqrt{3}}{6} & 0 & 0 & \frac{\sqrt{3} i}{6} \\ 0 & 0 & 0 & \frac{\sqrt{3}}{6} & - \frac{\sqrt{3} i}{6} & 0 \\ 0 & \frac{\sqrt{3}}{6} & 0 & \frac{\sqrt{3} i}{6} & 0 & 0 \\ \frac{\sqrt{3}}{6} & 0 & - \frac{\sqrt{3} i}{6} & 0 & 0 & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x57}\quad \mathbb{M}_{1,1}^{(1,1;a)}(T_{1})=\begin{bmatrix} 0 & \frac{\sqrt{30}}{15} & 0 & - \frac{\sqrt{30} i}{20} & \frac{\sqrt{30}}{20} & 0 \\ \frac{\sqrt{30}}{15} & 0 & \frac{\sqrt{30} i}{20} & 0 & 0 & - \frac{\sqrt{30}}{20} \\ 0 & - \frac{\sqrt{30} i}{20} & 0 & - \frac{\sqrt{30}}{30} & 0 & 0 \\ \frac{\sqrt{30} i}{20} & 0 & - \frac{\sqrt{30}}{30} & 0 & 0 & 0 \\ \frac{\sqrt{30}}{20} & 0 & 0 & 0 & 0 & - \frac{\sqrt{30}}{30} \\ 0 & - \frac{\sqrt{30}}{20} & 0 & 0 & - \frac{\sqrt{30}}{30} & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x58}\quad \mathbb{M}_{1,2}^{(1,1;a)}(T_{1})=\begin{bmatrix} 0 & \frac{\sqrt{30} i}{30} & 0 & \frac{\sqrt{30}}{20} & 0 & 0 \\ - \frac{\sqrt{30} i}{30} & 0 & \frac{\sqrt{30}}{20} & 0 & 0 & 0 \\ 0 & \frac{\sqrt{30}}{20} & 0 & - \frac{\sqrt{30} i}{15} & \frac{\sqrt{30}}{20} & 0 \\ \frac{\sqrt{30}}{20} & 0 & \frac{\sqrt{30} i}{15} & 0 & 0 & - \frac{\sqrt{30}}{20} \\ 0 & 0 & \frac{\sqrt{30}}{20} & 0 & 0 & \frac{\sqrt{30} i}{30} \\ 0 & 0 & 0 & - \frac{\sqrt{30}}{20} & - \frac{\sqrt{30} i}{30} & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x59}\quad \mathbb{M}_{1,3}^{(1,1;a)}(T_{1})=\begin{bmatrix} - \frac{\sqrt{30}}{30} & 0 & 0 & 0 & 0 & \frac{\sqrt{30}}{20} \\ 0 & \frac{\sqrt{30}}{30} & 0 & 0 & \frac{\sqrt{30}}{20} & 0 \\ 0 & 0 & - \frac{\sqrt{30}}{30} & 0 & 0 & - \frac{\sqrt{30} i}{20} \\ 0 & 0 & 0 & \frac{\sqrt{30}}{30} & \frac{\sqrt{30} i}{20} & 0 \\ 0 & \frac{\sqrt{30}}{20} & 0 & - \frac{\sqrt{30} i}{20} & \frac{\sqrt{30}}{15} & 0 \\ \frac{\sqrt{30}}{20} & 0 & \frac{\sqrt{30} i}{20} & 0 & 0 & - \frac{\sqrt{30}}{15} \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x60}\quad \mathbb{T}_{2,1}^{(1,0;a)}(E)=\begin{bmatrix} 0 & 0 & 0 & 0 & 0 & \frac{\sqrt{2} i}{4} \\ 0 & 0 & 0 & 0 & - \frac{\sqrt{2} i}{4} & 0 \\ 0 & 0 & 0 & 0 & 0 & \frac{\sqrt{2}}{4} \\ 0 & 0 & 0 & 0 & \frac{\sqrt{2}}{4} & 0 \\ 0 & \frac{\sqrt{2} i}{4} & 0 & \frac{\sqrt{2}}{4} & 0 & 0 \\ - \frac{\sqrt{2} i}{4} & 0 & \frac{\sqrt{2}}{4} & 0 & 0 & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x61}\quad \mathbb{T}_{2,2}^{(1,0;a)}(E)=\begin{bmatrix} 0 & 0 & - \frac{\sqrt{6}}{6} & 0 & 0 & - \frac{\sqrt{6} i}{12} \\ 0 & 0 & 0 & \frac{\sqrt{6}}{6} & \frac{\sqrt{6} i}{12} & 0 \\ - \frac{\sqrt{6}}{6} & 0 & 0 & 0 & 0 & \frac{\sqrt{6}}{12} \\ 0 & \frac{\sqrt{6}}{6} & 0 & 0 & \frac{\sqrt{6}}{12} & 0 \\ 0 & - \frac{\sqrt{6} i}{12} & 0 & \frac{\sqrt{6}}{12} & 0 & 0 \\ \frac{\sqrt{6} i}{12} & 0 & \frac{\sqrt{6}}{12} & 0 & 0 & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x62}\quad \mathbb{T}_{2,1}^{(1,0;a)}(T_{2})=\begin{bmatrix} 0 & 0 & 0 & \frac{\sqrt{6} i}{12} & \frac{\sqrt{6}}{12} & 0 \\ 0 & 0 & - \frac{\sqrt{6} i}{12} & 0 & 0 & - \frac{\sqrt{6}}{12} \\ 0 & \frac{\sqrt{6} i}{12} & 0 & \frac{\sqrt{6}}{6} & 0 & 0 \\ - \frac{\sqrt{6} i}{12} & 0 & \frac{\sqrt{6}}{6} & 0 & 0 & 0 \\ \frac{\sqrt{6}}{12} & 0 & 0 & 0 & 0 & - \frac{\sqrt{6}}{6} \\ 0 & - \frac{\sqrt{6}}{12} & 0 & 0 & - \frac{\sqrt{6}}{6} & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x63}\quad \mathbb{T}_{2,2}^{(1,0;a)}(T_{2})=\begin{bmatrix} 0 & \frac{\sqrt{6} i}{6} & 0 & \frac{\sqrt{6}}{12} & 0 & 0 \\ - \frac{\sqrt{6} i}{6} & 0 & \frac{\sqrt{6}}{12} & 0 & 0 & 0 \\ 0 & \frac{\sqrt{6}}{12} & 0 & 0 & - \frac{\sqrt{6}}{12} & 0 \\ \frac{\sqrt{6}}{12} & 0 & 0 & 0 & 0 & \frac{\sqrt{6}}{12} \\ 0 & 0 & - \frac{\sqrt{6}}{12} & 0 & 0 & - \frac{\sqrt{6} i}{6} \\ 0 & 0 & 0 & \frac{\sqrt{6}}{12} & \frac{\sqrt{6} i}{6} & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x64}\quad \mathbb{T}_{2,3}^{(1,0;a)}(T_{2})=\begin{bmatrix} \frac{\sqrt{6}}{6} & 0 & 0 & 0 & 0 & - \frac{\sqrt{6}}{12} \\ 0 & - \frac{\sqrt{6}}{6} & 0 & 0 & - \frac{\sqrt{6}}{12} & 0 \\ 0 & 0 & - \frac{\sqrt{6}}{6} & 0 & 0 & - \frac{\sqrt{6} i}{12} \\ 0 & 0 & 0 & \frac{\sqrt{6}}{6} & \frac{\sqrt{6} i}{12} & 0 \\ 0 & - \frac{\sqrt{6}}{12} & 0 & - \frac{\sqrt{6} i}{12} & 0 & 0 \\ - \frac{\sqrt{6}}{12} & 0 & \frac{\sqrt{6} i}{12} & 0 & 0 & 0 \end{bmatrix}
+\end{dmath*}
+\vspace{5mm}
+
+\noindent\textbullet\, bra: $\bra{p_{x},\uparrow},\, \bra{p_{x},\downarrow},\, \bra{p_{y},\uparrow},\, \bra{p_{y},\downarrow},\, \bra{p_{z},\uparrow},\, \bra{p_{z},\downarrow}$
+
+\noindent\textbullet\, ket: $\ket{s_{},\uparrow},\, \ket{s_{},\downarrow}$
+
+\begin{dmath*}
+\fbox{x65}\quad \mathbb{Q}_{1,1}^{(a)}(T_{2})=\begin{bmatrix} \frac{1}{2} & 0 \\ 0 & \frac{1}{2} \\ 0 & 0 \\ 0 & 0 \\ 0 & 0 \\ 0 & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x66}\quad \mathbb{Q}_{1,2}^{(a)}(T_{2})=\begin{bmatrix} 0 & 0 \\ 0 & 0 \\ \frac{1}{2} & 0 \\ 0 & \frac{1}{2} \\ 0 & 0 \\ 0 & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x67}\quad \mathbb{Q}_{1,3}^{(a)}(T_{2})=\begin{bmatrix} 0 & 0 \\ 0 & 0 \\ 0 & 0 \\ 0 & 0 \\ \frac{1}{2} & 0 \\ 0 & \frac{1}{2} \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x68}\quad \mathbb{Q}_{1,1}^{(1,0;a)}(T_{2})=\begin{bmatrix} 0 & 0 \\ 0 & 0 \\ \frac{\sqrt{2} i}{4} & 0 \\ 0 & - \frac{\sqrt{2} i}{4} \\ 0 & - \frac{\sqrt{2}}{4} \\ \frac{\sqrt{2}}{4} & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x69}\quad \mathbb{Q}_{1,2}^{(1,0;a)}(T_{2})=\begin{bmatrix} - \frac{\sqrt{2} i}{4} & 0 \\ 0 & \frac{\sqrt{2} i}{4} \\ 0 & 0 \\ 0 & 0 \\ 0 & \frac{\sqrt{2} i}{4} \\ \frac{\sqrt{2} i}{4} & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x70}\quad \mathbb{Q}_{1,3}^{(1,0;a)}(T_{2})=\begin{bmatrix} 0 & \frac{\sqrt{2}}{4} \\ - \frac{\sqrt{2}}{4} & 0 \\ 0 & - \frac{\sqrt{2} i}{4} \\ - \frac{\sqrt{2} i}{4} & 0 \\ 0 & 0 \\ 0 & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x71}\quad \mathbb{G}_{2,1}^{(1,-1;a)}(E)=\begin{bmatrix} 0 & \frac{\sqrt{2} i}{4} \\ \frac{\sqrt{2} i}{4} & 0 \\ 0 & - \frac{\sqrt{2}}{4} \\ \frac{\sqrt{2}}{4} & 0 \\ 0 & 0 \\ 0 & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x72}\quad \mathbb{G}_{2,2}^{(1,-1;a)}(E)=\begin{bmatrix} 0 & \frac{\sqrt{6} i}{12} \\ \frac{\sqrt{6} i}{12} & 0 \\ 0 & \frac{\sqrt{6}}{12} \\ - \frac{\sqrt{6}}{12} & 0 \\ - \frac{\sqrt{6} i}{6} & 0 \\ 0 & \frac{\sqrt{6} i}{6} \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x73}\quad \mathbb{G}_{2,1}^{(1,-1;a)}(T_{1})=\begin{bmatrix} 0 & 0 \\ 0 & 0 \\ - \frac{\sqrt{2} i}{4} & 0 \\ 0 & \frac{\sqrt{2} i}{4} \\ 0 & - \frac{\sqrt{2}}{4} \\ \frac{\sqrt{2}}{4} & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x74}\quad \mathbb{G}_{2,2}^{(1,-1;a)}(T_{1})=\begin{bmatrix} - \frac{\sqrt{2} i}{4} & 0 \\ 0 & \frac{\sqrt{2} i}{4} \\ 0 & 0 \\ 0 & 0 \\ 0 & - \frac{\sqrt{2} i}{4} \\ - \frac{\sqrt{2} i}{4} & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x75}\quad \mathbb{G}_{2,3}^{(1,-1;a)}(T_{1})=\begin{bmatrix} 0 & - \frac{\sqrt{2}}{4} \\ \frac{\sqrt{2}}{4} & 0 \\ 0 & - \frac{\sqrt{2} i}{4} \\ - \frac{\sqrt{2} i}{4} & 0 \\ 0 & 0 \\ 0 & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x76}\quad \mathbb{G}_{0}^{(1,1;a)}(A_{2})=\begin{bmatrix} 0 & - \frac{\sqrt{3} i}{6} \\ - \frac{\sqrt{3} i}{6} & 0 \\ 0 & - \frac{\sqrt{3}}{6} \\ \frac{\sqrt{3}}{6} & 0 \\ - \frac{\sqrt{3} i}{6} & 0 \\ 0 & \frac{\sqrt{3} i}{6} \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x77}\quad \mathbb{M}_{2,1}^{(1,-1;a)}(E)=\begin{bmatrix} 0 & - \frac{\sqrt{2}}{4} \\ - \frac{\sqrt{2}}{4} & 0 \\ 0 & - \frac{\sqrt{2} i}{4} \\ \frac{\sqrt{2} i}{4} & 0 \\ 0 & 0 \\ 0 & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x78}\quad \mathbb{M}_{2,2}^{(1,-1;a)}(E)=\begin{bmatrix} 0 & - \frac{\sqrt{6}}{12} \\ - \frac{\sqrt{6}}{12} & 0 \\ 0 & \frac{\sqrt{6} i}{12} \\ - \frac{\sqrt{6} i}{12} & 0 \\ \frac{\sqrt{6}}{6} & 0 \\ 0 & - \frac{\sqrt{6}}{6} \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x79}\quad \mathbb{M}_{2,1}^{(1,-1;a)}(T_{1})=\begin{bmatrix} 0 & 0 \\ 0 & 0 \\ \frac{\sqrt{2}}{4} & 0 \\ 0 & - \frac{\sqrt{2}}{4} \\ 0 & - \frac{\sqrt{2} i}{4} \\ \frac{\sqrt{2} i}{4} & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x80}\quad \mathbb{M}_{2,2}^{(1,-1;a)}(T_{1})=\begin{bmatrix} \frac{\sqrt{2}}{4} & 0 \\ 0 & - \frac{\sqrt{2}}{4} \\ 0 & 0 \\ 0 & 0 \\ 0 & \frac{\sqrt{2}}{4} \\ \frac{\sqrt{2}}{4} & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x81}\quad \mathbb{M}_{2,3}^{(1,-1;a)}(T_{1})=\begin{bmatrix} 0 & - \frac{\sqrt{2} i}{4} \\ \frac{\sqrt{2} i}{4} & 0 \\ 0 & \frac{\sqrt{2}}{4} \\ \frac{\sqrt{2}}{4} & 0 \\ 0 & 0 \\ 0 & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x82}\quad \mathbb{M}_{0}^{(1,1;a)}(A_{2})=\begin{bmatrix} 0 & \frac{\sqrt{3}}{6} \\ \frac{\sqrt{3}}{6} & 0 \\ 0 & - \frac{\sqrt{3} i}{6} \\ \frac{\sqrt{3} i}{6} & 0 \\ \frac{\sqrt{3}}{6} & 0 \\ 0 & - \frac{\sqrt{3}}{6} \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x83}\quad \mathbb{T}_{1,1}^{(a)}(T_{2})=\begin{bmatrix} - \frac{i}{2} & 0 \\ 0 & - \frac{i}{2} \\ 0 & 0 \\ 0 & 0 \\ 0 & 0 \\ 0 & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x84}\quad \mathbb{T}_{1,2}^{(a)}(T_{2})=\begin{bmatrix} 0 & 0 \\ 0 & 0 \\ - \frac{i}{2} & 0 \\ 0 & - \frac{i}{2} \\ 0 & 0 \\ 0 & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x85}\quad \mathbb{T}_{1,3}^{(a)}(T_{2})=\begin{bmatrix} 0 & 0 \\ 0 & 0 \\ 0 & 0 \\ 0 & 0 \\ - \frac{i}{2} & 0 \\ 0 & - \frac{i}{2} \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x86}\quad \mathbb{T}_{1,1}^{(1,0;a)}(T_{2})=\begin{bmatrix} 0 & 0 \\ 0 & 0 \\ - \frac{\sqrt{2}}{4} & 0 \\ 0 & \frac{\sqrt{2}}{4} \\ 0 & - \frac{\sqrt{2} i}{4} \\ \frac{\sqrt{2} i}{4} & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x87}\quad \mathbb{T}_{1,2}^{(1,0;a)}(T_{2})=\begin{bmatrix} \frac{\sqrt{2}}{4} & 0 \\ 0 & - \frac{\sqrt{2}}{4} \\ 0 & 0 \\ 0 & 0 \\ 0 & - \frac{\sqrt{2}}{4} \\ - \frac{\sqrt{2}}{4} & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x88}\quad \mathbb{T}_{1,3}^{(1,0;a)}(T_{2})=\begin{bmatrix} 0 & \frac{\sqrt{2} i}{4} \\ - \frac{\sqrt{2} i}{4} & 0 \\ 0 & \frac{\sqrt{2}}{4} \\ \frac{\sqrt{2}}{4} & 0 \\ 0 & 0 \\ 0 & 0 \end{bmatrix}
+\end{dmath*}
+\vspace{5mm}
+\noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{Cluster SAMB}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
+\vspace{3mm}
+
+\noindent\textbullet\, Site cluster
+
+\vspace{5mm}
+
+\noindent ** Wyckoff: \texttt{1o}
+
+\begin{dmath*}
+\fbox{y1}\quad \mathbb{Q}_{0}^{(s)}(A_{1})=\left[ 1 \right]
+\end{dmath*}
+\vspace{5mm}
+
+\noindent ** Wyckoff: \texttt{4a}
+
+\begin{dmath*}
+\fbox{y2}\quad \mathbb{Q}_{0}^{(s)}(A_{1})=\left[ \frac{1}{2},\, \frac{1}{2},\, \frac{1}{2},\, \frac{1}{2} \right]
+\end{dmath*}
+\begin{dmath*}
+\fbox{y3}\quad \mathbb{Q}_{1,1}^{(s)}(T_{2})=\left[ \frac{1}{2},\, - \frac{1}{2},\, - \frac{1}{2},\, \frac{1}{2} \right]
+\end{dmath*}
+\begin{dmath*}
+\fbox{y4}\quad \mathbb{Q}_{1,2}^{(s)}(T_{2})=\left[ \frac{1}{2},\, - \frac{1}{2},\, \frac{1}{2},\, - \frac{1}{2} \right]
+\end{dmath*}
+\begin{dmath*}
+\fbox{y5}\quad \mathbb{Q}_{1,3}^{(s)}(T_{2})=\left[ \frac{1}{2},\, \frac{1}{2},\, - \frac{1}{2},\, - \frac{1}{2} \right]
+\end{dmath*}
+\vspace{5mm}
+
+\noindent\textbullet\, Bond cluster
+
+\vspace{5mm}
+
+\noindent ** Wyckoff: \texttt{4a@4a}
+
+\begin{dmath*}
+\fbox{y6}\quad \mathbb{Q}_{0}^{(s)}(A_{1})=\left[ \frac{1}{2},\, \frac{1}{2},\, \frac{1}{2},\, \frac{1}{2} \right]
+\end{dmath*}
+\begin{dmath*}
+\fbox{y7}\quad \mathbb{T}_{0}^{(s)}(A_{1})=\left[ \frac{i}{2},\, \frac{i}{2},\, \frac{i}{2},\, \frac{i}{2} \right]
+\end{dmath*}
+\begin{dmath*}
+\fbox{y8}\quad \mathbb{Q}_{1,1}^{(s)}(T_{2})=\left[ \frac{1}{2},\, - \frac{1}{2},\, - \frac{1}{2},\, \frac{1}{2} \right]
+\end{dmath*}
+\begin{dmath*}
+\fbox{y9}\quad \mathbb{Q}_{1,2}^{(s)}(T_{2})=\left[ \frac{1}{2},\, - \frac{1}{2},\, \frac{1}{2},\, - \frac{1}{2} \right]
+\end{dmath*}
+\begin{dmath*}
+\fbox{y10}\quad \mathbb{Q}_{1,3}^{(s)}(T_{2})=\left[ \frac{1}{2},\, \frac{1}{2},\, - \frac{1}{2},\, - \frac{1}{2} \right]
+\end{dmath*}
+\begin{dmath*}
+\fbox{y11}\quad \mathbb{T}_{1,1}^{(s)}(T_{2})=\left[ \frac{i}{2},\, - \frac{i}{2},\, - \frac{i}{2},\, \frac{i}{2} \right]
+\end{dmath*}
+\begin{dmath*}
+\fbox{y12}\quad \mathbb{T}_{1,2}^{(s)}(T_{2})=\left[ \frac{i}{2},\, - \frac{i}{2},\, \frac{i}{2},\, - \frac{i}{2} \right]
+\end{dmath*}
+\begin{dmath*}
+\fbox{y13}\quad \mathbb{T}_{1,3}^{(s)}(T_{2})=\left[ \frac{i}{2},\, \frac{i}{2},\, - \frac{i}{2},\, - \frac{i}{2} \right]
+\end{dmath*}
+\vspace{5mm}
+\noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{Site and Bond}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
+\vspace{3mm}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{longtable}{ccl}
+\caption{Orbital of each site}
+ \\
+ \hline \hline
+\# & site & orbital \\ \hline \endfirsthead
+
+\multicolumn{2}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+\# & site & orbital \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{2}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{2}{r}{} \\ \endlastfoot
+
+1 & \texttt{C} & $\ket{s_{},\uparrow}$, $\ket{s_{},\downarrow}$, $\ket{p_{x},\uparrow}$, $\ket{p_{x},\downarrow}$, $\ket{p_{y},\uparrow}$, $\ket{p_{y},\downarrow}$, $\ket{p_{z},\uparrow}$, $\ket{p_{z},\downarrow}$ \\ \hline
+2 & \texttt{H} & $\ket{s_{},\uparrow}$, $\ket{s_{},\downarrow}$ \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{longtable}{ccclll}
+\caption{Neighbor and bra-ket of each bond}
+ \\
+ \hline \hline
+\# & head & tail & neighbor & head (bra) & tail (ket) \\ \hline \endfirsthead
+
+\multicolumn{5}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+\# & head & tail & neighbor & head (bra) & tail (ket) \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{5}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{5}{r}{} \\ \endlastfoot
+
+1 & \texttt{C} & \texttt{H} & \texttt{[1]} & \texttt{[s,p]} & \texttt{[s]} \\
+\end{longtable}
+\end{center}
+\vspace{5mm}
+\noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{Site in Unit Cell}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
+\vspace{3mm}
+
+\noindent Sites in (conventional) cell (no plus set), SL = sublattice
+
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{longtable}{cll}
+\caption{'\texttt{C}' (\#1) site cluster (\texttt{1o}), \texttt{-43m}}
+ \\
+ \hline \hline
+SL & position ($\bm{s})$ & mapping \\ \hline \endfirsthead
+
+\multicolumn{2}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+SL & position ($\bm{s})$ & mapping \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{2}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{2}{r}{} \\ \endlastfoot
+
+1 & \texttt{[ 0.00000, 0.00000, 0.00000]} & \texttt{[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24]} \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{longtable}{cll}
+\caption{'\texttt{H}' (\#2) site cluster (\texttt{4a}), \texttt{.3m}}
+ \\
+ \hline \hline
+SL & position ($\bm{s})$ & mapping \\ \hline \endfirsthead
+
+\multicolumn{2}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+SL & position ($\bm{s})$ & mapping \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{2}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{2}{r}{} \\ \endlastfoot
+
+1 & \texttt{[ 0.33333, 0.33333, 0.33333]} & \texttt{[1,5,9,13,17,21]} \\ \hline
+2 & \texttt{[-0.33333,-0.33333, 0.33333]} & \texttt{[2,7,12,14,19,24]} \\ \hline
+3 & \texttt{[-0.33333, 0.33333,-0.33333]} & \texttt{[3,8,10,16,18,23]} \\ \hline
+4 & \texttt{[ 0.33333,-0.33333,-0.33333]} & \texttt{[4,6,11,15,20,22]} \\
+\end{longtable}
+\end{center}
+\vspace{5mm}
+\noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{Bond in Unit Cell}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
+\vspace{3mm}
+
+\noindent Bonds in (conventional) cell (no plus set): tail, head = (SL, plus set), (N)D = (non)directional (listed up to 5th neighbor at most)
+
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{longtable}{cllllll}
+\caption{1-th '\texttt{C}'-'\texttt{H}' [1] (\#1) bond cluster (\texttt{4a@4a}), D, $|\bm{v}|=0.57735$ (cartesian)}
+ \\
+ \hline \hline
+SL & vector ($\bm{v})$ & center ($\bm{c})$ & mapping & head & tail & $\bm{R}$ (primitive) \\ \hline \endfirsthead
+
+\multicolumn{6}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+SL & vector ($\bm{v})$ & center ($\bm{c})$ & mapping & head & tail & $\bm{R}$ (primitive) \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{6}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{6}{r}{} \\ \endlastfoot
+
+1 & \texttt{[-0.33333,-0.33333,-0.33333]} & \texttt{[ 0.16667, 0.16667, 0.16667]} & \texttt{[1,5,9,13,17,21]} & \texttt{(1,1)} & \texttt{(1,1)} & \texttt{[0,0,0]} \\ \hline
+2 & \texttt{[ 0.33333, 0.33333,-0.33333]} & \texttt{[-0.16667,-0.16667, 0.16667]} & \texttt{[2,7,12,14,19,24]} & \texttt{(1,1)} & \texttt{(2,1)} & \texttt{[0,0,0]} \\ \hline
+3 & \texttt{[ 0.33333,-0.33333, 0.33333]} & \texttt{[-0.16667, 0.16667,-0.16667]} & \texttt{[3,8,10,16,18,23]} & \texttt{(1,1)} & \texttt{(3,1)} & \texttt{[0,0,0]} \\ \hline
+4 & \texttt{[-0.33333, 0.33333, 0.33333]} & \texttt{[ 0.16667,-0.16667,-0.16667]} & \texttt{[4,6,11,15,20,22]} & \texttt{(1,1)} & \texttt{(4,1)} & \texttt{[0,0,0]} \\
+\end{longtable}
+\end{center}
+
+\end{document}

@@ -1,0 +1,142 @@
+\documentclass[fleqn,8pt]{jsarticle}
+
+%%% package
+
+\usepackage[usenames]{color}
+\usepackage{amsmath}
+\usepackage{breqn}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{enumitem}
+\usepackage{braket}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+%%% layout setting
+
+\paperwidth=210truemm
+\paperheight=297truemm
+\textwidth=189.2truemm
+\textheight=269.2truemm
+\oddsidemargin=-15truemm
+\topmargin=-15truemm
+\footskip=7truemm
+
+%%% fixed
+
+\hoffset=0truemm
+\voffset=0truemm
+\headheight=0truemm
+\headsep=0truemm
+\marginparsep=0truemm
+\marginparwidth=0truemm
+
+%%% main text
+
+\begin{document}
+
+\setcounter{MaxMatrixCols}{32}
+
+\renewcommand{\tablename}{Table~}
+\renewcommand{\figurename}{Figure~}
+\begin{center}
+\LARGE
+MSG No. 166.102\quad$R_{I}\bar{3}m$\quad[ Type IV, trigonal ]
+\end{center}
+* symmetry operation
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{longtable}{ccccc}
+\caption{Symmetry operations for 3d polar vector.}
+ \\
+ \hline \hline
+No. & tag & matrix (polar) & det & TR \\ \hline \endfirsthead
+
+\multicolumn{4}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+No. & tag & matrix (polar) & det & TR \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{4}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{4}{r}{} \\ \endlastfoot
+
+$ 1 $ & $ \{1|0\} $ & $ \begin{bmatrix} 1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 1 & 0 \end{bmatrix} $ & $ 1 $ & $ 1 $ \\ \hline
+$ 2 $ & $ \{3^{+}_{\,\,001}|0\} $ & $ \begin{bmatrix} 0 & -1 & 0 & 0 \\ 1 & -1 & 0 & 0 \\ 0 & 0 & 1 & 0 \end{bmatrix} $ & $ 1 $ & $ 1 $ \\ \hline
+$ 3 $ & $ \{3^{-}_{\,\,001}|0\} $ & $ \begin{bmatrix} -1 & 1 & 0 & 0 \\ -1 & 0 & 0 & 0 \\ 0 & 0 & 1 & 0 \end{bmatrix} $ & $ 1 $ & $ 1 $ \\ \hline
+$ 4 $ & $ \{2{}_{100}|0\} $ & $ \begin{bmatrix} 1 & -1 & 0 & 0 \\ 0 & -1 & 0 & 0 \\ 0 & 0 & -1 & 0 \end{bmatrix} $ & $ 1 $ & $ 1 $ \\ \hline
+$ 5 $ & $ \{2{}_{110}|0\} $ & $ \begin{bmatrix} 0 & 1 & 0 & 0 \\ 1 & 0 & 0 & 0 \\ 0 & 0 & -1 & 0 \end{bmatrix} $ & $ 1 $ & $ 1 $ \\ \hline
+$ 6 $ & $ \{2{}_{010}|0\} $ & $ \begin{bmatrix} -1 & 0 & 0 & 0 \\ -1 & 1 & 0 & 0 \\ 0 & 0 & -1 & 0 \end{bmatrix} $ & $ 1 $ & $ 1 $ \\ \hline
+$ 7 $ & $ \{-1|0\} $ & $ \begin{bmatrix} -1 & 0 & 0 & 0 \\ 0 & -1 & 0 & 0 \\ 0 & 0 & -1 & 0 \end{bmatrix} $ & $ -1 $ & $ 1 $ \\ \hline
+$ 8 $ & $ \{-3^{+}_{\,\,001}|0\} $ & $ \begin{bmatrix} 0 & 1 & 0 & 0 \\ -1 & 1 & 0 & 0 \\ 0 & 0 & -1 & 0 \end{bmatrix} $ & $ -1 $ & $ 1 $ \\ \hline
+$ 9 $ & $ \{-3^{-}_{\,\,001}|0\} $ & $ \begin{bmatrix} 1 & -1 & 0 & 0 \\ 1 & 0 & 0 & 0 \\ 0 & 0 & -1 & 0 \end{bmatrix} $ & $ -1 $ & $ 1 $ \\ \hline
+$ 10 $ & $ \{{\rm m}_{100}|0\} $ & $ \begin{bmatrix} -1 & 1 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 1 & 0 \end{bmatrix} $ & $ -1 $ & $ 1 $ \\ \hline
+$ 11 $ & $ \{{\rm m}_{110}|0\} $ & $ \begin{bmatrix} 0 & -1 & 0 & 0 \\ -1 & 0 & 0 & 0 \\ 0 & 0 & 1 & 0 \end{bmatrix} $ & $ -1 $ & $ 1 $ \\ \hline
+$ 12 $ & $ \{{\rm m}_{010}|0\} $ & $ \begin{bmatrix} 1 & 0 & 0 & 0 \\ 1 & -1 & 0 & 0 \\ 0 & 0 & 1 & 0 \end{bmatrix} $ & $ -1 $ & $ 1 $ \\ \hline
+$ 13 $ & $ \{1|\frac{2}{3} \frac{1}{3} \frac{1}{3}\} $ & $ \begin{bmatrix} 1 & 0 & 0 & \frac{2}{3} \\ 0 & 1 & 0 & \frac{1}{3} \\ 0 & 0 & 1 & \frac{1}{3} \end{bmatrix} $ & $ 1 $ & $ 1 $ \\ \hline
+$ 14 $ & $ \{3^{+}_{\,\,001}|\frac{2}{3} \frac{1}{3} \frac{1}{3}\} $ & $ \begin{bmatrix} 0 & -1 & 0 & \frac{2}{3} \\ 1 & -1 & 0 & \frac{1}{3} \\ 0 & 0 & 1 & \frac{1}{3} \end{bmatrix} $ & $ 1 $ & $ 1 $ \\ \hline
+$ 15 $ & $ \{3^{-}_{\,\,001}|\frac{2}{3} \frac{1}{3} \frac{1}{3}\} $ & $ \begin{bmatrix} -1 & 1 & 0 & \frac{2}{3} \\ -1 & 0 & 0 & \frac{1}{3} \\ 0 & 0 & 1 & \frac{1}{3} \end{bmatrix} $ & $ 1 $ & $ 1 $ \\ \hline
+$ 16 $ & $ \{2{}_{100}|\frac{2}{3} \frac{1}{3} \frac{1}{3}\} $ & $ \begin{bmatrix} 1 & -1 & 0 & \frac{2}{3} \\ 0 & -1 & 0 & \frac{1}{3} \\ 0 & 0 & -1 & \frac{1}{3} \end{bmatrix} $ & $ 1 $ & $ 1 $ \\ \hline
+$ 17 $ & $ \{2{}_{110}|\frac{2}{3} \frac{1}{3} \frac{1}{3}\} $ & $ \begin{bmatrix} 0 & 1 & 0 & \frac{2}{3} \\ 1 & 0 & 0 & \frac{1}{3} \\ 0 & 0 & -1 & \frac{1}{3} \end{bmatrix} $ & $ 1 $ & $ 1 $ \\ \hline
+$ 18 $ & $ \{2{}_{010}|\frac{2}{3} \frac{1}{3} \frac{1}{3}\} $ & $ \begin{bmatrix} -1 & 0 & 0 & \frac{2}{3} \\ -1 & 1 & 0 & \frac{1}{3} \\ 0 & 0 & -1 & \frac{1}{3} \end{bmatrix} $ & $ 1 $ & $ 1 $ \\ \hline
+$ 19 $ & $ \{-1|\frac{2}{3} \frac{1}{3} \frac{1}{3}\} $ & $ \begin{bmatrix} -1 & 0 & 0 & \frac{2}{3} \\ 0 & -1 & 0 & \frac{1}{3} \\ 0 & 0 & -1 & \frac{1}{3} \end{bmatrix} $ & $ -1 $ & $ 1 $ \\ \hline
+$ 20 $ & $ \{-3^{+}_{\,\,001}|\frac{2}{3} \frac{1}{3} \frac{1}{3}\} $ & $ \begin{bmatrix} 0 & 1 & 0 & \frac{2}{3} \\ -1 & 1 & 0 & \frac{1}{3} \\ 0 & 0 & -1 & \frac{1}{3} \end{bmatrix} $ & $ -1 $ & $ 1 $ \\ \hline
+$ 21 $ & $ \{-3^{-}_{\,\,001}|\frac{2}{3} \frac{1}{3} \frac{1}{3}\} $ & $ \begin{bmatrix} 1 & -1 & 0 & \frac{2}{3} \\ 1 & 0 & 0 & \frac{1}{3} \\ 0 & 0 & -1 & \frac{1}{3} \end{bmatrix} $ & $ -1 $ & $ 1 $ \\ \hline
+$ 22 $ & $ \{{\rm m}_{100}|\frac{2}{3} \frac{1}{3} \frac{1}{3}\} $ & $ \begin{bmatrix} -1 & 1 & 0 & \frac{2}{3} \\ 0 & 1 & 0 & \frac{1}{3} \\ 0 & 0 & 1 & \frac{1}{3} \end{bmatrix} $ & $ -1 $ & $ 1 $ \\ \hline
+$ 23 $ & $ \{{\rm m}_{110}|\frac{2}{3} \frac{1}{3} \frac{1}{3}\} $ & $ \begin{bmatrix} 0 & -1 & 0 & \frac{2}{3} \\ -1 & 0 & 0 & \frac{1}{3} \\ 0 & 0 & 1 & \frac{1}{3} \end{bmatrix} $ & $ -1 $ & $ 1 $ \\ \hline
+$ 24 $ & $ \{{\rm m}_{010}|\frac{2}{3} \frac{1}{3} \frac{1}{3}\} $ & $ \begin{bmatrix} 1 & 0 & 0 & \frac{2}{3} \\ 1 & -1 & 0 & \frac{1}{3} \\ 0 & 0 & 1 & \frac{1}{3} \end{bmatrix} $ & $ -1 $ & $ 1 $ \\ \hline
+$ 25 $ & $ \{1|\frac{1}{3} \frac{2}{3} \frac{2}{3}\} $ & $ \begin{bmatrix} 1 & 0 & 0 & \frac{1}{3} \\ 0 & 1 & 0 & \frac{2}{3} \\ 0 & 0 & 1 & \frac{2}{3} \end{bmatrix} $ & $ 1 $ & $ 1 $ \\ \hline
+$ 26 $ & $ \{3^{+}_{\,\,001}|\frac{1}{3} \frac{2}{3} \frac{2}{3}\} $ & $ \begin{bmatrix} 0 & -1 & 0 & \frac{1}{3} \\ 1 & -1 & 0 & \frac{2}{3} \\ 0 & 0 & 1 & \frac{2}{3} \end{bmatrix} $ & $ 1 $ & $ 1 $ \\ \hline
+$ 27 $ & $ \{3^{-}_{\,\,001}|\frac{1}{3} \frac{2}{3} \frac{2}{3}\} $ & $ \begin{bmatrix} -1 & 1 & 0 & \frac{1}{3} \\ -1 & 0 & 0 & \frac{2}{3} \\ 0 & 0 & 1 & \frac{2}{3} \end{bmatrix} $ & $ 1 $ & $ 1 $ \\ \hline
+$ 28 $ & $ \{2{}_{100}|\frac{1}{3} \frac{2}{3} \frac{2}{3}\} $ & $ \begin{bmatrix} 1 & -1 & 0 & \frac{1}{3} \\ 0 & -1 & 0 & \frac{2}{3} \\ 0 & 0 & -1 & \frac{2}{3} \end{bmatrix} $ & $ 1 $ & $ 1 $ \\ \hline
+$ 29 $ & $ \{2{}_{110}|\frac{1}{3} \frac{2}{3} \frac{2}{3}\} $ & $ \begin{bmatrix} 0 & 1 & 0 & \frac{1}{3} \\ 1 & 0 & 0 & \frac{2}{3} \\ 0 & 0 & -1 & \frac{2}{3} \end{bmatrix} $ & $ 1 $ & $ 1 $ \\ \hline
+$ 30 $ & $ \{2{}_{010}|\frac{1}{3} \frac{2}{3} \frac{2}{3}\} $ & $ \begin{bmatrix} -1 & 0 & 0 & \frac{1}{3} \\ -1 & 1 & 0 & \frac{2}{3} \\ 0 & 0 & -1 & \frac{2}{3} \end{bmatrix} $ & $ 1 $ & $ 1 $ \\ \hline
+$ 31 $ & $ \{-1|\frac{1}{3} \frac{2}{3} \frac{2}{3}\} $ & $ \begin{bmatrix} -1 & 0 & 0 & \frac{1}{3} \\ 0 & -1 & 0 & \frac{2}{3} \\ 0 & 0 & -1 & \frac{2}{3} \end{bmatrix} $ & $ -1 $ & $ 1 $ \\ \hline
+$ 32 $ & $ \{-3^{+}_{\,\,001}|\frac{1}{3} \frac{2}{3} \frac{2}{3}\} $ & $ \begin{bmatrix} 0 & 1 & 0 & \frac{1}{3} \\ -1 & 1 & 0 & \frac{2}{3} \\ 0 & 0 & -1 & \frac{2}{3} \end{bmatrix} $ & $ -1 $ & $ 1 $ \\ \hline
+$ 33 $ & $ \{-3^{-}_{\,\,001}|\frac{1}{3} \frac{2}{3} \frac{2}{3}\} $ & $ \begin{bmatrix} 1 & -1 & 0 & \frac{1}{3} \\ 1 & 0 & 0 & \frac{2}{3} \\ 0 & 0 & -1 & \frac{2}{3} \end{bmatrix} $ & $ -1 $ & $ 1 $ \\ \hline
+$ 34 $ & $ \{{\rm m}_{100}|\frac{1}{3} \frac{2}{3} \frac{2}{3}\} $ & $ \begin{bmatrix} -1 & 1 & 0 & \frac{1}{3} \\ 0 & 1 & 0 & \frac{2}{3} \\ 0 & 0 & 1 & \frac{2}{3} \end{bmatrix} $ & $ -1 $ & $ 1 $ \\ \hline
+$ 35 $ & $ \{{\rm m}_{110}|\frac{1}{3} \frac{2}{3} \frac{2}{3}\} $ & $ \begin{bmatrix} 0 & -1 & 0 & \frac{1}{3} \\ -1 & 0 & 0 & \frac{2}{3} \\ 0 & 0 & 1 & \frac{2}{3} \end{bmatrix} $ & $ -1 $ & $ 1 $ \\ \hline
+$ 36 $ & $ \{{\rm m}_{010}|\frac{1}{3} \frac{2}{3} \frac{2}{3}\} $ & $ \begin{bmatrix} 1 & 0 & 0 & \frac{1}{3} \\ 1 & -1 & 0 & \frac{2}{3} \\ 0 & 0 & 1 & \frac{2}{3} \end{bmatrix} $ & $ -1 $ & $ 1 $ \\ \hline
+$ 37 $ & $ \{1{}'|0 0 \frac{1}{2}\} $ & $ \begin{bmatrix} 1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 1 & \frac{1}{2} \end{bmatrix} $ & $ 1 $ & $ -1 $ \\ \hline
+$ 38 $ & $ \{3^{+}_{\,\,001}{}'|0 0 \frac{1}{2}\} $ & $ \begin{bmatrix} 0 & -1 & 0 & 0 \\ 1 & -1 & 0 & 0 \\ 0 & 0 & 1 & \frac{1}{2} \end{bmatrix} $ & $ 1 $ & $ -1 $ \\ \hline
+$ 39 $ & $ \{3^{-}_{\,\,001}{}'|0 0 \frac{1}{2}\} $ & $ \begin{bmatrix} -1 & 1 & 0 & 0 \\ -1 & 0 & 0 & 0 \\ 0 & 0 & 1 & \frac{1}{2} \end{bmatrix} $ & $ 1 $ & $ -1 $ \\ \hline
+$ 40 $ & $ \{2{}_{100}{}'|0 0 \frac{1}{2}\} $ & $ \begin{bmatrix} 1 & -1 & 0 & 0 \\ 0 & -1 & 0 & 0 \\ 0 & 0 & -1 & \frac{1}{2} \end{bmatrix} $ & $ 1 $ & $ -1 $ \\ \hline
+$ 41 $ & $ \{2{}_{110}{}'|0 0 \frac{1}{2}\} $ & $ \begin{bmatrix} 0 & 1 & 0 & 0 \\ 1 & 0 & 0 & 0 \\ 0 & 0 & -1 & \frac{1}{2} \end{bmatrix} $ & $ 1 $ & $ -1 $ \\ \hline
+$ 42 $ & $ \{2{}_{010}{}'|0 0 \frac{1}{2}\} $ & $ \begin{bmatrix} -1 & 0 & 0 & 0 \\ -1 & 1 & 0 & 0 \\ 0 & 0 & -1 & \frac{1}{2} \end{bmatrix} $ & $ 1 $ & $ -1 $ \\ \hline
+$ 43 $ & $ \{-1{}'|0 0 \frac{1}{2}\} $ & $ \begin{bmatrix} -1 & 0 & 0 & 0 \\ 0 & -1 & 0 & 0 \\ 0 & 0 & -1 & \frac{1}{2} \end{bmatrix} $ & $ -1 $ & $ -1 $ \\ \hline
+$ 44 $ & $ \{-3^{+}_{\,\,001}{}'|0 0 \frac{1}{2}\} $ & $ \begin{bmatrix} 0 & 1 & 0 & 0 \\ -1 & 1 & 0 & 0 \\ 0 & 0 & -1 & \frac{1}{2} \end{bmatrix} $ & $ -1 $ & $ -1 $ \\ \hline
+$ 45 $ & $ \{-3^{-}_{\,\,001}{}'|0 0 \frac{1}{2}\} $ & $ \begin{bmatrix} 1 & -1 & 0 & 0 \\ 1 & 0 & 0 & 0 \\ 0 & 0 & -1 & \frac{1}{2} \end{bmatrix} $ & $ -1 $ & $ -1 $ \\ \hline
+$ 46 $ & $ \{{\rm m}_{100}{}'|0 0 \frac{1}{2}\} $ & $ \begin{bmatrix} -1 & 1 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 1 & \frac{1}{2} \end{bmatrix} $ & $ -1 $ & $ -1 $ \\ \hline
+$ 47 $ & $ \{{\rm m}_{110}{}'|0 0 \frac{1}{2}\} $ & $ \begin{bmatrix} 0 & -1 & 0 & 0 \\ -1 & 0 & 0 & 0 \\ 0 & 0 & 1 & \frac{1}{2} \end{bmatrix} $ & $ -1 $ & $ -1 $ \\ \hline
+$ 48 $ & $ \{{\rm m}_{010}{}'|0 0 \frac{1}{2}\} $ & $ \begin{bmatrix} 1 & 0 & 0 & 0 \\ 1 & -1 & 0 & 0 \\ 0 & 0 & 1 & \frac{1}{2} \end{bmatrix} $ & $ -1 $ & $ -1 $ \\ \hline
+$ 49 $ & $ \{1{}'|\frac{2}{3} \frac{1}{3} \frac{5}{6}\} $ & $ \begin{bmatrix} 1 & 0 & 0 & \frac{2}{3} \\ 0 & 1 & 0 & \frac{1}{3} \\ 0 & 0 & 1 & \frac{5}{6} \end{bmatrix} $ & $ 1 $ & $ -1 $ \\ \hline
+$ 50 $ & $ \{3^{+}_{\,\,001}{}'|\frac{2}{3} \frac{1}{3} \frac{5}{6}\} $ & $ \begin{bmatrix} 0 & -1 & 0 & \frac{2}{3} \\ 1 & -1 & 0 & \frac{1}{3} \\ 0 & 0 & 1 & \frac{5}{6} \end{bmatrix} $ & $ 1 $ & $ -1 $ \\ \hline
+$ 51 $ & $ \{3^{-}_{\,\,001}{}'|\frac{2}{3} \frac{1}{3} \frac{5}{6}\} $ & $ \begin{bmatrix} -1 & 1 & 0 & \frac{2}{3} \\ -1 & 0 & 0 & \frac{1}{3} \\ 0 & 0 & 1 & \frac{5}{6} \end{bmatrix} $ & $ 1 $ & $ -1 $ \\ \hline
+$ 52 $ & $ \{2{}_{100}{}'|\frac{2}{3} \frac{1}{3} \frac{5}{6}\} $ & $ \begin{bmatrix} 1 & -1 & 0 & \frac{2}{3} \\ 0 & -1 & 0 & \frac{1}{3} \\ 0 & 0 & -1 & \frac{5}{6} \end{bmatrix} $ & $ 1 $ & $ -1 $ \\ \hline
+$ 53 $ & $ \{2{}_{110}{}'|\frac{2}{3} \frac{1}{3} \frac{5}{6}\} $ & $ \begin{bmatrix} 0 & 1 & 0 & \frac{2}{3} \\ 1 & 0 & 0 & \frac{1}{3} \\ 0 & 0 & -1 & \frac{5}{6} \end{bmatrix} $ & $ 1 $ & $ -1 $ \\ \hline
+$ 54 $ & $ \{2{}_{010}{}'|\frac{2}{3} \frac{1}{3} \frac{5}{6}\} $ & $ \begin{bmatrix} -1 & 0 & 0 & \frac{2}{3} \\ -1 & 1 & 0 & \frac{1}{3} \\ 0 & 0 & -1 & \frac{5}{6} \end{bmatrix} $ & $ 1 $ & $ -1 $ \\ \hline
+$ 55 $ & $ \{-1{}'|\frac{2}{3} \frac{1}{3} \frac{5}{6}\} $ & $ \begin{bmatrix} -1 & 0 & 0 & \frac{2}{3} \\ 0 & -1 & 0 & \frac{1}{3} \\ 0 & 0 & -1 & \frac{5}{6} \end{bmatrix} $ & $ -1 $ & $ -1 $ \\ \hline
+$ 56 $ & $ \{-3^{+}_{\,\,001}{}'|\frac{2}{3} \frac{1}{3} \frac{5}{6}\} $ & $ \begin{bmatrix} 0 & 1 & 0 & \frac{2}{3} \\ -1 & 1 & 0 & \frac{1}{3} \\ 0 & 0 & -1 & \frac{5}{6} \end{bmatrix} $ & $ -1 $ & $ -1 $ \\ \hline
+$ 57 $ & $ \{-3^{-}_{\,\,001}{}'|\frac{2}{3} \frac{1}{3} \frac{5}{6}\} $ & $ \begin{bmatrix} 1 & -1 & 0 & \frac{2}{3} \\ 1 & 0 & 0 & \frac{1}{3} \\ 0 & 0 & -1 & \frac{5}{6} \end{bmatrix} $ & $ -1 $ & $ -1 $ \\ \hline
+$ 58 $ & $ \{{\rm m}_{100}{}'|\frac{2}{3} \frac{1}{3} \frac{5}{6}\} $ & $ \begin{bmatrix} -1 & 1 & 0 & \frac{2}{3} \\ 0 & 1 & 0 & \frac{1}{3} \\ 0 & 0 & 1 & \frac{5}{6} \end{bmatrix} $ & $ -1 $ & $ -1 $ \\ \hline
+$ 59 $ & $ \{{\rm m}_{110}{}'|\frac{2}{3} \frac{1}{3} \frac{5}{6}\} $ & $ \begin{bmatrix} 0 & -1 & 0 & \frac{2}{3} \\ -1 & 0 & 0 & \frac{1}{3} \\ 0 & 0 & 1 & \frac{5}{6} \end{bmatrix} $ & $ -1 $ & $ -1 $ \\ \hline
+$ 60 $ & $ \{{\rm m}_{010}{}'|\frac{2}{3} \frac{1}{3} \frac{5}{6}\} $ & $ \begin{bmatrix} 1 & 0 & 0 & \frac{2}{3} \\ 1 & -1 & 0 & \frac{1}{3} \\ 0 & 0 & 1 & \frac{5}{6} \end{bmatrix} $ & $ -1 $ & $ -1 $ \\ \hline
+$ 61 $ & $ \{1{}'|\frac{1}{3} \frac{2}{3} \frac{1}{6}\} $ & $ \begin{bmatrix} 1 & 0 & 0 & \frac{1}{3} \\ 0 & 1 & 0 & \frac{2}{3} \\ 0 & 0 & 1 & \frac{1}{6} \end{bmatrix} $ & $ 1 $ & $ -1 $ \\ \hline
+$ 62 $ & $ \{3^{+}_{\,\,001}{}'|\frac{1}{3} \frac{2}{3} \frac{1}{6}\} $ & $ \begin{bmatrix} 0 & -1 & 0 & \frac{1}{3} \\ 1 & -1 & 0 & \frac{2}{3} \\ 0 & 0 & 1 & \frac{1}{6} \end{bmatrix} $ & $ 1 $ & $ -1 $ \\ \hline
+$ 63 $ & $ \{3^{-}_{\,\,001}{}'|\frac{1}{3} \frac{2}{3} \frac{1}{6}\} $ & $ \begin{bmatrix} -1 & 1 & 0 & \frac{1}{3} \\ -1 & 0 & 0 & \frac{2}{3} \\ 0 & 0 & 1 & \frac{1}{6} \end{bmatrix} $ & $ 1 $ & $ -1 $ \\ \hline
+$ 64 $ & $ \{2{}_{100}{}'|\frac{1}{3} \frac{2}{3} \frac{1}{6}\} $ & $ \begin{bmatrix} 1 & -1 & 0 & \frac{1}{3} \\ 0 & -1 & 0 & \frac{2}{3} \\ 0 & 0 & -1 & \frac{1}{6} \end{bmatrix} $ & $ 1 $ & $ -1 $ \\ \hline
+$ 65 $ & $ \{2{}_{110}{}'|\frac{1}{3} \frac{2}{3} \frac{1}{6}\} $ & $ \begin{bmatrix} 0 & 1 & 0 & \frac{1}{3} \\ 1 & 0 & 0 & \frac{2}{3} \\ 0 & 0 & -1 & \frac{1}{6} \end{bmatrix} $ & $ 1 $ & $ -1 $ \\ \hline
+$ 66 $ & $ \{2{}_{010}{}'|\frac{1}{3} \frac{2}{3} \frac{1}{6}\} $ & $ \begin{bmatrix} -1 & 0 & 0 & \frac{1}{3} \\ -1 & 1 & 0 & \frac{2}{3} \\ 0 & 0 & -1 & \frac{1}{6} \end{bmatrix} $ & $ 1 $ & $ -1 $ \\ \hline
+$ 67 $ & $ \{-1{}'|\frac{1}{3} \frac{2}{3} \frac{1}{6}\} $ & $ \begin{bmatrix} -1 & 0 & 0 & \frac{1}{3} \\ 0 & -1 & 0 & \frac{2}{3} \\ 0 & 0 & -1 & \frac{1}{6} \end{bmatrix} $ & $ -1 $ & $ -1 $ \\ \hline
+$ 68 $ & $ \{-3^{+}_{\,\,001}{}'|\frac{1}{3} \frac{2}{3} \frac{1}{6}\} $ & $ \begin{bmatrix} 0 & 1 & 0 & \frac{1}{3} \\ -1 & 1 & 0 & \frac{2}{3} \\ 0 & 0 & -1 & \frac{1}{6} \end{bmatrix} $ & $ -1 $ & $ -1 $ \\ \hline
+$ 69 $ & $ \{-3^{-}_{\,\,001}{}'|\frac{1}{3} \frac{2}{3} \frac{1}{6}\} $ & $ \begin{bmatrix} 1 & -1 & 0 & \frac{1}{3} \\ 1 & 0 & 0 & \frac{2}{3} \\ 0 & 0 & -1 & \frac{1}{6} \end{bmatrix} $ & $ -1 $ & $ -1 $ \\ \hline
+$ 70 $ & $ \{{\rm m}_{100}{}'|\frac{1}{3} \frac{2}{3} \frac{1}{6}\} $ & $ \begin{bmatrix} -1 & 1 & 0 & \frac{1}{3} \\ 0 & 1 & 0 & \frac{2}{3} \\ 0 & 0 & 1 & \frac{1}{6} \end{bmatrix} $ & $ -1 $ & $ -1 $ \\ \hline
+$ 71 $ & $ \{{\rm m}_{110}{}'|\frac{1}{3} \frac{2}{3} \frac{1}{6}\} $ & $ \begin{bmatrix} 0 & -1 & 0 & \frac{1}{3} \\ -1 & 0 & 0 & \frac{2}{3} \\ 0 & 0 & 1 & \frac{1}{6} \end{bmatrix} $ & $ -1 $ & $ -1 $ \\ \hline
+$ 72 $ & $ \{{\rm m}_{010}{}'|\frac{1}{3} \frac{2}{3} \frac{1}{6}\} $ & $ \begin{bmatrix} 1 & 0 & 0 & \frac{1}{3} \\ 1 & -1 & 0 & \frac{2}{3} \\ 0 & 0 & 1 & \frac{1}{6} \end{bmatrix} $ & $ -1 $ & $ -1 $ \\
+\end{longtable}
+\end{center}
+
+\end{document}

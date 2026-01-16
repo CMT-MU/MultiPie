@@ -1,0 +1,202 @@
+\documentclass[fleqn,8pt,landscape]{jsarticle}
+\special{papersize=\the\paperwidth,\the\paperheight}
+
+%%% package
+
+\usepackage[usenames]{color}
+\usepackage{amsmath}
+\usepackage{breqn}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{enumitem}
+\usepackage{braket}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+%%% layout setting
+
+\paperwidth=356.4truemm
+\paperheight=252.0truemm
+\textwidth=335.59999999999997truemm
+\textheight=224.2truemm
+\oddsidemargin=-15truemm
+\topmargin=-15truemm
+\footskip=7truemm
+
+%%% fixed
+
+\hoffset=0truemm
+\voffset=0truemm
+\headheight=0truemm
+\headsep=0truemm
+\marginparsep=0truemm
+\marginparwidth=0truemm
+
+%%% main text
+
+\begin{document}
+
+\setcounter{MaxMatrixCols}{32}
+
+\renewcommand{\tablename}{Table~}
+\renewcommand{\figurename}{Figure~}
+\begin{center}
+\LARGE
+MPG No. 9.1.29\quad$4$\quad[ Type I, tetragonal ] [T tensor]
+\end{center}
+* Rank 0 tensor.
+\begin{align*}
+\begin{bmatrix} T \end{bmatrix}
+\end{align*}
+\begin{align*}
+& T = T_{s}^{(1)}
+\end{align*}
+* Rank 1 tensor.
+\begin{align*}
+\begin{bmatrix} 0 & 0 & T_{z} \end{bmatrix}
+\end{align*}
+\begin{align*}
+& T_{z} = T_{pz}^{(1)}
+\end{align*}
+* Rank 2 tensor (s).
+\begin{align*}
+\begin{bmatrix} T_{xx} & 0 & 0 \\ 0 & T_{xx} & 0 \\ 0 & 0 & T_{zz} \end{bmatrix}
+\end{align*}
+\begin{align*}
+& T_{xx} = - T_{du}^{(1)} + T_{s}^{(1)} \\
+& T_{zz} = 2 T_{du}^{(1)} + T_{s}^{(1)}
+\end{align*}
+* Rank 2 tensor (a).
+\begin{align*}
+\begin{bmatrix} 0 & T_{xy} & 0 \\ - T_{xy} & 0 & 0 \\ 0 & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& T_{xy} = M_{pz}^{(1)}
+\end{align*}
+* Rank 3 tensor (s).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & T_{xxz} \\ 0 & 0 & T_{xxz} \\ 0 & 0 & T_{zzz} \\ T_{yzx} & T_{yzy} & 0 \\ T_{yzy} & - T_{yzx} & 0 \\ 0 & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& T_{xxz} = - T_{faz}^{(1)} + T_{pz}^{(1)} \\
+& T_{zzz} = 2 T_{faz}^{(1)} + T_{pz}^{(1)} + 2 T_{pz}^{(2)} \\
+& T_{yzx} = - 3 M_{du}^{(1)} \\
+& T_{yzy} = - T_{faz}^{(1)} + T_{pz}^{(2)}
+\end{align*}
+* Rank 3 tensor (a).
+\begin{align*}
+\begin{bmatrix} T_{yzx} & T_{yzy} & 0 \\ - T_{yzy} & T_{yzx} & 0 \\ 0 & 0 & T_{xyz} \end{bmatrix}
+\end{align*}
+\begin{align*}
+& T_{yzx} = - M_{du}^{(2)} + M_{s}^{(1)} \\
+& T_{yzy} = T_{pz}^{(3)} \\
+& T_{xyz} = 2 M_{du}^{(2)} + M_{s}^{(1)}
+\end{align*}
+* Rank 4 tensor (sss).
+\begin{align*}
+\begin{bmatrix} T_{xxxx} & T_{xxyy} & T_{xxzz} & 0 & 0 & T_{xxxy} \\ T_{xxyy} & T_{xxxx} & T_{xxzz} & 0 & 0 & - T_{xxxy} \\ T_{xxzz} & T_{xxzz} & T_{zzzz} & 0 & 0 & 0 \\ 0 & 0 & 0 & T_{yzyz} & 0 & 0 \\ 0 & 0 & 0 & 0 & T_{yzyz} & 0 \\ T_{xxxy} & - T_{xxxy} & 0 & 0 & 0 & T_{xyxy} \end{bmatrix}
+\end{align*}
+\begin{align*}
+& T_{xxxx} = - 2 T_{du}^{(1)} - 4 T_{du}^{(2)} - T_{gu}^{(1)} + 2 T_{g}^{(1)} + T_{s}^{(1)} + 2 T_{s}^{(2)} \\
+& T_{xxyy} = - 2 T_{du}^{(1)} + 2 T_{gu}^{(1)} - T_{g}^{(1)} + T_{s}^{(1)} \\
+& T_{xxzz} = T_{du}^{(1)} - T_{gu}^{(1)} - T_{g}^{(1)} + T_{s}^{(1)} \\
+& T_{xxxy} = T_{gaz}^{(1)} \\
+& T_{zzzz} = 4 T_{du}^{(1)} + 8 T_{du}^{(2)} + 2 T_{gu}^{(1)} + 2 T_{g}^{(1)} + T_{s}^{(1)} + 2 T_{s}^{(2)} \\
+& T_{yzyz} = T_{du}^{(2)} - T_{gu}^{(1)} - T_{g}^{(1)} + T_{s}^{(2)} \\
+& T_{xyxy} = - 2 T_{du}^{(2)} + 2 T_{gu}^{(1)} - T_{g}^{(1)} + T_{s}^{(2)}
+\end{align*}
+* Rank 4 tensor (ssa).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & T_{xxzz} & 0 & 0 & T_{xxxy} \\ 0 & 0 & T_{xxzz} & 0 & 0 & - T_{xxxy} \\ - T_{xxzz} & - T_{xxzz} & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & T_{yzzx} & 0 \\ 0 & 0 & 0 & - T_{yzzx} & 0 & 0 \\ - T_{xxxy} & T_{xxxy} & 0 & 0 & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& T_{xxzz} = 3 T_{du}^{(3)} \\
+& T_{xxxy} = - 2 M_{faz}^{(1)} + 2 M_{pz}^{(1)} \\
+& T_{yzzx} = - 4 M_{faz}^{(1)} - M_{pz}^{(1)}
+\end{align*}
+* Rank 4 tensor (aas).
+\begin{align*}
+\begin{bmatrix} T_{yzyz} & 0 & 0 \\ 0 & T_{yzyz} & 0 \\ 0 & 0 & T_{xyxy} \end{bmatrix}
+\end{align*}
+\begin{align*}
+& T_{yzyz} = - 2 T_{du}^{(4)} + T_{s}^{(3)} \\
+& T_{xyxy} = 4 T_{du}^{(4)} + T_{s}^{(3)}
+\end{align*}
+* Rank 4 tensor (aaa).
+\begin{align*}
+\begin{bmatrix} 0 & T_{yzzx} & 0 \\ - T_{yzzx} & 0 & 0 \\ 0 & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& T_{yzzx} = - M_{pz}^{(2)}
+\end{align*}
+* Rank 4 tensor (sa).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & T_{xxxy} \\ 0 & 0 & T_{xxxy} \\ 0 & 0 & T_{zzxy} \\ T_{yzyz} & T_{yzzx} & 0 \\ T_{yzzx} & - T_{yzyz} & 0 \\ 0 & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& T_{xxxy} = - M_{faz}^{(2)} + M_{pz}^{(3)} \\
+& T_{zzxy} = 2 M_{faz}^{(2)} + M_{pz}^{(3)} + 2 M_{pz}^{(4)} \\
+& T_{yzyz} = - 3 T_{du}^{(5)} \\
+& T_{yzzx} = - M_{faz}^{(2)} + M_{pz}^{(4)}
+\end{align*}
+* Rank 4 tensor (as).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & 0 & T_{yzyz} & T_{yzzx} & 0 \\ 0 & 0 & 0 & T_{yzzx} & - T_{yzyz} & 0 \\ T_{xyxx} & T_{xyxx} & T_{xyzz} & 0 & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& T_{yzyz} = - 3 T_{du}^{(6)} \\
+& T_{yzzx} = - M_{faz}^{(3)} + M_{pz}^{(6)} \\
+& T_{xyxx} = - M_{faz}^{(3)} + M_{pz}^{(5)} \\
+& T_{xyzz} = 2 M_{faz}^{(3)} + M_{pz}^{(5)} + 2 M_{pz}^{(6)}
+\end{align*}
+* Rank 4 tensor (s).
+\begin{align*}
+\begin{bmatrix} T_{xxxx} & T_{xxyy} & T_{xxzz} & 0 & 0 & T_{xxxy} & 0 & 0 & T_{xxyx} \\ T_{xxyy} & T_{xxxx} & T_{xxzz} & 0 & 0 & - T_{xxyx} & 0 & 0 & - T_{xxxy} \\ T_{zzxx} & T_{zzxx} & T_{zzzz} & 0 & 0 & T_{zzxy} & 0 & 0 & - T_{zzxy} \\ 0 & 0 & 0 & T_{yzyz} & T_{yzzx} & 0 & T_{yzzy} & T_{yzxz} & 0 \\ 0 & 0 & 0 & - T_{yzxz} & T_{yzzy} & 0 & - T_{yzzx} & T_{yzyz} & 0 \\ T_{xyxx} & - T_{xyxx} & 0 & 0 & 0 & T_{xyxy} & 0 & 0 & T_{xyxy} \end{bmatrix}
+\end{align*}
+\begin{align*}
+& T_{xxxx} = - 2 T_{du}^{(1)} - 4 T_{du}^{(2)} - T_{gu}^{(1)} + 2 T_{g}^{(1)} + T_{s}^{(1)} + 2 T_{s}^{(2)} \\
+& T_{xxyy} = - 2 T_{du}^{(1)} + 2 T_{gu}^{(1)} - T_{g}^{(1)} + T_{s}^{(1)} \\
+& T_{xxzz} = T_{du}^{(1)} + 3 T_{du}^{(3)} - T_{gu}^{(1)} - T_{g}^{(1)} + T_{s}^{(1)} \\
+& T_{xxxy} = - 2 M_{faz}^{(1)} - M_{faz}^{(2)} + 2 M_{pz}^{(1)} + M_{pz}^{(3)} + T_{gaz}^{(1)} \\
+& T_{xxyx} = - 2 M_{faz}^{(1)} + M_{faz}^{(2)} + 2 M_{pz}^{(1)} - M_{pz}^{(3)} + T_{gaz}^{(1)} \\
+& T_{zzxx} = T_{du}^{(1)} - 3 T_{du}^{(3)} - T_{gu}^{(1)} - T_{g}^{(1)} + T_{s}^{(1)} \\
+& T_{zzzz} = 4 T_{du}^{(1)} + 8 T_{du}^{(2)} + 2 T_{gu}^{(1)} + 2 T_{g}^{(1)} + T_{s}^{(1)} + 2 T_{s}^{(2)} \\
+& T_{zzxy} = 2 M_{faz}^{(2)} + M_{pz}^{(3)} + 2 M_{pz}^{(4)} \\
+& T_{yzyz} = T_{du}^{(2)} - 3 T_{du}^{(5)} - T_{gu}^{(1)} - T_{g}^{(1)} + T_{s}^{(2)} \\
+& T_{yzzx} = - 4 M_{faz}^{(1)} - M_{faz}^{(2)} - M_{pz}^{(1)} + M_{pz}^{(4)} \\
+& T_{yzzy} = T_{du}^{(2)} + 3 T_{du}^{(5)} - T_{gu}^{(1)} - T_{g}^{(1)} + T_{s}^{(2)} \\
+& T_{yzxz} = - 4 M_{faz}^{(1)} + M_{faz}^{(2)} - M_{pz}^{(1)} - M_{pz}^{(4)} \\
+& T_{xyxx} = 2 M_{faz}^{(1)} - 2 M_{pz}^{(1)} + T_{gaz}^{(1)} \\
+& T_{xyxy} = - 2 T_{du}^{(2)} + 2 T_{gu}^{(1)} - T_{g}^{(1)} + T_{s}^{(2)}
+\end{align*}
+* Rank 4 tensor (a).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & 0 & T_{yzyz} & T_{yzzx} & 0 & T_{yzzy} & T_{yzxz} & 0 \\ 0 & 0 & 0 & T_{yzxz} & - T_{yzzy} & 0 & T_{yzzx} & - T_{yzyz} & 0 \\ T_{xyxx} & T_{xyxx} & T_{xyzz} & 0 & 0 & T_{xyxy} & 0 & 0 & - T_{xyxy} \end{bmatrix}
+\end{align*}
+\begin{align*}
+& T_{yzyz} = - 2 T_{du}^{(4)} - 3 T_{du}^{(6)} + T_{s}^{(3)} \\
+& T_{yzzx} = - M_{faz}^{(3)} - M_{pz}^{(2)} + M_{pz}^{(6)} \\
+& T_{yzzy} = 2 T_{du}^{(4)} - 3 T_{du}^{(6)} - T_{s}^{(3)} \\
+& T_{yzxz} = - M_{faz}^{(3)} + M_{pz}^{(2)} + M_{pz}^{(6)} \\
+& T_{xyxx} = - M_{faz}^{(3)} + M_{pz}^{(5)} \\
+& T_{xyzz} = 2 M_{faz}^{(3)} + M_{pz}^{(5)} + 2 M_{pz}^{(6)} \\
+& T_{xyxy} = 4 T_{du}^{(4)} + T_{s}^{(3)}
+\end{align*}
+* Rank 4 tensor (t).
+\begin{align*}
+\begin{bmatrix} T_{xxxx} & T_{xxxy} & 0 \\ - T_{xxxy} & T_{xxxx} & 0 \\ 0 & 0 & T_{zzzz} \\ 0 & 0 & T_{yyzz} \\ T_{zzxx} & 0 & 0 \\ T_{xxxy} & T_{xxyy} & 0 \\ 0 & T_{yzzy} & 0 \\ 0 & 0 & T_{zxxz} \\ T_{xxyy} + T_{yyzz} - T_{yzzy} - T_{zxxz} + T_{zzxx} & - T_{xxxy} & 0 \\ 0 & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& T_{xxxx} = - 2 T_{du}^{(1)} - 4 T_{du}^{(2)} - T_{gu}^{(1)} + 2 T_{g}^{(1)} + 3 T_{s}^{(1)} \\
+& T_{xxxy} = T_{gaz}^{(1)} \\
+& T_{zzzz} = 4 T_{du}^{(1)} + 8 T_{du}^{(2)} + 2 T_{gu}^{(1)} + 2 T_{g}^{(1)} + 3 T_{s}^{(1)} \\
+& T_{yyzz} = T_{du}^{(1)} + 3 T_{du}^{(3)} - T_{gu}^{(1)} - T_{g}^{(1)} + T_{s}^{(1)} \\
+& T_{zzxx} = T_{du}^{(1)} - 3 T_{du}^{(3)} - T_{gu}^{(1)} - T_{g}^{(1)} + T_{s}^{(1)} \\
+& T_{xxyy} = - 2 T_{du}^{(1)} + 2 T_{gu}^{(1)} - T_{g}^{(1)} + T_{s}^{(1)} \\
+& T_{yzzy} = T_{du}^{(2)} + 3 T_{du}^{(5)} - T_{gu}^{(1)} - T_{g}^{(1)} + T_{s}^{(1)} \\
+& T_{zxxz} = T_{du}^{(2)} - 3 T_{du}^{(5)} - T_{gu}^{(1)} - T_{g}^{(1)} + T_{s}^{(1)}
+\end{align*}
+
+\end{document}

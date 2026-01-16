@@ -1,0 +1,115 @@
+\documentclass[fleqn,8pt,landscape]{jsarticle}
+\special{papersize=\the\paperwidth,\the\paperheight}
+
+%%% package
+
+\usepackage[usenames]{color}
+\usepackage{amsmath}
+\usepackage{breqn}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{enumitem}
+\usepackage{braket}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+%%% layout setting
+
+\paperwidth=356.4truemm
+\paperheight=252.0truemm
+\textwidth=335.59999999999997truemm
+\textheight=224.2truemm
+\oddsidemargin=-15truemm
+\topmargin=-15truemm
+\footskip=7truemm
+
+%%% fixed
+
+\hoffset=0truemm
+\voffset=0truemm
+\headheight=0truemm
+\headsep=0truemm
+\marginparsep=0truemm
+\marginparwidth=0truemm
+
+%%% main text
+
+\begin{document}
+
+\setcounter{MaxMatrixCols}{32}
+
+\renewcommand{\tablename}{Table~}
+\renewcommand{\figurename}{Figure~}
+\begin{center}
+\LARGE
+MPG No. 24.5.149\quad$6'22'$\quad(6'2'2 setting)\quad[ Type III, hexagonal ] [M tensor]
+\end{center}
+* Rank 0 tensor.
+* Rank 1 tensor.
+* Rank 2 tensor (s).
+* Rank 2 tensor (a).
+* Rank 3 tensor (s).
+\begin{align*}
+\begin{bmatrix} 0 & M_{xxy} & 0 \\ 0 & - M_{xxy} & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \\ M_{xxy} & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{xxy} = M_{f1}^{(1)}
+\end{align*}
+* Rank 3 tensor (a).
+* Rank 4 tensor (sss).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & 0 & 0 & M_{xxzx} & 0 \\ 0 & 0 & 0 & 0 & - M_{xxzx} & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & - M_{xxzx} \\ M_{xxzx} & - M_{xxzx} & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & - M_{xxzx} & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{xxzx} = M_{ga}^{(1)}
+\end{align*}
+* Rank 4 tensor (ssa).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & 0 & 0 & M_{xxzx} & 0 \\ 0 & 0 & 0 & 0 & - M_{xxzx} & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & M_{xxzx} \\ - M_{xxzx} & M_{xxzx} & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & - M_{xxzx} & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{xxzx} = - 2 T_{f1}^{(1)}
+\end{align*}
+* Rank 4 tensor (aas).
+* Rank 4 tensor (aaa).
+* Rank 4 tensor (sa).
+\begin{align*}
+\begin{bmatrix} 0 & M_{xxzx} & 0 \\ 0 & - M_{xxzx} & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \\ M_{xxzx} & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{xxzx} = T_{f1}^{(2)}
+\end{align*}
+* Rank 4 tensor (as).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & 0 & 0 & 0 & M_{yzxy} \\ M_{yzxy} & - M_{yzxy} & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{yzxy} = T_{f1}^{(3)}
+\end{align*}
+* Rank 4 tensor (s).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & 0 & 0 & M_{xxzx} & 0 & 0 & M_{xxxz} & 0 \\ 0 & 0 & 0 & 0 & - M_{xxzx} & 0 & 0 & - M_{xxxz} & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & M_{yzxy} & 0 & 0 & M_{yzxy} \\ - M_{yzxy} & M_{yzxy} & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & - M_{xxxz} & 0 & 0 & - M_{xxzx} & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{xxzx} = M_{ga}^{(1)} - 2 T_{f1}^{(1)} + T_{f1}^{(2)} \\
+& M_{xxxz} = M_{ga}^{(1)} - 2 T_{f1}^{(1)} - T_{f1}^{(2)} \\
+& M_{yzxy} = - M_{ga}^{(1)} - 2 T_{f1}^{(1)}
+\end{align*}
+* Rank 4 tensor (a).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & 0 & 0 & 0 & M_{yzxy} & 0 & 0 & M_{yzxy} \\ M_{yzxy} & - M_{yzxy} & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{yzxy} = T_{f1}^{(3)}
+\end{align*}
+* Rank 4 tensor (t).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & M_{xxxz} \\ 0 & 0 & 0 \\ 0 & 0 & 0 \\ - M_{xxxz} & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \\ M_{xxxz} & 0 & 0 \\ 0 & 0 & - M_{xxxz} \\ 0 & - M_{xxxz} & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{xxxz} = M_{ga}^{(1)}
+\end{align*}
+
+\end{document}

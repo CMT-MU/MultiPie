@@ -1,0 +1,297 @@
+\documentclass[fleqn,10pt]{jsarticle}
+
+%%% package
+
+\usepackage[usenames]{color}
+\usepackage{amsmath}
+\usepackage{breqn}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{enumitem}
+\usepackage{braket}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+%%% layout setting
+
+\paperwidth=210truemm
+\paperheight=297truemm
+\textwidth=189.2truemm
+\textheight=269.2truemm
+\oddsidemargin=-15truemm
+\topmargin=-15truemm
+\footskip=7truemm
+
+%%% fixed
+
+\hoffset=0truemm
+\voffset=0truemm
+\headheight=0truemm
+\headsep=0truemm
+\marginparsep=0truemm
+\marginparwidth=0truemm
+
+%%% main text
+
+\begin{document}
+
+\setcounter{MaxMatrixCols}{32}
+
+\renewcommand{\tablename}{Table~}
+\renewcommand{\figurename}{Figure~}
+\begin{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.0}
+\begin{longtable}{lllllllll}
+\caption{Space group information.}
+ \\
+ \hline \hline
+ID & tag &  &  & Sch\"onflies & international & setting & crystal & PG \\ \hline \endfirsthead
+
+\multicolumn{8}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+ID & tag &  &  & Sch\"onflies & international & setting & crystal & PG \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{8}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{8}{r}{} \\ \endlastfoot
+
+\texttt{1} & \texttt{C1^1} & \texttt{SG:1} & \texttt{1} & $C_{\rm 1}^{1}$ & $P1$ &  & triclinic & $C_{\rm 1}$ \\
+\texttt{2} & \texttt{Ci^1} & \texttt{SG:2} & \texttt{2} & $C_{\rm i}^{1}$ & $P\bar{1}$ &  & triclinic & $C_{\rm i}$ \\ \hline
+\texttt{3} & \texttt{C2^1} & \texttt{SG:3} & \texttt{3} & $C_{\rm 2}^{1}$ & $P2$ & b-axis & monoclinic & $C_{\rm 2}$ \\
+\texttt{4} & \texttt{C2^2} & \texttt{SG:4} & \texttt{4} & $C_{\rm 2}^{2}$ & $P2_1$ & b-axis & monoclinic & $C_{\rm 2}$ \\
+\texttt{5} & \texttt{C2^3} & \texttt{SG:5} & \texttt{5} & $C_{\rm 2}^{3}$ & $C2$ & b-axis & monoclinic & $C_{\rm 2}$ \\ \hline
+\texttt{6} & \texttt{Cs^1} & \texttt{SG:6} & \texttt{6} & $C_{\rm s}^{1}$ & $Pm$ & b-axis & monoclinic & $C_{\rm s}$ \\
+\texttt{7} & \texttt{Cs^2} & \texttt{SG:7} & \texttt{7} & $C_{\rm s}^{2}$ & $Pc$ & b-axis & monoclinic & $C_{\rm s}$ \\
+\texttt{8} & \texttt{Cs^3} & \texttt{SG:8} & \texttt{8} & $C_{\rm s}^{3}$ & $Cm$ & b-axis & monoclinic & $C_{\rm s}$ \\
+\texttt{9} & \texttt{Cs^4} & \texttt{SG:9} & \texttt{9} & $C_{\rm s}^{4}$ & $Cc$ & b-axis & monoclinic & $C_{\rm s}$ \\ \hline
+\texttt{10} & \texttt{C2h^1} & \texttt{SG:10} & \texttt{10} & $C_{\rm 2h}^{1}$ & $P2/m$ & b-axis & monoclinic & $C_{\rm 2h}$ \\
+\texttt{11} & \texttt{C2h^2} & \texttt{SG:11} & \texttt{11} & $C_{\rm 2h}^{2}$ & $P2_1/m$ & b-axis & monoclinic & $C_{\rm 2h}$ \\
+\texttt{12} & \texttt{C2h^3} & \texttt{SG:12} & \texttt{12} & $C_{\rm 2h}^{3}$ & $C2/m$ & b-axis & monoclinic & $C_{\rm 2h}$ \\
+\texttt{13} & \texttt{C2h^4} & \texttt{SG:13} & \texttt{13} & $C_{\rm 2h}^{4}$ & $P2/c$ & b-axis & monoclinic & $C_{\rm 2h}$ \\
+\texttt{14} & \texttt{C2h^5} & \texttt{SG:14} & \texttt{14} & $C_{\rm 2h}^{5}$ & $P2_1/c$ & b-axis & monoclinic & $C_{\rm 2h}$ \\
+\texttt{15} & \texttt{C2h^6} & \texttt{SG:15} & \texttt{15} & $C_{\rm 2h}^{6}$ & $C2/c$ & b-axis & monoclinic & $C_{\rm 2h}$ \\ \hline
+\texttt{16} & \texttt{D2^1} & \texttt{SG:16} & \texttt{16} & $D_{\rm 2}^{1}$ & $P222$ &  & orthorhombic & $D_{\rm 2}$ \\
+\texttt{17} & \texttt{D2^2} & \texttt{SG:17} & \texttt{17} & $D_{\rm 2}^{2}$ & $P222_1$ &  & orthorhombic & $D_{\rm 2}$ \\
+\texttt{18} & \texttt{D2^3} & \texttt{SG:18} & \texttt{18} & $D_{\rm 2}^{3}$ & $P2_12_12$ &  & orthorhombic & $D_{\rm 2}$ \\
+\texttt{19} & \texttt{D2^4} & \texttt{SG:19} & \texttt{19} & $D_{\rm 2}^{4}$ & $P2_12_12_1$ &  & orthorhombic & $D_{\rm 2}$ \\
+\texttt{20} & \texttt{D2^5} & \texttt{SG:20} & \texttt{20} & $D_{\rm 2}^{5}$ & $C222_1$ &  & orthorhombic & $D_{\rm 2}$ \\
+\texttt{21} & \texttt{D2^6} & \texttt{SG:21} & \texttt{21} & $D_{\rm 2}^{6}$ & $C222$ &  & orthorhombic & $D_{\rm 2}$ \\
+\texttt{22} & \texttt{D2^7} & \texttt{SG:22} & \texttt{22} & $D_{\rm 2}^{7}$ & $F222$ &  & orthorhombic & $D_{\rm 2}$ \\
+\texttt{23} & \texttt{D2^8} & \texttt{SG:23} & \texttt{23} & $D_{\rm 2}^{8}$ & $I222$ &  & orthorhombic & $D_{\rm 2}$ \\
+\texttt{24} & \texttt{D2^9} & \texttt{SG:24} & \texttt{24} & $D_{\rm 2}^{9}$ & $I2_12_12_1$ &  & orthorhombic & $D_{\rm 2}$ \\ \hline
+\texttt{25} & \texttt{C2v^1} & \texttt{SG:25} & \texttt{25} & $C_{\rm 2v}^{1}$ & $Pmm2$ &  & orthorhombic & $C_{\rm 2v}$ \\
+\texttt{26} & \texttt{C2v^2} & \texttt{SG:26} & \texttt{26} & $C_{\rm 2v}^{2}$ & $Pmc2_1$ &  & orthorhombic & $C_{\rm 2v}$ \\
+\texttt{27} & \texttt{C2v^3} & \texttt{SG:27} & \texttt{27} & $C_{\rm 2v}^{3}$ & $Pcc2$ &  & orthorhombic & $C_{\rm 2v}$ \\
+\texttt{28} & \texttt{C2v^4} & \texttt{SG:28} & \texttt{28} & $C_{\rm 2v}^{4}$ & $Pma2$ &  & orthorhombic & $C_{\rm 2v}$ \\
+\texttt{29} & \texttt{C2v^5} & \texttt{SG:29} & \texttt{29} & $C_{\rm 2v}^{5}$ & $Pca2_1$ &  & orthorhombic & $C_{\rm 2v}$ \\
+\texttt{30} & \texttt{C2v^6} & \texttt{SG:30} & \texttt{30} & $C_{\rm 2v}^{6}$ & $Pnc2$ &  & orthorhombic & $C_{\rm 2v}$ \\
+\texttt{31} & \texttt{C2v^7} & \texttt{SG:31} & \texttt{31} & $C_{\rm 2v}^{7}$ & $Pmn2_1$ &  & orthorhombic & $C_{\rm 2v}$ \\
+\texttt{32} & \texttt{C2v^8} & \texttt{SG:32} & \texttt{32} & $C_{\rm 2v}^{8}$ & $Pba2$ &  & orthorhombic & $C_{\rm 2v}$ \\
+\texttt{33} & \texttt{C2v^9} & \texttt{SG:33} & \texttt{33} & $C_{\rm 2v}^{9}$ & $Pna2_1$ &  & orthorhombic & $C_{\rm 2v}$ \\
+\texttt{34} & \texttt{C2v^10} & \texttt{SG:34} & \texttt{34} & $C_{\rm 2v}^{10}$ & $Pnn2$ &  & orthorhombic & $C_{\rm 2v}$ \\
+\texttt{35} & \texttt{C2v^11} & \texttt{SG:35} & \texttt{35} & $C_{\rm 2v}^{11}$ & $Cmm2$ &  & orthorhombic & $C_{\rm 2v}$ \\
+\texttt{36} & \texttt{C2v^12} & \texttt{SG:36} & \texttt{36} & $C_{\rm 2v}^{12}$ & $Cmc2_1$ &  & orthorhombic & $C_{\rm 2v}$ \\
+\texttt{37} & \texttt{C2v^13} & \texttt{SG:37} & \texttt{37} & $C_{\rm 2v}^{13}$ & $Ccc2$ &  & orthorhombic & $C_{\rm 2v}$ \\
+\texttt{38} & \texttt{C2v^14} & \texttt{SG:38} & \texttt{38} & $C_{\rm 2v}^{14}$ & $Amm2$ &  & orthorhombic & $C_{\rm 2v}$ \\
+\texttt{39} & \texttt{C2v^15} & \texttt{SG:39} & \texttt{39} & $C_{\rm 2v}^{15}$ & $Aem2$ &  & orthorhombic & $C_{\rm 2v}$ \\
+\texttt{40} & \texttt{C2v^16} & \texttt{SG:40} & \texttt{40} & $C_{\rm 2v}^{16}$ & $Ama2$ &  & orthorhombic & $C_{\rm 2v}$ \\
+\texttt{41} & \texttt{C2v^17} & \texttt{SG:41} & \texttt{41} & $C_{\rm 2v}^{17}$ & $Aea2$ &  & orthorhombic & $C_{\rm 2v}$ \\
+\texttt{42} & \texttt{C2v^18} & \texttt{SG:42} & \texttt{42} & $C_{\rm 2v}^{18}$ & $Fmm2$ &  & orthorhombic & $C_{\rm 2v}$ \\
+\texttt{43} & \texttt{C2v^19} & \texttt{SG:43} & \texttt{43} & $C_{\rm 2v}^{19}$ & $Fdd2$ &  & orthorhombic & $C_{\rm 2v}$ \\
+\texttt{44} & \texttt{C2v^20} & \texttt{SG:44} & \texttt{44} & $C_{\rm 2v}^{20}$ & $Imm2$ &  & orthorhombic & $C_{\rm 2v}$ \\
+\texttt{45} & \texttt{C2v^21} & \texttt{SG:45} & \texttt{45} & $C_{\rm 2v}^{21}$ & $Iba2$ &  & orthorhombic & $C_{\rm 2v}$ \\
+\texttt{46} & \texttt{C2v^22} & \texttt{SG:46} & \texttt{46} & $C_{\rm 2v}^{22}$ & $Ima2$ &  & orthorhombic & $C_{\rm 2v}$ \\ \hline
+\texttt{47} & \texttt{D2h^1} & \texttt{SG:47} & \texttt{47} & $D_{\rm 2h}^{1}$ & $Pmmm$ &  & orthorhombic & $D_{\rm 2h}$ \\
+\texttt{48} & \texttt{D2h^2} & \texttt{SG:48} & \texttt{48} & $D_{\rm 2h}^{2}$ & $Pnnn$ &  & orthorhombic & $D_{\rm 2h}$ \\
+\texttt{49} & \texttt{D2h^3} & \texttt{SG:49} & \texttt{49} & $D_{\rm 2h}^{3}$ & $Pccm$ &  & orthorhombic & $D_{\rm 2h}$ \\
+\texttt{50} & \texttt{D2h^4} & \texttt{SG:50} & \texttt{50} & $D_{\rm 2h}^{4}$ & $Pban$ &  & orthorhombic & $D_{\rm 2h}$ \\
+\texttt{51} & \texttt{D2h^5} & \texttt{SG:51} & \texttt{51} & $D_{\rm 2h}^{5}$ & $Pmma$ &  & orthorhombic & $D_{\rm 2h}$ \\
+\texttt{52} & \texttt{D2h^6} & \texttt{SG:52} & \texttt{52} & $D_{\rm 2h}^{6}$ & $Pnna$ &  & orthorhombic & $D_{\rm 2h}$ \\
+\texttt{53} & \texttt{D2h^7} & \texttt{SG:53} & \texttt{53} & $D_{\rm 2h}^{7}$ & $Pmna$ &  & orthorhombic & $D_{\rm 2h}$ \\
+\texttt{54} & \texttt{D2h^8} & \texttt{SG:54} & \texttt{54} & $D_{\rm 2h}^{8}$ & $Pcca$ &  & orthorhombic & $D_{\rm 2h}$ \\
+\texttt{55} & \texttt{D2h^9} & \texttt{SG:55} & \texttt{55} & $D_{\rm 2h}^{9}$ & $Pbam$ &  & orthorhombic & $D_{\rm 2h}$ \\
+\texttt{56} & \texttt{D2h^10} & \texttt{SG:56} & \texttt{56} & $D_{\rm 2h}^{10}$ & $Pccn$ &  & orthorhombic & $D_{\rm 2h}$ \\
+\texttt{57} & \texttt{D2h^11} & \texttt{SG:57} & \texttt{57} & $D_{\rm 2h}^{11}$ & $Pbcm$ &  & orthorhombic & $D_{\rm 2h}$ \\
+\texttt{58} & \texttt{D2h^12} & \texttt{SG:58} & \texttt{58} & $D_{\rm 2h}^{12}$ & $Pnnm$ &  & orthorhombic & $D_{\rm 2h}$ \\
+\texttt{59} & \texttt{D2h^13} & \texttt{SG:59} & \texttt{59} & $D_{\rm 2h}^{13}$ & $Pmmn$ &  & orthorhombic & $D_{\rm 2h}$ \\
+\texttt{60} & \texttt{D2h^14} & \texttt{SG:60} & \texttt{60} & $D_{\rm 2h}^{14}$ & $Pbcn$ &  & orthorhombic & $D_{\rm 2h}$ \\
+\texttt{61} & \texttt{D2h^15} & \texttt{SG:61} & \texttt{61} & $D_{\rm 2h}^{15}$ & $Pbca$ &  & orthorhombic & $D_{\rm 2h}$ \\
+\texttt{62} & \texttt{D2h^16} & \texttt{SG:62} & \texttt{62} & $D_{\rm 2h}^{16}$ & $Pnma$ &  & orthorhombic & $D_{\rm 2h}$ \\
+\texttt{63} & \texttt{D2h^17} & \texttt{SG:63} & \texttt{63} & $D_{\rm 2h}^{17}$ & $Cmcm$ &  & orthorhombic & $D_{\rm 2h}$ \\
+\texttt{64} & \texttt{D2h^18} & \texttt{SG:64} & \texttt{64} & $D_{\rm 2h}^{18}$ & $Cmce$ &  & orthorhombic & $D_{\rm 2h}$ \\
+\texttt{65} & \texttt{D2h^19} & \texttt{SG:65} & \texttt{65} & $D_{\rm 2h}^{19}$ & $Cmmm$ &  & orthorhombic & $D_{\rm 2h}$ \\
+\texttt{66} & \texttt{D2h^20} & \texttt{SG:66} & \texttt{66} & $D_{\rm 2h}^{20}$ & $Cccm$ &  & orthorhombic & $D_{\rm 2h}$ \\
+\texttt{67} & \texttt{D2h^21} & \texttt{SG:67} & \texttt{67} & $D_{\rm 2h}^{21}$ & $Cmme$ &  & orthorhombic & $D_{\rm 2h}$ \\
+\texttt{68} & \texttt{D2h^22} & \texttt{SG:68} & \texttt{68} & $D_{\rm 2h}^{22}$ & $Ccce$ &  & orthorhombic & $D_{\rm 2h}$ \\
+\texttt{69} & \texttt{D2h^23} & \texttt{SG:69} & \texttt{69} & $D_{\rm 2h}^{23}$ & $Fmmm$ &  & orthorhombic & $D_{\rm 2h}$ \\
+\texttt{70} & \texttt{D2h^24} & \texttt{SG:70} & \texttt{70} & $D_{\rm 2h}^{24}$ & $Fddd$ &  & orthorhombic & $D_{\rm 2h}$ \\
+\texttt{71} & \texttt{D2h^25} & \texttt{SG:71} & \texttt{71} & $D_{\rm 2h}^{25}$ & $Immm$ &  & orthorhombic & $D_{\rm 2h}$ \\
+\texttt{72} & \texttt{D2h^26} & \texttt{SG:72} & \texttt{72} & $D_{\rm 2h}^{26}$ & $Ibam$ &  & orthorhombic & $D_{\rm 2h}$ \\
+\texttt{73} & \texttt{D2h^27} & \texttt{SG:73} & \texttt{73} & $D_{\rm 2h}^{27}$ & $Ibca$ &  & orthorhombic & $D_{\rm 2h}$ \\
+\texttt{74} & \texttt{D2h^28} & \texttt{SG:74} & \texttt{74} & $D_{\rm 2h}^{28}$ & $Imma$ &  & orthorhombic & $D_{\rm 2h}$ \\ \hline
+\texttt{75} & \texttt{C4^1} & \texttt{SG:75} & \texttt{75} & $C_{\rm 4}^{1}$ & $P4$ &  & tetragonal & $C_{\rm 4}$ \\
+\texttt{76} & \texttt{C4^2} & \texttt{SG:76} & \texttt{76} & $C_{\rm 4}^{2}$ & $P4_1$ &  & tetragonal & $C_{\rm 4}$ \\
+\texttt{77} & \texttt{C4^3} & \texttt{SG:77} & \texttt{77} & $C_{\rm 4}^{3}$ & $P4_2$ &  & tetragonal & $C_{\rm 4}$ \\
+\texttt{78} & \texttt{C4^4} & \texttt{SG:78} & \texttt{78} & $C_{\rm 4}^{4}$ & $P4_3$ &  & tetragonal & $C_{\rm 4}$ \\
+\texttt{79} & \texttt{C4^5} & \texttt{SG:79} & \texttt{79} & $C_{\rm 4}^{5}$ & $I4$ &  & tetragonal & $C_{\rm 4}$ \\
+\texttt{80} & \texttt{C4^6} & \texttt{SG:80} & \texttt{80} & $C_{\rm 4}^{6}$ & $I4_1$ &  & tetragonal & $C_{\rm 4}$ \\ \hline
+\texttt{81} & \texttt{S4^1} & \texttt{SG:81} & \texttt{81} & $S_{\rm 4}^{1}$ & $P\bar{4}$ &  & tetragonal & $S_{\rm 4}$ \\
+\texttt{82} & \texttt{S4^2} & \texttt{SG:82} & \texttt{82} & $S_{\rm 4}^{2}$ & $I\bar{4}$ &  & tetragonal & $S_{\rm 4}$ \\ \hline
+\texttt{83} & \texttt{C4h^1} & \texttt{SG:83} & \texttt{83} & $C_{\rm 4h}^{1}$ & $P4/m$ &  & tetragonal & $C_{\rm 4h}$ \\
+\texttt{84} & \texttt{C4h^2} & \texttt{SG:84} & \texttt{84} & $C_{\rm 4h}^{2}$ & $P4_2/m$ &  & tetragonal & $C_{\rm 4h}$ \\
+\texttt{85} & \texttt{C4h^3} & \texttt{SG:85} & \texttt{85} & $C_{\rm 4h}^{3}$ & $P4/n$ &  & tetragonal & $C_{\rm 4h}$ \\
+\texttt{86} & \texttt{C4h^4} & \texttt{SG:86} & \texttt{86} & $C_{\rm 4h}^{4}$ & $P4_2/n$ &  & tetragonal & $C_{\rm 4h}$ \\
+\texttt{87} & \texttt{C4h^5} & \texttt{SG:87} & \texttt{87} & $C_{\rm 4h}^{5}$ & $I4/m$ &  & tetragonal & $C_{\rm 4h}$ \\
+\texttt{88} & \texttt{C4h^6} & \texttt{SG:88} & \texttt{88} & $C_{\rm 4h}^{6}$ & $I4_1/a$ &  & tetragonal & $C_{\rm 4h}$ \\ \hline
+\texttt{89} & \texttt{D4^1} & \texttt{SG:89} & \texttt{89} & $D_{\rm 4}^{1}$ & $P422$ &  & tetragonal & $D_{\rm 4}$ \\
+\texttt{90} & \texttt{D4^2} & \texttt{SG:90} & \texttt{90} & $D_{\rm 4}^{2}$ & $P42_12$ &  & tetragonal & $D_{\rm 4}$ \\
+\texttt{91} & \texttt{D4^3} & \texttt{SG:91} & \texttt{91} & $D_{\rm 4}^{3}$ & $P4_122$ &  & tetragonal & $D_{\rm 4}$ \\
+\texttt{92} & \texttt{D4^4} & \texttt{SG:92} & \texttt{92} & $D_{\rm 4}^{4}$ & $P4_12_12$ &  & tetragonal & $D_{\rm 4}$ \\
+\texttt{93} & \texttt{D4^5} & \texttt{SG:93} & \texttt{93} & $D_{\rm 4}^{5}$ & $P4_222$ &  & tetragonal & $D_{\rm 4}$ \\
+\texttt{94} & \texttt{D4^6} & \texttt{SG:94} & \texttt{94} & $D_{\rm 4}^{6}$ & $P4_22_12$ &  & tetragonal & $D_{\rm 4}$ \\
+\texttt{95} & \texttt{D4^7} & \texttt{SG:95} & \texttt{95} & $D_{\rm 4}^{7}$ & $P4_322$ &  & tetragonal & $D_{\rm 4}$ \\
+\texttt{96} & \texttt{D4^8} & \texttt{SG:96} & \texttt{96} & $D_{\rm 4}^{8}$ & $P4_32_12$ &  & tetragonal & $D_{\rm 4}$ \\
+\texttt{97} & \texttt{D4^9} & \texttt{SG:97} & \texttt{97} & $D_{\rm 4}^{9}$ & $I422$ &  & tetragonal & $D_{\rm 4}$ \\
+\texttt{98} & \texttt{D4^10} & \texttt{SG:98} & \texttt{98} & $D_{\rm 4}^{10}$ & $I4_122$ &  & tetragonal & $D_{\rm 4}$ \\ \hline
+\texttt{99} & \texttt{C4v^1} & \texttt{SG:99} & \texttt{99} & $C_{\rm 4v}^{1}$ & $P4mm$ &  & tetragonal & $C_{\rm 4v}$ \\
+\texttt{100} & \texttt{C4v^2} & \texttt{SG:100} & \texttt{100} & $C_{\rm 4v}^{2}$ & $P4bm$ &  & tetragonal & $C_{\rm 4v}$ \\
+\texttt{101} & \texttt{C4v^3} & \texttt{SG:101} & \texttt{101} & $C_{\rm 4v}^{3}$ & $P4_2cm$ &  & tetragonal & $C_{\rm 4v}$ \\
+\texttt{102} & \texttt{C4v^4} & \texttt{SG:102} & \texttt{102} & $C_{\rm 4v}^{4}$ & $P4_2nm$ &  & tetragonal & $C_{\rm 4v}$ \\
+\texttt{103} & \texttt{C4v^5} & \texttt{SG:103} & \texttt{103} & $C_{\rm 4v}^{5}$ & $P4cc$ &  & tetragonal & $C_{\rm 4v}$ \\
+\texttt{104} & \texttt{C4v^6} & \texttt{SG:104} & \texttt{104} & $C_{\rm 4v}^{6}$ & $P4nc$ &  & tetragonal & $C_{\rm 4v}$ \\
+\texttt{105} & \texttt{C4v^7} & \texttt{SG:105} & \texttt{105} & $C_{\rm 4v}^{7}$ & $P4_2mc$ &  & tetragonal & $C_{\rm 4v}$ \\
+\texttt{106} & \texttt{C4v^8} & \texttt{SG:106} & \texttt{106} & $C_{\rm 4v}^{8}$ & $P4_2bc$ &  & tetragonal & $C_{\rm 4v}$ \\
+\texttt{107} & \texttt{C4v^9} & \texttt{SG:107} & \texttt{107} & $C_{\rm 4v}^{9}$ & $I4mm$ &  & tetragonal & $C_{\rm 4v}$ \\
+\texttt{108} & \texttt{C4v^10} & \texttt{SG:108} & \texttt{108} & $C_{\rm 4v}^{10}$ & $I4cm$ &  & tetragonal & $C_{\rm 4v}$ \\
+\texttt{109} & \texttt{C4v^11} & \texttt{SG:109} & \texttt{109} & $C_{\rm 4v}^{11}$ & $I4_1md$ &  & tetragonal & $C_{\rm 4v}$ \\
+\texttt{110} & \texttt{C4v^12} & \texttt{SG:110} & \texttt{110} & $C_{\rm 4v}^{12}$ & $I4_1cd$ &  & tetragonal & $C_{\rm 4v}$ \\ \hline
+\texttt{111} & \texttt{D2d^1} & \texttt{SG:111} & \texttt{111} & $D_{\rm 2d}^{1}$ & $P\bar{4}2m$ &  & tetragonal & $D_{\rm 2d}$ \\
+\texttt{112} & \texttt{D2d^2} & \texttt{SG:112} & \texttt{112} & $D_{\rm 2d}^{2}$ & $P\bar{4}2c$ &  & tetragonal & $D_{\rm 2d}$ \\
+\texttt{113} & \texttt{D2d^3} & \texttt{SG:113} & \texttt{113} & $D_{\rm 2d}^{3}$ & $P\bar{4}2_1m$ &  & tetragonal & $D_{\rm 2d}$ \\
+\texttt{114} & \texttt{D2d^4} & \texttt{SG:114} & \texttt{114} & $D_{\rm 2d}^{4}$ & $P\bar{4}2_1c$ &  & tetragonal & $D_{\rm 2d}$ \\
+\texttt{115} & \texttt{D2d^5} & \texttt{SG:115} & \texttt{115} & $D_{\rm 2d}^{5}$ & $P\bar{4}m2$ &  & tetragonal & $D_{\rm 2d}(1)$ \\
+\texttt{116} & \texttt{D2d^6} & \texttt{SG:116} & \texttt{116} & $D_{\rm 2d}^{6}$ & $P\bar{4}c2$ &  & tetragonal & $D_{\rm 2d}(1)$ \\
+\texttt{117} & \texttt{D2d^7} & \texttt{SG:117} & \texttt{117} & $D_{\rm 2d}^{7}$ & $P\bar{4}b2$ &  & tetragonal & $D_{\rm 2d}(1)$ \\
+\texttt{118} & \texttt{D2d^8} & \texttt{SG:118} & \texttt{118} & $D_{\rm 2d}^{8}$ & $P\bar{4}n2$ &  & tetragonal & $D_{\rm 2d}(1)$ \\
+\texttt{119} & \texttt{D2d^9} & \texttt{SG:119} & \texttt{119} & $D_{\rm 2d}^{9}$ & $I\bar{4}m2$ &  & tetragonal & $D_{\rm 2d}(1)$ \\
+\texttt{120} & \texttt{D2d^10} & \texttt{SG:120} & \texttt{120} & $D_{\rm 2d}^{10}$ & $I\bar{4}c2$ &  & tetragonal & $D_{\rm 2d}(1)$ \\
+\texttt{121} & \texttt{D2d^11} & \texttt{SG:121} & \texttt{121} & $D_{\rm 2d}^{11}$ & $I\bar{4}2m$ &  & tetragonal & $D_{\rm 2d}$ \\
+\texttt{122} & \texttt{D2d^12} & \texttt{SG:122} & \texttt{122} & $D_{\rm 2d}^{12}$ & $I\bar{4}2d$ &  & tetragonal & $D_{\rm 2d}$ \\ \hline
+\texttt{123} & \texttt{D4h^1} & \texttt{SG:123} & \texttt{123} & $D_{\rm 4h}^{1}$ & $P4/mmm$ &  & tetragonal & $D_{\rm 4h}$ \\
+\texttt{124} & \texttt{D4h^2} & \texttt{SG:124} & \texttt{124} & $D_{\rm 4h}^{2}$ & $P4/mcc$ &  & tetragonal & $D_{\rm 4h}$ \\
+\texttt{125} & \texttt{D4h^3} & \texttt{SG:125} & \texttt{125} & $D_{\rm 4h}^{3}$ & $P4/nbm$ &  & tetragonal & $D_{\rm 4h}$ \\
+\texttt{126} & \texttt{D4h^4} & \texttt{SG:126} & \texttt{126} & $D_{\rm 4h}^{4}$ & $P4/nnc$ &  & tetragonal & $D_{\rm 4h}$ \\
+\texttt{127} & \texttt{D4h^5} & \texttt{SG:127} & \texttt{127} & $D_{\rm 4h}^{5}$ & $P4/mbm$ &  & tetragonal & $D_{\rm 4h}$ \\
+\texttt{128} & \texttt{D4h^6} & \texttt{SG:128} & \texttt{128} & $D_{\rm 4h}^{6}$ & $P4/mnc$ &  & tetragonal & $D_{\rm 4h}$ \\
+\texttt{129} & \texttt{D4h^7} & \texttt{SG:129} & \texttt{129} & $D_{\rm 4h}^{7}$ & $P4/nmm$ &  & tetragonal & $D_{\rm 4h}$ \\
+\texttt{130} & \texttt{D4h^8} & \texttt{SG:130} & \texttt{130} & $D_{\rm 4h}^{8}$ & $P4/ncc$ &  & tetragonal & $D_{\rm 4h}$ \\
+\texttt{131} & \texttt{D4h^9} & \texttt{SG:131} & \texttt{131} & $D_{\rm 4h}^{9}$ & $P4_2/mmc$ &  & tetragonal & $D_{\rm 4h}$ \\
+\texttt{132} & \texttt{D4h^10} & \texttt{SG:132} & \texttt{132} & $D_{\rm 4h}^{10}$ & $P4_2/mcm$ &  & tetragonal & $D_{\rm 4h}$ \\
+\texttt{133} & \texttt{D4h^11} & \texttt{SG:133} & \texttt{133} & $D_{\rm 4h}^{11}$ & $P4_2/nbc$ &  & tetragonal & $D_{\rm 4h}$ \\
+\texttt{134} & \texttt{D4h^12} & \texttt{SG:134} & \texttt{134} & $D_{\rm 4h}^{12}$ & $P4_2/nnm$ &  & tetragonal & $D_{\rm 4h}$ \\
+\texttt{135} & \texttt{D4h^13} & \texttt{SG:135} & \texttt{135} & $D_{\rm 4h}^{13}$ & $P4_2/mbc$ &  & tetragonal & $D_{\rm 4h}$ \\
+\texttt{136} & \texttt{D4h^14} & \texttt{SG:136} & \texttt{136} & $D_{\rm 4h}^{14}$ & $P4_2/mnm$ &  & tetragonal & $D_{\rm 4h}$ \\
+\texttt{137} & \texttt{D4h^15} & \texttt{SG:137} & \texttt{137} & $D_{\rm 4h}^{15}$ & $P4_2/nmc$ &  & tetragonal & $D_{\rm 4h}$ \\
+\texttt{138} & \texttt{D4h^16} & \texttt{SG:138} & \texttt{138} & $D_{\rm 4h}^{16}$ & $P4_2/ncm$ &  & tetragonal & $D_{\rm 4h}$ \\
+\texttt{139} & \texttt{D4h^17} & \texttt{SG:139} & \texttt{139} & $D_{\rm 4h}^{17}$ & $I4/mmm$ &  & tetragonal & $D_{\rm 4h}$ \\
+\texttt{140} & \texttt{D4h^18} & \texttt{SG:140} & \texttt{140} & $D_{\rm 4h}^{18}$ & $I4/mcm$ &  & tetragonal & $D_{\rm 4h}$ \\
+\texttt{141} & \texttt{D4h^19} & \texttt{SG:141} & \texttt{141} & $D_{\rm 4h}^{19}$ & $I4_1/amd$ &  & tetragonal & $D_{\rm 4h}$ \\
+\texttt{142} & \texttt{D4h^20} & \texttt{SG:142} & \texttt{142} & $D_{\rm 4h}^{20}$ & $I4_1/acd$ &  & tetragonal & $D_{\rm 4h}$ \\ \hline
+\texttt{143} & \texttt{C3^1} & \texttt{SG:143} & \texttt{143} & $C_{\rm 3}^{1}$ & $P3$ &  & trigonal & $C_{\rm 3}$ \\
+\texttt{144} & \texttt{C3^2} & \texttt{SG:144} & \texttt{144} & $C_{\rm 3}^{2}$ & $P3_1$ &  & trigonal & $C_{\rm 3}$ \\
+\texttt{145} & \texttt{C3^3} & \texttt{SG:145} & \texttt{145} & $C_{\rm 3}^{3}$ & $P3_2$ &  & trigonal & $C_{\rm 3}$ \\
+\texttt{146} & \texttt{C3^4} & \texttt{SG:146} & \texttt{146} & $C_{\rm 3}^{4}$ & $R3$ &  & trigonal & $C_{\rm 3}$ \\ \hline
+\texttt{147} & \texttt{C3i^1} & \texttt{SG:147} & \texttt{147} & $C_{\rm 3i}^{1}$ & $P\bar{3}$ &  & trigonal & $C_{\rm 3i}$ \\
+\texttt{148} & \texttt{C3i^2} & \texttt{SG:148} & \texttt{148} & $C_{\rm 3i}^{2}$ & $R\bar{3}$ &  & trigonal & $C_{\rm 3i}$ \\ \hline
+\texttt{149} & \texttt{D3^1} & \texttt{SG:149} & \texttt{149} & $D_{\rm 3}^{1}$ & $P312$ &  & trigonal & $D_{\rm 3}(1)$ \\
+\texttt{150} & \texttt{D3^2} & \texttt{SG:150} & \texttt{150} & $D_{\rm 3}^{2}$ & $P321$ &  & trigonal & $D_{\rm 3}$ \\
+\texttt{151} & \texttt{D3^3} & \texttt{SG:151} & \texttt{151} & $D_{\rm 3}^{3}$ & $P3_112$ &  & trigonal & $D_{\rm 3}(1)$ \\
+\texttt{152} & \texttt{D3^4} & \texttt{SG:152} & \texttt{152} & $D_{\rm 3}^{4}$ & $P3_121$ &  & trigonal & $D_{\rm 3}$ \\
+\texttt{153} & \texttt{D3^5} & \texttt{SG:153} & \texttt{153} & $D_{\rm 3}^{5}$ & $P3_212$ &  & trigonal & $D_{\rm 3}(1)$ \\
+\texttt{154} & \texttt{D3^6} & \texttt{SG:154} & \texttt{154} & $D_{\rm 3}^{6}$ & $P3_221$ &  & trigonal & $D_{\rm 3}$ \\
+\texttt{155} & \texttt{D3^7} & \texttt{SG:155} & \texttt{155} & $D_{\rm 3}^{7}$ & $R32$ &  & trigonal & $D_{\rm 3}$ \\ \hline
+\texttt{156} & \texttt{C3v^1} & \texttt{SG:156} & \texttt{156} & $C_{\rm 3v}^{1}$ & $P3m1$ &  & trigonal & $C_{\rm 3v}$ \\
+\texttt{157} & \texttt{C3v^2} & \texttt{SG:157} & \texttt{157} & $C_{\rm 3v}^{2}$ & $P31m$ &  & trigonal & $C_{\rm 3v}(1)$ \\
+\texttt{158} & \texttt{C3v^3} & \texttt{SG:158} & \texttt{158} & $C_{\rm 3v}^{3}$ & $P3c1$ &  & trigonal & $C_{\rm 3v}$ \\
+\texttt{159} & \texttt{C3v^4} & \texttt{SG:159} & \texttt{159} & $C_{\rm 3v}^{4}$ & $P31c$ &  & trigonal & $C_{\rm 3v}(1)$ \\
+\texttt{160} & \texttt{C3v^5} & \texttt{SG:160} & \texttt{160} & $C_{\rm 3v}^{5}$ & $R3m$ &  & trigonal & $C_{\rm 3v}$ \\
+\texttt{161} & \texttt{C3v^6} & \texttt{SG:161} & \texttt{161} & $C_{\rm 3v}^{6}$ & $R3c$ &  & trigonal & $C_{\rm 3v}$ \\ \hline
+\texttt{162} & \texttt{D3d^1} & \texttt{SG:162} & \texttt{162} & $D_{\rm 3d}^{1}$ & $P\bar{3}1m$ &  & trigonal & $D_{\rm 3d}(1)$ \\
+\texttt{163} & \texttt{D3d^2} & \texttt{SG:163} & \texttt{163} & $D_{\rm 3d}^{2}$ & $P\bar{3}1c$ &  & trigonal & $D_{\rm 3d}(1)$ \\
+\texttt{164} & \texttt{D3d^3} & \texttt{SG:164} & \texttt{164} & $D_{\rm 3d}^{3}$ & $P\bar{3}m1$ &  & trigonal & $D_{\rm 3d}$ \\
+\texttt{165} & \texttt{D3d^4} & \texttt{SG:165} & \texttt{165} & $D_{\rm 3d}^{4}$ & $P\bar{3}c1$ &  & trigonal & $D_{\rm 3d}$ \\
+\texttt{166} & \texttt{D3d^5} & \texttt{SG:166} & \texttt{166} & $D_{\rm 3d}^{5}$ & $R\bar{3}m$ &  & trigonal & $D_{\rm 3d}$ \\
+\texttt{167} & \texttt{D3d^6} & \texttt{SG:167} & \texttt{167} & $D_{\rm 3d}^{6}$ & $R\bar{3}c$ &  & trigonal & $D_{\rm 3d}$ \\ \hline
+\texttt{168} & \texttt{C6^1} & \texttt{SG:168} & \texttt{168} & $C_{\rm 6}^{1}$ & $P6$ &  & hexagonal & $C_{\rm 6}$ \\
+\texttt{169} & \texttt{C6^2} & \texttt{SG:169} & \texttt{169} & $C_{\rm 6}^{2}$ & $P6_1$ &  & hexagonal & $C_{\rm 6}$ \\
+\texttt{170} & \texttt{C6^3} & \texttt{SG:170} & \texttt{170} & $C_{\rm 6}^{3}$ & $P6_5$ &  & hexagonal & $C_{\rm 6}$ \\
+\texttt{171} & \texttt{C6^4} & \texttt{SG:171} & \texttt{171} & $C_{\rm 6}^{4}$ & $P6_2$ &  & hexagonal & $C_{\rm 6}$ \\
+\texttt{172} & \texttt{C6^5} & \texttt{SG:172} & \texttt{172} & $C_{\rm 6}^{5}$ & $P6_4$ &  & hexagonal & $C_{\rm 6}$ \\
+\texttt{173} & \texttt{C6^6} & \texttt{SG:173} & \texttt{173} & $C_{\rm 6}^{6}$ & $P6_3$ &  & hexagonal & $C_{\rm 6}$ \\ \hline
+\texttt{174} & \texttt{C3h^1} & \texttt{SG:174} & \texttt{174} & $C_{\rm 3h}^{1}$ & $P\bar{6}$ &  & hexagonal & $C_{\rm 3h}$ \\ \hline
+\texttt{175} & \texttt{C6h^1} & \texttt{SG:175} & \texttt{175} & $C_{\rm 6h}^{1}$ & $P6/m$ &  & hexagonal & $C_{\rm 6h}$ \\
+\texttt{176} & \texttt{C6h^2} & \texttt{SG:176} & \texttt{176} & $C_{\rm 6h}^{2}$ & $P6_3/m$ &  & hexagonal & $C_{\rm 6h}$ \\ \hline
+\texttt{177} & \texttt{D6^1} & \texttt{SG:177} & \texttt{177} & $D_{\rm 6}^{1}$ & $P622$ &  & hexagonal & $D_{\rm 6}$ \\
+\texttt{178} & \texttt{D6^2} & \texttt{SG:178} & \texttt{178} & $D_{\rm 6}^{2}$ & $P6_122$ &  & hexagonal & $D_{\rm 6}$ \\
+\texttt{179} & \texttt{D6^3} & \texttt{SG:179} & \texttt{179} & $D_{\rm 6}^{3}$ & $P6_522$ &  & hexagonal & $D_{\rm 6}$ \\
+\texttt{180} & \texttt{D6^4} & \texttt{SG:180} & \texttt{180} & $D_{\rm 6}^{4}$ & $P6_222$ &  & hexagonal & $D_{\rm 6}$ \\
+\texttt{181} & \texttt{D6^5} & \texttt{SG:181} & \texttt{181} & $D_{\rm 6}^{5}$ & $P6_422$ &  & hexagonal & $D_{\rm 6}$ \\
+\texttt{182} & \texttt{D6^6} & \texttt{SG:182} & \texttt{182} & $D_{\rm 6}^{6}$ & $P6_322$ &  & hexagonal & $D_{\rm 6}$ \\ \hline
+\texttt{183} & \texttt{C6v^1} & \texttt{SG:183} & \texttt{183} & $C_{\rm 6v}^{1}$ & $P6mm$ &  & hexagonal & $C_{\rm 6v}$ \\
+\texttt{184} & \texttt{C6v^2} & \texttt{SG:184} & \texttt{184} & $C_{\rm 6v}^{2}$ & $P6cc$ &  & hexagonal & $C_{\rm 6v}$ \\
+\texttt{185} & \texttt{C6v^3} & \texttt{SG:185} & \texttt{185} & $C_{\rm 6v}^{3}$ & $P6_3cm$ &  & hexagonal & $C_{\rm 6v}$ \\
+\texttt{186} & \texttt{C6v^4} & \texttt{SG:186} & \texttt{186} & $C_{\rm 6v}^{4}$ & $P6_3mc$ &  & hexagonal & $C_{\rm 6v}$ \\ \hline
+\texttt{187} & \texttt{D3h^1} & \texttt{SG:187} & \texttt{187} & $D_{\rm 3h}^{1}$ & $P\bar{6}m2$ &  & hexagonal & $D_{\rm 3h}$ \\
+\texttt{188} & \texttt{D3h^2} & \texttt{SG:188} & \texttt{188} & $D_{\rm 3h}^{2}$ & $P\bar{6}c2$ &  & hexagonal & $D_{\rm 3h}$ \\
+\texttt{189} & \texttt{D3h^3} & \texttt{SG:189} & \texttt{189} & $D_{\rm 3h}^{3}$ & $P\bar{6}2m$ &  & hexagonal & $D_{\rm 3h}(1)$ \\
+\texttt{190} & \texttt{D3h^4} & \texttt{SG:190} & \texttt{190} & $D_{\rm 3h}^{4}$ & $P\bar{6}2c$ &  & hexagonal & $D_{\rm 3h}(1)$ \\ \hline
+\texttt{191} & \texttt{D6h^1} & \texttt{SG:191} & \texttt{191} & $D_{\rm 6h}^{1}$ & $P6/mmm$ &  & hexagonal & $D_{\rm 6h}$ \\
+\texttt{192} & \texttt{D6h^2} & \texttt{SG:192} & \texttt{192} & $D_{\rm 6h}^{2}$ & $P6/mcc$ &  & hexagonal & $D_{\rm 6h}$ \\
+\texttt{193} & \texttt{D6h^3} & \texttt{SG:193} & \texttt{193} & $D_{\rm 6h}^{3}$ & $P6_3/mcm$ &  & hexagonal & $D_{\rm 6h}$ \\
+\texttt{194} & \texttt{D6h^4} & \texttt{SG:194} & \texttt{194} & $D_{\rm 6h}^{4}$ & $P6_3/mmc$ &  & hexagonal & $D_{\rm 6h}$ \\ \hline
+\texttt{195} & \texttt{T^1} & \texttt{SG:195} & \texttt{195} & $T_{\rm }^{1}$ & $P23$ &  & cubic & $T_{\rm }$ \\
+\texttt{196} & \texttt{T^2} & \texttt{SG:196} & \texttt{196} & $T_{\rm }^{2}$ & $F23$ &  & cubic & $T_{\rm }$ \\
+\texttt{197} & \texttt{T^3} & \texttt{SG:197} & \texttt{197} & $T_{\rm }^{3}$ & $I23$ &  & cubic & $T_{\rm }$ \\
+\texttt{198} & \texttt{T^4} & \texttt{SG:198} & \texttt{198} & $T_{\rm }^{4}$ & $P2_13$ &  & cubic & $T_{\rm }$ \\
+\texttt{199} & \texttt{T^5} & \texttt{SG:199} & \texttt{199} & $T_{\rm }^{5}$ & $I2_13$ &  & cubic & $T_{\rm }$ \\ \hline
+\texttt{200} & \texttt{Th^1} & \texttt{SG:200} & \texttt{200} & $T_{\rm h}^{1}$ & $Pm\bar{3}$ &  & cubic & $T_{\rm h}$ \\
+\texttt{201} & \texttt{Th^2} & \texttt{SG:201} & \texttt{201} & $T_{\rm h}^{2}$ & $Pn\bar{3}$ &  & cubic & $T_{\rm h}$ \\
+\texttt{202} & \texttt{Th^3} & \texttt{SG:202} & \texttt{202} & $T_{\rm h}^{3}$ & $Fm\bar{3}$ &  & cubic & $T_{\rm h}$ \\
+\texttt{203} & \texttt{Th^4} & \texttt{SG:203} & \texttt{203} & $T_{\rm h}^{4}$ & $Fd\bar{3}$ &  & cubic & $T_{\rm h}$ \\
+\texttt{204} & \texttt{Th^5} & \texttt{SG:204} & \texttt{204} & $T_{\rm h}^{5}$ & $Im\bar{3}$ &  & cubic & $T_{\rm h}$ \\
+\texttt{205} & \texttt{Th^6} & \texttt{SG:205} & \texttt{205} & $T_{\rm h}^{6}$ & $Pa\bar{3}$ &  & cubic & $T_{\rm h}$ \\
+\texttt{206} & \texttt{Th^7} & \texttt{SG:206} & \texttt{206} & $T_{\rm h}^{7}$ & $Ia\bar{3}$ &  & cubic & $T_{\rm h}$ \\ \hline
+\texttt{207} & \texttt{O^1} & \texttt{SG:207} & \texttt{207} & $O_{\rm }^{1}$ & $P432$ &  & cubic & $O_{\rm }$ \\
+\texttt{208} & \texttt{O^2} & \texttt{SG:208} & \texttt{208} & $O_{\rm }^{2}$ & $P4_232$ &  & cubic & $O_{\rm }$ \\
+\texttt{209} & \texttt{O^3} & \texttt{SG:209} & \texttt{209} & $O_{\rm }^{3}$ & $F432$ &  & cubic & $O_{\rm }$ \\
+\texttt{210} & \texttt{O^4} & \texttt{SG:210} & \texttt{210} & $O_{\rm }^{4}$ & $F4_132$ &  & cubic & $O_{\rm }$ \\
+\texttt{211} & \texttt{O^5} & \texttt{SG:211} & \texttt{211} & $O_{\rm }^{5}$ & $I432$ &  & cubic & $O_{\rm }$ \\
+\texttt{212} & \texttt{O^6} & \texttt{SG:212} & \texttt{212} & $O_{\rm }^{6}$ & $P4_332$ &  & cubic & $O_{\rm }$ \\
+\texttt{213} & \texttt{O^7} & \texttt{SG:213} & \texttt{213} & $O_{\rm }^{7}$ & $P4_132$ &  & cubic & $O_{\rm }$ \\
+\texttt{214} & \texttt{O^8} & \texttt{SG:214} & \texttt{214} & $O_{\rm }^{8}$ & $I4_132$ &  & cubic & $O_{\rm }$ \\ \hline
+\texttt{215} & \texttt{Td^1} & \texttt{SG:215} & \texttt{215} & $T_{\rm d}^{1}$ & $P\bar{4}3m$ &  & cubic & $T_{\rm d}$ \\
+\texttt{216} & \texttt{Td^2} & \texttt{SG:216} & \texttt{216} & $T_{\rm d}^{2}$ & $F\bar{4}3m$ &  & cubic & $T_{\rm d}$ \\
+\texttt{217} & \texttt{Td^3} & \texttt{SG:217} & \texttt{217} & $T_{\rm d}^{3}$ & $I\bar{4}3m$ &  & cubic & $T_{\rm d}$ \\
+\texttt{218} & \texttt{Td^4} & \texttt{SG:218} & \texttt{218} & $T_{\rm d}^{4}$ & $P\bar{4}3n$ &  & cubic & $T_{\rm d}$ \\
+\texttt{219} & \texttt{Td^5} & \texttt{SG:219} & \texttt{219} & $T_{\rm d}^{5}$ & $F\bar{4}3c$ &  & cubic & $T_{\rm d}$ \\
+\texttt{220} & \texttt{Td^6} & \texttt{SG:220} & \texttt{220} & $T_{\rm d}^{6}$ & $I\bar{4}3d$ &  & cubic & $T_{\rm d}$ \\ \hline
+\texttt{221} & \texttt{Oh^1} & \texttt{SG:221} & \texttt{221} & $O_{\rm h}^{1}$ & $Pm\bar{3}m$ &  & cubic & $O_{\rm h}$ \\
+\texttt{222} & \texttt{Oh^2} & \texttt{SG:222} & \texttt{222} & $O_{\rm h}^{2}$ & $Pn\bar{3}n$ &  & cubic & $O_{\rm h}$ \\
+\texttt{223} & \texttt{Oh^3} & \texttt{SG:223} & \texttt{223} & $O_{\rm h}^{3}$ & $Pm\bar{3}n$ &  & cubic & $O_{\rm h}$ \\
+\texttt{224} & \texttt{Oh^4} & \texttt{SG:224} & \texttt{224} & $O_{\rm h}^{4}$ & $Pn\bar{3}m$ &  & cubic & $O_{\rm h}$ \\
+\texttt{225} & \texttt{Oh^5} & \texttt{SG:225} & \texttt{225} & $O_{\rm h}^{5}$ & $Fm\bar{3}m$ &  & cubic & $O_{\rm h}$ \\
+\texttt{226} & \texttt{Oh^6} & \texttt{SG:226} & \texttt{226} & $O_{\rm h}^{6}$ & $Fm\bar{3}c$ &  & cubic & $O_{\rm h}$ \\
+\texttt{227} & \texttt{Oh^7} & \texttt{SG:227} & \texttt{227} & $O_{\rm h}^{7}$ & $Fd\bar{3}m$ &  & cubic & $O_{\rm h}$ \\
+\texttt{228} & \texttt{Oh^8} & \texttt{SG:228} & \texttt{228} & $O_{\rm h}^{8}$ & $Fd\bar{3}c$ &  & cubic & $O_{\rm h}$ \\
+\texttt{229} & \texttt{Oh^9} & \texttt{SG:229} & \texttt{229} & $O_{\rm h}^{9}$ & $Im\bar{3}m$ &  & cubic & $O_{\rm h}$ \\
+\texttt{230} & \texttt{Oh^10} & \texttt{SG:230} & \texttt{230} & $O_{\rm h}^{10}$ & $Ia\bar{3}d$ &  & cubic & $O_{\rm h}$ \\
+\end{longtable}
+\end{center}
+\end{center}
+
+\end{document}

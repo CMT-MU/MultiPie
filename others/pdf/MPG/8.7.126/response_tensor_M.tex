@@ -1,0 +1,168 @@
+\documentclass[fleqn,8pt,landscape]{jsarticle}
+\special{papersize=\the\paperwidth,\the\paperheight}
+
+%%% package
+
+\usepackage[usenames]{color}
+\usepackage{amsmath}
+\usepackage{breqn}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{enumitem}
+\usepackage{braket}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+%%% layout setting
+
+\paperwidth=356.4truemm
+\paperheight=252.0truemm
+\textwidth=335.59999999999997truemm
+\textheight=224.2truemm
+\oddsidemargin=-15truemm
+\topmargin=-15truemm
+\footskip=7truemm
+
+%%% fixed
+
+\hoffset=0truemm
+\voffset=0truemm
+\headheight=0truemm
+\headsep=0truemm
+\marginparsep=0truemm
+\marginparwidth=0truemm
+
+%%% main text
+
+\begin{document}
+
+\setcounter{MaxMatrixCols}{32}
+
+\renewcommand{\tablename}{Table~}
+\renewcommand{\figurename}{Figure~}
+\begin{center}
+\LARGE
+MPG No. 8.7.126\quad$m'mm$\quad(mm'm setting)\quad[ Type III, orthorhombic ] [M tensor]
+\end{center}
+* Rank 0 tensor.
+* Rank 1 tensor.
+* Rank 2 tensor (s).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & M_{xz} \\ 0 & 0 & 0 \\ M_{xz} & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{xz} = M_{dxz}^{(1)}
+\end{align*}
+* Rank 2 tensor (a).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & M_{xz} \\ 0 & 0 & 0 \\ - M_{xz} & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{xz} = - T_{py}^{(1)}
+\end{align*}
+* Rank 3 tensor (s).
+* Rank 3 tensor (a).
+* Rank 4 tensor (sss).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & 0 & 0 & M_{xxzx} & 0 \\ 0 & 0 & 0 & 0 & M_{yyzx} & 0 \\ 0 & 0 & 0 & 0 & M_{zzzx} & 0 \\ 0 & 0 & 0 & 0 & 0 & M_{yzxy} \\ M_{xxzx} & M_{yyzx} & M_{zzzx} & 0 & 0 & 0 \\ 0 & 0 & 0 & M_{yzxy} & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{xxzx} = M_{dxz}^{(1)} + 2 M_{dxz}^{(2)} - M_{gay}^{(1)} - M_{gby}^{(1)} \\
+& M_{yyzx} = M_{dxz}^{(1)} + 2 M_{gby}^{(1)} \\
+& M_{zzzx} = M_{dxz}^{(1)} + 2 M_{dxz}^{(2)} + M_{gay}^{(1)} - M_{gby}^{(1)} \\
+& M_{yzxy} = M_{dxz}^{(2)} + 2 M_{gby}^{(1)}
+\end{align*}
+* Rank 4 tensor (ssa).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & 0 & 0 & M_{xxzx} & 0 \\ 0 & 0 & 0 & 0 & M_{yyzx} & 0 \\ 0 & 0 & 0 & 0 & M_{zzzx} & 0 \\ 0 & 0 & 0 & 0 & 0 & M_{yzxy} \\ - M_{xxzx} & - M_{yyzx} & - M_{zzzx} & 0 & 0 & 0 \\ 0 & 0 & 0 & - M_{yzxy} & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{xxzx} = M_{dxz}^{(3)} + 2 T_{fay}^{(1)} + 2 T_{fby}^{(1)} - 2 T_{py}^{(1)} \\
+& M_{yyzx} = M_{dxz}^{(3)} - 4 T_{fby}^{(1)} \\
+& M_{zzzx} = M_{dxz}^{(3)} - 2 T_{fay}^{(1)} + 2 T_{fby}^{(1)} + 2 T_{py}^{(1)} \\
+& M_{yzxy} = 4 T_{fay}^{(1)} + T_{py}^{(1)}
+\end{align*}
+* Rank 4 tensor (aas).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & M_{yzxy} \\ 0 & 0 & 0 \\ M_{yzxy} & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{yzxy} = 2 M_{dxz}^{(4)}
+\end{align*}
+* Rank 4 tensor (aaa).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & M_{yzxy} \\ 0 & 0 & 0 \\ - M_{yzxy} & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{yzxy} = T_{py}^{(2)}
+\end{align*}
+* Rank 4 tensor (sa).
+\begin{align*}
+\begin{bmatrix} 0 & M_{xxzx} & 0 \\ 0 & M_{yyzx} & 0 \\ 0 & M_{zzzx} & 0 \\ 0 & 0 & M_{yzxy} \\ 0 & 0 & 0 \\ M_{xyyz} & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{xxzx} = 2 M_{dxz}^{(5)} - T_{fay}^{(2)} - T_{fby}^{(2)} + T_{py}^{(3)} \\
+& M_{yyzx} = 2 T_{fay}^{(2)} + T_{py}^{(3)} + 2 T_{py}^{(4)} \\
+& M_{zzzx} = - 2 M_{dxz}^{(5)} - T_{fay}^{(2)} + T_{fby}^{(2)} + T_{py}^{(3)} \\
+& M_{yzxy} = M_{dxz}^{(5)} - T_{fay}^{(2)} + T_{fby}^{(2)} + T_{py}^{(4)} \\
+& M_{xyyz} = - M_{dxz}^{(5)} - T_{fay}^{(2)} - T_{fby}^{(2)} + T_{py}^{(4)}
+\end{align*}
+* Rank 4 tensor (as).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & 0 & 0 & 0 & M_{yzxy} \\ M_{zxxx} & M_{zxyy} & M_{zxzz} & 0 & 0 & 0 \\ 0 & 0 & 0 & M_{xyyz} & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{yzxy} = - M_{dxz}^{(6)} - T_{fay}^{(3)} - T_{fby}^{(3)} + T_{py}^{(6)} \\
+& M_{zxxx} = 2 M_{dxz}^{(6)} - T_{fay}^{(3)} - T_{fby}^{(3)} + T_{py}^{(5)} \\
+& M_{zxyy} = 2 T_{fay}^{(3)} + T_{py}^{(5)} + 2 T_{py}^{(6)} \\
+& M_{zxzz} = - 2 M_{dxz}^{(6)} - T_{fay}^{(3)} + T_{fby}^{(3)} + T_{py}^{(5)} \\
+& M_{xyyz} = M_{dxz}^{(6)} - T_{fay}^{(3)} + T_{fby}^{(3)} + T_{py}^{(6)}
+\end{align*}
+* Rank 4 tensor (s).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & 0 & 0 & M_{xxzx} & 0 & 0 & M_{xxxz} & 0 \\ 0 & 0 & 0 & 0 & M_{yyzx} & 0 & 0 & M_{yyxz} & 0 \\ 0 & 0 & 0 & 0 & M_{zzzx} & 0 & 0 & M_{zzxz} & 0 \\ 0 & 0 & 0 & 0 & 0 & M_{yzxy} & 0 & 0 & M_{yzyx} \\ M_{zxxx} & M_{zxyy} & M_{zxzz} & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & M_{xyyz} & 0 & 0 & M_{xyzy} & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{xxzx} = M_{dxz}^{(1)} + 2 M_{dxz}^{(2)} + M_{dxz}^{(3)} + 2 M_{dxz}^{(5)} - M_{gay}^{(1)} - M_{gby}^{(1)} + 2 T_{fay}^{(1)} - T_{fay}^{(2)} + 2 T_{fby}^{(1)} - T_{fby}^{(2)} - 2 T_{py}^{(1)} + T_{py}^{(3)} \\
+& M_{xxxz} = M_{dxz}^{(1)} + 2 M_{dxz}^{(2)} + M_{dxz}^{(3)} - 2 M_{dxz}^{(5)} - M_{gay}^{(1)} - M_{gby}^{(1)} + 2 T_{fay}^{(1)} + T_{fay}^{(2)} + 2 T_{fby}^{(1)} + T_{fby}^{(2)} - 2 T_{py}^{(1)} - T_{py}^{(3)} \\
+& M_{yyzx} = M_{dxz}^{(1)} + M_{dxz}^{(3)} + 2 M_{gby}^{(1)} + 2 T_{fay}^{(2)} - 4 T_{fby}^{(1)} + T_{py}^{(3)} + 2 T_{py}^{(4)} \\
+& M_{yyxz} = M_{dxz}^{(1)} + M_{dxz}^{(3)} + 2 M_{gby}^{(1)} - 2 T_{fay}^{(2)} - 4 T_{fby}^{(1)} - T_{py}^{(3)} - 2 T_{py}^{(4)} \\
+& M_{zzzx} = M_{dxz}^{(1)} + 2 M_{dxz}^{(2)} + M_{dxz}^{(3)} - 2 M_{dxz}^{(5)} + M_{gay}^{(1)} - M_{gby}^{(1)} - 2 T_{fay}^{(1)} - T_{fay}^{(2)} + 2 T_{fby}^{(1)} + T_{fby}^{(2)} + 2 T_{py}^{(1)} + T_{py}^{(3)} \\
+& M_{zzxz} = M_{dxz}^{(1)} + 2 M_{dxz}^{(2)} + M_{dxz}^{(3)} + 2 M_{dxz}^{(5)} + M_{gay}^{(1)} - M_{gby}^{(1)} - 2 T_{fay}^{(1)} + T_{fay}^{(2)} + 2 T_{fby}^{(1)} - T_{fby}^{(2)} + 2 T_{py}^{(1)} - T_{py}^{(3)} \\
+& M_{yzxy} = M_{dxz}^{(2)} + M_{dxz}^{(5)} + 2 M_{gby}^{(1)} + 4 T_{fay}^{(1)} - T_{fay}^{(2)} + T_{fby}^{(2)} + T_{py}^{(1)} + T_{py}^{(4)} \\
+& M_{yzyx} = M_{dxz}^{(2)} - M_{dxz}^{(5)} + 2 M_{gby}^{(1)} + 4 T_{fay}^{(1)} + T_{fay}^{(2)} - T_{fby}^{(2)} + T_{py}^{(1)} - T_{py}^{(4)} \\
+& M_{zxxx} = M_{dxz}^{(1)} + 2 M_{dxz}^{(2)} - M_{dxz}^{(3)} - M_{gay}^{(1)} - M_{gby}^{(1)} - 2 T_{fay}^{(1)} - 2 T_{fby}^{(1)} + 2 T_{py}^{(1)} \\
+& M_{zxyy} = M_{dxz}^{(1)} - M_{dxz}^{(3)} + 2 M_{gby}^{(1)} + 4 T_{fby}^{(1)} \\
+& M_{zxzz} = M_{dxz}^{(1)} + 2 M_{dxz}^{(2)} - M_{dxz}^{(3)} + M_{gay}^{(1)} - M_{gby}^{(1)} + 2 T_{fay}^{(1)} - 2 T_{fby}^{(1)} - 2 T_{py}^{(1)} \\
+& M_{xyyz} = M_{dxz}^{(2)} - M_{dxz}^{(5)} + 2 M_{gby}^{(1)} - 4 T_{fay}^{(1)} - T_{fay}^{(2)} - T_{fby}^{(2)} - T_{py}^{(1)} + T_{py}^{(4)} \\
+& M_{xyzy} = M_{dxz}^{(2)} + M_{dxz}^{(5)} + 2 M_{gby}^{(1)} - 4 T_{fay}^{(1)} + T_{fay}^{(2)} + T_{fby}^{(2)} - T_{py}^{(1)} - T_{py}^{(4)}
+\end{align*}
+* Rank 4 tensor (a).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & 0 & 0 & 0 & M_{yzxy} & 0 & 0 & M_{yzyx} \\ M_{zxxx} & M_{zxyy} & M_{zxzz} & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & M_{xyyz} & 0 & 0 & M_{xyzy} & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{yzxy} = 2 M_{dxz}^{(4)} - M_{dxz}^{(6)} - T_{fay}^{(3)} - T_{fby}^{(3)} + T_{py}^{(2)} + T_{py}^{(6)} \\
+& M_{yzyx} = - 2 M_{dxz}^{(4)} - M_{dxz}^{(6)} - T_{fay}^{(3)} - T_{fby}^{(3)} - T_{py}^{(2)} + T_{py}^{(6)} \\
+& M_{zxxx} = 2 M_{dxz}^{(6)} - T_{fay}^{(3)} - T_{fby}^{(3)} + T_{py}^{(5)} \\
+& M_{zxyy} = 2 T_{fay}^{(3)} + T_{py}^{(5)} + 2 T_{py}^{(6)} \\
+& M_{zxzz} = - 2 M_{dxz}^{(6)} - T_{fay}^{(3)} + T_{fby}^{(3)} + T_{py}^{(5)} \\
+& M_{xyyz} = 2 M_{dxz}^{(4)} + M_{dxz}^{(6)} - T_{fay}^{(3)} + T_{fby}^{(3)} - T_{py}^{(2)} + T_{py}^{(6)} \\
+& M_{xyzy} = - 2 M_{dxz}^{(4)} + M_{dxz}^{(6)} - T_{fay}^{(3)} + T_{fby}^{(3)} + T_{py}^{(2)} + T_{py}^{(6)}
+\end{align*}
+* Rank 4 tensor (t).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & M_{xxxz} \\ 0 & 0 & 0 \\ M_{zzzx} & 0 & 0 \\ M_{yyzx} & 0 & 0 \\ 0 & 0 & M_{zzxz} \\ 0 & 0 & 0 \\ 0 & 0 & 0 \\ M_{zxxx} & 0 & 0 \\ 0 & 0 & M_{xyyz} \\ 0 & M_{xyyz} + \frac{M_{zzxz}}{2} - \frac{M_{zzzx}}{2} & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{xxxz} = M_{dxz}^{(1)} + 2 M_{dxz}^{(2)} + M_{dxz}^{(3)} - 2 M_{dxz}^{(5)} - M_{gay}^{(1)} - M_{gby}^{(1)} \\
+& M_{zzzx} = M_{dxz}^{(1)} + 2 M_{dxz}^{(2)} + M_{dxz}^{(3)} - 2 M_{dxz}^{(5)} + M_{gay}^{(1)} - M_{gby}^{(1)} \\
+& M_{yyzx} = M_{dxz}^{(1)} + M_{dxz}^{(3)} + 2 M_{gby}^{(1)} \\
+& M_{zzxz} = M_{dxz}^{(1)} + 2 M_{dxz}^{(2)} + M_{dxz}^{(3)} + 2 M_{dxz}^{(5)} + M_{gay}^{(1)} - M_{gby}^{(1)} \\
+& M_{zxxx} = M_{dxz}^{(1)} + 2 M_{dxz}^{(2)} - M_{dxz}^{(3)} - M_{gay}^{(1)} - M_{gby}^{(1)} \\
+& M_{xyyz} = M_{dxz}^{(2)} - M_{dxz}^{(5)} + 2 M_{gby}^{(1)}
+\end{align*}
+
+\end{document}

@@ -1,0 +1,830 @@
+\documentclass[fleqn,10pt,landscape]{jsarticle}
+\special{papersize=\the\paperwidth,\the\paperheight}
+
+%%% package
+
+\usepackage[usenames]{color}
+\usepackage{amsmath}
+\usepackage{breqn}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{enumitem}
+\usepackage{braket}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+%%% layout setting
+
+\paperwidth=297.0truemm
+\paperheight=210.0truemm
+\textwidth=246.2truemm
+\textheight=152.2truemm
+\oddsidemargin=0truemm
+\topmargin=0truemm
+\footskip=7truemm
+
+%%% fixed
+
+\hoffset=0truemm
+\voffset=0truemm
+\headheight=0truemm
+\headsep=0truemm
+\marginparsep=0truemm
+\marginparwidth=0truemm
+
+%%% main text
+
+\begin{document}
+
+\setcounter{MaxMatrixCols}{32}
+
+\renewcommand{\tablename}{Table~}
+\renewcommand{\figurename}{Figure~}
+\setlength{\baselineskip}{16pt}
+\setlength{\parindent}{0pt}
+\setlength{\mathindent}{0pt}
+\footnotesize
+\begin{center}
+\LARGE
+Model for ``\texttt{Cs1}''
+\end{center}
+\begin{flushright}
+Generated on 2026-01-16 09:10:50 by MultiPie 2.0.0
+\end{flushright}
+\setlength{\baselineskip}{16pt}
+\footnotesize
+\vspace{5mm}
+\noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{General Condition}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
+\vspace{3mm}
+
+\begin{itemize}
+\item Basis type: \texttt{lgs}
+
+\item SAMB selection:
+
+\, - Type: \texttt{[Q, G]}
+
+\, - Rank: \texttt{[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]}
+
+\, - Irrep.: [$A^{\prime}$, $A^{\prime\prime}$]
+
+\, - Spin (s): \texttt{[0, 1]}
+
+\item Max. neighbor: \texttt{10}
+
+\item Search cell range: \texttt{(-2, 3), (-2, 3), (-2, 3)}
+
+\item Toroidal priority: \texttt{false}
+
+\end{itemize}
+\vspace{5mm}
+\noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{Group and Unit Cell}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
+\vspace{3mm}
+
+\begin{itemize}
+\item Group: SG No. 6\quad$C_{\rm s}^{1}$\quad$Pm$\quad(b-axis setting)\quad[ monoclinic ]
+\item Associated point group: PG No. 6\quad$C_{\rm s}$\quad$m$\quad(b-axis setting)\quad[ monoclinic ]
+\end{itemize}
+\begin{itemize}
+\item Unit cell:
+
+\quad $a=\texttt{ 1.00000},\,\, b=\texttt{ 1.00000},\,\, c=\texttt{ 1.00000},\,\, \alpha=\texttt{90.0},\,\, \beta=\texttt{90.0},\,\, \gamma=\texttt{90.0}$
+
+\item Lattice vectors (conventional cell):
+
+\quad $\bm{a}_1=\texttt{[ 1.00000, 0.00000, 0.00000]}$
+
+\quad $\bm{a}_2=\texttt{[ 0.00000, 1.00000, 0.00000]}$
+
+\quad $\bm{a}_3=\texttt{[ 0.00000, 0.00000, 1.00000]}$
+
+\end{itemize}
+\vspace{5mm}
+\noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{Symmetry Operation}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
+\vspace{3mm}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{longtable}{c|cl|cl|cl|cl}
+\caption{Symmetry operation}
+ \\
+ \hline \hline
+ & \# & SO & \# & SO & \# & SO & \# & SO \\ \hline \endfirsthead
+
+\multicolumn{8}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+ & \# & SO & \# & SO & \# & SO & \# & SO \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{8}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{8}{r}{} \\ \endlastfoot
+
+ & 1 & $\{1|0\}$ & 2 & $\{{\rm m}_{010}|0\}$ \\
+\end{longtable}
+\end{center}
+\vspace{5mm}
+\noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{Harmonics}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
+\vspace{3mm}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{longtable}{clcccccl}
+\caption{Harmonics}
+ \\
+ \hline \hline
+\# & symbol & irrep. & rank & X & multiplicity & component & symmetry \\ \hline \endfirsthead
+
+\multicolumn{7}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+\# & symbol & irrep. & rank & X & multiplicity & component & symmetry \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{7}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{7}{r}{} \\ \endlastfoot
+
+1 & $\mathbb{Q}_{0}(A^{\prime})$ & $A^{\prime}$ & 0 & $Q$, $T$ & - & - & $1$ \\ \hline
+2 & $\mathbb{G}_{1}(A^{\prime})$ & $A^{\prime}$ & 1 & $G$, $M$ & - & - & $y$ \\ \hline
+3 & $\mathbb{Q}_{1}(A^{\prime},1)$ & $A^{\prime}$ & 1 & $Q$, $T$ & 1 & - & $x$ \\ \hline
+4 & $\mathbb{Q}_{1}(A^{\prime},2)$ & $A^{\prime}$ & 1 & $Q$, $T$ & 2 & - & $z$ \\ \hline
+5 & $\mathbb{Q}_{2}(A^{\prime},1)$ & $A^{\prime}$ & 2 & $Q$, $T$ & 1 & - & $- \frac{x^{2}}{2} - \frac{y^{2}}{2} + z^{2}$ \\ \hline
+6 & $\mathbb{Q}_{2}(A^{\prime},2)$ & $A^{\prime}$ & 2 & $Q$, $T$ & 2 & - & $\frac{\sqrt{3} \left(x - y\right) \left(x + y\right)}{2}$ \\ \hline
+7 & $\mathbb{Q}_{2}(A^{\prime},3)$ & $A^{\prime}$ & 2 & $Q$, $T$ & 3 & - & $\sqrt{3} x z$ \\ \hline
+8 & $\mathbb{G}_{3}(A^{\prime},1)$ & $A^{\prime}$ & 3 & $G$, $M$ & 1 & - & $\sqrt{15} x y z$ \\ \hline
+9 & $\mathbb{G}_{3}(A^{\prime},2)$ & $A^{\prime}$ & 3 & $G$, $M$ & 2 & - & $- \frac{y \left(3 x^{2} - 2 y^{2} + 3 z^{2}\right)}{2}$ \\ \hline
+10 & $\mathbb{G}_{3}(A^{\prime},3)$ & $A^{\prime}$ & 3 & $G$, $M$ & 3 & - & $- \frac{\sqrt{15} y \left(x - z\right) \left(x + z\right)}{2}$ \\ \hline
+11 & $\mathbb{Q}_{3}(A^{\prime},1)$ & $A^{\prime}$ & 3 & $Q$, $T$ & 1 & - & $\frac{x \left(2 x^{2} - 3 y^{2} - 3 z^{2}\right)}{2}$ \\ \hline
+12 & $\mathbb{Q}_{3}(A^{\prime},2)$ & $A^{\prime}$ & 3 & $Q$, $T$ & 2 & - & $- \frac{z \left(3 x^{2} + 3 y^{2} - 2 z^{2}\right)}{2}$ \\ \hline
+13 & $\mathbb{Q}_{3}(A^{\prime},4)$ & $A^{\prime}$ & 3 & $Q$, $T$ & 4 & - & $\frac{\sqrt{15} z \left(x - y\right) \left(x + y\right)}{2}$ \\ \hline
+14 & $\mathbb{G}_{0}(A^{\prime\prime})$ & $A^{\prime\prime}$ & 0 & $G$, $M$ & - & - & $1$ \\ \hline
+15 & $\mathbb{G}_{1}(A^{\prime\prime},1)$ & $A^{\prime\prime}$ & 1 & $G$, $M$ & 1 & - & $x$ \\ \hline
+16 & $\mathbb{G}_{1}(A^{\prime\prime},2)$ & $A^{\prime\prime}$ & 1 & $G$, $M$ & 2 & - & $z$ \\ \hline
+17 & $\mathbb{Q}_{1}(A^{\prime\prime})$ & $A^{\prime\prime}$ & 1 & $Q$, $T$ & - & - & $y$ \\ \hline
+18 & $\mathbb{G}_{2}(A^{\prime\prime},1)$ & $A^{\prime\prime}$ & 2 & $G$, $M$ & 1 & - & $- \frac{x^{2}}{2} - \frac{y^{2}}{2} + z^{2}$ \\ \hline
+19 & $\mathbb{Q}_{2}(A^{\prime\prime},1)$ & $A^{\prime\prime}$ & 2 & $Q$, $T$ & 1 & - & $\sqrt{3} y z$ \\ \hline
+20 & $\mathbb{Q}_{2}(A^{\prime\prime},2)$ & $A^{\prime\prime}$ & 2 & $Q$, $T$ & 2 & - & $\sqrt{3} x y$ \\ \hline
+21 & $\mathbb{G}_{3}(A^{\prime\prime},1)$ & $A^{\prime\prime}$ & 3 & $G$, $M$ & 1 & - & $\frac{x \left(2 x^{2} - 3 y^{2} - 3 z^{2}\right)}{2}$ \\ \hline
+22 & $\mathbb{G}_{3}(A^{\prime\prime},3)$ & $A^{\prime\prime}$ & 3 & $G$, $M$ & 3 & - & $\frac{\sqrt{15} x \left(y - z\right) \left(y + z\right)}{2}$ \\ \hline
+23 & $\mathbb{G}_{3}(A^{\prime\prime},4)$ & $A^{\prime\prime}$ & 3 & $G$, $M$ & 4 & - & $\frac{\sqrt{15} z \left(x - y\right) \left(x + y\right)}{2}$ \\ \hline
+24 & $\mathbb{Q}_{3}(A^{\prime\prime},1)$ & $A^{\prime\prime}$ & 3 & $Q$, $T$ & 1 & - & $\sqrt{15} x y z$ \\ \hline
+25 & $\mathbb{Q}_{3}(A^{\prime\prime},3)$ & $A^{\prime\prime}$ & 3 & $Q$, $T$ & 3 & - & $- \frac{\sqrt{15} y \left(x - z\right) \left(x + z\right)}{2}$ \\
+\end{longtable}
+\end{center}
+\vspace{5mm}
+\noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{Basis in full matrix}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
+\vspace{3mm}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{longtable}{c|cl|cl|cl|cl}
+\caption{dimension = 4}
+ \\
+ \hline \hline
+ & \# & orbital@atom(SL) & \# & orbital@atom(SL) & \# & orbital@atom(SL) & \# & orbital@atom(SL) \\ \hline \endfirsthead
+
+\multicolumn{8}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+ & \# & orbital@atom(SL) & \# & orbital@atom(SL) & \# & orbital@atom(SL) & \# & orbital@atom(SL) \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{8}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{8}{r}{} \\ \endlastfoot
+
+ & 1 & $\ket{p_{x},\uparrow}@{\rm A}(1)$ & 2 & $\ket{p_{x},\downarrow}@{\rm A}(1)$ & 3 & $\ket{p_{y},\uparrow}@{\rm A}(1)$ & 4 & $\ket{p_{y},\downarrow}@{\rm A}(1)$ \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{longtable}{ll}
+\caption{Atomic basis (orbital part only)}
+ \\
+ \hline \hline
+orbital & definition \\ \hline \endfirsthead
+
+\multicolumn{1}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+orbital & definition \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{1}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{1}{r}{} \\ \endlastfoot
+
+$ \ket{p_{x}} $ & $ x $ \\
+$ \ket{p_{y}} $ & $ y $ \\
+$ \ket{p_{z}} $ & $ z $ \\
+\end{longtable}
+\end{center}
+\vspace{5mm}
+\noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{SAMB}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
+\vspace{3mm}
+
+\noindent70 (all 150) SAMBs
+
+\vspace{5mm}
+
+\noindent\textbullet\, '\texttt{A}' site-cluster
+
+\noindent\quad * bra: $\bra{p_{x},\uparrow},\, \bra{p_{x},\downarrow},\, \bra{p_{y},\uparrow},\, \bra{p_{y},\downarrow}$
+
+\noindent\quad * ket: $\ket{p_{x},\uparrow},\, \ket{p_{x},\downarrow},\, \ket{p_{y},\uparrow},\, \ket{p_{y},\downarrow}$
+
+\noindent\quad * wyckoff: \texttt{1a}
+
+\begin{dmath*}
+\fbox{z1}\quad \mathbb{Q}_{0}^{(c)}(A^{\prime})=\mathbb{Q}_{0}^{(a)}(A^{\prime}) \mathbb{Q}_{0}^{(s)}(A^{\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z2}\quad \mathbb{Q}_{2}^{(c)}(A^{\prime},2)=\mathbb{Q}_{2}^{(a)}(A^{\prime},2) \mathbb{Q}_{0}^{(s)}(A^{\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z3}\quad \mathbb{Q}_{2}^{(1,-1;c)}(A^{\prime},1)=\mathbb{Q}_{2}^{(1,-1;a)}(A^{\prime},1) \mathbb{Q}_{0}^{(s)}(A^{\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z4}\quad \mathbb{Q}_{2}^{(1,-1;c)}(A^{\prime},3)=\mathbb{Q}_{2}^{(1,-1;a)}(A^{\prime},3) \mathbb{Q}_{0}^{(s)}(A^{\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z79}\quad \mathbb{Q}_{2}^{(c)}(A^{\prime\prime},2)=\mathbb{Q}_{2}^{(a)}(A^{\prime\prime},2) \mathbb{Q}_{0}^{(s)}(A^{\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z80}\quad \mathbb{Q}_{2}^{(1,-1;c)}(A^{\prime\prime},1)=\mathbb{Q}_{2}^{(1,-1;a)}(A^{\prime\prime},1) \mathbb{Q}_{0}^{(s)}(A^{\prime})
+\end{dmath*}
+\vspace{5mm}
+
+\noindent\textbullet\, '\texttt{A}'-'\texttt{A}' bond-cluster
+
+\noindent\quad * bra: $\bra{p_{x},\uparrow},\, \bra{p_{x},\downarrow},\, \bra{p_{y},\uparrow},\, \bra{p_{y},\downarrow}$
+
+\noindent\quad * ket: $\ket{p_{x},\uparrow},\, \ket{p_{x},\downarrow},\, \ket{p_{y},\uparrow},\, \ket{p_{y},\downarrow}$
+
+\noindent\quad * wyckoff: \texttt{1a@1a}
+
+\begin{dmath*}
+\fbox{z5}\quad \mathbb{Q}_{0}^{(c)}(A^{\prime})=\mathbb{Q}_{0}^{(a)}(A^{\prime}) \mathbb{Q}_{0}^{(b)}(A^{\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z6}\quad \mathbb{Q}_{2}^{(c)}(A^{\prime},2)=\mathbb{Q}_{2}^{(a)}(A^{\prime},2) \mathbb{Q}_{0}^{(b)}(A^{\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z7}\quad \mathbb{Q}_{2}^{(1,-1;c)}(A^{\prime},1)=\mathbb{Q}_{2}^{(1,-1;a)}(A^{\prime},1) \mathbb{Q}_{0}^{(b)}(A^{\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z8}\quad \mathbb{Q}_{2}^{(1,-1;c)}(A^{\prime},3)=\mathbb{Q}_{2}^{(1,-1;a)}(A^{\prime},3) \mathbb{Q}_{0}^{(b)}(A^{\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z9}\quad \mathbb{Q}_{2}^{(c)}(A^{\prime\prime},2)=\mathbb{Q}_{2}^{(a)}(A^{\prime\prime},2) \mathbb{Q}_{0}^{(b)}(A^{\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z10}\quad \mathbb{Q}_{2}^{(1,-1;c)}(A^{\prime\prime},1)=\mathbb{Q}_{2}^{(1,-1;a)}(A^{\prime\prime},1) \mathbb{Q}_{0}^{(b)}(A^{\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z11}\quad \mathbb{G}_{1}^{(1,-1;c)}(A^{\prime})=\mathbb{M}_{1}^{(1,-1;a)}(A^{\prime}) \mathbb{T}_{0}^{(b)}(A^{\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z12}\quad \mathbb{G}_{3}^{(1,-1;c)}(A^{\prime},1)=\mathbb{M}_{3}^{(1,-1;a)}(A^{\prime},1) \mathbb{T}_{0}^{(b)}(A^{\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z81}\quad \mathbb{G}_{3}^{(1,-1;c)}(A^{\prime},2)=\mathbb{M}_{3}^{(1,-1;a)}(A^{\prime},2) \mathbb{T}_{0}^{(b)}(A^{\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z82}\quad \mathbb{G}_{3}^{(1,-1;c)}(A^{\prime},3)=\mathbb{M}_{3}^{(1,-1;a)}(A^{\prime},3) \mathbb{T}_{0}^{(b)}(A^{\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z83}\quad \mathbb{G}_{1}^{(c)}(A^{\prime\prime},2)=\mathbb{M}_{1}^{(a)}(A^{\prime\prime},2) \mathbb{T}_{0}^{(b)}(A^{\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z84}\quad \mathbb{G}_{1}^{(1,-1;c)}(A^{\prime\prime},1)=\mathbb{M}_{1}^{(1,-1;a)}(A^{\prime\prime},1) \mathbb{T}_{0}^{(b)}(A^{\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z85}\quad \mathbb{G}_{1}^{(1,-1;c)}(A^{\prime\prime},2)=\mathbb{M}_{1}^{(1,-1;a)}(A^{\prime\prime},2) \mathbb{T}_{0}^{(b)}(A^{\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z86}\quad \mathbb{G}_{3}^{(1,-1;c)}(A^{\prime\prime},1)=\mathbb{M}_{3}^{(1,-1;a)}(A^{\prime\prime},1) \mathbb{T}_{0}^{(b)}(A^{\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z87}\quad \mathbb{G}_{3}^{(1,-1;c)}(A^{\prime\prime},3)=\mathbb{M}_{3}^{(1,-1;a)}(A^{\prime\prime},3) \mathbb{T}_{0}^{(b)}(A^{\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z88}\quad \mathbb{G}_{3}^{(1,-1;c)}(A^{\prime\prime},4)=\mathbb{M}_{3}^{(1,-1;a)}(A^{\prime\prime},4) \mathbb{T}_{0}^{(b)}(A^{\prime})
+\end{dmath*}
+\noindent * common SAMBs
+
+\noindent\texttt{(z5, z23, z47, z55), (z6, z24, z48, z56), (z7, z25, z49, z57), (z8, z26, z50, z58), (z9, z27, z51, z59), (z10, z28, z52, z60), (z11, z29, z53, z61), (z12, z30, z54, z62), (z81, z95, z119, z127), (z82, z96, z120, z128), (z83, z97, z121, z129), (z84, z98, z122, z130), (z85, z99, z123, z131), (z86, z100, z124, z132), (z87, z101, z125, z133), (z88, z102, z126, z134)}
+\vspace{5mm}
+
+\noindent\textbullet\, '\texttt{A}'-'\texttt{A}' bond-cluster
+
+\noindent\quad * bra: $\bra{p_{x},\uparrow},\, \bra{p_{x},\downarrow},\, \bra{p_{y},\uparrow},\, \bra{p_{y},\downarrow}$
+
+\noindent\quad * ket: $\ket{p_{x},\uparrow},\, \ket{p_{x},\downarrow},\, \ket{p_{y},\uparrow},\, \ket{p_{y},\downarrow}$
+
+\noindent\quad * wyckoff: \texttt{1b@1b}
+
+\begin{dmath*}
+\fbox{z13}\quad \mathbb{Q}_{0}^{(c)}(A^{\prime})=\mathbb{Q}_{0}^{(a)}(A^{\prime}) \mathbb{Q}_{0}^{(b)}(A^{\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z14}\quad \mathbb{Q}_{1}^{(c)}(A^{\prime},1)=- \mathbb{M}_{1}^{(a)}(A^{\prime\prime},2) \mathbb{T}_{1}^{(b)}(A^{\prime\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z15}\quad \mathbb{Q}_{2}^{(c)}(A^{\prime},2)=\mathbb{Q}_{2}^{(a)}(A^{\prime},2) \mathbb{Q}_{0}^{(b)}(A^{\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z16}\quad \mathbb{Q}_{1}^{(1,-1;c)}(A^{\prime},1)=- \mathbb{M}_{1}^{(1,-1;a)}(A^{\prime\prime},2) \mathbb{T}_{1}^{(b)}(A^{\prime\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z17}\quad \mathbb{Q}_{1}^{(1,-1;c)}(A^{\prime},2)=\mathbb{M}_{1}^{(1,-1;a)}(A^{\prime\prime},1) \mathbb{T}_{1}^{(b)}(A^{\prime\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z18}\quad \mathbb{Q}_{2}^{(1,-1;c)}(A^{\prime},1)=\mathbb{Q}_{2}^{(1,-1;a)}(A^{\prime},1) \mathbb{Q}_{0}^{(b)}(A^{\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z19}\quad \mathbb{Q}_{2}^{(1,-1;c)}(A^{\prime},3)=\mathbb{Q}_{2}^{(1,-1;a)}(A^{\prime},3) \mathbb{Q}_{0}^{(b)}(A^{\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z20}\quad \mathbb{Q}_{3}^{(1,-1;c)}(A^{\prime},1)=- \mathbb{M}_{3}^{(1,-1;a)}(A^{\prime\prime},4) \mathbb{T}_{1}^{(b)}(A^{\prime\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z21}\quad \mathbb{Q}_{3}^{(1,-1;c)}(A^{\prime},2)=- \frac{\sqrt{6} \mathbb{M}_{3}^{(1,-1;a)}(A^{\prime\prime},1) \mathbb{T}_{1}^{(b)}(A^{\prime\prime})}{4} - \frac{\sqrt{10} \mathbb{M}_{3}^{(1,-1;a)}(A^{\prime\prime},3) \mathbb{T}_{1}^{(b)}(A^{\prime\prime})}{4}
+\end{dmath*}
+\begin{dmath*}
+\fbox{z22}\quad \mathbb{Q}_{3}^{(1,-1;c)}(A^{\prime},4)=\frac{\sqrt{10} \mathbb{M}_{3}^{(1,-1;a)}(A^{\prime\prime},1) \mathbb{T}_{1}^{(b)}(A^{\prime\prime})}{4} - \frac{\sqrt{6} \mathbb{M}_{3}^{(1,-1;a)}(A^{\prime\prime},3) \mathbb{T}_{1}^{(b)}(A^{\prime\prime})}{4}
+\end{dmath*}
+\begin{dmath*}
+\fbox{z89}\quad \mathbb{Q}_{2}^{(c)}(A^{\prime\prime},2)=\mathbb{Q}_{2}^{(a)}(A^{\prime\prime},2) \mathbb{Q}_{0}^{(b)}(A^{\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z90}\quad \mathbb{Q}_{2}^{(1,-1;c)}(A^{\prime\prime},1)=\mathbb{Q}_{2}^{(1,-1;a)}(A^{\prime\prime},1) \mathbb{Q}_{0}^{(b)}(A^{\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z91}\quad \mathbb{Q}_{3}^{(1,-1;c)}(A^{\prime\prime},1)=- \mathbb{M}_{3}^{(1,-1;a)}(A^{\prime},3) \mathbb{T}_{1}^{(b)}(A^{\prime\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z92}\quad \mathbb{Q}_{3}^{(1,-1;c)}(A^{\prime\prime},3)=\mathbb{M}_{3}^{(1,-1;a)}(A^{\prime},1) \mathbb{T}_{1}^{(b)}(A^{\prime\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z93}\quad \mathbb{G}_{0}^{(1,-1;c)}(A^{\prime\prime})=\mathbb{M}_{1}^{(1,-1;a)}(A^{\prime}) \mathbb{T}_{1}^{(b)}(A^{\prime\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z94}\quad \mathbb{G}_{2}^{(1,-1;c)}(A^{\prime\prime},1)=- \mathbb{M}_{3}^{(1,-1;a)}(A^{\prime},2) \mathbb{T}_{1}^{(b)}(A^{\prime\prime})
+\end{dmath*}
+\vspace{5mm}
+
+\noindent\textbullet\, '\texttt{A}'-'\texttt{A}' bond-cluster
+
+\noindent\quad * bra: $\bra{p_{x},\uparrow},\, \bra{p_{x},\downarrow},\, \bra{p_{y},\uparrow},\, \bra{p_{y},\downarrow}$
+
+\noindent\quad * ket: $\ket{p_{x},\uparrow},\, \ket{p_{x},\downarrow},\, \ket{p_{y},\uparrow},\, \ket{p_{y},\downarrow}$
+
+\noindent\quad * wyckoff: \texttt{2c@1b}
+
+\begin{dmath*}
+\fbox{z31}\quad \mathbb{Q}_{0}^{(c)}(A^{\prime})=\mathbb{Q}_{0}^{(a)}(A^{\prime}) \mathbb{Q}_{0}^{(b)}(A^{\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z32}\quad \mathbb{Q}_{1}^{(c)}(A^{\prime},1a)=\mathbb{Q}_{2}^{(a)}(A^{\prime\prime},2) \mathbb{Q}_{1}^{(b)}(A^{\prime\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z33}\quad \mathbb{Q}_{1}^{(c)}(A^{\prime},1b)=- \mathbb{M}_{1}^{(a)}(A^{\prime\prime},2) \mathbb{T}_{1}^{(b)}(A^{\prime\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z34}\quad \mathbb{Q}_{2}^{(c)}(A^{\prime},2)=\mathbb{Q}_{2}^{(a)}(A^{\prime},2) \mathbb{Q}_{0}^{(b)}(A^{\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z35}\quad \mathbb{Q}_{1}^{(1,-1;c)}(A^{\prime},1)=- \mathbb{M}_{1}^{(1,-1;a)}(A^{\prime\prime},2) \mathbb{T}_{1}^{(b)}(A^{\prime\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z36}\quad \mathbb{Q}_{1}^{(1,-1;c)}(A^{\prime},2a)=\mathbb{Q}_{2}^{(1,-1;a)}(A^{\prime\prime},1) \mathbb{Q}_{1}^{(b)}(A^{\prime\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z37}\quad \mathbb{Q}_{1}^{(1,-1;c)}(A^{\prime},2b)=\mathbb{M}_{1}^{(1,-1;a)}(A^{\prime\prime},1) \mathbb{T}_{1}^{(b)}(A^{\prime\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z38}\quad \mathbb{Q}_{2}^{(1,-1;c)}(A^{\prime},1)=\mathbb{Q}_{2}^{(1,-1;a)}(A^{\prime},1) \mathbb{Q}_{0}^{(b)}(A^{\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z39}\quad \mathbb{Q}_{2}^{(1,-1;c)}(A^{\prime},3)=\mathbb{Q}_{2}^{(1,-1;a)}(A^{\prime},3) \mathbb{Q}_{0}^{(b)}(A^{\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z40}\quad \mathbb{Q}_{3}^{(1,-1;c)}(A^{\prime},1)=- \mathbb{M}_{3}^{(1,-1;a)}(A^{\prime\prime},4) \mathbb{T}_{1}^{(b)}(A^{\prime\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z41}\quad \mathbb{Q}_{3}^{(1,-1;c)}(A^{\prime},2)=- \frac{\sqrt{6} \mathbb{M}_{3}^{(1,-1;a)}(A^{\prime\prime},1) \mathbb{T}_{1}^{(b)}(A^{\prime\prime})}{4} - \frac{\sqrt{10} \mathbb{M}_{3}^{(1,-1;a)}(A^{\prime\prime},3) \mathbb{T}_{1}^{(b)}(A^{\prime\prime})}{4}
+\end{dmath*}
+\begin{dmath*}
+\fbox{z42}\quad \mathbb{Q}_{3}^{(1,-1;c)}(A^{\prime},4)=\frac{\sqrt{10} \mathbb{M}_{3}^{(1,-1;a)}(A^{\prime\prime},1) \mathbb{T}_{1}^{(b)}(A^{\prime\prime})}{4} - \frac{\sqrt{6} \mathbb{M}_{3}^{(1,-1;a)}(A^{\prime\prime},3) \mathbb{T}_{1}^{(b)}(A^{\prime\prime})}{4}
+\end{dmath*}
+\begin{dmath*}
+\fbox{z43}\quad \mathbb{Q}_{1}^{(c)}(A^{\prime\prime},a)=\mathbb{Q}_{0}^{(a)}(A^{\prime}) \mathbb{Q}_{1}^{(b)}(A^{\prime\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z44}\quad \mathbb{Q}_{1}^{(c)}(A^{\prime\prime},b)=- \mathbb{Q}_{2}^{(a)}(A^{\prime},2) \mathbb{Q}_{1}^{(b)}(A^{\prime\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z45}\quad \mathbb{Q}_{2}^{(c)}(A^{\prime\prime},2)=\mathbb{Q}_{2}^{(a)}(A^{\prime\prime},2) \mathbb{Q}_{0}^{(b)}(A^{\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z46}\quad \mathbb{Q}_{1}^{(1,-1;c)}(A^{\prime\prime})=- \mathbb{Q}_{2}^{(1,-1;a)}(A^{\prime},1) \mathbb{Q}_{1}^{(b)}(A^{\prime\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z103}\quad \mathbb{Q}_{2}^{(1,-1;c)}(A^{\prime\prime},1)=\mathbb{Q}_{2}^{(1,-1;a)}(A^{\prime\prime},1) \mathbb{Q}_{0}^{(b)}(A^{\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z104}\quad \mathbb{Q}_{3}^{(1,-1;c)}(A^{\prime\prime},1a)=\mathbb{Q}_{2}^{(1,-1;a)}(A^{\prime},3) \mathbb{Q}_{1}^{(b)}(A^{\prime\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z105}\quad \mathbb{Q}_{3}^{(1,-1;c)}(A^{\prime\prime},1b)=- \mathbb{M}_{3}^{(1,-1;a)}(A^{\prime},3) \mathbb{T}_{1}^{(b)}(A^{\prime\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z106}\quad \mathbb{Q}_{3}^{(1,-1;c)}(A^{\prime\prime},3)=\mathbb{M}_{3}^{(1,-1;a)}(A^{\prime},1) \mathbb{T}_{1}^{(b)}(A^{\prime\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z107}\quad \mathbb{G}_{1}^{(1,-1;c)}(A^{\prime})=\mathbb{M}_{1}^{(1,-1;a)}(A^{\prime}) \mathbb{T}_{0}^{(b)}(A^{\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z108}\quad \mathbb{G}_{3}^{(1,-1;c)}(A^{\prime},1)=\mathbb{M}_{3}^{(1,-1;a)}(A^{\prime},1) \mathbb{T}_{0}^{(b)}(A^{\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z109}\quad \mathbb{G}_{3}^{(1,-1;c)}(A^{\prime},2)=\mathbb{M}_{3}^{(1,-1;a)}(A^{\prime},2) \mathbb{T}_{0}^{(b)}(A^{\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z110}\quad \mathbb{G}_{3}^{(1,-1;c)}(A^{\prime},3)=\mathbb{M}_{3}^{(1,-1;a)}(A^{\prime},3) \mathbb{T}_{0}^{(b)}(A^{\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z111}\quad \mathbb{G}_{1}^{(c)}(A^{\prime\prime},2)=\mathbb{M}_{1}^{(a)}(A^{\prime\prime},2) \mathbb{T}_{0}^{(b)}(A^{\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z112}\quad \mathbb{G}_{0}^{(1,-1;c)}(A^{\prime\prime})=\mathbb{M}_{1}^{(1,-1;a)}(A^{\prime}) \mathbb{T}_{1}^{(b)}(A^{\prime\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z113}\quad \mathbb{G}_{1}^{(1,-1;c)}(A^{\prime\prime},1)=\mathbb{M}_{1}^{(1,-1;a)}(A^{\prime\prime},1) \mathbb{T}_{0}^{(b)}(A^{\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z114}\quad \mathbb{G}_{1}^{(1,-1;c)}(A^{\prime\prime},2)=\mathbb{M}_{1}^{(1,-1;a)}(A^{\prime\prime},2) \mathbb{T}_{0}^{(b)}(A^{\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z115}\quad \mathbb{G}_{2}^{(1,-1;c)}(A^{\prime\prime},1)=- \mathbb{M}_{3}^{(1,-1;a)}(A^{\prime},2) \mathbb{T}_{1}^{(b)}(A^{\prime\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z116}\quad \mathbb{G}_{3}^{(1,-1;c)}(A^{\prime\prime},1)=\mathbb{M}_{3}^{(1,-1;a)}(A^{\prime\prime},1) \mathbb{T}_{0}^{(b)}(A^{\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z117}\quad \mathbb{G}_{3}^{(1,-1;c)}(A^{\prime\prime},3)=\mathbb{M}_{3}^{(1,-1;a)}(A^{\prime\prime},3) \mathbb{T}_{0}^{(b)}(A^{\prime})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z118}\quad \mathbb{G}_{3}^{(1,-1;c)}(A^{\prime\prime},4)=\mathbb{M}_{3}^{(1,-1;a)}(A^{\prime\prime},4) \mathbb{T}_{0}^{(b)}(A^{\prime})
+\end{dmath*}
+\noindent * common SAMBs
+
+\noindent\texttt{(z31, z63), (z32, z64), (z33, z65), (z34, z66), (z35, z67), (z36, z68), (z37, z69), (z38, z70), (z39, z71), (z40, z72), (z41, z73), (z42, z74), (z43, z75), (z44, z76), (z45, z77), (z46, z78), (z103, z135), (z104, z136), (z105, z137), (z106, z138), (z107, z139), (z108, z140), (z109, z141), (z110, z142), (z111, z143), (z112, z144), (z113, z145), (z114, z146), (z115, z147), (z116, z148), (z117, z149), (z118, z150)}
+\vspace{5mm}
+
+\vspace{5mm}
+\noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{Atomic SAMB}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
+\vspace{3mm}
+
+\vspace{5mm}
+
+\noindent\textbullet\, bra: $\bra{p_{x},\uparrow},\, \bra{p_{x},\downarrow},\, \bra{p_{y},\uparrow},\, \bra{p_{y},\downarrow}$
+
+\noindent\textbullet\, ket: $\ket{p_{x},\uparrow},\, \ket{p_{x},\downarrow},\, \ket{p_{y},\uparrow},\, \ket{p_{y},\downarrow}$
+
+\begin{dmath*}
+\fbox{x1}\quad \mathbb{Q}_{0}^{(a)}(A^{\prime})=\begin{bmatrix} \frac{1}{2} & 0 & 0 & 0 \\ 0 & \frac{1}{2} & 0 & 0 \\ 0 & 0 & \frac{1}{2} & 0 \\ 0 & 0 & 0 & \frac{1}{2} \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x2}\quad \mathbb{Q}_{2}^{(a)}(A^{\prime},2)=\begin{bmatrix} \frac{1}{2} & 0 & 0 & 0 \\ 0 & \frac{1}{2} & 0 & 0 \\ 0 & 0 & - \frac{1}{2} & 0 \\ 0 & 0 & 0 & - \frac{1}{2} \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x3}\quad \mathbb{Q}_{2}^{(a)}(A^{\prime\prime},2)=\begin{bmatrix} 0 & 0 & \frac{1}{2} & 0 \\ 0 & 0 & 0 & \frac{1}{2} \\ \frac{1}{2} & 0 & 0 & 0 \\ 0 & \frac{1}{2} & 0 & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x4}\quad \mathbb{Q}_{2}^{(1,-1;a)}(A^{\prime},1)=\begin{bmatrix} 0 & 0 & - \frac{i}{2} & 0 \\ 0 & 0 & 0 & \frac{i}{2} \\ \frac{i}{2} & 0 & 0 & 0 \\ 0 & - \frac{i}{2} & 0 & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x5}\quad \mathbb{Q}_{2}^{(1,-1;a)}(A^{\prime},3)=\begin{bmatrix} 0 & 0 & 0 & - \frac{i}{2} \\ 0 & 0 & - \frac{i}{2} & 0 \\ 0 & \frac{i}{2} & 0 & 0 \\ \frac{i}{2} & 0 & 0 & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x6}\quad \mathbb{Q}_{2}^{(1,-1;a)}(A^{\prime\prime},1)=\begin{bmatrix} 0 & 0 & 0 & - \frac{1}{2} \\ 0 & 0 & \frac{1}{2} & 0 \\ 0 & \frac{1}{2} & 0 & 0 \\ - \frac{1}{2} & 0 & 0 & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x7}\quad \mathbb{M}_{1}^{(a)}(A^{\prime\prime},2)=\begin{bmatrix} 0 & 0 & - \frac{i}{2} & 0 \\ 0 & 0 & 0 & - \frac{i}{2} \\ \frac{i}{2} & 0 & 0 & 0 \\ 0 & \frac{i}{2} & 0 & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x8}\quad \mathbb{M}_{1}^{(1,-1;a)}(A^{\prime})=\begin{bmatrix} 0 & - \frac{i}{2} & 0 & 0 \\ \frac{i}{2} & 0 & 0 & 0 \\ 0 & 0 & 0 & - \frac{i}{2} \\ 0 & 0 & \frac{i}{2} & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x9}\quad \mathbb{M}_{3}^{(1,-1;a)}(A^{\prime},1)=\begin{bmatrix} 0 & 0 & \frac{1}{2} & 0 \\ 0 & 0 & 0 & - \frac{1}{2} \\ \frac{1}{2} & 0 & 0 & 0 \\ 0 & - \frac{1}{2} & 0 & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x10}\quad \mathbb{M}_{3}^{(1,-1;a)}(A^{\prime},2)=\begin{bmatrix} 0 & \frac{3 \sqrt{13} i}{26} & 0 & - \frac{\sqrt{13}}{13} \\ - \frac{3 \sqrt{13} i}{26} & 0 & - \frac{\sqrt{13}}{13} & 0 \\ 0 & - \frac{\sqrt{13}}{13} & 0 & - \frac{3 \sqrt{13} i}{26} \\ - \frac{\sqrt{13}}{13} & 0 & \frac{3 \sqrt{13} i}{26} & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x11}\quad \mathbb{M}_{3}^{(1,-1;a)}(A^{\prime},3)=\begin{bmatrix} 0 & - \frac{\sqrt{13} i}{13} & 0 & - \frac{3 \sqrt{13}}{26} \\ \frac{\sqrt{13} i}{13} & 0 & - \frac{3 \sqrt{13}}{26} & 0 \\ 0 & - \frac{3 \sqrt{13}}{26} & 0 & \frac{\sqrt{13} i}{13} \\ - \frac{3 \sqrt{13}}{26} & 0 & - \frac{\sqrt{13} i}{13} & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x12}\quad \mathbb{M}_{1}^{(1,-1;a)}(A^{\prime\prime},1)=\begin{bmatrix} 0 & \frac{1}{2} & 0 & 0 \\ \frac{1}{2} & 0 & 0 & 0 \\ 0 & 0 & 0 & \frac{1}{2} \\ 0 & 0 & \frac{1}{2} & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x13}\quad \mathbb{M}_{1}^{(1,-1;a)}(A^{\prime\prime},2)=\begin{bmatrix} \frac{1}{2} & 0 & 0 & 0 \\ 0 & - \frac{1}{2} & 0 & 0 \\ 0 & 0 & \frac{1}{2} & 0 \\ 0 & 0 & 0 & - \frac{1}{2} \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x14}\quad \mathbb{M}_{3}^{(1,-1;a)}(A^{\prime\prime},1)=\begin{bmatrix} 0 & \frac{3 \sqrt{13}}{26} & 0 & \frac{\sqrt{13} i}{13} \\ \frac{3 \sqrt{13}}{26} & 0 & - \frac{\sqrt{13} i}{13} & 0 \\ 0 & \frac{\sqrt{13} i}{13} & 0 & - \frac{3 \sqrt{13}}{26} \\ - \frac{\sqrt{13} i}{13} & 0 & - \frac{3 \sqrt{13}}{26} & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x15}\quad \mathbb{M}_{3}^{(1,-1;a)}(A^{\prime\prime},3)=\begin{bmatrix} 0 & \frac{\sqrt{13}}{13} & 0 & - \frac{3 \sqrt{13} i}{26} \\ \frac{\sqrt{13}}{13} & 0 & \frac{3 \sqrt{13} i}{26} & 0 \\ 0 & - \frac{3 \sqrt{13} i}{26} & 0 & - \frac{\sqrt{13}}{13} \\ \frac{3 \sqrt{13} i}{26} & 0 & - \frac{\sqrt{13}}{13} & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x16}\quad \mathbb{M}_{3}^{(1,-1;a)}(A^{\prime\prime},4)=\begin{bmatrix} \frac{1}{2} & 0 & 0 & 0 \\ 0 & - \frac{1}{2} & 0 & 0 \\ 0 & 0 & - \frac{1}{2} & 0 \\ 0 & 0 & 0 & \frac{1}{2} \end{bmatrix}
+\end{dmath*}
+\vspace{5mm}
+\noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{Cluster SAMB}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
+\vspace{3mm}
+
+\noindent\textbullet\, Site cluster
+
+\vspace{5mm}
+
+\noindent ** Wyckoff: \texttt{1a}
+
+\begin{dmath*}
+\fbox{y1}\quad \mathbb{Q}_{0}^{(s)}(A^{\prime})=\left[ 1 \right]
+\end{dmath*}
+\vspace{5mm}
+
+\noindent\textbullet\, Bond cluster
+
+\vspace{5mm}
+
+\noindent ** Wyckoff: \texttt{1a@1a}
+
+\begin{dmath*}
+\fbox{y2}\quad \mathbb{Q}_{0}^{(s)}(A^{\prime})=\left[ 1 \right]
+\end{dmath*}
+\begin{dmath*}
+\fbox{y3}\quad \mathbb{T}_{0}^{(s)}(A^{\prime})=\left[ i \right]
+\end{dmath*}
+\vspace{5mm}
+
+\noindent ** Wyckoff: \texttt{1b@1b}
+
+\begin{dmath*}
+\fbox{y4}\quad \mathbb{Q}_{0}^{(s)}(A^{\prime})=\left[ 1 \right]
+\end{dmath*}
+\begin{dmath*}
+\fbox{y5}\quad \mathbb{T}_{1}^{(s)}(A^{\prime\prime})=\left[ i \right]
+\end{dmath*}
+\vspace{5mm}
+
+\noindent ** Wyckoff: \texttt{2c@1b}
+
+\begin{dmath*}
+\fbox{y6}\quad \mathbb{Q}_{0}^{(s)}(A^{\prime})=\left[ \frac{\sqrt{2}}{2},\, \frac{\sqrt{2}}{2} \right]
+\end{dmath*}
+\begin{dmath*}
+\fbox{y7}\quad \mathbb{T}_{0}^{(s)}(A^{\prime})=\left[ \frac{\sqrt{2} i}{2},\, \frac{\sqrt{2} i}{2} \right]
+\end{dmath*}
+\begin{dmath*}
+\fbox{y8}\quad \mathbb{Q}_{1}^{(s)}(A^{\prime\prime})=\left[ \frac{\sqrt{2}}{2},\, - \frac{\sqrt{2}}{2} \right]
+\end{dmath*}
+\begin{dmath*}
+\fbox{y9}\quad \mathbb{T}_{1}^{(s)}(A^{\prime\prime})=\left[ \frac{\sqrt{2} i}{2},\, - \frac{\sqrt{2} i}{2} \right]
+\end{dmath*}
+\vspace{5mm}
+\noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{Site and Bond}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
+\vspace{3mm}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{longtable}{ccl}
+\caption{Orbital of each site}
+ \\
+ \hline \hline
+\# & site & orbital \\ \hline \endfirsthead
+
+\multicolumn{2}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+\# & site & orbital \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{2}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{2}{r}{} \\ \endlastfoot
+
+1 & \texttt{A} & $\ket{p_{x},\uparrow}$, $\ket{p_{x},\downarrow}$, $\ket{p_{y},\uparrow}$, $\ket{p_{y},\downarrow}$ \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{longtable}{ccclll}
+\caption{Neighbor and bra-ket of each bond}
+ \\
+ \hline \hline
+\# & head & tail & neighbor & head (bra) & tail (ket) \\ \hline \endfirsthead
+
+\multicolumn{5}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+\# & head & tail & neighbor & head (bra) & tail (ket) \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{5}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{5}{r}{} \\ \endlastfoot
+
+1 & \texttt{A} & \texttt{A} & \texttt{[1,2]} & \texttt{[p]} & \texttt{[p]} \\
+\end{longtable}
+\end{center}
+\vspace{5mm}
+\noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{Site in Unit Cell}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
+\vspace{3mm}
+
+\noindent Sites in (conventional) cell (no plus set), SL = sublattice
+
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{longtable}{cll}
+\caption{'\texttt{A}' (\#1) site cluster (\texttt{1a}), \texttt{m}}
+ \\
+ \hline \hline
+SL & position ($\bm{s})$ & mapping \\ \hline \endfirsthead
+
+\multicolumn{2}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+SL & position ($\bm{s})$ & mapping \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{2}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{2}{r}{} \\ \endlastfoot
+
+1 & \texttt{[ 0.00000, 0.00000, 0.00000]} & \texttt{[1,2]} \\
+\end{longtable}
+\end{center}
+\vspace{5mm}
+\noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{Bond in Unit Cell}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
+\vspace{3mm}
+
+\noindent Bonds in (conventional) cell (no plus set): tail, head = (SL, plus set), (N)D = (non)directional (listed up to 5th neighbor at most)
+
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{longtable}{cllllll}
+\caption{1-th '\texttt{A}'-'\texttt{A}' [1] (\#1) bond cluster (\texttt{1a@1a}), D, $|\bm{v}|=1.0$ (cartesian)}
+ \\
+ \hline \hline
+SL & vector ($\bm{v})$ & center ($\bm{c})$ & mapping & head & tail & $\bm{R}$ (primitive) \\ \hline \endfirsthead
+
+\multicolumn{6}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+SL & vector ($\bm{v})$ & center ($\bm{c})$ & mapping & head & tail & $\bm{R}$ (primitive) \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{6}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{6}{r}{} \\ \endlastfoot
+
+1 & \texttt{[-1.00000, 0.00000, 0.00000]} & \texttt{[ 0.50000, 0.00000, 0.00000]} & \texttt{[1,2]} & \texttt{(1,1)} & \texttt{(1,1)} & \texttt{[1,0,0]} \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{longtable}{cllllll}
+\caption{1-th '\texttt{A}'-'\texttt{A}' [2] (\#2) bond cluster (\texttt{1b@1b}), ND, $|\bm{v}|=1.0$ (cartesian)}
+ \\
+ \hline \hline
+SL & vector ($\bm{v})$ & center ($\bm{c})$ & mapping & head & tail & $\bm{R}$ (primitive) \\ \hline \endfirsthead
+
+\multicolumn{6}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+SL & vector ($\bm{v})$ & center ($\bm{c})$ & mapping & head & tail & $\bm{R}$ (primitive) \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{6}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{6}{r}{} \\ \endlastfoot
+
+1 & \texttt{[ 0.00000,-1.00000, 0.00000]} & \texttt{[ 0.00000, 0.50000, 0.00000]} & \texttt{[1,-2]} & \texttt{(1,1)} & \texttt{(1,1)} & \texttt{[0,1,0]} \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{longtable}{cllllll}
+\caption{1-th '\texttt{A}'-'\texttt{A}' [3] (\#3) bond cluster (\texttt{1a@1a}), D, $|\bm{v}|=1.0$ (cartesian)}
+ \\
+ \hline \hline
+SL & vector ($\bm{v})$ & center ($\bm{c})$ & mapping & head & tail & $\bm{R}$ (primitive) \\ \hline \endfirsthead
+
+\multicolumn{6}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+SL & vector ($\bm{v})$ & center ($\bm{c})$ & mapping & head & tail & $\bm{R}$ (primitive) \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{6}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{6}{r}{} \\ \endlastfoot
+
+1 & \texttt{[ 0.00000, 0.00000,-1.00000]} & \texttt{[ 0.00000, 0.00000, 0.50000]} & \texttt{[1,2]} & \texttt{(1,1)} & \texttt{(1,1)} & \texttt{[0,0,1]} \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{longtable}{cllllll}
+\caption{2-th '\texttt{A}'-'\texttt{A}' [1] (\#4) bond cluster (\texttt{2c@1b}), D, $|\bm{v}|=1.41421$ (cartesian)}
+ \\
+ \hline \hline
+SL & vector ($\bm{v})$ & center ($\bm{c})$ & mapping & head & tail & $\bm{R}$ (primitive) \\ \hline \endfirsthead
+
+\multicolumn{6}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+SL & vector ($\bm{v})$ & center ($\bm{c})$ & mapping & head & tail & $\bm{R}$ (primitive) \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{6}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{6}{r}{} \\ \endlastfoot
+
+1 & \texttt{[-1.00000,-1.00000, 0.00000]} & \texttt{[ 0.50000, 0.50000, 0.00000]} & \texttt{[1]} & \texttt{(1,1)} & \texttt{(1,1)} & \texttt{[1,1,0]} \\ \hline
+2 & \texttt{[-1.00000, 1.00000, 0.00000]} & \texttt{[ 0.50000, 0.50000, 0.00000]} & \texttt{[2]} & \texttt{(1,1)} & \texttt{(1,1)} & \texttt{[1,-1,0]} \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{longtable}{cllllll}
+\caption{2-th '\texttt{A}'-'\texttt{A}' [2] (\#5) bond cluster (\texttt{1a@1a}), D, $|\bm{v}|=1.41421$ (cartesian)}
+ \\
+ \hline \hline
+SL & vector ($\bm{v})$ & center ($\bm{c})$ & mapping & head & tail & $\bm{R}$ (primitive) \\ \hline \endfirsthead
+
+\multicolumn{6}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+SL & vector ($\bm{v})$ & center ($\bm{c})$ & mapping & head & tail & $\bm{R}$ (primitive) \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{6}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{6}{r}{} \\ \endlastfoot
+
+1 & \texttt{[-1.00000, 0.00000,-1.00000]} & \texttt{[ 0.50000, 0.00000, 0.50000]} & \texttt{[1,2]} & \texttt{(1,1)} & \texttt{(1,1)} & \texttt{[1,0,1]} \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{longtable}{cllllll}
+\caption{2-th '\texttt{A}'-'\texttt{A}' [3] (\#6) bond cluster (\texttt{1a@1a}), D, $|\bm{v}|=1.41421$ (cartesian)}
+ \\
+ \hline \hline
+SL & vector ($\bm{v})$ & center ($\bm{c})$ & mapping & head & tail & $\bm{R}$ (primitive) \\ \hline \endfirsthead
+
+\multicolumn{6}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+SL & vector ($\bm{v})$ & center ($\bm{c})$ & mapping & head & tail & $\bm{R}$ (primitive) \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{6}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{6}{r}{} \\ \endlastfoot
+
+1 & \texttt{[-1.00000, 0.00000, 1.00000]} & \texttt{[ 0.50000, 0.00000, 0.50000]} & \texttt{[1,2]} & \texttt{(1,1)} & \texttt{(1,1)} & \texttt{[1,0,-1]} \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{longtable}{cllllll}
+\caption{2-th '\texttt{A}'-'\texttt{A}' [4] (\#7) bond cluster (\texttt{2c@1b}), D, $|\bm{v}|=1.41421$ (cartesian)}
+ \\
+ \hline \hline
+SL & vector ($\bm{v})$ & center ($\bm{c})$ & mapping & head & tail & $\bm{R}$ (primitive) \\ \hline \endfirsthead
+
+\multicolumn{6}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+SL & vector ($\bm{v})$ & center ($\bm{c})$ & mapping & head & tail & $\bm{R}$ (primitive) \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{6}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{6}{r}{} \\ \endlastfoot
+
+1 & \texttt{[ 0.00000,-1.00000,-1.00000]} & \texttt{[ 0.00000, 0.50000, 0.50000]} & \texttt{[1]} & \texttt{(1,1)} & \texttt{(1,1)} & \texttt{[0,1,1]} \\ \hline
+2 & \texttt{[ 0.00000, 1.00000,-1.00000]} & \texttt{[ 0.00000, 0.50000, 0.50000]} & \texttt{[2]} & \texttt{(1,1)} & \texttt{(1,1)} & \texttt{[0,-1,1]} \\
+\end{longtable}
+\end{center}
+
+\end{document}

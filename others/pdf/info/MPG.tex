@@ -1,0 +1,224 @@
+\documentclass[fleqn,10pt]{jsarticle}
+
+%%% package
+
+\usepackage[usenames]{color}
+\usepackage{amsmath}
+\usepackage{breqn}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{enumitem}
+\usepackage{braket}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+%%% layout setting
+
+\paperwidth=210truemm
+\paperheight=297truemm
+\textwidth=189.2truemm
+\textheight=269.2truemm
+\oddsidemargin=-15truemm
+\topmargin=-15truemm
+\footskip=7truemm
+
+%%% fixed
+
+\hoffset=0truemm
+\voffset=0truemm
+\headheight=0truemm
+\headsep=0truemm
+\marginparsep=0truemm
+\marginparwidth=0truemm
+
+%%% main text
+
+\begin{document}
+
+\setcounter{MaxMatrixCols}{32}
+
+\renewcommand{\tablename}{Table~}
+\renewcommand{\figurename}{Figure~}
+\begin{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.0}
+\begin{longtable}{lllllll}
+\caption{Magnetic point group information.}
+ \\
+ \hline \hline
+ID & tag & international & setting & crystal & PG & type \\ \hline \endfirsthead
+
+\multicolumn{6}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+ID & tag & international & setting & crystal & PG & type \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{6}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{6}{r}{} \\ \endlastfoot
+
+\texttt{1.1.1} & \texttt{MPG:1.1.1} & $1$ & $$ & triclinic & $C_{\rm 1}$ & I \\
+\texttt{1.2.2} & \texttt{MPG:1.2.2} & $11'$ & $$ & triclinic & $C_{\rm 1}$ & II \\ \hline
+\texttt{2.1.3} & \texttt{MPG:2.1.3} & $\bar{1}$ & $$ & triclinic & $C_{\rm i}$ & I \\
+\texttt{2.2.4} & \texttt{MPG:2.2.4} & $\bar{1}1'$ & $$ & triclinic & $C_{\rm i}$ & II \\
+\texttt{2.3.5} & \texttt{MPG:2.3.5} & $\bar{1}'$ & $$ & triclinic & $C_{\rm i}$ & III \\ \hline
+\texttt{3.1.6} & \texttt{MPG:3.1.6} & $2$ & $$ & monoclinic & $C_{\rm 2}$ & I \\
+\texttt{3.2.7} & \texttt{MPG:3.2.7} & $21'$ & $$ & monoclinic & $C_{\rm 2}$ & II \\
+\texttt{3.3.8} & \texttt{MPG:3.3.8} & $2'$ & $$ & monoclinic & $C_{\rm 2}$ & III \\ \hline
+\texttt{4.1.9} & \texttt{MPG:4.1.9} & $m$ & $$ & monoclinic & $C_{\rm s}$ & I \\
+\texttt{4.2.10} & \texttt{MPG:4.2.10} & $m1'$ & $$ & monoclinic & $C_{\rm s}$ & II \\
+\texttt{4.3.11} & \texttt{MPG:4.3.11} & $m'$ & $$ & monoclinic & $C_{\rm s}$ & III \\ \hline
+\texttt{5.1.12} & \texttt{MPG:5.1.12} & $2/m$ & $$ & monoclinic & $C_{\rm 2h}$ & I \\
+\texttt{5.2.13} & \texttt{MPG:5.2.13} & $2/m1'$ & $$ & monoclinic & $C_{\rm 2h}$ & II \\
+\texttt{5.3.14} & \texttt{MPG:5.3.14} & $2'/m$ & $$ & monoclinic & $C_{\rm 2h}$ & III \\
+\texttt{5.4.15} & \texttt{MPG:5.4.15} & $2/m'$ & $$ & monoclinic & $C_{\rm 2h}$ & III \\
+\texttt{5.5.16} & \texttt{MPG:5.5.16} & $2'/m'$ & $$ & monoclinic & $C_{\rm 2h}$ & III \\ \hline
+\texttt{6.1.17} & \texttt{MPG:6.1.17} & $222$ & $$ & orthorhombic & $D_{\rm 2}$ & I \\
+\texttt{6.2.18} & \texttt{MPG:6.2.18} & $2221'$ & $$ & orthorhombic & $D_{\rm 2}$ & II \\
+\texttt{6.3.19} & \texttt{MPG:6.3.19} & $2'2'2$ & $2'2'2$ & orthorhombic & $D_{\rm 2}$ & III \\
+\texttt{6.4.123} & \texttt{MPG:6.4.123} & $2'2'2$ & $22'2'$ & orthorhombic & $D_{\rm 2}$ & III \\ \hline
+\texttt{7.1.20} & \texttt{MPG:7.1.20} & $mm2$ & $$ & orthorhombic & $C_{\rm 2v}$ & I \\
+\texttt{7.2.21} & \texttt{MPG:7.2.21} & $mm21'$ & $$ & orthorhombic & $C_{\rm 2v}$ & II \\
+\texttt{7.3.22} & \texttt{MPG:7.3.22} & $m'm2'$ & $m'm2'$ & orthorhombic & $C_{\rm 2v}$ & III \\
+\texttt{7.4.23} & \texttt{MPG:7.4.23} & $m'm'2$ & $$ & orthorhombic & $C_{\rm 2v}$ & III \\
+\texttt{7.5.124} & \texttt{MPG:7.5.124} & $m'm2'$ & $mm'2'$ & orthorhombic & $C_{\rm 2v}$ & III \\ \hline
+\texttt{8.1.24} & \texttt{MPG:8.1.24} & $mmm$ & $$ & orthorhombic & $D_{\rm 2h}$ & I \\
+\texttt{8.2.25} & \texttt{MPG:8.2.25} & $mmm1'$ & $$ & orthorhombic & $D_{\rm 2h}$ & II \\
+\texttt{8.3.26} & \texttt{MPG:8.3.26} & $m'mm$ & $m'mm$ & orthorhombic & $D_{\rm 2h}$ & III \\
+\texttt{8.4.27} & \texttt{MPG:8.4.27} & $m'm'm$ & $m'm'm$ & orthorhombic & $D_{\rm 2h}$ & III \\
+\texttt{8.5.28} & \texttt{MPG:8.5.28} & $m'm'm'$ & $$ & orthorhombic & $D_{\rm 2h}$ & III \\
+\texttt{8.6.125} & \texttt{MPG:8.6.125} & $m'mm$ & $mmm'$ & orthorhombic & $D_{\rm 2h}$ & III \\
+\texttt{8.7.126} & \texttt{MPG:8.7.126} & $m'mm$ & $mm'm$ & orthorhombic & $D_{\rm 2h}$ & III \\
+\texttt{8.8.127} & \texttt{MPG:8.8.127} & $m'm'm$ & $m'mm'$ & orthorhombic & $D_{\rm 2h}$ & III \\
+\texttt{8.9.128} & \texttt{MPG:8.9.128} & $m'm'm$ & $mm'm'$ & orthorhombic & $D_{\rm 2h}$ & III \\ \hline
+\texttt{9.1.29} & \texttt{MPG:9.1.29} & $4$ & $$ & tetragonal & $C_{\rm 4}$ & I \\
+\texttt{9.2.30} & \texttt{MPG:9.2.30} & $41'$ & $$ & tetragonal & $C_{\rm 4}$ & II \\
+\texttt{9.3.31} & \texttt{MPG:9.3.31} & $4'$ & $$ & tetragonal & $C_{\rm 4}$ & III \\ \hline
+\texttt{10.1.32} & \texttt{MPG:10.1.32} & $\bar{4}$ & $$ & tetragonal & $S_{\rm 4}$ & I \\
+\texttt{10.2.33} & \texttt{MPG:10.2.33} & $\bar{4}1'$ & $$ & tetragonal & $S_{\rm 4}$ & II \\
+\texttt{10.3.34} & \texttt{MPG:10.3.34} & $\bar{4}'$ & $$ & tetragonal & $S_{\rm 4}$ & III \\ \hline
+\texttt{11.1.35} & \texttt{MPG:11.1.35} & $4/m$ & $$ & tetragonal & $C_{\rm 4h}$ & I \\
+\texttt{11.2.36} & \texttt{MPG:11.2.36} & $4/m1'$ & $$ & tetragonal & $C_{\rm 4h}$ & II \\
+\texttt{11.3.37} & \texttt{MPG:11.3.37} & $4'/m$ & $$ & tetragonal & $C_{\rm 4h}$ & III \\
+\texttt{11.4.38} & \texttt{MPG:11.4.38} & $4/m'$ & $$ & tetragonal & $C_{\rm 4h}$ & III \\
+\texttt{11.5.39} & \texttt{MPG:11.5.39} & $4'/m'$ & $$ & tetragonal & $C_{\rm 4h}$ & III \\ \hline
+\texttt{12.1.40} & \texttt{MPG:12.1.40} & $422$ & $$ & tetragonal & $D_{\rm 4}$ & I \\
+\texttt{12.2.41} & \texttt{MPG:12.2.41} & $4221'$ & $$ & tetragonal & $D_{\rm 4}$ & II \\
+\texttt{12.3.42} & \texttt{MPG:12.3.42} & $4'22'$ & $4'22'$ & tetragonal & $D_{\rm 4}$ & III \\
+\texttt{12.4.43} & \texttt{MPG:12.4.43} & $42'2'$ & $$ & tetragonal & $D_{\rm 4}$ & III \\
+\texttt{12.5.129} & \texttt{MPG:12.5.129} & $4'22'$ & $4'2'2$ & tetragonal & $D_{\rm 4}$ & III \\ \hline
+\texttt{13.1.44} & \texttt{MPG:13.1.44} & $4mm$ & $$ & tetragonal & $C_{\rm 4v}$ & I \\
+\texttt{13.2.45} & \texttt{MPG:13.2.45} & $4mm1'$ & $$ & tetragonal & $C_{\rm 4v}$ & II \\
+\texttt{13.3.46} & \texttt{MPG:13.3.46} & $4'm'm$ & $4'm'm$ & tetragonal & $C_{\rm 4v}$ & III \\
+\texttt{13.4.47} & \texttt{MPG:13.4.47} & $4m'm'$ & $$ & tetragonal & $C_{\rm 4v}$ & III \\
+\texttt{13.5.130} & \texttt{MPG:13.5.130} & $4'm'm$ & $4'mm'$ & tetragonal & $C_{\rm 4v}$ & III \\ \hline
+\texttt{14.1.48} & \texttt{MPG:14.1.48} & $\bar{4}2m$ & $-42m$ & tetragonal & $D_{\rm 2d}$ & I \\
+\texttt{14.2.49} & \texttt{MPG:14.2.49} & $\bar{4}2m1'$ & $-42m1'$ & tetragonal & $D_{\rm 2d}$ & II \\
+\texttt{14.3.50} & \texttt{MPG:14.3.50} & $\bar{4}'2'm$ & $-4'2'm$ & tetragonal & $D_{\rm 2d}$ & III \\
+\texttt{14.4.51} & \texttt{MPG:14.4.51} & $\bar{4}'2m'$ & $-4'2m'$ & tetragonal & $D_{\rm 2d}$ & III \\
+\texttt{14.5.52} & \texttt{MPG:14.5.52} & $\bar{4}2'm'$ & $-42'm'$ & tetragonal & $D_{\rm 2d}$ & III \\ \hline
+\texttt{15.1.53} & \texttt{MPG:15.1.53} & $4/mmm$ & $$ & tetragonal & $D_{\rm 4h}$ & I \\
+\texttt{15.2.54} & \texttt{MPG:15.2.54} & $4/mmm1'$ & $$ & tetragonal & $D_{\rm 4h}$ & II \\
+\texttt{15.3.55} & \texttt{MPG:15.3.55} & $4/m'mm$ & $$ & tetragonal & $D_{\rm 4h}$ & III \\
+\texttt{15.4.56} & \texttt{MPG:15.4.56} & $4'/mm'm$ & $4'/mm'm$ & tetragonal & $D_{\rm 4h}$ & III \\
+\texttt{15.5.57} & \texttt{MPG:15.5.57} & $4'/m'm'm$ & $4'/m'm'm$ & tetragonal & $D_{\rm 4h}$ & III \\
+\texttt{15.6.58} & \texttt{MPG:15.6.58} & $4/mm'm'$ & $$ & tetragonal & $D_{\rm 4h}$ & III \\
+\texttt{15.7.59} & \texttt{MPG:15.7.59} & $4/m'm'm'$ & $$ & tetragonal & $D_{\rm 4h}$ & III \\
+\texttt{15.8.136} & \texttt{MPG:15.8.136} & $4'/mm'm$ & $4'/mmm'$ & tetragonal & $D_{\rm 4h}$ & III \\
+\texttt{15.9.137} & \texttt{MPG:15.9.137} & $4'/m'm'm$ & $4'/m'mm'$ & tetragonal & $D_{\rm 4h}$ & III \\ \hline
+\texttt{16.1.60} & \texttt{MPG:16.1.60} & $3$ & $$ & trigonal & $C_{\rm 3}$ & I \\
+\texttt{16.2.61} & \texttt{MPG:16.2.61} & $31'$ & $$ & trigonal & $C_{\rm 3}$ & II \\ \hline
+\texttt{17.1.62} & \texttt{MPG:17.1.62} & $\bar{3}$ & $$ & trigonal & $C_{\rm 3i}$ & I \\
+\texttt{17.2.63} & \texttt{MPG:17.2.63} & $\bar{3}1'$ & $$ & trigonal & $C_{\rm 3i}$ & II \\
+\texttt{17.3.64} & \texttt{MPG:17.3.64} & $\bar{3}'$ & $$ & trigonal & $C_{\rm 3i}$ & III \\ \hline
+\texttt{18.1.65} & \texttt{MPG:18.1.65} & $32$ & $321$ & trigonal & $D_{\rm 3}$ & I \\
+\texttt{18.2.66} & \texttt{MPG:18.2.66} & $321'$ & $3211'$ & trigonal & $D_{\rm 3}$ & II \\
+\texttt{18.3.67} & \texttt{MPG:18.3.67} & $32'$ & $32'1$ & trigonal & $D_{\rm 3}$ & III \\ \hline
+\texttt{19.1.68} & \texttt{MPG:19.1.68} & $3m$ & $3m1$ & trigonal & $C_{\rm 3v}$ & I \\
+\texttt{19.2.69} & \texttt{MPG:19.2.69} & $3m1'$ & $3m11'$ & trigonal & $C_{\rm 3v}$ & II \\
+\texttt{19.3.70} & \texttt{MPG:19.3.70} & $3m'$ & $3m'1$ & trigonal & $C_{\rm 3v}$ & III \\ \hline
+\texttt{20.1.71} & \texttt{MPG:20.1.71} & $\bar{3}m$ & $-3m1$ & trigonal & $D_{\rm 3d}$ & I \\
+\texttt{20.2.72} & \texttt{MPG:20.2.72} & $\bar{3}m1'$ & $-3m11'$ & trigonal & $D_{\rm 3d}$ & II \\
+\texttt{20.3.73} & \texttt{MPG:20.3.73} & $\bar{3}'m$ & $-3'm1$ & trigonal & $D_{\rm 3d}$ & III \\
+\texttt{20.4.74} & \texttt{MPG:20.4.74} & $\bar{3}'m'$ & $-3'm'1$ & trigonal & $D_{\rm 3d}$ & III \\
+\texttt{20.5.75} & \texttt{MPG:20.5.75} & $\bar{3}m'$ & $-3m'1$ & trigonal & $D_{\rm 3d}$ & III \\ \hline
+\texttt{21.1.76} & \texttt{MPG:21.1.76} & $6$ & $$ & hexagonal & $C_{\rm 6}$ & I \\
+\texttt{21.2.77} & \texttt{MPG:21.2.77} & $61'$ & $$ & hexagonal & $C_{\rm 6}$ & II \\
+\texttt{21.3.78} & \texttt{MPG:21.3.78} & $6'$ & $$ & hexagonal & $C_{\rm 6}$ & III \\ \hline
+\texttt{22.1.79} & \texttt{MPG:22.1.79} & $\bar{6}$ & $$ & hexagonal & $C_{\rm 3h}$ & I \\
+\texttt{22.2.80} & \texttt{MPG:22.2.80} & $\bar{6}1'$ & $$ & hexagonal & $C_{\rm 3h}$ & II \\
+\texttt{22.3.81} & \texttt{MPG:22.3.81} & $\bar{6}'$ & $$ & hexagonal & $C_{\rm 3h}$ & III \\ \hline
+\texttt{23.1.82} & \texttt{MPG:23.1.82} & $6/m$ & $$ & hexagonal & $C_{\rm 6h}$ & I \\
+\texttt{23.2.83} & \texttt{MPG:23.2.83} & $6/m1'$ & $$ & hexagonal & $C_{\rm 6h}$ & II \\
+\texttt{23.3.84} & \texttt{MPG:23.3.84} & $6'/m$ & $$ & hexagonal & $C_{\rm 6h}$ & III \\
+\texttt{23.4.85} & \texttt{MPG:23.4.85} & $6/m'$ & $$ & hexagonal & $C_{\rm 6h}$ & III \\
+\texttt{23.5.86} & \texttt{MPG:23.5.86} & $6'/m'$ & $$ & hexagonal & $C_{\rm 6h}$ & III \\ \hline
+\texttt{24.1.87} & \texttt{MPG:24.1.87} & $622$ & $$ & hexagonal & $D_{\rm 6}$ & I \\
+\texttt{24.2.88} & \texttt{MPG:24.2.88} & $6221'$ & $$ & hexagonal & $D_{\rm 6}$ & II \\
+\texttt{24.3.89} & \texttt{MPG:24.3.89} & $6'22'$ & $6'22'$ & hexagonal & $D_{\rm 6}$ & III \\
+\texttt{24.4.90} & \texttt{MPG:24.4.90} & $62'2'$ & $$ & hexagonal & $D_{\rm 6}$ & III \\
+\texttt{24.5.149} & \texttt{MPG:24.5.149} & $6'22'$ & $6'2'2$ & hexagonal & $D_{\rm 6}$ & III \\ \hline
+\texttt{25.1.91} & \texttt{MPG:25.1.91} & $6mm$ & $$ & hexagonal & $C_{\rm 6v}$ & I \\
+\texttt{25.2.92} & \texttt{MPG:25.2.92} & $6mm1'$ & $$ & hexagonal & $C_{\rm 6v}$ & II \\
+\texttt{25.3.93} & \texttt{MPG:25.3.93} & $6'mm'$ & $6'mm'$ & hexagonal & $C_{\rm 6v}$ & III \\
+\texttt{25.4.94} & \texttt{MPG:25.4.94} & $6m'm'$ & $$ & hexagonal & $C_{\rm 6v}$ & III \\
+\texttt{25.5.150} & \texttt{MPG:25.5.150} & $6'mm'$ & $6'm'm$ & hexagonal & $C_{\rm 6v}$ & III \\ \hline
+\texttt{26.1.95} & \texttt{MPG:26.1.95} & $\bar{6}m2$ & $-6m2$ & hexagonal & $D_{\rm 3h}$ & I \\
+\texttt{26.2.96} & \texttt{MPG:26.2.96} & $\bar{6}m21'$ & $-6m21'$ & hexagonal & $D_{\rm 3h}$ & II \\
+\texttt{26.3.97} & \texttt{MPG:26.3.97} & $\bar{6}'m'2$ & $-6'm'2$ & hexagonal & $D_{\rm 3h}$ & III \\
+\texttt{26.4.98} & \texttt{MPG:26.4.98} & $\bar{6}'m2'$ & $-6'm2'$ & hexagonal & $D_{\rm 3h}$ & III \\
+\texttt{26.5.99} & \texttt{MPG:26.5.99} & $\bar{6}m'2'$ & $-6m'2'$ & hexagonal & $D_{\rm 3h}$ & III \\ \hline
+\texttt{27.1.100} & \texttt{MPG:27.1.100} & $6/mmm$ & $$ & hexagonal & $D_{\rm 6h}$ & I \\
+\texttt{27.2.101} & \texttt{MPG:27.2.101} & $6/mmm1'$ & $$ & hexagonal & $D_{\rm 6h}$ & II \\
+\texttt{27.3.102} & \texttt{MPG:27.3.102} & $6/m'mm$ & $$ & hexagonal & $D_{\rm 6h}$ & III \\
+\texttt{27.4.103} & \texttt{MPG:27.4.103} & $6'/mmm'$ & $6'/mmm'$ & hexagonal & $D_{\rm 6h}$ & III \\
+\texttt{27.5.104} & \texttt{MPG:27.5.104} & $6'/m'mm'$ & $6'/m'mm'$ & hexagonal & $D_{\rm 6h}$ & III \\
+\texttt{27.6.105} & \texttt{MPG:27.6.105} & $6/mm'm'$ & $$ & hexagonal & $D_{\rm 6h}$ & III \\
+\texttt{27.7.106} & \texttt{MPG:27.7.106} & $6/m'm'm'$ & $$ & hexagonal & $D_{\rm 6h}$ & III \\
+\texttt{27.8.156} & \texttt{MPG:27.8.156} & $6'/mmm'$ & $6'/mm'm$ & hexagonal & $D_{\rm 6h}$ & III \\
+\texttt{27.9.157} & \texttt{MPG:27.9.157} & $6'/m'mm'$ & $6'/m'm'm$ & hexagonal & $D_{\rm 6h}$ & III \\ \hline
+\texttt{28.1.107} & \texttt{MPG:28.1.107} & $23$ & $$ & cubic & $T_{\rm }$ & I \\
+\texttt{28.2.108} & \texttt{MPG:28.2.108} & $231'$ & $$ & cubic & $T_{\rm }$ & II \\ \hline
+\texttt{29.1.109} & \texttt{MPG:29.1.109} & $m\bar{3}$ & $$ & cubic & $T_{\rm h}$ & I \\
+\texttt{29.2.110} & \texttt{MPG:29.2.110} & $m\bar{3}1'$ & $$ & cubic & $T_{\rm h}$ & II \\
+\texttt{29.3.111} & \texttt{MPG:29.3.111} & $m'\bar{3}'$ & $$ & cubic & $T_{\rm h}$ & III \\ \hline
+\texttt{30.1.112} & \texttt{MPG:30.1.112} & $432$ & $$ & cubic & $O_{\rm }$ & I \\
+\texttt{30.2.113} & \texttt{MPG:30.2.113} & $4321'$ & $$ & cubic & $O_{\rm }$ & II \\
+\texttt{30.3.114} & \texttt{MPG:30.3.114} & $4'32'$ & $$ & cubic & $O_{\rm }$ & III \\ \hline
+\texttt{31.1.115} & \texttt{MPG:31.1.115} & $\bar{4}3m$ & $$ & cubic & $T_{\rm d}$ & I \\
+\texttt{31.2.116} & \texttt{MPG:31.2.116} & $\bar{4}3m1'$ & $$ & cubic & $T_{\rm d}$ & II \\
+\texttt{31.3.117} & \texttt{MPG:31.3.117} & $\bar{4}'3m'$ & $$ & cubic & $T_{\rm d}$ & III \\ \hline
+\texttt{32.1.118} & \texttt{MPG:32.1.118} & $m\bar{3}m$ & $$ & cubic & $O_{\rm h}$ & I \\
+\texttt{32.2.119} & \texttt{MPG:32.2.119} & $m\bar{3}m1'$ & $$ & cubic & $O_{\rm h}$ & II \\
+\texttt{32.3.120} & \texttt{MPG:32.3.120} & $m'\bar{3}'m$ & $$ & cubic & $O_{\rm h}$ & III \\
+\texttt{32.4.121} & \texttt{MPG:32.4.121} & $m\bar{3}m'$ & $$ & cubic & $O_{\rm h}$ & III \\
+\texttt{32.5.122} & \texttt{MPG:32.5.122} & $m'\bar{3}'m'$ & $$ & cubic & $O_{\rm h}$ & III \\ \hline
+\texttt{33.1.131} & \texttt{MPG:33.1.131} & $\bar{4}2m$ & $-4m2$ & tetragonal & $D_{\rm 2d}(1)$ & I \\
+\texttt{33.2.132} & \texttt{MPG:33.2.132} & $\bar{4}2m1'$ & $-4m21'$ & tetragonal & $D_{\rm 2d}(1)$ & II \\
+\texttt{33.3.133} & \texttt{MPG:33.3.133} & $\bar{4}'2'm$ & $-4'm2'$ & tetragonal & $D_{\rm 2d}(1)$ & III \\
+\texttt{33.4.134} & \texttt{MPG:33.4.134} & $\bar{4}'2m'$ & $-4'm'2$ & tetragonal & $D_{\rm 2d}(1)$ & III \\
+\texttt{33.5.135} & \texttt{MPG:33.5.135} & $\bar{4}2'm'$ & $-4m'2'$ & tetragonal & $D_{\rm 2d}(1)$ & III \\ \hline
+\texttt{34.1.138} & \texttt{MPG:34.1.138} & $32$ & $312$ & trigonal & $D_{\rm 3}(1)$ & I \\
+\texttt{34.2.139} & \texttt{MPG:34.2.139} & $321'$ & $3121'$ & trigonal & $D_{\rm 3}(1)$ & II \\
+\texttt{34.3.140} & \texttt{MPG:34.3.140} & $32'$ & $312'$ & trigonal & $D_{\rm 3}(1)$ & III \\ \hline
+\texttt{35.1.141} & \texttt{MPG:35.1.141} & $3m$ & $31m$ & trigonal & $C_{\rm 3v}(1)$ & I \\
+\texttt{35.2.142} & \texttt{MPG:35.2.142} & $3m1'$ & $31m1'$ & trigonal & $C_{\rm 3v}(1)$ & II \\
+\texttt{35.3.143} & \texttt{MPG:35.3.143} & $3m'$ & $31m'$ & trigonal & $C_{\rm 3v}(1)$ & III \\ \hline
+\texttt{36.1.144} & \texttt{MPG:36.1.144} & $\bar{3}m$ & $-31m$ & trigonal & $D_{\rm 3d}(1)$ & I \\
+\texttt{36.2.145} & \texttt{MPG:36.2.145} & $\bar{3}m1'$ & $-31m1'$ & trigonal & $D_{\rm 3d}(1)$ & II \\
+\texttt{36.3.146} & \texttt{MPG:36.3.146} & $\bar{3}'m$ & $-3'1m$ & trigonal & $D_{\rm 3d}(1)$ & III \\
+\texttt{36.4.147} & \texttt{MPG:36.4.147} & $\bar{3}'m'$ & $-3'1m'$ & trigonal & $D_{\rm 3d}(1)$ & III \\
+\texttt{36.5.148} & \texttt{MPG:36.5.148} & $\bar{3}m'$ & $-31m'$ & trigonal & $D_{\rm 3d}(1)$ & III \\ \hline
+\texttt{37.1.151} & \texttt{MPG:37.1.151} & $\bar{6}m2$ & $-62m$ & hexagonal & $D_{\rm 3h}(1)$ & I \\
+\texttt{37.2.152} & \texttt{MPG:37.2.152} & $\bar{6}m21'$ & $-62m1'$ & hexagonal & $D_{\rm 3h}(1)$ & II \\
+\texttt{37.3.153} & \texttt{MPG:37.3.153} & $\bar{6}'m'2$ & $-6'2m'$ & hexagonal & $D_{\rm 3h}(1)$ & III \\
+\texttt{37.4.154} & \texttt{MPG:37.4.154} & $\bar{6}'m2'$ & $-6'2'm$ & hexagonal & $D_{\rm 3h}(1)$ & III \\
+\texttt{37.5.155} & \texttt{MPG:37.5.155} & $\bar{6}m'2'$ & $-62'm'$ & hexagonal & $D_{\rm 3h}(1)$ & III \\
+\end{longtable}
+\end{center}
+\end{center}
+
+\end{document}

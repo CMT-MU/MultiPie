@@ -1,0 +1,114 @@
+\documentclass[fleqn,10pt]{jsarticle}
+
+%%% package
+
+\usepackage[usenames]{color}
+\usepackage{amsmath}
+\usepackage{breqn}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{enumitem}
+\usepackage{braket}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+%%% layout setting
+
+\paperwidth=210truemm
+\paperheight=297truemm
+\textwidth=189.2truemm
+\textheight=269.2truemm
+\oddsidemargin=-15truemm
+\topmargin=-15truemm
+\footskip=7truemm
+
+%%% fixed
+
+\hoffset=0truemm
+\voffset=0truemm
+\headheight=0truemm
+\headsep=0truemm
+\marginparsep=0truemm
+\marginparwidth=0truemm
+
+%%% main text
+
+\begin{document}
+
+\setcounter{MaxMatrixCols}{32}
+
+\renewcommand{\tablename}{Table~}
+\renewcommand{\figurename}{Figure~}
+\begin{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.0}
+\begin{longtable}{lllllll}
+\caption{Point group information.}
+ \\
+ \hline \hline
+ID & tag &  & Sch\"onflies & international & setting & crystal \\ \hline \endfirsthead
+
+\multicolumn{6}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+ID & tag &  & Sch\"onflies & international & setting & crystal \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{6}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{6}{r}{} \\ \endlastfoot
+
+\texttt{1} & \texttt{C1} & \texttt{PG:1} & $C_{\rm 1}$ & $1$ &  & triclinic \\
+\texttt{2} & \texttt{Ci} & \texttt{PG:2} & $C_{\rm i}$ & $\bar{1}$ &  & triclinic \\ \hline
+\texttt{3} & \texttt{C2} & \texttt{PG:3} & $C_{\rm 2}$ & $2$ & b-axis & monoclinic \\
+\texttt{4} & \texttt{Cs} & \texttt{PG:4} & $C_{\rm s}$ & $m$ & b-axis & monoclinic \\
+\texttt{5} & \texttt{C2h} & \texttt{PG:5} & $C_{\rm 2h}$ & $2/m$ & b-axis & monoclinic \\ \hline
+\texttt{6} & \texttt{D2} & \texttt{PG:6} & $D_{\rm 2}$ & $222$ &  & orthorhombic \\
+\texttt{7} & \texttt{C2v} & \texttt{PG:7} & $C_{\rm 2v}$ & $mm2$ &  & orthorhombic \\
+\texttt{8} & \texttt{D2h} & \texttt{PG:8} & $D_{\rm 2h}$ & $mmm$ &  & orthorhombic \\ \hline
+\texttt{9} & \texttt{C4} & \texttt{PG:9} & $C_{\rm 4}$ & $4$ &  & tetragonal \\
+\texttt{10} & \texttt{S4} & \texttt{PG:10} & $S_{\rm 4}$ & $\bar{4}$ &  & tetragonal \\
+\texttt{11} & \texttt{C4h} & \texttt{PG:11} & $C_{\rm 4h}$ & $4/m$ &  & tetragonal \\
+\texttt{12} & \texttt{D4} & \texttt{PG:12} & $D_{\rm 4}$ & $422$ &  & tetragonal \\
+\texttt{13} & \texttt{C4v} & \texttt{PG:13} & $C_{\rm 4v}$ & $4mm$ &  & tetragonal \\
+\texttt{14} & \texttt{D2d} & \texttt{PG:14} & $D_{\rm 2d}$ & $\bar{4}2m$ & -42m & tetragonal \\
+\texttt{15} & \texttt{D4h} & \texttt{PG:15} & $D_{\rm 4h}$ & $4/mmm$ &  & tetragonal \\ \hline
+\texttt{16} & \texttt{C3} & \texttt{PG:16} & $C_{\rm 3}$ & $3$ &  & trigonal \\
+\texttt{17} & \texttt{C3i} & \texttt{PG:17} & $C_{\rm 3i}$ & $\bar{3}$ &  & trigonal \\
+\texttt{18} & \texttt{D3} & \texttt{PG:18} & $D_{\rm 3}$ & $32$ & 321 & trigonal \\
+\texttt{19} & \texttt{C3v} & \texttt{PG:19} & $C_{\rm 3v}$ & $3m$ & 3m1 & trigonal \\
+\texttt{20} & \texttt{D3d} & \texttt{PG:20} & $D_{\rm 3d}$ & $\bar{3}m$ & -3m1 & trigonal \\ \hline
+\texttt{21} & \texttt{C6} & \texttt{PG:21} & $C_{\rm 6}$ & $6$ &  & hexagonal \\
+\texttt{22} & \texttt{C3h} & \texttt{PG:22} & $C_{\rm 3h}$ & $\bar{6}$ &  & hexagonal \\
+\texttt{23} & \texttt{C6h} & \texttt{PG:23} & $C_{\rm 6h}$ & $6/m$ &  & hexagonal \\
+\texttt{24} & \texttt{D6} & \texttt{PG:24} & $D_{\rm 6}$ & $622$ &  & hexagonal \\
+\texttt{25} & \texttt{C6v} & \texttt{PG:25} & $C_{\rm 6v}$ & $6mm$ &  & hexagonal \\
+\texttt{26} & \texttt{D3h} & \texttt{PG:26} & $D_{\rm 3h}$ & $\bar{6}m2$ & -6m2 & hexagonal \\
+\texttt{27} & \texttt{D6h} & \texttt{PG:27} & $D_{\rm 6h}$ & $6/mmm$ &  & hexagonal \\ \hline
+\texttt{28} & \texttt{T} & \texttt{PG:28} & $T_{\rm }$ & $23$ &  & cubic \\
+\texttt{29} & \texttt{Th} & \texttt{PG:29} & $T_{\rm h}$ & $m\bar{3}$ &  & cubic \\
+\texttt{30} & \texttt{O} & \texttt{PG:30} & $O_{\rm }$ & $432$ &  & cubic \\
+\texttt{31} & \texttt{Td} & \texttt{PG:31} & $T_{\rm d}$ & $\bar{4}3m$ &  & cubic \\
+\texttt{32} & \texttt{Oh} & \texttt{PG:32} & $O_{\rm h}$ & $m\bar{3}m$ &  & cubic \\ \hline
+\texttt{33} & \texttt{D2d-1} & \texttt{PG:33} & $D_{\rm 2d}(1)$ & $\bar{4}2m$ & -4m2 & tetragonal \\ \hline
+\texttt{34} & \texttt{D3-1} & \texttt{PG:34} & $D_{\rm 3}(1)$ & $32$ & 312 & trigonal \\
+\texttt{35} & \texttt{C3v-1} & \texttt{PG:35} & $C_{\rm 3v}(1)$ & $3m$ & 31m & trigonal \\
+\texttt{36} & \texttt{D3d-1} & \texttt{PG:36} & $D_{\rm 3d}(1)$ & $\bar{3}m$ & -31m & trigonal \\ \hline
+\texttt{37} & \texttt{D3h-1} & \texttt{PG:37} & $D_{\rm 3h}(1)$ & $\bar{6}m2$ & -62m & hexagonal \\ \hline
+\texttt{38} & \texttt{C4-c} & \texttt{PG:38} & $C_{\rm 4}(c)$ & $4$ &  & tetragonal \\
+\texttt{39} & \texttt{S4-c} & \texttt{PG:39} & $S_{\rm 4}(c)$ & $\bar{4}$ &  & tetragonal \\
+\texttt{40} & \texttt{C4h-c} & \texttt{PG:40} & $C_{\rm 4h}(c)$ & $4/m$ &  & tetragonal \\ \hline
+\texttt{41} & \texttt{C3-c} & \texttt{PG:41} & $C_{\rm 3}(c)$ & $3$ &  & trigonal \\
+\texttt{42} & \texttt{C3i-c} & \texttt{PG:42} & $C_{\rm 3i}(c)$ & $\bar{3}$ &  & trigonal \\ \hline
+\texttt{43} & \texttt{C6-c} & \texttt{PG:43} & $C_{\rm 6}(c)$ & $6$ &  & hexagonal \\
+\texttt{44} & \texttt{C3h-c} & \texttt{PG:44} & $C_{\rm 3h}(c)$ & $\bar{6}$ &  & hexagonal \\
+\texttt{45} & \texttt{C6h-c} & \texttt{PG:45} & $C_{\rm 6h}(c)$ & $6/m$ &  & hexagonal \\ \hline
+\texttt{46} & \texttt{T-c} & \texttt{PG:46} & $T_{\rm }(c)$ & $23$ &  & cubic \\
+\texttt{47} & \texttt{Th-c} & \texttt{PG:47} & $T_{\rm h}(c)$ & $m\bar{3}$ &  & cubic \\
+\end{longtable}
+\end{center}
+\end{center}
+
+\end{document}

@@ -1,0 +1,782 @@
+\documentclass[fleqn,8pt]{jsarticle}
+
+%%% package
+
+\usepackage[usenames]{color}
+\usepackage{amsmath}
+\usepackage{breqn}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{enumitem}
+\usepackage{braket}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+%%% layout setting
+
+\paperwidth=210truemm
+\paperheight=297truemm
+\textwidth=189.2truemm
+\textheight=269.2truemm
+\oddsidemargin=-15truemm
+\topmargin=-15truemm
+\footskip=7truemm
+
+%%% fixed
+
+\hoffset=0truemm
+\voffset=0truemm
+\headheight=0truemm
+\headsep=0truemm
+\marginparsep=0truemm
+\marginparwidth=0truemm
+
+%%% main text
+
+\begin{document}
+
+\setcounter{MaxMatrixCols}{32}
+
+\renewcommand{\tablename}{Table~}
+\renewcommand{\figurename}{Figure~}
+\begin{center}
+\LARGE
+SG No. 166\quad$D_{\rm 3d}^{5}$\quad$R\bar{3}m$\quad[ trigonal ]
+\end{center}
+
+* plus set:\,\,\,$+\left[ 0,\, 0,\, 0 \right]$,\quad $+\left[ \frac{2}{3},\, \frac{1}{3},\, \frac{1}{3} \right]$,\quad $+\left[ \frac{1}{3},\, \frac{2}{3},\, \frac{2}{3} \right]$
+
+
+* Wyckoff site: {\tt 3a}, site symmetry: {\tt -3m}
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{cccc}
+\caption{Wyckoff bond: {\tt 3a@3a}}
+ \\
+ \hline \hline
+No. & vector & center & mapping \\ \hline \endfirsthead
+
+\multicolumn{3}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+No. & vector & center & mapping \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{3}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{3}{r}{} \\ \endlastfoot
+
+1 & $\left[ 0,\, 0,\, Z \right]$ & $\left[ 0,\, 0,\, 0 \right]$ & {\tt [1,2,3,-4,-5,-6,-7,-8,-9,10,11,12]} \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{cccc}
+\caption{Wyckoff bond: {\tt 9b@3a}}
+ \\
+ \hline \hline
+No. & vector & center & mapping \\ \hline \endfirsthead
+
+\multicolumn{3}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+No. & vector & center & mapping \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{3}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{3}{r}{} \\ \endlastfoot
+
+1 & $\left[ X,\, - X,\, Z \right]$ & $\left[ 0,\, 0,\, 0 \right]$ & {\tt [1,-4,-7,10]} \\ \hline
+2 & $\left[ X,\, 2 X,\, Z \right]$ & $\left[ 0,\, 0,\, 0 \right]$ & {\tt [2,-6,-8,12]} \\ \hline
+3 & $\left[ - 2 X,\, - X,\, Z \right]$ & $\left[ 0,\, 0,\, 0 \right]$ & {\tt [3,-5,-9,11]} \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{cccc}
+\caption{Wyckoff bond: {\tt 9c@3a}}
+ \\
+ \hline \hline
+No. & vector & center & mapping \\ \hline \endfirsthead
+
+\multicolumn{3}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+No. & vector & center & mapping \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{3}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{3}{r}{} \\ \endlastfoot
+
+1 & $\left[ X,\, 0,\, 0 \right]$ & $\left[ 0,\, 0,\, 0 \right]$ & {\tt [1,5,-7,-11]} \\ \hline
+2 & $\left[ 0,\, X,\, 0 \right]$ & $\left[ 0,\, 0,\, 0 \right]$ & {\tt [2,4,-8,-10]} \\ \hline
+3 & $\left[ - X,\, - X,\, 0 \right]$ & $\left[ 0,\, 0,\, 0 \right]$ & {\tt [3,6,-9,-12]} \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{cccc}
+\caption{Wyckoff bond: {\tt 18d@3a}}
+ \\
+ \hline \hline
+No. & vector & center & mapping \\ \hline \endfirsthead
+
+\multicolumn{3}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+No. & vector & center & mapping \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{3}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{3}{r}{} \\ \endlastfoot
+
+1 & $\left[ X,\, Y,\, Z \right]$ & $\left[ 0,\, 0,\, 0 \right]$ & {\tt [1,-7]} \\ \hline
+2 & $\left[ - Y,\, X - Y,\, Z \right]$ & $\left[ 0,\, 0,\, 0 \right]$ & {\tt [2,-8]} \\ \hline
+3 & $\left[ - X + Y,\, - X,\, Z \right]$ & $\left[ 0,\, 0,\, 0 \right]$ & {\tt [3,-9]} \\ \hline
+4 & $\left[ Y,\, X,\, - Z \right]$ & $\left[ 0,\, 0,\, 0 \right]$ & {\tt [4,-10]} \\ \hline
+5 & $\left[ X - Y,\, - Y,\, - Z \right]$ & $\left[ 0,\, 0,\, 0 \right]$ & {\tt [5,-11]} \\ \hline
+6 & $\left[ - X,\, - X + Y,\, - Z \right]$ & $\left[ 0,\, 0,\, 0 \right]$ & {\tt [6,-12]} \\
+\end{longtable}
+\end{center}
+* Wyckoff site: {\tt 3b}, site symmetry: {\tt -3m}
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{cccc}
+\caption{Wyckoff bond: {\tt 3a@3b}}
+ \\
+ \hline \hline
+No. & vector & center & mapping \\ \hline \endfirsthead
+
+\multicolumn{3}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+No. & vector & center & mapping \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{3}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{3}{r}{} \\ \endlastfoot
+
+1 & $\left[ 0,\, 0,\, Z \right]$ & $\left[ 0,\, 0,\, \frac{1}{2} \right]$ & {\tt [1,2,3,-4,-5,-6,-7,-8,-9,10,11,12]} \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{cccc}
+\caption{Wyckoff bond: {\tt 9b@3b}}
+ \\
+ \hline \hline
+No. & vector & center & mapping \\ \hline \endfirsthead
+
+\multicolumn{3}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+No. & vector & center & mapping \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{3}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{3}{r}{} \\ \endlastfoot
+
+1 & $\left[ X,\, - X,\, Z \right]$ & $\left[ 0,\, 0,\, \frac{1}{2} \right]$ & {\tt [1,-4,-7,10]} \\ \hline
+2 & $\left[ X,\, 2 X,\, Z \right]$ & $\left[ 0,\, 0,\, \frac{1}{2} \right]$ & {\tt [2,-6,-8,12]} \\ \hline
+3 & $\left[ - 2 X,\, - X,\, Z \right]$ & $\left[ 0,\, 0,\, \frac{1}{2} \right]$ & {\tt [3,-5,-9,11]} \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{cccc}
+\caption{Wyckoff bond: {\tt 9c@3b}}
+ \\
+ \hline \hline
+No. & vector & center & mapping \\ \hline \endfirsthead
+
+\multicolumn{3}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+No. & vector & center & mapping \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{3}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{3}{r}{} \\ \endlastfoot
+
+1 & $\left[ X,\, 0,\, 0 \right]$ & $\left[ 0,\, 0,\, \frac{1}{2} \right]$ & {\tt [1,5,-7,-11]} \\ \hline
+2 & $\left[ 0,\, X,\, 0 \right]$ & $\left[ 0,\, 0,\, \frac{1}{2} \right]$ & {\tt [2,4,-8,-10]} \\ \hline
+3 & $\left[ - X,\, - X,\, 0 \right]$ & $\left[ 0,\, 0,\, \frac{1}{2} \right]$ & {\tt [3,6,-9,-12]} \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{cccc}
+\caption{Wyckoff bond: {\tt 18d@3b}}
+ \\
+ \hline \hline
+No. & vector & center & mapping \\ \hline \endfirsthead
+
+\multicolumn{3}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+No. & vector & center & mapping \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{3}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{3}{r}{} \\ \endlastfoot
+
+1 & $\left[ X,\, Y,\, Z \right]$ & $\left[ 0,\, 0,\, \frac{1}{2} \right]$ & {\tt [1,-7]} \\ \hline
+2 & $\left[ - Y,\, X - Y,\, Z \right]$ & $\left[ 0,\, 0,\, \frac{1}{2} \right]$ & {\tt [2,-8]} \\ \hline
+3 & $\left[ - X + Y,\, - X,\, Z \right]$ & $\left[ 0,\, 0,\, \frac{1}{2} \right]$ & {\tt [3,-9]} \\ \hline
+4 & $\left[ Y,\, X,\, - Z \right]$ & $\left[ 0,\, 0,\, \frac{1}{2} \right]$ & {\tt [4,-10]} \\ \hline
+5 & $\left[ X - Y,\, - Y,\, - Z \right]$ & $\left[ 0,\, 0,\, \frac{1}{2} \right]$ & {\tt [5,-11]} \\ \hline
+6 & $\left[ - X,\, - X + Y,\, - Z \right]$ & $\left[ 0,\, 0,\, \frac{1}{2} \right]$ & {\tt [6,-12]} \\
+\end{longtable}
+\end{center}
+* Wyckoff site: {\tt 6c}, site symmetry: {\tt 3m}
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{cccc}
+\caption{Wyckoff bond: {\tt 6a@6c}}
+ \\
+ \hline \hline
+No. & vector & center & mapping \\ \hline \endfirsthead
+
+\multicolumn{3}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+No. & vector & center & mapping \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{3}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{3}{r}{} \\ \endlastfoot
+
+1 & $\left[ 0,\, 0,\, Z \right]$ & $\left[ 0,\, 0,\, z \right]$ & {\tt [1,2,3,10,11,12]} \\ \hline
+2 & $\left[ 0,\, 0,\, - Z \right]$ & $\left[ 0,\, 0,\, - z \right]$ & {\tt [4,5,6,7,8,9]} \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{cccc}
+\caption{Wyckoff bond: {\tt 18b@6c}}
+ \\
+ \hline \hline
+No. & vector & center & mapping \\ \hline \endfirsthead
+
+\multicolumn{3}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+No. & vector & center & mapping \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{3}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{3}{r}{} \\ \endlastfoot
+
+1 & $\left[ X,\, - X,\, Z \right]$ & $\left[ 0,\, 0,\, z \right]$ & {\tt [1,10]} \\ \hline
+2 & $\left[ X,\, 2 X,\, Z \right]$ & $\left[ 0,\, 0,\, z \right]$ & {\tt [2,12]} \\ \hline
+3 & $\left[ - 2 X,\, - X,\, Z \right]$ & $\left[ 0,\, 0,\, z \right]$ & {\tt [3,11]} \\ \hline
+4 & $\left[ - X,\, X,\, - Z \right]$ & $\left[ 0,\, 0,\, - z \right]$ & {\tt [4,7]} \\ \hline
+5 & $\left[ 2 X,\, X,\, - Z \right]$ & $\left[ 0,\, 0,\, - z \right]$ & {\tt [5,9]} \\ \hline
+6 & $\left[ - X,\, - 2 X,\, - Z \right]$ & $\left[ 0,\, 0,\, - z \right]$ & {\tt [6,8]} \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{cccc}
+\caption{Wyckoff bond: {\tt 18c@6c}}
+ \\
+ \hline \hline
+No. & vector & center & mapping \\ \hline \endfirsthead
+
+\multicolumn{3}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+No. & vector & center & mapping \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{3}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{3}{r}{} \\ \endlastfoot
+
+1 & $\left[ X,\, 0,\, 0 \right]$ & $\left[ 0,\, 0,\, z \right]$ & {\tt [1,-11]} \\ \hline
+2 & $\left[ 0,\, X,\, 0 \right]$ & $\left[ 0,\, 0,\, z \right]$ & {\tt [2,-10]} \\ \hline
+3 & $\left[ - X,\, - X,\, 0 \right]$ & $\left[ 0,\, 0,\, z \right]$ & {\tt [3,-12]} \\ \hline
+4 & $\left[ 0,\, X,\, 0 \right]$ & $\left[ 0,\, 0,\, - z \right]$ & {\tt [4,-8]} \\ \hline
+5 & $\left[ X,\, 0,\, 0 \right]$ & $\left[ 0,\, 0,\, - z \right]$ & {\tt [5,-7]} \\ \hline
+6 & $\left[ - X,\, - X,\, 0 \right]$ & $\left[ 0,\, 0,\, - z \right]$ & {\tt [6,-9]} \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{cccc}
+\caption{Wyckoff bond: {\tt 36d@6c}}
+ \\
+ \hline \hline
+No. & vector & center & mapping \\ \hline \endfirsthead
+
+\multicolumn{3}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+No. & vector & center & mapping \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{3}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{3}{r}{} \\ \endlastfoot
+
+1 & $\left[ X,\, Y,\, Z \right]$ & $\left[ 0,\, 0,\, z \right]$ & {\tt [1]} \\ \hline
+2 & $\left[ - Y,\, X - Y,\, Z \right]$ & $\left[ 0,\, 0,\, z \right]$ & {\tt [2]} \\ \hline
+3 & $\left[ - X + Y,\, - X,\, Z \right]$ & $\left[ 0,\, 0,\, z \right]$ & {\tt [3]} \\ \hline
+4 & $\left[ Y,\, X,\, - Z \right]$ & $\left[ 0,\, 0,\, - z \right]$ & {\tt [4]} \\ \hline
+5 & $\left[ X - Y,\, - Y,\, - Z \right]$ & $\left[ 0,\, 0,\, - z \right]$ & {\tt [5]} \\ \hline
+6 & $\left[ - X,\, - X + Y,\, - Z \right]$ & $\left[ 0,\, 0,\, - z \right]$ & {\tt [6]} \\ \hline
+7 & $\left[ - X,\, - Y,\, - Z \right]$ & $\left[ 0,\, 0,\, - z \right]$ & {\tt [7]} \\ \hline
+8 & $\left[ Y,\, - X + Y,\, - Z \right]$ & $\left[ 0,\, 0,\, - z \right]$ & {\tt [8]} \\ \hline
+9 & $\left[ X - Y,\, X,\, - Z \right]$ & $\left[ 0,\, 0,\, - z \right]$ & {\tt [9]} \\ \hline
+10 & $\left[ - Y,\, - X,\, Z \right]$ & $\left[ 0,\, 0,\, z \right]$ & {\tt [10]} \\ \hline
+11 & $\left[ - X + Y,\, Y,\, Z \right]$ & $\left[ 0,\, 0,\, z \right]$ & {\tt [11]} \\ \hline
+12 & $\left[ X,\, X - Y,\, Z \right]$ & $\left[ 0,\, 0,\, z \right]$ & {\tt [12]} \\
+\end{longtable}
+\end{center}
+* Wyckoff site: {\tt 9d}, site symmetry: {\tt .2/m}
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{cccc}
+\caption{Wyckoff bond: {\tt 9a@9d}}
+ \\
+ \hline \hline
+No. & vector & center & mapping \\ \hline \endfirsthead
+
+\multicolumn{3}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+No. & vector & center & mapping \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{3}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{3}{r}{} \\ \endlastfoot
+
+1 & $\left[ X,\, 2 X,\, Z \right]$ & $\left[ \frac{1}{2},\, 0,\, \frac{1}{2} \right]$ & {\tt [1,-5,-7,11]} \\ \hline
+2 & $\left[ - 2 X,\, - X,\, Z \right]$ & $\left[ 0,\, \frac{1}{2},\, \frac{1}{2} \right]$ & {\tt [2,-4,-8,10]} \\ \hline
+3 & $\left[ X,\, - X,\, Z \right]$ & $\left[ \frac{1}{2},\, \frac{1}{2},\, \frac{1}{2} \right]$ & {\tt [3,-6,-9,12]} \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{cccc}
+\caption{Wyckoff bond: {\tt 9b@9d}}
+ \\
+ \hline \hline
+No. & vector & center & mapping \\ \hline \endfirsthead
+
+\multicolumn{3}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+No. & vector & center & mapping \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{3}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{3}{r}{} \\ \endlastfoot
+
+1 & $\left[ X,\, 0,\, 0 \right]$ & $\left[ \frac{1}{2},\, 0,\, \frac{1}{2} \right]$ & {\tt [1,5,-7,-11]} \\ \hline
+2 & $\left[ 0,\, X,\, 0 \right]$ & $\left[ 0,\, \frac{1}{2},\, \frac{1}{2} \right]$ & {\tt [2,4,-8,-10]} \\ \hline
+3 & $\left[ - X,\, - X,\, 0 \right]$ & $\left[ \frac{1}{2},\, \frac{1}{2},\, \frac{1}{2} \right]$ & {\tt [3,6,-9,-12]} \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{cccc}
+\caption{Wyckoff bond: {\tt 18c@9d}}
+ \\
+ \hline \hline
+No. & vector & center & mapping \\ \hline \endfirsthead
+
+\multicolumn{3}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+No. & vector & center & mapping \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{3}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{3}{r}{} \\ \endlastfoot
+
+1 & $\left[ X,\, Y,\, Z \right]$ & $\left[ \frac{1}{2},\, 0,\, \frac{1}{2} \right]$ & {\tt [1,-7]} \\ \hline
+2 & $\left[ - Y,\, X - Y,\, Z \right]$ & $\left[ 0,\, \frac{1}{2},\, \frac{1}{2} \right]$ & {\tt [2,-8]} \\ \hline
+3 & $\left[ - X + Y,\, - X,\, Z \right]$ & $\left[ \frac{1}{2},\, \frac{1}{2},\, \frac{1}{2} \right]$ & {\tt [3,-9]} \\ \hline
+4 & $\left[ Y,\, X,\, - Z \right]$ & $\left[ 0,\, \frac{1}{2},\, \frac{1}{2} \right]$ & {\tt [4,-10]} \\ \hline
+5 & $\left[ X - Y,\, - Y,\, - Z \right]$ & $\left[ \frac{1}{2},\, 0,\, \frac{1}{2} \right]$ & {\tt [5,-11]} \\ \hline
+6 & $\left[ - X,\, - X + Y,\, - Z \right]$ & $\left[ \frac{1}{2},\, \frac{1}{2},\, \frac{1}{2} \right]$ & {\tt [6,-12]} \\
+\end{longtable}
+\end{center}
+* Wyckoff site: {\tt 9e}, site symmetry: {\tt .2/m}
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{cccc}
+\caption{Wyckoff bond: {\tt 9a@9e}}
+ \\
+ \hline \hline
+No. & vector & center & mapping \\ \hline \endfirsthead
+
+\multicolumn{3}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+No. & vector & center & mapping \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{3}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{3}{r}{} \\ \endlastfoot
+
+1 & $\left[ X,\, 2 X,\, Z \right]$ & $\left[ \frac{1}{2},\, 0,\, 0 \right]$ & {\tt [1,-5,-7,11]} \\ \hline
+2 & $\left[ - 2 X,\, - X,\, Z \right]$ & $\left[ 0,\, \frac{1}{2},\, 0 \right]$ & {\tt [2,-4,-8,10]} \\ \hline
+3 & $\left[ X,\, - X,\, Z \right]$ & $\left[ \frac{1}{2},\, \frac{1}{2},\, 0 \right]$ & {\tt [3,-6,-9,12]} \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{cccc}
+\caption{Wyckoff bond: {\tt 9b@9e}}
+ \\
+ \hline \hline
+No. & vector & center & mapping \\ \hline \endfirsthead
+
+\multicolumn{3}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+No. & vector & center & mapping \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{3}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{3}{r}{} \\ \endlastfoot
+
+1 & $\left[ X,\, 0,\, 0 \right]$ & $\left[ \frac{1}{2},\, 0,\, 0 \right]$ & {\tt [1,5,-7,-11]} \\ \hline
+2 & $\left[ 0,\, X,\, 0 \right]$ & $\left[ 0,\, \frac{1}{2},\, 0 \right]$ & {\tt [2,4,-8,-10]} \\ \hline
+3 & $\left[ - X,\, - X,\, 0 \right]$ & $\left[ \frac{1}{2},\, \frac{1}{2},\, 0 \right]$ & {\tt [3,6,-9,-12]} \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{cccc}
+\caption{Wyckoff bond: {\tt 18c@9e}}
+ \\
+ \hline \hline
+No. & vector & center & mapping \\ \hline \endfirsthead
+
+\multicolumn{3}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+No. & vector & center & mapping \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{3}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{3}{r}{} \\ \endlastfoot
+
+1 & $\left[ X,\, Y,\, Z \right]$ & $\left[ \frac{1}{2},\, 0,\, 0 \right]$ & {\tt [1,-7]} \\ \hline
+2 & $\left[ - Y,\, X - Y,\, Z \right]$ & $\left[ 0,\, \frac{1}{2},\, 0 \right]$ & {\tt [2,-8]} \\ \hline
+3 & $\left[ - X + Y,\, - X,\, Z \right]$ & $\left[ \frac{1}{2},\, \frac{1}{2},\, 0 \right]$ & {\tt [3,-9]} \\ \hline
+4 & $\left[ Y,\, X,\, - Z \right]$ & $\left[ 0,\, \frac{1}{2},\, 0 \right]$ & {\tt [4,-10]} \\ \hline
+5 & $\left[ X - Y,\, - Y,\, - Z \right]$ & $\left[ \frac{1}{2},\, 0,\, 0 \right]$ & {\tt [5,-11]} \\ \hline
+6 & $\left[ - X,\, - X + Y,\, - Z \right]$ & $\left[ \frac{1}{2},\, \frac{1}{2},\, 0 \right]$ & {\tt [6,-12]} \\
+\end{longtable}
+\end{center}
+* Wyckoff site: {\tt 18f}, site symmetry: {\tt .2}
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{cccc}
+\caption{Wyckoff bond: {\tt 18a@18f}}
+ \\
+ \hline \hline
+No. & vector & center & mapping \\ \hline \endfirsthead
+
+\multicolumn{3}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+No. & vector & center & mapping \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{3}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{3}{r}{} \\ \endlastfoot
+
+1 & $\left[ X,\, 2 X,\, Z \right]$ & $\left[ x,\, 0,\, 0 \right]$ & {\tt [1,-5]} \\ \hline
+2 & $\left[ - 2 X,\, - X,\, Z \right]$ & $\left[ 0,\, x,\, 0 \right]$ & {\tt [2,-4]} \\ \hline
+3 & $\left[ X,\, - X,\, Z \right]$ & $\left[ - x,\, - x,\, 0 \right]$ & {\tt [3,-6]} \\ \hline
+4 & $\left[ - X,\, - 2 X,\, - Z \right]$ & $\left[ - x,\, 0,\, 0 \right]$ & {\tt [7,-11]} \\ \hline
+5 & $\left[ 2 X,\, X,\, - Z \right]$ & $\left[ 0,\, - x,\, 0 \right]$ & {\tt [8,-10]} \\ \hline
+6 & $\left[ - X,\, X,\, - Z \right]$ & $\left[ x,\, x,\, 0 \right]$ & {\tt [9,-12]} \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{cccc}
+\caption{Wyckoff bond: {\tt 18b@18f}}
+ \\
+ \hline \hline
+No. & vector & center & mapping \\ \hline \endfirsthead
+
+\multicolumn{3}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+No. & vector & center & mapping \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{3}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{3}{r}{} \\ \endlastfoot
+
+1 & $\left[ X,\, 0,\, 0 \right]$ & $\left[ x,\, 0,\, 0 \right]$ & {\tt [1,5]} \\ \hline
+2 & $\left[ 0,\, X,\, 0 \right]$ & $\left[ 0,\, x,\, 0 \right]$ & {\tt [2,4]} \\ \hline
+3 & $\left[ - X,\, - X,\, 0 \right]$ & $\left[ - x,\, - x,\, 0 \right]$ & {\tt [3,6]} \\ \hline
+4 & $\left[ - X,\, 0,\, 0 \right]$ & $\left[ - x,\, 0,\, 0 \right]$ & {\tt [7,11]} \\ \hline
+5 & $\left[ 0,\, - X,\, 0 \right]$ & $\left[ 0,\, - x,\, 0 \right]$ & {\tt [8,10]} \\ \hline
+6 & $\left[ X,\, X,\, 0 \right]$ & $\left[ x,\, x,\, 0 \right]$ & {\tt [9,12]} \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{cccc}
+\caption{Wyckoff bond: {\tt 36c@18f}}
+ \\
+ \hline \hline
+No. & vector & center & mapping \\ \hline \endfirsthead
+
+\multicolumn{3}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+No. & vector & center & mapping \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{3}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{3}{r}{} \\ \endlastfoot
+
+1 & $\left[ X,\, Y,\, Z \right]$ & $\left[ x,\, 0,\, 0 \right]$ & {\tt [1]} \\ \hline
+2 & $\left[ - Y,\, X - Y,\, Z \right]$ & $\left[ 0,\, x,\, 0 \right]$ & {\tt [2]} \\ \hline
+3 & $\left[ - X + Y,\, - X,\, Z \right]$ & $\left[ - x,\, - x,\, 0 \right]$ & {\tt [3]} \\ \hline
+4 & $\left[ Y,\, X,\, - Z \right]$ & $\left[ 0,\, x,\, 0 \right]$ & {\tt [4]} \\ \hline
+5 & $\left[ X - Y,\, - Y,\, - Z \right]$ & $\left[ x,\, 0,\, 0 \right]$ & {\tt [5]} \\ \hline
+6 & $\left[ - X,\, - X + Y,\, - Z \right]$ & $\left[ - x,\, - x,\, 0 \right]$ & {\tt [6]} \\ \hline
+7 & $\left[ - X,\, - Y,\, - Z \right]$ & $\left[ - x,\, 0,\, 0 \right]$ & {\tt [7]} \\ \hline
+8 & $\left[ Y,\, - X + Y,\, - Z \right]$ & $\left[ 0,\, - x,\, 0 \right]$ & {\tt [8]} \\ \hline
+9 & $\left[ X - Y,\, X,\, - Z \right]$ & $\left[ x,\, x,\, 0 \right]$ & {\tt [9]} \\ \hline
+10 & $\left[ - Y,\, - X,\, Z \right]$ & $\left[ 0,\, - x,\, 0 \right]$ & {\tt [10]} \\ \hline
+11 & $\left[ - X + Y,\, Y,\, Z \right]$ & $\left[ - x,\, 0,\, 0 \right]$ & {\tt [11]} \\ \hline
+12 & $\left[ X,\, X - Y,\, Z \right]$ & $\left[ x,\, x,\, 0 \right]$ & {\tt [12]} \\
+\end{longtable}
+\end{center}
+* Wyckoff site: {\tt 18g}, site symmetry: {\tt .2}
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{cccc}
+\caption{Wyckoff bond: {\tt 18a@18g}}
+ \\
+ \hline \hline
+No. & vector & center & mapping \\ \hline \endfirsthead
+
+\multicolumn{3}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+No. & vector & center & mapping \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{3}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{3}{r}{} \\ \endlastfoot
+
+1 & $\left[ X,\, 2 X,\, Z \right]$ & $\left[ x,\, 0,\, \frac{1}{2} \right]$ & {\tt [1,-5]} \\ \hline
+2 & $\left[ - 2 X,\, - X,\, Z \right]$ & $\left[ 0,\, x,\, \frac{1}{2} \right]$ & {\tt [2,-4]} \\ \hline
+3 & $\left[ X,\, - X,\, Z \right]$ & $\left[ - x,\, - x,\, \frac{1}{2} \right]$ & {\tt [3,-6]} \\ \hline
+4 & $\left[ - X,\, - 2 X,\, - Z \right]$ & $\left[ - x,\, 0,\, \frac{1}{2} \right]$ & {\tt [7,-11]} \\ \hline
+5 & $\left[ 2 X,\, X,\, - Z \right]$ & $\left[ 0,\, - x,\, \frac{1}{2} \right]$ & {\tt [8,-10]} \\ \hline
+6 & $\left[ - X,\, X,\, - Z \right]$ & $\left[ x,\, x,\, \frac{1}{2} \right]$ & {\tt [9,-12]} \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{cccc}
+\caption{Wyckoff bond: {\tt 18b@18g}}
+ \\
+ \hline \hline
+No. & vector & center & mapping \\ \hline \endfirsthead
+
+\multicolumn{3}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+No. & vector & center & mapping \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{3}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{3}{r}{} \\ \endlastfoot
+
+1 & $\left[ X,\, 0,\, 0 \right]$ & $\left[ x,\, 0,\, \frac{1}{2} \right]$ & {\tt [1,5]} \\ \hline
+2 & $\left[ 0,\, X,\, 0 \right]$ & $\left[ 0,\, x,\, \frac{1}{2} \right]$ & {\tt [2,4]} \\ \hline
+3 & $\left[ - X,\, - X,\, 0 \right]$ & $\left[ - x,\, - x,\, \frac{1}{2} \right]$ & {\tt [3,6]} \\ \hline
+4 & $\left[ - X,\, 0,\, 0 \right]$ & $\left[ - x,\, 0,\, \frac{1}{2} \right]$ & {\tt [7,11]} \\ \hline
+5 & $\left[ 0,\, - X,\, 0 \right]$ & $\left[ 0,\, - x,\, \frac{1}{2} \right]$ & {\tt [8,10]} \\ \hline
+6 & $\left[ X,\, X,\, 0 \right]$ & $\left[ x,\, x,\, \frac{1}{2} \right]$ & {\tt [9,12]} \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{cccc}
+\caption{Wyckoff bond: {\tt 36c@18g}}
+ \\
+ \hline \hline
+No. & vector & center & mapping \\ \hline \endfirsthead
+
+\multicolumn{3}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+No. & vector & center & mapping \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{3}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{3}{r}{} \\ \endlastfoot
+
+1 & $\left[ X,\, Y,\, Z \right]$ & $\left[ x,\, 0,\, \frac{1}{2} \right]$ & {\tt [1]} \\ \hline
+2 & $\left[ - Y,\, X - Y,\, Z \right]$ & $\left[ 0,\, x,\, \frac{1}{2} \right]$ & {\tt [2]} \\ \hline
+3 & $\left[ - X + Y,\, - X,\, Z \right]$ & $\left[ - x,\, - x,\, \frac{1}{2} \right]$ & {\tt [3]} \\ \hline
+4 & $\left[ Y,\, X,\, - Z \right]$ & $\left[ 0,\, x,\, \frac{1}{2} \right]$ & {\tt [4]} \\ \hline
+5 & $\left[ X - Y,\, - Y,\, - Z \right]$ & $\left[ x,\, 0,\, \frac{1}{2} \right]$ & {\tt [5]} \\ \hline
+6 & $\left[ - X,\, - X + Y,\, - Z \right]$ & $\left[ - x,\, - x,\, \frac{1}{2} \right]$ & {\tt [6]} \\ \hline
+7 & $\left[ - X,\, - Y,\, - Z \right]$ & $\left[ - x,\, 0,\, \frac{1}{2} \right]$ & {\tt [7]} \\ \hline
+8 & $\left[ Y,\, - X + Y,\, - Z \right]$ & $\left[ 0,\, - x,\, \frac{1}{2} \right]$ & {\tt [8]} \\ \hline
+9 & $\left[ X - Y,\, X,\, - Z \right]$ & $\left[ x,\, x,\, \frac{1}{2} \right]$ & {\tt [9]} \\ \hline
+10 & $\left[ - Y,\, - X,\, Z \right]$ & $\left[ 0,\, - x,\, \frac{1}{2} \right]$ & {\tt [10]} \\ \hline
+11 & $\left[ - X + Y,\, Y,\, Z \right]$ & $\left[ - x,\, 0,\, \frac{1}{2} \right]$ & {\tt [11]} \\ \hline
+12 & $\left[ X,\, X - Y,\, Z \right]$ & $\left[ x,\, x,\, \frac{1}{2} \right]$ & {\tt [12]} \\
+\end{longtable}
+\end{center}
+* Wyckoff site: {\tt 18h}, site symmetry: {\tt .m}
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{cccc}
+\caption{Wyckoff bond: {\tt 18a@18h}}
+ \\
+ \hline \hline
+No. & vector & center & mapping \\ \hline \endfirsthead
+
+\multicolumn{3}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+No. & vector & center & mapping \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{3}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{3}{r}{} \\ \endlastfoot
+
+1 & $\left[ X,\, - X,\, Z \right]$ & $\left[ x,\, - x,\, z \right]$ & {\tt [1,10]} \\ \hline
+2 & $\left[ X,\, 2 X,\, Z \right]$ & $\left[ x,\, 2 x,\, z \right]$ & {\tt [2,12]} \\ \hline
+3 & $\left[ - 2 X,\, - X,\, Z \right]$ & $\left[ - 2 x,\, - x,\, z \right]$ & {\tt [3,11]} \\ \hline
+4 & $\left[ - X,\, X,\, - Z \right]$ & $\left[ - x,\, x,\, - z \right]$ & {\tt [4,7]} \\ \hline
+5 & $\left[ 2 X,\, X,\, - Z \right]$ & $\left[ 2 x,\, x,\, - z \right]$ & {\tt [5,9]} \\ \hline
+6 & $\left[ - X,\, - 2 X,\, - Z \right]$ & $\left[ - x,\, - 2 x,\, - z \right]$ & {\tt [6,8]} \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{cccc}
+\caption{Wyckoff bond: {\tt 18b@18h}}
+ \\
+ \hline \hline
+No. & vector & center & mapping \\ \hline \endfirsthead
+
+\multicolumn{3}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+No. & vector & center & mapping \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{3}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{3}{r}{} \\ \endlastfoot
+
+1 & $\left[ X,\, X,\, 0 \right]$ & $\left[ x,\, - x,\, z \right]$ & {\tt [1,-10]} \\ \hline
+2 & $\left[ - X,\, 0,\, 0 \right]$ & $\left[ x,\, 2 x,\, z \right]$ & {\tt [2,-12]} \\ \hline
+3 & $\left[ 0,\, - X,\, 0 \right]$ & $\left[ - 2 x,\, - x,\, z \right]$ & {\tt [3,-11]} \\ \hline
+4 & $\left[ X,\, X,\, 0 \right]$ & $\left[ - x,\, x,\, - z \right]$ & {\tt [4,-7]} \\ \hline
+5 & $\left[ 0,\, - X,\, 0 \right]$ & $\left[ 2 x,\, x,\, - z \right]$ & {\tt [5,-9]} \\ \hline
+6 & $\left[ - X,\, 0,\, 0 \right]$ & $\left[ - x,\, - 2 x,\, - z \right]$ & {\tt [6,-8]} \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{cccc}
+\caption{Wyckoff bond: {\tt 36c@18h}}
+ \\
+ \hline \hline
+No. & vector & center & mapping \\ \hline \endfirsthead
+
+\multicolumn{3}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+No. & vector & center & mapping \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{3}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{3}{r}{} \\ \endlastfoot
+
+1 & $\left[ X,\, Y,\, Z \right]$ & $\left[ x,\, - x,\, z \right]$ & {\tt [1]} \\ \hline
+2 & $\left[ - Y,\, X - Y,\, Z \right]$ & $\left[ x,\, 2 x,\, z \right]$ & {\tt [2]} \\ \hline
+3 & $\left[ - X + Y,\, - X,\, Z \right]$ & $\left[ - 2 x,\, - x,\, z \right]$ & {\tt [3]} \\ \hline
+4 & $\left[ Y,\, X,\, - Z \right]$ & $\left[ - x,\, x,\, - z \right]$ & {\tt [4]} \\ \hline
+5 & $\left[ X - Y,\, - Y,\, - Z \right]$ & $\left[ 2 x,\, x,\, - z \right]$ & {\tt [5]} \\ \hline
+6 & $\left[ - X,\, - X + Y,\, - Z \right]$ & $\left[ - x,\, - 2 x,\, - z \right]$ & {\tt [6]} \\ \hline
+7 & $\left[ - X,\, - Y,\, - Z \right]$ & $\left[ - x,\, x,\, - z \right]$ & {\tt [7]} \\ \hline
+8 & $\left[ Y,\, - X + Y,\, - Z \right]$ & $\left[ - x,\, - 2 x,\, - z \right]$ & {\tt [8]} \\ \hline
+9 & $\left[ X - Y,\, X,\, - Z \right]$ & $\left[ 2 x,\, x,\, - z \right]$ & {\tt [9]} \\ \hline
+10 & $\left[ - Y,\, - X,\, Z \right]$ & $\left[ x,\, - x,\, z \right]$ & {\tt [10]} \\ \hline
+11 & $\left[ - X + Y,\, Y,\, Z \right]$ & $\left[ - 2 x,\, - x,\, z \right]$ & {\tt [11]} \\ \hline
+12 & $\left[ X,\, X - Y,\, Z \right]$ & $\left[ x,\, 2 x,\, z \right]$ & {\tt [12]} \\
+\end{longtable}
+\end{center}
+* Wyckoff site: {\tt 36i}, site symmetry: {\tt 1}
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{cccc}
+\caption{Wyckoff bond: {\tt 36a@36i}}
+ \\
+ \hline \hline
+No. & vector & center & mapping \\ \hline \endfirsthead
+
+\multicolumn{3}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+No. & vector & center & mapping \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{3}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{3}{r}{} \\ \endlastfoot
+
+1 & $\left[ X,\, Y,\, Z \right]$ & $\left[ x,\, y,\, z \right]$ & {\tt [1]} \\ \hline
+2 & $\left[ - Y,\, X - Y,\, Z \right]$ & $\left[ - y,\, x - y,\, z \right]$ & {\tt [2]} \\ \hline
+3 & $\left[ - X + Y,\, - X,\, Z \right]$ & $\left[ - x + y,\, - x,\, z \right]$ & {\tt [3]} \\ \hline
+4 & $\left[ Y,\, X,\, - Z \right]$ & $\left[ y,\, x,\, - z \right]$ & {\tt [4]} \\ \hline
+5 & $\left[ X - Y,\, - Y,\, - Z \right]$ & $\left[ x - y,\, - y,\, - z \right]$ & {\tt [5]} \\ \hline
+6 & $\left[ - X,\, - X + Y,\, - Z \right]$ & $\left[ - x,\, - x + y,\, - z \right]$ & {\tt [6]} \\ \hline
+7 & $\left[ - X,\, - Y,\, - Z \right]$ & $\left[ - x,\, - y,\, - z \right]$ & {\tt [7]} \\ \hline
+8 & $\left[ Y,\, - X + Y,\, - Z \right]$ & $\left[ y,\, - x + y,\, - z \right]$ & {\tt [8]} \\ \hline
+9 & $\left[ X - Y,\, X,\, - Z \right]$ & $\left[ x - y,\, x,\, - z \right]$ & {\tt [9]} \\ \hline
+10 & $\left[ - Y,\, - X,\, Z \right]$ & $\left[ - y,\, - x,\, z \right]$ & {\tt [10]} \\ \hline
+11 & $\left[ - X + Y,\, Y,\, Z \right]$ & $\left[ - x + y,\, y,\, z \right]$ & {\tt [11]} \\ \hline
+12 & $\left[ X,\, X - Y,\, Z \right]$ & $\left[ x,\, x - y,\, z \right]$ & {\tt [12]} \\
+\end{longtable}
+\end{center}
+
+\end{document}
