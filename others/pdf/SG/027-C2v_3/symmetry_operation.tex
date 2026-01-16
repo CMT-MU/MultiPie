@@ -1,0 +1,77 @@
+\documentclass[fleqn,8pt]{jsarticle}
+
+%%% package
+
+\usepackage[usenames]{color}
+\usepackage{amsmath}
+\usepackage{breqn}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{enumitem}
+\usepackage{braket}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+%%% layout setting
+
+\paperwidth=210truemm
+\paperheight=297truemm
+\textwidth=189.2truemm
+\textheight=269.2truemm
+\oddsidemargin=-15truemm
+\topmargin=-15truemm
+\footskip=7truemm
+
+%%% fixed
+
+\hoffset=0truemm
+\voffset=0truemm
+\headheight=0truemm
+\headsep=0truemm
+\marginparsep=0truemm
+\marginparwidth=0truemm
+
+%%% main text
+
+\begin{document}
+
+\setcounter{MaxMatrixCols}{32}
+
+\renewcommand{\tablename}{Table~}
+\renewcommand{\figurename}{Figure~}
+\begin{center}
+\LARGE
+SG No. 27\quad$C_{\rm 2v}^{3}$\quad$Pcc2$\quad[ orthorhombic ]
+\end{center}
+
+* generator : $\{2{}_{001}|0\},\,\,\{{\rm m}_{010}|0 0 \frac{1}{2}\}$
+
+* symmetry operation\quad$+\left[ 0,\, 0,\, 0 \right]$
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{longtable}{cccc}
+\caption{Symmetry operations for 3d polar vector.}
+ \\
+ \hline \hline
+No. & tag & matrix (polar) & det \\ \hline \endfirsthead
+
+\multicolumn{3}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+No. & tag & matrix (polar) & det \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{3}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{3}{r}{} \\ \endlastfoot
+
+$ 1 $ & $ \{1|0\} $ & $ \begin{bmatrix} 1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 1 & 0 \end{bmatrix} $ & $ 1 $ \\ \hline
+$ 2 $ & $ \{2{}_{001}|0\} $ & $ \begin{bmatrix} -1 & 0 & 0 & 0 \\ 0 & -1 & 0 & 0 \\ 0 & 0 & 1 & 0 \end{bmatrix} $ & $ 1 $ \\ \hline
+$ 3 $ & $ \{{\rm m}_{010}|0 0 \frac{1}{2}\} $ & $ \begin{bmatrix} 1 & 0 & 0 & 0 \\ 0 & -1 & 0 & 0 \\ 0 & 0 & 1 & \frac{1}{2} \end{bmatrix} $ & $ -1 $ \\ \hline
+$ 4 $ & $ \{{\rm m}_{100}|0 0 \frac{1}{2}\} $ & $ \begin{bmatrix} -1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 1 & \frac{1}{2} \end{bmatrix} $ & $ -1 $ \\
+\end{longtable}
+\end{center}
+
+\end{document}

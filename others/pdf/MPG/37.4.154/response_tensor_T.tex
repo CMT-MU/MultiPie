@@ -1,0 +1,129 @@
+\documentclass[fleqn,8pt,landscape]{jsarticle}
+\special{papersize=\the\paperwidth,\the\paperheight}
+
+%%% package
+
+\usepackage[usenames]{color}
+\usepackage{amsmath}
+\usepackage{breqn}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{enumitem}
+\usepackage{braket}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+%%% layout setting
+
+\paperwidth=356.4truemm
+\paperheight=252.0truemm
+\textwidth=335.59999999999997truemm
+\textheight=224.2truemm
+\oddsidemargin=-15truemm
+\topmargin=-15truemm
+\footskip=7truemm
+
+%%% fixed
+
+\hoffset=0truemm
+\voffset=0truemm
+\headheight=0truemm
+\headsep=0truemm
+\marginparsep=0truemm
+\marginparwidth=0truemm
+
+%%% main text
+
+\begin{document}
+
+\setcounter{MaxMatrixCols}{32}
+
+\renewcommand{\tablename}{Table~}
+\renewcommand{\figurename}{Figure~}
+\begin{center}
+\LARGE
+MPG No. 37.4.154\quad$\bar{6}'m2'$\quad(-6'2'm setting)\quad[ Type III, hexagonal ] [T tensor]
+\end{center}
+* Rank 0 tensor.
+* Rank 1 tensor.
+\begin{align*}
+\begin{bmatrix} 0 & 0 & T_{z} \end{bmatrix}
+\end{align*}
+\begin{align*}
+& T_{z} = T_{pz}^{(1)}
+\end{align*}
+* Rank 2 tensor (s).
+* Rank 2 tensor (a).
+* Rank 3 tensor (s).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & T_{xxz} \\ 0 & 0 & T_{xxz} \\ 0 & 0 & T_{zzz} \\ 0 & T_{yzy} & 0 \\ T_{yzy} & 0 & 0 \\ 0 & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& T_{xxz} = - T_{faz}^{(1)} + T_{pz}^{(1)} \\
+& T_{zzz} = 2 T_{faz}^{(1)} + T_{pz}^{(1)} + 2 T_{pz}^{(2)} \\
+& T_{yzy} = - T_{faz}^{(1)} + T_{pz}^{(2)}
+\end{align*}
+* Rank 3 tensor (a).
+\begin{align*}
+\begin{bmatrix} 0 & T_{yzy} & 0 \\ - T_{yzy} & 0 & 0 \\ 0 & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& T_{yzy} = T_{pz}^{(3)}
+\end{align*}
+* Rank 4 tensor (sss).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & 0 & 0 & T_{xxzx} & 0 \\ 0 & 0 & 0 & 0 & - T_{xxzx} & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & - T_{xxzx} \\ T_{xxzx} & - T_{xxzx} & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & - T_{xxzx} & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& T_{xxzx} = T_{ga}^{(1)}
+\end{align*}
+* Rank 4 tensor (ssa).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & 0 & 0 & T_{xxzx} & 0 \\ 0 & 0 & 0 & 0 & - T_{xxzx} & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & T_{xxzx} \\ - T_{xxzx} & T_{xxzx} & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & - T_{xxzx} & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& T_{xxzx} = - 2 M_{f1}^{(1)}
+\end{align*}
+* Rank 4 tensor (aas).
+* Rank 4 tensor (aaa).
+* Rank 4 tensor (sa).
+\begin{align*}
+\begin{bmatrix} 0 & T_{xxzx} & 0 \\ 0 & - T_{xxzx} & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \\ T_{xxzx} & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& T_{xxzx} = M_{f1}^{(2)}
+\end{align*}
+* Rank 4 tensor (as).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & 0 & 0 & 0 & T_{yzxy} \\ T_{yzxy} & - T_{yzxy} & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& T_{yzxy} = M_{f1}^{(3)}
+\end{align*}
+* Rank 4 tensor (s).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & 0 & 0 & T_{xxzx} & 0 & 0 & T_{xxxz} & 0 \\ 0 & 0 & 0 & 0 & - T_{xxzx} & 0 & 0 & - T_{xxxz} & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & T_{yzxy} & 0 & 0 & T_{yzxy} \\ - T_{yzxy} & T_{yzxy} & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & - T_{xxxz} & 0 & 0 & - T_{xxzx} & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& T_{xxzx} = - 2 M_{f1}^{(1)} + M_{f1}^{(2)} + T_{ga}^{(1)} \\
+& T_{xxxz} = - 2 M_{f1}^{(1)} - M_{f1}^{(2)} + T_{ga}^{(1)} \\
+& T_{yzxy} = - 2 M_{f1}^{(1)} - T_{ga}^{(1)}
+\end{align*}
+* Rank 4 tensor (a).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & 0 & 0 & 0 & T_{yzxy} & 0 & 0 & T_{yzxy} \\ T_{yzxy} & - T_{yzxy} & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& T_{yzxy} = M_{f1}^{(3)}
+\end{align*}
+* Rank 4 tensor (t).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & T_{xxxz} \\ 0 & 0 & 0 \\ 0 & 0 & 0 \\ - T_{xxxz} & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \\ T_{xxxz} & 0 & 0 \\ 0 & 0 & - T_{xxxz} \\ 0 & - T_{xxxz} & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& T_{xxxz} = T_{ga}^{(1)}
+\end{align*}
+
+\end{document}

@@ -1,0 +1,773 @@
+\documentclass[fleqn,9pt,landscape]{jsarticle}
+\special{papersize=\the\paperwidth,\the\paperheight}
+
+%%% package
+
+\usepackage[usenames]{color}
+\usepackage{amsmath}
+\usepackage{breqn}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{enumitem}
+\usepackage{braket}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+%%% layout setting
+
+\paperwidth=324.06truemm
+\paperheight=229.13333333333333truemm
+\textwidth=283.26truemm
+\textheight=181.33333333333331truemm
+\oddsidemargin=-5truemm
+\topmargin=-5truemm
+\footskip=7truemm
+
+%%% fixed
+
+\hoffset=0truemm
+\voffset=0truemm
+\headheight=0truemm
+\headsep=0truemm
+\marginparsep=0truemm
+\marginparwidth=0truemm
+
+%%% main text
+
+\begin{document}
+
+\setcounter{MaxMatrixCols}{32}
+
+\renewcommand{\tablename}{Table~}
+\renewcommand{\figurename}{Figure~}
+\begin{center}
+\LARGE
+Active Multipoles in Magnetic Point Groups
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{longtable}{ll}
+\caption{Multipoles in response tensor.}
+ \\
+ \hline \hline
+tag & symmetry \\ \hline \endfirsthead
+
+\multicolumn{1}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+tag & symmetry \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{1}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{1}{r}{} \\ \endlastfoot
+
+\texttt{s} & $1$ \\ \hline
+\texttt{px} & $x$ \\
+\texttt{py} & $y$ \\
+\texttt{pz} & $z$ \\ \hline
+\texttt{du} & $- \frac{x^{2}}{2} - \frac{y^{2}}{2} + z^{2}$ \\
+\texttt{dv} & $\frac{\sqrt{3} \left(x^{2} - y^{2}\right)}{2}$ \\
+\texttt{dyz} & $\sqrt{3} y z$ \\
+\texttt{dxz} & $\sqrt{3} x z$ \\
+\texttt{dxy} & $\sqrt{3} x y$ \\ \hline
+\texttt{f3} & $\sqrt{15} x y z$ \\
+\texttt{fax} & $\frac{x \left(2 x^{2} - 3 y^{2} - 3 z^{2}\right)}{2}$ \\
+\texttt{fay} & $\frac{y \left(- 3 x^{2} + 2 y^{2} - 3 z^{2}\right)}{2}$ \\
+\texttt{faz} & $\frac{z \left(- 3 x^{2} - 3 y^{2} + 2 z^{2}\right)}{2}$ \\
+\texttt{fbx} & $\frac{\sqrt{15} x \left(y^{2} - z^{2}\right)}{2}$ \\
+\texttt{fby} & $\frac{\sqrt{15} y \left(- x^{2} + z^{2}\right)}{2}$ \\
+\texttt{fbz} & $\frac{\sqrt{15} z \left(x^{2} - y^{2}\right)}{2}$ \\
+\texttt{f1} & $\frac{\sqrt{10} y \left(3 x^{2} - y^{2}\right)}{4}$ \\
+\texttt{f2} & $\frac{\sqrt{10} x \left(x^{2} - 3 y^{2}\right)}{4}$ \\
+\texttt{f3x} & $\frac{\sqrt{6} x \left(- x^{2} - y^{2} + 4 z^{2}\right)}{4}$ \\
+\texttt{f3y} & $\frac{\sqrt{6} y \left(- x^{2} - y^{2} + 4 z^{2}\right)}{4}$ \\ \hline
+\texttt{g} & $\frac{\sqrt{21} \left(x^{4} - 3 x^{2} y^{2} - 3 x^{2} z^{2} + y^{4} - 3 y^{2} z^{2} + z^{4}\right)}{6}$ \\
+\texttt{gu} & $- \frac{\sqrt{15} \left(x^{4} - 12 x^{2} y^{2} + 6 x^{2} z^{2} + y^{4} + 6 y^{2} z^{2} - 2 z^{4}\right)}{12}$ \\
+\texttt{gv} & $\frac{\sqrt{5} \left(x - y\right) \left(x + y\right) \left(- x^{2} - y^{2} + 6 z^{2}\right)}{4}$ \\
+\texttt{gax} & $\frac{\sqrt{35} y z \left(y - z\right) \left(y + z\right)}{2}$ \\
+\texttt{gay} & $\frac{\sqrt{35} x z \left(- x + z\right) \left(x + z\right)}{2}$ \\
+\texttt{gaz} & $\frac{\sqrt{35} x y \left(x - y\right) \left(x + y\right)}{2}$ \\
+\texttt{gbx} & $\frac{\sqrt{5} y z \left(6 x^{2} - y^{2} - z^{2}\right)}{2}$ \\
+\texttt{gby} & $\frac{\sqrt{5} x z \left(- x^{2} + 6 y^{2} - z^{2}\right)}{2}$ \\
+\texttt{gbz} & $\frac{\sqrt{5} x y \left(- x^{2} - y^{2} + 6 z^{2}\right)}{2}$ \\
+\texttt{g0} & $\frac{3 x^{4}}{8} + \frac{3 x^{2} y^{2}}{4} - 3 x^{2} z^{2} + \frac{3 y^{4}}{8} - 3 y^{2} z^{2} + z^{4}$ \\
+\texttt{ga} & $\frac{\sqrt{70} x z \left(x^{2} - 3 y^{2}\right)}{4}$ \\
+\texttt{gb} & $\frac{\sqrt{70} y z \left(3 x^{2} - y^{2}\right)}{4}$ \\
+\texttt{gc} & $\frac{\sqrt{35} \left(x^{2} - 2 x y - y^{2}\right) \left(x^{2} + 2 x y - y^{2}\right)}{8}$ \\
+\texttt{gau} & $- \frac{\sqrt{10} y z \left(3 x^{2} + 3 y^{2} - 4 z^{2}\right)}{4}$ \\
+\texttt{gav} & $\frac{\sqrt{10} x z \left(3 x^{2} + 3 y^{2} - 4 z^{2}\right)}{4}$ \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{longtable}{lllll|l|lll|ll|lll|l|lll|lll|l|ll|lll|lll}
+\caption{Active Multipole (cubic subgroups)}
+ \\
+ \hline \hline
+\# & MPG & Type & Crystal & X & \texttt{s} & \texttt{px} & \texttt{py} & \texttt{pz} & \texttt{du} & \texttt{dv} & \texttt{dyz} & \texttt{dxz} & \texttt{dxy} & \texttt{f3} & \texttt{fax} & \texttt{fay} & \texttt{faz} & \texttt{fbx} & \texttt{fby} & \texttt{fbz} & \texttt{g} & \texttt{gu} & \texttt{gv} & \texttt{gax} & \texttt{gay} & \texttt{gaz} & \texttt{gbx} & \texttt{gby} & \texttt{gbz} \\ \hline \endfirsthead
+
+\multicolumn{29}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+\# & MPG & Type & Crystal & X & \texttt{s} & \texttt{px} & \texttt{py} & \texttt{pz} & \texttt{du} & \texttt{dv} & \texttt{dyz} & \texttt{dxz} & \texttt{dxy} & \texttt{f3} & \texttt{fax} & \texttt{fay} & \texttt{faz} & \texttt{fbx} & \texttt{fby} & \texttt{fbz} & \texttt{g} & \texttt{gu} & \texttt{gv} & \texttt{gax} & \texttt{gay} & \texttt{gaz} & \texttt{gbx} & \texttt{gby} & \texttt{gbz} \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{29}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{29}{r}{} \\ \endlastfoot
+
+1.1.1 & \texttt{$1$} & I & triclinic & Q & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
+(1) & $C_{\rm 1}$ &  &  & G & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
+ &  &  &  & T & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
+ &  &  &  & M & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\ \hline
+1.2.2 & \texttt{$11'$} & II & triclinic & Q & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
+(1) & $C_{\rm 1}$ &  &  & G & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
+ &  &  &  & T &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+2.1.3 & \texttt{$\bar{1}$} & I & triclinic & Q & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
+(2) & $C_{\rm i}$ &  &  & G &  & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
+ &  &  &  & M &  & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  \\ \hline
+2.2.4 & \texttt{$\bar{1}1'$} & II & triclinic & Q & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
+(2) & $C_{\rm i}$ &  &  & G &  & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+2.3.5 & \texttt{$\bar{1}'$} & III & triclinic & Q & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
+(2) & $C_{\rm i}$ &  &  & G &  & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\ \hline
+3.1.6 & \texttt{$2$} & I & monoclinic & Q & $\bullet$ &  & $\bullet$ &  & $\bullet$ & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  &  & $\bullet$ &  & $\bullet$ & $\bullet$ & $\bullet$ &  & $\bullet$ &  &  & $\bullet$ &  \\
+(3) & $C_{\rm 2}$ &  &  & G & $\bullet$ &  & $\bullet$ &  & $\bullet$ & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  &  & $\bullet$ &  & $\bullet$ & $\bullet$ & $\bullet$ &  & $\bullet$ &  &  & $\bullet$ &  \\
+ &  &  &  & T & $\bullet$ &  & $\bullet$ &  & $\bullet$ & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  &  & $\bullet$ &  & $\bullet$ & $\bullet$ & $\bullet$ &  & $\bullet$ &  &  & $\bullet$ &  \\
+ &  &  &  & M & $\bullet$ &  & $\bullet$ &  & $\bullet$ & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  &  & $\bullet$ &  & $\bullet$ & $\bullet$ & $\bullet$ &  & $\bullet$ &  &  & $\bullet$ &  \\ \hline
+3.2.7 & \texttt{$21'$} & II & monoclinic & Q & $\bullet$ &  & $\bullet$ &  & $\bullet$ & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  &  & $\bullet$ &  & $\bullet$ & $\bullet$ & $\bullet$ &  & $\bullet$ &  &  & $\bullet$ &  \\
+(3) & $C_{\rm 2}$ &  &  & G & $\bullet$ &  & $\bullet$ &  & $\bullet$ & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  &  & $\bullet$ &  & $\bullet$ & $\bullet$ & $\bullet$ &  & $\bullet$ &  &  & $\bullet$ &  \\
+ &  &  &  & T &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+3.3.8 & \texttt{$2'$} & III & monoclinic & Q & $\bullet$ &  & $\bullet$ &  & $\bullet$ & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  &  & $\bullet$ &  & $\bullet$ & $\bullet$ & $\bullet$ &  & $\bullet$ &  &  & $\bullet$ &  \\
+(3) & $C_{\rm 2}$ &  &  & G & $\bullet$ &  & $\bullet$ &  & $\bullet$ & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  &  & $\bullet$ &  & $\bullet$ & $\bullet$ & $\bullet$ &  & $\bullet$ &  &  & $\bullet$ &  \\
+ &  &  &  & T &  & $\bullet$ &  & $\bullet$ &  &  & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  & $\bullet$ & $\bullet$ &  & $\bullet$ &  &  &  & $\bullet$ &  & $\bullet$ & $\bullet$ &  & $\bullet$ \\
+ &  &  &  & M &  & $\bullet$ &  & $\bullet$ &  &  & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  & $\bullet$ & $\bullet$ &  & $\bullet$ &  &  &  & $\bullet$ &  & $\bullet$ & $\bullet$ &  & $\bullet$ \\ \hline
+4.1.9 & \texttt{$m$} & I & monoclinic & Q & $\bullet$ & $\bullet$ &  & $\bullet$ & $\bullet$ & $\bullet$ &  & $\bullet$ &  &  & $\bullet$ &  & $\bullet$ & $\bullet$ &  & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ &  & $\bullet$ &  &  & $\bullet$ &  \\
+(4) & $C_{\rm s}$ &  &  & G &  &  & $\bullet$ &  &  &  & $\bullet$ &  & $\bullet$ & $\bullet$ &  & $\bullet$ &  &  & $\bullet$ &  &  &  &  & $\bullet$ &  & $\bullet$ & $\bullet$ &  & $\bullet$ \\
+ &  &  &  & T & $\bullet$ & $\bullet$ &  & $\bullet$ & $\bullet$ & $\bullet$ &  & $\bullet$ &  &  & $\bullet$ &  & $\bullet$ & $\bullet$ &  & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ &  & $\bullet$ &  &  & $\bullet$ &  \\
+ &  &  &  & M &  &  & $\bullet$ &  &  &  & $\bullet$ &  & $\bullet$ & $\bullet$ &  & $\bullet$ &  &  & $\bullet$ &  &  &  &  & $\bullet$ &  & $\bullet$ & $\bullet$ &  & $\bullet$ \\ \hline
+4.2.10 & \texttt{$m1'$} & II & monoclinic & Q & $\bullet$ & $\bullet$ &  & $\bullet$ & $\bullet$ & $\bullet$ &  & $\bullet$ &  &  & $\bullet$ &  & $\bullet$ & $\bullet$ &  & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ &  & $\bullet$ &  &  & $\bullet$ &  \\
+(4) & $C_{\rm s}$ &  &  & G &  &  & $\bullet$ &  &  &  & $\bullet$ &  & $\bullet$ & $\bullet$ &  & $\bullet$ &  &  & $\bullet$ &  &  &  &  & $\bullet$ &  & $\bullet$ & $\bullet$ &  & $\bullet$ \\
+ &  &  &  & T &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+4.3.11 & \texttt{$m'$} & III & monoclinic & Q & $\bullet$ & $\bullet$ &  & $\bullet$ & $\bullet$ & $\bullet$ &  & $\bullet$ &  &  & $\bullet$ &  & $\bullet$ & $\bullet$ &  & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ &  & $\bullet$ &  &  & $\bullet$ &  \\
+(4) & $C_{\rm s}$ &  &  & G &  &  & $\bullet$ &  &  &  & $\bullet$ &  & $\bullet$ & $\bullet$ &  & $\bullet$ &  &  & $\bullet$ &  &  &  &  & $\bullet$ &  & $\bullet$ & $\bullet$ &  & $\bullet$ \\
+ &  &  &  & T &  &  & $\bullet$ &  &  &  & $\bullet$ &  & $\bullet$ & $\bullet$ &  & $\bullet$ &  &  & $\bullet$ &  &  &  &  & $\bullet$ &  & $\bullet$ & $\bullet$ &  & $\bullet$ \\
+ &  &  &  & M & $\bullet$ & $\bullet$ &  & $\bullet$ & $\bullet$ & $\bullet$ &  & $\bullet$ &  &  & $\bullet$ &  & $\bullet$ & $\bullet$ &  & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ &  & $\bullet$ &  &  & $\bullet$ &  \\ \hline
+5.1.12 & \texttt{$2/m$} & I & monoclinic & Q & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ &  & $\bullet$ &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ &  & $\bullet$ &  &  & $\bullet$ &  \\
+(5) & $C_{\rm 2h}$ &  &  & G &  &  & $\bullet$ &  &  &  &  &  &  & $\bullet$ &  & $\bullet$ &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ &  & $\bullet$ &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ &  & $\bullet$ &  &  & $\bullet$ &  \\
+ &  &  &  & M &  &  & $\bullet$ &  &  &  &  &  &  & $\bullet$ &  & $\bullet$ &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  \\ \hline
+5.2.13 & \texttt{$2/m1'$} & II & monoclinic & Q & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ &  & $\bullet$ &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ &  & $\bullet$ &  &  & $\bullet$ &  \\
+(5) & $C_{\rm 2h}$ &  &  & G &  &  & $\bullet$ &  &  &  &  &  &  & $\bullet$ &  & $\bullet$ &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+5.3.14 & \texttt{$2'/m$} & III & monoclinic & Q & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ &  & $\bullet$ &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ &  & $\bullet$ &  &  & $\bullet$ &  \\
+(5) & $C_{\rm 2h}$ &  &  & G &  &  & $\bullet$ &  &  &  &  &  &  & $\bullet$ &  & $\bullet$ &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  & $\bullet$ &  & $\bullet$ &  &  &  &  &  &  & $\bullet$ &  & $\bullet$ & $\bullet$ &  & $\bullet$ &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  & $\bullet$ &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  & $\bullet$ & $\bullet$ &  & $\bullet$ \\ \hline
+5.4.15 & \texttt{$2/m'$} & III & monoclinic & Q & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ &  & $\bullet$ &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ &  & $\bullet$ &  &  & $\bullet$ &  \\
+(5) & $C_{\rm 2h}$ &  &  & G &  &  & $\bullet$ &  &  &  &  &  &  & $\bullet$ &  & $\bullet$ &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  & $\bullet$ &  &  &  &  &  &  & $\bullet$ &  & $\bullet$ &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ &  & $\bullet$ &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ &  & $\bullet$ &  &  & $\bullet$ &  \\ \hline
+5.5.16 & \texttt{$2'/m'$} & III & monoclinic & Q & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ &  & $\bullet$ &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ &  & $\bullet$ &  &  & $\bullet$ &  \\
+(5) & $C_{\rm 2h}$ &  &  & G &  &  & $\bullet$ &  &  &  &  &  &  & $\bullet$ &  & $\bullet$ &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  & $\bullet$ &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  & $\bullet$ & $\bullet$ &  & $\bullet$ \\
+ &  &  &  & M &  & $\bullet$ &  & $\bullet$ &  &  &  &  &  &  & $\bullet$ &  & $\bullet$ & $\bullet$ &  & $\bullet$ &  &  &  &  &  &  &  &  &  \\ \hline
+6.1.17 & \texttt{$222$} & I & orthorhombic & Q & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  \\
+(6) & $D_{\rm 2}$ &  &  & G & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  \\
+ &  &  &  & T & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  \\
+ &  &  &  & M & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  \\ \hline
+6.2.18 & \texttt{$2221'$} & II & orthorhombic & Q & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  \\
+(6) & $D_{\rm 2}$ &  &  & G & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+6.3.19 & \texttt{$2'2'2$} & III & orthorhombic & Q & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  \\
+(6) & $D_{\rm 2}$ &  &  & G & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  & $\bullet$ &  &  &  &  & $\bullet$ &  &  &  & $\bullet$ &  &  & $\bullet$ &  &  &  &  &  & $\bullet$ &  &  & $\bullet$ \\
+ &  &  &  & M &  &  &  & $\bullet$ &  &  &  &  & $\bullet$ &  &  &  & $\bullet$ &  &  & $\bullet$ &  &  &  &  &  & $\bullet$ &  &  & $\bullet$ \\ \hline
+6.4.123 & \texttt{$2'2'2$} & III & orthorhombic & Q & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  \\
+(6) & $D_{\rm 2}$ &  &  & G & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  \\
+ &  &  &  & T &  & $\bullet$ &  &  &  &  & $\bullet$ &  &  &  & $\bullet$ &  &  & $\bullet$ &  &  &  &  &  & $\bullet$ &  &  & $\bullet$ &  &  \\
+ &  &  &  & M &  & $\bullet$ &  &  &  &  & $\bullet$ &  &  &  & $\bullet$ &  &  & $\bullet$ &  &  &  &  &  & $\bullet$ &  &  & $\bullet$ &  &  \\ \hline
+7.1.20 & \texttt{$mm2$} & I & orthorhombic & Q & $\bullet$ &  &  & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  & $\bullet$ &  &  & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  \\
+(7) & $C_{\rm 2v}$ &  &  & G &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  & $\bullet$ \\
+ &  &  &  & T & $\bullet$ &  &  & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  & $\bullet$ &  &  & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  & $\bullet$ \\ \hline
+7.2.21 & \texttt{$mm21'$} & II & orthorhombic & Q & $\bullet$ &  &  & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  & $\bullet$ &  &  & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  \\
+(7) & $C_{\rm 2v}$ &  &  & G &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  & $\bullet$ \\
+ &  &  &  & T &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+7.3.22 & \texttt{$m'm2'$} & III & orthorhombic & Q & $\bullet$ &  &  & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  & $\bullet$ &  &  & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  \\
+(7) & $C_{\rm 2v}$ &  &  & G &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  & $\bullet$ \\
+ &  &  &  & T &  & $\bullet$ &  &  &  &  &  & $\bullet$ &  &  & $\bullet$ &  &  & $\bullet$ &  &  &  &  &  &  & $\bullet$ &  &  & $\bullet$ &  \\
+ &  &  &  & M &  &  & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  & $\bullet$ &  &  & $\bullet$ &  &  &  &  & $\bullet$ &  &  & $\bullet$ &  &  \\ \hline
+7.4.23 & \texttt{$m'm'2$} & III & orthorhombic & Q & $\bullet$ &  &  & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  & $\bullet$ &  &  & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  \\
+(7) & $C_{\rm 2v}$ &  &  & G &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  & $\bullet$ \\
+ &  &  &  & T &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  & $\bullet$ \\
+ &  &  &  & M & $\bullet$ &  &  & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  & $\bullet$ &  &  & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  \\ \hline
+7.5.124 & \texttt{$m'm2'$} & III & orthorhombic & Q & $\bullet$ &  &  & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  & $\bullet$ &  &  & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  \\
+(7) & $C_{\rm 2v}$ &  &  & G &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  & $\bullet$ \\
+ &  &  &  & T &  &  & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  & $\bullet$ &  &  & $\bullet$ &  &  &  &  & $\bullet$ &  &  & $\bullet$ &  &  \\
+ &  &  &  & M &  & $\bullet$ &  &  &  &  &  & $\bullet$ &  &  & $\bullet$ &  &  & $\bullet$ &  &  &  &  &  &  & $\bullet$ &  &  & $\bullet$ &  \\ \hline
+8.1.24 & \texttt{$mmm$} & I & orthorhombic & Q & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  \\
+(8) & $D_{\rm 2h}$ &  &  & G &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+8.2.25 & \texttt{$mmm1'$} & II & orthorhombic & Q & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  \\
+(8) & $D_{\rm 2h}$ &  &  & G &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+8.3.26 & \texttt{$m'mm$} & III & orthorhombic & Q & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  \\
+(8) & $D_{\rm 2h}$ &  &  & G &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  & $\bullet$ &  &  &  &  &  &  &  &  & $\bullet$ &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  & $\bullet$ &  &  \\ \hline
+8.4.27 & \texttt{$m'm'm$} & III & orthorhombic & Q & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  \\
+(8) & $D_{\rm 2h}$ &  &  & G &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  & $\bullet$ \\
+ &  &  &  & M &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  & $\bullet$ &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  \\ \hline
+8.5.28 & \texttt{$m'm'm'$} & III & orthorhombic & Q & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  \\
+(8) & $D_{\rm 2h}$ &  &  & G &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  \\ \hline
+8.6.125 & \texttt{$m'mm$} & III & orthorhombic & Q & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  \\
+(8) & $D_{\rm 2h}$ &  &  & G &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  & $\bullet$ &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  & $\bullet$ \\ \hline
+8.7.126 & \texttt{$m'mm$} & III & orthorhombic & Q & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  \\
+(8) & $D_{\rm 2h}$ &  &  & G &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  & $\bullet$ &  &  &  &  &  &  &  &  & $\bullet$ &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  & $\bullet$ &  \\ \hline
+8.8.127 & \texttt{$m'm'm$} & III & orthorhombic & Q & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  \\
+(8) & $D_{\rm 2h}$ &  &  & G &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  & $\bullet$ &  \\
+ &  &  &  & M &  &  & $\bullet$ &  &  &  &  &  &  &  &  & $\bullet$ &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  \\ \hline
+8.9.128 & \texttt{$m'm'm$} & III & orthorhombic & Q & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  \\
+(8) & $D_{\rm 2h}$ &  &  & G &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  & $\bullet$ &  &  \\
+ &  &  &  & M &  & $\bullet$ &  &  &  &  &  &  &  &  & $\bullet$ &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+9.1.29 & \texttt{$4$} & I & tetragonal & Q & $\bullet$ &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ &  &  &  & $\bullet$ &  &  &  \\
+(9) & $C_{\rm 4}$ &  &  & G & $\bullet$ &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ &  &  &  & $\bullet$ &  &  &  \\
+ &  &  &  & T & $\bullet$ &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ &  &  &  & $\bullet$ &  &  &  \\
+ &  &  &  & M & $\bullet$ &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ &  &  &  & $\bullet$ &  &  &  \\ \hline
+9.2.30 & \texttt{$41'$} & II & tetragonal & Q & $\bullet$ &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ &  &  &  & $\bullet$ &  &  &  \\
+(9) & $C_{\rm 4}$ &  &  & G & $\bullet$ &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ &  &  &  & $\bullet$ &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+9.3.31 & \texttt{$4'$} & III & tetragonal & Q & $\bullet$ &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ &  &  &  & $\bullet$ &  &  &  \\
+(9) & $C_{\rm 4}$ &  &  & G & $\bullet$ &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ &  &  &  & $\bullet$ &  &  &  \\
+ &  &  &  & T &  &  &  &  &  & $\bullet$ &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  & $\bullet$ &  &  & $\bullet$ &  &  &  &  &  & $\bullet$ \\
+ &  &  &  & M &  &  &  &  &  & $\bullet$ &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  & $\bullet$ &  &  & $\bullet$ &  &  &  &  &  & $\bullet$ \\ \hline
+10.1.32 & \texttt{$\bar{4}$} & I & tetragonal & Q & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  & $\bullet$ &  &  &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  & $\bullet$ &  &  &  \\
+(10) & $S_{\rm 4}$ &  &  & G &  &  &  & $\bullet$ &  & $\bullet$ &  &  & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  & $\bullet$ &  &  &  &  &  & $\bullet$ \\
+ &  &  &  & T & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  & $\bullet$ &  &  &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  & $\bullet$ &  &  &  \\
+ &  &  &  & M &  &  &  & $\bullet$ &  & $\bullet$ &  &  & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  & $\bullet$ &  &  &  &  &  & $\bullet$ \\ \hline
+10.2.33 & \texttt{$\bar{4}1'$} & II & tetragonal & Q & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  & $\bullet$ &  &  &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  & $\bullet$ &  &  &  \\
+(10) & $S_{\rm 4}$ &  &  & G &  &  &  & $\bullet$ &  & $\bullet$ &  &  & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  & $\bullet$ &  &  &  &  &  & $\bullet$ \\
+ &  &  &  & T &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+10.3.34 & \texttt{$\bar{4}'$} & III & tetragonal & Q & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  & $\bullet$ &  &  &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  & $\bullet$ &  &  &  \\
+(10) & $S_{\rm 4}$ &  &  & G &  &  &  & $\bullet$ &  & $\bullet$ &  &  & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  & $\bullet$ &  &  &  &  &  & $\bullet$ \\
+ &  &  &  & T &  &  &  & $\bullet$ &  & $\bullet$ &  &  & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  & $\bullet$ &  &  &  &  &  & $\bullet$ \\
+ &  &  &  & M & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  & $\bullet$ &  &  &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  & $\bullet$ &  &  &  \\ \hline
+11.1.35 & \texttt{$4/m$} & I & tetragonal & Q & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ &  &  &  & $\bullet$ &  &  &  \\
+(11) & $C_{\rm 4h}$ &  &  & G &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ &  &  &  & $\bullet$ &  &  &  \\
+ &  &  &  & M &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+11.2.36 & \texttt{$4/m1'$} & II & tetragonal & Q & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ &  &  &  & $\bullet$ &  &  &  \\
+(11) & $C_{\rm 4h}$ &  &  & G &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+11.3.37 & \texttt{$4'/m$} & III & tetragonal & Q & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ &  &  &  & $\bullet$ &  &  &  \\
+(11) & $C_{\rm 4h}$ &  &  & G &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  & $\bullet$ &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  & $\bullet$ \\
+ &  &  &  & M &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  \\ \hline
+11.4.38 & \texttt{$4/m'$} & III & tetragonal & Q & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ &  &  &  & $\bullet$ &  &  &  \\
+(11) & $C_{\rm 4h}$ &  &  & G &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ &  &  &  & $\bullet$ &  &  &  \\ \hline
+11.5.39 & \texttt{$4'/m'$} & III & tetragonal & Q & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ &  &  &  & $\bullet$ &  &  &  \\
+(11) & $C_{\rm 4h}$ &  &  & G &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  & $\bullet$ &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  & $\bullet$ \\ \hline
+12.1.40 & \texttt{$422$} & I & tetragonal & Q & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  \\
+(12) & $D_{\rm 4}$ &  &  & G & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  \\
+ &  &  &  & T & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  \\
+ &  &  &  & M & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  \\ \hline
+12.2.41 & \texttt{$4221'$} & II & tetragonal & Q & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  \\
+(12) & $D_{\rm 4}$ &  &  & G & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+12.3.42 & \texttt{$4'22'$} & III & tetragonal & Q & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  \\
+(12) & $D_{\rm 4}$ &  &  & G & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  \\ \hline
+12.4.43 & \texttt{$42'2'$} & III & tetragonal & Q & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  \\
+(12) & $D_{\rm 4}$ &  &  & G & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  \\
+ &  &  &  & M &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  \\ \hline
+12.5.129 & \texttt{$4'22'$} & III & tetragonal & Q & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  \\
+(12) & $D_{\rm 4}$ &  &  & G & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  & $\bullet$ \\
+ &  &  &  & M &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  & $\bullet$ \\ \hline
+13.1.44 & \texttt{$4mm$} & I & tetragonal & Q & $\bullet$ &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  \\
+(13) & $C_{\rm 4v}$ &  &  & G &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  \\
+ &  &  &  & T & $\bullet$ &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  \\ \hline
+13.2.45 & \texttt{$4mm1'$} & II & tetragonal & Q & $\bullet$ &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  \\
+(13) & $C_{\rm 4v}$ &  &  & G &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+13.3.46 & \texttt{$4'm'm$} & III & tetragonal & Q & $\bullet$ &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  \\
+(13) & $C_{\rm 4v}$ &  &  & G &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ \\
+ &  &  &  & M &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  & $\bullet$ &  &  &  &  &  &  \\ \hline
+13.4.47 & \texttt{$4m'm'$} & III & tetragonal & Q & $\bullet$ &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  \\
+(13) & $C_{\rm 4v}$ &  &  & G &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  \\
+ &  &  &  & M & $\bullet$ &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  \\ \hline
+13.5.130 & \texttt{$4'm'm$} & III & tetragonal & Q & $\bullet$ &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  \\
+(13) & $C_{\rm 4v}$ &  &  & G &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  \\
+ &  &  &  & T &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  & $\bullet$ &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ \\ \hline
+14.1.48 & \texttt{$\bar{4}2m$} & I & tetragonal & Q & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  & $\bullet$ &  &  &  &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  \\
+(14) & $D_{\rm 2d}$ &  &  & G &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  \\
+ &  &  &  & T & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  & $\bullet$ &  &  &  &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  \\ \hline
+14.2.49 & \texttt{$\bar{4}2m1'$} & II & tetragonal & Q & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  & $\bullet$ &  &  &  &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  \\
+(14) & $D_{\rm 2d}$ &  &  & G &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+14.3.50 & \texttt{$\bar{4}'2'm$} & III & tetragonal & Q & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  & $\bullet$ &  &  &  &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  \\
+(14) & $D_{\rm 2d}$ &  &  & G &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  & $\bullet$ &  &  &  &  & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ \\
+ &  &  &  & M &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  & $\bullet$ &  &  &  \\ \hline
+14.4.51 & \texttt{$\bar{4}'2m'$} & III & tetragonal & Q & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  & $\bullet$ &  &  &  &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  \\
+(14) & $D_{\rm 2d}$ &  &  & G &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  \\
+ &  &  &  & M & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  & $\bullet$ &  &  &  &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  \\ \hline
+14.5.52 & \texttt{$\bar{4}2'm'$} & III & tetragonal & Q & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  & $\bullet$ &  &  &  &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  \\
+(14) & $D_{\rm 2d}$ &  &  & G &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  & $\bullet$ &  &  &  \\
+ &  &  &  & M &  &  &  & $\bullet$ &  &  &  &  & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ \\ \hline
+15.1.53 & \texttt{$4/mmm$} & I & tetragonal & Q & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  \\
+(15) & $D_{\rm 4h}$ &  &  & G &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+15.2.54 & \texttt{$4/mmm1'$} & II & tetragonal & Q & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  \\
+(15) & $D_{\rm 4h}$ &  &  & G &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+15.3.55 & \texttt{$4/m'mm$} & III & tetragonal & Q & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  \\
+(15) & $D_{\rm 4h}$ &  &  & G &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  \\ \hline
+15.4.56 & \texttt{$4'/mm'm$} & III & tetragonal & Q & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  \\
+(15) & $D_{\rm 4h}$ &  &  & G &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ \\
+ &  &  &  & M &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  \\ \hline
+15.5.57 & \texttt{$4'/m'm'm$} & III & tetragonal & Q & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  \\
+(15) & $D_{\rm 4h}$ &  &  & G &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  \\ \hline
+15.6.58 & \texttt{$4/mm'm'$} & III & tetragonal & Q & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  \\
+(15) & $D_{\rm 4h}$ &  &  & G &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  \\
+ &  &  &  & M &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+15.7.59 & \texttt{$4/m'm'm'$} & III & tetragonal & Q & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  \\
+(15) & $D_{\rm 4h}$ &  &  & G &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  \\ \hline
+15.8.136 & \texttt{$4'/mm'm$} & III & tetragonal & Q & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  \\
+(15) & $D_{\rm 4h}$ &  &  & G &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+15.9.137 & \texttt{$4'/m'm'm$} & III & tetragonal & Q & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  \\
+(15) & $D_{\rm 4h}$ &  &  & G &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ \\ \hline
+28.1.107 & \texttt{$23$} & I & cubic & Q & $\bullet$ &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  \\
+(28) & $T_{\rm }$ &  &  & G & $\bullet$ &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  \\
+ &  &  &  & T & $\bullet$ &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  \\
+ &  &  &  & M & $\bullet$ &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  \\ \hline
+28.2.108 & \texttt{$231'$} & II & cubic & Q & $\bullet$ &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  \\
+(28) & $T_{\rm }$ &  &  & G & $\bullet$ &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+29.1.109 & \texttt{$m\bar{3}$} & I & cubic & Q & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  \\
+(29) & $T_{\rm h}$ &  &  & G &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+29.2.110 & \texttt{$m\bar{3}1'$} & II & cubic & Q & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  \\
+(29) & $T_{\rm h}$ &  &  & G &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+29.3.111 & \texttt{$m'\bar{3}'$} & III & cubic & Q & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  \\
+(29) & $T_{\rm h}$ &  &  & G &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  \\ \hline
+30.1.112 & \texttt{$432$} & I & cubic & Q & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  \\
+(30) & $O_{\rm }$ &  &  & G & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  \\
+ &  &  &  & T & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  \\
+ &  &  &  & M & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  \\ \hline
+30.2.113 & \texttt{$4321'$} & II & cubic & Q & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  \\
+(30) & $O_{\rm }$ &  &  & G & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+30.3.114 & \texttt{$4'32'$} & III & cubic & Q & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  \\
+(30) & $O_{\rm }$ &  &  & G & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+31.1.115 & \texttt{$\bar{4}3m$} & I & cubic & Q & $\bullet$ &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  \\
+(31) & $T_{\rm d}$ &  &  & G &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T & $\bullet$ &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+31.2.116 & \texttt{$\bar{4}3m1'$} & II & cubic & Q & $\bullet$ &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  \\
+(31) & $T_{\rm d}$ &  &  & G &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+31.3.117 & \texttt{$\bar{4}'3m'$} & III & cubic & Q & $\bullet$ &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  \\
+(31) & $T_{\rm d}$ &  &  & G &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M & $\bullet$ &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  \\ \hline
+32.1.118 & \texttt{$m\bar{3}m$} & I & cubic & Q & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  \\
+(32) & $O_{\rm h}$ &  &  & G &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+32.2.119 & \texttt{$m\bar{3}m1'$} & II & cubic & Q & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  \\
+(32) & $O_{\rm h}$ &  &  & G &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+32.3.120 & \texttt{$m'\bar{3}'m$} & III & cubic & Q & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  \\
+(32) & $O_{\rm h}$ &  &  & G &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+32.4.121 & \texttt{$m\bar{3}m'$} & III & cubic & Q & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  \\
+(32) & $O_{\rm h}$ &  &  & G &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+32.5.122 & \texttt{$m'\bar{3}'m'$} & III & cubic & Q & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  \\
+(32) & $O_{\rm h}$ &  &  & G &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  \\ \hline
+33.1.131 & \texttt{$\bar{4}2m$} & I & tetragonal & Q & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  \\
+(33) & $D_{\rm 2d}(1)$ &  &  & G &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ \\
+ &  &  &  & T & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ \\ \hline
+33.2.132 & \texttt{$\bar{4}2m1'$} & II & tetragonal & Q & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  \\
+(33) & $D_{\rm 2d}(1)$ &  &  & G &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ \\
+ &  &  &  & T &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+33.3.133 & \texttt{$\bar{4}'2'm$} & III & tetragonal & Q & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  \\
+(33) & $D_{\rm 2d}(1)$ &  &  & G &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ \\
+ &  &  &  & T &  &  &  & $\bullet$ &  & $\bullet$ &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  \\ \hline
+33.4.134 & \texttt{$\bar{4}'2m'$} & III & tetragonal & Q & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  \\
+(33) & $D_{\rm 2d}(1)$ &  &  & G &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ \\
+ &  &  &  & T &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ \\
+ &  &  &  & M & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  \\ \hline
+33.5.135 & \texttt{$\bar{4}2'm'$} & III & tetragonal & Q & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  \\
+(33) & $D_{\rm 2d}(1)$ &  &  & G &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ \\
+ &  &  &  & T &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  \\
+ &  &  &  & M &  &  &  & $\bullet$ &  & $\bullet$ &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{longtable}{lllll|l|l|l|l|l|l|l|l|l|ll|ll|ll|ll|ll|ll|ll|ll}
+\caption{Active Multipole (hexagonal subgroups)}
+ \\
+ \hline \hline
+\# & MPG & Type & Crystal & X & \texttt{s} & \texttt{pz} & \texttt{du} & \texttt{f1} & \texttt{f2} & \texttt{faz} & \texttt{g0} & \texttt{ga} & \texttt{gb} & \texttt{px} & \texttt{py} & \texttt{dyz} & \texttt{dxz} & \texttt{dv} & \texttt{dxy} & \texttt{f3x} & \texttt{f3y} & \texttt{f3} & \texttt{fbz} & \texttt{gau} & \texttt{gav} & \texttt{gc} & \texttt{gaz} & \texttt{gv} & \texttt{gbz} \\ \hline \endfirsthead
+
+\multicolumn{29}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+\# & MPG & Type & Crystal & X & \texttt{s} & \texttt{pz} & \texttt{du} & \texttt{f1} & \texttt{f2} & \texttt{faz} & \texttt{g0} & \texttt{ga} & \texttt{gb} & \texttt{px} & \texttt{py} & \texttt{dyz} & \texttt{dxz} & \texttt{dv} & \texttt{dxy} & \texttt{f3x} & \texttt{f3y} & \texttt{f3} & \texttt{fbz} & \texttt{gau} & \texttt{gav} & \texttt{gc} & \texttt{gaz} & \texttt{gv} & \texttt{gbz} \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{29}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{29}{r}{} \\ \endlastfoot
+
+16.1.60 & \texttt{$3$} & I & trigonal & Q & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(16) & $C3$ &  &  & G & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+16.2.61 & \texttt{$31'$} & II & trigonal & Q & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(16) & $C3$ &  &  & G & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+17.1.62 & \texttt{$\bar{3}$} & I & trigonal & Q & $\bullet$ &  & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(17) & $C3i$ &  &  & G &  & $\bullet$ &  & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T & $\bullet$ &  & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  & $\bullet$ &  & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+17.2.63 & \texttt{$\bar{3}1'$} & II & trigonal & Q & $\bullet$ &  & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(17) & $C3i$ &  &  & G &  & $\bullet$ &  & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+17.3.64 & \texttt{$\bar{3}'$} & III & trigonal & Q & $\bullet$ &  & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(17) & $C3i$ &  &  & G &  & $\bullet$ &  & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  & $\bullet$ &  & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M & $\bullet$ &  & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+18.1.65 & \texttt{$32$} & I & trigonal & Q & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(18) & $D3$ &  &  & G & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+18.2.66 & \texttt{$321'$} & II & trigonal & Q & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(18) & $D3$ &  &  & G & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+18.3.67 & \texttt{$32'$} & III & trigonal & Q & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(18) & $D3$ &  &  & G & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+19.1.68 & \texttt{$3m$} & I & trigonal & Q & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ &  & $\bullet$ & $\bullet$ &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(19) & $C3v$ &  &  & G &  &  &  &  & $\bullet$ &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ &  & $\bullet$ & $\bullet$ &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  & $\bullet$ &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+19.2.69 & \texttt{$3m1'$} & II & trigonal & Q & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ &  & $\bullet$ & $\bullet$ &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(19) & $C3v$ &  &  & G &  &  &  &  & $\bullet$ &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+19.3.70 & \texttt{$3m'$} & III & trigonal & Q & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ &  & $\bullet$ & $\bullet$ &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(19) & $C3v$ &  &  & G &  &  &  &  & $\bullet$ &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  & $\bullet$ &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ &  & $\bullet$ & $\bullet$ &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+20.1.71 & \texttt{$\bar{3}m$} & I & trigonal & Q & $\bullet$ &  & $\bullet$ &  &  &  & $\bullet$ &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(20) & $D3d$ &  &  & G &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T & $\bullet$ &  & $\bullet$ &  &  &  & $\bullet$ &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+20.2.72 & \texttt{$\bar{3}m1'$} & II & trigonal & Q & $\bullet$ &  & $\bullet$ &  &  &  & $\bullet$ &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(20) & $D3d$ &  &  & G &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+20.3.73 & \texttt{$\bar{3}'m$} & III & trigonal & Q & $\bullet$ &  & $\bullet$ &  &  &  & $\bullet$ &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(20) & $D3d$ &  &  & G &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+20.4.74 & \texttt{$\bar{3}'m'$} & III & trigonal & Q & $\bullet$ &  & $\bullet$ &  &  &  & $\bullet$ &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(20) & $D3d$ &  &  & G &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M & $\bullet$ &  & $\bullet$ &  &  &  & $\bullet$ &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+20.5.75 & \texttt{$\bar{3}m'$} & III & trigonal & Q & $\bullet$ &  & $\bullet$ &  &  &  & $\bullet$ &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(20) & $D3d$ &  &  & G &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+21.1.76 & \texttt{$6$} & I & hexagonal & Q & $\bullet$ & $\bullet$ & $\bullet$ &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(21) & $C6$ &  &  & G & $\bullet$ & $\bullet$ & $\bullet$ &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T & $\bullet$ & $\bullet$ & $\bullet$ &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M & $\bullet$ & $\bullet$ & $\bullet$ &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+21.2.77 & \texttt{$61'$} & II & hexagonal & Q & $\bullet$ & $\bullet$ & $\bullet$ &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(21) & $C6$ &  &  & G & $\bullet$ & $\bullet$ & $\bullet$ &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+21.3.78 & \texttt{$6'$} & III & hexagonal & Q & $\bullet$ & $\bullet$ & $\bullet$ &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(21) & $C6$ &  &  & G & $\bullet$ & $\bullet$ & $\bullet$ &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  & $\bullet$ & $\bullet$ &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  & $\bullet$ & $\bullet$ &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+22.1.79 & \texttt{$\bar{6}$} & I & hexagonal & Q & $\bullet$ &  & $\bullet$ & $\bullet$ & $\bullet$ &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(22) & $C3h$ &  &  & G &  & $\bullet$ &  &  &  & $\bullet$ &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T & $\bullet$ &  & $\bullet$ & $\bullet$ & $\bullet$ &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  & $\bullet$ &  &  &  & $\bullet$ &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+22.2.80 & \texttt{$\bar{6}1'$} & II & hexagonal & Q & $\bullet$ &  & $\bullet$ & $\bullet$ & $\bullet$ &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(22) & $C3h$ &  &  & G &  & $\bullet$ &  &  &  & $\bullet$ &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+22.3.81 & \texttt{$\bar{6}'$} & III & hexagonal & Q & $\bullet$ &  & $\bullet$ & $\bullet$ & $\bullet$ &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(22) & $C3h$ &  &  & G &  & $\bullet$ &  &  &  & $\bullet$ &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  & $\bullet$ &  &  &  & $\bullet$ &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M & $\bullet$ &  & $\bullet$ & $\bullet$ & $\bullet$ &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+23.1.82 & \texttt{$6/m$} & I & hexagonal & Q & $\bullet$ &  & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(23) & $C6h$ &  &  & G &  & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T & $\bullet$ &  & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+23.2.83 & \texttt{$6/m1'$} & II & hexagonal & Q & $\bullet$ &  & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(23) & $C6h$ &  &  & G &  & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+23.3.84 & \texttt{$6'/m$} & III & hexagonal & Q & $\bullet$ &  & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(23) & $C6h$ &  &  & G &  & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+23.4.85 & \texttt{$6/m'$} & III & hexagonal & Q & $\bullet$ &  & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(23) & $C6h$ &  &  & G &  & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M & $\bullet$ &  & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+23.5.86 & \texttt{$6'/m'$} & III & hexagonal & Q & $\bullet$ &  & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(23) & $C6h$ &  &  & G &  & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+24.1.87 & \texttt{$622$} & I & hexagonal & Q & $\bullet$ &  & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(24) & $D6$ &  &  & G & $\bullet$ &  & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T & $\bullet$ &  & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M & $\bullet$ &  & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+24.2.88 & \texttt{$6221'$} & II & hexagonal & Q & $\bullet$ &  & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(24) & $D6$ &  &  & G & $\bullet$ &  & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+24.3.89 & \texttt{$6'22'$} & III & hexagonal & Q & $\bullet$ &  & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(24) & $D6$ &  &  & G & $\bullet$ &  & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+24.4.90 & \texttt{$62'2'$} & III & hexagonal & Q & $\bullet$ &  & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(24) & $D6$ &  &  & G & $\bullet$ &  & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+24.5.149 & \texttt{$6'22'$} & III & hexagonal & Q & $\bullet$ &  & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(24) & $D6$ &  &  & G & $\bullet$ &  & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+25.1.91 & \texttt{$6mm$} & I & hexagonal & Q & $\bullet$ & $\bullet$ & $\bullet$ &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(25) & $C6v$ &  &  & G &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T & $\bullet$ & $\bullet$ & $\bullet$ &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+25.2.92 & \texttt{$6mm1'$} & II & hexagonal & Q & $\bullet$ & $\bullet$ & $\bullet$ &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(25) & $C6v$ &  &  & G &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+25.3.93 & \texttt{$6'mm'$} & III & hexagonal & Q & $\bullet$ & $\bullet$ & $\bullet$ &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(25) & $C6v$ &  &  & G &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  & $\bullet$ &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  & $\bullet$ &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+25.4.94 & \texttt{$6m'm'$} & III & hexagonal & Q & $\bullet$ & $\bullet$ & $\bullet$ &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(25) & $C6v$ &  &  & G &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M & $\bullet$ & $\bullet$ & $\bullet$ &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+25.5.150 & \texttt{$6'mm'$} & III & hexagonal & Q & $\bullet$ & $\bullet$ & $\bullet$ &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(25) & $C6v$ &  &  & G &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  & $\bullet$ &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  & $\bullet$ &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+26.1.95 & \texttt{$\bar{6}m2$} & I & hexagonal & Q & $\bullet$ &  & $\bullet$ & $\bullet$ &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(26) & $D3h$ &  &  & G &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T & $\bullet$ &  & $\bullet$ & $\bullet$ &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+26.2.96 & \texttt{$\bar{6}m21'$} & II & hexagonal & Q & $\bullet$ &  & $\bullet$ & $\bullet$ &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(26) & $D3h$ &  &  & G &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+26.3.97 & \texttt{$\bar{6}'m'2$} & III & hexagonal & Q & $\bullet$ &  & $\bullet$ & $\bullet$ &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(26) & $D3h$ &  &  & G &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M & $\bullet$ &  & $\bullet$ & $\bullet$ &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+26.4.98 & \texttt{$\bar{6}'m2'$} & III & hexagonal & Q & $\bullet$ &  & $\bullet$ & $\bullet$ &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(26) & $D3h$ &  &  & G &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  & $\bullet$ &  &  &  & $\bullet$ &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+26.5.99 & \texttt{$\bar{6}m'2'$} & III & hexagonal & Q & $\bullet$ &  & $\bullet$ & $\bullet$ &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(26) & $D3h$ &  &  & G &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  & $\bullet$ &  &  &  & $\bullet$ &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+27.1.100 & \texttt{$6/mmm$} & I & hexagonal & Q & $\bullet$ &  & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(27) & $D6h$ &  &  & G &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T & $\bullet$ &  & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+27.2.101 & \texttt{$6/mmm1'$} & II & hexagonal & Q & $\bullet$ &  & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(27) & $D6h$ &  &  & G &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+27.3.102 & \texttt{$6/m'mm$} & III & hexagonal & Q & $\bullet$ &  & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(27) & $D6h$ &  &  & G &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+27.4.103 & \texttt{$6'/mmm'$} & III & hexagonal & Q & $\bullet$ &  & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(27) & $D6h$ &  &  & G &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+27.5.104 & \texttt{$6'/m'mm'$} & III & hexagonal & Q & $\bullet$ &  & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(27) & $D6h$ &  &  & G &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+27.6.105 & \texttt{$6/mm'm'$} & III & hexagonal & Q & $\bullet$ &  & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(27) & $D6h$ &  &  & G &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+27.7.106 & \texttt{$6/m'm'm'$} & III & hexagonal & Q & $\bullet$ &  & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(27) & $D6h$ &  &  & G &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M & $\bullet$ &  & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+27.8.156 & \texttt{$6'/mmm'$} & III & hexagonal & Q & $\bullet$ &  & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(27) & $D6h$ &  &  & G &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+27.9.157 & \texttt{$6'/m'mm'$} & III & hexagonal & Q & $\bullet$ &  & $\bullet$ &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(27) & $D6h$ &  &  & G &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+34.1.138 & \texttt{$32$} & I & trigonal & Q & $\bullet$ &  & $\bullet$ & $\bullet$ &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(34) & $D3-1$ &  &  & G & $\bullet$ &  & $\bullet$ & $\bullet$ &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T & $\bullet$ &  & $\bullet$ & $\bullet$ &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M & $\bullet$ &  & $\bullet$ & $\bullet$ &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+34.2.139 & \texttt{$321'$} & II & trigonal & Q & $\bullet$ &  & $\bullet$ & $\bullet$ &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(34) & $D3-1$ &  &  & G & $\bullet$ &  & $\bullet$ & $\bullet$ &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+34.3.140 & \texttt{$32'$} & III & trigonal & Q & $\bullet$ &  & $\bullet$ & $\bullet$ &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(34) & $D3-1$ &  &  & G & $\bullet$ &  & $\bullet$ & $\bullet$ &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  & $\bullet$ &  &  & $\bullet$ & $\bullet$ &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  & $\bullet$ &  &  & $\bullet$ & $\bullet$ &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+35.1.141 & \texttt{$3m$} & I & trigonal & Q & $\bullet$ & $\bullet$ & $\bullet$ &  & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(35) & $C3v-1$ &  &  & G &  &  &  & $\bullet$ &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T & $\bullet$ & $\bullet$ & $\bullet$ &  & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  & $\bullet$ &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+35.2.142 & \texttt{$3m1'$} & II & trigonal & Q & $\bullet$ & $\bullet$ & $\bullet$ &  & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(35) & $C3v-1$ &  &  & G &  &  &  & $\bullet$ &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+35.3.143 & \texttt{$3m'$} & III & trigonal & Q & $\bullet$ & $\bullet$ & $\bullet$ &  & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(35) & $C3v-1$ &  &  & G &  &  &  & $\bullet$ &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  & $\bullet$ &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M & $\bullet$ & $\bullet$ & $\bullet$ &  & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+36.1.144 & \texttt{$\bar{3}m$} & I & trigonal & Q & $\bullet$ &  & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(36) & $D3d-1$ &  &  & G &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T & $\bullet$ &  & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+36.2.145 & \texttt{$\bar{3}m1'$} & II & trigonal & Q & $\bullet$ &  & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(36) & $D3d-1$ &  &  & G &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+36.3.146 & \texttt{$\bar{3}'m$} & III & trigonal & Q & $\bullet$ &  & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(36) & $D3d-1$ &  &  & G &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  & $\bullet$ &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+36.4.147 & \texttt{$\bar{3}'m'$} & III & trigonal & Q & $\bullet$ &  & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(36) & $D3d-1$ &  &  & G &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M & $\bullet$ &  & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+36.5.148 & \texttt{$\bar{3}m'$} & III & trigonal & Q & $\bullet$ &  & $\bullet$ &  &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(36) & $D3d-1$ &  &  & G &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  & $\bullet$ &  &  & $\bullet$ & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+37.1.151 & \texttt{$\bar{6}m2$} & I & hexagonal & Q & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(37) & $D3h-1$ &  &  & G &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+37.2.152 & \texttt{$\bar{6}m21'$} & II & hexagonal & Q & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(37) & $D3h-1$ &  &  & G &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+37.3.153 & \texttt{$\bar{6}'m'2$} & III & hexagonal & Q & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(37) & $D3h-1$ &  &  & G &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+37.4.154 & \texttt{$\bar{6}'m2'$} & III & hexagonal & Q & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(37) & $D3h-1$ &  &  & G &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  & $\bullet$ &  &  &  & $\bullet$ &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\ \hline
+37.5.155 & \texttt{$\bar{6}m'2'$} & III & hexagonal & Q & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+(37) & $D3h-1$ &  &  & G &  &  &  &  &  &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & T &  &  &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+ &  &  &  & M &  & $\bullet$ &  &  &  & $\bullet$ &  & $\bullet$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\end{longtable}
+\end{center}
+
+\end{document}

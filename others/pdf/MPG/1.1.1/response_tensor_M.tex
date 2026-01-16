@@ -1,0 +1,368 @@
+\documentclass[fleqn,8pt,landscape]{jsarticle}
+\special{papersize=\the\paperwidth,\the\paperheight}
+
+%%% package
+
+\usepackage[usenames]{color}
+\usepackage{amsmath}
+\usepackage{breqn}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{enumitem}
+\usepackage{braket}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+%%% layout setting
+
+\paperwidth=356.4truemm
+\paperheight=252.0truemm
+\textwidth=335.59999999999997truemm
+\textheight=224.2truemm
+\oddsidemargin=-15truemm
+\topmargin=-15truemm
+\footskip=7truemm
+
+%%% fixed
+
+\hoffset=0truemm
+\voffset=0truemm
+\headheight=0truemm
+\headsep=0truemm
+\marginparsep=0truemm
+\marginparwidth=0truemm
+
+%%% main text
+
+\begin{document}
+
+\setcounter{MaxMatrixCols}{32}
+
+\renewcommand{\tablename}{Table~}
+\renewcommand{\figurename}{Figure~}
+\begin{center}
+\LARGE
+MPG No. 1.1.1\quad$1$\quad[ Type I, triclinic ] [M tensor]
+\end{center}
+* Rank 0 tensor.
+\begin{align*}
+\begin{bmatrix} M \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M = M_{s}^{(1)}
+\end{align*}
+* Rank 1 tensor.
+\begin{align*}
+\begin{bmatrix} M_{x} & M_{y} & M_{z} \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{x} = M_{px}^{(1)} \\
+& M_{y} = M_{py}^{(1)} \\
+& M_{z} = M_{pz}^{(1)}
+\end{align*}
+* Rank 2 tensor (s).
+\begin{align*}
+\begin{bmatrix} M_{xx} & M_{xy} & M_{xz} \\ M_{xy} & M_{yy} & M_{yz} \\ M_{xz} & M_{yz} & M_{zz} \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{xx} = - M_{du}^{(1)} + M_{dv}^{(1)} + M_{s}^{(1)} \\
+& M_{xy} = M_{dxy}^{(1)} \\
+& M_{xz} = M_{dxz}^{(1)} \\
+& M_{yy} = - M_{du}^{(1)} - M_{dv}^{(1)} + M_{s}^{(1)} \\
+& M_{yz} = M_{dyz}^{(1)} \\
+& M_{zz} = 2 M_{du}^{(1)} + M_{s}^{(1)}
+\end{align*}
+* Rank 2 tensor (a).
+\begin{align*}
+\begin{bmatrix} 0 & M_{xy} & M_{xz} \\ - M_{xy} & 0 & M_{yz} \\ - M_{xz} & - M_{yz} & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{xy} = T_{pz}^{(1)} \\
+& M_{xz} = - T_{py}^{(1)} \\
+& M_{yz} = T_{px}^{(1)}
+\end{align*}
+* Rank 3 tensor (s).
+\begin{align*}
+\begin{bmatrix} M_{xxx} & M_{xxy} & M_{xxz} \\ M_{yyx} & M_{yyy} & M_{yyz} \\ M_{zzx} & M_{zzy} & M_{zzz} \\ M_{yzx} & M_{yzy} & M_{yzz} \\ M_{zxx} & M_{zxy} & M_{zxz} \\ M_{xyx} & M_{xyy} & M_{xyz} \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{xxx} = 2 M_{fax}^{(1)} + M_{px}^{(1)} + 2 M_{px}^{(2)} \\
+& M_{xxy} = - M_{fay}^{(1)} - M_{fby}^{(1)} + M_{py}^{(1)} + 2 T_{dxz}^{(1)} \\
+& M_{xxz} = - M_{faz}^{(1)} + M_{fbz}^{(1)} + M_{pz}^{(1)} - 2 T_{dxy}^{(1)} \\
+& M_{yyx} = - M_{fax}^{(1)} + M_{fbx}^{(1)} + M_{px}^{(1)} - 2 T_{dyz}^{(1)} \\
+& M_{yyy} = 2 M_{fay}^{(1)} + M_{py}^{(1)} + 2 M_{py}^{(2)} \\
+& M_{yyz} = - M_{faz}^{(1)} - M_{fbz}^{(1)} + M_{pz}^{(1)} + 2 T_{dxy}^{(1)} \\
+& M_{zzx} = - M_{fax}^{(1)} - M_{fbx}^{(1)} + M_{px}^{(1)} + 2 T_{dyz}^{(1)} \\
+& M_{zzy} = - M_{fay}^{(1)} + M_{fby}^{(1)} + M_{py}^{(1)} - 2 T_{dxz}^{(1)} \\
+& M_{zzz} = 2 M_{faz}^{(1)} + M_{pz}^{(1)} + 2 M_{pz}^{(2)} \\
+& M_{yzx} = M_{f3}^{(1)} - 3 T_{du}^{(1)} - T_{dv}^{(1)} \\
+& M_{yzy} = - M_{faz}^{(1)} - M_{fbz}^{(1)} + M_{pz}^{(2)} - T_{dxy}^{(1)} \\
+& M_{yzz} = - M_{fay}^{(1)} + M_{fby}^{(1)} + M_{py}^{(2)} + T_{dxz}^{(1)} \\
+& M_{zxx} = - M_{faz}^{(1)} + M_{fbz}^{(1)} + M_{pz}^{(2)} + T_{dxy}^{(1)} \\
+& M_{zxy} = M_{f3}^{(1)} + 3 T_{du}^{(1)} - T_{dv}^{(1)} \\
+& M_{zxz} = - M_{fax}^{(1)} - M_{fbx}^{(1)} + M_{px}^{(2)} - T_{dyz}^{(1)} \\
+& M_{xyx} = - M_{fay}^{(1)} - M_{fby}^{(1)} + M_{py}^{(2)} - T_{dxz}^{(1)} \\
+& M_{xyy} = - M_{fax}^{(1)} + M_{fbx}^{(1)} + M_{px}^{(2)} + T_{dyz}^{(1)} \\
+& M_{xyz} = M_{f3}^{(1)} + 2 T_{dv}^{(1)}
+\end{align*}
+* Rank 3 tensor (a).
+\begin{align*}
+\begin{bmatrix} M_{yzx} & M_{yzy} & M_{yzz} \\ M_{zxx} & M_{zxy} & M_{zxz} \\ M_{xyx} & M_{xyy} & M_{xyz} \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{yzx} = - T_{du}^{(2)} + T_{dv}^{(2)} + T_{s}^{(1)} \\
+& M_{yzy} = M_{pz}^{(3)} + T_{dxy}^{(2)} \\
+& M_{yzz} = - M_{py}^{(3)} + T_{dxz}^{(2)} \\
+& M_{zxx} = - M_{pz}^{(3)} + T_{dxy}^{(2)} \\
+& M_{zxy} = - T_{du}^{(2)} - T_{dv}^{(2)} + T_{s}^{(1)} \\
+& M_{zxz} = M_{px}^{(3)} + T_{dyz}^{(2)} \\
+& M_{xyx} = M_{py}^{(3)} + T_{dxz}^{(2)} \\
+& M_{xyy} = - M_{px}^{(3)} + T_{dyz}^{(2)} \\
+& M_{xyz} = 2 T_{du}^{(2)} + T_{s}^{(1)}
+\end{align*}
+* Rank 4 tensor (sss).
+\begin{align*}
+\begin{bmatrix} M_{xxxx} & M_{xxyy} & M_{xxzz} & M_{xxyz} & M_{xxzx} & M_{xxxy} \\ M_{xxyy} & M_{yyyy} & M_{yyzz} & M_{yyyz} & M_{yyzx} & M_{yyxy} \\ M_{xxzz} & M_{yyzz} & M_{zzzz} & M_{zzyz} & M_{zzzx} & M_{zzxy} \\ M_{xxyz} & M_{yyyz} & M_{zzyz} & M_{yzyz} & M_{yzzx} & M_{yzxy} \\ M_{xxzx} & M_{yyzx} & M_{zzzx} & M_{yzzx} & M_{zxzx} & M_{zxxy} \\ M_{xxxy} & M_{yyxy} & M_{zzxy} & M_{yzxy} & M_{zxxy} & M_{xyxy} \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{xxxx} = - 2 M_{du}^{(1)} - 4 M_{du}^{(2)} + 2 M_{dv}^{(1)} + 4 M_{dv}^{(2)} - M_{gu}^{(1)} + M_{gv}^{(1)} + 2 M_{g}^{(1)} + M_{s}^{(1)} + 2 M_{s}^{(2)} \\
+& M_{xxyy} = - 2 M_{du}^{(1)} + 2 M_{gu}^{(1)} - M_{g}^{(1)} + M_{s}^{(1)} \\
+& M_{xxzz} = M_{du}^{(1)} + M_{dv}^{(1)} - M_{gu}^{(1)} - M_{gv}^{(1)} - M_{g}^{(1)} + M_{s}^{(1)} \\
+& M_{xxyz} = M_{dyz}^{(1)} + 2 M_{gbx}^{(1)} \\
+& M_{xxzx} = M_{dxz}^{(1)} + 2 M_{dxz}^{(2)} - M_{gay}^{(1)} - M_{gby}^{(1)} \\
+& M_{xxxy} = M_{dxy}^{(1)} + 2 M_{dxy}^{(2)} + M_{gaz}^{(1)} - M_{gbz}^{(1)} \\
+& M_{yyyy} = - 2 M_{du}^{(1)} - 4 M_{du}^{(2)} - 2 M_{dv}^{(1)} - 4 M_{dv}^{(2)} - M_{gu}^{(1)} - M_{gv}^{(1)} + 2 M_{g}^{(1)} + M_{s}^{(1)} + 2 M_{s}^{(2)} \\
+& M_{yyzz} = M_{du}^{(1)} - M_{dv}^{(1)} - M_{gu}^{(1)} + M_{gv}^{(1)} - M_{g}^{(1)} + M_{s}^{(1)} \\
+& M_{yyyz} = M_{dyz}^{(1)} + 2 M_{dyz}^{(2)} + M_{gax}^{(1)} - M_{gbx}^{(1)} \\
+& M_{yyzx} = M_{dxz}^{(1)} + 2 M_{gby}^{(1)} \\
+& M_{yyxy} = M_{dxy}^{(1)} + 2 M_{dxy}^{(2)} - M_{gaz}^{(1)} - M_{gbz}^{(1)} \\
+& M_{zzzz} = 4 M_{du}^{(1)} + 8 M_{du}^{(2)} + 2 M_{gu}^{(1)} + 2 M_{g}^{(1)} + M_{s}^{(1)} + 2 M_{s}^{(2)} \\
+& M_{zzyz} = M_{dyz}^{(1)} + 2 M_{dyz}^{(2)} - M_{gax}^{(1)} - M_{gbx}^{(1)} \\
+& M_{zzzx} = M_{dxz}^{(1)} + 2 M_{dxz}^{(2)} + M_{gay}^{(1)} - M_{gby}^{(1)} \\
+& M_{zzxy} = M_{dxy}^{(1)} + 2 M_{gbz}^{(1)} \\
+& M_{yzyz} = M_{du}^{(2)} - M_{dv}^{(2)} - M_{gu}^{(1)} + M_{gv}^{(1)} - M_{g}^{(1)} + M_{s}^{(2)} \\
+& M_{yzzx} = M_{dxy}^{(2)} + 2 M_{gbz}^{(1)} \\
+& M_{yzxy} = M_{dxz}^{(2)} + 2 M_{gby}^{(1)} \\
+& M_{zxzx} = M_{du}^{(2)} + M_{dv}^{(2)} - M_{gu}^{(1)} - M_{gv}^{(1)} - M_{g}^{(1)} + M_{s}^{(2)} \\
+& M_{zxxy} = M_{dyz}^{(2)} + 2 M_{gbx}^{(1)} \\
+& M_{xyxy} = - 2 M_{du}^{(2)} + 2 M_{gu}^{(1)} - M_{g}^{(1)} + M_{s}^{(2)}
+\end{align*}
+* Rank 4 tensor (ssa).
+\begin{align*}
+\begin{bmatrix} 0 & M_{xxyy} & M_{xxzz} & M_{xxyz} & M_{xxzx} & M_{xxxy} \\ - M_{xxyy} & 0 & M_{yyzz} & M_{yyyz} & M_{yyzx} & M_{yyxy} \\ - M_{xxzz} & - M_{yyzz} & 0 & M_{zzyz} & M_{zzzx} & M_{zzxy} \\ - M_{xxyz} & - M_{yyyz} & - M_{zzyz} & 0 & M_{yzzx} & M_{yzxy} \\ - M_{xxzx} & - M_{yyzx} & - M_{zzzx} & - M_{yzzx} & 0 & M_{zxxy} \\ - M_{xxxy} & - M_{yyxy} & - M_{zzxy} & - M_{yzxy} & - M_{zxxy} & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{xxyy} = - 2 M_{dv}^{(3)} + 4 T_{f3}^{(1)} \\
+& M_{xxzz} = 3 M_{du}^{(3)} - M_{dv}^{(3)} - 4 T_{f3}^{(1)} \\
+& M_{xxyz} = M_{dyz}^{(3)} - 4 T_{fbx}^{(1)} \\
+& M_{xxzx} = M_{dxz}^{(3)} + 2 T_{fay}^{(1)} + 2 T_{fby}^{(1)} - 2 T_{py}^{(1)} \\
+& M_{xxxy} = M_{dxy}^{(3)} - 2 T_{faz}^{(1)} + 2 T_{fbz}^{(1)} + 2 T_{pz}^{(1)} \\
+& M_{yyzz} = 3 M_{du}^{(3)} + M_{dv}^{(3)} + 4 T_{f3}^{(1)} \\
+& M_{yyyz} = M_{dyz}^{(3)} - 2 T_{fax}^{(1)} + 2 T_{fbx}^{(1)} + 2 T_{px}^{(1)} \\
+& M_{yyzx} = M_{dxz}^{(3)} - 4 T_{fby}^{(1)} \\
+& M_{yyxy} = M_{dxy}^{(3)} + 2 T_{faz}^{(1)} + 2 T_{fbz}^{(1)} - 2 T_{pz}^{(1)} \\
+& M_{zzyz} = M_{dyz}^{(3)} + 2 T_{fax}^{(1)} + 2 T_{fbx}^{(1)} - 2 T_{px}^{(1)} \\
+& M_{zzzx} = M_{dxz}^{(3)} - 2 T_{fay}^{(1)} + 2 T_{fby}^{(1)} + 2 T_{py}^{(1)} \\
+& M_{zzxy} = M_{dxy}^{(3)} - 4 T_{fbz}^{(1)} \\
+& M_{yzzx} = - 4 T_{faz}^{(1)} - T_{pz}^{(1)} \\
+& M_{yzxy} = 4 T_{fay}^{(1)} + T_{py}^{(1)} \\
+& M_{zxxy} = - 4 T_{fax}^{(1)} - T_{px}^{(1)}
+\end{align*}
+* Rank 4 tensor (aas).
+\begin{align*}
+\begin{bmatrix} M_{yzyz} & M_{yzzx} & M_{yzxy} \\ M_{yzzx} & M_{zxzx} & M_{zxxy} \\ M_{yzxy} & M_{zxxy} & M_{xyxy} \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{yzyz} = - 2 M_{du}^{(4)} + 2 M_{dv}^{(4)} + M_{s}^{(3)} \\
+& M_{yzzx} = 2 M_{dxy}^{(4)} \\
+& M_{yzxy} = 2 M_{dxz}^{(4)} \\
+& M_{zxzx} = - 2 M_{du}^{(4)} - 2 M_{dv}^{(4)} + M_{s}^{(3)} \\
+& M_{zxxy} = 2 M_{dyz}^{(4)} \\
+& M_{xyxy} = 4 M_{du}^{(4)} + M_{s}^{(3)}
+\end{align*}
+* Rank 4 tensor (aaa).
+\begin{align*}
+\begin{bmatrix} 0 & M_{yzzx} & M_{yzxy} \\ - M_{yzzx} & 0 & M_{zxxy} \\ - M_{yzxy} & - M_{zxxy} & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{yzzx} = - T_{pz}^{(2)} \\
+& M_{yzxy} = T_{py}^{(2)} \\
+& M_{zxxy} = - T_{px}^{(2)}
+\end{align*}
+* Rank 4 tensor (sa).
+\begin{align*}
+\begin{bmatrix} M_{xxyz} & M_{xxzx} & M_{xxxy} \\ M_{yyyz} & M_{yyzx} & M_{yyxy} \\ M_{zzyz} & M_{zzzx} & M_{zzxy} \\ M_{yzyz} & M_{yzzx} & M_{yzxy} \\ M_{zxyz} & M_{zxzx} & M_{zxxy} \\ M_{xyyz} & M_{xyzx} & M_{xyxy} \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{xxyz} = 2 T_{fax}^{(2)} + T_{px}^{(3)} + 2 T_{px}^{(4)} \\
+& M_{xxzx} = 2 M_{dxz}^{(5)} - T_{fay}^{(2)} - T_{fby}^{(2)} + T_{py}^{(3)} \\
+& M_{xxxy} = - 2 M_{dxy}^{(5)} - T_{faz}^{(2)} + T_{fbz}^{(2)} + T_{pz}^{(3)} \\
+& M_{yyyz} = - 2 M_{dyz}^{(5)} - T_{fax}^{(2)} + T_{fbx}^{(2)} + T_{px}^{(3)} \\
+& M_{yyzx} = 2 T_{fay}^{(2)} + T_{py}^{(3)} + 2 T_{py}^{(4)} \\
+& M_{yyxy} = 2 M_{dxy}^{(5)} - T_{faz}^{(2)} - T_{fbz}^{(2)} + T_{pz}^{(3)} \\
+& M_{zzyz} = 2 M_{dyz}^{(5)} - T_{fax}^{(2)} - T_{fbx}^{(2)} + T_{px}^{(3)} \\
+& M_{zzzx} = - 2 M_{dxz}^{(5)} - T_{fay}^{(2)} + T_{fby}^{(2)} + T_{py}^{(3)} \\
+& M_{zzxy} = 2 T_{faz}^{(2)} + T_{pz}^{(3)} + 2 T_{pz}^{(4)} \\
+& M_{yzyz} = - 3 M_{du}^{(5)} - M_{dv}^{(5)} + T_{f3}^{(2)} \\
+& M_{yzzx} = - M_{dxy}^{(5)} - T_{faz}^{(2)} - T_{fbz}^{(2)} + T_{pz}^{(4)} \\
+& M_{yzxy} = M_{dxz}^{(5)} - T_{fay}^{(2)} + T_{fby}^{(2)} + T_{py}^{(4)} \\
+& M_{zxyz} = M_{dxy}^{(5)} - T_{faz}^{(2)} + T_{fbz}^{(2)} + T_{pz}^{(4)} \\
+& M_{zxzx} = 3 M_{du}^{(5)} - M_{dv}^{(5)} + T_{f3}^{(2)} \\
+& M_{zxxy} = - M_{dyz}^{(5)} - T_{fax}^{(2)} - T_{fbx}^{(2)} + T_{px}^{(4)} \\
+& M_{xyyz} = - M_{dxz}^{(5)} - T_{fay}^{(2)} - T_{fby}^{(2)} + T_{py}^{(4)} \\
+& M_{xyzx} = M_{dyz}^{(5)} - T_{fax}^{(2)} + T_{fbx}^{(2)} + T_{px}^{(4)} \\
+& M_{xyxy} = 2 M_{dv}^{(5)} + T_{f3}^{(2)}
+\end{align*}
+* Rank 4 tensor (as).
+\begin{align*}
+\begin{bmatrix} M_{yzxx} & M_{yzyy} & M_{yzzz} & M_{yzyz} & M_{yzzx} & M_{yzxy} \\ M_{zxxx} & M_{zxyy} & M_{zxzz} & M_{zxyz} & M_{zxzx} & M_{zxxy} \\ M_{xyxx} & M_{xyyy} & M_{xyzz} & M_{xyyz} & M_{xyzx} & M_{xyxy} \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{yzxx} = 2 T_{fax}^{(3)} + T_{px}^{(5)} + 2 T_{px}^{(6)} \\
+& M_{yzyy} = - 2 M_{dyz}^{(6)} - T_{fax}^{(3)} + T_{fbx}^{(3)} + T_{px}^{(5)} \\
+& M_{yzzz} = 2 M_{dyz}^{(6)} - T_{fax}^{(3)} - T_{fbx}^{(3)} + T_{px}^{(5)} \\
+& M_{yzyz} = - 3 M_{du}^{(6)} - M_{dv}^{(6)} + T_{f3}^{(3)} \\
+& M_{yzzx} = M_{dxy}^{(6)} - T_{faz}^{(3)} + T_{fbz}^{(3)} + T_{pz}^{(6)} \\
+& M_{yzxy} = - M_{dxz}^{(6)} - T_{fay}^{(3)} - T_{fby}^{(3)} + T_{py}^{(6)} \\
+& M_{zxxx} = 2 M_{dxz}^{(6)} - T_{fay}^{(3)} - T_{fby}^{(3)} + T_{py}^{(5)} \\
+& M_{zxyy} = 2 T_{fay}^{(3)} + T_{py}^{(5)} + 2 T_{py}^{(6)} \\
+& M_{zxzz} = - 2 M_{dxz}^{(6)} - T_{fay}^{(3)} + T_{fby}^{(3)} + T_{py}^{(5)} \\
+& M_{zxyz} = - M_{dxy}^{(6)} - T_{faz}^{(3)} - T_{fbz}^{(3)} + T_{pz}^{(6)} \\
+& M_{zxzx} = 3 M_{du}^{(6)} - M_{dv}^{(6)} + T_{f3}^{(3)} \\
+& M_{zxxy} = M_{dyz}^{(6)} - T_{fax}^{(3)} + T_{fbx}^{(3)} + T_{px}^{(6)} \\
+& M_{xyxx} = - 2 M_{dxy}^{(6)} - T_{faz}^{(3)} + T_{fbz}^{(3)} + T_{pz}^{(5)} \\
+& M_{xyyy} = 2 M_{dxy}^{(6)} - T_{faz}^{(3)} - T_{fbz}^{(3)} + T_{pz}^{(5)} \\
+& M_{xyzz} = 2 T_{faz}^{(3)} + T_{pz}^{(5)} + 2 T_{pz}^{(6)} \\
+& M_{xyyz} = M_{dxz}^{(6)} - T_{fay}^{(3)} + T_{fby}^{(3)} + T_{py}^{(6)} \\
+& M_{xyzx} = - M_{dyz}^{(6)} - T_{fax}^{(3)} - T_{fbx}^{(3)} + T_{px}^{(6)} \\
+& M_{xyxy} = 2 M_{dv}^{(6)} + T_{f3}^{(3)}
+\end{align*}
+* Rank 4 tensor (s).
+\begin{align*}
+\begin{bmatrix} M_{xxxx} & M_{xxyy} & M_{xxzz} & M_{xxyz} & M_{xxzx} & M_{xxxy} & M_{xxzy} & M_{xxxz} & M_{xxyx} \\ M_{yyxx} & M_{yyyy} & M_{yyzz} & M_{yyyz} & M_{yyzx} & M_{yyxy} & M_{yyzy} & M_{yyxz} & M_{yyyx} \\ M_{zzxx} & M_{zzyy} & M_{zzzz} & M_{zzyz} & M_{zzzx} & M_{zzxy} & M_{zzzy} & M_{zzxz} & M_{zzyx} \\ M_{yzxx} & M_{yzyy} & M_{yzzz} & M_{yzyz} & M_{yzzx} & M_{yzxy} & M_{yzzy} & M_{yzxz} & M_{yzyx} \\ M_{zxxx} & M_{zxyy} & M_{zxzz} & M_{zxyz} & M_{zxzx} & M_{zxxy} & M_{zxzy} & M_{zxxz} & M_{zxyx} \\ M_{xyxx} & M_{xyyy} & M_{xyzz} & M_{xyyz} & M_{xyzx} & M_{xyxy} & M_{xyzy} & M_{xyxz} & M_{xyyx} \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{xxxx} = - 2 M_{du}^{(1)} - 4 M_{du}^{(2)} + 2 M_{dv}^{(1)} + 4 M_{dv}^{(2)} - M_{gu}^{(1)} + M_{gv}^{(1)} + 2 M_{g}^{(1)} + M_{s}^{(1)} + 2 M_{s}^{(2)} \\
+& M_{xxyy} = - 2 M_{du}^{(1)} - 2 M_{dv}^{(3)} + 2 M_{gu}^{(1)} - M_{g}^{(1)} + M_{s}^{(1)} + 4 T_{f3}^{(1)} \\
+& M_{xxzz} = M_{du}^{(1)} + 3 M_{du}^{(3)} + M_{dv}^{(1)} - M_{dv}^{(3)} - M_{gu}^{(1)} - M_{gv}^{(1)} - M_{g}^{(1)} + M_{s}^{(1)} - 4 T_{f3}^{(1)} \\
+& M_{xxyz} = M_{dyz}^{(1)} + M_{dyz}^{(3)} + 2 M_{gbx}^{(1)} + 2 T_{fax}^{(2)} - 4 T_{fbx}^{(1)} + T_{px}^{(3)} + 2 T_{px}^{(4)} \\
+& M_{xxzx} = M_{dxz}^{(1)} + 2 M_{dxz}^{(2)} + M_{dxz}^{(3)} + 2 M_{dxz}^{(5)} - M_{gay}^{(1)} - M_{gby}^{(1)} + 2 T_{fay}^{(1)} - T_{fay}^{(2)} + 2 T_{fby}^{(1)} - T_{fby}^{(2)} - 2 T_{py}^{(1)} + T_{py}^{(3)} \\
+& M_{xxxy} = M_{dxy}^{(1)} + 2 M_{dxy}^{(2)} + M_{dxy}^{(3)} - 2 M_{dxy}^{(5)} + M_{gaz}^{(1)} - M_{gbz}^{(1)} - 2 T_{faz}^{(1)} - T_{faz}^{(2)} + 2 T_{fbz}^{(1)} + T_{fbz}^{(2)} + 2 T_{pz}^{(1)} + T_{pz}^{(3)} \\
+& M_{xxzy} = M_{dyz}^{(1)} + M_{dyz}^{(3)} + 2 M_{gbx}^{(1)} - 2 T_{fax}^{(2)} - 4 T_{fbx}^{(1)} - T_{px}^{(3)} - 2 T_{px}^{(4)} \\
+& M_{xxxz} = M_{dxz}^{(1)} + 2 M_{dxz}^{(2)} + M_{dxz}^{(3)} - 2 M_{dxz}^{(5)} - M_{gay}^{(1)} - M_{gby}^{(1)} + 2 T_{fay}^{(1)} + T_{fay}^{(2)} + 2 T_{fby}^{(1)} + T_{fby}^{(2)} - 2 T_{py}^{(1)} - T_{py}^{(3)} \\
+& M_{xxyx} = M_{dxy}^{(1)} + 2 M_{dxy}^{(2)} + M_{dxy}^{(3)} + 2 M_{dxy}^{(5)} + M_{gaz}^{(1)} - M_{gbz}^{(1)} - 2 T_{faz}^{(1)} + T_{faz}^{(2)} + 2 T_{fbz}^{(1)} - T_{fbz}^{(2)} + 2 T_{pz}^{(1)} - T_{pz}^{(3)} \\
+& M_{yyxx} = - 2 M_{du}^{(1)} + 2 M_{dv}^{(3)} + 2 M_{gu}^{(1)} - M_{g}^{(1)} + M_{s}^{(1)} - 4 T_{f3}^{(1)} \\
+& M_{yyyy} = - 2 M_{du}^{(1)} - 4 M_{du}^{(2)} - 2 M_{dv}^{(1)} - 4 M_{dv}^{(2)} - M_{gu}^{(1)} - M_{gv}^{(1)} + 2 M_{g}^{(1)} + M_{s}^{(1)} + 2 M_{s}^{(2)} \\
+& M_{yyzz} = M_{du}^{(1)} + 3 M_{du}^{(3)} - M_{dv}^{(1)} + M_{dv}^{(3)} - M_{gu}^{(1)} + M_{gv}^{(1)} - M_{g}^{(1)} + M_{s}^{(1)} + 4 T_{f3}^{(1)} \\
+& M_{yyyz} = M_{dyz}^{(1)} + 2 M_{dyz}^{(2)} + M_{dyz}^{(3)} - 2 M_{dyz}^{(5)} + M_{gax}^{(1)} - M_{gbx}^{(1)} - 2 T_{fax}^{(1)} - T_{fax}^{(2)} + 2 T_{fbx}^{(1)} + T_{fbx}^{(2)} + 2 T_{px}^{(1)} + T_{px}^{(3)} \\
+& M_{yyzx} = M_{dxz}^{(1)} + M_{dxz}^{(3)} + 2 M_{gby}^{(1)} + 2 T_{fay}^{(2)} - 4 T_{fby}^{(1)} + T_{py}^{(3)} + 2 T_{py}^{(4)} \\
+& M_{yyxy} = M_{dxy}^{(1)} + 2 M_{dxy}^{(2)} + M_{dxy}^{(3)} + 2 M_{dxy}^{(5)} - M_{gaz}^{(1)} - M_{gbz}^{(1)} + 2 T_{faz}^{(1)} - T_{faz}^{(2)} + 2 T_{fbz}^{(1)} - T_{fbz}^{(2)} - 2 T_{pz}^{(1)} + T_{pz}^{(3)} \\
+& M_{yyzy} = M_{dyz}^{(1)} + 2 M_{dyz}^{(2)} + M_{dyz}^{(3)} + 2 M_{dyz}^{(5)} + M_{gax}^{(1)} - M_{gbx}^{(1)} - 2 T_{fax}^{(1)} + T_{fax}^{(2)} + 2 T_{fbx}^{(1)} - T_{fbx}^{(2)} + 2 T_{px}^{(1)} - T_{px}^{(3)} \\
+& M_{yyxz} = M_{dxz}^{(1)} + M_{dxz}^{(3)} + 2 M_{gby}^{(1)} - 2 T_{fay}^{(2)} - 4 T_{fby}^{(1)} - T_{py}^{(3)} - 2 T_{py}^{(4)} \\
+& M_{yyyx} = M_{dxy}^{(1)} + 2 M_{dxy}^{(2)} + M_{dxy}^{(3)} - 2 M_{dxy}^{(5)} - M_{gaz}^{(1)} - M_{gbz}^{(1)} + 2 T_{faz}^{(1)} + T_{faz}^{(2)} + 2 T_{fbz}^{(1)} + T_{fbz}^{(2)} - 2 T_{pz}^{(1)} - T_{pz}^{(3)} \\
+& M_{zzxx} = M_{du}^{(1)} - 3 M_{du}^{(3)} + M_{dv}^{(1)} + M_{dv}^{(3)} - M_{gu}^{(1)} - M_{gv}^{(1)} - M_{g}^{(1)} + M_{s}^{(1)} + 4 T_{f3}^{(1)} \\
+& M_{zzyy} = M_{du}^{(1)} - 3 M_{du}^{(3)} - M_{dv}^{(1)} - M_{dv}^{(3)} - M_{gu}^{(1)} + M_{gv}^{(1)} - M_{g}^{(1)} + M_{s}^{(1)} - 4 T_{f3}^{(1)} \\
+& M_{zzzz} = 4 M_{du}^{(1)} + 8 M_{du}^{(2)} + 2 M_{gu}^{(1)} + 2 M_{g}^{(1)} + M_{s}^{(1)} + 2 M_{s}^{(2)} \\
+& M_{zzyz} = M_{dyz}^{(1)} + 2 M_{dyz}^{(2)} + M_{dyz}^{(3)} + 2 M_{dyz}^{(5)} - M_{gax}^{(1)} - M_{gbx}^{(1)} + 2 T_{fax}^{(1)} - T_{fax}^{(2)} + 2 T_{fbx}^{(1)} - T_{fbx}^{(2)} - 2 T_{px}^{(1)} + T_{px}^{(3)} \\
+& M_{zzzx} = M_{dxz}^{(1)} + 2 M_{dxz}^{(2)} + M_{dxz}^{(3)} - 2 M_{dxz}^{(5)} + M_{gay}^{(1)} - M_{gby}^{(1)} - 2 T_{fay}^{(1)} - T_{fay}^{(2)} + 2 T_{fby}^{(1)} + T_{fby}^{(2)} + 2 T_{py}^{(1)} + T_{py}^{(3)} \\
+& M_{zzxy} = M_{dxy}^{(1)} + M_{dxy}^{(3)} + 2 M_{gbz}^{(1)} + 2 T_{faz}^{(2)} - 4 T_{fbz}^{(1)} + T_{pz}^{(3)} + 2 T_{pz}^{(4)} \\
+& M_{zzzy} = M_{dyz}^{(1)} + 2 M_{dyz}^{(2)} + M_{dyz}^{(3)} - 2 M_{dyz}^{(5)} - M_{gax}^{(1)} - M_{gbx}^{(1)} + 2 T_{fax}^{(1)} + T_{fax}^{(2)} + 2 T_{fbx}^{(1)} + T_{fbx}^{(2)} - 2 T_{px}^{(1)} - T_{px}^{(3)} \\
+& M_{zzxz} = M_{dxz}^{(1)} + 2 M_{dxz}^{(2)} + M_{dxz}^{(3)} + 2 M_{dxz}^{(5)} + M_{gay}^{(1)} - M_{gby}^{(1)} - 2 T_{fay}^{(1)} + T_{fay}^{(2)} + 2 T_{fby}^{(1)} - T_{fby}^{(2)} + 2 T_{py}^{(1)} - T_{py}^{(3)} \\
+& M_{zzyx} = M_{dxy}^{(1)} + M_{dxy}^{(3)} + 2 M_{gbz}^{(1)} - 2 T_{faz}^{(2)} - 4 T_{fbz}^{(1)} - T_{pz}^{(3)} - 2 T_{pz}^{(4)} \\
+& M_{yzxx} = M_{dyz}^{(1)} - M_{dyz}^{(3)} + 2 M_{gbx}^{(1)} + 4 T_{fbx}^{(1)} \\
+& M_{yzyy} = M_{dyz}^{(1)} + 2 M_{dyz}^{(2)} - M_{dyz}^{(3)} + M_{gax}^{(1)} - M_{gbx}^{(1)} + 2 T_{fax}^{(1)} - 2 T_{fbx}^{(1)} - 2 T_{px}^{(1)} \\
+& M_{yzzz} = M_{dyz}^{(1)} + 2 M_{dyz}^{(2)} - M_{dyz}^{(3)} - M_{gax}^{(1)} - M_{gbx}^{(1)} - 2 T_{fax}^{(1)} - 2 T_{fbx}^{(1)} + 2 T_{px}^{(1)} \\
+& M_{yzyz} = M_{du}^{(2)} - 3 M_{du}^{(5)} - M_{dv}^{(2)} - M_{dv}^{(5)} - M_{gu}^{(1)} + M_{gv}^{(1)} - M_{g}^{(1)} + M_{s}^{(2)} + T_{f3}^{(2)} \\
+& M_{yzzx} = M_{dxy}^{(2)} - M_{dxy}^{(5)} + 2 M_{gbz}^{(1)} - 4 T_{faz}^{(1)} - T_{faz}^{(2)} - T_{fbz}^{(2)} - T_{pz}^{(1)} + T_{pz}^{(4)} \\
+& M_{yzxy} = M_{dxz}^{(2)} + M_{dxz}^{(5)} + 2 M_{gby}^{(1)} + 4 T_{fay}^{(1)} - T_{fay}^{(2)} + T_{fby}^{(2)} + T_{py}^{(1)} + T_{py}^{(4)} \\
+& M_{yzzy} = M_{du}^{(2)} + 3 M_{du}^{(5)} - M_{dv}^{(2)} + M_{dv}^{(5)} - M_{gu}^{(1)} + M_{gv}^{(1)} - M_{g}^{(1)} + M_{s}^{(2)} - T_{f3}^{(2)} \\
+& M_{yzxz} = M_{dxy}^{(2)} + M_{dxy}^{(5)} + 2 M_{gbz}^{(1)} - 4 T_{faz}^{(1)} + T_{faz}^{(2)} + T_{fbz}^{(2)} - T_{pz}^{(1)} - T_{pz}^{(4)} \\
+& M_{yzyx} = M_{dxz}^{(2)} - M_{dxz}^{(5)} + 2 M_{gby}^{(1)} + 4 T_{fay}^{(1)} + T_{fay}^{(2)} - T_{fby}^{(2)} + T_{py}^{(1)} - T_{py}^{(4)} \\
+& M_{zxxx} = M_{dxz}^{(1)} + 2 M_{dxz}^{(2)} - M_{dxz}^{(3)} - M_{gay}^{(1)} - M_{gby}^{(1)} - 2 T_{fay}^{(1)} - 2 T_{fby}^{(1)} + 2 T_{py}^{(1)} \\
+& M_{zxyy} = M_{dxz}^{(1)} - M_{dxz}^{(3)} + 2 M_{gby}^{(1)} + 4 T_{fby}^{(1)} \\
+& M_{zxzz} = M_{dxz}^{(1)} + 2 M_{dxz}^{(2)} - M_{dxz}^{(3)} + M_{gay}^{(1)} - M_{gby}^{(1)} + 2 T_{fay}^{(1)} - 2 T_{fby}^{(1)} - 2 T_{py}^{(1)} \\
+& M_{zxyz} = M_{dxy}^{(2)} + M_{dxy}^{(5)} + 2 M_{gbz}^{(1)} + 4 T_{faz}^{(1)} - T_{faz}^{(2)} + T_{fbz}^{(2)} + T_{pz}^{(1)} + T_{pz}^{(4)} \\
+& M_{zxzx} = M_{du}^{(2)} + 3 M_{du}^{(5)} + M_{dv}^{(2)} - M_{dv}^{(5)} - M_{gu}^{(1)} - M_{gv}^{(1)} - M_{g}^{(1)} + M_{s}^{(2)} + T_{f3}^{(2)} \\
+& M_{zxxy} = M_{dyz}^{(2)} - M_{dyz}^{(5)} + 2 M_{gbx}^{(1)} - 4 T_{fax}^{(1)} - T_{fax}^{(2)} - T_{fbx}^{(2)} - T_{px}^{(1)} + T_{px}^{(4)} \\
+& M_{zxzy} = M_{dxy}^{(2)} - M_{dxy}^{(5)} + 2 M_{gbz}^{(1)} + 4 T_{faz}^{(1)} + T_{faz}^{(2)} - T_{fbz}^{(2)} + T_{pz}^{(1)} - T_{pz}^{(4)} \\
+& M_{zxxz} = M_{du}^{(2)} - 3 M_{du}^{(5)} + M_{dv}^{(2)} + M_{dv}^{(5)} - M_{gu}^{(1)} - M_{gv}^{(1)} - M_{g}^{(1)} + M_{s}^{(2)} - T_{f3}^{(2)} \\
+& M_{zxyx} = M_{dyz}^{(2)} + M_{dyz}^{(5)} + 2 M_{gbx}^{(1)} - 4 T_{fax}^{(1)} + T_{fax}^{(2)} + T_{fbx}^{(2)} - T_{px}^{(1)} - T_{px}^{(4)} \\
+& M_{xyxx} = M_{dxy}^{(1)} + 2 M_{dxy}^{(2)} - M_{dxy}^{(3)} + M_{gaz}^{(1)} - M_{gbz}^{(1)} + 2 T_{faz}^{(1)} - 2 T_{fbz}^{(1)} - 2 T_{pz}^{(1)} \\
+& M_{xyyy} = M_{dxy}^{(1)} + 2 M_{dxy}^{(2)} - M_{dxy}^{(3)} - M_{gaz}^{(1)} - M_{gbz}^{(1)} - 2 T_{faz}^{(1)} - 2 T_{fbz}^{(1)} + 2 T_{pz}^{(1)} \\
+& M_{xyzz} = M_{dxy}^{(1)} - M_{dxy}^{(3)} + 2 M_{gbz}^{(1)} + 4 T_{fbz}^{(1)} \\
+& M_{xyyz} = M_{dxz}^{(2)} - M_{dxz}^{(5)} + 2 M_{gby}^{(1)} - 4 T_{fay}^{(1)} - T_{fay}^{(2)} - T_{fby}^{(2)} - T_{py}^{(1)} + T_{py}^{(4)} \\
+& M_{xyzx} = M_{dyz}^{(2)} + M_{dyz}^{(5)} + 2 M_{gbx}^{(1)} + 4 T_{fax}^{(1)} - T_{fax}^{(2)} + T_{fbx}^{(2)} + T_{px}^{(1)} + T_{px}^{(4)} \\
+& M_{xyxy} = - 2 M_{du}^{(2)} + 2 M_{dv}^{(5)} + 2 M_{gu}^{(1)} - M_{g}^{(1)} + M_{s}^{(2)} + T_{f3}^{(2)} \\
+& M_{xyzy} = M_{dxz}^{(2)} + M_{dxz}^{(5)} + 2 M_{gby}^{(1)} - 4 T_{fay}^{(1)} + T_{fay}^{(2)} + T_{fby}^{(2)} - T_{py}^{(1)} - T_{py}^{(4)} \\
+& M_{xyxz} = M_{dyz}^{(2)} - M_{dyz}^{(5)} + 2 M_{gbx}^{(1)} + 4 T_{fax}^{(1)} + T_{fax}^{(2)} - T_{fbx}^{(2)} + T_{px}^{(1)} - T_{px}^{(4)} \\
+& M_{xyyx} = - 2 M_{du}^{(2)} - 2 M_{dv}^{(5)} + 2 M_{gu}^{(1)} - M_{g}^{(1)} + M_{s}^{(2)} - T_{f3}^{(2)}
+\end{align*}
+* Rank 4 tensor (a).
+\begin{align*}
+\begin{bmatrix} M_{yzxx} & M_{yzyy} & M_{yzzz} & M_{yzyz} & M_{yzzx} & M_{yzxy} & M_{yzzy} & M_{yzxz} & M_{yzyx} \\ M_{zxxx} & M_{zxyy} & M_{zxzz} & M_{zxyz} & M_{zxzx} & M_{zxxy} & M_{zxzy} & M_{zxxz} & M_{zxyx} \\ M_{xyxx} & M_{xyyy} & M_{xyzz} & M_{xyyz} & M_{xyzx} & M_{xyxy} & M_{xyzy} & M_{xyxz} & M_{xyyx} \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{yzxx} = 2 T_{fax}^{(3)} + T_{px}^{(5)} + 2 T_{px}^{(6)} \\
+& M_{yzyy} = - 2 M_{dyz}^{(6)} - T_{fax}^{(3)} + T_{fbx}^{(3)} + T_{px}^{(5)} \\
+& M_{yzzz} = 2 M_{dyz}^{(6)} - T_{fax}^{(3)} - T_{fbx}^{(3)} + T_{px}^{(5)} \\
+& M_{yzyz} = - 2 M_{du}^{(4)} - 3 M_{du}^{(6)} + 2 M_{dv}^{(4)} - M_{dv}^{(6)} + M_{s}^{(3)} + T_{f3}^{(3)} \\
+& M_{yzzx} = 2 M_{dxy}^{(4)} + M_{dxy}^{(6)} - T_{faz}^{(3)} + T_{fbz}^{(3)} - T_{pz}^{(2)} + T_{pz}^{(6)} \\
+& M_{yzxy} = 2 M_{dxz}^{(4)} - M_{dxz}^{(6)} - T_{fay}^{(3)} - T_{fby}^{(3)} + T_{py}^{(2)} + T_{py}^{(6)} \\
+& M_{yzzy} = 2 M_{du}^{(4)} - 3 M_{du}^{(6)} - 2 M_{dv}^{(4)} - M_{dv}^{(6)} - M_{s}^{(3)} + T_{f3}^{(3)} \\
+& M_{yzxz} = - 2 M_{dxy}^{(4)} + M_{dxy}^{(6)} - T_{faz}^{(3)} + T_{fbz}^{(3)} + T_{pz}^{(2)} + T_{pz}^{(6)} \\
+& M_{yzyx} = - 2 M_{dxz}^{(4)} - M_{dxz}^{(6)} - T_{fay}^{(3)} - T_{fby}^{(3)} - T_{py}^{(2)} + T_{py}^{(6)} \\
+& M_{zxxx} = 2 M_{dxz}^{(6)} - T_{fay}^{(3)} - T_{fby}^{(3)} + T_{py}^{(5)} \\
+& M_{zxyy} = 2 T_{fay}^{(3)} + T_{py}^{(5)} + 2 T_{py}^{(6)} \\
+& M_{zxzz} = - 2 M_{dxz}^{(6)} - T_{fay}^{(3)} + T_{fby}^{(3)} + T_{py}^{(5)} \\
+& M_{zxyz} = 2 M_{dxy}^{(4)} - M_{dxy}^{(6)} - T_{faz}^{(3)} - T_{fbz}^{(3)} + T_{pz}^{(2)} + T_{pz}^{(6)} \\
+& M_{zxzx} = - 2 M_{du}^{(4)} + 3 M_{du}^{(6)} - 2 M_{dv}^{(4)} - M_{dv}^{(6)} + M_{s}^{(3)} + T_{f3}^{(3)} \\
+& M_{zxxy} = 2 M_{dyz}^{(4)} + M_{dyz}^{(6)} - T_{fax}^{(3)} + T_{fbx}^{(3)} - T_{px}^{(2)} + T_{px}^{(6)} \\
+& M_{zxzy} = - 2 M_{dxy}^{(4)} - M_{dxy}^{(6)} - T_{faz}^{(3)} - T_{fbz}^{(3)} - T_{pz}^{(2)} + T_{pz}^{(6)} \\
+& M_{zxxz} = 2 M_{du}^{(4)} + 3 M_{du}^{(6)} + 2 M_{dv}^{(4)} - M_{dv}^{(6)} - M_{s}^{(3)} + T_{f3}^{(3)} \\
+& M_{zxyx} = - 2 M_{dyz}^{(4)} + M_{dyz}^{(6)} - T_{fax}^{(3)} + T_{fbx}^{(3)} + T_{px}^{(2)} + T_{px}^{(6)} \\
+& M_{xyxx} = - 2 M_{dxy}^{(6)} - T_{faz}^{(3)} + T_{fbz}^{(3)} + T_{pz}^{(5)} \\
+& M_{xyyy} = 2 M_{dxy}^{(6)} - T_{faz}^{(3)} - T_{fbz}^{(3)} + T_{pz}^{(5)} \\
+& M_{xyzz} = 2 T_{faz}^{(3)} + T_{pz}^{(5)} + 2 T_{pz}^{(6)} \\
+& M_{xyyz} = 2 M_{dxz}^{(4)} + M_{dxz}^{(6)} - T_{fay}^{(3)} + T_{fby}^{(3)} - T_{py}^{(2)} + T_{py}^{(6)} \\
+& M_{xyzx} = 2 M_{dyz}^{(4)} - M_{dyz}^{(6)} - T_{fax}^{(3)} - T_{fbx}^{(3)} + T_{px}^{(2)} + T_{px}^{(6)} \\
+& M_{xyxy} = 4 M_{du}^{(4)} + 2 M_{dv}^{(6)} + M_{s}^{(3)} + T_{f3}^{(3)} \\
+& M_{xyzy} = - 2 M_{dxz}^{(4)} + M_{dxz}^{(6)} - T_{fay}^{(3)} + T_{fby}^{(3)} + T_{py}^{(2)} + T_{py}^{(6)} \\
+& M_{xyxz} = - 2 M_{dyz}^{(4)} - M_{dyz}^{(6)} - T_{fax}^{(3)} - T_{fbx}^{(3)} - T_{px}^{(2)} + T_{px}^{(6)} \\
+& M_{xyyx} = - 4 M_{du}^{(4)} + 2 M_{dv}^{(6)} - M_{s}^{(3)} + T_{f3}^{(3)}
+\end{align*}
+* Rank 4 tensor (t).
+\begin{align*}
+\begin{bmatrix} M_{xxxx} & M_{xxxy} & M_{xxxz} \\ M_{yyyx} & M_{yyyy} & M_{yyyz} \\ M_{zzzx} & M_{zzzy} & M_{zzzz} \\ M_{yyzx} & M_{yyzy} & M_{yyzz} \\ M_{zzxx} & M_{zzxy} & M_{zzxz} \\ M_{xxyx} & M_{xxyy} & M_{xxyz} \\ M_{yzzx} & M_{yzzy} & M_{yzzz} \\ M_{zxxx} & M_{zxxy} & M_{zxxz} \\ M_{xxyy} + M_{yyzz} - M_{yzzy} - M_{zxxz} + M_{zzxx} & M_{xyyy} & M_{xyyz} \\ - \frac{M_{yyyz}}{2} + \frac{M_{yyzy}}{2} + M_{zxxy} & M_{xyyz} + \frac{M_{zzxz}}{2} - \frac{M_{zzzx}}{2} & \frac{M_{xxxy}}{2} - \frac{M_{xxyx}}{2} + M_{xyyy} - M_{yyyx} + M_{zzxy} \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{xxxx} = - 2 M_{du}^{(1)} - 4 M_{du}^{(2)} + 2 M_{dv}^{(1)} + 4 M_{dv}^{(2)} - M_{gu}^{(1)} + M_{gv}^{(1)} + 2 M_{g}^{(1)} + 3 M_{s}^{(1)} \\
+& M_{xxxy} = M_{dxy}^{(1)} + 2 M_{dxy}^{(2)} + M_{dxy}^{(3)} - 2 M_{dxy}^{(5)} + M_{gaz}^{(1)} - M_{gbz}^{(1)} \\
+& M_{xxxz} = M_{dxz}^{(1)} + 2 M_{dxz}^{(2)} + M_{dxz}^{(3)} - 2 M_{dxz}^{(5)} - M_{gay}^{(1)} - M_{gby}^{(1)} \\
+& M_{yyyx} = M_{dxy}^{(1)} + 2 M_{dxy}^{(2)} + M_{dxy}^{(3)} - 2 M_{dxy}^{(5)} - M_{gaz}^{(1)} - M_{gbz}^{(1)} \\
+& M_{yyyy} = - 2 M_{du}^{(1)} - 4 M_{du}^{(2)} - 2 M_{dv}^{(1)} - 4 M_{dv}^{(2)} - M_{gu}^{(1)} - M_{gv}^{(1)} + 2 M_{g}^{(1)} + 3 M_{s}^{(1)} \\
+& M_{yyyz} = M_{dyz}^{(1)} + 2 M_{dyz}^{(2)} + M_{dyz}^{(3)} - 2 M_{dyz}^{(5)} + M_{gax}^{(1)} - M_{gbx}^{(1)} \\
+& M_{zzzx} = M_{dxz}^{(1)} + 2 M_{dxz}^{(2)} + M_{dxz}^{(3)} - 2 M_{dxz}^{(5)} + M_{gay}^{(1)} - M_{gby}^{(1)} \\
+& M_{zzzy} = M_{dyz}^{(1)} + 2 M_{dyz}^{(2)} + M_{dyz}^{(3)} - 2 M_{dyz}^{(5)} - M_{gax}^{(1)} - M_{gbx}^{(1)} \\
+& M_{zzzz} = 4 M_{du}^{(1)} + 8 M_{du}^{(2)} + 2 M_{gu}^{(1)} + 2 M_{g}^{(1)} + 3 M_{s}^{(1)} \\
+& M_{yyzx} = M_{dxz}^{(1)} + M_{dxz}^{(3)} + 2 M_{gby}^{(1)} \\
+& M_{yyzy} = M_{dyz}^{(1)} + 2 M_{dyz}^{(2)} + M_{dyz}^{(3)} + 2 M_{dyz}^{(5)} + M_{gax}^{(1)} - M_{gbx}^{(1)} \\
+& M_{yyzz} = M_{du}^{(1)} + 3 M_{du}^{(3)} - M_{dv}^{(1)} + M_{dv}^{(3)} - M_{gu}^{(1)} + M_{gv}^{(1)} - M_{g}^{(1)} + M_{s}^{(1)} \\
+& M_{zzxx} = M_{du}^{(1)} - 3 M_{du}^{(3)} + M_{dv}^{(1)} + M_{dv}^{(3)} - M_{gu}^{(1)} - M_{gv}^{(1)} - M_{g}^{(1)} + M_{s}^{(1)} \\
+& M_{zzxy} = M_{dxy}^{(1)} + M_{dxy}^{(3)} + 2 M_{gbz}^{(1)} \\
+& M_{zzxz} = M_{dxz}^{(1)} + 2 M_{dxz}^{(2)} + M_{dxz}^{(3)} + 2 M_{dxz}^{(5)} + M_{gay}^{(1)} - M_{gby}^{(1)} \\
+& M_{xxyx} = M_{dxy}^{(1)} + 2 M_{dxy}^{(2)} + M_{dxy}^{(3)} + 2 M_{dxy}^{(5)} + M_{gaz}^{(1)} - M_{gbz}^{(1)} \\
+& M_{xxyy} = - 2 M_{du}^{(1)} - 2 M_{dv}^{(3)} + 2 M_{gu}^{(1)} - M_{g}^{(1)} + M_{s}^{(1)} \\
+& M_{xxyz} = M_{dyz}^{(1)} + M_{dyz}^{(3)} + 2 M_{gbx}^{(1)} \\
+& M_{yzzx} = M_{dxy}^{(2)} - M_{dxy}^{(5)} + 2 M_{gbz}^{(1)} \\
+& M_{yzzy} = M_{du}^{(2)} + 3 M_{du}^{(5)} - M_{dv}^{(2)} + M_{dv}^{(5)} - M_{gu}^{(1)} + M_{gv}^{(1)} - M_{g}^{(1)} + M_{s}^{(1)} \\
+& M_{yzzz} = M_{dyz}^{(1)} + 2 M_{dyz}^{(2)} - M_{dyz}^{(3)} - M_{gax}^{(1)} - M_{gbx}^{(1)} \\
+& M_{zxxx} = M_{dxz}^{(1)} + 2 M_{dxz}^{(2)} - M_{dxz}^{(3)} - M_{gay}^{(1)} - M_{gby}^{(1)} \\
+& M_{zxxy} = M_{dyz}^{(2)} - M_{dyz}^{(5)} + 2 M_{gbx}^{(1)} \\
+& M_{zxxz} = M_{du}^{(2)} - 3 M_{du}^{(5)} + M_{dv}^{(2)} + M_{dv}^{(5)} - M_{gu}^{(1)} - M_{gv}^{(1)} - M_{g}^{(1)} + M_{s}^{(1)} \\
+& M_{xyyy} = M_{dxy}^{(1)} + 2 M_{dxy}^{(2)} - M_{dxy}^{(3)} - M_{gaz}^{(1)} - M_{gbz}^{(1)} \\
+& M_{xyyz} = M_{dxz}^{(2)} - M_{dxz}^{(5)} + 2 M_{gby}^{(1)}
+\end{align*}
+
+\end{document}

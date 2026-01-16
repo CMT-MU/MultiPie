@@ -1,0 +1,119 @@
+\documentclass[fleqn,8pt,landscape]{jsarticle}
+\special{papersize=\the\paperwidth,\the\paperheight}
+
+%%% package
+
+\usepackage[usenames]{color}
+\usepackage{amsmath}
+\usepackage{breqn}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{enumitem}
+\usepackage{braket}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+%%% layout setting
+
+\paperwidth=356.4truemm
+\paperheight=252.0truemm
+\textwidth=335.59999999999997truemm
+\textheight=224.2truemm
+\oddsidemargin=-15truemm
+\topmargin=-15truemm
+\footskip=7truemm
+
+%%% fixed
+
+\hoffset=0truemm
+\voffset=0truemm
+\headheight=0truemm
+\headsep=0truemm
+\marginparsep=0truemm
+\marginparwidth=0truemm
+
+%%% main text
+
+\begin{document}
+
+\setcounter{MaxMatrixCols}{32}
+
+\renewcommand{\tablename}{Table~}
+\renewcommand{\figurename}{Figure~}
+\begin{center}
+\LARGE
+MPG No. 27.6.105\quad$6/mm'm'$\quad[ Type III, hexagonal ] [T tensor]
+\end{center}
+* Rank 0 tensor.
+* Rank 1 tensor.
+* Rank 2 tensor (s).
+* Rank 2 tensor (a).
+\begin{align*}
+\begin{bmatrix} 0 & T_{xy} & 0 \\ - T_{xy} & 0 & 0 \\ 0 & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& T_{xy} = M_{pz}^{(1)}
+\end{align*}
+* Rank 3 tensor (s).
+* Rank 3 tensor (a).
+* Rank 4 tensor (sss).
+* Rank 4 tensor (ssa).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & 0 & 0 & 0 & T_{xxxy} \\ 0 & 0 & 0 & 0 & 0 & - T_{xxxy} \\ 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & T_{yzzx} & 0 \\ 0 & 0 & 0 & - T_{yzzx} & 0 & 0 \\ - T_{xxxy} & T_{xxxy} & 0 & 0 & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& T_{xxxy} = - 2 M_{faz}^{(1)} + 2 M_{pz}^{(1)} \\
+& T_{yzzx} = - 4 M_{faz}^{(1)} - M_{pz}^{(1)}
+\end{align*}
+* Rank 4 tensor (aas).
+* Rank 4 tensor (aaa).
+\begin{align*}
+\begin{bmatrix} 0 & T_{yzzx} & 0 \\ - T_{yzzx} & 0 & 0 \\ 0 & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& T_{yzzx} = - M_{pz}^{(2)}
+\end{align*}
+* Rank 4 tensor (sa).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & T_{xxxy} \\ 0 & 0 & T_{xxxy} \\ 0 & 0 & T_{zzxy} \\ 0 & T_{yzzx} & 0 \\ T_{yzzx} & 0 & 0 \\ 0 & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& T_{xxxy} = - M_{faz}^{(2)} + M_{pz}^{(3)} \\
+& T_{zzxy} = 2 M_{faz}^{(2)} + M_{pz}^{(3)} + 2 M_{pz}^{(4)} \\
+& T_{yzzx} = - M_{faz}^{(2)} + M_{pz}^{(4)}
+\end{align*}
+* Rank 4 tensor (as).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & 0 & 0 & T_{yzzx} & 0 \\ 0 & 0 & 0 & T_{yzzx} & 0 & 0 \\ T_{xyxx} & T_{xyxx} & T_{xyzz} & 0 & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& T_{yzzx} = - M_{faz}^{(3)} + M_{pz}^{(6)} \\
+& T_{xyxx} = - M_{faz}^{(3)} + M_{pz}^{(5)} \\
+& T_{xyzz} = 2 M_{faz}^{(3)} + M_{pz}^{(5)} + 2 M_{pz}^{(6)}
+\end{align*}
+* Rank 4 tensor (s).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & 0 & 0 & 0 & T_{xxxy} & 0 & 0 & T_{xxyx} \\ 0 & 0 & 0 & 0 & 0 & - T_{xxyx} & 0 & 0 & - T_{xxxy} \\ 0 & 0 & 0 & 0 & 0 & T_{zzxy} & 0 & 0 & - T_{zzxy} \\ 0 & 0 & 0 & 0 & T_{yzzx} & 0 & 0 & T_{yzxz} & 0 \\ 0 & 0 & 0 & - T_{yzxz} & 0 & 0 & - T_{yzzx} & 0 & 0 \\ - \frac{T_{xxxy}}{2} - \frac{T_{xxyx}}{2} & \frac{T_{xxxy}}{2} + \frac{T_{xxyx}}{2} & 0 & 0 & 0 & 0 & 0 & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& T_{xxxy} = - 2 M_{faz}^{(1)} - M_{faz}^{(2)} + 2 M_{pz}^{(1)} + M_{pz}^{(3)} \\
+& T_{xxyx} = - 2 M_{faz}^{(1)} + M_{faz}^{(2)} + 2 M_{pz}^{(1)} - M_{pz}^{(3)} \\
+& T_{zzxy} = 2 M_{faz}^{(2)} + M_{pz}^{(3)} + 2 M_{pz}^{(4)} \\
+& T_{yzzx} = - 4 M_{faz}^{(1)} - M_{faz}^{(2)} - M_{pz}^{(1)} + M_{pz}^{(4)} \\
+& T_{yzxz} = - 4 M_{faz}^{(1)} + M_{faz}^{(2)} - M_{pz}^{(1)} - M_{pz}^{(4)}
+\end{align*}
+* Rank 4 tensor (a).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & 0 & 0 & T_{yzzx} & 0 & 0 & T_{yzxz} & 0 \\ 0 & 0 & 0 & T_{yzxz} & 0 & 0 & T_{yzzx} & 0 & 0 \\ T_{xyxx} & T_{xyxx} & T_{xyzz} & 0 & 0 & 0 & 0 & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& T_{yzzx} = - M_{faz}^{(3)} - M_{pz}^{(2)} + M_{pz}^{(6)} \\
+& T_{yzxz} = - M_{faz}^{(3)} + M_{pz}^{(2)} + M_{pz}^{(6)} \\
+& T_{xyxx} = - M_{faz}^{(3)} + M_{pz}^{(5)} \\
+& T_{xyzz} = 2 M_{faz}^{(3)} + M_{pz}^{(5)} + 2 M_{pz}^{(6)}
+\end{align*}
+* Rank 4 tensor (t).
+
+\end{document}

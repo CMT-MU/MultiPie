@@ -1,0 +1,632 @@
+\documentclass[fleqn,10pt,landscape]{jsarticle}
+\special{papersize=\the\paperwidth,\the\paperheight}
+
+%%% package
+
+\usepackage[usenames]{color}
+\usepackage{amsmath}
+\usepackage{breqn}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{enumitem}
+\usepackage{braket}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+%%% layout setting
+
+\paperwidth=297.0truemm
+\paperheight=210.0truemm
+\textwidth=246.2truemm
+\textheight=152.2truemm
+\oddsidemargin=0truemm
+\topmargin=0truemm
+\footskip=7truemm
+
+%%% fixed
+
+\hoffset=0truemm
+\voffset=0truemm
+\headheight=0truemm
+\headsep=0truemm
+\marginparsep=0truemm
+\marginparwidth=0truemm
+
+%%% main text
+
+\begin{document}
+
+\setcounter{MaxMatrixCols}{32}
+
+\renewcommand{\tablename}{Table~}
+\renewcommand{\figurename}{Figure~}
+\setlength{\baselineskip}{16pt}
+\setlength{\parindent}{0pt}
+\setlength{\mathindent}{0pt}
+\footnotesize
+\begin{center}
+\LARGE
+Model for ``\texttt{GaAs}''
+\end{center}
+\begin{flushright}
+Generated on 2026-01-16 09:15:56 by MultiPie 2.0.0
+\end{flushright}
+\setlength{\baselineskip}{16pt}
+\footnotesize
+\vspace{5mm}
+\noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{General Condition}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
+\vspace{3mm}
+
+\begin{itemize}
+\item Basis type: \texttt{lg}
+
+\item SAMB selection:
+
+\, - Type: \texttt{[Q, G]}
+
+\, - Rank: \texttt{[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]}
+
+\, - Irrep.: [$A_{1}$, $A_{2}$, $E$, $T_{1}$, $T_{2}$]
+
+\, - Spin (s): \texttt{[0, 1]}
+
+\item Max. neighbor: \texttt{10}
+
+\item Search cell range: \texttt{(-2, 3), (-2, 3), (-2, 3)}
+
+\item Toroidal priority: \texttt{false}
+
+\end{itemize}
+\vspace{5mm}
+\noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{Group and Unit Cell}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
+\vspace{3mm}
+
+\begin{itemize}
+\item Group: SG No. 216\quad$T_{\rm d}^{2}$\quad$F\bar{4}3m$\quad[ cubic ]
+\item Associated point group: PG No. 216\quad$T_{\rm d}$\quad$\bar{4}3m$\quad[ cubic ]
+\end{itemize}
+\begin{itemize}
+\item Unit cell:
+
+\quad $a=\texttt{ 1.00000},\,\, b=\texttt{ 1.00000},\,\, c=\texttt{ 1.00000},\,\, \alpha=\texttt{90.0},\,\, \beta=\texttt{90.0},\,\, \gamma=\texttt{90.0}$
+
+\item Lattice vectors (conventional cell):
+
+\quad $\bm{a}_1=\texttt{[ 1.00000, 0.00000, 0.00000]}$
+
+\quad $\bm{a}_2=\texttt{[ 0.00000, 1.00000, 0.00000]}$
+
+\quad $\bm{a}_3=\texttt{[ 0.00000, 0.00000, 1.00000]}$
+
+\item Plus sets:
+
+\quad $+\left[ 0,\, 0,\, 0 \right]$,\,\,\, $+\left[ 0,\, \frac{1}{2},\, \frac{1}{2} \right]$,\,\,\, $+\left[ \frac{1}{2},\, 0,\, \frac{1}{2} \right]$,\,\,\, $+\left[ \frac{1}{2},\, \frac{1}{2},\, 0 \right]$
+
+\end{itemize}
+\vspace{5mm}
+\noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{Symmetry Operation}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
+\vspace{3mm}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{longtable}{c|cl|cl|cl|cl|cl}
+\caption{Symmetry operation}
+ \\
+ \hline \hline
+ & \# & SO & \# & SO & \# & SO & \# & SO & \# & SO \\ \hline \endfirsthead
+
+\multicolumn{10}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+ & \# & SO & \# & SO & \# & SO & \# & SO & \# & SO \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{10}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{10}{r}{} \\ \endlastfoot
+
+ & 1 & $\{1|0\}$ & 2 & $\{2{}_{001}|0\}$ & 3 & $\{2{}_{010}|0\}$ & 4 & $\{2{}_{100}|0\}$ & 5 & $\{3^{+}_{\,\,111}|0\}$ \\
+& 6 & $\{3^{+}_{\,\,-11-1}|0\}$ & 7 & $\{3^{+}_{\,\,1-1-1}|0\}$ & 8 & $\{3^{+}_{\,\,-1-11}|0\}$ & 9 & $\{3^{-}_{\,\,111}|0\}$ & 10 & $\{3^{-}_{\,\,1-1-1}|0\}$ \\
+& 11 & $\{3^{-}_{\,\,-1-11}|0\}$ & 12 & $\{3^{-}_{\,\,-11-1}|0\}$ & 13 & $\{{\rm m}_{1-10}|0\}$ & 14 & $\{{\rm m}_{110}|0\}$ & 15 & $\{-4^{+}_{\,\,001}|0\}$ \\
+& 16 & $\{-4^{-}_{\,\,001}|0\}$ & 17 & $\{{\rm m}_{01-1}|0\}$ & 18 & $\{-4^{+}_{\,\,100}|0\}$ & 19 & $\{-4^{-}_{\,\,100}|0\}$ & 20 & $\{{\rm m}_{011}|0\}$ \\
+& 21 & $\{{\rm m}_{-101}|0\}$ & 22 & $\{-4^{-}_{\,\,010}|0\}$ & 23 & $\{{\rm m}_{101}|0\}$ & 24 & $\{-4^{+}_{\,\,010}|0\}$ &  &  \\
+\end{longtable}
+\end{center}
+\vspace{5mm}
+\noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{Harmonics}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
+\vspace{3mm}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{longtable}{clcccccl}
+\caption{Harmonics}
+ \\
+ \hline \hline
+\# & symbol & irrep. & rank & X & multiplicity & component & symmetry \\ \hline \endfirsthead
+
+\multicolumn{7}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+\# & symbol & irrep. & rank & X & multiplicity & component & symmetry \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{7}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{7}{r}{} \\ \endlastfoot
+
+1 & $\mathbb{Q}_{0}(A_{1})$ & $A_{1}$ & 0 & $Q$, $T$ & - & - & $1$ \\ \hline
+2 & $\mathbb{Q}_{3}(A_{1})$ & $A_{1}$ & 3 & $Q$, $T$ & - & - & $\sqrt{15} x y z$ \\ \hline
+3 & $\mathbb{G}_{0}(A_{2})$ & $A_{2}$ & 0 & $G$, $M$ & - & - & $1$ \\ \hline
+4 & $\mathbb{G}_{2,1}(E)$ & $E$ & 2 & $G$, $M$ & - & 1 & $- \frac{\sqrt{3} \left(x - y\right) \left(x + y\right)}{2}$ \\
+5 & $\mathbb{G}_{2,2}(E)$ &  &  &  &  & 2 & $- \frac{x^{2}}{2} - \frac{y^{2}}{2} + z^{2}$ \\ \hline
+6 & $\mathbb{Q}_{2,1}(E)$ & $E$ & 2 & $Q$, $T$ & - & 1 & $- \frac{x^{2}}{2} - \frac{y^{2}}{2} + z^{2}$ \\
+7 & $\mathbb{Q}_{2,2}(E)$ &  &  &  &  & 2 & $\frac{\sqrt{3} \left(x - y\right) \left(x + y\right)}{2}$ \\ \hline
+8 & $\mathbb{G}_{1,1}(T_{1})$ & $T_{1}$ & 1 & $G$, $M$ & - & 1 & $x$ \\
+9 & $\mathbb{G}_{1,2}(T_{1})$ &  &  &  &  & 2 & $y$ \\
+10 & $\mathbb{G}_{1,3}(T_{1})$ &  &  &  &  & 3 & $z$ \\ \hline
+11 & $\mathbb{G}_{2,1}(T_{1})$ & $T_{1}$ & 2 & $G$, $M$ & - & 1 & $\sqrt{3} y z$ \\
+12 & $\mathbb{G}_{2,2}(T_{1})$ &  &  &  &  & 2 & $\sqrt{3} x z$ \\
+13 & $\mathbb{G}_{2,3}(T_{1})$ &  &  &  &  & 3 & $\sqrt{3} x y$ \\ \hline
+14 & $\mathbb{Q}_{3,1}(T_{1})$ & $T_{1}$ & 3 & $Q$, $T$ & - & 1 & $\frac{\sqrt{15} x \left(y - z\right) \left(y + z\right)}{2}$ \\
+15 & $\mathbb{Q}_{3,2}(T_{1})$ &  &  &  &  & 2 & $- \frac{\sqrt{15} y \left(x - z\right) \left(x + z\right)}{2}$ \\
+16 & $\mathbb{Q}_{3,3}(T_{1})$ &  &  &  &  & 3 & $\frac{\sqrt{15} z \left(x - y\right) \left(x + y\right)}{2}$ \\ \hline
+17 & $\mathbb{Q}_{1,1}(T_{2})$ & $T_{2}$ & 1 & $Q$, $T$ & - & 1 & $x$ \\
+18 & $\mathbb{Q}_{1,2}(T_{2})$ &  &  &  &  & 2 & $y$ \\
+19 & $\mathbb{Q}_{1,3}(T_{2})$ &  &  &  &  & 3 & $z$ \\ \hline
+20 & $\mathbb{Q}_{2,1}(T_{2})$ & $T_{2}$ & 2 & $Q$, $T$ & - & 1 & $\sqrt{3} y z$ \\
+21 & $\mathbb{Q}_{2,2}(T_{2})$ &  &  &  &  & 2 & $\sqrt{3} x z$ \\
+22 & $\mathbb{Q}_{2,3}(T_{2})$ &  &  &  &  & 3 & $\sqrt{3} x y$ \\ \hline
+23 & $\mathbb{Q}_{3,1}(T_{2})$ & $T_{2}$ & 3 & $Q$, $T$ & - & 1 & $\frac{x \left(2 x^{2} - 3 y^{2} - 3 z^{2}\right)}{2}$ \\
+24 & $\mathbb{Q}_{3,2}(T_{2})$ &  &  &  &  & 2 & $- \frac{y \left(3 x^{2} - 2 y^{2} + 3 z^{2}\right)}{2}$ \\
+25 & $\mathbb{Q}_{3,3}(T_{2})$ &  &  &  &  & 3 & $- \frac{z \left(3 x^{2} + 3 y^{2} - 2 z^{2}\right)}{2}$ \\
+\end{longtable}
+\end{center}
+\vspace{5mm}
+\noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{Basis in full matrix}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
+\vspace{3mm}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{longtable}{c|cl|cl|cl|cl|cl}
+\caption{dimension = 6}
+ \\
+ \hline \hline
+ & \# & orbital@atom(SL) & \# & orbital@atom(SL) & \# & orbital@atom(SL) & \# & orbital@atom(SL) & \# & orbital@atom(SL) \\ \hline \endfirsthead
+
+\multicolumn{10}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+ & \# & orbital@atom(SL) & \# & orbital@atom(SL) & \# & orbital@atom(SL) & \# & orbital@atom(SL) & \# & orbital@atom(SL) \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{10}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{10}{r}{} \\ \endlastfoot
+
+ & 1 & $\ket{p_{x}}@{\rm As}(1)$ & 2 & $\ket{p_{y}}@{\rm As}(1)$ & 3 & $\ket{p_{z}}@{\rm As}(1)$ & 4 & $\ket{p_{x}}@{\rm Ga}(1)$ & 5 & $\ket{p_{y}}@{\rm Ga}(1)$ \\
+& 6 & $\ket{p_{z}}@{\rm Ga}(1)$ &  &  &  &  &  &  &  &  \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{longtable}{ll}
+\caption{Atomic basis (orbital part only)}
+ \\
+ \hline \hline
+orbital & definition \\ \hline \endfirsthead
+
+\multicolumn{1}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+orbital & definition \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{1}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{1}{r}{} \\ \endlastfoot
+
+$ \ket{p_{x}} $ & $ x $ \\
+$ \ket{p_{y}} $ & $ y $ \\
+$ \ket{p_{z}} $ & $ z $ \\
+\end{longtable}
+\end{center}
+\vspace{5mm}
+\noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{SAMB}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
+\vspace{3mm}
+
+\noindent21 (all 48) SAMBs
+
+\vspace{5mm}
+
+\noindent\textbullet\, '\texttt{As}' site-cluster
+
+\noindent\quad * bra: $\bra{p_{x}},\, \bra{p_{y}},\, \bra{p_{z}}$
+
+\noindent\quad * ket: $\ket{p_{x}},\, \ket{p_{y}},\, \ket{p_{z}}$
+
+\noindent\quad * wyckoff: \texttt{4c}
+
+\begin{dmath*}
+\fbox{z1}\quad \mathbb{Q}_{0}^{(c)}(A_{1})=\mathbb{Q}_{0}^{(a)}(A_{1}) \mathbb{Q}_{0}^{(s)}(A_{1})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z6}\quad \mathbb{Q}_{2,1}^{(c)}(E)=\frac{\sqrt{2} \mathbb{Q}_{2,1}^{(a)}(E) \mathbb{Q}_{0}^{(s)}(A_{1})}{2}
+\end{dmath*}
+\begin{dmath*}
+\fbox{z7}\quad \mathbb{Q}_{2,2}^{(c)}(E)=\frac{\sqrt{2} \mathbb{Q}_{2,2}^{(a)}(E) \mathbb{Q}_{0}^{(s)}(A_{1})}{2}
+\end{dmath*}
+\begin{dmath*}
+\fbox{z28}\quad \mathbb{Q}_{2,1}^{(c)}(T_{2})=\frac{\sqrt{3} \mathbb{Q}_{2,1}^{(a)}(T_{2}) \mathbb{Q}_{0}^{(s)}(A_{1})}{3}
+\end{dmath*}
+\begin{dmath*}
+\fbox{z29}\quad \mathbb{Q}_{2,2}^{(c)}(T_{2})=\frac{\sqrt{3} \mathbb{Q}_{2,2}^{(a)}(T_{2}) \mathbb{Q}_{0}^{(s)}(A_{1})}{3}
+\end{dmath*}
+\begin{dmath*}
+\fbox{z30}\quad \mathbb{Q}_{2,3}^{(c)}(T_{2})=\frac{\sqrt{3} \mathbb{Q}_{2,3}^{(a)}(T_{2}) \mathbb{Q}_{0}^{(s)}(A_{1})}{3}
+\end{dmath*}
+\vspace{5mm}
+
+\noindent\textbullet\, '\texttt{Ga}' site-cluster
+
+\noindent\quad * bra: $\bra{p_{x}},\, \bra{p_{y}},\, \bra{p_{z}}$
+
+\noindent\quad * ket: $\ket{p_{x}},\, \ket{p_{y}},\, \ket{p_{z}}$
+
+\noindent\quad * wyckoff: \texttt{4a}
+
+\begin{dmath*}
+\fbox{z2}\quad \mathbb{Q}_{0}^{(c)}(A_{1})=\mathbb{Q}_{0}^{(a)}(A_{1}) \mathbb{Q}_{0}^{(s)}(A_{1})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z8}\quad \mathbb{Q}_{2,1}^{(c)}(E)=\frac{\sqrt{2} \mathbb{Q}_{2,1}^{(a)}(E) \mathbb{Q}_{0}^{(s)}(A_{1})}{2}
+\end{dmath*}
+\begin{dmath*}
+\fbox{z9}\quad \mathbb{Q}_{2,2}^{(c)}(E)=\frac{\sqrt{2} \mathbb{Q}_{2,2}^{(a)}(E) \mathbb{Q}_{0}^{(s)}(A_{1})}{2}
+\end{dmath*}
+\begin{dmath*}
+\fbox{z31}\quad \mathbb{Q}_{2,1}^{(c)}(T_{2})=\frac{\sqrt{3} \mathbb{Q}_{2,1}^{(a)}(T_{2}) \mathbb{Q}_{0}^{(s)}(A_{1})}{3}
+\end{dmath*}
+\begin{dmath*}
+\fbox{z32}\quad \mathbb{Q}_{2,2}^{(c)}(T_{2})=\frac{\sqrt{3} \mathbb{Q}_{2,2}^{(a)}(T_{2}) \mathbb{Q}_{0}^{(s)}(A_{1})}{3}
+\end{dmath*}
+\begin{dmath*}
+\fbox{z33}\quad \mathbb{Q}_{2,3}^{(c)}(T_{2})=\frac{\sqrt{3} \mathbb{Q}_{2,3}^{(a)}(T_{2}) \mathbb{Q}_{0}^{(s)}(A_{1})}{3}
+\end{dmath*}
+\vspace{5mm}
+
+\noindent\textbullet\, '\texttt{As}'-'\texttt{Ga}' bond-cluster
+
+\noindent\quad * bra: $\bra{p_{x}},\, \bra{p_{y}},\, \bra{p_{z}}$
+
+\noindent\quad * ket: $\ket{p_{x}},\, \ket{p_{y}},\, \ket{p_{z}}$
+
+\noindent\quad * wyckoff: \texttt{16a@16e}
+
+\begin{dmath*}
+\fbox{z3}\quad \mathbb{Q}_{0}^{(c)}(A_{1})=\mathbb{Q}_{0}^{(a)}(A_{1}) \mathbb{Q}_{0}^{(b)}(A_{1})
+\end{dmath*}
+\begin{dmath*}
+\fbox{z4}\quad \mathbb{Q}_{3}^{(c)}(A_{1})=\frac{\sqrt{3} \mathbb{Q}_{2,1}^{(a)}(T_{2}) \mathbb{Q}_{1,1}^{(b)}(T_{2})}{3} + \frac{\sqrt{3} \mathbb{Q}_{2,2}^{(a)}(T_{2}) \mathbb{Q}_{1,2}^{(b)}(T_{2})}{3} + \frac{\sqrt{3} \mathbb{Q}_{2,3}^{(a)}(T_{2}) \mathbb{Q}_{1,3}^{(b)}(T_{2})}{3}
+\end{dmath*}
+\begin{dmath*}
+\fbox{z5}\quad \mathbb{Q}_{2,1}^{(c)}(E)=\frac{\sqrt{2} \mathbb{Q}_{2,1}^{(a)}(E) \mathbb{Q}_{0}^{(b)}(A_{1})}{2}
+\end{dmath*}
+\begin{dmath*}
+\fbox{z10}\quad \mathbb{Q}_{2,2}^{(c)}(E)=\frac{\sqrt{2} \mathbb{Q}_{2,2}^{(a)}(E) \mathbb{Q}_{0}^{(b)}(A_{1})}{2}
+\end{dmath*}
+\begin{dmath*}
+\fbox{z11}\quad \mathbb{Q}_{3,1}^{(c)}(T_{1})=- \frac{\sqrt{3} \mathbb{Q}_{2,1}^{(a)}(E) \mathbb{Q}_{1,1}^{(b)}(T_{2})}{6} - \frac{\mathbb{Q}_{2,2}^{(a)}(E) \mathbb{Q}_{1,1}^{(b)}(T_{2})}{6} - \frac{\mathbb{Q}_{2,2}^{(a)}(T_{2}) \mathbb{Q}_{1,3}^{(b)}(T_{2})}{3} + \frac{\mathbb{Q}_{2,3}^{(a)}(T_{2}) \mathbb{Q}_{1,2}^{(b)}(T_{2})}{3}
+\end{dmath*}
+\begin{dmath*}
+\fbox{z12}\quad \mathbb{Q}_{3,2}^{(c)}(T_{1})=\frac{\sqrt{3} \mathbb{Q}_{2,1}^{(a)}(E) \mathbb{Q}_{1,2}^{(b)}(T_{2})}{6} + \frac{\mathbb{Q}_{2,1}^{(a)}(T_{2}) \mathbb{Q}_{1,3}^{(b)}(T_{2})}{3} - \frac{\mathbb{Q}_{2,2}^{(a)}(E) \mathbb{Q}_{1,2}^{(b)}(T_{2})}{6} - \frac{\mathbb{Q}_{2,3}^{(a)}(T_{2}) \mathbb{Q}_{1,1}^{(b)}(T_{2})}{3}
+\end{dmath*}
+\begin{dmath*}
+\fbox{z13}\quad \mathbb{Q}_{3,3}^{(c)}(T_{1})=- \frac{\mathbb{Q}_{2,1}^{(a)}(T_{2}) \mathbb{Q}_{1,2}^{(b)}(T_{2})}{3} + \frac{\mathbb{Q}_{2,2}^{(a)}(E) \mathbb{Q}_{1,3}^{(b)}(T_{2})}{3} + \frac{\mathbb{Q}_{2,2}^{(a)}(T_{2}) \mathbb{Q}_{1,1}^{(b)}(T_{2})}{3}
+\end{dmath*}
+\begin{dmath*}
+\fbox{z14}\quad \mathbb{Q}_{1,1}^{(c)}(T_{2},a)=\frac{\sqrt{3} \mathbb{Q}_{0}^{(a)}(A_{1}) \mathbb{Q}_{1,1}^{(b)}(T_{2})}{3}
+\end{dmath*}
+\begin{dmath*}
+\fbox{z15}\quad \mathbb{Q}_{1,2}^{(c)}(T_{2},a)=\frac{\sqrt{3} \mathbb{Q}_{0}^{(a)}(A_{1}) \mathbb{Q}_{1,2}^{(b)}(T_{2})}{3}
+\end{dmath*}
+\begin{dmath*}
+\fbox{z16}\quad \mathbb{Q}_{1,3}^{(c)}(T_{2},a)=\frac{\sqrt{3} \mathbb{Q}_{0}^{(a)}(A_{1}) \mathbb{Q}_{1,3}^{(b)}(T_{2})}{3}
+\end{dmath*}
+\begin{dmath*}
+\fbox{z17}\quad \mathbb{Q}_{1,1}^{(c)}(T_{2},b)=- \frac{\sqrt{30} \mathbb{Q}_{2,1}^{(a)}(E) \mathbb{Q}_{1,1}^{(b)}(T_{2})}{30} + \frac{\sqrt{10} \mathbb{Q}_{2,2}^{(a)}(E) \mathbb{Q}_{1,1}^{(b)}(T_{2})}{10} + \frac{\sqrt{10} \mathbb{Q}_{2,2}^{(a)}(T_{2}) \mathbb{Q}_{1,3}^{(b)}(T_{2})}{10} + \frac{\sqrt{10} \mathbb{Q}_{2,3}^{(a)}(T_{2}) \mathbb{Q}_{1,2}^{(b)}(T_{2})}{10}
+\end{dmath*}
+\begin{dmath*}
+\fbox{z18}\quad \mathbb{Q}_{1,2}^{(c)}(T_{2},b)=- \frac{\sqrt{30} \mathbb{Q}_{2,1}^{(a)}(E) \mathbb{Q}_{1,2}^{(b)}(T_{2})}{30} + \frac{\sqrt{10} \mathbb{Q}_{2,1}^{(a)}(T_{2}) \mathbb{Q}_{1,3}^{(b)}(T_{2})}{10} - \frac{\sqrt{10} \mathbb{Q}_{2,2}^{(a)}(E) \mathbb{Q}_{1,2}^{(b)}(T_{2})}{10} + \frac{\sqrt{10} \mathbb{Q}_{2,3}^{(a)}(T_{2}) \mathbb{Q}_{1,1}^{(b)}(T_{2})}{10}
+\end{dmath*}
+\begin{dmath*}
+\fbox{z19}\quad \mathbb{Q}_{1,3}^{(c)}(T_{2},b)=\frac{\sqrt{30} \mathbb{Q}_{2,1}^{(a)}(E) \mathbb{Q}_{1,3}^{(b)}(T_{2})}{15} + \frac{\sqrt{10} \mathbb{Q}_{2,1}^{(a)}(T_{2}) \mathbb{Q}_{1,2}^{(b)}(T_{2})}{10} + \frac{\sqrt{10} \mathbb{Q}_{2,2}^{(a)}(T_{2}) \mathbb{Q}_{1,1}^{(b)}(T_{2})}{10}
+\end{dmath*}
+\begin{dmath*}
+\fbox{z20}\quad \mathbb{Q}_{1,1}^{(c)}(T_{2},c)=\frac{\sqrt{6} \mathbb{M}_{1,2}^{(a)}(T_{1}) \mathbb{T}_{1,3}^{(b)}(T_{2})}{6} - \frac{\sqrt{6} \mathbb{M}_{1,3}^{(a)}(T_{1}) \mathbb{T}_{1,2}^{(b)}(T_{2})}{6}
+\end{dmath*}
+\begin{dmath*}
+\fbox{z21}\quad \mathbb{Q}_{1,2}^{(c)}(T_{2},c)=- \frac{\sqrt{6} \mathbb{M}_{1,1}^{(a)}(T_{1}) \mathbb{T}_{1,3}^{(b)}(T_{2})}{6} + \frac{\sqrt{6} \mathbb{M}_{1,3}^{(a)}(T_{1}) \mathbb{T}_{1,1}^{(b)}(T_{2})}{6}
+\end{dmath*}
+\begin{dmath*}
+\fbox{z22}\quad \mathbb{Q}_{1,3}^{(c)}(T_{2},c)=\frac{\sqrt{6} \mathbb{M}_{1,1}^{(a)}(T_{1}) \mathbb{T}_{1,2}^{(b)}(T_{2})}{6} - \frac{\sqrt{6} \mathbb{M}_{1,2}^{(a)}(T_{1}) \mathbb{T}_{1,1}^{(b)}(T_{2})}{6}
+\end{dmath*}
+\begin{dmath*}
+\fbox{z23}\quad \mathbb{Q}_{2,1}^{(c)}(T_{2})=\frac{\sqrt{3} \mathbb{Q}_{2,1}^{(a)}(T_{2}) \mathbb{Q}_{0}^{(b)}(A_{1})}{3}
+\end{dmath*}
+\begin{dmath*}
+\fbox{z24}\quad \mathbb{Q}_{2,2}^{(c)}(T_{2})=\frac{\sqrt{3} \mathbb{Q}_{2,2}^{(a)}(T_{2}) \mathbb{Q}_{0}^{(b)}(A_{1})}{3}
+\end{dmath*}
+\begin{dmath*}
+\fbox{z25}\quad \mathbb{Q}_{2,3}^{(c)}(T_{2})=\frac{\sqrt{3} \mathbb{Q}_{2,3}^{(a)}(T_{2}) \mathbb{Q}_{0}^{(b)}(A_{1})}{3}
+\end{dmath*}
+\begin{dmath*}
+\fbox{z26}\quad \mathbb{Q}_{3,1}^{(c)}(T_{2})=- \frac{\sqrt{5} \mathbb{Q}_{2,1}^{(a)}(E) \mathbb{Q}_{1,1}^{(b)}(T_{2})}{10} + \frac{\sqrt{15} \mathbb{Q}_{2,2}^{(a)}(E) \mathbb{Q}_{1,1}^{(b)}(T_{2})}{10} - \frac{\sqrt{15} \mathbb{Q}_{2,2}^{(a)}(T_{2}) \mathbb{Q}_{1,3}^{(b)}(T_{2})}{15} - \frac{\sqrt{15} \mathbb{Q}_{2,3}^{(a)}(T_{2}) \mathbb{Q}_{1,2}^{(b)}(T_{2})}{15}
+\end{dmath*}
+\begin{dmath*}
+\fbox{z27}\quad \mathbb{Q}_{3,2}^{(c)}(T_{2})=- \frac{\sqrt{5} \mathbb{Q}_{2,1}^{(a)}(E) \mathbb{Q}_{1,2}^{(b)}(T_{2})}{10} - \frac{\sqrt{15} \mathbb{Q}_{2,1}^{(a)}(T_{2}) \mathbb{Q}_{1,3}^{(b)}(T_{2})}{15} - \frac{\sqrt{15} \mathbb{Q}_{2,2}^{(a)}(E) \mathbb{Q}_{1,2}^{(b)}(T_{2})}{10} - \frac{\sqrt{15} \mathbb{Q}_{2,3}^{(a)}(T_{2}) \mathbb{Q}_{1,1}^{(b)}(T_{2})}{15}
+\end{dmath*}
+\begin{dmath*}
+\fbox{z34}\quad \mathbb{Q}_{3,3}^{(c)}(T_{2})=\frac{\sqrt{5} \mathbb{Q}_{2,1}^{(a)}(E) \mathbb{Q}_{1,3}^{(b)}(T_{2})}{5} - \frac{\sqrt{15} \mathbb{Q}_{2,1}^{(a)}(T_{2}) \mathbb{Q}_{1,2}^{(b)}(T_{2})}{15} - \frac{\sqrt{15} \mathbb{Q}_{2,2}^{(a)}(T_{2}) \mathbb{Q}_{1,1}^{(b)}(T_{2})}{15}
+\end{dmath*}
+\begin{dmath*}
+\fbox{z35}\quad \mathbb{G}_{0}^{(c)}(A_{2})=\frac{\sqrt{3} \mathbb{M}_{1,1}^{(a)}(T_{1}) \mathbb{T}_{1,1}^{(b)}(T_{2})}{3} + \frac{\sqrt{3} \mathbb{M}_{1,2}^{(a)}(T_{1}) \mathbb{T}_{1,2}^{(b)}(T_{2})}{3} + \frac{\sqrt{3} \mathbb{M}_{1,3}^{(a)}(T_{1}) \mathbb{T}_{1,3}^{(b)}(T_{2})}{3}
+\end{dmath*}
+\begin{dmath*}
+\fbox{z36}\quad \mathbb{G}_{2,1}^{(c)}(E,a)=\frac{\sqrt{3} \mathbb{Q}_{2,1}^{(a)}(T_{2}) \mathbb{Q}_{1,1}^{(b)}(T_{2})}{6} + \frac{\sqrt{3} \mathbb{Q}_{2,2}^{(a)}(T_{2}) \mathbb{Q}_{1,2}^{(b)}(T_{2})}{6} - \frac{\sqrt{3} \mathbb{Q}_{2,3}^{(a)}(T_{2}) \mathbb{Q}_{1,3}^{(b)}(T_{2})}{3}
+\end{dmath*}
+\begin{dmath*}
+\fbox{z37}\quad \mathbb{G}_{2,2}^{(c)}(E,a)=- \frac{\mathbb{Q}_{2,1}^{(a)}(T_{2}) \mathbb{Q}_{1,1}^{(b)}(T_{2})}{2} + \frac{\mathbb{Q}_{2,2}^{(a)}(T_{2}) \mathbb{Q}_{1,2}^{(b)}(T_{2})}{2}
+\end{dmath*}
+\begin{dmath*}
+\fbox{z38}\quad \mathbb{G}_{2,1}^{(c)}(E,b)=- \frac{\mathbb{M}_{1,1}^{(a)}(T_{1}) \mathbb{T}_{1,1}^{(b)}(T_{2})}{2} + \frac{\mathbb{M}_{1,2}^{(a)}(T_{1}) \mathbb{T}_{1,2}^{(b)}(T_{2})}{2}
+\end{dmath*}
+\begin{dmath*}
+\fbox{z39}\quad \mathbb{G}_{2,2}^{(c)}(E,b)=- \frac{\sqrt{3} \mathbb{M}_{1,1}^{(a)}(T_{1}) \mathbb{T}_{1,1}^{(b)}(T_{2})}{6} - \frac{\sqrt{3} \mathbb{M}_{1,2}^{(a)}(T_{1}) \mathbb{T}_{1,2}^{(b)}(T_{2})}{6} + \frac{\sqrt{3} \mathbb{M}_{1,3}^{(a)}(T_{1}) \mathbb{T}_{1,3}^{(b)}(T_{2})}{3}
+\end{dmath*}
+\begin{dmath*}
+\fbox{z40}\quad \mathbb{G}_{1,1}^{(c)}(T_{1})=\frac{\sqrt{3} \mathbb{M}_{1,1}^{(a)}(T_{1}) \mathbb{T}_{0}^{(b)}(A_{1})}{3}
+\end{dmath*}
+\begin{dmath*}
+\fbox{z41}\quad \mathbb{G}_{1,2}^{(c)}(T_{1})=\frac{\sqrt{3} \mathbb{M}_{1,2}^{(a)}(T_{1}) \mathbb{T}_{0}^{(b)}(A_{1})}{3}
+\end{dmath*}
+\begin{dmath*}
+\fbox{z42}\quad \mathbb{G}_{1,3}^{(c)}(T_{1})=\frac{\sqrt{3} \mathbb{M}_{1,3}^{(a)}(T_{1}) \mathbb{T}_{0}^{(b)}(A_{1})}{3}
+\end{dmath*}
+\begin{dmath*}
+\fbox{z43}\quad \mathbb{G}_{2,1}^{(c)}(T_{1},a)=\frac{\sqrt{6} \mathbb{Q}_{2,1}^{(a)}(E) \mathbb{Q}_{1,1}^{(b)}(T_{2})}{6} + \frac{\sqrt{2} \mathbb{Q}_{2,2}^{(a)}(E) \mathbb{Q}_{1,1}^{(b)}(T_{2})}{6} - \frac{\sqrt{2} \mathbb{Q}_{2,2}^{(a)}(T_{2}) \mathbb{Q}_{1,3}^{(b)}(T_{2})}{6} + \frac{\sqrt{2} \mathbb{Q}_{2,3}^{(a)}(T_{2}) \mathbb{Q}_{1,2}^{(b)}(T_{2})}{6}
+\end{dmath*}
+\begin{dmath*}
+\fbox{z44}\quad \mathbb{G}_{2,2}^{(c)}(T_{1},a)=- \frac{\sqrt{6} \mathbb{Q}_{2,1}^{(a)}(E) \mathbb{Q}_{1,2}^{(b)}(T_{2})}{6} + \frac{\sqrt{2} \mathbb{Q}_{2,1}^{(a)}(T_{2}) \mathbb{Q}_{1,3}^{(b)}(T_{2})}{6} + \frac{\sqrt{2} \mathbb{Q}_{2,2}^{(a)}(E) \mathbb{Q}_{1,2}^{(b)}(T_{2})}{6} - \frac{\sqrt{2} \mathbb{Q}_{2,3}^{(a)}(T_{2}) \mathbb{Q}_{1,1}^{(b)}(T_{2})}{6}
+\end{dmath*}
+\begin{dmath*}
+\fbox{z45}\quad \mathbb{G}_{2,3}^{(c)}(T_{1},a)=- \frac{\sqrt{2} \mathbb{Q}_{2,1}^{(a)}(T_{2}) \mathbb{Q}_{1,2}^{(b)}(T_{2})}{6} - \frac{\sqrt{2} \mathbb{Q}_{2,2}^{(a)}(E) \mathbb{Q}_{1,3}^{(b)}(T_{2})}{3} + \frac{\sqrt{2} \mathbb{Q}_{2,2}^{(a)}(T_{2}) \mathbb{Q}_{1,1}^{(b)}(T_{2})}{6}
+\end{dmath*}
+\begin{dmath*}
+\fbox{z46}\quad \mathbb{G}_{2,1}^{(c)}(T_{1},b)=\frac{\sqrt{6} \mathbb{M}_{1,2}^{(a)}(T_{1}) \mathbb{T}_{1,3}^{(b)}(T_{2})}{6} + \frac{\sqrt{6} \mathbb{M}_{1,3}^{(a)}(T_{1}) \mathbb{T}_{1,2}^{(b)}(T_{2})}{6}
+\end{dmath*}
+\begin{dmath*}
+\fbox{z47}\quad \mathbb{G}_{2,2}^{(c)}(T_{1},b)=\frac{\sqrt{6} \mathbb{M}_{1,1}^{(a)}(T_{1}) \mathbb{T}_{1,3}^{(b)}(T_{2})}{6} + \frac{\sqrt{6} \mathbb{M}_{1,3}^{(a)}(T_{1}) \mathbb{T}_{1,1}^{(b)}(T_{2})}{6}
+\end{dmath*}
+\begin{dmath*}
+\fbox{z48}\quad \mathbb{G}_{2,3}^{(c)}(T_{1},b)=\frac{\sqrt{6} \mathbb{M}_{1,1}^{(a)}(T_{1}) \mathbb{T}_{1,2}^{(b)}(T_{2})}{6} + \frac{\sqrt{6} \mathbb{M}_{1,2}^{(a)}(T_{1}) \mathbb{T}_{1,1}^{(b)}(T_{2})}{6}
+\end{dmath*}
+\vspace{5mm}
+
+\vspace{5mm}
+\noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{Atomic SAMB}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
+\vspace{3mm}
+
+\vspace{5mm}
+
+\noindent\textbullet\, bra: $\bra{p_{x}},\, \bra{p_{y}},\, \bra{p_{z}}$
+
+\noindent\textbullet\, ket: $\ket{p_{x}},\, \ket{p_{y}},\, \ket{p_{z}}$
+
+\begin{dmath*}
+\fbox{x1}\quad \mathbb{Q}_{0}^{(a)}(A_{1})=\begin{bmatrix} \frac{\sqrt{3}}{3} & 0 & 0 \\ 0 & \frac{\sqrt{3}}{3} & 0 \\ 0 & 0 & \frac{\sqrt{3}}{3} \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x2}\quad \mathbb{Q}_{2,1}^{(a)}(E)=\begin{bmatrix} - \frac{\sqrt{6}}{6} & 0 & 0 \\ 0 & - \frac{\sqrt{6}}{6} & 0 \\ 0 & 0 & \frac{\sqrt{6}}{3} \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x3}\quad \mathbb{Q}_{2,2}^{(a)}(E)=\begin{bmatrix} \frac{\sqrt{2}}{2} & 0 & 0 \\ 0 & - \frac{\sqrt{2}}{2} & 0 \\ 0 & 0 & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x4}\quad \mathbb{Q}_{2,1}^{(a)}(T_{2})=\begin{bmatrix} 0 & 0 & 0 \\ 0 & 0 & \frac{\sqrt{2}}{2} \\ 0 & \frac{\sqrt{2}}{2} & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x5}\quad \mathbb{Q}_{2,2}^{(a)}(T_{2})=\begin{bmatrix} 0 & 0 & \frac{\sqrt{2}}{2} \\ 0 & 0 & 0 \\ \frac{\sqrt{2}}{2} & 0 & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x6}\quad \mathbb{Q}_{2,3}^{(a)}(T_{2})=\begin{bmatrix} 0 & \frac{\sqrt{2}}{2} & 0 \\ \frac{\sqrt{2}}{2} & 0 & 0 \\ 0 & 0 & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x7}\quad \mathbb{M}_{1,1}^{(a)}(T_{1})=\begin{bmatrix} 0 & 0 & 0 \\ 0 & 0 & - \frac{\sqrt{2} i}{2} \\ 0 & \frac{\sqrt{2} i}{2} & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x8}\quad \mathbb{M}_{1,2}^{(a)}(T_{1})=\begin{bmatrix} 0 & 0 & \frac{\sqrt{2} i}{2} \\ 0 & 0 & 0 \\ - \frac{\sqrt{2} i}{2} & 0 & 0 \end{bmatrix}
+\end{dmath*}
+\begin{dmath*}
+\fbox{x9}\quad \mathbb{M}_{1,3}^{(a)}(T_{1})=\begin{bmatrix} 0 & - \frac{\sqrt{2} i}{2} & 0 \\ \frac{\sqrt{2} i}{2} & 0 & 0 \\ 0 & 0 & 0 \end{bmatrix}
+\end{dmath*}
+\vspace{5mm}
+\noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{Cluster SAMB}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
+\vspace{3mm}
+
+\noindent\textbullet\, Site cluster
+
+\vspace{5mm}
+
+\noindent ** Wyckoff: \texttt{4a}
+
+\begin{dmath*}
+\fbox{y1}\quad \mathbb{Q}_{0}^{(s)}(A_{1})=\left[ 1 \right]
+\end{dmath*}
+\vspace{5mm}
+
+\noindent ** Wyckoff: \texttt{4c}
+
+\begin{dmath*}
+\fbox{y2}\quad \mathbb{Q}_{0}^{(s)}(A_{1})=\left[ 1 \right]
+\end{dmath*}
+\vspace{5mm}
+
+\noindent\textbullet\, Bond cluster
+
+\vspace{5mm}
+
+\noindent ** Wyckoff: \texttt{16a@16e}
+
+\begin{dmath*}
+\fbox{y3}\quad \mathbb{Q}_{0}^{(s)}(A_{1})=\left[ \frac{1}{2},\, \frac{1}{2},\, \frac{1}{2},\, \frac{1}{2} \right]
+\end{dmath*}
+\begin{dmath*}
+\fbox{y4}\quad \mathbb{T}_{0}^{(s)}(A_{1})=\left[ \frac{i}{2},\, \frac{i}{2},\, \frac{i}{2},\, \frac{i}{2} \right]
+\end{dmath*}
+\begin{dmath*}
+\fbox{y5}\quad \mathbb{Q}_{1,1}^{(s)}(T_{2})=\left[ \frac{1}{2},\, - \frac{1}{2},\, - \frac{1}{2},\, \frac{1}{2} \right]
+\end{dmath*}
+\begin{dmath*}
+\fbox{y6}\quad \mathbb{Q}_{1,2}^{(s)}(T_{2})=\left[ \frac{1}{2},\, - \frac{1}{2},\, \frac{1}{2},\, - \frac{1}{2} \right]
+\end{dmath*}
+\begin{dmath*}
+\fbox{y7}\quad \mathbb{Q}_{1,3}^{(s)}(T_{2})=\left[ \frac{1}{2},\, \frac{1}{2},\, - \frac{1}{2},\, - \frac{1}{2} \right]
+\end{dmath*}
+\begin{dmath*}
+\fbox{y8}\quad \mathbb{T}_{1,1}^{(s)}(T_{2})=\left[ \frac{i}{2},\, - \frac{i}{2},\, - \frac{i}{2},\, \frac{i}{2} \right]
+\end{dmath*}
+\begin{dmath*}
+\fbox{y9}\quad \mathbb{T}_{1,2}^{(s)}(T_{2})=\left[ \frac{i}{2},\, - \frac{i}{2},\, \frac{i}{2},\, - \frac{i}{2} \right]
+\end{dmath*}
+\begin{dmath*}
+\fbox{y10}\quad \mathbb{T}_{1,3}^{(s)}(T_{2})=\left[ \frac{i}{2},\, \frac{i}{2},\, - \frac{i}{2},\, - \frac{i}{2} \right]
+\end{dmath*}
+\vspace{5mm}
+\noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{Site and Bond}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
+\vspace{3mm}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{longtable}{ccl}
+\caption{Orbital of each site}
+ \\
+ \hline \hline
+\# & site & orbital \\ \hline \endfirsthead
+
+\multicolumn{2}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+\# & site & orbital \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{2}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{2}{r}{} \\ \endlastfoot
+
+1 & \texttt{As} & $\ket{p_{x}}$, $\ket{p_{y}}$, $\ket{p_{z}}$ \\ \hline
+2 & \texttt{Ga} & $\ket{p_{x}}$, $\ket{p_{y}}$, $\ket{p_{z}}$ \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{longtable}{ccclll}
+\caption{Neighbor and bra-ket of each bond}
+ \\
+ \hline \hline
+\# & head & tail & neighbor & head (bra) & tail (ket) \\ \hline \endfirsthead
+
+\multicolumn{5}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+\# & head & tail & neighbor & head (bra) & tail (ket) \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{5}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{5}{r}{} \\ \endlastfoot
+
+1 & \texttt{As} & \texttt{Ga} & \texttt{[1]} & \texttt{[p]} & \texttt{[p]} \\
+\end{longtable}
+\end{center}
+\vspace{5mm}
+\noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{Site in Unit Cell}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
+\vspace{3mm}
+
+\noindent Sites in (conventional) cell (no plus set), SL = sublattice
+
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{longtable}{cll}
+\caption{'\texttt{As}' (\#1) site cluster (\texttt{4c}), \texttt{-43m}}
+ \\
+ \hline \hline
+SL & position ($\bm{s})$ & mapping \\ \hline \endfirsthead
+
+\multicolumn{2}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+SL & position ($\bm{s})$ & mapping \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{2}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{2}{r}{} \\ \endlastfoot
+
+1 & \texttt{[ 0.25000, 0.25000, 0.25000]} & \texttt{[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24]} \\
+\end{longtable}
+\end{center}
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{longtable}{cll}
+\caption{'\texttt{Ga}' (\#2) site cluster (\texttt{4a}), \texttt{-43m}}
+ \\
+ \hline \hline
+SL & position ($\bm{s})$ & mapping \\ \hline \endfirsthead
+
+\multicolumn{2}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+SL & position ($\bm{s})$ & mapping \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{2}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{2}{r}{} \\ \endlastfoot
+
+1 & \texttt{[ 0.00000, 0.00000, 0.00000]} & \texttt{[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24]} \\
+\end{longtable}
+\end{center}
+\vspace{5mm}
+\noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{Bond in Unit Cell}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
+\vspace{3mm}
+
+\noindent Bonds in (conventional) cell (no plus set): tail, head = (SL, plus set), (N)D = (non)directional (listed up to 5th neighbor at most)
+
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{longtable}{cllllll}
+\caption{1-th '\texttt{As}'-'\texttt{Ga}' [1] (\#1) bond cluster (\texttt{16a@16e}), D, $|\bm{v}|=0.43301$ (cartesian)}
+ \\
+ \hline \hline
+SL & vector ($\bm{v})$ & center ($\bm{c})$ & mapping & head & tail & $\bm{R}$ (primitive) \\ \hline \endfirsthead
+
+\multicolumn{6}{l}{\tablename\ \thetable{}} \\
+ \hline \hline
+SL & vector ($\bm{v})$ & center ($\bm{c})$ & mapping & head & tail & $\bm{R}$ (primitive) \\ \hline \endhead
+
+ \hline \hline
+\multicolumn{6}{r}{\footnotesize\it continued ...} \\ \endfoot
+
+ \hline \hline
+\multicolumn{6}{r}{} \\ \endlastfoot
+
+1 & \texttt{[ 0.25000, 0.25000, 0.25000]} & \texttt{[ 0.12500, 0.12500, 0.12500]} & \texttt{[1,5,9,13,17,21]} & \texttt{(1,1)} & \texttt{(1,1)} & \texttt{[0,0,0]} \\ \hline
+2 & \texttt{[-0.25000,-0.25000, 0.25000]} & \texttt{[ 0.87500, 0.87500, 0.12500]} & \texttt{[2,7,12,14,19,24]} & \texttt{(1,4)} & \texttt{(1,1)} & \texttt{[0,0,1]} \\ \hline
+3 & \texttt{[-0.25000, 0.25000,-0.25000]} & \texttt{[ 0.87500, 0.12500, 0.87500]} & \texttt{[3,8,10,16,18,23]} & \texttt{(1,3)} & \texttt{(1,1)} & \texttt{[0,1,0]} \\ \hline
+4 & \texttt{[ 0.25000,-0.25000,-0.25000]} & \texttt{[ 0.12500, 0.87500, 0.87500]} & \texttt{[4,6,11,15,20,22]} & \texttt{(1,2)} & \texttt{(1,1)} & \texttt{[1,0,0]} \\
+\end{longtable}
+\end{center}
+
+\end{document}

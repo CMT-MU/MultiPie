@@ -18,8 +18,6 @@ execute:
 # ==================================================
 # Parse and render settings
 parse:
-  myst_substitutions:
-      sub3: My _global_ value!
   myst_enable_extensions:
     - amsmath
     - colon_fence
@@ -35,6 +33,7 @@ parse:
 # ==================================================
 # HTML-specific settings
 html:
+  extra_css: ["_static/custom.css"]
   home_page_in_navbar: false
   use_edit_page_button: false
   use_repository_button: true
@@ -73,7 +72,7 @@ sphinx:
     autodoc_default_options:
       members: true
       member-order: "groupwise"
-      undoc-members": true
+      undoc-members: true
       show-inheritance: true
     html_theme: sphinx_book_theme
     html_theme_options:
@@ -83,10 +82,12 @@ sphinx:
     html_copy_source : false
     bibtex_reference_style: label
     bibtex_default_style: "unsrt"
-    language: jp
+    language: en
     mathjax_path: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
     mathjax3_config:
       loader:
         load: ["[tex]/physics"]
       tex:
         packages: { "[+]": ["physics"] }
+        macros:
+          "bm": ["\\boldsymbol{#1}", 1]

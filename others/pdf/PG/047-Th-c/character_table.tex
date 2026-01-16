@@ -1,0 +1,98 @@
+\documentclass[fleqn,8pt,landscape]{jsarticle}
+\special{papersize=\the\paperwidth,\the\paperheight}
+
+%%% package
+
+\usepackage[usenames]{color}
+\usepackage{amsmath}
+\usepackage{breqn}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{enumitem}
+\usepackage{braket}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+%%% layout setting
+
+\paperwidth=356.4truemm
+\paperheight=252.0truemm
+\textwidth=335.59999999999997truemm
+\textheight=224.2truemm
+\oddsidemargin=-15truemm
+\topmargin=-15truemm
+\footskip=7truemm
+
+%%% fixed
+
+\hoffset=0truemm
+\voffset=0truemm
+\headheight=0truemm
+\headsep=0truemm
+\marginparsep=0truemm
+\marginparwidth=0truemm
+
+%%% main text
+
+\begin{document}
+
+\setcounter{MaxMatrixCols}{32}
+
+\renewcommand{\tablename}{Table~}
+\renewcommand{\figurename}{Figure~}
+\begin{center}
+\LARGE
+PG No. 47\quad$T_{\rm h}(c)$\quad$m\bar{3}$\quad[ cubic ]
+\end{center}
+
+* character table ($\omega=e^{2\pi i/3}$)
+\begin{quote}
+\begin{tabular}{crrrrrrrr} \hline \hline
+$ T_{\rm h}(c) $ & $ 1(1) $ & $ 2{}_{001}(3) $ & $ 3^{+}_{\,\,111}(4) $ & $ 3^{-}_{\,\,111}(4) $ & $ -1(1) $ & $ {\rm m}_{001}(3) $ & $ -3^{+}_{\,\,111}(4) $ & $ -3^{-}_{\,\,111}(4) $ \\ \hline
+$ A_{g} $ & $ 1 $ & $ 1 $ & $ 1 $ & $ 1 $ & $ 1 $ & $ 1 $ & $ 1 $ & $ 1 $ \\
+$ E_{g}^{(a)} $ & $ 1 $ & $ 1 $ & $ \omega^{*} $ & $ \omega $ & $ 1 $ & $ 1 $ & $ \omega^{*} $ & $ \omega $ \\
+$ E_{g}^{(b)} $ & $ 1 $ & $ 1 $ & $ \omega $ & $ \omega^{*} $ & $ 1 $ & $ 1 $ & $ \omega $ & $ \omega^{*} $ \\
+$ T_{g} $ & $ 3 $ & $ -1 $ & $ 0 $ & $ 0 $ & $ 3 $ & $ -1 $ & $ 0 $ & $ 0 $ \\
+$ A_{u} $ & $ 1 $ & $ 1 $ & $ 1 $ & $ 1 $ & $ -1 $ & $ -1 $ & $ -1 $ & $ -1 $ \\
+$ E_{u}^{(a)} $ & $ 1 $ & $ 1 $ & $ \omega^{*} $ & $ \omega $ & $ -1 $ & $ -1 $ & $ - \omega^{*} $ & $ - \omega $ \\
+$ E_{u}^{(b)} $ & $ 1 $ & $ 1 $ & $ \omega $ & $ \omega^{*} $ & $ -1 $ & $ -1 $ & $ - \omega $ & $ - \omega^{*} $ \\
+$ T_{u} $ & $ 3 $ & $ -1 $ & $ 0 $ & $ 0 $ & $ -3 $ & $ 1 $ & $ 0 $ & $ 0 $ \\
+ \hline \hline
+\end{tabular}
+\end{quote}
+
+* polar $\leftrightarrow$ axial conversion
+\begin{quote}
+\begin{tabular}{cccccccc}
+$ A_{g}\,\,(A_{u}) $ & $ E_{g}^{(a)}\,\,(E_{u}^{(a)}) $ & $ E_{g}^{(b)}\,\,(E_{u}^{(b)}) $ & $ T_{g}\,\,(T_{u}) $ & $ A_{u}\,\,(A_{g}) $ & $ E_{u}^{(a)}\,\,(E_{g}^{(a)}) $ & $ E_{u}^{(b)}\,\,(E_{g}^{(b)}) $ & $ T_{u}\,\,(T_{g}) $
+\end{tabular}
+\end{quote}
+
+* symmetric product
+\begin{quote}
+\begin{tabular}{c|cccccccc} \hline \hline
+ & $ A_{g} $ & $ E_{g}^{(a)} $ & $ E_{g}^{(b)} $ & $ T_{g} $ & $ A_{u} $ & $ E_{u}^{(a)} $ & $ E_{u}^{(b)} $ & $ T_{u} $ \\ \hline
+$ A_{g} $ & $ A_{g} $ & $ E_{g}^{(a)} $ & $ E_{g}^{(b)} $ & $ T_{g} $ & $ A_{u} $ & $ E_{u}^{(a)} $ & $ E_{u}^{(b)} $ & $ T_{u} $ \\
+$ E_{g}^{(a)} $ & $  $ & $ E_{g}^{(b)} $ & $ A_{g} $ & $ T_{g} $ & $ E_{u}^{(a)} $ & $ E_{u}^{(b)} $ & $ A_{u} $ & $ T_{u} $ \\
+$ E_{g}^{(b)} $ & $  $ & $  $ & $ E_{g}^{(a)} $ & $ T_{g} $ & $ E_{u}^{(b)} $ & $ A_{u} $ & $ E_{u}^{(a)} $ & $ T_{u} $ \\
+$ T_{g} $ & $  $ & $  $ & $  $ & $ A_{g} + E_{g}^{(a)} + E_{g}^{(b)} + T_{g} $ & $ T_{u} $ & $ T_{u} $ & $ T_{u} $ & $ A_{u} + E_{u}^{(a)} + E_{u}^{(b)} + 2 T_{u} $ \\
+$ A_{u} $ & $  $ & $  $ & $  $ & $  $ & $ A_{g} $ & $ E_{g}^{(a)} $ & $ E_{g}^{(b)} $ & $ T_{g} $ \\
+$ E_{u}^{(a)} $ & $  $ & $  $ & $  $ & $  $ & $  $ & $ E_{g}^{(b)} $ & $ A_{g} $ & $ T_{g} $ \\
+$ E_{u}^{(b)} $ & $  $ & $  $ & $  $ & $  $ & $  $ & $  $ & $ E_{g}^{(a)} $ & $ T_{g} $ \\
+$ T_{u} $ & $  $ & $  $ & $  $ & $  $ & $  $ & $  $ & $  $ & $ A_{g} + E_{g}^{(a)} + E_{g}^{(b)} + T_{g} $ \\
+ \hline \hline
+\end{tabular}
+\end{quote}
+
+* anti-symmetric product
+\begin{quote}
+\begin{tabular}{ccccccccc} \hline \hline
+ & $ A_{g} $ & $ E_{g}^{(a)} $ & $ E_{g}^{(b)} $ & $ T_{g} $ & $ A_{u} $ & $ E_{u}^{(a)} $ & $ E_{u}^{(b)} $ & $ T_{u} $ \\ \hline
+$  $ & $ - $ & $ - $ & $ - $ & $ T_{g} $ & $ - $ & $ - $ & $ - $ & $ T_{g} $ \\
+ \hline \hline
+\end{tabular}
+\end{quote}
+
+\end{document}

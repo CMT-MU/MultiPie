@@ -1,0 +1,94 @@
+\documentclass[fleqn,8pt,landscape]{jsarticle}
+\special{papersize=\the\paperwidth,\the\paperheight}
+
+%%% package
+
+\usepackage[usenames]{color}
+\usepackage{amsmath}
+\usepackage{breqn}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{enumitem}
+\usepackage{braket}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+%%% layout setting
+
+\paperwidth=356.4truemm
+\paperheight=252.0truemm
+\textwidth=335.59999999999997truemm
+\textheight=224.2truemm
+\oddsidemargin=-15truemm
+\topmargin=-15truemm
+\footskip=7truemm
+
+%%% fixed
+
+\hoffset=0truemm
+\voffset=0truemm
+\headheight=0truemm
+\headsep=0truemm
+\marginparsep=0truemm
+\marginparwidth=0truemm
+
+%%% main text
+
+\begin{document}
+
+\setcounter{MaxMatrixCols}{32}
+
+\renewcommand{\tablename}{Table~}
+\renewcommand{\figurename}{Figure~}
+\begin{center}
+\LARGE
+PG No. 36\quad$D_{\rm 3d}(1)$\quad$\bar{3}m$\quad(-31m setting)\quad[ trigonal ]
+\end{center}
+
+* character table
+\begin{quote}
+\begin{tabular}{crrrrrr} \hline \hline
+$ D_{\rm 3d}(1) $ & $ 1(1) $ & $ 2{}_{120}(3) $ & $ 3^{+}_{\,\,001}(2) $ & $ -1(1) $ & $ {\rm m}_{120}(3) $ & $ -3^{+}_{\,\,001}(2) $ \\ \hline
+$ A_{1g} $ & $ 1 $ & $ 1 $ & $ 1 $ & $ 1 $ & $ 1 $ & $ 1 $ \\
+$ A_{2g} $ & $ 1 $ & $ -1 $ & $ 1 $ & $ 1 $ & $ -1 $ & $ 1 $ \\
+$ E_{g} $ & $ 2 $ & $ 0 $ & $ -1 $ & $ 2 $ & $ 0 $ & $ -1 $ \\
+$ A_{1u} $ & $ 1 $ & $ 1 $ & $ 1 $ & $ -1 $ & $ -1 $ & $ -1 $ \\
+$ A_{2u} $ & $ 1 $ & $ -1 $ & $ 1 $ & $ -1 $ & $ 1 $ & $ -1 $ \\
+$ E_{u} $ & $ 2 $ & $ 0 $ & $ -1 $ & $ -2 $ & $ 0 $ & $ 1 $ \\
+ \hline \hline
+\end{tabular}
+\end{quote}
+
+* polar $\leftrightarrow$ axial conversion
+\begin{quote}
+\begin{tabular}{cccccc}
+$ A_{1g}\,\,(A_{1u}) $ & $ A_{2g}\,\,(A_{2u}) $ & $ E_{g}\,\,(E_{u}) $ & $ A_{1u}\,\,(A_{1g}) $ & $ A_{2u}\,\,(A_{2g}) $ & $ E_{u}\,\,(E_{g}) $
+\end{tabular}
+\end{quote}
+
+* symmetric product
+\begin{quote}
+\begin{tabular}{c|cccccc} \hline \hline
+ & $ A_{1g} $ & $ A_{2g} $ & $ E_{g} $ & $ A_{1u} $ & $ A_{2u} $ & $ E_{u} $ \\ \hline
+$ A_{1g} $ & $ A_{1g} $ & $ A_{2g} $ & $ E_{g} $ & $ A_{1u} $ & $ A_{2u} $ & $ E_{u} $ \\
+$ A_{2g} $ & $  $ & $ A_{1g} $ & $ E_{g} $ & $ A_{2u} $ & $ A_{1u} $ & $ E_{u} $ \\
+$ E_{g} $ & $  $ & $  $ & $ A_{1g} + E_{g} $ & $ E_{u} $ & $ E_{u} $ & $ A_{1u} + A_{2u} + E_{u} $ \\
+$ A_{1u} $ & $  $ & $  $ & $  $ & $ A_{1g} $ & $ A_{2g} $ & $ E_{g} $ \\
+$ A_{2u} $ & $  $ & $  $ & $  $ & $  $ & $ A_{1g} $ & $ E_{g} $ \\
+$ E_{u} $ & $  $ & $  $ & $  $ & $  $ & $  $ & $ A_{1g} + E_{g} $ \\
+ \hline \hline
+\end{tabular}
+\end{quote}
+
+* anti-symmetric product
+\begin{quote}
+\begin{tabular}{ccccccc} \hline \hline
+ & $ A_{1g} $ & $ A_{2g} $ & $ E_{g} $ & $ A_{1u} $ & $ A_{2u} $ & $ E_{u} $ \\ \hline
+$  $ & $ - $ & $ - $ & $ A_{2g} $ & $ - $ & $ - $ & $ A_{2g} $ \\
+ \hline \hline
+\end{tabular}
+\end{quote}
+
+\end{document}
