@@ -540,9 +540,13 @@ class MaterialModel(BinaryManager):
         common_id = {comb: [[] for _ in nn_lst] for comb, nn_lst in lst.items()}
 
         # Flatten all (neighbor, n, comb) tuples and keep the local index i
-        global_items = [(neighbor, n, comb, i) for comb, nn_lst in lst.items() for i, (neighbor, n) in enumerate(nn_lst)]
-        # sort (neighbor, n)
-        global_items.sort(key=lambda t: (t[0], t[1]))
+        site_global_items = [(neighbor, n, comb, i) for comb, nn_lst in lst.items() for i, (neighbor, n) in enumerate(nn_lst) if neighbor == 0 and n==-1]
+        site_global_items.sort(key=lambda t: (t[0], t[1]))
+        bond_global_items = [(neighbor, n, comb, i) for comb, nn_lst in lst.items() for i, (neighbor, n) in enumerate(nn_lst) if neighbor > 0]
+        bond_global_items.sort(key=lambda t: (t[0], t[1]))
+
+        global_items = site_global_items + bond_global_items
+
 
         no = 1
         for Gamma in self["SAMB_select"]["Gamma"]:
