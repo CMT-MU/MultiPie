@@ -522,6 +522,7 @@ class MaterialModel(BinaryManager):
             - (dict) -- comomon id, dict[SAMBType, [id]].
         """
         lst = {}
+        tail_head_lst = []
         for site_bond, wp in self["wyckoff"].items():
             tail, head = get_tail_head(site_bond)
             neighbor, n = get_neighbor_info(site_bond)
@@ -534,11 +535,7 @@ class MaterialModel(BinaryManager):
         lst = {k: sorted(v) for k, v in lst.items()}
 
         dic_minimal = {}
-        nn_index = {}
-        for comb, nn_lst in lst.items():
-            nn_sorted = sorted(nn_lst)
-            nn_index[comb] = {nn: i for i, nn in enumerate(nn_sorted)}
-
+        for comb in lst.keys():
             bra_orb = self["site"]["representative"][comb.head].orbital[comb.bk_info.bh_rank]
             ket_orb = self["site"]["representative"][comb.tail].orbital[comb.bk_info.kt_rank]
             a_samb = atomic_samb[comb.bk_info]
@@ -557,25 +554,25 @@ class MaterialModel(BinaryManager):
 
         # Flatten all (neighbor, n, comb) tuples and keep the local index i
         site_global_items = [
-            (neighbor, n, comb, i)
+            (comb.tail, comb.head, neighbor, n, comb, i)
             for comb, nn_lst in lst.items()
             for i, (neighbor, n) in enumerate(nn_lst)
             if neighbor == 0 and n == -1
         ]
-        site_global_items.sort(key=lambda t: (t[0], t[1]))
+        site_global_items.sort(key=lambda t: (t[0], t[1], t[2], t[3]))
         bond_global_items = [
-            (neighbor, n, comb, i)
+            (comb.tail, comb.head, neighbor, n, comb, i)
             for comb, nn_lst in lst.items()
             for i, (neighbor, n) in enumerate(nn_lst)
             if neighbor > 0
         ]
-        bond_global_items.sort(key=lambda t: (t[0], t[1]))
+        bond_global_items.sort(key=lambda t: (t[0], t[1], t[2], t[3]))
 
         global_items = site_global_items + bond_global_items
 
         no = 1
         for Gamma in self["SAMB_select"]["Gamma"]:
-            for neighbor, n, comb, i in global_items:
+            for _, _, neighbor, n, comb, i in global_items:
                 samb_info = UniqueSAMBType(comb, neighbor, n)
                 for idx in dic_minimal[comb].select(**{"Gamma": Gamma}).keys():
                     for tag in self.group.tag_multipole(idx, latex=True, superscript="c"):
