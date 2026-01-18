@@ -748,7 +748,7 @@ class Group(dict):
 
                     dic[tag] = (lst, ex)
 
-        dic = dic.sort(("X", ["Q", "G", "M", "T"]), "Gamma", "s", "k", "l", "n", "p")
+        dic = dic.sort("Gamma", ("X", ["Q", "G", "M", "T"]), "s", "k", "l", "n", "p")
 
         return dic
 
@@ -1012,7 +1012,9 @@ class Group(dict):
         multipole = multipole.replace("r", "sqrt(x**2+y**2+z**2)")
         multipole = sp.S(str_to_sympy(multipole))
 
-        s = np.asarray([multipole.subs({"x": vi[0], "y": vi[1], "z": vi[2]}, simultaneous=True) for vi in vt]).reshape(-1)
+        s = np.asarray([multipole.subs({"x": vi[0], "y": vi[1], "z": vi[2]}, simultaneous=True) for vi in vt]).reshape(
+            -1
+        )
 
         if X in ["G", "M"]:
             s = np.asarray([si * di for si, di in zip(s, d)])

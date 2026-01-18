@@ -1,10 +1,8 @@
-# Learn more at https://jupyterbook.org/customize/config.html
-
 # ==================================================
 # Book settings
 title: MultiPie
 author: Hiroaki Kusunose and Rikuto Oiwa
-copyright: "2021-2024"
+copyright: "2021-"
 logo: multipie_logo.png
 
 # ==================================================
@@ -75,6 +73,9 @@ sphinx:
       undoc-members: true
       show-inheritance: true
     html_theme: sphinx_book_theme
+    html_static_path: ["_static"]
+    html_js_files:
+      - custom.js
     html_theme_options:
       show_prev_next: false
       navigation_with_keys: false
