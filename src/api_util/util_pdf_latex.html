@@ -334,7 +334,9 @@
 <button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 </button>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -350,6 +352,26 @@
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_pdf_latex.PDFviaLaTeX"><code class="docutils literal notranslate"><span class="pre">PDFviaLaTeX</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_pdf_latex.PDFviaLaTeX.build"><code class="docutils literal notranslate"><span class="pre">PDFviaLaTeX.build()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_pdf_latex.PDFviaLaTeX.equation"><code class="docutils literal notranslate"><span class="pre">PDFviaLaTeX.equation()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_pdf_latex.PDFviaLaTeX.figure"><code class="docutils literal notranslate"><span class="pre">PDFviaLaTeX.figure()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_pdf_latex.PDFviaLaTeX.simple_table"><code class="docutils literal notranslate"><span class="pre">PDFviaLaTeX.simple_table()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_pdf_latex.PDFviaLaTeX.table"><code class="docutils literal notranslate"><span class="pre">PDFviaLaTeX.table()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_pdf_latex.PDFviaLaTeX.text"><code class="docutils literal notranslate"><span class="pre">PDFviaLaTeX.text()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_pdf_latex.PDFviaLaTeX.title"><code class="docutils literal notranslate"><span class="pre">PDFviaLaTeX.title()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_pdf_latex.list_to_table"><code class="docutils literal notranslate"><span class="pre">list_to_table()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_pdf_latex.regularize_table"><code class="docutils literal notranslate"><span class="pre">regularize_table()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_pdf_latex.wrap_string"><code class="docutils literal notranslate"><span class="pre">wrap_string()</span></code></a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -359,8 +381,196 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="pdf-creator">
-<h1>PDF creator<a class="headerlink" href="#pdf-creator" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="module-multipie.util.util_pdf_latex">
+<span id="pdf-creator"></span><h1>PDF creator<a class="headerlink" href="#module-multipie.util.util_pdf_latex" title="Link to this heading">#</a></h1>
+<p>This class mangaes PDF creation via LaTeX.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="multipie.util.util_pdf_latex.PDFviaLaTeX">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">PDFviaLaTeX</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">package</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">style</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'normal'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_page</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">landscape</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">english</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_pdf_latex.html#PDFviaLaTeX"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_pdf_latex.PDFviaLaTeX" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>PDF creator class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fname</strong> (<em>str</em>) – file name without “.tex”.</p></li>
+<li><p><strong>package</strong> (<em>list</em><em>, </em><em>optional</em>) – package [(name,option)].</p></li>
+<li><p><strong>style</strong> (<em>str</em><em>, </em><em>optional</em>) – margin style (narrowest/narrow/normal/wide/widest).</p></li>
+<li><p><strong>pt</strong> (<em>int</em><em>, </em><em>optional</em>) – default point (8/9/10/11/12/14).</p></li>
+<li><p><strong>no_page</strong> (<em>bool</em><em>, </em><em>optional</em>) – no page number ?</p></li>
+<li><p><strong>landscape</strong> (<em>bool</em><em>, </em><em>optional</em>) – landscape ?</p></li>
+<li><p><strong>english</strong> (<em>bool</em><em>, </em><em>optional</em>) – english mode ?</p></li>
+<li><p><strong>dir</strong> (<em>str</em><em>, </em><em>optional</em>) – output directory.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="multipie.util.util_pdf_latex.PDFviaLaTeX.build">
+<span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_pdf_latex.html#PDFviaLaTeX.build"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_pdf_latex.PDFviaLaTeX.build" title="Link to this definition">#</a></dt>
+<dd><p>Create PDF.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multipie.util.util_pdf_latex.PDFviaLaTeX.equation">
+<span class="sig-name descname"><span class="pre">equation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eqs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">long</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_pdf_latex.html#PDFviaLaTeX.equation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_pdf_latex.PDFviaLaTeX.equation" title="Link to this definition">#</a></dt>
+<dd><p>Add equation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>eqs</strong> (<em>str</em><em> or </em><em>list</em>) – equation or list of eqs.</p></li>
+<li><p><strong>num</strong> (<em>bool</em><em>, </em><em>optional</em>) – with eq. number ?</p></li>
+<li><p><strong>long</strong> (<em>bool</em><em>, </em><em>optional</em>) – long eq. ? (single eq. only).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multipie.util.util_pdf_latex.PDFviaLaTeX.figure">
+<span class="sig-name descname"><span class="pre">figure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'c'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">caption</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_pdf_latex.html#PDFviaLaTeX.figure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_pdf_latex.PDFviaLaTeX.figure" title="Link to this definition">#</a></dt>
+<dd><p>Add figure (not in the figure environment, if caption is empty).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fname</strong> (<em>str</em>) – file name of figure.</p></li>
+<li><p><strong>width</strong> (<em>float</em><em>, </em><em>optional</em>) – figure width relative to page width.</p></li>
+<li><p><strong>pos</strong> (<em>str</em><em>, </em><em>optional</em>) – position (c/l/r) (center/left/right).</p></li>
+<li><p><strong>caption</strong> (<em>str</em><em>, </em><em>optional</em>) – caption of figure.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multipie.util.util_pdf_latex.PDFviaLaTeX.simple_table">
+<span class="sig-name descname"><span class="pre">simple_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tbl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cpos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmath</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_pdf_latex.html#PDFviaLaTeX.simple_table"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_pdf_latex.PDFviaLaTeX.simple_table" title="Link to this definition">#</a></dt>
+<dd><p>Add simple table.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tbl</strong> (<em>list</em>) – content of table (1d or 2d).</p></li>
+<li><p><strong>cols</strong> (<em>int</em><em>, </em><em>optional</em>) – number of columns.</p></li>
+<li><p><strong>cpos</strong> (<em>str</em><em>, </em><em>optional</em>) – position of each cols. default is center.</p></li>
+<li><p><strong>tmath</strong> (<em>bool</em><em>, </em><em>optional</em>) – math mode ?</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multipie.util.util_pdf_latex.PDFviaLaTeX.table">
+<span class="sig-name descname"><span class="pre">table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tbl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">row</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hl</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">caption</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stretch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cpos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rcmath</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rmath</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmath</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tmath</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">long</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_pdf_latex.html#PDFviaLaTeX.table"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_pdf_latex.PDFviaLaTeX.table" title="Link to this definition">#</a></dt>
+<dd><p>Add table (reshaped by using number of col).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tbl</strong> (<em>list</em>) – content of table [[str]].</p></li>
+<li><p><strong>row</strong> (<em>list</em>) – row name [str].</p></li>
+<li><p><strong>col</strong> (<em>list</em>) – column name [str].</p></li>
+<li><p><strong>rc</strong> (<em>str</em><em>, </em><em>optional</em>) – row-col name.</p></li>
+<li><p><strong>hl</strong> (<em>list</em><em>, </em><em>optional</em>) – position with horizontal line [int]. if True, use horizontal lines for all lines.</p></li>
+<li><p><strong>caption</strong> (<em>str</em><em>, </em><em>optional</em>) – table caption.</p></li>
+<li><p><strong>stretch</strong> (<em>float</em><em>, </em><em>optional</em>) – baseline stretch (ratio).</p></li>
+<li><p><strong>cpos</strong> (<em>str</em><em>, </em><em>optional</em>) – column position. default is center.</p></li>
+<li><p><strong>rcmath</strong> (<em>bool</em><em>, </em><em>optional</em>) – math mode for row-col name ?</p></li>
+<li><p><strong>rmath</strong> (<em>bool</em><em>, </em><em>optional</em>) – math mode for row name ?</p></li>
+<li><p><strong>cmath</strong> (<em>bool</em><em>, </em><em>optional</em>) – math mode for column name ?</p></li>
+<li><p><strong>tmath</strong> (<em>bool</em><em>, </em><em>optional</em>) – math mode for table ?</p></li>
+<li><p><strong>long</strong> (<em>bool</em><em>, </em><em>optional</em>) – long table ?</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multipie.util.util_pdf_latex.PDFviaLaTeX.text">
+<span class="sig-name descname"><span class="pre">text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">content</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_pdf_latex.html#PDFviaLaTeX.text"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_pdf_latex.PDFviaLaTeX.text" title="Link to this definition">#</a></dt>
+<dd><p>Add text.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>content</strong> (<em>str</em><em> or </em><em>list</em><em>, </em><em>optional</em>) – text.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multipie.util.util_pdf_latex.PDFviaLaTeX.title">
+<span class="sig-name descname"><span class="pre">title</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">title</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'LARGE'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'c'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_pdf_latex.html#PDFviaLaTeX.title"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_pdf_latex.PDFviaLaTeX.title" title="Link to this definition">#</a></dt>
+<dd><p>Add title.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>title</strong> (<em>str</em>) – title.</p></li>
+<li><p><strong>size</strong> (<em>str</em><em>, </em><em>optional</em>) – font size (large/Large/LARGE/Huge).</p></li>
+<li><p><strong>pos</strong> (<em>str</em><em>, </em><em>optional</em>) – position (c/l/r) (center/left/right).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_pdf_latex.list_to_table">
+<span class="sig-name descname"><span class="pre">list_to_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lst1d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_pdf_latex.html#list_to_table"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_pdf_latex.list_to_table" title="Link to this definition">#</a></dt>
+<dd><p>Convert from list to table.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lst1d</strong> (<em>list</em>) – 1d list.</p></li>
+<li><p><strong>col</strong> (<em>int</em>) – number of columns.</p></li>
+<li><p><strong>p</strong> (<em>any</em><em>, </em><em>optional</em>) – padding value (no padding for None).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(list) – 2d list.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_pdf_latex.regularize_table">
+<span class="sig-name descname"><span class="pre">regularize_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lst2d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">padding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_pdf_latex.html#regularize_table"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_pdf_latex.regularize_table" title="Link to this definition">#</a></dt>
+<dd><p>Regularize an irregular table.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lst2d</strong> (<em>list</em>) – 2d list with different number of columns.</p></li>
+<li><p><strong>padding</strong> (<em>any</em><em>, </em><em>optional</em>) – padding value.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(list) – regularized 2d list.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_pdf_latex.wrap_string">
+<span class="sig-name descname"><span class="pre">wrap_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">left</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">right</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_pdf_latex.html#wrap_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_pdf_latex.wrap_string" title="Link to this definition">#</a></dt>
+<dd><p>Wrap array elementwise with left and right strings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<em>array-like</em>) – array.</p></li>
+<li><p><strong>left</strong> (<em>str</em><em>, </em><em>optional</em>) – left string to wrap.</p></li>
+<li><p><strong>right</strong> (<em>str</em><em>, </em><em>optional</em>) – right string to wrap.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(array-like) – wrapped array.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 
     <script type="text/x-thebe-config">
@@ -393,6 +603,34 @@
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_pdf_latex.PDFviaLaTeX"><code class="docutils literal notranslate"><span class="pre">PDFviaLaTeX</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_pdf_latex.PDFviaLaTeX.build"><code class="docutils literal notranslate"><span class="pre">PDFviaLaTeX.build()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_pdf_latex.PDFviaLaTeX.equation"><code class="docutils literal notranslate"><span class="pre">PDFviaLaTeX.equation()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_pdf_latex.PDFviaLaTeX.figure"><code class="docutils literal notranslate"><span class="pre">PDFviaLaTeX.figure()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_pdf_latex.PDFviaLaTeX.simple_table"><code class="docutils literal notranslate"><span class="pre">PDFviaLaTeX.simple_table()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_pdf_latex.PDFviaLaTeX.table"><code class="docutils literal notranslate"><span class="pre">PDFviaLaTeX.table()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_pdf_latex.PDFviaLaTeX.text"><code class="docutils literal notranslate"><span class="pre">PDFviaLaTeX.text()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_pdf_latex.PDFviaLaTeX.title"><code class="docutils literal notranslate"><span class="pre">PDFviaLaTeX.title()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_pdf_latex.list_to_table"><code class="docutils literal notranslate"><span class="pre">list_to_table()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_pdf_latex.regularize_table"><code class="docutils literal notranslate"><span class="pre">regularize_table()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_pdf_latex.wrap_string"><code class="docutils literal notranslate"><span class="pre">wrap_string()</span></code></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

@@ -333,7 +333,9 @@
 <button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 </button>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -349,6 +351,15 @@
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_samb.orthogonalize_multipole"><code class="docutils literal notranslate"><span class="pre">orthogonalize_multipole()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_samb.orthogonalize_samb"><code class="docutils literal notranslate"><span class="pre">orthogonalize_samb()</span></code></a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -358,8 +369,49 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="samb">
-<h1>SAMB<a class="headerlink" href="#samb" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="module-multipie.util.util_samb">
+<span id="samb"></span><h1>SAMB<a class="headerlink" href="#module-multipie.util.util_samb" title="Link to this heading">#</a></h1>
+<p>Utility for SAMB.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_samb.orthogonalize_multipole">
+<span class="sig-name descname"><span class="pre">orthogonalize_multipole</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">samb</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diagonal_block</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_samb.html#orthogonalize_multipole"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_samb.orthogonalize_multipole" title="Link to this definition">#</a></dt>
+<dd><p>Orthogonalize mutlipole SAMB.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>samb</strong> (<a class="reference internal" href="util_dict.html#multipie.util.util_dict.Dict" title="multipie.util.util_dict.Dict"><em>Dict</em></a>) – SAMB dict, Dict[idx, (expression, SAMB)].</p></li>
+<li><p><strong>diagonal_block</strong> (<em>bool</em>) – diagonal block ?</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(Dict) – orthogonalized SAMB.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_samb.orthogonalize_samb">
+<span class="sig-name descname"><span class="pre">orthogonalize_samb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">samb</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diagonal_block</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_samb.html#orthogonalize_samb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_samb.orthogonalize_samb" title="Link to this definition">#</a></dt>
+<dd><p>Orthogonalize SAMB.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>samb</strong> (<a class="reference internal" href="util_dict.html#multipie.util.util_dict.Dict" title="multipie.util.util_dict.Dict"><em>Dict</em></a>) – SAMB dict, Dict[idx, (expression, SAMB)].</p></li>
+<li><p><strong>diagonal_block</strong> (<em>bool</em>) – diagonal block ?</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(Dict) – orthogonalized SAMB.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 
     <script type="text/x-thebe-config">
@@ -392,6 +444,23 @@
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_samb.orthogonalize_multipole"><code class="docutils literal notranslate"><span class="pre">orthogonalize_multipole()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_samb.orthogonalize_samb"><code class="docutils literal notranslate"><span class="pre">orthogonalize_samb()</span></code></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
