@@ -147,7 +147,9 @@ class MaterialModel(BinaryManager):
             os.chdir("samb")
 
             name = self["model"] + "_atomic_samb"
-            create_qtdraw_file(filename=f"{name}.qtdw", callback=lambda qtdraw: create_atomic_samb_qtdraw(qtdraw, self, name))
+            create_qtdraw_file(
+                filename=f"{name}.qtdw", callback=lambda qtdraw: create_atomic_samb_qtdraw(qtdraw, self, name)
+            )
 
             os.chdir(cwd)
 
@@ -173,7 +175,8 @@ class MaterialModel(BinaryManager):
             name = self["model"] + "_" + "-".join(site_bond)
 
             create_qtdraw_file(
-                filename=f"{name}.qtdw", callback=lambda qtdraw: create_cluster_samb_qtdraw(qtdraw, self, site_bond, name)
+                filename=f"{name}.qtdw",
+                callback=lambda qtdraw: create_cluster_samb_qtdraw(qtdraw, self, site_bond, name),
             )
 
             os.chdir(cwd)
@@ -221,7 +224,9 @@ class MaterialModel(BinaryManager):
         Save SAMB QtDraw file.
         """
         site_bond = [
-            s for s in self["wyckoff"].keys() if s.count(";") == 0 or int(s.split("_")[1]) < self["qtdraw_prop"]["max_neighbor"]
+            s
+            for s in self["wyckoff"].keys()
+            if s.count(";") == 0 or int(s.split("_")[1]) < self["qtdraw_prop"]["max_neighbor"]
         ]
         site = [s for s in site_bond if s.count(";") == 0]
         bond = [s for s in site_bond if s.count(";") > 0]
@@ -273,7 +278,9 @@ class MaterialModel(BinaryManager):
             "select": select_regularized,
             "dimension": len(ket_site),
             "ket_site": ket_site,
-            "matrix": {z: {k: str(v).replace(" ", "") for k, v in elm.items()} for z, elm in combined_samb_matrix.items()},
+            "matrix": {
+                z: {k: str(v).replace(" ", "") for k, v in elm.items()} for z, elm in combined_samb_matrix.items()
+            },
         }
         write_dict(d, filename, var, comment)
         if self.verbose:
@@ -355,7 +362,9 @@ class MaterialModel(BinaryManager):
         site_dict = parse_representative_site(group, site_data, basis_type, basis_info)
         site_grid = create_site_grid(site_dict, igrid)
         site_so = create_site_so(group, site_dict)
-        bond_dict = parse_representative_bond(group, G, site_grid, site_so, site_dict, bond_data, max_neighbor, self.verbose)
+        bond_dict = parse_representative_bond(
+            group, G, site_grid, site_so, site_dict, bond_data, max_neighbor, self.verbose
+        )
         A = cell_info["A"][0:3, 0:3].T
         lattice = group.info.lattice
         Ap = convert_to_primitive(lattice, A, shift=False)
@@ -466,15 +475,20 @@ class MaterialModel(BinaryManager):
             - (dict) -- cluster SAMB, dict[wyckoff, SAMB Dict].
             - (dict) -- cluster id, dict["y#", (wyckoff, SAMB index, comp)].
         """
-        wp_lst = sorted(list(set([lst.wyckoff for lst in self["site"]["representative"].values()])), key=lambda i: int(i[:-1]))
-        site_samb = {wp: self.group.cluster_samb(wp).sort("Gamma", "l", "k", ("X", ["Q", "G", "T", "M"]), "n") for wp in wp_lst}
+        wp_lst = sorted(
+            list(set([lst.wyckoff for lst in self["site"]["representative"].values()])), key=lambda i: int(i[:-1])
+        )
+        site_samb = {
+            wp: self.group.cluster_samb(wp).sort("Gamma", "l", "k", ("X", ["Q", "G", "T", "M"]), "n") for wp in wp_lst
+        }
 
         wp_lst = sorted(
             list(set([lst.wyckoff for lst in self["bond"]["representative"].values()])),
             key=lambda i: int(i.split("@")[0][:-1]),
         )
         bond_samb = {
-            wp: self.group.cluster_samb(wp, "bond").sort("Gamma", "l", "k", ("X", ["Q", "G", "T", "M"]), "n") for wp in wp_lst
+            wp: self.group.cluster_samb(wp, "bond").sort("Gamma", "l", "k", ("X", ["Q", "G", "T", "M"]), "n")
+            for wp in wp_lst
         }
 
         samb = site_samb | bond_samb
@@ -533,20 +547,31 @@ class MaterialModel(BinaryManager):
             if comb.head != comb.tail and bra_orb != ket_orb:
                 c_samb = c_samb.select(X=["Q"])
 
-            dic_minimal[comb] = self.group.combined_samb(a_samb.named_keys(), c_samb.named_keys(), toroidal_priority, **kwargs)
+            dic_minimal[comb] = self.group.combined_samb(
+                a_samb.named_keys(), c_samb.named_keys(), toroidal_priority, **kwargs
+            )
 
         min_no = sum(len(samb) for samb in dic_minimal.values())
         combined_id = {}
         common_id = {comb: [[] for _ in nn_lst] for comb, nn_lst in lst.items()}
 
         # Flatten all (neighbor, n, comb) tuples and keep the local index i
-        site_global_items = [(neighbor, n, comb, i) for comb, nn_lst in lst.items() for i, (neighbor, n) in enumerate(nn_lst) if neighbor == 0 and n==-1]
+        site_global_items = [
+            (neighbor, n, comb, i)
+            for comb, nn_lst in lst.items()
+            for i, (neighbor, n) in enumerate(nn_lst)
+            if neighbor == 0 and n == -1
+        ]
         site_global_items.sort(key=lambda t: (t[0], t[1]))
-        bond_global_items = [(neighbor, n, comb, i) for comb, nn_lst in lst.items() for i, (neighbor, n) in enumerate(nn_lst) if neighbor > 0]
+        bond_global_items = [
+            (neighbor, n, comb, i)
+            for comb, nn_lst in lst.items()
+            for i, (neighbor, n) in enumerate(nn_lst)
+            if neighbor > 0
+        ]
         bond_global_items.sort(key=lambda t: (t[0], t[1]))
 
         global_items = site_global_items + bond_global_items
-
 
         no = 1
         for Gamma in self["SAMB_select"]["Gamma"]:
@@ -626,7 +651,9 @@ class MaterialModel(BinaryManager):
 
         # default filter.
         default = {}
-        all_site = [(k, [no for no, i in enumerate(v.orbital) if len(i) > 0]) for k, v in self["site"]["representative"].items()]
+        all_site = [
+            (k, [no for no, i in enumerate(v.orbital) if len(i) > 0]) for k, v in self["site"]["representative"].items()
+        ]
         default["site"] = all_site
         all_bond = [(v.tail, v.head, v.neighbor, v.t_rank, v.h_rank) for v in self["bond"]["representative"].values()]
         default["bond"] = all_bond
@@ -645,7 +672,10 @@ class MaterialModel(BinaryManager):
                         d = [(s, sorted(list(set(o) & set(orb)))) for s, o in default[key] if s == name]
                     dic[key] = dic.get(key, []) + [i for i in d if len(i[1]) > 0]
                 d = list({tuple(tuple(x) if isinstance(x, list) else x for x in t) for t in dic[key]})
-                d = [tuple(list(x) if isinstance(x, tuple) and all(isinstance(i, int) for i in x) else x for x in t) for t in d]
+                d = [
+                    tuple(list(x) if isinstance(x, tuple) and all(isinstance(i, int) for i in x) else x for x in t)
+                    for t in d
+                ]
                 dic[key] = sorted(d)
             elif key == "bond":
                 for name, rank, neighbor in val:
@@ -657,8 +687,16 @@ class MaterialModel(BinaryManager):
                         d = [(h, t, n, hr, tr) for t, h, n, tr, hr in default[key] if n in neighbor]
                     elif rank is None:  # name, neighbor.
                         tail, head = name.split(";")
-                        d = [(h, t, n, hr, tr) for t, h, n, tr, hr in default[key] if t == tail and h == head and n in neighbor]
-                        d += [(h, t, n, hr, tr) for t, h, n, tr, hr in default[key] if h == tail and t == head and n in neighbor]
+                        d = [
+                            (h, t, n, hr, tr)
+                            for t, h, n, tr, hr in default[key]
+                            if t == tail and h == head and n in neighbor
+                        ]
+                        d += [
+                            (h, t, n, hr, tr)
+                            for t, h, n, tr, hr in default[key]
+                            if h == tail and t == head and n in neighbor
+                        ]
                     elif neighbor is None:  # name, rank.
                         tail, head = name.split(";")
                         t_rank, h_rank = rank.split(";")
@@ -689,7 +727,10 @@ class MaterialModel(BinaryManager):
                         ]
                     dic[key] = dic.get(key, []) + d
                 d = list({tuple(tuple(x) if isinstance(x, list) else x for x in t) for t in dic[key]})
-                d = [tuple(list(x) if isinstance(x, tuple) and all(isinstance(i, int) for i in x) else x for x in t) for t in d]
+                d = [
+                    tuple(list(x) if isinstance(x, tuple) and all(isinstance(i, int) for i in x) else x for x in t)
+                    for t in d
+                ]
                 dic[key] = sorted(d)
         for key, val in default.items():
             if key not in kwargs.keys():
@@ -961,7 +1002,8 @@ class MaterialModel(BinaryManager):
             - (dict) -- site dict, dict[name, [position]].
         """
         lst = {
-            name: [i.position_primitive.tolist() for i in val if i.plus_set == 1] for name, val in self["site"]["cell"].items()
+            name: [i.position_primitive.tolist() for i in val if i.plus_set == 1]
+            for name, val in self["site"]["cell"].items()
         }
         return lst
 
