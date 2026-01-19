@@ -116,7 +116,7 @@ def create_samb_matrix(select_inputs, topdir=None, verbose=False):
     mm = MaterialModel(topdir, verbose)
     for inp in select_inputs:
         model = inp["model"]
-        select = inp["select"]
+        select = inp["SAMB_select"]
         parameter = inp.get("parameter", None)
         try:
             mm.load(model)
