@@ -12,9 +12,23 @@
 - **Harmonics**
   - polar : [PDF](../../../others/pdf/PG/003-C2/harmonics_polar.pdf)
   - axial : [PDF](../../../others/pdf/PG/003-C2/harmonics_axial.pdf)
+- **Multipolar Harmonics (internal)**
+  - dipolar internal polar(Q)/axial(G) varialble
+    - polar (Q) : [PDF](../../../others/pdf/PG/003-C2/harmonics_s1_polar_q.pdf)
+    - axial (Q) : [PDF](../../../others/pdf/PG/003-C2/harmonics_s1_axial_q.pdf)
+    - polar (G) : [PDF](../../../others/pdf/PG/003-C2/harmonics_s1_polar_g.pdf)
+    - axial (G) : [PDF](../../../others/pdf/PG/003-C2/harmonics_s1_axial_g.pdf)
+  - quadrupolar internal polar(Q)/axial(G) variable
+    - polar (Q) : [PDF](../../../others/pdf/PG/003-C2/harmonics_s2_polar_q.pdf)
+    - axial (Q) : [PDF](../../../others/pdf/PG/003-C2/harmonics_s2_axial_q.pdf)
+    - polar (G) : [PDF](../../../others/pdf/PG/003-C2/harmonics_s2_polar_g.pdf)
+    - axial (G) : [PDF](../../../others/pdf/PG/003-C2/harmonics_s2_axial_g.pdf)
+  - octupolar internal polar(Q)/axial(G) variable
+    - polar (Q) : [PDF](../../../others/pdf/PG/003-C2/harmonics_s3_polar_q.pdf)
+    - axial (Q) : [PDF](../../../others/pdf/PG/003-C2/harmonics_s3_axial_q.pdf)
+    - polar (G) : [PDF](../../../others/pdf/PG/003-C2/harmonics_s3_polar_g.pdf)
+    - axial (G) : [PDF](../../../others/pdf/PG/003-C2/harmonics_s3_axial_g.pdf)
 - **Response tensor**
   - Q : [PDF](../../../others/pdf/MPG/3.2.7/response_tensor_Q.pdf)
   - G : [PDF](../../../others/pdf/MPG/3.2.7/response_tensor_G.pdf)
-  - T : [PDF](../../../others/pdf/MPG/3.2.7/response_tensor_T.pdf)
-  - M : [PDF](../../../others/pdf/MPG/3.2.7/response_tensor_M.pdf)
 

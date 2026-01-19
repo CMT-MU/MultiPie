@@ -122,7 +122,7 @@ def create_markdown():
         tag, no = g.info.tag, int(id_s.split(":")[1])
         point_tbl.append(f"{no}: [$\\,\\,{g.latex()}$ (${g.info.international}$)](PG/No_{no}.md)")
 
-        xl = ["Q", "G", "T", "M"]
+        xl = ["Q", "G"]
         mno = g.info.MPG.split(":")[1]
 
         pg_dict = {
@@ -140,6 +140,26 @@ def create_markdown():
             "Harmonics": {
                 "polar": f"[PDF]({dir_pdf2}PG/{no:03d}-{tag}/harmonics_polar.pdf)",
                 "axial": f"[PDF]({dir_pdf2}PG/{no:03d}-{tag}/harmonics_axial.pdf)",
+            },
+            "Multipolar Harmonics (internal)": {
+                "dipolar internal polar(Q)/axial(G) varialble": {
+                    "polar (Q)": f"[PDF]({dir_pdf2}PG/{no:03d}-{tag}/harmonics_s1_polar_q.pdf)",
+                    "axial (Q)": f"[PDF]({dir_pdf2}PG/{no:03d}-{tag}/harmonics_s1_axial_q.pdf)",
+                    "polar (G)": f"[PDF]({dir_pdf2}PG/{no:03d}-{tag}/harmonics_s1_polar_g.pdf)",
+                    "axial (G)": f"[PDF]({dir_pdf2}PG/{no:03d}-{tag}/harmonics_s1_axial_g.pdf)",
+                },
+                "quadrupolar internal polar(Q)/axial(G) variable": {
+                    "polar (Q)": f"[PDF]({dir_pdf2}PG/{no:03d}-{tag}/harmonics_s2_polar_q.pdf)",
+                    "axial (Q)": f"[PDF]({dir_pdf2}PG/{no:03d}-{tag}/harmonics_s2_axial_q.pdf)",
+                    "polar (G)": f"[PDF]({dir_pdf2}PG/{no:03d}-{tag}/harmonics_s2_polar_g.pdf)",
+                    "axial (G)": f"[PDF]({dir_pdf2}PG/{no:03d}-{tag}/harmonics_s2_axial_g.pdf)",
+                },
+                "octupolar internal polar(Q)/axial(G) variable": {
+                    "polar (Q)": f"[PDF]({dir_pdf2}PG/{no:03d}-{tag}/harmonics_s3_polar_q.pdf)",
+                    "axial (Q)": f"[PDF]({dir_pdf2}PG/{no:03d}-{tag}/harmonics_s3_axial_q.pdf)",
+                    "polar (G)": f"[PDF]({dir_pdf2}PG/{no:03d}-{tag}/harmonics_s3_polar_g.pdf)",
+                    "axial (G)": f"[PDF]({dir_pdf2}PG/{no:03d}-{tag}/harmonics_s3_axial_g.pdf)",
+                },
             },
             "Response tensor": {X: f"[PDF]({dir_pdf2}MPG/{mno}/response_tensor_" + X + ".pdf)" for X in xl},
         }
