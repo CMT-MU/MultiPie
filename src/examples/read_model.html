@@ -401,7 +401,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>load binary from &#39;examples/graphene/graphene.pkl&#39;.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>load binary from &#39;/Users/hk/Library/CloudStorage/Dropbox/working/GitHub/MultiPie/docs/src/examples/graphene/graphene.pkl&#39;.
 &quot;&quot;&quot;
 Model: graphene
 * Group: D_6h^1
@@ -631,7 +631,7 @@ Model: graphene
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;== </span><span class="si">{</span><span class="n">to_tuple</span><span class="p">(</span><span class="n">comb</span><span class="p">)</span><span class="si">}</span><span class="s2"> ==&quot;</span><span class="p">)</span>
     <span class="n">clustar_str</span> <span class="o">=</span> <span class="s2">&quot;b&quot;</span> <span class="k">if</span> <span class="n">comb</span><span class="o">.</span><span class="n">wyckoff</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;@&quot;</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span> <span class="k">else</span> <span class="s2">&quot;s&quot;</span>
     <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="p">(</span><span class="n">cl</span><span class="p">,</span> <span class="n">ex</span><span class="p">)</span> <span class="ow">in</span> <span class="n">samb</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="n">tag</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">tag_multipole</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span><span class="n">latex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">superscript</span><span class="o">=</span><span class="s2">&quot;c&quot;</span><span class="p">)</span>
+        <span class="n">tag</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">tag_multipole</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span><span class="n">latex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">t</span><span class="p">,</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span><span class="n">cl</span><span class="p">):</span>
             <span class="n">ex</span> <span class="o">=</span> <span class="mi">0</span>
             <span class="k">for</span> <span class="n">cg</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">c1</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="n">c2</span> <span class="ow">in</span> <span class="n">m</span><span class="p">:</span>
@@ -648,87 +648,87 @@ Model: graphene
 </pre></div>
 </div>
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{0}^{(c)}(A_{1g}) = \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{0}^{(s)}(A_{1g})\]</div>
+\[\displaystyle \mathbb{Q}_{0}(A_{1g}) = \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{0}^{(s)}(A_{1g})\]</div>
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{3}^{(c)}(B_{1u}) = \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{3}^{(s)}(B_{1u})\]</div>
+\[\displaystyle \mathbb{Q}_{3}(B_{1u}) = \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{3}^{(s)}(B_{1u})\]</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>== (&#39;C&#39;, &#39;C&#39;, &#39;3a@3f&#39;, (1, (2,), 1, (2,))) ==
 </pre></div>
 </div>
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{0}^{(c)}(A_{1g}) = \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{0}^{(b)}(A_{1g})\]</div>
+\[\displaystyle \mathbb{Q}_{0}(A_{1g}) = \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{0}^{(b)}(A_{1g})\]</div>
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{2,1}^{(c)}(E_{2g}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,1}^{(b)}(E_{2g})}{2}\]</div>
+\[\displaystyle \mathbb{Q}_{2,1}(E_{2g}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,1}^{(b)}(E_{2g})}{2}\]</div>
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{2,2}^{(c)}(E_{2g}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,2}^{(b)}(E_{2g})}{2}\]</div>
+\[\displaystyle \mathbb{Q}_{2,2}(E_{2g}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,2}^{(b)}(E_{2g})}{2}\]</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>== (&#39;C&#39;, &#39;C&#39;, &#39;6b@6l&#39;, (1, (2,), 1, (2,))) ==
 </pre></div>
 </div>
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{0}^{(c)}(A_{1g}) = \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{0}^{(b)}(A_{1g})\]</div>
+\[\displaystyle \mathbb{Q}_{0}(A_{1g}) = \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{0}^{(b)}(A_{1g})\]</div>
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{3}^{(c)}(B_{1u}) = \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{3}^{(b)}(B_{1u})\]</div>
+\[\displaystyle \mathbb{Q}_{3}(B_{1u}) = \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{3}^{(b)}(B_{1u})\]</div>
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{1,1}^{(c)}(E_{1u}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{1,1}^{(b)}(E_{1u})}{2}\]</div>
+\[\displaystyle \mathbb{Q}_{1,1}(E_{1u}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{1,1}^{(b)}(E_{1u})}{2}\]</div>
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{1,2}^{(c)}(E_{1u}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{1,2}^{(b)}(E_{1u})}{2}\]</div>
+\[\displaystyle \mathbb{Q}_{1,2}(E_{1u}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{1,2}^{(b)}(E_{1u})}{2}\]</div>
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{2,1}^{(c)}(E_{2g}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,1}^{(b)}(E_{2g})}{2}\]</div>
+\[\displaystyle \mathbb{Q}_{2,1}(E_{2g}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,1}^{(b)}(E_{2g})}{2}\]</div>
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{2,2}^{(c)}(E_{2g}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,2}^{(b)}(E_{2g})}{2}\]</div>
+\[\displaystyle \mathbb{Q}_{2,2}(E_{2g}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,2}^{(b)}(E_{2g})}{2}\]</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>== (&#39;C&#39;, &#39;C&#39;, &#39;3b@1a&#39;, (1, (2,), 1, (2,))) ==
 </pre></div>
 </div>
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{0}^{(c)}(A_{1g}) = \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{0}^{(b)}(A_{1g})\]</div>
+\[\displaystyle \mathbb{Q}_{0}(A_{1g}) = \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{0}^{(b)}(A_{1g})\]</div>
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{2,1}^{(c)}(E_{2g}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,1}^{(b)}(E_{2g})}{2}\]</div>
+\[\displaystyle \mathbb{Q}_{2,1}(E_{2g}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,1}^{(b)}(E_{2g})}{2}\]</div>
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{2,2}^{(c)}(E_{2g}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,2}^{(b)}(E_{2g})}{2}\]</div>
+\[\displaystyle \mathbb{Q}_{2,2}(E_{2g}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,2}^{(b)}(E_{2g})}{2}\]</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>== (&#39;C&#39;, &#39;C&#39;, &#39;6d@3f&#39;, (1, (2,), 1, (2,))) ==
 </pre></div>
 </div>
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{0}^{(c)}(A_{1g}) = \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{0}^{(b)}(A_{1g})\]</div>
+\[\displaystyle \mathbb{Q}_{0}(A_{1g}) = \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{0}^{(b)}(A_{1g})\]</div>
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{6}^{(c)}(A_{2g}) = \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{6}^{(b)}(A_{2g})\]</div>
+\[\displaystyle \mathbb{Q}_{6}(A_{2g}) = \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{6}^{(b)}(A_{2g})\]</div>
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{2,1}^{(c)}(E_{2g}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,1}^{(b)}(E_{2g})}{2}\]</div>
+\[\displaystyle \mathbb{Q}_{2,1}(E_{2g}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,1}^{(b)}(E_{2g})}{2}\]</div>
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{2,2}^{(c)}(E_{2g}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,2}^{(b)}(E_{2g})}{2}\]</div>
+\[\displaystyle \mathbb{Q}_{2,2}(E_{2g}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,2}^{(b)}(E_{2g})}{2}\]</div>
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{4,1}^{(c)}(E_{2g},1) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{4,1}^{(b)}(E_{2g},1)}{2}\]</div>
+\[\displaystyle \mathbb{Q}_{4,1}(E_{2g},1) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{4,1}^{(b)}(E_{2g},1)}{2}\]</div>
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{4,2}^{(c)}(E_{2g},1) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{4,2}^{(b)}(E_{2g},1)}{2}\]</div>
+\[\displaystyle \mathbb{Q}_{4,2}(E_{2g},1) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{4,2}^{(b)}(E_{2g},1)}{2}\]</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>== (&#39;C&#39;, &#39;C&#39;, &#39;6a@6l&#39;, (1, (2,), 1, (2,))) ==
 </pre></div>
 </div>
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{0}^{(c)}(A_{1g}) = \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{0}^{(b)}(A_{1g})\]</div>
+\[\displaystyle \mathbb{Q}_{0}(A_{1g}) = \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{0}^{(b)}(A_{1g})\]</div>
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{3}^{(c)}(B_{1u}) = \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{3}^{(b)}(B_{1u})\]</div>
+\[\displaystyle \mathbb{Q}_{3}(B_{1u}) = \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{3}^{(b)}(B_{1u})\]</div>
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{1,1}^{(c)}(E_{1u}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{1,1}^{(b)}(E_{1u})}{2}\]</div>
+\[\displaystyle \mathbb{Q}_{1,1}(E_{1u}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{1,1}^{(b)}(E_{1u})}{2}\]</div>
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{1,2}^{(c)}(E_{1u}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{1,2}^{(b)}(E_{1u})}{2}\]</div>
+\[\displaystyle \mathbb{Q}_{1,2}(E_{1u}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{1,2}^{(b)}(E_{1u})}{2}\]</div>
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{2,1}^{(c)}(E_{2g}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,1}^{(b)}(E_{2g})}{2}\]</div>
+\[\displaystyle \mathbb{Q}_{2,1}(E_{2g}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,1}^{(b)}(E_{2g})}{2}\]</div>
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{2,2}^{(c)}(E_{2g}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,2}^{(b)}(E_{2g})}{2}\]</div>
+\[\displaystyle \mathbb{Q}_{2,2}(E_{2g}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,2}^{(b)}(E_{2g})}{2}\]</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>== (&#39;C&#39;, &#39;C&#39;, &#39;6c@2c&#39;, (1, (2,), 1, (2,))) ==
 </pre></div>
 </div>
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{0}^{(c)}(A_{1g}) = \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{0}^{(b)}(A_{1g})\]</div>
+\[\displaystyle \mathbb{Q}_{0}(A_{1g}) = \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{0}^{(b)}(A_{1g})\]</div>
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{3}^{(c)}(B_{1u}) = \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{3}^{(b)}(B_{1u})\]</div>
+\[\displaystyle \mathbb{Q}_{3}(B_{1u}) = \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{3}^{(b)}(B_{1u})\]</div>
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{1,1}^{(c)}(E_{1u}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{1,1}^{(b)}(E_{1u})}{2}\]</div>
+\[\displaystyle \mathbb{Q}_{1,1}(E_{1u}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{1,1}^{(b)}(E_{1u})}{2}\]</div>
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{1,2}^{(c)}(E_{1u}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{1,2}^{(b)}(E_{1u})}{2}\]</div>
+\[\displaystyle \mathbb{Q}_{1,2}(E_{1u}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{1,2}^{(b)}(E_{1u})}{2}\]</div>
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{2,1}^{(c)}(E_{2g}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,1}^{(b)}(E_{2g})}{2}\]</div>
+\[\displaystyle \mathbb{Q}_{2,1}(E_{2g}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,1}^{(b)}(E_{2g})}{2}\]</div>
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{2,2}^{(c)}(E_{2g}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,2}^{(b)}(E_{2g})}{2}\]</div>
+\[\displaystyle \mathbb{Q}_{2,2}(E_{2g}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,2}^{(b)}(E_{2g})}{2}\]</div>
 </div>
 </div>
 </section>
