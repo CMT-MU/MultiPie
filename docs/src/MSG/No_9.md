@@ -1,22 +1,42 @@
-# #9: $Cc$
+# MSG (SG) #9:  $C_{\rm s}^{4}$ ($Cc$)
 
-- **#9.37: $Cc$**
+- **#9.37:  $Cc$**
+  - Related group
+    - PG : [$C_{\rm s}$ ($m$)](../PG/No_4.md)
+    - SG : [$C_{\rm s}^{4}$ ($Cc$)](../SG/No_9.md)
+    - MPG : [$m1'$](../MPG/No_4.2.10.md)
   - Symmetry operation : [PDF](../../../others/pdf/MSG/9.37/symmetry_operation.pdf)
   - Wyckoff
     - site : [PDF](../../../others/pdf/MSG/9.37/wyckoff_site.pdf)
-- **#9.38: $Cc1'$**
+- **#9.38:  $Cc1'$**
+  - Related group
+    - PG : [$C_{\rm s}$ ($m$)](../PG/No_4.md)
+    - SG : [$C_{\rm s}^{4}$ ($Cc$)](../SG/No_9.md)
+    - MPG : [$m1'$](../MPG/No_4.2.10.md)
   - Symmetry operation : [PDF](../../../others/pdf/MSG/9.38/symmetry_operation.pdf)
   - Wyckoff
     - site : [PDF](../../../others/pdf/MSG/9.38/wyckoff_site.pdf)
-- **#9.39: $Cc'$**
+- **#9.39:  $Cc'$**
+  - Related group
+    - PG : [$C_{\rm s}$ ($m$)](../PG/No_4.md)
+    - SG : [$C_{\rm s}^{4}$ ($Cc$)](../SG/No_9.md)
+    - MPG : [$m1'$](../MPG/No_4.2.10.md)
   - Symmetry operation : [PDF](../../../others/pdf/MSG/9.39/symmetry_operation.pdf)
   - Wyckoff
     - site : [PDF](../../../others/pdf/MSG/9.39/wyckoff_site.pdf)
-- **#9.40: $C_{c}c$**
+- **#9.40:  $C_{c}c$**
+  - Related group
+    - PG : [$C_{\rm s}$ ($m$)](../PG/No_4.md)
+    - SG : [$C_{\rm s}^{4}$ ($Cc$)](../SG/No_9.md)
+    - MPG : [$m1'$](../MPG/No_4.2.10.md)
   - Symmetry operation : [PDF](../../../others/pdf/MSG/9.40/symmetry_operation.pdf)
   - Wyckoff
     - site : [PDF](../../../others/pdf/MSG/9.40/wyckoff_site.pdf)
-- **#9.41: $C_{a}c$**
+- **#9.41:  $C_{a}c$**
+  - Related group
+    - PG : [$C_{\rm s}$ ($m$)](../PG/No_4.md)
+    - SG : [$C_{\rm s}^{4}$ ($Cc$)](../SG/No_9.md)
+    - MPG : [$m1'$](../MPG/No_4.2.10.md)
   - Symmetry operation : [PDF](../../../others/pdf/MSG/9.41/symmetry_operation.pdf)
   - Wyckoff
     - site : [PDF](../../../others/pdf/MSG/9.41/wyckoff_site.pdf)

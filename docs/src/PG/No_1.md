@@ -1,5 +1,9 @@
-# #1: $C_{\rm 1}$
+# PG #1:  $C_{\rm 1}$ ($1$)
 
+- **Related group**
+  - SG : [$C_{\rm 1}^{1}$ ($P1$)](../SG/No_1.md)
+  - MPG : [$11'$](../MPG/No_1.2.2.md)
+  - MSG (SG) : [$C_{\rm 1}^{1}$ ($P1$)](../MSG/No_1.md)
 - **Symmetry operation** : [PDF](../../../others/pdf/PG/001-C1/symmetry_operation.pdf)
 - **Character table** : [PDF](../../../others/pdf/PG/001-C1/character_table.pdf)
 - **Wyckoff**
@@ -12,9 +16,23 @@
 - **Harmonics**
   - polar : [PDF](../../../others/pdf/PG/001-C1/harmonics_polar.pdf)
   - axial : [PDF](../../../others/pdf/PG/001-C1/harmonics_axial.pdf)
+- **Multipolar Harmonics (internal)**
+  - dipolar internal polar(Q)/axial(G) varialble
+    - polar (Q) : [PDF](../../../others/pdf/PG/001-C1/harmonics_s1_polar_q.pdf)
+    - axial (Q) : [PDF](../../../others/pdf/PG/001-C1/harmonics_s1_axial_q.pdf)
+    - polar (G) : [PDF](../../../others/pdf/PG/001-C1/harmonics_s1_polar_g.pdf)
+    - axial (G) : [PDF](../../../others/pdf/PG/001-C1/harmonics_s1_axial_g.pdf)
+  - quadrupolar internal polar(Q)/axial(G) variable
+    - polar (Q) : [PDF](../../../others/pdf/PG/001-C1/harmonics_s2_polar_q.pdf)
+    - axial (Q) : [PDF](../../../others/pdf/PG/001-C1/harmonics_s2_axial_q.pdf)
+    - polar (G) : [PDF](../../../others/pdf/PG/001-C1/harmonics_s2_polar_g.pdf)
+    - axial (G) : [PDF](../../../others/pdf/PG/001-C1/harmonics_s2_axial_g.pdf)
+  - octupolar internal polar(Q)/axial(G) variable
+    - polar (Q) : [PDF](../../../others/pdf/PG/001-C1/harmonics_s3_polar_q.pdf)
+    - axial (Q) : [PDF](../../../others/pdf/PG/001-C1/harmonics_s3_axial_q.pdf)
+    - polar (G) : [PDF](../../../others/pdf/PG/001-C1/harmonics_s3_polar_g.pdf)
+    - axial (G) : [PDF](../../../others/pdf/PG/001-C1/harmonics_s3_axial_g.pdf)
 - **Response tensor**
   - Q : [PDF](../../../others/pdf/MPG/1.2.2/response_tensor_Q.pdf)
   - G : [PDF](../../../others/pdf/MPG/1.2.2/response_tensor_G.pdf)
-  - T : [PDF](../../../others/pdf/MPG/1.2.2/response_tensor_T.pdf)
-  - M : [PDF](../../../others/pdf/MPG/1.2.2/response_tensor_M.pdf)
 

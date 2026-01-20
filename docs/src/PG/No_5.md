@@ -1,5 +1,9 @@
-# #5: $C_{\rm 2h}$
+# PG #5:  $C_{\rm 2h}$ ($2/m$)
 
+- **Related group**
+  - SG : [$C_{\rm 2h}^{1}$ ($P2/m$)](../SG/No_10.md)
+  - MPG : [$2/m1'$](../MPG/No_5.2.13.md)
+  - MSG (SG) : [$C_{\rm 2h}^{1}$ ($P2/m$)](../MSG/No_10.md)
 - **Symmetry operation** : [PDF](../../../others/pdf/PG/005-C2h/symmetry_operation.pdf)
 - **Character table** : [PDF](../../../others/pdf/PG/005-C2h/character_table.pdf)
 - **Wyckoff**
@@ -12,9 +16,23 @@
 - **Harmonics**
   - polar : [PDF](../../../others/pdf/PG/005-C2h/harmonics_polar.pdf)
   - axial : [PDF](../../../others/pdf/PG/005-C2h/harmonics_axial.pdf)
+- **Multipolar Harmonics (internal)**
+  - dipolar internal polar(Q)/axial(G) varialble
+    - polar (Q) : [PDF](../../../others/pdf/PG/005-C2h/harmonics_s1_polar_q.pdf)
+    - axial (Q) : [PDF](../../../others/pdf/PG/005-C2h/harmonics_s1_axial_q.pdf)
+    - polar (G) : [PDF](../../../others/pdf/PG/005-C2h/harmonics_s1_polar_g.pdf)
+    - axial (G) : [PDF](../../../others/pdf/PG/005-C2h/harmonics_s1_axial_g.pdf)
+  - quadrupolar internal polar(Q)/axial(G) variable
+    - polar (Q) : [PDF](../../../others/pdf/PG/005-C2h/harmonics_s2_polar_q.pdf)
+    - axial (Q) : [PDF](../../../others/pdf/PG/005-C2h/harmonics_s2_axial_q.pdf)
+    - polar (G) : [PDF](../../../others/pdf/PG/005-C2h/harmonics_s2_polar_g.pdf)
+    - axial (G) : [PDF](../../../others/pdf/PG/005-C2h/harmonics_s2_axial_g.pdf)
+  - octupolar internal polar(Q)/axial(G) variable
+    - polar (Q) : [PDF](../../../others/pdf/PG/005-C2h/harmonics_s3_polar_q.pdf)
+    - axial (Q) : [PDF](../../../others/pdf/PG/005-C2h/harmonics_s3_axial_q.pdf)
+    - polar (G) : [PDF](../../../others/pdf/PG/005-C2h/harmonics_s3_polar_g.pdf)
+    - axial (G) : [PDF](../../../others/pdf/PG/005-C2h/harmonics_s3_axial_g.pdf)
 - **Response tensor**
   - Q : [PDF](../../../others/pdf/MPG/5.2.13/response_tensor_Q.pdf)
   - G : [PDF](../../../others/pdf/MPG/5.2.13/response_tensor_G.pdf)
-  - T : [PDF](../../../others/pdf/MPG/5.2.13/response_tensor_T.pdf)
-  - M : [PDF](../../../others/pdf/MPG/5.2.13/response_tensor_M.pdf)
 

@@ -1,18 +1,34 @@
-# #2: $P\bar{1}$
+# MSG (SG) #2:  $C_{\rm i}^{1}$ ($P\bar{1}$)
 
-- **#2.4: $P\bar{1}$**
+- **#2.4:  $P\bar{1}$**
+  - Related group
+    - PG : [$C_{\rm i}$ ($\bar{1}$)](../PG/No_2.md)
+    - SG : [$C_{\rm i}^{1}$ ($P\bar{1}$)](../SG/No_2.md)
+    - MPG : [$\bar{1}1'$](../MPG/No_2.2.4.md)
   - Symmetry operation : [PDF](../../../others/pdf/MSG/2.4/symmetry_operation.pdf)
   - Wyckoff
     - site : [PDF](../../../others/pdf/MSG/2.4/wyckoff_site.pdf)
-- **#2.5: $P\bar{1}1'$**
+- **#2.5:  $P\bar{1}1'$**
+  - Related group
+    - PG : [$C_{\rm i}$ ($\bar{1}$)](../PG/No_2.md)
+    - SG : [$C_{\rm i}^{1}$ ($P\bar{1}$)](../SG/No_2.md)
+    - MPG : [$\bar{1}1'$](../MPG/No_2.2.4.md)
   - Symmetry operation : [PDF](../../../others/pdf/MSG/2.5/symmetry_operation.pdf)
   - Wyckoff
     - site : [PDF](../../../others/pdf/MSG/2.5/wyckoff_site.pdf)
-- **#2.6: $P\bar{1}'$**
+- **#2.6:  $P\bar{1}'$**
+  - Related group
+    - PG : [$C_{\rm i}$ ($\bar{1}$)](../PG/No_2.md)
+    - SG : [$C_{\rm i}^{1}$ ($P\bar{1}$)](../SG/No_2.md)
+    - MPG : [$\bar{1}1'$](../MPG/No_2.2.4.md)
   - Symmetry operation : [PDF](../../../others/pdf/MSG/2.6/symmetry_operation.pdf)
   - Wyckoff
     - site : [PDF](../../../others/pdf/MSG/2.6/wyckoff_site.pdf)
-- **#2.7: $P_{S}\bar{1}$**
+- **#2.7:  $P_{S}\bar{1}$**
+  - Related group
+    - PG : [$C_{\rm i}$ ($\bar{1}$)](../PG/No_2.md)
+    - SG : [$C_{\rm i}^{1}$ ($P\bar{1}$)](../SG/No_2.md)
+    - MPG : [$\bar{1}1'$](../MPG/No_2.2.4.md)
   - Symmetry operation : [PDF](../../../others/pdf/MSG/2.7/symmetry_operation.pdf)
   - Wyckoff
     - site : [PDF](../../../others/pdf/MSG/2.7/wyckoff_site.pdf)

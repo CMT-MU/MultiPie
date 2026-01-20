@@ -1,5 +1,9 @@
-# #4: $C_{\rm s}$
+# PG #4:  $C_{\rm s}$ ($m$)
 
+- **Related group**
+  - SG : [$C_{\rm s}^{1}$ ($Pm$)](../SG/No_6.md)
+  - MPG : [$m1'$](../MPG/No_4.2.10.md)
+  - MSG (SG) : [$C_{\rm s}^{1}$ ($Pm$)](../MSG/No_6.md)
 - **Symmetry operation** : [PDF](../../../others/pdf/PG/004-Cs/symmetry_operation.pdf)
 - **Character table** : [PDF](../../../others/pdf/PG/004-Cs/character_table.pdf)
 - **Wyckoff**
@@ -12,9 +16,23 @@
 - **Harmonics**
   - polar : [PDF](../../../others/pdf/PG/004-Cs/harmonics_polar.pdf)
   - axial : [PDF](../../../others/pdf/PG/004-Cs/harmonics_axial.pdf)
+- **Multipolar Harmonics (internal)**
+  - dipolar internal polar(Q)/axial(G) varialble
+    - polar (Q) : [PDF](../../../others/pdf/PG/004-Cs/harmonics_s1_polar_q.pdf)
+    - axial (Q) : [PDF](../../../others/pdf/PG/004-Cs/harmonics_s1_axial_q.pdf)
+    - polar (G) : [PDF](../../../others/pdf/PG/004-Cs/harmonics_s1_polar_g.pdf)
+    - axial (G) : [PDF](../../../others/pdf/PG/004-Cs/harmonics_s1_axial_g.pdf)
+  - quadrupolar internal polar(Q)/axial(G) variable
+    - polar (Q) : [PDF](../../../others/pdf/PG/004-Cs/harmonics_s2_polar_q.pdf)
+    - axial (Q) : [PDF](../../../others/pdf/PG/004-Cs/harmonics_s2_axial_q.pdf)
+    - polar (G) : [PDF](../../../others/pdf/PG/004-Cs/harmonics_s2_polar_g.pdf)
+    - axial (G) : [PDF](../../../others/pdf/PG/004-Cs/harmonics_s2_axial_g.pdf)
+  - octupolar internal polar(Q)/axial(G) variable
+    - polar (Q) : [PDF](../../../others/pdf/PG/004-Cs/harmonics_s3_polar_q.pdf)
+    - axial (Q) : [PDF](../../../others/pdf/PG/004-Cs/harmonics_s3_axial_q.pdf)
+    - polar (G) : [PDF](../../../others/pdf/PG/004-Cs/harmonics_s3_polar_g.pdf)
+    - axial (G) : [PDF](../../../others/pdf/PG/004-Cs/harmonics_s3_axial_g.pdf)
 - **Response tensor**
   - Q : [PDF](../../../others/pdf/MPG/4.2.10/response_tensor_Q.pdf)
   - G : [PDF](../../../others/pdf/MPG/4.2.10/response_tensor_G.pdf)
-  - T : [PDF](../../../others/pdf/MPG/4.2.10/response_tensor_T.pdf)
-  - M : [PDF](../../../others/pdf/MPG/4.2.10/response_tensor_M.pdf)
 

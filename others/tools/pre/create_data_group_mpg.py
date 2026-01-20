@@ -1,5 +1,11 @@
 import os
+import re
+from multipie import MPGInfoType
+from data_mpg import _mpg_info
+from data_pg import _pg_info
+from output.data_group_msg import msg_id_set
 
+# ==================================================
 header = """
 Group information for all magnetic point groups.
 
@@ -28,17 +34,14 @@ Group information for all magnetic point groups.
     - type: type I, II, III.
     - SO: symmetry operations.
 """
-import re
-from multipie import MPGInfoType
-from data_mpg import _mpg_info
-from data_pg import _pg_info
-from output.data_group_msg import msg_id_set
 
 
+# ==================================================
 def replace_bar(s):
     return re.sub(r"-(\d)", r"\\bar{\1}", s)
 
 
+# ==================================================
 def create_mpg():
     mpg_info = {}
     for MPG_id, (international, T_type, setting, SO) in _mpg_info.items():
