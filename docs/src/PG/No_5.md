@@ -1,5 +1,9 @@
-# #5: $C_{\rm 2h}$
+# PG #5:  $C_{\rm 2h}$ ($2/m$)
 
+- **Related group**
+  - SG : [$C_{\rm 2h}^{1}$ ($P2/m$)](../SG/No_10.md)
+  - MPG : [$2/m1'$](../MPG/No_5.2.13.md)
+  - MSG (SG) : [$C_{\rm 2h}^{1}$ ($P2/m$)](../MSG/No_10.md)
 - **Symmetry operation** : [PDF](../../../others/pdf/PG/005-C2h/symmetry_operation.pdf)
 - **Character table** : [PDF](../../../others/pdf/PG/005-C2h/character_table.pdf)
 - **Wyckoff**

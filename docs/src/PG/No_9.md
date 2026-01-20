@@ -1,5 +1,9 @@
-# #9: $C_{\rm 4}$
+# PG #9:  $C_{\rm 4}$ ($4$)
 
+- **Related group**
+  - SG : [$C_{\rm 4}^{1}$ ($P4$)](../SG/No_75.md)
+  - MPG : [$41'$](../MPG/No_9.2.30.md)
+  - MSG (SG) : [$C_{\rm 4}^{1}$ ($P4$)](../MSG/No_75.md)
 - **Symmetry operation** : [PDF](../../../others/pdf/PG/009-C4/symmetry_operation.pdf)
 - **Character table** : [PDF](../../../others/pdf/PG/009-C4/character_table.pdf)
 - **Wyckoff**

@@ -309,9 +309,7 @@ class ModelPDF:
         hl = []
         no = 0
         for name, rep in site.items():
-            orb = sum(
-                [[self.mm.group.tag_atomic_basis(i, l, latex=True) for i in ol] for l, ol in enumerate(rep.orbital)], []
-            )
+            orb = sum([[self.mm.group.tag_atomic_basis(i, l, latex=True) for i in ol] for l, ol in enumerate(rep.orbital)], [])
             if len(orb) < 17:
                 orb = "$" + "$, $".join(orb) + "$"
                 name = r"\texttt{" + name + "}"
@@ -502,7 +500,7 @@ class ModelPDF:
         tbl = []
         for no, b in enumerate(basis):
             b = "$" + str(b) + "$"
-            tbl.append([str(no + 1), b])
+            tbl.append([str(no), b])
         tbl = sum(tbl, [])
         self.pdf.table(
             tbl,
@@ -523,9 +521,7 @@ class ModelPDF:
         basis_form = Group.global_info()["harmonics"]["basis_function"]
 
         ranks = sorted(
-            list(
-                set(sum([[rank for rank, orb in enumerate(rep.orbital) if len(orb) > 0] for rep in site.values()], []))
-            )
+            list(set(sum([[rank for rank, orb in enumerate(rep.orbital) if len(orb) > 0] for rep in site.values()], [])))
         )
 
         cap = "Atomic basis (orbital part only)"

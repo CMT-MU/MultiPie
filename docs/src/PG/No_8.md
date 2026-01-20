@@ -1,5 +1,9 @@
-# #8: $D_{\rm 2h}$
+# PG #8:  $D_{\rm 2h}$ ($mmm$)
 
+- **Related group**
+  - SG : [$D_{\rm 2h}^{1}$ ($Pmmm$)](../SG/No_47.md)
+  - MPG : [$mmm1'$](../MPG/No_8.2.25.md)
+  - MSG (SG) : [$D_{\rm 2h}^{1}$ ($Pmmm$)](../MSG/No_47.md)
 - **Symmetry operation** : [PDF](../../../others/pdf/PG/008-D2h/symmetry_operation.pdf)
 - **Character table** : [PDF](../../../others/pdf/PG/008-D2h/character_table.pdf)
 - **Wyckoff**

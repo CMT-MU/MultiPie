@@ -1,5 +1,9 @@
-# #7: $C_{\rm 2v}$
+# PG #7:  $C_{\rm 2v}$ ($mm2$)
 
+- **Related group**
+  - SG : [$C_{\rm 2v}^{1}$ ($Pmm2$)](../SG/No_25.md)
+  - MPG : [$mm21'$](../MPG/No_7.2.21.md)
+  - MSG (SG) : [$C_{\rm 2v}^{1}$ ($Pmm2$)](../MSG/No_25.md)
 - **Symmetry operation** : [PDF](../../../others/pdf/PG/007-C2v/symmetry_operation.pdf)
 - **Character table** : [PDF](../../../others/pdf/PG/007-C2v/character_table.pdf)
 - **Wyckoff**

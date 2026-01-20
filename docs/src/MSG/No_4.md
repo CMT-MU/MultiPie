@@ -1,26 +1,50 @@
-# #4: $P2_1$
+# MSG (SG) #4:  $C_{\rm 2}^{2}$ ($P2_1$)
 
-- **#4.7: $P2_{1}$**
+- **#4.7:  $P2_{1}$**
+  - Related group
+    - PG : [$C_{\rm 2}$ ($2$)](../PG/No_3.md)
+    - SG : [$C_{\rm 2}^{2}$ ($P2_1$)](../SG/No_4.md)
+    - MPG : [$21'$](../MPG/No_3.2.7.md)
   - Symmetry operation : [PDF](../../../others/pdf/MSG/4.7/symmetry_operation.pdf)
   - Wyckoff
     - site : [PDF](../../../others/pdf/MSG/4.7/wyckoff_site.pdf)
-- **#4.8: $P2_{1}1'$**
+- **#4.8:  $P2_{1}1'$**
+  - Related group
+    - PG : [$C_{\rm 2}$ ($2$)](../PG/No_3.md)
+    - SG : [$C_{\rm 2}^{2}$ ($P2_1$)](../SG/No_4.md)
+    - MPG : [$21'$](../MPG/No_3.2.7.md)
   - Symmetry operation : [PDF](../../../others/pdf/MSG/4.8/symmetry_operation.pdf)
   - Wyckoff
     - site : [PDF](../../../others/pdf/MSG/4.8/wyckoff_site.pdf)
-- **#4.9: $P2_{1}'$**
+- **#4.9:  $P2_{1}'$**
+  - Related group
+    - PG : [$C_{\rm 2}$ ($2$)](../PG/No_3.md)
+    - SG : [$C_{\rm 2}^{2}$ ($P2_1$)](../SG/No_4.md)
+    - MPG : [$21'$](../MPG/No_3.2.7.md)
   - Symmetry operation : [PDF](../../../others/pdf/MSG/4.9/symmetry_operation.pdf)
   - Wyckoff
     - site : [PDF](../../../others/pdf/MSG/4.9/wyckoff_site.pdf)
-- **#4.10: $P_{a}2_{1}$**
+- **#4.10:  $P_{a}2_{1}$**
+  - Related group
+    - PG : [$C_{\rm 2}$ ($2$)](../PG/No_3.md)
+    - SG : [$C_{\rm 2}^{2}$ ($P2_1$)](../SG/No_4.md)
+    - MPG : [$21'$](../MPG/No_3.2.7.md)
   - Symmetry operation : [PDF](../../../others/pdf/MSG/4.10/symmetry_operation.pdf)
   - Wyckoff
     - site : [PDF](../../../others/pdf/MSG/4.10/wyckoff_site.pdf)
-- **#4.11: $P_{b}2_{1}$**
+- **#4.11:  $P_{b}2_{1}$**
+  - Related group
+    - PG : [$C_{\rm 2}$ ($2$)](../PG/No_3.md)
+    - SG : [$C_{\rm 2}^{2}$ ($P2_1$)](../SG/No_4.md)
+    - MPG : [$21'$](../MPG/No_3.2.7.md)
   - Symmetry operation : [PDF](../../../others/pdf/MSG/4.11/symmetry_operation.pdf)
   - Wyckoff
     - site : [PDF](../../../others/pdf/MSG/4.11/wyckoff_site.pdf)
-- **#4.12: $P_{C}2_{1}$**
+- **#4.12:  $P_{C}2_{1}$**
+  - Related group
+    - PG : [$C_{\rm 2}$ ($2$)](../PG/No_3.md)
+    - SG : [$C_{\rm 2}^{2}$ ($P2_1$)](../SG/No_4.md)
+    - MPG : [$21'$](../MPG/No_3.2.7.md)
   - Symmetry operation : [PDF](../../../others/pdf/MSG/4.12/symmetry_operation.pdf)
   - Wyckoff
     - site : [PDF](../../../others/pdf/MSG/4.12/wyckoff_site.pdf)

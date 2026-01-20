@@ -1,5 +1,9 @@
-# #5.3.14: $2'/m$
+# MPG #5.3.14:  $2'/m$
 
+- **Related group**
+  - PG : [$C_{\rm 2h}$ ($2/m$)](../PG/No_5.md)
+  - SG : [$C_{\rm 2h}^{1}$ ($P2/m$)](../SG/No_10.md)
+  - MSG (SG) : [$C_{\rm 2h}^{1}$ ($P2/m$)](../MSG/No_10.md)
 - **Symmetry operation** : [PDF](../../../others/pdf/MPG/5.3.14/symmetry_operation.pdf)
 - **Wyckoff**
   - site : [PDF](../../../others/pdf/MPG/5.3.14/wyckoff_site.pdf)

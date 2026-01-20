@@ -1,5 +1,9 @@
-# #7.4.23: $m'm'2$
+# MPG #7.4.23:  $m'm'2$
 
+- **Related group**
+  - PG : [$C_{\rm 2v}$ ($mm2$)](../PG/No_7.md)
+  - SG : [$C_{\rm 2v}^{1}$ ($Pmm2$)](../SG/No_25.md)
+  - MSG (SG) : [$C_{\rm 2v}^{1}$ ($Pmm2$)](../MSG/No_25.md)
 - **Symmetry operation** : [PDF](../../../others/pdf/MPG/7.4.23/symmetry_operation.pdf)
 - **Wyckoff**
   - site : [PDF](../../../others/pdf/MPG/7.4.23/wyckoff_site.pdf)

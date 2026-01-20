@@ -3,11 +3,14 @@ Create markdown for all information.
 """
 
 import os
-
+import sys
 from multipie.core.multipie_info import __top_dir__
+
+sys.path.append(__top_dir__)
 from multipie.core.group import Group
 from multipie.util.util import timer
 from multipie.util.util_binary import BinaryManager
+from others.tools.data.data_group_name_list import group_name_list
 
 
 # ==================================================
@@ -88,129 +91,196 @@ def create_markdown():
     overview_md = dict_to_markdown(overview_dict)
 
     # ---------- Helper ----------
-    def write_group_markdown(group_dict, dir_out, g, no, with_inter=False):
-        if with_inter:
-            title = f"# #{no}: ${g.info.international}$\n"
-        else:
-            title = f"# #{no}: ${g.latex()}$\n"
+    def write_group_markdown(group_dict, dir_out, title, md):
         md_content = title + "\n" + dict_to_markdown(group_dict) + "\n"
-        out_path = os.path.join(dir_md, dir_out, f"No_{no}.md")
+        out_path = os.path.join(dir_md, dir_out, md)
         with open(out_path, "w", encoding="utf-8") as f:
             f.write(md_content)
 
     # ---------- Containers ----------
     point_tbl, complex_tbl, space_tbl, mpg_tbl, msg_tbl = [], [], [], [], []
 
-    # ---------- Space group ----------
-    for id_s in info["id_set"]["SG"]["all"]:
-        g = Group(id_s)
-        tag, no = g.info.tag.replace("^", "_"), int(id_s.split(":")[1])
-        space_tbl.append(f"{no}: [$\\,\\,{g.latex()}$ (${g.info.international}$)](SG/No_{no}.md)")
-
-        sg_dict = {
-            "Symmetry operation": f"[PDF]({dir_pdf2}SG/{no:03d}-{tag}/symmetry_operation.pdf)",
-            "Wyckoff": {
-                "site": f"[PDF]({dir_pdf2}SG/{no:03d}-{tag}/wyckoff_site.pdf)",
-                "bond": f"[PDF]({dir_pdf2}SG/{no:03d}-{tag}/wyckoff_bond.pdf)",
-            },
-        }
-        write_group_markdown(sg_dict, "SG", g, no)
-
     # ---------- Point group (real) ----------
-    for id_s in info["id_set"]["PG"]["all"]:
-        g = Group(id_s)
-        tag, no = g.info.tag, int(id_s.split(":")[1])
-        point_tbl.append(f"{no}: [$\\,\\,{g.latex()}$ (${g.info.international}$)](PG/No_{no}.md)")
+    for id_s, (d, md, no, tag, name, pg, sg, mpg, msg) in group_name_list["PG"].items():
+        if no > 37:
+            continue
+
+        point_tbl.append(f"{no}:  [{name}](PG/{md})")
 
         xl = ["Q", "G"]
-        mno = g.info.MPG.split(":")[1]
+        mno = group_name_list["MPG"][mpg][2]  # no.
+        title = f"# PG #{no}:  {name}\n"
+        dd = f"{dir_pdf2}PG/{d}"
+
+        sg_md = group_name_list["SG"][sg][1]
+        mpg_md = group_name_list["MPG"][mpg][1]
+        sg_name = group_name_list["SG"][sg][4]
+        mpg_name = group_name_list["MPG"][mpg][4]
 
         pg_dict = {
-            "Symmetry operation": f"[PDF]({dir_pdf2}PG/{no:03d}-{tag}/symmetry_operation.pdf)",
-            "Character table": f"[PDF]({dir_pdf2}PG/{no:03d}-{tag}/character_table.pdf)",
+            "Related group": {
+                "SG": f"[{sg_name}](../SG/{sg_md})",
+                "MPG": f"[{mpg_name}](../MPG/{mpg_md})",
+                "MSG (SG)": f"[{sg_name}](../MSG/{sg_md})",
+            },
+            "Symmetry operation": f"[PDF]({dd}/symmetry_operation.pdf)",
+            "Character table": f"[PDF]({dd}/character_table.pdf)",
             "Wyckoff": {
-                "site": f"[PDF]({dir_pdf2}PG/{no:03d}-{tag}/wyckoff_site.pdf)",
-                "bond": f"[PDF]({dir_pdf2}PG/{no:03d}-{tag}/wyckoff_bond.pdf)",
+                "site": f"[PDF]({dd}/wyckoff_site.pdf)",
+                "bond": f"[PDF]({dd}/wyckoff_bond.pdf)",
             },
             "Atomic multipole": {
-                "JML basis": f"[PDF]({dir_pdf2}PG/{no:03d}-{tag}/atomic_multipole_jml.pdf)",
-                r"L$\Gamma\sigma$ basis": f"[PDF]({dir_pdf2}PG/{no:03d}-{tag}/atomic_multipole_lgs.pdf)",
-                r"L$\Gamma$ basis": f"[PDF]({dir_pdf2}PG/{no:03d}-{tag}/atomic_multipole_lg.pdf)",
+                "JML basis": f"[PDF]({dd}/atomic_multipole_jml.pdf)",
+                r"L$\Gamma\sigma$ basis": f"[PDF]({dd}/atomic_multipole_lgs.pdf)",
+                r"L$\Gamma$ basis": f"[PDF]({dd}/atomic_multipole_lg.pdf)",
             },
             "Harmonics": {
-                "polar": f"[PDF]({dir_pdf2}PG/{no:03d}-{tag}/harmonics_polar.pdf)",
-                "axial": f"[PDF]({dir_pdf2}PG/{no:03d}-{tag}/harmonics_axial.pdf)",
+                "polar": f"[PDF]({dd}/harmonics_polar.pdf)",
+                "axial": f"[PDF]({dd}/harmonics_axial.pdf)",
             },
             "Multipolar Harmonics (internal)": {
                 "dipolar internal polar(Q)/axial(G) varialble": {
-                    "polar (Q)": f"[PDF]({dir_pdf2}PG/{no:03d}-{tag}/harmonics_s1_polar_q.pdf)",
-                    "axial (Q)": f"[PDF]({dir_pdf2}PG/{no:03d}-{tag}/harmonics_s1_axial_q.pdf)",
-                    "polar (G)": f"[PDF]({dir_pdf2}PG/{no:03d}-{tag}/harmonics_s1_polar_g.pdf)",
-                    "axial (G)": f"[PDF]({dir_pdf2}PG/{no:03d}-{tag}/harmonics_s1_axial_g.pdf)",
+                    "polar (Q)": f"[PDF]({dd}/harmonics_s1_polar_q.pdf)",
+                    "axial (Q)": f"[PDF]({dd}/harmonics_s1_axial_q.pdf)",
+                    "polar (G)": f"[PDF]({dd}/harmonics_s1_polar_g.pdf)",
+                    "axial (G)": f"[PDF]({dd}/harmonics_s1_axial_g.pdf)",
                 },
                 "quadrupolar internal polar(Q)/axial(G) variable": {
-                    "polar (Q)": f"[PDF]({dir_pdf2}PG/{no:03d}-{tag}/harmonics_s2_polar_q.pdf)",
-                    "axial (Q)": f"[PDF]({dir_pdf2}PG/{no:03d}-{tag}/harmonics_s2_axial_q.pdf)",
-                    "polar (G)": f"[PDF]({dir_pdf2}PG/{no:03d}-{tag}/harmonics_s2_polar_g.pdf)",
-                    "axial (G)": f"[PDF]({dir_pdf2}PG/{no:03d}-{tag}/harmonics_s2_axial_g.pdf)",
+                    "polar (Q)": f"[PDF]({dd}/harmonics_s2_polar_q.pdf)",
+                    "axial (Q)": f"[PDF]({dd}/harmonics_s2_axial_q.pdf)",
+                    "polar (G)": f"[PDF]({dd}/harmonics_s2_polar_g.pdf)",
+                    "axial (G)": f"[PDF]({dd}/harmonics_s2_axial_g.pdf)",
                 },
                 "octupolar internal polar(Q)/axial(G) variable": {
-                    "polar (Q)": f"[PDF]({dir_pdf2}PG/{no:03d}-{tag}/harmonics_s3_polar_q.pdf)",
-                    "axial (Q)": f"[PDF]({dir_pdf2}PG/{no:03d}-{tag}/harmonics_s3_axial_q.pdf)",
-                    "polar (G)": f"[PDF]({dir_pdf2}PG/{no:03d}-{tag}/harmonics_s3_polar_g.pdf)",
-                    "axial (G)": f"[PDF]({dir_pdf2}PG/{no:03d}-{tag}/harmonics_s3_axial_g.pdf)",
+                    "polar (Q)": f"[PDF]({dd}/harmonics_s3_polar_q.pdf)",
+                    "axial (Q)": f"[PDF]({dd}/harmonics_s3_axial_q.pdf)",
+                    "polar (G)": f"[PDF]({dd}/harmonics_s3_polar_g.pdf)",
+                    "axial (G)": f"[PDF]({dd}/harmonics_s3_axial_g.pdf)",
                 },
             },
             "Response tensor": {X: f"[PDF]({dir_pdf2}MPG/{mno}/response_tensor_" + X + ".pdf)" for X in xl},
         }
-        write_group_markdown(pg_dict, "PG", g, no)
+
+        write_group_markdown(pg_dict, "PG", title, md)
 
     # ---------- Point group (complex) ----------
-    for id_s in info["id_set"]["PG"]["complex"]:
-        g = Group(id_s)
-        tag, no = g.info.tag, int(id_s.split(":")[1])
-        complex_tbl.append(f"{no} :[$\\,\\,{g.latex()}$ (${g.info.international}$)](PG/No_{no}.md)")
+    for id_s, (d, md, no, tag, name, pg, sg, mpg, msg) in group_name_list["PG"].items():
+        if no < 38:
+            continue
+
+        complex_tbl.append(f"{no}:  [{name}](PG/{md})")
+
+        title = f"# PG #{no}:  {name}\n"
+        dd = f"{dir_pdf2}PG/{d}"
+
+        sg_md = group_name_list["SG"][sg][1]
+        mpg_md = group_name_list["MPG"][mpg][1]
+        sg_name = group_name_list["SG"][sg][4]
+        mpg_name = group_name_list["MPG"][mpg][4]
 
         cg_dict = {
-            "Symmetry operation": f"[PDF]({dir_pdf2}PG/{no:03d}-{tag}/symmetry_operation.pdf)",
-            "Character table": f"[PDF]({dir_pdf2}PG/{no:03d}-{tag}/character_table.pdf)",
-            "Harmonics": {
-                "polar": f"[PDF]({dir_pdf2}PG/{no:03d}-{tag}/harmonics_polar.pdf)",
-                "axial": f"[PDF]({dir_pdf2}PG/{no:03d}-{tag}/harmonics_axial.pdf)",
+            "Related group": {
+                "SG": f"[{sg_name}](../SG/{sg_md})",
+                "MPG": f"[{mpg_name}](../MPG/{mpg_md})",
+                "MSG (SG)": f"[{sg_name}](../MSG/{sg_md})",
             },
-            "Representation matrix": f"[PDF]({dir_pdf2}PG/{no:03d}-{tag}/representation_matrix.pdf)",
+            "Symmetry operation": f"[PDF]({dd}/symmetry_operation.pdf)",
+            "Character table": f"[PDF]({dd}/character_table.pdf)",
+            "Harmonics": {
+                "polar": f"[PDF]({dd}/harmonics_polar.pdf)",
+                "axial": f"[PDF]({dd}/harmonics_axial.pdf)",
+            },
+            "Representation matrix": f"[PDF]({dd}/representation_matrix.pdf)",
         }
-        write_group_markdown(cg_dict, "PG", g, no)
+
+        write_group_markdown(cg_dict, "PG", title, md)
+
+    # ---------- Space group ----------
+    for id_s, (d, md, no, tag, name, pg, sg, mpg, msg) in group_name_list["SG"].items():
+        space_tbl.append(f"{no}:  [{name}](SG/{md})")
+
+        title = f"# SG #{no}:  {name}\n"
+        dd = f"{dir_pdf2}SG/{d}"
+
+        pg_md = group_name_list["PG"][pg][1]
+        mpg_md = group_name_list["MPG"][mpg][1]
+        pg_name = group_name_list["PG"][pg][4]
+        mpg_name = group_name_list["MPG"][mpg][4]
+
+        sg_dict = {
+            "Related group": {
+                "PG": f"[{pg_name}](../PG/{pg_md})",
+                "MPG": f"[{mpg_name}](../MPG/{mpg_md})",
+                "MSG (SG)": f"[{name}](../MSG/{md})",
+            },
+            "Symmetry operation": f"[PDF]({dd}/symmetry_operation.pdf)",
+            "Wyckoff": {
+                "site": f"[PDF]({dd}/wyckoff_site.pdf)",
+                "bond": f"[PDF]({dd}/wyckoff_bond.pdf)",
+            },
+        }
+
+        write_group_markdown(sg_dict, "SG", title, md)
 
     # ---------- Magnetic point group ----------
-    for id_s in info["id_set"]["MPG"]["all"]:
-        g = Group(id_s)
-        tag, no = g.info.tag, id_s.split(":")[1]
-        mpg_tbl.append(f"{no} :[$\\,\\,{g.latex()}$](MPG/No_{no}.md)")
-        xl = ["Q", "G"] if g.info.type == "II" else ["Q", "G", "T", "M"]
+    for id_s, (d, md, no, tag, name, pg, sg, mpg, msg) in group_name_list["MPG"].items():
+        mpg_tbl.append(f"{no}:  [{name}](MPG/{md})")
+
+        xl = ["Q", "G"] if name.endswith("1'$") else ["Q", "G", "T", "M"]
+        title = f"# MPG #{no}:  {name}\n"
+        dd = f"{dir_pdf2}MPG/{d}"
+
+        pg_md = group_name_list["PG"][pg][1]
+        sg_md = group_name_list["SG"][sg][1]
+        pg_name = group_name_list["PG"][pg][4]
+        sg_name = group_name_list["SG"][sg][4]
 
         cg_dict = {
-            "Symmetry operation": f"[PDF]({dir_pdf2}MPG/{no}/symmetry_operation.pdf)",
-            "Wyckoff": {"site": f"[PDF]({dir_pdf2}MPG/{no}/wyckoff_site.pdf)"},
-            "Response tensor": {X: f"[PDF]({dir_pdf2}MPG/{no}/response_tensor_" + X + ".pdf)" for X in xl},
+            "Related group": {
+                "PG": f"[{pg_name}](../PG/{pg_md})",
+                "SG": f"[{sg_name}](../SG/{sg_md})",
+                "MSG (SG)": f"[{sg_name}](../MSG/{sg_md})",
+            },
+            "Symmetry operation": f"[PDF]({dd}/symmetry_operation.pdf)",
+            "Wyckoff": {"site": f"[PDF]({dd}/wyckoff_site.pdf)"},
+            "Response tensor": {X: f"[PDF]({dd}/response_tensor_" + X + ".pdf)" for X in xl},
         }
-        write_group_markdown(cg_dict, "MPG", g, no)
+
+        write_group_markdown(cg_dict, "MPG", title, md)
 
     # ---------- Magnetic space group ----------
     for SG, lst in info["id_set"]["MSG"]["SG"].items():
-        gs = Group(SG)
-        tag, no = gs.info.tag, SG.split(":")[1]
-        msg_tbl.append(f"{no} :[$\\,\\,{gs.info.international}$](MSG/No_{no}.md)")
+        d, md, no, tag, name, pg, sg, mpg, msg = group_name_list["SG"][SG]
+
+        msg_tbl.append(f"{no}:  [{name}](MSG/{md})")
+
+        title = f"# MSG (SG) #{no}:  {name}\n"
+
         cg_dict = {}
         for id_s in lst:
-            g = Group(id_s)
-            no_c = id_s.split(":")[1]
-            tag_c = "#" + no_c + ": $" + g.info.BNS + "$"
+            msg_info = group_name_list["MSG"][id_s]
+            no_c = msg_info[2]  # no.
+            tag_c = f"#{no_c}:  {msg_info[4]}"  # name.
+            dd = f"{dir_pdf2}MSG/{no_c}"
+
+            pg_md = group_name_list["PG"][pg][1]
+            sg_md = group_name_list["SG"][sg][1]
+            mpg_md = group_name_list["MPG"][mpg][1]
+            pg_name = group_name_list["PG"][pg][4]
+            sg_name = group_name_list["SG"][sg][4]
+            mpg_name = group_name_list["MPG"][mpg][4]
+
             cg_dict[f"{tag_c}"] = {
-                "Symmetry operation": f"[PDF]({dir_pdf2}MSG/{no_c}/symmetry_operation.pdf)",
-                "Wyckoff": {"site": f"[PDF]({dir_pdf2}MSG/{no_c}/wyckoff_site.pdf)"},
+                "Related group": {
+                    "PG": f"[{pg_name}](../PG/{pg_md})",
+                    "SG": f"[{sg_name}](../SG/{sg_md})",
+                    "MPG": f"[{mpg_name}](../MPG/{mpg_md})",
+                },
+                "Symmetry operation": f"[PDF]({dd}/symmetry_operation.pdf)",
+                "Wyckoff": {"site": f"[PDF]({dd}/wyckoff_site.pdf)"},
             }
-        write_group_markdown(cg_dict, "MSG", gs, no, True)
+
+        write_group_markdown(cg_dict, "MSG", title, md)
 
     # ---------- Merge real + complex ----------
     point_tbl_md = list_to_table(point_tbl, header=True)

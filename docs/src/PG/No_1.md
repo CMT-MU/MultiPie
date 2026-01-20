@@ -1,5 +1,9 @@
-# #1: $C_{\rm 1}$
+# PG #1:  $C_{\rm 1}$ ($1$)
 
+- **Related group**
+  - SG : [$C_{\rm 1}^{1}$ ($P1$)](../SG/No_1.md)
+  - MPG : [$11'$](../MPG/No_1.2.2.md)
+  - MSG (SG) : [$C_{\rm 1}^{1}$ ($P1$)](../MSG/No_1.md)
 - **Symmetry operation** : [PDF](../../../others/pdf/PG/001-C1/symmetry_operation.pdf)
 - **Character table** : [PDF](../../../others/pdf/PG/001-C1/character_table.pdf)
 - **Wyckoff**

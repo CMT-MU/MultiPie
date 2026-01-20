@@ -1,5 +1,9 @@
-# #2: $C_{\rm i}$
+# PG #2:  $C_{\rm i}$ ($\bar{1}$)
 
+- **Related group**
+  - SG : [$C_{\rm i}^{1}$ ($P\bar{1}$)](../SG/No_2.md)
+  - MPG : [$\bar{1}1'$](../MPG/No_2.2.4.md)
+  - MSG (SG) : [$C_{\rm i}^{1}$ ($P\bar{1}$)](../MSG/No_2.md)
 - **Symmetry operation** : [PDF](../../../others/pdf/PG/002-Ci/symmetry_operation.pdf)
 - **Character table** : [PDF](../../../others/pdf/PG/002-Ci/character_table.pdf)
 - **Wyckoff**

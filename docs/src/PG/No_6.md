@@ -1,5 +1,9 @@
-# #6: $D_{\rm 2}$
+# PG #6:  $D_{\rm 2}$ ($222$)
 
+- **Related group**
+  - SG : [$D_{\rm 2}^{1}$ ($P222$)](../SG/No_16.md)
+  - MPG : [$2221'$](../MPG/No_6.2.18.md)
+  - MSG (SG) : [$D_{\rm 2}^{1}$ ($P222$)](../MSG/No_16.md)
 - **Symmetry operation** : [PDF](../../../others/pdf/PG/006-D2/symmetry_operation.pdf)
 - **Character table** : [PDF](../../../others/pdf/PG/006-D2/character_table.pdf)
 - **Wyckoff**
