@@ -90,16 +90,39 @@ class ModelPDF:
         scr = str(scr[0:2]) + ", " + str(scr[2:4]) + ", " + str(scr[4:6])
         basis_type = self.mm["basis_type"]
         select = self.mm["SAMB_select"]
+        a_select = self.mm["atomic_select"]
+        s_select = self.mm["site_select"]
+        b_select = self.mm["bond_select"]
         irrep = ["$" + self.mm.group.tag_irrep(i, latex=True) + "$" for i in select["Gamma"]]
+        a_irrep = ["$" + self.mm.group.tag_irrep(i, latex=True) + "$" for i in a_select["Gamma"]]
+        s_irrep = ["$" + self.mm.group.tag_irrep(i, latex=True) + "$" for i in s_select["Gamma"]]
+        b_irrep = ["$" + self.mm.group.tag_irrep(i, latex=True) + "$" for i in b_select["Gamma"]]
 
         self.hr("General Condition")
         self.text(r"\begin{itemize}")
         self.text(r"\item Basis type: \texttt{" + basis_type + "}\n")
+
         self.text(r"\item SAMB selection:" + "\n")
         self.text(r"\, - Type: \texttt{" + str(select["X"]).replace("'", "") + "}\n")
         self.text(r"\, - Rank: \texttt{" + str(select["l"]) + "}\n")
         self.text(r"\, - Irrep.: [" + ", ".join(irrep) + "]\n")
         self.text(r"\, - Spin (s): \texttt{" + str(select["s"]) + "}\n")
+
+        self.text(r"\item Atomic selection:" + "\n")
+        self.text(r"\, - Type: \texttt{" + str(a_select["X"]).replace("'", "") + "}\n")
+        self.text(r"\, - Rank: \texttt{" + str(a_select["l"]) + "}\n")
+        self.text(r"\, - Irrep.: [" + ", ".join(a_irrep) + "]\n")
+        self.text(r"\, - Spin (s): \texttt{" + str(a_select["s"]) + "}\n")
+
+        self.text(r"\item Site-cluster selection:" + "\n")
+        self.text(r"\, - Rank: \texttt{" + str(s_select["l"]) + "}\n")
+        self.text(r"\, - Irrep.: [" + ", ".join(s_irrep) + "]\n")
+
+        self.text(r"\item Bond-cluster selection:" + "\n")
+        self.text(r"\, - Type: \texttt{" + str(b_select["X"]).replace("'", "") + "}\n")
+        self.text(r"\, - Rank: \texttt{" + str(b_select["l"]) + "}\n")
+        self.text(r"\, - Irrep.: [" + ", ".join(b_irrep) + "]\n")
+
         self.text(r"\item Max. neighbor: \texttt{" + str(mn) + "}\n")
         self.text(r"\item Search cell range: \texttt{" + scr + "}\n")
         self.text(r"\item Toroidal priority: \texttt{" + str(tp).lower() + "}\n")
