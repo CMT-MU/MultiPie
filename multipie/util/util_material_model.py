@@ -368,16 +368,18 @@ def parse_samb_select(dic, irreps):
         - null list represents all possible values.
         - "IR" in "Gamma" indicates the identity representation.
     """
-    if dic["Gamma"] == "IR":
+    if "Gamma" in dic.keys() and dic["Gamma"] == "IR":
         dic["Gamma"] = [irreps[0]]
 
     dic = {k: [v] if type(v) != list else v for k, v in dic.items()}
 
-    if len(dic["l"]) == 0:
+    if "X" in dic.keys() and len(dic["X"]) == 0:
+        dic["X"] = ["Q", "G", "M", "T"]
+    if "l" in dic.keys() and len(dic["l"]) == 0:
         dic["l"] = list(range(12))
     if len(dic["Gamma"]) == 0:
         dic["Gamma"] = irreps
-    if len(dic["s"]) == 0:
+    if "s" in dic.keys() and len(dic["s"]) == 0:
         dic["s"] = [0, 1]
 
     return dic

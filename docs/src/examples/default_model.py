@@ -6,12 +6,27 @@ default_model = {
     "spinful": False,
     "site": {},
     "bond": [],
-    "SAMB_select": {
-        "X": ["Q", "G"],  # type, "Q/G/T/M".
+    "SAMB_select": {  # select combined SAMB.
+        "X": ["Q", "G"],  # type, "Q/G/T/M", []=all.
         "l": [],  # rank, []=all.
         "Gamma": [],  # "IR"=identity, []=all, "..."/["...","..."]=specified irreps.
-        "s": [],  # spin, []=all.
-    },  # X, l, Gamma, s.
+        "s": [],  # spin, 0/1, []=all.
+    },
+    "atomic_select": {  # select atomic SAMB.
+        "X": [],  # type, "Q/G/T/M", []=all.
+        "l": [],  # rank, []=all.
+        "Gamma": [],  # "IR"=identity, []=all, "..."/["...","..."]=specified irreps.
+        "s": [],  # spin, 0/1, []=all.
+    },
+    "site_select": {  # select site-cluster SAMB.
+        "l": [],  # rank, []=all.
+        "Gamma": [],  # "IR"=identity, []=all, "..."/["...","..."]=specified irreps.
+    },
+    "bond_select": {  # select bond-cluster SAMB.
+        "X": [],  # type, "Q/T/M", []=all.
+        "l": [],  # rank, []=all.
+        "Gamma": [],  # "IR"=identity, []=all, "..."/["...","..."]=specified irreps.
+    },
     "toroidal_priority": False,
     "max_neighbor": 10,  # for DFT fitting, e.g. =200.
     "search_cell_range": (-2, 3, -2, 3, -2, 3),  # (a1, a2, a3) range. for DFT fitting, e.g.=(-10, 10, -10, 10, -10, 10).
