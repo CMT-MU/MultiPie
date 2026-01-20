@@ -1,5 +1,11 @@
 import os
+import re
+from multipie import MSGInfoType
+from data_msg import _msg_info
+from data_pg import _pg_info
+from data_sg import _sg_info
 
+# ==================================================
 header = """
 Group information for all magnetic space groups.
 
@@ -29,17 +35,14 @@ Group information for all magnetic space groups.
     - type: type I, II, III, IV.
     - SO: symmetry operations.
 """
-import re
-from multipie import MSGInfoType
-from data_msg import _msg_info
-from data_pg import _pg_info
-from data_sg import _sg_info
 
 
+# ==================================================
 def replace_bar(s):
     return re.sub(r"-(\d)", r"\\bar{\1}", s)
 
 
+# ==================================================
 def create_msg():
     msg_info = {}
     for MSG_id, (BNS, T_type, OG, MPG_id, setting, SO) in _msg_info.items():

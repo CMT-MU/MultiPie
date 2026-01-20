@@ -1,5 +1,12 @@
 import os
+import re
+from multipie import PGInfoType
+from data_pg import _pg_info, _sg_complex_to_real
+from output.data_group_sg import sg_id_set
+from output.data_group_mpg import mpg_id_set
+from output.data_group_msg import msg_id_set
 
+# ==================================================
 header = """
 Group information for all point groups.
 
@@ -29,18 +36,14 @@ Group information for all point groups.
     - SO: symmetry operations.
     - SO_gen: generator of SOs.
 """
-import re
-from multipie import PGInfoType
-from data_pg import _pg_info, _sg_complex_to_real
-from output.data_group_sg import sg_id_set
-from output.data_group_mpg import mpg_id_set
-from output.data_group_msg import msg_id_set
 
 
+# ==================================================
 def replace_bar(s):
     return re.sub(r"-(\d)", r"\\bar{\1}", s)
 
 
+# ==================================================
 def create_pg():
     pg_info = {}
     for PG_id, (schoenflies, international, crystal, setting, SO, generator) in _pg_info.items():

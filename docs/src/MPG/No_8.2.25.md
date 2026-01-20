@@ -1,5 +1,9 @@
-# #8.2.25: $mmm1'$
+# MPG #8.2.25:  $mmm1'$
 
+- **Related group**
+  - PG : [$D_{\rm 2h}$ ($mmm$)](../PG/No_8.md)
+  - SG : [$D_{\rm 2h}^{1}$ ($Pmmm$)](../SG/No_47.md)
+  - MSG (SG) : [$D_{\rm 2h}^{1}$ ($Pmmm$)](../MSG/No_47.md)
 - **Symmetry operation** : [PDF](../../../others/pdf/MPG/8.2.25/symmetry_operation.pdf)
 - **Wyckoff**
   - site : [PDF](../../../others/pdf/MPG/8.2.25/wyckoff_site.pdf)

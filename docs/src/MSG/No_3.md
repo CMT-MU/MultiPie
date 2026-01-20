@@ -1,26 +1,50 @@
-# #3: $P2$
+# MSG (SG) #3:  $C_{\rm 2}^{1}$ ($P2$)
 
-- **#3.1: $P2$**
+- **#3.1:  $P2$**
+  - Related group
+    - PG : [$C_{\rm 2}$ ($2$)](../PG/No_3.md)
+    - SG : [$C_{\rm 2}^{1}$ ($P2$)](../SG/No_3.md)
+    - MPG : [$21'$](../MPG/No_3.2.7.md)
   - Symmetry operation : [PDF](../../../others/pdf/MSG/3.1/symmetry_operation.pdf)
   - Wyckoff
     - site : [PDF](../../../others/pdf/MSG/3.1/wyckoff_site.pdf)
-- **#3.2: $P21'$**
+- **#3.2:  $P21'$**
+  - Related group
+    - PG : [$C_{\rm 2}$ ($2$)](../PG/No_3.md)
+    - SG : [$C_{\rm 2}^{1}$ ($P2$)](../SG/No_3.md)
+    - MPG : [$21'$](../MPG/No_3.2.7.md)
   - Symmetry operation : [PDF](../../../others/pdf/MSG/3.2/symmetry_operation.pdf)
   - Wyckoff
     - site : [PDF](../../../others/pdf/MSG/3.2/wyckoff_site.pdf)
-- **#3.3: $P2'$**
+- **#3.3:  $P2'$**
+  - Related group
+    - PG : [$C_{\rm 2}$ ($2$)](../PG/No_3.md)
+    - SG : [$C_{\rm 2}^{1}$ ($P2$)](../SG/No_3.md)
+    - MPG : [$21'$](../MPG/No_3.2.7.md)
   - Symmetry operation : [PDF](../../../others/pdf/MSG/3.3/symmetry_operation.pdf)
   - Wyckoff
     - site : [PDF](../../../others/pdf/MSG/3.3/wyckoff_site.pdf)
-- **#3.4: $P_{a}2$**
+- **#3.4:  $P_{a}2$**
+  - Related group
+    - PG : [$C_{\rm 2}$ ($2$)](../PG/No_3.md)
+    - SG : [$C_{\rm 2}^{1}$ ($P2$)](../SG/No_3.md)
+    - MPG : [$21'$](../MPG/No_3.2.7.md)
   - Symmetry operation : [PDF](../../../others/pdf/MSG/3.4/symmetry_operation.pdf)
   - Wyckoff
     - site : [PDF](../../../others/pdf/MSG/3.4/wyckoff_site.pdf)
-- **#3.5: $P_{b}2$**
+- **#3.5:  $P_{b}2$**
+  - Related group
+    - PG : [$C_{\rm 2}$ ($2$)](../PG/No_3.md)
+    - SG : [$C_{\rm 2}^{1}$ ($P2$)](../SG/No_3.md)
+    - MPG : [$21'$](../MPG/No_3.2.7.md)
   - Symmetry operation : [PDF](../../../others/pdf/MSG/3.5/symmetry_operation.pdf)
   - Wyckoff
     - site : [PDF](../../../others/pdf/MSG/3.5/wyckoff_site.pdf)
-- **#3.6: $P_{C}2$**
+- **#3.6:  $P_{C}2$**
+  - Related group
+    - PG : [$C_{\rm 2}$ ($2$)](../PG/No_3.md)
+    - SG : [$C_{\rm 2}^{1}$ ($P2$)](../SG/No_3.md)
+    - MPG : [$21'$](../MPG/No_3.2.7.md)
   - Symmetry operation : [PDF](../../../others/pdf/MSG/3.6/symmetry_operation.pdf)
   - Wyckoff
     - site : [PDF](../../../others/pdf/MSG/3.6/wyckoff_site.pdf)

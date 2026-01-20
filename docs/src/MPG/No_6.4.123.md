@@ -1,5 +1,9 @@
-# #6.4.123: $2'2'2$
+# MPG #6.4.123:  $2'2'2$
 
+- **Related group**
+  - PG : [$D_{\rm 2}$ ($222$)](../PG/No_6.md)
+  - SG : [$D_{\rm 2}^{2}$ ($P222_1$)](../SG/No_17.md)
+  - MSG (SG) : [$D_{\rm 2}^{2}$ ($P222_1$)](../MSG/No_17.md)
 - **Symmetry operation** : [PDF](../../../others/pdf/MPG/6.4.123/symmetry_operation.pdf)
 - **Wyckoff**
   - site : [PDF](../../../others/pdf/MPG/6.4.123/wyckoff_site.pdf)

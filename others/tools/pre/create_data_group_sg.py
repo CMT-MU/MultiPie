@@ -1,5 +1,12 @@
 import os
+import re
+from multipie import SGInfoType
+from data_sg import _sg_info
+from data_pg import _pg_info
+from data_msg import _msg_info
+from output.data_group_msg import msg_id_set
 
+# ==================================================
 header = """
 Group information for all space groups.
 
@@ -28,18 +35,14 @@ Group information for all space groups.
     - SO: symmetry operations.
     - SO_gen: generator of SOs.
 """
-import re
-from multipie import SGInfoType
-from data_sg import _sg_info
-from data_pg import _pg_info
-from data_msg import _msg_info
-from output.data_group_msg import msg_id_set
 
 
+# ==================================================
 def replace_bar(s):
     return re.sub(r"-(\d)", r"\\bar{\1}", s)
 
 
+# ==================================================
 def create_sg():
     sg_info = {}
     for SG_id, (schoenflies, international, setting, PG_id, SO, generator) in _sg_info.items():
