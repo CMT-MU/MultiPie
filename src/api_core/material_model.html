@@ -508,11 +508,14 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="multipie.core.material_model.MaterialModel.get_atomic_samb">
-<span class="sig-name descname"><span class="pre">get_atomic_samb</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/core/material_model.html#MaterialModel.get_atomic_samb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.core.material_model.MaterialModel.get_atomic_samb" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">get_atomic_samb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">select</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/core/material_model.html#MaterialModel.get_atomic_samb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.core.material_model.MaterialModel.get_atomic_samb" title="Link to this definition">#</a></dt>
 <dd><p>Get all atomic SAMB.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><ul class="simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>select</strong> (<em>dict</em>) – select dict.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
 <li><p>(dict) – atomic SAMB, dict[BraketInfoType, SAMB Dict].</p></li>
 <li><p>(dict) – atomic id, dict[“x#”, (SAMB index, comp)].</p></li>
 </ul>
@@ -523,11 +526,17 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="multipie.core.material_model.MaterialModel.get_cluster_samb">
-<span class="sig-name descname"><span class="pre">get_cluster_samb</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/core/material_model.html#MaterialModel.get_cluster_samb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.core.material_model.MaterialModel.get_cluster_samb" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">get_cluster_samb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">site_select</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bond_select</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/core/material_model.html#MaterialModel.get_cluster_samb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.core.material_model.MaterialModel.get_cluster_samb" title="Link to this definition">#</a></dt>
 <dd><p>Get all cluster SAMB.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><ul class="simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>site_select</strong> (<em>dict</em>) – site select dict.</p></li>
+<li><p><strong>bond_select</strong> (<em>dict</em>) – bond select dict.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
 <li><p>(dict) – cluster SAMB, dict[wyckoff, SAMB Dict].</p></li>
 <li><p>(dict) – cluster id, dict[“y#”, (wyckoff, SAMB index, comp)].</p></li>
 </ul>
@@ -538,15 +547,15 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="multipie.core.material_model.MaterialModel.get_combined_samb">
-<span class="sig-name descname"><span class="pre">get_combined_samb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">atomic_samb</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cluster_samb</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toroidal_priority</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/core/material_model.html#MaterialModel.get_combined_samb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.core.material_model.MaterialModel.get_combined_samb" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">get_combined_samb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">atomic_samb</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cluster_samb</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">select</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toroidal_priority</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/core/material_model.html#MaterialModel.get_combined_samb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.core.material_model.MaterialModel.get_combined_samb" title="Link to this definition">#</a></dt>
 <dd><p>Get all combined SAMB.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>atomic_samb</strong> (<em>dict</em>) – all atomic SAMB, Dict[braket_info, SAMB].</p></li>
 <li><p><strong>cluster_samb</strong> (<em>dict</em>) – alll cluster SAMB, Dict[“site/bond”, SAMB].</p></li>
+<li><p><strong>select</strong> (<em>dict</em>) – SAMB select.</p></li>
 <li><p><strong>toroidal_priority</strong> (<em>bool</em><em>, </em><em>optional</em>) – use (G,T) prior to (Q,M) in creation ?</p></li>
-<li><p><strong>kwargs</strong> (<em>dict</em><em>, </em><em>optional</em>) – select conditions for multipoles with keywords, [“X”, “l”, “Gamma”, “s”].</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>

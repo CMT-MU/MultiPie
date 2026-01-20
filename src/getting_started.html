@@ -437,12 +437,27 @@ For <code class="docutils literal notranslate"><span class="pre">C3v</span></cod
     <span class="s2">&quot;spinful&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
     <span class="s2">&quot;site&quot;</span><span class="p">:</span> <span class="p">{},</span>
     <span class="s2">&quot;bond&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;SAMB_select&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;X&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Q&quot;</span><span class="p">,</span> <span class="s2">&quot;G&quot;</span><span class="p">],</span>  <span class="c1"># type, &quot;Q/G/T/M&quot;.</span>
+    <span class="s2">&quot;SAMB_select&quot;</span><span class="p">:</span> <span class="p">{</span>  <span class="c1"># select combined SAMB.</span>
+        <span class="s2">&quot;X&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Q&quot;</span><span class="p">,</span> <span class="s2">&quot;G&quot;</span><span class="p">],</span>  <span class="c1"># type, &quot;Q/G/T/M&quot;, []=all.</span>
         <span class="s2">&quot;l&quot;</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># rank, []=all.</span>
         <span class="s2">&quot;Gamma&quot;</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># &quot;IR&quot;=identity, []=all, &quot;...&quot;/[&quot;...&quot;,&quot;...&quot;]=specified irreps.</span>
-        <span class="s2">&quot;s&quot;</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># spin, []=all.</span>
-    <span class="p">},</span>  <span class="c1"># X, l, Gamma, s.</span>
+        <span class="s2">&quot;s&quot;</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># spin, 0/1, []=all.</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;atomic_select&quot;</span><span class="p">:</span> <span class="p">{</span>  <span class="c1"># select atomic SAMB.</span>
+        <span class="s2">&quot;X&quot;</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># type, &quot;Q/G/T/M&quot;, []=all.</span>
+        <span class="s2">&quot;l&quot;</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># rank, []=all.</span>
+        <span class="s2">&quot;Gamma&quot;</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># &quot;IR&quot;=identity, []=all, &quot;...&quot;/[&quot;...&quot;,&quot;...&quot;]=specified irreps.</span>
+        <span class="s2">&quot;s&quot;</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># spin, 0/1, []=all.</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;site_select&quot;</span><span class="p">:</span> <span class="p">{</span>  <span class="c1"># select site-cluster SAMB.</span>
+        <span class="s2">&quot;l&quot;</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># rank, []=all.</span>
+        <span class="s2">&quot;Gamma&quot;</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># &quot;IR&quot;=identity, []=all, &quot;...&quot;/[&quot;...&quot;,&quot;...&quot;]=specified irreps.</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;bond_select&quot;</span><span class="p">:</span> <span class="p">{</span>  <span class="c1"># select bond-cluster SAMB.</span>
+        <span class="s2">&quot;X&quot;</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># type, &quot;Q/T/M&quot;, []=all.</span>
+        <span class="s2">&quot;l&quot;</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># rank, []=all.</span>
+        <span class="s2">&quot;Gamma&quot;</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># &quot;IR&quot;=identity, []=all, &quot;...&quot;/[&quot;...&quot;,&quot;...&quot;]=specified irreps.</span>
+    <span class="p">},</span>
     <span class="s2">&quot;toroidal_priority&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
     <span class="s2">&quot;max_neighbor&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>  <span class="c1"># for DFT fitting, e.g. =200.</span>
     <span class="s2">&quot;search_cell_range&quot;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>  <span class="c1"># (a1, a2, a3) range. for DFT fitting, e.g.=(-10, 10, -10, 10, -10, 10).</span>
