@@ -421,7 +421,10 @@
 </li>
 <li><p>Generation condition.</p>
 <ul>
-<li><p><strong>SAMB_select</strong>: SAMB select condtions.</p></li>
+<li><p><strong>SAMB_select</strong>: SAMB selection.</p></li>
+<li><p><strong>atomic_select</strong>: atomic SAMB selection.</p></li>
+<li><p><strong>site_select</strong>: site-cluster SAMB selection.</p></li>
+<li><p><strong>bond_select</strong>: bond-cluster SAMB selection.</p></li>
 <li><p><strong>max_neighbor</strong>: max. neighbor in search of bonds.</p></li>
 <li><p><strong>search_cell_range</strong>: cell range in search of bonds.</p></li>
 <li><p><strong>toroidal_priority</strong>: toroidal priority, false=Q-G or true=G-Q.</p></li>
@@ -445,6 +448,7 @@
 <li><p><strong>combined_samb</strong>: combined SAMB.</p></li>
 <li><p><strong>combined_id</strong>: combined SAMB ID.</p></li>
 <li><p><strong>common_id</strong>: common ID for combined SAMB.</p></li>
+<li><p><strong>cluster_name_id</strong>: cluster-name ID for combined SAMB.</p></li>
 </ul>
 </li>
 <li><p>Misc.</p>
@@ -565,6 +569,7 @@
 <li><p>(int) – no. of minimal SAMBs.</p></li>
 <li><p>(int) – no. of all SAMBs.</p></li>
 <li><p>(dict) – comomon id, dict[SAMBType, [id]].</p></li>
+<li><p>(dict) – cluster name id, dict[site/bond_name, [id]].</p></li>
 </ul>
 </p>
 </dd>
@@ -593,7 +598,7 @@
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <ul class="simple">
-<li><p>R = (n1,n2,n3) and m and n are a lattie vector, bra and ket indexes, respectively.</p></li>
+<li><p>R = (n1,n2,n3) and m and n are lattice indices, bra and ket indexes, respectively.</p></li>
 </ul>
 </div>
 </dd></dl>

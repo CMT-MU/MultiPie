@@ -524,10 +524,10 @@ Example input file:</p>
         <span class="s2">&quot;bond&quot;</span><span class="p">:</span> <span class="p">[</span>
             <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
         <span class="p">],</span>  <span class="c1"># S1;S2, [neighbor], (S1;S2, [neighbor]), (S1;S2, R;R2), (S1;S2, [neighbor]) or (S1;S2, R1;R2, [neighbor]).</span>
-        <span class="s2">&quot;X&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Q&quot;</span><span class="p">,</span> <span class="s2">&quot;G&quot;</span><span class="p">],</span>  <span class="c1"># combined SAMB type Q/G/T/M.</span>
-        <span class="s2">&quot;l&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>  <span class="c1"># combined SAMB rank.</span>
-        <span class="s2">&quot;Gamma&quot;</span><span class="p">:</span> <span class="s2">&quot;A1g&quot;</span><span class="p">,</span>  <span class="c1"># combined SAMB irreps.</span>
-        <span class="s2">&quot;s&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>  <span class="c1"># combined SAMB s=0, 1.</span>
+        <span class="s2">&quot;X&quot;</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># combined SAMB type Q/G/T/M, []=all.</span>
+        <span class="s2">&quot;l&quot;</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># combined SAMB rank, []=all.</span>
+        <span class="s2">&quot;Gamma&quot;</span><span class="p">:</span> <span class="s2">&quot;A1g&quot;</span><span class="p">,</span>  <span class="c1"># combined SAMB irreps., e.g., &quot;A1g&quot;, [&quot;A1g&quot;,&quot;A1u&quot;], &quot;IR&quot;=identity irrep., []=all.</span>
+        <span class="s2">&quot;s&quot;</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># combined SAMB s=0, 1, []=all.</span>
     <span class="p">},</span>
     <span class="c1"># weight for SAMBs, non-specified parameters are zero. (float or sympy const.)</span>
     <span class="s2">&quot;parameter&quot;</span><span class="p">:</span> <span class="p">{</span>

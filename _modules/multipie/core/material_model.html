@@ -594,6 +594,12 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">H</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_hr</span><span class="p">(</span><span class="n">parameter</span><span class="p">,</span> <span class="n">combined_samb_matrix</span><span class="p">)</span>
 
+        <span class="c1"># fileter selected id.</span>
+        <span class="n">cluster_name_id</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;cluster_name_id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">cluster_name_id</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">v</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">combined_samb_matrix</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
+
+        <span class="c1"># write matrix.</span>
         <span class="n">cwd</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
         <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_cwd</span><span class="p">()</span>
         <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
@@ -615,11 +621,14 @@
             <span class="s2">&quot;select&quot;</span><span class="p">:</span> <span class="n">select_regularized</span><span class="p">,</span>
             <span class="s2">&quot;dimension&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">ket_site</span><span class="p">),</span>
             <span class="s2">&quot;ket_site&quot;</span><span class="p">:</span> <span class="n">ket_site</span><span class="p">,</span>
+            <span class="s2">&quot;cluster_name_id&quot;</span><span class="p">:</span> <span class="n">cluster_name_id</span><span class="p">,</span>
             <span class="s2">&quot;matrix&quot;</span><span class="p">:</span> <span class="p">{</span><span class="n">z</span><span class="p">:</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">elm</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span> <span class="k">for</span> <span class="n">z</span><span class="p">,</span> <span class="n">elm</span> <span class="ow">in</span> <span class="n">combined_samb_matrix</span><span class="o">.</span><span class="n">items</span><span class="p">()},</span>
         <span class="p">}</span>
         <span class="n">write_dict</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">var</span><span class="p">,</span> <span class="n">comment</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;save matrix to &#39;</span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># write hr.dat.</span>
         <span class="k">if</span> <span class="n">H</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">filename</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;model&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;_hr.dat&quot;</span>
             <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
@@ -749,7 +758,7 @@
         <span class="c1"># SAMB.</span>
         <span class="n">atomic_samb</span><span class="p">,</span> <span class="n">atomic_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_atomic_samb</span><span class="p">(</span><span class="n">atomic_select</span><span class="p">)</span>
         <span class="n">cluster_samb</span><span class="p">,</span> <span class="n">cluster_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_cluster_samb</span><span class="p">(</span><span class="n">site_select</span><span class="p">,</span> <span class="n">bond_select</span><span class="p">)</span>
-        <span class="n">combined_samb</span><span class="p">,</span> <span class="n">combined_id</span><span class="p">,</span> <span class="n">combined_min_num</span><span class="p">,</span> <span class="n">combined_num</span><span class="p">,</span> <span class="n">common_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_combined_samb</span><span class="p">(</span>
+        <span class="n">combined_samb</span><span class="p">,</span> <span class="n">combined_id</span><span class="p">,</span> <span class="n">combined_min_num</span><span class="p">,</span> <span class="n">combined_num</span><span class="p">,</span> <span class="n">common_id</span><span class="p">,</span> <span class="n">cluster_name_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_combined_samb</span><span class="p">(</span>
             <span class="n">atomic_samb</span><span class="p">,</span> <span class="n">cluster_samb</span><span class="p">,</span> <span class="n">samb_select</span><span class="p">,</span> <span class="n">toroidal_priority</span>
         <span class="p">)</span>
 
@@ -761,6 +770,7 @@
         <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;combined_samb&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">combined_samb</span>
         <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;combined_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">combined_id</span>
         <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;common_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">common_id</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;cluster_name_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cluster_name_id</span>
         <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;SAMB_number_min&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">combined_min_num</span>
         <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;SAMB_number&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">combined_num</span>
 
@@ -889,6 +899,7 @@
 <span class="sd">            - (int) -- no. of minimal SAMBs.</span>
 <span class="sd">            - (int) -- no. of all SAMBs.</span>
 <span class="sd">            - (dict) -- comomon id, dict[SAMBType, [id]].</span>
+<span class="sd">            - (dict) -- cluster name id, dict[site/bond_name, [id]].</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">lst</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">site_bond</span><span class="p">,</span> <span class="n">wp</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;wyckoff&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -947,7 +958,17 @@
                         <span class="n">common_id</span><span class="p">[</span><span class="n">comb</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">zi</span><span class="p">)</span>
                         <span class="n">no</span> <span class="o">+=</span> <span class="mi">1</span>
 
-        <span class="k">return</span> <span class="n">dic_minimal</span><span class="p">,</span> <span class="n">combined_id</span><span class="p">,</span> <span class="n">min_no</span><span class="p">,</span> <span class="n">no</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">common_id</span></div>
+        <span class="n">cluster_name_id</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="n">info</span><span class="p">)</span> <span class="ow">in</span> <span class="n">combined_id</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">head</span><span class="p">,</span> <span class="n">tail</span> <span class="o">=</span> <span class="n">info</span><span class="o">.</span><span class="n">samb_type</span><span class="o">.</span><span class="n">head</span><span class="p">,</span> <span class="n">info</span><span class="o">.</span><span class="n">samb_type</span><span class="o">.</span><span class="n">tail</span>
+            <span class="n">neighbor</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">info</span><span class="o">.</span><span class="n">neighbor</span><span class="p">,</span> <span class="n">info</span><span class="o">.</span><span class="n">n</span>
+            <span class="k">if</span> <span class="n">neighbor</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">s</span> <span class="o">=</span> <span class="n">tail</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">s</span> <span class="o">=</span> <span class="n">get_bond</span><span class="p">(</span><span class="n">tail</span><span class="p">,</span> <span class="n">head</span><span class="p">,</span> <span class="n">neighbor</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+            <span class="n">cluster_name_id</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">=</span> <span class="n">cluster_name_id</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="p">[])</span> <span class="o">+</span> <span class="p">[</span><span class="n">k</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">dic_minimal</span><span class="p">,</span> <span class="n">combined_id</span><span class="p">,</span> <span class="n">min_no</span><span class="p">,</span> <span class="n">no</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">common_id</span><span class="p">,</span> <span class="n">cluster_name_id</span></div>
 
 
     <span class="c1"># ==================================================</span>
@@ -1142,7 +1163,7 @@
 <span class="sd">            - (dict) -- combined SAMB in matrix form, dict[zj, dict[ (n1, n2, n3, m, n), matrix element] ].</span>
 
 <span class="sd">        Note:</span>
-<span class="sd">            - R = (n1,n2,n3) and m and n are a lattie vector, bra and ket indexes, respectively.</span>
+<span class="sd">            - R = (n1,n2,n3) and m and n are lattice indices, bra and ket indexes, respectively.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># check format key.</span>
         <span class="k">if</span> <span class="n">fmt</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;sympy&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">]:</span>
