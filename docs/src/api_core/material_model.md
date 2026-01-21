@@ -16,7 +16,10 @@ This class has the following dict data.
   - **unit_vector_primitive**: unit vectors (primitive cell).
 
 - Generation condition.
-  - **SAMB_select**: SAMB select condtions.
+  - **SAMB_select**: SAMB selection.
+  - **atomic_select**: atomic SAMB selection.
+  - **site_select**: site-cluster SAMB selection.
+  - **bond_select**: bond-cluster SAMB selection.
   - **max_neighbor**: max. neighbor in search of bonds.
   - **search_cell_range**: cell range in search of bonds.
   - **toroidal_priority**: toroidal priority, false=Q-G or true=G-Q.
@@ -36,6 +39,7 @@ This class has the following dict data.
   - **combined_samb**: combined SAMB.
   - **combined_id**: combined SAMB ID.
   - **common_id**: common ID for combined SAMB.
+  - **cluster_name_id**: cluster-name ID for combined SAMB.
 
 - Misc.
   - **basis_type**: atomic basis type.

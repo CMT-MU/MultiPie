@@ -253,6 +253,12 @@ class MaterialModel(BinaryManager):
         else:
             H = self.get_hr(parameter, combined_samb_matrix)
 
+        # fileter selected id.
+        cluster_name_id = {}
+        for k, v in self["cluster_name_id"].items():
+            cluster_name_id[k] = [i for i in v if i in combined_samb_matrix.keys()]
+
+        # write matrix.
         cwd = os.getcwd()
         path = self.get_cwd()
         os.chdir(path)
@@ -274,11 +280,14 @@ class MaterialModel(BinaryManager):
             "select": select_regularized,
             "dimension": len(ket_site),
             "ket_site": ket_site,
+            "cluster_name_id": cluster_name_id,
             "matrix": {z: {k: str(v).replace(" ", "") for k, v in elm.items()} for z, elm in combined_samb_matrix.items()},
         }
         write_dict(d, filename, var, comment)
         if self.verbose:
             print(f"save matrix to '{path}/{filename}'.")
+
+        # write hr.dat.
         if H is not None:
             filename = self["model"] + "_hr.dat"
             with open(filename, mode="w", encoding="utf-8") as f:
@@ -405,7 +414,7 @@ class MaterialModel(BinaryManager):
         # SAMB.
         atomic_samb, atomic_id = self.get_atomic_samb(atomic_select)
         cluster_samb, cluster_id = self.get_cluster_samb(site_select, bond_select)
-        combined_samb, combined_id, combined_min_num, combined_num, common_id = self.get_combined_samb(
+        combined_samb, combined_id, combined_min_num, combined_num, common_id, cluster_name_id = self.get_combined_samb(
             atomic_samb, cluster_samb, samb_select, toroidal_priority
         )
 
@@ -417,6 +426,7 @@ class MaterialModel(BinaryManager):
         self["combined_samb"] = combined_samb
         self["combined_id"] = combined_id
         self["common_id"] = common_id
+        self["cluster_name_id"] = cluster_name_id
         self["SAMB_number_min"] = combined_min_num
         self["SAMB_number"] = combined_num
 
@@ -533,6 +543,7 @@ class MaterialModel(BinaryManager):
             - (int) -- no. of minimal SAMBs.
             - (int) -- no. of all SAMBs.
             - (dict) -- comomon id, dict[SAMBType, [id]].
+            - (dict) -- cluster name id, dict[site/bond_name, [id]].
         """
         lst = {}
         for site_bond, wp in self["wyckoff"].items():
@@ -591,7 +602,17 @@ class MaterialModel(BinaryManager):
                         common_id[comb][i].append(zi)
                         no += 1
 
-        return dic_minimal, combined_id, min_no, no - 1, common_id
+        cluster_name_id = {}
+        for k, (tag, info) in combined_id.items():
+            head, tail = info.samb_type.head, info.samb_type.tail
+            neighbor, n = info.neighbor, info.n
+            if neighbor == 0:
+                s = tail
+            else:
+                s = get_bond(tail, head, neighbor, n)
+            cluster_name_id[s] = cluster_name_id.get(s, []) + [k]
+
+        return dic_minimal, combined_id, min_no, no - 1, common_id, cluster_name_id
 
     # ==================================================
     def select_combined_samb(self, **kwargs):
@@ -780,7 +801,7 @@ class MaterialModel(BinaryManager):
             - (dict) -- combined SAMB in matrix form, dict[zj, dict[ (n1, n2, n3, m, n), matrix element] ].
 
         Note:
-            - R = (n1,n2,n3) and m and n are a lattie vector, bra and ket indexes, respectively.
+            - R = (n1,n2,n3) and m and n are lattice indices, bra and ket indexes, respectively.
         """
         # check format key.
         if fmt not in ["sympy", "value"]:
