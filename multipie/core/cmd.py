@@ -102,6 +102,8 @@ def create_samb_matrix(select_inputs, topdir=None, verbose=False):
     Note:
         - matrix (and hr) file is created in model directory.
         - if topdir is None, current directory is used, which should contain model directory.
+        - if input does not have "parameter" key, hr.dat is not created.
+        - if input does not have "select" key, all SAMBs are used.
     """
 
     def create(mm, select, parameter):
@@ -116,7 +118,7 @@ def create_samb_matrix(select_inputs, topdir=None, verbose=False):
     mm = MaterialModel(topdir, verbose)
     for inp in select_inputs:
         model = inp["model"]
-        select = inp["select"]
+        select = inp.get("select", {})
         parameter = inp.get("parameter", None)
         try:
             mm.load(model)
