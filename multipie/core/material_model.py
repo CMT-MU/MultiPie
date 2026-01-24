@@ -254,9 +254,15 @@ class MaterialModel(BinaryManager):
             H = self.get_hr(parameter, combined_samb_matrix)
 
         # fileter selected id.
-        cluster_name_id = {}
-        for k, v in self["cluster_name_id"].items():
-            cluster_name_id[k] = [i for i in v if i in combined_samb_matrix.keys()]
+        cluster_rep = {}
+        for k, lst in self["cluster_representative"].items():
+            r_lst = []
+            for ls, info in lst:
+                f_lst = [i for i in ls if i in combined_samb_matrix.keys()]
+                if f_lst:
+                    r_lst.append((f_lst, info))
+            if r_lst:
+                cluster_rep[k] = r_lst
 
         # write matrix.
         cwd = os.getcwd()
@@ -280,8 +286,8 @@ class MaterialModel(BinaryManager):
             "select": select_regularized,
             "dimension": len(ket_site),
             "ket_site": ket_site,
-            "cluster_name_id": cluster_name_id,
             "matrix": {z: {k: str(v).replace(" ", "") for k, v in elm.items()} for z, elm in combined_samb_matrix.items()},
+            "cluster_representative": cluster_rep,
         }
         write_dict(d, filename, var, comment)
         if self.verbose:
@@ -414,7 +420,7 @@ class MaterialModel(BinaryManager):
         # SAMB.
         atomic_samb, atomic_id = self.get_atomic_samb(atomic_select)
         cluster_samb, cluster_id = self.get_cluster_samb(site_select, bond_select)
-        combined_samb, combined_id, combined_min_num, combined_num, common_id, cluster_name_id = self.get_combined_samb(
+        combined_samb, combined_id, combined_min_num, combined_num, common_id, cluster_rep = self.get_combined_samb(
             atomic_samb, cluster_samb, samb_select, toroidal_priority
         )
 
@@ -426,7 +432,7 @@ class MaterialModel(BinaryManager):
         self["combined_samb"] = combined_samb
         self["combined_id"] = combined_id
         self["common_id"] = common_id
-        self["cluster_name_id"] = cluster_name_id
+        self["cluster_representative"] = cluster_rep
         self["SAMB_number_min"] = combined_min_num
         self["SAMB_number"] = combined_num
 
@@ -569,7 +575,7 @@ class MaterialModel(BinaryManager):
 
             dic_minimal[comb] = self.group.combined_samb(a_samb.named_keys(), c_samb.named_keys(), toroidal_priority, **select)
 
-        min_no = sum(len(samb) for samb in dic_minimal.values())
+        min_no = sum(sum(len(i[0]) for i in samb.values()) for samb in dic_minimal.values())
         combined_id = {}
         common_id = {comb: [[] for _ in nn_lst] for comb, nn_lst in lst.items()}
 
@@ -595,24 +601,41 @@ class MaterialModel(BinaryManager):
         for Gamma in self["SAMB_select"]["Gamma"]:
             for _, _, neighbor, n, comb, i in global_items:
                 samb_info = UniqueSAMBType(comb, neighbor, n)
+                if neighbor == 0:
+                    sb_tag = comb.tail
+                else:
+                    sb_tag = get_bond(comb.tail, comb.head, neighbor, n)
                 for idx in dic_minimal[comb].select(**{"Gamma": Gamma}).keys():
                     for tag in self.group.tag_multipole(idx, latex=True, superscript="c"):
                         zi = f"z{no}"
                         combined_id[zi] = (tag, samb_info)
-                        common_id[comb][i].append(zi)
+                        common_id[comb][i].append((zi, sb_tag))
                         no += 1
+        common_id = {info: ([[i[0] for i in bk] for bk in lst], [bk[0][1] for bk in lst]) for info, lst in common_id.items()}
 
-        cluster_name_id = {}
-        for k, (tag, info) in combined_id.items():
-            head, tail = info.samb_type.head, info.samb_type.tail
-            neighbor, n = info.neighbor, info.n
-            if neighbor == 0:
-                s = tail
-            else:
-                s = get_bond(tail, head, neighbor, n)
-            cluster_name_id[s] = cluster_name_id.get(s, []) + [k]
+        # cluster-name id.
+        cluster_rep = {}
+        for info, lst in common_id.items():
+            tail, head = info.tail, info.head
+            bk_info = info.bk_info
+            bra_rank = bk_info.bh_rank
+            ket_rank = bk_info.kt_rank
+            for i, tag in zip(*lst):
+                tail, head = get_tail_head(tag)
+                if tag.count(";") > 0:  # bond.
+                    rep = self["bond"]["cell"][tag][0]
+                    head_sl, tail_sl = rep.h_idx[0], rep.t_idx[0]
+                    R = rep.R_primitive
+                else:  # site.
+                    rep = self["site"]["cell"][tag][0]
+                    head_sl = tail_sl = rep.sublattice
+                    R = (0, 0, 0)
+                bra_start, bra_dim = self["full_matrix"]["index"][(head, head_sl, bra_rank)]
+                ket_start, ket_dim = self["full_matrix"]["index"][(tail, tail_sl, ket_rank)]
+                r = ((bra_start, bra_dim), (ket_start, ket_dim), R)
+                cluster_rep[tag] = cluster_rep.get(tag, []) + [(i, r)]
 
-        return dic_minimal, combined_id, min_no, no - 1, common_id, cluster_name_id
+        return dic_minimal, combined_id, min_no, no - 1, common_id, cluster_rep
 
     # ==================================================
     def select_combined_samb(self, **kwargs):
@@ -831,11 +854,11 @@ class MaterialModel(BinaryManager):
                 X_cache[key] = m
             return m
 
-        def _hermite_conj(head, head_idx, bra_rank, tail, tail_idx, ket_rank):
+        def _hermite_conj(head, head_sl, bra_rank, tail, tail_sl, ket_rank):
             hermite_conj = False
-            if (head, head_idx, bra_rank) not in self["full_matrix"]["index"]:
+            if (head, head_sl, bra_rank) not in self["full_matrix"]["index"]:
                 hermite_conj = True
-            if (tail, tail_idx, ket_rank) not in self["full_matrix"]["index"]:
+            if (tail, tail_sl, ket_rank) not in self["full_matrix"]["index"]:
                 hermite_conj = True
             return hermite_conj
 
@@ -860,13 +883,13 @@ class MaterialModel(BinaryManager):
 
             is_site = "@" not in wp
             if is_site:
-                head_idx = tail_idx = 1
+                head_sl = tail_sl = 1
             else:
                 name = get_bond(tail, head, bn, bm)
                 bond = self["bond"]["cell"][name][0]
-                head_idx, tail_idx = bond.h_idx[0], bond.t_idx[0]
+                head_sl, tail_sl = bond.h_idx[0], bond.t_idx[0]
 
-            hermite_conj = _hermite_conj(head, head_idx, bra_rank, tail, tail_idx, ket_rank)
+            hermite_conj = _hermite_conj(head, head_sl, bra_rank, tail, tail_sl, ket_rank)
             if hermite_conj:
                 bra_idx, bra_rank, ket_idx, ket_rank = ket_idx, ket_rank, bra_idx, bra_rank
 
@@ -885,15 +908,15 @@ class MaterialModel(BinaryManager):
                         Y = c_samb[t2][0][c2]
                         for i, y in enumerate(Y):
                             if is_site:
-                                head_idx = tail_idx = i + 1
+                                head_sl = tail_sl = i + 1
                                 n1 = n2 = n3 = 0
                             else:
                                 bond = self["bond"]["cell"][name][i]
                                 n1, n2, n3 = bond.R_primitive
-                                head_idx, tail_idx = bond.h_idx[0], bond.t_idx[0]
+                                head_sl, tail_sl = bond.h_idx[0], bond.t_idx[0]
 
-                            bra_start, bra_dim = self["full_matrix"]["index"][(head, head_idx, bra_rank)]
-                            ket_start, ket_dim = self["full_matrix"]["index"][(tail, tail_idx, ket_rank)]
+                            bra_start, bra_dim = self["full_matrix"]["index"][(head, head_sl, bra_rank)]
+                            ket_start, ket_dim = self["full_matrix"]["index"][(tail, tail_sl, ket_rank)]
 
                             for r, c in product(range(bra_dim), range(ket_dim)):
                                 val = cg * y * (Xd[r, c] if hermite_conj else X[r, c])
@@ -902,7 +925,7 @@ class MaterialModel(BinaryManager):
 
                             if not is_site:
                                 if head == tail and (bra_rank, bra_idx) != (ket_rank, ket_idx):
-                                    if head_idx == tail_idx:
+                                    if head_sl == tail_sl:
                                         bra2_start = ket_start
                                         ket2_start = bra_start
                                     else:
