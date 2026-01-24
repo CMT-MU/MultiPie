@@ -38,8 +38,8 @@ This class has the following dict data.
   - **cluster_id**: site/bond cluster SAMB ID.
   - **combined_samb**: combined SAMB.
   - **combined_id**: combined SAMB ID.
-  - **common_id**: common ID for combined SAMB.
-  - **cluster_name_id**: cluster-name ID for combined SAMB.
+  - **common_id**: common ID of combined SAMB.
+  - **cluster_representative**: cluster-name, ID, and representative for each combined SAMB.
 
 - Misc.
   - **basis_type**: atomic basis type.

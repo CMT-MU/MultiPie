@@ -257,6 +257,8 @@ class ModelPDF:
             if not samb:
                 continue
 
+            no_tag, sb_tag = common_id[comb]
+
             bk = comb.bk_info
             wp = comb.wyckoff
             clustar_str = "b" if wp.count("@") > 0 else "s"
@@ -281,6 +283,7 @@ class ModelPDF:
                 if clustar_str == "s"
                 else r"'\texttt{" + comb.head + r"}'-'\texttt{" + comb.tail + "}' bond-cluster"
             )
+            cluster += r" : \texttt{" + sb_tag[0] + "}"
             wyckoff = r"\texttt{" + wp + "}"
 
             self.vspace("5mm")
@@ -289,7 +292,6 @@ class ModelPDF:
             self.text(r"\noindent\quad * ket: " + ket + "\n")
             self.text(r"\noindent\quad * wyckoff: " + wyckoff + "\n")
 
-            no_tag = common_id[comb]
             i = 0
             for idx, (cl, ex) in samb.items():
                 tag = self.mm.group.tag_multipole(idx, latex=True, superscript="c")
@@ -308,10 +310,11 @@ class ModelPDF:
 
             if len(no_tag) > 1:
                 if self.mm["pdf_ctrl"]["common_samb"]:
+                    sb_head = "(" + ", ".join(sb_tag) + ")"
                     sb_str = np.array(no_tag).T.tolist()
                     sb_str = ", ".join(["(" + ", ".join(i) + ")" for i in sb_str])
                     self.text(r"\noindent * common SAMBs" + "\n")
-                    self.text(r"\noindent\texttt{" + sb_str + "}")
+                    self.text(r"\noindent\texttt{" + sb_head + ", " + sb_str + "}")
                 else:
                     n = (len(no_tag) - 1) * len(no_tag[0])
                     self.text(r"\noindent\quad" + f"+ {n} common SAMBs" + "\n")
