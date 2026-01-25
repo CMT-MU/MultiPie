@@ -216,6 +216,8 @@ class ModelPDF:
 
         no = 1
         for name, samb in atomic_samb.items():
+            if name.bh_rank > name.kt_rank:
+                continue
             self.vspace("5mm")
             bs1 = [
                 self.mm.group.tag_atomic_basis(

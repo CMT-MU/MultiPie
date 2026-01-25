@@ -477,10 +477,12 @@ class MaterialModel(BinaryManager):
 
         no = 1
         atomic_id = {}
-        for i in samb.values():
+        for bk_info, i in samb.items():
+            if bk_info.bh_rank > bk_info.kt_rank:
+                continue
             for idx, (mat, ex) in i.items():
                 for c in range(len(ex)):
-                    atomic_id[f"x{no}"] = (idx, c)
+                    atomic_id[f"x{no}"] = (bk_info, idx, c)
                     no += 1
 
         return samb, atomic_id
@@ -606,7 +608,10 @@ class MaterialModel(BinaryManager):
                         combined_id[zi] = (tag, samb_info, idx, comp)
                         common_id[comb][i].append((zi, sb_tag))
                         no += 1
-        common_id = {info: ([[i[0] for i in bk] for bk in lst], [bk[0][1] for bk in lst]) for info, lst in common_id.items()}
+
+        common_id = {
+            info: ([[i[0] for i in bk] for bk in lst if bk], [bk[0][1] for bk in lst if bk]) for info, lst in common_id.items()
+        }
 
         # cluster-info.
         dic = {}
@@ -941,6 +946,81 @@ class MaterialModel(BinaryManager):
         return matrix
 
     # ==================================================
+    def X(self, tag, hc=False):
+        """
+        Get atomic SAMB.
+
+        Args:
+            tag (str): atomic tag, e.g. x1.
+            hc (bool, optional): hermite conjugation ?
+
+        Returns:
+            - (ndarray) -- atomic SAMB matrix.
+            - (sympy) -- symmetry.
+        """
+        if tag not in self["atomic_id"]:
+            return None
+        bk, index, comp = self["atomic_id"][tag]
+        mat, sym = self["atomic_samb"][bk][index]
+        mat = mat[comp]
+        sym = sym[comp]
+        if hc:
+            mat = np.array(sp.Matrix(mat).H)
+        return mat, sym
+
+    # ==================================================
+    def Y(self, tag):
+        """
+        Get site/bond-cluster SAMB.
+
+        Args:
+            tag (str): cluster tag, e.g., y1.
+
+        Returns:
+            - (ndarray) -- cluster SAMB vector.
+            - (sympy) -- symmetry.
+        """
+        if tag not in self["cluster_id"]:
+            return None
+        wyckoff, index, comp = self["cluster_id"][tag]
+        vec, sym = self["cluster_samb"][wyckoff][index]
+        vec = vec[comp]
+        sym = sym[comp]
+        return vec, sym
+
+    # ==================================================
+    def Z(self, tag, symbol=False):
+        """
+        Get combined SAMB.
+
+        Args:
+            tag (str): combined tag, e.g., z1.
+            symbol (bool, optional): symbol expression ?
+
+        Returns:
+            - (list or sympy) -- combined SAMB linear combination list or expression.
+            - (sympy) -- symmetry.
+            - (str or sympy) -- symbol in LaTex or expression.
+        """
+        if tag not in self["combined_id"]:
+            return None
+        s_symbol, u_samb_type, index, comp = self["combined_id"][tag]
+        clustar_str = "b" if u_samb_type.samb_type.wyckoff.count("@") > 0 else "s"
+        lc, sym = self["combined_samb"][u_samb_type.samb_type][index]
+        lc = lc[comp]
+        sym = sym[comp]
+        if symbol:
+            s_symbol = sp.Symbol(s_symbol)
+            ex = 0
+            for cg, t1, c1, t2, c2 in lc:
+                t1 = self.group.tag_multipole(t1, c1, latex=True, superscript="a")
+                t2 = self.group.tag_multipole(t2, c2, latex=True, superscript=clustar_str)
+                ex += cg * sp.Symbol(t1, commutative=False) * sp.Symbol(t2, commutative=False)
+            lc = ex
+
+        return lc, sym, s_symbol
+
+    # ==================================================
     def get_hr(self, coeff, combined_samb_matrix=None, fmt="sympy", digit=14, **kwargs):
         """
         Get Hamiltonian matrix (real-space).
@@ -1116,7 +1196,7 @@ class MaterialModel(BinaryManager):
         if atomic_id not in self["atomic_id"].keys():
             raise KeyError(f"unknown atomic id, {atomic_id}.")
 
-        idx, comp = self["atomic_id"][atomic_id]
+        bk_info, idx, comp = self["atomic_id"][atomic_id]
 
         if label:
             qtdraw.add_text2d(f"idx = ({",".join(map(str,idx[:4]))},{comp})")
