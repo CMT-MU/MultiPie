@@ -8,7 +8,7 @@ Selected SAMB matrix.
 
 kagome = {
     "model": "kagome",
-    "pkl": "kagome.pkl (2026-01-25 20:50:18)",
+    "pkl": "kagome.pkl (2026-01-26 01:26:14)",
     "select": {"site": [("A", [0, 1])], "bond": [("A", "A", 1, [0, 1], [0, 1])], "X": ["Q", "G"], "l": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], "Gamma": ["Ag", "Eg", "Au", "Eu"], "s": [0, 1]},
     "dimension": 24,
     "ket_site": {

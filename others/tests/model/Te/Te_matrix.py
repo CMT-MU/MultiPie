@@ -8,7 +8,7 @@ Selected SAMB matrix.
 
 Te = {
     "model": "Te",
-    "pkl": "Te.pkl (2026-01-25 20:47:25)",
+    "pkl": "Te.pkl (2026-01-26 01:23:11)",
     "select": {"site": [("A", [1])], "bond": [("A", "A", 1, [1], [1])], "X": ["Q", "G"], "l": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], "Gamma": ["A1", "A2", "E"], "s": [0, 1]},
     "dimension": 9,
     "ket_site": {

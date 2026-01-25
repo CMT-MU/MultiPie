@@ -8,7 +8,7 @@ Selected SAMB matrix.
 
 C3v = {
     "model": "C3v",
-    "pkl": "C3v.pkl (2026-01-25 20:41:21)",
+    "pkl": "C3v.pkl (2026-01-26 01:20:43)",
     "select": {"site": [("A", [0]), ("B", [1])], "bond": [], "X": ["Q", "G"], "l": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], "Gamma": ["A1", "A2", "E"], "s": [0, 1]},
     "dimension": 12,
     "ket_site": {

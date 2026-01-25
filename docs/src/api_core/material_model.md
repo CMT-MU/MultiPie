@@ -50,11 +50,11 @@ This class has the following dict data.
   - **SAMB_number**: (int) total number of SAMBs.
   - **SAMB_number_min**: (int) total number of SAMBs excluding duplicated ones.
   - **atomic_samb**: (dict) atomic SAMB, dict[BraketInfoType, SAMB Dict].
-  - **atomic_id**: (dict) atomic SAMB ID, dict[tag, (index, component)].
+  - **atomic_id**: (dict) atomic SAMB ID, dict[tag, (BraketInfoType, index, component)].
   - **cluster_samb**: (dict) site/bond cluster SAMB, dict[wyckoff, SAMB Dict].
   - **cluster_id**: (dict) site/bond cluster SAMB ID, dict[tag, (wyckoff, index, component)].
   - **combined_samb**: (dict) combined SAMB, dict[SAMBType, SAMB Dict].
-  - **combined_id**: (dict) combined SAMB ID, dict[tag, (symbol, UniqueSAMBType, SAMB index, component)].
+  - **combined_id**: (dict) combined SAMB ID, dict[tag, (symbol, UniqueSAMBType, index, component)].
   - **common_id**: (dict) common ID of combined SAMB, dict[SAMBType, ([Ztag_list], [site/bond-tag])].
   - **cluster_info**: (dict) cluster info, dict[site/bond_name, dict[(bra_rank,ket_rank), (wyckoff,z_list)] ].
 
