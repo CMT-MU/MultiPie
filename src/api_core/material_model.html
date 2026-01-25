@@ -363,6 +363,9 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#samb-dict-data">SAMB Dict data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-multipie.core.material_model">MaterialModel Class</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel"><code class="docutils literal notranslate"><span class="pre">MaterialModel</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.X"><code class="docutils literal notranslate"><span class="pre">MaterialModel.X()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.Y"><code class="docutils literal notranslate"><span class="pre">MaterialModel.Y()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.Z"><code class="docutils literal notranslate"><span class="pre">MaterialModel.Z()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.analyze"><code class="docutils literal notranslate"><span class="pre">MaterialModel.analyze()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.cell_site_primitive"><code class="docutils literal notranslate"><span class="pre">MaterialModel.cell_site_primitive()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.clear"><code class="docutils literal notranslate"><span class="pre">MaterialModel.clear()</span></code></a></li>
@@ -475,11 +478,11 @@
 <li><p><strong>SAMB_number</strong>: (int) total number of SAMBs.</p></li>
 <li><p><strong>SAMB_number_min</strong>: (int) total number of SAMBs excluding duplicated ones.</p></li>
 <li><p><strong>atomic_samb</strong>: (dict) atomic SAMB, dict[BraketInfoType, SAMB Dict].</p></li>
-<li><p><strong>atomic_id</strong>: (dict) atomic SAMB ID, dict[tag, (index, component)].</p></li>
+<li><p><strong>atomic_id</strong>: (dict) atomic SAMB ID, dict[tag, (BraketInfoType, index, component)].</p></li>
 <li><p><strong>cluster_samb</strong>: (dict) site/bond cluster SAMB, dict[wyckoff, SAMB Dict].</p></li>
 <li><p><strong>cluster_id</strong>: (dict) site/bond cluster SAMB ID, dict[tag, (wyckoff, index, component)].</p></li>
 <li><p><strong>combined_samb</strong>: (dict) combined SAMB, dict[SAMBType, SAMB Dict].</p></li>
-<li><p><strong>combined_id</strong>: (dict) combined SAMB ID, dict[tag, (symbol, UniqueSAMBType, SAMB index, component)].</p></li>
+<li><p><strong>combined_id</strong>: (dict) combined SAMB ID, dict[tag, (symbol, UniqueSAMBType, index, component)].</p></li>
 <li><p><strong>common_id</strong>: (dict) common ID of combined SAMB, dict[SAMBType, ([Ztag_list], [site/bond-tag])].</p></li>
 <li><p><strong>cluster_info</strong>: (dict) cluster info, dict[site/bond_name, dict[(bra_rank,ket_rank), (wyckoff,z_list)] ].</p></li>
 </ul>
@@ -557,6 +560,67 @@
 </ul>
 </dd>
 </dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="multipie.core.material_model.MaterialModel.X">
+<span class="sig-name descname"><span class="pre">X</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/core/material_model.html#MaterialModel.X"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.core.material_model.MaterialModel.X" title="Link to this definition">#</a></dt>
+<dd><p>Get atomic SAMB.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tag</strong> (<em>str</em>) – atomic tag, e.g. x1.</p></li>
+<li><p><strong>hc</strong> (<em>bool</em><em>, </em><em>optional</em>) – hermite conjugation ?</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(ndarray) – atomic SAMB matrix.</p></li>
+<li><p>(sympy) – symmetry.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multipie.core.material_model.MaterialModel.Y">
+<span class="sig-name descname"><span class="pre">Y</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tag</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/core/material_model.html#MaterialModel.Y"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.core.material_model.MaterialModel.Y" title="Link to this definition">#</a></dt>
+<dd><p>Get site/bond-cluster SAMB.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>tag</strong> (<em>str</em>) – cluster tag, e.g., y1.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(ndarray) – cluster SAMB vector.</p></li>
+<li><p>(sympy) – symmetry.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multipie.core.material_model.MaterialModel.Z">
+<span class="sig-name descname"><span class="pre">Z</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symbol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/core/material_model.html#MaterialModel.Z"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.core.material_model.MaterialModel.Z" title="Link to this definition">#</a></dt>
+<dd><p>Get combined SAMB.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tag</strong> (<em>str</em>) – combined tag, e.g., z1.</p></li>
+<li><p><strong>symbol</strong> (<em>bool</em><em>, </em><em>optional</em>) – symbol expression ?</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(list or sympy) – combined SAMB linear combination list or expression.</p></li>
+<li><p>(sympy) – symmetry.</p></li>
+<li><p>(str or sympy) – symbol in LaTex or expression.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="multipie.core.material_model.MaterialModel.analyze">
 <span class="sig-name descname"><span class="pre">analyze</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_in</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/core/material_model.html#MaterialModel.analyze"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.core.material_model.MaterialModel.analyze" title="Link to this definition">#</a></dt>
@@ -956,6 +1020,9 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#samb-dict-data">SAMB Dict data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-multipie.core.material_model">MaterialModel Class</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel"><code class="docutils literal notranslate"><span class="pre">MaterialModel</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.X"><code class="docutils literal notranslate"><span class="pre">MaterialModel.X()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.Y"><code class="docutils literal notranslate"><span class="pre">MaterialModel.Y()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.Z"><code class="docutils literal notranslate"><span class="pre">MaterialModel.Z()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.analyze"><code class="docutils literal notranslate"><span class="pre">MaterialModel.analyze()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.cell_site_primitive"><code class="docutils literal notranslate"><span class="pre">MaterialModel.cell_site_primitive()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.clear"><code class="docutils literal notranslate"><span class="pre">MaterialModel.clear()</span></code></a></li>

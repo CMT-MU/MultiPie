@@ -827,10 +827,12 @@
 
         <span class="n">no</span> <span class="o">=</span> <span class="mi">1</span>
         <span class="n">atomic_id</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">samb</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">bk_info</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">samb</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">bk_info</span><span class="o">.</span><span class="n">bh_rank</span> <span class="o">&gt;</span> <span class="n">bk_info</span><span class="o">.</span><span class="n">kt_rank</span><span class="p">:</span>
+                <span class="k">continue</span>
             <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="p">(</span><span class="n">mat</span><span class="p">,</span> <span class="n">ex</span><span class="p">)</span> <span class="ow">in</span> <span class="n">i</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
                 <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ex</span><span class="p">)):</span>
-                    <span class="n">atomic_id</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;x</span><span class="si">{</span><span class="n">no</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+                    <span class="n">atomic_id</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;x</span><span class="si">{</span><span class="n">no</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">bk_info</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
                     <span class="n">no</span> <span class="o">+=</span> <span class="mi">1</span>
 
         <span class="k">return</span> <span class="n">samb</span><span class="p">,</span> <span class="n">atomic_id</span></div>
@@ -962,7 +964,10 @@
                         <span class="n">combined_id</span><span class="p">[</span><span class="n">zi</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="n">samb_info</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">comp</span><span class="p">)</span>
                         <span class="n">common_id</span><span class="p">[</span><span class="n">comb</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">zi</span><span class="p">,</span> <span class="n">sb_tag</span><span class="p">))</span>
                         <span class="n">no</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="n">common_id</span> <span class="o">=</span> <span class="p">{</span><span class="n">info</span><span class="p">:</span> <span class="p">([[</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">bk</span><span class="p">]</span> <span class="k">for</span> <span class="n">bk</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">],</span> <span class="p">[</span><span class="n">bk</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">bk</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">])</span> <span class="k">for</span> <span class="n">info</span><span class="p">,</span> <span class="n">lst</span> <span class="ow">in</span> <span class="n">common_id</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+
+        <span class="n">common_id</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">info</span><span class="p">:</span> <span class="p">([[</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">bk</span><span class="p">]</span> <span class="k">for</span> <span class="n">bk</span> <span class="ow">in</span> <span class="n">lst</span> <span class="k">if</span> <span class="n">bk</span><span class="p">],</span> <span class="p">[</span><span class="n">bk</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">bk</span> <span class="ow">in</span> <span class="n">lst</span> <span class="k">if</span> <span class="n">bk</span><span class="p">])</span> <span class="k">for</span> <span class="n">info</span><span class="p">,</span> <span class="n">lst</span> <span class="ow">in</span> <span class="n">common_id</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+        <span class="p">}</span>
 
         <span class="c1"># cluster-info.</span>
         <span class="n">dic</span> <span class="o">=</span> <span class="p">{}</span>
@@ -1304,6 +1309,90 @@
 
 
     <span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="MaterialModel.X">
+<a class="viewcode-back" href="../../../src/api_core/material_model.html#multipie.core.material_model.MaterialModel.X">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">X</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tag</span><span class="p">,</span> <span class="n">hc</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get atomic SAMB.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            tag (str): atomic tag, e.g. x1.</span>
+<span class="sd">            hc (bool, optional): hermite conjugation ?</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            - (ndarray) -- atomic SAMB matrix.</span>
+<span class="sd">            - (sympy) -- symmetry.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">tag</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;atomic_id&quot;</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="n">bk</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">comp</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;atomic_id&quot;</span><span class="p">][</span><span class="n">tag</span><span class="p">]</span>
+        <span class="n">mat</span><span class="p">,</span> <span class="n">sym</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;atomic_samb&quot;</span><span class="p">][</span><span class="n">bk</span><span class="p">][</span><span class="n">index</span><span class="p">]</span>
+        <span class="n">mat</span> <span class="o">=</span> <span class="n">mat</span><span class="p">[</span><span class="n">comp</span><span class="p">]</span>
+        <span class="n">sym</span> <span class="o">=</span> <span class="n">sym</span><span class="p">[</span><span class="n">comp</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">hc</span><span class="p">:</span>
+            <span class="n">mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">Matrix</span><span class="p">(</span><span class="n">mat</span><span class="p">)</span><span class="o">.</span><span class="n">H</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">mat</span><span class="p">,</span> <span class="n">sym</span></div>
+
+
+    <span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="MaterialModel.Y">
+<a class="viewcode-back" href="../../../src/api_core/material_model.html#multipie.core.material_model.MaterialModel.Y">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">Y</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tag</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get site/bond-cluster SAMB.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            tag (str): cluster tag, e.g., y1.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            - (ndarray) -- cluster SAMB vector.</span>
+<span class="sd">            - (sympy) -- symmetry.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">tag</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;cluster_id&quot;</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="n">wyckoff</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">comp</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;cluster_id&quot;</span><span class="p">][</span><span class="n">tag</span><span class="p">]</span>
+        <span class="n">vec</span><span class="p">,</span> <span class="n">sym</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;cluster_samb&quot;</span><span class="p">][</span><span class="n">wyckoff</span><span class="p">][</span><span class="n">index</span><span class="p">]</span>
+        <span class="n">vec</span> <span class="o">=</span> <span class="n">vec</span><span class="p">[</span><span class="n">comp</span><span class="p">]</span>
+        <span class="n">sym</span> <span class="o">=</span> <span class="n">sym</span><span class="p">[</span><span class="n">comp</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">vec</span><span class="p">,</span> <span class="n">sym</span></div>
+
+
+    <span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="MaterialModel.Z">
+<a class="viewcode-back" href="../../../src/api_core/material_model.html#multipie.core.material_model.MaterialModel.Z">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">Z</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tag</span><span class="p">,</span> <span class="n">symbol</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get combined SAMB.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            tag (str): combined tag, e.g., z1.</span>
+<span class="sd">            symbol (bool, optional): symbol expression ?</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            - (list or sympy) -- combined SAMB linear combination list or expression.</span>
+<span class="sd">            - (sympy) -- symmetry.</span>
+<span class="sd">            - (str or sympy) -- symbol in LaTex or expression.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">tag</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;combined_id&quot;</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="n">s_symbol</span><span class="p">,</span> <span class="n">u_samb_type</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">comp</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;combined_id&quot;</span><span class="p">][</span><span class="n">tag</span><span class="p">]</span>
+        <span class="n">clustar_str</span> <span class="o">=</span> <span class="s2">&quot;b&quot;</span> <span class="k">if</span> <span class="n">u_samb_type</span><span class="o">.</span><span class="n">samb_type</span><span class="o">.</span><span class="n">wyckoff</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;@&quot;</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">&quot;s&quot;</span>
+        <span class="n">lc</span><span class="p">,</span> <span class="n">sym</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;combined_samb&quot;</span><span class="p">][</span><span class="n">u_samb_type</span><span class="o">.</span><span class="n">samb_type</span><span class="p">][</span><span class="n">index</span><span class="p">]</span>
+        <span class="n">lc</span> <span class="o">=</span> <span class="n">lc</span><span class="p">[</span><span class="n">comp</span><span class="p">]</span>
+        <span class="n">sym</span> <span class="o">=</span> <span class="n">sym</span><span class="p">[</span><span class="n">comp</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">symbol</span><span class="p">:</span>
+            <span class="n">s_symbol</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="n">s_symbol</span><span class="p">)</span>
+            <span class="n">ex</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">cg</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">c1</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="n">c2</span> <span class="ow">in</span> <span class="n">lc</span><span class="p">:</span>
+                <span class="n">t1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">tag_multipole</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span> <span class="n">c1</span><span class="p">,</span> <span class="n">latex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">superscript</span><span class="o">=</span><span class="s2">&quot;a&quot;</span><span class="p">)</span>
+                <span class="n">t2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">tag_multipole</span><span class="p">(</span><span class="n">t2</span><span class="p">,</span> <span class="n">c2</span><span class="p">,</span> <span class="n">latex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">superscript</span><span class="o">=</span><span class="n">clustar_str</span><span class="p">)</span>
+                <span class="n">ex</span> <span class="o">+=</span> <span class="n">cg</span> <span class="o">*</span> <span class="n">sp</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span> <span class="n">commutative</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">*</span> <span class="n">sp</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="n">t2</span><span class="p">,</span> <span class="n">commutative</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">lc</span> <span class="o">=</span> <span class="n">ex</span>
+
+        <span class="k">return</span> <span class="n">lc</span><span class="p">,</span> <span class="n">sym</span><span class="p">,</span> <span class="n">s_symbol</span></div>
+
+
+    <span class="c1"># ==================================================</span>
 <div class="viewcode-block" id="MaterialModel.get_hr">
 <a class="viewcode-back" href="../../../src/api_core/material_model.html#multipie.core.material_model.MaterialModel.get_hr">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_hr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coeff</span><span class="p">,</span> <span class="n">combined_samb_matrix</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;sympy&quot;</span><span class="p">,</span> <span class="n">digit</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -1499,7 +1588,7 @@
         <span class="k">if</span> <span class="n">atomic_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;atomic_id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
             <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;unknown atomic id, </span><span class="si">{</span><span class="n">atomic_id</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
 
-        <span class="n">idx</span><span class="p">,</span> <span class="n">comp</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;atomic_id&quot;</span><span class="p">][</span><span class="n">atomic_id</span><span class="p">]</span>
+        <span class="n">bk_info</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">comp</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;atomic_id&quot;</span><span class="p">][</span><span class="n">atomic_id</span><span class="p">]</span>
 
         <span class="k">if</span> <span class="n">label</span><span class="p">:</span>
             <span class="n">qtdraw</span><span class="o">.</span><span class="n">add_text2d</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;idx = (</span><span class="si">{</span><span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span><span class="n">idx</span><span class="p">[:</span><span class="mi">4</span><span class="p">]))</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">comp</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>

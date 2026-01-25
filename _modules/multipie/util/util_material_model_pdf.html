@@ -563,6 +563,8 @@
 
         <span class="n">no</span> <span class="o">=</span> <span class="mi">1</span>
         <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">samb</span> <span class="ow">in</span> <span class="n">atomic_samb</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">bh_rank</span> <span class="o">&gt;</span> <span class="n">name</span><span class="o">.</span><span class="n">kt_rank</span><span class="p">:</span>
+                <span class="k">continue</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">vspace</span><span class="p">(</span><span class="s2">&quot;5mm&quot;</span><span class="p">)</span>
             <span class="n">bs1</span> <span class="o">=</span> <span class="p">[</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">mm</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">tag_atomic_basis</span><span class="p">(</span>
