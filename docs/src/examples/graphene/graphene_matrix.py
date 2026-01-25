@@ -1,13 +1,18 @@
 """
 Selected SAMB matrix.
+- dimension: (int) matrix size.
+- ket_site": (dict) ket info., dict[ket_name, position (fractional, primitive)].
+- index: (dict) ket index, dict[(site,sublattice,rank), (top_index,size)].
+- matrix: (dict) matrix, dict[zi, dict[(R,row,column), value] ] (R=n1,n2,n3, primitive).
 """
 
 graphene = {
     "model": "graphene",
-    "pkl": "graphene.pkl (2026-01-24 10:41:15)",
+    "pkl": "graphene.pkl (2026-01-25 20:41:32)",
     "select": {"site": [("C", [1])], "bond": [("C", "C", 1, [1], [1]), ("C", "C", 2, [1], [1])], "X": ["Q", "G"], "l": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], "Gamma": ["A1g", "A2g", "B1g", "B2g", "E1g", "E2g", "A1u", "A2u", "B1u", "B2u", "E1u", "E2u"], "s": [0, 1]},
     "dimension": 2,
     "ket_site": {"pz@C(1)": [0.3333333333333333, 0.6666666666666666, 0.0], "pz@C(2)": [0.6666666666666666, 0.3333333333333333, 0.0]},
+    "index": {("C", 1, 1): (0, 1), ("C", 2, 1): (1, 1)},
     "matrix": {
         "z1": {(0, 0, 0, 0, 0): "sqrt(2)/2", (0, 0, 0, 1, 1): "sqrt(2)/2"},
         "z2": {(0, -1, 0, 1, 0): "sqrt(6)/6", (1, 0, 0, 1, 0): "sqrt(6)/6", (0, 0, 0, 1, 0): "sqrt(6)/6", (0, 1, 0, 0, 1): "sqrt(6)/6", (-1, 0, 0, 0, 1): "sqrt(6)/6", (0, 0, 0, 0, 1): "sqrt(6)/6"},
@@ -73,5 +78,4 @@ graphene = {
             (1, 1, 0, 1, 1): "sqrt(6)/12",
         },
     },
-    "cluster_representative": {"C": [(["z1", "z23"], ((0, 1), (0, 1), (0, 0, 0)))], "C;C_001_1": [(["z2", "z9", "z10"], ((1, 1), (0, 1), (0, -1, 0)))], "C;C_002_1": [(["z3", "z11", "z12", "z24", "z27", "z28"], ((0, 1), (0, 1), (-1, 0, 0)))]},
 }

@@ -41,6 +41,13 @@ from multipie.util.util_material_model_pdf import ModelPDF
 from multipie.core.default_model import _default_model
 from multipie.util.util_plot import plot_site, plot_bond, plot_site_samb, plot_bond_samb, plot_harmonics
 
+_matrix_comment = """Selected SAMB matrix.
+- dimension: (int) matrix size.
+- ket_site": (dict) ket info., dict[ket_name, position (fractional, primitive)].
+- index: (dict) ket index, dict[(site,sublattice,rank), (top_index,size)].
+- matrix: (dict) matrix, dict[zi, dict[(R,row,column), value] ] (R=n1,n2,n3, primitive).
+"""
+
 
 # ==================================================
 class MaterialModel(BinaryManager):
@@ -253,24 +260,12 @@ class MaterialModel(BinaryManager):
         else:
             H = self.get_hr(parameter, combined_samb_matrix)
 
-        # fileter selected id.
-        cluster_rep = {}
-        for k, lst in self["cluster_representative"].items():
-            r_lst = []
-            for ls, info in lst:
-                f_lst = [i for i in ls if i in combined_samb_matrix.keys()]
-                if f_lst:
-                    r_lst.append((f_lst, info))
-            if r_lst:
-                cluster_rep[k] = r_lst
-
         # write matrix.
         cwd = os.getcwd()
         path = self.get_cwd()
         os.chdir(path)
         filename = self["model"] + "_matrix.py"
         var = self["model"]
-        comment = "Selected SAMB matrix.\n"
         ket = [orbital + "@" + atom + f"({sl})" for atom, sl, rank, orbital in self["full_matrix"]["ket"]]
         site_dict = {
             k + "_" + str(vi.sublattice): vi.position_primitive.tolist()
@@ -286,10 +281,10 @@ class MaterialModel(BinaryManager):
             "select": select_regularized,
             "dimension": len(ket_site),
             "ket_site": ket_site,
+            "index": self["full_matrix"]["index"],
             "matrix": {z: {k: str(v).replace(" ", "") for k, v in elm.items()} for z, elm in combined_samb_matrix.items()},
-            "cluster_representative": cluster_rep,
         }
-        write_dict(d, filename, var, comment)
+        write_dict(d, filename, var, _matrix_comment)
         if self.verbose:
             print(f"save matrix to '{path}/{filename}'.")
 
@@ -420,7 +415,7 @@ class MaterialModel(BinaryManager):
         # SAMB.
         atomic_samb, atomic_id = self.get_atomic_samb(atomic_select)
         cluster_samb, cluster_id = self.get_cluster_samb(site_select, bond_select)
-        combined_samb, combined_id, combined_min_num, combined_num, common_id, cluster_rep = self.get_combined_samb(
+        combined_samb, combined_id, combined_min_num, combined_num, common_id, cluster_info = self.get_combined_samb(
             atomic_samb, cluster_samb, samb_select, toroidal_priority
         )
 
@@ -432,7 +427,7 @@ class MaterialModel(BinaryManager):
         self["combined_samb"] = combined_samb
         self["combined_id"] = combined_id
         self["common_id"] = common_id
-        self["cluster_representative"] = cluster_rep
+        self["cluster_info"] = cluster_info
         self["SAMB_number_min"] = combined_min_num
         self["SAMB_number"] = combined_num
 
@@ -545,11 +540,11 @@ class MaterialModel(BinaryManager):
 
         Returns:
             - (dict) -- combined SAMB (minimal), dict[SAMBType, SAMB].
-            - (dict) -- id to SAMB info, dict[str, (tag, UniqueSAMBType)].
+            - (dict) -- id to SAMB info, dict[str, (tag, UniqueSAMBType, component)].
             - (int) -- no. of minimal SAMBs.
             - (int) -- no. of all SAMBs.
             - (dict) -- comomon id, dict[SAMBType, [id]].
-            - (dict) -- cluster name id, dict[site/bond_name, [id]].
+            - (dict) -- cluster info, dict[site/bond_name, dict[(bra_rank,ket_rank), (wyckoff,z_list)] ].
         """
         lst = {}
         for site_bond, wp in self["wyckoff"].items():
@@ -563,7 +558,7 @@ class MaterialModel(BinaryManager):
         # sort (neighbor, n) for each comb
         lst = {k: sorted(v) for k, v in lst.items()}
 
-        dic_minimal = {}
+        combined_samb = {}
         for comb in lst.keys():
             bra_orb = self["site"]["representative"][comb.head].orbital[comb.bk_info.bh_rank]
             ket_orb = self["site"]["representative"][comb.tail].orbital[comb.bk_info.kt_rank]
@@ -573,9 +568,9 @@ class MaterialModel(BinaryManager):
             if comb.head != comb.tail and bra_orb != ket_orb:
                 c_samb = c_samb.select(X=["Q"])
 
-            dic_minimal[comb] = self.group.combined_samb(a_samb.named_keys(), c_samb.named_keys(), toroidal_priority, **select)
+            combined_samb[comb] = self.group.combined_samb(a_samb.named_keys(), c_samb.named_keys(), toroidal_priority, **select)
 
-        min_no = sum(sum(len(i[0]) for i in samb.values()) for samb in dic_minimal.values())
+        min_no = sum(sum(len(i[0]) for i in samb.values()) for samb in combined_samb.values())
         combined_id = {}
         common_id = {comb: [[] for _ in nn_lst] for comb, nn_lst in lst.items()}
 
@@ -605,37 +600,26 @@ class MaterialModel(BinaryManager):
                     sb_tag = comb.tail
                 else:
                     sb_tag = get_bond(comb.tail, comb.head, neighbor, n)
-                for idx in dic_minimal[comb].select(**{"Gamma": Gamma}).keys():
-                    for tag in self.group.tag_multipole(idx, latex=True, superscript="c"):
+                for idx in combined_samb[comb].select(**{"Gamma": Gamma}).keys():
+                    for comp, tag in enumerate(self.group.tag_multipole(idx, latex=True, superscript="c")):
                         zi = f"z{no}"
-                        combined_id[zi] = (tag, samb_info)
+                        combined_id[zi] = (tag, samb_info, idx, comp)
                         common_id[comb][i].append((zi, sb_tag))
                         no += 1
         common_id = {info: ([[i[0] for i in bk] for bk in lst], [bk[0][1] for bk in lst]) for info, lst in common_id.items()}
 
-        # cluster-name id.
-        cluster_rep = {}
-        for info, lst in common_id.items():
-            tail, head = info.tail, info.head
-            bk_info = info.bk_info
-            bra_rank = bk_info.bh_rank
-            ket_rank = bk_info.kt_rank
-            for i, tag in zip(*lst):
-                tail, head = get_tail_head(tag)
-                if tag.count(";") > 0:  # bond.
-                    rep = self["bond"]["cell"][tag][0]
-                    head_sl, tail_sl = rep.h_idx[0], rep.t_idx[0]
-                    R = rep.R_primitive
-                else:  # site.
-                    rep = self["site"]["cell"][tag][0]
-                    head_sl = tail_sl = rep.sublattice
-                    R = (0, 0, 0)
-                bra_start, bra_dim = self["full_matrix"]["index"][(head, head_sl, bra_rank)]
-                ket_start, ket_dim = self["full_matrix"]["index"][(tail, tail_sl, ket_rank)]
-                r = ((bra_start, bra_dim), (ket_start, ket_dim), R)
-                cluster_rep[tag] = cluster_rep.get(tag, []) + [(i, r)]
+        # cluster-info.
+        dic = {}
+        for info, (sb_z_list, sb_list) in common_id.items():
+            wyckoff = info.wyckoff
+            bk_block = (info.bk_info.bh_rank, info.bk_info.kt_rank)
+            for sb, z_list in zip(sb_list, sb_z_list):
+                dic[sb] = dic.get(sb, []) + [(bk_block, wyckoff, z_list)]
+        cluster_info = {}
+        for sb, v in dic.items():
+            cluster_info[sb] = {bk_block: (wyckoff, z_list) for bk_block, wyckoff, z_list in v}
 
-        return dic_minimal, combined_id, min_no, no - 1, common_id, cluster_rep
+        return combined_samb, combined_id, min_no, no - 1, common_id, cluster_info
 
     # ==================================================
     def select_combined_samb(self, **kwargs):
@@ -775,7 +759,7 @@ class MaterialModel(BinaryManager):
         select_dict = {k: dic[k] for k in ["X", "l", "Gamma", "s"]}
 
         combined_id = {}
-        for zi, (tag, samb_info) in self["combined_id"].items():
+        for zi, (tag, samb_info, idx, comp) in self["combined_id"].items():
             samb_type = samb_info.samb_type
             head, tail = samb_type.head, samb_type.tail
             bk_info = samb_type.bk_info
@@ -786,7 +770,7 @@ class MaterialModel(BinaryManager):
                     for idx in self["combined_samb"][samb_type].select(**select_dict).keys():
                         for tag_ in self.group.tag_multipole(idx, latex=True, superscript="c"):
                             if tag == tag_:
-                                combined_id[zi] = (tag, samb_info)
+                                combined_id[zi] = (tag, samb_info, idx, comp)
             for h, t, nr, h_rank, t_rank in dic["bond"]:
                 if (
                     not is_site
@@ -806,7 +790,7 @@ class MaterialModel(BinaryManager):
                     for idx in self["combined_samb"][samb_type].select(**select_dict).keys():
                         for tag_ in self.group.tag_multipole(idx, latex=True, superscript="c"):
                             if tag == tag_:
-                                combined_id[zi] = (tag, samb_info)
+                                combined_id[zi] = (tag, samb_info, idx, comp)
 
         return combined_id, select_dict, dic
 
@@ -869,7 +853,7 @@ class MaterialModel(BinaryManager):
                 return round(v.real, digit) + round(v.imag, digit) * 1j
             return v
 
-        for zi, (tag, samb_info) in combined_id.items():
+        for zi, (tag, samb_info, idx, comp) in combined_id.items():
             samb_type = samb_info.samb_type
 
             tail, head = samb_type.tail, samb_type.head

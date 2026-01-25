@@ -476,11 +476,11 @@ class Group(dict):
             return r
         else:
             if tp in ["PG", "SG"]:
-                return replace_bar(info.schoenflies)
+                return replace_bar(info.schoenflies).replace("_", "")
             elif tp == "MPG":
-                return replace_bar(info.international)
+                return replace_bar(info.international).replace("_", "")
             else:
-                return replace_bar(info.BNS)
+                return replace_bar(info.BNS).replace("_", "")
 
     # ==================================================
     def atomic_basis(self, basis_type):
@@ -1012,9 +1012,7 @@ class Group(dict):
         multipole = multipole.replace("r", "sqrt(x**2+y**2+z**2)")
         multipole = sp.S(str_to_sympy(multipole))
 
-        s = np.asarray([multipole.subs({"x": vi[0], "y": vi[1], "z": vi[2]}, simultaneous=True) for vi in vt]).reshape(
-            -1
-        )
+        s = np.asarray([multipole.subs({"x": vi[0], "y": vi[1], "z": vi[2]}, simultaneous=True) for vi in vt]).reshape(-1)
 
         if X in ["G", "M"]:
             s = np.asarray([si * di for si, di in zip(s, d)])
