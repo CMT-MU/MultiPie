@@ -50,7 +50,7 @@ All required dependencies will be installed automatically.
 Install the visualization tool QtDraw:
     ```bash
     pip install qtdraw
-    playwright install chromium
+    playwright install chromium  # for Linux use `playwright install-deps chromium` instead.
     ```
 
 - **Linux** (Ubuntu 22.04.4 LTS on WSL2)
