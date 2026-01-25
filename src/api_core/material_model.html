@@ -59,6 +59,8 @@
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>window.MathJax = {"loader": {"load": ["[tex]/physics"]}, "tex": {"packages": {"[+]": ["physics"]}, "macros": {"bm": ["\\boldsymbol{#1}", 1]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'src/api_core/material_model';</script>
     <script src="../../_static/custom.js?v=9c3a2667"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -357,6 +359,8 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dict-data">Dict data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#samb-dict-data">SAMB Dict data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-multipie.core.material_model">MaterialModel Class</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel"><code class="docutils literal notranslate"><span class="pre">MaterialModel</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.analyze"><code class="docutils literal notranslate"><span class="pre">MaterialModel.analyze()</span></code></a></li>
@@ -400,68 +404,142 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="material-model">
 <h1>Material Model<a class="headerlink" href="#material-model" title="Link to this heading">#</a></h1>
+<section id="dict-data">
+<h2>Dict data<a class="headerlink" href="#dict-data" title="Link to this heading">#</a></h2>
 <p>This class has the following dict data.</p>
 <ul class="simple">
 <li><p>General info.</p>
 <ul>
-<li><p><strong>model</strong>: model name.</p></li>
-<li><p><strong>version</strong>: MultiPie version.</p></li>
-<li><p><strong>created</strong>: created time stamp.</p></li>
+<li><p><strong>model</strong>: (str) model name.</p></li>
+<li><p><strong>version</strong>: (str) MultiPie version.</p></li>
+<li><p><strong>created</strong>: (str) created time stamp.</p></li>
 </ul>
 </li>
 <li><p>Structural info.</p>
 <ul>
-<li><p><strong>group</strong>: group tag.</p></li>
-<li><p><strong>crystal</strong>: crystal class.</p></li>
-<li><p><strong>cell</strong>: unit-cell parameters.</p></li>
-<li><p><strong>cell_info</strong>: unit-cell information (parameters, volume, A, G matrices).</p></li>
-<li><p><strong>unit_vector</strong>: unit vectors (conventional cell).</p></li>
-<li><p><strong>unit_vector_primitive</strong>: unit vectors (primitive cell).</p></li>
+<li><p><strong>group</strong>: (str) group tag.</p></li>
+<li><p><strong>crystal</strong>: (str) crystal class.</p></li>
+<li><p><strong>cell</strong>: (dict) unit-cell parameters.</p>
+<ul>
+<li><p>a: (float) a.</p></li>
+<li><p>b: (float) b.</p></li>
+<li><p>c: (float) c.</p></li>
+<li><p>alpha: (float) alpha (deg.).</p></li>
+<li><p>beta: (float) beta (deg.).</p></li>
+<li><p>gamma: (float) gamma (deg.).</p></li>
+</ul>
+</li>
+<li><p><strong>cell_info</strong>: (dict) unit-cell information</p>
+<ul>
+<li><p>cell: (dict) = cell.</p></li>
+<li><p>volume: (float) volume.</p></li>
+<li><p>A: (list) [a1,a2,a3,t] (4x4, each column).</p></li>
+<li><p>G: (list) metric matrix (4x4).</p></li>
+</ul>
+</li>
+<li><p><strong>unit_vector</strong>: (list) unit vectors, a1, a2, a3 (conventional cell).</p></li>
+<li><p><strong>unit_vector_primitive</strong>: (list) unit vectors, a1p, a2p, a3p (primitive cell).</p></li>
 </ul>
 </li>
 <li><p>Generation condition.</p>
 <ul>
-<li><p><strong>SAMB_select</strong>: SAMB selection.</p></li>
-<li><p><strong>atomic_select</strong>: atomic SAMB selection.</p></li>
-<li><p><strong>site_select</strong>: site-cluster SAMB selection.</p></li>
-<li><p><strong>bond_select</strong>: bond-cluster SAMB selection.</p></li>
-<li><p><strong>max_neighbor</strong>: max. neighbor in search of bonds.</p></li>
-<li><p><strong>search_cell_range</strong>: cell range in search of bonds.</p></li>
-<li><p><strong>toroidal_priority</strong>: toroidal priority, false=Q-G or true=G-Q.</p></li>
+<li><p><strong>SAMB_select</strong>: (dict) SAMB selection.</p></li>
+<li><p><strong>atomic_select</strong>: (dict) atomic SAMB selection.</p></li>
+<li><p><strong>site_select</strong>: (dict) site-cluster SAMB selection.</p></li>
+<li><p><strong>bond_select</strong>: (dict) bond-cluster SAMB selection.</p></li>
+<li><p><strong>max_neighbor</strong>: (int) max. neighbor in search of bonds.</p></li>
+<li><p><strong>search_cell_range</strong>: (tuple) cell range in search of bonds, (a1,a2,b1,b2,c1,c2).</p></li>
+<li><p><strong>toroidal_priority</strong>: (bool) toroidal priority, false=Q-G or true=G-Q.</p></li>
 </ul>
 </li>
 <li><p>Site and bond info.</p>
 <ul>
-<li><p><strong>site_grid</strong>: site grid.</p></li>
-<li><p><strong>site</strong>: represetative and conventional unit-cell sites.</p></li>
-<li><p><strong>bond</strong>: represetative and conventional unit-cell bonds.</p></li>
+<li><p><strong>site_grid</strong>: (dict) site grid.</p></li>
+<li><p><strong>site</strong>: (dict) site info.</p>
+<ul>
+<li><p>representative: (dict) representative site, dict[name, RepSiteType].</p></li>
+<li><p>cell: (dict) conventional cell site, dict[name, [CellSiteType]].</p></li>
+</ul>
+</li>
+<li><p><strong>bond</strong>: bond info.</p>
+<ul>
+<li><p>representative: (dict) representative bond, dict[name, RepBondType].</p></li>
+<li><p>cell: (dict) conventional cell bond, dict[name, [CellBondType]].</p></li>
+<li><p>info: (list) bond properties, [BondInfoType].</p></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><p>SAMB.</p>
 <ul>
-<li><p><strong>SAMB_number</strong>: total number of SAMBs.</p></li>
-<li><p><strong>SAMB_number_min</strong>: total number of SAMBs excluding duplicated ones.</p></li>
-<li><p><strong>atomic_samb</strong>: atomic SAMB.</p></li>
-<li><p><strong>atomic_id</strong>: atomic SAMB ID.</p></li>
-<li><p><strong>cluster_samb</strong>: site/bond cluster SAMB.</p></li>
-<li><p><strong>cluster_id</strong>: site/bond cluster SAMB ID.</p></li>
-<li><p><strong>combined_samb</strong>: combined SAMB.</p></li>
-<li><p><strong>combined_id</strong>: combined SAMB ID.</p></li>
-<li><p><strong>common_id</strong>: common ID of combined SAMB.</p></li>
-<li><p><strong>cluster_representative</strong>: cluster-name, ID, and representative for each combined SAMB.</p></li>
+<li><p><strong>SAMB_number</strong>: (int) total number of SAMBs.</p></li>
+<li><p><strong>SAMB_number_min</strong>: (int) total number of SAMBs excluding duplicated ones.</p></li>
+<li><p><strong>atomic_samb</strong>: (dict) atomic SAMB, dict[BraketInfoType, SAMB Dict].</p></li>
+<li><p><strong>atomic_id</strong>: (dict) atomic SAMB ID, dict[tag, (index, component)].</p></li>
+<li><p><strong>cluster_samb</strong>: (dict) site/bond cluster SAMB, dict[wyckoff, SAMB Dict].</p></li>
+<li><p><strong>cluster_id</strong>: (dict) site/bond cluster SAMB ID, dict[tag, (wyckoff, index, component)].</p></li>
+<li><p><strong>combined_samb</strong>: (dict) combined SAMB, dict[SAMBType, SAMB Dict].</p></li>
+<li><p><strong>combined_id</strong>: (dict) combined SAMB ID, dict[tag, (symbol, UniqueSAMBType, SAMB index, component)].</p></li>
+<li><p><strong>common_id</strong>: (dict) common ID of combined SAMB, dict[SAMBType, ([Ztag_list], [site/bond-tag])].</p></li>
+<li><p><strong>cluster_info</strong>: (dict) cluster info, dict[site/bond_name, dict[(bra_rank,ket_rank), (wyckoff,z_list)] ].</p></li>
 </ul>
 </li>
 <li><p>Misc.</p>
 <ul>
-<li><p><strong>basis_type</strong>: atomic basis type.</p></li>
-<li><p><strong>full_matrix</strong>: “ket”: ket=[(atom,SL,rank,orbital)], “index”={(atom,SL,rank): (top,size)}.</p></li>
-<li><p><strong>braket</strong>: dict from site_bond tag to list of BraketInfoType.</p></li>
-<li><p><strong>wyckoff</strong>: dict from site_bond tag to wyckoff.</p></li>
-<li><p><strong>qtdraw_prop</strong>: QtDraw properties.</p></li>
-<li><p><strong>pdf_ctrl</strong>: PDF creation control.</p></li>
+<li><p><strong>basis_type</strong>: (str) atomic basis type.</p></li>
+<li><p><strong>full_matrix</strong>: (dict) full matrix info.</p>
+<ul>
+<li><p>ket: (list) ket info., [(atom,sublattice,rank,orbital)].</p></li>
+<li><p>index: (dict) index info., dict[(atom,SL,rank), (top,size)].</p></li>
+</ul>
+</li>
+<li><p><strong>braket</strong>: (dict) braket info., dict[site/bond-tag, [BraketInfoType]].</p></li>
+<li><p><strong>wyckoff</strong>: (dict) wyckoff info., dict[site/bond-tag, wyckoff].</p></li>
+<li><p><strong>qtdraw_prop</strong>: (dict) QtDraw properties.</p></li>
+<li><p><strong>pdf_ctrl</strong>: (dict) PDF creation control.</p></li>
 </ul>
 </li>
 </ul>
+</section>
+<section id="samb-dict-data">
+<h2>SAMB Dict data<a class="headerlink" href="#samb-dict-data" title="Link to this heading">#</a></h2>
+<p>Combined, atomic, and site/bond-cluster SAMBs have the following dict data.</p>
+<ul class="simple">
+<li><p>Combined SAMB, <span class="math notranslate nohighlight">\(Z_i\)</span>, Dict[index, SAMB].</p>
+<ul>
+<li><p>index: (PGMultipoleType) (X,l,<span class="math notranslate nohighlight">\(\Gamma\)</span>,s,k,n,p,x)</p></li>
+<li><p>SAMB: (tuple) SAMB data for set of components.</p>
+<ul>
+<li><p>(list) [[(coeff, X_index, X_component, Y_index, Y_component)]],</p></li>
+<li><p>(list) [symmetry].</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Atomic SAMB, <span class="math notranslate nohighlight">\(X_j\)</span>, Dict[index, SAMB].</p>
+<ul>
+<li><p>index: (PGMultipoleType) (X,l,<span class="math notranslate nohighlight">\(\Gamma\)</span>,s,k,n,p,x)</p></li>
+<li><p>SAMB: (tuple) SAMB data for set of components.</p>
+<ul>
+<li><p>(list) [matrix],</p></li>
+<li><p>(list) [symmetry]</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Site/bond-cluster SAMB, <span class="math notranslate nohighlight">\(Y_k\)</span>, Dict[index, SAMB].</p>
+<ul>
+<li><p>index: (PGMultipoleType) (X,l,<span class="math notranslate nohighlight">\(\Gamma\)</span>,s,k,n,p,x)</p></li>
+<li><p>SAMB: (tuple) SAMB data for set of components.</p>
+<ul>
+<li><p>(list) [vector],</p></li>
+<li><p>(list) [symmetry]</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section>
 <section id="module-multipie.core.material_model">
 <span id="materialmodel-class"></span><h2>MaterialModel Class<a class="headerlink" href="#module-multipie.core.material_model" title="Link to this heading">#</a></h2>
 <p>Material model analyzer class.</p>
@@ -565,11 +643,11 @@
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p>(dict) – combined SAMB (minimal), dict[SAMBType, SAMB].</p></li>
-<li><p>(dict) – id to SAMB info, dict[str, (tag, UniqueSAMBType)].</p></li>
+<li><p>(dict) – id to SAMB info, dict[str, (tag, UniqueSAMBType, component)].</p></li>
 <li><p>(int) – no. of minimal SAMBs.</p></li>
 <li><p>(int) – no. of all SAMBs.</p></li>
 <li><p>(dict) – comomon id, dict[SAMBType, [id]].</p></li>
-<li><p>(dict) – cluster name id, dict[site/bond_name, [id]].</p></li>
+<li><p>(dict) – cluster info, dict[site/bond_name, dict[(bra_rank,ket_rank), (wyckoff,z_list)] ].</p></li>
 </ul>
 </p>
 </dd>
@@ -874,6 +952,8 @@
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dict-data">Dict data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#samb-dict-data">SAMB Dict data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-multipie.core.material_model">MaterialModel Class</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel"><code class="docutils literal notranslate"><span class="pre">MaterialModel</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.analyze"><code class="docutils literal notranslate"><span class="pre">MaterialModel.analyze()</span></code></a></li>
