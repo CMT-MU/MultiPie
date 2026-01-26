@@ -372,7 +372,7 @@ def setup_logging(level=logging.INFO):
     Args:
         level (int, optional): log level.
     """
-    logging.basicConfig(format="%(message)s", level=level)
+    logging.basicConfig(format="%(message)s", level=level, force=True, stream=sys.stdout)
 
 
 # ==================================================

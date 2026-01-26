@@ -386,6 +386,64 @@ def parse_samb_select(dic, irreps):
 
 
 # ==================================================
+def parse_combined_select(select):
+    """
+    Parse select dict for combined SAMB.
+
+    Args:
+        select (dict): select condition.
+
+    Returns:
+        - (dict) -- full form of dict.
+    """
+    if select is None:
+        select = {}
+
+    select = {k: v if isinstance(v, list) else [v] for k, v in select.items()}
+    regularized_select = {}
+    for k, v in select.items():
+        if k == "site":
+            regularized_select["site"] = []
+            for i in v:
+                if isinstance(i, str):  # site.
+                    regularized_select["site"].append((i, None))
+                else:
+                    a, b = i  # site, rank/[rank]
+                    if not isinstance(b, list):
+                        b = [b]
+                    regularized_select["site"].append((a, b))
+        elif (
+            k == "bond"
+        ):  # name, neighbor, [neighbor], (name, neighbor), (name, [neighbor]), (name, rank), (name, rank, neighbor), (name, rank, [neighbor]).
+            regularized_select["bond"] = []
+            for i in v:
+                if isinstance(i, str):  # tail;head.
+                    regularized_select["bond"].append((i, None, None))
+                elif isinstance(i, int):  # neighbor.
+                    regularized_select["bond"].append((None, None, [i]))
+                elif isinstance(i, list) and all(isinstance(x, int) for x in i):  # neighbor.
+                    regularized_select["bond"].append((None, None, i))
+                elif len(i) == 2:
+                    a, b = i
+                    if isinstance(b, list):  # tail;head, neighbor.
+                        regularized_select["bond"].append((a, None, b))
+                    elif isinstance(b, str):  # tail;head, t_rank;h_rank.
+                        regularized_select["bond"].append((a, b, None))
+                    else:
+                        regularized_select["bond"].append((a, None, [b]))  # tail;head, neighbor.
+                elif len(i) == 3:
+                    a, b, c = i
+                    if isinstance(c, list):
+                        regularized_select["bond"].append((a, b, c))  # tail;head, t_rank;h_rank, neighbor.
+                    else:
+                        regularized_select["bond"].append((a, b, [c]))  # tail;head, t_rank;h_rank, neighbor.
+        else:
+            regularized_select[k] = v
+
+    return regularized_select
+
+
+# ==================================================
 def create_site_grid(site_dict, igrid=None):
     """
     Create site grid.

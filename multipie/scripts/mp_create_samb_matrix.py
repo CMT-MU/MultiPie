@@ -3,7 +3,6 @@ Create SAMB from model input.
 """
 
 import click
-from multipie.util.util import setup_logging
 from multipie.core.cmd import create_samb_matrix
 
 
@@ -22,5 +21,4 @@ def cmd(models, verbose):
         exit()
 
     # create all models.
-    setup_logging()
     create_samb_matrix(models, verbose=verbose)
