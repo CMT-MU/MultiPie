@@ -55,6 +55,7 @@ This class has the following dict data.
   - **cluster_id**: (dict) site/bond cluster SAMB ID, dict[tag, (wyckoff, index, component)].
   - **combined_samb**: (dict) combined SAMB, dict[SAMBType, SAMB Dict].
   - **combined_id**: (dict) combined SAMB ID, dict[tag, (symbol, UniqueSAMBType, index, component)].
+  - **irrep_id**: (dict) combined SAMB ID by irrep., dict[irrep, combined_id].
   - **common_id**: (dict) common ID of combined SAMB, dict[SAMBType, ([Ztag_list], [site/bond-tag])].
   - **cluster_info**: (dict) cluster info, dict[site/bond_name, dict[(bra_rank,ket_rank), (wyckoff,z_list)] ].
 

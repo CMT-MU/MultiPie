@@ -47,7 +47,7 @@ def create_samb(models, topdir=None, verbose=False):
         try:
             create(mm, model)
         except Exception:
-            logging.exception()
+            logging.exception("in create_samb")
             raise
 
     return False
@@ -93,7 +93,7 @@ def create_samb_qtdraw(models, topdir=None, verbose=False):
             mm.load(model)
             create(mm)
         except Exception:
-            logging.exception()
+            logging.exception("in create_samb_qtdraw")
             raise
 
     return False
@@ -139,7 +139,7 @@ def create_samb_matrix(select_inputs, topdir=None, verbose=False):
             create(mm, select, parameter)
         except Exception as e:
             print(e)
-            logging.exception()
+            logging.exception("in create_samb_matrix")
             raise
 
     return False
