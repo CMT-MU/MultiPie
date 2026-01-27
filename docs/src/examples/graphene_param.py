@@ -8,7 +8,7 @@ graphene_sel_par = {
     "model": "graphene",
     # selection for SAMB.
     "select": {
-        "bond": [[0, 1, 2]],
+        "bond": [[1, 2]],
     },
     # weight for SAMBs, non-specified parameters are zero. (float or sympy const.)
     "parameter": {

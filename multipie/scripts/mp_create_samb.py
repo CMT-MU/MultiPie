@@ -4,7 +4,6 @@ Create SAMB from model input.
 
 import click
 from multipie.core.multipie_info import __top_dir__
-from multipie.util.util import setup_logging
 from multipie.core.cmd import create_samb
 
 DEFAULT_MODEL = __top_dir__ + "/multipie/core/default_model.py"
@@ -55,5 +54,4 @@ def cmd(models, verbose, input):
         exit()
 
     # create all models.
-    setup_logging()
     create_samb(models, verbose=verbose)

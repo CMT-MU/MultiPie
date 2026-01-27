@@ -34,6 +34,7 @@ from multipie.util.util_material_model import (
     write_site_grid,
     create_qtdraw,
     parse_samb_select,
+    parse_combined_select,
     create_atomic_samb_qtdraw,
     create_cluster_samb_qtdraw,
 )
@@ -122,7 +123,7 @@ class MaterialModel(BinaryManager):
                 print(f"save qtdraw to '{path}/{filename}.qtdw'.")
 
     # ==================================================
-    def save_pdf(self):
+    def save_pdf(self, verbose=None):
         """
         Save model as PDF file.
         """
@@ -136,7 +137,9 @@ class MaterialModel(BinaryManager):
             ModelPDF(self, pdf)
 
             os.chdir(cwd)
-            if self.verbose:
+            if verbose is None:
+                verbose = self.verbose
+            if verbose:
                 print(f"save PDF to '{path}/{filename}.pdf'.")
 
     # ==================================================
@@ -224,7 +227,7 @@ class MaterialModel(BinaryManager):
             os.chdir(cwd)
 
     # ==================================================
-    def save_samb_qtdraw(self):
+    def save_samb_qtdraw(self, verbose=None):
         """
         Save SAMB QtDraw file.
         """
@@ -240,11 +243,14 @@ class MaterialModel(BinaryManager):
         for b in bond:
             self.save_site_bond(b)
             self.save_cluster_samb(b)
-        if self.verbose:
+
+        if verbose is None:
+            verbose = self.verbose
+        if verbose:
             print(f"save SAMB QtDraw files in '{self.get_cwd()}/samb'.")
 
     # ==================================================
-    def save_samb_matrix(self, select, parameter=None):
+    def save_samb_matrix(self, select, parameter=None, verbose=None):
         """
         Save SAMB matrix (and hr).
 
@@ -252,13 +258,12 @@ class MaterialModel(BinaryManager):
             select (dict): select dict (see, select_combined_samb).
             parameter (dict, optional): parameter dict, dict[z#, value].
         """
-        select_regularized = self.select_combined_samb(**select)[-1]
-        combined_samb_matrix = self.get_combined_samb_matrix(**select)
+        if verbose is None:
+            verbose = self.verbose
 
-        if parameter is None:
-            H = None
-        else:
-            H = self.get_hr(parameter, combined_samb_matrix)
+        _, samb_select, _select = self.select_combined_samb(select)
+        regularized_select = samb_select | _select
+        matrix = self.get_combined_samb_matrix(select)
 
         # write matrix.
         cwd = os.getcwd()
@@ -278,23 +283,28 @@ class MaterialModel(BinaryManager):
         d = {
             "model": self["model"],
             "pkl": f"{self["model"]}.pkl ({self["created"]})",
-            "select": select_regularized,
+            "select": regularized_select,
             "dimension": len(ket_site),
             "ket_site": ket_site,
             "index": self["full_matrix"]["index"],
-            "matrix": {z: {k: str(v).replace(" ", "") for k, v in elm.items()} for z, elm in combined_samb_matrix.items()},
+            "matrix": {z: {k: str(v).replace(" ", "") for k, v in elm.items()} for z, elm in matrix.items()},
         }
         write_dict(d, filename, var, _matrix_comment)
-        if self.verbose:
+        if verbose:
             print(f"save matrix to '{path}/{filename}'.")
 
         # write hr.dat.
+        if parameter is None:
+            H = None
+        else:
+            H = self.get_hr(parameter, combined_samb_matrix=matrix)
+
         if H is not None:
             filename = self["model"] + "_hr.dat"
             with open(filename, mode="w", encoding="utf-8") as f:
                 print(f"# SAMB matrix from {var}.pkl ({self["created"]})", file=f)
                 print("# select", file=f)
-                for k, v in select_regularized.items():
+                for k, v in regularized_select.items():
                     print(f"#   {k}: {str(v).replace(" ", "")}", file=f)
                 print(f"# basis ({len(ket_site)})", file=f)
                 for no, (b, p) in enumerate(ket_site.items()):
@@ -308,7 +318,7 @@ class MaterialModel(BinaryManager):
                     r, i = v.real, v.imag
                     s = f"{n1: 4d} {n2: 4d} {n3: 4d} {m: 4d} {n: 4d}    {r: .15e}    {i: .15e}"
                     print(s, file=f)
-            if self.verbose:
+            if verbose:
                 print(f"save hr to '{path}/{filename}'.")
         os.chdir(cwd)
 
@@ -430,6 +440,11 @@ class MaterialModel(BinaryManager):
         self["cluster_info"] = cluster_info
         self["SAMB_number_min"] = combined_min_num
         self["SAMB_number"] = combined_num
+
+        irrep_id = {
+            irrep: self.select_combined_samb(select={"Gamma": irrep})[0] for irrep in self.group.character["table"].keys()
+        }
+        self["irrep_id"] = irrep_id
 
         self["version"] = __version__
         self["created"] = time_stamp()
@@ -627,141 +642,31 @@ class MaterialModel(BinaryManager):
         return combined_samb, combined_id, min_no, no - 1, common_id, cluster_info
 
     # ==================================================
-    def select_combined_samb(self, **kwargs):
+    def select_combined_samb(self, select):
         """
         Select combined SAMB.
 
         Args:
-            kwargs (dict, optional): select conditions for multipoles with keywords, "site/bond/X/l/Gamma/s".
+            select (dict): select conditions for multipoles with keywords, "site/bond/X/l/Gamma/s".
 
         Returns:
             - (dict) -- selected combined IDs.
-            - (dict) -- select dict for combined SAMB.
-            - (dict) -- regularized select dict.
+            - (dict) -- SAMB select dict.
+            - (dict) -- other select dict.
 
         Note:
             - site = [(site, *[orbital_rank])]. (* omittable).
             - bond = [(site1;site2, *rank1;rank2, *[neighbor])] or [(*site1;site2, *rank1;rank2, [neighbor])].
-            - X = Q/G/T/M.
-            - l = [0,1,2,3,4,5,6,7,8,9,10,11].
-            - Gamma = [irreps.].
-            - s = [0,1].
+            - X = Q/G/T/M, []=all.
+            - l = [0,1,2,3,4,5,6,7,8,9,10,11], []=all.
+            - Gamma = [irreps.], "IR"=identity, []=all.
+            - s = [0,1], []=all.
         """
-        # regularize kwargs.
-        kwargs = {k: v if isinstance(v, list) else [v] for k, v in kwargs.items()}
-        inp = {}
-        for k, v in kwargs.items():
-            if k == "site":
-                inp["site"] = []
-                for i in v:
-                    if isinstance(i, str):  # site.
-                        inp["site"].append((i, None))
-                    else:
-                        a, b = i  # site, rank/[rank]
-                        if not isinstance(b, list):
-                            b = [b]
-                        inp["site"].append((a, b))
-            elif (
-                k == "bond"
-            ):  # name, neighbor, [neighbor], (name, neighbor), (name, [neighbor]), (name, rank), (name, rank, neighbor), (name, rank, [neighbor]).
-                inp["bond"] = []
-                for i in v:
-                    if isinstance(i, str):  # tail;head.
-                        inp["bond"].append((i, None, None))
-                    elif isinstance(i, int):  # neighbor.
-                        inp["bond"].append((None, None, [i]))
-                    elif isinstance(i, list) and all(isinstance(x, int) for x in i):  # neighbor.
-                        inp["bond"].append((None, None, i))
-                    elif len(i) == 2:
-                        a, b = i
-                        if isinstance(b, list):  # tail;head, neighbor.
-                            inp["bond"].append((a, None, b))
-                        elif isinstance(b, str):  # tail;head, t_rank;h_rank.
-                            inp["bond"].append((a, b, None))
-                        else:
-                            inp["bond"].append((a, None, [b]))  # tail;head, neighbor.
-                    elif len(i) == 3:
-                        a, b, c = i
-                        if isinstance(c, list):
-                            inp["bond"].append((a, b, c))  # tail;head, t_rank;h_rank, neighbor.
-                        else:
-                            inp["bond"].append((a, b, [c]))  # tail;head, t_rank;h_rank, neighbor.
-            else:
-                inp[k] = v
-
-        # default filter.
-        default = {}
-        all_site = [(k, [no for no, i in enumerate(v.orbital) if len(i) > 0]) for k, v in self["site"]["representative"].items()]
-        default["site"] = all_site
-        all_bond = [(v.tail, v.head, v.neighbor, v.t_rank, v.h_rank) for v in self["bond"]["representative"].values()]
-        default["bond"] = all_bond
-        default.update(self["SAMB_select"])
-
-        # final filter.
-        dic = {"site": [], "bond": [], "X": [], "l": [], "Gamma": [], "s": []}
-        for key, val in inp.items():
-            if key in ["X", "l", "Gamma", "s"]:
-                dic[key] = dic.get(key, []) + [i for i in default[key] if i in val]
-            elif key == "site":
-                for name, orb in val:
-                    if orb is None:
-                        d = [(s, o) for s, o in default[key] if s == name]
-                    else:
-                        d = [(s, sorted(list(set(o) & set(orb)))) for s, o in default[key] if s == name]
-                    dic[key] = dic.get(key, []) + [i for i in d if len(i[1]) > 0]
-                d = list({tuple(tuple(x) if isinstance(x, list) else x for x in t) for t in dic[key]})
-                d = [tuple(list(x) if isinstance(x, tuple) and all(isinstance(i, int) for i in x) else x for x in t) for t in d]
-                dic[key] = sorted(d)
-            elif key == "bond":
-                for name, rank, neighbor in val:
-                    if rank is None and neighbor is None:  # name only.
-                        tail, head = name.split(";")
-                        d = [(h, t, n, hr, tr) for t, h, n, tr, hr in default[key] if t == tail and h == head]
-                        d += [(h, t, n, hr, tr) for t, h, n, tr, hr in default[key] if h == tail and t == head]
-                    elif name is None and rank is None:  # neighbor only.
-                        d = [(h, t, n, hr, tr) for t, h, n, tr, hr in default[key] if n in neighbor]
-                    elif rank is None:  # name, neighbor.
-                        tail, head = name.split(";")
-                        d = [(h, t, n, hr, tr) for t, h, n, tr, hr in default[key] if t == tail and h == head and n in neighbor]
-                        d += [(h, t, n, hr, tr) for t, h, n, tr, hr in default[key] if h == tail and t == head and n in neighbor]
-                    elif neighbor is None:  # name, rank.
-                        tail, head = name.split(";")
-                        t_rank, h_rank = rank.split(";")
-                        t_rank, h_rank = {int(t_rank)}, {int(h_rank)}
-                        d = [
-                            (h, t, n, sorted(list(set(hr) & h_rank)), sorted(list(set(tr) & t_rank)))
-                            for t, h, n, tr, hr in default[key]
-                            if t == tail and h == head
-                        ]
-                        d += [
-                            (h, t, n, sorted(list(set(hr) & h_rank)), sorted(list(set(tr) & t_rank)))
-                            for t, h, n, tr, hr in default[key]
-                            if h == tail and t == head
-                        ]
-                    else:
-                        tail, head = name.split(";")
-                        t_rank, h_rank = rank.split(";")
-                        t_rank, h_rank = set(int(t_rank)), set(int(h_rank))
-                        d = [
-                            (h, t, n, sorted(list(set(hr) & h_rank)), sorted(list(set(tr) & t_rank)))
-                            for t, h, n, tr, hr in default[key]
-                            if t == tail and h == head and n in neighbor
-                        ]
-                        d += [
-                            (h, t, n, sorted(list(set(hr) & h_rank)), sorted(list(set(tr) & t_rank)))
-                            for t, h, n, tr, hr in default[key]
-                            if h == tail and t == head and n in neighbor
-                        ]
-                    dic[key] = dic.get(key, []) + d
-                d = list({tuple(tuple(x) if isinstance(x, list) else x for x in t) for t in dic[key]})
-                d = [tuple(list(x) if isinstance(x, tuple) and all(isinstance(i, int) for i in x) else x for x in t) for t in d]
-                dic[key] = sorted(d)
-        for key, val in default.items():
-            if key not in kwargs.keys():
-                dic[key] = val
-
-        # create select_dict for SAMB and combined_id.
-        select_dict = {k: dic[k] for k in ["X", "l", "Gamma", "s"]}
+        irrep = list(self.group.character["table"].keys())
+        samb_select = self["SAMB_select"]
+        site_rep = self["site"]["representative"]
+        bond_rep = self["bond"]["representative"]
+        samb_select, select = parse_combined_select(select, irrep, samb_select, site_rep, bond_rep)
 
         combined_id = {}
         for zi, (tag, samb_info, idx, comp) in self["combined_id"].items():
@@ -770,13 +675,13 @@ class MaterialModel(BinaryManager):
             bk_info = samb_type.bk_info
             neighbor = samb_info.neighbor
             is_site = not ("@" in samb_type.wyckoff)
-            for site, rank in dic["site"]:
+            for site, rank in select["site"]:
                 if is_site and head == site and bk_info.bh_rank in rank:
-                    for idx in self["combined_samb"][samb_type].select(**select_dict).keys():
+                    for idx in self["combined_samb"][samb_type].select(**samb_select).keys():
                         for tag_ in self.group.tag_multipole(idx, latex=True, superscript="c"):
                             if tag == tag_:
                                 combined_id[zi] = (tag, samb_info, idx, comp)
-            for h, t, nr, h_rank, t_rank in dic["bond"]:
+            for h, t, nr, h_rank, t_rank in select["bond"]:
                 if (
                     not is_site
                     and tail == t
@@ -792,22 +697,22 @@ class MaterialModel(BinaryManager):
                     and bk_info.bh_rank in t_rank
                     and neighbor == nr
                 ):
-                    for idx in self["combined_samb"][samb_type].select(**select_dict).keys():
+                    for idx in self["combined_samb"][samb_type].select(**samb_select).keys():
                         for tag_ in self.group.tag_multipole(idx, latex=True, superscript="c"):
                             if tag == tag_:
                                 combined_id[zi] = (tag, samb_info, idx, comp)
 
-        return combined_id, select_dict, dic
+        return combined_id, samb_select, select
 
     # ==================================================
-    def get_combined_samb_matrix(self, fmt="sympy", digit=14, **kwargs):
+    def get_combined_samb_matrix(self, select=None, fmt="sympy", digit=14):
         """
         Get combined SAMBs in matrix form (real-space).
 
         Args:
+            select (dict, optional): select conditions for multipoles with keywords (see, select_combined_samb).
             fmt (str, optional): sympy/value.
             digit (int, optional): digit for value output.
-            kwargs (dict, optional): select conditions for multipoles with keywords (see, select_combined_samb).
 
         Returns:
             - (dict) -- combined SAMB in matrix form, dict[zj, dict[ (n1, n2, n3, m, n), matrix element] ].
@@ -819,14 +724,8 @@ class MaterialModel(BinaryManager):
         if fmt not in ["sympy", "value"]:
             raise KeyError(f"unknown format = {fmt} is given.")
 
-        # check fileter key.
-        filter_key = ["site", "bond", "neighbor", "n", "bk_info"]
-        for k in kwargs.keys():
-            if k not in filter_key + list(self["SAMB_select"].keys()):
-                raise KeyError(f"invalid key, {k}.")
-
         # filter combined id.
-        combined_id, select_dict, _ = self.select_combined_samb(**kwargs)
+        combined_id, samb_select, select = self.select_combined_samb(select)
 
         cluster_samb = self["cluster_samb"]
         atomic_samb = self["atomic_samb"]
@@ -885,7 +784,7 @@ class MaterialModel(BinaryManager):
             a_samb = atomic_samb[bk_info]
             c_samb = cluster_samb[wp]
 
-            for idx, (cl, _) in combined_samb[samb_type].select(**select_dict).items():
+            for idx, (cl, _) in combined_samb[samb_type].select(**samb_select).items():
                 for tag_, m in zip(self.group.tag_multipole(idx, latex=True, superscript="c"), cl):
                     if tag_ != tag:
                         continue
@@ -1021,16 +920,16 @@ class MaterialModel(BinaryManager):
         return lc, sym, s_symbol
 
     # ==================================================
-    def get_hr(self, coeff, combined_samb_matrix=None, fmt="sympy", digit=14, **kwargs):
+    def get_hr(self, parameter, select=None, combined_samb_matrix=None, fmt="sympy", digit=14):
         """
         Get Hamiltonian matrix (real-space).
 
         Args:
-            coeff (dict): coefficient of SAMBs, dict[zj, float/sympy].
+            parameter (dict): parameter of SAMBs, dict[zj, float/sympy].
+            select (dict, optional): select conditions for multipoles with keywords (see, select_combined_samb).
             combined_samb_matrix (dict, optional): combined SAMBs in matrix form (real-space), { zj: {(n1, n2, n3, m, n): matrix element} }.
             fmt (str, optional): sympy/value.
             digit (int, optional): digit for value output.
-            kwargs (dict, optional): select conditions for multipoles with keywords (see, select_combined_samb).
 
         Returns:
             - (dict) -- Hamiltonian matrix (real-space), dict[(n1, n2, n3, m, n), matrix element].
@@ -1039,10 +938,10 @@ class MaterialModel(BinaryManager):
             - R = (n1,n2,n3) and m and n are a lattie vector, bra and ket indexes, respectively.
         """
         if combined_samb_matrix is None:
-            combined_samb_matrix = self.get_combined_samb_matrix(fmt, digit, **kwargs)
+            combined_samb_matrix = self.get_combined_samb_matrix(select, fmt, digit)
 
         Hamiltonian = defaultdict(lambda: sp.S(0) if fmt == "sympy" else 0.0)
-        for zj, cj in coeff.items():
+        for zj, cj in parameter.items():
             if zj not in combined_samb_matrix.keys():
                 raise Exception(f"parameter {zj} is missing.")
             d = combined_samb_matrix[zj]

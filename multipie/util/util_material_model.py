@@ -352,37 +352,200 @@ def parse_neighbor(neighbor, tail_rank, head_rank):
 
 
 # ==================================================
-def parse_samb_select(dic, irreps):
+def parse_samb_select(select, irreps):
     """
     Parse SAMB select dict.
 
     Args:
-        dic (dict): select condition dict.
+        select (dict): select condition dict.
         irreps (list): list of irreps.
 
     Returns:
-        - (dict) -- full form of dict.
+        - (dict) -- regularized SAMB select.
 
     Note:
         - dict keys are "X", "l", "Gamma", "s".
         - null list represents all possible values.
         - "IR" in "Gamma" indicates the identity representation.
     """
-    if "Gamma" in dic.keys() and dic["Gamma"] == "IR":
-        dic["Gamma"] = [irreps[0]]
+    if select is None:
+        select = {}
 
-    dic = {k: [v] if type(v) != list else v for k, v in dic.items()}
+    for key in select.keys():
+        if key not in ["X", "l", "Gamma", "s"]:
+            raise ValueError(f"unknown key, {key}.")
 
-    if "X" in dic.keys() and len(dic["X"]) == 0:
-        dic["X"] = ["Q", "G", "M", "T"]
-    if "l" in dic.keys() and len(dic["l"]) == 0:
-        dic["l"] = list(range(12))
-    if len(dic["Gamma"]) == 0:
-        dic["Gamma"] = irreps
-    if "s" in dic.keys() and len(dic["s"]) == 0:
-        dic["s"] = [0, 1]
+    if "Gamma" in select.keys() and select["Gamma"] == "IR":
+        select["Gamma"] = [irreps[0]]
 
-    return dic
+    select = {k: [v] if type(v) != list else v for k, v in select.items()}
+
+    if "X" not in select.keys() or len(select["X"]) == 0:
+        select["X"] = ["Q", "G", "M", "T"]
+    if "l" not in select.keys() or len(select["l"]) == 0:
+        select["l"] = list(range(12))
+    if "Gamma" not in select.keys() or len(select["Gamma"]) == 0:
+        select["Gamma"] = irreps
+    if "s" not in select.keys() or len(select["s"]) == 0:
+        select["s"] = [0, 1]
+
+    return select
+
+
+# ==================================================
+def parse_combined_select(select, irreps, default_samb_select, site_rep, bond_rep):
+    """
+    Parse select dict for combined SAMB.
+
+    Args:
+        select (dict): select condition dict.
+        irreps (list): list of irreps.
+        default_samb_select (dict): default SAMB select.
+        site_rep (dict): site representative dict.
+        bond_rep (dict): bond representative dict.
+
+    Returns:
+        - (dict) -- regularized SAMB select.
+        - (dict) -- regularized other select.
+
+    Note:
+        - dict keys are "site" and "bond" in addition to SAMB_select.
+        - null list represents all possible values.
+    """
+    if select is None:
+        select = {}
+
+    for key in select.keys():
+        if key not in ["site", "bond", "X", "l", "Gamma", "s"]:
+            raise ValueError(f"unkwon key, {key}.")
+
+    # split samb select and others.
+    samb_select = {key: val for key, val in select.items() if key in ["X", "l", "Gamma", "s"]}
+    select = {key: val for key, val in select.items() if key in ["site", "bond"]}
+
+    # regularize samb select.
+    regularized_samb_select = parse_samb_select(samb_select, irreps)
+    regularized_samb_select = {k: [x for x in v if x in default_samb_select[k]] for k, v in regularized_samb_select.items()}
+
+    keys = list(regularized_samb_select.keys())
+    for k, v in default_samb_select.items():
+        if k not in keys:
+            regularized_samb_select[k] = v
+
+    # regularized combined select.
+    select = {k: v if isinstance(v, list) else [v] for k, v in select.items()}
+
+    regularized_select = {}
+    for k, v in select.items():
+        if k == "site":
+            regularized_select["site"] = []
+            for i in v:
+                if isinstance(i, str):  # site.
+                    regularized_select["site"].append((i, None))
+                else:
+                    a, b = i  # site, rank/[rank]
+                    if not isinstance(b, list):
+                        b = [b]
+                    regularized_select["site"].append((a, b))
+        elif (
+            k == "bond"
+        ):  # name, neighbor, [neighbor], (name, neighbor), (name, [neighbor]), (name, rank), (name, rank, neighbor), (name, rank, [neighbor]).
+            regularized_select["bond"] = []
+            for i in v:
+                if isinstance(i, str):  # tail;head.
+                    regularized_select["bond"].append((i, None, None))
+                elif isinstance(i, int):  # neighbor.
+                    regularized_select["bond"].append((None, None, [i]))
+                elif isinstance(i, list) and all(isinstance(x, int) for x in i):  # neighbor.
+                    regularized_select["bond"].append((None, None, i))
+                elif len(i) == 2:
+                    a, b = i
+                    if isinstance(b, list):  # tail;head, neighbor.
+                        regularized_select["bond"].append((a, None, b))
+                    elif isinstance(b, str):  # tail;head, t_rank;h_rank.
+                        regularized_select["bond"].append((a, b, None))
+                    else:
+                        regularized_select["bond"].append((a, None, [b]))  # tail;head, neighbor.
+                elif len(i) == 3:
+                    a, b, c = i
+                    if isinstance(c, list):
+                        regularized_select["bond"].append((a, b, c))  # tail;head, t_rank;h_rank, neighbor.
+                    else:
+                        regularized_select["bond"].append((a, b, [c]))  # tail;head, t_rank;h_rank, neighbor.
+
+    # final filter.
+    final_select = {}
+
+    # site.
+    default_site = [(k, [no for no, i in enumerate(v.orbital) if len(i) > 0]) for k, v in site_rep.items()]
+    if "site" not in select.keys():
+        final_select["site"] = default_site
+    else:
+        site = []
+        for name, orb in regularized_select["site"]:
+            if orb is None:
+                d = [(s, o) for s, o in default_site if s == name]
+            else:
+                d = [(s, sorted(list(set(o) & set(orb)))) for s, o in default_site if s == name]
+            site += [i for i in d if len(i[1]) > 0]
+        site = list({tuple(tuple(x) if isinstance(x, list) else x for x in t) for t in site})
+        site = [tuple(list(x) if isinstance(x, tuple) and all(isinstance(i, int) for i in x) else x for x in t) for t in site]
+        final_select["site"] = sorted(site)
+    site_list = [i[0] for i in final_select["site"]]
+
+    # bond.
+    default_bond = [
+        (v.tail, v.head, v.neighbor, v.t_rank, v.h_rank) for v in bond_rep.values() if v.tail in site_list and v.head in site_list
+    ]
+    if "bond" not in select.keys():
+        final_select["bond"] = default_bond
+    else:
+        bond = []
+        for name, rank, neighbor in regularized_select["bond"]:
+            if rank is None and neighbor is None:  # name only.
+                tail, head = name.split(";")
+                d = [(h, t, n, hr, tr) for t, h, n, tr, hr in default_bond if t == tail and h == head]
+                d += [(h, t, n, hr, tr) for t, h, n, tr, hr in default_bond if h == tail and t == head]
+            elif name is None and rank is None:  # neighbor only.
+                d = [(h, t, n, hr, tr) for t, h, n, tr, hr in default_bond if n in neighbor]
+            elif rank is None:  # name, neighbor.
+                tail, head = name.split(";")
+                d = [(h, t, n, hr, tr) for t, h, n, tr, hr in default_bond if t == tail and h == head and n in neighbor]
+                d += [(h, t, n, hr, tr) for t, h, n, tr, hr in default_bond if h == tail and t == head and n in neighbor]
+            elif neighbor is None:  # name, rank.
+                tail, head = name.split(";")
+                t_rank, h_rank = rank.split(";")
+                t_rank, h_rank = {int(t_rank)}, {int(h_rank)}
+                d = [
+                    (h, t, n, sorted(list(set(hr) & h_rank)), sorted(list(set(tr) & t_rank)))
+                    for t, h, n, tr, hr in default_bond
+                    if t == tail and h == head
+                ]
+                d += [
+                    (h, t, n, sorted(list(set(hr) & h_rank)), sorted(list(set(tr) & t_rank)))
+                    for t, h, n, tr, hr in default_bond
+                    if h == tail and t == head
+                ]
+            else:
+                tail, head = name.split(";")
+                t_rank, h_rank = rank.split(";")
+                t_rank, h_rank = set(int(t_rank)), set(int(h_rank))
+                d = [
+                    (h, t, n, sorted(list(set(hr) & h_rank)), sorted(list(set(tr) & t_rank)))
+                    for t, h, n, tr, hr in default_bond
+                    if t == tail and h == head and n in neighbor
+                ]
+                d += [
+                    (h, t, n, sorted(list(set(hr) & h_rank)), sorted(list(set(tr) & t_rank)))
+                    for t, h, n, tr, hr in default_bond
+                    if h == tail and t == head and n in neighbor
+                ]
+            bond += d
+        bond = list({tuple(tuple(x) if isinstance(x, list) else x for x in t) for t in bond})
+        bond = [tuple(list(x) if isinstance(x, tuple) and all(isinstance(i, int) for i in x) else x for x in t) for t in bond]
+        final_select["bond"] = sorted(bond)
+
+    return regularized_samb_select, final_select
 
 
 # ==================================================
