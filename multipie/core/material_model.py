@@ -258,17 +258,12 @@ class MaterialModel(BinaryManager):
             select (dict): select dict (see, select_combined_samb).
             parameter (dict, optional): parameter dict, dict[z#, value].
         """
-        _, samb_select, _select = self.select_combined_samb(select)
-        regularized_select = samb_select | _select
-        matrix = self.get_combined_samb_matrix(select)
-
         if verbose is None:
             verbose = self.verbose
 
-        if parameter is None:
-            H = None
-        else:
-            H = self.get_hr(parameter, combined_samb_matrix=matrix)
+        _, samb_select, _select = self.select_combined_samb(select)
+        regularized_select = samb_select | _select
+        matrix = self.get_combined_samb_matrix(select)
 
         # write matrix.
         cwd = os.getcwd()
@@ -299,6 +294,11 @@ class MaterialModel(BinaryManager):
             print(f"save matrix to '{path}/{filename}'.")
 
         # write hr.dat.
+        if parameter is None:
+            H = None
+        else:
+            H = self.get_hr(parameter, combined_samb_matrix=matrix)
+
         if H is not None:
             filename = self["model"] + "_hr.dat"
             with open(filename, mode="w", encoding="utf-8") as f:
@@ -723,12 +723,6 @@ class MaterialModel(BinaryManager):
         # check format key.
         if fmt not in ["sympy", "value"]:
             raise KeyError(f"unknown format = {fmt} is given.")
-
-        # check fileter key.
-        filter_key = ["site", "bond", "neighbor", "n", "bk_info"]
-        for k in select.keys():
-            if k not in filter_key + list(self["SAMB_select"].keys()):
-                raise KeyError(f"invalid key, {k}.")
 
         # filter combined id.
         combined_id, samb_select, select = self.select_combined_samb(select)

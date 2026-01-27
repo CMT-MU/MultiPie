@@ -8,11 +8,12 @@ C3v_sel_par = {
     "model": "C3v",
     # selection for SAMB.
     "select": {
-        "bond": [[0]],
+        "site": "A",
+        "bond": [[1]],
     },
     # weight for SAMBs, non-specified parameters are zero. (float or sympy const.)
     "parameter": {
-        "z3": 1,
-        "z4": 1,
+        "z1": 1,
+        "z6": 1,
     },
 }
