@@ -316,7 +316,8 @@
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">multipie.util.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">timer</span><span class="p">,</span> <span class="n">read_dict_file</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">multipie.util.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">timer</span><span class="p">,</span> <span class="n">read_dict_file</span><span class="p">,</span> <span class="n">setup_logging</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">multipie.core.material_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">MaterialModel</span>
 
 
@@ -332,10 +333,14 @@
 <span class="sd">        topdir (str, optional): top directory.</span>
 <span class="sd">        verbose (bool, optional): verbose ?</span>
 
+<span class="sd">    Returns:</span>
+<span class="sd">        - (bool) -- if no error occurs, return False.</span>
+
 <span class="sd">    Note:</span>
 <span class="sd">        - model name directory is created to store results in top directory.</span>
 <span class="sd">        - if topdir is None, current directory is used.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">setup_logging</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">create</span><span class="p">(</span><span class="n">mm</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
         <span class="nd">@timer</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;create model=&#39;</span><span class="si">{</span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;model&quot;</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
@@ -354,7 +359,13 @@
 
     <span class="n">mm</span> <span class="o">=</span> <span class="n">MaterialModel</span><span class="p">(</span><span class="n">topdir</span><span class="p">,</span> <span class="n">verbose</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">models</span><span class="p">:</span>
-        <span class="n">create</span><span class="p">(</span><span class="n">mm</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span></div>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">create</span><span class="p">(</span><span class="n">mm</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s2">&quot;in create_samb&quot;</span><span class="p">)</span>
+            <span class="k">raise</span>
+
+    <span class="k">return</span> <span class="kc">False</span></div>
 
 
 
@@ -371,17 +382,18 @@
 <span class="sd">        verbose (bool, optional): verbose ?</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        - (bool) -- if error occurs, return True, otherwise False.</span>
+<span class="sd">        - (bool) -- if no error occurs, return False.</span>
 
 <span class="sd">    Note:</span>
 <span class="sd">        - samb directory is created to store results in model directory.</span>
 <span class="sd">        - if topdir is None, current directory is used, which should contain model directory.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">setup_logging</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">create</span><span class="p">(</span><span class="n">mm</span><span class="p">):</span>
         <span class="nd">@timer</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;create SAMB QtDraw file for model=&#39;</span><span class="si">{</span><span class="n">mm</span><span class="p">[</span><span class="s2">&quot;model&quot;</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
         <span class="k">def</span><span class="w"> </span><span class="nf">create0</span><span class="p">():</span>
-            <span class="n">mm</span><span class="o">.</span><span class="n">save_samb_qtdraw</span><span class="p">()</span>
+            <span class="n">mm</span><span class="o">.</span><span class="n">save_samb_qtdraw</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
 
         <span class="n">create0</span><span class="p">()</span>
 
@@ -391,15 +403,16 @@
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">models</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
         <span class="n">models</span> <span class="o">=</span> <span class="p">[</span><span class="n">models</span><span class="p">]</span>
 
-    <span class="n">mm</span> <span class="o">=</span> <span class="n">MaterialModel</span><span class="p">(</span><span class="n">topdir</span><span class="p">)</span>
+    <span class="n">mm</span> <span class="o">=</span> <span class="n">MaterialModel</span><span class="p">(</span><span class="n">topdir</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">models</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">model</span><span class="p">)</span> <span class="o">==</span> <span class="nb">dict</span><span class="p">:</span>
             <span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="p">[</span><span class="s2">&quot;model&quot;</span><span class="p">]</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">mm</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
-        <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
-            <span class="k">return</span> <span class="kc">True</span>
-        <span class="n">create</span><span class="p">(</span><span class="n">mm</span><span class="p">)</span>
+            <span class="n">create</span><span class="p">(</span><span class="n">mm</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s2">&quot;in create_samb_qtdraw&quot;</span><span class="p">)</span>
+            <span class="k">raise</span>
 
     <span class="k">return</span> <span class="kc">False</span></div>
 
@@ -418,7 +431,7 @@
 <span class="sd">        verbose (bool, optional): verbose ?</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        - (bool) -- if error occurs, return True, otherwise False.</span>
+<span class="sd">        - (bool) -- if no error occurs, return False.</span>
 
 <span class="sd">    Note:</span>
 <span class="sd">        - matrix (and hr) file is created in model directory.</span>
@@ -426,26 +439,29 @@
 <span class="sd">        - if input does not have &quot;parameter&quot; key, hr.dat is not created.</span>
 <span class="sd">        - if input does not have &quot;select&quot; key, all SAMBs are used.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">setup_logging</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">create</span><span class="p">(</span><span class="n">mm</span><span class="p">,</span> <span class="n">select</span><span class="p">,</span> <span class="n">parameter</span><span class="p">):</span>
         <span class="nd">@timer</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;create matrix (hr) for model=&#39;</span><span class="si">{</span><span class="n">mm</span><span class="p">[</span><span class="s2">&quot;model&quot;</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
         <span class="k">def</span><span class="w"> </span><span class="nf">create0</span><span class="p">():</span>
-            <span class="n">mm</span><span class="o">.</span><span class="n">save_samb_matrix</span><span class="p">(</span><span class="n">select</span><span class="p">,</span> <span class="n">parameter</span><span class="p">)</span>
+            <span class="n">mm</span><span class="o">.</span><span class="n">save_samb_matrix</span><span class="p">(</span><span class="n">select</span><span class="p">,</span> <span class="n">parameter</span><span class="o">=</span><span class="n">parameter</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
 
         <span class="n">create0</span><span class="p">()</span>
 
-    <span class="n">select_inputs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">read_dict_file</span><span class="p">(</span><span class="n">select_inputs</span><span class="p">,</span> <span class="n">topdir</span><span class="p">,</span> <span class="n">verbose</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+    <span class="n">select_inputs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">read_dict_file</span><span class="p">(</span><span class="n">select_inputs</span><span class="p">,</span> <span class="n">topdir</span><span class="o">=</span><span class="n">topdir</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
 
-    <span class="n">mm</span> <span class="o">=</span> <span class="n">MaterialModel</span><span class="p">(</span><span class="n">topdir</span><span class="p">,</span> <span class="n">verbose</span><span class="p">)</span>
+    <span class="n">mm</span> <span class="o">=</span> <span class="n">MaterialModel</span><span class="p">(</span><span class="n">topdir</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">inp</span> <span class="ow">in</span> <span class="n">select_inputs</span><span class="p">:</span>
         <span class="n">model</span> <span class="o">=</span> <span class="n">inp</span><span class="p">[</span><span class="s2">&quot;model&quot;</span><span class="p">]</span>
-        <span class="n">select</span> <span class="o">=</span> <span class="n">inp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;select&quot;</span><span class="p">,</span> <span class="p">{})</span>
+        <span class="n">select</span> <span class="o">=</span> <span class="n">inp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;select&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
         <span class="n">parameter</span> <span class="o">=</span> <span class="n">inp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;parameter&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">mm</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
-        <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
-            <span class="k">return</span> <span class="kc">True</span>
-        <span class="n">create</span><span class="p">(</span><span class="n">mm</span><span class="p">,</span> <span class="n">select</span><span class="p">,</span> <span class="n">parameter</span><span class="p">)</span>
+            <span class="n">create</span><span class="p">(</span><span class="n">mm</span><span class="p">,</span> <span class="n">select</span><span class="p">,</span> <span class="n">parameter</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s2">&quot;in create_samb_matrix&quot;</span><span class="p">)</span>
+            <span class="k">raise</span>
 
     <span class="k">return</span> <span class="kc">False</span></div>
 

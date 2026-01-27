@@ -483,6 +483,7 @@
 <li><p><strong>cluster_id</strong>: (dict) site/bond cluster SAMB ID, dict[tag, (wyckoff, index, component)].</p></li>
 <li><p><strong>combined_samb</strong>: (dict) combined SAMB, dict[SAMBType, SAMB Dict].</p></li>
 <li><p><strong>combined_id</strong>: (dict) combined SAMB ID, dict[tag, (symbol, UniqueSAMBType, index, component)].</p></li>
+<li><p><strong>irrep_id</strong>: (dict) combined SAMB ID by irrep., dict[irrep, combined_id].</p></li>
 <li><p><strong>common_id</strong>: (dict) common ID of combined SAMB, dict[SAMBType, ([Ztag_list], [site/bond-tag])].</p></li>
 <li><p><strong>cluster_info</strong>: (dict) cluster info, dict[site/bond_name, dict[(bra_rank,ket_rank), (wyckoff,z_list)] ].</p></li>
 </ul>
@@ -720,14 +721,14 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="multipie.core.material_model.MaterialModel.get_combined_samb_matrix">
-<span class="sig-name descname"><span class="pre">get_combined_samb_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fmt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sympy'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">digit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">14</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/core/material_model.html#MaterialModel.get_combined_samb_matrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.core.material_model.MaterialModel.get_combined_samb_matrix" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">get_combined_samb_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">select</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fmt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sympy'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">digit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">14</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/core/material_model.html#MaterialModel.get_combined_samb_matrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.core.material_model.MaterialModel.get_combined_samb_matrix" title="Link to this definition">#</a></dt>
 <dd><p>Get combined SAMBs in matrix form (real-space).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
+<li><p><strong>select</strong> (<em>dict</em><em>, </em><em>optional</em>) – select conditions for multipoles with keywords (see, select_combined_samb).</p></li>
 <li><p><strong>fmt</strong> (<em>str</em><em>, </em><em>optional</em>) – sympy/value.</p></li>
 <li><p><strong>digit</strong> (<em>int</em><em>, </em><em>optional</em>) – digit for value output.</p></li>
-<li><p><strong>kwargs</strong> (<em>dict</em><em>, </em><em>optional</em>) – select conditions for multipoles with keywords (see, select_combined_samb).</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -747,16 +748,16 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="multipie.core.material_model.MaterialModel.get_hr">
-<span class="sig-name descname"><span class="pre">get_hr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coeff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">combined_samb_matrix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fmt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sympy'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">digit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">14</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/core/material_model.html#MaterialModel.get_hr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.core.material_model.MaterialModel.get_hr" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">get_hr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">select</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">combined_samb_matrix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fmt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sympy'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">digit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">14</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/core/material_model.html#MaterialModel.get_hr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.core.material_model.MaterialModel.get_hr" title="Link to this definition">#</a></dt>
 <dd><p>Get Hamiltonian matrix (real-space).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>coeff</strong> (<em>dict</em>) – coefficient of SAMBs, dict[zj, float/sympy].</p></li>
+<li><p><strong>parameter</strong> (<em>dict</em>) – parameter of SAMBs, dict[zj, float/sympy].</p></li>
+<li><p><strong>select</strong> (<em>dict</em><em>, </em><em>optional</em>) – select conditions for multipoles with keywords (see, select_combined_samb).</p></li>
 <li><p><strong>combined_samb_matrix</strong> (<em>dict</em><em>, </em><em>optional</em>) – combined SAMBs in matrix form (real-space), { zj: {(n1, n2, n3, m, n): matrix element} }.</p></li>
 <li><p><strong>fmt</strong> (<em>str</em><em>, </em><em>optional</em>) – sympy/value.</p></li>
 <li><p><strong>digit</strong> (<em>int</em><em>, </em><em>optional</em>) – digit for value output.</p></li>
-<li><p><strong>kwargs</strong> (<em>dict</em><em>, </em><em>optional</em>) – select conditions for multipoles with keywords (see, select_combined_samb).</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -885,13 +886,13 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="multipie.core.material_model.MaterialModel.save_pdf">
-<span class="sig-name descname"><span class="pre">save_pdf</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/core/material_model.html#MaterialModel.save_pdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.core.material_model.MaterialModel.save_pdf" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">save_pdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/core/material_model.html#MaterialModel.save_pdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.core.material_model.MaterialModel.save_pdf" title="Link to this definition">#</a></dt>
 <dd><p>Save model as PDF file.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="multipie.core.material_model.MaterialModel.save_samb_matrix">
-<span class="sig-name descname"><span class="pre">save_samb_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">select</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/core/material_model.html#MaterialModel.save_samb_matrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.core.material_model.MaterialModel.save_samb_matrix" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">save_samb_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">select</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/core/material_model.html#MaterialModel.save_samb_matrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.core.material_model.MaterialModel.save_samb_matrix" title="Link to this definition">#</a></dt>
 <dd><p>Save SAMB matrix (and hr).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -905,7 +906,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="multipie.core.material_model.MaterialModel.save_samb_qtdraw">
-<span class="sig-name descname"><span class="pre">save_samb_qtdraw</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/core/material_model.html#MaterialModel.save_samb_qtdraw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.core.material_model.MaterialModel.save_samb_qtdraw" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">save_samb_qtdraw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/core/material_model.html#MaterialModel.save_samb_qtdraw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.core.material_model.MaterialModel.save_samb_qtdraw" title="Link to this definition">#</a></dt>
 <dd><p>Save SAMB QtDraw file.</p>
 </dd></dl>
 
@@ -928,17 +929,17 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="multipie.core.material_model.MaterialModel.select_combined_samb">
-<span class="sig-name descname"><span class="pre">select_combined_samb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/core/material_model.html#MaterialModel.select_combined_samb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.core.material_model.MaterialModel.select_combined_samb" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">select_combined_samb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">select</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/core/material_model.html#MaterialModel.select_combined_samb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.core.material_model.MaterialModel.select_combined_samb" title="Link to this definition">#</a></dt>
 <dd><p>Select combined SAMB.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>kwargs</strong> (<em>dict</em><em>, </em><em>optional</em>) – select conditions for multipoles with keywords, “site/bond/X/l/Gamma/s”.</p>
+<dd class="field-odd"><p><strong>select</strong> (<em>dict</em>) – select conditions for multipoles with keywords, “site/bond/X/l/Gamma/s”.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p>(dict) – selected combined IDs.</p></li>
-<li><p>(dict) – select dict for combined SAMB.</p></li>
-<li><p>(dict) – regularized select dict.</p></li>
+<li><p>(dict) – SAMB select dict.</p></li>
+<li><p>(dict) – other select dict.</p></li>
 </ul>
 </p>
 </dd>
@@ -948,10 +949,10 @@
 <ul class="simple">
 <li><p>site = [(site, <em>[orbital_rank])]. (</em> omittable).</p></li>
 <li><p>bond = [(site1;site2, <a href="#id1"><span class="problematic" id="id2">*</span></a>rank1;rank2, <a href="#id3"><span class="problematic" id="id4">*</span></a>[neighbor])] or [(<a href="#id5"><span class="problematic" id="id6">*</span></a>site1;site2, <a href="#id7"><span class="problematic" id="id8">*</span></a>rank1;rank2, [neighbor])].</p></li>
-<li><p>X = Q/G/T/M.</p></li>
-<li><p>l = [0,1,2,3,4,5,6,7,8,9,10,11].</p></li>
-<li><p>Gamma = [irreps.].</p></li>
-<li><p>s = [0,1].</p></li>
+<li><p>X = Q/G/T/M, []=all.</p></li>
+<li><p>l = [0,1,2,3,4,5,6,7,8,9,10,11], []=all.</p></li>
+<li><p>Gamma = [irreps.], “IR”=identity, []=all.</p></li>
+<li><p>s = [0,1], []=all.</p></li>
 </ul>
 </div>
 </dd></dl>

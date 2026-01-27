@@ -389,7 +389,6 @@
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># create_model.py</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">multipie.util.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">setup_logging</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">multipie</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_samb</span><span class="p">,</span> <span class="n">create_samb_qtdraw</span><span class="p">,</span> <span class="n">create_samb_matrix</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">C3v</span><span class="w"> </span><span class="kn">import</span> <span class="n">C3v</span>  <span class="c1"># C3v model input.</span>
@@ -403,7 +402,6 @@
 <span class="n">models</span> <span class="o">=</span> <span class="p">[</span><span class="n">C3v</span><span class="p">,</span> <span class="n">graphene</span><span class="p">]</span>  <span class="c1"># model input files.</span>
 <span class="n">select_inputs</span> <span class="o">=</span> <span class="p">[</span><span class="n">C3v_sel_par</span><span class="p">,</span> <span class="n">graphene_sel_par</span><span class="p">]</span>  <span class="c1"># selection and paramter files.</span>
 
-<span class="n">setup_logging</span><span class="p">()</span>
 <span class="n">create_samb</span><span class="p">(</span><span class="n">models</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>  <span class="c1"># create model.</span>
 <span class="n">create_samb_matrix</span><span class="p">(</span><span class="n">select_inputs</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>  <span class="c1"># create full matrix.</span>
 <span class="n">create_samb_qtdraw</span><span class="p">(</span><span class="n">models</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>  <span class="c1"># create full matrix with parameters.</span>
@@ -557,12 +555,13 @@ Example input file:</p>
     <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="s2">&quot;C3v&quot;</span><span class="p">,</span>
     <span class="c1"># selection for SAMB.</span>
     <span class="s2">&quot;select&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;bond&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]],</span>
+        <span class="s2">&quot;site&quot;</span><span class="p">:</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;bond&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="mi">1</span><span class="p">]],</span>
     <span class="p">},</span>
     <span class="c1"># weight for SAMBs, non-specified parameters are zero. (float or sympy const.)</span>
     <span class="s2">&quot;parameter&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;z3&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="s2">&quot;z4&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;z1&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;z6&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
     <span class="p">},</span>
 <span class="p">}</span>
 </pre></div>

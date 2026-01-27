@@ -373,6 +373,7 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.get_neighbor_info"><code class="docutils literal notranslate"><span class="pre">get_neighbor_info()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.get_tail_head"><code class="docutils literal notranslate"><span class="pre">get_tail_head()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.get_unique_bond"><code class="docutils literal notranslate"><span class="pre">get_unique_bond()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.parse_combined_select"><code class="docutils literal notranslate"><span class="pre">parse_combined_select()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.parse_neighbor"><code class="docutils literal notranslate"><span class="pre">parse_neighbor()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.parse_orbital"><code class="docutils literal notranslate"><span class="pre">parse_orbital()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.parse_representative_bond"><code class="docutils literal notranslate"><span class="pre">parse_representative_bond()</span></code></a></li>
@@ -721,6 +722,37 @@
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_material_model.parse_combined_select">
+<span class="sig-name descname"><span class="pre">parse_combined_select</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">select</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">irreps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_samb_select</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">site_rep</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bond_rep</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_material_model.html#parse_combined_select"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_material_model.parse_combined_select" title="Link to this definition">#</a></dt>
+<dd><p>Parse select dict for combined SAMB.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>select</strong> (<em>dict</em>) – select condition dict.</p></li>
+<li><p><strong>irreps</strong> (<em>list</em>) – list of irreps.</p></li>
+<li><p><strong>default_samb_select</strong> (<em>dict</em>) – default SAMB select.</p></li>
+<li><p><strong>site_rep</strong> (<em>dict</em>) – site representative dict.</p></li>
+<li><p><strong>bond_rep</strong> (<em>dict</em>) – bond representative dict.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(dict) – regularized SAMB select.</p></li>
+<li><p>(dict) – regularized other select.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>dict keys are “site” and “bond” in addition to SAMB_select.</p></li>
+<li><p>null list represents all possible values.</p></li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="multipie.util.util_material_model.parse_neighbor">
 <span class="sig-name descname"><span class="pre">parse_neighbor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">neighbor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tail_rank</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">head_rank</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_material_model.html#parse_neighbor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_material_model.parse_neighbor" title="Link to this definition">#</a></dt>
 <dd><p>Parse neighbor.</p>
@@ -833,18 +865,18 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="multipie.util.util_material_model.parse_samb_select">
-<span class="sig-name descname"><span class="pre">parse_samb_select</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dic</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">irreps</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_material_model.html#parse_samb_select"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_material_model.parse_samb_select" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">parse_samb_select</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">select</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">irreps</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_material_model.html#parse_samb_select"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_material_model.parse_samb_select" title="Link to this definition">#</a></dt>
 <dd><p>Parse SAMB select dict.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dic</strong> (<em>dict</em>) – select condition dict.</p></li>
+<li><p><strong>select</strong> (<em>dict</em>) – select condition dict.</p></li>
 <li><p><strong>irreps</strong> (<em>list</em>) – list of irreps.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
-<li><p>(dict) – full form of dict.</p></li>
+<li><p>(dict) – regularized SAMB select.</p></li>
 </ul>
 </p>
 </dd>
@@ -1050,6 +1082,7 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.get_neighbor_info"><code class="docutils literal notranslate"><span class="pre">get_neighbor_info()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.get_tail_head"><code class="docutils literal notranslate"><span class="pre">get_tail_head()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.get_unique_bond"><code class="docutils literal notranslate"><span class="pre">get_unique_bond()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.parse_combined_select"><code class="docutils literal notranslate"><span class="pre">parse_combined_select()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.parse_neighbor"><code class="docutils literal notranslate"><span class="pre">parse_neighbor()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.parse_orbital"><code class="docutils literal notranslate"><span class="pre">parse_orbital()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_material_model.parse_representative_bond"><code class="docutils literal notranslate"><span class="pre">parse_representative_bond()</span></code></a></li>
