@@ -580,7 +580,29 @@ class Group(dict):
 
         Note:
             - SAMB is sorted in order of (Q/G/T/M), s, k, Gamma, l, n.
+            - mask_bra_ket (bra,ket) can be given as ([int],[int]), ([str],[str]), (ndarray,ndarray) or (str,str).
+            - ([int],[int]) orbital indices of tesseral basis for given basis_type.
+            - ([str],[str]) orbital names of tesseral basis for given basis_type.
+            - (ndarray,ndarray) or (str,str) unitary matrix from JML/Lgs/Lg to n basis, <JML/Lgs/Lg | n>.
         """
+
+        def check_mask(obj):
+            if not isinstance(obj, tuple) or len(obj) != 2:
+                return None
+            bra, ket = obj
+            if isinstance(bra, np.ndarray) and isinstance(ket, np.ndarray):
+                return "ndarray"
+            if isinstance(bra, str) and isinstance(ket, str):
+                return "ndarray"
+            if isinstance(bra, list) and isinstance(ket, list):
+                if not bra and not ket:  # both empty list.
+                    return None
+                if all(isinstance(x, int) for x in bra) and all(isinstance(x, int) for x in ket):
+                    return "int"
+                if all(isinstance(x, str) for x in bra) and all(isinstance(x, str) for x in ket):
+                    return "str"
+            return None
+
         if basis_type not in ["jml", "lgs", "lg"]:
             raise Exception(f"unknown basis_type, '{basis_type}'.")
 
@@ -594,14 +616,36 @@ class Group(dict):
             dic = a_samb[basis_type][rank_bra_ket]
 
         if mask_bra_ket is not None:
+            tp = check_mask(mask_bra_ket)
+            if tp is None:
+                raise Exception(f"unknown mask_bra_ket, '{mask_bra_ket}'.")
+
             bra_mask, ket_mask = mask_bra_ket
-            if len(bra_mask) == 0 and len(ket_mask) == 0:
-                return None
-            if len(bra_mask) == 0:
-                bra_mask = list(range(len(self.atomic_basis(basis_type)[bra_rank])))
-            if len(ket_mask) == 0:
-                ket_mask = list(range(len(self.atomic_basis(basis_type)[ket_rank])))
-            dic = Dict(dic.key_type, {tag: (mat[:, bra_mask][:, :, ket_mask], ex) for tag, (mat, ex) in dic.items()})
+            if tp in ["int", "str"]:
+                if tp == "str":
+                    bra_set = self.atomic_basis(basis_type)[bra_rank]
+                    ket_set = self.atomic_basis(basis_type)[ket_rank]
+                    bra_mask = [bra_set.index(t) for t in bra_mask]
+                    ket_mask = [ket_set.index(t) for t in ket_mask]
+                if len(bra_mask) == 0:
+                    bra_mask = list(range(len(self.atomic_basis(basis_type)[bra_rank])))
+                if len(ket_mask) == 0:
+                    ket_mask = list(range(len(self.atomic_basis(basis_type)[ket_rank])))
+                dic = Dict(dic.key_type, {tag: (mat[:, bra_mask][:, :, ket_mask], ex) for tag, (mat, ex) in dic.items()})
+            else:
+                if isinstance(bra_mask, str):
+                    bra_mask = str_to_sympy(bra_mask)
+                if isinstance(ket_mask, str):
+                    ket_mask = str_to_sympy(ket_mask)
+
+                U_bra = bra_mask.conjugate().T
+                U_ket = ket_mask
+
+                dic1 = Dict(PGMultipoleType)
+                for idx, (mat, ex) in dic.items():
+                    matp = np.vectorize(sp.expand)(np.einsum("ik,akl,lj->aij", U_bra, mat, U_ket, dtype=object))
+                    dic1[tuple(idx)] = (matp, ex)
+                dic = dic1
 
             # remove zero matrices
             dic = Dict(dic.key_type, {tag: (mat, ex) for tag, (mat, ex) in dic.items() if not np.all(mat == 0)})

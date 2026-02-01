@@ -8,7 +8,7 @@ Selected SAMB matrix.
 
 kappaET = {
     "model": "kappaET",
-    "pkl": "kappaET.pkl (2026-02-01 11:16:46)",
+    "pkl": "kappaET.pkl (2026-02-01 15:40:16)",
     "select": {"X": ["Q", "G"], "l": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], "Gamma": ["A1", "A2", "B1", "B2"], "s": [0, 1], "site": [("A", [0])], "bond": [("A", "A", 1, [0], [0]), ("A", "A", 2, [0], [0]), ("A", "A", 3, [0], [0])]},
     "dimension": 8,
     "ket_site": {

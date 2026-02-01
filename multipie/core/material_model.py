@@ -563,83 +563,73 @@ class MaterialModel(BinaryManager):
             - (dict) -- comomon id, dict[SAMBType, [id]].
             - (dict) -- cluster info, dict[site/bond_name, dict[(bra_rank,ket_rank), (wyckoff,z_list)] ].
         """
-        lst = {}
-        for site_bond, wp in self["wyckoff"].items():
-            tail, head = get_tail_head(site_bond)
-            neighbor, n = get_neighbor_info(site_bond)
-            braket_info_lst = self["braket"][site_bond]
-            for braket_info in braket_info_lst:
-                comb = SAMBType(head, tail, wp, braket_info)
-                lst[comb] = lst.get(comb, []) + [(neighbor, n)]
+        # grouping and sorting site/bond relations.
+        samb_groups = {}
+        for sb, wp in self["wyckoff"].items():
+            tail, head = get_tail_head(sb)
+            neighbor, n = get_neighbor_info(sb)
+            for bk in self["braket"][sb]:
+                comb = SAMBType(head, tail, wp, bk)
+                samb_groups.setdefault(comb, []).append((neighbor, n))
 
-        # sort (neighbor, n) for each comb
-        lst = {k: sorted(v) for k, v in lst.items()}
+        # ensure deterministic order within groups.
+        samb_groups = {k: sorted(v) for k, v in samb_groups.items()}
 
-        combined_samb = {}
-        for comb in lst.keys():
+        # combined SAMB calculation.
+        combined_results = {}
+        for comb in samb_groups:
             bra_orb = self["site"]["representative"][comb.head].orbital[comb.bk_info.bh_rank]
             ket_orb = self["site"]["representative"][comb.tail].orbital[comb.bk_info.kt_rank]
-            a_samb = atomic_samb[comb.bk_info]
-            c_samb = cluster_samb[comb.wyckoff]
 
+            # filtering cluster SAMB if orbitals differ.
+            c_s = cluster_samb[comb.wyckoff]
             if comb.head != comb.tail and bra_orb != ket_orb:
-                c_samb = c_samb.select(X=["Q"])
+                c_s = c_s.select(X=["Q"])
 
-            combined_samb[comb] = self.group.combined_samb(a_samb.named_keys(), c_samb.named_keys(), toroidal_priority, **select)
+            combined_results[comb] = self.group.combined_samb(
+                atomic_samb[comb.bk_info].named_keys(), c_s.named_keys(), toroidal_priority, **select
+            )
 
-        min_no = sum(sum(len(i[0]) for i in samb.values()) for samb in combined_samb.values())
-        combined_id = {}
-        common_id = {comb: [[] for _ in nn_lst] for comb, nn_lst in lst.items()}
+        # flatten and sort items (priority: Site(0) -> Bond(1)).
+        items = sorted(
+            [
+                (0 if nb == 0 else 1, c.tail, c.head, nb, n, c, i)
+                for c, nn_lst in samb_groups.items()
+                for i, (nb, n) in enumerate(nn_lst)
+            ]
+        )
 
-        # Flatten all (neighbor, n, comb) tuples and keep the local index i
-        site_global_items = [
-            (comb.tail, comb.head, neighbor, n, comb, i)
-            for comb, nn_lst in lst.items()
-            for i, (neighbor, n) in enumerate(nn_lst)
-            if neighbor == 0 and n == -1
-        ]
-        site_global_items.sort(key=lambda t: (t[0], t[1], t[2], t[3]))
-        bond_global_items = [
-            (comb.tail, comb.head, neighbor, n, comb, i)
-            for comb, nn_lst in lst.items()
-            for i, (neighbor, n) in enumerate(nn_lst)
-            if neighbor > 0
-        ]
-        bond_global_items.sort(key=lambda t: (t[0], t[1], t[2], t[3]))
+        # global z-indexing.
+        combined_id, common_id_map = {}, {c: [[] for _ in v] for c, v in samb_groups.items()}
+        z_count = 0
 
-        global_items = site_global_items + bond_global_items
-
-        no = 1
         for Gamma in self["SAMB_select"]["Gamma"]:
-            for _, _, neighbor, n, comb, i in global_items:
-                samb_info = UniqueSAMBType(comb, neighbor, n)
-                if neighbor == 0:
-                    sb_tag = comb.tail
-                else:
-                    sb_tag = get_bond(comb.tail, comb.head, neighbor, n)
-                for idx in combined_samb[comb].select(**{"Gamma": Gamma}).keys():
-                    for comp, tag in enumerate(self.group.tag_multipole(idx, latex=True, superscript="c")):
-                        zi = f"z{no}"
-                        combined_id[zi] = (tag, samb_info, idx, comp)
-                        common_id[comb][i].append((zi, sb_tag))
-                        no += 1
+            for _, tail, head, nb, n, comb, i in items:
+                sb_tag = tail if nb == 0 else get_bond(tail, head, nb, n)
+                res = combined_results[comb].select(Gamma=Gamma)
 
+                for idx in res.keys():
+                    for comp, tag in enumerate(self.group.tag_multipole(idx, latex=True, superscript="c")):
+                        z_count += 1
+                        z_id = f"z{z_count}"
+                        combined_id[z_id] = (tag, UniqueSAMBType(comb, nb, n), idx, comp)
+                        common_id_map[comb][i].append((z_id, sb_tag))
+
+        # output formatting (common_id and cluster_info).
         common_id = {
-            info: ([[i[0] for i in bk] for bk in lst if bk], [bk[0][1] for bk in lst if bk]) for info, lst in common_id.items()
+            c: ([[z for z, _ in d] for d in data if d], [d[0][1] for d in data if d])
+            for c, data in common_id_map.items()
+            if any(data)
         }
 
-        # cluster-info.
-        dic = {}
-        for info, (sb_z_list, sb_list) in common_id.items():
-            wyckoff = info.wyckoff
-            bk_block = (info.bk_info.bh_rank, info.bk_info.kt_rank)
-            for sb, z_list in zip(sb_list, sb_z_list):
-                dic[sb] = dic.get(sb, []) + [(bk_block, wyckoff, z_list)]
         cluster_info = {}
-        for sb, v in dic.items():
-            cluster_info[sb] = {bk_block: (wyckoff, z_list) for bk_block, wyckoff, z_list in v}
+        for c, (z_lists, sb_list) in common_id.items():
+            for sb, z_list in zip(sb_list, z_lists):
+                cluster_info.setdefault(sb, {})[(c.bk_info.bh_rank, c.bk_info.kt_rank)] = (c.wyckoff, z_list)
 
-        return combined_samb, combined_id, min_no, no - 1, common_id, cluster_info
+        min_no = sum(sum(len(v[0]) for v in res.values()) for res in combined_results.values())
+
+        return combined_results, combined_id, min_no, z_count, common_id, cluster_info
 
     # ==================================================
     def select_combined_samb(self, select):
@@ -670,37 +660,27 @@ class MaterialModel(BinaryManager):
 
         combined_id = {}
         for zi, (tag, samb_info, idx, comp) in self["combined_id"].items():
-            samb_type = samb_info.samb_type
-            head, tail = samb_type.head, samb_type.tail
-            bk_info = samb_type.bk_info
-            neighbor = samb_info.neighbor
-            is_site = not ("@" in samb_type.wyckoff)
-            for site, rank in select["site"]:
-                if is_site and head == site and bk_info.bh_rank in rank:
-                    for idx in self["combined_samb"][samb_type].select(**samb_select).keys():
-                        for tag_ in self.group.tag_multipole(idx, latex=True, superscript="c"):
-                            if tag == tag_:
-                                combined_id[zi] = (tag, samb_info, idx, comp)
-            for h, t, nr, h_rank, t_rank in select["bond"]:
-                if (
-                    not is_site
-                    and tail == t
-                    and head == h
-                    and bk_info.kt_rank in t_rank
-                    and bk_info.bh_rank in h_rank
-                    and neighbor == nr
-                ) or (
-                    not is_site
-                    and tail == h
-                    and head == t
-                    and bk_info.kt_rank in h_rank
-                    and bk_info.bh_rank in t_rank
-                    and neighbor == nr
-                ):
-                    for idx in self["combined_samb"][samb_type].select(**samb_select).keys():
-                        for tag_ in self.group.tag_multipole(idx, latex=True, superscript="c"):
-                            if tag == tag_:
-                                combined_id[zi] = (tag, samb_info, idx, comp)
+            st = samb_info.samb_type
+            bk = st.bk_info
+            is_site = "@" not in st.wyckoff
+
+            is_match = False
+            if is_site:
+                is_match = any(st.head == s and bk.bh_rank in r for s, r in select["site"])
+            else:
+                for h, t, nr, hr, tr in select["bond"]:
+                    if samb_info.neighbor != nr:
+                        continue
+                    if (st.head == h and st.tail == t and bk.bh_rank in hr and bk.kt_rank in tr) or (
+                        st.head == t and st.tail == h and bk.bh_rank in tr and bk.kt_rank in hr
+                    ):
+                        is_match = True
+                        break
+
+            if is_match:
+                if idx in self["combined_samb"][st].select(**samb_select).keys():
+                    if tag in self.group.tag_multipole(idx, latex=True, superscript="c"):
+                        combined_id[zi] = (tag, samb_info, idx, comp)
 
         return combined_id, samb_select, select
 
