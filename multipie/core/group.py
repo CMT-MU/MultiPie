@@ -594,7 +594,7 @@ class Group(dict):
                 return "ndarray"
             if isinstance(bra, str) and isinstance(ket, str):
                 return "ndarray"
-            if isinstance(bra, list) and isinstance(ket, list):
+            if isinstance(bra, (list, tuple)) and isinstance(ket, (list, tuple)):
                 if not bra and not ket:  # both empty list.
                     return None
                 if all(isinstance(x, int) for x in bra) and all(isinstance(x, int) for x in ket):
