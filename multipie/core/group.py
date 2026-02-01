@@ -493,17 +493,13 @@ class Group(dict):
         Returns:
             - (dict) -- atomic basis in each rank.
         """
-        global_info = self.global_info()
-        if basis_type == "jml":
-            basis = global_info["harmonics"]["atomic_basis"]["spinful"]["jml"]
-        elif basis_type == "lgs":
-            t = "hexagonal" if self.is_hexagonal_subgroup else "cubic"
-            basis = global_info["harmonics"]["atomic_basis"]["spinful"][t]
-        elif basis_type == "lg":
-            t = "hexagonal" if self.is_hexagonal_subgroup else "cubic"
-            basis = global_info["harmonics"]["atomic_basis"]["spinless"][t]
-        else:
+        harm_info = self.global_info()["harmonics"]["atomic_basis"]
+        if basis_type not in ["jml", "lgs", "lg"]:
             raise Exception(f"unknown basis type, '{basis_type}'.")
+        if basis_type in ["jml", "lgs"]:
+            basis = harm_info["spinful"][basis_type]
+        else:
+            basis = harm_info["spinless"][basis_type]
 
         return basis
 

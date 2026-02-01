@@ -35,7 +35,7 @@ def create_atomic_multipole_each(tag, b_type, h_dir):
                 samb1[(head, l, Gamma, n, p, s, k, "q", -1)] = (ex[0], mat[0])
             else:
                 for m, (e, mm) in enumerate(zip(ex, mat)):
-                    samb1[(head, l, Gamma, n, p, s, k, "q", m)] = (e, mm)
+                    samb1[(head, l, Gamma, n, p, s, k, "q", m + 1)] = (e, mm)
         tbl1 = [
             [TagMultipole.latex(m_tag[:-1], "point_group", m_tag[-1], tag="a", vector=False), to_latex(mat, "matrix")]
             for m_tag, (ex, mat) in samb1.items()

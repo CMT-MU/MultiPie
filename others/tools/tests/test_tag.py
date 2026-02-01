@@ -91,7 +91,7 @@ def test_tag_basis():
 
 
 # ================================================== main
-# test_tag_symmetry_operation()
-# test_tag_irrep()
+test_tag_symmetry_operation()
+test_tag_irrep()
 test_tag_multipole()
-# test_tag_basis()
+test_tag_basis()

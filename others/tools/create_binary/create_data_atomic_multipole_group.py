@@ -76,7 +76,7 @@ def orthogonalize_pg_multipole(samb, diagonal_block):
 
 
 # ==================================================
-def create_atomic_multipole_pg(atomic_multipole, harmonics, Us, hexagonal):
+def create_atomic_multipole_pg(atomic_multipole, harmonics, Us):
     # create spinful pg atomic multipole.
     gam = {"lms": {}, "jml": {}}
     for bt in ["lms", "jml"]:
@@ -110,13 +110,11 @@ def create_atomic_multipole_pg(atomic_multipole, harmonics, Us, hexagonal):
 
     gam1["jml"] = dic1
 
-    c = "hexagonal" if hexagonal else "cubic"
-
     # spinful.
     dic1 = {}
     for (bra, ket), samb in gam["lms"].items():
-        Ubra = Us[c][bra].conjugate().T
-        Uket = Us[c][ket]
+        Ubra = Us[bra].conjugate().T
+        Uket = Us[ket]
 
         dic = Dict(PGMultipoleType)
         for idx, (mat, ex) in samb.items():
@@ -137,16 +135,13 @@ def create_atomic_multipole_pg(atomic_multipole, harmonics, Us, hexagonal):
 
 
 # ==================================================
-def create_atomic_multipole_group_data(atomic_multipole, gam, info, Us):
-    group = BinaryManager("group", topdir=BIN_DIR)
+def create_atomic_multipole_group_data(atomic_multipole, gam, info, U):
     harmonics = BinaryManager("harmonics", topdir=BIN_DIR)
 
     for no in info["id_set"]["PG"]["all"]:
         group_tag = info["tag"][no]
         print("creating", group_tag, flush=True)
-        g_info = group[no]
-        hexagonal = g_info["info"].hexagonal_g
-        gam[no] = create_atomic_multipole_pg(atomic_multipole, harmonics[no], Us, hexagonal)
+        gam[no] = create_atomic_multipole_pg(atomic_multipole, harmonics[no], U)
 
     gam.add_comment(h_atomic_multipole_group)
 
@@ -156,26 +151,23 @@ def create_atomic_multipole_group_data(atomic_multipole, gam, info, Us):
 def create_atomic_multipole_group():
     info = BinaryManager("info", topdir=BIN_DIR)
 
-    # create U-matrix for cubic and hexagonal.
-    Us = {}
-    for c in ["cubic", "hexagonal"]:
-        U = []
-        for lst in info["harmonics"]["atomic_basis"]["spinless"]["cubic"].values():
-            UL = []
-            for name in lst:
-                UL.append(info["harmonics"]["basis_function"][name][1].tolist())
-            U1 = np.asarray(UL).T
-            sh = U1.shape
-            Uf = np.full((2 * sh[0], 2 * sh[1]), sp.S(0))
-            Uf[::2, ::2] = U1
-            Uf[1::2, 1::2] = U1
-            U.append(Uf)
-        Us[c] = U
+    # create U-matrix for point-group atomic basis.
+    U = []
+    for lst in info["harmonics"]["atomic_basis"]["spinless"]["lg"].values():
+        UL = []
+        for name in lst:
+            UL.append(info["harmonics"]["basis_function"][name][1].tolist())
+        U1 = np.asarray(UL).T
+        sh = U1.shape
+        Uf = np.full((2 * sh[0], 2 * sh[1]), sp.S(0))
+        Uf[::2, ::2] = U1
+        Uf[1::2, 1::2] = U1
+        U.append(Uf)
 
     atomic_multipole = BinaryManager("atomic_multipole", topdir=BIN_DIR)
 
     atomic_multipole_group = BinaryManager(verbose=True, topdir=BIN_DIR)
-    create_atomic_multipole_group_data(atomic_multipole, atomic_multipole_group, info, Us)
+    create_atomic_multipole_group_data(atomic_multipole, atomic_multipole_group, info, U)
     atomic_multipole_group.save_binary("atomic_multipole_group")
 
 
