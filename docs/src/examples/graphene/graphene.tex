@@ -14,6 +14,7 @@
 \usepackage{multirow}
 \usepackage{booktabs}
 \usepackage{longtable}
+\usepackage[justification=raggedright, singlelinecheck=off]{caption}
 
 %%% layout setting
 
@@ -51,7 +52,7 @@
 Model for ``\texttt{graphene}''
 \end{center}
 \begin{flushright}
-Generated on 2026-02-01 12:00:03 by MultiPie 2.0.7
+Generated on 2026-02-01 16:06:17 by MultiPie 2.0.8
 \end{flushright}
 \setlength{\baselineskip}{16pt}
 \footnotesize
@@ -129,9 +130,8 @@ Generated on 2026-02-01 12:00:03 by MultiPie 2.0.7
 \noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{Symmetry Operation}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
 \vspace{3mm}
 
-\begin{center}
 \renewcommand{\arraystretch}{1.6}
-\begin{longtable}{c|cl|cl|cl|cl|cl}
+\begin{longtable}[l]{c|cl|cl|cl|cl|cl}
 \caption{Symmetry operation}
  \\
  \hline \hline
@@ -153,14 +153,12 @@ Generated on 2026-02-01 12:00:03 by MultiPie 2.0.7
 & 16 & $\{{\rm m}_{001}|0\}$ & 17 & $\{-6^{-}_{\,\,001}|0\}$ & 18 & $\{-6^{+}_{\,\,001}|0\}$ & 19 & $\{{\rm m}_{110}|0\}$ & 20 & $\{{\rm m}_{100}|0\}$ \\
 & 21 & $\{{\rm m}_{010}|0\}$ & 22 & $\{{\rm m}_{1-10}|0\}$ & 23 & $\{{\rm m}_{120}|0\}$ & 24 & $\{{\rm m}_{210}|0\}$ &  &  \\
 \end{longtable}
-\end{center}
 \vspace{5mm}
 \noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{Harmonics}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
 \vspace{3mm}
 
-\begin{center}
 \renewcommand{\arraystretch}{1.6}
-\begin{longtable}{clcccccl}
+\begin{longtable}[l]{clcccccl}
 \caption{Harmonics}
  \\
  \hline \hline
@@ -188,14 +186,12 @@ Generated on 2026-02-01 12:00:03 by MultiPie 2.0.7
 10 & $\mathbb{Q}_{4,1}(E_{2g},1)$ & $E_{2g}$ & 4 & $Q$, $T$ & 1 & 1 & $\frac{\sqrt{35} \left(x^{2} - 2 x y - y^{2}\right) \left(x^{2} + 2 x y - y^{2}\right)}{8}$ \\
 11 & $\mathbb{Q}_{4,2}(E_{2g},1)$ &  &  &  &  & 2 & $\frac{\sqrt{35} x y \left(x - y\right) \left(x + y\right)}{2}$ \\
 \end{longtable}
-\end{center}
 \vspace{5mm}
 \noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{Basis in full matrix}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
 \vspace{3mm}
 
-\begin{center}
 \renewcommand{\arraystretch}{1.6}
-\begin{longtable}{c|cl|cl}
+\begin{longtable}[l]{c|cl|cl}
 \caption{dimension = 2}
  \\
  \hline \hline
@@ -213,10 +209,8 @@ Generated on 2026-02-01 12:00:03 by MultiPie 2.0.7
 
  & 0 & $\ket{p_{z}}@{\rm C}(1)$ & 1 & $\ket{p_{z}}@{\rm C}(2)$ \\
 \end{longtable}
-\end{center}
-\begin{center}
 \renewcommand{\arraystretch}{1.6}
-\begin{longtable}{ll}
+\begin{longtable}[l]{ll}
 \caption{Atomic basis (orbital part only)}
  \\
  \hline \hline
@@ -236,16 +230,13 @@ $ \ket{p_{x}} $ & $ x $ \\
 $ \ket{p_{y}} $ & $ y $ \\
 $ \ket{p_{z}} $ & $ z $ \\
 \end{longtable}
-\end{center}
 \vspace{5mm}
-\noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{SAMB}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
+\noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{SAMB: 32 (all 32)}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
 \vspace{3mm}
 
-\noindent32 (all 32) SAMBs
-
 \vspace{5mm}
 
-\noindent\textbullet\, '\texttt{C}' site-cluster : \texttt{C}
+\noindent\textbullet\, \texttt{C} : '\texttt{C}' site-cluster
 
 \noindent\quad * bra: $\bra{p_{z}}$
 
@@ -254,14 +245,14 @@ $ \ket{p_{z}} $ & $ z $ \\
 \noindent\quad * wyckoff: \texttt{2c}
 
 \begin{dmath*}
-\fbox{z1}\quad \mathbb{Q}_{0}^{(c)}(A_{1g})=\mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{0}^{(s)}(A_{1g})
+\hspace*{3mm}\fbox{z1}\quad \mathbb{Q}_{0}^{(c)}(A_{1g})=\mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{0}^{(s)}(A_{1g})
 \end{dmath*}
 \begin{dmath*}
-\fbox{z23}\quad \mathbb{Q}_{3}^{(c)}(B_{1u})=\mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{3}^{(s)}(B_{1u})
+\hspace*{3mm}\fbox{z23}\quad \mathbb{Q}_{3}^{(c)}(B_{1u})=\mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{3}^{(s)}(B_{1u})
 \end{dmath*}
 \vspace{5mm}
 
-\noindent\textbullet\, '\texttt{C}'-'\texttt{C}' bond-cluster : \texttt{C;C_001_1}
+\noindent\textbullet\, \texttt{C;C_001_1} : '\texttt{C}'-'\texttt{C}' bond-cluster
 
 \noindent\quad * bra: $\bra{p_{z}}$
 
@@ -270,17 +261,17 @@ $ \ket{p_{z}} $ & $ z $ \\
 \noindent\quad * wyckoff: \texttt{3a@3f}
 
 \begin{dmath*}
-\fbox{z2}\quad \mathbb{Q}_{0}^{(c)}(A_{1g})=\mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{0}^{(b)}(A_{1g})
+\hspace*{3mm}\fbox{z2}\quad \mathbb{Q}_{0}^{(c)}(A_{1g})=\mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{0}^{(b)}(A_{1g})
 \end{dmath*}
 \begin{dmath*}
-\fbox{z9}\quad \mathbb{Q}_{2,1}^{(c)}(E_{2g})=\frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,1}^{(b)}(E_{2g})}{2}
+\hspace*{3mm}\fbox{z9}\quad \mathbb{Q}_{2,1}^{(c)}(E_{2g})=\frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,1}^{(b)}(E_{2g})}{2}
 \end{dmath*}
 \begin{dmath*}
-\fbox{z10}\quad \mathbb{Q}_{2,2}^{(c)}(E_{2g})=\frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,2}^{(b)}(E_{2g})}{2}
+\hspace*{3mm}\fbox{z10}\quad \mathbb{Q}_{2,2}^{(c)}(E_{2g})=\frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,2}^{(b)}(E_{2g})}{2}
 \end{dmath*}
 \vspace{5mm}
 
-\noindent\textbullet\, '\texttt{C}'-'\texttt{C}' bond-cluster : \texttt{C;C_002_1}
+\noindent\textbullet\, \texttt{C;C_002_1} : '\texttt{C}'-'\texttt{C}' bond-cluster
 
 \noindent\quad * bra: $\bra{p_{z}}$
 
@@ -289,26 +280,26 @@ $ \ket{p_{z}} $ & $ z $ \\
 \noindent\quad * wyckoff: \texttt{6b@6l}
 
 \begin{dmath*}
-\fbox{z3}\quad \mathbb{Q}_{0}^{(c)}(A_{1g})=\mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{0}^{(b)}(A_{1g})
+\hspace*{3mm}\fbox{z3}\quad \mathbb{Q}_{0}^{(c)}(A_{1g})=\mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{0}^{(b)}(A_{1g})
 \end{dmath*}
 \begin{dmath*}
-\fbox{z11}\quad \mathbb{Q}_{3}^{(c)}(B_{1u})=\mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{3}^{(b)}(B_{1u})
+\hspace*{3mm}\fbox{z11}\quad \mathbb{Q}_{3}^{(c)}(B_{1u})=\mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{3}^{(b)}(B_{1u})
 \end{dmath*}
 \begin{dmath*}
-\fbox{z12}\quad \mathbb{Q}_{1,1}^{(c)}(E_{1u})=\frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{1,1}^{(b)}(E_{1u})}{2}
+\hspace*{3mm}\fbox{z12}\quad \mathbb{Q}_{1,1}^{(c)}(E_{1u})=\frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{1,1}^{(b)}(E_{1u})}{2}
 \end{dmath*}
 \begin{dmath*}
-\fbox{z24}\quad \mathbb{Q}_{1,2}^{(c)}(E_{1u})=\frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{1,2}^{(b)}(E_{1u})}{2}
+\hspace*{3mm}\fbox{z24}\quad \mathbb{Q}_{1,2}^{(c)}(E_{1u})=\frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{1,2}^{(b)}(E_{1u})}{2}
 \end{dmath*}
 \begin{dmath*}
-\fbox{z27}\quad \mathbb{Q}_{2,1}^{(c)}(E_{2g})=\frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,1}^{(b)}(E_{2g})}{2}
+\hspace*{3mm}\fbox{z27}\quad \mathbb{Q}_{2,1}^{(c)}(E_{2g})=\frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,1}^{(b)}(E_{2g})}{2}
 \end{dmath*}
 \begin{dmath*}
-\fbox{z28}\quad \mathbb{Q}_{2,2}^{(c)}(E_{2g})=\frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,2}^{(b)}(E_{2g})}{2}
+\hspace*{3mm}\fbox{z28}\quad \mathbb{Q}_{2,2}^{(c)}(E_{2g})=\frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,2}^{(b)}(E_{2g})}{2}
 \end{dmath*}
 \vspace{5mm}
 
-\noindent\textbullet\, '\texttt{C}'-'\texttt{C}' bond-cluster : \texttt{C;C_003_1}
+\noindent\textbullet\, \texttt{C;C_003_1} : '\texttt{C}'-'\texttt{C}' bond-cluster
 
 \noindent\quad * bra: $\bra{p_{z}}$
 
@@ -317,17 +308,17 @@ $ \ket{p_{z}} $ & $ z $ \\
 \noindent\quad * wyckoff: \texttt{3b@1a}
 
 \begin{dmath*}
-\fbox{z4}\quad \mathbb{Q}_{0}^{(c)}(A_{1g})=\mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{0}^{(b)}(A_{1g})
+\hspace*{3mm}\fbox{z4}\quad \mathbb{Q}_{0}^{(c)}(A_{1g})=\mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{0}^{(b)}(A_{1g})
 \end{dmath*}
 \begin{dmath*}
-\fbox{z13}\quad \mathbb{Q}_{2,1}^{(c)}(E_{2g})=\frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,1}^{(b)}(E_{2g})}{2}
+\hspace*{3mm}\fbox{z13}\quad \mathbb{Q}_{2,1}^{(c)}(E_{2g})=\frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,1}^{(b)}(E_{2g})}{2}
 \end{dmath*}
 \begin{dmath*}
-\fbox{z14}\quad \mathbb{Q}_{2,2}^{(c)}(E_{2g})=\frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,2}^{(b)}(E_{2g})}{2}
+\hspace*{3mm}\fbox{z14}\quad \mathbb{Q}_{2,2}^{(c)}(E_{2g})=\frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,2}^{(b)}(E_{2g})}{2}
 \end{dmath*}
 \vspace{5mm}
 
-\noindent\textbullet\, '\texttt{C}'-'\texttt{C}' bond-cluster : \texttt{C;C_004_1}
+\noindent\textbullet\, \texttt{C;C_004_1} : '\texttt{C}'-'\texttt{C}' bond-cluster
 
 \noindent\quad * bra: $\bra{p_{z}}$
 
@@ -336,26 +327,26 @@ $ \ket{p_{z}} $ & $ z $ \\
 \noindent\quad * wyckoff: \texttt{6d@3f}
 
 \begin{dmath*}
-\fbox{z5}\quad \mathbb{Q}_{0}^{(c)}(A_{1g})=\mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{0}^{(b)}(A_{1g})
+\hspace*{3mm}\fbox{z5}\quad \mathbb{Q}_{0}^{(c)}(A_{1g})=\mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{0}^{(b)}(A_{1g})
 \end{dmath*}
 \begin{dmath*}
-\fbox{z8}\quad \mathbb{Q}_{6}^{(c)}(A_{2g})=\mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{6}^{(b)}(A_{2g})
+\hspace*{3mm}\fbox{z8}\quad \mathbb{Q}_{6}^{(c)}(A_{2g})=\mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{6}^{(b)}(A_{2g})
 \end{dmath*}
 \begin{dmath*}
-\fbox{z15}\quad \mathbb{Q}_{2,1}^{(c)}(E_{2g})=\frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,1}^{(b)}(E_{2g})}{2}
+\hspace*{3mm}\fbox{z15}\quad \mathbb{Q}_{2,1}^{(c)}(E_{2g})=\frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,1}^{(b)}(E_{2g})}{2}
 \end{dmath*}
 \begin{dmath*}
-\fbox{z16}\quad \mathbb{Q}_{2,2}^{(c)}(E_{2g})=\frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,2}^{(b)}(E_{2g})}{2}
+\hspace*{3mm}\fbox{z16}\quad \mathbb{Q}_{2,2}^{(c)}(E_{2g})=\frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,2}^{(b)}(E_{2g})}{2}
 \end{dmath*}
 \begin{dmath*}
-\fbox{z17}\quad \mathbb{Q}_{4,1}^{(c)}(E_{2g},1)=\frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{4,1}^{(b)}(E_{2g},1)}{2}
+\hspace*{3mm}\fbox{z17}\quad \mathbb{Q}_{4,1}^{(c)}(E_{2g},1)=\frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{4,1}^{(b)}(E_{2g},1)}{2}
 \end{dmath*}
 \begin{dmath*}
-\fbox{z18}\quad \mathbb{Q}_{4,2}^{(c)}(E_{2g},1)=\frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{4,2}^{(b)}(E_{2g},1)}{2}
+\hspace*{3mm}\fbox{z18}\quad \mathbb{Q}_{4,2}^{(c)}(E_{2g},1)=\frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{4,2}^{(b)}(E_{2g},1)}{2}
 \end{dmath*}
 \vspace{5mm}
 
-\noindent\textbullet\, '\texttt{C}'-'\texttt{C}' bond-cluster : \texttt{C;C_005_1}
+\noindent\textbullet\, \texttt{C;C_005_1} : '\texttt{C}'-'\texttt{C}' bond-cluster
 
 \noindent\quad * bra: $\bra{p_{z}}$
 
@@ -364,26 +355,26 @@ $ \ket{p_{z}} $ & $ z $ \\
 \noindent\quad * wyckoff: \texttt{6a@6l}
 
 \begin{dmath*}
-\fbox{z6}\quad \mathbb{Q}_{0}^{(c)}(A_{1g})=\mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{0}^{(b)}(A_{1g})
+\hspace*{3mm}\fbox{z6}\quad \mathbb{Q}_{0}^{(c)}(A_{1g})=\mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{0}^{(b)}(A_{1g})
 \end{dmath*}
 \begin{dmath*}
-\fbox{z19}\quad \mathbb{Q}_{3}^{(c)}(B_{1u})=\mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{3}^{(b)}(B_{1u})
+\hspace*{3mm}\fbox{z19}\quad \mathbb{Q}_{3}^{(c)}(B_{1u})=\mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{3}^{(b)}(B_{1u})
 \end{dmath*}
 \begin{dmath*}
-\fbox{z20}\quad \mathbb{Q}_{1,1}^{(c)}(E_{1u})=\frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{1,1}^{(b)}(E_{1u})}{2}
+\hspace*{3mm}\fbox{z20}\quad \mathbb{Q}_{1,1}^{(c)}(E_{1u})=\frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{1,1}^{(b)}(E_{1u})}{2}
 \end{dmath*}
 \begin{dmath*}
-\fbox{z25}\quad \mathbb{Q}_{1,2}^{(c)}(E_{1u})=\frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{1,2}^{(b)}(E_{1u})}{2}
+\hspace*{3mm}\fbox{z25}\quad \mathbb{Q}_{1,2}^{(c)}(E_{1u})=\frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{1,2}^{(b)}(E_{1u})}{2}
 \end{dmath*}
 \begin{dmath*}
-\fbox{z29}\quad \mathbb{Q}_{2,1}^{(c)}(E_{2g})=\frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,1}^{(b)}(E_{2g})}{2}
+\hspace*{3mm}\fbox{z29}\quad \mathbb{Q}_{2,1}^{(c)}(E_{2g})=\frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,1}^{(b)}(E_{2g})}{2}
 \end{dmath*}
 \begin{dmath*}
-\fbox{z30}\quad \mathbb{Q}_{2,2}^{(c)}(E_{2g})=\frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,2}^{(b)}(E_{2g})}{2}
+\hspace*{3mm}\fbox{z30}\quad \mathbb{Q}_{2,2}^{(c)}(E_{2g})=\frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,2}^{(b)}(E_{2g})}{2}
 \end{dmath*}
 \vspace{5mm}
 
-\noindent\textbullet\, '\texttt{C}'-'\texttt{C}' bond-cluster : \texttt{C;C_006_1}
+\noindent\textbullet\, \texttt{C;C_006_1} : '\texttt{C}'-'\texttt{C}' bond-cluster
 
 \noindent\quad * bra: $\bra{p_{z}}$
 
@@ -392,22 +383,22 @@ $ \ket{p_{z}} $ & $ z $ \\
 \noindent\quad * wyckoff: \texttt{6c@2c}
 
 \begin{dmath*}
-\fbox{z7}\quad \mathbb{Q}_{0}^{(c)}(A_{1g})=\mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{0}^{(b)}(A_{1g})
+\hspace*{3mm}\fbox{z7}\quad \mathbb{Q}_{0}^{(c)}(A_{1g})=\mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{0}^{(b)}(A_{1g})
 \end{dmath*}
 \begin{dmath*}
-\fbox{z21}\quad \mathbb{Q}_{3}^{(c)}(B_{1u})=\mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{3}^{(b)}(B_{1u})
+\hspace*{3mm}\fbox{z21}\quad \mathbb{Q}_{3}^{(c)}(B_{1u})=\mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{3}^{(b)}(B_{1u})
 \end{dmath*}
 \begin{dmath*}
-\fbox{z22}\quad \mathbb{Q}_{1,1}^{(c)}(E_{1u})=\frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{1,1}^{(b)}(E_{1u})}{2}
+\hspace*{3mm}\fbox{z22}\quad \mathbb{Q}_{1,1}^{(c)}(E_{1u})=\frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{1,1}^{(b)}(E_{1u})}{2}
 \end{dmath*}
 \begin{dmath*}
-\fbox{z26}\quad \mathbb{Q}_{1,2}^{(c)}(E_{1u})=\frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{1,2}^{(b)}(E_{1u})}{2}
+\hspace*{3mm}\fbox{z26}\quad \mathbb{Q}_{1,2}^{(c)}(E_{1u})=\frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{1,2}^{(b)}(E_{1u})}{2}
 \end{dmath*}
 \begin{dmath*}
-\fbox{z31}\quad \mathbb{Q}_{2,1}^{(c)}(E_{2g})=\frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,1}^{(b)}(E_{2g})}{2}
+\hspace*{3mm}\fbox{z31}\quad \mathbb{Q}_{2,1}^{(c)}(E_{2g})=\frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,1}^{(b)}(E_{2g})}{2}
 \end{dmath*}
 \begin{dmath*}
-\fbox{z32}\quad \mathbb{Q}_{2,2}^{(c)}(E_{2g})=\frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,2}^{(b)}(E_{2g})}{2}
+\hspace*{3mm}\fbox{z32}\quad \mathbb{Q}_{2,2}^{(c)}(E_{2g})=\frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,2}^{(b)}(E_{2g})}{2}
 \end{dmath*}
 \vspace{5mm}
 
@@ -446,7 +437,7 @@ $ \ket{p_{z}} $ & $ z $ \\
 
 \vspace{5mm}
 
-\noindent ** Wyckoff: \texttt{3b@1a}
+\noindent ** Wyckoff: \texttt{3a@3f}
 
 \begin{dmath*}
 \fbox{y3}\quad \mathbb{Q}_{0}^{(s)}(A_{1g})=\left[ \frac{\sqrt{3}}{3},\, \frac{\sqrt{3}}{3},\, \frac{\sqrt{3}}{3} \right]
@@ -468,7 +459,7 @@ $ \ket{p_{z}} $ & $ z $ \\
 \end{dmath*}
 \vspace{5mm}
 
-\noindent ** Wyckoff: \texttt{3a@3f}
+\noindent ** Wyckoff: \texttt{3b@1a}
 
 \begin{dmath*}
 \fbox{y9}\quad \mathbb{Q}_{0}^{(s)}(A_{1g})=\left[ \frac{\sqrt{3}}{3},\, \frac{\sqrt{3}}{3},\, \frac{\sqrt{3}}{3} \right]
@@ -490,43 +481,43 @@ $ \ket{p_{z}} $ & $ z $ \\
 \end{dmath*}
 \vspace{5mm}
 
-\noindent ** Wyckoff: \texttt{6b@6l}
+\noindent ** Wyckoff: \texttt{6d@3f}
 
 \begin{dmath*}
 \fbox{y15}\quad \mathbb{Q}_{0}^{(s)}(A_{1g})=\left[ \frac{\sqrt{6}}{6},\, \frac{\sqrt{6}}{6},\, \frac{\sqrt{6}}{6},\, \frac{\sqrt{6}}{6},\, \frac{\sqrt{6}}{6},\, \frac{\sqrt{6}}{6} \right]
 \end{dmath*}
 \begin{dmath*}
-\fbox{y16}\quad \mathbb{M}_{1}^{(s)}(A_{2g})=\left[ \frac{\sqrt{6} i}{6},\, \frac{\sqrt{6} i}{6},\, \frac{\sqrt{6} i}{6},\, \frac{\sqrt{6} i}{6},\, \frac{\sqrt{6} i}{6},\, \frac{\sqrt{6} i}{6} \right]
+\fbox{y16}\quad \mathbb{Q}_{6}^{(s)}(A_{2g})=\left[ \frac{\sqrt{6}}{6},\, \frac{\sqrt{6}}{6},\, \frac{\sqrt{6}}{6},\, - \frac{\sqrt{6}}{6},\, - \frac{\sqrt{6}}{6},\, - \frac{\sqrt{6}}{6} \right]
 \end{dmath*}
 \begin{dmath*}
-\fbox{y17}\quad \mathbb{Q}_{3}^{(s)}(B_{1u})=\left[ \frac{\sqrt{6}}{6},\, \frac{\sqrt{6}}{6},\, \frac{\sqrt{6}}{6},\, - \frac{\sqrt{6}}{6},\, - \frac{\sqrt{6}}{6},\, - \frac{\sqrt{6}}{6} \right]
+\fbox{y17}\quad \mathbb{T}_{3}^{(s)}(B_{1u})=\left[ \frac{\sqrt{6} i}{6},\, \frac{\sqrt{6} i}{6},\, \frac{\sqrt{6} i}{6},\, - \frac{\sqrt{6} i}{6},\, - \frac{\sqrt{6} i}{6},\, - \frac{\sqrt{6} i}{6} \right]
 \end{dmath*}
 \begin{dmath*}
-\fbox{y18}\quad \mathbb{T}_{3}^{(s)}(B_{2u})=\left[ \frac{\sqrt{6} i}{6},\, \frac{\sqrt{6} i}{6},\, \frac{\sqrt{6} i}{6},\, - \frac{\sqrt{6} i}{6},\, - \frac{\sqrt{6} i}{6},\, - \frac{\sqrt{6} i}{6} \right]
+\fbox{y18}\quad \mathbb{T}_{3}^{(s)}(B_{2u})=\left[ \frac{\sqrt{6} i}{6},\, \frac{\sqrt{6} i}{6},\, \frac{\sqrt{6} i}{6},\, \frac{\sqrt{6} i}{6},\, \frac{\sqrt{6} i}{6},\, \frac{\sqrt{6} i}{6} \right]
 \end{dmath*}
 \begin{dmath*}
-\fbox{y19}\quad \mathbb{Q}_{1,1}^{(s)}(E_{1u})=\left[ 0,\, - \frac{1}{2},\, \frac{1}{2},\, 0,\, \frac{1}{2},\, - \frac{1}{2} \right]
+\fbox{y19}\quad \mathbb{T}_{1,1}^{(s)}(E_{1u},a)=\left[ \frac{5 \sqrt{21} i}{42},\, - \frac{2 \sqrt{21} i}{21},\, - \frac{\sqrt{21} i}{42},\, - \frac{\sqrt{21} i}{42},\, \frac{5 \sqrt{21} i}{42},\, - \frac{2 \sqrt{21} i}{21} \right]
 \end{dmath*}
 \begin{dmath*}
-\fbox{y20}\quad \mathbb{Q}_{1,2}^{(s)}(E_{1u})=\left[ \frac{\sqrt{3}}{3},\, - \frac{\sqrt{3}}{6},\, - \frac{\sqrt{3}}{6},\, - \frac{\sqrt{3}}{3},\, \frac{\sqrt{3}}{6},\, \frac{\sqrt{3}}{6} \right]
+\fbox{y20}\quad \mathbb{T}_{1,2}^{(s)}(E_{1u},a)=\left[ \frac{\sqrt{7} i}{14},\, \frac{\sqrt{7} i}{7},\, - \frac{3 \sqrt{7} i}{14},\, \frac{3 \sqrt{7} i}{14},\, - \frac{\sqrt{7} i}{14},\, - \frac{\sqrt{7} i}{7} \right]
 \end{dmath*}
 \begin{dmath*}
-\fbox{y21}\quad \mathbb{T}_{1,1}^{(s)}(E_{1u})=\left[ \frac{\sqrt{3} i}{3},\, - \frac{\sqrt{3} i}{6},\, - \frac{\sqrt{3} i}{6},\, - \frac{\sqrt{3} i}{3},\, \frac{\sqrt{3} i}{6},\, \frac{\sqrt{3} i}{6} \right]
+\fbox{y21}\quad \mathbb{T}_{1,1}^{(s)}(E_{1u},b)=\left[ \frac{\sqrt{7} i}{14},\, \frac{\sqrt{7} i}{7},\, - \frac{3 \sqrt{7} i}{14},\, - \frac{3 \sqrt{7} i}{14},\, \frac{\sqrt{7} i}{14},\, \frac{\sqrt{7} i}{7} \right]
 \end{dmath*}
 \begin{dmath*}
-\fbox{y22}\quad \mathbb{T}_{1,2}^{(s)}(E_{1u})=\left[ 0,\, \frac{i}{2},\, - \frac{i}{2},\, 0,\, - \frac{i}{2},\, \frac{i}{2} \right]
+\fbox{y22}\quad \mathbb{T}_{1,2}^{(s)}(E_{1u},b)=\left[ - \frac{5 \sqrt{21} i}{42},\, \frac{2 \sqrt{21} i}{21},\, \frac{\sqrt{21} i}{42},\, - \frac{\sqrt{21} i}{42},\, \frac{5 \sqrt{21} i}{42},\, - \frac{2 \sqrt{21} i}{21} \right]
 \end{dmath*}
 \begin{dmath*}
-\fbox{y23}\quad \mathbb{Q}_{2,1}^{(s)}(E_{2g})=\left[ \frac{\sqrt{3}}{3},\, - \frac{\sqrt{3}}{6},\, - \frac{\sqrt{3}}{6},\, \frac{\sqrt{3}}{3},\, - \frac{\sqrt{3}}{6},\, - \frac{\sqrt{3}}{6} \right]
+\fbox{y23}\quad \mathbb{Q}_{2,1}^{(s)}(E_{2g})=\left[ \frac{11 \sqrt{3}}{42},\, \frac{\sqrt{3}}{21},\, - \frac{13 \sqrt{3}}{42},\, - \frac{13 \sqrt{3}}{42},\, \frac{11 \sqrt{3}}{42},\, \frac{\sqrt{3}}{21} \right]
 \end{dmath*}
 \begin{dmath*}
-\fbox{y24}\quad \mathbb{Q}_{2,2}^{(s)}(E_{2g})=\left[ 0,\, \frac{1}{2},\, - \frac{1}{2},\, 0,\, \frac{1}{2},\, - \frac{1}{2} \right]
+\fbox{y24}\quad \mathbb{Q}_{2,2}^{(s)}(E_{2g})=\left[ - \frac{5}{14},\, \frac{4}{7},\, - \frac{3}{14},\, \frac{3}{14},\, \frac{5}{14},\, - \frac{4}{7} \right]
 \end{dmath*}
 \begin{dmath*}
-\fbox{y25}\quad \mathbb{T}_{2,1}^{(s)}(E_{2g})=\left[ 0,\, \frac{i}{2},\, - \frac{i}{2},\, 0,\, \frac{i}{2},\, - \frac{i}{2} \right]
+\fbox{y25}\quad \mathbb{Q}_{4,1}^{(s)}(E_{2g},1)=\left[ \frac{5}{14},\, - \frac{4}{7},\, \frac{3}{14},\, \frac{3}{14},\, \frac{5}{14},\, - \frac{4}{7} \right]
 \end{dmath*}
 \begin{dmath*}
-\fbox{y26}\quad \mathbb{T}_{2,2}^{(s)}(E_{2g})=\left[ - \frac{\sqrt{3} i}{3},\, \frac{\sqrt{3} i}{6},\, \frac{\sqrt{3} i}{6},\, - \frac{\sqrt{3} i}{3},\, \frac{\sqrt{3} i}{6},\, \frac{\sqrt{3} i}{6} \right]
+\fbox{y26}\quad \mathbb{Q}_{4,2}^{(s)}(E_{2g},1)=\left[ \frac{11 \sqrt{3}}{42},\, \frac{\sqrt{3}}{21},\, - \frac{13 \sqrt{3}}{42},\, \frac{13 \sqrt{3}}{42},\, - \frac{11 \sqrt{3}}{42},\, - \frac{\sqrt{3}}{21} \right]
 \end{dmath*}
 \vspace{5mm}
 
@@ -570,43 +561,43 @@ $ \ket{p_{z}} $ & $ z $ \\
 \end{dmath*}
 \vspace{5mm}
 
-\noindent ** Wyckoff: \texttt{6d@3f}
+\noindent ** Wyckoff: \texttt{6b@6l}
 
 \begin{dmath*}
 \fbox{y39}\quad \mathbb{Q}_{0}^{(s)}(A_{1g})=\left[ \frac{\sqrt{6}}{6},\, \frac{\sqrt{6}}{6},\, \frac{\sqrt{6}}{6},\, \frac{\sqrt{6}}{6},\, \frac{\sqrt{6}}{6},\, \frac{\sqrt{6}}{6} \right]
 \end{dmath*}
 \begin{dmath*}
-\fbox{y40}\quad \mathbb{Q}_{6}^{(s)}(A_{2g})=\left[ \frac{\sqrt{6}}{6},\, \frac{\sqrt{6}}{6},\, \frac{\sqrt{6}}{6},\, - \frac{\sqrt{6}}{6},\, - \frac{\sqrt{6}}{6},\, - \frac{\sqrt{6}}{6} \right]
+\fbox{y40}\quad \mathbb{M}_{1}^{(s)}(A_{2g})=\left[ \frac{\sqrt{6} i}{6},\, \frac{\sqrt{6} i}{6},\, \frac{\sqrt{6} i}{6},\, \frac{\sqrt{6} i}{6},\, \frac{\sqrt{6} i}{6},\, \frac{\sqrt{6} i}{6} \right]
 \end{dmath*}
 \begin{dmath*}
-\fbox{y41}\quad \mathbb{T}_{3}^{(s)}(B_{1u})=\left[ \frac{\sqrt{6} i}{6},\, \frac{\sqrt{6} i}{6},\, \frac{\sqrt{6} i}{6},\, - \frac{\sqrt{6} i}{6},\, - \frac{\sqrt{6} i}{6},\, - \frac{\sqrt{6} i}{6} \right]
+\fbox{y41}\quad \mathbb{Q}_{3}^{(s)}(B_{1u})=\left[ \frac{\sqrt{6}}{6},\, \frac{\sqrt{6}}{6},\, \frac{\sqrt{6}}{6},\, - \frac{\sqrt{6}}{6},\, - \frac{\sqrt{6}}{6},\, - \frac{\sqrt{6}}{6} \right]
 \end{dmath*}
 \begin{dmath*}
-\fbox{y42}\quad \mathbb{T}_{3}^{(s)}(B_{2u})=\left[ \frac{\sqrt{6} i}{6},\, \frac{\sqrt{6} i}{6},\, \frac{\sqrt{6} i}{6},\, \frac{\sqrt{6} i}{6},\, \frac{\sqrt{6} i}{6},\, \frac{\sqrt{6} i}{6} \right]
+\fbox{y42}\quad \mathbb{T}_{3}^{(s)}(B_{2u})=\left[ \frac{\sqrt{6} i}{6},\, \frac{\sqrt{6} i}{6},\, \frac{\sqrt{6} i}{6},\, - \frac{\sqrt{6} i}{6},\, - \frac{\sqrt{6} i}{6},\, - \frac{\sqrt{6} i}{6} \right]
 \end{dmath*}
 \begin{dmath*}
-\fbox{y43}\quad \mathbb{T}_{1,1}^{(s)}(E_{1u},a)=\left[ \frac{5 \sqrt{21} i}{42},\, - \frac{2 \sqrt{21} i}{21},\, - \frac{\sqrt{21} i}{42},\, - \frac{\sqrt{21} i}{42},\, \frac{5 \sqrt{21} i}{42},\, - \frac{2 \sqrt{21} i}{21} \right]
+\fbox{y43}\quad \mathbb{Q}_{1,1}^{(s)}(E_{1u})=\left[ 0,\, - \frac{1}{2},\, \frac{1}{2},\, 0,\, \frac{1}{2},\, - \frac{1}{2} \right]
 \end{dmath*}
 \begin{dmath*}
-\fbox{y44}\quad \mathbb{T}_{1,2}^{(s)}(E_{1u},a)=\left[ \frac{\sqrt{7} i}{14},\, \frac{\sqrt{7} i}{7},\, - \frac{3 \sqrt{7} i}{14},\, \frac{3 \sqrt{7} i}{14},\, - \frac{\sqrt{7} i}{14},\, - \frac{\sqrt{7} i}{7} \right]
+\fbox{y44}\quad \mathbb{Q}_{1,2}^{(s)}(E_{1u})=\left[ \frac{\sqrt{3}}{3},\, - \frac{\sqrt{3}}{6},\, - \frac{\sqrt{3}}{6},\, - \frac{\sqrt{3}}{3},\, \frac{\sqrt{3}}{6},\, \frac{\sqrt{3}}{6} \right]
 \end{dmath*}
 \begin{dmath*}
-\fbox{y45}\quad \mathbb{T}_{1,1}^{(s)}(E_{1u},b)=\left[ \frac{\sqrt{7} i}{14},\, \frac{\sqrt{7} i}{7},\, - \frac{3 \sqrt{7} i}{14},\, - \frac{3 \sqrt{7} i}{14},\, \frac{\sqrt{7} i}{14},\, \frac{\sqrt{7} i}{7} \right]
+\fbox{y45}\quad \mathbb{T}_{1,1}^{(s)}(E_{1u})=\left[ \frac{\sqrt{3} i}{3},\, - \frac{\sqrt{3} i}{6},\, - \frac{\sqrt{3} i}{6},\, - \frac{\sqrt{3} i}{3},\, \frac{\sqrt{3} i}{6},\, \frac{\sqrt{3} i}{6} \right]
 \end{dmath*}
 \begin{dmath*}
-\fbox{y46}\quad \mathbb{T}_{1,2}^{(s)}(E_{1u},b)=\left[ - \frac{5 \sqrt{21} i}{42},\, \frac{2 \sqrt{21} i}{21},\, \frac{\sqrt{21} i}{42},\, - \frac{\sqrt{21} i}{42},\, \frac{5 \sqrt{21} i}{42},\, - \frac{2 \sqrt{21} i}{21} \right]
+\fbox{y46}\quad \mathbb{T}_{1,2}^{(s)}(E_{1u})=\left[ 0,\, \frac{i}{2},\, - \frac{i}{2},\, 0,\, - \frac{i}{2},\, \frac{i}{2} \right]
 \end{dmath*}
 \begin{dmath*}
-\fbox{y47}\quad \mathbb{Q}_{2,1}^{(s)}(E_{2g})=\left[ \frac{11 \sqrt{3}}{42},\, \frac{\sqrt{3}}{21},\, - \frac{13 \sqrt{3}}{42},\, - \frac{13 \sqrt{3}}{42},\, \frac{11 \sqrt{3}}{42},\, \frac{\sqrt{3}}{21} \right]
+\fbox{y47}\quad \mathbb{Q}_{2,1}^{(s)}(E_{2g})=\left[ \frac{\sqrt{3}}{3},\, - \frac{\sqrt{3}}{6},\, - \frac{\sqrt{3}}{6},\, \frac{\sqrt{3}}{3},\, - \frac{\sqrt{3}}{6},\, - \frac{\sqrt{3}}{6} \right]
 \end{dmath*}
 \begin{dmath*}
-\fbox{y48}\quad \mathbb{Q}_{2,2}^{(s)}(E_{2g})=\left[ - \frac{5}{14},\, \frac{4}{7},\, - \frac{3}{14},\, \frac{3}{14},\, \frac{5}{14},\, - \frac{4}{7} \right]
+\fbox{y48}\quad \mathbb{Q}_{2,2}^{(s)}(E_{2g})=\left[ 0,\, \frac{1}{2},\, - \frac{1}{2},\, 0,\, \frac{1}{2},\, - \frac{1}{2} \right]
 \end{dmath*}
 \begin{dmath*}
-\fbox{y49}\quad \mathbb{Q}_{4,1}^{(s)}(E_{2g},1)=\left[ \frac{5}{14},\, - \frac{4}{7},\, \frac{3}{14},\, \frac{3}{14},\, \frac{5}{14},\, - \frac{4}{7} \right]
+\fbox{y49}\quad \mathbb{T}_{2,1}^{(s)}(E_{2g})=\left[ 0,\, \frac{i}{2},\, - \frac{i}{2},\, 0,\, \frac{i}{2},\, - \frac{i}{2} \right]
 \end{dmath*}
 \begin{dmath*}
-\fbox{y50}\quad \mathbb{Q}_{4,2}^{(s)}(E_{2g},1)=\left[ \frac{11 \sqrt{3}}{42},\, \frac{\sqrt{3}}{21},\, - \frac{13 \sqrt{3}}{42},\, \frac{13 \sqrt{3}}{42},\, - \frac{11 \sqrt{3}}{42},\, - \frac{\sqrt{3}}{21} \right]
+\fbox{y50}\quad \mathbb{T}_{2,2}^{(s)}(E_{2g})=\left[ - \frac{\sqrt{3} i}{3},\, \frac{\sqrt{3} i}{6},\, \frac{\sqrt{3} i}{6},\, - \frac{\sqrt{3} i}{3},\, \frac{\sqrt{3} i}{6},\, \frac{\sqrt{3} i}{6} \right]
 \end{dmath*}
 \vspace{5mm}
 
@@ -652,9 +643,8 @@ $ \ket{p_{z}} $ & $ z $ \\
 \noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{Site and Bond}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
 \vspace{3mm}
 
-\begin{center}
 \renewcommand{\arraystretch}{1.6}
-\begin{longtable}{ccl}
+\begin{longtable}[l]{ccl}
 \caption{Orbital of each site}
  \\
  \hline \hline
@@ -672,10 +662,8 @@ $ \ket{p_{z}} $ & $ z $ \\
 
 1 & \texttt{C} & $\ket{p_{z}}$ \\
 \end{longtable}
-\end{center}
-\begin{center}
 \renewcommand{\arraystretch}{1.6}
-\begin{longtable}{ccclll}
+\begin{longtable}[l]{ccclll}
 \caption{Neighbor and bra-ket of each bond}
  \\
  \hline \hline
@@ -693,16 +681,14 @@ $ \ket{p_{z}} $ & $ z $ \\
 
 1 & \texttt{C} & \texttt{C} & \texttt{[1,2,3,4,5,6]} & \texttt{[p]} & \texttt{[p]} \\
 \end{longtable}
-\end{center}
 \vspace{5mm}
 \noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{Site in Unit Cell}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
 \vspace{3mm}
 
 \noindent Sites in (conventional) cell (no plus set), SL = sublattice
 
-\begin{center}
 \renewcommand{\arraystretch}{1.6}
-\begin{longtable}{cll}
+\begin{longtable}[l]{cll}
 \caption{'\texttt{C}' (\#1) site cluster (\texttt{2c}), \texttt{-6m2}}
  \\
  \hline \hline
@@ -721,16 +707,14 @@ SL & position ($\bm{s})$ & mapping \\ \hline \endhead
 1 & \texttt{[ 0.33333, 0.66667, 0.00000]} & \texttt{[1,2,3,10,11,12,16,17,18,19,20,21]} \\ \hline
 2 & \texttt{[ 0.66667, 0.33333, 0.00000]} & \texttt{[4,5,6,7,8,9,13,14,15,22,23,24]} \\
 \end{longtable}
-\end{center}
 \vspace{5mm}
 \noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{Bond in Unit Cell}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
 \vspace{3mm}
 
 \noindent Bonds in (conventional) cell (no plus set): tail, head = (SL, plus set), (N)D = (non)directional (listed up to 5th neighbor at most)
 
-\begin{center}
 \renewcommand{\arraystretch}{1.6}
-\begin{longtable}{cllllll}
+\begin{longtable}[l]{cllllll}
 \caption{1-th '\texttt{C}'-'\texttt{C}' [1] (\#1) bond cluster (\texttt{3a@3f}), ND, $|\bm{v}|=0.57735$ (cartesian)}
  \\
  \hline \hline
@@ -750,10 +734,8 @@ SL & vector ($\bm{v})$ & center ($\bm{c})$ & mapping & head & tail & $\bm{R}$ (p
 2 & \texttt{[-0.66667,-0.33333, 0.00000]} & \texttt{[ 0.00000, 0.50000, 0.00000]} & \texttt{[2,-5,-7,10,-14,17,19,-22]} & \texttt{(2,1)} & \texttt{(1,1)} & \texttt{[1,0,0]} \\ \hline
 3 & \texttt{[ 0.33333,-0.33333, 0.00000]} & \texttt{[ 0.50000, 0.50000, 0.00000]} & \texttt{[3,-6,-9,12,-15,18,21,-24]} & \texttt{(2,1)} & \texttt{(1,1)} & \texttt{[0,0,0]} \\
 \end{longtable}
-\end{center}
-\begin{center}
 \renewcommand{\arraystretch}{1.6}
-\begin{longtable}{cllllll}
+\begin{longtable}[l]{cllllll}
 \caption{2-th '\texttt{C}'-'\texttt{C}' [1] (\#2) bond cluster (\texttt{6b@6l}), ND, $|\bm{v}|=1.0$ (cartesian)}
  \\
  \hline \hline
@@ -776,10 +758,8 @@ SL & vector ($\bm{v})$ & center ($\bm{c})$ & mapping & head & tail & $\bm{R}$ (p
 5 & \texttt{[ 0.00000,-1.00000, 0.00000]} & \texttt{[ 0.66667, 0.83333, 0.00000]} & \texttt{[5,-7,14,-22]} & \texttt{(2,1)} & \texttt{(2,1)} & \texttt{[0,1,0]} \\ \hline
 6 & \texttt{[ 1.00000, 1.00000, 0.00000]} & \texttt{[ 0.16667, 0.83333, 0.00000]} & \texttt{[6,-9,15,-24]} & \texttt{(2,1)} & \texttt{(2,1)} & \texttt{[-1,-1,0]} \\
 \end{longtable}
-\end{center}
-\begin{center}
 \renewcommand{\arraystretch}{1.6}
-\begin{longtable}{cllllll}
+\begin{longtable}[l]{cllllll}
 \caption{3-th '\texttt{C}'-'\texttt{C}' [1] (\#3) bond cluster (\texttt{3b@1a}), ND, $|\bm{v}|=1.1547$ (cartesian)}
  \\
  \hline \hline
@@ -799,10 +779,8 @@ SL & vector ($\bm{v})$ & center ($\bm{c})$ & mapping & head & tail & $\bm{R}$ (p
 2 & \texttt{[ 1.33333, 0.66667, 0.00000]} & \texttt{[ 0.00000, 0.00000, 0.00000]} & \texttt{[2,-5,-7,10,-14,17,19,-22]} & \texttt{(2,1)} & \texttt{(1,1)} & \texttt{[-1,-1,0]} \\ \hline
 3 & \texttt{[-0.66667, 0.66667, 0.00000]} & \texttt{[ 0.00000, 0.00000, 0.00000]} & \texttt{[3,-6,-9,12,-15,18,21,-24]} & \texttt{(2,1)} & \texttt{(1,1)} & \texttt{[1,-1,0]} \\
 \end{longtable}
-\end{center}
-\begin{center}
 \renewcommand{\arraystretch}{1.6}
-\begin{longtable}{cllllll}
+\begin{longtable}[l]{cllllll}
 \caption{4-th '\texttt{C}'-'\texttt{C}' [1] (\#4) bond cluster (\texttt{6d@3f}), ND, $|\bm{v}|=1.52753$ (cartesian)}
  \\
  \hline \hline
@@ -825,10 +803,8 @@ SL & vector ($\bm{v})$ & center ($\bm{c})$ & mapping & head & tail & $\bm{R}$ (p
 5 & \texttt{[-0.33333, 1.33333, 0.00000]} & \texttt{[ 0.50000, 0.00000, 0.00000]} & \texttt{[8,-11,-20,23]} & \texttt{(1,1)} & \texttt{(2,1)} & \texttt{[0,-1,0]} \\ \hline
 6 & \texttt{[ 1.66667, 0.33333, 0.00000]} & \texttt{[ 0.50000, 0.50000, 0.00000]} & \texttt{[9,-12,-21,24]} & \texttt{(1,1)} & \texttt{(2,1)} & \texttt{[-2,0,0]} \\
 \end{longtable}
-\end{center}
-\begin{center}
 \renewcommand{\arraystretch}{1.6}
-\begin{longtable}{cllllll}
+\begin{longtable}[l]{cllllll}
 \caption{5-th '\texttt{C}'-'\texttt{C}' [1] (\#5) bond cluster (\texttt{6a@6l}), D, $|\bm{v}|=1.73205$ (cartesian)}
  \\
  \hline \hline
@@ -851,6 +827,5 @@ SL & vector ($\bm{v})$ & center ($\bm{c})$ & mapping & head & tail & $\bm{R}$ (p
 5 & \texttt{[ 2.00000, 1.00000, 0.00000]} & \texttt{[ 0.66667, 0.83333, 0.00000]} & \texttt{[5,7,14,22]} & \texttt{(2,1)} & \texttt{(2,1)} & \texttt{[-2,-1,0]} \\ \hline
 6 & \texttt{[-1.00000, 1.00000, 0.00000]} & \texttt{[ 0.16667, 0.83333, 0.00000]} & \texttt{[6,9,15,24]} & \texttt{(2,1)} & \texttt{(2,1)} & \texttt{[1,-1,0]} \\
 \end{longtable}
-\end{center}
 
 \end{document}

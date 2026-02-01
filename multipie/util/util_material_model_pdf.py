@@ -251,9 +251,7 @@ class ModelPDF:
         basis_type = self.mm["basis_type"]
         common_id = self.mm["common_id"]
 
-        self.hr("SAMB")
-
-        self.text(r"\noindent" + f"{samb_num_min} (all {samb_num}) SAMBs\n")
+        self.hr(f"SAMB: {samb_num_min} (all {samb_num})")
 
         for comb, samb in combined_samb.items():
             if not samb:
@@ -285,7 +283,7 @@ class ModelPDF:
                 if clustar_str == "s"
                 else r"'\texttt{" + comb.head + r"}'-'\texttt{" + comb.tail + "}' bond-cluster"
             )
-            cluster += r" : \texttt{" + sb_tag[0] + "}"
+            cluster = r"\texttt{" + sb_tag[0] + "} : " + cluster
             wyckoff = r"\texttt{" + wp + "}"
 
             self.vspace("5mm")
@@ -306,7 +304,7 @@ class ModelPDF:
                         t2 = self.mm.group.tag_multipole(t2, c2, latex=True, superscript=clustar_str)
                         ex += cg * sp.Symbol(t1, commutative=False) * sp.Symbol(t2, commutative=False)
 
-                    d = self.number_tag(zi)
+                    d = r"\hspace*{3mm}" + self.number_tag(zi)
                     d += sp.latex(sp.Symbol(t)) + "=" + sp.latex(ex)
                     self.pdf.equation(d, long=True)
 
@@ -355,7 +353,7 @@ class ModelPDF:
                 tbl.append(["", orb2])
                 hl.append(no + 1)
                 no += 2
-        self.pdf.table(tbl, row, lbl, r"\#", cpos="ccl", long=True, stretch=1.6, hl=hl[:-1], caption=cap)
+        self.pdf.table(tbl, row, lbl, r"\#", cpos="ccl", long=True, stretch=1.6, hl=hl[:-1], caption=cap, center=False)
 
         rank_dict = {0: "s", 1: "p", 2: "d", 3: "f"}
         cap = "Neighbor and bra-ket of each bond"
@@ -374,7 +372,7 @@ class ModelPDF:
             hr = r"\texttt{[" + ",".join([rank_dict[i] for i in rep.h_rank]) + "]}"
             row.append(str(no + 1))
             tbl.append([head, tail, nb, hr, tr])
-        self.pdf.table(tbl, row, lbl, r"\#", cpos="ccclll", long=True, stretch=1.6, hl=True, caption=cap)
+        self.pdf.table(tbl, row, lbl, r"\#", cpos="ccclll", long=True, stretch=1.6, hl=True, caption=cap, center=False)
 
     # ==================================================
     def site_info(self):
@@ -412,7 +410,7 @@ class ModelPDF:
                 row.append(str(c.no))
                 tbl.append([pos, m])
 
-            self.pdf.table(tbl, row, lbl, "SL", cpos="cll", long=True, stretch=1.6, hl=True, caption=cap)
+            self.pdf.table(tbl, row, lbl, "SL", cpos="cll", long=True, stretch=1.6, hl=True, caption=cap, center=False)
 
     # ==================================================
     def bond_info(self):
@@ -474,7 +472,7 @@ class ModelPDF:
                 row.append(str(i.no))
                 tbl.append([v, c, m, h, t, R])
 
-            self.pdf.table(tbl, row, lbl, "SL", cpos="cllllll", long=True, stretch=1.6, hl=True, caption=cap)
+            self.pdf.table(tbl, row, lbl, "SL", cpos="cllllll", long=True, stretch=1.6, hl=True, caption=cap, center=False)
 
     # ==================================================
     def harmonics_info(self):
@@ -514,7 +512,7 @@ class ModelPDF:
                     no += 1
             hl.append(no - 1)
 
-        self.pdf.table(tbl, row, lbl, r"\#", cpos="clcccccl", long=True, stretch=1.6, hl=hl[:-1], caption=cap)
+        self.pdf.table(tbl, row, lbl, r"\#", cpos="clcccccl", long=True, stretch=1.6, hl=hl[:-1], caption=cap, center=False)
 
     # ==================================================
     def full_matrix_info(self):
@@ -538,6 +536,7 @@ class ModelPDF:
             cpos="c" + "|cl" * min(len(tbl) // 2, 5),
             stretch=1.6,
             long=True,
+            center=False,
         )
 
         # atomic basis.
@@ -568,7 +567,18 @@ class ModelPDF:
             hl.append(no)
 
         self.pdf.table(
-            tbl, row, lbl, "orbital", caption=cap, cpos="ll", hl=hl[:-1], rmath=True, tmath=True, stretch=1.6, long=True
+            tbl,
+            row,
+            lbl,
+            "orbital",
+            caption=cap,
+            cpos="ll",
+            hl=hl[:-1],
+            rmath=True,
+            tmath=True,
+            stretch=1.6,
+            long=True,
+            center=False,
         )
 
     # ==================================================
@@ -593,6 +603,7 @@ class ModelPDF:
             cpos="c" + "|cl" * min(len(tbl), 5),
             stretch=1.6,
             long=True,
+            center=False,
         )
 
     # ==================================================

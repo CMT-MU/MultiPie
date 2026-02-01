@@ -14,6 +14,7 @@
 \usepackage{multirow}
 \usepackage{booktabs}
 \usepackage{longtable}
+\usepackage[justification=raggedright, singlelinecheck=off]{caption}
 
 %%% layout setting
 
@@ -51,7 +52,7 @@
 Model for ``\texttt{C2h1}''
 \end{center}
 \begin{flushright}
-Generated on 2026-02-01 11:15:31 by MultiPie 2.0.7
+Generated on 2026-02-01 15:39:01 by MultiPie 2.0.8
 \end{flushright}
 \setlength{\baselineskip}{16pt}
 \footnotesize
@@ -129,9 +130,8 @@ Generated on 2026-02-01 11:15:31 by MultiPie 2.0.7
 \noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{Symmetry Operation}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
 \vspace{3mm}
 
-\begin{center}
 \renewcommand{\arraystretch}{1.6}
-\begin{longtable}{c|cl|cl|cl|cl|cl}
+\begin{longtable}[l]{c|cl|cl|cl|cl|cl}
 \caption{Symmetry operation}
  \\
  \hline \hline
@@ -149,14 +149,12 @@ Generated on 2026-02-01 11:15:31 by MultiPie 2.0.7
 
  & 1 & $\{1|0\}$ & 2 & $\{2{}_{010}|0\}$ & 3 & $\{-1|0\}$ & 4 & $\{{\rm m}_{010}|0\}$ \\
 \end{longtable}
-\end{center}
 \vspace{5mm}
 \noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{Harmonics}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
 \vspace{3mm}
 
-\begin{center}
 \renewcommand{\arraystretch}{1.6}
-\begin{longtable}{clcccccl}
+\begin{longtable}[l]{clcccccl}
 \caption{Harmonics}
  \\
  \hline \hline
@@ -186,14 +184,12 @@ Generated on 2026-02-01 11:15:31 by MultiPie 2.0.7
 12 & $\mathbb{Q}_{1}(B_{u},2)$ & $B_{u}$ & 1 & $Q$, $T$ & 2 & - & $z$ \\ \hline
 13 & $\mathbb{G}_{2}(B_{u},2)$ & $B_{u}$ & 2 & $G$, $M$ & 2 & - & $\sqrt{3} x y$ \\
 \end{longtable}
-\end{center}
 \vspace{5mm}
 \noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{Basis in full matrix}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
 \vspace{3mm}
 
-\begin{center}
 \renewcommand{\arraystretch}{1.6}
-\begin{longtable}{c|cl|cl|cl|cl}
+\begin{longtable}[l]{c|cl|cl|cl|cl}
 \caption{dimension = 4}
  \\
  \hline \hline
@@ -211,10 +207,8 @@ Generated on 2026-02-01 11:15:31 by MultiPie 2.0.7
 
  & 0 & $\ket{s_{},\uparrow}@{\rm A}(1)$ & 1 & $\ket{s_{},\downarrow}@{\rm A}(1)$ & 2 & $\ket{s_{},\uparrow}@{\rm B}(1)$ & 3 & $\ket{s_{},\downarrow}@{\rm B}(1)$ \\
 \end{longtable}
-\end{center}
-\begin{center}
 \renewcommand{\arraystretch}{1.6}
-\begin{longtable}{ll}
+\begin{longtable}[l]{ll}
 \caption{Atomic basis (orbital part only)}
  \\
  \hline \hline
@@ -232,16 +226,13 @@ orbital & definition \\ \hline \endhead
 
 $ \ket{s} $ & $ 1 $ \\
 \end{longtable}
-\end{center}
 \vspace{5mm}
-\noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{SAMB}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
+\noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{SAMB: 34 (all 34)}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
 \vspace{3mm}
 
-\noindent34 (all 34) SAMBs
-
 \vspace{5mm}
 
-\noindent\textbullet\, '\texttt{A}' site-cluster : \texttt{A}
+\noindent\textbullet\, \texttt{A} : '\texttt{A}' site-cluster
 
 \noindent\quad * bra: $\bra{s_{},\uparrow},\, \bra{s_{},\downarrow}$
 
@@ -250,11 +241,11 @@ $ \ket{s} $ & $ 1 $ \\
 \noindent\quad * wyckoff: \texttt{1a}
 
 \begin{dmath*}
-\fbox{z1}\quad \mathbb{Q}_{0}^{(c)}(A_{g})=\mathbb{Q}_{0}^{(a)}(A_{g}) \mathbb{Q}_{0}^{(s)}(A_{g})
+\hspace*{3mm}\fbox{z1}\quad \mathbb{Q}_{0}^{(c)}(A_{g})=\mathbb{Q}_{0}^{(a)}(A_{g}) \mathbb{Q}_{0}^{(s)}(A_{g})
 \end{dmath*}
 \vspace{5mm}
 
-\noindent\textbullet\, '\texttt{B}' site-cluster : \texttt{B}
+\noindent\textbullet\, \texttt{B} : '\texttt{B}' site-cluster
 
 \noindent\quad * bra: $\bra{s_{},\uparrow},\, \bra{s_{},\downarrow}$
 
@@ -263,11 +254,11 @@ $ \ket{s} $ & $ 1 $ \\
 \noindent\quad * wyckoff: \texttt{1e}
 
 \begin{dmath*}
-\fbox{z2}\quad \mathbb{Q}_{0}^{(c)}(A_{g})=\mathbb{Q}_{0}^{(a)}(A_{g}) \mathbb{Q}_{0}^{(s)}(A_{g})
+\hspace*{3mm}\fbox{z2}\quad \mathbb{Q}_{0}^{(c)}(A_{g})=\mathbb{Q}_{0}^{(a)}(A_{g}) \mathbb{Q}_{0}^{(s)}(A_{g})
 \end{dmath*}
 \vspace{5mm}
 
-\noindent\textbullet\, '\texttt{A}'-'\texttt{A}' bond-cluster : \texttt{A;A_001_1}
+\noindent\textbullet\, \texttt{A;A_001_1} : '\texttt{A}'-'\texttt{A}' bond-cluster
 
 \noindent\quad * bra: $\bra{s_{},\uparrow},\, \bra{s_{},\downarrow}$
 
@@ -276,20 +267,20 @@ $ \ket{s} $ & $ 1 $ \\
 \noindent\quad * wyckoff: \texttt{1a@1d}
 
 \begin{dmath*}
-\fbox{z3}\quad \mathbb{Q}_{0}^{(c)}(A_{g})=\mathbb{Q}_{0}^{(a)}(A_{g}) \mathbb{Q}_{0}^{(b)}(A_{g})
+\hspace*{3mm}\fbox{z3}\quad \mathbb{Q}_{0}^{(c)}(A_{g})=\mathbb{Q}_{0}^{(a)}(A_{g}) \mathbb{Q}_{0}^{(b)}(A_{g})
 \end{dmath*}
 \begin{dmath*}
-\fbox{z15}\quad \mathbb{Q}_{1}^{(1,-1;c)}(A_{u})=\mathbb{M}_{1}^{(1,-1;a)}(B_{g},2) \mathbb{T}_{1}^{(b)}(B_{u},1)
+\hspace*{3mm}\fbox{z15}\quad \mathbb{Q}_{1}^{(1,-1;c)}(A_{u})=\mathbb{M}_{1}^{(1,-1;a)}(B_{g},2) \mathbb{T}_{1}^{(b)}(B_{u},1)
 \end{dmath*}
 \begin{dmath*}
-\fbox{z16}\quad \mathbb{G}_{0}^{(1,-1;c)}(A_{u})=\mathbb{M}_{1}^{(1,-1;a)}(B_{g},1) \mathbb{T}_{1}^{(b)}(B_{u},1)
+\hspace*{3mm}\fbox{z16}\quad \mathbb{G}_{0}^{(1,-1;c)}(A_{u})=\mathbb{M}_{1}^{(1,-1;a)}(B_{g},1) \mathbb{T}_{1}^{(b)}(B_{u},1)
 \end{dmath*}
 \begin{dmath*}
-\fbox{z27}\quad \mathbb{Q}_{1}^{(1,-1;c)}(B_{u},2)=- \mathbb{M}_{1}^{(1,-1;a)}(A_{g}) \mathbb{T}_{1}^{(b)}(B_{u},1)
+\hspace*{3mm}\fbox{z27}\quad \mathbb{Q}_{1}^{(1,-1;c)}(B_{u},2)=- \mathbb{M}_{1}^{(1,-1;a)}(A_{g}) \mathbb{T}_{1}^{(b)}(B_{u},1)
 \end{dmath*}
 \vspace{5mm}
 
-\noindent\textbullet\, '\texttt{A}'-'\texttt{A}' bond-cluster : \texttt{A;A_001_2}
+\noindent\textbullet\, \texttt{A;A_001_2} : '\texttt{A}'-'\texttt{A}' bond-cluster
 
 \noindent\quad * bra: $\bra{s_{},\uparrow},\, \bra{s_{},\downarrow}$
 
@@ -298,20 +289,20 @@ $ \ket{s} $ & $ 1 $ \\
 \noindent\quad * wyckoff: \texttt{1a@1c}
 
 \begin{dmath*}
-\fbox{z4}\quad \mathbb{Q}_{0}^{(c)}(A_{g})=\mathbb{Q}_{0}^{(a)}(A_{g}) \mathbb{Q}_{0}^{(b)}(A_{g})
+\hspace*{3mm}\fbox{z4}\quad \mathbb{Q}_{0}^{(c)}(A_{g})=\mathbb{Q}_{0}^{(a)}(A_{g}) \mathbb{Q}_{0}^{(b)}(A_{g})
 \end{dmath*}
 \begin{dmath*}
-\fbox{z17}\quad \mathbb{Q}_{1}^{(1,-1;c)}(A_{u})=\mathbb{M}_{1}^{(1,-1;a)}(B_{g},2) \mathbb{T}_{1}^{(b)}(B_{u},1)
+\hspace*{3mm}\fbox{z17}\quad \mathbb{Q}_{1}^{(1,-1;c)}(A_{u})=\mathbb{M}_{1}^{(1,-1;a)}(B_{g},2) \mathbb{T}_{1}^{(b)}(B_{u},1)
 \end{dmath*}
 \begin{dmath*}
-\fbox{z18}\quad \mathbb{G}_{0}^{(1,-1;c)}(A_{u})=\mathbb{M}_{1}^{(1,-1;a)}(B_{g},1) \mathbb{T}_{1}^{(b)}(B_{u},1)
+\hspace*{3mm}\fbox{z18}\quad \mathbb{G}_{0}^{(1,-1;c)}(A_{u})=\mathbb{M}_{1}^{(1,-1;a)}(B_{g},1) \mathbb{T}_{1}^{(b)}(B_{u},1)
 \end{dmath*}
 \begin{dmath*}
-\fbox{z28}\quad \mathbb{Q}_{1}^{(1,-1;c)}(B_{u},2)=- \mathbb{M}_{1}^{(1,-1;a)}(A_{g}) \mathbb{T}_{1}^{(b)}(B_{u},1)
+\hspace*{3mm}\fbox{z28}\quad \mathbb{Q}_{1}^{(1,-1;c)}(B_{u},2)=- \mathbb{M}_{1}^{(1,-1;a)}(A_{g}) \mathbb{T}_{1}^{(b)}(B_{u},1)
 \end{dmath*}
 \vspace{5mm}
 
-\noindent\textbullet\, '\texttt{A}'-'\texttt{B}' bond-cluster : \texttt{B;A_001_1}
+\noindent\textbullet\, \texttt{B;A_001_1} : '\texttt{A}'-'\texttt{B}' bond-cluster
 
 \noindent\quad * bra: $\bra{s_{},\uparrow},\, \bra{s_{},\downarrow}$
 
@@ -320,56 +311,56 @@ $ \ket{s} $ & $ 1 $ \\
 \noindent\quad * wyckoff: \texttt{4a@4o}
 
 \begin{dmath*}
-\fbox{z5}\quad \mathbb{Q}_{0}^{(c)}(A_{g})=\mathbb{Q}_{0}^{(a)}(A_{g}) \mathbb{Q}_{0}^{(b)}(A_{g})
+\hspace*{3mm}\fbox{z5}\quad \mathbb{Q}_{0}^{(c)}(A_{g})=\mathbb{Q}_{0}^{(a)}(A_{g}) \mathbb{Q}_{0}^{(b)}(A_{g})
 \end{dmath*}
 \begin{dmath*}
-\fbox{z6}\quad \mathbb{Q}_{0}^{(1,-1;c)}(A_{g})=\mathbb{M}_{1}^{(1,-1;a)}(B_{g},1) \mathbb{M}_{1}^{(b)}(B_{g},1)
+\hspace*{3mm}\fbox{z6}\quad \mathbb{Q}_{0}^{(1,-1;c)}(A_{g})=\mathbb{M}_{1}^{(1,-1;a)}(B_{g},1) \mathbb{M}_{1}^{(b)}(B_{g},1)
 \end{dmath*}
 \begin{dmath*}
-\fbox{z7}\quad \mathbb{Q}_{2}^{(1,-1;c)}(A_{g},3)=\mathbb{M}_{1}^{(1,-1;a)}(B_{g},2) \mathbb{M}_{1}^{(b)}(B_{g},1)
+\hspace*{3mm}\fbox{z7}\quad \mathbb{Q}_{2}^{(1,-1;c)}(A_{g},3)=\mathbb{M}_{1}^{(1,-1;a)}(B_{g},2) \mathbb{M}_{1}^{(b)}(B_{g},1)
 \end{dmath*}
 \begin{dmath*}
-\fbox{z8}\quad \mathbb{G}_{1}^{(1,-1;c)}(A_{g})=\mathbb{M}_{1}^{(1,-1;a)}(A_{g}) \mathbb{T}_{0}^{(b)}(A_{g})
+\hspace*{3mm}\fbox{z8}\quad \mathbb{G}_{1}^{(1,-1;c)}(A_{g})=\mathbb{M}_{1}^{(1,-1;a)}(A_{g}) \mathbb{T}_{0}^{(b)}(A_{g})
 \end{dmath*}
 \begin{dmath*}
-\fbox{z11}\quad \mathbb{Q}_{1}^{(c)}(A_{u})=\mathbb{Q}_{0}^{(a)}(A_{g}) \mathbb{Q}_{1}^{(b)}(A_{u})
+\hspace*{3mm}\fbox{z11}\quad \mathbb{Q}_{1}^{(c)}(A_{u})=\mathbb{Q}_{0}^{(a)}(A_{g}) \mathbb{Q}_{1}^{(b)}(A_{u})
 \end{dmath*}
 \begin{dmath*}
-\fbox{z12}\quad \mathbb{Q}_{1}^{(1,-1;c)}(A_{u})=\mathbb{M}_{1}^{(1,-1;a)}(B_{g},2) \mathbb{T}_{1}^{(b)}(B_{u},1)
+\hspace*{3mm}\fbox{z12}\quad \mathbb{Q}_{1}^{(1,-1;c)}(A_{u})=\mathbb{M}_{1}^{(1,-1;a)}(B_{g},2) \mathbb{T}_{1}^{(b)}(B_{u},1)
 \end{dmath*}
 \begin{dmath*}
-\fbox{z13}\quad \mathbb{G}_{0}^{(1,-1;c)}(A_{u})=\frac{\sqrt{2} \mathbb{M}_{1}^{(1,-1;a)}(A_{g}) \mathbb{T}_{1}^{(b)}(A_{u})}{2} + \frac{\sqrt{2} \mathbb{M}_{1}^{(1,-1;a)}(B_{g},1) \mathbb{T}_{1}^{(b)}(B_{u},1)}{2}
+\hspace*{3mm}\fbox{z13}\quad \mathbb{G}_{0}^{(1,-1;c)}(A_{u})=\frac{\sqrt{2} \mathbb{M}_{1}^{(1,-1;a)}(A_{g}) \mathbb{T}_{1}^{(b)}(A_{u})}{2} + \frac{\sqrt{2} \mathbb{M}_{1}^{(1,-1;a)}(B_{g},1) \mathbb{T}_{1}^{(b)}(B_{u},1)}{2}
 \end{dmath*}
 \begin{dmath*}
-\fbox{z14}\quad \mathbb{G}_{2}^{(1,-1;c)}(A_{u},2)=- \frac{\sqrt{2} \mathbb{M}_{1}^{(1,-1;a)}(A_{g}) \mathbb{T}_{1}^{(b)}(A_{u})}{2} + \frac{\sqrt{2} \mathbb{M}_{1}^{(1,-1;a)}(B_{g},1) \mathbb{T}_{1}^{(b)}(B_{u},1)}{2}
+\hspace*{3mm}\fbox{z14}\quad \mathbb{G}_{2}^{(1,-1;c)}(A_{u},2)=- \frac{\sqrt{2} \mathbb{M}_{1}^{(1,-1;a)}(A_{g}) \mathbb{T}_{1}^{(b)}(A_{u})}{2} + \frac{\sqrt{2} \mathbb{M}_{1}^{(1,-1;a)}(B_{g},1) \mathbb{T}_{1}^{(b)}(B_{u},1)}{2}
 \end{dmath*}
 \begin{dmath*}
-\fbox{z19}\quad \mathbb{Q}_{2}^{(c)}(B_{g},1)=\mathbb{Q}_{0}^{(a)}(A_{g}) \mathbb{Q}_{2}^{(b)}(B_{g},1)
+\hspace*{3mm}\fbox{z19}\quad \mathbb{Q}_{2}^{(c)}(B_{g},1)=\mathbb{Q}_{0}^{(a)}(A_{g}) \mathbb{Q}_{2}^{(b)}(B_{g},1)
 \end{dmath*}
 \begin{dmath*}
-\fbox{z20}\quad \mathbb{Q}_{2}^{(1,-1;c)}(B_{g},2)=\mathbb{M}_{1}^{(1,-1;a)}(A_{g}) \mathbb{M}_{1}^{(b)}(B_{g},1)
+\hspace*{3mm}\fbox{z20}\quad \mathbb{Q}_{2}^{(1,-1;c)}(B_{g},2)=\mathbb{M}_{1}^{(1,-1;a)}(A_{g}) \mathbb{M}_{1}^{(b)}(B_{g},1)
 \end{dmath*}
 \begin{dmath*}
-\fbox{z21}\quad \mathbb{G}_{1}^{(1,-1;c)}(B_{g},1)=\mathbb{M}_{1}^{(1,-1;a)}(B_{g},1) \mathbb{T}_{0}^{(b)}(A_{g})
+\hspace*{3mm}\fbox{z21}\quad \mathbb{G}_{1}^{(1,-1;c)}(B_{g},1)=\mathbb{M}_{1}^{(1,-1;a)}(B_{g},1) \mathbb{T}_{0}^{(b)}(A_{g})
 \end{dmath*}
 \begin{dmath*}
-\fbox{z22}\quad \mathbb{G}_{1}^{(1,-1;c)}(B_{g},2)=\mathbb{M}_{1}^{(1,-1;a)}(B_{g},2) \mathbb{T}_{0}^{(b)}(A_{g})
+\hspace*{3mm}\fbox{z22}\quad \mathbb{G}_{1}^{(1,-1;c)}(B_{g},2)=\mathbb{M}_{1}^{(1,-1;a)}(B_{g},2) \mathbb{T}_{0}^{(b)}(A_{g})
 \end{dmath*}
 \begin{dmath*}
-\fbox{z29}\quad \mathbb{Q}_{1}^{(c)}(B_{u},1)=\mathbb{Q}_{0}^{(a)}(A_{g}) \mathbb{Q}_{1}^{(b)}(B_{u},1)
+\hspace*{3mm}\fbox{z29}\quad \mathbb{Q}_{1}^{(c)}(B_{u},1)=\mathbb{Q}_{0}^{(a)}(A_{g}) \mathbb{Q}_{1}^{(b)}(B_{u},1)
 \end{dmath*}
 \begin{dmath*}
-\fbox{z30}\quad \mathbb{Q}_{1}^{(1,-1;c)}(B_{u},1)=- \mathbb{M}_{1}^{(1,-1;a)}(B_{g},2) \mathbb{T}_{1}^{(b)}(A_{u})
+\hspace*{3mm}\fbox{z30}\quad \mathbb{Q}_{1}^{(1,-1;c)}(B_{u},1)=- \mathbb{M}_{1}^{(1,-1;a)}(B_{g},2) \mathbb{T}_{1}^{(b)}(A_{u})
 \end{dmath*}
 \begin{dmath*}
-\fbox{z31}\quad \mathbb{Q}_{1}^{(1,-1;c)}(B_{u},2)=- \frac{\sqrt{2} \mathbb{M}_{1}^{(1,-1;a)}(A_{g}) \mathbb{T}_{1}^{(b)}(B_{u},1)}{2} + \frac{\sqrt{2} \mathbb{M}_{1}^{(1,-1;a)}(B_{g},1) \mathbb{T}_{1}^{(b)}(A_{u})}{2}
+\hspace*{3mm}\fbox{z31}\quad \mathbb{Q}_{1}^{(1,-1;c)}(B_{u},2)=- \frac{\sqrt{2} \mathbb{M}_{1}^{(1,-1;a)}(A_{g}) \mathbb{T}_{1}^{(b)}(B_{u},1)}{2} + \frac{\sqrt{2} \mathbb{M}_{1}^{(1,-1;a)}(B_{g},1) \mathbb{T}_{1}^{(b)}(A_{u})}{2}
 \end{dmath*}
 \begin{dmath*}
-\fbox{z32}\quad \mathbb{G}_{2}^{(1,-1;c)}(B_{u},2)=\frac{\sqrt{2} \mathbb{M}_{1}^{(1,-1;a)}(A_{g}) \mathbb{T}_{1}^{(b)}(B_{u},1)}{2} + \frac{\sqrt{2} \mathbb{M}_{1}^{(1,-1;a)}(B_{g},1) \mathbb{T}_{1}^{(b)}(A_{u})}{2}
+\hspace*{3mm}\fbox{z32}\quad \mathbb{G}_{2}^{(1,-1;c)}(B_{u},2)=\frac{\sqrt{2} \mathbb{M}_{1}^{(1,-1;a)}(A_{g}) \mathbb{T}_{1}^{(b)}(B_{u},1)}{2} + \frac{\sqrt{2} \mathbb{M}_{1}^{(1,-1;a)}(B_{g},1) \mathbb{T}_{1}^{(b)}(A_{u})}{2}
 \end{dmath*}
 \vspace{5mm}
 
-\noindent\textbullet\, '\texttt{B}'-'\texttt{B}' bond-cluster : \texttt{B;B_001_1}
+\noindent\textbullet\, \texttt{B;B_001_1} : '\texttt{B}'-'\texttt{B}' bond-cluster
 
 \noindent\quad * bra: $\bra{s_{},\uparrow},\, \bra{s_{},\downarrow}$
 
@@ -378,20 +369,20 @@ $ \ket{s} $ & $ 1 $ \\
 \noindent\quad * wyckoff: \texttt{1a@1b}
 
 \begin{dmath*}
-\fbox{z9}\quad \mathbb{Q}_{0}^{(c)}(A_{g})=\mathbb{Q}_{0}^{(a)}(A_{g}) \mathbb{Q}_{0}^{(b)}(A_{g})
+\hspace*{3mm}\fbox{z9}\quad \mathbb{Q}_{0}^{(c)}(A_{g})=\mathbb{Q}_{0}^{(a)}(A_{g}) \mathbb{Q}_{0}^{(b)}(A_{g})
 \end{dmath*}
 \begin{dmath*}
-\fbox{z23}\quad \mathbb{Q}_{1}^{(1,-1;c)}(A_{u})=\mathbb{M}_{1}^{(1,-1;a)}(B_{g},2) \mathbb{T}_{1}^{(b)}(B_{u},1)
+\hspace*{3mm}\fbox{z23}\quad \mathbb{Q}_{1}^{(1,-1;c)}(A_{u})=\mathbb{M}_{1}^{(1,-1;a)}(B_{g},2) \mathbb{T}_{1}^{(b)}(B_{u},1)
 \end{dmath*}
 \begin{dmath*}
-\fbox{z24}\quad \mathbb{G}_{0}^{(1,-1;c)}(A_{u})=\mathbb{M}_{1}^{(1,-1;a)}(B_{g},1) \mathbb{T}_{1}^{(b)}(B_{u},1)
+\hspace*{3mm}\fbox{z24}\quad \mathbb{G}_{0}^{(1,-1;c)}(A_{u})=\mathbb{M}_{1}^{(1,-1;a)}(B_{g},1) \mathbb{T}_{1}^{(b)}(B_{u},1)
 \end{dmath*}
 \begin{dmath*}
-\fbox{z33}\quad \mathbb{Q}_{1}^{(1,-1;c)}(B_{u},2)=- \mathbb{M}_{1}^{(1,-1;a)}(A_{g}) \mathbb{T}_{1}^{(b)}(B_{u},1)
+\hspace*{3mm}\fbox{z33}\quad \mathbb{Q}_{1}^{(1,-1;c)}(B_{u},2)=- \mathbb{M}_{1}^{(1,-1;a)}(A_{g}) \mathbb{T}_{1}^{(b)}(B_{u},1)
 \end{dmath*}
 \vspace{5mm}
 
-\noindent\textbullet\, '\texttt{B}'-'\texttt{B}' bond-cluster : \texttt{B;B_001_2}
+\noindent\textbullet\, \texttt{B;B_001_2} : '\texttt{B}'-'\texttt{B}' bond-cluster
 
 \noindent\quad * bra: $\bra{s_{},\uparrow},\, \bra{s_{},\downarrow}$
 
@@ -400,16 +391,16 @@ $ \ket{s} $ & $ 1 $ \\
 \noindent\quad * wyckoff: \texttt{1a@1h}
 
 \begin{dmath*}
-\fbox{z10}\quad \mathbb{Q}_{0}^{(c)}(A_{g})=\mathbb{Q}_{0}^{(a)}(A_{g}) \mathbb{Q}_{0}^{(b)}(A_{g})
+\hspace*{3mm}\fbox{z10}\quad \mathbb{Q}_{0}^{(c)}(A_{g})=\mathbb{Q}_{0}^{(a)}(A_{g}) \mathbb{Q}_{0}^{(b)}(A_{g})
 \end{dmath*}
 \begin{dmath*}
-\fbox{z25}\quad \mathbb{Q}_{1}^{(1,-1;c)}(A_{u})=\mathbb{M}_{1}^{(1,-1;a)}(B_{g},2) \mathbb{T}_{1}^{(b)}(B_{u},1)
+\hspace*{3mm}\fbox{z25}\quad \mathbb{Q}_{1}^{(1,-1;c)}(A_{u})=\mathbb{M}_{1}^{(1,-1;a)}(B_{g},2) \mathbb{T}_{1}^{(b)}(B_{u},1)
 \end{dmath*}
 \begin{dmath*}
-\fbox{z26}\quad \mathbb{G}_{0}^{(1,-1;c)}(A_{u})=\mathbb{M}_{1}^{(1,-1;a)}(B_{g},1) \mathbb{T}_{1}^{(b)}(B_{u},1)
+\hspace*{3mm}\fbox{z26}\quad \mathbb{G}_{0}^{(1,-1;c)}(A_{u})=\mathbb{M}_{1}^{(1,-1;a)}(B_{g},1) \mathbb{T}_{1}^{(b)}(B_{u},1)
 \end{dmath*}
 \begin{dmath*}
-\fbox{z34}\quad \mathbb{Q}_{1}^{(1,-1;c)}(B_{u},2)=- \mathbb{M}_{1}^{(1,-1;a)}(A_{g}) \mathbb{T}_{1}^{(b)}(B_{u},1)
+\hspace*{3mm}\fbox{z34}\quad \mathbb{Q}_{1}^{(1,-1;c)}(B_{u},2)=- \mathbb{M}_{1}^{(1,-1;a)}(A_{g}) \mathbb{T}_{1}^{(b)}(B_{u},1)
 \end{dmath*}
 \vspace{5mm}
 
@@ -461,7 +452,7 @@ $ \ket{s} $ & $ 1 $ \\
 
 \vspace{5mm}
 
-\noindent ** Wyckoff: \texttt{1a@1h}
+\noindent ** Wyckoff: \texttt{1a@1b}
 
 \begin{dmath*}
 \fbox{y3}\quad \mathbb{Q}_{0}^{(s)}(A_{g})=\left[ 1 \right]
@@ -471,7 +462,7 @@ $ \ket{s} $ & $ 1 $ \\
 \end{dmath*}
 \vspace{5mm}
 
-\noindent ** Wyckoff: \texttt{1a@1d}
+\noindent ** Wyckoff: \texttt{1a@1h}
 
 \begin{dmath*}
 \fbox{y5}\quad \mathbb{Q}_{0}^{(s)}(A_{g})=\left[ 1 \right]
@@ -491,7 +482,7 @@ $ \ket{s} $ & $ 1 $ \\
 \end{dmath*}
 \vspace{5mm}
 
-\noindent ** Wyckoff: \texttt{1a@1b}
+\noindent ** Wyckoff: \texttt{1a@1d}
 
 \begin{dmath*}
 \fbox{y9}\quad \mathbb{Q}_{0}^{(s)}(A_{g})=\left[ 1 \right]
@@ -531,9 +522,8 @@ $ \ket{s} $ & $ 1 $ \\
 \noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{Site and Bond}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
 \vspace{3mm}
 
-\begin{center}
 \renewcommand{\arraystretch}{1.6}
-\begin{longtable}{ccl}
+\begin{longtable}[l]{ccl}
 \caption{Orbital of each site}
  \\
  \hline \hline
@@ -552,10 +542,8 @@ $ \ket{s} $ & $ 1 $ \\
 1 & \texttt{A} & $\ket{s_{},\uparrow}$, $\ket{s_{},\downarrow}$ \\ \hline
 2 & \texttt{B} & $\ket{s_{},\uparrow}$, $\ket{s_{},\downarrow}$ \\
 \end{longtable}
-\end{center}
-\begin{center}
 \renewcommand{\arraystretch}{1.6}
-\begin{longtable}{ccclll}
+\begin{longtable}[l]{ccclll}
 \caption{Neighbor and bra-ket of each bond}
  \\
  \hline \hline
@@ -575,16 +563,14 @@ $ \ket{s} $ & $ 1 $ \\
 2 & \texttt{A} & \texttt{B} & \texttt{[1]} & \texttt{[s]} & \texttt{[s]} \\ \hline
 3 & \texttt{B} & \texttt{B} & \texttt{[1]} & \texttt{[s]} & \texttt{[s]} \\
 \end{longtable}
-\end{center}
 \vspace{5mm}
 \noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{Site in Unit Cell}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
 \vspace{3mm}
 
 \noindent Sites in (conventional) cell (no plus set), SL = sublattice
 
-\begin{center}
 \renewcommand{\arraystretch}{1.6}
-\begin{longtable}{cll}
+\begin{longtable}[l]{cll}
 \caption{'\texttt{A}' (\#1) site cluster (\texttt{1a}), \texttt{2/m}}
  \\
  \hline \hline
@@ -602,10 +588,8 @@ SL & position ($\bm{s})$ & mapping \\ \hline \endhead
 
 1 & \texttt{[ 0.00000, 0.00000, 0.00000]} & \texttt{[1,2,3,4]} \\
 \end{longtable}
-\end{center}
-\begin{center}
 \renewcommand{\arraystretch}{1.6}
-\begin{longtable}{cll}
+\begin{longtable}[l]{cll}
 \caption{'\texttt{B}' (\#2) site cluster (\texttt{1e}), \texttt{2/m}}
  \\
  \hline \hline
@@ -623,16 +607,14 @@ SL & position ($\bm{s})$ & mapping \\ \hline \endhead
 
 1 & \texttt{[ 0.50000, 0.50000, 0.00000]} & \texttt{[1,2,3,4]} \\
 \end{longtable}
-\end{center}
 \vspace{5mm}
 \noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{Bond in Unit Cell}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
 \vspace{3mm}
 
 \noindent Bonds in (conventional) cell (no plus set): tail, head = (SL, plus set), (N)D = (non)directional (listed up to 5th neighbor at most)
 
-\begin{center}
 \renewcommand{\arraystretch}{1.6}
-\begin{longtable}{cllllll}
+\begin{longtable}[l]{cllllll}
 \caption{1-th '\texttt{A}'-'\texttt{A}' [1] (\#1) bond cluster (\texttt{1a@1d}), ND, $|\bm{v}|=1.0$ (cartesian)}
  \\
  \hline \hline
@@ -650,10 +632,8 @@ SL & vector ($\bm{v})$ & center ($\bm{c})$ & mapping & head & tail & $\bm{R}$ (p
 
 1 & \texttt{[-1.00000, 0.00000, 0.00000]} & \texttt{[ 0.50000, 0.00000, 0.00000]} & \texttt{[1,-2,-3,4]} & \texttt{(1,1)} & \texttt{(1,1)} & \texttt{[1,0,0]} \\
 \end{longtable}
-\end{center}
-\begin{center}
 \renewcommand{\arraystretch}{1.6}
-\begin{longtable}{cllllll}
+\begin{longtable}[l]{cllllll}
 \caption{1-th '\texttt{A}'-'\texttt{A}' [2] (\#2) bond cluster (\texttt{1a@1c}), ND, $|\bm{v}|=1.0$ (cartesian)}
  \\
  \hline \hline
@@ -671,10 +651,8 @@ SL & vector ($\bm{v})$ & center ($\bm{c})$ & mapping & head & tail & $\bm{R}$ (p
 
 1 & \texttt{[ 0.00000, 0.00000,-1.00000]} & \texttt{[ 0.00000, 0.00000, 0.50000]} & \texttt{[1,-2,-3,4]} & \texttt{(1,1)} & \texttt{(1,1)} & \texttt{[0,0,1]} \\
 \end{longtable}
-\end{center}
-\begin{center}
 \renewcommand{\arraystretch}{1.6}
-\begin{longtable}{cllllll}
+\begin{longtable}[l]{cllllll}
 \caption{1-th '\texttt{A}'-'\texttt{B}' [1] (\#3) bond cluster (\texttt{4a@4o}), D, $|\bm{v}|=0.78102$ (cartesian)}
  \\
  \hline \hline
@@ -695,10 +673,8 @@ SL & vector ($\bm{v})$ & center ($\bm{c})$ & mapping & head & tail & $\bm{R}$ (p
 3 & \texttt{[ 0.50000, 0.50000, 0.00000]} & \texttt{[ 0.75000, 0.75000, 0.00000]} & \texttt{[3]} & \texttt{(1,1)} & \texttt{(1,1)} & \texttt{[-1,-1,0]} \\ \hline
 4 & \texttt{[-0.50000, 0.50000, 0.00000]} & \texttt{[ 0.25000, 0.75000, 0.00000]} & \texttt{[4]} & \texttt{(1,1)} & \texttt{(1,1)} & \texttt{[0,-1,0]} \\
 \end{longtable}
-\end{center}
-\begin{center}
 \renewcommand{\arraystretch}{1.6}
-\begin{longtable}{cllllll}
+\begin{longtable}[l]{cllllll}
 \caption{1-th '\texttt{B}'-'\texttt{B}' [1] (\#4) bond cluster (\texttt{1a@1b}), ND, $|\bm{v}|=1.0$ (cartesian)}
  \\
  \hline \hline
@@ -716,10 +692,8 @@ SL & vector ($\bm{v})$ & center ($\bm{c})$ & mapping & head & tail & $\bm{R}$ (p
 
 1 & \texttt{[-1.00000, 0.00000, 0.00000]} & \texttt{[ 0.00000, 0.50000, 0.00000]} & \texttt{[1,-2,-3,4]} & \texttt{(1,1)} & \texttt{(1,1)} & \texttt{[1,0,0]} \\
 \end{longtable}
-\end{center}
-\begin{center}
 \renewcommand{\arraystretch}{1.6}
-\begin{longtable}{cllllll}
+\begin{longtable}[l]{cllllll}
 \caption{1-th '\texttt{B}'-'\texttt{B}' [2] (\#5) bond cluster (\texttt{1a@1h}), ND, $|\bm{v}|=1.0$ (cartesian)}
  \\
  \hline \hline
@@ -737,6 +711,5 @@ SL & vector ($\bm{v})$ & center ($\bm{c})$ & mapping & head & tail & $\bm{R}$ (p
 
 1 & \texttt{[ 0.00000, 0.00000,-1.00000]} & \texttt{[ 0.50000, 0.50000, 0.50000]} & \texttt{[1,-2,-3,4]} & \texttt{(1,1)} & \texttt{(1,1)} & \texttt{[0,0,1]} \\
 \end{longtable}
-\end{center}
 
 \end{document}

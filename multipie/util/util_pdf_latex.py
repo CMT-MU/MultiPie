@@ -125,6 +125,7 @@ class PDFviaLaTeX:
             ("multirow", ""),
             ("booktabs", ""),
             ("longtable", ""),
+            ("caption", "justification=raggedright, singlelinecheck=off"),
         ]  #: LaTeX package (name, option)
         self.__package += package
 
@@ -395,7 +396,20 @@ class PDFviaLaTeX:
 
     # ==================================================
     def _table(
-        self, tbl, row, col, rc="", hl=[], caption="", stretch=1.0, cpos=None, rcmath=False, rmath=False, cmath=False, tmath=False
+        self,
+        tbl,
+        row,
+        col,
+        rc="",
+        hl=[],
+        caption="",
+        stretch=1.0,
+        cpos=None,
+        rcmath=False,
+        rmath=False,
+        cmath=False,
+        tmath=False,
+        center=True,
     ):
         """
         Add table (reshaped by using number of col).
@@ -415,7 +429,8 @@ class PDFviaLaTeX:
         txt = []
         if caption:
             txt.append(r"\begin{table}[ht!]")
-            txt.append(r"\begin{center}")
+            if center:
+                txt.append(r"\begin{center}")
             txt.append(r"\caption{" + caption + "}")
             txt.append(r"\renewcommand{\arraystretch}{" + str(stretch) + "}")
 
@@ -445,14 +460,28 @@ class PDFviaLaTeX:
         # end tabular
 
         if caption:
-            txt.append(r"\end{center}")
+            if center:
+                txt.append(r"\end{center}")
             txt.append(r"\end{table}")
 
         self.text(txt)
 
     # ==================================================
     def _long_table(
-        self, tbl, row, col, rc="", hl=[], caption="", stretch=1.0, cpos=None, rcmath=False, rmath=False, cmath=False, tmath=False
+        self,
+        tbl,
+        row,
+        col,
+        rc="",
+        hl=[],
+        caption="",
+        stretch=1.0,
+        cpos=None,
+        rcmath=False,
+        rmath=False,
+        cmath=False,
+        tmath=False,
+        center=True,
     ):
         """
         Add table (reshaped by using number of col).
@@ -476,9 +505,10 @@ class PDFviaLaTeX:
         head = rc + " & " + " & ".join(col) + cr + hr
 
         txt = []
-        txt.append(r"\begin{center}")
+        cnt = "" if center else "[l]"
+
         txt.append(r"\renewcommand{\arraystretch}{" + str(stretch) + "}")
-        txt.append(r"\begin{longtable}{" + cpos + "}")
+        txt.append(r"\begin{longtable}" + cnt + "{" + cpos + "}")
         if caption:
             txt.append(r"\caption{" + caption + "}")
             txt.append(cr)
@@ -509,7 +539,6 @@ class PDFviaLaTeX:
             ti += n[i]
 
         txt.append(r"\end{longtable}")
-        txt.append(r"\end{center}")
 
         self.text(txt)
         self.__twice = True
@@ -530,6 +559,7 @@ class PDFviaLaTeX:
         cmath=False,
         tmath=False,
         long=False,
+        center=True,
     ):
         """
         Add table (reshaped by using number of col).
@@ -548,10 +578,11 @@ class PDFviaLaTeX:
             cmath (bool, optional): math mode for column name ?
             tmath (bool, optional): math mode for table ?
             long (bool, optional): long table ?
+            center (bool, optional): centering ?
         """
         if hl is True:
             hl = list(range(len(row) - 1))
         if long:
-            self._long_table(tbl, row, col, rc, hl, caption, stretch, cpos, rcmath, rmath, cmath, tmath)
+            self._long_table(tbl, row, col, rc, hl, caption, stretch, cpos, rcmath, rmath, cmath, tmath, center)
         else:
-            self._table(tbl, row, col, rc, hl, caption, stretch, cpos, rcmath, rmath, cmath, tmath)
+            self._table(tbl, row, col, rc, hl, caption, stretch, cpos, rcmath, rmath, cmath, tmath, center)
