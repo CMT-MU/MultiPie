@@ -334,7 +334,9 @@
 <button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 </button>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -350,6 +352,30 @@
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util.check_black"><code class="docutils literal notranslate"><span class="pre">check_black()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util.check_latex"><code class="docutils literal notranslate"><span class="pre">check_latex()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util.check_qtdraw"><code class="docutils literal notranslate"><span class="pre">check_qtdraw()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util.deep_update"><code class="docutils literal notranslate"><span class="pre">deep_update()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util.do_black"><code class="docutils literal notranslate"><span class="pre">do_black()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util.normalize_vector"><code class="docutils literal notranslate"><span class="pre">normalize_vector()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util.progress_bar_done"><code class="docutils literal notranslate"><span class="pre">progress_bar_done()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util.progress_bar_step"><code class="docutils literal notranslate"><span class="pre">progress_bar_step()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util.read_dict"><code class="docutils literal notranslate"><span class="pre">read_dict()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util.read_dict_file"><code class="docutils literal notranslate"><span class="pre">read_dict_file()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util.replace"><code class="docutils literal notranslate"><span class="pre">replace()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util.setup_logging"><code class="docutils literal notranslate"><span class="pre">setup_logging()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util.str_to_sympy"><code class="docutils literal notranslate"><span class="pre">str_to_sympy()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util.time_stamp"><code class="docutils literal notranslate"><span class="pre">time_stamp()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util.timer"><code class="docutils literal notranslate"><span class="pre">timer()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util.to_latex"><code class="docutils literal notranslate"><span class="pre">to_latex()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util.write_dict"><code class="docutils literal notranslate"><span class="pre">write_dict()</span></code></a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -359,8 +385,290 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="versatile">
-<h1>Versatile<a class="headerlink" href="#versatile" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="module-multipie.util.util">
+<span id="versatile"></span><h1>Versatile<a class="headerlink" href="#module-multipie.util.util" title="Link to this heading">#</a></h1>
+<p>For versatile utility.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util.check_black">
+<span class="sig-name descname"><span class="pre">check_black</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util.html#check_black"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util.check_black" title="Link to this definition">#</a></dt>
+<dd><p>Check if black is installed or not.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p>(bool) – installed ?</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util.check_latex">
+<span class="sig-name descname"><span class="pre">check_latex</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util.html#check_latex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util.check_latex" title="Link to this definition">#</a></dt>
+<dd><p>Check if LaTeX is installed or not.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p>(bool) – installed ?</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util.check_qtdraw">
+<span class="sig-name descname"><span class="pre">check_qtdraw</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util.html#check_qtdraw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util.check_qtdraw" title="Link to this definition">#</a></dt>
+<dd><p>Check if qtdraw is installed or not.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p>(bool) – installed ?</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util.deep_update">
+<span class="sig-name descname"><span class="pre">deep_update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util.html#deep_update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util.deep_update" title="Link to this definition">#</a></dt>
+<dd><p>Update dict with deepcopy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>d</strong> (<em>dict</em>) – dict to update (inplace).</p></li>
+<li><p><strong>u</strong> (<em>dict</em>) – additional dict.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util.do_black">
+<span class="sig-name descname"><span class="pre">do_black</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">w_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ext</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.py'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util.html#do_black"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util.do_black" title="Link to this definition">#</a></dt>
+<dd><p>Execute black for Python file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>w_dir</strong> (<em>str</em>) – directory.</p></li>
+<li><p><strong>ext</strong> (<em>str</em><em>, </em><em>optional</em>) – extention.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util.normalize_vector">
+<span class="sig-name descname"><span class="pre">normalize_vector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-11</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util.html#normalize_vector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util.normalize_vector" title="Link to this definition">#</a></dt>
+<dd><p>Normalize vector (sympy or complex/float).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec</strong> (<em>array-like</em>) – list of vectors.</p></li>
+<li><p><strong>tol</strong> (<em>float</em><em>, </em><em>optional</em>) – absolute norm tolerance for float.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(ndaray) – normalized vector.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util.progress_bar_done">
+<span class="sig-name descname"><span class="pre">progress_bar_done</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util.html#progress_bar_done"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util.progress_bar_done" title="Link to this definition">#</a></dt>
+<dd><p>Finalize progress bar.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>length</strong> (<em>int</em><em>, </em><em>optional</em>) – width.</p></li>
+<li><p><strong>label</strong> (<em>str</em><em>, </em><em>optional</em>) – prefix.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util.progress_bar_step">
+<span class="sig-name descname"><span class="pre">progress_bar_step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util.html#progress_bar_step"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util.progress_bar_step" title="Link to this definition">#</a></dt>
+<dd><p>Show progress bar.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>length</strong> (<em>int</em><em>, </em><em>optional</em>) – width.</p></li>
+<li><p><strong>label</strong> (<em>str</em><em>, </em><em>optional</em>) – prefix.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util.read_dict">
+<span class="sig-name descname"><span class="pre">read_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util.html#read_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util.read_dict" title="Link to this definition">#</a></dt>
+<dd><p>Read dict.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<em>str</em>) – file name.</p></li>
+<li><p><strong>r_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – directory to read, if None, cwd is used.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(dict) – read dict.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util.read_dict_file">
+<span class="sig-name descname"><span class="pre">read_dict_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util.html#read_dict_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util.read_dict_file" title="Link to this definition">#</a></dt>
+<dd><p>Read dict file or dict.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>str</em><em> or </em><em>dict</em>) – filename or dict.</p></li>
+<li><p><strong>topdir</strong> (<em>str</em><em>, </em><em>optional</em>) – top directory.</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em><em>, </em><em>optional</em>) – verbose ?</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(dict) – dict[var, data_dict].</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>if topdir is None, current directory is used.</p></li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util.replace">
+<span class="sig-name descname"><span class="pre">replace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util.html#replace"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util.replace" title="Link to this definition">#</a></dt>
+<dd><p>Replace expression (exchange among variables is ok).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<em>ndarray</em>) – array.</p></li>
+<li><p><strong>s</strong> (<em>dict</em>) – dict for substitution.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(ndarray) – replaced array.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util.setup_logging">
+<span class="sig-name descname"><span class="pre">setup_logging</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util.html#setup_logging"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util.setup_logging" title="Link to this definition">#</a></dt>
+<dd><p>Setup logging.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>level</strong> (<em>int</em><em>, </em><em>optional</em>) – log level.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util.str_to_sympy">
+<span class="sig-name descname"><span class="pre">str_to_sympy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check_var</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check_shape</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rational</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">assumptions</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util.html#str_to_sympy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util.str_to_sympy" title="Link to this definition">#</a></dt>
+<dd><p>Convert a string to a sympy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s</strong> (<em>str</em>) – a string.</p></li>
+<li><p><strong>check_var</strong> (<em>list</em><em>, </em><em>optional</em>) – variables to accept, None (all).</p></li>
+<li><p><strong>check_shape</strong> (<em>tuple</em><em>, </em><em>optional</em>) – shape, (), (n,), (n,m), …</p></li>
+<li><p><strong>rational</strong> (<em>bool</em><em>, </em><em>optional</em>) – use rational number ?</p></li>
+<li><p><strong>subs</strong> (<em>dict</em><em>, </em><em>optional</em>) – replace dict for local variables.</p></li>
+<li><p><strong>**assumptions</strong> (<em>dict</em><em>, </em><em>optional</em>) – common assumptions for all variables.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(ndarray) – (list of) sympy.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>if format error occurs, raise ValueError.</p></li>
+<li><p>if s cannot be converted to a sympy, raise ValueError.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util.time_stamp">
+<span class="sig-name descname"><span class="pre">time_stamp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util.html#time_stamp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util.time_stamp" title="Link to this definition">#</a></dt>
+<dd><p>Get current time stamp.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p>(str) – time stamp.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util.timer">
+<span class="sig-name descname"><span class="pre">timer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util.html#timer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util.timer" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util.to_latex">
+<span class="sig-name descname"><span class="pre">to_latex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">style</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'scalar'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util.html#to_latex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util.to_latex" title="Link to this definition">#</a></dt>
+<dd><p>convert list to latex list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<em>array-like</em>) – list of sympy.</p></li>
+<li><p><strong>style</strong> (<em>str</em><em>, </em><em>optional</em>) – style, “scalar/vector/matrix”.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(ndarray or str) – (list of) LaTeX string without “$”.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util.write_dict">
+<span class="sig-name descname"><span class="pre">write_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dic</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comment</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">w_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util.html#write_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util.write_dict" title="Link to this definition">#</a></dt>
+<dd><p>Write dict.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dic</strong> (<em>dict</em>) – dict to write.</p></li>
+<li><p><strong>filename</strong> (<em>str</em>) – file name.</p></li>
+<li><p><strong>var</strong> (<em>str</em><em>, </em><em>optional</em>) – dict variable, if None, filename is used.</p></li>
+<li><p><strong>comment</strong> (<em>str</em><em>, </em><em>optional</em>) – comment.</p></li>
+<li><p><strong>w_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – directory to write, if None, cwd is used.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 
     <script type="text/x-thebe-config">
@@ -393,6 +701,38 @@
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util.check_black"><code class="docutils literal notranslate"><span class="pre">check_black()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util.check_latex"><code class="docutils literal notranslate"><span class="pre">check_latex()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util.check_qtdraw"><code class="docutils literal notranslate"><span class="pre">check_qtdraw()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util.deep_update"><code class="docutils literal notranslate"><span class="pre">deep_update()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util.do_black"><code class="docutils literal notranslate"><span class="pre">do_black()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util.normalize_vector"><code class="docutils literal notranslate"><span class="pre">normalize_vector()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util.progress_bar_done"><code class="docutils literal notranslate"><span class="pre">progress_bar_done()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util.progress_bar_step"><code class="docutils literal notranslate"><span class="pre">progress_bar_step()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util.read_dict"><code class="docutils literal notranslate"><span class="pre">read_dict()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util.read_dict_file"><code class="docutils literal notranslate"><span class="pre">read_dict_file()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util.replace"><code class="docutils literal notranslate"><span class="pre">replace()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util.setup_logging"><code class="docutils literal notranslate"><span class="pre">setup_logging()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util.str_to_sympy"><code class="docutils literal notranslate"><span class="pre">str_to_sympy()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util.time_stamp"><code class="docutils literal notranslate"><span class="pre">time_stamp()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util.timer"><code class="docutils literal notranslate"><span class="pre">timer()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util.to_latex"><code class="docutils literal notranslate"><span class="pre">to_latex()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util.write_dict"><code class="docutils literal notranslate"><span class="pre">write_dict()</span></code></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

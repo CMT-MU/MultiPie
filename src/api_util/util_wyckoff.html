@@ -334,7 +334,9 @@
 <button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 </button>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -350,6 +352,28 @@
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_wyckoff.convert_to_bond"><code class="docutils literal notranslate"><span class="pre">convert_to_bond()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_wyckoff.create_cell_bond"><code class="docutils literal notranslate"><span class="pre">create_cell_bond()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_wyckoff.create_cell_site"><code class="docutils literal notranslate"><span class="pre">create_cell_site()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_wyckoff.create_equivalent_bond"><code class="docutils literal notranslate"><span class="pre">create_equivalent_bond()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_wyckoff.create_equivalent_site"><code class="docutils literal notranslate"><span class="pre">create_equivalent_site()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_wyckoff.create_mapping"><code class="docutils literal notranslate"><span class="pre">create_mapping()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_wyckoff.evaluate_wyckoff_bond"><code class="docutils literal notranslate"><span class="pre">evaluate_wyckoff_bond()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_wyckoff.evaluate_wyckoff_site"><code class="docutils literal notranslate"><span class="pre">evaluate_wyckoff_site()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_wyckoff.find_vector"><code class="docutils literal notranslate"><span class="pre">find_vector()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_wyckoff.find_wyckoff_bond"><code class="docutils literal notranslate"><span class="pre">find_wyckoff_bond()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_wyckoff.find_wyckoff_site"><code class="docutils literal notranslate"><span class="pre">find_wyckoff_site()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_wyckoff.find_xyz"><code class="docutils literal notranslate"><span class="pre">find_xyz()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_wyckoff.remove_duplicate_vector"><code class="docutils literal notranslate"><span class="pre">remove_duplicate_vector()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_wyckoff.wyckoff_bond_for_search"><code class="docutils literal notranslate"><span class="pre">wyckoff_bond_for_search()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_wyckoff.wyckoff_site_for_search"><code class="docutils literal notranslate"><span class="pre">wyckoff_site_for_search()</span></code></a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -359,8 +383,351 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="wyckoff-position">
-<h1>Wyckoff position<a class="headerlink" href="#wyckoff-position" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="module-multipie.util.util_wyckoff">
+<span id="wyckoff-position"></span><h1>Wyckoff position<a class="headerlink" href="#module-multipie.util.util_wyckoff" title="Link to this heading">#</a></h1>
+<p>For Wyckoff related.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_wyckoff.convert_to_bond">
+<span class="sig-name descname"><span class="pre">convert_to_bond</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bond</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_wyckoff.html#convert_to_bond"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_wyckoff.convert_to_bond" title="Link to this definition">#</a></dt>
+<dd><p>Convert to bond from str.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>bond</strong> (<em>str</em>) – bond.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(ndarray) – bond (vector,center).</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>bond string is “[tail];[head]/[vector]&#64;[center]/[start]:[vector]”.</p></li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_wyckoff.create_cell_bond">
+<span class="sig-name descname"><span class="pre">create_cell_bond</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bond</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_wyckoff.html#create_cell_bond"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_wyckoff.create_cell_bond" title="Link to this definition">#</a></dt>
+<dd><p>Create bonds in unit cell (sorted, nondirectional and with plus set).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>group</strong> (<em>dict</em>) – group dict.</p></li>
+<li><p><strong>bond</strong> (<em>ndarray</em><em> or </em><em>str</em>) – bond.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(ndarray) – bonds in unit cell.</p></li>
+<li><p>(list) – SO mapping (index from 1).</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>bond string is “[tail];[head]/[vector]&#64;[center]/[start]:[vector]”.</p></li>
+<li><p>negative value in mapping represents reversed bond.</p></li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_wyckoff.create_cell_site">
+<span class="sig-name descname"><span class="pre">create_cell_site</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">site</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_wyckoff.html#create_cell_site"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_wyckoff.create_cell_site" title="Link to this definition">#</a></dt>
+<dd><p>Create sites in unit cell (sorted and with plus set).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>group</strong> (<em>dict</em>) – group dict.</p></li>
+<li><p><strong>site</strong> (<em>ndarray</em><em> or </em><em>str</em>) – site.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(ndarray) – sites in unit cell.</p></li>
+<li><p>(list) – SO mapping (index from 1).</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>site string is “[x,y,z]”.</p></li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_wyckoff.create_equivalent_bond">
+<span class="sig-name descname"><span class="pre">create_equivalent_bond</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">so</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">so_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b0_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shift</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_wyckoff.html#create_equivalent_bond"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_wyckoff.create_equivalent_bond" title="Link to this definition">#</a></dt>
+<dd><p>Create equivalent bond for given bond, <a class="reference external" href="mailto:v0&#37;&#52;&#48;s0">v0<span>&#64;</span>s0</a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>so</strong> (<em>ndarray</em>) – symmetry operation (conventional) (PG:3x3) or (SG:4x4).</p></li>
+<li><p><strong>so_p</strong> (<em>ndarray</em>) – symmetry operation (primitive) (PG:3x3) or (SG:4x4).</p></li>
+<li><p><strong>b0_p</strong> (<em>ndarray</em>) – representative bond (primitive), (vector+center) (float).</p></li>
+<li><p><strong>shift</strong> (<em>bool</em>) – shift center for SG ?</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(ndarray) – set of equivalent bond (nondirectional, primitive) (vector+center).</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_wyckoff.create_equivalent_site">
+<span class="sig-name descname"><span class="pre">create_equivalent_site</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">so_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s0_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shift</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_wyckoff.html#create_equivalent_site"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_wyckoff.create_equivalent_site" title="Link to this definition">#</a></dt>
+<dd><p>Create equivalent site for given site, s0.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>so_p</strong> (<em>ndarray</em>) – symmetry operation (primitive) (PG:3x3) or (SG:4x4).</p></li>
+<li><p><strong>s0_p</strong> (<em>ndarray</em>) – representative site (primitive) (float).</p></li>
+<li><p><strong>shift</strong> (<em>bool</em>) – shift site for SG ?</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(ndarray) – set of equivalent site (primitive).</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_wyckoff.create_mapping">
+<span class="sig-name descname"><span class="pre">create_mapping</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">all_vec</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u_vec</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-08</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_wyckoff.html#create_mapping"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_wyckoff.create_mapping" title="Link to this definition">#</a></dt>
+<dd><p>Create mapping for vector list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>all_vec</strong> (<em>ndarray</em>) – vector list.</p></li>
+<li><p><strong>u_vec</strong> (<em>ndarray</em>) – unique vector list.</p></li>
+<li><p><strong>tol</strong> (<em>float</em><em>, </em><em>optional</em>) – tolerance for same vector.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(list) – mapping.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_wyckoff.evaluate_wyckoff_bond">
+<span class="sig-name descname"><span class="pre">evaluate_wyckoff_bond</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b_wp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">XYZxyz</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_wyckoff.html#evaluate_wyckoff_bond"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_wyckoff.evaluate_wyckoff_bond" title="Link to this definition">#</a></dt>
+<dd><p>Evaluate Wyckoff bond for given bond for X, Y, Z, x, y, z (with plus set).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>group</strong> (<em>dict</em>) – group dict.</p></li>
+<li><p><strong>b_wp</strong> (<em>str</em>) – Wyckoff bond.</p></li>
+<li><p><strong>XYZxyz</strong> (<em>dict</em>) – X, Y, Z, x, y, z value dict.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(ndarray) – set of Wyckoff bond (vector+center) (plus_set0, plus_set1, …).</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_wyckoff.evaluate_wyckoff_site">
+<span class="sig-name descname"><span class="pre">evaluate_wyckoff_site</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s_wp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xyz</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_wyckoff.html#evaluate_wyckoff_site"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_wyckoff.evaluate_wyckoff_site" title="Link to this definition">#</a></dt>
+<dd><p>Evaluate Wyckoff site for given site for x, y, z (with plus set).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>group</strong> (<em>dict</em>) – group dict.</p></li>
+<li><p><strong>s_wp</strong> (<em>str</em>) – Wyckoff site.</p></li>
+<li><p><strong>xyz</strong> (<em>dict</em>) – x, y, z value dict.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(ndarray) – set of Wyckoff site (plus_set0, plus_set1, …).</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_wyckoff.find_vector">
+<span class="sig-name descname"><span class="pre">find_vector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-08</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_wyckoff.html#find_vector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_wyckoff.find_vector" title="Link to this definition">#</a></dt>
+<dd><p>Find vector (lowest index only).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>target</strong> (<em>array-like</em>) – vector.</p></li>
+<li><p><strong>vec</strong> (<em>array-like</em>) – list of vectors.</p></li>
+<li><p><strong>tol</strong> (<em>float</em><em>, </em><em>optional</em>) – tolerance for same vector.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(int) – index (when not found, return None).</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_wyckoff.find_wyckoff_bond">
+<span class="sig-name descname"><span class="pre">find_wyckoff_bond</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bond</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_wyckoff.html#find_wyckoff_bond"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_wyckoff.find_wyckoff_bond" title="Link to this definition">#</a></dt>
+<dd><p>Find Wyckoff bond.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>group</strong> (<em>dict</em>) – group dict.</p></li>
+<li><p><strong>bond</strong> (<em>ndarray</em><em> or </em><em>str</em>) – bond (vector+center) to find.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(str) – Wyckoff bond position (return None when not found).</p></li>
+<li><p>(ndarray) – set of Wyckoff bond (vector+center) (plus_set0, plus_set1, …).</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>bond string is “[tail];[head]/[vector]&#64;[center]/[start]:[vector]”.</p></li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_wyckoff.find_wyckoff_site">
+<span class="sig-name descname"><span class="pre">find_wyckoff_site</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">site</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_wyckoff.html#find_wyckoff_site"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_wyckoff.find_wyckoff_site" title="Link to this definition">#</a></dt>
+<dd><p>Find Wyckoff site.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>group</strong> (<em>dict</em>) – group dict.</p></li>
+<li><p><strong>site</strong> (<em>ndarray</em><em> or </em><em>str</em>) – site to find.</p></li>
+<li><p><strong>msg</strong> (<em>bool</em><em>, </em><em>optional</em>) – MSG ?</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(str) – Wyckoff position (return None when not found).</p></li>
+<li><p>(ndarray) – set of Wyckoff site (plus_set0, plus_set1, …).</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>site string is “[x,y,z]”.</p></li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_wyckoff.find_xyz">
+<span class="sig-name descname"><span class="pre">find_xyz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">site</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['x',</span> <span class="pre">'y',</span> <span class="pre">'z']</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_wyckoff.html#find_xyz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_wyckoff.find_xyz" title="Link to this definition">#</a></dt>
+<dd><p>Find match in pos for given site, and obtain [x,y,z].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pos</strong> (<em>ndarray</em>) – set of vectors in terms of var.</p></li>
+<li><p><strong>site</strong> (<em>ndarray</em>) – site to match.</p></li>
+<li><p><strong>var</strong> (<em>list</em><em>, </em><em>optional</em>) – variable.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(dict) – (x,y,z) value (return None when not found).</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_wyckoff.remove_duplicate_vector">
+<span class="sig-name descname"><span class="pre">remove_duplicate_vector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">directional</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_wyckoff.html#remove_duplicate_vector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_wyckoff.remove_duplicate_vector" title="Link to this definition">#</a></dt>
+<dd><p>Remove duplicate vector.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec</strong> (<em>array-like</em>) – list of vectors.</p></li>
+<li><p><strong>directional</strong> (<em>bool</em><em>, </em><em>optional</em>) – directional vector ?</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(ndarray) – vectors.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>each vector is assumed to be site(3d) or bond(6d, vector+center).</p></li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_wyckoff.wyckoff_bond_for_search">
+<span class="sig-name descname"><span class="pre">wyckoff_bond_for_search</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bond_ex</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_wyckoff.html#wyckoff_bond_for_search"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_wyckoff.wyckoff_bond_for_search" title="Link to this definition">#</a></dt>
+<dd><p>Wyckoff bond for search with surrounding cell (no plus set).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>bond_ex</strong> (<em>ndarray</em>) – set of Wyckoff bond in terms of (X,Y,Z,x,y,z).</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(ndarray) – set of Wyckoff bond vector for search.</p></li>
+<li><p>(ndarray) – set of Wyckoff bond center for search.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_wyckoff.wyckoff_site_for_search">
+<span class="sig-name descname"><span class="pre">wyckoff_site_for_search</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">site_ex</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_wyckoff.html#wyckoff_site_for_search"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_wyckoff.wyckoff_site_for_search" title="Link to this definition">#</a></dt>
+<dd><p>Wyckoff site for search with surrounding cell (no plus set).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>site_ex</strong> (<em>ndarray</em>) – set of Wyckoff site in terms of (x,y,z).</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(ndarray) – set of Wyckoff site for search.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 
     <script type="text/x-thebe-config">
@@ -393,6 +760,36 @@
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_wyckoff.convert_to_bond"><code class="docutils literal notranslate"><span class="pre">convert_to_bond()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_wyckoff.create_cell_bond"><code class="docutils literal notranslate"><span class="pre">create_cell_bond()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_wyckoff.create_cell_site"><code class="docutils literal notranslate"><span class="pre">create_cell_site()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_wyckoff.create_equivalent_bond"><code class="docutils literal notranslate"><span class="pre">create_equivalent_bond()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_wyckoff.create_equivalent_site"><code class="docutils literal notranslate"><span class="pre">create_equivalent_site()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_wyckoff.create_mapping"><code class="docutils literal notranslate"><span class="pre">create_mapping()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_wyckoff.evaluate_wyckoff_bond"><code class="docutils literal notranslate"><span class="pre">evaluate_wyckoff_bond()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_wyckoff.evaluate_wyckoff_site"><code class="docutils literal notranslate"><span class="pre">evaluate_wyckoff_site()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_wyckoff.find_vector"><code class="docutils literal notranslate"><span class="pre">find_vector()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_wyckoff.find_wyckoff_bond"><code class="docutils literal notranslate"><span class="pre">find_wyckoff_bond()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_wyckoff.find_wyckoff_site"><code class="docutils literal notranslate"><span class="pre">find_wyckoff_site()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_wyckoff.find_xyz"><code class="docutils literal notranslate"><span class="pre">find_xyz()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_wyckoff.remove_duplicate_vector"><code class="docutils literal notranslate"><span class="pre">remove_duplicate_vector()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_wyckoff.wyckoff_bond_for_search"><code class="docutils literal notranslate"><span class="pre">wyckoff_bond_for_search()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_wyckoff.wyckoff_site_for_search"><code class="docutils literal notranslate"><span class="pre">wyckoff_site_for_search()</span></code></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

@@ -334,7 +334,9 @@
 <button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 </button>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -350,6 +352,42 @@
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_tag.TagBasis"><code class="docutils literal notranslate"><span class="pre">TagBasis</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_tag.TagBasis.latex"><code class="docutils literal notranslate"><span class="pre">TagBasis.latex()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_tag.TagBasis.parse"><code class="docutils literal notranslate"><span class="pre">TagBasis.parse()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_tag.TagBasis.str"><code class="docutils literal notranslate"><span class="pre">TagBasis.str()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_tag.TagIrrep"><code class="docutils literal notranslate"><span class="pre">TagIrrep</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_tag.TagIrrep.latex"><code class="docutils literal notranslate"><span class="pre">TagIrrep.latex()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_tag.TagIrrep.parse"><code class="docutils literal notranslate"><span class="pre">TagIrrep.parse()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_tag.TagIrrep.str"><code class="docutils literal notranslate"><span class="pre">TagIrrep.str()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_tag.TagMultipole"><code class="docutils literal notranslate"><span class="pre">TagMultipole</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_tag.TagMultipole.parse"><code class="docutils literal notranslate"><span class="pre">TagMultipole.parse()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_tag.TagMultipole.latex"><code class="docutils literal notranslate"><span class="pre">TagMultipole.latex()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_tag.TagMultipole.str"><code class="docutils literal notranslate"><span class="pre">TagMultipole.str()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_tag.TagMultipole.d_default"><code class="docutils literal notranslate"><span class="pre">TagMultipole.d_default</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_tag.TagMultipole.p_dict"><code class="docutils literal notranslate"><span class="pre">TagMultipole.p_dict</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_tag.TagMultipole.s_dict"><code class="docutils literal notranslate"><span class="pre">TagMultipole.s_dict</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_tag.TagMultipole.t_dict"><code class="docutils literal notranslate"><span class="pre">TagMultipole.t_dict</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_tag.TagSymmetryOperation"><code class="docutils literal notranslate"><span class="pre">TagSymmetryOperation</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_tag.TagSymmetryOperation.latex"><code class="docutils literal notranslate"><span class="pre">TagSymmetryOperation.latex()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_tag.TagSymmetryOperation.parse"><code class="docutils literal notranslate"><span class="pre">TagSymmetryOperation.parse()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_tag.TagSymmetryOperation.parse_axis"><code class="docutils literal notranslate"><span class="pre">TagSymmetryOperation.parse_axis()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_tag.TagSymmetryOperation.str"><code class="docutils literal notranslate"><span class="pre">TagSymmetryOperation.str()</span></code></a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -359,8 +397,322 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="tag">
-<h1>Tag<a class="headerlink" href="#tag" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="module-multipie.util.util_tag">
+<span id="tag"></span><h1>Tag<a class="headerlink" href="#module-multipie.util.util_tag" title="Link to this heading">#</a></h1>
+<p>For tag.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="multipie.util.util_tag.TagBasis">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">TagBasis</span></span><a class="reference internal" href="../../_modules/multipie/util/util_tag.html#TagBasis"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_tag.TagBasis" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="multipie.util.util_tag.TagBasis.latex">
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">latex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rank</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ket</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_tag.html#TagBasis.latex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_tag.TagBasis.latex" title="Link to this definition">#</a></dt>
+<dd><p>Convert to LaTeX.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tag</strong> (<em>str</em>) – basis tag.</p></li>
+<li><p><strong>rank</strong> (<em>int</em>) – rank.</p></li>
+<li><p><strong>ket</strong> (<em>bool</em><em>, </em><em>optional</em>) – ket ? otherwise bra.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(str) – in LaTeX format, without $.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multipie.util.util_tag.TagBasis.parse">
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">parse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tag</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_tag.html#TagBasis.parse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_tag.TagBasis.parse" title="Link to this definition">#</a></dt>
+<dd><p>Parse basis.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>idx</strong> (<em>str</em>) – tag.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool, spherical:bool, orbital(M/gamma/J):str, spin(spin/J_M):str).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p>(dict) – info, (spinless</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multipie.util.util_tag.TagBasis.str">
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">info</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rank</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_tag.html#TagBasis.str"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_tag.TagBasis.str" title="Link to this definition">#</a></dt>
+<dd><p>Convert to string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>info</strong> (<em>dict</em>) – basis info.</p></li>
+<li><p><strong>rank</strong> (<em>int</em>) – rank.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(str) – basis tag.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="multipie.util.util_tag.TagIrrep">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">TagIrrep</span></span><a class="reference internal" href="../../_modules/multipie/util/util_tag.html#TagIrrep"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_tag.TagIrrep" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="multipie.util.util_tag.TagIrrep.latex">
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">latex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tag</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_tag.html#TagIrrep.latex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_tag.TagIrrep.latex" title="Link to this definition">#</a></dt>
+<dd><p>Convert to LaTeX.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>tag</strong> (<em>str</em>) – irrep.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(str) – in LaTeX format, without $.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multipie.util.util_tag.TagIrrep.parse">
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">parse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tag</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_tag.html#TagIrrep.parse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_tag.TagIrrep.parse" title="Link to this definition">#</a></dt>
+<dd><p>Parse irrep.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>tag</strong> (<em>str</em>) – irrep.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>str, head:str, dimension:int, parity:str, complex:str, subscript:str, superscript:str).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p>(dict) – info, (tag</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multipie.util.util_tag.TagIrrep.str">
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">info</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_tag.html#TagIrrep.str"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_tag.TagIrrep.str" title="Link to this definition">#</a></dt>
+<dd><p>Convert to string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>info</strong> (<em>dict</em>) – irrep. info.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(str) – in string format.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="multipie.util.util_tag.TagMultipole">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">TagMultipole</span></span><a class="reference internal" href="../../_modules/multipie/util/util_tag.html#TagMultipole"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_tag.TagMultipole" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="multipie.util.util_tag.TagMultipole.parse">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">parse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mp_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">component</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_tag.html#TagMultipole.parse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_tag.TagMultipole.parse" title="Link to this definition">#</a></dt>
+<dd><p>Parse multipole.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>idx</strong> (<em>tuple</em>) – multipole index.</p></li>
+<li><p><strong>mp_type</strong> (<em>str</em>) – multipole type, “spherical/point_group”.</p></li>
+<li><p><strong>component</strong> (<em>int</em><em>, </em><em>optional</em>) – component.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>str, l:int, s:int, k:int, x:str, Gamma:str, n:int, p:int, component:int, t_type:str, p_type:str, mp_type: str).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p>(dict) – info, (X</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>spherical: (X, l, s, k, x), [type, rank, internal rank, internal component, internal type].</p></li>
+<li><p>point_group: (X, l, Gamma, n, p, s, k, x), [type, rank, irrep., multiplicity, additional multiplicity, internal rank, internal component, internal type].</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multipie.util.util_tag.TagMultipole.latex">
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">latex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mp_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">component</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vector</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">internal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_tag.html#TagMultipole.latex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_tag.TagMultipole.latex" title="Link to this definition">#</a></dt>
+<dd><p>Convert to LaTeX.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>idx</strong> (<em>tuple</em>) – multipole index.</p></li>
+<li><p><strong>mp_type</strong> (<em>str</em>) – multipole type, “spherical/point_group”.</p></li>
+<li><p><strong>component</strong> (<em>int</em><em>, </em><em>optional</em>) – component.</p></li>
+<li><p><strong>tag</strong> (<em>str</em><em>, </em><em>optional</em>) – superscript.</p></li>
+<li><p><strong>vector</strong> (<em>bool</em><em>, </em><em>optional</em>) – with vector arrow ?</p></li>
+<li><p><strong>internal</strong> (<em>bool</em><em>, </em><em>optional</em>) – add internal info. ?</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(str) – in LaTeX format, without $.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multipie.util.util_tag.TagMultipole.str">
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">info</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_tag.html#TagMultipole.str"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_tag.TagMultipole.str" title="Link to this definition">#</a></dt>
+<dd><p>Convert to string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>info</strong> (<em>dict</em>) – multipole info.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(str) – multipole in str.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="multipie.util.util_tag.TagMultipole.d_default">
+<span class="sig-name descname"><span class="pre">d_default</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'Gamma':</span> <span class="pre">'',</span> <span class="pre">'X':</span> <span class="pre">'Q',</span> <span class="pre">'component':</span> <span class="pre">None,</span> <span class="pre">'k':</span> <span class="pre">0,</span> <span class="pre">'l':</span> <span class="pre">0,</span> <span class="pre">'mp_type':</span> <span class="pre">'spherical',</span> <span class="pre">'n':</span> <span class="pre">-1,</span> <span class="pre">'p':</span> <span class="pre">-1,</span> <span class="pre">'p_type':</span> <span class="pre">'polar',</span> <span class="pre">'s':</span> <span class="pre">0,</span> <span class="pre">'t_type':</span> <span class="pre">'electric',</span> <span class="pre">'x':</span> <span class="pre">'q'}</span></span><a class="headerlink" href="#multipie.util.util_tag.TagMultipole.d_default" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="multipie.util.util_tag.TagMultipole.p_dict">
+<span class="sig-name descname"><span class="pre">p_dict</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'G':</span> <span class="pre">'axial',</span> <span class="pre">'M':</span> <span class="pre">'axial',</span> <span class="pre">'Q':</span> <span class="pre">'polar',</span> <span class="pre">'T':</span> <span class="pre">'polar'}</span></span><a class="headerlink" href="#multipie.util.util_tag.TagMultipole.p_dict" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="multipie.util.util_tag.TagMultipole.s_dict">
+<span class="sig-name descname"><span class="pre">s_dict</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{0:</span> <span class="pre">'s',</span> <span class="pre">1:</span> <span class="pre">'p',</span> <span class="pre">2:</span> <span class="pre">'d',</span> <span class="pre">3:</span> <span class="pre">'f'}</span></span><a class="headerlink" href="#multipie.util.util_tag.TagMultipole.s_dict" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="multipie.util.util_tag.TagMultipole.t_dict">
+<span class="sig-name descname"><span class="pre">t_dict</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'G':</span> <span class="pre">'electric',</span> <span class="pre">'M':</span> <span class="pre">'magnetic',</span> <span class="pre">'Q':</span> <span class="pre">'electric',</span> <span class="pre">'T':</span> <span class="pre">'magnetic'}</span></span><a class="headerlink" href="#multipie.util.util_tag.TagMultipole.t_dict" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="multipie.util.util_tag.TagSymmetryOperation">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">TagSymmetryOperation</span></span><a class="reference internal" href="../../_modules/multipie/util/util_tag.html#TagSymmetryOperation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_tag.TagSymmetryOperation" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="multipie.util.util_tag.TagSymmetryOperation.latex">
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">latex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tag</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_tag.html#TagSymmetryOperation.latex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_tag.TagSymmetryOperation.latex" title="Link to this definition">#</a></dt>
+<dd><p>Convert to LaTeX.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>tag</strong> (<em>str</em>) – symmetry operation.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(str) – in LaTeX format, without $.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multipie.util.util_tag.TagSymmetryOperation.parse">
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">parse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hexagonal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_tag.html#TagSymmetryOperation.parse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_tag.TagSymmetryOperation.parse" title="Link to this definition">#</a></dt>
+<dd><p>Parse symmetry operation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tag</strong> (<em>str</em>) – symmetry operation.</p></li>
+<li><p><strong>hexagonal</strong> (<em>bool</em><em>, </em><em>optional</em>) – convert to cartesian coordinate for hexagonal systems ?</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>info, (mirror:bool, inversion:bool, n:int, axis:str, det:int, partial_trans:str, zero_trans:bool, point_group:bool, time_reversal:bool).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p>(dict)</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>format of symmetry-operation string (translation is omittable).</p></li>
+<li><p>inversion(-) n-fold rotation(2,3+/-,4+/-,6+/-)mirror(m) axis[n1n2n3][’] :translation[t1,t2,t3].</p></li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multipie.util.util_tag.TagSymmetryOperation.parse_axis">
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">parse_axis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tag</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_tag.html#TagSymmetryOperation.parse_axis"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_tag.TagSymmetryOperation.parse_axis" title="Link to this definition">#</a></dt>
+<dd><p>Parse axis string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>tag</strong> (<em>str</em>) – axis string (without [],comma,space).</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(str) axis, [a,b,c].</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multipie.util.util_tag.TagSymmetryOperation.str">
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">info</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hexagonal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_tag.html#TagSymmetryOperation.str"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_tag.TagSymmetryOperation.str" title="Link to this definition">#</a></dt>
+<dd><p>Convert to string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>info</strong> (<em>dict</em>) – symmetry operation info.</p></li>
+<li><p><strong>hexagonal</strong> (<em>bool</em><em>, </em><em>optional</em>) – convert from cartesian coordinate for hexagonal systems ?</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(str) – in string format.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 
     <script type="text/x-thebe-config">
@@ -393,6 +745,50 @@
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_tag.TagBasis"><code class="docutils literal notranslate"><span class="pre">TagBasis</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_tag.TagBasis.latex"><code class="docutils literal notranslate"><span class="pre">TagBasis.latex()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_tag.TagBasis.parse"><code class="docutils literal notranslate"><span class="pre">TagBasis.parse()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_tag.TagBasis.str"><code class="docutils literal notranslate"><span class="pre">TagBasis.str()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_tag.TagIrrep"><code class="docutils literal notranslate"><span class="pre">TagIrrep</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_tag.TagIrrep.latex"><code class="docutils literal notranslate"><span class="pre">TagIrrep.latex()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_tag.TagIrrep.parse"><code class="docutils literal notranslate"><span class="pre">TagIrrep.parse()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_tag.TagIrrep.str"><code class="docutils literal notranslate"><span class="pre">TagIrrep.str()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_tag.TagMultipole"><code class="docutils literal notranslate"><span class="pre">TagMultipole</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_tag.TagMultipole.parse"><code class="docutils literal notranslate"><span class="pre">TagMultipole.parse()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_tag.TagMultipole.latex"><code class="docutils literal notranslate"><span class="pre">TagMultipole.latex()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_tag.TagMultipole.str"><code class="docutils literal notranslate"><span class="pre">TagMultipole.str()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_tag.TagMultipole.d_default"><code class="docutils literal notranslate"><span class="pre">TagMultipole.d_default</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_tag.TagMultipole.p_dict"><code class="docutils literal notranslate"><span class="pre">TagMultipole.p_dict</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_tag.TagMultipole.s_dict"><code class="docutils literal notranslate"><span class="pre">TagMultipole.s_dict</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_tag.TagMultipole.t_dict"><code class="docutils literal notranslate"><span class="pre">TagMultipole.t_dict</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_tag.TagSymmetryOperation"><code class="docutils literal notranslate"><span class="pre">TagSymmetryOperation</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_tag.TagSymmetryOperation.latex"><code class="docutils literal notranslate"><span class="pre">TagSymmetryOperation.latex()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_tag.TagSymmetryOperation.parse"><code class="docutils literal notranslate"><span class="pre">TagSymmetryOperation.parse()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_tag.TagSymmetryOperation.parse_axis"><code class="docutils literal notranslate"><span class="pre">TagSymmetryOperation.parse_axis()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_tag.TagSymmetryOperation.str"><code class="docutils literal notranslate"><span class="pre">TagSymmetryOperation.str()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

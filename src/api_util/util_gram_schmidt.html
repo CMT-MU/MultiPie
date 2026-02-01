@@ -334,7 +334,9 @@
 <button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 </button>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -350,6 +352,16 @@
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_gram_schmidt.gram_schmidt"><code class="docutils literal notranslate"><span class="pre">gram_schmidt()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_gram_schmidt.gram_schmidt_complex"><code class="docutils literal notranslate"><span class="pre">gram_schmidt_complex()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_gram_schmidt.gram_schmidt_float"><code class="docutils literal notranslate"><span class="pre">gram_schmidt_float()</span></code></a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -359,8 +371,74 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="grad-schmidt-orthonormalization">
-<h1>Grad-Schmidt orthonormalization<a class="headerlink" href="#grad-schmidt-orthonormalization" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="module-multipie.util.util_gram_schmidt">
+<span id="grad-schmidt-orthonormalization"></span><h1>Grad-Schmidt orthonormalization<a class="headerlink" href="#module-multipie.util.util_gram_schmidt" title="Link to this heading">#</a></h1>
+<p>For Gram-Schmidt orthonormalization.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_gram_schmidt.gram_schmidt">
+<span class="sig-name descname"><span class="pre">gram_schmidt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_gram_schmidt.html#gram_schmidt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_gram_schmidt.gram_schmidt" title="Link to this definition">#</a></dt>
+<dd><p>Gram-Schmidt orthogonalization (sympy).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec</strong> (<em>array-like</em>) – list of vectors to be orthogonalized, [[sympy]].</p></li>
+<li><p><strong>n_max</strong> (<em>int</em><em>, </em><em>optional</em>) – max. of nonzero basis.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(ndarray) – list of nonzero orthogonalized vectors, [[sympy]].</p></li>
+<li><p>(ndarray) – indices of nonzero vectors, [int].</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_gram_schmidt.gram_schmidt_complex">
+<span class="sig-name descname"><span class="pre">gram_schmidt_complex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">TOL</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-08</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_gram_schmidt.html#gram_schmidt_complex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_gram_schmidt.gram_schmidt_complex" title="Link to this definition">#</a></dt>
+<dd><p>Gram-Schmidt orthogonalization for complex vectors by converting to complex.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec</strong> (<em>array-like</em>) – list of vectors to be orthogonalized, [[sympy]].</p></li>
+<li><p><strong>n_max</strong> (<em>int</em><em>, </em><em>optional</em>) – max. of nonzero basis.</p></li>
+<li><p><strong>TOL</strong> (<em>float</em><em>, </em><em>optional</em>) – absolute tolerance.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(ndarray) – list of nonzero orthogonalized vectors, [[complex]].</p></li>
+<li><p>(ndarray) – indices of nonzero vectors, [int].</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_gram_schmidt.gram_schmidt_float">
+<span class="sig-name descname"><span class="pre">gram_schmidt_float</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vec</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">TOL</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-08</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_gram_schmidt.html#gram_schmidt_float"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_gram_schmidt.gram_schmidt_float" title="Link to this definition">#</a></dt>
+<dd><p>Gram-Schmidt orthogonalization for real vectors by converting to float.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vec</strong> (<em>array-like</em>) – list of vectors to be orthogonalized, [[sympy]].</p></li>
+<li><p><strong>n_max</strong> (<em>int</em><em>, </em><em>optional</em>) – max. of nonzero basis.</p></li>
+<li><p><strong>TOL</strong> (<em>float</em><em>, </em><em>optional</em>) – absolute tolerance.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(ndarray) – list of nonzero orthogonalized vectors, [[float]].</p></li>
+<li><p>(ndarray) – indices of nonzero vectors, [int].</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 
     <script type="text/x-thebe-config">
@@ -393,6 +471,24 @@
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_gram_schmidt.gram_schmidt"><code class="docutils literal notranslate"><span class="pre">gram_schmidt()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_gram_schmidt.gram_schmidt_complex"><code class="docutils literal notranslate"><span class="pre">gram_schmidt_complex()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_gram_schmidt.gram_schmidt_float"><code class="docutils literal notranslate"><span class="pre">gram_schmidt_float()</span></code></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
