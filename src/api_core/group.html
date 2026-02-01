@@ -383,6 +383,7 @@
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.group.Group.name"><code class="docutils literal notranslate"><span class="pre">Group.name()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.group.Group.response_tensor"><code class="docutils literal notranslate"><span class="pre">Group.response_tensor()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.group.Group.response_tensor_all"><code class="docutils literal notranslate"><span class="pre">Group.response_tensor_all()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.group.Group.tag_atomic_basis_proj"><code class="docutils literal notranslate"><span class="pre">Group.tag_atomic_basis_proj()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.group.Group.transform_multipole"><code class="docutils literal notranslate"><span class="pre">Group.transform_multipole()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.group.Group.transform_vector"><code class="docutils literal notranslate"><span class="pre">Group.transform_vector()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.group.Group.ID"><code class="docutils literal notranslate"><span class="pre">Group.ID</span></code></a></li>
@@ -1003,6 +1004,28 @@
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="multipie.core.group.Group.tag_atomic_basis_proj">
+<span class="sig-name descname"><span class="pre">tag_atomic_basis_proj</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">basis_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rank</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ket</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/core/group.html#Group.tag_atomic_basis_proj"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.core.group.Group.tag_atomic_basis_proj" title="Link to this definition">#</a></dt>
+<dd><p>Tag atomic basis for given option.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>basis_type</strong> (<em>str</em>) – basis type, “jml”, “lgs”, “lg”.</p></li>
+<li><p><strong>rank</strong> (<em>int</em>) – rank.</p></li>
+<li><p><strong>mask</strong> (<em>list</em><em>, </em><em>optional</em>) – mask, [int], [str], U=&lt;JML/Lgs/Lg | n&gt;.</p></li>
+<li><p><strong>ket</strong> (<em>bool</em><em>, </em><em>optional</em>) – ket or bra ?</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(list) – list of basis in sympy.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="multipie.core.group.Group.transform_multipole">
 <span class="sig-name descname"><span class="pre">transform_multipole</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">multipole</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Q'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/core/group.html#Group.transform_multipole"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.core.group.Group.transform_multipole" title="Link to this definition">#</a></dt>
 <dd><p>Transform multipole.</p>
@@ -1302,6 +1325,7 @@
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.group.Group.name"><code class="docutils literal notranslate"><span class="pre">Group.name()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.group.Group.response_tensor"><code class="docutils literal notranslate"><span class="pre">Group.response_tensor()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.group.Group.response_tensor_all"><code class="docutils literal notranslate"><span class="pre">Group.response_tensor_all()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.group.Group.tag_atomic_basis_proj"><code class="docutils literal notranslate"><span class="pre">Group.tag_atomic_basis_proj()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.group.Group.transform_multipole"><code class="docutils literal notranslate"><span class="pre">Group.transform_multipole()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.group.Group.transform_vector"><code class="docutils literal notranslate"><span class="pre">Group.transform_vector()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.group.Group.ID"><code class="docutils literal notranslate"><span class="pre">Group.ID</span></code></a></li>

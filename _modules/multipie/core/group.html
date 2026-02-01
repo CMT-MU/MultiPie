@@ -702,6 +702,45 @@
 
 
     <span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="Group.tag_atomic_basis_proj">
+<a class="viewcode-back" href="../../../src/api_core/group.html#multipie.core.group.Group.tag_atomic_basis_proj">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">tag_atomic_basis_proj</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">basis_type</span><span class="p">,</span> <span class="n">rank</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ket</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Tag atomic basis for given option.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            basis_type (str): basis type, &quot;jml&quot;, &quot;lgs&quot;, &quot;lg&quot;.</span>
+<span class="sd">            rank (int): rank.</span>
+<span class="sd">            mask (list, optional): mask, [int], [str], U=&lt;JML/Lgs/Lg | n&gt;.</span>
+<span class="sd">            ket (bool, optional): ket or bra ?</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            - (list) -- list of basis in sympy.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">basis_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;jml&quot;</span><span class="p">,</span> <span class="s2">&quot;lgs&quot;</span><span class="p">,</span> <span class="s2">&quot;lg&quot;</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;unknown basis_type, &#39;</span><span class="si">{</span><span class="n">basis_type</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
+
+        <span class="n">basis</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">atomic_basis</span><span class="p">(</span><span class="n">basis_type</span><span class="p">)[</span><span class="n">rank</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">mask</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">mask</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">basis</span><span class="p">)))</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="n">U</span> <span class="o">=</span> <span class="n">str_to_sympy</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">ket</span><span class="p">:</span>
+                    <span class="n">U</span> <span class="o">=</span> <span class="n">U</span><span class="o">.</span><span class="n">conjugate</span><span class="p">()</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="n">sp</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tag_atomic_basis</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">rank</span><span class="p">,</span> <span class="n">ket</span><span class="p">,</span> <span class="n">latex</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">basis</span><span class="p">])</span>
+            <span class="n">tags</span> <span class="o">=</span> <span class="p">(</span><span class="n">s</span> <span class="o">@</span> <span class="n">U</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">mask</span><span class="p">):</span>
+                <span class="n">mask</span> <span class="o">=</span> <span class="p">[</span><span class="n">basis</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">mask</span><span class="p">]</span>
+            <span class="n">tags</span> <span class="o">=</span> <span class="p">[</span><span class="n">sp</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tag_atomic_basis</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">rank</span><span class="p">,</span> <span class="n">ket</span><span class="p">,</span> <span class="n">latex</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">mask</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">tags</span></div>
+
+
+    <span class="c1"># ==================================================</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Group tag.</span>
@@ -1003,7 +1042,10 @@
             <span class="c1"># remove zero matrices</span>
             <span class="n">dic</span> <span class="o">=</span> <span class="n">Dict</span><span class="p">(</span><span class="n">dic</span><span class="o">.</span><span class="n">key_type</span><span class="p">,</span> <span class="p">{</span><span class="n">tag</span><span class="p">:</span> <span class="p">(</span><span class="n">mat</span><span class="p">,</span> <span class="n">ex</span><span class="p">)</span> <span class="k">for</span> <span class="n">tag</span><span class="p">,</span> <span class="p">(</span><span class="n">mat</span><span class="p">,</span> <span class="n">ex</span><span class="p">)</span> <span class="ow">in</span> <span class="n">dic</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">mat</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)})</span>
 
-            <span class="n">dic</span> <span class="o">=</span> <span class="n">orthogonalize_multipole</span><span class="p">(</span><span class="n">dic</span><span class="p">,</span> <span class="n">bra_rank</span> <span class="o">==</span> <span class="n">ket_rank</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">basis_type</span> <span class="o">!=</span> <span class="s2">&quot;jml&quot;</span><span class="p">:</span>
+                <span class="n">dic</span> <span class="o">=</span> <span class="n">orthogonalize_multipole</span><span class="p">(</span><span class="n">dic</span><span class="p">,</span> <span class="n">bra_rank</span> <span class="o">==</span> <span class="n">ket_rank</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">dic</span> <span class="o">=</span> <span class="n">orthogonalize_multipole</span><span class="p">(</span><span class="n">dic</span><span class="p">,</span> <span class="p">(</span><span class="n">bra_rank</span> <span class="o">==</span> <span class="n">ket_rank</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">bra_mask</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">ket_mask</span><span class="p">)))</span>
 
         <span class="k">return</span> <span class="n">dic</span></div>
 
