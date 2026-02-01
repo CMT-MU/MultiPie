@@ -14,6 +14,7 @@
 \usepackage{multirow}
 \usepackage{booktabs}
 \usepackage{longtable}
+\usepackage[justification=raggedright, singlelinecheck=off]{caption}
 
 %%% layout setting
 
@@ -51,7 +52,7 @@
 Model for ``\texttt{CH4}''
 \end{center}
 \begin{flushright}
-Generated on 2026-02-01 11:15:00 by MultiPie 2.0.7
+Generated on 2026-02-01 12:25:45 by MultiPie 2.0.8
 \end{flushright}
 \setlength{\baselineskip}{16pt}
 \footnotesize
@@ -128,9 +129,8 @@ Generated on 2026-02-01 11:15:00 by MultiPie 2.0.7
 \noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{Symmetry Operation}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
 \vspace{3mm}
 
-\begin{center}
 \renewcommand{\arraystretch}{1.6}
-\begin{longtable}{c|cl|cl|cl|cl|cl}
+\begin{longtable}[l]{c|cl|cl|cl|cl|cl}
 \caption{Symmetry operation}
  \\
  \hline \hline
@@ -152,14 +152,12 @@ Generated on 2026-02-01 11:15:00 by MultiPie 2.0.7
 & 16 & $-4^{-}_{\,\,001}$ & 17 & ${\rm m}_{01-1}$ & 18 & $-4^{+}_{\,\,100}$ & 19 & $-4^{-}_{\,\,100}$ & 20 & ${\rm m}_{011}$ \\
 & 21 & ${\rm m}_{-101}$ & 22 & $-4^{-}_{\,\,010}$ & 23 & ${\rm m}_{101}$ & 24 & $-4^{+}_{\,\,010}$ &  &  \\
 \end{longtable}
-\end{center}
 \vspace{5mm}
 \noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{Harmonics}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
 \vspace{3mm}
 
-\begin{center}
 \renewcommand{\arraystretch}{1.6}
-\begin{longtable}{clcccccl}
+\begin{longtable}[l]{clcccccl}
 \caption{Harmonics}
  \\
  \hline \hline
@@ -201,14 +199,12 @@ Generated on 2026-02-01 11:15:00 by MultiPie 2.0.7
 24 & $\mathbb{G}_{3,2}(T_{2})$ &  &  &  &  & 2 & $- \frac{\sqrt{15} y \left(x - z\right) \left(x + z\right)}{2}$ \\
 25 & $\mathbb{G}_{3,3}(T_{2})$ &  &  &  &  & 3 & $\frac{\sqrt{15} z \left(x - y\right) \left(x + y\right)}{2}$ \\
 \end{longtable}
-\end{center}
 \vspace{5mm}
 \noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{Basis in full matrix}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
 \vspace{3mm}
 
-\begin{center}
 \renewcommand{\arraystretch}{1.6}
-\begin{longtable}{c|cl|cl|cl|cl|cl}
+\begin{longtable}[l]{c|cl|cl|cl|cl|cl}
 \caption{dimension = 16}
  \\
  \hline \hline
@@ -229,10 +225,8 @@ Generated on 2026-02-01 11:15:00 by MultiPie 2.0.7
 & 10 & $\ket{s_{},\uparrow}@{\rm H}(2)$ & 11 & $\ket{s_{},\downarrow}@{\rm H}(2)$ & 12 & $\ket{s_{},\uparrow}@{\rm H}(3)$ & 13 & $\ket{s_{},\downarrow}@{\rm H}(3)$ & 14 & $\ket{s_{},\uparrow}@{\rm H}(4)$ \\
 & 15 & $\ket{s_{},\downarrow}@{\rm H}(4)$ &  &  &  &  &  &  &  &  \\
 \end{longtable}
-\end{center}
-\begin{center}
 \renewcommand{\arraystretch}{1.6}
-\begin{longtable}{ll}
+\begin{longtable}[l]{ll}
 \caption{Atomic basis (orbital part only)}
  \\
  \hline \hline
@@ -253,16 +247,13 @@ $ \ket{p_{x}} $ & $ x $ \\
 $ \ket{p_{y}} $ & $ y $ \\
 $ \ket{p_{z}} $ & $ z $ \\
 \end{longtable}
-\end{center}
 \vspace{5mm}
-\noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{SAMB}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
+\noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{SAMB: 11 (all 11)}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
 \vspace{3mm}
 
-\noindent11 (all 11) SAMBs
-
 \vspace{5mm}
 
-\noindent\textbullet\, '\texttt{C}' site-cluster : \texttt{C}
+\noindent\textbullet\, \texttt{C} : '\texttt{C}' site-cluster
 
 \noindent\quad * bra: $\bra{s_{},\uparrow},\, \bra{s_{},\downarrow}$
 
@@ -271,11 +262,11 @@ $ \ket{p_{z}} $ & $ z $ \\
 \noindent\quad * wyckoff: \texttt{1o}
 
 \begin{dmath*}
-\fbox{z1}\quad \mathbb{Q}_{0}^{(c)}(A_{1})=\mathbb{Q}_{0}^{(a)}(A_{1}) \mathbb{Q}_{0}^{(s)}(A_{1})
+\hspace*{3mm}\fbox{z1}\quad \mathbb{Q}_{0}^{(c)}(A_{1})=\mathbb{Q}_{0}^{(a)}(A_{1}) \mathbb{Q}_{0}^{(s)}(A_{1})
 \end{dmath*}
 \vspace{5mm}
 
-\noindent\textbullet\, '\texttt{C}' site-cluster : \texttt{C}
+\noindent\textbullet\, \texttt{C} : '\texttt{C}' site-cluster
 
 \noindent\quad * bra: $\bra{s_{},\uparrow},\, \bra{s_{},\downarrow}$
 
@@ -284,11 +275,11 @@ $ \ket{p_{z}} $ & $ z $ \\
 \noindent\quad * wyckoff: \texttt{1o}
 
 \begin{dmath*}
-\fbox{z8}\quad \mathbb{G}_{0}^{(1,1;c)}(A_{2})=\mathbb{G}_{0}^{(1,1;a)}(A_{2}) \mathbb{Q}_{0}^{(s)}(A_{1})
+\hspace*{3mm}\fbox{z8}\quad \mathbb{G}_{0}^{(1,1;c)}(A_{2})=\mathbb{G}_{0}^{(1,1;a)}(A_{2}) \mathbb{Q}_{0}^{(s)}(A_{1})
 \end{dmath*}
 \vspace{5mm}
 
-\noindent\textbullet\, '\texttt{C}' site-cluster : \texttt{C}
+\noindent\textbullet\, \texttt{C} : '\texttt{C}' site-cluster
 
 \noindent\quad * bra: $\bra{p_{x},\uparrow},\, \bra{p_{x},\downarrow},\, \bra{p_{y},\uparrow},\, \bra{p_{y},\downarrow},\, \bra{p_{z},\uparrow},\, \bra{p_{z},\downarrow}$
 
@@ -297,14 +288,14 @@ $ \ket{p_{z}} $ & $ z $ \\
 \noindent\quad * wyckoff: \texttt{1o}
 
 \begin{dmath*}
-\fbox{z2}\quad \mathbb{Q}_{0}^{(c)}(A_{1})=\mathbb{Q}_{0}^{(a)}(A_{1}) \mathbb{Q}_{0}^{(s)}(A_{1})
+\hspace*{3mm}\fbox{z2}\quad \mathbb{Q}_{0}^{(c)}(A_{1})=\mathbb{Q}_{0}^{(a)}(A_{1}) \mathbb{Q}_{0}^{(s)}(A_{1})
 \end{dmath*}
 \begin{dmath*}
-\fbox{z3}\quad \mathbb{Q}_{0}^{(1,1;c)}(A_{1})=\mathbb{Q}_{0}^{(1,1;a)}(A_{1}) \mathbb{Q}_{0}^{(s)}(A_{1})
+\hspace*{3mm}\fbox{z3}\quad \mathbb{Q}_{0}^{(1,1;c)}(A_{1})=\mathbb{Q}_{0}^{(1,1;a)}(A_{1}) \mathbb{Q}_{0}^{(s)}(A_{1})
 \end{dmath*}
 \vspace{5mm}
 
-\noindent\textbullet\, '\texttt{H}' site-cluster : \texttt{H}
+\noindent\textbullet\, \texttt{H} : '\texttt{H}' site-cluster
 
 \noindent\quad * bra: $\bra{s_{},\uparrow},\, \bra{s_{},\downarrow}$
 
@@ -313,11 +304,11 @@ $ \ket{p_{z}} $ & $ z $ \\
 \noindent\quad * wyckoff: \texttt{4a}
 
 \begin{dmath*}
-\fbox{z4}\quad \mathbb{Q}_{0}^{(c)}(A_{1})=\mathbb{Q}_{0}^{(a)}(A_{1}) \mathbb{Q}_{0}^{(s)}(A_{1})
+\hspace*{3mm}\fbox{z4}\quad \mathbb{Q}_{0}^{(c)}(A_{1})=\mathbb{Q}_{0}^{(a)}(A_{1}) \mathbb{Q}_{0}^{(s)}(A_{1})
 \end{dmath*}
 \vspace{5mm}
 
-\noindent\textbullet\, '\texttt{C}'-'\texttt{H}' bond-cluster : \texttt{H;C_001_1}
+\noindent\textbullet\, \texttt{H;C_001_1} : '\texttt{C}'-'\texttt{H}' bond-cluster
 
 \noindent\quad * bra: $\bra{s_{},\uparrow},\, \bra{s_{},\downarrow}$
 
@@ -326,14 +317,14 @@ $ \ket{p_{z}} $ & $ z $ \\
 \noindent\quad * wyckoff: \texttt{4a@4a}
 
 \begin{dmath*}
-\fbox{z5}\quad \mathbb{Q}_{0}^{(c)}(A_{1})=\mathbb{Q}_{0}^{(a)}(A_{1}) \mathbb{Q}_{0}^{(b)}(A_{1})
+\hspace*{3mm}\fbox{z5}\quad \mathbb{Q}_{0}^{(c)}(A_{1})=\mathbb{Q}_{0}^{(a)}(A_{1}) \mathbb{Q}_{0}^{(b)}(A_{1})
 \end{dmath*}
 \begin{dmath*}
-\fbox{z9}\quad \mathbb{G}_{0}^{(1,-1;c)}(A_{2})=\frac{\sqrt{3} \mathbb{M}_{1,1}^{(1,-1;a)}(T_{1}) \mathbb{T}_{1,1}^{(b)}(T_{2})}{3} + \frac{\sqrt{3} \mathbb{M}_{1,2}^{(1,-1;a)}(T_{1}) \mathbb{T}_{1,2}^{(b)}(T_{2})}{3} + \frac{\sqrt{3} \mathbb{M}_{1,3}^{(1,-1;a)}(T_{1}) \mathbb{T}_{1,3}^{(b)}(T_{2})}{3}
+\hspace*{3mm}\fbox{z9}\quad \mathbb{G}_{0}^{(1,-1;c)}(A_{2})=\frac{\sqrt{3} \mathbb{M}_{1,1}^{(1,-1;a)}(T_{1}) \mathbb{T}_{1,1}^{(b)}(T_{2})}{3} + \frac{\sqrt{3} \mathbb{M}_{1,2}^{(1,-1;a)}(T_{1}) \mathbb{T}_{1,2}^{(b)}(T_{2})}{3} + \frac{\sqrt{3} \mathbb{M}_{1,3}^{(1,-1;a)}(T_{1}) \mathbb{T}_{1,3}^{(b)}(T_{2})}{3}
 \end{dmath*}
 \vspace{5mm}
 
-\noindent\textbullet\, '\texttt{C}'-'\texttt{H}' bond-cluster : \texttt{H;C_001_1}
+\noindent\textbullet\, \texttt{H;C_001_1} : '\texttt{C}'-'\texttt{H}' bond-cluster
 
 \noindent\quad * bra: $\bra{p_{x},\uparrow},\, \bra{p_{x},\downarrow},\, \bra{p_{y},\uparrow},\, \bra{p_{y},\downarrow},\, \bra{p_{z},\uparrow},\, \bra{p_{z},\downarrow}$
 
@@ -342,16 +333,16 @@ $ \ket{p_{z}} $ & $ z $ \\
 \noindent\quad * wyckoff: \texttt{4a@4a}
 
 \begin{dmath*}
-\fbox{z6}\quad \mathbb{Q}_{0}^{(c)}(A_{1})=\frac{\sqrt{3} \mathbb{Q}_{1,1}^{(a)}(T_{2}) \mathbb{Q}_{1,1}^{(b)}(T_{2})}{3} + \frac{\sqrt{3} \mathbb{Q}_{1,2}^{(a)}(T_{2}) \mathbb{Q}_{1,2}^{(b)}(T_{2})}{3} + \frac{\sqrt{3} \mathbb{Q}_{1,3}^{(a)}(T_{2}) \mathbb{Q}_{1,3}^{(b)}(T_{2})}{3}
+\hspace*{3mm}\fbox{z6}\quad \mathbb{Q}_{0}^{(c)}(A_{1})=\frac{\sqrt{3} \mathbb{Q}_{1,1}^{(a)}(T_{2}) \mathbb{Q}_{1,1}^{(b)}(T_{2})}{3} + \frac{\sqrt{3} \mathbb{Q}_{1,2}^{(a)}(T_{2}) \mathbb{Q}_{1,2}^{(b)}(T_{2})}{3} + \frac{\sqrt{3} \mathbb{Q}_{1,3}^{(a)}(T_{2}) \mathbb{Q}_{1,3}^{(b)}(T_{2})}{3}
 \end{dmath*}
 \begin{dmath*}
-\fbox{z7}\quad \mathbb{Q}_{0}^{(1,0;c)}(A_{1})=\frac{\sqrt{3} \mathbb{Q}_{1,1}^{(1,0;a)}(T_{2}) \mathbb{Q}_{1,1}^{(b)}(T_{2})}{3} + \frac{\sqrt{3} \mathbb{Q}_{1,2}^{(1,0;a)}(T_{2}) \mathbb{Q}_{1,2}^{(b)}(T_{2})}{3} + \frac{\sqrt{3} \mathbb{Q}_{1,3}^{(1,0;a)}(T_{2}) \mathbb{Q}_{1,3}^{(b)}(T_{2})}{3}
+\hspace*{3mm}\fbox{z7}\quad \mathbb{Q}_{0}^{(1,0;c)}(A_{1})=\frac{\sqrt{3} \mathbb{Q}_{1,1}^{(1,0;a)}(T_{2}) \mathbb{Q}_{1,1}^{(b)}(T_{2})}{3} + \frac{\sqrt{3} \mathbb{Q}_{1,2}^{(1,0;a)}(T_{2}) \mathbb{Q}_{1,2}^{(b)}(T_{2})}{3} + \frac{\sqrt{3} \mathbb{Q}_{1,3}^{(1,0;a)}(T_{2}) \mathbb{Q}_{1,3}^{(b)}(T_{2})}{3}
 \end{dmath*}
 \begin{dmath*}
-\fbox{z10}\quad \mathbb{G}_{3}^{(1,-1;c)}(A_{2})=\frac{\sqrt{3} \mathbb{G}_{2,1}^{(1,-1;a)}(T_{1}) \mathbb{Q}_{1,1}^{(b)}(T_{2})}{3} + \frac{\sqrt{3} \mathbb{G}_{2,2}^{(1,-1;a)}(T_{1}) \mathbb{Q}_{1,2}^{(b)}(T_{2})}{3} + \frac{\sqrt{3} \mathbb{G}_{2,3}^{(1,-1;a)}(T_{1}) \mathbb{Q}_{1,3}^{(b)}(T_{2})}{3}
+\hspace*{3mm}\fbox{z10}\quad \mathbb{G}_{3}^{(1,-1;c)}(A_{2})=\frac{\sqrt{3} \mathbb{G}_{2,1}^{(1,-1;a)}(T_{1}) \mathbb{Q}_{1,1}^{(b)}(T_{2})}{3} + \frac{\sqrt{3} \mathbb{G}_{2,2}^{(1,-1;a)}(T_{1}) \mathbb{Q}_{1,2}^{(b)}(T_{2})}{3} + \frac{\sqrt{3} \mathbb{G}_{2,3}^{(1,-1;a)}(T_{1}) \mathbb{Q}_{1,3}^{(b)}(T_{2})}{3}
 \end{dmath*}
 \begin{dmath*}
-\fbox{z11}\quad \mathbb{G}_{0}^{(1,1;c)}(A_{2})=\mathbb{G}_{0}^{(1,1;a)}(A_{2}) \mathbb{Q}_{0}^{(b)}(A_{1})
+\hspace*{3mm}\fbox{z11}\quad \mathbb{G}_{0}^{(1,1;c)}(A_{2})=\mathbb{G}_{0}^{(1,1;a)}(A_{2}) \mathbb{Q}_{0}^{(b)}(A_{1})
 \end{dmath*}
 \vspace{5mm}
 
@@ -634,9 +625,8 @@ $ \ket{p_{z}} $ & $ z $ \\
 \noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{Site and Bond}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
 \vspace{3mm}
 
-\begin{center}
 \renewcommand{\arraystretch}{1.6}
-\begin{longtable}{ccl}
+\begin{longtable}[l]{ccl}
 \caption{Orbital of each site}
  \\
  \hline \hline
@@ -655,10 +645,8 @@ $ \ket{p_{z}} $ & $ z $ \\
 1 & \texttt{C} & $\ket{s_{},\uparrow}$, $\ket{s_{},\downarrow}$, $\ket{p_{x},\uparrow}$, $\ket{p_{x},\downarrow}$, $\ket{p_{y},\uparrow}$, $\ket{p_{y},\downarrow}$, $\ket{p_{z},\uparrow}$, $\ket{p_{z},\downarrow}$ \\ \hline
 2 & \texttt{H} & $\ket{s_{},\uparrow}$, $\ket{s_{},\downarrow}$ \\
 \end{longtable}
-\end{center}
-\begin{center}
 \renewcommand{\arraystretch}{1.6}
-\begin{longtable}{ccclll}
+\begin{longtable}[l]{ccclll}
 \caption{Neighbor and bra-ket of each bond}
  \\
  \hline \hline
@@ -676,16 +664,14 @@ $ \ket{p_{z}} $ & $ z $ \\
 
 1 & \texttt{C} & \texttt{H} & \texttt{[1]} & \texttt{[s,p]} & \texttt{[s]} \\
 \end{longtable}
-\end{center}
 \vspace{5mm}
 \noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{Site in Unit Cell}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
 \vspace{3mm}
 
 \noindent Sites in (conventional) cell (no plus set), SL = sublattice
 
-\begin{center}
 \renewcommand{\arraystretch}{1.6}
-\begin{longtable}{cll}
+\begin{longtable}[l]{cll}
 \caption{'\texttt{C}' (\#1) site cluster (\texttt{1o}), \texttt{-43m}}
  \\
  \hline \hline
@@ -703,10 +689,8 @@ SL & position ($\bm{s})$ & mapping \\ \hline \endhead
 
 1 & \texttt{[ 0.00000, 0.00000, 0.00000]} & \texttt{[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24]} \\
 \end{longtable}
-\end{center}
-\begin{center}
 \renewcommand{\arraystretch}{1.6}
-\begin{longtable}{cll}
+\begin{longtable}[l]{cll}
 \caption{'\texttt{H}' (\#2) site cluster (\texttt{4a}), \texttt{.3m}}
  \\
  \hline \hline
@@ -727,16 +711,14 @@ SL & position ($\bm{s})$ & mapping \\ \hline \endhead
 3 & \texttt{[-0.33333, 0.33333,-0.33333]} & \texttt{[3,8,10,16,18,23]} \\ \hline
 4 & \texttt{[ 0.33333,-0.33333,-0.33333]} & \texttt{[4,6,11,15,20,22]} \\
 \end{longtable}
-\end{center}
 \vspace{5mm}
 \noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{Bond in Unit Cell}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
 \vspace{3mm}
 
 \noindent Bonds in (conventional) cell (no plus set): tail, head = (SL, plus set), (N)D = (non)directional (listed up to 5th neighbor at most)
 
-\begin{center}
 \renewcommand{\arraystretch}{1.6}
-\begin{longtable}{cllllll}
+\begin{longtable}[l]{cllllll}
 \caption{1-th '\texttt{C}'-'\texttt{H}' [1] (\#1) bond cluster (\texttt{4a@4a}), D, $|\bm{v}|=0.57735$ (cartesian)}
  \\
  \hline \hline
@@ -757,6 +739,5 @@ SL & vector ($\bm{v})$ & center ($\bm{c})$ & mapping & head & tail & $\bm{R}$ (p
 3 & \texttt{[ 0.33333,-0.33333, 0.33333]} & \texttt{[-0.16667, 0.16667,-0.16667]} & \texttt{[3,8,10,16,18,23]} & \texttt{(1,1)} & \texttt{(3,1)} & \texttt{[0,0,0]} \\ \hline
 4 & \texttt{[-0.33333, 0.33333, 0.33333]} & \texttt{[ 0.16667,-0.16667,-0.16667]} & \texttt{[4,6,11,15,20,22]} & \texttt{(1,1)} & \texttt{(4,1)} & \texttt{[0,0,0]} \\
 \end{longtable}
-\end{center}
 
 \end{document}
