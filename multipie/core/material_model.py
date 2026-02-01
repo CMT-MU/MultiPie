@@ -563,83 +563,73 @@ class MaterialModel(BinaryManager):
             - (dict) -- comomon id, dict[SAMBType, [id]].
             - (dict) -- cluster info, dict[site/bond_name, dict[(bra_rank,ket_rank), (wyckoff,z_list)] ].
         """
-        lst = {}
-        for site_bond, wp in self["wyckoff"].items():
-            tail, head = get_tail_head(site_bond)
-            neighbor, n = get_neighbor_info(site_bond)
-            braket_info_lst = self["braket"][site_bond]
-            for braket_info in braket_info_lst:
-                comb = SAMBType(head, tail, wp, braket_info)
-                lst[comb] = lst.get(comb, []) + [(neighbor, n)]
+        # grouping and sorting site/bond relations.
+        samb_groups = {}
+        for sb, wp in self["wyckoff"].items():
+            tail, head = get_tail_head(sb)
+            neighbor, n = get_neighbor_info(sb)
+            for bk in self["braket"][sb]:
+                comb = SAMBType(head, tail, wp, bk)
+                samb_groups.setdefault(comb, []).append((neighbor, n))
 
-        # sort (neighbor, n) for each comb
-        lst = {k: sorted(v) for k, v in lst.items()}
+        # ensure deterministic order within groups.
+        samb_groups = {k: sorted(v) for k, v in samb_groups.items()}
 
-        combined_samb = {}
-        for comb in lst.keys():
+        # combined SAMB calculation.
+        combined_results = {}
+        for comb in samb_groups:
             bra_orb = self["site"]["representative"][comb.head].orbital[comb.bk_info.bh_rank]
             ket_orb = self["site"]["representative"][comb.tail].orbital[comb.bk_info.kt_rank]
-            a_samb = atomic_samb[comb.bk_info]
-            c_samb = cluster_samb[comb.wyckoff]
 
+            # filtering cluster SAMB if orbitals differ.
+            c_s = cluster_samb[comb.wyckoff]
             if comb.head != comb.tail and bra_orb != ket_orb:
-                c_samb = c_samb.select(X=["Q"])
+                c_s = c_s.select(X=["Q"])
 
-            combined_samb[comb] = self.group.combined_samb(a_samb.named_keys(), c_samb.named_keys(), toroidal_priority, **select)
+            combined_results[comb] = self.group.combined_samb(
+                atomic_samb[comb.bk_info].named_keys(), c_s.named_keys(), toroidal_priority, **select
+            )
 
-        min_no = sum(sum(len(i[0]) for i in samb.values()) for samb in combined_samb.values())
-        combined_id = {}
-        common_id = {comb: [[] for _ in nn_lst] for comb, nn_lst in lst.items()}
+        # flatten and sort items (priority: Site(0) -> Bond(1)).
+        items = sorted(
+            [
+                (0 if nb == 0 else 1, c.tail, c.head, nb, n, c, i)
+                for c, nn_lst in samb_groups.items()
+                for i, (nb, n) in enumerate(nn_lst)
+            ]
+        )
 
-        # Flatten all (neighbor, n, comb) tuples and keep the local index i
-        site_global_items = [
-            (comb.tail, comb.head, neighbor, n, comb, i)
-            for comb, nn_lst in lst.items()
-            for i, (neighbor, n) in enumerate(nn_lst)
-            if neighbor == 0 and n == -1
-        ]
-        site_global_items.sort(key=lambda t: (t[0], t[1], t[2], t[3]))
-        bond_global_items = [
-            (comb.tail, comb.head, neighbor, n, comb, i)
-            for comb, nn_lst in lst.items()
-            for i, (neighbor, n) in enumerate(nn_lst)
-            if neighbor > 0
-        ]
-        bond_global_items.sort(key=lambda t: (t[0], t[1], t[2], t[3]))
+        # global z-indexing.
+        combined_id, common_id_map = {}, {c: [[] for _ in v] for c, v in samb_groups.items()}
+        z_count = 0
 
-        global_items = site_global_items + bond_global_items
-
-        no = 1
         for Gamma in self["SAMB_select"]["Gamma"]:
-            for _, _, neighbor, n, comb, i in global_items:
-                samb_info = UniqueSAMBType(comb, neighbor, n)
-                if neighbor == 0:
-                    sb_tag = comb.tail
-                else:
-                    sb_tag = get_bond(comb.tail, comb.head, neighbor, n)
-                for idx in combined_samb[comb].select(**{"Gamma": Gamma}).keys():
-                    for comp, tag in enumerate(self.group.tag_multipole(idx, latex=True, superscript="c")):
-                        zi = f"z{no}"
-                        combined_id[zi] = (tag, samb_info, idx, comp)
-                        common_id[comb][i].append((zi, sb_tag))
-                        no += 1
+            for _, tail, head, nb, n, comb, i in items:
+                sb_tag = tail if nb == 0 else get_bond(tail, head, nb, n)
+                res = combined_results[comb].select(Gamma=Gamma)
 
+                for idx in res.keys():
+                    for comp, tag in enumerate(self.group.tag_multipole(idx, latex=True, superscript="c")):
+                        z_count += 1
+                        z_id = f"z{z_count}"
+                        combined_id[z_id] = (tag, UniqueSAMBType(comb, nb, n), idx, comp)
+                        common_id_map[comb][i].append((z_id, sb_tag))
+
+        # output formatting (common_id and cluster_info).
         common_id = {
-            info: ([[i[0] for i in bk] for bk in lst if bk], [bk[0][1] for bk in lst if bk]) for info, lst in common_id.items()
+            c: ([[z for z, _ in d] for d in data if d], [d[0][1] for d in data if d])
+            for c, data in common_id_map.items()
+            if any(data)
         }
 
-        # cluster-info.
-        dic = {}
-        for info, (sb_z_list, sb_list) in common_id.items():
-            wyckoff = info.wyckoff
-            bk_block = (info.bk_info.bh_rank, info.bk_info.kt_rank)
-            for sb, z_list in zip(sb_list, sb_z_list):
-                dic[sb] = dic.get(sb, []) + [(bk_block, wyckoff, z_list)]
         cluster_info = {}
-        for sb, v in dic.items():
-            cluster_info[sb] = {bk_block: (wyckoff, z_list) for bk_block, wyckoff, z_list in v}
+        for c, (z_lists, sb_list) in common_id.items():
+            for sb, z_list in zip(sb_list, z_lists):
+                cluster_info.setdefault(sb, {})[(c.bk_info.bh_rank, c.bk_info.kt_rank)] = (c.wyckoff, z_list)
 
-        return combined_samb, combined_id, min_no, no - 1, common_id, cluster_info
+        min_no = sum(sum(len(v[0]) for v in res.values()) for res in combined_results.values())
+
+        return combined_results, combined_id, min_no, z_count, common_id, cluster_info
 
     # ==================================================
     def select_combined_samb(self, select):
@@ -670,37 +660,27 @@ class MaterialModel(BinaryManager):
 
         combined_id = {}
         for zi, (tag, samb_info, idx, comp) in self["combined_id"].items():
-            samb_type = samb_info.samb_type
-            head, tail = samb_type.head, samb_type.tail
-            bk_info = samb_type.bk_info
-            neighbor = samb_info.neighbor
-            is_site = not ("@" in samb_type.wyckoff)
-            for site, rank in select["site"]:
-                if is_site and head == site and bk_info.bh_rank in rank:
-                    for idx in self["combined_samb"][samb_type].select(**samb_select).keys():
-                        for tag_ in self.group.tag_multipole(idx, latex=True, superscript="c"):
-                            if tag == tag_:
-                                combined_id[zi] = (tag, samb_info, idx, comp)
-            for h, t, nr, h_rank, t_rank in select["bond"]:
-                if (
-                    not is_site
-                    and tail == t
-                    and head == h
-                    and bk_info.kt_rank in t_rank
-                    and bk_info.bh_rank in h_rank
-                    and neighbor == nr
-                ) or (
-                    not is_site
-                    and tail == h
-                    and head == t
-                    and bk_info.kt_rank in h_rank
-                    and bk_info.bh_rank in t_rank
-                    and neighbor == nr
-                ):
-                    for idx in self["combined_samb"][samb_type].select(**samb_select).keys():
-                        for tag_ in self.group.tag_multipole(idx, latex=True, superscript="c"):
-                            if tag == tag_:
-                                combined_id[zi] = (tag, samb_info, idx, comp)
+            st = samb_info.samb_type
+            bk = st.bk_info
+            is_site = "@" not in st.wyckoff
+
+            is_match = False
+            if is_site:
+                is_match = any(st.head == s and bk.bh_rank in r for s, r in select["site"])
+            else:
+                for h, t, nr, hr, tr in select["bond"]:
+                    if samb_info.neighbor != nr:
+                        continue
+                    if (st.head == h and st.tail == t and bk.bh_rank in hr and bk.kt_rank in tr) or (
+                        st.head == t and st.tail == h and bk.bh_rank in tr and bk.kt_rank in hr
+                    ):
+                        is_match = True
+                        break
+
+            if is_match:
+                if idx in self["combined_samb"][st].select(**samb_select).keys():
+                    if tag in self.group.tag_multipole(idx, latex=True, superscript="c"):
+                        combined_id[zi] = (tag, samb_info, idx, comp)
 
         return combined_id, samb_select, select
 
@@ -720,125 +700,80 @@ class MaterialModel(BinaryManager):
         Note:
             - R = (n1,n2,n3) and m and n are lattice indices, bra and ket indexes, respectively.
         """
-        # check format key.
-        if fmt not in ["sympy", "value"]:
-            raise KeyError(f"unknown format = {fmt} is given.")
-
-        # filter combined id.
-        combined_id, samb_select, select = self.select_combined_samb(select)
-
-        cluster_samb = self["cluster_samb"]
-        atomic_samb = self["atomic_samb"]
-        combined_samb = self["combined_samb"]
-
-        X_cache = {}
-        matrix = {}
-
-        def _X(a_samb, t1, c1):
-            key = (id(a_samb), t1, c1)
-            m = X_cache.get(key)
-            if m is None:
-                m = sp.Matrix(a_samb[t1][0][c1])
-                X_cache[key] = m
-            return m
-
-        def _hermite_conj(head, head_sl, bra_rank, tail, tail_sl, ket_rank):
-            hermite_conj = False
-            if (head, head_sl, bra_rank) not in self["full_matrix"]["index"]:
-                hermite_conj = True
-            if (tail, tail_sl, ket_rank) not in self["full_matrix"]["index"]:
-                hermite_conj = True
-            return hermite_conj
 
         def _format_val(v):
-            v = sp.expand(v)
+            expanded_v = sp.expand(v)
             if fmt == "value":
-                v = complex(v)
-                return round(v.real, digit) + round(v.imag, digit) * 1j
-            return v
+                c_val = complex(expanded_v)
+                return round(c_val.real, digit) + round(c_val.imag, digit) * 1j
+            return expanded_v
 
-        for zi, (tag, samb_info, idx, comp) in combined_id.items():
-            samb_type = samb_info.samb_type
+        if fmt not in ["sympy", "value"]:
+            raise KeyError(f"Unknown format: {fmt}")
 
-            tail, head = samb_type.tail, samb_type.head
-            wp = samb_type.wyckoff
+        combined_id, _, _ = self.select_combined_samb(select)
 
-            bk_info = samb_type.bk_info
-            bra_rank, bra_idx = bk_info.bh_rank, bk_info.bh_idx
-            ket_rank, ket_idx = bk_info.kt_rank, bk_info.kt_idx
+        full_matrix_idx = self["full_matrix"]["index"]
+        atomic_samb_data = self["atomic_samb"]
+        cluster_samb_data = self["cluster_samb"]
 
-            bn, bm = samb_info.neighbor, samb_info.n
+        matrix = {}
+        for zi, (s_symbol, u_samb_type, index, comp) in combined_id.items():
+            st = u_samb_type.samb_type
+            wp = st.wyckoff
+            tail, head = st.tail, st.head
+            bk = st.bk_info
+            b_rank, k_rank = bk.bh_rank, bk.kt_rank
 
             is_site = "@" not in wp
             if is_site:
-                head_sl = tail_sl = 1
+                c_info = self["site"]["cell"][tail]
             else:
-                name = get_bond(tail, head, bn, bm)
-                bond = self["bond"]["cell"][name][0]
-                head_sl, tail_sl = bond.h_idx[0], bond.t_idx[0]
+                bond_name = get_bond(tail, head, u_samb_type.neighbor, u_samb_type.n)
+                c_info = self["bond"]["cell"][bond_name]
 
-            hermite_conj = _hermite_conj(head, head_sl, bra_rank, tail, tail_sl, ket_rank)
-            if hermite_conj:
-                bra_idx, bra_rank, ket_idx, ket_rank = ket_idx, ket_rank, bra_idx, bra_rank
+            # Retrieve linear combination (lc) and symmetry (sym) info
+            lc_list, sym_list = self["combined_samb"][st][index]
+            lc = lc_list[comp]
 
-            a_samb = atomic_samb[bk_info]
-            c_samb = cluster_samb[wp]
+            a_samb = atomic_samb_data[bk]
+            c_samb = cluster_samb_data[wp]
 
-            for idx, (cl, _) in combined_samb[samb_type].select(**samb_select).items():
-                for tag_, m in zip(self.group.tag_multipole(idx, latex=True, superscript="c"), cl):
-                    if tag_ != tag:
-                        continue
+            d = defaultdict(lambda: sp.S(0) if fmt == "sympy" else 0.0)
 
-                    d = defaultdict(lambda: sp.S(0) if fmt == "sympy" else 0.0)
-                    for cg, t1, c1, t2, c2 in m:
-                        X = _X(a_samb, t1, c1)
-                        Xd = X.adjoint()
-                        Y = c_samb[t2][0][c2]
-                        for i, y in enumerate(Y):
-                            if is_site:
-                                head_sl = tail_sl = i + 1
-                                n1 = n2 = n3 = 0
-                            else:
-                                bond = self["bond"]["cell"][name][i]
-                                n1, n2, n3 = bond.R_primitive
-                                head_sl, tail_sl = bond.h_idx[0], bond.t_idx[0]
+            for cg, t1, c1, t2, c2 in lc:
+                atomic_matrix = a_samb[t1][0][c1]  # X matrix
+                cluster_coeffs = c_samb[t2][0][c2]  # Y coefficients
 
-                            bra_start, bra_dim = self["full_matrix"]["index"][(head, head_sl, bra_rank)]
-                            ket_start, ket_dim = self["full_matrix"]["index"][(tail, tail_sl, ket_rank)]
+                for yi, bi in zip(cluster_coeffs, c_info):
+                    if is_site:
+                        h_sl = t_sl = bi.sublattice
+                        n1 = n2 = n3 = 0
+                    else:
+                        h_sl, t_sl = bi.h_idx[0], bi.t_idx[0]
+                        n1, n2, n3 = bi.R_primitive
 
-                            for r, c in product(range(bra_dim), range(ket_dim)):
-                                val = cg * y * (Xd[r, c] if hermite_conj else X[r, c])
-                                key = (n1, n2, n3, bra_start + r, ket_start + c)
-                                d[key] += val
+                    b_top, b_dim = full_matrix_idx[(head, h_sl, b_rank)]
+                    k_top, k_dim = full_matrix_idx[(tail, t_sl, k_rank)]
 
-                            if not is_site:
-                                if head == tail and (bra_rank, bra_idx) != (ket_rank, ket_idx):
-                                    if head_sl == tail_sl:
-                                        bra2_start = ket_start
-                                        ket2_start = bra_start
-                                    else:
-                                        ket_list = [o for o in self["full_matrix"]["ket"] if o[0] == head and o[1] == 1]
-                                        bra_orb = [o for o in ket_list if o[2] == bra_rank][0]
-                                        ket_orb = [o for o in ket_list if o[2] == ket_rank][0]
-                                        bra_orb_idx = ket_list.index(bra_orb)
-                                        ket_orb_idx = ket_list.index(ket_orb)
+                    # pre-calculate the scalar multiplier for this sub-block.
+                    scale = cg * yi
 
-                                        bra2_start = bra_start + (ket_orb_idx - bra_orb_idx)
-                                        ket2_start = ket_start - (ket_orb_idx - bra_orb_idx)
+                    for r in range(b_dim):
+                        row_idx = b_top + r
+                        for c in range(k_dim):
+                            val = scale * atomic_matrix[r, c]
+                            if val != 0:
+                                d[(n1, n2, n3, row_idx, k_top + c)] += val
 
-                                    for r, c in product(range(ket_dim), range(bra_dim)):
-                                        val = cg * y * Xd[r, c]
-                                        key = (n1, n2, n3, bra2_start + r, ket2_start + c)
-                                        d[key] += val
+            # add hermite conjugate elements.
+            for (n1, n2, n3, m, n), val in list(d.items()):
+                d[(-n1, -n2, -n3, n, m)] += sp.conjugate(val)
 
-                    # hermite conjugate
-                    for Rmn, val in list(d.items()):
-                        n1_, n2_, n3_, m_, n_ = Rmn
-                        d[(-n1_, -n2_, -n3_, n_, m_)] += sp.conjugate(val)
+            norm_sq = sum(v * sp.conjugate(v) for v in d.values())
+            norm = sp.sqrt(sp.expand(norm_sq))
 
-                    norm = sp.sqrt(sp.expand(sum([v * sp.conjugate(v) for v in d.values()], sp.S(0))))
-
-                    matrix[zi] = {Rmn: _format_val(v / norm) for Rmn, v in d.items() if not v.is_zero}
+            matrix[zi] = {Rmn: _format_val(v / norm) for Rmn, v in d.items() if not v.is_zero}
 
         matrix = dict(sorted(matrix.items(), key=lambda x: int(x[0][1:])))
 
