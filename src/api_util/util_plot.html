@@ -334,9 +334,7 @@
 <button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 </button>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</button>
+
 </div></div>
       
     </div>
@@ -352,19 +350,6 @@
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_plot.plot_bond"><code class="docutils literal notranslate"><span class="pre">plot_bond()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_plot.plot_bond_samb"><code class="docutils literal notranslate"><span class="pre">plot_bond_samb()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_plot.plot_harmonics"><code class="docutils literal notranslate"><span class="pre">plot_harmonics()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_plot.plot_site"><code class="docutils literal notranslate"><span class="pre">plot_site()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_plot.plot_site_samb"><code class="docutils literal notranslate"><span class="pre">plot_site_samb()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_plot.plot_vector_samb"><code class="docutils literal notranslate"><span class="pre">plot_vector_samb()</span></code></a></li>
-</ul>
-            </nav>
         </div>
     </div>
 </div>
@@ -374,110 +359,8 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="module-multipie.util.util_plot">
-<span id="plot"></span><h1>Plot<a class="headerlink" href="#module-multipie.util.util_plot" title="Link to this heading">#</a></h1>
-<p>Utility for plot.</p>
-<dl class="py function">
-<dt class="sig sig-object py" id="multipie.util.util_plot.plot_bond">
-<span class="sig-name descname"><span class="pre">plot_bond</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qtdraw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bond</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_plot.html#plot_bond"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_plot.plot_bond" title="Link to this definition">#</a></dt>
-<dd><p>Plot bond cluster.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>qtdraw</strong> (<em>QtDraw</em>) – QtDraw object.</p></li>
-<li><p><strong>name</strong> (<em>str</em>) – cluster name.</p></li>
-<li><p><strong>bond</strong> (<em>ndarray</em>) – bond cluster.</p></li>
-<li><p><strong>rep</strong> (<em>bool</em><em>, </em><em>optional</em>) – highlight for 0th bond ?</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="multipie.util.util_plot.plot_bond_samb">
-<span class="sig-name descname"><span class="pre">plot_bond_samb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qtdraw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bond</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">samb</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sym</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_plot.html#plot_bond_samb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_plot.plot_bond_samb" title="Link to this definition">#</a></dt>
-<dd><p>Plot bond-cluster SAMB.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>qtdraw</strong> (<em>QtDraw</em>) – QtDraw object.</p></li>
-<li><p><strong>name</strong> (<em>str</em>) – SAMB name.</p></li>
-<li><p><strong>bond</strong> (<em>ndarray</em>) – bond cluster.</p></li>
-<li><p><strong>samb</strong> (<em>ndarray</em>) – bond-cluster samb.</p></li>
-<li><p><strong>sym</strong> (<em>bool</em><em>, </em><em>optional</em>) – symmetric bond ?</p></li>
-<li><p><strong>label</strong> (<em>str</em><em>, </em><em>optional</em>) – SAMB label.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="multipie.util.util_plot.plot_harmonics">
-<span class="sig-name descname"><span class="pre">plot_harmonics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qtdraw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">samb</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">point</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[[0,</span> <span class="pre">0,</span> <span class="pre">0]]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_plot.html#plot_harmonics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_plot.plot_harmonics" title="Link to this definition">#</a></dt>
-<dd><p>Plot harmonics.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>qtdraw</strong> (<em>QtDraw</em>) – QtDraw object.</p></li>
-<li><p><strong>name</strong> (<em>str</em>) – SAMB name.</p></li>
-<li><p><strong>samb</strong> (<em>sympy</em>) – samb expression.</p></li>
-<li><p><strong>point</strong> (<em>ndarray</em><em>, </em><em>optional</em>) – center of harmonics.</p></li>
-<li><p><strong>label</strong> (<em>str</em><em>, </em><em>optional</em>) – SAMB label.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="multipie.util.util_plot.plot_site">
-<span class="sig-name descname"><span class="pre">plot_site</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qtdraw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">site</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_plot.html#plot_site"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_plot.plot_site" title="Link to this definition">#</a></dt>
-<dd><p>Plot site cluster.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>qtdraw</strong> (<em>QtDraw</em>) – QtDraw object.</p></li>
-<li><p><strong>name</strong> (<em>str</em>) – cluster name.</p></li>
-<li><p><strong>site</strong> (<em>ndarray</em>) – site cluster.</p></li>
-<li><p><strong>rep</strong> (<em>bool</em><em>, </em><em>optional</em>) – highlight for 0th site ?</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="multipie.util.util_plot.plot_site_samb">
-<span class="sig-name descname"><span class="pre">plot_site_samb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qtdraw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">site</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">samb</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_plot.html#plot_site_samb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_plot.plot_site_samb" title="Link to this definition">#</a></dt>
-<dd><p>Plot site-cluster SAMB.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>qtdraw</strong> (<em>QtDraw</em>) – QtDraw object.</p></li>
-<li><p><strong>name</strong> (<em>str</em>) – SAMB name.</p></li>
-<li><p><strong>site</strong> (<em>ndarray</em>) – site cluster.</p></li>
-<li><p><strong>samb</strong> (<em>ndarray</em>) – site-cluster samb.</p></li>
-<li><p><strong>label</strong> (<em>str</em><em>, </em><em>optional</em>) – SAMB label.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="multipie.util.util_plot.plot_vector_samb">
-<span class="sig-name descname"><span class="pre">plot_vector_samb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qtdraw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bond</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">samb</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_plot.html#plot_vector_samb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_plot.plot_vector_samb" title="Link to this definition">#</a></dt>
-<dd><p>Plot bond-cluster vector SAMB.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>qtdraw</strong> (<em>QtDraw</em>) – QtDraw object.</p></li>
-<li><p><strong>name</strong> (<em>str</em>) – SAMB name.</p></li>
-<li><p><strong>bond</strong> (<em>ndarray</em>) – bond cluster.</p></li>
-<li><p><strong>samb</strong> (<em>ndarray</em>) – bond-cluster vector samb.</p></li>
-<li><p><strong>label</strong> (<em>str</em><em>, </em><em>optional</em>) – SAMB label.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
+  <section class="tex2jax_ignore mathjax_ignore" id="plot">
+<h1>Plot<a class="headerlink" href="#plot" title="Link to this heading">#</a></h1>
 </section>
 
     <script type="text/x-thebe-config">
@@ -510,27 +393,6 @@
             </div>
             
             
-              
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_plot.plot_bond"><code class="docutils literal notranslate"><span class="pre">plot_bond()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_plot.plot_bond_samb"><code class="docutils literal notranslate"><span class="pre">plot_bond_samb()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_plot.plot_harmonics"><code class="docutils literal notranslate"><span class="pre">plot_harmonics()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_plot.plot_site"><code class="docutils literal notranslate"><span class="pre">plot_site()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_plot.plot_site_samb"><code class="docutils literal notranslate"><span class="pre">plot_site_samb()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_plot.plot_vector_samb"><code class="docutils literal notranslate"><span class="pre">plot_vector_samb()</span></code></a></li>
-</ul>
-  </nav></div>
-
-</div></div>
               
             
           </div>

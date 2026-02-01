@@ -334,9 +334,7 @@
 <button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 </button>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</button>
+
 </div></div>
       
     </div>
@@ -352,28 +350,6 @@
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_binary.BinaryManager"><code class="docutils literal notranslate"><span class="pre">BinaryManager</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_binary.BinaryManager.add_comment"><code class="docutils literal notranslate"><span class="pre">BinaryManager.add_comment()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_binary.BinaryManager.clear"><code class="docutils literal notranslate"><span class="pre">BinaryManager.clear()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_binary.BinaryManager.from_dict"><code class="docutils literal notranslate"><span class="pre">BinaryManager.from_dict()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_binary.BinaryManager.get_cwd"><code class="docutils literal notranslate"><span class="pre">BinaryManager.get_cwd()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_binary.BinaryManager.get_fullpath"><code class="docutils literal notranslate"><span class="pre">BinaryManager.get_fullpath()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_binary.BinaryManager.load_binary"><code class="docutils literal notranslate"><span class="pre">BinaryManager.load_binary()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_binary.BinaryManager.save_binary"><code class="docutils literal notranslate"><span class="pre">BinaryManager.save_binary()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_binary.BinaryManager.set_subdir"><code class="docutils literal notranslate"><span class="pre">BinaryManager.set_subdir()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_binary.BinaryManager.set_topdir"><code class="docutils literal notranslate"><span class="pre">BinaryManager.set_topdir()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_binary.BinaryManager.to_dict"><code class="docutils literal notranslate"><span class="pre">BinaryManager.to_dict()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_binary.BinaryManager.suffix"><code class="docutils literal notranslate"><span class="pre">BinaryManager.suffix</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_binary.convert_binary_to_text"><code class="docutils literal notranslate"><span class="pre">convert_binary_to_text()</span></code></a></li>
-</ul>
-            </nav>
         </div>
     </div>
 </div>
@@ -383,174 +359,8 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="module-multipie.util.util_binary">
-<span id="binary-data"></span><h1>Binary data<a class="headerlink" href="#module-multipie.util.util_binary" title="Link to this heading">#</a></h1>
-<p>For binary data.</p>
-<dl class="py class">
-<dt class="sig sig-object py" id="multipie.util.util_binary.BinaryManager">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">BinaryManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comment</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_binary.html#BinaryManager"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_binary.BinaryManager" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></p>
-<p>Binary data manager.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>filename</strong> (<em>str</em><em>, </em><em>optional</em>) – file name to load.</p></li>
-<li><p><strong>topdir</strong> (<em>str</em><em>, </em><em>optional</em>) – top directory. [default: multipie/binary_data]</p></li>
-<li><p><strong>subdir</strong> (<em>str</em><em>, </em><em>optional</em>) – sub directory.</p></li>
-<li><p><strong>verbose</strong> (<em>bool</em><em>, </em><em>optional</em>) – verbose comment ?</p></li>
-<li><p><strong>comment</strong> (<em>str</em><em>, </em><em>optional</em>) – comment.</p></li>
-</ul>
-</dd>
-</dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="multipie.util.util_binary.BinaryManager.add_comment">
-<span class="sig-name descname"><span class="pre">add_comment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">comment</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_binary.html#BinaryManager.add_comment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_binary.BinaryManager.add_comment" title="Link to this definition">#</a></dt>
-<dd><p>Add comment.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>comment</strong> (<em>str</em>) – comment.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="multipie.util.util_binary.BinaryManager.clear">
-<span class="sig-name descname"><span class="pre">clear</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_binary.html#BinaryManager.clear"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_binary.BinaryManager.clear" title="Link to this definition">#</a></dt>
-<dd><p>Clear data.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="multipie.util.util_binary.BinaryManager.from_dict">
-<span class="sig-name descname"><span class="pre">from_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_binary.html#BinaryManager.from_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_binary.BinaryManager.from_dict" title="Link to this definition">#</a></dt>
-<dd><p>Set data from dict.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="multipie.util.util_binary.BinaryManager.get_cwd">
-<span class="sig-name descname"><span class="pre">get_cwd</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_binary.html#BinaryManager.get_cwd"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_binary.BinaryManager.get_cwd" title="Link to this definition">#</a></dt>
-<dd><p>Get working directory.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><ul class="simple">
-<li><p>(str) – working directory.</p></li>
-</ul>
-</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="multipie.util.util_binary.BinaryManager.get_fullpath">
-<span class="sig-name descname"><span class="pre">get_fullpath</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_binary.html#BinaryManager.get_fullpath"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_binary.BinaryManager.get_fullpath" title="Link to this definition">#</a></dt>
-<dd><p>Get full path name.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – file name.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><ul class="simple">
-<li><p>(str) – full path name.</p></li>
-</ul>
-</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="multipie.util.util_binary.BinaryManager.load_binary">
-<span class="sig-name descname"><span class="pre">load_binary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_binary.html#BinaryManager.load_binary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_binary.BinaryManager.load_binary" title="Link to this definition">#</a></dt>
-<dd><p>Load binary data.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – file name. (extension is .pkl).</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><ul class="simple">
-<li><p>(bool) – return True if error occurs, otherwise False.</p></li>
-</ul>
-</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="multipie.util.util_binary.BinaryManager.save_binary">
-<span class="sig-name descname"><span class="pre">save_binary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detail</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_binary.html#BinaryManager.save_binary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_binary.BinaryManager.save_binary" title="Link to this definition">#</a></dt>
-<dd><p>Save data as binary.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>filename</strong> (<em>str</em>) – file name. (extension is .pkl).</p></li>
-<li><p><strong>detail</strong> (<em>bool</em><em>, </em><em>optional</em>) – detailed info. ?</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="multipie.util.util_binary.BinaryManager.set_subdir">
-<span class="sig-name descname"><span class="pre">set_subdir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subdir</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_binary.html#BinaryManager.set_subdir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_binary.BinaryManager.set_subdir" title="Link to this definition">#</a></dt>
-<dd><p>Set sub directory.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>subdir</strong> (<em>str</em>) – sub directory.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="multipie.util.util_binary.BinaryManager.set_topdir">
-<span class="sig-name descname"><span class="pre">set_topdir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">topdir</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_binary.html#BinaryManager.set_topdir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_binary.BinaryManager.set_topdir" title="Link to this definition">#</a></dt>
-<dd><p>Set top directory.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>topdir</strong> (<em>str</em>) – top directory.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="multipie.util.util_binary.BinaryManager.to_dict">
-<span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_binary.html#BinaryManager.to_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_binary.BinaryManager.to_dict" title="Link to this definition">#</a></dt>
-<dd><p>Convert data to dict.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><ul class="simple">
-<li><p>(dict) – data in dict.</p></li>
-</ul>
-</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="multipie.util.util_binary.BinaryManager.suffix">
-<span class="sig-name descname"><span class="pre">suffix</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'.pkl'</span></span><a class="headerlink" href="#multipie.util.util_binary.BinaryManager.suffix" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="multipie.util.util_binary.convert_binary_to_text">
-<span class="sig-name descname"><span class="pre">convert_binary_to_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_binary.html#convert_binary_to_text"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_binary.convert_binary_to_text" title="Link to this definition">#</a></dt>
-<dd><p>Convert binary to text file.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>filename</strong> (<em>str</em>) – binary file name.</p></li>
-<li><p><strong>out_filename</strong> (<em>str</em><em>, </em><em>optional</em>) – text file name.</p></li>
-<li><p><strong>verbose</strong> (<em>bool</em><em>, </em><em>optional</em>) – verbose ?</p></li>
-</ul>
-</dd>
-</dl>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<ul class="simple">
-<li><p>text file name becomes binary_filename_pkl.py if out_filename is not given.</p></li>
-</ul>
-</div>
-</dd></dl>
-
+  <section class="tex2jax_ignore mathjax_ignore" id="binary-data">
+<h1>Binary data<a class="headerlink" href="#binary-data" title="Link to this heading">#</a></h1>
 </section>
 
     <script type="text/x-thebe-config">
@@ -583,36 +393,6 @@
             </div>
             
             
-              
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_binary.BinaryManager"><code class="docutils literal notranslate"><span class="pre">BinaryManager</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_binary.BinaryManager.add_comment"><code class="docutils literal notranslate"><span class="pre">BinaryManager.add_comment()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_binary.BinaryManager.clear"><code class="docutils literal notranslate"><span class="pre">BinaryManager.clear()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_binary.BinaryManager.from_dict"><code class="docutils literal notranslate"><span class="pre">BinaryManager.from_dict()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_binary.BinaryManager.get_cwd"><code class="docutils literal notranslate"><span class="pre">BinaryManager.get_cwd()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_binary.BinaryManager.get_fullpath"><code class="docutils literal notranslate"><span class="pre">BinaryManager.get_fullpath()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_binary.BinaryManager.load_binary"><code class="docutils literal notranslate"><span class="pre">BinaryManager.load_binary()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_binary.BinaryManager.save_binary"><code class="docutils literal notranslate"><span class="pre">BinaryManager.save_binary()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_binary.BinaryManager.set_subdir"><code class="docutils literal notranslate"><span class="pre">BinaryManager.set_subdir()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_binary.BinaryManager.set_topdir"><code class="docutils literal notranslate"><span class="pre">BinaryManager.set_topdir()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_binary.BinaryManager.to_dict"><code class="docutils literal notranslate"><span class="pre">BinaryManager.to_dict()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_binary.BinaryManager.suffix"><code class="docutils literal notranslate"><span class="pre">BinaryManager.suffix</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_binary.convert_binary_to_text"><code class="docutils literal notranslate"><span class="pre">convert_binary_to_text()</span></code></a></li>
-</ul>
-  </nav></div>
-
-</div></div>
               
             
           </div>
