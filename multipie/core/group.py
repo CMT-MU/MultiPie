@@ -369,6 +369,42 @@ class Group(dict):
         return d
 
     # ==================================================
+    def tag_atomic_basis_proj(self, basis_type, rank, mask=None, ket=True):
+        """
+        Tag atomic basis for given option.
+
+        Args:
+            basis_type (str): basis type, "jml", "lgs", "lg".
+            rank (int): rank.
+            mask (list, optional): mask, [int], [str], U=<JML/Lgs/Lg | n>.
+            ket (bool, optional): ket or bra ?
+
+        Returns:
+            - (list) -- list of basis in sympy.
+        """
+        if basis_type not in ["jml", "lgs", "lg"]:
+            raise Exception(f"unknown basis_type, '{basis_type}'.")
+
+        basis = self.atomic_basis(basis_type)[rank]
+
+        if mask is None:
+            mask = list(range(len(basis)))
+
+        if isinstance(mask, (str, np.ndarray)):
+            if isinstance(mask, str):
+                U = str_to_sympy(mask)
+                if not ket:
+                    U = U.conjugate()
+            s = np.asarray([sp.Symbol(self.tag_atomic_basis(i, rank, ket, latex=True)) for i in basis])
+            tags = (s @ U).reshape(-1).tolist()
+        else:
+            if all(isinstance(x, int) for x in mask):
+                mask = [basis[t] for t in mask]
+            tags = [sp.Symbol(self.tag_atomic_basis(i, rank, ket, latex=True)) for i in mask]
+
+        return tags
+
+    # ==================================================
     def __str__(self):
         """
         Group tag.
@@ -650,7 +686,10 @@ class Group(dict):
             # remove zero matrices
             dic = Dict(dic.key_type, {tag: (mat, ex) for tag, (mat, ex) in dic.items() if not np.all(mat == 0)})
 
-            dic = orthogonalize_multipole(dic, bra_rank == ket_rank)
+            if basis_type != "jml":
+                dic = orthogonalize_multipole(dic, bra_rank == ket_rank)
+            else:
+                dic = orthogonalize_multipole(dic, (bra_rank == ket_rank) and (len(bra_mask) == len(ket_mask)))
 
         return dic
 
