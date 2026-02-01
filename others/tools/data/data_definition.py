@@ -793,14 +793,19 @@ atomic_basis = {
     "spinless": {
         # L: [atomic orbital name(M)] (spherical).
         "lm": {0: ["0"], 1: ["1", "0", "-1"], 2: ["2", "1", "0", "-1", "-2"], 3: ["3", "2", "1", "0", "-1", "-2", "-3"]},
-        # L: [atomic orbital name(gamma)] (cubic subgroup).
+        # L: [atomic orbital name(gamma)] (point group, cll, sll, c1l-1, sll-1, ..., cl0).
+        "lg": {
+            0: ["s"],
+            1: ["px", "py", "pz"],
+            2: ["dv", "dxy", "dxz", "dyz", "du"],
+            3: ["f2", "f1", "fbz", "f3", "f3x", "f3y", "faz"],
+        },
         "cubic": {
             0: ["s"],
             1: ["px", "py", "pz"],
             2: ["du", "dv", "dyz", "dxz", "dxy"],
             3: ["f3", "fax", "fay", "faz", "fbx", "fby", "fbz"],
         },
-        # L: [atomic orbital name(gamma)] (hexagonal subgroup).
         "hexagonal": {
             0: ["s"],
             1: ["px", "py", "pz"],
@@ -864,7 +869,28 @@ atomic_basis = {
                 "(-3,d)",
             ],
         },
-        # L: [(atomic orbital name(gamma), spin up(u)/down(d))] (cubic subgroup).
+        # L: [(atomic orbital name(gamma), spin up(u)/down(d))] (point group).
+        "lgs": {
+            0: ["(s,u)", "(s,d)"],
+            1: ["(px,u)", "(px,d)", "(py,u)", "(py,d)", "(pz,u)", "(pz,d)"],
+            2: ["(dv,u)", "(dv,d)", "(dxy,u)", "(dxy,d)", "(dxz,u)", "(dxz,d)", "(dyz,u)", "(dyz,d)", "(du,u)", "(du,d)"],
+            3: [
+                "(f2,u)",
+                "(f2,d)",
+                "(f1,u)",
+                "(f1,d)",
+                "(fbz,u)",
+                "(fbz,d)",
+                "(f3,u)",
+                "(f3,d)",
+                "(f3x,u)",
+                "(f3x,d)",
+                "(f3y,u)",
+                "(f3y,d)",
+                "(faz,u)",
+                "(faz,d)",
+            ],
+        },
         "cubic": {
             0: ["(s,u)", "(s,d)"],
             1: ["(px,u)", "(px,d)", "(py,u)", "(py,d)", "(pz,u)", "(pz,d)"],
@@ -886,7 +912,6 @@ atomic_basis = {
                 "(fbz,d)",
             ],
         },
-        # L: [(atomic orbital name(gamma), spin up(u)/down(d))] (hexagonal subgroup).
         "hexagonal": {
             0: ["(s,u)", "(s,d)"],
             1: ["(px,u)", "(px,d)", "(py,u)", "(py,d)", "(pz,u)", "(pz,d)"],

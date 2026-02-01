@@ -642,27 +642,32 @@ Atomic多極子基底$\hat{X}_{l,m}^{(s,k)}$の定義はJPSJ89, 104704 (2020)に
 \braket{A|\hat{X}_{l,\gamma}^{(\Gamma,n;s,k)}|B}=\sum_{m}U_{m,\gamma}^{(X,l,\Gamma,n)}\braket{A|\hat{X}_{l,m}^{(s,k)}|B}
 \end{align}
 により、各点群の多極子基底の行列要素を求める。
-$\ket{LM;\sigma}$軌道基底の場合は、実数軌道基底のほうが便利なので、ユニタリー変換$u_{A,r}^{(l,ch)}$ ($ch=$cubic, hexagonal: 表\ref{tbl:uorb})により
+$\ket{LM;\sigma}$軌道基底の場合は、実数軌道基底のほうが便利なので、ユニタリー変換$u_{A,r}^{(l)}$ (表\ref{tbl:tesbasis})により
 \begin{align}
 \braket{r|\hat{X}_{l,\gamma}^{(\Gamma,n;s,k)}|s}
 =
 \sum_{AB}
-u_{A,r}^{(l,ch)*}
+u_{A,r}^{(l)*}
 \braket{A|\hat{X}_{l,\gamma}^{(\Gamma,n;s,k)}|B}
-u_{B,s}^{(l,ch)}
+u_{B,s}^{(l)}
 =
-\braket{r|\hat{u}^{(l,ch)\dagger}
+\braket{r|\hat{u}^{(l)\dagger}
 \hat{X}_{l,\gamma}^{(\Gamma,n;s,k)}
-\hat{u}^{(l,ch)}|s}
+\hat{u}^{(l)}|s}
 \end{align}
-に変換しておく。
+tesseral基底に変換しておく。
+Atomic多極子のデータはこの基底で保存しておく。
+
+他の基底関数の場合は適宜ユニタリー変換をすればよい。
+cubic/hexagonalの場合の標準基底は表\ref{tbl:uorb}としておく。
+
 
 スピンレスの多極子基底は$s=k=0$により与えられ、その行列は$\ket{LM;\uparrow}$と$\ket{LM;\downarrow}$のブロックごとに分離し、行列要素は等しい。
 
 \begin{table}[ht!]
 \begin{center}
 \small
-\caption{立方晶/六方晶系の軌道基底と基底の順序。六方晶系の$(yz,-zx)$, $(x^{2}-y^{2},-xy)$のみ、負符号を外すために成分の順序を入れ替えた。}
+\caption{立方晶/六方晶系の軌道基底と基底の順序(spinlessのみ)。六方晶系の$(yz,-zx)$, $(x^{2}-y^{2},-xy)$のみ、負符号を外すために成分の順序を入れ替えた。}
 \label{tbl:uorb}
 \begin{tabular}{cl} \hline\hline
 $L$ & basis (cubic) \\ \hline

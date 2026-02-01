@@ -41,10 +41,10 @@ h_global_info = """
     - (s,x) (int,str): (ndarray(2s+1,sympy)) list of basis.
   - "atomic_basis" (str): (dict) atomic basis.
     - "spinless" (str): (dict) spinless basis.
-      - "lm/cubic/hexagonal" (str): (dict) basis.
+      - "lm/lg" (str): (dict) basis.
         - L (int): ([str]) list of basis, M or gamma.
     - "spinful" (str): (dict) spinful basis.
-      - "jml/lms/cubic/hexagonal" (str): (dict) basis.
+      - "jml/lms/lgs" (str): (dict) basis.
         - L (int): ([str]) list of basis, (J,M) or (M,s) or (gamma,s).
   - "basis_function" (str): (dict) orbital basis function.
     - name (str): ((sympy,ndarray(2L+1,sympy))) cartesian expression and u-matrix, <m|gamma>.T.
