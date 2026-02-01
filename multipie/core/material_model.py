@@ -700,125 +700,80 @@ class MaterialModel(BinaryManager):
         Note:
             - R = (n1,n2,n3) and m and n are lattice indices, bra and ket indexes, respectively.
         """
-        # check format key.
-        if fmt not in ["sympy", "value"]:
-            raise KeyError(f"unknown format = {fmt} is given.")
-
-        # filter combined id.
-        combined_id, samb_select, select = self.select_combined_samb(select)
-
-        cluster_samb = self["cluster_samb"]
-        atomic_samb = self["atomic_samb"]
-        combined_samb = self["combined_samb"]
-
-        X_cache = {}
-        matrix = {}
-
-        def _X(a_samb, t1, c1):
-            key = (id(a_samb), t1, c1)
-            m = X_cache.get(key)
-            if m is None:
-                m = sp.Matrix(a_samb[t1][0][c1])
-                X_cache[key] = m
-            return m
-
-        def _hermite_conj(head, head_sl, bra_rank, tail, tail_sl, ket_rank):
-            hermite_conj = False
-            if (head, head_sl, bra_rank) not in self["full_matrix"]["index"]:
-                hermite_conj = True
-            if (tail, tail_sl, ket_rank) not in self["full_matrix"]["index"]:
-                hermite_conj = True
-            return hermite_conj
 
         def _format_val(v):
-            v = sp.expand(v)
+            expanded_v = sp.expand(v)
             if fmt == "value":
-                v = complex(v)
-                return round(v.real, digit) + round(v.imag, digit) * 1j
-            return v
+                c_val = complex(expanded_v)
+                return round(c_val.real, digit) + round(c_val.imag, digit) * 1j
+            return expanded_v
 
-        for zi, (tag, samb_info, idx, comp) in combined_id.items():
-            samb_type = samb_info.samb_type
+        if fmt not in ["sympy", "value"]:
+            raise KeyError(f"Unknown format: {fmt}")
 
-            tail, head = samb_type.tail, samb_type.head
-            wp = samb_type.wyckoff
+        combined_id, _, _ = self.select_combined_samb(select)
 
-            bk_info = samb_type.bk_info
-            bra_rank, bra_idx = bk_info.bh_rank, bk_info.bh_idx
-            ket_rank, ket_idx = bk_info.kt_rank, bk_info.kt_idx
+        full_matrix_idx = self["full_matrix"]["index"]
+        atomic_samb_data = self["atomic_samb"]
+        cluster_samb_data = self["cluster_samb"]
 
-            bn, bm = samb_info.neighbor, samb_info.n
+        matrix = {}
+        for zi, (s_symbol, u_samb_type, index, comp) in combined_id.items():
+            st = u_samb_type.samb_type
+            wp = st.wyckoff
+            tail, head = st.tail, st.head
+            bk = st.bk_info
+            b_rank, k_rank = bk.bh_rank, bk.kt_rank
 
             is_site = "@" not in wp
             if is_site:
-                head_sl = tail_sl = 1
+                c_info = self["site"]["cell"][tail]
             else:
-                name = get_bond(tail, head, bn, bm)
-                bond = self["bond"]["cell"][name][0]
-                head_sl, tail_sl = bond.h_idx[0], bond.t_idx[0]
+                bond_name = get_bond(tail, head, u_samb_type.neighbor, u_samb_type.n)
+                c_info = self["bond"]["cell"][bond_name]
 
-            hermite_conj = _hermite_conj(head, head_sl, bra_rank, tail, tail_sl, ket_rank)
-            if hermite_conj:
-                bra_idx, bra_rank, ket_idx, ket_rank = ket_idx, ket_rank, bra_idx, bra_rank
+            # Retrieve linear combination (lc) and symmetry (sym) info
+            lc_list, sym_list = self["combined_samb"][st][index]
+            lc = lc_list[comp]
 
-            a_samb = atomic_samb[bk_info]
-            c_samb = cluster_samb[wp]
+            a_samb = atomic_samb_data[bk]
+            c_samb = cluster_samb_data[wp]
 
-            for idx, (cl, _) in combined_samb[samb_type].select(**samb_select).items():
-                for tag_, m in zip(self.group.tag_multipole(idx, latex=True, superscript="c"), cl):
-                    if tag_ != tag:
-                        continue
+            d = defaultdict(lambda: sp.S(0) if fmt == "sympy" else 0.0)
 
-                    d = defaultdict(lambda: sp.S(0) if fmt == "sympy" else 0.0)
-                    for cg, t1, c1, t2, c2 in m:
-                        X = _X(a_samb, t1, c1)
-                        Xd = X.adjoint()
-                        Y = c_samb[t2][0][c2]
-                        for i, y in enumerate(Y):
-                            if is_site:
-                                head_sl = tail_sl = i + 1
-                                n1 = n2 = n3 = 0
-                            else:
-                                bond = self["bond"]["cell"][name][i]
-                                n1, n2, n3 = bond.R_primitive
-                                head_sl, tail_sl = bond.h_idx[0], bond.t_idx[0]
+            for cg, t1, c1, t2, c2 in lc:
+                atomic_matrix = a_samb[t1][0][c1]  # X matrix
+                cluster_coeffs = c_samb[t2][0][c2]  # Y coefficients
 
-                            bra_start, bra_dim = self["full_matrix"]["index"][(head, head_sl, bra_rank)]
-                            ket_start, ket_dim = self["full_matrix"]["index"][(tail, tail_sl, ket_rank)]
+                for yi, bi in zip(cluster_coeffs, c_info):
+                    if is_site:
+                        h_sl = t_sl = bi.sublattice
+                        n1 = n2 = n3 = 0
+                    else:
+                        h_sl, t_sl = bi.h_idx[0], bi.t_idx[0]
+                        n1, n2, n3 = bi.R_primitive
 
-                            for r, c in product(range(bra_dim), range(ket_dim)):
-                                val = cg * y * (Xd[r, c] if hermite_conj else X[r, c])
-                                key = (n1, n2, n3, bra_start + r, ket_start + c)
-                                d[key] += val
+                    b_top, b_dim = full_matrix_idx[(head, h_sl, b_rank)]
+                    k_top, k_dim = full_matrix_idx[(tail, t_sl, k_rank)]
 
-                            if not is_site:
-                                if head == tail and (bra_rank, bra_idx) != (ket_rank, ket_idx):
-                                    if head_sl == tail_sl:
-                                        bra2_start = ket_start
-                                        ket2_start = bra_start
-                                    else:
-                                        ket_list = [o for o in self["full_matrix"]["ket"] if o[0] == head and o[1] == 1]
-                                        bra_orb = [o for o in ket_list if o[2] == bra_rank][0]
-                                        ket_orb = [o for o in ket_list if o[2] == ket_rank][0]
-                                        bra_orb_idx = ket_list.index(bra_orb)
-                                        ket_orb_idx = ket_list.index(ket_orb)
+                    # pre-calculate the scalar multiplier for this sub-block.
+                    scale = cg * yi
 
-                                        bra2_start = bra_start + (ket_orb_idx - bra_orb_idx)
-                                        ket2_start = ket_start - (ket_orb_idx - bra_orb_idx)
+                    for r in range(b_dim):
+                        row_idx = b_top + r
+                        for c in range(k_dim):
+                            val = scale * atomic_matrix[r, c]
+                            if val != 0:
+                                d[(n1, n2, n3, row_idx, k_top + c)] += val
 
-                                    for r, c in product(range(ket_dim), range(bra_dim)):
-                                        val = cg * y * Xd[r, c]
-                                        key = (n1, n2, n3, bra2_start + r, ket2_start + c)
-                                        d[key] += val
+            # add hermite conjugate elements.
+            for (n1, n2, n3, m, n), val in list(d.items()):
+                d[(-n1, -n2, -n3, n, m)] += sp.conjugate(val)
 
-                    # hermite conjugate
-                    for Rmn, val in list(d.items()):
-                        n1_, n2_, n3_, m_, n_ = Rmn
-                        d[(-n1_, -n2_, -n3_, n_, m_)] += sp.conjugate(val)
+            norm_sq = sum(v * sp.conjugate(v) for v in d.values())
+            norm = sp.sqrt(sp.expand(norm_sq))
 
-                    norm = sp.sqrt(sp.expand(sum([v * sp.conjugate(v) for v in d.values()], sp.S(0))))
-
-                    matrix[zi] = {Rmn: _format_val(v / norm) for Rmn, v in d.items() if not v.is_zero}
+            matrix[zi] = {Rmn: _format_val(v / norm) for Rmn, v in d.items() if not v.is_zero}
 
         matrix = dict(sorted(matrix.items(), key=lambda x: int(x[0][1:])))
 
