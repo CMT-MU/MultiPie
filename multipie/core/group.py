@@ -161,6 +161,53 @@ class Group(dict):
         return self._group_dict[tp]
 
     # ==================================================
+    def transform_atomic_samb(self, dic, U_ket=None, U_bra=None, spinful=False):
+        """
+        Transform atomic basis from tesseral rep. to cubic/hexagonal/given one.
+
+        Args:
+            dic (Dict): atomic SAMB dict.
+            U_ket (ndarray or int, optional): U matrix from tesseral ket to given one, <t|n> or ket rank for lg/lgs.
+            U_bra (ndarray or int, optional): U matrix from tesseral bra to given one, <t|n> or bra rank for lg/lgs.
+            spinful (bool, optional): spinful basis ?
+
+        Returns:
+            - (Dict) -- transformed atomic SAMB.
+        """
+
+        def get_u_matrix(rank):
+            basis_def = self.global_info()["harmonics"]["basis_function"]
+            basis = self.global_info()["harmonics"]["atomic_basis"]["spinless"]
+            basis_pg = basis["hexagonal"] if self.is_hexagonal_subgroup else basis["cubic"]
+
+            ut = np.asarray([basis_def[i][1].tolist() for i in basis["lg"][rank]], dtype=object).conjugate()
+            upg = np.asarray([basis_def[i][1].tolist() for i in basis_pg[rank]], dtype=object).T
+            U = ut @ upg
+
+            if spinful:
+                U = np.kron(U, np.eye(2, dtype=object))
+            return U
+
+        if type(U_ket) == int:
+            U_ket = get_u_matrix(U_ket)
+
+        if U_bra is None:
+            U_bra = U_ket
+        else:
+            if type(U_bra) == int:
+                U_bra = get_u_matrix(U_bra)
+
+        U_bra = U_bra.conjugate().T
+
+        dic_transformed = Dict(PGMultipoleType)
+        for idx, (mat, ex) in dic.items():
+            matp = np.einsum("ik,akl,lj->aij", U_bra, mat, U_ket, dtype=object)
+            matp = np.vectorize(sp.expand)(matp)
+            dic_transformed[tuple(idx)] = (matp, ex)
+
+        return dic_transformed
+
+    # ==================================================
     @property
     def is_point_group(self):
         """
