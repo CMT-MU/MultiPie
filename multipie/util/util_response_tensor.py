@@ -224,7 +224,7 @@ def A12(i1, i2):
 # ==================================================
 def S123(i1, i2, i3):
     """
-    Symmetric part of rnak 3 tensor component.
+    Symmetric part of rank 3 tensor component.
 
     Args:
         i1 (int): index 1, 1-3.
