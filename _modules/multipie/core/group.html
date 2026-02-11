@@ -482,6 +482,56 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_group_dict</span><span class="p">[</span><span class="n">tp</span><span class="p">]</span>
 
     <span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="Group.transform_atomic_samb">
+<a class="viewcode-back" href="../../../src/api_core/group.html#multipie.core.group.Group.transform_atomic_samb">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">transform_atomic_samb</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dic</span><span class="p">,</span> <span class="n">U_ket</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">U_bra</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">spinful</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Transform atomic basis from tesseral rep. to cubic/hexagonal/given one.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            dic (Dict): atomic SAMB dict.</span>
+<span class="sd">            U_ket (ndarray or int, optional): U matrix from tesseral ket to given one, &lt;t|n&gt; or ket rank for lg/lgs.</span>
+<span class="sd">            U_bra (ndarray or int, optional): U matrix from tesseral bra to given one, &lt;t|n&gt; or bra rank for lg/lgs.</span>
+<span class="sd">            spinful (bool, optional): spinful basis ?</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            - (Dict) -- transformed atomic SAMB.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">get_u_matrix</span><span class="p">(</span><span class="n">rank</span><span class="p">):</span>
+            <span class="n">basis_def</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">global_info</span><span class="p">()[</span><span class="s2">&quot;harmonics&quot;</span><span class="p">][</span><span class="s2">&quot;basis_function&quot;</span><span class="p">]</span>
+            <span class="n">basis</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">global_info</span><span class="p">()[</span><span class="s2">&quot;harmonics&quot;</span><span class="p">][</span><span class="s2">&quot;atomic_basis&quot;</span><span class="p">][</span><span class="s2">&quot;spinless&quot;</span><span class="p">]</span>
+            <span class="n">basis_pg</span> <span class="o">=</span> <span class="n">basis</span><span class="p">[</span><span class="s2">&quot;hexagonal&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_hexagonal_subgroup</span> <span class="k">else</span> <span class="n">basis</span><span class="p">[</span><span class="s2">&quot;cubic&quot;</span><span class="p">]</span>
+
+            <span class="n">ut</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="n">basis_def</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">basis</span><span class="p">[</span><span class="s2">&quot;lg&quot;</span><span class="p">][</span><span class="n">rank</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span><span class="o">.</span><span class="n">conjugate</span><span class="p">()</span>
+            <span class="n">upg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="n">basis_def</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">basis_pg</span><span class="p">[</span><span class="n">rank</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+            <span class="n">U</span> <span class="o">=</span> <span class="n">ut</span> <span class="o">@</span> <span class="n">upg</span>
+
+            <span class="k">if</span> <span class="n">spinful</span><span class="p">:</span>
+                <span class="n">U</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">U</span>
+
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">U_ket</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">:</span>
+            <span class="n">U_ket</span> <span class="o">=</span> <span class="n">get_u_matrix</span><span class="p">(</span><span class="n">U_ket</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">U_bra</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">U_bra</span> <span class="o">=</span> <span class="n">U_ket</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">U_bra</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">:</span>
+                <span class="n">U_bra</span> <span class="o">=</span> <span class="n">get_u_matrix</span><span class="p">(</span><span class="n">U_bra</span><span class="p">)</span>
+
+        <span class="n">U_bra</span> <span class="o">=</span> <span class="n">U_bra</span><span class="o">.</span><span class="n">conjugate</span><span class="p">()</span><span class="o">.</span><span class="n">T</span>
+
+        <span class="n">dic_transformed</span> <span class="o">=</span> <span class="n">Dict</span><span class="p">(</span><span class="n">PGMultipoleType</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="p">(</span><span class="n">mat</span><span class="p">,</span> <span class="n">ex</span><span class="p">)</span> <span class="ow">in</span> <span class="n">dic</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">matp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;ik,akl,lj-&gt;aij&quot;</span><span class="p">,</span> <span class="n">U_bra</span><span class="p">,</span> <span class="n">mat</span><span class="p">,</span> <span class="n">U_ket</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span>
+            <span class="n">matp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">expand</span><span class="p">)(</span><span class="n">matp</span><span class="p">)</span>
+            <span class="n">dic_transformed</span><span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="n">idx</span><span class="p">)]</span> <span class="o">=</span> <span class="p">(</span><span class="n">matp</span><span class="p">,</span> <span class="n">ex</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">dic_transformed</span></div>
+
+
+    <span class="c1"># ==================================================</span>
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">is_point_group</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
