@@ -157,7 +157,9 @@ class MaterialModel(BinaryManager):
             os.chdir("samb")
 
             name = self["model"] + "_atomic_samb"
-            create_qtdraw_file(filename=f"{name}.qtdw", callback=lambda qtdraw: create_atomic_samb_qtdraw(qtdraw, self, name))
+            create_qtdraw_file(
+                filename=f"{name}.qtdw", callback=lambda qtdraw: create_atomic_samb_qtdraw(qtdraw, self, name)
+            )
 
             os.chdir(cwd)
 
@@ -232,7 +234,9 @@ class MaterialModel(BinaryManager):
         Save SAMB QtDraw file.
         """
         site_bond = [
-            s for s in self["wyckoff"].keys() if s.count(";") == 0 or int(s.split("_")[1]) < self["qtdraw_prop"]["max_neighbor"]
+            s
+            for s in self["wyckoff"].keys()
+            if s.count(";") == 0 or int(s.split("_")[1]) < self["qtdraw_prop"]["max_neighbor"]
         ]
         site = [s for s in site_bond if s.count(";") == 0]
         bond = [s for s in site_bond if s.count(";") > 0]
@@ -383,7 +387,9 @@ class MaterialModel(BinaryManager):
         site_dict = parse_representative_site(group, site_data, basis_type, basis_info)
         site_grid = create_site_grid(site_dict, igrid)
         site_so = create_site_so(group, site_dict)
-        bond_dict = parse_representative_bond(group, G, site_grid, site_so, site_dict, bond_data, max_neighbor, self.verbose)
+        bond_dict = parse_representative_bond(
+            group, G, site_grid, site_so, site_dict, bond_data, max_neighbor, self.verbose
+        )
         A = cell_info["A"][0:3, 0:3].T
         lattice = group.info.lattice
         Ap = convert_to_primitive(lattice, A, shift=False)
@@ -442,7 +448,8 @@ class MaterialModel(BinaryManager):
         self["SAMB_number"] = combined_num
 
         irrep_id = {
-            irrep: self.select_combined_samb(select={"Gamma": irrep})[0] for irrep in self.group.character["table"].keys()
+            irrep: self.select_combined_samb(select={"Gamma": irrep})[0]
+            for irrep in self.group.character["table"].keys()
         }
         self["irrep_id"] = irrep_id
 
@@ -515,9 +522,13 @@ class MaterialModel(BinaryManager):
             - (dict) -- cluster SAMB, dict[wyckoff, SAMB Dict].
             - (dict) -- cluster id, dict["y#", (wyckoff, SAMB index, comp)].
         """
-        wp_lst = sorted(list(set([lst.wyckoff for lst in self["site"]["representative"].values()])), key=lambda i: int(i[:-1]))
+        wp_lst = sorted(
+            list(set([lst.wyckoff for lst in self["site"]["representative"].values()])), key=lambda i: int(i[:-1])
+        )
         site_samb = {
-            wp: self.group.cluster_samb(wp).select(**site_select).sort("Gamma", "l", "k", ("X", ["Q", "G", "T", "M"]), "n")
+            wp: self.group.cluster_samb(wp)
+            .select(**site_select)
+            .sort("Gamma", "l", "k", ("X", ["Q", "G", "T", "M"]), "n")
             for wp in wp_lst
         }
 
@@ -724,6 +735,7 @@ class MaterialModel(BinaryManager):
             tail, head = st.tail, st.head
             bk = st.bk_info
             b_rank, k_rank = bk.bh_rank, bk.kt_rank
+            b_idx, k_idx = bk.bh_idx, bk.kt_idx
 
             is_site = "@" not in wp
             if is_site:
@@ -765,6 +777,21 @@ class MaterialModel(BinaryManager):
                             val = scale * atomic_matrix[r, c]
                             if val != 0:
                                 d[(n1, n2, n3, row_idx, k_top + c)] += val
+
+                    if not is_site:
+                        if head == tail and (b_rank, b_idx) != (k_rank, k_idx):
+                            if h_sl == t_sl:
+                                b2_top, k2_top = k_top, b_top
+                            else:
+                                ket_list = [o for o in self["full_matrix"]["ket"] if o[0] == head and o[1] == 1]
+                                bra_orb = [o for o in ket_list if o[2] == b_rank][0]
+                                ket_orb = [o for o in ket_list if o[2] == k_rank][0]
+                                delta = ket_list.index(ket_orb) - ket_list.index(bra_orb)
+                                b2_top = b_top + delta
+                                k2_top = k_top - delta
+
+                            for r, c in product(range(k_dim), range(b_dim)):
+                                d[(n1, n2, n3, b2_top + r, k2_top + c)] += cg * yi * atomic_matrix[c, r].conjugate()
 
             # add hermite conjugate elements.
             for (n1, n2, n3, m, n), val in list(d.items()):
@@ -935,7 +962,8 @@ class MaterialModel(BinaryManager):
             - (dict) -- site dict, dict[name, [position]].
         """
         lst = {
-            name: [i.position_primitive.tolist() for i in val if i.plus_set == 1] for name, val in self["site"]["cell"].items()
+            name: [i.position_primitive.tolist() for i in val if i.plus_set == 1]
+            for name, val in self["site"]["cell"].items()
         }
         return lst
 
