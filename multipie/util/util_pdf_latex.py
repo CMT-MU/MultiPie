@@ -125,7 +125,7 @@ class PDFviaLaTeX:
             ("multirow", ""),
             ("booktabs", ""),
             ("longtable", ""),
-            ("caption", "justification=raggedright, singlelinecheck=off"),
+            ("caption", ""),
         ]  #: LaTeX package (name, option)
         self.__package += package
 
@@ -431,6 +431,8 @@ class PDFviaLaTeX:
             txt.append(r"\begin{table}[ht!]")
             if center:
                 txt.append(r"\begin{center}")
+            else:
+                txt.append(r"\captionsetup{justification=raggedright, singlelinecheck=off}")
             txt.append(r"\caption{" + caption + "}")
             txt.append(r"\renewcommand{\arraystretch}{" + str(stretch) + "}")
 
@@ -510,6 +512,8 @@ class PDFviaLaTeX:
         txt.append(r"\renewcommand{\arraystretch}{" + str(stretch) + "}")
         txt.append(r"\begin{longtable}" + cnt + "{" + cpos + "}")
         if caption:
+            if not center:
+                txt.append(r"\captionsetup{justification=raggedright, singlelinecheck=off}")
             txt.append(r"\caption{" + caption + "}")
             txt.append(cr)
 
