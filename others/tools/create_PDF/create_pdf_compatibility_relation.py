@@ -62,13 +62,36 @@ def create_compatibility_relation():
                 "fby",
                 "fbz",
             ],
-            [0, 7, 18, 21, 24],
+            [
+                "l",
+                "f3",
+                "hu",
+                "hv",
+                "px",
+                "py",
+                "pz",
+                "fbx",
+                "fby",
+                "fbz",
+                "s",
+                "i",
+                "du",
+                "dv",
+                "gax",
+                "gay",
+                "gaz",
+                "dyz",
+                "dxz",
+                "dxy",
+            ],
+            [1, 8, 19, 22, 25],
             r"$O_{\rm h}$ subgroup.",
+            "c|cccccccccc|cccccccccc",
         ),
         (
             "D6h",
             [
-                "s",
+                "s/du",
                 "i0",
                 "ga",
                 "gb",
@@ -85,37 +108,43 @@ def create_compatibility_relation():
                 "f3",
                 "fbz",
             ],
-            [0, 11],
+            [
+                "j",
+                "pz",
+                "f1",
+                "f2",
+                "px",
+                "py",
+                "f3",
+                "fbz",
+                "s/du",
+                "i0",
+                "ga",
+                "gb",
+                "dyz",
+                "dxz'",
+                "dv",
+                "dxy'",
+            ],
+            [1, 12],
             r"$D_{\rm 6h}$ subgroup.",
+            "c|cccccccc|cccccccc",
         ),
     ]
 
     pdf = PDFviaLaTeX("compatibility_relation", dir=h_dir, pt=9, landscape=True, style="narrowest", english=True)
     pdf.title("Compatibility Relation for Point Groups")
 
-    for rc, ex, hl, cap in data:
+    for rc, ex_q, ex_g, hl, cap, cpos in data:
         col = [to_latex(i[0]) for i in cr[(rc, rc)]]
-        row = [""]
-        tbl = [[r"\texttt{" + i + "}" for i in ex]]
+        row = ["Q", "G"]
+        tbl = [[r"\texttt{" + i + "}" for i in ex_q], [r"\texttt{" + i + "}" for i in ex_g]]
         for k, v in cr.items():
             if k[0] == rc:
                 row.append(tag_latex(k[1]))
                 tbl.append([to_latex(i[1]) for i in v])
 
-        pdf.text(r"\begin{center}")
-        pdf.table(
-            tbl,
-            row,
-            col,
-            tag_latex(rc),
-            caption=cap,
-            stretch=1.0,
-            long=True,
-            cmath=False,
-            tmath=False,
-            hl=hl,
-        )
-        pdf.text(r"\end{center}")
+        pdf.table(tbl, row, col, tag_latex(rc), caption=cap, stretch=1.0, cmath=False, tmath=False, hl=hl, cpos=cpos)
         pdf.text(r"\newpage")
 
     pdf.build()

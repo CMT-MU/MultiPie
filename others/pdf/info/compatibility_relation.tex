@@ -14,6 +14,7 @@
 \usepackage{multirow}
 \usepackage{booktabs}
 \usepackage{longtable}
+\usepackage{caption}
 
 %%% layout setting
 
@@ -46,26 +47,14 @@
 \LARGE
 Compatibility Relation for Point Groups
 \end{center}
+\begin{table}[ht!]
 \begin{center}
-\begin{center}
-\renewcommand{\arraystretch}{1.0}
-\begin{longtable}{ccccccccccccccccccccc}
 \caption{$O_{\rm h}$ subgroup.}
- \\
- \hline \hline
-$O_{\rm h}$ & $A_{1g}$ & $A_{2g}$ & $E_{g}(x)$ & $E_{g}(y)$ & $T_{1g}(x)$ & $T_{1g}(y)$ & $T_{1g}(z)$ & $T_{2g}(x)$ & $T_{2g}(y)$ & $T_{2g}(z)$ & $A_{1u}$ & $A_{2u}$ & $E_{u}(x)$ & $E_{u}(y)$ & $T_{1u}(x)$ & $T_{1u}(y)$ & $T_{1u}(z)$ & $T_{2u}(x)$ & $T_{2u}(y)$ & $T_{2u}(z)$ \\ \hline \endfirsthead
-
-\multicolumn{20}{l}{\tablename\ \thetable{}} \\
- \hline \hline
-$O_{\rm h}$ & $A_{1g}$ & $A_{2g}$ & $E_{g}(x)$ & $E_{g}(y)$ & $T_{1g}(x)$ & $T_{1g}(y)$ & $T_{1g}(z)$ & $T_{2g}(x)$ & $T_{2g}(y)$ & $T_{2g}(z)$ & $A_{1u}$ & $A_{2u}$ & $E_{u}(x)$ & $E_{u}(y)$ & $T_{1u}(x)$ & $T_{1u}(y)$ & $T_{1u}(z)$ & $T_{2u}(x)$ & $T_{2u}(y)$ & $T_{2u}(z)$ \\ \hline \endhead
-
- \hline \hline
-\multicolumn{20}{r}{\footnotesize\it continued ...} \\ \endfoot
-
- \hline \hline
-\multicolumn{20}{r}{} \\ \endlastfoot
-
- & \texttt{s} & \texttt{i} & \texttt{du} & \texttt{dv} & \texttt{gax} & \texttt{gay} & \texttt{gaz} & \texttt{dyz} & \texttt{dxz} & \texttt{dxy} & \texttt{l} & \texttt{f3} & \texttt{hu} & \texttt{hv} & \texttt{px} & \texttt{py} & \texttt{pz} & \texttt{fbx} & \texttt{fby} & \texttt{fbz} \\ \hline
+\renewcommand{\arraystretch}{1.0}
+\begin{tabular}{c|cccccccccc|cccccccccc} \hline \hline
+$O_{\rm h}$ & $A_{1g}$ & $A_{2g}$ & $E_{g}(x)$ & $E_{g}(y)$ & $T_{1g}(x)$ & $T_{1g}(y)$ & $T_{1g}(z)$ & $T_{2g}(x)$ & $T_{2g}(y)$ & $T_{2g}(z)$ & $A_{1u}$ & $A_{2u}$ & $E_{u}(x)$ & $E_{u}(y)$ & $T_{1u}(x)$ & $T_{1u}(y)$ & $T_{1u}(z)$ & $T_{2u}(x)$ & $T_{2u}(y)$ & $T_{2u}(z)$ \\ \hline
+Q & \texttt{s} & \texttt{i} & \texttt{du} & \texttt{dv} & \texttt{gax} & \texttt{gay} & \texttt{gaz} & \texttt{dyz} & \texttt{dxz} & \texttt{dxy} & \texttt{l} & \texttt{f3} & \texttt{hu} & \texttt{hv} & \texttt{px} & \texttt{py} & \texttt{pz} & \texttt{fbx} & \texttt{fby} & \texttt{fbz} \\
+G & \texttt{l} & \texttt{f3} & \texttt{hu} & \texttt{hv} & \texttt{px} & \texttt{py} & \texttt{pz} & \texttt{fbx} & \texttt{fby} & \texttt{fbz} & \texttt{s} & \texttt{i} & \texttt{du} & \texttt{dv} & \texttt{gax} & \texttt{gay} & \texttt{gaz} & \texttt{dyz} & \texttt{dxz} & \texttt{dxy} \\ \hline
 $O_{\rm h}$ & $A_{1g}$ & $A_{2g}$ & $E_{g}(x)$ & $E_{g}(y)$ & $T_{1g}(x)$ & $T_{1g}(y)$ & $T_{1g}(z)$ & $T_{2g}(x)$ & $T_{2g}(y)$ & $T_{2g}(z)$ & $A_{1u}$ & $A_{2u}$ & $E_{u}(x)$ & $E_{u}(y)$ & $T_{1u}(x)$ & $T_{1u}(y)$ & $T_{1u}(z)$ & $T_{2u}(x)$ & $T_{2u}(y)$ & $T_{2u}(z)$ \\
 $T_{\rm d}$ & $A_{1}$ & $A_{2}$ & $E(x)$ & $E(y)$ & $T_{1}(x)$ & $T_{1}(y)$ & $T_{1}(z)$ & $T_{2}(x)$ & $T_{2}(y)$ & $T_{2}(z)$ & $A_{2}$ & $A_{1}$ & $E(y)$ & $-E(x)$ & $T_{2}(x)$ & $T_{2}(y)$ & $T_{2}(z)$ & $T_{1}(x)$ & $T_{1}(y)$ & $T_{1}(z)$ \\
 $O_{\rm }$ & $A_{1}$ & $A_{2}$ & $E(x)$ & $E(y)$ & $T_{1}(x)$ & $T_{1}(y)$ & $T_{1}(z)$ & $T_{2}(x)$ & $T_{2}(y)$ & $T_{2}(z)$ & $A_{1}$ & $A_{2}$ & $E(x)$ & $E(y)$ & $T_{1}(x)$ & $T_{1}(y)$ & $T_{1}(z)$ & $T_{2}(x)$ & $T_{2}(y)$ & $T_{2}(z)$ \\
@@ -92,30 +81,19 @@ $C_{\rm s}$ & $A^{\prime}$ & $A^{\prime}$ & $A^{\prime}$ & $A^{\prime}$ & $A^{\p
 $C_{\rm 2}$ & $A$ & $A$ & $A$ & $A$ & $B$ & $A$ & $B$ & $B$ & $A$ & $B$ & $A$ & $A$ & $A$ & $A$ & $B$ & $A$ & $B$ & $B$ & $A$ & $B$ \\ \hline
 $C_{\rm i}$ & $A_{g}$ & $A_{g}$ & $A_{g}$ & $A_{g}$ & $A_{g}$ & $A_{g}$ & $A_{g}$ & $A_{g}$ & $A_{g}$ & $A_{g}$ & $A_{u}$ & $A_{u}$ & $A_{u}$ & $A_{u}$ & $A_{u}$ & $A_{u}$ & $A_{u}$ & $A_{u}$ & $A_{u}$ & $A_{u}$ \\
 $C_{\rm 1}$ & $A$ & $A$ & $A$ & $A$ & $A$ & $A$ & $A$ & $A$ & $A$ & $A$ & $A$ & $A$ & $A$ & $A$ & $A$ & $A$ & $A$ & $A$ & $A$ & $A$ \\
-\end{longtable}
+ \hline \hline
+\end{tabular}
 \end{center}
-\end{center}
+\end{table}
 \newpage
+\begin{table}[ht!]
 \begin{center}
-\begin{center}
-\renewcommand{\arraystretch}{1.0}
-\begin{longtable}{ccccccccccccccccc}
 \caption{$D_{\rm 6h}$ subgroup.}
- \\
- \hline \hline
-$D_{\rm 6h}$ & $A_{1g}$ & $A_{2g}$ & $B_{1g}$ & $B_{2g}$ & $E_{1g}(x)$ & $E_{1g}(y)$ & $E_{2g}(x)$ & $E_{2g}(y)$ & $A_{1u}$ & $A_{2u}$ & $B_{1u}$ & $B_{2u}$ & $E_{1u}(x)$ & $E_{1u}(y)$ & $E_{2u}(x)$ & $E_{2u}(y)$ \\ \hline \endfirsthead
-
-\multicolumn{16}{l}{\tablename\ \thetable{}} \\
- \hline \hline
-$D_{\rm 6h}$ & $A_{1g}$ & $A_{2g}$ & $B_{1g}$ & $B_{2g}$ & $E_{1g}(x)$ & $E_{1g}(y)$ & $E_{2g}(x)$ & $E_{2g}(y)$ & $A_{1u}$ & $A_{2u}$ & $B_{1u}$ & $B_{2u}$ & $E_{1u}(x)$ & $E_{1u}(y)$ & $E_{2u}(x)$ & $E_{2u}(y)$ \\ \hline \endhead
-
- \hline \hline
-\multicolumn{16}{r}{\footnotesize\it continued ...} \\ \endfoot
-
- \hline \hline
-\multicolumn{16}{r}{} \\ \endlastfoot
-
- & \texttt{s} & \texttt{i0} & \texttt{ga} & \texttt{gb} & \texttt{dyz} & \texttt{dxz'} & \texttt{dv} & \texttt{dxy'} & \texttt{j} & \texttt{pz} & \texttt{f1} & \texttt{f2} & \texttt{px} & \texttt{py} & \texttt{f3} & \texttt{fbz} \\ \hline
+\renewcommand{\arraystretch}{1.0}
+\begin{tabular}{c|cccccccc|cccccccc} \hline \hline
+$D_{\rm 6h}$ & $A_{1g}$ & $A_{2g}$ & $B_{1g}$ & $B_{2g}$ & $E_{1g}(x)$ & $E_{1g}(y)$ & $E_{2g}(x)$ & $E_{2g}(y)$ & $A_{1u}$ & $A_{2u}$ & $B_{1u}$ & $B_{2u}$ & $E_{1u}(x)$ & $E_{1u}(y)$ & $E_{2u}(x)$ & $E_{2u}(y)$ \\ \hline
+Q & \texttt{s/du} & \texttt{i0} & \texttt{ga} & \texttt{gb} & \texttt{dyz} & \texttt{dxz'} & \texttt{dv} & \texttt{dxy'} & \texttt{j} & \texttt{pz} & \texttt{f1} & \texttt{f2} & \texttt{px} & \texttt{py} & \texttt{f3} & \texttt{fbz} \\
+G & \texttt{j} & \texttt{pz} & \texttt{f1} & \texttt{f2} & \texttt{px} & \texttt{py} & \texttt{f3} & \texttt{fbz} & \texttt{s/du} & \texttt{i0} & \texttt{ga} & \texttt{gb} & \texttt{dyz} & \texttt{dxz'} & \texttt{dv} & \texttt{dxy'} \\ \hline
 $D_{\rm 6h}$ & $A_{1g}$ & $A_{2g}$ & $B_{1g}$ & $B_{2g}$ & $E_{1g}(x)$ & $E_{1g}(y)$ & $E_{2g}(x)$ & $E_{2g}(y)$ & $A_{1u}$ & $A_{2u}$ & $B_{1u}$ & $B_{2u}$ & $E_{1u}(x)$ & $E_{1u}(y)$ & $E_{2u}(x)$ & $E_{2u}(y)$ \\
 $D_{\rm 3h}$ & $A_{1}^{\prime}$ & $A_{2}^{\prime}$ & $A_{1}^{\prime\prime}$ & $A_{2}^{\prime\prime}$ & $E^{\prime\prime}(x)$ & $E^{\prime\prime}(y)$ & $E^{\prime}(y)$ & $-E^{\prime}(x)$ & $A_{1}^{\prime\prime}$ & $A_{2}^{\prime\prime}$ & $A_{1}^{\prime}$ & $A_{2}^{\prime}$ & $E^{\prime}(x)$ & $E^{\prime}(y)$ & $E^{\prime\prime}(y)$ & $-E^{\prime\prime}(x)$ \\
 $D_{\rm 3h}$(1) & $A_{1}^{\prime}$ & $A_{2}^{\prime}$ & $A_{2}^{\prime\prime}$ & $A_{1}^{\prime\prime}$ & $E^{\prime\prime}(x)$ & $E^{\prime\prime}(y)$ & $E^{\prime}(x)$ & $E^{\prime}(y)$ & $A_{1}^{\prime\prime}$ & $A_{2}^{\prime\prime}$ & $A_{2}^{\prime}$ & $A_{1}^{\prime}$ & $E^{\prime}(x)$ & $E^{\prime}(y)$ & $E^{\prime\prime}(x)$ & $E^{\prime\prime}(y)$ \\
@@ -137,9 +115,10 @@ $C_{\rm 3i}$ & $A_{g}$ & $A_{g}$ & $A_{g}$ & $A_{g}$ & $E_{g}(x)$ & $E_{g}(y)$ &
 $C_{\rm 3i}$(c) & $A_{g}$ & $A_{g}$ & $A_{g}$ & $A_{g}$ & $E_{g}^{(a)}$ & $E_{g}^{(b)}$ & $E_{g}^{(a)}$ & $E_{g}^{(b)}$ & $A_{u}$ & $A_{u}$ & $A_{u}$ & $A_{u}$ & $E_{u}^{(a)}$ & $E_{u}^{(b)}$ & $E_{u}^{(a)}$ & $E_{u}^{(b)}$ \\
 $C_{\rm 3}$ & $A$ & $A$ & $A$ & $A$ & $E(x)$ & $E(y)$ & $E(x)$ & $E(y)$ & $A$ & $A$ & $A$ & $A$ & $E(x)$ & $E(y)$ & $E(x)$ & $E(y)$ \\
 $C_{\rm 3}$(c) & $A$ & $A$ & $A$ & $A$ & $E^{(a)}$ & $E^{(b)}$ & $E^{(a)}$ & $E^{(b)}$ & $A$ & $A$ & $A$ & $A$ & $E^{(a)}$ & $E^{(b)}$ & $E^{(a)}$ & $E^{(b)}$ \\
-\end{longtable}
+ \hline \hline
+\end{tabular}
 \end{center}
-\end{center}
+\end{table}
 \newpage
 
 \end{document}
