@@ -16,38 +16,35 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
-    this give us a css class that will be invisible only if js is disabled
-  -->
-  <noscript>
-    <style>
-      .pst-js-only { display: none !important; }
-
-    </style>
-  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=34ddd5e8" />
   
-  <!-- So that users can add custom icons -->
-  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="../../_static/documentation_options.js?v=a8e58a58"></script>
-    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
-    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
@@ -59,6 +56,8 @@
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'src/api_core/init';</script>
     <script src="../../_static/custom.js?v=9c3a2667"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -67,7 +66,6 @@
     <link rel="prev" title="Create function" href="cmd.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -83,8 +81,19 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <dialog id="pst-search-dialog">
-    
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
 <form class="bd-search d-flex align-items-center"
       action="../../search.html"
       method="get">
@@ -92,6 +101,7 @@
   <input type="search"
          class="form-control"
          name="q"
+         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -99,8 +109,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form>
-  </dialog>
+</form></div>
+  </div>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -116,8 +126,7 @@
       
       
       
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+      <div class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -147,17 +156,21 @@
     
     
     <img src="../../_static/multipie_logo.png" class="logo__image only-light" alt="MultiPie - Home"/>
-    <img src="../../_static/multipie_logo.png" class="logo__image only-dark pst-js-only" alt="MultiPie - Home"/>
+    <script>document.write(`<img src="../../_static/multipie_logo.png" class="logo__image only-dark" alt="MultiPie - Home"/>`);</script>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button></div>
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
@@ -205,14 +218,9 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
-      <div class="sidebar-primary-item">
-<div id="ethical-ad-placement"
-      class="flat"
-      data-ea-publisher="readthedocs"
-      data-ea-type="readthedocs-sidebar"
-      data-ea-manual="true">
-</div></div>
   </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -324,16 +332,24 @@
 
 
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button>
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
 
 
-<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-</button>
+  </button>
+`);
+</script>
 <button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
@@ -404,28 +420,28 @@
 <h2>Group<a class="headerlink" href="#group" title="Link to this heading">#</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="multipie.PGInfoType">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">PGInfoType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">international</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schoenflies</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crystal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">setting</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">PG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MPG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MSG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lattice</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hexagonal_g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SO</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SO_gen</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#multipie.PGInfoType" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">PGInfoType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">international</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schoenflies</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crystal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">setting</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">PG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MPG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MSG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lattice</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hexagonal_g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SO</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SO_gen</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#multipie.PGInfoType" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
 <p>Point Group info type.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="multipie.SGInfoType">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">SGInfoType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">international</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schoenflies</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crystal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">setting</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">PG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MPG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MSG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lattice</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hexagonal_g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SO</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SO_gen</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#multipie.SGInfoType" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SGInfoType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">international</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schoenflies</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crystal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">setting</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">PG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MPG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MSG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lattice</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hexagonal_g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SO</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SO_gen</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#multipie.SGInfoType" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
 <p>Space Group info type.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="multipie.MPGInfoType">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">MPGInfoType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">international</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schoenflies</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crystal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">setting</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">PG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MPG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MSG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lattice</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hexagonal_g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SO</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#multipie.MPGInfoType" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MPGInfoType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">international</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schoenflies</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crystal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">setting</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">PG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MPG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MSG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lattice</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hexagonal_g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SO</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#multipie.MPGInfoType" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
 <p>Magnetic Point Group info type.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="multipie.MSGInfoType">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">MSGInfoType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">BNS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">OG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schoenflies</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crystal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">setting</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">PG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MPG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MSG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lattice</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hexagonal_g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SO</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#multipie.MSGInfoType" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MSGInfoType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">BNS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">OG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schoenflies</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crystal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">setting</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">PG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MPG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MSG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lattice</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hexagonal_g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SO</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#multipie.MSGInfoType" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
 <p>Magnetic Space Group info type.</p>
 </dd></dl>
@@ -435,14 +451,14 @@
 <h2>Multipole<a class="headerlink" href="#multipole" title="Link to this heading">#</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="multipie.PGMultipoleType">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">PGMultipoleType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Gamma</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#multipie.PGMultipoleType" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">PGMultipoleType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Gamma</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#multipie.PGMultipoleType" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
 <p>Point-group multipole type (type, rank, irrep, multiplicity, add_multiplicity, s, k, internal-type).</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="multipie.SphericalMultipoleType">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">SphericalMultipoleType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#multipie.SphericalMultipoleType" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SphericalMultipoleType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#multipie.SphericalMultipoleType" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
 <p>Spherical multipole type (type, rank, s, k, internal-type).</p>
 </dd></dl>
@@ -452,56 +468,56 @@
 <h2>MaterialModel<a class="headerlink" href="#materialmodel" title="Link to this heading">#</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="multipie.RepSiteType">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">RepSiteType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">no</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wyckoff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symmetry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orbital</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#multipie.RepSiteType" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">RepSiteType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">no</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wyckoff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symmetry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orbital</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#multipie.RepSiteType" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
 <p>Representative site type.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="multipie.CellSiteType">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">CellSiteType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">no</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position_primitive</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mapping</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sublattice</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plus_set</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#multipie.CellSiteType" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CellSiteType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">no</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position_primitive</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mapping</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sublattice</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plus_set</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#multipie.CellSiteType" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
 <p>Cell site type.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="multipie.RepBondType">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">RepBondType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">no</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tail</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">head</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neighbor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wyckoff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">directional</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vector</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_rank</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h_rank</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#multipie.RepBondType" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">RepBondType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">no</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tail</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">head</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neighbor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wyckoff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">directional</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vector</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_rank</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h_rank</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#multipie.RepBondType" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
 <p>Representative bond type.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="multipie.CellBondType">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">CellBondType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">no</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vector</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vector_primitive</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center_primitive</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mapping</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sublattice</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plus_set</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h_idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R_primitive</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#multipie.CellBondType" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CellBondType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">no</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vector</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vector_primitive</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center_primitive</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mapping</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sublattice</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plus_set</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h_idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R_primitive</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#multipie.CellBondType" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
 <p>Cell bond type.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="multipie.BondInfoType">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">BondInfoType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tail</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">head</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neighbor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_rank</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h_rank</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#multipie.BondInfoType" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">BondInfoType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tail</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">head</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neighbor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_rank</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h_rank</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#multipie.BondInfoType" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
 <p>Bond info type.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="multipie.BraketInfoType">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">BraketInfoType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bh_rank</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bh_idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kt_rank</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kt_idx</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#multipie.BraketInfoType" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">BraketInfoType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bh_rank</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bh_idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kt_rank</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kt_idx</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#multipie.BraketInfoType" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
 <p>Braket info type.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="multipie.SAMBType">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">SAMBType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">head</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tail</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wyckoff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bk_info</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#multipie.SAMBType" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SAMBType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">head</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tail</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wyckoff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bk_info</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#multipie.SAMBType" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
 <p>Combined SAMB type.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="multipie.UniqueSAMBType">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">UniqueSAMBType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">samb_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neighbor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#multipie.UniqueSAMBType" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">UniqueSAMBType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">samb_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neighbor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#multipie.UniqueSAMBType" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
 <p>Unique combined SAMB type.</p>
 </dd></dl>
@@ -511,28 +527,28 @@
 <h2>Misc.<a class="headerlink" href="#misc" title="Link to this heading">#</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="multipie.InternalBasisType">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">InternalBasisType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#multipie.InternalBasisType" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">InternalBasisType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#multipie.InternalBasisType" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
 <p>Internal basis type.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="multipie.IrrepListType">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">IrrepListType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Gamma</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#multipie.IrrepListType" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">IrrepListType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Gamma</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#multipie.IrrepListType" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
 <p>Irrep list type.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="multipie.RepMatrixType">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">RepMatrixType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Gamma</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#multipie.RepMatrixType" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">RepMatrixType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Gamma</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#multipie.RepMatrixType" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
 <p>Representation matrix type.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="multipie.SOMatrixType">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">SOMatrixType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#multipie.SOMatrixType" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SOMatrixType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#multipie.SOMatrixType" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
 <p>Symmetry operation matrix type.</p>
 </dd></dl>
@@ -571,8 +587,7 @@
             
             
               
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -659,8 +674,8 @@ By Hiroaki Kusunose and Rikuto Oiwa
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>
