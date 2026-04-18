@@ -201,7 +201,7 @@ class ModelPDF:
             self.vspace("5mm")
             self.text(r"\noindent ** Wyckoff: \texttt{" + wp + "}\n")
             for idx, (mat, ex) in samb.items():
-                tag = self.mm.group.tag_multipole(idx, latex=True, superscript="s")
+                tag = self.mm.group.tag_multipole(idx, latex=True, superscript="b")
                 for e, m in zip(tag, mat):
                     d = self.number_tag("y" + str(no)) + sp.latex(sp.Symbol(e)) + "=" + to_latex(m, "vector")
                     self.pdf.equation(d, long=True)
