@@ -8,6 +8,8 @@ By installing the Python package [QtDraw](https://github.com/CMT-MU/QtDraw), cry
 
 Information for all supported groups is summarized in [Group Information](group_doc.md).
 
+A practical tutorial of MultiPie via QtDraw is given by [Tutorial via QtDraw](https://github.com/CMT-MU/QtDraw/blob/main/docs/src/tutorial_multipie_qtdraw.pdf)
+
 For implementation-related notes (in Japanese) and the API, please refer to the following:
 - [Technical Note](tech_note.md) (in Japanese)
 - API
