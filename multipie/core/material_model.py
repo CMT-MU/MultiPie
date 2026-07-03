@@ -1,7 +1,7 @@
 """
-Material model analyzer class.
+Material model construction class.
 
-This module provides material model analyzer.
+This module provides material model construction.
 """
 
 import os
@@ -55,7 +55,7 @@ class MaterialModel(BinaryManager):
     # ==================================================
     def __init__(self, topdir=None, verbose=False):
         """
-        Material model analyzer.
+        Material model construction.
 
         Args:
             topdir (str, optional): top directory. [default: cwd]
@@ -157,9 +157,7 @@ class MaterialModel(BinaryManager):
             os.chdir("samb")
 
             name = self["model"] + "_atomic_samb"
-            create_qtdraw_file(
-                filename=f"{name}.qtdw", callback=lambda qtdraw: create_atomic_samb_qtdraw(qtdraw, self, name)
-            )
+            create_qtdraw_file(filename=f"{name}.qtdw", callback=lambda qtdraw: create_atomic_samb_qtdraw(qtdraw, self, name))
 
             os.chdir(cwd)
 
@@ -234,9 +232,7 @@ class MaterialModel(BinaryManager):
         Save SAMB QtDraw file.
         """
         site_bond = [
-            s
-            for s in self["wyckoff"].keys()
-            if s.count(";") == 0 or int(s.split("_")[1]) < self["qtdraw_prop"]["max_neighbor"]
+            s for s in self["wyckoff"].keys() if s.count(";") == 0 or int(s.split("_")[1]) < self["qtdraw_prop"]["max_neighbor"]
         ]
         site = [s for s in site_bond if s.count(";") == 0]
         bond = [s for s in site_bond if s.count(";") > 0]
@@ -387,9 +383,7 @@ class MaterialModel(BinaryManager):
         site_dict = parse_representative_site(group, site_data, basis_type, basis_info)
         site_grid = create_site_grid(site_dict, igrid)
         site_so = create_site_so(group, site_dict)
-        bond_dict = parse_representative_bond(
-            group, G, site_grid, site_so, site_dict, bond_data, max_neighbor, self.verbose
-        )
+        bond_dict = parse_representative_bond(group, G, site_grid, site_so, site_dict, bond_data, max_neighbor, self.verbose)
         A = cell_info["A"][0:3, 0:3].T
         lattice = group.info.lattice
         Ap = convert_to_primitive(lattice, A, shift=False)
@@ -448,8 +442,7 @@ class MaterialModel(BinaryManager):
         self["SAMB_number"] = combined_num
 
         irrep_id = {
-            irrep: self.select_combined_samb(select={"Gamma": irrep})[0]
-            for irrep in self.group.character["table"].keys()
+            irrep: self.select_combined_samb(select={"Gamma": irrep})[0] for irrep in self.group.character["table"].keys()
         }
         self["irrep_id"] = irrep_id
 
@@ -522,13 +515,9 @@ class MaterialModel(BinaryManager):
             - (dict) -- cluster SAMB, dict[wyckoff, SAMB Dict].
             - (dict) -- cluster id, dict["y#", (wyckoff, SAMB index, comp)].
         """
-        wp_lst = sorted(
-            list(set([lst.wyckoff for lst in self["site"]["representative"].values()])), key=lambda i: int(i[:-1])
-        )
+        wp_lst = sorted(list(set([lst.wyckoff for lst in self["site"]["representative"].values()])), key=lambda i: int(i[:-1]))
         site_samb = {
-            wp: self.group.cluster_samb(wp)
-            .select(**site_select)
-            .sort("Gamma", "l", "k", ("X", ["Q", "G", "T", "M"]), "n")
+            wp: self.group.cluster_samb(wp).select(**site_select).sort("Gamma", "l", "k", ("X", ["Q", "G", "T", "M"]), "n")
             for wp in wp_lst
         }
 
@@ -962,8 +951,7 @@ class MaterialModel(BinaryManager):
             - (dict) -- site dict, dict[name, [position]].
         """
         lst = {
-            name: [i.position_primitive.tolist() for i in val if i.plus_set == 1]
-            for name, val in self["site"]["cell"].items()
+            name: [i.position_primitive.tolist() for i in val if i.plus_set == 1] for name, val in self["site"]["cell"].items()
         }
         return lst
 
