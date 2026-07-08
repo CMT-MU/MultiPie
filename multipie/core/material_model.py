@@ -247,16 +247,19 @@ class MaterialModel(BinaryManager):
         if verbose is None:
             verbose = self.verbose
         if verbose:
-            print(f"save SAMB QtDraw files in '{self.get_cwd()}/samb'.")
+            print(f"save SAMB QtDraw files in '{self.get_cwd()}/samb/'.")
 
     # ==================================================
-    def save_samb_matrix(self, select, parameter=None, verbose=None):
+    def save_samb_matrix(self, select, verbose=None):
         """
-        Save SAMB matrix (and hr).
+        Save SAMB matrix.
 
         Args:
             select (dict): select dict (see, select_combined_samb).
-            parameter (dict, optional): parameter dict, dict[z#, value].
+            verbose (bool, optional): verboser ?
+
+        Returns:
+            - (dict) -- matrix info.
         """
         if verbose is None:
             verbose = self.verbose
@@ -271,18 +274,11 @@ class MaterialModel(BinaryManager):
         os.chdir(path)
         filename = self["model"] + "_matrix.py"
         var = self["model"]
-        ket = [orbital + "@" + atom + f"({sl})" for atom, sl, rank, orbital in self["full_matrix"]["ket"]]
-        site_dict = {
-            k + "_" + str(vi.sublattice): vi.position_primitive.tolist()
-            for k, v in self["site"]["cell"].items()
-            for vi in v
-            if vi.plus_set == 1
-        }
-        site = [site_dict[atom + "_" + str(sl)] for atom, sl, rank, orbital in self["full_matrix"]["ket"]]
-        ket_site = dict(zip(ket, site))
+        ket_site = self.get_ket_site()
         d = {
             "model": self["model"],
-            "pkl": f"{self["model"]}.pkl ({self["created"]})",
+            "source": f"{self["model"]}.pkl",
+            "date": f"{self["created"]}",
             "select": regularized_select,
             "dimension": len(ket_site),
             "ket_site": ket_site,
@@ -293,21 +289,46 @@ class MaterialModel(BinaryManager):
         if verbose:
             print(f"save matrix to '{path}/{filename}'.")
 
-        # write hr.dat.
+        os.chdir(cwd)
+
+        d["matrix"] = matrix  #  restore sympy element.
+        return d
+
+    # ==================================================
+    def save_samb_hr(self, mat_dict, parameter=None, verbose=None):
+        """
+        Save SAMB matrix in hr format.
+
+        Args:
+            mat_dic (dict): matrix info.
+            parameter (dict, optional): parameter dict, dict[z#, value].
+            verbose (bool, optional): verboser ?
+
+        Returns:
+            - (dict) -- matrix dict.
+        """
+        if verbose is None:
+            verbose = self.verbose
+
+        # write hr.
+        cwd = os.getcwd()
+        path = self.get_cwd()
+        os.chdir(path)
+
         if parameter is None:
             H = None
         else:
-            H = self.get_hr(parameter, combined_samb_matrix=matrix)
+            H = self.get_hr(parameter, combined_samb_matrix=mat_dict["matrix"])
 
         if H is not None:
             filename = self["model"] + "_hr.dat"
             with open(filename, mode="w", encoding="utf-8") as f:
-                print(f"# SAMB matrix from {var}.pkl ({self["created"]})", file=f)
+                print(f"# SAMB matrix from {mat_dict["source"]} ({self["created"]})", file=f)
                 print("# select", file=f)
-                for k, v in regularized_select.items():
+                for k, v in mat_dict["select"].items():
                     print(f"#   {k}: {str(v).replace(" ", "")}", file=f)
-                print(f"# basis ({len(ket_site)})", file=f)
-                for no, (b, p) in enumerate(ket_site.items()):
+                print(f"# basis ({mat_dict["dimension"]})", file=f)
+                for no, (b, p) in enumerate(mat_dict["ket_site"].items()):
                     print(f"#   {no:2d} {b}: {str(p).replace(" ", "")}", file=f)
                 for z, v in parameter.items():
                     print(f"# {z:<4} = {v}", file=f)
@@ -320,7 +341,10 @@ class MaterialModel(BinaryManager):
                     print(s, file=f)
             if verbose:
                 print(f"save hr to '{path}/{filename}'.")
+
         os.chdir(cwd)
+
+        return H
 
     # ==================================================
     def analyze(self, model_in):
@@ -899,7 +923,7 @@ class MaterialModel(BinaryManager):
             for Rmn, Zj in d.items():
                 Hamiltonian[Rmn] += cj * Zj
 
-        return Hamiltonian
+        return dict(Hamiltonian)
 
     # ==================================================
     def get_multipole_expression(self):
@@ -925,6 +949,26 @@ class MaterialModel(BinaryManager):
             #    raise Exception(f"cannot find idx={idx1[1:]}.")
 
         return harmonics_lst
+
+    # ==================================================
+    def get_ket_site(self):
+        """
+        Get ket and corresponding site.
+
+        Returns:
+            - (dict) -- ket and site, dict[name, position].
+        """
+        ket = [orbital + "@" + atom + f"({sl})" for atom, sl, rank, orbital in self["full_matrix"]["ket"]]
+        site_dict = {
+            k + "_" + str(vi.sublattice): vi.position_primitive.tolist()
+            for k, v in self["site"]["cell"].items()
+            for vi in v
+            if vi.plus_set == 1
+        }
+        site = [site_dict[atom + "_" + str(sl)] for atom, sl, rank, orbital in self["full_matrix"]["ket"]]
+        ket_site = dict(zip(ket, site))
+
+        return ket_site
 
     # ==================================================
     def ket(self):

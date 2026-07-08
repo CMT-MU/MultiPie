@@ -8,7 +8,8 @@ Selected SAMB matrix.
 
 graphene = {
     "model": "graphene",
-    "pkl": "graphene.pkl (2026-04-04 02:13:30)",
+    "source": "graphene.pkl",
+    "date": "2026-04-04 02:13:30",
     "select": {
         "X": ["Q", "G"],
         "l": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
