@@ -39,7 +39,7 @@ from multipie.util.util_material_model import (
     create_cluster_samb_qtdraw,
 )
 from multipie.util.util_material_model_pdf import ModelPDF
-from multipie.core.default_model import _default_model
+from multipie.core.default_model import default_model
 from multipie.util.util_plot import plot_site, plot_bond, plot_site_samb, plot_bond_samb, plot_harmonics
 
 _matrix_comment = """Selected SAMB matrix.
@@ -363,7 +363,7 @@ class MaterialModel(BinaryManager):
 
         # set model based on default model.
         model = {}
-        deep_update(model, _default_model)
+        deep_update(model, default_model)
         deep_update(model, model_in)
 
         # get basic data.

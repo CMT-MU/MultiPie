@@ -1,10 +1,10 @@
 """
-Create SAMB from model input.
+Create model by model input.
 """
 
 import click
 from multipie.core.multipie_info import __top_dir__
-from multipie.core.cmd import create_samb
+from multipie.core.cmd import create_model
 
 DEFAULT_MODEL = __top_dir__ + "/multipie/core/default_model.py"
 
@@ -34,24 +34,24 @@ def extract_dict(filepath, key):
     return None
 
 
-# ================================================== mp_create_samb
+# ================================================== mp_create
 @click.command()
 @click.option("-v", "--verbose", is_flag=True, help="verbose off.")
 @click.option("-i", "--input", is_flag=True, help="show input format, and exit.")
 @click.argument("models", nargs=-1)
 def cmd(models, verbose, input):
     """
-    Create SAMB from input files (MODELS w or w/o '.py').
+    Create models by input files (MODELS w or w/o '.py').
     """
     if input:
-        input_str = "default_model = " + extract_dict(DEFAULT_MODEL, "_default_model")
+        input_str = "default_model = " + extract_dict(DEFAULT_MODEL, "default_model")
         click.echo(input_str)
         exit()
     if len(models) < 1:
-        click.echo("Usage: mp_create_samb [OPTIONS] [MODELS]...")
-        click.echo("Try 'mp_create_samb --help' for help.\n")
+        click.echo("Usage: mp_create [OPTIONS] [MODELS]...")
+        click.echo("Try 'mp_create --help' for help.\n")
         click.echo("Error: Missing argument 'MODELS'.")
         exit()
 
     # create all models.
-    create_samb(models, verbose=verbose)
+    create_model(models, verbose=verbose)

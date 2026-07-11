@@ -6,7 +6,7 @@ from multipie import __version__
 
 # ==================================================
 # default model input.
-_default_model = {
+default_model = {
     "model": "unknown",
     "group": "C1",
     "cell": {},

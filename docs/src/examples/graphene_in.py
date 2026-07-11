@@ -1,8 +1,9 @@
-# graphene.py
+# graphene_in.py
 """
 input file for graphene.
 """
-graphene = {
+
+graphene_in = {
     "model": "graphene",  #  name of model.
     "group": 191,  # No. of space group.
     "cell": {"c": 4},  # set large enough interlayer distance.

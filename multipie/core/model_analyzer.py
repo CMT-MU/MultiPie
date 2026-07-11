@@ -228,7 +228,6 @@ class ModelAnalyzer(dict):
 
     # ==================================================
     def compute_dispersion(self):
-        print("compute and output dispersion.")
         tb_gauge = self.output["fourier"]["tb_gauge"]
         k_point = self.output["dispersion"]["k_point"]
         k_path = self.output["dispersion"]["k_path"]
@@ -253,4 +252,5 @@ class ModelAnalyzer(dict):
 
     # ==================================================
     def compute_dos(self):
-        print("compute and output dos.")
+        if self.output["dos"]:
+            print("compute and output dos.")

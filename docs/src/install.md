@@ -67,15 +67,12 @@ Install the visualization tool QtDraw:
 
 ## Shell Commands
 MultiPie provides the following command-line utilities:
-- `mp_create_samb file1, file2, ...`
+- `mp_create input1, input2, ...`
 
-  create the SAMB for the specified model files.
-- `mp_create_samb_matrix file1, file2, ...`
+  create models by the model input files.
+- `mp_analyze control`
 
-  create the SAMB matrix for the specified select_parameter files.
-- `mp_create_samb_qtdraw file1, file2, ...`
-
-  generate QtDraw files of the SAMB for the specified model files.
+  analyze the model by the control file.
 
 See the [Getting Started](getting_started.md) guide for examples.
 

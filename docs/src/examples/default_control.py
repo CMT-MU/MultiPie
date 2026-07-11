@@ -1,8 +1,3 @@
-"""
-Default control for ModelAnalyzer.
-"""
-
-# ==================================================
 # default control.
 default_control = {
     "samb": {
