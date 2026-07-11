@@ -417,7 +417,7 @@ class MaterialModel(BinaryManager):
         braket_dict = create_braket_dict(site_dict["representative"], bond_dict["representative"], basis_info_type)
 
         # information for full matrix.
-        full_mat_info = create_full_matrix_info(site_dict)
+        full_mat_info = create_full_matrix_info(site_dict, basis_info_type)
 
         # save information.
         name = model["model"]
@@ -958,14 +958,14 @@ class MaterialModel(BinaryManager):
         Returns:
             - (dict) -- ket and site, dict[name, position].
         """
-        ket = [orbital + "@" + atom + f"({sl})" for atom, sl, rank, orbital in self["full_matrix"]["ket"]]
+        ket = [orbital + "@" + atom + f"({sl})" for atom, sl, rank, idx, orbital in self["full_matrix"]["ket"]]
         site_dict = {
             k + "_" + str(vi.sublattice): vi.position_primitive.tolist()
             for k, v in self["site"]["cell"].items()
             for vi in v
             if vi.plus_set == 1
         }
-        site = [site_dict[atom + "_" + str(sl)] for atom, sl, rank, orbital in self["full_matrix"]["ket"]]
+        site = [site_dict[atom + "_" + str(sl)] for atom, sl, rank, idx, orbital in self["full_matrix"]["ket"]]
         ket_site = dict(zip(ket, site))
 
         return ket_site
@@ -979,7 +979,7 @@ class MaterialModel(BinaryManager):
             - (list) -- ket string in LaTeX.
         """
         lst = []
-        for atom, sublattice, rank, orbital in self["full_matrix"]["ket"]:
+        for atom, sublattice, rank, idx, orbital in self["full_matrix"]["ket"]:
             orb = self.group.tag_atomic_basis(orbital, rank, latex=True)
             orb += "@" + r"{\rm " + atom + "}(" + str(sublattice) + ")"
             lst.append(orb)

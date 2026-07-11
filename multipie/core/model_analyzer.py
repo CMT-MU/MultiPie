@@ -8,7 +8,13 @@ import os
 import numpy as np
 from multipie.core.material_model import MaterialModel
 from multipie.core.default_control import default_control
-from multipie.util.util_model_analyzer import fourier_r_to_k, grid_path, output_linear_dispersion_eig
+from multipie.util.util_model_analyzer import (
+    fourier_r_to_k,
+    grid_path,
+    output_linear_dispersion_eig,
+    create_all_local_operator,
+    create_local_operator,
+)
 from multipie.util.util import read_dict, str_to_sympy
 
 
@@ -37,6 +43,7 @@ class ModelAnalyzer(dict):
         self._HR = None
         self._name = ""
         self._mm = MaterialModel(topdir, verbose=verbose)
+        self._local = create_all_local_operator()
         self.set_grid_size(N1, N2, N3)
 
     # ==================================================
@@ -173,6 +180,21 @@ class ModelAnalyzer(dict):
         self["unit_cell_volume"] = float(np.dot(A[0], np.cross(A[1], A[2])))  # volume of primitive cell.
 
     # ==================================================
+    def local_operator(self, name):
+        """
+        Create local operator.
+
+        Args:
+            name (str): operator name, "Sx/Sy/Sz/Lx/Ly/Lz/Qu/Qv/Qyz/Qzx/Qxy".
+
+        Returns:
+            - (ndarray) -- operator matrix (dim x dim).
+        """
+        ket = self.model["full_matrix"]["ket"]
+        basis_type = self.model["basis_type"]
+        return create_local_operator(ket, name, self._local, basis_type == "lgs")
+
+    # ==================================================
     def set_from_wannier(self):
         pass
 
@@ -185,7 +207,7 @@ class ModelAnalyzer(dict):
         cwd = os.getcwd()
 
         outdir = os.path.join(self._topdir, self.name, self.output["dir"])
-        os.mkdir(outdir)
+        os.makedirs(outdir, exist_ok=True)
         os.chdir(outdir)
 
         self.set_eigen_system()
@@ -207,18 +229,27 @@ class ModelAnalyzer(dict):
     # ==================================================
     def compute_dispersion(self):
         print("compute and output dispersion.")
-        atom_phase = self.output["fourier"]["atom_phase"]
+        tb_gauge = self.output["fourier"]["tb_gauge"]
         k_point = self.output["dispersion"]["k_point"]
         k_path = self.output["dispersion"]["k_path"]
         k_point = {k: str_to_sympy(v).astype(float) for k, v, in k_point.items()}
         k_point_path, k_linear, k_dis_pos = grid_path(k_point, k_path, self["mp_grid"][0], self["B"])
         atom = np.asarray(list(self.model.get_ket_site().values()), dtype=float)
+        basis_type = self.model["basis_type"]
+        if basis_type == "jml":
+            op_lst = []
+        else:
+            op_lst = self.output["dispersion"].get("local", [])
+
         HR = {((n1, n2, n3), m, n): complex(v) for (n1, n2, n3, m, n), v in self._HR.items()}
-        Hk = fourier_r_to_k(HR, atom, k_point_path, atom_phase)
+        Hk = fourier_r_to_k(HR, atom, k_point_path, tb_gauge)
 
         Ek, Uk = np.linalg.eigh(Hk)
-
-        output_linear_dispersion_eig(".", self.name, k_linear, Ek, k_dis_pos=k_dis_pos)
+        Ok = [np.einsum("kmi,mn,kni->ki", Uk.conj(), self.local_operator(name), Uk).real for name in op_lst]
+        if Ok:
+            output_linear_dispersion_eig(".", self.name + "_dispersion", k_linear, Ek, Ok, k_dis_pos=k_dis_pos, colormap=True)
+        else:
+            output_linear_dispersion_eig(".", self.name + "_dispersion", k_linear, Ek, k_dis_pos=k_dis_pos)
 
     # ==================================================
     def compute_dos(self):

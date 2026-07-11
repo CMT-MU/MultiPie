@@ -4,6 +4,8 @@ Utility for ModelAnalyzer calss.
 
 import numpy as np
 import subprocess
+from multipie import Group
+from multipie.util.util import str_to_sympy
 
 
 # ==================================================
@@ -93,7 +95,7 @@ def fourier_r_to_k(OR, atom, kv, s=True):
 
     Nk = len(kv)
     d = len(atom)
-    S = np.zeros((Nk, d, d), dtype=np.complex128)
+    S = np.zeros((Nk, d, d), dtype=complex)
     for (R, m, n), value in OR.items():
         eR = np.exp(1j * (2 * np.pi * kv @ np.asarray(R)))
         if s:
@@ -115,7 +117,7 @@ def output_linear_dispersion_eig(outdir, filename, k, e, o=None, **kwargs):
         filename (str): file name.
         k (ndarray): k points along high-symmetry lines.
         e (ndarray): eigen values.
-        o (ndarray, optional): expectation value of any operator for each band, [num_band, num_k, component].
+        o (list, optional): expectation value of any operator for each band, [[num_k, num_band]].
         kwargs (dict, optional): key words for generate_band_gnuplot.
     """
     kmax = np.max(k)
@@ -151,12 +153,8 @@ def output_linear_dispersion_eig(outdir, filename, k, e, o=None, **kwargs):
                 s += "{k:0<20}   {e:<20} \n".format(k=k[i], e=en[i])
             else:
                 s += "{k:0<20}   {e:<20}".format(k=k[i], e=en[i])
-                if o.ndim == 2:
-                    s += "   {o:<20}".format(o=o[n, i])
-                else:
-                    for a in range(o.shape[2]):
-                        s += "   {o:<20}".format(o=o[n, i, a])
-
+                for oi in o:
+                    s += "   {o:<20}".format(o=oi[i, n])
                 s += " \n"
 
         s += "\n"
@@ -188,6 +186,7 @@ def generate_band_gnuplot_eig(outdir, filename, kmax, emax, emin, num_wann, **kw
             - lwidth (float): line width.
             - lc (str): line color.
             - ref_filename (str): file name of reference band data.
+            - colormap (bool): with colormap of first expectation value of operator.
     """
     offset = (emax - emin) * 0.1
 
@@ -195,8 +194,9 @@ def generate_band_gnuplot_eig(outdir, filename, kmax, emax, emin, num_wann, **kw
     ef = kwargs.get("ef", 0.0)
     k_dis_pos = kwargs.get("k_dis_pos", None)
     ref_filename = kwargs.get("ref_filename", None)
-    lwidth = kwargs.get("lwidth", 3)
+    lwidth = kwargs.get("lwidth", 2)
     lc = kwargs.get("lc", "salmon")
+    colormap = kwargs.get("colormap", False)
 
     fs = open(f"{outdir}/plot_band.gnu", "w")
     fs.write("unset key \n")
@@ -204,15 +204,18 @@ def generate_band_gnuplot_eig(outdir, filename, kmax, emax, emin, num_wann, **kw
     fs.write(f"lwidth = {lwidth} \n")
     fs.write(f"set xrange [:{kmax}] \n")
     fs.write(f"set yrange [{emin-ef-offset}:{emax-ef+offset}] \n")
-    fs.write("set tics font 'Times New Roman, 30' \n\n")
+    fs.write("set tics font 'Times New Roman, 14' \n\n")
     fs.write("set size ratio 0.7 \n\n")
+
+    fs.write('set palette defined ( -1.0 "royalblue", 0 "gray90", 1.0 "salmon")\n')
+    fs.write("set cbrange [-1.0:1.0]\n\n")
 
     if k_dis_pos is not None:
         for pos, label in k_dis_pos.items():
             fs.write(f"set arrow from  {pos},  {emin-ef-offset} to {pos}, {emax-ef+offset} nohead \n")
 
         k_dis_pos = {pos: "{/Symbol G}" if label == "G" else label for pos, label in k_dis_pos.items()}
-        fs.write("set xtics (" + "".join([f"'{label}' {pos}," for pos, label in k_dis_pos.items()]) + ") \n\n")
+        fs.write("set xtics (" + "".join([f'"{label}" {pos},' for pos, label in k_dis_pos.items()]) + ") \n\n")
 
     fs.write(f"ef = {ef} \n")
 
@@ -225,12 +228,14 @@ def generate_band_gnuplot_eig(outdir, filename, kmax, emax, emin, num_wann, **kw
     fs.write("plot ")
 
     if ref_filename is not None:
-        # fs.write(f"'{ref_filename}' u ($1/(2*pi)):($2-ef) w l lw lwidth lc 'dark-grey', ")
         fs.write(f"'{ref_filename}' u ($1/a):($2-ef) w l lw lwidth lc 'dark-grey', ")
 
-    fs.write(f"'{filename}.txt' u 1:2 w l lw lwidth dt (3,1) lc '{lc}', ")
+    if colormap:
+        fs.write(f"'{filename}.txt' u 1:2:3 w l lw lwidth lc palette, ")
+    else:
+        fs.write(f"'{filename}.txt' u 1:2 w l lw lwidth lc '{lc}', ")
 
-    fs.write(f"{0.0} lw 0.5 dt (2,1) lc 'black'")
+    fs.write(f"{0.0} lw 0.5 lc 'black'")
 
     fs.write(" \n\n")
 
@@ -240,12 +245,14 @@ def generate_band_gnuplot_eig(outdir, filename, kmax, emax, emin, num_wann, **kw
     fs.write("plot ")
 
     if ref_filename is not None:
-        # fs.write(f"'{ref_filename}' u ($1/(2*pi)):($2-ef) w l lw lwidth lc 'dark-grey', ")
         fs.write(f"'{ref_filename}' u ($1/a):($2-ef) w l lw lwidth lc 'dark-grey', ")
 
-    fs.write(f"'{filename}.txt' u 1:2 w l lw lwidth dt (3,1) lc '{lc}', ")
+    if colormap:
+        fs.write(f"'{filename}.txt' u 1:2:3 w l lw lwidth lc palette, ")
+    else:
+        fs.write(f"'{filename}.txt' u 1:2 w l lw lwidth lc '{lc}', ")
 
-    fs.write(f"{0.0} lw 0.5 dt (2,1) lc 'black'")
+    fs.write(f"{0.0} lw 0.5 lc 'black'")
 
     fs.close()
 
@@ -253,144 +260,136 @@ def generate_band_gnuplot_eig(outdir, filename, kmax, emax, emin, num_wann, **kw
 
 
 # ==================================================
-def output_linear_dispersion(outdir, filename, k, e, u, **kwargs):
+def parse_orbital(orbital_str):
     """
-    Output band dispersion along high-symmetry lines.
+    Parse orbital string.
 
     Args:
-        outdir (str): input and output files are found in this directory.
-        filename (str): file name.
-        k (ndarray): k points along high-symmetry lines.
-        e (ndarray): eigen values.
-        u (ndarray): eigen vectors.
-        kwargs (dict, optional): key words for generate_band_gnuplot.
+        orbital_str (str): orbital string, (orbital, spin).
+
+    Returns:
+        - (tuple or str) -- orbital, spin or orbital.
     """
-    kmax = np.max(k)
-    emax = np.max(e)
-    emin = np.min(e)
-    num_wann = e.shape[1]
-
-    filename = filename[:-4] if filename[-4:] == ".txt" else filename
-
-    fs = open(outdir + "/" + filename + ".txt", "w")
-    fs.write("# n = band, j = orbital, E_n: energy, W_jn: weight\n")
-    fs.write("# k E_0 W_00 W_10 ... W_M0\n")
-    fs.write("# k E_1 W_01 W_11 ... W_M1\n")
-    fs.write("# ...\n")
-    fs.write("# k E_d W_0d W_1d ... W_dd\n")
-    fs.write(f"# Emax = {str(emax)}\n")
-    fs.write(f"# Emin = {str(emin)}\n")
-    fs.write(f"# num_wann = {str(num_wann)}\n")
-
-    ef = kwargs.get("ef", None)
-
-    if ef is None:
-        ef = 0.0
-        kwargs["ef"] = 0.0
-        fs.write("# ef = ? (no shift) \n\n")
+    if orbital_str.count("("):
+        return orbital_str.strip("()").split(",")
     else:
-        fs.write(f"# shifted by fermi energy = {ef} [eV] \n\n")
-
-    num_k, Nm = e.shape
-    e = e.T
-    u = np.abs(u) ** 2
-
-    for n in range(Nm):
-        en = e[n] - ef
-        s = ""
-        for i in range(num_k):
-            s += "{k:0<20}   {e:<20}".format(k=k[i], e=en[i])
-            for j in range(Nm):
-                s += " " + str(u[i, j, n])
-
-            s += "\n"
-
-        s += "\n"
-        fs.write(s)
-
-    fs.close()
-
-    # generate gnuplot file
-    generate_band_gnuplot(outdir, filename, kmax, emax, emin, num_wann, **kwargs)
+        return orbital_str, "u"
 
 
 # ==================================================
-def generate_band_gnuplot(outdir, filename, kmax, emax, emin, num_wann, **kwargs):
+def create_operator_index(ket, mode=None):
     """
-    Generate gnuplot file to plot band dispersion.
+    Create operator index.
 
     Args:
-        outdir (str): input and output files are found in this directory.
-        filename (str): file name.
-        kmax (float): maximum value in kpoints.
-        emax (float): maximum value of eigen values.
-        emin (float): minimum value of eigen values.
-        num_wann (int): # of wannier functions.
-        kwargs (dict, optional): key words for generate_band_gnuplot.
-            - a (float): length of lattice vector.
-            - ef (float): fermi energy.
-            - k_dis_pos (dict): {disconnected linear position:label}.
-            - lwidth (float): line width.
-            - lc (str): line color.
-            - ref_filename (str): file name of reference band data.
+        ket (list): ket list.
+        mode (str, optional): "orbital" or "spin".
+
+    Returns:
+        - (list) -- index pair list.
+
+    Note:
+        - atom, sublattice, rank is the same in pair.
+        - spin is the same for "orbital" mode.
+        - orbital is the same for "spin" mode.
     """
-    offset = (emax - emin) * 0.1
+    results = []
 
-    a = kwargs.get("a", None)
-    ef = kwargs.get("ef", 0.0)
-    k_dis_pos = kwargs.get("k_dis_pos", None)
-    ref_filename = kwargs.get("ref_filename", None)
-    lwidth = kwargs.get("lwidth", 3)
-    lc = kwargs.get("lc", "salmon")
+    for i, (atom_i, sub_i, rank_i, idx_i, orb_i) in enumerate(ket):
+        o_i, s_i = parse_orbital(orb_i)
 
-    fs = open(f"{outdir}/plot_band_detail.gnu", "w")
-    fs.write("unset key \n")
-    fs.write("unset grid \n")
-    fs.write(f"lwidth = {lwidth} \n")
-    fs.write(f"set xrange [:{kmax}] \n")
-    fs.write(f"set yrange [{emin-ef-offset}:{emax-ef+offset}] \n")
-    fs.write("set tics font 'Times New Roman, 30' \n\n")
-    fs.write("set size ratio 0.7 \n\n")
+        for j, (atom_j, sub_j, rank_j, idx_j, orb_j) in enumerate(ket):
+            o_j, s_j = parse_orbital(orb_j)
 
-    if k_dis_pos is not None:
-        for pos, label in k_dis_pos.items():
-            fs.write(f"set arrow from  {pos},  {emin-ef-offset} to  {pos}, {emax-ef+offset} nohead \n")
+            if atom_i != atom_j or sub_i != sub_j or rank_i != rank_j:  # same atom, sub, rank.
+                continue
 
-        k_dis_pos = {pos: "{/Symbol G}" if label == "G" else label for pos, label in k_dis_pos.items()}
-        fs.write("set xtics (" + "".join([f"'{label}' {pos}," for pos, label in k_dis_pos.items()]) + ") \n\n")
+            if mode == "spin" and o_i != o_j:  # same orbital.
+                continue
 
-    fs.write(f"ef = {ef} \n")
+            if mode == "orbital" and s_i != s_j:  # same spin.
+                continue
 
-    if a is not None:
-        fs.write(f"a = {a} \n")
+            results.append((i, j, rank_i, idx_i, idx_j))
 
-    fs.write("set terminal postscript eps color enhanced \n\n")
+    return results
 
-    fs.write(f"set output '{filename}.eps' \n\n")
-    fs.write("plot ")
 
-    if ref_filename is not None:
-        fs.write(f"'{ref_filename}' u ($1/(2*pi)):($2-ef) w l lw lwidth lc 'dark-grey', ")
+# ==================================================
+def create_local_operator(ket, op_name, op_dict, spinful):
+    """
+    Create local operator.
 
-    fs.write(f"'{filename}.txt' u 1:2 w l lw lwidth dt (3,1) lc '{lc}', ")
+    Args:
+        ket (list): ket set.
+        op_name (str): operator name.
+        op_dict (dict): operator dict.
+        spinful (bool): lgs basis ?
 
-    fs.write(f"{0.0} lw 0.5 dt (2,1) lc 'black'")
+    Returns:
+        - (ndarray) -- matrix for given operator.
+    """
+    if op_name[0] == "S":
+        mode = "spin"
+    else:
+        mode = "orbital"
 
-    fs.write(" \n\n")
+    dim = len(ket)
+    mat = np.zeros((dim, dim), dtype=complex)
+    lst = create_operator_index(ket, mode)
+    if mode == "spin":
+        for m, n, rank, b_idx, k_idx in lst:
+            if spinful:
+                b_idx = b_idx // 2
+                k_idx = k_idx // 2
+            mat[m, n] += complex(op_dict["s"][op_name][b_idx, k_idx])
+    else:
+        for m, n, rank, b_idx, k_idx in lst:
+            if spinful:
+                b_idx = b_idx // 2
+                k_idx = k_idx // 2
+            mat[m, n] += complex(op_dict[rank][op_name][b_idx, k_idx])
 
-    fs.write("set terminal pdf \n\n")
+    return mat
 
-    fs.write(f"set output '{filename}.pdf' \n\n")
-    fs.write("plot ")
 
-    if ref_filename is not None:
-        # fs.write(f"'{ref_filename}' u ($1/(2*pi)):($2-ef) w l lw lwidth lc 'dark-grey', ")
-        fs.write(f"'{ref_filename}' u ($1/a):($2-ef) w l lw lwidth lc 'dark-grey', ")
+# ==================================================
+def create_all_local_operator():
+    """
+    Create local operators.
 
-    fs.write(f"'{filename}.txt' u 1:2 w l lw lwidth dt (3,1) lc '{lc}', ")
+    Returns:
+        - (dict) -- local operators, dict[rank, dict[name, matrix]].
 
-    fs.write(f"{0.0} lw 0.5 dt (2,1) lc 'black'")
+    Note:
+        - atomic basis is tesseral harmonics, s, px, py, pz, dv, dxy, dxz, dyz, du, f2, f1, fbz, f3, f3x, f3y, faz.
+        - operator names are Lx, Ly, Lz, Qu, Qv, Qyz, Qxz, Qxy, which are not normalized as defined.
+        - it is used for basis, lg and lgs, not for jml.
+    """
+    op_key = [("M", 1, "T1g", -1, -1, 0, 0, "q"), ("Q", 2, "Eg", -1, -1, 0, 0, "q"), ("Q", 2, "T2g", -1, -1, 0, 0, "q")]
+    op_factor = {
+        1: ["sqrt(2)", "sqrt(6)/5", "sqrt(6)/5"],
+        2: ["sqrt(10)", "sqrt(14)/7", "sqrt(14)/7"],
+        3: ["14/sqrt(7)", "sqrt(21)*2/15", "sqrt(21)*2/15"],
+    }
+    group = Group("Oh")
 
-    fs.close()
+    lst = ["Lx", "Ly", "Lz", "Qu", "Qv", "Qyz", "Qxz", "Qxy"]
+    d = {0: {name: str_to_sympy("[[0]]") for name in lst}}
+    for rank in [1, 2, 3]:
+        no = 0
+        am = group.atomic_samb("lg", (rank, rank))
+        dd = {}
+        for l, f in zip(op_key, op_factor[rank]):
+            f = str_to_sympy(f)
+            v, ex = am[l]
+            for e, m in zip(ex, v):
+                name = lst[no]
+                no = no + 1
+                dd[name] = m * f
+        d[rank] = dd
 
-    subprocess.run(f"cd {outdir} ; gnuplot plot_band_detail.gnu", shell=True)
+    spin = {"Sx": "[[0,1/2],[1/2,0]]", "Sy": "[[0,-I/2],[I/2,0]]", "Sz": "[[1/2,0],[0,-1/2]]"}
+    d["s"] = {name: str_to_sympy(s) for name, s in spin.items()}
+
+    return d

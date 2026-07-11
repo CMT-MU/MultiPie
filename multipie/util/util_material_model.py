@@ -10,7 +10,6 @@ from multipie.util.util_crystal import site_distance, shift_site, convert_to_pri
 from multipie.util.util_wyckoff import find_vector
 from multipie.core.default_model import _site_property, _bond_property
 
-
 TOL = 100.0 * TOL_SAME_SITE
 DIGIT = 6
 
@@ -289,9 +288,7 @@ def parse_orbital(orbital, basis_type, basis_info):
     else:
         raise Exception(f"invalid orbital format, {orbital}.")
 
-    basis_set = [
-        sorted(block, key=lambda x: basis_info[basis_type][rank].index(x)) for rank, block in enumerate(basis_set)
-    ]
+    basis_set = [sorted(block, key=lambda x: basis_info[basis_type][rank].index(x)) for rank, block in enumerate(basis_set)]
 
     return basis_set
 
@@ -429,9 +426,7 @@ def parse_combined_select(select, irreps, default_samb_select, site_rep, bond_re
 
     # regularize samb select.
     regularized_samb_select = parse_samb_select(samb_select, irreps)
-    regularized_samb_select = {
-        k: [x for x in v if x in default_samb_select[k]] for k, v in regularized_samb_select.items()
-    }
+    regularized_samb_select = {k: [x for x in v if x in default_samb_select[k]] for k, v in regularized_samb_select.items()}
 
     keys = list(regularized_samb_select.keys())
     for k, v in default_samb_select.items():
@@ -495,18 +490,13 @@ def parse_combined_select(select, irreps, default_samb_select, site_rep, bond_re
                 d = [(s, sorted(list(set(o) & set(orb)))) for s, o in default_site if s == name]
             site += [i for i in d if len(i[1]) > 0]
         site = list({tuple(tuple(x) if isinstance(x, list) else x for x in t) for t in site})
-        site = [
-            tuple(list(x) if isinstance(x, tuple) and all(isinstance(i, int) for i in x) else x for x in t)
-            for t in site
-        ]
+        site = [tuple(list(x) if isinstance(x, tuple) and all(isinstance(i, int) for i in x) else x for x in t) for t in site]
         final_select["site"] = sorted(site)
     site_list = [i[0] for i in final_select["site"]]
 
     # bond.
     default_bond = [
-        (v.tail, v.head, v.neighbor, v.t_rank, v.h_rank)
-        for v in bond_rep.values()
-        if v.tail in site_list and v.head in site_list
+        (v.tail, v.head, v.neighbor, v.t_rank, v.h_rank) for v in bond_rep.values() if v.tail in site_list and v.head in site_list
     ]
     if "bond" not in select.keys():
         final_select["bond"] = default_bond
@@ -522,9 +512,7 @@ def parse_combined_select(select, irreps, default_samb_select, site_rep, bond_re
             elif rank is None:  # name, neighbor.
                 tail, head = name.split(";")
                 d = [(h, t, n, hr, tr) for t, h, n, tr, hr in default_bond if t == tail and h == head and n in neighbor]
-                d += [
-                    (h, t, n, hr, tr) for t, h, n, tr, hr in default_bond if h == tail and t == head and n in neighbor
-                ]
+                d += [(h, t, n, hr, tr) for t, h, n, tr, hr in default_bond if h == tail and t == head and n in neighbor]
             elif neighbor is None:  # name, rank.
                 tail, head = name.split(";")
                 t_rank, h_rank = rank.split(";")
@@ -555,10 +543,7 @@ def parse_combined_select(select, irreps, default_samb_select, site_rep, bond_re
                 ]
             bond += d
         bond = list({tuple(tuple(x) if isinstance(x, list) else x for x in t) for t in bond})
-        bond = [
-            tuple(list(x) if isinstance(x, tuple) and all(isinstance(i, int) for i in x) else x for x in t)
-            for t in bond
-        ]
+        bond = [tuple(list(x) if isinstance(x, tuple) and all(isinstance(i, int) for i in x) else x for x in t) for t in bond]
         final_select["bond"] = sorted(bond)
 
     return regularized_samb_select, final_select
@@ -680,15 +665,16 @@ def create_braket_dict(rep_site, rep_bond, basis_info_type):
 
 
 # ==================================================
-def create_full_matrix_info(site_dict):
+def create_full_matrix_info(site_dict, basis_info_type):
     """
     Create full matrix info.
 
     Args:
         site_dict (dict): site dict.
+        basis_info_type (dict): atomic basis in each rank.
 
     Returns:
-        - (dict) -- full matrix info, "ket": [(name, sublattice, rank, orbital)], "index": Dict[(atom,sublattice,rank), (top_idx, size)].
+        - (dict) -- full matrix info, "ket": [(name, sublattice, rank, basis_idx, orbital)], "index": Dict[(atom,sublattice,rank), (top_idx, size)].
     """
     ket = []
     ket_dict = {}
@@ -699,8 +685,10 @@ def create_full_matrix_info(site_dict):
                 continue
             for rank, orbitals in enumerate(lst.orbital):
                 num_orb = len(orbitals)
+                basis_lst = basis_info_type[rank]
                 for o in orbitals:
-                    ket.append([name, c.sublattice, rank, o])
+                    basis_idx = basis_lst.index(o)
+                    ket.append([name, c.sublattice, rank, basis_idx, o])
 
                 if num_orb > 0:
                     ket_dict[(name, c.sublattice, rank)] = (start_idx, num_orb)
@@ -921,9 +909,7 @@ def parse_representative_bond(group, G, site_grid, site_so, site_dict, bond_data
                 head_idx = [find_vector(i, head_pos, TOL) + 1 for i in head_p]
                 head_idx = [(head_info[i - 1].sublattice, head_info[i - 1].plus_set) for i in head_idx]
 
-                rep_bond[name] = RepBondType(
-                    c_no + 1, tail_tag, head_tag, n + 1, b_wp, d, v0, c0, dist, tail_rank, head_rank
-                )
+                rep_bond[name] = RepBondType(c_no + 1, tail_tag, head_tag, n + 1, b_wp, d, v0, c0, dist, tail_rank, head_rank)
                 cell_bond[name] = []
                 for k, (v, vp, c, cp, m, sl, pi, ti, hi) in enumerate(
                     zip(vector, vector_p, center, center_p, mapping, sublattice, pset, tail_idx, head_idx)
@@ -958,9 +944,7 @@ def write_site_dict(site_dict):
 
     print("--- representative site ---")
     for name, c in rep_site.items():
-        print(
-            f"{name}: #{c.no}, wyckoff = {c.wyckoff}, symmetry = {c.symmetry}, 1st = {c.position}, orbital = {c.orbital}"
-        )
+        print(f"{name}: #{c.no}, wyckoff = {c.wyckoff}, symmetry = {c.symmetry}, 1st = {c.position}, orbital = {c.orbital}")
 
     print("--- cell site ---")
     for name, cell_site_name in cell_site.items():
@@ -1092,7 +1076,7 @@ def qtdraw_bond(qtdraw, bond_dict, max_neighbor, scale, mode, width, show_rep_bo
         if n > max_neighbor:
             continue
         prop_no = min(c_no, len(_bond_property) - 1)
-        ((color, color2), width1, opacity) = _bond_property[prop_no]
+        (color, color2), width1, opacity = _bond_property[prop_no]
         if not directional:
             color2 = color
         for c in cell_bond_name:
