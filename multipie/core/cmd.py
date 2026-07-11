@@ -78,7 +78,7 @@ def analyze_model(control, N1=50, N2=50, N3=50, topdir=None, verbose=False):
     def create(ma):
         @timer(f"analyze model by '{control}'", verbose=verbose)
         def create0():
-            ma.exec(control)
+            ma.analyze(control)
 
         create0()
 

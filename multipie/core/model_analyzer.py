@@ -125,9 +125,9 @@ class ModelAnalyzer(dict):
         self["mp_grid"] = [N1, N2, N3]
 
     # ==================================================
-    def exec(self, control):
+    def analyze(self, control):
         """
-        Execute analyzer with control file.
+        Analyze model with control file.
 
         Args:
             control (str or dict): control file (.py) or model name.
