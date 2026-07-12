@@ -62,7 +62,7 @@ This class has the following dict data.
 - Misc.
   - **basis_type**: (str) atomic basis type.
   - **full_matrix**: (dict) full matrix info.
-    - ket: (list) ket info., [(atom,sublattice,rank,orbital)].
+    - ket: (list) ket info., [(atom,sublattice,rank,basis_index,orbital)].
     - index: (dict) index info., dict[(atom,SL,rank), (top,size)].
   - **braket**: (dict) braket info., dict[site/bond-tag, [BraketInfoType]].
   - **wyckoff**: (dict) wyckoff info., dict[site/bond-tag, wyckoff].

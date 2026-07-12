@@ -152,7 +152,7 @@ RepMatrixType = namedtuple("RepMatrixType", ["Gamma"])
 """Representation matrix type."""
 
 
-__all__ = ["Group", "MaterialModel", "create_samb", "create_samb_qtdraw", "create_samb_matrix"]
+__all__ = ["Group", "MaterialModel", "ModelAnalyzer", "create_samb", "create_samb_qtdraw", "create_samb_matrix"]
 
 if TYPE_CHECKING:
     from multipie.core.group import Group
@@ -160,6 +160,7 @@ if TYPE_CHECKING:
     from multipie.core.cmd import create_samb_qtdraw
     from multipie.core.cmd import create_samb_matrix
     from multipie.core.material_model import MaterialModel
+    from multipie.core.model_analyzer import ModelAnalyzer
 
 
 def __getattr__(name):
@@ -187,5 +188,10 @@ def __getattr__(name):
         from multipie.core.material_model import MaterialModel
 
         return MaterialModel
+
+    if name == "ModelAnalyzer":
+        from multipie.core.model_analyzer import ModelAnalyzer
+
+        return ModelAnalyzer
 
     raise AttributeError

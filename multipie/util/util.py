@@ -293,7 +293,7 @@ def read_dict_file(data, topdir=None, verbose=False):
     cwd = os.getcwd()
     os.chdir(topdir)
 
-    # dict or [dict.
+    # dict or [dict].
     if isinstance(data, dict):
         return {data["model"]: data}
     if isinstance(data, (tuple, list)) and data and isinstance(data[0], dict):

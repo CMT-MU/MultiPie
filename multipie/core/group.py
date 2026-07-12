@@ -42,7 +42,19 @@ from multipie.util.util_response_tensor import (
 CHOP = 1e-6
 
 
+# ==================================================
 def replace_bar(s):
+    """
+    Replace latex code, bar.
+
+    Args:
+        s (str): str to be replaced.
+
+    Returns:
+        - (str) -- replaced str.
+
+    :meta private:
+    """
     return re.sub(r"\\bar\{(\d)\}", r"-\1", s).replace("{", "").replace("}", "").replace(r"\rm ", "")
 
 
@@ -1351,7 +1363,7 @@ class Group(dict):
         basis = [f"({L},{m},1/2)" for m in reversed(range(-L, L + 1))]
 
         def proc(xlmsk):
-            (X, l, m, s, k) = xlmsk
+            X, l, m, s, k = xlmsk
             am = sp.Matrix.zeros(len(basis))
             for i, b1 in enumerate(basis):
                 for j, b2 in enumerate(basis):

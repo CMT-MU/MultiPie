@@ -2,86 +2,59 @@
 
 ## Tutorial
 
-As a tutorial, we describe the procedure for generating models and SAMBs.
+As a tutorial, we describe the procedure for generating model in the case of **graphene**.
 
-1. Download the contents of the [examples](https://github.com/CMT-MU/MultiPie/tree/main/docs/src/examples) directory.
-2. Inside the `examples` directory, run the `create_model.py` script:
+1. Download `graphene_in.py` and `graphene_ctrl.py` from [examples](https://github.com/CMT-MU/MultiPie/tree/main/docs/src/examples) directory.
+2. At the same place where the above two files are, run the following:
 
     ```bash
-    python -m create_model.py
+    $ mp_create graphene_in.py
     ```
 
-    ```{literalinclude} examples/create_model.py
+    It creates four files under `graphene` directory:
+
+     - `graphene.pkl` : Model information file (binary)
+     - `graphene.tex`, `graphene.pdf` : Summary of the model information
+     - `graphene.qtdw` : QtDraw file of the model structure
+
+3. To analyze the model, e.g., draw dispersion, run the following:
+
+    ```bash
+    $ mp_analyze graphene_ctrl.py
     ```
 
-    This will create the `C3v` and `graphene` directories. Each directory will contain six files and a samb subdirectory.
-    For `C3v`, the generated files are:
+    It creates the following files under `graphene` directory:
 
-     - `C3v.pkl` : Model information file (binary)
-     - `C3v.tex`, `C3v.pdf` : Summary of the model information
-     - `C3v.qtdw` : QtDraw file of the model structure
-     - `C3v_matrix.py` : Matrix element data of the SAMB
-     - `C3v_hr.dat` : Numerical matrix element data with SAMB weight parameters applied
-     - `samb` : QtDraw files for the SAMB
+     - `graphene_matrix.py`, `graphene_hr.dat` : Full matrix information for selected SAMBs
+     - `output/` : Various output for physical quantities
+     - `samb/` : QtDraw files for SAMBs
 
-    The same set of files is generated for `graphene`.
+4. In order to handle `graphene.pkl` interactively, use IPython interface. See in detail [analyze_model.ipynb](examples/analyze_model.ipynb)
 
-3. For details on how to load and analyze the model information binary file, `.pkl`, see [read_model.ipynb](examples/read_model.ipynb)
+## Model input file
 
-## SAMB construction (detail)
+In case of graphene, the model input file is
 
-### model input file
+```{literalinclude} examples/graphene_in.py
+```
 
-The default values of model input file is the following:
+The other setting are provided as default values, which are given as follows:
 
 ```{literalinclude} examples/default_model.py
 ```
 
-You can overwrite whatever you want.
+You can overwrite whatever you want as in the case of graphene.
 
-### model information files
+## Control file
 
-Using the following input file, you can construct the model information files by running:
+In case of graphene, the control file is
 
-```bash
-mp_create_samb C3v
+```{literalinclude} examples/graphene_ctrl.py
 ```
 
-This command generates `C3v.pkl`, `C3v.tex`, `C3v.pdf`, and `C3v.qtdw`.
-Example input file:
+The default values of control file are provided as follows:
 
-```{literalinclude} examples/C3v.py
+```{literalinclude} examples/default_control.py
 ```
 
-### selection and parameter file
-
-The constructed SAMBs can be selected by selection file:
-
-```{literalinclude} examples/selection_ex.py
-```
-
-The typical usage is the following: you first create the SAMBs for all irreps., and then select the desired SAMBs in order to create matrix elements with necessary bases, such as the symmetry-breaking terms in addition to the identity irreps.
-
-### matrix element files
-
-To generate full matrix file, `_matrix.py` by selection (and `_hr.dat` for given parameters) file, run:
-
-```bash
-mp_create_samb_matrix C3v_param
-```
-
-This command generates two files, `C3v_matrix.py`, and `C3v_hr.dat`.
-Example input file:
-
-```{literalinclude} examples/C3v_param.py
-```
-
-### QtDraw SAMB files
-
-To generate QtDraw files for the constructed SAMB, run:
-
-```bash
-mp_create_samb_qtdraw C3v graphene
-```
-
-The generated SAMB QtDraw files are saved in the `samb` directory.
+The typical use of generating SAMBs, you first create the SAMBs for all irreps., and then choose the necessary SAMBs, such as the symmetry-breaking terms in addition to the identity irreps., by specifying `samb/parameter` in the control file.
