@@ -40,6 +40,7 @@ class ModelAnalyzer(dict):
         self._output = default_control["output"]
 
         self._topdir = topdir
+        self._verbose = verbose
         self._HR = None
         self._name = ""
         self._mm = MaterialModel(topdir, verbose=verbose)
@@ -132,11 +133,11 @@ class ModelAnalyzer(dict):
         Args:
             control (str or dict): control file (.py) or model name.
         """
-        if type(control) == str:  # control file.
+        if type(control) == str:  # read control file or from dict.
             if control.endswith(".py"):
                 file = os.path.join(self._topdir, control)
                 control = read_dict(file)
-            else:  # model name.
+            else:  # w/o control and model_name is given.
                 self.model.load(control)
                 self.model.save_samb_matrix({})
                 return
@@ -145,14 +146,22 @@ class ModelAnalyzer(dict):
         self._wannier |= control.get("wannier", {})
         self._output |= control.get("output", {})
 
+        # exec. SAMB control.
         if self.samb.get("model", None) is not None:
             self._name = self.samb["model"]
             self.model.load(self.name)
             self.set_primitive_cell(np.array(self.model["unit_vector_primitive"]))
             select = self.samb.get("select", {})
+
             parameter = self.samb.get("parameter", {})
+            if type(parameter) == str:  # when parameter is str, which means filename of z_j dict.
+                z_file = os.path.join(self._topdir, self.name, parameter)
+                parameter = read_dict(z_file)
+                self._samb["parameter"] = parameter
+
             if self.samb.get("samb_figure", False):
                 self.model.save_samb_qtdraw()
+
             if parameter:
                 md = self.model.save_samb_matrix(select)
                 self._HR = self.model.save_samb_hr(md, parameter)
@@ -160,10 +169,12 @@ class ModelAnalyzer(dict):
                 self.model.save_samb_matrix(select)
                 return
 
+        # exec. wannier control.
         if self._wannier.get("cw", None) is not None:
             # self._name = self.wannier["model"]
             self.set_from_wannier()
 
+        # compute physical quanties and output data.
         self.compute_physical_quantity()
 
     # ==================================================
@@ -271,6 +282,10 @@ class ModelAnalyzer(dict):
             output_linear_dispersion_eig(".", self.name + "_dispersion", k_linear, Ek, Ok, k_dis_pos=k_dis_pos, colormap=True)
         else:
             output_linear_dispersion_eig(".", self.name + "_dispersion", k_linear, Ek, k_dis_pos=k_dis_pos)
+
+        if self._verbose:
+            outdir = os.path.join(self._topdir, self.name, self.output["dir"])
+            print(f"save dispersion in {outdir}/.")
 
     # ==================================================
     def compute_dos(self):

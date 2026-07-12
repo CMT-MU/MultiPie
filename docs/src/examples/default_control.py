@@ -10,7 +10,7 @@ default_control = {
             # "Gamma": ["A1g"],  # SAMB irreps. in list. "IR"=identity irrep., empty []=all.
             # "s": [],  # SAMB internal rank, 0,1 in list. empty []=all
         },
-        "parameter": {  # SAMB with finite weight (float or sympy const.).
+        "parameter": {  # SAMB with finite weight (float or sympy const.), or filename of z_j dict.
             "z1": 1.0,
         },
         "samb_figure": False,  # save SAMB QtDraw files ?
