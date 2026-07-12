@@ -173,6 +173,8 @@ class ModelAnalyzer(dict):
 
         Args:
             A (ndarray): [a1, a2, a3] (3x3).
+
+        :meta private:
         """
         B = 2 * np.pi * np.linalg.inv(A).T
         self["A"] = A  # primitive cell.
@@ -189,6 +191,8 @@ class ModelAnalyzer(dict):
 
         Returns:
             - (ndarray) -- operator matrix (dim x dim).
+
+        :meta private:
         """
         ket = self.model["full_matrix"]["ket"]
         basis_type = self.model["basis_type"]
@@ -196,10 +200,20 @@ class ModelAnalyzer(dict):
 
     # ==================================================
     def set_from_wannier(self):
+        """
+        Set data for wannier-based input.
+
+        :meta private:
+        """
         pass
 
     # ==================================================
     def compute_physical_quantity(self):
+        """
+        Compute physical quantities by parsing the control file.
+
+        :meta private:
+        """
         if self._HR is None:
             print("set H(R) first before calculating physical quantities.")
             return
@@ -222,12 +236,20 @@ class ModelAnalyzer(dict):
 
     # ==================================================
     def set_eigen_system(self):
-        # check output to determine for calculating E only or both E, U.
-        # and then compute E (and U).
+        """
+        Set eigen system by checking control/output if E and/or U is required.
+
+        :meta private:
+        """
         pass
 
     # ==================================================
     def compute_dispersion(self):
+        """
+        Compute dispersion.
+
+        :meta private:
+        """
         tb_gauge = self.output["fourier"]["tb_gauge"]
         k_point = self.output["dispersion"]["k_point"]
         k_path = self.output["dispersion"]["k_path"]
@@ -252,5 +274,10 @@ class ModelAnalyzer(dict):
 
     # ==================================================
     def compute_dos(self):
+        """
+        Compute DOS.
+
+        :meta private:
+        """
         if self.output["dos"]:
             print("compute and output dos.")

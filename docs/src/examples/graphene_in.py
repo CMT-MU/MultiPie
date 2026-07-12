@@ -9,7 +9,7 @@ graphene_in = {
     "cell": {"c": 4},  # set large enough interlayer distance.
     #
     "site": {"C": ("[1/3,2/3,0]", "pz")},  # positions of C site and its orbital.
-    "bond": [("C", "C", [1, 2, 3, 4, 5, 6])],  # C-C bonds up to 6th neighbors.
+    "bond": [("C", "C", [1, 2])],  # C-C bonds up to 2nd neighbors.
     #
     "spinful": False,  # spinless.
 }
