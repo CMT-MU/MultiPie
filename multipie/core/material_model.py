@@ -1,7 +1,7 @@
 """
-Material model analyzer class.
+Material model construction class.
 
-This module provides material model analyzer.
+This module provides material model construction.
 """
 
 import os
@@ -39,7 +39,7 @@ from multipie.util.util_material_model import (
     create_cluster_samb_qtdraw,
 )
 from multipie.util.util_material_model_pdf import ModelPDF
-from multipie.core.default_model import _default_model
+from multipie.core.default_model import default_model
 from multipie.util.util_plot import plot_site, plot_bond, plot_site_samb, plot_bond_samb, plot_harmonics
 
 _matrix_comment = """Selected SAMB matrix.
@@ -55,7 +55,7 @@ class MaterialModel(BinaryManager):
     # ==================================================
     def __init__(self, topdir=None, verbose=False):
         """
-        Material model analyzer.
+        Material model construction.
 
         Args:
             topdir (str, optional): top directory. [default: cwd]
@@ -157,9 +157,7 @@ class MaterialModel(BinaryManager):
             os.chdir("samb")
 
             name = self["model"] + "_atomic_samb"
-            create_qtdraw_file(
-                filename=f"{name}.qtdw", callback=lambda qtdraw: create_atomic_samb_qtdraw(qtdraw, self, name)
-            )
+            create_qtdraw_file(filename=f"{name}.qtdw", callback=lambda qtdraw: create_atomic_samb_qtdraw(qtdraw, self, name))
 
             os.chdir(cwd)
 
@@ -234,9 +232,7 @@ class MaterialModel(BinaryManager):
         Save SAMB QtDraw file.
         """
         site_bond = [
-            s
-            for s in self["wyckoff"].keys()
-            if s.count(";") == 0 or int(s.split("_")[1]) < self["qtdraw_prop"]["max_neighbor"]
+            s for s in self["wyckoff"].keys() if s.count(";") == 0 or int(s.split("_")[1]) < self["qtdraw_prop"]["max_neighbor"]
         ]
         site = [s for s in site_bond if s.count(";") == 0]
         bond = [s for s in site_bond if s.count(";") > 0]
@@ -251,16 +247,19 @@ class MaterialModel(BinaryManager):
         if verbose is None:
             verbose = self.verbose
         if verbose:
-            print(f"save SAMB QtDraw files in '{self.get_cwd()}/samb'.")
+            print(f"save SAMB QtDraw files in '{self.get_cwd()}/samb/'.")
 
     # ==================================================
-    def save_samb_matrix(self, select, parameter=None, verbose=None):
+    def save_samb_matrix(self, select, verbose=None):
         """
-        Save SAMB matrix (and hr).
+        Save SAMB matrix.
 
         Args:
             select (dict): select dict (see, select_combined_samb).
-            parameter (dict, optional): parameter dict, dict[z#, value].
+            verbose (bool, optional): verboser ?
+
+        Returns:
+            - (dict) -- matrix info.
         """
         if verbose is None:
             verbose = self.verbose
@@ -275,18 +274,11 @@ class MaterialModel(BinaryManager):
         os.chdir(path)
         filename = self["model"] + "_matrix.py"
         var = self["model"]
-        ket = [orbital + "@" + atom + f"({sl})" for atom, sl, rank, orbital in self["full_matrix"]["ket"]]
-        site_dict = {
-            k + "_" + str(vi.sublattice): vi.position_primitive.tolist()
-            for k, v in self["site"]["cell"].items()
-            for vi in v
-            if vi.plus_set == 1
-        }
-        site = [site_dict[atom + "_" + str(sl)] for atom, sl, rank, orbital in self["full_matrix"]["ket"]]
-        ket_site = dict(zip(ket, site))
+        ket_site = self.get_ket_site()
         d = {
             "model": self["model"],
-            "pkl": f"{self["model"]}.pkl ({self["created"]})",
+            "source": f"{self["model"]}.pkl",
+            "date": f"{self["created"]}",
             "select": regularized_select,
             "dimension": len(ket_site),
             "ket_site": ket_site,
@@ -297,21 +289,46 @@ class MaterialModel(BinaryManager):
         if verbose:
             print(f"save matrix to '{path}/{filename}'.")
 
-        # write hr.dat.
+        os.chdir(cwd)
+
+        d["matrix"] = matrix  #  restore sympy element.
+        return d
+
+    # ==================================================
+    def save_samb_hr(self, mat_dict, parameter=None, verbose=None):
+        """
+        Save SAMB matrix in hr format.
+
+        Args:
+            mat_dic (dict): matrix info.
+            parameter (dict, optional): parameter dict, dict[z#, value].
+            verbose (bool, optional): verboser ?
+
+        Returns:
+            - (dict) -- matrix dict.
+        """
+        if verbose is None:
+            verbose = self.verbose
+
+        # write hr.
+        cwd = os.getcwd()
+        path = self.get_cwd()
+        os.chdir(path)
+
         if parameter is None:
             H = None
         else:
-            H = self.get_hr(parameter, combined_samb_matrix=matrix)
+            H = self.get_hr(parameter, combined_samb_matrix=mat_dict["matrix"])
 
         if H is not None:
             filename = self["model"] + "_hr.dat"
             with open(filename, mode="w", encoding="utf-8") as f:
-                print(f"# SAMB matrix from {var}.pkl ({self["created"]})", file=f)
+                print(f"# SAMB matrix from {mat_dict["source"]} ({self["created"]})", file=f)
                 print("# select", file=f)
-                for k, v in regularized_select.items():
+                for k, v in mat_dict["select"].items():
                     print(f"#   {k}: {str(v).replace(" ", "")}", file=f)
-                print(f"# basis ({len(ket_site)})", file=f)
-                for no, (b, p) in enumerate(ket_site.items()):
+                print(f"# basis ({mat_dict["dimension"]})", file=f)
+                for no, (b, p) in enumerate(mat_dict["ket_site"].items()):
                     print(f"#   {no:2d} {b}: {str(p).replace(" ", "")}", file=f)
                 for z, v in parameter.items():
                     print(f"# {z:<4} = {v}", file=f)
@@ -324,7 +341,10 @@ class MaterialModel(BinaryManager):
                     print(s, file=f)
             if verbose:
                 print(f"save hr to '{path}/{filename}'.")
+
         os.chdir(cwd)
+
+        return H
 
     # ==================================================
     def analyze(self, model_in):
@@ -343,7 +363,7 @@ class MaterialModel(BinaryManager):
 
         # set model based on default model.
         model = {}
-        deep_update(model, _default_model)
+        deep_update(model, default_model)
         deep_update(model, model_in)
 
         # get basic data.
@@ -387,9 +407,7 @@ class MaterialModel(BinaryManager):
         site_dict = parse_representative_site(group, site_data, basis_type, basis_info)
         site_grid = create_site_grid(site_dict, igrid)
         site_so = create_site_so(group, site_dict)
-        bond_dict = parse_representative_bond(
-            group, G, site_grid, site_so, site_dict, bond_data, max_neighbor, self.verbose
-        )
+        bond_dict = parse_representative_bond(group, G, site_grid, site_so, site_dict, bond_data, max_neighbor, self.verbose)
         A = cell_info["A"][0:3, 0:3].T
         lattice = group.info.lattice
         Ap = convert_to_primitive(lattice, A, shift=False)
@@ -399,7 +417,7 @@ class MaterialModel(BinaryManager):
         braket_dict = create_braket_dict(site_dict["representative"], bond_dict["representative"], basis_info_type)
 
         # information for full matrix.
-        full_mat_info = create_full_matrix_info(site_dict)
+        full_mat_info = create_full_matrix_info(site_dict, basis_info_type)
 
         # save information.
         name = model["model"]
@@ -448,8 +466,7 @@ class MaterialModel(BinaryManager):
         self["SAMB_number"] = combined_num
 
         irrep_id = {
-            irrep: self.select_combined_samb(select={"Gamma": irrep})[0]
-            for irrep in self.group.character["table"].keys()
+            irrep: self.select_combined_samb(select={"Gamma": irrep})[0] for irrep in self.group.character["table"].keys()
         }
         self["irrep_id"] = irrep_id
 
@@ -522,13 +539,9 @@ class MaterialModel(BinaryManager):
             - (dict) -- cluster SAMB, dict[wyckoff, SAMB Dict].
             - (dict) -- cluster id, dict["y#", (wyckoff, SAMB index, comp)].
         """
-        wp_lst = sorted(
-            list(set([lst.wyckoff for lst in self["site"]["representative"].values()])), key=lambda i: int(i[:-1])
-        )
+        wp_lst = sorted(list(set([lst.wyckoff for lst in self["site"]["representative"].values()])), key=lambda i: int(i[:-1]))
         site_samb = {
-            wp: self.group.cluster_samb(wp)
-            .select(**site_select)
-            .sort("Gamma", "l", "k", ("X", ["Q", "G", "T", "M"]), "n")
+            wp: self.group.cluster_samb(wp).select(**site_select).sort("Gamma", "l", "k", ("X", ["Q", "G", "T", "M"]), "n")
             for wp in wp_lst
         }
 
@@ -910,7 +923,7 @@ class MaterialModel(BinaryManager):
             for Rmn, Zj in d.items():
                 Hamiltonian[Rmn] += cj * Zj
 
-        return Hamiltonian
+        return dict(Hamiltonian)
 
     # ==================================================
     def get_multipole_expression(self):
@@ -938,6 +951,26 @@ class MaterialModel(BinaryManager):
         return harmonics_lst
 
     # ==================================================
+    def get_ket_site(self):
+        """
+        Get ket and corresponding site.
+
+        Returns:
+            - (dict) -- ket and site, dict[name, position].
+        """
+        ket = [orbital + "@" + atom + f"({sl})" for atom, sl, rank, idx, orbital in self["full_matrix"]["ket"]]
+        site_dict = {
+            k + "_" + str(vi.sublattice): vi.position_primitive.tolist()
+            for k, v in self["site"]["cell"].items()
+            for vi in v
+            if vi.plus_set == 1
+        }
+        site = [site_dict[atom + "_" + str(sl)] for atom, sl, rank, idx, orbital in self["full_matrix"]["ket"]]
+        ket_site = dict(zip(ket, site))
+
+        return ket_site
+
+    # ==================================================
     def ket(self):
         """
         Get ket string list.
@@ -946,7 +979,7 @@ class MaterialModel(BinaryManager):
             - (list) -- ket string in LaTeX.
         """
         lst = []
-        for atom, sublattice, rank, orbital in self["full_matrix"]["ket"]:
+        for atom, sublattice, rank, idx, orbital in self["full_matrix"]["ket"]:
             orb = self.group.tag_atomic_basis(orbital, rank, latex=True)
             orb += "@" + r"{\rm " + atom + "}(" + str(sublattice) + ")"
             lst.append(orb)
@@ -962,8 +995,7 @@ class MaterialModel(BinaryManager):
             - (dict) -- site dict, dict[name, [position]].
         """
         lst = {
-            name: [i.position_primitive.tolist() for i in val if i.plus_set == 1]
-            for name, val in self["site"]["cell"].items()
+            name: [i.position_primitive.tolist() for i in val if i.plus_set == 1] for name, val in self["site"]["cell"].items()
         }
         return lst
 

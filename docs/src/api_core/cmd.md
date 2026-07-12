@@ -1,6 +1,6 @@
 # Create function
 
-## Create SAMB, QtDraw, and matrix
+## Create and analyze model
 
 ```{eval-rst}
 .. automodule:: multipie.core.cmd
