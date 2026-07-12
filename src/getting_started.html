@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=34ddd5e8" />
@@ -65,7 +65,7 @@
     <script src="../_static/custom.js?v=9c3a2667"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Group information" href="group_doc.html" />
+    <link rel="next" title="Brief Manual" href="manual.html" />
     <link rel="prev" title="Installing MultiPie" href="install.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -170,15 +170,17 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Documentation</span></p>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="manual.html">Brief Manual</a></li>
 <li class="toctree-l1"><a class="reference internal" href="group_doc.html">Group information</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tech_note.html">Technical Note</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API reference</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="api_core.html">Core</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="api_core/cmd.html">Create function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_core/model_analyzer.html">ModelAnalyzer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api_core/group.html">Group</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api_core/material_model.html">Material Model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api_core/cmd.html">Create function</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api_core/init.html">Type</a></li>
 </ul>
 </details></li>
@@ -360,14 +362,8 @@
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tutorial">Tutorial</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#samb-construction-detail">SAMB construction (detail)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-input-file">model input file</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-information-files">model information files</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selection-and-parameter-file">selection and parameter file</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-element-files">matrix element files</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qtdraw-samb-files">QtDraw SAMB files</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-input-file">Model input file</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#control-file">Control file</a></li>
 </ul>
             </nav>
         </div>
@@ -383,68 +379,75 @@
 <h1>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading">#</a></h1>
 <section id="tutorial">
 <h2>Tutorial<a class="headerlink" href="#tutorial" title="Link to this heading">#</a></h2>
-<p>As a tutorial, we describe the procedure for generating models and SAMBs.</p>
+<p>As a tutorial, we describe the procedure for generating model in the case of <strong>graphene</strong>.</p>
 <ol class="arabic">
-<li><p>Download the contents of the <a class="reference external" href="https://github.com/CMT-MU/MultiPie/tree/main/docs/src/examples">examples</a> directory.</p></li>
-<li><p>Inside the <code class="docutils literal notranslate"><span class="pre">examples</span></code> directory, run the <code class="docutils literal notranslate"><span class="pre">create_model.py</span></code> script:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>create_model.py
+<li><p>Download <code class="docutils literal notranslate"><span class="pre">graphene_in.py</span></code> and <code class="docutils literal notranslate"><span class="pre">graphene_ctrl.py</span></code> from <a class="reference external" href="https://github.com/CMT-MU/MultiPie/tree/main/docs/src/examples">examples</a> directory.</p></li>
+<li><p>At the same place where the above two files are, run the following:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>mp_create<span class="w"> </span>graphene_in.py
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># create_model.py</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">multipie</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_samb</span><span class="p">,</span> <span class="n">create_samb_qtdraw</span><span class="p">,</span> <span class="n">create_samb_matrix</span>
-
-<span class="kn">from</span><span class="w"> </span><span class="nn">C3v</span><span class="w"> </span><span class="kn">import</span> <span class="n">C3v</span>  <span class="c1"># C3v model input.</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">C3v_param</span><span class="w"> </span><span class="kn">import</span> <span class="n">C3v_sel_par</span>  <span class="c1"># C3v SAMB selection and parameters.</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">graphene</span><span class="w"> </span><span class="kn">import</span> <span class="n">graphene</span>  <span class="c1"># graphene model input.</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">graphene_param</span><span class="w"> </span><span class="kn">import</span> <span class="n">graphene_sel_par</span>  <span class="c1"># graphene SAMB selection and parameters.</span>
-
-<span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span>
-
-<span class="c1"># ==================================================</span>
-<span class="n">models</span> <span class="o">=</span> <span class="p">[</span><span class="n">C3v</span><span class="p">,</span> <span class="n">graphene</span><span class="p">]</span>  <span class="c1"># model input files.</span>
-<span class="n">select_inputs</span> <span class="o">=</span> <span class="p">[</span><span class="n">C3v_sel_par</span><span class="p">,</span> <span class="n">graphene_sel_par</span><span class="p">]</span>  <span class="c1"># selection and paramter files.</span>
-
-<span class="n">create_samb</span><span class="p">(</span><span class="n">models</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>  <span class="c1"># create model.</span>
-<span class="n">create_samb_matrix</span><span class="p">(</span><span class="n">select_inputs</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>  <span class="c1"># create full matrix.</span>
-<span class="n">create_samb_qtdraw</span><span class="p">(</span><span class="n">models</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>  <span class="c1"># create full matrix with parameters.</span>
-</pre></div>
-</div>
-<p>This will create the <code class="docutils literal notranslate"><span class="pre">C3v</span></code> and <code class="docutils literal notranslate"><span class="pre">graphene</span></code> directories. Each directory will contain six files and a samb subdirectory.
-For <code class="docutils literal notranslate"><span class="pre">C3v</span></code>, the generated files are:</p>
+<p>It creates four files under <code class="docutils literal notranslate"><span class="pre">graphene</span></code> directory:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">C3v.pkl</span></code> : Model information file (binary)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">C3v.tex</span></code>, <code class="docutils literal notranslate"><span class="pre">C3v.pdf</span></code> : Summary of the model information</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">C3v.qtdw</span></code> : QtDraw file of the model structure</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">C3v_matrix.py</span></code> : Matrix element data of the SAMB</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">C3v_hr.dat</span></code> : Numerical matrix element data with SAMB weight parameters applied</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">samb</span></code> : QtDraw files for the SAMB</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">graphene.pkl</span></code> : Model information file (binary)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">graphene.tex</span></code>, <code class="docutils literal notranslate"><span class="pre">graphene.pdf</span></code> : Summary of the model information</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">graphene.qtdw</span></code> : QtDraw file of the model structure</p></li>
 </ul>
-<p>The same set of files is generated for <code class="docutils literal notranslate"><span class="pre">graphene</span></code>.</p>
 </li>
-<li><p>For details on how to load and analyze the model information binary file, <code class="docutils literal notranslate"><span class="pre">.pkl</span></code>, see <a class="reference internal" href="examples/read_model.html"><span class="std std-doc">read_model.ipynb</span></a></p></li>
+<li><p>To analyze the model, e.g., draw dispersion, run the following:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>mp_analyze<span class="w"> </span>graphene_ctrl.py
+</pre></div>
+</div>
+<p>It creates the following files under <code class="docutils literal notranslate"><span class="pre">graphene</span></code> directory:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">graphene_matrix.py</span></code>, <code class="docutils literal notranslate"><span class="pre">graphene_hr.dat</span></code> : Full matrix information for selected SAMBs</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">output/</span></code> : Various output for physical quantities</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">samb/</span></code> : QtDraw files for SAMBs</p></li>
+</ul>
+</li>
+<li><p>In order to handle <code class="docutils literal notranslate"><span class="pre">graphene.pkl</span></code> interactively, use IPython interface. See in detail <a class="reference internal" href="examples/analyze_model.html"><span class="std std-doc">analyze_model.ipynb</span></a></p></li>
 </ol>
 </section>
-<section id="samb-construction-detail">
-<h2>SAMB construction (detail)<a class="headerlink" href="#samb-construction-detail" title="Link to this heading">#</a></h2>
 <section id="model-input-file">
-<h3>model input file<a class="headerlink" href="#model-input-file" title="Link to this heading">#</a></h3>
-<p>The default values of model input file is the following:</p>
+<h2>Model input file<a class="headerlink" href="#model-input-file" title="Link to this heading">#</a></h2>
+<p>In case of graphene, the model input file is</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># graphene_in.py</span>
+<span class="n">graphene_in</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="s2">&quot;graphene&quot;</span><span class="p">,</span>  <span class="c1">#  name of model.</span>
+    <span class="s2">&quot;group&quot;</span><span class="p">:</span> <span class="mi">191</span><span class="p">,</span>  <span class="c1"># No. of space group.</span>
+    <span class="s2">&quot;cell&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;c&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">},</span>  <span class="c1"># set large enough interlayer distance.</span>
+    <span class="c1">#</span>
+    <span class="s2">&quot;site&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;C&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;[1/3,2/3,0]&quot;</span><span class="p">,</span> <span class="s2">&quot;pz&quot;</span><span class="p">)},</span>  <span class="c1"># positions of C site and its orbital.</span>
+    <span class="s2">&quot;bond&quot;</span><span class="p">:</span> <span class="p">[(</span><span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])],</span>  <span class="c1"># C-C bonds up to 2nd neighbors.</span>
+    <span class="c1">#</span>
+    <span class="s2">&quot;spinful&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>  <span class="c1"># spinless.</span>
+    <span class="c1">#</span>
+    <span class="s2">&quot;SAMB_select&quot;</span><span class="p">:</span> <span class="p">{</span>  <span class="c1"># select combined SAMB.</span>
+        <span class="s2">&quot;X&quot;</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># all Q/G/M/T.</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The other setting are provided as default values, which are given as follows:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># default model input.</span>
 <span class="n">default_model</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="s2">&quot;unknown&quot;</span><span class="p">,</span>
     <span class="s2">&quot;group&quot;</span><span class="p">:</span> <span class="s2">&quot;C1&quot;</span><span class="p">,</span>
     <span class="s2">&quot;cell&quot;</span><span class="p">:</span> <span class="p">{},</span>
     <span class="s2">&quot;spinful&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="c1"># acceptable orbital names (tesesral) in site:</span>
+    <span class="c1">#   s, p=(px, py, pz), d=(dv, dxy, dxz, dyz, du), f=(f2, f1, fbz, f3, f3x, f3y, faz).</span>
+    <span class="c1">#   (s,u), (s,d), ...</span>
+    <span class="c1">#   (1/2,s), (1/2,p), (3/2,p), (3/2,d), (5/2,d), (5/2,f), (7/2,f).</span>
     <span class="s2">&quot;site&quot;</span><span class="p">:</span> <span class="p">{},</span>
     <span class="s2">&quot;bond&quot;</span><span class="p">:</span> <span class="p">[],</span>
     <span class="s2">&quot;SAMB_select&quot;</span><span class="p">:</span> <span class="p">{</span>  <span class="c1"># select combined SAMB.</span>
-        <span class="s2">&quot;X&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Q&quot;</span><span class="p">,</span> <span class="s2">&quot;G&quot;</span><span class="p">],</span>  <span class="c1"># type, &quot;Q/G/T/M&quot;, []=all.</span>
+        <span class="s2">&quot;X&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Q&quot;</span><span class="p">,</span> <span class="s2">&quot;G&quot;</span><span class="p">],</span>  <span class="c1"># type, &quot;Q/G/M/T&quot;, []=all.</span>
         <span class="s2">&quot;l&quot;</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># rank, []=all.</span>
         <span class="s2">&quot;Gamma&quot;</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># &quot;IR&quot;=identity, []=all, &quot;...&quot;/[&quot;...&quot;,&quot;...&quot;]=specified irreps.</span>
         <span class="s2">&quot;s&quot;</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># spin, 0/1, []=all.</span>
     <span class="p">},</span>
     <span class="s2">&quot;atomic_select&quot;</span><span class="p">:</span> <span class="p">{</span>  <span class="c1"># select atomic SAMB.</span>
-        <span class="s2">&quot;X&quot;</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># type, &quot;Q/G/T/M&quot;, []=all.</span>
+        <span class="s2">&quot;X&quot;</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># type, &quot;Q/G/M/T&quot;, []=all.</span>
         <span class="s2">&quot;l&quot;</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># rank, []=all.</span>
         <span class="s2">&quot;Gamma&quot;</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># &quot;IR&quot;=identity, []=all, &quot;...&quot;/[&quot;...&quot;,&quot;...&quot;]=specified irreps.</span>
         <span class="s2">&quot;s&quot;</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># spin, 0/1, []=all.</span>
@@ -454,7 +457,7 @@ For <code class="docutils literal notranslate"><span class="pre">C3v</span></cod
         <span class="s2">&quot;Gamma&quot;</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># &quot;IR&quot;=identity, []=all, &quot;...&quot;/[&quot;...&quot;,&quot;...&quot;]=specified irreps.</span>
     <span class="p">},</span>
     <span class="s2">&quot;bond_select&quot;</span><span class="p">:</span> <span class="p">{</span>  <span class="c1"># select bond-cluster SAMB.</span>
-        <span class="s2">&quot;X&quot;</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># type, &quot;Q/T/M&quot;, []=all.</span>
+        <span class="s2">&quot;X&quot;</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># type, &quot;Q/G/M/T&quot;, []=all.</span>
         <span class="s2">&quot;l&quot;</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># rank, []=all.</span>
         <span class="s2">&quot;Gamma&quot;</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># &quot;IR&quot;=identity, []=all, &quot;...&quot;/[&quot;...&quot;,&quot;...&quot;]=specified irreps.</span>
     <span class="p">},</span>
@@ -484,99 +487,65 @@ For <code class="docutils literal notranslate"><span class="pre">C3v</span></cod
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>You can overwrite whatever you want.</p>
+<p>You can overwrite whatever you want as in the case of graphene.</p>
 </section>
-<section id="model-information-files">
-<h3>model information files<a class="headerlink" href="#model-information-files" title="Link to this heading">#</a></h3>
-<p>Using the following input file, you can construct the model information files by running:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mp_create_samb<span class="w"> </span>C3v
-</pre></div>
-</div>
-<p>This command generates <code class="docutils literal notranslate"><span class="pre">C3v.pkl</span></code>, <code class="docutils literal notranslate"><span class="pre">C3v.tex</span></code>, <code class="docutils literal notranslate"><span class="pre">C3v.pdf</span></code>, and <code class="docutils literal notranslate"><span class="pre">C3v.qtdw</span></code>.
-Example input file:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># C3v.py</span>
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">input file for C3v molecule.</span>
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="n">C3v</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="s2">&quot;C3v&quot;</span><span class="p">,</span>  <span class="c1"># name of model.</span>
-    <span class="s2">&quot;group&quot;</span><span class="p">:</span> <span class="s2">&quot;C3v-1&quot;</span><span class="p">,</span>  <span class="c1"># name of point group.</span>
-    <span class="s2">&quot;cell&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;c&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">},</span>  <span class="c1"># set large enough interlayer distance.</span>
-    <span class="c1">#</span>
-    <span class="s2">&quot;site&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;A&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;[-1/6,-1/6,0]&quot;</span><span class="p">,</span> <span class="s2">&quot;s&quot;</span><span class="p">),</span> <span class="s2">&quot;B&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;[-2/3,0,0]&quot;</span><span class="p">,</span> <span class="s2">&quot;p&quot;</span><span class="p">)},</span>  <span class="c1"># positions of A and B sites and their orbitals.</span>
-    <span class="s2">&quot;bond&quot;</span><span class="p">:</span> <span class="p">[(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)],</span>  <span class="c1"># nearest-neighbor A-A and B-B bonds.</span>
-    <span class="c1">#</span>
-    <span class="s2">&quot;spinful&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>  <span class="c1"># spinless.</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</section>
-<section id="selection-and-parameter-file">
-<h3>selection and parameter file<a class="headerlink" href="#selection-and-parameter-file" title="Link to this heading">#</a></h3>
-<p>The constructed SAMBs can be selected by selection file:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># selection and parameter example.</span>
-<span class="n">selection_paramter</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="c1"># model pkl name (w/o .pkl).</span>
-    <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="s2">&quot;model_pkl_name&quot;</span><span class="p">,</span>
-    <span class="c1"># selection for SAMB.</span>
-    <span class="s2">&quot;select&quot;</span><span class="p">:</span> <span class="p">{</span>  <span class="c1"># S=site, R=orbital rank.</span>
-        <span class="s2">&quot;site&quot;</span><span class="p">:</span> <span class="p">[(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])],</span>  <span class="c1"># S or (S, [R]).</span>
-        <span class="s2">&quot;bond&quot;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
-        <span class="p">],</span>  <span class="c1"># S1;S2, [neighbor], (S1;S2, [neighbor]), (S1;S2, R;R2), (S1;S2, [neighbor]) or (S1;S2, R1;R2, [neighbor]).</span>
-        <span class="s2">&quot;X&quot;</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># combined SAMB type Q/G/T/M, []=all.</span>
-        <span class="s2">&quot;l&quot;</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># combined SAMB rank, []=all.</span>
-        <span class="s2">&quot;Gamma&quot;</span><span class="p">:</span> <span class="s2">&quot;A1g&quot;</span><span class="p">,</span>  <span class="c1"># combined SAMB irreps., e.g., &quot;A1g&quot;, [&quot;A1g&quot;,&quot;A1u&quot;], &quot;IR&quot;=identity irrep., []=all.</span>
-        <span class="s2">&quot;s&quot;</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># combined SAMB s=0, 1, []=all.</span>
+<section id="control-file">
+<h2>Control file<a class="headerlink" href="#control-file" title="Link to this heading">#</a></h2>
+<p>In case of graphene, the control file is</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># graphene_ctrl.py</span>
+<span class="n">graphene_ctrl</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;samb&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="s2">&quot;graphene&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;parameter&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;z2&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;samb_figure&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
     <span class="p">},</span>
-    <span class="c1"># weight for SAMBs, non-specified parameters are zero. (float or sympy const.)</span>
-    <span class="s2">&quot;parameter&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;z1&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="s2">&quot;z2&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;output&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;dispersion&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;k_point&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Γ&quot;</span><span class="p">:</span> <span class="s2">&quot;[0,0,0]&quot;</span><span class="p">,</span> <span class="s2">&quot;K&quot;</span><span class="p">:</span> <span class="s2">&quot;[1/3,1/3,0]&quot;</span><span class="p">,</span> <span class="s2">&quot;M&quot;</span><span class="p">:</span> <span class="s2">&quot;[1/2,0,0]&quot;</span><span class="p">},</span>
+            <span class="s2">&quot;k_path&quot;</span><span class="p">:</span> <span class="s2">&quot;Γ-M-K-Γ&quot;</span><span class="p">,</span>
+        <span class="p">},</span>
     <span class="p">},</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>The typical usage is the following: you first create the SAMBs for all irreps., and then select the desired SAMBs in order to create matrix elements with necessary bases, such as the symmetry-breaking terms in addition to the identity irreps.</p>
-</section>
-<section id="matrix-element-files">
-<h3>matrix element files<a class="headerlink" href="#matrix-element-files" title="Link to this heading">#</a></h3>
-<p>To generate full matrix file, <code class="docutils literal notranslate"><span class="pre">_matrix.py</span></code> by selection (and <code class="docutils literal notranslate"><span class="pre">_hr.dat</span></code> for given parameters) file, run:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mp_create_samb_matrix<span class="w"> </span>C3v_param
-</pre></div>
-</div>
-<p>This command generates two files, <code class="docutils literal notranslate"><span class="pre">C3v_matrix.py</span></code>, and <code class="docutils literal notranslate"><span class="pre">C3v_hr.dat</span></code>.
-Example input file:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># C3v_param.py</span>
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">selection_parameter file for C3v.</span>
-<span class="sd">if parameter is omitted, no hr.dat file is created.</span>
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="n">C3v_sel_par</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="c1"># model pkl name (w/o .pkl).</span>
-    <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="s2">&quot;C3v&quot;</span><span class="p">,</span>
-    <span class="c1"># selection for SAMB.</span>
-    <span class="s2">&quot;select&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;site&quot;</span><span class="p">:</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;bond&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="mi">1</span><span class="p">]],</span>
+<p>The default values of control file are provided as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># default control.</span>
+<span class="n">default_control</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;samb&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># model name for .pkl.</span>
+        <span class="s2">&quot;select&quot;</span><span class="p">:</span> <span class="p">{</span>  <span class="c1"># SAMB select condition, where S=site name, R=orbital rank, N=neighbor bond.</span>
+            <span class="c1"># &quot;site&quot;: [(&quot;A&quot;, [1, 2])],  # S or (S, [R]) in list.</span>
+            <span class="c1"># &quot;bond&quot;: [[0, 1, 2]],  # S1;S2, [N], (S1;S2, [N]), (S1;S2, R;R2), (S1;S2, [N]) or (S1;S2, R1;R2, [N]) in list.</span>
+            <span class="c1"># &quot;X&quot;: [],  # SAMB type Q/G/T/M in list. empty []=all.</span>
+            <span class="c1"># &quot;l&quot;: [],  # SAMB rank, 0, 1, ..., 11 in list. empty []=all.</span>
+            <span class="c1"># &quot;Gamma&quot;: [&quot;A1g&quot;],  # SAMB irreps. in list. &quot;IR&quot;=identity irrep., empty []=all.</span>
+            <span class="c1"># &quot;s&quot;: [],  # SAMB internal rank, 0,1 in list. empty []=all</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;parameter&quot;</span><span class="p">:</span> <span class="p">{</span>  <span class="c1"># SAMB with finite weight (float or sympy const.), or filename of z_j dict.</span>
+            <span class="s2">&quot;z1&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;samb_figure&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>  <span class="c1"># save SAMB QtDraw files ?</span>
     <span class="p">},</span>
-    <span class="c1"># weight for SAMBs, non-specified parameters are zero. (float or sympy const.)</span>
-    <span class="s2">&quot;parameter&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;z1&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="s2">&quot;z6&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;wannier&quot;</span><span class="p">:</span> <span class="p">{</span>  <span class="c1"># Closest Wannier (CW) or SymWannier setting.</span>
+        <span class="s2">&quot;cw&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># CW or SymWannier file.</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;output&quot;</span><span class="p">:</span> <span class="p">{</span>  <span class="c1"># physical quantity setting.</span>
+        <span class="s2">&quot;dir&quot;</span><span class="p">:</span> <span class="s2">&quot;output&quot;</span><span class="p">,</span>  <span class="c1">#  output directory.</span>
+        <span class="s2">&quot;fourier&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;tb_gauge&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>  <span class="c1"># TB gauge ?</span>
+        <span class="s2">&quot;dispersion&quot;</span><span class="p">:</span> <span class="p">{</span>  <span class="c1"># dispersion info.</span>
+            <span class="s2">&quot;k_point&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Γ&quot;</span><span class="p">:</span> <span class="s2">&quot;[0,0,0]&quot;</span><span class="p">,</span> <span class="s2">&quot;X&quot;</span><span class="p">:</span> <span class="s2">&quot;[1,0,0]&quot;</span><span class="p">},</span>  <span class="c1"># k-point definition (primitive, fractional).</span>
+            <span class="s2">&quot;k_path&quot;</span><span class="p">:</span> <span class="s2">&quot;Γ&quot;</span><span class="p">,</span>  <span class="c1"># symmetry line, separated by &quot;-&quot;. disconnected points by &quot;|&quot;.</span>
+            <span class="s2">&quot;local&quot;</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># local quantity, &quot;Sx/Sy/Sz/Lx/Ly/Lz/Qu/Qv/Qyz/Qzx/Qxy&quot;.</span>
+            <span class="s2">&quot;z&quot;</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># expectation value of Z_j. [Under Construction]</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;dos&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>  <span class="c1"># compute DOS ?</span>
     <span class="p">},</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-</section>
-<section id="qtdraw-samb-files">
-<h3>QtDraw SAMB files<a class="headerlink" href="#qtdraw-samb-files" title="Link to this heading">#</a></h3>
-<p>To generate QtDraw files for the constructed SAMB, run:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mp_create_samb_qtdraw<span class="w"> </span>C3v<span class="w"> </span>graphene
-</pre></div>
-</div>
-<p>The generated SAMB QtDraw files are saved in the <code class="docutils literal notranslate"><span class="pre">samb</span></code> directory.</p>
-</section>
+<p>The typical use of generating SAMBs, you first create the SAMBs for all irreps., and then choose the necessary SAMBs, such as the symmetry-breaking terms in addition to the identity irreps., by specifying <code class="docutils literal notranslate"><span class="pre">samb/parameter</span></code> in the control file.</p>
 </section>
 </section>
 
@@ -623,14 +592,8 @@ Example input file:</p>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tutorial">Tutorial</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#samb-construction-detail">SAMB construction (detail)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-input-file">model input file</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-information-files">model information files</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selection-and-parameter-file">selection and parameter file</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-element-files">matrix element files</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qtdraw-samb-files">QtDraw SAMB files</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-input-file">Model input file</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#control-file">Control file</a></li>
 </ul>
   </nav></div>
 

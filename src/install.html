@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=34ddd5e8" />
@@ -170,15 +170,17 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Documentation</span></p>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="manual.html">Brief Manual</a></li>
 <li class="toctree-l1"><a class="reference internal" href="group_doc.html">Group information</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tech_note.html">Technical Note</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API reference</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="api_core.html">Core</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="api_core/cmd.html">Create function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_core/model_analyzer.html">ModelAnalyzer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api_core/group.html">Group</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api_core/material_model.html">Material Model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api_core/cmd.html">Create function</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api_core/init.html">Type</a></li>
 </ul>
 </details></li>
@@ -465,14 +467,11 @@ sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> <
 <h2>Shell Commands<a class="headerlink" href="#shell-commands" title="Link to this heading">#</a></h2>
 <p>MultiPie provides the following command-line utilities:</p>
 <ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">mp_create_samb</span> <span class="pre">file1,</span> <span class="pre">file2,</span> <span class="pre">...</span></code></p>
-<p>create the SAMB for the specified model files.</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">mp_create</span> <span class="pre">input1,</span> <span class="pre">input2,</span> <span class="pre">...</span></code></p>
+<p>create models by the model input files.</p>
 </li>
-<li><p><code class="docutils literal notranslate"><span class="pre">mp_create_samb_matrix</span> <span class="pre">file1,</span> <span class="pre">file2,</span> <span class="pre">...</span></code></p>
-<p>create the SAMB matrix for the specified select_parameter files.</p>
-</li>
-<li><p><code class="docutils literal notranslate"><span class="pre">mp_create_samb_qtdraw</span> <span class="pre">file1,</span> <span class="pre">file2,</span> <span class="pre">...</span></code></p>
-<p>generate QtDraw files of the SAMB for the specified model files.</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">mp_analyze</span> <span class="pre">control</span></code></p>
+<p>analyze the model by the control file.</p>
 </li>
 </ul>
 <p>See the <a class="reference internal" href="getting_started.html"><span class="std std-doc">Getting Started</span></a> guide for examples.</p>

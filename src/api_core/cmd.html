@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=34ddd5e8" />
@@ -65,8 +65,8 @@
     <script src="../../_static/custom.js?v=9c3a2667"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Type" href="init.html" />
-    <link rel="prev" title="Material Model" href="material_model.html" />
+    <link rel="next" title="ModelAnalyzer" href="model_analyzer.html" />
+    <link rel="prev" title="Core" href="../api_core.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -170,15 +170,17 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Documentation</span></p>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../manual.html">Brief Manual</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../group_doc.html">Group information</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tech_note.html">Technical Note</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API reference</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../api_core.html">Core</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Create function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="model_analyzer.html">ModelAnalyzer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="group.html">Group</a></li>
 <li class="toctree-l2"><a class="reference internal" href="material_model.html">Material Model</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Create function</a></li>
 <li class="toctree-l2"><a class="reference internal" href="init.html">Type</a></li>
 </ul>
 </details></li>
@@ -359,12 +361,7 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-multipie.core.cmd">Create SAMB, QtDraw, and matrix</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.cmd.create_samb"><code class="docutils literal notranslate"><span class="pre">create_samb()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.cmd.create_samb_matrix"><code class="docutils literal notranslate"><span class="pre">create_samb_matrix()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.cmd.create_samb_qtdraw"><code class="docutils literal notranslate"><span class="pre">create_samb_qtdraw()</span></code></a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-and-analyze-model">Create and analyze model</a></li>
 </ul>
             </nav>
         </div>
@@ -378,95 +375,8 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="create-function">
 <h1>Create function<a class="headerlink" href="#create-function" title="Link to this heading">#</a></h1>
-<section id="module-multipie.core.cmd">
-<span id="create-samb-qtdraw-and-matrix"></span><h2>Create SAMB, QtDraw, and matrix<a class="headerlink" href="#module-multipie.core.cmd" title="Link to this heading">#</a></h2>
-<p>Create command for model, matrix, and qtdraw.</p>
-<dl class="py function">
-<dt class="sig sig-object py" id="multipie.core.cmd.create_samb">
-<span class="sig-name descname"><span class="pre">create_samb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">models</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/core/cmd.html#create_samb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.core.cmd.create_samb" title="Link to this definition">#</a></dt>
-<dd><p>Create SAMB.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>models</strong> (<em>str</em><em> or </em><em>[</em><em>str</em><em>] or </em><em>dict</em><em> or </em><em>[</em><em>dict</em><em>]</em>) – model file name(s) or dict(s).</p></li>
-<li><p><strong>topdir</strong> (<em>str</em><em>, </em><em>optional</em>) – top directory.</p></li>
-<li><p><strong>verbose</strong> (<em>bool</em><em>, </em><em>optional</em>) – verbose ?</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><ul class="simple">
-<li><p>(bool) – if no error occurs, return False.</p></li>
-</ul>
-</p>
-</dd>
-</dl>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<ul class="simple">
-<li><p>model name directory is created to store results in top directory.</p></li>
-<li><p>if topdir is None, current directory is used.</p></li>
-</ul>
-</div>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="multipie.core.cmd.create_samb_matrix">
-<span class="sig-name descname"><span class="pre">create_samb_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">select_inputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/core/cmd.html#create_samb_matrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.core.cmd.create_samb_matrix" title="Link to this definition">#</a></dt>
-<dd><p>Create SAMB matrix (hr).</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>select_inputs</strong> (<em>str</em><em> or </em><em>[</em><em>str</em><em>] or </em><em>dict</em><em> or </em><em>[</em><em>dict</em><em>]</em>) – select input file name(s) or dict(s).</p></li>
-<li><p><strong>topdir</strong> (<em>str</em><em>, </em><em>optional</em>) – top directory.</p></li>
-<li><p><strong>verbose</strong> (<em>bool</em><em>, </em><em>optional</em>) – verbose ?</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><ul class="simple">
-<li><p>(bool) – if no error occurs, return False.</p></li>
-</ul>
-</p>
-</dd>
-</dl>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<ul class="simple">
-<li><p>matrix (and hr) file is created in model directory.</p></li>
-<li><p>if topdir is None, current directory is used, which should contain model directory.</p></li>
-<li><p>if input does not have “parameter” key, hr.dat is not created.</p></li>
-<li><p>if input does not have “select” key, all SAMBs are used.</p></li>
-</ul>
-</div>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="multipie.core.cmd.create_samb_qtdraw">
-<span class="sig-name descname"><span class="pre">create_samb_qtdraw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">models</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/core/cmd.html#create_samb_qtdraw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.core.cmd.create_samb_qtdraw" title="Link to this definition">#</a></dt>
-<dd><p>Create SAMB QtDraw file.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>models</strong> (<em>str</em><em> or </em><em>[</em><em>str</em><em>] or </em><em>dict</em><em> or </em><em>[</em><em>dict</em><em>]</em>) – model name(s) or dict(s).</p></li>
-<li><p><strong>topdir</strong> (<em>str</em><em>, </em><em>optional</em>) – top directory.</p></li>
-<li><p><strong>verbose</strong> (<em>bool</em><em>, </em><em>optional</em>) – verbose ?</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><ul class="simple">
-<li><p>(bool) – if no error occurs, return False.</p></li>
-</ul>
-</p>
-</dd>
-</dl>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<ul class="simple">
-<li><p>samb directory is created to store results in model directory.</p></li>
-<li><p>if topdir is None, current directory is used, which should contain model directory.</p></li>
-</ul>
-</div>
-</dd></dl>
-
+<section id="create-and-analyze-model">
+<h2>Create and analyze model<a class="headerlink" href="#create-and-analyze-model" title="Link to this heading">#</a></h2>
 </section>
 </section>
 
@@ -512,12 +422,7 @@
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-multipie.core.cmd">Create SAMB, QtDraw, and matrix</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.cmd.create_samb"><code class="docutils literal notranslate"><span class="pre">create_samb()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.cmd.create_samb_matrix"><code class="docutils literal notranslate"><span class="pre">create_samb_matrix()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.cmd.create_samb_qtdraw"><code class="docutils literal notranslate"><span class="pre">create_samb_qtdraw()</span></code></a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-and-analyze-model">Create and analyze model</a></li>
 </ul>
   </nav></div>
 

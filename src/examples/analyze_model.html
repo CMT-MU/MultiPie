@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=34ddd5e8" />
@@ -63,7 +63,7 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"loader": {"load": ["[tex]/physics"]}, "tex": {"packages": {"[+]": ["physics"]}, "macros": {"bm": ["\\boldsymbol{#1}", 1]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'src/examples/read_model';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'src/examples/analyze_model';</script>
     <script src="../../_static/custom.js?v=9c3a2667"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -172,15 +172,17 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Documentation</span></p>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../manual.html">Brief Manual</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../group_doc.html">Group information</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tech_note.html">Technical Note</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API reference</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../api_core.html">Core</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api_core/cmd.html">Create function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_core/model_analyzer.html">ModelAnalyzer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api_core/group.html">Group</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api_core/material_model.html">Material Model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api_core/cmd.html">Create function</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api_core/init.html">Type</a></li>
 </ul>
 </details></li>
@@ -387,33 +389,40 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sp</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">multipie</span><span class="w"> </span><span class="kn">import</span> <span class="n">MaterialModel</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">multipie</span><span class="w"> </span><span class="kn">import</span> <span class="n">ModelAnalyzer</span>
 <span class="n">to_tuple</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">to_tuple</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)</span> <span class="k">else</span> <span class="n">x</span>
 
-<span class="n">mm</span> <span class="o">=</span> <span class="n">MaterialModel</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># initialize material model.</span>
+<span class="n">ma</span> <span class="o">=</span> <span class="n">ModelAnalyzer</span><span class="p">(</span><span class="n">topdir</span><span class="o">=</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># initialize model analyzer.</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="s2">&quot;graphene&quot;</span> <span class="c1"># model name.</span>
-<span class="n">mm</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">model</span><span class="p">)</span> <span class="c1"># load model pkl.</span>
-<span class="n">group</span> <span class="o">=</span> <span class="n">mm</span><span class="o">.</span><span class="n">group</span> <span class="c1"># alias for group object.</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># control.</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">graphene_ctrl</span><span class="w"> </span><span class="kn">import</span> <span class="n">graphene_ctrl</span>
+<span class="n">ma</span><span class="o">.</span><span class="n">analyze</span><span class="p">(</span><span class="n">graphene_ctrl</span><span class="p">)</span>
+<span class="n">mm</span> <span class="o">=</span> <span class="n">ma</span><span class="o">.</span><span class="n">model</span> <span class="c1">#  MaterialModel object.</span>
+<span class="n">group</span> <span class="o">=</span> <span class="n">mm</span><span class="o">.</span><span class="n">group</span> <span class="c1"># Group object.</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>load binary from &#39;examples/graphene/graphene.pkl&#39;.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>load binary from &#39;./graphene/graphene.pkl&#39;.
 &quot;&quot;&quot;
 Model: graphene
 * Group: D6h^1
-* SAMB selection: {&#39;X&#39;: [&#39;Q&#39;, &#39;G&#39;], &#39;l&#39;: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], &#39;Gamma&#39;: [&#39;A1g&#39;, &#39;A2g&#39;, &#39;B1g&#39;, &#39;B2g&#39;, &#39;E1g&#39;, &#39;E2g&#39;, &#39;A1u&#39;, &#39;A2u&#39;, &#39;B1u&#39;, &#39;B2u&#39;, &#39;E1u&#39;, &#39;E2u&#39;], &#39;s&#39;: [0, 1]}
-* atomic selection: {&#39;X&#39;: [&#39;Q&#39;, &#39;G&#39;, &#39;M&#39;, &#39;T&#39;], &#39;l&#39;: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], &#39;Gamma&#39;: [&#39;A1g&#39;, &#39;A2g&#39;, &#39;B1g&#39;, &#39;B2g&#39;, &#39;E1g&#39;, &#39;E2g&#39;, &#39;A1u&#39;, &#39;A2u&#39;, &#39;B1u&#39;, &#39;B2u&#39;, &#39;E1u&#39;, &#39;E2u&#39;], &#39;s&#39;: [0, 1]}
-* site-cluster selection: {&#39;l&#39;: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], &#39;Gamma&#39;: [&#39;A1g&#39;, &#39;A2g&#39;, &#39;B1g&#39;, &#39;B2g&#39;, &#39;E1g&#39;, &#39;E2g&#39;, &#39;A1u&#39;, &#39;A2u&#39;, &#39;B1u&#39;, &#39;B2u&#39;, &#39;E1u&#39;, &#39;E2u&#39;], &#39;X&#39;: [&#39;Q&#39;, &#39;G&#39;, &#39;M&#39;, &#39;T&#39;], &#39;s&#39;: [0, 1]}
-* bond-cluster selection: {&#39;X&#39;: [&#39;Q&#39;, &#39;G&#39;, &#39;M&#39;, &#39;T&#39;], &#39;l&#39;: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], &#39;Gamma&#39;: [&#39;A1g&#39;, &#39;A2g&#39;, &#39;B1g&#39;, &#39;B2g&#39;, &#39;E1g&#39;, &#39;E2g&#39;, &#39;A1u&#39;, &#39;A2u&#39;, &#39;B1u&#39;, &#39;B2u&#39;, &#39;E1u&#39;, &#39;E2u&#39;], &#39;s&#39;: [0, 1]}
-  32 (all 32) basis set
+* SAMB selection: {&#39;X&#39;: [&#39;Q&#39;, &#39;G&#39;, &#39;M&#39;, &#39;T&#39;], &#39;l&#39;: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], &#39;Gamma&#39;: [&#39;A1g&#39;, &#39;A1u&#39;, &#39;A2g&#39;, &#39;A2u&#39;, &#39;B1g&#39;, &#39;B1u&#39;, &#39;B2g&#39;, &#39;B2u&#39;, &#39;E1g&#39;, &#39;E1u&#39;, &#39;E2g&#39;, &#39;E2u&#39;], &#39;s&#39;: [0, 1]}
+* atomic selection: {&#39;X&#39;: [&#39;Q&#39;, &#39;G&#39;, &#39;M&#39;, &#39;T&#39;], &#39;l&#39;: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], &#39;Gamma&#39;: [&#39;A1g&#39;, &#39;A1u&#39;, &#39;A2g&#39;, &#39;A2u&#39;, &#39;B1g&#39;, &#39;B1u&#39;, &#39;B2g&#39;, &#39;B2u&#39;, &#39;E1g&#39;, &#39;E1u&#39;, &#39;E2g&#39;, &#39;E2u&#39;], &#39;s&#39;: [0, 1]}
+* site-cluster selection: {&#39;l&#39;: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], &#39;Gamma&#39;: [&#39;A1g&#39;, &#39;A1u&#39;, &#39;A2g&#39;, &#39;A2u&#39;, &#39;B1g&#39;, &#39;B1u&#39;, &#39;B2g&#39;, &#39;B2u&#39;, &#39;E1g&#39;, &#39;E1u&#39;, &#39;E2g&#39;, &#39;E2u&#39;], &#39;X&#39;: [&#39;Q&#39;, &#39;G&#39;, &#39;M&#39;, &#39;T&#39;], &#39;s&#39;: [0, 1]}
+* bond-cluster selection: {&#39;X&#39;: [&#39;Q&#39;, &#39;G&#39;, &#39;M&#39;, &#39;T&#39;], &#39;l&#39;: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], &#39;Gamma&#39;: [&#39;A1g&#39;, &#39;A1u&#39;, &#39;A2g&#39;, &#39;A2u&#39;, &#39;B1g&#39;, &#39;B1u&#39;, &#39;B2g&#39;, &#39;B2u&#39;, &#39;E1g&#39;, &#39;E1u&#39;, &#39;E2g&#39;, &#39;E2u&#39;], &#39;s&#39;: [0, 1]}
+  20 (all 20) basis set
 &quot;&quot;&quot;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>save SAMB QtDraw files in &#39;./graphene/samb/&#39;.
+save matrix to &#39;./graphene/graphene_matrix.py&#39;.
+save hr to &#39;./graphene/graphene_hr.dat&#39;.
 </pre></div>
 </div>
 </div>
@@ -478,21 +487,6 @@ Model: graphene
 \[\displaystyle \mathbb{Q}_{2,1}^{(b)}(E_{2g}) = \left[\begin{matrix}\frac{\sqrt{6}}{3} &amp; - \frac{\sqrt{6}}{6} &amp; - \frac{\sqrt{6}}{6}\end{matrix}\right]\]</div>
 <div class="output text_latex math notranslate nohighlight">
 \[\displaystyle \mathbb{Q}_{2,2}^{(b)}(E_{2g}) = \left[\begin{matrix}0 &amp; \frac{\sqrt{2}}{2} &amp; - \frac{\sqrt{2}}{2}\end{matrix}\right]\]</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>== 3b@1a ==
-</pre></div>
-</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{0}^{(b)}(A_{1g}) = \left[\begin{matrix}\frac{\sqrt{3}}{3} &amp; \frac{\sqrt{3}}{3} &amp; \frac{\sqrt{3}}{3}\end{matrix}\right]\]</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{T}_{3}^{(b)}(B_{1u}) = \left[\begin{matrix}\frac{\sqrt{3} i}{3} &amp; \frac{\sqrt{3} i}{3} &amp; \frac{\sqrt{3} i}{3}\end{matrix}\right]\]</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{T}_{1,1}^{(b)}(E_{1u}) = \left[\begin{matrix}0 &amp; - \frac{\sqrt{2} i}{2} &amp; \frac{\sqrt{2} i}{2}\end{matrix}\right]\]</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{T}_{1,2}^{(b)}(E_{1u}) = \left[\begin{matrix}\frac{\sqrt{6} i}{3} &amp; - \frac{\sqrt{6} i}{6} &amp; - \frac{\sqrt{6} i}{6}\end{matrix}\right]\]</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{2,1}^{(b)}(E_{2g}) = \left[\begin{matrix}\frac{\sqrt{6}}{3} &amp; - \frac{\sqrt{6}}{6} &amp; - \frac{\sqrt{6}}{6}\end{matrix}\right]\]</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{2,2}^{(b)}(E_{2g}) = \left[\begin{matrix}0 &amp; \frac{\sqrt{2}}{2} &amp; - \frac{\sqrt{2}}{2}\end{matrix}\right]\]</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>== 6b@6l ==
 </pre></div>
 </div>
@@ -520,87 +514,6 @@ Model: graphene
 \[\displaystyle \mathbb{T}_{2,1}^{(b)}(E_{2g}) = \left[\begin{matrix}0 &amp; \frac{i}{2} &amp; - \frac{i}{2} &amp; 0 &amp; \frac{i}{2} &amp; - \frac{i}{2}\end{matrix}\right]\]</div>
 <div class="output text_latex math notranslate nohighlight">
 \[\displaystyle \mathbb{T}_{2,2}^{(b)}(E_{2g}) = \left[\begin{matrix}- \frac{\sqrt{3} i}{3} &amp; \frac{\sqrt{3} i}{6} &amp; \frac{\sqrt{3} i}{6} &amp; - \frac{\sqrt{3} i}{3} &amp; \frac{\sqrt{3} i}{6} &amp; \frac{\sqrt{3} i}{6}\end{matrix}\right]\]</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>== 6c@2c ==
-</pre></div>
-</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{0}^{(b)}(A_{1g}) = \left[\begin{matrix}\frac{\sqrt{6}}{6} &amp; \frac{\sqrt{6}}{6} &amp; \frac{\sqrt{6}}{6} &amp; \frac{\sqrt{6}}{6} &amp; \frac{\sqrt{6}}{6} &amp; \frac{\sqrt{6}}{6}\end{matrix}\right]\]</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{M}_{1}^{(b)}(A_{2g}) = \left[\begin{matrix}\frac{\sqrt{6} i}{6} &amp; \frac{\sqrt{6} i}{6} &amp; \frac{\sqrt{6} i}{6} &amp; \frac{\sqrt{6} i}{6} &amp; \frac{\sqrt{6} i}{6} &amp; \frac{\sqrt{6} i}{6}\end{matrix}\right]\]</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{3}^{(b)}(B_{1u}) = \left[\begin{matrix}\frac{\sqrt{6}}{6} &amp; \frac{\sqrt{6}}{6} &amp; \frac{\sqrt{6}}{6} &amp; - \frac{\sqrt{6}}{6} &amp; - \frac{\sqrt{6}}{6} &amp; - \frac{\sqrt{6}}{6}\end{matrix}\right]\]</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{T}_{3}^{(b)}(B_{2u}) = \left[\begin{matrix}\frac{\sqrt{6} i}{6} &amp; \frac{\sqrt{6} i}{6} &amp; \frac{\sqrt{6} i}{6} &amp; - \frac{\sqrt{6} i}{6} &amp; - \frac{\sqrt{6} i}{6} &amp; - \frac{\sqrt{6} i}{6}\end{matrix}\right]\]</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{1,1}^{(b)}(E_{1u}) = \left[\begin{matrix}0 &amp; - \frac{1}{2} &amp; \frac{1}{2} &amp; 0 &amp; \frac{1}{2} &amp; - \frac{1}{2}\end{matrix}\right]\]</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{1,2}^{(b)}(E_{1u}) = \left[\begin{matrix}\frac{\sqrt{3}}{3} &amp; - \frac{\sqrt{3}}{6} &amp; - \frac{\sqrt{3}}{6} &amp; - \frac{\sqrt{3}}{3} &amp; \frac{\sqrt{3}}{6} &amp; \frac{\sqrt{3}}{6}\end{matrix}\right]\]</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{T}_{1,1}^{(b)}(E_{1u}) = \left[\begin{matrix}\frac{\sqrt{3} i}{3} &amp; - \frac{\sqrt{3} i}{6} &amp; - \frac{\sqrt{3} i}{6} &amp; - \frac{\sqrt{3} i}{3} &amp; \frac{\sqrt{3} i}{6} &amp; \frac{\sqrt{3} i}{6}\end{matrix}\right]\]</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{T}_{1,2}^{(b)}(E_{1u}) = \left[\begin{matrix}0 &amp; \frac{i}{2} &amp; - \frac{i}{2} &amp; 0 &amp; - \frac{i}{2} &amp; \frac{i}{2}\end{matrix}\right]\]</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{2,1}^{(b)}(E_{2g}) = \left[\begin{matrix}\frac{\sqrt{3}}{3} &amp; - \frac{\sqrt{3}}{6} &amp; - \frac{\sqrt{3}}{6} &amp; \frac{\sqrt{3}}{3} &amp; - \frac{\sqrt{3}}{6} &amp; - \frac{\sqrt{3}}{6}\end{matrix}\right]\]</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{2,2}^{(b)}(E_{2g}) = \left[\begin{matrix}0 &amp; \frac{1}{2} &amp; - \frac{1}{2} &amp; 0 &amp; \frac{1}{2} &amp; - \frac{1}{2}\end{matrix}\right]\]</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{T}_{2,1}^{(b)}(E_{2g}) = \left[\begin{matrix}0 &amp; \frac{i}{2} &amp; - \frac{i}{2} &amp; 0 &amp; \frac{i}{2} &amp; - \frac{i}{2}\end{matrix}\right]\]</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{T}_{2,2}^{(b)}(E_{2g}) = \left[\begin{matrix}- \frac{\sqrt{3} i}{3} &amp; \frac{\sqrt{3} i}{6} &amp; \frac{\sqrt{3} i}{6} &amp; - \frac{\sqrt{3} i}{3} &amp; \frac{\sqrt{3} i}{6} &amp; \frac{\sqrt{3} i}{6}\end{matrix}\right]\]</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>== 6a@6l ==
-</pre></div>
-</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{0}^{(b)}(A_{1g}) = \left[\begin{matrix}\frac{\sqrt{6}}{6} &amp; \frac{\sqrt{6}}{6} &amp; \frac{\sqrt{6}}{6} &amp; \frac{\sqrt{6}}{6} &amp; \frac{\sqrt{6}}{6} &amp; \frac{\sqrt{6}}{6}\end{matrix}\right]\]</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{T}_{0}^{(b)}(A_{1g}) = \left[\begin{matrix}\frac{\sqrt{6} i}{6} &amp; \frac{\sqrt{6} i}{6} &amp; \frac{\sqrt{6} i}{6} &amp; \frac{\sqrt{6} i}{6} &amp; \frac{\sqrt{6} i}{6} &amp; \frac{\sqrt{6} i}{6}\end{matrix}\right]\]</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{3}^{(b)}(B_{1u}) = \left[\begin{matrix}\frac{\sqrt{6}}{6} &amp; \frac{\sqrt{6}}{6} &amp; \frac{\sqrt{6}}{6} &amp; - \frac{\sqrt{6}}{6} &amp; - \frac{\sqrt{6}}{6} &amp; - \frac{\sqrt{6}}{6}\end{matrix}\right]\]</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{T}_{3}^{(b)}(B_{1u}) = \left[\begin{matrix}\frac{\sqrt{6} i}{6} &amp; \frac{\sqrt{6} i}{6} &amp; \frac{\sqrt{6} i}{6} &amp; - \frac{\sqrt{6} i}{6} &amp; - \frac{\sqrt{6} i}{6} &amp; - \frac{\sqrt{6} i}{6}\end{matrix}\right]\]</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{1,1}^{(b)}(E_{1u}) = \left[\begin{matrix}0 &amp; - \frac{1}{2} &amp; \frac{1}{2} &amp; 0 &amp; \frac{1}{2} &amp; - \frac{1}{2}\end{matrix}\right]\]</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{1,2}^{(b)}(E_{1u}) = \left[\begin{matrix}\frac{\sqrt{3}}{3} &amp; - \frac{\sqrt{3}}{6} &amp; - \frac{\sqrt{3}}{6} &amp; - \frac{\sqrt{3}}{3} &amp; \frac{\sqrt{3}}{6} &amp; \frac{\sqrt{3}}{6}\end{matrix}\right]\]</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{T}_{1,1}^{(b)}(E_{1u}) = \left[\begin{matrix}0 &amp; - \frac{i}{2} &amp; \frac{i}{2} &amp; 0 &amp; \frac{i}{2} &amp; - \frac{i}{2}\end{matrix}\right]\]</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{T}_{1,2}^{(b)}(E_{1u}) = \left[\begin{matrix}\frac{\sqrt{3} i}{3} &amp; - \frac{\sqrt{3} i}{6} &amp; - \frac{\sqrt{3} i}{6} &amp; - \frac{\sqrt{3} i}{3} &amp; \frac{\sqrt{3} i}{6} &amp; \frac{\sqrt{3} i}{6}\end{matrix}\right]\]</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{2,1}^{(b)}(E_{2g}) = \left[\begin{matrix}\frac{\sqrt{3}}{3} &amp; - \frac{\sqrt{3}}{6} &amp; - \frac{\sqrt{3}}{6} &amp; \frac{\sqrt{3}}{3} &amp; - \frac{\sqrt{3}}{6} &amp; - \frac{\sqrt{3}}{6}\end{matrix}\right]\]</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{2,2}^{(b)}(E_{2g}) = \left[\begin{matrix}0 &amp; \frac{1}{2} &amp; - \frac{1}{2} &amp; 0 &amp; \frac{1}{2} &amp; - \frac{1}{2}\end{matrix}\right]\]</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{T}_{2,1}^{(b)}(E_{2g}) = \left[\begin{matrix}\frac{\sqrt{3} i}{3} &amp; - \frac{\sqrt{3} i}{6} &amp; - \frac{\sqrt{3} i}{6} &amp; \frac{\sqrt{3} i}{3} &amp; - \frac{\sqrt{3} i}{6} &amp; - \frac{\sqrt{3} i}{6}\end{matrix}\right]\]</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{T}_{2,2}^{(b)}(E_{2g}) = \left[\begin{matrix}0 &amp; \frac{i}{2} &amp; - \frac{i}{2} &amp; 0 &amp; \frac{i}{2} &amp; - \frac{i}{2}\end{matrix}\right]\]</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>== 6d@3f ==
-</pre></div>
-</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{0}^{(b)}(A_{1g}) = \left[\begin{matrix}\frac{\sqrt{6}}{6} &amp; \frac{\sqrt{6}}{6} &amp; \frac{\sqrt{6}}{6} &amp; \frac{\sqrt{6}}{6} &amp; \frac{\sqrt{6}}{6} &amp; \frac{\sqrt{6}}{6}\end{matrix}\right]\]</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{6}^{(b)}(A_{2g}) = \left[\begin{matrix}\frac{\sqrt{6}}{6} &amp; \frac{\sqrt{6}}{6} &amp; \frac{\sqrt{6}}{6} &amp; - \frac{\sqrt{6}}{6} &amp; - \frac{\sqrt{6}}{6} &amp; - \frac{\sqrt{6}}{6}\end{matrix}\right]\]</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{T}_{3}^{(b)}(B_{1u}) = \left[\begin{matrix}\frac{\sqrt{6} i}{6} &amp; \frac{\sqrt{6} i}{6} &amp; \frac{\sqrt{6} i}{6} &amp; - \frac{\sqrt{6} i}{6} &amp; - \frac{\sqrt{6} i}{6} &amp; - \frac{\sqrt{6} i}{6}\end{matrix}\right]\]</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{T}_{3}^{(b)}(B_{2u}) = \left[\begin{matrix}\frac{\sqrt{6} i}{6} &amp; \frac{\sqrt{6} i}{6} &amp; \frac{\sqrt{6} i}{6} &amp; \frac{\sqrt{6} i}{6} &amp; \frac{\sqrt{6} i}{6} &amp; \frac{\sqrt{6} i}{6}\end{matrix}\right]\]</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{T}_{1,1}^{(b)}(E_{1u},a) = \left[\begin{matrix}\frac{5 \sqrt{21} i}{42} &amp; - \frac{2 \sqrt{21} i}{21} &amp; - \frac{\sqrt{21} i}{42} &amp; - \frac{\sqrt{21} i}{42} &amp; \frac{5 \sqrt{21} i}{42} &amp; - \frac{2 \sqrt{21} i}{21}\end{matrix}\right]\]</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{T}_{1,2}^{(b)}(E_{1u},a) = \left[\begin{matrix}\frac{\sqrt{7} i}{14} &amp; \frac{\sqrt{7} i}{7} &amp; - \frac{3 \sqrt{7} i}{14} &amp; \frac{3 \sqrt{7} i}{14} &amp; - \frac{\sqrt{7} i}{14} &amp; - \frac{\sqrt{7} i}{7}\end{matrix}\right]\]</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{T}_{1,1}^{(b)}(E_{1u},b) = \left[\begin{matrix}\frac{\sqrt{7} i}{14} &amp; \frac{\sqrt{7} i}{7} &amp; - \frac{3 \sqrt{7} i}{14} &amp; - \frac{3 \sqrt{7} i}{14} &amp; \frac{\sqrt{7} i}{14} &amp; \frac{\sqrt{7} i}{7}\end{matrix}\right]\]</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{T}_{1,2}^{(b)}(E_{1u},b) = \left[\begin{matrix}- \frac{5 \sqrt{21} i}{42} &amp; \frac{2 \sqrt{21} i}{21} &amp; \frac{\sqrt{21} i}{42} &amp; - \frac{\sqrt{21} i}{42} &amp; \frac{5 \sqrt{21} i}{42} &amp; - \frac{2 \sqrt{21} i}{21}\end{matrix}\right]\]</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{2,1}^{(b)}(E_{2g}) = \left[\begin{matrix}\frac{11 \sqrt{3}}{42} &amp; \frac{\sqrt{3}}{21} &amp; - \frac{13 \sqrt{3}}{42} &amp; - \frac{13 \sqrt{3}}{42} &amp; \frac{11 \sqrt{3}}{42} &amp; \frac{\sqrt{3}}{21}\end{matrix}\right]\]</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{2,2}^{(b)}(E_{2g}) = \left[\begin{matrix}- \frac{5}{14} &amp; \frac{4}{7} &amp; - \frac{3}{14} &amp; \frac{3}{14} &amp; \frac{5}{14} &amp; - \frac{4}{7}\end{matrix}\right]\]</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{4,1}^{(b)}(E_{2g},1) = \left[\begin{matrix}\frac{5}{14} &amp; - \frac{4}{7} &amp; \frac{3}{14} &amp; \frac{3}{14} &amp; \frac{5}{14} &amp; - \frac{4}{7}\end{matrix}\right]\]</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{4,2}^{(b)}(E_{2g},1) = \left[\begin{matrix}\frac{11 \sqrt{3}}{42} &amp; \frac{\sqrt{3}}{21} &amp; - \frac{13 \sqrt{3}}{42} &amp; \frac{13 \sqrt{3}}{42} &amp; - \frac{11 \sqrt{3}}{42} &amp; - \frac{\sqrt{3}}{21}\end{matrix}\right]\]</div>
 </div>
 </div>
 </section>
@@ -663,6 +576,12 @@ Model: graphene
 <div class="output text_latex math notranslate nohighlight">
 \[\displaystyle \mathbb{Q}_{0}^{(c)}(A_{1g}) = \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{0}^{(b)}(A_{1g})\]</div>
 <div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{T}_{3}^{(c)}(B_{1u}) = \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{T}_{3}^{(b)}(B_{1u})\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{T}_{1,1}^{(c)}(E_{1u}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{T}_{1,1}^{(b)}(E_{1u})}{2}\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{T}_{1,2}^{(c)}(E_{1u}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{T}_{1,2}^{(b)}(E_{1u})}{2}\]</div>
+<div class="output text_latex math notranslate nohighlight">
 \[\displaystyle \mathbb{Q}_{2,1}^{(c)}(E_{2g}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,1}^{(b)}(E_{2g})}{2}\]</div>
 <div class="output text_latex math notranslate nohighlight">
 \[\displaystyle \mathbb{Q}_{2,2}^{(c)}(E_{2g}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,2}^{(b)}(E_{2g})}{2}\]</div>
@@ -672,69 +591,27 @@ Model: graphene
 <div class="output text_latex math notranslate nohighlight">
 \[\displaystyle \mathbb{Q}_{0}^{(c)}(A_{1g}) = \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{0}^{(b)}(A_{1g})\]</div>
 <div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{M}_{1}^{(c)}(A_{2g}) = \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{M}_{1}^{(b)}(A_{2g})\]</div>
+<div class="output text_latex math notranslate nohighlight">
 \[\displaystyle \mathbb{Q}_{3}^{(c)}(B_{1u}) = \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{3}^{(b)}(B_{1u})\]</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{T}_{3}^{(c)}(B_{2u}) = \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{T}_{3}^{(b)}(B_{2u})\]</div>
 <div class="output text_latex math notranslate nohighlight">
 \[\displaystyle \mathbb{Q}_{1,1}^{(c)}(E_{1u}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{1,1}^{(b)}(E_{1u})}{2}\]</div>
 <div class="output text_latex math notranslate nohighlight">
 \[\displaystyle \mathbb{Q}_{1,2}^{(c)}(E_{1u}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{1,2}^{(b)}(E_{1u})}{2}\]</div>
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{2,1}^{(c)}(E_{2g}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,1}^{(b)}(E_{2g})}{2}\]</div>
+\[\displaystyle \mathbb{T}_{1,1}^{(c)}(E_{1u}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{T}_{1,1}^{(b)}(E_{1u})}{2}\]</div>
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{2,2}^{(c)}(E_{2g}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,2}^{(b)}(E_{2g})}{2}\]</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>== (&#39;C&#39;, &#39;C&#39;, &#39;3b@1a&#39;, (1, (2,), 1, (2,))) ==
-</pre></div>
-</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{0}^{(c)}(A_{1g}) = \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{0}^{(b)}(A_{1g})\]</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{2,1}^{(c)}(E_{2g}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,1}^{(b)}(E_{2g})}{2}\]</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{2,2}^{(c)}(E_{2g}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,2}^{(b)}(E_{2g})}{2}\]</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>== (&#39;C&#39;, &#39;C&#39;, &#39;6d@3f&#39;, (1, (2,), 1, (2,))) ==
-</pre></div>
-</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{0}^{(c)}(A_{1g}) = \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{0}^{(b)}(A_{1g})\]</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{6}^{(c)}(A_{2g}) = \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{6}^{(b)}(A_{2g})\]</div>
+\[\displaystyle \mathbb{T}_{1,2}^{(c)}(E_{1u}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{T}_{1,2}^{(b)}(E_{1u})}{2}\]</div>
 <div class="output text_latex math notranslate nohighlight">
 \[\displaystyle \mathbb{Q}_{2,1}^{(c)}(E_{2g}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,1}^{(b)}(E_{2g})}{2}\]</div>
 <div class="output text_latex math notranslate nohighlight">
 \[\displaystyle \mathbb{Q}_{2,2}^{(c)}(E_{2g}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,2}^{(b)}(E_{2g})}{2}\]</div>
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{4,1}^{(c)}(E_{2g},1) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{4,1}^{(b)}(E_{2g},1)}{2}\]</div>
+\[\displaystyle \mathbb{T}_{2,1}^{(c)}(E_{2g}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{T}_{2,1}^{(b)}(E_{2g})}{2}\]</div>
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{4,2}^{(c)}(E_{2g},1) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{4,2}^{(b)}(E_{2g},1)}{2}\]</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>== (&#39;C&#39;, &#39;C&#39;, &#39;6a@6l&#39;, (1, (2,), 1, (2,))) ==
-</pre></div>
-</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{0}^{(c)}(A_{1g}) = \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{0}^{(b)}(A_{1g})\]</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{3}^{(c)}(B_{1u}) = \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{3}^{(b)}(B_{1u})\]</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{1,1}^{(c)}(E_{1u}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{1,1}^{(b)}(E_{1u})}{2}\]</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{1,2}^{(c)}(E_{1u}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{1,2}^{(b)}(E_{1u})}{2}\]</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{2,1}^{(c)}(E_{2g}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,1}^{(b)}(E_{2g})}{2}\]</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{2,2}^{(c)}(E_{2g}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,2}^{(b)}(E_{2g})}{2}\]</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>== (&#39;C&#39;, &#39;C&#39;, &#39;6c@2c&#39;, (1, (2,), 1, (2,))) ==
-</pre></div>
-</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{0}^{(c)}(A_{1g}) = \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{0}^{(b)}(A_{1g})\]</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{3}^{(c)}(B_{1u}) = \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{3}^{(b)}(B_{1u})\]</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{1,1}^{(c)}(E_{1u}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{1,1}^{(b)}(E_{1u})}{2}\]</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{1,2}^{(c)}(E_{1u}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{1,2}^{(b)}(E_{1u})}{2}\]</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{2,1}^{(c)}(E_{2g}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,1}^{(b)}(E_{2g})}{2}\]</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{2,2}^{(c)}(E_{2g}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{Q}_{2,2}^{(b)}(E_{2g})}{2}\]</div>
+\[\displaystyle \mathbb{T}_{2,2}^{(c)}(E_{2g}) = \frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1g}) \mathbb{T}_{2,2}^{(b)}(E_{2g})}{2}\]</div>
 </div>
 </div>
 </section>
@@ -758,8 +635,6 @@ Model: graphene
 <div class="output text_latex math notranslate nohighlight">
 \[\displaystyle \mathbb{G}_{1}(A_{2g}) = z\]</div>
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{6}(A_{2g}) = \frac{\sqrt{462} x y \left(x^{2} - 3 y^{2}\right) \left(3 x^{2} - y^{2}\right)}{16}\]</div>
-<div class="output text_latex math notranslate nohighlight">
 \[\displaystyle \mathbb{Q}_{3}(B_{1u}) = \frac{\sqrt{10} y \left(3 x^{2} - y^{2}\right)}{4}\]</div>
 <div class="output text_latex math notranslate nohighlight">
 \[\displaystyle \mathbb{Q}_{3}(B_{2u}) = \frac{\sqrt{10} x \left(x^{2} - 3 y^{2}\right)}{4}\]</div>
@@ -771,10 +646,6 @@ Model: graphene
 \[\displaystyle \mathbb{Q}_{2,1}(E_{2g}) = \frac{\sqrt{3} \left(x - y\right) \left(x + y\right)}{2}\]</div>
 <div class="output text_latex math notranslate nohighlight">
 \[\displaystyle \mathbb{Q}_{2,2}(E_{2g}) = - \sqrt{3} x y\]</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{4,1}(E_{2g},1) = \frac{\sqrt{35} \left(x^{2} - 2 x y - y^{2}\right) \left(x^{2} + 2 x y - y^{2}\right)}{8}\]</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \mathbb{Q}_{4,2}(E_{2g},1) = \frac{\sqrt{35} x y \left(x - y\right) \left(x + y\right)}{2}\]</div>
 </div>
 </div>
 </section>
@@ -805,151 +676,91 @@ Model: graphene
 </div>
 <div class="output text_latex math notranslate nohighlight">
 \[\displaystyle z_{3} = \mathbb{Q}_{0}^{(c)}(A_{1g})\]</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>info =  ((&#39;C&#39;, &#39;C&#39;, &#39;3b@1a&#39;, (1, (2,), 1, (2,))), 3, 1) index = (&#39;Q&#39;, 0, &#39;A1g&#39;, -1, -1, 0, 0, &#39;q&#39;) comp = 0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>info =  ((&#39;C&#39;, &#39;C&#39;, &#39;6b@6l&#39;, (1, (2,), 1, (2,))), 2, 1) index = (&#39;M&#39;, 1, &#39;A2g&#39;, -1, -1, 0, 0, &#39;q&#39;) comp = 0
 </pre></div>
 </div>
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle z_{4} = \mathbb{Q}_{0}^{(c)}(A_{1g})\]</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>info =  ((&#39;C&#39;, &#39;C&#39;, &#39;6d@3f&#39;, (1, (2,), 1, (2,))), 4, 1) index = (&#39;Q&#39;, 0, &#39;A1g&#39;, -1, -1, 0, 0, &#39;q&#39;) comp = 0
-</pre></div>
-</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle z_{5} = \mathbb{Q}_{0}^{(c)}(A_{1g})\]</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>info =  ((&#39;C&#39;, &#39;C&#39;, &#39;6a@6l&#39;, (1, (2,), 1, (2,))), 5, 1) index = (&#39;Q&#39;, 0, &#39;A1g&#39;, -1, -1, 0, 0, &#39;q&#39;) comp = 0
-</pre></div>
-</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle z_{6} = \mathbb{Q}_{0}^{(c)}(A_{1g})\]</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>info =  ((&#39;C&#39;, &#39;C&#39;, &#39;6c@2c&#39;, (1, (2,), 1, (2,))), 6, 1) index = (&#39;Q&#39;, 0, &#39;A1g&#39;, -1, -1, 0, 0, &#39;q&#39;) comp = 0
-</pre></div>
-</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle z_{7} = \mathbb{Q}_{0}^{(c)}(A_{1g})\]</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>info =  ((&#39;C&#39;, &#39;C&#39;, &#39;6d@3f&#39;, (1, (2,), 1, (2,))), 4, 1) index = (&#39;Q&#39;, 6, &#39;A2g&#39;, -1, -1, 0, 0, &#39;q&#39;) comp = 0
-</pre></div>
-</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle z_{8} = \mathbb{Q}_{6}^{(c)}(A_{2g})\]</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>info =  ((&#39;C&#39;, &#39;C&#39;, &#39;3a@3f&#39;, (1, (2,), 1, (2,))), 1, 1) index = (&#39;Q&#39;, 2, &#39;E2g&#39;, -1, -1, 0, 0, &#39;q&#39;) comp = 0
-</pre></div>
-</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle z_{9} = \mathbb{Q}_{2,1}^{(c)}(E_{2g})\]</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>info =  ((&#39;C&#39;, &#39;C&#39;, &#39;3a@3f&#39;, (1, (2,), 1, (2,))), 1, 1) index = (&#39;Q&#39;, 2, &#39;E2g&#39;, -1, -1, 0, 0, &#39;q&#39;) comp = 1
-</pre></div>
-</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle z_{10} = \mathbb{Q}_{2,2}^{(c)}(E_{2g})\]</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>info =  ((&#39;C&#39;, &#39;C&#39;, &#39;6b@6l&#39;, (1, (2,), 1, (2,))), 2, 1) index = (&#39;Q&#39;, 2, &#39;E2g&#39;, -1, -1, 0, 0, &#39;q&#39;) comp = 0
-</pre></div>
-</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle z_{11} = \mathbb{Q}_{2,1}^{(c)}(E_{2g})\]</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>info =  ((&#39;C&#39;, &#39;C&#39;, &#39;6b@6l&#39;, (1, (2,), 1, (2,))), 2, 1) index = (&#39;Q&#39;, 2, &#39;E2g&#39;, -1, -1, 0, 0, &#39;q&#39;) comp = 1
-</pre></div>
-</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle z_{12} = \mathbb{Q}_{2,2}^{(c)}(E_{2g})\]</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>info =  ((&#39;C&#39;, &#39;C&#39;, &#39;3b@1a&#39;, (1, (2,), 1, (2,))), 3, 1) index = (&#39;Q&#39;, 2, &#39;E2g&#39;, -1, -1, 0, 0, &#39;q&#39;) comp = 0
-</pre></div>
-</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle z_{13} = \mathbb{Q}_{2,1}^{(c)}(E_{2g})\]</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>info =  ((&#39;C&#39;, &#39;C&#39;, &#39;3b@1a&#39;, (1, (2,), 1, (2,))), 3, 1) index = (&#39;Q&#39;, 2, &#39;E2g&#39;, -1, -1, 0, 0, &#39;q&#39;) comp = 1
-</pre></div>
-</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle z_{14} = \mathbb{Q}_{2,2}^{(c)}(E_{2g})\]</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>info =  ((&#39;C&#39;, &#39;C&#39;, &#39;6d@3f&#39;, (1, (2,), 1, (2,))), 4, 1) index = (&#39;Q&#39;, 2, &#39;E2g&#39;, -1, -1, 0, 0, &#39;q&#39;) comp = 0
-</pre></div>
-</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle z_{15} = \mathbb{Q}_{2,1}^{(c)}(E_{2g})\]</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>info =  ((&#39;C&#39;, &#39;C&#39;, &#39;6d@3f&#39;, (1, (2,), 1, (2,))), 4, 1) index = (&#39;Q&#39;, 2, &#39;E2g&#39;, -1, -1, 0, 0, &#39;q&#39;) comp = 1
-</pre></div>
-</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle z_{16} = \mathbb{Q}_{2,2}^{(c)}(E_{2g})\]</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>info =  ((&#39;C&#39;, &#39;C&#39;, &#39;6d@3f&#39;, (1, (2,), 1, (2,))), 4, 1) index = (&#39;Q&#39;, 4, &#39;E2g&#39;, 1, -1, 0, 0, &#39;q&#39;) comp = 0
-</pre></div>
-</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle z_{17} = \mathbb{Q}_{4,1}^{(c)}(E_{2g},1)\]</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>info =  ((&#39;C&#39;, &#39;C&#39;, &#39;6d@3f&#39;, (1, (2,), 1, (2,))), 4, 1) index = (&#39;Q&#39;, 4, &#39;E2g&#39;, 1, -1, 0, 0, &#39;q&#39;) comp = 1
-</pre></div>
-</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle z_{18} = \mathbb{Q}_{4,2}^{(c)}(E_{2g},1)\]</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>info =  ((&#39;C&#39;, &#39;C&#39;, &#39;6a@6l&#39;, (1, (2,), 1, (2,))), 5, 1) index = (&#39;Q&#39;, 2, &#39;E2g&#39;, -1, -1, 0, 0, &#39;q&#39;) comp = 0
-</pre></div>
-</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle z_{19} = \mathbb{Q}_{2,1}^{(c)}(E_{2g})\]</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>info =  ((&#39;C&#39;, &#39;C&#39;, &#39;6a@6l&#39;, (1, (2,), 1, (2,))), 5, 1) index = (&#39;Q&#39;, 2, &#39;E2g&#39;, -1, -1, 0, 0, &#39;q&#39;) comp = 1
-</pre></div>
-</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle z_{20} = \mathbb{Q}_{2,2}^{(c)}(E_{2g})\]</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>info =  ((&#39;C&#39;, &#39;C&#39;, &#39;6c@2c&#39;, (1, (2,), 1, (2,))), 6, 1) index = (&#39;Q&#39;, 2, &#39;E2g&#39;, -1, -1, 0, 0, &#39;q&#39;) comp = 0
-</pre></div>
-</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle z_{21} = \mathbb{Q}_{2,1}^{(c)}(E_{2g})\]</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>info =  ((&#39;C&#39;, &#39;C&#39;, &#39;6c@2c&#39;, (1, (2,), 1, (2,))), 6, 1) index = (&#39;Q&#39;, 2, &#39;E2g&#39;, -1, -1, 0, 0, &#39;q&#39;) comp = 1
-</pre></div>
-</div>
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle z_{22} = \mathbb{Q}_{2,2}^{(c)}(E_{2g})\]</div>
+\[\displaystyle z_{4} = \mathbb{M}_{1}^{(c)}(A_{2g})\]</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>info =  ((&#39;C&#39;, &#39;C&#39;, &#39;2c&#39;, (1, (2,), 1, (2,))), 0, -1) index = (&#39;Q&#39;, 3, &#39;B1u&#39;, -1, -1, 0, 0, &#39;q&#39;) comp = 0
 </pre></div>
 </div>
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle z_{23} = \mathbb{Q}_{3}^{(c)}(B_{1u})\]</div>
+\[\displaystyle z_{5} = \mathbb{Q}_{3}^{(c)}(B_{1u})\]</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>info =  ((&#39;C&#39;, &#39;C&#39;, &#39;3a@3f&#39;, (1, (2,), 1, (2,))), 1, 1) index = (&#39;T&#39;, 3, &#39;B1u&#39;, -1, -1, 0, 0, &#39;q&#39;) comp = 0
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle z_{6} = \mathbb{T}_{3}^{(c)}(B_{1u})\]</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>info =  ((&#39;C&#39;, &#39;C&#39;, &#39;6b@6l&#39;, (1, (2,), 1, (2,))), 2, 1) index = (&#39;Q&#39;, 3, &#39;B1u&#39;, -1, -1, 0, 0, &#39;q&#39;) comp = 0
 </pre></div>
 </div>
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle z_{24} = \mathbb{Q}_{3}^{(c)}(B_{1u})\]</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>info =  ((&#39;C&#39;, &#39;C&#39;, &#39;6a@6l&#39;, (1, (2,), 1, (2,))), 5, 1) index = (&#39;Q&#39;, 3, &#39;B1u&#39;, -1, -1, 0, 0, &#39;q&#39;) comp = 0
+\[\displaystyle z_{7} = \mathbb{Q}_{3}^{(c)}(B_{1u})\]</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>info =  ((&#39;C&#39;, &#39;C&#39;, &#39;6b@6l&#39;, (1, (2,), 1, (2,))), 2, 1) index = (&#39;T&#39;, 3, &#39;B2u&#39;, -1, -1, 0, 0, &#39;q&#39;) comp = 0
 </pre></div>
 </div>
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle z_{25} = \mathbb{Q}_{3}^{(c)}(B_{1u})\]</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>info =  ((&#39;C&#39;, &#39;C&#39;, &#39;6c@2c&#39;, (1, (2,), 1, (2,))), 6, 1) index = (&#39;Q&#39;, 3, &#39;B1u&#39;, -1, -1, 0, 0, &#39;q&#39;) comp = 0
+\[\displaystyle z_{8} = \mathbb{T}_{3}^{(c)}(B_{2u})\]</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>info =  ((&#39;C&#39;, &#39;C&#39;, &#39;3a@3f&#39;, (1, (2,), 1, (2,))), 1, 1) index = (&#39;T&#39;, 1, &#39;E1u&#39;, -1, -1, 0, 0, &#39;q&#39;) comp = 0
 </pre></div>
 </div>
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle z_{26} = \mathbb{Q}_{3}^{(c)}(B_{1u})\]</div>
+\[\displaystyle z_{9} = \mathbb{T}_{1,1}^{(c)}(E_{1u})\]</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>info =  ((&#39;C&#39;, &#39;C&#39;, &#39;3a@3f&#39;, (1, (2,), 1, (2,))), 1, 1) index = (&#39;T&#39;, 1, &#39;E1u&#39;, -1, -1, 0, 0, &#39;q&#39;) comp = 1
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle z_{10} = \mathbb{T}_{1,2}^{(c)}(E_{1u})\]</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>info =  ((&#39;C&#39;, &#39;C&#39;, &#39;6b@6l&#39;, (1, (2,), 1, (2,))), 2, 1) index = (&#39;Q&#39;, 1, &#39;E1u&#39;, -1, -1, 0, 0, &#39;q&#39;) comp = 0
 </pre></div>
 </div>
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle z_{27} = \mathbb{Q}_{1,1}^{(c)}(E_{1u})\]</div>
+\[\displaystyle z_{11} = \mathbb{Q}_{1,1}^{(c)}(E_{1u})\]</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>info =  ((&#39;C&#39;, &#39;C&#39;, &#39;6b@6l&#39;, (1, (2,), 1, (2,))), 2, 1) index = (&#39;Q&#39;, 1, &#39;E1u&#39;, -1, -1, 0, 0, &#39;q&#39;) comp = 1
 </pre></div>
 </div>
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle z_{28} = \mathbb{Q}_{1,2}^{(c)}(E_{1u})\]</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>info =  ((&#39;C&#39;, &#39;C&#39;, &#39;6a@6l&#39;, (1, (2,), 1, (2,))), 5, 1) index = (&#39;Q&#39;, 1, &#39;E1u&#39;, -1, -1, 0, 0, &#39;q&#39;) comp = 0
+\[\displaystyle z_{12} = \mathbb{Q}_{1,2}^{(c)}(E_{1u})\]</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>info =  ((&#39;C&#39;, &#39;C&#39;, &#39;6b@6l&#39;, (1, (2,), 1, (2,))), 2, 1) index = (&#39;T&#39;, 1, &#39;E1u&#39;, -1, -1, 0, 0, &#39;q&#39;) comp = 0
 </pre></div>
 </div>
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle z_{29} = \mathbb{Q}_{1,1}^{(c)}(E_{1u})\]</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>info =  ((&#39;C&#39;, &#39;C&#39;, &#39;6a@6l&#39;, (1, (2,), 1, (2,))), 5, 1) index = (&#39;Q&#39;, 1, &#39;E1u&#39;, -1, -1, 0, 0, &#39;q&#39;) comp = 1
+\[\displaystyle z_{13} = \mathbb{T}_{1,1}^{(c)}(E_{1u})\]</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>info =  ((&#39;C&#39;, &#39;C&#39;, &#39;6b@6l&#39;, (1, (2,), 1, (2,))), 2, 1) index = (&#39;T&#39;, 1, &#39;E1u&#39;, -1, -1, 0, 0, &#39;q&#39;) comp = 1
 </pre></div>
 </div>
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle z_{30} = \mathbb{Q}_{1,2}^{(c)}(E_{1u})\]</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>info =  ((&#39;C&#39;, &#39;C&#39;, &#39;6c@2c&#39;, (1, (2,), 1, (2,))), 6, 1) index = (&#39;Q&#39;, 1, &#39;E1u&#39;, -1, -1, 0, 0, &#39;q&#39;) comp = 0
+\[\displaystyle z_{14} = \mathbb{T}_{1,2}^{(c)}(E_{1u})\]</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>info =  ((&#39;C&#39;, &#39;C&#39;, &#39;3a@3f&#39;, (1, (2,), 1, (2,))), 1, 1) index = (&#39;Q&#39;, 2, &#39;E2g&#39;, -1, -1, 0, 0, &#39;q&#39;) comp = 0
 </pre></div>
 </div>
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle z_{31} = \mathbb{Q}_{1,1}^{(c)}(E_{1u})\]</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>info =  ((&#39;C&#39;, &#39;C&#39;, &#39;6c@2c&#39;, (1, (2,), 1, (2,))), 6, 1) index = (&#39;Q&#39;, 1, &#39;E1u&#39;, -1, -1, 0, 0, &#39;q&#39;) comp = 1
+\[\displaystyle z_{15} = \mathbb{Q}_{2,1}^{(c)}(E_{2g})\]</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>info =  ((&#39;C&#39;, &#39;C&#39;, &#39;3a@3f&#39;, (1, (2,), 1, (2,))), 1, 1) index = (&#39;Q&#39;, 2, &#39;E2g&#39;, -1, -1, 0, 0, &#39;q&#39;) comp = 1
 </pre></div>
 </div>
 <div class="output text_latex math notranslate nohighlight">
-\[\displaystyle z_{32} = \mathbb{Q}_{1,2}^{(c)}(E_{1u})\]</div>
+\[\displaystyle z_{16} = \mathbb{Q}_{2,2}^{(c)}(E_{2g})\]</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>info =  ((&#39;C&#39;, &#39;C&#39;, &#39;6b@6l&#39;, (1, (2,), 1, (2,))), 2, 1) index = (&#39;Q&#39;, 2, &#39;E2g&#39;, -1, -1, 0, 0, &#39;q&#39;) comp = 0
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle z_{17} = \mathbb{Q}_{2,1}^{(c)}(E_{2g})\]</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>info =  ((&#39;C&#39;, &#39;C&#39;, &#39;6b@6l&#39;, (1, (2,), 1, (2,))), 2, 1) index = (&#39;Q&#39;, 2, &#39;E2g&#39;, -1, -1, 0, 0, &#39;q&#39;) comp = 1
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle z_{18} = \mathbb{Q}_{2,2}^{(c)}(E_{2g})\]</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>info =  ((&#39;C&#39;, &#39;C&#39;, &#39;6b@6l&#39;, (1, (2,), 1, (2,))), 2, 1) index = (&#39;T&#39;, 2, &#39;E2g&#39;, -1, -1, 0, 0, &#39;q&#39;) comp = 0
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle z_{19} = \mathbb{T}_{2,1}^{(c)}(E_{2g})\]</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>info =  ((&#39;C&#39;, &#39;C&#39;, &#39;6b@6l&#39;, (1, (2,), 1, (2,))), 2, 1) index = (&#39;T&#39;, 2, &#39;E2g&#39;, -1, -1, 0, 0, &#39;q&#39;) comp = 1
+</pre></div>
+</div>
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle z_{20} = \mathbb{T}_{2,2}^{(c)}(E_{2g})\]</div>
 </div>
 </div>
 </section>
@@ -963,13 +774,9 @@ Model: graphene
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;C&#39;, &#39;C&#39;, &#39;2c&#39;, (1, (2,), 1, (2,))) ([[&#39;z1&#39;, &#39;z23&#39;]], [&#39;C&#39;])
-(&#39;C&#39;, &#39;C&#39;, &#39;3a@3f&#39;, (1, (2,), 1, (2,))) ([[&#39;z2&#39;, &#39;z9&#39;, &#39;z10&#39;]], [&#39;C;C_001_1&#39;])
-(&#39;C&#39;, &#39;C&#39;, &#39;6b@6l&#39;, (1, (2,), 1, (2,))) ([[&#39;z3&#39;, &#39;z11&#39;, &#39;z12&#39;, &#39;z24&#39;, &#39;z27&#39;, &#39;z28&#39;]], [&#39;C;C_002_1&#39;])
-(&#39;C&#39;, &#39;C&#39;, &#39;3b@1a&#39;, (1, (2,), 1, (2,))) ([[&#39;z4&#39;, &#39;z13&#39;, &#39;z14&#39;]], [&#39;C;C_003_1&#39;])
-(&#39;C&#39;, &#39;C&#39;, &#39;6d@3f&#39;, (1, (2,), 1, (2,))) ([[&#39;z5&#39;, &#39;z8&#39;, &#39;z15&#39;, &#39;z16&#39;, &#39;z17&#39;, &#39;z18&#39;]], [&#39;C;C_004_1&#39;])
-(&#39;C&#39;, &#39;C&#39;, &#39;6a@6l&#39;, (1, (2,), 1, (2,))) ([[&#39;z6&#39;, &#39;z19&#39;, &#39;z20&#39;, &#39;z25&#39;, &#39;z29&#39;, &#39;z30&#39;]], [&#39;C;C_005_1&#39;])
-(&#39;C&#39;, &#39;C&#39;, &#39;6c@2c&#39;, (1, (2,), 1, (2,))) ([[&#39;z7&#39;, &#39;z21&#39;, &#39;z22&#39;, &#39;z26&#39;, &#39;z31&#39;, &#39;z32&#39;]], [&#39;C;C_006_1&#39;])
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;C&#39;, &#39;C&#39;, &#39;2c&#39;, (1, (2,), 1, (2,))) ([[&#39;z1&#39;, &#39;z5&#39;]], [&#39;C&#39;])
+(&#39;C&#39;, &#39;C&#39;, &#39;3a@3f&#39;, (1, (2,), 1, (2,))) ([[&#39;z2&#39;, &#39;z6&#39;, &#39;z9&#39;, &#39;z10&#39;, &#39;z15&#39;, &#39;z16&#39;]], [&#39;C;C_001_1&#39;])
+(&#39;C&#39;, &#39;C&#39;, &#39;6b@6l&#39;, (1, (2,), 1, (2,))) ([[&#39;z3&#39;, &#39;z4&#39;, &#39;z7&#39;, &#39;z8&#39;, &#39;z11&#39;, &#39;z12&#39;, &#39;z13&#39;, &#39;z14&#39;, &#39;z17&#39;, &#39;z18&#39;, &#39;z19&#39;, &#39;z20&#39;]], [&#39;C;C_002_1&#39;])
 </pre></div>
 </div>
 </div>
@@ -988,19 +795,11 @@ Model: graphene
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C
-(1, 1) 2c [&#39;z1&#39;, &#39;z23&#39;]
+(1, 1) 2c [&#39;z1&#39;, &#39;z5&#39;]
 C;C_001_1
-(1, 1) 3a@3f [&#39;z2&#39;, &#39;z9&#39;, &#39;z10&#39;]
+(1, 1) 3a@3f [&#39;z2&#39;, &#39;z6&#39;, &#39;z9&#39;, &#39;z10&#39;, &#39;z15&#39;, &#39;z16&#39;]
 C;C_002_1
-(1, 1) 6b@6l [&#39;z3&#39;, &#39;z11&#39;, &#39;z12&#39;, &#39;z24&#39;, &#39;z27&#39;, &#39;z28&#39;]
-C;C_003_1
-(1, 1) 3b@1a [&#39;z4&#39;, &#39;z13&#39;, &#39;z14&#39;]
-C;C_004_1
-(1, 1) 6d@3f [&#39;z5&#39;, &#39;z8&#39;, &#39;z15&#39;, &#39;z16&#39;, &#39;z17&#39;, &#39;z18&#39;]
-C;C_005_1
-(1, 1) 6a@6l [&#39;z6&#39;, &#39;z19&#39;, &#39;z20&#39;, &#39;z25&#39;, &#39;z29&#39;, &#39;z30&#39;]
-C;C_006_1
-(1, 1) 6c@2c [&#39;z7&#39;, &#39;z21&#39;, &#39;z22&#39;, &#39;z26&#39;, &#39;z31&#39;, &#39;z32&#39;]
+(1, 1) 6b@6l [&#39;z3&#39;, &#39;z4&#39;, &#39;z7&#39;, &#39;z8&#39;, &#39;z11&#39;, &#39;z12&#39;, &#39;z13&#39;, &#39;z14&#39;, &#39;z17&#39;, &#39;z18&#39;, &#39;z19&#39;, &#39;z20&#39;]
 </pre></div>
 </div>
 </div>
@@ -1036,14 +835,10 @@ tag = C
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- info ---
-C-C: neighbor=[1, 2, 3, 4, 5, 6], head rank=[1], tail rank=[1]
+C-C: neighbor=[1, 2], head rank=[1], tail rank=[1]
 --- representative bond ---
 C;C_001_1: #1, 1th, directional = False, wyckoff = 3a@3f, 1st = [0.33333333, 0.66666666, 0.0]@[0.5, 0.0, 0.0], distance = 0.5773502595671213
 C;C_002_1: #2, 2th, directional = False, wyckoff = 6b@6l, 1st = [1.0, 0.0, 0.0]@[0.83333333, 0.66666666, 0.0], distance = 1.0
-C;C_003_1: #3, 3th, directional = False, wyckoff = 3b@1a, 1st = [-0.66666667, -1.33333334, 0.0]@[0.0, 0.0, 0.0], distance = 1.1547005364547505
-C;C_004_1: #4, 4th, directional = False, wyckoff = 6d@3f, 1st = [-1.66666667, -1.33333333, 0.0]@[0.5, 0.0, 0.0], distance = 1.5275252269238924
-C;C_005_1: #5, 5th, directional = True, wyckoff = 6a@6l, 1st = [1.0, 2.0, 0.0]@[0.83333333, 0.66666666, 0.0], distance = 1.7320507960218718
-C;C_006_1: #6, 6th, directional = False, wyckoff = 6c@2c, 1st = [2.0, 0.0, 0.0]@[0.3333333333333333, 0.6666666666666666, 0.0], distance = 2.0
 --- cell bond ---
 tag = C;C_001_1
 #1: bond = [0.33333333, 0.66666666, 0.0]@[0.5, 0.0, 0.0], mapping = [1, -4, -8, 11, -13, 16, 20, -23], sublattice = 1, plus set = 1, head(sublattice,plus_set) = (2, 1), tail(sublattice,plus_set) = (1, 1)
@@ -1056,31 +851,6 @@ tag = C;C_002_1
 #4: bond = [-1.0, 0.0, 0.0]@[0.16666667000000002, 0.33333334000000003, 0.0], mapping = [4, -8, 13, -23], sublattice = 4, plus set = 1, head(sublattice,plus_set) = (2, 1), tail(sublattice,plus_set) = (2, 1)
 #5: bond = [0.0, -1.0, 0.0]@[0.66666666, 0.83333333, 0.0], mapping = [5, -7, 14, -22], sublattice = 5, plus set = 1, head(sublattice,plus_set) = (2, 1), tail(sublattice,plus_set) = (2, 1)
 #6: bond = [1.0, 1.0, 0.0]@[0.16666667000000002, 0.83333333, 0.0], mapping = [6, -9, 15, -24], sublattice = 6, plus set = 1, head(sublattice,plus_set) = (2, 1), tail(sublattice,plus_set) = (2, 1)
-tag = C;C_003_1
-#1: bond = [-0.66666667, -1.33333334, 0.0]@[0.0, 0.0, 0.0], mapping = [1, -4, -8, 11, -13, 16, 20, -23], sublattice = 1, plus set = 1, head(sublattice,plus_set) = (2, 1), tail(sublattice,plus_set) = (1, 1)
-#2: bond = [1.33333334, 0.66666667, 0.0]@[0.0, 0.0, 0.0], mapping = [2, -5, -7, 10, -14, 17, 19, -22], sublattice = 2, plus set = 1, head(sublattice,plus_set) = (2, 1), tail(sublattice,plus_set) = (1, 1)
-#3: bond = [-0.66666667, 0.66666667, 0.0]@[0.0, 0.0, 0.0], mapping = [3, -6, -9, 12, -15, 18, 21, -24], sublattice = 3, plus set = 1, head(sublattice,plus_set) = (2, 1), tail(sublattice,plus_set) = (1, 1)
-tag = C;C_004_1
-#1: bond = [-1.66666667, -1.33333333, 0.0]@[0.5, 0.0, 0.0], mapping = [1, -4, -13, 16], sublattice = 1, plus set = 1, head(sublattice,plus_set) = (2, 1), tail(sublattice,plus_set) = (1, 1)
-#2: bond = [1.33333333, -0.3333333399999998, 0.0]@[0.0, 0.5, 0.0], mapping = [2, -5, -14, 17], sublattice = 2, plus set = 1, head(sublattice,plus_set) = (2, 1), tail(sublattice,plus_set) = (1, 1)
-#3: bond = [0.3333333399999998, 1.66666667, 0.0]@[0.5, 0.5, 0.0], mapping = [3, -6, -15, 18], sublattice = 3, plus set = 1, head(sublattice,plus_set) = (2, 1), tail(sublattice,plus_set) = (1, 1)
-#4: bond = [-1.33333333, -1.66666667, 0.0]@[0.0, 0.5, 0.0], mapping = [7, -10, -19, 22], sublattice = 4, plus set = 1, head(sublattice,plus_set) = (1, 1), tail(sublattice,plus_set) = (2, 1)
-#5: bond = [-0.3333333399999998, 1.33333333, 0.0]@[0.5, 0.0, 0.0], mapping = [8, -11, -20, 23], sublattice = 5, plus set = 1, head(sublattice,plus_set) = (1, 1), tail(sublattice,plus_set) = (2, 1)
-#6: bond = [1.66666667, 0.3333333399999998, 0.0]@[0.5, 0.5, 0.0], mapping = [9, -12, -21, 24], sublattice = 6, plus set = 1, head(sublattice,plus_set) = (1, 1), tail(sublattice,plus_set) = (2, 1)
-tag = C;C_005_1
-#1: bond = [1.0, 2.0, 0.0]@[0.83333333, 0.66666666, 0.0], mapping = [1, 11, 16, 20], sublattice = 1, plus set = 1, head(sublattice,plus_set) = (1, 1), tail(sublattice,plus_set) = (1, 1)
-#2: bond = [-2.0, -1.0, 0.0]@[0.33333334, 0.16666667, 0.0], mapping = [2, 10, 17, 19], sublattice = 2, plus set = 1, head(sublattice,plus_set) = (1, 1), tail(sublattice,plus_set) = (1, 1)
-#3: bond = [1.0, -1.0, 0.0]@[0.83333333, 0.16666667, 0.0], mapping = [3, 12, 18, 21], sublattice = 3, plus set = 1, head(sublattice,plus_set) = (1, 1), tail(sublattice,plus_set) = (1, 1)
-#4: bond = [-1.0, -2.0, 0.0]@[0.16666667, 0.33333334, 0.0], mapping = [4, 8, 13, 23], sublattice = 4, plus set = 1, head(sublattice,plus_set) = (2, 1), tail(sublattice,plus_set) = (2, 1)
-#5: bond = [2.0, 1.0, 0.0]@[0.66666666, 0.83333333, 0.0], mapping = [5, 7, 14, 22], sublattice = 5, plus set = 1, head(sublattice,plus_set) = (2, 1), tail(sublattice,plus_set) = (2, 1)
-#6: bond = [-1.0, 1.0, 0.0]@[0.16666667, 0.83333333, 0.0], mapping = [6, 9, 15, 24], sublattice = 6, plus set = 1, head(sublattice,plus_set) = (2, 1), tail(sublattice,plus_set) = (2, 1)
-tag = C;C_006_1
-#1: bond = [2.0, 0.0, 0.0]@[0.3333333333333333, 0.6666666666666666, 0.0], mapping = [1, -11, 16, -20], sublattice = 1, plus set = 1, head(sublattice,plus_set) = (1, 1), tail(sublattice,plus_set) = (1, 1)
-#2: bond = [0.0, 2.0, 0.0]@[0.3333333333333333, 0.6666666666666666, 0.0], mapping = [2, -10, 17, -19], sublattice = 2, plus set = 1, head(sublattice,plus_set) = (1, 1), tail(sublattice,plus_set) = (1, 1)
-#3: bond = [-2.0, -2.0, 0.0]@[0.3333333333333333, 0.6666666666666666, 0.0], mapping = [3, -12, 18, -21], sublattice = 3, plus set = 1, head(sublattice,plus_set) = (1, 1), tail(sublattice,plus_set) = (1, 1)
-#4: bond = [-2.0, 0.0, 0.0]@[0.6666666666666666, 0.3333333333333333, 0.0], mapping = [4, -8, 13, -23], sublattice = 4, plus set = 1, head(sublattice,plus_set) = (2, 1), tail(sublattice,plus_set) = (2, 1)
-#5: bond = [0.0, -2.0, 0.0]@[0.6666666666666666, 0.3333333333333333, 0.0], mapping = [5, -7, 14, -22], sublattice = 5, plus set = 1, head(sublattice,plus_set) = (2, 1), tail(sublattice,plus_set) = (2, 1)
-#6: bond = [2.0, 2.0, 0.0]@[0.6666666666666666, 0.3333333333333333, 0.0], mapping = [6, -9, 15, -24], sublattice = 6, plus set = 1, head(sublattice,plus_set) = (2, 1), tail(sublattice,plus_set) = (2, 1)
 </pre></div>
 </div>
 </div>
