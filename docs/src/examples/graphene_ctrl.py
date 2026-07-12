@@ -1,8 +1,4 @@
 # graphene_ctrl.py
-"""
-control file for graphene.
-"""
-
 graphene_ctrl = {
     "samb": {
         "model": "graphene",

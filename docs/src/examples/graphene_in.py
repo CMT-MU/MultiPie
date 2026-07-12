@@ -1,8 +1,4 @@
 # graphene_in.py
-"""
-input file for graphene.
-"""
-
 graphene_in = {
     "model": "graphene",  #  name of model.
     "group": 191,  # No. of space group.
@@ -12,4 +8,8 @@ graphene_in = {
     "bond": [("C", "C", [1, 2])],  # C-C bonds up to 2nd neighbors.
     #
     "spinful": False,  # spinless.
+    #
+    "SAMB_select": {  # select combined SAMB.
+        "X": [],  # all Q/G/M/T.
+    },
 }
