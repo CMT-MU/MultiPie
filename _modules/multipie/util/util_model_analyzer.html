@@ -1,0 +1,802 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>multipie.util.util_model_analyzer &#8212; MultiPie</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=34ddd5e8" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../../_static/documentation_options.js?v=a8e58a58"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/multipie/util/util_model_analyzer';</script>
+    <script src="../../../_static/custom.js?v=9c3a2667"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../README.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/multipie_logo.png" class="logo__image only-light" alt="MultiPie - Home"/>
+    <img src="../../../_static/multipie_logo.png" class="logo__image only-dark pst-js-only" alt="MultiPie - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../src/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/install.html">Installing MultiPie</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/getting_started.html">Getting Started</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../src/manual.html">Brief Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/group_doc.html">Group information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/tech_note.html">Technical Note</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../src/api_core.html">Core</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_core/cmd.html">Create function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_core/model_analyzer.html">ModelAnalyzer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_core/group.html">Group</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_core/material_model.html">Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_core/init.html">Type</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../src/api_util.html">Utility</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_binary.html">Binary data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_crystal.html">Crystal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_dict.html">Dict</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_tag.html">Tag</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_wyckoff.html">Wyckoff position</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_harmonics.html">Harmonics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util.html">Versatile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_gram_schmidt.html">Grad-Schmidt orthonormalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_material_model.html">Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_material_model_pdf.html">PDF creator for Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_pdf_latex.html">PDF creator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_plot.html">Plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_response_tensor.html">Response tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_samb.html">SAMB</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/CMT-MU/MultiPie.git" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for multipie.util.util_model_analyzer</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Utility for ModelAnalyzer calss.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">multipie</span><span class="w"> </span><span class="kn">import</span> <span class="n">Group</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">multipie.util.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">str_to_sympy</span>
+
+
+<span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="grid_path">
+<a class="viewcode-back" href="../../../src/api_util/util_model_analyzer.html#multipie.util.util_model_analyzer.grid_path">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">grid_path</span><span class="p">(</span><span class="n">pts</span><span class="p">,</span> <span class="n">gpath</span><span class="p">,</span> <span class="n">N1</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">A</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create grid points along path.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        pts (dict): definitions of points, e.g., {&quot;A&quot;:[1,2,3],&quot;B&quot;:[3,4,5]}.</span>
+<span class="sd">        gpath (str): path, e.g., &quot;A-B|C-D-E&quot;.</span>
+<span class="sd">        N1 (int, optional): number of divisions.</span>
+<span class="sd">        A (ndarray, optional): conversion matrix.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        - (ndarray) -- grid points.</span>
+<span class="sd">        - (ndarray) -- linear positions.</span>
+<span class="sd">        - (dict) -- dict[disconnected linear position, label].</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">A</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">pts</span><span class="o">.</span><span class="n">values</span><span class="p">())[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+
+    <span class="n">gpath</span> <span class="o">=</span> <span class="n">gpath</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="n">glabel</span> <span class="o">=</span> <span class="n">gpath</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)</span>
+    <span class="n">gpath</span> <span class="o">=</span> <span class="n">gpath</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;|&quot;</span><span class="p">)</span>
+    <span class="n">gpath</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">gpath</span><span class="p">]</span>
+    <span class="n">gpath</span> <span class="o">=</span> <span class="p">[[(</span><span class="n">i1</span><span class="p">,</span> <span class="n">i2</span><span class="p">)</span> <span class="k">for</span> <span class="n">i1</span><span class="p">,</span> <span class="n">i2</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">i</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">:])]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">gpath</span><span class="p">]</span>
+    <span class="n">gpath</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">gpath</span><span class="p">,</span> <span class="p">[])</span>
+
+    <span class="n">grid</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">glin</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">gdis</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">gpath</span><span class="p">:</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pts</span><span class="p">[</span><span class="n">s</span><span class="p">])</span>
+        <span class="n">e</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pts</span><span class="p">[</span><span class="n">e</span><span class="p">])</span>
+        <span class="n">dv</span> <span class="o">=</span> <span class="p">(</span><span class="n">e</span> <span class="o">-</span> <span class="n">s</span><span class="p">)</span> <span class="o">/</span> <span class="n">N1</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">dv</span> <span class="o">@</span> <span class="n">A</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N1</span><span class="p">):</span>
+            <span class="n">glin</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+            <span class="n">grid</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span> <span class="o">+</span> <span class="n">j</span> <span class="o">*</span> <span class="n">dv</span><span class="p">)</span>
+            <span class="n">x</span> <span class="o">+=</span> <span class="n">d</span>
+        <span class="n">grid</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span> <span class="o">+</span> <span class="n">N1</span> <span class="o">*</span> <span class="n">dv</span><span class="p">)</span>
+        <span class="n">glin</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">gdis</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+    <span class="n">grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
+    <span class="n">glin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">glin</span><span class="p">)</span>
+    <span class="n">gdis</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">gdis</span><span class="p">,</span> <span class="n">glabel</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">grid</span><span class="p">,</span> <span class="n">glin</span><span class="p">,</span> <span class="n">gdis</span></div>
+
+
+
+<span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="grid_all">
+<a class="viewcode-back" href="../../../src/api_util/util_model_analyzer.html#multipie.util.util_model_analyzer.grid_all">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">grid_all</span><span class="p">(</span><span class="n">N1</span><span class="p">,</span> <span class="n">N2</span><span class="p">,</span> <span class="n">N3</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create N1 x N2 x N3 grid points.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        N1 (int): number of divisions for a1.</span>
+<span class="sd">        N2 (int): number of divisions for a2.</span>
+<span class="sd">        N3 (int): number of divisions for a3.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        - (ndarray) -- grid points.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">kpoints</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">i</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">N1</span><span class="p">),</span> <span class="n">j</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">N2</span><span class="p">),</span> <span class="n">k</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">N3</span><span class="p">)]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N1</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N2</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N3</span><span class="p">)])</span>
+
+    <span class="k">return</span> <span class="n">kpoints</span></div>
+
+
+
+<span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="fourier_r_to_k">
+<a class="viewcode-back" href="../../../src/api_util/util_model_analyzer.html#multipie.util.util_model_analyzer.fourier_r_to_k">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">fourier_r_to_k</span><span class="p">(</span><span class="n">OR</span><span class="p">,</span> <span class="n">atom</span><span class="p">,</span> <span class="n">kv</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Fourier transformation from R to k.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        OR (dict): matrix dict, dict[(n1,n2,n3,m,n): value].</span>
+<span class="sd">        atom (ndarray): atomic postions.</span>
+<span class="sd">        kv (ndarray): list of k vector.</span>
+<span class="sd">        s (bool, optional): include phase of atomic position ?</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        - (ndarray) -- O(k) = sum_s Omn exp( 2pi i k*Rs ), Rs = (n1,n2,n3)-s(R[m]-R[n]).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">eRa</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="p">(</span><span class="n">kv</span> <span class="o">@</span> <span class="n">atom</span><span class="o">.</span><span class="n">T</span><span class="p">))</span>
+
+    <span class="n">Nk</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">kv</span><span class="p">)</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">atom</span><span class="p">)</span>
+    <span class="n">S</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">Nk</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">d</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">OR</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">eR</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">kv</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">R</span><span class="p">)))</span>
+        <span class="k">if</span> <span class="n">s</span><span class="p">:</span>
+            <span class="n">S</span><span class="p">[:,</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">]</span> <span class="o">+=</span> <span class="n">value</span> <span class="o">*</span> <span class="n">eR</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">conj</span><span class="p">(</span><span class="n">eRa</span><span class="p">[:,</span> <span class="n">m</span><span class="p">])</span> <span class="o">*</span> <span class="n">eRa</span><span class="p">[:,</span> <span class="n">n</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">S</span><span class="p">[:,</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">]</span> <span class="o">+=</span> <span class="n">value</span> <span class="o">*</span> <span class="n">eR</span>
+
+    <span class="k">return</span> <span class="n">S</span></div>
+
+
+
+<span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="output_linear_dispersion_eig">
+<a class="viewcode-back" href="../../../src/api_util/util_model_analyzer.html#multipie.util.util_model_analyzer.output_linear_dispersion_eig">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">output_linear_dispersion_eig</span><span class="p">(</span><span class="n">outdir</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">o</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Output band dispersion along high-symmetry lines.</span>
+<span class="sd">    (only eigen values)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        outdir (str): input and output files are found in this directory.</span>
+<span class="sd">        filename (str): file name.</span>
+<span class="sd">        k (ndarray): k points along high-symmetry lines.</span>
+<span class="sd">        e (ndarray): eigen values.</span>
+<span class="sd">        o (list, optional): expectation value of any operator for each band, [[num_k, num_band]].</span>
+<span class="sd">        kwargs (dict, optional): key words for generate_band_gnuplot.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">kmax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+    <span class="n">emax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+    <span class="n">emin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+    <span class="n">num_wann</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span><span class="p">[:</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span> <span class="k">if</span> <span class="n">filename</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">:]</span> <span class="o">==</span> <span class="s2">&quot;.txt&quot;</span> <span class="k">else</span> <span class="n">filename</span>
+
+    <span class="n">fs</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">outdir</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">filename</span> <span class="o">+</span> <span class="s2">&quot;.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span>
+    <span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;# k Energy [eV] </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;# Emax = </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">emax</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;# Emin = </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">emin</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;# num_wann = </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">num_wann</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">ef</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;ef&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">ef</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">ef</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;ef&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;# ef = ? (no shift) </span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;# shifted by fermi energy = </span><span class="si">{</span><span class="n">ef</span><span class="si">}</span><span class="s2"> [eV] </span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">num_k</span><span class="p">,</span> <span class="n">Nm</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">e</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">T</span>
+
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Nm</span><span class="p">):</span>
+        <span class="n">en</span> <span class="o">=</span> <span class="n">e</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">-</span> <span class="n">ef</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_k</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">o</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">s</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="si">{k:0&lt;20}</span><span class="s2">   </span><span class="si">{e:&lt;20}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="n">k</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">e</span><span class="o">=</span><span class="n">en</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">s</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="si">{k:0&lt;20}</span><span class="s2">   </span><span class="si">{e:&lt;20}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="n">k</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">e</span><span class="o">=</span><span class="n">en</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                <span class="k">for</span> <span class="n">oi</span> <span class="ow">in</span> <span class="n">o</span><span class="p">:</span>
+                    <span class="n">s</span> <span class="o">+=</span> <span class="s2">&quot;   </span><span class="si">{o:&lt;20}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">o</span><span class="o">=</span><span class="n">oi</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">n</span><span class="p">])</span>
+                <span class="n">s</span> <span class="o">+=</span> <span class="s2">&quot; </span><span class="se">\n</span><span class="s2">&quot;</span>
+
+        <span class="n">s</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+
+    <span class="n">fs</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="c1"># generate gnuplot file</span>
+    <span class="n">generate_band_gnuplot_eig</span><span class="p">(</span><span class="n">outdir</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">kmax</span><span class="p">,</span> <span class="n">emax</span><span class="p">,</span> <span class="n">emin</span><span class="p">,</span> <span class="n">num_wann</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="generate_band_gnuplot_eig">
+<a class="viewcode-back" href="../../../src/api_util/util_model_analyzer.html#multipie.util.util_model_analyzer.generate_band_gnuplot_eig">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">generate_band_gnuplot_eig</span><span class="p">(</span><span class="n">outdir</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">kmax</span><span class="p">,</span> <span class="n">emax</span><span class="p">,</span> <span class="n">emin</span><span class="p">,</span> <span class="n">num_wann</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generate gnuplot file to plot band dispersion.</span>
+<span class="sd">    (only eigen values)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        outdir (str): input and output files are found in this directory.</span>
+<span class="sd">        filename (str): file name.</span>
+<span class="sd">        kmax (float): maximum value in kpoints.</span>
+<span class="sd">        emax (float): maximum value of eigen values.</span>
+<span class="sd">        emin (float): minimum value of eigen values.</span>
+<span class="sd">        num_wann (int): # of wannier functions.</span>
+<span class="sd">        kwargs (dict, optional): key words for generate_band_gnuplot.</span>
+<span class="sd">            - a (float): length of lattice vector.</span>
+<span class="sd">            - ef (float): fermi energy.</span>
+<span class="sd">            - k_dis_pos (dict): {disconnected linear position:label}.</span>
+<span class="sd">            - lwidth (float): line width.</span>
+<span class="sd">            - lc (str): line color.</span>
+<span class="sd">            - ref_filename (str): file name of reference band data.</span>
+<span class="sd">            - colormap (bool): with colormap of first expectation value of operator.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">offset</span> <span class="o">=</span> <span class="p">(</span><span class="n">emax</span> <span class="o">-</span> <span class="n">emin</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.1</span>
+
+    <span class="n">a</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">ef</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;ef&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+    <span class="n">k_dis_pos</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;k_dis_pos&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">ref_filename</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;ref_filename&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">lwidth</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;lwidth&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">lc</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;lc&quot;</span><span class="p">,</span> <span class="s2">&quot;salmon&quot;</span><span class="p">)</span>
+    <span class="n">colormap</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;colormap&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+
+    <span class="n">fs</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">outdir</span><span class="si">}</span><span class="s2">/plot_band.gnu&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span>
+    <span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;unset key </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;unset grid </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;lwidth = </span><span class="si">{</span><span class="n">lwidth</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;set xrange [:</span><span class="si">{</span><span class="n">kmax</span><span class="si">}</span><span class="s2">] </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;set yrange [</span><span class="si">{</span><span class="n">emin</span><span class="o">-</span><span class="n">ef</span><span class="o">-</span><span class="n">offset</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">emax</span><span class="o">-</span><span class="n">ef</span><span class="o">+</span><span class="n">offset</span><span class="si">}</span><span class="s2">] </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;set tics font &#39;Times New Roman, 14&#39; </span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;set size ratio 0.7 </span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;set palette defined ( -1.0 &quot;royalblue&quot;, 0 &quot;gray90&quot;, 1.0 &quot;salmon&quot;)</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;set cbrange [-1.0:1.0]</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">k_dis_pos</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">pos</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">k_dis_pos</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;set arrow from  </span><span class="si">{</span><span class="n">pos</span><span class="si">}</span><span class="s2">,  </span><span class="si">{</span><span class="n">emin</span><span class="o">-</span><span class="n">ef</span><span class="o">-</span><span class="n">offset</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">pos</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">emax</span><span class="o">-</span><span class="n">ef</span><span class="o">+</span><span class="n">offset</span><span class="si">}</span><span class="s2"> nohead </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="n">k_dis_pos</span> <span class="o">=</span> <span class="p">{</span><span class="n">pos</span><span class="p">:</span> <span class="s2">&quot;{/Symbol G}&quot;</span> <span class="k">if</span> <span class="n">label</span> <span class="o">==</span> <span class="s2">&quot;G&quot;</span> <span class="k">else</span> <span class="n">label</span> <span class="k">for</span> <span class="n">pos</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">k_dis_pos</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+        <span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;set xtics (&quot;</span> <span class="o">+</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">f</span><span class="s1">&#39;&quot;</span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s1">&quot; </span><span class="si">{</span><span class="n">pos</span><span class="si">}</span><span class="s1">,&#39;</span> <span class="k">for</span> <span class="n">pos</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">k_dis_pos</span><span class="o">.</span><span class="n">items</span><span class="p">()])</span> <span class="o">+</span> <span class="s2">&quot;) </span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ef = </span><span class="si">{</span><span class="n">ef</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">a</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;a = </span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;set terminal postscript eps color enhanced </span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;set output &#39;</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">.eps&#39; </span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;plot &quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">ref_filename</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">ref_filename</span><span class="si">}</span><span class="s2">&#39; u ($1/a):($2-ef) w l lw lwidth lc &#39;dark-grey&#39;, &quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">colormap</span><span class="p">:</span>
+        <span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">.txt&#39; u 1:2:3 w l lw lwidth lc palette, &quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">.txt&#39; u 1:2 w l lw lwidth lc &#39;</span><span class="si">{</span><span class="n">lc</span><span class="si">}</span><span class="s2">&#39;, &quot;</span><span class="p">)</span>
+
+    <span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="mf">0.0</span><span class="si">}</span><span class="s2"> lw 0.5 lc &#39;black&#39;&quot;</span><span class="p">)</span>
+
+    <span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot; </span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;set terminal pdf </span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;set output &#39;</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">.pdf&#39; </span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;plot &quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">ref_filename</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">ref_filename</span><span class="si">}</span><span class="s2">&#39; u ($1/a):($2-ef) w l lw lwidth lc &#39;dark-grey&#39;, &quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">colormap</span><span class="p">:</span>
+        <span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">.txt&#39; u 1:2:3 w l lw lwidth lc palette, &quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">.txt&#39; u 1:2 w l lw lwidth lc &#39;</span><span class="si">{</span><span class="n">lc</span><span class="si">}</span><span class="s2">&#39;, &quot;</span><span class="p">)</span>
+
+    <span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="mf">0.0</span><span class="si">}</span><span class="s2"> lw 0.5 lc &#39;black&#39;&quot;</span><span class="p">)</span>
+
+    <span class="n">fs</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;cd </span><span class="si">{</span><span class="n">outdir</span><span class="si">}</span><span class="s2"> ; gnuplot plot_band.gnu&quot;</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="parse_orbital">
+<a class="viewcode-back" href="../../../src/api_util/util_model_analyzer.html#multipie.util.util_model_analyzer.parse_orbital">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">parse_orbital</span><span class="p">(</span><span class="n">orbital_str</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Parse orbital string.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        orbital_str (str): orbital string, (orbital, spin).</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        - (tuple or str) -- orbital, spin or orbital.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">orbital_str</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;(&quot;</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">orbital_str</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;()&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">orbital_str</span><span class="p">,</span> <span class="s2">&quot;u&quot;</span></div>
+
+
+
+<span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="create_operator_index">
+<a class="viewcode-back" href="../../../src/api_util/util_model_analyzer.html#multipie.util.util_model_analyzer.create_operator_index">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_operator_index</span><span class="p">(</span><span class="n">ket</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create operator index.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        ket (list): ket list.</span>
+<span class="sd">        mode (str, optional): &quot;orbital&quot; or &quot;spin&quot;.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        - (list) -- index pair list.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        - atom, sublattice, rank is the same in pair.</span>
+<span class="sd">        - spin is the same for &quot;orbital&quot; mode.</span>
+<span class="sd">        - orbital is the same for &quot;spin&quot; mode.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">atom_i</span><span class="p">,</span> <span class="n">sub_i</span><span class="p">,</span> <span class="n">rank_i</span><span class="p">,</span> <span class="n">idx_i</span><span class="p">,</span> <span class="n">orb_i</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ket</span><span class="p">):</span>
+        <span class="n">o_i</span><span class="p">,</span> <span class="n">s_i</span> <span class="o">=</span> <span class="n">parse_orbital</span><span class="p">(</span><span class="n">orb_i</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="p">(</span><span class="n">atom_j</span><span class="p">,</span> <span class="n">sub_j</span><span class="p">,</span> <span class="n">rank_j</span><span class="p">,</span> <span class="n">idx_j</span><span class="p">,</span> <span class="n">orb_j</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ket</span><span class="p">):</span>
+            <span class="n">o_j</span><span class="p">,</span> <span class="n">s_j</span> <span class="o">=</span> <span class="n">parse_orbital</span><span class="p">(</span><span class="n">orb_j</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">atom_i</span> <span class="o">!=</span> <span class="n">atom_j</span> <span class="ow">or</span> <span class="n">sub_i</span> <span class="o">!=</span> <span class="n">sub_j</span> <span class="ow">or</span> <span class="n">rank_i</span> <span class="o">!=</span> <span class="n">rank_j</span><span class="p">:</span>  <span class="c1"># same atom, sub, rank.</span>
+                <span class="k">continue</span>
+
+            <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;spin&quot;</span> <span class="ow">and</span> <span class="n">o_i</span> <span class="o">!=</span> <span class="n">o_j</span><span class="p">:</span>  <span class="c1"># same orbital.</span>
+                <span class="k">continue</span>
+
+            <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;orbital&quot;</span> <span class="ow">and</span> <span class="n">s_i</span> <span class="o">!=</span> <span class="n">s_j</span><span class="p">:</span>  <span class="c1"># same spin.</span>
+                <span class="k">continue</span>
+
+            <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">rank_i</span><span class="p">,</span> <span class="n">idx_i</span><span class="p">,</span> <span class="n">idx_j</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">results</span></div>
+
+
+
+<span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="create_local_operator">
+<a class="viewcode-back" href="../../../src/api_util/util_model_analyzer.html#multipie.util.util_model_analyzer.create_local_operator">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_local_operator</span><span class="p">(</span><span class="n">ket</span><span class="p">,</span> <span class="n">op_name</span><span class="p">,</span> <span class="n">op_dict</span><span class="p">,</span> <span class="n">spinful</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create local operator.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        ket (list): ket set.</span>
+<span class="sd">        op_name (str): operator name.</span>
+<span class="sd">        op_dict (dict): operator dict.</span>
+<span class="sd">        spinful (bool): lgs basis ?</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        - (ndarray) -- matrix for given operator.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">op_name</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;S&quot;</span><span class="p">:</span>
+        <span class="n">mode</span> <span class="o">=</span> <span class="s2">&quot;spin&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">mode</span> <span class="o">=</span> <span class="s2">&quot;orbital&quot;</span>
+
+    <span class="n">dim</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ket</span><span class="p">)</span>
+    <span class="n">mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">dim</span><span class="p">,</span> <span class="n">dim</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+    <span class="n">lst</span> <span class="o">=</span> <span class="n">create_operator_index</span><span class="p">(</span><span class="n">ket</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;spin&quot;</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">rank</span><span class="p">,</span> <span class="n">b_idx</span><span class="p">,</span> <span class="n">k_idx</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">spinful</span><span class="p">:</span>
+                <span class="n">b_idx</span> <span class="o">=</span> <span class="n">b_idx</span> <span class="o">//</span> <span class="mi">2</span>
+                <span class="n">k_idx</span> <span class="o">=</span> <span class="n">k_idx</span> <span class="o">//</span> <span class="mi">2</span>
+            <span class="n">mat</span><span class="p">[</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">]</span> <span class="o">+=</span> <span class="nb">complex</span><span class="p">(</span><span class="n">op_dict</span><span class="p">[</span><span class="s2">&quot;s&quot;</span><span class="p">][</span><span class="n">op_name</span><span class="p">][</span><span class="n">b_idx</span><span class="p">,</span> <span class="n">k_idx</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">rank</span><span class="p">,</span> <span class="n">b_idx</span><span class="p">,</span> <span class="n">k_idx</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">spinful</span><span class="p">:</span>
+                <span class="n">b_idx</span> <span class="o">=</span> <span class="n">b_idx</span> <span class="o">//</span> <span class="mi">2</span>
+                <span class="n">k_idx</span> <span class="o">=</span> <span class="n">k_idx</span> <span class="o">//</span> <span class="mi">2</span>
+            <span class="n">mat</span><span class="p">[</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">]</span> <span class="o">+=</span> <span class="nb">complex</span><span class="p">(</span><span class="n">op_dict</span><span class="p">[</span><span class="n">rank</span><span class="p">][</span><span class="n">op_name</span><span class="p">][</span><span class="n">b_idx</span><span class="p">,</span> <span class="n">k_idx</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">mat</span></div>
+
+
+
+<span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="create_all_local_operator">
+<a class="viewcode-back" href="../../../src/api_util/util_model_analyzer.html#multipie.util.util_model_analyzer.create_all_local_operator">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_all_local_operator</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create local operators.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        - (dict) -- local operators, dict[rank, dict[name, matrix]].</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        - atomic basis is tesseral harmonics, s, px, py, pz, dv, dxy, dxz, dyz, du, f2, f1, fbz, f3, f3x, f3y, faz.</span>
+<span class="sd">        - operator names are Lx, Ly, Lz, Qu, Qv, Qyz, Qxz, Qxy, which are not normalized as defined.</span>
+<span class="sd">        - it is used for basis, lg and lgs, not for jml.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">op_key</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;M&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;T1g&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;q&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;Q&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;Eg&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;q&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;Q&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;T2g&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;q&quot;</span><span class="p">)]</span>
+    <span class="n">op_factor</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;sqrt(2)&quot;</span><span class="p">,</span> <span class="s2">&quot;sqrt(6)/5&quot;</span><span class="p">,</span> <span class="s2">&quot;sqrt(6)/5&quot;</span><span class="p">],</span>
+        <span class="mi">2</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;sqrt(10)&quot;</span><span class="p">,</span> <span class="s2">&quot;sqrt(14)/7&quot;</span><span class="p">,</span> <span class="s2">&quot;sqrt(14)/7&quot;</span><span class="p">],</span>
+        <span class="mi">3</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;14/sqrt(7)&quot;</span><span class="p">,</span> <span class="s2">&quot;sqrt(21)*2/15&quot;</span><span class="p">,</span> <span class="s2">&quot;sqrt(21)*2/15&quot;</span><span class="p">],</span>
+    <span class="p">}</span>
+    <span class="n">group</span> <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="s2">&quot;Oh&quot;</span><span class="p">)</span>
+
+    <span class="n">lst</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Lx&quot;</span><span class="p">,</span> <span class="s2">&quot;Ly&quot;</span><span class="p">,</span> <span class="s2">&quot;Lz&quot;</span><span class="p">,</span> <span class="s2">&quot;Qu&quot;</span><span class="p">,</span> <span class="s2">&quot;Qv&quot;</span><span class="p">,</span> <span class="s2">&quot;Qyz&quot;</span><span class="p">,</span> <span class="s2">&quot;Qxz&quot;</span><span class="p">,</span> <span class="s2">&quot;Qxy&quot;</span><span class="p">]</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="n">str_to_sympy</span><span class="p">(</span><span class="s2">&quot;[[0]]&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">}}</span>
+    <span class="k">for</span> <span class="n">rank</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]:</span>
+        <span class="n">no</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">am</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">atomic_samb</span><span class="p">(</span><span class="s2">&quot;lg&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">rank</span><span class="p">,</span> <span class="n">rank</span><span class="p">))</span>
+        <span class="n">dd</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">l</span><span class="p">,</span> <span class="n">f</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">op_key</span><span class="p">,</span> <span class="n">op_factor</span><span class="p">[</span><span class="n">rank</span><span class="p">]):</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="n">str_to_sympy</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+            <span class="n">v</span><span class="p">,</span> <span class="n">ex</span> <span class="o">=</span> <span class="n">am</span><span class="p">[</span><span class="n">l</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">e</span><span class="p">,</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">ex</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+                <span class="n">name</span> <span class="o">=</span> <span class="n">lst</span><span class="p">[</span><span class="n">no</span><span class="p">]</span>
+                <span class="n">no</span> <span class="o">=</span> <span class="n">no</span> <span class="o">+</span> <span class="mi">1</span>
+                <span class="n">dd</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">m</span> <span class="o">*</span> <span class="n">f</span>
+        <span class="n">d</span><span class="p">[</span><span class="n">rank</span><span class="p">]</span> <span class="o">=</span> <span class="n">dd</span>
+
+    <span class="n">spin</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Sx&quot;</span><span class="p">:</span> <span class="s2">&quot;[[0,1/2],[1/2,0]]&quot;</span><span class="p">,</span> <span class="s2">&quot;Sy&quot;</span><span class="p">:</span> <span class="s2">&quot;[[0,-I/2],[I/2,0]]&quot;</span><span class="p">,</span> <span class="s2">&quot;Sz&quot;</span><span class="p">:</span> <span class="s2">&quot;[[1/2,0],[0,-1/2]]&quot;</span><span class="p">}</span>
+    <span class="n">d</span><span class="p">[</span><span class="s2">&quot;s&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="n">str_to_sympy</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">spin</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+
+    <span class="k">return</span> <span class="n">d</span></div>
+
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Hiroaki Kusunose and Rikuto Oiwa
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2021-.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
