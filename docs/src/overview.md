@@ -4,11 +4,9 @@
 
 The SAMB forms a complete basis set and is therefore useful for describing arbitrary physical quantities according to their symmetry classifications. Any physical quantity can also be decomposed in terms of the SAMB.
 
-By installing the Python package [QtDraw](https://github.com/CMT-MU/QtDraw), crystal and molecular structures, as well as polar and axial vectors, orbitals, and the SAMB, can be visualized. This visualization capability makes the tool especially helpful for learning group theory in a transparent and intuitive manner.
+The brief manuals for MultiPie are given [here](manual.md). Moreover, information for all supported groups is summarized in [Group Information](group_doc.md).
 
-Information for all supported groups is summarized in [Group Information](group_doc.md).
-
-A practical tutorial of MultiPie via QtDraw is given by [Tutorial via QtDraw](https://github.com/CMT-MU/QtDraw/blob/main/docs/src/tutorial_multipie_qtdraw.pdf)
+By installing the Python package [QtDraw](https://github.com/CMT-MU/QtDraw), crystal and molecular structures, as well as polar and axial vectors, orbitals, and the SAMB, can be visualized. This visualization capability makes the tool especially helpful for learning group theory in a transparent and intuitive manner. A practical tutorial of MultiPie via QtDraw is given by [Tutorial via QtDraw](https://github.com/CMT-MU/QtDraw/blob/main/docs/src/tutorial_multipie_qtdraw.pdf)
 
 For implementation-related notes (in Japanese) and the API, please refer to the following:
 - [Technical Note](tech_note.md) (in Japanese)
