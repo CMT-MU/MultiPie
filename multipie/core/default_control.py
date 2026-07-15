@@ -28,7 +28,7 @@ default_control = {
         "fourier": {"tb_gauge": True},  # TB gauge ?
         "dispersion": {  # dispersion info.
             "k_point": {"Γ": "[0,0,0]", "X": "[1,0,0]"},  # k-point definition (primitive, fractional).
-            "k_path": "Γ",  # symmetry line, separated by "-". disconnected points by "|".
+            "k_path": "Γ",  # symmetry line, separated by "-". disconnected points by "|". if empty str, default values are used for k_point and k_path.
             "local": [],  # local quantity, "Sx/Sy/Sz/Lx/Ly/Lz/Qu/Qv/Qyz/Qzx/Qxy".
             "z": [],  # expectation value of Z_j. [Under Construction]
         },
