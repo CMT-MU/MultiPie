@@ -6,6 +6,7 @@ This module provides model analyzer.
 
 import os
 import numpy as np
+import seekpath
 from multipie.core.material_model import MaterialModel
 from multipie.core.default_control import default_control
 from multipie.util.util_model_analyzer import (
@@ -261,11 +262,16 @@ class ModelAnalyzer(dict):
 
         :meta private:
         """
-        tb_gauge = self.output["fourier"]["tb_gauge"]
-        k_point = self.output["dispersion"]["k_point"]
-        k_path = self.output["dispersion"]["k_path"]
-        k_point = {k: str_to_sympy(v).astype(float) for k, v, in k_point.items()}
+        k_path = self.output["dispersion"].get("k_path", None)
+        if k_path is None or self.model.group.group_type != "SG":
+            return
+
+        k_point, k_path = self.get_kpath(k_path)
         k_point_path, k_linear, k_dis_pos = grid_path(k_point, k_path, self["mp_grid"][0], self["B"])
+        self._output["dispersion"]["k_path"] = k_path
+        self._output["dispersion"]["k_point"] = k_point
+
+        tb_gauge = self.output["fourier"]["tb_gauge"]
         atom = np.asarray(list(self.model.get_ket_site().values()), dtype=float)
         basis_type = self.model["basis_type"]
         if basis_type == "jml":
@@ -296,3 +302,45 @@ class ModelAnalyzer(dict):
         """
         if self.output["dos"]:
             print("compute and output dos.")
+
+    # ==================================================
+    def get_kpath(self, k_path):
+        """
+        Get k path.
+
+        Args:
+            k_path (str): k path.
+        Returns:
+            - (dict) -- k point dict.
+            - (str) -- k path.
+        """
+        if k_path == "":  # create default path.
+            A = self.model["unit_vector_primitive"]
+            d = next(reversed(self.model.group.wyckoff["site"].values()))  # general point.
+            positions = d["reference"].astype(float)  # fractional, conventional, plus set.
+            numbers = np.full(len(positions), 1, dtype=int)
+
+            structure = (A, positions, numbers)
+            info = seekpath.get_path(structure)
+
+            if info["spacegroup_number"] != int(self.model.group.ID):
+                print("obtained SG is different with given group.")
+                raise Exception
+
+            k_point = info["point_coords"]
+            k_point["Γ"] = k_point["GAMMA"]
+            del k_point["GAMMA"]
+
+            path = info["path"]
+            k_path = path[0][0] + "-" + path[0][1]
+            for (a, b), (c, d) in zip(path, path[1:]):
+                if b == c:
+                    k_path += "-" + d
+                else:
+                    k_path += "|" + c + "-" + d
+            k_path = k_path.replace("GAMMA", "Γ")
+        else:
+            k_point = self.output["dispersion"].get("k_point", {})
+            k_point = {k: str_to_sympy(v).astype(float) for k, v, in k_point.items()}
+
+        return k_point, k_path

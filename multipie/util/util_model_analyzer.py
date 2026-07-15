@@ -214,7 +214,7 @@ def generate_band_gnuplot_eig(outdir, filename, kmax, emax, emin, num_wann, **kw
         for pos, label in k_dis_pos.items():
             fs.write(f"set arrow from  {pos},  {emin-ef-offset} to {pos}, {emax-ef+offset} nohead \n")
 
-        k_dis_pos = {pos: "{/Symbol G}" if label == "G" else label for pos, label in k_dis_pos.items()}
+        k_dis_pos = {pos: label.replace("G", "{/Symbol G}").replace("|", ":") for pos, label in k_dis_pos.items()}
         fs.write("set xtics (" + "".join([f'"{label}" {pos},' for pos, label in k_dis_pos.items()]) + ") \n\n")
 
     fs.write(f"ef = {ef} \n")
