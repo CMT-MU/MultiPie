@@ -140,7 +140,8 @@ class ModelAnalyzer(dict):
                 control = read_dict(file)
             else:  # w/o control and model_name is given.
                 self.model.load(control)
-                self.model.save_samb_matrix({})
+                matrix_info = self.model.get_samb_matrix({})
+                self.model.save_samb_matrix(matrix_info)
                 return
 
         self._samb |= control.get("samb", {})
@@ -150,25 +151,7 @@ class ModelAnalyzer(dict):
         # exec. SAMB control.
         if self.samb.get("model", None) is not None:
             self._name = self.samb["model"]
-            self.model.load(self.name)
-            self.set_primitive_cell(np.array(self.model["unit_vector_primitive"]))
-            select = self.samb.get("select", {})
-
-            parameter = self.samb.get("parameter", {})
-            if type(parameter) == str:  # when parameter is str, which means filename of z_j dict.
-                z_file = os.path.join(self._topdir, self.name, parameter)
-                parameter = read_dict(z_file)
-                self._samb["parameter"] = parameter
-
-            if self.samb.get("samb_figure", False):
-                self.model.save_samb_qtdraw()
-
-            if parameter:
-                md = self.model.save_samb_matrix(select)
-                self._HR = self.model.save_samb_hr(md, parameter)
-            else:
-                self.model.save_samb_matrix(select)
-                return
+            self.set_samb()
 
         # exec. wannier control.
         if self._wannier.get("cw", None) is not None:
@@ -209,6 +192,37 @@ class ModelAnalyzer(dict):
         ket = self.model["full_matrix"]["ket"]
         basis_type = self.model["basis_type"]
         return create_local_operator(ket, name, self._local, basis_type == "lgs")
+
+    # ==================================================
+    def set_samb(self):
+        """
+        Calculate SAMB related quantities.
+
+        :meta private:
+        """
+        self.model.load(self.name)
+        self.set_primitive_cell(np.array(self.model["unit_vector_primitive"]))
+        select = self.samb.get("select", {})
+
+        parameter = self.samb.get("parameter", {})
+        if type(parameter) == str:  # when parameter is str, which means filename of z_j dict.
+            z_file = os.path.join(self._topdir, self.name, parameter)
+            parameter = read_dict(z_file)
+            self._samb["parameter"] = parameter
+
+        if self.samb.get("samb_figure", False):
+            self.model.save_samb_qtdraw()
+
+        matrix_info = self.model.get_samb_matrix(select)
+        if parameter:
+            self._HR = self.model.get_hr(parameter, matrix_info["matrix"])
+            self.model.save_samb_hr(matrix_info, parameter, self._HR)
+        self.model.save_samb_matrix(matrix_info)
+
+        if self.samb.get("matrix_k", False):
+            self.set_matrix_k(matrix_info)
+
+        self.md = matrix_info
 
     # ==================================================
     def set_from_wannier(self):
@@ -284,14 +298,15 @@ class ModelAnalyzer(dict):
 
         Ek, Uk = np.linalg.eigh(Hk)
         Ok = [np.einsum("kmi,mn,kni->ki", Uk.conj(), self.local_operator(name), Uk).real for name in op_lst]
+        fname = self.name + "_dispersion"
         if Ok:
-            output_linear_dispersion_eig(".", self.name + "_dispersion", k_linear, Ek, Ok, k_dis_pos=k_dis_pos, colormap=True)
+            output_linear_dispersion_eig(".", fname, k_linear, Ek, Ok, k_dis_pos=k_dis_pos, colormap=True)
         else:
-            output_linear_dispersion_eig(".", self.name + "_dispersion", k_linear, Ek, k_dis_pos=k_dis_pos)
+            output_linear_dispersion_eig(".", fname, k_linear, Ek, k_dis_pos=k_dis_pos)
 
         if self._verbose:
             outdir = os.path.join(self._topdir, self.name, self.output["dir"])
-            print(f"save dispersion in {outdir}/.")
+            print(f"save dispersion '{fname}' in {outdir}/.")
 
     # ==================================================
     def compute_dos(self):
@@ -313,6 +328,8 @@ class ModelAnalyzer(dict):
         Returns:
             - (dict) -- k point dict.
             - (str) -- k path.
+
+        :meta private:
         """
         if k_path == "":  # create default path.
             A = self.model["unit_vector_primitive"]
@@ -344,3 +361,10 @@ class ModelAnalyzer(dict):
             k_point = {k: str_to_sympy(v).astype(float) for k, v, in k_point.items()}
 
         return k_point, k_path
+
+    # ==================================================
+    def set_matrix_k(self, md):
+        """
+        :meta private:
+        """
+        pass
