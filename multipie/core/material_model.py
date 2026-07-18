@@ -27,6 +27,7 @@ from multipie.util.util_material_model import (
     create_wyckoff_dict,
     create_braket_dict,
     create_full_matrix_info,
+    create_combined_cluster_info,
     parse_representative_site,
     parse_representative_bond,
     write_site_dict,
@@ -46,6 +47,8 @@ _matrix_comment = """Selected SAMB matrix.
 - dimension: (int) matrix size.
 - ket_site": (dict) ket info., dict[ket_name, position (fractional, primitive)].
 - index: (dict) ket index, dict[(site,sublattice,rank), (top_index,size)].
+- vector: (dict) primitive bond vector, dict[cluster name, [primitive bond vector]].
+- cluster: (dict) cluster name, dict[SAMB ID, cluster name].
 - matrix: (dict) matrix, dict[zi, dict[(R,row,column), value] ] (R=n1,n2,n3, primitive).
 """
 
@@ -279,6 +282,8 @@ class MaterialModel(BinaryManager):
             "dimension": len(ket_site),
             "ket_site": ket_site,
             "index": self["full_matrix"]["index"],
+            "vector": self["cluster_vector"],
+            "cluster": self["combined_cluster"],
             "matrix": matrix,
         }
 
@@ -296,7 +301,7 @@ class MaterialModel(BinaryManager):
         if verbose is None:
             verbose = self.verbose
 
-        # convert sympyt to str.
+        # convert sympy to str.
         matrix = matrix_info["matrix"]
         matrix_info["matrix"] = {z: {k: str(v).replace(" ", "") for k, v in elm.items()} for z, elm in matrix.items()}
 
@@ -305,8 +310,8 @@ class MaterialModel(BinaryManager):
         path = self.get_cwd()
         os.chdir(path)
 
-        filename = self["model"] + "_matrix.py"
         var = self["model"]
+        filename = var + "_matrix.py"
 
         write_dict(matrix_info, filename, var, _matrix_comment)
         if verbose:
@@ -344,7 +349,7 @@ class MaterialModel(BinaryManager):
                 print(f"#   {k}: {str(v).replace(" ", "")}", file=f)
             print(f"# basis ({matrix_info["dimension"]})", file=f)
             for no, (b, p) in enumerate(matrix_info["ket_site"].items()):
-                print(f"#   {no:2d} {b}: {str(p).replace(" ", "")}", file=f)
+                print(f"#   {no:2d} {b}: [{p[0]: .6f}, {p[1]: .6f}, {p[2]: .6f}]", file=f)
             for z, v in parameter.items():
                 print(f"# {z:<4} = {v}", file=f)
             print("#", file=f)
@@ -465,14 +470,17 @@ class MaterialModel(BinaryManager):
         combined_samb, combined_id, combined_min_num, combined_num, common_id, cluster_info = self.get_combined_samb(
             atomic_samb, cluster_samb, samb_select, toroidal_priority
         )
+        zj_site_bond, site_bond_vector = create_combined_cluster_info(combined_id, bond_dict["cell"])
 
         # save samb.
         self["atomic_samb"] = atomic_samb
         self["atomic_id"] = atomic_id
         self["cluster_samb"] = cluster_samb
         self["cluster_id"] = cluster_id
+        self["cluster_vector"] = site_bond_vector
         self["combined_samb"] = combined_samb
         self["combined_id"] = combined_id
+        self["combined_cluster"] = zj_site_bond
         self["common_id"] = common_id
         self["cluster_info"] = cluster_info
         self["SAMB_number_min"] = combined_min_num
