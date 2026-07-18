@@ -49,7 +49,7 @@ _matrix_comment = """Selected SAMB matrix.
 - index: (dict) ket index, dict[(site,sublattice,rank), (top_index,size)].
 - vector: (dict) primitive bond vector, dict[cluster name, [primitive bond vector]].
 - cluster: (dict) cluster name, dict[SAMB ID, cluster name].
-- matrix: (dict) matrix, dict[zi, dict[(R,row,column), value] ] (R=n1,n2,n3, primitive).
+- matrix: (dict) matrix, dict[zi, dict[(R,row,column), (value, bond_no)] ] (R=n1,n2,n3, primitive).
 """
 
 
@@ -303,7 +303,7 @@ class MaterialModel(BinaryManager):
 
         # convert sympy to str.
         matrix = matrix_info["matrix"]
-        matrix_info["matrix"] = {z: {k: str(v).replace(" ", "") for k, v in elm.items()} for z, elm in matrix.items()}
+        matrix_info["matrix"] = {z: {k: (str(v[0]).replace(" ", ""), v[1]) for k, v in elm.items()} for z, elm in matrix.items()}
 
         # write matrix.
         cwd = os.getcwd()
@@ -742,7 +742,7 @@ class MaterialModel(BinaryManager):
             digit (int, optional): digit for value output.
 
         Returns:
-            - (dict) -- combined SAMB in matrix form, dict[zj, dict[ (n1, n2, n3, m, n), matrix element] ].
+            - (dict) -- combined SAMB in matrix form, dict[zj, dict[ (n1, n2, n3, m, n), (matrix element, bond_no)] ].
 
         Note:
             - R = (n1,n2,n3) and m and n are lattice indices, bra and ket indexes, respectively.
@@ -788,6 +788,7 @@ class MaterialModel(BinaryManager):
             c_samb = cluster_samb_data[wp]
 
             d = defaultdict(lambda: sp.S(0) if fmt == "sympy" else 0.0)
+            bond_d = {}
 
             for cg, t1, c1, t2, c2 in lc:
                 atomic_matrix = a_samb[t1][0][c1]  # X matrix
@@ -813,6 +814,7 @@ class MaterialModel(BinaryManager):
                             val = scale * atomic_matrix[r, c]
                             if val != 0:
                                 d[(n1, n2, n3, row_idx, k_top + c)] += val
+                                bond_d[(n1, n2, n3, row_idx, k_top + c)] = 0 if is_site else bi.no
 
                     if not is_site:
                         if head == tail and (b_rank, b_idx) != (k_rank, k_idx):
@@ -828,15 +830,17 @@ class MaterialModel(BinaryManager):
 
                             for r, c in product(range(k_dim), range(b_dim)):
                                 d[(n1, n2, n3, b2_top + r, k2_top + c)] += cg * yi * atomic_matrix[c, r].conjugate()
+                                bond_d[(n1, n2, n3, b2_top + r, k2_top + c)] = 0 if is_site else bi.no
 
             # add hermite conjugate elements.
             for (n1, n2, n3, m, n), val in list(d.items()):
                 d[(-n1, -n2, -n3, n, m)] += sp.conjugate(val)
+                bond_d[(-n1, -n2, -n3, n, m)] = -bond_d[(n1, n2, n3, m, n)]
 
             norm_sq = sum(v * sp.conjugate(v) for v in d.values())
             norm = sp.sqrt(sp.expand(norm_sq))
 
-            matrix[zi] = {Rmn: _format_val(v / norm) for Rmn, v in d.items() if not v.is_zero}
+            matrix[zi] = {Rmn: (_format_val(v / norm), bond_d[Rmn]) for Rmn, v in d.items() if not v.is_zero}
 
         matrix = dict(sorted(matrix.items(), key=lambda x: int(x[0][1:])))
 
@@ -924,7 +928,7 @@ class MaterialModel(BinaryManager):
 
         Args:
             parameter (dict): parameter of SAMBs, dict[zj, float/sympy].
-            combined_samb_matrix (dict): combined SAMBs in matrix form (real-space), { zj: {(n1, n2, n3, m, n): matrix element} }.
+            combined_samb_matrix (dict): combined SAMBs in matrix form (real-space), dict[zj, dict[(n1, n2, n3, m, n), (matrix element, bond_no)] ].
             fmt (str, optional): sympy/value.
 
         Returns:
@@ -938,7 +942,7 @@ class MaterialModel(BinaryManager):
             if zj not in combined_samb_matrix.keys():
                 raise Exception(f"parameter {zj} is missing.")
             d = combined_samb_matrix[zj]
-            for Rmn, Zj in d.items():
+            for Rmn, (Zj, _) in d.items():
                 Hamiltonian[Rmn] += cj * Zj
 
         return dict(Hamiltonian)
