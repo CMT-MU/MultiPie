@@ -232,8 +232,6 @@ class ModelAnalyzer(dict):
 
         self.set_k_multipole(matrix_info)
 
-        self.md = matrix_info
-
     # ==================================================
     def set_from_wannier(self):
         """
