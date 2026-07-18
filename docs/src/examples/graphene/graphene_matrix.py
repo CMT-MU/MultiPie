@@ -3,17 +3,42 @@ Selected SAMB matrix.
 - dimension: (int) matrix size.
 - ket_site": (dict) ket info., dict[ket_name, position (fractional, primitive)].
 - index: (dict) ket index, dict[(site,sublattice,rank), (top_index,size)].
+- vector: (dict) primitive bond vector, dict[cluster name, [primitive bond vector]].
+- cluster: (dict) cluster name, dict[SAMB ID, cluster name].
 - matrix: (dict) matrix, dict[zi, dict[(R,row,column), value] ] (R=n1,n2,n3, primitive).
 """
 
 graphene = {
     "model": "graphene",
     "source": "graphene.pkl",
-    "date": "2026-07-12 10:23:48",
+    "date": "2026-07-18 12:26:41",
     "select": {"X": ["Q", "G", "M", "T"], "l": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], "Gamma": ["A1g", "A1u", "A2g", "A2u", "B1g", "B1u", "B2g", "B2u", "E1g", "E1u", "E2g", "E2u"], "s": [0, 1], "site": [("C", [1])], "bond": [("C", "C", 1, [1], [1]), ("C", "C", 2, [1], [1])]},
     "dimension": 2,
     "ket_site": {"pz@C(1)": [0.3333333333333333, 0.6666666666666666, 0.0], "pz@C(2)": [0.6666666666666666, 0.3333333333333333, 0.0]},
     "index": {("C", 1, 1): (0, 1), ("C", 2, 1): (1, 1)},
+    "vector": {"C": [[0.0, 0.0, 0.0]], "C;C_001_1": [[0.33333333, 0.66666666, 0.0], [-0.66666666, -0.33333333, 0.0], [0.33333333, -0.33333333, 0.0]], "C;C_002_1": [[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [-1.0, -1.0, 0.0], [-1.0, 0.0, 0.0], [0.0, -1.0, 0.0], [1.0, 1.0, 0.0]]},
+    "cluster": {
+        "z1": "C",
+        "z2": "C;C_001_1",
+        "z3": "C;C_002_1",
+        "z4": "C;C_002_1",
+        "z5": "C",
+        "z6": "C;C_001_1",
+        "z7": "C;C_002_1",
+        "z8": "C;C_002_1",
+        "z9": "C;C_001_1",
+        "z10": "C;C_001_1",
+        "z11": "C;C_002_1",
+        "z12": "C;C_002_1",
+        "z13": "C;C_002_1",
+        "z14": "C;C_002_1",
+        "z15": "C;C_001_1",
+        "z16": "C;C_001_1",
+        "z17": "C;C_002_1",
+        "z18": "C;C_002_1",
+        "z19": "C;C_002_1",
+        "z20": "C;C_002_1",
+    },
     "matrix": {
         "z1": {(0, 0, 0, 0, 0): "sqrt(2)/2", (0, 0, 0, 1, 1): "sqrt(2)/2"},
         "z2": {(0, -1, 0, 1, 0): "sqrt(6)/6", (1, 0, 0, 1, 0): "sqrt(6)/6", (0, 0, 0, 1, 0): "sqrt(6)/6", (0, 1, 0, 0, 1): "sqrt(6)/6", (-1, 0, 0, 0, 1): "sqrt(6)/6", (0, 0, 0, 0, 1): "sqrt(6)/6"},
