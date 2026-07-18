@@ -3,6 +3,7 @@ Selected SAMB matrix in momentum representation.
 - dimension (int): matrix size.
 - ket_site (list): ket info., [ket_name].
 - index (dict): ket index, dict[(site,sublattice,rank), (top_index,size)].
+- cluster (dict): cluster name, dict[SAMB ID, cluster name].
 - cluster_vector (dict): cluster vector, dict[site/bond name, dict[kb, expression] ].
 - k_multipole (dict): momentum multipole in terms of k.b_n, dict[wyckoff, dict[idx, (k_multipole, symmetry)] ].
 - k_matrix (dict): momentum matrix, dict[tag, dict[(n1,n2,n3,m,n), value] ].
@@ -12,6 +13,28 @@ graphene_k = {
     "dimension": 2,
     "ket_site": ["pz@C(1)", "pz@C(2)"],
     "index": {("C", 1, 1): (0, 1), ("C", 2, 1): (1, 1)},
+    "cluster": {
+        "z1": "C",
+        "z2": "C;C_001_1",
+        "z3": "C;C_002_1",
+        "z4": "C;C_002_1",
+        "z5": "C",
+        "z6": "C;C_001_1",
+        "z7": "C;C_002_1",
+        "z8": "C;C_002_1",
+        "z9": "C;C_001_1",
+        "z10": "C;C_001_1",
+        "z11": "C;C_002_1",
+        "z12": "C;C_002_1",
+        "z13": "C;C_002_1",
+        "z14": "C;C_002_1",
+        "z15": "C;C_001_1",
+        "z16": "C;C_001_1",
+        "z17": "C;C_002_1",
+        "z18": "C;C_002_1",
+        "z19": "C;C_002_1",
+        "z20": "C;C_002_1",
+    },
     "cluster_vector": {"C": {}, "C;C_001_1": {"kb_1": "0.33333333*k_1+0.66666666*k_2", "kb_2": "-0.66666666*k_1-0.33333333*k_2", "kb_3": "0.33333333*k_1-0.33333333*k_2"}, "C;C_002_1": {"kb_1": "1.0*k_1", "kb_2": "1.0*k_2", "kb_3": "-1.0*k_1-1.0*k_2"}},
     "k_multipole": {
         "2c": {("Q", 0, "A1g", -1, -1, 0, 0, "q"): ("[[sqrt(2)/2,sqrt(2)/2]]", "[1]"), ("Q", 3, "B1u", -1, -1, 0, 0, "q"): ("[[sqrt(2)/2,-sqrt(2)/2]]", "[sqrt(10)*y*(3*x**2-y**2)/4]")},
