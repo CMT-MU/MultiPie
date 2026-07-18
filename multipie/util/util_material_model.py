@@ -700,6 +700,36 @@ def create_full_matrix_info(site_dict, basis_info_type):
 
 
 # ==================================================
+def create_combined_cluster_info(combined_id, bond_cell):
+    """
+    Create combined cluster info.
+
+    Args:
+        combined_id (dict): combined_id.
+        bond_cell (dict): bond in cell.
+
+    Returns:
+        - (dict) -- zj, site_bond dict, dict[zj, site_bond name].
+        - (dict) -- site_bond, primitive bond vecotr, dict[site_bond name, bond vector in primitive cell].
+    """
+    zj_bond = {}
+    bond_vec = {}
+    for zj, (_, info, _, _) in combined_id.items():
+        if info.n > 0:
+            name = get_bond(info.samb_type.tail, info.samb_type.head, info.neighbor, info.n)
+            zj_bond[zj] = name
+            if name not in bond_vec.keys():
+                bond_vec[name] = [i.vector_primitive.tolist() for i in bond_cell[name]]
+        else:
+            name = info.samb_type.tail
+            zj_bond[zj] = name
+            if name not in bond_vec.keys():
+                bond_vec[name] = [[0.0, 0.0, 0.0]]
+
+    return zj_bond, bond_vec
+
+
+# ==================================================
 def parse_representative_site(group, site_data, basis_type, basis_info):
     """
     Parse representative site.
