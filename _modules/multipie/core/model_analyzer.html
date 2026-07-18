@@ -33,7 +33,7 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=34ddd5e8" />
@@ -342,6 +342,7 @@
 <span class="s2">- dimension (int): matrix size.</span>
 <span class="s2">- ket_site (list): ket info., [ket_name].</span>
 <span class="s2">- index (dict): ket index, dict[(site,sublattice,rank), (top_index,size)].</span>
+<span class="s2">- cluster (dict): cluster name, dict[SAMB ID, cluster name].</span>
 <span class="s2">- cluster_vector (dict): cluster vector, dict[site/bond name, dict[kb, expression] ].</span>
 <span class="s2">- k_multipole (dict): momentum multipole in terms of k.b_n, dict[wyckoff, dict[idx, (k_multipole, symmetry)] ].</span>
 <span class="s2">- k_matrix (dict): momentum matrix, dict[tag, dict[(n1,n2,n3,m,n), value] ].</span>
@@ -732,6 +733,7 @@
                 <span class="s2">&quot;dimension&quot;</span><span class="p">:</span> <span class="n">matrix_info</span><span class="p">[</span><span class="s2">&quot;dimension&quot;</span><span class="p">],</span>
                 <span class="s2">&quot;ket_site&quot;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">matrix_info</span><span class="p">[</span><span class="s2">&quot;ket_site&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span>
                 <span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="n">matrix_info</span><span class="p">[</span><span class="s2">&quot;index&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;cluster&quot;</span><span class="p">:</span> <span class="n">matrix_info</span><span class="p">[</span><span class="s2">&quot;cluster&quot;</span><span class="p">],</span>
                 <span class="s2">&quot;cluster_vector&quot;</span><span class="p">:</span> <span class="n">cluster_vec</span><span class="p">,</span>
                 <span class="s2">&quot;k_multipole&quot;</span><span class="p">:</span> <span class="n">k_multipole</span><span class="p">,</span>
                 <span class="s2">&quot;k_matrix&quot;</span><span class="p">:</span> <span class="n">k_matrix</span><span class="p">,</span>
