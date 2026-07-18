@@ -44,12 +44,12 @@ from multipie.core.default_model import default_model
 from multipie.util.util_plot import plot_site, plot_bond, plot_site_samb, plot_bond_samb, plot_harmonics
 
 _matrix_comment = """Selected SAMB matrix.
-- dimension: (int) matrix size.
-- ket_site": (dict) ket info., dict[ket_name, position (fractional, primitive)].
-- index: (dict) ket index, dict[(site,sublattice,rank), (top_index,size)].
-- vector: (dict) primitive bond vector, dict[cluster name, [primitive bond vector]].
-- cluster: (dict) cluster name, dict[SAMB ID, cluster name].
-- matrix: (dict) matrix, dict[zi, dict[(R,row,column), (value, bond_no)] ] (R=n1,n2,n3, primitive).
+- dimension (int): matrix size.
+- ket_site (dict): ket info., dict[ket_name, position (fractional, primitive)].
+- index (dict): ket index, dict[(site,sublattice,rank), (top_index,size)].
+- vector (dict): primitive bond vector, dict[cluster name, [primitive bond vector]].
+- cluster (dict): cluster name, dict[SAMB ID, cluster name].
+- matrix (dict): matrix, dict[zi, dict[(R,row,column), (value, bond_no)] ] (R=n1,n2,n3, primitive).
 """
 
 
@@ -302,8 +302,9 @@ class MaterialModel(BinaryManager):
             verbose = self.verbose
 
         # convert sympy to str.
+        mi = matrix_info.copy()
         matrix = matrix_info["matrix"]
-        matrix_info["matrix"] = {z: {k: (str(v[0]).replace(" ", ""), v[1]) for k, v in elm.items()} for z, elm in matrix.items()}
+        mi["matrix"] = {z: {k: (str(v[0]).replace(" ", ""), v[1]) for k, v in elm.items()} for z, elm in matrix.items()}
 
         # write matrix.
         cwd = os.getcwd()
@@ -313,7 +314,7 @@ class MaterialModel(BinaryManager):
         var = self["model"]
         filename = var + "_matrix.py"
 
-        write_dict(matrix_info, filename, var, _matrix_comment)
+        write_dict(mi, filename, var, _matrix_comment)
         if verbose:
             print(f"save matrix to '{path}/{filename}'.")
 

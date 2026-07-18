@@ -2,9 +2,11 @@
 Utility for ModelAnalyzer calss.
 """
 
+import os
 import numpy as np
 import sympy as sp
 import subprocess
+from collections import defaultdict
 from multipie import Group
 from multipie.util.util import str_to_sympy
 
@@ -108,13 +110,12 @@ def fourier_r_to_k(OR, atom, kv, s=True):
 
 
 # ==================================================
-def output_linear_dispersion_eig(outdir, filename, k, e, o=None, **kwargs):
+def output_linear_dispersion_eig(filename, k, e, o=None, **kwargs):
     """
     Output band dispersion along high-symmetry lines.
     (only eigen values)
 
     Args:
-        outdir (str): input and output files are found in this directory.
         filename (str): file name.
         k (ndarray): k points along high-symmetry lines.
         e (ndarray): eigen values.
@@ -128,7 +129,7 @@ def output_linear_dispersion_eig(outdir, filename, k, e, o=None, **kwargs):
 
     filename = filename[:-4] if filename[-4:] == ".txt" else filename
 
-    fs = open(outdir + "/" + filename + ".txt", "w")
+    fs = open(filename, "w")
     fs.write("# k Energy [eV] \n")
     fs.write(f"# Emax = {str(emax)}\n")
     fs.write(f"# Emin = {str(emin)}\n")
@@ -164,17 +165,16 @@ def output_linear_dispersion_eig(outdir, filename, k, e, o=None, **kwargs):
     fs.close()
 
     # generate gnuplot file
-    generate_band_gnuplot_eig(outdir, filename, kmax, emax, emin, num_wann, **kwargs)
+    generate_band_gnuplot_eig(filename, kmax, emax, emin, num_wann, **kwargs)
 
 
 # ==================================================
-def generate_band_gnuplot_eig(outdir, filename, kmax, emax, emin, num_wann, **kwargs):
+def generate_band_gnuplot_eig(filename, kmax, emax, emin, num_wann, **kwargs):
     """
     Generate gnuplot file to plot band dispersion.
     (only eigen values)
 
     Args:
-        outdir (str): input and output files are found in this directory.
         filename (str): file name.
         kmax (float): maximum value in kpoints.
         emax (float): maximum value of eigen values.
@@ -199,7 +199,7 @@ def generate_band_gnuplot_eig(outdir, filename, kmax, emax, emin, num_wann, **kw
     lc = kwargs.get("lc", "salmon")
     colormap = kwargs.get("colormap", False)
 
-    fs = open(f"{outdir}/plot_band.gnu", "w")
+    fs = open("plot_band.gnu", "w")
     fs.write("unset key \n")
     fs.write("unset grid \n")
     fs.write(f"lwidth = {lwidth} \n")
@@ -225,7 +225,8 @@ def generate_band_gnuplot_eig(outdir, filename, kmax, emax, emin, num_wann, **kw
 
     fs.write("set terminal postscript eps color enhanced \n\n")
 
-    fs.write(f"set output '{filename}.eps' \n\n")
+    fn_eps = os.path.splitext(filename)[0] + ".eps"
+    fs.write(f"set output '{fn_eps}' \n\n")
     fs.write("plot ")
 
     if ref_filename is not None:
@@ -257,7 +258,7 @@ def generate_band_gnuplot_eig(outdir, filename, kmax, emax, emin, num_wann, **kw
 
     fs.close()
 
-    subprocess.run(f"cd {outdir} ; gnuplot plot_band.gnu", shell=True)
+    subprocess.run(f"gnuplot plot_band.gnu", shell=True)
 
 
 # ==================================================
@@ -399,14 +400,14 @@ def create_all_local_operator():
 # ==================================================
 def create_k_multipole(cluster_samb, cluster_vector):
     """
-    Create k multipole.
+    Create momentum multipole.
 
     Args:
         cluster_samb (dict): cluster SAMB.
         cluster_vector (dict): cluster vector.
 
     Returns:
-        - (dict) -- k multipole in terms of k.b_n, dict[wyckoff, dict[idx, (k_multipole, symmetry)] ].
+        - (dict) -- momentum multipole in terms of k.b_n, dict[wyckoff, dict[idx, (k_multipole, symmetry)] ].
         - (dict) -- cluster vector, dict[site/bond name, dict[kb, expression] ].
     """
     k_multipole = {}
@@ -421,7 +422,7 @@ def create_k_multipole(cluster_samb, cluster_vector):
                 if idx[0] == "Q":
                     d_wp[idx] = (sp.sqrt(2) * samb @ c, sym)
                 else:
-                    d_wp[idx] = (-sp.sqrt(2) * sp.I * samb @ s, sym)
+                    d_wp[idx] = (sp.sqrt(2) * sp.I * samb @ s, sym)
             k_multipole[k] = d_wp
         else:  # site.
             k_multipole[k] = v
@@ -437,3 +438,38 @@ def create_k_multipole(cluster_samb, cluster_vector):
             kb_dic[sb] = {}
 
     return k_multipole, kb_dic
+
+
+# ==================================================
+def create_k_matrix(matrix, cluster_dict, vector_dict):
+    """
+    Create momentum matrix.
+
+    Args:
+        matrix (dict): O(R) matrix dict.
+        cluster_dict (dict): cluster dict.
+        vector_dict (dict): vector dict.
+
+    Returns:
+        - (dict) -- momentum matrix, dict[tag, dict[(n1,n2,n3,m,n), value] ].
+
+    Notes:
+        - only tight-binding gauge is supported.
+    """
+    k_matrix = {}
+    for tag in matrix.keys():
+        cluster = cluster_dict[tag]
+        OR = matrix[tag]
+        if ";" in cluster:
+            vec = vector_dict[cluster]
+            mat = defaultdict(lambda: sp.S(0))
+            kb = np.array(sp.symbols(" ".join([f"kb_{i+1}" for i in range(len(vec))])), dtype=object)
+            for (n1, n2, n3, m, n), (value, b_no) in OR.items():
+                k = kb[b_no - 1] if b_no > 0 else -kb[-b_no - 1]
+                mat[(n1, n2, n3, m, n)] += value * sp.exp(sp.I * k)
+            mat = {Rmn: v for Rmn, v in mat.items() if not v.is_zero}
+            k_matrix[tag] = mat
+        else:
+            k_matrix[tag] = {Rmn: v for Rmn, (v, b) in OR.items()}
+
+    return k_matrix

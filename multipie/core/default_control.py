@@ -19,7 +19,7 @@ default_control = {
             "z1": 1.0,
         },
         "samb_figure": False,  # save SAMB QtDraw files ?
-        "k_multipole": False,  # compute k multipole ?
+        "k_multipole": False,  # compute momentum multipole ?
     },
     "wannier": {  # Closest Wannier (CW) or SymWannier setting.
         "cw": None,  # CW or SymWannier file.
@@ -27,12 +27,12 @@ default_control = {
     "output": {  # physical quantity setting.
         "dir": "output",  #  output directory.
         "fourier": {"tb_gauge": True},  # TB gauge ?
+        "dos": False,  # compute DOS ?
         "dispersion": {  # dispersion info.
-            "k_point": {"Γ": "[0,0,0]", "X": "[1,0,0]"},  # k-point definition (primitive, fractional).
-            "k_path": "Γ",  # symmetry line, separated by "-". disconnected points by "|". if empty str, default values are used for k_point and k_path.
+            "k_path": "",  # symmetry line, separated by "-". disconnected points by "|". if empty str, default values are used for k_path and k_point.
+            "k_point": {"Γ": "[0,0,0]"},  # k-point definition (primitive, fractional).
             "local": [],  # local quantity, "Sx/Sy/Sz/Lx/Ly/Lz/Qu/Qv/Qyz/Qzx/Qxy".
             "z": [],  # expectation value of Z_j. [Under Construction]
         },
-        "dos": False,  # compute DOS ?
     },
 }

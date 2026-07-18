@@ -16,8 +16,18 @@ from multipie.util.util_model_analyzer import (
     create_all_local_operator,
     create_local_operator,
     create_k_multipole,
+    create_k_matrix,
 )
 from multipie.util.util import read_dict, str_to_sympy, write_dict
+
+_k_matrix_comment = """Selected SAMB matrix in momentum representation.
+- dimension (int): matrix size.
+- ket_site (list): ket info., [ket_name].
+- index (dict): ket index, dict[(site,sublattice,rank), (top_index,size)].
+- cluster_vector (dict): cluster vector, dict[site/bond name, dict[kb, expression] ].
+- k_multipole (dict): momentum multipole in terms of k.b_n, dict[wyckoff, dict[idx, (k_multipole, symmetry)] ].
+- k_matrix (dict): momentum matrix, dict[tag, dict[(n1,n2,n3,m,n), value] ].
+"""
 
 
 # ==================================================
@@ -297,15 +307,15 @@ class ModelAnalyzer(dict):
 
         Ek, Uk = np.linalg.eigh(Hk)
         Ok = [np.einsum("kmi,mn,kni->ki", Uk.conj(), self.local_operator(name), Uk).real for name in op_lst]
-        fname = self.name + "_dispersion"
+        fname = self.name + "_dispersion.txt"
         if Ok:
-            output_linear_dispersion_eig(".", fname, k_linear, Ek, Ok, k_dis_pos=k_dis_pos, colormap=True)
+            output_linear_dispersion_eig(fname, k_linear, Ek, Ok, k_dis_pos=k_dis_pos, colormap=True)
         else:
-            output_linear_dispersion_eig(".", fname, k_linear, Ek, k_dis_pos=k_dis_pos)
+            output_linear_dispersion_eig(fname, k_linear, Ek, k_dis_pos=k_dis_pos)
 
         if self._verbose:
             outdir = os.path.join(self._topdir, self.name, self.output["dir"])
-            print(f"save dispersion '{fname}' in {outdir}/.")
+            print(f"save dispersion to '{outdir}/{fname}'.")
 
     # ==================================================
     def compute_dos(self):
@@ -370,20 +380,42 @@ class ModelAnalyzer(dict):
 
         Args:
             matrix_info (dict): matrix info.
+
+        Notes:
+            - only tight-binding gauge is supported.
+
+        :meta private:
         """
         if not self.samb.get("k_multipole", False):
             return
 
         k_multipole, cluster_vec = create_k_multipole(self.model["cluster_samb"], self.model["cluster_vector"])
+        cluster_vec = {sb: {str(kb): str(v).replace(" ", "") for kb, v in lst.items()} for sb, lst in cluster_vec.items()}
+        k_matrix = create_k_matrix(matrix_info["matrix"], matrix_info["cluster"], matrix_info["vector"])
+
+        # convert to str for output.
         k_multipole = {
             wp: {idx: (str(samb.tolist()).replace(" ", ""), str(sym.tolist()).replace(" ", "")) for idx, (samb, sym) in v.items()}
             for wp, v in k_multipole.items()
         }
-        cluster_vec = {sb: {str(kb): str(v).replace(" ", "") for kb, v in lst.items()} for sb, lst in cluster_vec.items()}
+        k_matrix = {tag: {Rmn: str(v).replace(" ", "") for Rmn, v in mat.items()} for tag, mat in k_matrix.items()}
 
+        # output.
         outdir = os.path.join(self._topdir, self.name, self.output["dir"])
         fname = self.name + "_k.py"
-        write_dict({"k_multipole": k_multipole, "cluster_vector": cluster_vec}, fname, w_dir=outdir)
+        write_dict(
+            {
+                "dimension": matrix_info["dimension"],
+                "ket_site": list(matrix_info["ket_site"].keys()),
+                "index": matrix_info["index"],
+                "cluster_vector": cluster_vec,
+                "k_multipole": k_multipole,
+                "k_matrix": k_matrix,
+            },
+            fname,
+            comment=_k_matrix_comment,
+            w_dir=outdir,
+        )
 
         if self._verbose:
-            print(f"save k-multipole '{fname}' in {outdir}/.")
+            print(f"save k-multipole to '{outdir}/{fname}'.")
