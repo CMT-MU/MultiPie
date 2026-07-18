@@ -55,33 +55,3 @@ default_model = {
         "max_neighbor": 5,  # max. neighbor to write (None: all).
     },
 }
-
-# ==================================================
-# site property for QtDraw.
-_site_property = [  # (color, size, opacity)
-    ("darkseagreen", 1.0, 1.0),  # 1st cluster
-    ("lightblue", 0.9, 1.0),  # 2nd cluster
-    ("sandybrown", 0.8, 1.0),  # 3rd cluster
-    ("gold", 0.7, 1.0),  # 4th cluster
-    ("darkkhaki", 0.6, 1.0),  # 5th cluster
-    ("skyblue", 0.6, 1.0),  # 6th cluster
-    ("thistle", 0.6, 1.0),  # 7th cluster
-    ("darkgrey", 0.6, 1.0),  # 8th cluster
-    ("burlywood", 0.6, 1.0),  # 9th cluster
-    ("ghostwhite", 0.6, 1.0),  # other clusters
-]
-
-# ==================================================
-# bond property for QtDraw.
-_bond_property = [  # ((tail-color, head-color), width, opacity)
-    (("snow", "silver"), 1.0, 1.0),  # 1st cluster
-    (("lightcyan", "lightsteelblue"), 1.0, 1.0),  # 2nd cluster
-    (("antiquewhite", "burlywood"), 1.0, 1.0),  # 3rd cluster
-    (("palegoldenrod", "darkseagreen"), 1.0, 1.0),  # 4th cluster
-    (("mistyrose", "lightpink"), 1.0, 1.0),  # 5th cluster
-    (("aliceblue", "lightblue"), 1.0, 1.0),  # 6th cluster
-    (("wheat", "sandybrown"), 1.0, 1.0),  # 7th cluster
-    (("seashell", "thistle"), 1.0, 1.0),  # 8th cluster
-    (("cornsilk", "peachpuff"), 1.0, 1.0),  # 9th cluster
-    (("whitesmoke", "darkkhaki"), 1.0, 1.0),  # other clusters
-]
