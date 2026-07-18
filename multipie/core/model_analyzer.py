@@ -24,6 +24,7 @@ _k_matrix_comment = """Selected SAMB matrix in momentum representation.
 - dimension (int): matrix size.
 - ket_site (list): ket info., [ket_name].
 - index (dict): ket index, dict[(site,sublattice,rank), (top_index,size)].
+- cluster (dict): cluster name, dict[SAMB ID, cluster name].
 - cluster_vector (dict): cluster vector, dict[site/bond name, dict[kb, expression] ].
 - k_multipole (dict): momentum multipole in terms of k.b_n, dict[wyckoff, dict[idx, (k_multipole, symmetry)] ].
 - k_matrix (dict): momentum matrix, dict[tag, dict[(n1,n2,n3,m,n), value] ].
@@ -406,6 +407,7 @@ class ModelAnalyzer(dict):
                 "dimension": matrix_info["dimension"],
                 "ket_site": list(matrix_info["ket_site"].keys()),
                 "index": matrix_info["index"],
+                "cluster": matrix_info["cluster"],
                 "cluster_vector": cluster_vec,
                 "k_multipole": k_multipole,
                 "k_matrix": k_matrix,
