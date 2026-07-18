@@ -3,6 +3,7 @@ Utility for ModelAnalyzer calss.
 """
 
 import numpy as np
+import sympy as sp
 import subprocess
 from multipie import Group
 from multipie.util.util import str_to_sympy
@@ -393,3 +394,46 @@ def create_all_local_operator():
     d["s"] = {name: str_to_sympy(s) for name, s in spin.items()}
 
     return d
+
+
+# ==================================================
+def create_k_multipole(cluster_samb, cluster_vector):
+    """
+    Create k multipole.
+
+    Args:
+        cluster_samb (dict): cluster SAMB.
+        cluster_vector (dict): cluster vector.
+
+    Returns:
+        - (dict) -- k multipole in terms of k.b_n, dict[wyckoff, dict[idx, (k_multipole, symmetry)] ].
+        - (dict) -- cluster vector, dict[site/bond name, dict[kb, expression] ].
+    """
+    k_multipole = {}
+    for k, v in cluster_samb.items():
+        if "@" in k:  # bond.
+            d = len(next(iter(v.values()))[0][0])
+            kb = np.array(sp.symbols(" ".join([f"kb_{i+1}" for i in range(d)])), dtype=object)
+            c = list(map(sp.cos, kb))
+            s = list(map(sp.sin, kb))
+            d_wp = {}
+            for idx, (samb, sym) in v.items():
+                if idx[0] == "Q":
+                    d_wp[idx] = (sp.sqrt(2) * samb @ c, sym)
+                else:
+                    d_wp[idx] = (-sp.sqrt(2) * sp.I * samb @ s, sym)
+            k_multipole[k] = d_wp
+        else:  # site.
+            k_multipole[k] = v
+
+    kb_dic = {}
+    kv = np.array(sp.symbols("k_1 k_2 k_3"), dtype=object)
+    for sb, lst in cluster_vector.items():
+        if ";" in sb:
+            d = len(lst[0])
+            kb = np.array(sp.symbols(" ".join([f"kb_{i+1}" for i in range(d)])), dtype=object)
+            kb_dic[sb] = {i: j @ kv for i, j in zip(kb, lst)}
+        else:
+            kb_dic[sb] = {}
+
+    return k_multipole, kb_dic

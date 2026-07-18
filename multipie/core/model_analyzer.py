@@ -15,8 +15,9 @@ from multipie.util.util_model_analyzer import (
     output_linear_dispersion_eig,
     create_all_local_operator,
     create_local_operator,
+    create_k_multipole,
 )
-from multipie.util.util import read_dict, str_to_sympy
+from multipie.util.util import read_dict, str_to_sympy, write_dict
 
 
 # ==================================================
@@ -219,8 +220,7 @@ class ModelAnalyzer(dict):
             self.model.save_samb_hr(matrix_info, parameter, self._HR)
         self.model.save_samb_matrix(matrix_info)
 
-        if self.samb.get("matrix_k", False):
-            self.set_matrix_k(matrix_info)
+        self.set_k_multipole(matrix_info)
 
         self.md = matrix_info
 
@@ -251,12 +251,8 @@ class ModelAnalyzer(dict):
         os.chdir(outdir)
 
         self.set_eigen_system()
-
-        if "dispersion" in self.output:
-            self.compute_dispersion()
-
-        if "dos" in self.output:
-            self.compute_dos()
+        self.compute_dispersion()
+        self.compute_dos()
 
         os.chdir(cwd)
 
@@ -276,6 +272,9 @@ class ModelAnalyzer(dict):
 
         :meta private:
         """
+        if "dispersion" not in self.output:
+            return
+
         k_path = self.output["dispersion"].get("k_path", None)
         if k_path is None or self.model.group.group_type != "SG":
             return
@@ -315,8 +314,10 @@ class ModelAnalyzer(dict):
 
         :meta private:
         """
-        if self.output["dos"]:
-            print("compute and output dos.")
+        if not self.output.get("dos", False):
+            return
+
+        print("compute and output dos.")
 
     # ==================================================
     def get_kpath(self, k_path):
@@ -363,8 +364,26 @@ class ModelAnalyzer(dict):
         return k_point, k_path
 
     # ==================================================
-    def set_matrix_k(self, md):
+    def set_k_multipole(self, matrix_info):
         """
-        :meta private:
+        Set momentum multipole.
+
+        Args:
+            matrix_info (dict): matrix info.
         """
-        pass
+        if not self.samb.get("k_multipole", False):
+            return
+
+        k_multipole, cluster_vec = create_k_multipole(self.model["cluster_samb"], self.model["cluster_vector"])
+        k_multipole = {
+            wp: {idx: (str(samb.tolist()).replace(" ", ""), str(sym.tolist()).replace(" ", "")) for idx, (samb, sym) in v.items()}
+            for wp, v in k_multipole.items()
+        }
+        cluster_vec = {sb: {str(kb): str(v).replace(" ", "") for kb, v in lst.items()} for sb, lst in cluster_vec.items()}
+
+        outdir = os.path.join(self._topdir, self.name, self.output["dir"])
+        fname = self.name + "_k.py"
+        write_dict({"k_multipole": k_multipole, "cluster_vector": cluster_vec}, fname, w_dir=outdir)
+
+        if self._verbose:
+            print(f"save k-multipole '{fname}' in {outdir}/.")

@@ -19,6 +19,7 @@ default_control = {
             "z1": 1.0,
         },
         "samb_figure": False,  # save SAMB QtDraw files ?
+        "k_multipole": False,  # compute k multipole ?
     },
     "wannier": {  # Closest Wannier (CW) or SymWannier setting.
         "cw": None,  # CW or SymWannier file.
