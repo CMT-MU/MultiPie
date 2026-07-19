@@ -20,6 +20,7 @@ default_control = {
         },
         "samb_figure": False,  # save SAMB QtDraw files ?
         "k_multipole": False,  # compute momentum multipole ?
+        "NG_sum_rule": False,  # Nambu-Goldstone sum rule ?
     },
     "wannier": {  # Closest Wannier (CW) or SymWannier setting.
         "cw": None,  # CW or SymWannier file.
@@ -29,6 +30,7 @@ default_control = {
         "fourier": {"tb_gauge": True},  # TB gauge ?
         "dos": False,  # compute DOS ?
         "dispersion": {  # dispersion info.
+            "power": None,  # plot as Ek^power. if None, power=1.
             "k_path": "",  # symmetry line, separated by "-". disconnected points by "|". if empty str, default values are used for k_path and k_point.
             "k_point": {"Γ": "[0,0,0]"},  # k-point definition (primitive, fractional).
             "local": [],  # local quantity, "Sx/Sy/Sz/Lx/Ly/Lz/Qu/Qv/Qyz/Qzx/Qxy".
