@@ -406,7 +406,7 @@ class ModelAnalyzer(dict):
         }
 
         # output.
-        outdir = os.path.join(self._topdir, self.name, self.output["dir"])
+        outdir = os.path.join(self._topdir, self.name)
         fname = self.name + "_k.py"
         write_dict(
             {
