@@ -24,10 +24,9 @@ _k_matrix_comment = """Selected SAMB matrix in momentum representation.
 - dimension (int): matrix size.
 - ket_site (list): ket info., [ket_name].
 - index (dict): ket index, dict[(site,sublattice,rank), (top_index,size)].
-- cluster (dict): cluster name, dict[SAMB ID, cluster name].
 - cluster_vector (dict): cluster vector, dict[site/bond name, dict[kb, expression] ].
 - k_multipole (dict): momentum multipole in terms of k.b_n, dict[wyckoff, dict[idx, (k_multipole, symmetry)] ].
-- k_matrix (dict): momentum matrix, dict[tag, dict[(n1,n2,n3,m,n), value] ].
+- k_matrix (dict): momentum matrix, dict[tag, (site/bond_name, wyckoff, dict[(m,n), value]) ].
 """
 
 
@@ -388,16 +387,23 @@ class ModelAnalyzer(dict):
         if not self.samb.get("k_multipole", False):
             return
 
+        combined_id = self.model["combined_id"]
+
         k_multipole, cluster_vec = create_k_multipole(self.model["cluster_samb"], self.model["cluster_vector"])
         cluster_vec = {sb: {str(kb): str(v).replace(" ", "") for kb, v in lst.items()} for sb, lst in cluster_vec.items()}
         k_matrix = create_k_matrix(matrix_info["matrix"], matrix_info["cluster"], matrix_info["vector"])
+        k_matrix = {
+            tag: (matrix_info["cluster"][tag], combined_id[tag][1].samb_type.wyckoff, mat) for tag, mat in k_matrix.items()
+        }
 
         # convert to str for output.
         k_multipole = {
             wp: {idx: (str(samb.tolist()).replace(" ", ""), str(sym.tolist()).replace(" ", "")) for idx, (samb, sym) in v.items()}
             for wp, v in k_multipole.items()
         }
-        k_matrix = {tag: {Rmn: str(v).replace(" ", "") for Rmn, v in mat.items()} for tag, mat in k_matrix.items()}
+        k_matrix = {
+            tag: (cn, wp, {Rmn: str(v).replace(" ", "") for Rmn, v in mat.items()}) for tag, (cn, wp, mat) in k_matrix.items()
+        }
 
         # output.
         outdir = os.path.join(self._topdir, self.name, self.output["dir"])
@@ -407,7 +413,6 @@ class ModelAnalyzer(dict):
                 "dimension": matrix_info["dimension"],
                 "ket_site": list(matrix_info["ket_site"].keys()),
                 "index": matrix_info["index"],
-                "cluster": matrix_info["cluster"],
                 "cluster_vector": cluster_vec,
                 "k_multipole": k_multipole,
                 "k_matrix": k_matrix,
