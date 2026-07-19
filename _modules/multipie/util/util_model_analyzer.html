@@ -33,7 +33,7 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=34ddd5e8" />
@@ -456,8 +456,6 @@
     <span class="n">emin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
     <span class="n">num_wann</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
-    <span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span><span class="p">[:</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span> <span class="k">if</span> <span class="n">filename</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">:]</span> <span class="o">==</span> <span class="s2">&quot;.txt&quot;</span> <span class="k">else</span> <span class="n">filename</span>
-
     <span class="n">fs</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span>
     <span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;# k Energy [eV] </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;# Emax = </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">emax</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -565,9 +563,9 @@
         <span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">ref_filename</span><span class="si">}</span><span class="s2">&#39; u ($1/a):($2-ef) w l lw lwidth lc &#39;dark-grey&#39;, &quot;</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">colormap</span><span class="p">:</span>
-        <span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">.txt&#39; u 1:2:3 w l lw lwidth lc palette, &quot;</span><span class="p">)</span>
+        <span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&#39; u 1:2:3 w l lw lwidth lc palette, &quot;</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">.txt&#39; u 1:2 w l lw lwidth lc &#39;</span><span class="si">{</span><span class="n">lc</span><span class="si">}</span><span class="s2">&#39;, &quot;</span><span class="p">)</span>
+        <span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&#39; u 1:2 w l lw lwidth lc &#39;</span><span class="si">{</span><span class="n">lc</span><span class="si">}</span><span class="s2">&#39;, &quot;</span><span class="p">)</span>
 
     <span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="mf">0.0</span><span class="si">}</span><span class="s2"> lw 0.5 lc &#39;black&#39;&quot;</span><span class="p">)</span>
 
@@ -575,16 +573,17 @@
 
     <span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;set terminal pdf </span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    <span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;set output &#39;</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">.pdf&#39; </span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">fn_pdf</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">filename</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;.pdf&quot;</span>
+    <span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;set output &#39;</span><span class="si">{</span><span class="n">fn_pdf</span><span class="si">}</span><span class="s2">&#39; </span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;plot &quot;</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">ref_filename</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">ref_filename</span><span class="si">}</span><span class="s2">&#39; u ($1/a):($2-ef) w l lw lwidth lc &#39;dark-grey&#39;, &quot;</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">colormap</span><span class="p">:</span>
-        <span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">.txt&#39; u 1:2:3 w l lw lwidth lc palette, &quot;</span><span class="p">)</span>
+        <span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&#39; u 1:2:3 w l lw lwidth lc palette, &quot;</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">.txt&#39; u 1:2 w l lw lwidth lc &#39;</span><span class="si">{</span><span class="n">lc</span><span class="si">}</span><span class="s2">&#39;, &quot;</span><span class="p">)</span>
+        <span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&#39; u 1:2 w l lw lwidth lc &#39;</span><span class="si">{</span><span class="n">lc</span><span class="si">}</span><span class="s2">&#39;, &quot;</span><span class="p">)</span>
 
     <span class="n">fs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="mf">0.0</span><span class="si">}</span><span class="s2"> lw 0.5 lc &#39;black&#39;&quot;</span><span class="p">)</span>
 
