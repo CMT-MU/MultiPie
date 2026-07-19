@@ -877,6 +877,112 @@
 
     <span class="k">return</span> <span class="n">parameter</span></div>
 
+
+
+<span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="build_and_solve_hermitian">
+<a class="viewcode-back" href="../../../src/api_util/util_model_analyzer.html#multipie.util.util_model_analyzer.build_and_solve_hermitian">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">build_and_solve_hermitian</span><span class="p">(</span><span class="n">mat</span><span class="p">,</span> <span class="n">z_symbols</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Build linear equations from a Hermitian matrix and solve for z_j.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mat (ndarray): hermitian matrix, only upper triangle is required.</span>
+<span class="sd">        z_symbols (list): zj variables.</span>
+<span class="sd">        labels (list, optional): name for bra-ket.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        - (dict) -- dict from matrix index to name, dict[(int,int), name].</span>
+<span class="sd">        - (list) -- equations used to solve.</span>
+<span class="sd">        - (dict) -- solution dict, if failed, empty.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">rows</span><span class="p">,</span> <span class="n">cols</span> <span class="o">=</span> <span class="n">mat</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">expr_to_positions</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rows</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">cols</span><span class="p">):</span>
+            <span class="n">expr</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">sympify</span><span class="p">(</span><span class="n">mat</span><span class="p">[</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">expr</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">expr_expanded</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+            <span class="n">coeffs</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">expr_expanded</span><span class="o">.</span><span class="n">coeff</span><span class="p">(</span><span class="n">z</span><span class="p">)</span> <span class="k">for</span> <span class="n">z</span> <span class="ow">in</span> <span class="n">z_symbols</span><span class="p">)</span>
+            <span class="n">const</span> <span class="o">=</span> <span class="n">expr_expanded</span> <span class="o">-</span> <span class="nb">sum</span><span class="p">(</span><span class="n">c</span> <span class="o">*</span> <span class="n">z</span> <span class="k">for</span> <span class="n">c</span><span class="p">,</span> <span class="n">z</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">coeffs</span><span class="p">,</span> <span class="n">z_symbols</span><span class="p">))</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="n">coeffs</span> <span class="o">+</span> <span class="p">(</span><span class="n">const</span><span class="p">,)</span>
+            <span class="n">expr_to_positions</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">expr_expanded</span><span class="p">))</span>
+
+    <span class="n">g_syms</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">lin_eqs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">positions</span> <span class="ow">in</span> <span class="n">expr_to_positions</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">m0</span><span class="p">,</span> <span class="n">n0</span><span class="p">,</span> <span class="n">expr0</span> <span class="o">=</span> <span class="n">positions</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">labels</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">label_str</span> <span class="o">=</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="n">labels</span><span class="p">[</span><span class="n">m</span><span class="p">]</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">labels</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="si">}</span><span class="s2">)&quot;</span> <span class="k">for</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">positions</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">label_str</span> <span class="o">=</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">)&quot;</span> <span class="k">for</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">positions</span><span class="p">)</span>
+
+        <span class="n">g</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;g_</span><span class="se">{{</span><span class="si">{</span><span class="n">label_str</span><span class="si">}</span><span class="se">}}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">positions</span><span class="p">:</span>
+            <span class="n">g_syms</span><span class="p">[(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">)]</span> <span class="o">=</span> <span class="n">g</span>
+        <span class="n">lin_eqs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">Eq</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">expr0</span><span class="p">))</span>
+
+    <span class="n">sol</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">linsolve</span><span class="p">(</span><span class="n">lin_eqs</span><span class="p">,</span> <span class="n">z_symbols</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">sol</span> <span class="o">==</span> <span class="n">sp</span><span class="o">.</span><span class="n">EmptySet</span><span class="p">:</span>
+        <span class="n">sol_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="p">(</span><span class="n">values</span><span class="p">,)</span> <span class="o">=</span> <span class="n">sol</span>  <span class="c1"># take unique tuple in FiniteSet.</span>
+        <span class="n">sol_dict</span> <span class="o">=</span> <span class="p">{</span><span class="nb">str</span><span class="p">(</span><span class="n">zj</span><span class="p">):</span> <span class="n">val</span> <span class="k">for</span> <span class="n">zj</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">z_symbols</span><span class="p">,</span> <span class="n">values</span><span class="p">)}</span>
+
+    <span class="k">return</span> <span class="n">g_syms</span><span class="p">,</span> <span class="n">lin_eqs</span><span class="p">,</span> <span class="n">sol_dict</span></div>
+
+
+
+<span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="convert_zj_atomic_var">
+<a class="viewcode-back" href="../../../src/api_util/util_model_analyzer.html#multipie.util.util_model_analyzer.convert_zj_atomic_var">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">convert_zj_atomic_var</span><span class="p">(</span><span class="n">matrix_info</span><span class="p">,</span> <span class="n">combined_cluster</span><span class="p">,</span> <span class="n">combined_id</span><span class="p">,</span> <span class="n">IR</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert from zj to atomic variable.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        matrix_info (dict): matrix info.</span>
+<span class="sd">        combined_cluster (dict): combined cluster.</span>
+<span class="sd">        combined_id (dict): combined id.</span>
+<span class="sd">        IR (str): identity irrep.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        - (dict) -- zj to var for each cluster, dict[bond name, dict[zj, var] ].</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">dim</span> <span class="o">=</span> <span class="n">matrix_info</span><span class="p">[</span><span class="s2">&quot;dimension&quot;</span><span class="p">]</span>
+    <span class="n">ket</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;@&quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;(&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;)&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">matrix_info</span><span class="p">[</span><span class="s2">&quot;ket_site&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
+
+    <span class="c1"># classify zj for each cluster.</span>
+    <span class="n">cluster</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">tag</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">combined_cluster</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="s2">&quot;;&quot;</span> <span class="ow">in</span> <span class="n">name</span> <span class="ow">and</span> <span class="n">combined_id</span><span class="p">[</span><span class="n">tag</span><span class="p">][</span><span class="mi">2</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="n">IR</span><span class="p">:</span>
+            <span class="n">cluster</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tag</span><span class="p">)</span>
+
+    <span class="c1"># construct upper-triangle matrix.</span>
+    <span class="n">dic</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">tags</span> <span class="ow">in</span> <span class="n">cluster</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">var</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="n">dim</span><span class="p">,</span> <span class="n">dim</span><span class="p">),</span> <span class="n">sp</span><span class="o">.</span><span class="n">S</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">zj</span> <span class="ow">in</span> <span class="n">tags</span><span class="p">:</span>
+            <span class="n">zjv</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="n">zj</span><span class="p">,</span> <span class="n">real</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">zjv</span><span class="p">)</span>
+            <span class="k">for</span> <span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="n">n3</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">no</span><span class="p">)</span> <span class="ow">in</span> <span class="n">matrix_info</span><span class="p">[</span><span class="s2">&quot;matrix&quot;</span><span class="p">][</span><span class="n">zj</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">no</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="ow">and</span> <span class="n">m</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">:</span>  <span class="c1"># only upper triangle.</span>
+                    <span class="n">mat</span><span class="p">[</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">]</span> <span class="o">+=</span> <span class="n">val</span> <span class="o">*</span> <span class="n">zjv</span>
+        <span class="n">dic</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">mat</span><span class="p">,</span> <span class="n">var</span><span class="p">)</span>
+
+    <span class="c1"># solve zj for each cluster.</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="p">(</span><span class="n">mat</span><span class="p">,</span> <span class="n">var</span><span class="p">)</span> <span class="ow">in</span> <span class="n">dic</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">g_syms</span><span class="p">,</span> <span class="n">lin_eqs</span><span class="p">,</span> <span class="n">sol</span> <span class="o">=</span> <span class="n">build_and_solve_hermitian</span><span class="p">(</span><span class="n">mat</span><span class="p">,</span> <span class="n">var</span><span class="p">,</span> <span class="n">ket</span><span class="p">)</span>
+        <span class="n">result</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">sol</span>
+
+    <span class="k">return</span> <span class="n">result</span></div>
+
 </pre></div>
 
                 </article>

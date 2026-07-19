@@ -363,6 +363,8 @@
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.add_local_parameter"><code class="docutils literal notranslate"><span class="pre">add_local_parameter()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.build_and_solve_hermitian"><code class="docutils literal notranslate"><span class="pre">build_and_solve_hermitian()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.convert_zj_atomic_var"><code class="docutils literal notranslate"><span class="pre">convert_zj_atomic_var()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.create_all_local_operator"><code class="docutils literal notranslate"><span class="pre">create_all_local_operator()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.create_k_matrix"><code class="docutils literal notranslate"><span class="pre">create_k_matrix()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.create_k_multipole"><code class="docutils literal notranslate"><span class="pre">create_k_multipole()</span></code></a></li>
@@ -402,6 +404,51 @@
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p>(dict) – parameter dict with adding local one.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_model_analyzer.build_and_solve_hermitian">
+<span class="sig-name descname"><span class="pre">build_and_solve_hermitian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z_symbols</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_model_analyzer.html#build_and_solve_hermitian"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_model_analyzer.build_and_solve_hermitian" title="Link to this definition">#</a></dt>
+<dd><p>Build linear equations from a Hermitian matrix and solve for z_j.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mat</strong> (<em>ndarray</em>) – hermitian matrix, only upper triangle is required.</p></li>
+<li><p><strong>z_symbols</strong> (<em>list</em>) – zj variables.</p></li>
+<li><p><strong>labels</strong> (<em>list</em><em>, </em><em>optional</em>) – name for bra-ket.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(dict) – dict from matrix index to name, dict[(int,int), name].</p></li>
+<li><p>(list) – equations used to solve.</p></li>
+<li><p>(dict) – solution dict, if failed, empty.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_model_analyzer.convert_zj_atomic_var">
+<span class="sig-name descname"><span class="pre">convert_zj_atomic_var</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">matrix_info</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">combined_cluster</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">combined_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">IR</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_model_analyzer.html#convert_zj_atomic_var"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_model_analyzer.convert_zj_atomic_var" title="Link to this definition">#</a></dt>
+<dd><p>Convert from zj to atomic variable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>matrix_info</strong> (<em>dict</em>) – matrix info.</p></li>
+<li><p><strong>combined_cluster</strong> (<em>dict</em>) – combined cluster.</p></li>
+<li><p><strong>combined_id</strong> (<em>dict</em>) – combined id.</p></li>
+<li><p><strong>IR</strong> (<em>str</em>) – identity irrep.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(dict) – zj to var for each cluster, dict[bond name, dict[zj, var] ].</p></li>
 </ul>
 </p>
 </dd>
@@ -699,6 +746,8 @@
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.add_local_parameter"><code class="docutils literal notranslate"><span class="pre">add_local_parameter()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.build_and_solve_hermitian"><code class="docutils literal notranslate"><span class="pre">build_and_solve_hermitian()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.convert_zj_atomic_var"><code class="docutils literal notranslate"><span class="pre">convert_zj_atomic_var()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.create_all_local_operator"><code class="docutils literal notranslate"><span class="pre">create_all_local_operator()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.create_k_matrix"><code class="docutils literal notranslate"><span class="pre">create_k_matrix()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.create_k_multipole"><code class="docutils literal notranslate"><span class="pre">create_k_multipole()</span></code></a></li>
