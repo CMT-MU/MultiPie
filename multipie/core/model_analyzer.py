@@ -18,6 +18,7 @@ from multipie.util.util_model_analyzer import (
     create_k_multipole,
     create_k_matrix,
     add_local_parameter,
+    convert_zj_atomic_var,
 )
 from multipie.util.util import read_dict, str_to_sympy, write_dict
 
@@ -28,6 +29,15 @@ _k_matrix_comment = """Selected SAMB matrix in momentum representation.
 - cluster_vector (dict): cluster vector, dict[site/bond name, dict[kb, expression] ].
 - k_multipole (dict): momentum multipole in terms of k.b_n, dict[wyckoff, dict[idx, (k_multipole, symmetry)] ].
 - k_matrix (dict): momentum matrix, dict[tag, (site/bond_name, wyckoff, dict[(m,n), value]) ].
+"""
+
+_zj_var_comment = """Correspondence between zj and atomic variable.
+- correspondence for each bond cluster, dict[bond_name, dict[zj, expression in terms of atomic variables] ].
+- only for SAMB with identity irrep.
+"""
+
+_param_comment = """Parameter dict.
+- finite parameter, dict[zj, value].
 """
 
 
@@ -236,8 +246,18 @@ class ModelAnalyzer(dict):
         if parameter:
             self._HR = self.model.get_hr(parameter, matrix_info["matrix"])
             self.model.save_samb_hr(matrix_info, parameter, self._HR)
-            write_dict({tag: str(v).replace(" ", "") for tag, v in parameter.items()}, self.name + "_z.py", w_dir=self.name)
+            write_dict(
+                {tag: str(v).replace(" ", "") for tag, v in parameter.items()},
+                self.name + "_z.py",
+                comment=_param_comment,
+                w_dir=self.name,
+            )
         self.model.save_samb_matrix(matrix_info)
+
+        IR = next(iter(self.model.group.character["table"].keys()))  # identity irrep.
+        conv_dict = convert_zj_atomic_var(matrix_info, self.model["combined_cluster"], self.model["combined_id"], IR)
+        conv_dict = {name: {zj: str(ex).replace(" ", "") for zj, ex in dic.items()} for name, dic in conv_dict.items()}
+        write_dict(conv_dict, self.name + "_var.py", comment=_zj_var_comment, w_dir=self.name)
 
         self.set_k_multipole(matrix_info)
 

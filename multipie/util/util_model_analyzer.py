@@ -523,3 +523,103 @@ def add_local_parameter(matrix_info, parameter):
     parameter = dict(sorted(parameter.items()))
 
     return parameter
+
+
+# ==================================================
+def build_and_solve_hermitian(mat, z_symbols, labels=None):
+    """
+    Build linear equations from a Hermitian matrix and solve for z_j.
+
+    Args:
+        mat (ndarray): hermitian matrix, only upper triangle is required.
+        z_symbols (list): zj variables.
+        labels (list, optional): name for bra-ket.
+
+    Returns:
+        - (dict) -- dict from matrix index to name, dict[(int,int), name].
+        - (list) -- equations used to solve.
+        - (dict) -- solution dict, if failed, empty.
+    """
+    rows, cols = mat.shape
+    expr_to_positions = {}
+
+    for m in range(rows):
+        for n in range(m, cols):
+            expr = sp.sympify(mat[m, n])
+            if expr == 0:
+                continue
+            expr_expanded = sp.expand(expr)
+            coeffs = tuple(expr_expanded.coeff(z) for z in z_symbols)
+            const = expr_expanded - sum(c * z for c, z in zip(coeffs, z_symbols))
+            key = coeffs + (const,)
+            expr_to_positions.setdefault(key, []).append((m, n, expr_expanded))
+
+    g_syms = {}
+    lin_eqs = []
+    for key, positions in expr_to_positions.items():
+        m0, n0, expr0 = positions[0]
+
+        if labels is not None:
+            label_str = ",".join(f"({labels[m]},{labels[n]})" for m, n, _ in positions)
+        else:
+            label_str = ",".join(f"({m},{n})" for m, n, _ in positions)
+
+        g = sp.Symbol(f"g_{{{label_str}}}")
+        for m, n, _ in positions:
+            g_syms[(m, n)] = g
+        lin_eqs.append(sp.Eq(g, expr0))
+
+    sol = sp.linsolve(lin_eqs, z_symbols)
+
+    if sol == sp.EmptySet:
+        sol_dict = {}
+    else:
+        (values,) = sol  # take unique tuple in FiniteSet.
+        sol_dict = {str(zj): val for zj, val in zip(z_symbols, values)}
+
+    return g_syms, lin_eqs, sol_dict
+
+
+# ==================================================
+def convert_zj_atomic_var(matrix_info, combined_cluster, combined_id, IR):
+    """
+    Convert from zj to atomic variable.
+
+    Args:
+        matrix_info (dict): matrix info.
+        combined_cluster (dict): combined cluster.
+        combined_id (dict): combined id.
+        IR (str): identity irrep.
+
+    Returns:
+        - (dict) -- zj to var for each cluster, dict[bond name, dict[zj, var] ].
+    """
+    dim = matrix_info["dimension"]
+    ket = [i.replace("@", "_").replace("(", "").replace(")", "") for i in matrix_info["ket_site"].keys()]
+
+    # classify zj for each cluster.
+    cluster = {}
+    for tag, name in combined_cluster.items():
+        if ";" in name and combined_id[tag][2][2] == IR:
+            cluster.setdefault(name, []).append(tag)
+
+    # construct upper-triangle matrix.
+    dic = {}
+    for name, tags in cluster.items():
+        var = []
+        mat = np.full((dim, dim), sp.S(0))
+        for zj in tags:
+            zjv = sp.Symbol(zj, real=True)
+            var.append(zjv)
+            for (n1, n2, n3, m, n), (val, no) in matrix_info["matrix"][zj].items():
+                if no in (1, -1) and m <= n:  # only upper triangle.
+                    mat[m, n] += val * zjv
+        dic[name] = (mat, var)
+
+    # solve zj for each cluster.
+    result = {}
+    for name, (mat, var) in dic.items():
+        g_syms, lin_eqs, sol = build_and_solve_hermitian(mat, var, ket)
+        result[name] = sol
+
+    return result

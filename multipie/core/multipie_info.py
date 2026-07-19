@@ -1,4 +1,4 @@
-__version__ = "2.2.5"
+__version__ = "2.2.6"
 
 import os
 import importlib.resources as res
