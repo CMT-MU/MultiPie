@@ -823,6 +823,60 @@
 
     <span class="k">return</span> <span class="n">k_matrix</span></div>
 
+
+
+<span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="add_local_parameter">
+<a class="viewcode-back" href="../../../src/api_util/util_model_analyzer.html#multipie.util.util_model_analyzer.add_local_parameter">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">add_local_parameter</span><span class="p">(</span><span class="n">matrix_info</span><span class="p">,</span> <span class="n">parameter</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Add local parameter for given nonlocal parameter.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        matrix_info (dict): matrix info.</span>
+<span class="sd">        parameter (dict): parameter dict without site cluster.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        - (dict) -- parameter dict with adding local one.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span><span class="n">i</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">matrix_info</span><span class="p">[</span><span class="s2">&quot;index&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()]))</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>  <span class="c1"># only for the same ranks.</span>
+        <span class="k">return</span>
+    <span class="n">rank</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">matrix_info</span><span class="p">[</span><span class="s2">&quot;index&quot;</span><span class="p">]))[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">dim</span> <span class="o">=</span> <span class="n">matrix_info</span><span class="p">[</span><span class="s2">&quot;dimension&quot;</span><span class="p">]</span>
+
+    <span class="n">d</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">rank</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">nn</span> <span class="o">=</span> <span class="n">dim</span> <span class="o">//</span> <span class="n">d</span>
+
+    <span class="n">local</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">local_z</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">tag</span><span class="p">,</span> <span class="n">mat</span> <span class="ow">in</span> <span class="n">matrix_info</span><span class="p">[</span><span class="s2">&quot;matrix&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="n">dim</span><span class="p">,</span> <span class="n">dim</span><span class="p">),</span> <span class="n">sp</span><span class="o">.</span><span class="n">S</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="n">n3</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">no</span><span class="p">)</span> <span class="ow">in</span> <span class="n">mat</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">v</span><span class="p">[</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">]</span> <span class="o">+=</span> <span class="n">val</span>
+        <span class="k">if</span> <span class="s2">&quot;;&quot;</span> <span class="ow">in</span> <span class="n">matrix_info</span><span class="p">[</span><span class="s2">&quot;cluster&quot;</span><span class="p">][</span><span class="n">tag</span><span class="p">]:</span>  <span class="c1"># nonlocal SAMB with parameter key.</span>
+            <span class="k">if</span> <span class="n">tag</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">parameter</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="k">continue</span>
+            <span class="n">vd</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">nn</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">nn</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="n">dim</span><span class="p">,</span> <span class="n">dim</span><span class="p">),</span> <span class="n">sp</span><span class="o">.</span><span class="n">S</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nn</span><span class="p">):</span>
+                <span class="n">s</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="n">d</span> <span class="p">:</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">d</span><span class="p">,</span> <span class="n">i</span> <span class="o">*</span> <span class="n">d</span> <span class="p">:</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">d</span><span class="p">]</span> <span class="o">=</span> <span class="n">vd</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">local</span><span class="p">[</span><span class="n">tag</span><span class="p">]</span> <span class="o">=</span> <span class="n">s</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># local SAMB.</span>
+            <span class="n">local_z</span><span class="p">[</span><span class="n">tag</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+    <span class="n">coeff</span> <span class="o">=</span> <span class="p">{</span><span class="n">tag</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;ij,ji-&gt;&quot;</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">z</span> <span class="ow">in</span> <span class="n">local_z</span><span class="o">.</span><span class="n">values</span><span class="p">()])</span> <span class="k">for</span> <span class="n">tag</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">local</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+
+    <span class="n">zt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">local_z</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span> <span class="n">sp</span><span class="o">.</span><span class="n">S</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">zj</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">parameter</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">zt</span> <span class="o">-=</span> <span class="n">val</span> <span class="o">*</span> <span class="n">coeff</span><span class="p">[</span><span class="n">zj</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">zk</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">local_z</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="n">zt</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">val</span><span class="o">.</span><span class="n">is_zero</span><span class="p">:</span>
+            <span class="n">parameter</span><span class="p">[</span><span class="n">zk</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+
+    <span class="n">parameter</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">parameter</span><span class="o">.</span><span class="n">items</span><span class="p">()))</span>
+
+    <span class="k">return</span> <span class="n">parameter</span></div>
+
 </pre></div>
 
                 </article>
