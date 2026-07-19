@@ -17,6 +17,7 @@ from multipie.util.util_model_analyzer import (
     create_local_operator,
     create_k_multipole,
     create_k_matrix,
+    add_local_parameter,
 )
 from multipie.util.util import read_dict, str_to_sympy, write_dict
 
@@ -214,20 +215,28 @@ class ModelAnalyzer(dict):
         self.model.load(self.name)
         self.set_primitive_cell(np.array(self.model["unit_vector_primitive"]))
         select = self.samb.get("select", {})
+        matrix_info = self.model.get_samb_matrix(select)
 
         parameter = self.samb.get("parameter", {})
         if type(parameter) == str:  # when parameter is str, which means filename of z_j dict.
             z_file = os.path.join(self._topdir, self.name, parameter)
             parameter = read_dict(z_file)
+            parameter = {tag: str_to_sympy(v, rational=False) if type(v) == str else v for tag, v in parameter.items()}
+            self._samb["parameter"] = parameter
+
+        if self.samb.get("NG_sum_rule", False):
+            parameter = add_local_parameter(matrix_info, parameter)
             self._samb["parameter"] = parameter
 
         if self.samb.get("samb_figure", False):
             self.model.save_samb_qtdraw()
 
-        matrix_info = self.model.get_samb_matrix(select)
+        # output matrx.py and hr.dat.
+        parameter = self.samb.get("parameter", {})
         if parameter:
             self._HR = self.model.get_hr(parameter, matrix_info["matrix"])
             self.model.save_samb_hr(matrix_info, parameter, self._HR)
+            write_dict({tag: str(v).replace(" ", "") for tag, v in parameter.items()}, self.name + "_z.py", w_dir=self.name)
         self.model.save_samb_matrix(matrix_info)
 
         self.set_k_multipole(matrix_info)
@@ -304,6 +313,9 @@ class ModelAnalyzer(dict):
         Hk = fourier_r_to_k(HR, atom, k_point_path, tb_gauge)
 
         Ek, Uk = np.linalg.eigh(Hk)
+        power = self.output["dispersion"].get("power", None)
+        if power is not None:
+            Ek = np.power(Ek, power)
         Ok = [np.einsum("kmi,mn,kni->ki", Uk.conj(), self.local_operator(name), Uk).real for name in op_lst]
         fname = self.name + "_dispersion.txt"
         if Ok:

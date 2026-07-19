@@ -472,3 +472,54 @@ def create_k_matrix(matrix, cluster_dict, vector_dict):
             k_matrix[tag] = {(m, n): v for (n1, n2, n3, m, n), (v, b) in OR.items()}
 
     return k_matrix
+
+
+# ==================================================
+def add_local_parameter(matrix_info, parameter):
+    """
+    Add local parameter for given nonlocal parameter.
+
+    Args:
+        matrix_info (dict): matrix info.
+        parameter (dict): parameter dict without site cluster.
+
+    Returns:
+        - (dict) -- parameter dict with adding local one.
+    """
+    if not len(set([i[2] for i in matrix_info["index"].keys()])) == 1:  # only for the same ranks.
+        return
+    rank = next(iter(matrix_info["index"]))[2]
+    dim = matrix_info["dimension"]
+
+    d = 2 * rank + 1
+    nn = dim // d
+
+    local = {}
+    local_z = {}
+    for tag, mat in matrix_info["matrix"].items():
+        v = np.full((dim, dim), sp.S(0))
+        for (n1, n2, n3, m, n), (val, no) in mat.items():
+            v[m, n] += val
+        if ";" in matrix_info["cluster"][tag]:  # nonlocal SAMB with parameter key.
+            if tag not in parameter.keys():
+                continue
+            vd = v.reshape(nn, d, nn, d).sum(axis=0).transpose(1, 0, 2)
+            s = np.full((dim, dim), sp.S(0))
+            for i in range(nn):
+                s[i * d : (i + 1) * d, i * d : (i + 1) * d] = vd[i]
+            local[tag] = s
+        else:  # local SAMB.
+            local_z[tag] = v
+    coeff = {tag: np.array([np.einsum("ij,ji->", z, s) for z in local_z.values()]) for tag, s in local.items()}
+
+    zt = np.full(len(local_z.keys()), sp.S(0))
+    for zj, val in parameter.items():
+        zt -= val * coeff[zj]
+
+    for zk, val in zip(local_z.keys(), zt):
+        if not val.is_zero:
+            parameter[zk] = val
+
+    parameter = dict(sorted(parameter.items()))
+
+    return parameter
