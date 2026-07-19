@@ -451,7 +451,7 @@ def create_k_matrix(matrix, cluster_dict, vector_dict):
         vector_dict (dict): vector dict.
 
     Returns:
-        - (dict) -- momentum matrix, dict[tag, dict[(n1,n2,n3,m,n), value] ].
+        - (dict) -- momentum matrix, dict[tag, dict[(m,n), value] ].
 
     Notes:
         - only tight-binding gauge is supported.
@@ -466,10 +466,10 @@ def create_k_matrix(matrix, cluster_dict, vector_dict):
             kb = np.array(sp.symbols(" ".join([f"kb_{i+1}" for i in range(len(vec))])), dtype=object)
             for (n1, n2, n3, m, n), (value, b_no) in OR.items():
                 k = kb[b_no - 1] if b_no > 0 else -kb[-b_no - 1]
-                mat[(n1, n2, n3, m, n)] += value * sp.exp(sp.I * k)
+                mat[(m, n)] += value * sp.exp(sp.I * k)
             mat = {Rmn: v for Rmn, v in mat.items() if not v.is_zero}
             k_matrix[tag] = mat
         else:
-            k_matrix[tag] = {Rmn: v for Rmn, (v, b) in OR.items()}
+            k_matrix[tag] = {(m, n): v for (n1, n2, n3, m, n), (v, b) in OR.items()}
 
     return k_matrix
