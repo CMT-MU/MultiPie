@@ -127,8 +127,6 @@ def output_linear_dispersion_eig(filename, k, e, o=None, **kwargs):
     emin = np.min(e)
     num_wann = e.shape[1]
 
-    filename = filename[:-4] if filename[-4:] == ".txt" else filename
-
     fs = open(filename, "w")
     fs.write("# k Energy [eV] \n")
     fs.write(f"# Emax = {str(emax)}\n")
@@ -233,9 +231,9 @@ def generate_band_gnuplot_eig(filename, kmax, emax, emin, num_wann, **kwargs):
         fs.write(f"'{ref_filename}' u ($1/a):($2-ef) w l lw lwidth lc 'dark-grey', ")
 
     if colormap:
-        fs.write(f"'{filename}.txt' u 1:2:3 w l lw lwidth lc palette, ")
+        fs.write(f"'{filename}' u 1:2:3 w l lw lwidth lc palette, ")
     else:
-        fs.write(f"'{filename}.txt' u 1:2 w l lw lwidth lc '{lc}', ")
+        fs.write(f"'{filename}' u 1:2 w l lw lwidth lc '{lc}', ")
 
     fs.write(f"{0.0} lw 0.5 lc 'black'")
 
@@ -243,16 +241,17 @@ def generate_band_gnuplot_eig(filename, kmax, emax, emin, num_wann, **kwargs):
 
     fs.write("set terminal pdf \n\n")
 
-    fs.write(f"set output '{filename}.pdf' \n\n")
+    fn_pdf = os.path.splitext(filename)[0] + ".pdf"
+    fs.write(f"set output '{fn_pdf}' \n\n")
     fs.write("plot ")
 
     if ref_filename is not None:
         fs.write(f"'{ref_filename}' u ($1/a):($2-ef) w l lw lwidth lc 'dark-grey', ")
 
     if colormap:
-        fs.write(f"'{filename}.txt' u 1:2:3 w l lw lwidth lc palette, ")
+        fs.write(f"'{filename}' u 1:2:3 w l lw lwidth lc palette, ")
     else:
-        fs.write(f"'{filename}.txt' u 1:2 w l lw lwidth lc '{lc}', ")
+        fs.write(f"'{filename}' u 1:2 w l lw lwidth lc '{lc}', ")
 
     fs.write(f"{0.0} lw 0.5 lc 'black'")
 
