@@ -414,96 +414,96 @@
 <ul class="simple">
 <li><p>General info.</p>
 <ul>
-<li><p><strong>model</strong>: (str) model name.</p></li>
-<li><p><strong>version</strong>: (str) MultiPie version.</p></li>
-<li><p><strong>created</strong>: (str) created time stamp.</p></li>
+<li><p><strong>model</strong> (str): model name.</p></li>
+<li><p><strong>version</strong> (str): MultiPie version.</p></li>
+<li><p><strong>created</strong> (str): created time stamp.</p></li>
 </ul>
 </li>
 <li><p>Structural info.</p>
 <ul>
-<li><p><strong>group</strong>: (str) group tag.</p></li>
-<li><p><strong>crystal</strong>: (str) crystal class.</p></li>
-<li><p><strong>cell</strong>: (dict) unit-cell parameters.</p>
+<li><p><strong>group</strong> (str): group tag.</p></li>
+<li><p><strong>crystal</strong> (str): crystal class.</p></li>
+<li><p><strong>cell</strong> (dict): unit-cell parameters.</p>
 <ul>
-<li><p>a: (float) a.</p></li>
-<li><p>b: (float) b.</p></li>
-<li><p>c: (float) c.</p></li>
-<li><p>alpha: (float) alpha (deg.).</p></li>
-<li><p>beta: (float) beta (deg.).</p></li>
-<li><p>gamma: (float) gamma (deg.).</p></li>
+<li><p><strong>a</strong> (float): a.</p></li>
+<li><p><strong>b</strong> (float): b.</p></li>
+<li><p><strong>c</strong> (float): c.</p></li>
+<li><p><strong>alpha</strong> (float): alpha (deg.).</p></li>
+<li><p><strong>beta</strong> (float): beta (deg.).</p></li>
+<li><p><strong>gamma</strong> (float): gamma (deg.).</p></li>
 </ul>
 </li>
-<li><p><strong>cell_info</strong>: (dict) unit-cell information</p>
+<li><p><strong>cell_info</strong> (dict): unit-cell information</p>
 <ul>
-<li><p>cell: (dict) = cell.</p></li>
-<li><p>volume: (float) volume.</p></li>
-<li><p>A: (list) [a1,a2,a3,t] (4x4, each column).</p></li>
-<li><p>G: (list) metric matrix (4x4).</p></li>
+<li><p><strong>cell</strong> (dict): = cell.</p></li>
+<li><p><strong>volume</strong> (float): volume.</p></li>
+<li><p><strong>A</strong> (list): [a1,a2,a3,t] (4x4, each column).</p></li>
+<li><p><strong>G</strong> (list): metric matrix (4x4).</p></li>
 </ul>
 </li>
-<li><p><strong>unit_vector</strong>: (list) unit vectors, a1, a2, a3 (conventional cell).</p></li>
-<li><p><strong>unit_vector_primitive</strong>: (list) unit vectors, a1p, a2p, a3p (primitive cell).</p></li>
+<li><p><strong>unit_vector</strong> (list): unit vectors, a1, a2, a3 (conventional cell).</p></li>
+<li><p><strong>unit_vector_primitive</strong> (list): unit vectors, a1p, a2p, a3p (primitive cell).</p></li>
 </ul>
 </li>
 <li><p>Generation condition.</p>
 <ul>
-<li><p><strong>SAMB_select</strong>: (dict) SAMB selection.</p></li>
-<li><p><strong>atomic_select</strong>: (dict) atomic SAMB selection.</p></li>
-<li><p><strong>site_select</strong>: (dict) site-cluster SAMB selection.</p></li>
-<li><p><strong>bond_select</strong>: (dict) bond-cluster SAMB selection.</p></li>
-<li><p><strong>max_neighbor</strong>: (int) max. neighbor in search of bonds.</p></li>
-<li><p><strong>search_cell_range</strong>: (tuple) cell range in search of bonds, (a1,a2,b1,b2,c1,c2).</p></li>
-<li><p><strong>toroidal_priority</strong>: (bool) toroidal priority, false=Q-G or true=G-Q.</p></li>
+<li><p><strong>SAMB_select</strong> (dict): SAMB selection.</p></li>
+<li><p><strong>atomic_select</strong> (dict): atomic SAMB selection.</p></li>
+<li><p><strong>site_select</strong> (dict): site-cluster SAMB selection.</p></li>
+<li><p><strong>bond_select</strong> (dict): bond-cluster SAMB selection.</p></li>
+<li><p><strong>max_neighbor</strong> (int): max. neighbor in search of bonds.</p></li>
+<li><p><strong>search_cell_range</strong> (tuple): cell range in search of bonds, (a1,a2,b1,b2,c1,c2).</p></li>
+<li><p><strong>toroidal_priority</strong> (bool): toroidal priority, false=Q-G or true=G-Q.</p></li>
 </ul>
 </li>
 <li><p>Site and bond info.</p>
 <ul>
-<li><p><strong>site_grid</strong>: (dict) site grid.</p></li>
-<li><p><strong>site</strong>: (dict) site info.</p>
+<li><p><strong>site_grid</strong> (dict): site grid.</p></li>
+<li><p><strong>site</strong> (dict): site info.</p>
 <ul>
-<li><p>representative: (dict) representative site, dict[name, RepSiteType].</p></li>
-<li><p>cell: (dict) conventional cell site, dict[name, [CellSiteType]].</p></li>
+<li><p><strong>representative</strong> (dict): representative site, dict[name, RepSiteType].</p></li>
+<li><p><strong>cell</strong> (dict): conventional cell site, dict[name, [CellSiteType]].</p></li>
 </ul>
 </li>
-<li><p><strong>bond</strong>: bond info.</p>
+<li><p><strong>bond</strong> (dict): bond info.</p>
 <ul>
-<li><p>representative: (dict) representative bond, dict[name, RepBondType].</p></li>
-<li><p>cell: (dict) conventional cell bond, dict[name, [CellBondType]].</p></li>
-<li><p>info: (list) bond properties, [BondInfoType].</p></li>
+<li><p><strong>representative</strong> (dict): representative bond, dict[name, RepBondType].</p></li>
+<li><p><strong>cell</strong> (dict): conventional cell bond, dict[name, [CellBondType]].</p></li>
+<li><p><strong>info</strong> (list): bond properties, [BondInfoType].</p></li>
 </ul>
 </li>
 </ul>
 </li>
 <li><p>SAMB.</p>
 <ul>
-<li><p><strong>SAMB_number</strong>: (int) total number of SAMBs.</p></li>
-<li><p><strong>SAMB_number_min</strong>: (int) total number of SAMBs excluding duplicated ones.</p></li>
-<li><p><strong>atomic_samb</strong>: (dict) atomic SAMB, dict[BraketInfoType, SAMB Dict].</p></li>
-<li><p><strong>atomic_id</strong>: (dict) atomic SAMB ID, dict[tag, (BraketInfoType, index, component)].</p></li>
-<li><p><strong>cluster_samb</strong>: (dict) site/bond cluster SAMB, dict[wyckoff, SAMB Dict].</p></li>
-<li><p><strong>cluster_id</strong>: (dict) site/bond cluster SAMB ID, dict[tag, (wyckoff, index, component)].</p></li>
-<li><p><strong>combined_samb</strong>: (dict) combined SAMB, dict[SAMBType, SAMB Dict].</p></li>
-<li><p><strong>combined_id</strong>: (dict) combined SAMB ID, dict[tag, (symbol, UniqueSAMBType, index, component)].</p></li>
-<li><p><strong>combined_cluster</strong>: (dict) combined cluster info, dict[combined SAMB ID, site/bond_name].</p></li>
-<li><p><strong>irrep_id</strong>: (dict) combined SAMB ID by irrep., dict[irrep, combined_id].</p></li>
-<li><p><strong>common_id</strong>: (dict) common ID of combined SAMB, dict[SAMBType, ([Ztag_list], [site/bond-tag])].</p></li>
-<li><p><strong>cluster_info</strong>: (dict) cluster info, dict[site/bond_name, dict[(bra_rank,ket_rank), (wyckoff,z_list)] ].</p></li>
-<li><p><strong>cluster_vector</strong>: (dict) cluster vector info, dict[site/bond_name, [primitive_vector]].</p></li>
+<li><p><strong>SAMB_number</strong> (int): total number of SAMBs.</p></li>
+<li><p><strong>SAMB_number_min</strong> (int): total number of SAMBs excluding duplicated ones.</p></li>
+<li><p><strong>atomic_samb</strong> (dict): atomic SAMB, dict[BraketInfoType, SAMB Dict].</p></li>
+<li><p><strong>atomic_id</strong> (dict): atomic SAMB ID, dict[tag, (BraketInfoType, index, component)].</p></li>
+<li><p><strong>cluster_samb</strong> (dict): site/bond cluster SAMB, dict[wyckoff, SAMB Dict].</p></li>
+<li><p><strong>cluster_id</strong> (dict): site/bond cluster SAMB ID, dict[tag, (wyckoff, index, component)].</p></li>
+<li><p><strong>combined_samb</strong> (dict): combined SAMB, dict[SAMBType, SAMB Dict].</p></li>
+<li><p><strong>combined_id</strong> (dict): combined SAMB ID, dict[tag, (symbol, UniqueSAMBType, index, component)].</p></li>
+<li><p><strong>combined_cluster</strong> (dict): combined cluster info, dict[combined SAMB ID, site/bond_name].</p></li>
+<li><p><strong>irrep_id</strong> (dict): combined SAMB ID by irrep., dict[irrep, combined_id].</p></li>
+<li><p><strong>common_id</strong> (dict): common ID of combined SAMB, dict[SAMBType, ([Ztag_list], [site/bond-tag])].</p></li>
+<li><p><strong>cluster_info</strong> (dict): cluster info, dict[site/bond_name, dict[(bra_rank,ket_rank), (wyckoff,z_list)] ].</p></li>
+<li><p><strong>cluster_vector</strong> (dict): cluster vector info, dict[site/bond_name, [primitive_vector]].</p></li>
 </ul>
 </li>
 <li><p>Misc.</p>
 <ul>
-<li><p><strong>basis_type</strong>: (str) atomic basis type.</p></li>
-<li><p><strong>full_matrix</strong>: (dict) full matrix info.</p>
+<li><p><strong>basis_type</strong> (str): atomic basis type.</p></li>
+<li><p><strong>full_matrix</strong> (dict): full matrix info.</p>
 <ul>
-<li><p>ket: (list) ket info., [(atom,sublattice,rank,basis_index,orbital)].</p></li>
-<li><p>index: (dict) index info., dict[(atom,SL,rank), (top,size)].</p></li>
+<li><p><strong>ket</strong> (list): ket info., [(atom,sublattice,rank,basis_index,orbital)].</p></li>
+<li><p><strong>index</strong> (dict): index info., dict[(atom,SL,rank), (top,size)].</p></li>
 </ul>
 </li>
-<li><p><strong>braket</strong>: (dict) braket info., dict[site/bond-tag, [BraketInfoType]].</p></li>
-<li><p><strong>wyckoff</strong>: (dict) wyckoff info., dict[site/bond-tag, wyckoff].</p></li>
-<li><p><strong>qtdraw_prop</strong>: (dict) QtDraw properties.</p></li>
-<li><p><strong>pdf_ctrl</strong>: (dict) PDF creation control.</p></li>
+<li><p><strong>braket</strong> (dict): braket info., dict[site/bond-tag, [BraketInfoType]].</p></li>
+<li><p><strong>wyckoff</strong> (dict): wyckoff info., dict[site/bond-tag, wyckoff].</p></li>
+<li><p><strong>qtdraw_prop</strong> (dict): QtDraw properties.</p></li>
+<li><p><strong>pdf_ctrl</strong> (dict): PDF creation control.</p></li>
 </ul>
 </li>
 </ul>
@@ -514,8 +514,8 @@
 <ul class="simple">
 <li><p>Combined SAMB, <span class="math notranslate nohighlight">\(Z_i\)</span>, Dict[index, SAMB].</p>
 <ul>
-<li><p>index: (PGMultipoleType) (X,l,<span class="math notranslate nohighlight">\(\Gamma\)</span>,s,k,n,p,x)</p></li>
-<li><p>SAMB: (tuple) SAMB data for set of components.</p>
+<li><p>index (PGMultipoleType): (X,l,<span class="math notranslate nohighlight">\(\Gamma\)</span>,s,k,n,p,x)</p></li>
+<li><p>SAMB (tuple): SAMB data for set of components.</p>
 <ul>
 <li><p>(list) [[(coeff, X_index, X_component, Y_index, Y_component)]],</p></li>
 <li><p>(list) [symmetry].</p></li>
@@ -525,8 +525,8 @@
 </li>
 <li><p>Atomic SAMB, <span class="math notranslate nohighlight">\(X_j\)</span>, Dict[index, SAMB].</p>
 <ul>
-<li><p>index: (PGMultipoleType) (X,l,<span class="math notranslate nohighlight">\(\Gamma\)</span>,s,k,n,p,x)</p></li>
-<li><p>SAMB: (tuple) SAMB data for set of components.</p>
+<li><p>index (PGMultipoleType): (X,l,<span class="math notranslate nohighlight">\(\Gamma\)</span>,s,k,n,p,x)</p></li>
+<li><p>SAMB (tuple): SAMB data for set of components.</p>
 <ul>
 <li><p>(list) [matrix],</p></li>
 <li><p>(list) [symmetry]</p></li>
@@ -536,8 +536,8 @@
 </li>
 <li><p>Site/bond-cluster SAMB, <span class="math notranslate nohighlight">\(Y_k\)</span>, Dict[index, SAMB].</p>
 <ul>
-<li><p>index: (PGMultipoleType) (X,l,<span class="math notranslate nohighlight">\(\Gamma\)</span>,s,k,n,p,x)</p></li>
-<li><p>SAMB: (tuple) SAMB data for set of components.</p>
+<li><p>index (PGMultipoleType): (X,l,<span class="math notranslate nohighlight">\(\Gamma\)</span>,s,k,n,p,x)</p></li>
+<li><p>SAMB (tuple): SAMB data for set of components.</p>
 <ul>
 <li><p>(list) [vector],</p></li>
 <li><p>(list) [symmetry]</p></li>
