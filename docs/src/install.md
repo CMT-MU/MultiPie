@@ -18,7 +18,7 @@
     ```bash
     brew install python@3.13
     ```
-  - Add Python (and LaTeX, if needed) to your `.bashrc` or `.zshrc`:
+  - Add Python (and LaTeX, if needed) path to your `.bashrc` or `.zshrc`:
     ```bash
     export PATH=/opt/homebrew/opt/python@3.13/libexec/bin:$PATH
     ```
@@ -28,7 +28,7 @@
 - **Linux**
 
   - Install Python using your distribution’s package manager or from source.
-  - Add Python (and LaTeX, if needed) to your shell configuration file (e.g. `.bashrc` or `.zshrc`):
+  - Add Python (and LaTeX, if needed) path to your shell configuration file (e.g. `.bashrc` or `.zshrc`):
     ```bash
     export PATH=/path/to/python/bin:$PATH
     ```
@@ -39,7 +39,7 @@
 
   - Install PowerShell and Python by following the instructions at:
   https://microsoft.com/PowerShell
-  - Ensure that Python is added to your system PATH during installation.
+  - Ensure that Python path is added to your system PATH during installation.
 
 2. Install MultiPie
 All required dependencies will be installed automatically.
@@ -67,10 +67,10 @@ Install the visualization tool QtDraw:
 
 ## Shell Commands
 MultiPie provides the following command-line utilities:
-- `mp_create input1, input2, ...`
+- `mp_create [option] input1, input2, ...`
 
   create models by the model input files.
-- `mp_analyze control`
+- `mp_analyze [option] control`
 
   analyze the model by the control file.
 

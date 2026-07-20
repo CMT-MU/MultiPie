@@ -3,4 +3,4 @@ Parameter dict.
 - finite parameter, dict[zj, value].
 """
 
-graphene_z = {"z2": "1.0"}
+graphene_z = {"z2": 1.0}
