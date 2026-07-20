@@ -69,6 +69,9 @@ class ModelAnalyzer(dict):
         self._mm = MaterialModel(topdir, verbose=verbose)
         self._local = create_all_local_operator()
         self.set_grid_size(N1, N2, N3)
+        self["samb"] = {}
+        self["wannier"] = {}
+        self["output"] = {}
 
     # ==================================================
     @property
@@ -146,7 +149,22 @@ class ModelAnalyzer(dict):
             N2 (int): number of divisions in a2.
             N3 (int): number of divisions in a3.
         """
-        self["mp_grid"] = [N1, N2, N3]
+        self["grid"] = [N1, N2, N3]
+
+    # ==================================================
+    def set_primitive_cell(self, A):
+        """
+        Set primitive cell info.
+
+        Args:
+            A (ndarray): [a1, a2, a3] (3x3).
+
+        :meta private:
+        """
+        B = 2 * np.pi * np.linalg.inv(A).T
+        self["A"] = A  # primitive cell.
+        self["B"] = B  # reciprocal cell.
+        self["unit_cell_volume"] = float(np.dot(A[0], np.cross(A[1], A[2])))  # volume of primitive cell.
 
     # ==================================================
     def analyze(self, control):
@@ -184,21 +202,6 @@ class ModelAnalyzer(dict):
         self.compute_physical_quantity()
 
     # ==================================================
-    def set_primitive_cell(self, A):
-        """
-        Set primitive cell info.
-
-        Args:
-            A (ndarray): [a1, a2, a3] (3x3).
-
-        :meta private:
-        """
-        B = 2 * np.pi * np.linalg.inv(A).T
-        self["A"] = A  # primitive cell.
-        self["B"] = B  # reciprocal cell.
-        self["unit_cell_volume"] = float(np.dot(A[0], np.cross(A[1], A[2])))  # volume of primitive cell.
-
-    # ==================================================
     def local_operator(self, name):
         """
         Create local operator.
@@ -231,35 +234,36 @@ class ModelAnalyzer(dict):
         if type(parameter) == str:  # when parameter is str, which means filename of z_j dict.
             z_file = os.path.join(self._topdir, self.name, parameter)
             parameter = read_dict(z_file)
-            parameter = {tag: str_to_sympy(v, rational=False) if type(v) == str else v for tag, v in parameter.items()}
-            self._samb["parameter"] = parameter
+            parameter = {tag: float(str_to_sympy(v, rational=False)) if type(v) == str else v for tag, v in parameter.items()}
 
         if self.samb.get("NG_sum_rule", False):
             parameter = add_local_parameter(matrix_info, parameter)
-            self._samb["parameter"] = parameter
 
         if self.samb.get("samb_figure", False):
             self.model.save_samb_qtdraw()
 
         # output matrx.py and hr.dat.
-        parameter = self.samb.get("parameter", {})
         if parameter:
             self._HR = self.model.get_hr(parameter, matrix_info["matrix"])
             self.model.save_samb_hr(matrix_info, parameter, self._HR)
-            write_dict(
-                {tag: str(v).replace(" ", "") for tag, v in parameter.items()},
-                self.name + "_z.py",
-                comment=_param_comment,
-                w_dir=self.name,
-            )
+            z_file = os.path.join(self._topdir, self.name, self.name + "_z.py")
+            write_dict({tag: float(v) for tag, v in parameter.items()}, z_file, comment=_param_comment, w_dir=self.name)
+            if self._verbose:
+                print(f"save z to '{z_file}'.")
         self.model.save_samb_matrix(matrix_info)
 
         IR = next(iter(self.model.group.character["table"].keys()))  # identity irrep.
         conv_dict = convert_zj_atomic_var(matrix_info, self.model["combined_cluster"], self.model["combined_id"], IR)
         conv_dict = {name: {zj: str(ex).replace(" ", "") for zj, ex in dic.items()} for name, dic in conv_dict.items()}
-        write_dict(conv_dict, self.name + "_var.py", comment=_zj_var_comment, w_dir=self.name)
+        var_file = os.path.join(self._topdir, self.name, self.name + "_var.py")
+        write_dict(conv_dict, var_file, comment=_zj_var_comment, w_dir=self.name)
+        if self._verbose:
+            print(f"save var to '{var_file}'.")
 
         self.set_k_multipole(matrix_info)
+
+        self["samb"]["parameter"] = parameter
+        self["samb"]["matrix_info"] = matrix_info
 
     # ==================================================
     def set_from_wannier(self):
@@ -317,9 +321,7 @@ class ModelAnalyzer(dict):
             return
 
         k_point, k_path = self.get_kpath(k_path)
-        k_point_path, k_linear, k_dis_pos = grid_path(k_point, k_path, self["mp_grid"][0], self["B"])
-        self._output["dispersion"]["k_path"] = k_path
-        self._output["dispersion"]["k_point"] = k_point
+        k_point_path, k_linear, k_dis_pos = grid_path(k_point, k_path, self["grid"][0], self["B"])
 
         tb_gauge = self.output["fourier"]["tb_gauge"]
         atom = np.asarray(list(self.model.get_ket_site().values()), dtype=float)
@@ -347,6 +349,8 @@ class ModelAnalyzer(dict):
             outdir = os.path.join(self._topdir, self.name, self.output["dir"])
             print(f"save dispersion to '{outdir}/{fname}'.")
 
+        self["output"]["dispersion"] = {"k_path": k_path, "k_point": k_point}
+
     # ==================================================
     def compute_dos(self):
         """
@@ -373,9 +377,9 @@ class ModelAnalyzer(dict):
         :meta private:
         """
         if k_path == "":  # create default path.
-            A = self.model["unit_vector_primitive"]
-            d = next(reversed(self.model.group.wyckoff["site"].values()))  # general point.
-            positions = d["reference"].astype(float)  # fractional, conventional, plus set.
+            A = self["A"]
+            gp = next(reversed(self.model.group.wyckoff["site"].values()))  # general point.
+            positions = gp["reference"].astype(float)  # fractional, conventional, plus set.
             numbers = np.full(len(positions), 1, dtype=int)
 
             structure = (A, positions, numbers)
@@ -437,22 +441,21 @@ class ModelAnalyzer(dict):
             tag: (cn, wp, {Rmn: str(v).replace(" ", "") for Rmn, v in mat.items()}) for tag, (cn, wp, mat) in k_matrix.items()
         }
 
+        k_multipole = {
+            "dimension": matrix_info["dimension"],
+            "ket_site": list(matrix_info["ket_site"].keys()),
+            "index": matrix_info["index"],
+            "cluster_vector": cluster_vec,
+            "k_multipole": k_multipole,
+            "k_matrix": k_matrix,
+        }
+
         # output.
         outdir = os.path.join(self._topdir, self.name)
         fname = self.name + "_k.py"
-        write_dict(
-            {
-                "dimension": matrix_info["dimension"],
-                "ket_site": list(matrix_info["ket_site"].keys()),
-                "index": matrix_info["index"],
-                "cluster_vector": cluster_vec,
-                "k_multipole": k_multipole,
-                "k_matrix": k_matrix,
-            },
-            fname,
-            comment=_k_matrix_comment,
-            w_dir=outdir,
-        )
+        write_dict(k_multipole, fname, comment=_k_matrix_comment, w_dir=outdir)
 
         if self._verbose:
             print(f"save k-multipole to '{outdir}/{fname}'.")
+
+        self["samb"]["k_multipole"] = k_multipole
