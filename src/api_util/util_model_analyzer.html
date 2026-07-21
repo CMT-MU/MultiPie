@@ -366,16 +366,18 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.build_and_solve_hermitian"><code class="docutils literal notranslate"><span class="pre">build_and_solve_hermitian()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.convert_zj_atomic_var"><code class="docutils literal notranslate"><span class="pre">convert_zj_atomic_var()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.create_all_local_operator"><code class="docutils literal notranslate"><span class="pre">create_all_local_operator()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.create_gnuplot_cmd"><code class="docutils literal notranslate"><span class="pre">create_gnuplot_cmd()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.create_k_matrix"><code class="docutils literal notranslate"><span class="pre">create_k_matrix()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.create_k_multipole"><code class="docutils literal notranslate"><span class="pre">create_k_multipole()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.create_local_operator"><code class="docutils literal notranslate"><span class="pre">create_local_operator()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.create_operator_index"><code class="docutils literal notranslate"><span class="pre">create_operator_index()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.fourier_r_to_k"><code class="docutils literal notranslate"><span class="pre">fourier_r_to_k()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.generate_band_gnuplot_eig"><code class="docutils literal notranslate"><span class="pre">generate_band_gnuplot_eig()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.grid_all"><code class="docutils literal notranslate"><span class="pre">grid_all()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.grid_path"><code class="docutils literal notranslate"><span class="pre">grid_path()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.output_linear_dispersion_eig"><code class="docutils literal notranslate"><span class="pre">output_linear_dispersion_eig()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.output_dispersion"><code class="docutils literal notranslate"><span class="pre">output_dispersion()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.parse_orbital"><code class="docutils literal notranslate"><span class="pre">parse_orbital()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.plot_save_dispersion"><code class="docutils literal notranslate"><span class="pre">plot_save_dispersion()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.read_text_data"><code class="docutils literal notranslate"><span class="pre">read_text_data()</span></code></a></li>
 </ul>
             </nav>
         </div>
@@ -475,6 +477,26 @@
 <li><p>it is used for basis, lg and lgs, not for jml.</p></li>
 </ul>
 </div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_model_analyzer.create_gnuplot_cmd">
+<span class="sig-name descname"><span class="pre">create_gnuplot_cmd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_dis_pos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kmax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">emax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">emin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colormap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lwidth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'salmon'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_model_analyzer.html#create_gnuplot_cmd"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_model_analyzer.create_gnuplot_cmd" title="Link to this definition">#</a></dt>
+<dd><p>Create gnuplot file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<em>str</em>) – file name.</p></li>
+<li><p><strong>k_dis_pos</strong> (<em>dict</em>) – info. of high-symmetry point in linear k, dict[disconnected position, label].</p></li>
+<li><p><strong>kmax</strong> (<em>float</em>) – maximum value in kpoints.</p></li>
+<li><p><strong>emax</strong> (<em>float</em>) – maximum value of eigen values.</p></li>
+<li><p><strong>emin</strong> (<em>float</em>) – minimum value of eigen values.</p></li>
+<li><p><strong>colormap</strong> (<em>bool</em><em>, </em><em>optional</em>) – with colormap of first expectation value of operator.</p></li>
+<li><p><strong>lwidth</strong> (<em>int</em><em>, </em><em>optional</em>) – line width.</p></li>
+<li><p><strong>lc</strong> (<em>str</em><em>, </em><em>optional</em>) – line color.</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
@@ -596,32 +618,6 @@
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="multipie.util.util_model_analyzer.generate_band_gnuplot_eig">
-<span class="sig-name descname"><span class="pre">generate_band_gnuplot_eig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kmax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">emax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">emin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_wann</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_model_analyzer.html#generate_band_gnuplot_eig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_model_analyzer.generate_band_gnuplot_eig" title="Link to this definition">#</a></dt>
-<dd><p>Generate gnuplot file to plot band dispersion.
-(only eigen values)</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>filename</strong> (<em>str</em>) – file name.</p></li>
-<li><p><strong>kmax</strong> (<em>float</em>) – maximum value in kpoints.</p></li>
-<li><p><strong>emax</strong> (<em>float</em>) – maximum value of eigen values.</p></li>
-<li><p><strong>emin</strong> (<em>float</em>) – minimum value of eigen values.</p></li>
-<li><p><strong>num_wann</strong> (<em>int</em>) – # of wannier functions.</p></li>
-<li><p><strong>kwargs</strong> (<em>dict</em><em>, </em><em>optional</em>) – key words for generate_band_gnuplot.
-- a (float): length of lattice vector.
-- ef (float): fermi energy.
-- k_dis_pos (dict): {disconnected linear position:label}.
-- lwidth (float): line width.
-- lc (str): line color.
-- ref_filename (str): file name of reference band data.
-- colormap (bool): with colormap of first expectation value of operator.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
 <dt class="sig sig-object py" id="multipie.util.util_model_analyzer.grid_all">
 <span class="sig-name descname"><span class="pre">grid_all</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_model_analyzer.html#grid_all"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_model_analyzer.grid_all" title="Link to this definition">#</a></dt>
 <dd><p>Create N1 x N2 x N3 grid points.</p>
@@ -667,10 +663,9 @@
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="multipie.util.util_model_analyzer.output_linear_dispersion_eig">
-<span class="sig-name descname"><span class="pre">output_linear_dispersion_eig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">o</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_model_analyzer.html#output_linear_dispersion_eig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_model_analyzer.output_linear_dispersion_eig" title="Link to this definition">#</a></dt>
-<dd><p>Output band dispersion along high-symmetry lines.
-(only eigen values)</p>
+<dt class="sig sig-object py" id="multipie.util.util_model_analyzer.output_dispersion">
+<span class="sig-name descname"><span class="pre">output_dispersion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">o</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_model_analyzer.html#output_dispersion"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_model_analyzer.output_dispersion" title="Link to this definition">#</a></dt>
+<dd><p>Output band dispersion along high-symmetry lines.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -678,7 +673,6 @@
 <li><p><strong>k</strong> (<em>ndarray</em>) – k points along high-symmetry lines.</p></li>
 <li><p><strong>e</strong> (<em>ndarray</em>) – eigen values.</p></li>
 <li><p><strong>o</strong> (<em>list</em><em>, </em><em>optional</em>) – expectation value of any operator for each band, [[num_k, num_band]].</p></li>
-<li><p><strong>kwargs</strong> (<em>dict</em><em>, </em><em>optional</em>) – key words for generate_band_gnuplot.</p></li>
 </ul>
 </dd>
 </dl>
@@ -695,6 +689,40 @@
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p>(tuple or str) – orbital, spin or orbital.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_model_analyzer.plot_save_dispersion">
+<span class="sig-name descname"><span class="pre">plot_save_dispersion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_dis_pos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colormap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lwidth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'salmon'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_model_analyzer.html#plot_save_dispersion"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_model_analyzer.plot_save_dispersion" title="Link to this definition">#</a></dt>
+<dd><p>Generate plot window for band dispersion (matplotlib).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<em>str</em>) – file name.</p></li>
+<li><p><strong>k_dis_pos</strong> (<em>dict</em>) – info. of high-symmetry point in linear k, dict[disconnected position, label].</p></li>
+<li><p><strong>colormap</strong> (<em>bool</em><em>, </em><em>optional</em>) – with colormap of first expectation value of operator.</p></li>
+<li><p><strong>lwidth</strong> (<em>int</em><em>, </em><em>optional</em>) – line width.</p></li>
+<li><p><strong>lc</strong> (<em>str</em><em>, </em><em>optional</em>) – line color.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_model_analyzer.read_text_data">
+<span class="sig-name descname"><span class="pre">read_text_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_model_analyzer.html#read_text_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_model_analyzer.read_text_data" title="Link to this definition">#</a></dt>
+<dd><p>Read text data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – file name.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(list) – block of data (ndarray) separated by empty line, [block][x, y].</p></li>
 </ul>
 </p>
 </dd>
@@ -749,16 +777,18 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.build_and_solve_hermitian"><code class="docutils literal notranslate"><span class="pre">build_and_solve_hermitian()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.convert_zj_atomic_var"><code class="docutils literal notranslate"><span class="pre">convert_zj_atomic_var()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.create_all_local_operator"><code class="docutils literal notranslate"><span class="pre">create_all_local_operator()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.create_gnuplot_cmd"><code class="docutils literal notranslate"><span class="pre">create_gnuplot_cmd()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.create_k_matrix"><code class="docutils literal notranslate"><span class="pre">create_k_matrix()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.create_k_multipole"><code class="docutils literal notranslate"><span class="pre">create_k_multipole()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.create_local_operator"><code class="docutils literal notranslate"><span class="pre">create_local_operator()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.create_operator_index"><code class="docutils literal notranslate"><span class="pre">create_operator_index()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.fourier_r_to_k"><code class="docutils literal notranslate"><span class="pre">fourier_r_to_k()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.generate_band_gnuplot_eig"><code class="docutils literal notranslate"><span class="pre">generate_band_gnuplot_eig()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.grid_all"><code class="docutils literal notranslate"><span class="pre">grid_all()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.grid_path"><code class="docutils literal notranslate"><span class="pre">grid_path()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.output_linear_dispersion_eig"><code class="docutils literal notranslate"><span class="pre">output_linear_dispersion_eig()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.output_dispersion"><code class="docutils literal notranslate"><span class="pre">output_dispersion()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.parse_orbital"><code class="docutils literal notranslate"><span class="pre">parse_orbital()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.plot_save_dispersion"><code class="docutils literal notranslate"><span class="pre">plot_save_dispersion()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.read_text_data"><code class="docutils literal notranslate"><span class="pre">read_text_data()</span></code></a></li>
 </ul>
   </nav></div>
 

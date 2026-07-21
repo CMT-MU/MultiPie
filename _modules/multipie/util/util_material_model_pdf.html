@@ -33,7 +33,7 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=34ddd5e8" />
@@ -913,24 +913,28 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mm</span><span class="p">[</span><span class="s2">&quot;basis_type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;jml&quot;</span><span class="p">:</span>
             <span class="k">return</span>
 
-        <span class="n">site</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mm</span><span class="p">[</span><span class="s2">&quot;site&quot;</span><span class="p">][</span><span class="s2">&quot;representative&quot;</span><span class="p">]</span>
+        <span class="n">spinful</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mm</span><span class="p">[</span><span class="s2">&quot;basis_type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;lgs&quot;</span>
         <span class="n">basis</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mm</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">atomic_basis</span><span class="p">(</span><span class="s2">&quot;lg&quot;</span><span class="p">)</span>
         <span class="n">basis_form</span> <span class="o">=</span> <span class="n">Group</span><span class="o">.</span><span class="n">global_info</span><span class="p">()[</span><span class="s2">&quot;harmonics&quot;</span><span class="p">][</span><span class="s2">&quot;basis_function&quot;</span><span class="p">]</span>
 
-        <span class="n">ranks</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span>
-            <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="nb">sum</span><span class="p">([[</span><span class="n">rank</span> <span class="k">for</span> <span class="n">rank</span><span class="p">,</span> <span class="n">orb</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">rep</span><span class="o">.</span><span class="n">orbital</span><span class="p">)</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">orb</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">rep</span> <span class="ow">in</span> <span class="n">site</span><span class="o">.</span><span class="n">values</span><span class="p">()],</span> <span class="p">[])))</span>
-        <span class="p">)</span>
-
+        <span class="n">atomic_samb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mm</span><span class="p">[</span><span class="s2">&quot;atomic_samb&quot;</span><span class="p">]</span>
         <span class="n">cap</span> <span class="o">=</span> <span class="s2">&quot;Atomic basis (orbital part only)&quot;</span>
         <span class="n">lbl</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;definition&quot;</span><span class="p">]</span>
         <span class="n">row</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">tbl</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">hl</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">no</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
-        <span class="k">for</span> <span class="n">rank</span> <span class="ow">in</span> <span class="n">ranks</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">basis</span><span class="p">[</span><span class="n">rank</span><span class="p">]:</span>
-                <span class="n">form</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">latex</span><span class="p">(</span><span class="n">basis_form</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
-                <span class="n">sb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mm</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">tag_atomic_basis</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">rank</span><span class="p">,</span> <span class="n">latex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">rank_done</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">atomic_samb</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">rank</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">kt_rank</span>
+            <span class="k">if</span> <span class="n">rank</span> <span class="ow">in</span> <span class="n">rank_done</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">rank_done</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rank</span><span class="p">)</span>
+            <span class="n">idx</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="o">//</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">name</span><span class="o">.</span><span class="n">kt_idx</span><span class="p">)[::</span><span class="mi">2</span><span class="p">]]</span> <span class="k">if</span> <span class="n">spinful</span> <span class="k">else</span> <span class="nb">list</span><span class="p">(</span><span class="n">name</span><span class="o">.</span><span class="n">kt_idx</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">idx</span><span class="p">:</span>
+                <span class="n">orb</span> <span class="o">=</span> <span class="n">basis</span><span class="p">[</span><span class="n">rank</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+                <span class="n">form</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">latex</span><span class="p">(</span><span class="n">basis_form</span><span class="p">[</span><span class="n">orb</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+                <span class="n">sb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mm</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">tag_atomic_basis</span><span class="p">(</span><span class="n">orb</span><span class="p">,</span> <span class="n">rank</span><span class="p">,</span> <span class="n">latex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
                 <span class="n">row</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sb</span><span class="p">)</span>
                 <span class="n">tbl</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">form</span><span class="p">])</span>
                 <span class="n">no</span> <span class="o">+=</span> <span class="mi">1</span>
