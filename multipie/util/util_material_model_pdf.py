@@ -543,24 +543,28 @@ class ModelPDF:
         if self.mm["basis_type"] == "jml":
             return
 
-        site = self.mm["site"]["representative"]
+        spinful = self.mm["basis_type"] == "lgs"
         basis = self.mm.group.atomic_basis("lg")
         basis_form = Group.global_info()["harmonics"]["basis_function"]
 
-        ranks = sorted(
-            list(set(sum([[rank for rank, orb in enumerate(rep.orbital) if len(orb) > 0] for rep in site.values()], [])))
-        )
-
+        atomic_samb = self.mm["atomic_samb"]
         cap = "Atomic basis (orbital part only)"
         lbl = ["definition"]
         row = []
         tbl = []
         hl = []
         no = -1
-        for rank in ranks:
-            for i in basis[rank]:
-                form = sp.latex(basis_form[i][0])
-                sb = self.mm.group.tag_atomic_basis(i, rank, latex=True)
+        rank_done = []
+        for name in atomic_samb.keys():
+            rank = name.kt_rank
+            if rank in rank_done:
+                continue
+            rank_done.append(rank)
+            idx = [i // 2 for i in list(name.kt_idx)[::2]] if spinful else list(name.kt_idx)
+            for i in idx:
+                orb = basis[rank][i]
+                form = sp.latex(basis_form[orb][0])
+                sb = self.mm.group.tag_atomic_basis(orb, rank, latex=True)
                 row.append(sb)
                 tbl.append([form])
                 no += 1

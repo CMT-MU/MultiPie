@@ -13,7 +13,9 @@ from multipie.core.default_control import default_control
 from multipie.util.util_model_analyzer import (
     fourier_r_to_k,
     grid_path,
-    output_linear_dispersion_eig,
+    output_dispersion,
+    plot_save_dispersion,
+    create_gnuplot_cmd,
     create_all_local_operator,
     create_local_operator,
     create_k_multipole,
@@ -340,18 +342,29 @@ class ModelAnalyzer(dict):
         power = self.output["dispersion"].get("power", None)
         if power is not None:
             Ek = np.power(Ek, power)
+
         Ok = [np.einsum("kmi,mn,kni->ki", Uk.conj(), self.local_operator(name), Uk).real for name in op_lst]
+
         fname = self.name + "_dispersion.txt"
+        colormap = len(Ok) > 0
         if Ok:
-            output_linear_dispersion_eig(fname, k_linear, Ek, Ok, k_dis_pos=k_dis_pos, colormap=True)
+            output_dispersion(fname, k_linear, Ek, Ok)
         else:
-            output_linear_dispersion_eig(fname, k_linear, Ek, k_dis_pos=k_dis_pos)
+            output_dispersion(fname, k_linear, Ek)
+        plot_save_dispersion(fname, k_dis_pos, colormap)
+        create_gnuplot_cmd(fname, k_dis_pos, np.max(k_linear), np.max(Ek), np.min(Ek), colormap)
 
         if self._verbose:
             outdir = os.path.join(self._topdir, self.name, self.output["dir"])
             print(f"save dispersion to '{outdir}/{fname}'.")
 
-        self["output"]["dispersion"] = {"k_path": k_path, "k_point": k_point}
+        self["output"]["dispersion"] = {
+            "k_path": k_path,
+            "k_point": k_point,
+            "e_max": np.max(Ek),
+            "e_min": np.min(Ek),
+            "ef": 0.0,
+        }
 
     # ==================================================
     def compute_dos(self):
