@@ -67,10 +67,10 @@ Install the visualization tool QtDraw:
 
 ## Shell Commands
 MultiPie provides the following command-line utilities:
-- `mp_create [option] input1, input2, ...`
+- `mp_create [option] input1 input2 ...`
 
   create models by the model input files.
-- `mp_analyze [option] control`
+- `mp_analyze [option] control1 control2 ...`
 
   analyze the model by the control file.
 

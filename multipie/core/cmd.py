@@ -55,12 +55,12 @@ def create_model(models, topdir=None, verbose=False):
 
 
 # ==================================================
-def analyze_model(control, N1=50, N2=50, N3=50, topdir=None, verbose=False):
+def analyze_model(controls, N1=50, N2=50, N3=50, topdir=None, verbose=False):
     """
     Analyze model.
 
     Args:
-        control (str or dict): control file or dict.
+        controls (str or [str] or dict or [dict]): control file(s) or dict(s).
         N1 (int, optional): number of divisions in a1.
         N2 (int, optional): number of divisions in a2.
         N3 (int, optional): number of divisions in a3.
@@ -75,7 +75,7 @@ def analyze_model(control, N1=50, N2=50, N3=50, topdir=None, verbose=False):
     """
     setup_logging()
 
-    def create(ma):
+    def create(ma, control):
         @timer(f"analyze model by '{control}'", verbose=verbose)
         def create0():
             ma.analyze(control)
@@ -85,11 +85,14 @@ def analyze_model(control, N1=50, N2=50, N3=50, topdir=None, verbose=False):
     if topdir is None:
         topdir = os.getcwd()
 
+    controls = list(read_dict_file(controls, topdir, verbose).values())
+
     ma = ModelAnalyzer(N1, N2, N3, topdir, verbose=verbose)
-    try:
-        create(ma)
-    except Exception:
-        logging.exception("in analyze_model")
-        raise
+    for control in controls:
+        try:
+            create(ma, control)
+        except Exception:
+            logging.exception("in analyze_model")
+            raise
 
     return False

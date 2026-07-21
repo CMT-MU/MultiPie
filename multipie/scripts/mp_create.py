@@ -36,7 +36,7 @@ def extract_dict(filepath, key):
 
 # ================================================== mp_create
 @click.command()
-@click.option("-v", "--verbose", is_flag=True, help="verbose off.")
+@click.option("-v", "--verbose", is_flag=True, help="verbose on.")
 @click.option("-i", "--input", is_flag=True, help="show input format, and exit.")
 @click.argument("models", nargs=-1)
 def cmd(models, verbose, input):

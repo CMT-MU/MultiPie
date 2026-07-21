@@ -5,6 +5,7 @@ This module provides model analyzer.
 """
 
 import os
+import logging
 import numpy as np
 import seekpath
 from multipie.core.material_model import MaterialModel
@@ -282,7 +283,8 @@ class ModelAnalyzer(dict):
         :meta private:
         """
         if self._HR is None:
-            print("set H(R) first before calculating physical quantities.")
+            if self._verbose:
+                print("set H(R) first before calculating physical quantities.")
             return
 
         cwd = os.getcwd()
@@ -386,8 +388,8 @@ class ModelAnalyzer(dict):
             info = seekpath.get_path(structure)
 
             if info["spacegroup_number"] != int(self.model.group.ID):
-                print("obtained SG is different with given group.")
-                raise Exception
+                logging.exception("obtained SG is different with given group.")
+                raise
 
             k_point = info["point_coords"]
             k_point["Γ"] = k_point["GAMMA"]

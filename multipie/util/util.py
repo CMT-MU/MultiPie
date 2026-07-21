@@ -295,9 +295,9 @@ def read_dict_file(data, topdir=None, verbose=False):
 
     # dict or [dict].
     if isinstance(data, dict):
-        return {data["model"]: data}
+        return {"dict1": data}
     if isinstance(data, (tuple, list)) and data and isinstance(data[0], dict):
-        return {i["model"]: i for i in data}
+        return {f"dict{no+1}": i for no, i in enumerate(data)}
 
     if not isinstance(data, str) and not (isinstance(data, (tuple, list)) and data and isinstance(data[0], str)):
         raise TypeError(f"invalid type, {type(data)}.")
@@ -308,29 +308,44 @@ def read_dict_file(data, topdir=None, verbose=False):
 
     data = [i + ".py" if not i.endswith(".py") else i for i in data]
 
-    dict_vars = {}
-    for i in data:
-        if not os.path.exists(i):
-            print(f"cannot open '{topdir}/{i}'.")
-            exit(1)
-        if verbose:
-            print(f"read '{topdir}/{i}'.")
-        # create module name.
-        module_name = os.path.splitext(os.path.basename(i))[0]
+    result = {}
+    counts = {}
 
-        # import.
-        spec = importlib.util.spec_from_file_location(module_name, i)
-        module = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(module)
+    def add(name, value):
+        n = counts.get(name, 0) + 1
+        counts[name] = n
+        if n == 1:
+            result[name] = value
+        else:
+            result[f"{name}{n}"] = value
 
-        dict_vars.update({k: v for k, v in vars(module).items() if isinstance(v, dict) and not k.startswith("__")})
+    for filename in data:
+        with open(filename, "r", encoding="utf-8") as f:
+            src = f.read()
+
+        tree = ast.parse(src, filename)
+
+        # for single {...}.
+        if len(tree.body) == 1 and isinstance(tree.body[0], ast.Expr) and isinstance(tree.body[0].value, ast.Dict):
+            add("dict", ast.literal_eval(tree.body[0].value))
+            continue
+
+        #  for A = {...}.
+        for node in tree.body:
+            if (
+                isinstance(node, ast.Assign)
+                and len(node.targets) == 1
+                and isinstance(node.targets[0], ast.Name)
+                and isinstance(node.value, ast.Dict)
+            ):
+                add(node.targets[0].id, ast.literal_eval(node.value))
 
     os.chdir(cwd)
 
-    if not dict_vars:
+    if not result:
         raise ValueError(f"no dict is found in {data}.")
 
-    return dict_vars
+    return result
 
 
 # ==================================================
