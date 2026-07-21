@@ -413,7 +413,7 @@ def create_k_multipole(cluster_samb, cluster_vector):
     for k, v in cluster_samb.items():
         if "@" in k:  # bond.
             d = len(next(iter(v.values()))[0][0])
-            kb = np.array(sp.symbols(" ".join([f"kb_{i+1}" for i in range(d)])), dtype=object)
+            kb = np.array([sp.Symbol(f"kb_{i+1}", real=True) for i in range(d)], dtype=object)
             c = list(map(sp.cos, kb))
             s = list(map(sp.sin, kb))
             d_wp = {}
@@ -427,11 +427,11 @@ def create_k_multipole(cluster_samb, cluster_vector):
             k_multipole[k] = v
 
     kb_dic = {}
-    kv = np.array(sp.symbols("k_1 k_2 k_3"), dtype=object)
+    kv = np.array([sp.Symbol(f"k_{i}", real=True) for i in range(1, 4)], dtype=object)
     for sb, lst in cluster_vector.items():
         if ";" in sb:
             d = len(lst[0])
-            kb = np.array(sp.symbols(" ".join([f"kb_{i+1}" for i in range(d)])), dtype=object)
+            kb = np.array([sp.Symbol(f"kb_{i+1}", real=True) for i in range(d)], dtype=object)
             kb_dic[sb] = {i: j @ kv for i, j in zip(kb, lst)}
         else:
             kb_dic[sb] = {}
@@ -462,7 +462,7 @@ def create_k_matrix(matrix, cluster_dict, vector_dict):
         if ";" in cluster:
             vec = vector_dict[cluster]
             mat = defaultdict(lambda: sp.S(0))
-            kb = np.array(sp.symbols(" ".join([f"kb_{i+1}" for i in range(len(vec))])), dtype=object)
+            kb = np.array([sp.Symbol(f"kb_{i+1}", real=True) for i in range(len(vec))], dtype=object)
             for (n1, n2, n3, m, n), (value, b_no) in OR.items():
                 k = kb[b_no - 1] if b_no > 0 else -kb[-b_no - 1]
                 mat[(m, n)] += value * sp.exp(sp.I * k)

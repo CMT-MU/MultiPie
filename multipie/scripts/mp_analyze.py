@@ -29,24 +29,23 @@ def parse_grid(ctx, param, value):
 @click.option("-v", "--verbose", is_flag=True, help="verbose on.")
 @click.option("-i", "--input", "input", is_flag=True, help="show input format, and exit.")
 @click.option("-g", "--grid", callback=parse_grid, default=None, help="grid points, N1[,N2[,N3]].")
-@click.argument("control", required=False)
-def cmd(control, verbose, input, grid):
+@click.argument("controls", nargs=-1)
+def cmd(controls, verbose, input, grid):
     """
-    Analyze model by control file.
+    Analyze model by control files (CONTROLS w or w/o '.py').
     """
     if input:
         input_str = "default_control = " + extract_dict(DEFAULT_CONTROL, "default_control")
         click.echo(input_str)
-        sys.exit()
-
-    if not control:
-        click.echo("Usage: mp_analyze [OPTIONS] CONTROL")
+        exit()
+    if len(controls) < 1:
+        click.echo("Usage: mp_analyze [OPTIONS] [CONTROLs]...")
         click.echo("Try 'mp_analyze --help' for help.\n")
-        click.echo("Error: Missing argument 'CONTROL'.")
+        click.echo("Error: Missing argument 'CONTROLS'.")
         sys.exit(1)
 
     # analyze model.
     if grid is not None:
-        analyze_model(control, *grid, verbose=verbose)
+        analyze_model(controls, *grid, verbose=verbose)
     else:
-        analyze_model(control, verbose=verbose)
+        analyze_model(controls, verbose=verbose)
