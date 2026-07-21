@@ -5,8 +5,10 @@ Utility for ModelAnalyzer calss.
 import os
 import numpy as np
 import sympy as sp
-import subprocess
 from collections import defaultdict
+import matplotlib.pyplot as plt
+from matplotlib.collections import LineCollection
+from matplotlib.colors import Normalize
 from multipie import Group
 from multipie.util.util import str_to_sympy
 
@@ -110,94 +112,70 @@ def fourier_r_to_k(OR, atom, kv, s=True):
 
 
 # ==================================================
-def output_linear_dispersion_eig(filename, k, e, o=None, **kwargs):
+def output_dispersion(filename, k, e, o=None):
     """
     Output band dispersion along high-symmetry lines.
-    (only eigen values)
 
     Args:
         filename (str): file name.
         k (ndarray): k points along high-symmetry lines.
         e (ndarray): eigen values.
         o (list, optional): expectation value of any operator for each band, [[num_k, num_band]].
-        kwargs (dict, optional): key words for generate_band_gnuplot.
     """
-    kmax = np.max(k)
     emax = np.max(e)
     emin = np.min(e)
-    num_wann = e.shape[1]
+    ef = 0.0
 
     fs = open(filename, "w")
     fs.write("# k Energy [eV] \n")
-    fs.write(f"# Emax = {str(emax)}\n")
-    fs.write(f"# Emin = {str(emin)}\n")
-    fs.write(f"# num_wann = {str(num_wann)}\n")
-
-    ef = kwargs.get("ef", None)
-
-    if ef is None:
-        ef = 0.0
-        kwargs["ef"] = 0.0
-        fs.write("# ef = ? (no shift) \n\n")
-    else:
-        fs.write(f"# shifted by fermi energy = {ef} [eV] \n\n")
+    fs.write(f"# Emax = {emax}\n")
+    fs.write(f"# Emin = {emin}\n")
+    fs.write(f"# ef = {ef}\n\n")
 
     num_k, Nm = e.shape
     e = e.T
 
+    kv = np.append(k, -1.0)  # add dummy for last one.
     for n in range(Nm):
         en = e[n] - ef
         s = ""
         for i in range(num_k):
+            s += "{k:0<20} {e:<20}".format(k=kv[i], e=en[i])
             if o is None:
-                s += "{k:0<20}   {e:<20} \n".format(k=k[i], e=en[i])
+                s += "\n"
             else:
-                s += "{k:0<20}   {e:<20}".format(k=k[i], e=en[i])
                 for oi in o:
-                    s += "   {o:<20}".format(o=oi[i, n])
-                s += " \n"
+                    s += " {o:<20}".format(o=oi[i, n])
+                s += "\n"
+            if np.abs(kv[i] - kv[i + 1]) < 1e-5:
+                s += "\n"
 
         s += "\n"
         fs.write(s)
 
     fs.close()
 
-    # generate gnuplot file
-    generate_band_gnuplot_eig(filename, kmax, emax, emin, num_wann, **kwargs)
-
 
 # ==================================================
-def generate_band_gnuplot_eig(filename, kmax, emax, emin, num_wann, **kwargs):
+def create_gnuplot_cmd(filename, k_dis_pos, kmax, emax, emin, colormap=False, lwidth=2, lc="salmon"):
     """
-    Generate gnuplot file to plot band dispersion.
-    (only eigen values)
+    Create gnuplot file.
 
     Args:
         filename (str): file name.
+        k_dis_pos (dict): info. of high-symmetry point in linear k, dict[disconnected position, label].
         kmax (float): maximum value in kpoints.
         emax (float): maximum value of eigen values.
         emin (float): minimum value of eigen values.
-        num_wann (int): # of wannier functions.
-        kwargs (dict, optional): key words for generate_band_gnuplot.
-            - a (float): length of lattice vector.
-            - ef (float): fermi energy.
-            - k_dis_pos (dict): {disconnected linear position:label}.
-            - lwidth (float): line width.
-            - lc (str): line color.
-            - ref_filename (str): file name of reference band data.
-            - colormap (bool): with colormap of first expectation value of operator.
+        colormap (bool, optional): with colormap of first expectation value of operator.
+        lwidth (int, optional): line width.
+        lc (str, optional): line color.
     """
     offset = (emax - emin) * 0.1
-
-    a = kwargs.get("a", None)
-    ef = kwargs.get("ef", 0.0)
-    k_dis_pos = kwargs.get("k_dis_pos", None)
-    ref_filename = kwargs.get("ref_filename", None)
-    lwidth = kwargs.get("lwidth", 2)
-    lc = kwargs.get("lc", "salmon")
-    colormap = kwargs.get("colormap", False)
+    ef = 0.0
 
     fs = open("plot_band.gnu", "w")
+
     fs.write("unset key \n")
     fs.write("unset grid \n")
     fs.write(f"lwidth = {lwidth} \n")
@@ -218,17 +196,11 @@ def generate_band_gnuplot_eig(filename, kmax, emax, emin, num_wann, **kwargs):
 
     fs.write(f"ef = {ef} \n")
 
-    if a is not None:
-        fs.write(f"a = {a} \n")
-
     fs.write("set terminal postscript eps color enhanced \n\n")
 
     fn_eps = os.path.splitext(filename)[0] + ".eps"
     fs.write(f"set output '{fn_eps}' \n\n")
     fs.write("plot ")
-
-    if ref_filename is not None:
-        fs.write(f"'{ref_filename}' u ($1/a):($2-ef) w l lw lwidth lc 'dark-grey', ")
 
     if colormap:
         fs.write(f"'{filename}' u 1:2:3 w l lw lwidth lc palette, ")
@@ -245,9 +217,6 @@ def generate_band_gnuplot_eig(filename, kmax, emax, emin, num_wann, **kwargs):
     fs.write(f"set output '{fn_pdf}' \n\n")
     fs.write("plot ")
 
-    if ref_filename is not None:
-        fs.write(f"'{ref_filename}' u ($1/a):($2-ef) w l lw lwidth lc 'dark-grey', ")
-
     if colormap:
         fs.write(f"'{filename}' u 1:2:3 w l lw lwidth lc palette, ")
     else:
@@ -257,7 +226,75 @@ def generate_band_gnuplot_eig(filename, kmax, emax, emin, num_wann, **kwargs):
 
     fs.close()
 
-    subprocess.run(f"gnuplot plot_band.gnu", shell=True)
+
+# ==================================================
+def plot_save_dispersion(filename, k_dis_pos, colormap=False, lwidth=1, lc="salmon"):
+    """
+    Generate plot window for band dispersion (matplotlib).
+
+    Args:
+        filename (str): file name.
+        k_dis_pos (dict): info. of high-symmetry point in linear k, dict[disconnected position, label].
+        colormap (bool, optional): with colormap of first expectation value of operator.
+        lwidth (int, optional): line width.
+        lc (str, optional): line color.
+    """
+    # read file.
+    bands = read_text_data(filename)
+    emax = max(a[:, 1].max() for a in bands)
+    emin = min(a[:, 1].min() for a in bands)
+    kmax = max(a[:, 0].max() for a in bands)
+    ef = 0.0
+
+    offset = (emax - emin) * 0.1
+
+    fig, ax = plt.subplots(figsize=(6, 3.5))  # aspect ratio 0.7
+    ax = fig.add_subplot(111)
+    fig.subplots_adjust(right=0.84)
+
+    ax.set_xlim(0, kmax)
+    ax.set_ylim(emin - ef - offset, emax - ef + offset)
+
+    ax.axhline(0, color="black", lw=0.5)
+    ax.tick_params(axis="x", which="both", bottom=False, top=False, labelbottom=True)
+    ax.tick_params(axis="y", which="both", left=True, right=True, direction="in")
+
+    # vertical lines.
+    positions = list(k_dis_pos.keys())
+    labels = [v.replace("G", r"$\Gamma$").replace("|", ":") for v in k_dis_pos.values()]
+    for x in positions:
+        ax.axvline(x, color="black", lw=0.5)
+    ax.set_xticks(positions)
+    ax.set_xticklabels(labels)
+
+    if colormap:
+        all_segments = []
+        all_colors = []
+        for band in bands:
+            x = band[:, 0]
+            y = band[:, 1] - ef
+            c = band[:, 2]
+            points = np.column_stack((x, y)).reshape(-1, 1, 2)
+            seg = np.concatenate([points[:-1], points[1:]], axis=1)
+            all_segments.extend(seg)
+            all_colors.extend(c[:-1])
+
+        lcobj = LineCollection(all_segments, cmap="coolwarm", norm=Normalize(-1.0, 1.0), linewidth=lwidth)
+        lcobj.set_array(np.asarray(all_colors))
+        ax.add_collection(lcobj)
+        cbar = fig.colorbar(lcobj, ax=ax, ticks=[-1.0, -0.5, 0.0, 0.5, 1.0], fraction=0.035, pad=0.02)
+        cbar.ax.tick_params(which="both", length=0)
+        cbar.set_ticklabels(["-1", "-0.5", "0", "0.5", "1"])
+    else:
+        for band in bands:
+            ax.plot(band[:, 0], band[:, 1] - ef, color=lc, lw=lwidth)
+
+    fn_pdf = os.path.splitext(filename)[0] + ".pdf"
+    fn_eps = os.path.splitext(filename)[0] + ".eps"
+    fig.savefig(fn_pdf)
+    fig.savefig(fn_eps)
+
+    plt.close("all")
 
 
 # ==================================================
@@ -623,3 +660,38 @@ def convert_zj_atomic_var(matrix_info, combined_cluster, combined_id, IR):
         result[name] = sol
 
     return result
+
+
+# ==================================================
+def read_text_data(filename):
+    """
+    Read text data.
+
+    Args:
+        filename (str): file name.
+
+    Returns:
+        - (list) -- block of data (ndarray) separated by empty line, [block][x, y].
+    """
+    bands = []
+    band = []
+
+    with open(filename, "r") as f:
+        for line in f:
+            line = line.strip()
+            # skip comment.
+            if line.startswith("#"):
+                continue
+            # each block ends with empty line.
+            if line == "":
+                if band:
+                    bands.append(np.array(band))
+                    band = []
+                continue
+            band.append([float(x) for x in line.split()])
+
+    # last block.
+    if band:
+        bands.append(np.array(band))
+
+    return bands
