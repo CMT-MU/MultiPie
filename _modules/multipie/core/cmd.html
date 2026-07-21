@@ -33,7 +33,7 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
     <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=34ddd5e8" />
@@ -378,12 +378,12 @@
 <span class="c1"># ==================================================</span>
 <div class="viewcode-block" id="analyze_model">
 <a class="viewcode-back" href="../../../src/api_core/cmd.html#multipie.core.cmd.analyze_model">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">analyze_model</span><span class="p">(</span><span class="n">control</span><span class="p">,</span> <span class="n">N1</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">N2</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">N3</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">topdir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">analyze_model</span><span class="p">(</span><span class="n">controls</span><span class="p">,</span> <span class="n">N1</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">N2</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">N3</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">topdir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Analyze model.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        control (str or dict): control file or dict.</span>
+<span class="sd">        controls (str or [str] or dict or [dict]): control file(s) or dict(s).</span>
 <span class="sd">        N1 (int, optional): number of divisions in a1.</span>
 <span class="sd">        N2 (int, optional): number of divisions in a2.</span>
 <span class="sd">        N3 (int, optional): number of divisions in a3.</span>
@@ -398,7 +398,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">setup_logging</span><span class="p">()</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">create</span><span class="p">(</span><span class="n">ma</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create</span><span class="p">(</span><span class="n">ma</span><span class="p">,</span> <span class="n">control</span><span class="p">):</span>
         <span class="nd">@timer</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;analyze model by &#39;</span><span class="si">{</span><span class="n">control</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
         <span class="k">def</span><span class="w"> </span><span class="nf">create0</span><span class="p">():</span>
             <span class="n">ma</span><span class="o">.</span><span class="n">analyze</span><span class="p">(</span><span class="n">control</span><span class="p">)</span>
@@ -408,12 +408,15 @@
     <span class="k">if</span> <span class="n">topdir</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">topdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
 
+    <span class="n">controls</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">read_dict_file</span><span class="p">(</span><span class="n">controls</span><span class="p">,</span> <span class="n">topdir</span><span class="p">,</span> <span class="n">verbose</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+
     <span class="n">ma</span> <span class="o">=</span> <span class="n">ModelAnalyzer</span><span class="p">(</span><span class="n">N1</span><span class="p">,</span> <span class="n">N2</span><span class="p">,</span> <span class="n">N3</span><span class="p">,</span> <span class="n">topdir</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">create</span><span class="p">(</span><span class="n">ma</span><span class="p">)</span>
-    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-        <span class="n">logging</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s2">&quot;in analyze_model&quot;</span><span class="p">)</span>
-        <span class="k">raise</span>
+    <span class="k">for</span> <span class="n">control</span> <span class="ow">in</span> <span class="n">controls</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">create</span><span class="p">(</span><span class="n">ma</span><span class="p">,</span> <span class="n">control</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s2">&quot;in analyze_model&quot;</span><span class="p">)</span>
+            <span class="k">raise</span>
 
     <span class="k">return</span> <span class="kc">False</span></div>
 
