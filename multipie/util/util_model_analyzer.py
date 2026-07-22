@@ -249,7 +249,7 @@ def plot_save_dispersion(filename, k_dis_pos, colormap=False, lwidth=1, lc="salm
     offset = (emax - emin) * 0.1
 
     fig, ax = plt.subplots(figsize=(6, 3.5))  # aspect ratio 0.7
-    ax = fig.add_subplot(111)
+    # ax = fig.add_subplot(111)
     fig.subplots_adjust(right=0.84)
 
     ax.set_xlim(0, kmax)
