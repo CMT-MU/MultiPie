@@ -89,7 +89,7 @@ def fourier_r_to_k(OR, atom, kv, s=True):
 
     Args:
         OR (dict): matrix dict, dict[(n1,n2,n3,m,n): value].
-        atom (ndarray): atomic postions.
+        atom (ndarray): atomic positions.
         kv (ndarray): list of k vector.
         s (bool, optional): include phase of atomic position ?
 

@@ -11,11 +11,11 @@ import seekpath
 from multipie.core.material_model import MaterialModel
 from multipie.core.default_control import default_control
 from multipie.util.util_model_analyzer import (
-    fourier_r_to_k,
     grid_path,
+    fourier_r_to_k,
     output_dispersion,
-    plot_save_dispersion,
     create_gnuplot_cmd,
+    plot_save_dispersion,
     create_all_local_operator,
     create_local_operator,
     create_k_multipole,
@@ -245,7 +245,7 @@ class ModelAnalyzer(dict):
         if self.samb.get("samb_figure", False):
             self.model.save_samb_qtdraw()
 
-        # output matrx.py and hr.dat.
+        # output matrix.py and hr.dat.
         if parameter:
             self._HR = self.model.get_hr(parameter, matrix_info["matrix"])
             self.model.save_samb_hr(matrix_info, parameter, self._HR)
