@@ -76,6 +76,8 @@ class ModelAnalyzer(dict):
         self["wannier"] = {}
         self["output"] = {}
 
+        os.chdir(self._topdir)
+
     # ==================================================
     @property
     def samb(self):
