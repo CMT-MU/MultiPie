@@ -1,5 +1,5 @@
 """
-Utility for MaterialModel calss.
+Utility for MaterialModel class.
 """
 
 import numpy as np

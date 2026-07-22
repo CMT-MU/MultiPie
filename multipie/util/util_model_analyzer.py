@@ -1,5 +1,5 @@
 """
-Utility for ModelAnalyzer calss.
+Utility for ModelAnalyzer class.
 """
 
 import os
