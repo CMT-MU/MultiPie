@@ -35,6 +35,7 @@ from multipie.util.util_wannier import (
     read_uHu,
     read_uIu,
     build_ket_wannier,
+    sort_ket_list,
     sort_ket_matrix_dict,
     decompose_operator_by_SAMB,
 )
@@ -304,18 +305,6 @@ class ModelAnalyzer(dict):
         # Check common values and merge.
         wannier_info = merge_wannier_info(win, nnkp, seedname)
 
-        # read seedname.mmn
-        # Mkb = read_mmn(topdir, seedname)
-
-        # read seedname.spn
-        # Sk = read_spn(topdir, seedname)
-
-        # read seedname.uHu
-        # uHu = read_uHu(topdir, seedname)
-
-        # read seedname.uIu
-        # uIu = read_uIu(topdir, seedname)
-
         # ワニエ関数の並び順をMultiPieのketに揃える。
         ket_multipie = self.model["full_matrix"]["ket"]
         ket_wannier = self._wannier.get("ket_wannier", "auto")
@@ -328,6 +317,39 @@ class ModelAnalyzer(dict):
                 if vi.plus_set == 1
             }
             ket_wannier = build_ket_wannier(nnkp, site_dict, rtol=1e-4, atol=1e-4)
+
+        atoms_list = list(wannier_info["atoms_frac"].values())
+        atoms_frac = np.array([atoms_list[i] for i in wannier_info["nw2n"]])
+        atoms_frac = sort_ket_list(atoms_frac, ket_wannier, ket_multipie)
+
+        atoms_list = list(wannier_info["atoms_cart"].values())
+        atoms_cart = np.array([atoms_list[i] for i in wannier_info["nw2n"]])
+        atoms_cart = sort_ket_list(atoms_cart, ket_wannier, ket_multipie)
+
+        info = {
+            # Wannier info
+            "A": wannier_info["A"],
+            "B": wannier_info["B"],
+            "ket": ket_multipie,  # sorted as MultiPie ket
+            "num_wann": wannier_info["num_wann"],
+            "atoms_frac": atoms_frac,
+            "atoms_cart": atoms_cart,
+            "spinors": wannier_info["spinors"],
+            "fermi_energy": wannier_info["fermi_energy"],
+            # DFT info
+            "num_bands": wannier_info["num_bands"],
+            "mp_grid": wannier_info["mp_grid"],
+            "num_k": wannier_info["num_k"],
+            "num_b": wannier_info["num_b"],
+            "kpoints": wannier_info["kpoints"],
+            "nnkpts": wannier_info["nnkpts"],
+            "bvec_cart": wannier_info["bvec_cart"],
+            "bvec_crys": wannier_info["bvec_crys"],
+            "wb": wannier_info["wb"],
+            "wk": wannier_info["wk"],
+            "bveck": wannier_info["bveck"],
+            "kb2k": wannier_info["kb2k"],
+        }
 
         Zr_dict = self._mm.get_combined_samb_matrix(fmt="value", digit=15, bond=False)
 
@@ -343,11 +365,23 @@ class ModelAnalyzer(dict):
         # nr_dict = sort_ket_matrix_dict(nr_dict, ket_wannier, ket_multipie)
         # z_j_exp = decompose_operator_by_SAMB(nr_dict, Zr_dict)
 
-        self["wannier"]["info"] = wannier_info
+        # read seedname.mmn
+        # Mkb = read_mmn(topdir, seedname)
+
+        # read seedname.spn
+        # Sk = read_spn(topdir, seedname)
+
+        # read seedname.uHu
+        # uHu = read_uHu(topdir, seedname)
+
+        # read seedname.uIu
+        # uIu = read_uIu(topdir, seedname)
+
+        self["wannier"]["info"] = info
+        self["wannier"]["ket"] = ket_multipie
         self["wannier"]["HR"] = hr_dict
         self["wannier"]["z_j"] = z_j
         # self["wannier"]["z_j_exp"] = z_j_exp
-
         # self["wannier"]["mmn"] = mmn
         # self["wannier"]["spn"] = spn
         # self["wannier"]["uHu"] = uHu

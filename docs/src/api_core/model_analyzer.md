@@ -16,6 +16,7 @@ This class has the following dict data.
 
 - **wannier** (dict): Wannier related.
   - **info** (dict): minimal information used for wannier90.x, read from seedname.win and seedname.nnkp files.
+  - **ket** (list): sorted Wannier functions.
   - **HR** (dict): Wannier Hamiltonian.
   - **z_j** (dict): expansion coefficients of the Wannier Hamiltonian expressed as a linear combination of SAMBs.
   - **z_j_exp** (dict): expansion coefficients of the electronic density matrix expressed as a linear combination of SAMBs, which equal the expectation values of the SAMBs.

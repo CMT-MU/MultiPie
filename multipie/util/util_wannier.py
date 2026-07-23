@@ -237,10 +237,6 @@ def read_win(topdir, seedname):
             - mp_grid     : Monkhorst-Pack grid ``[nk1,nk2,nk3]`` (list).
             - kpoints     : Explicit k points in crystal coordinates, reduced
                             to ``0 <= k_i < 1``, shape ``[num_k][3]`` (list).
-            - kpoint      : Labelled representative k points,
-                            ``{label: [k1,k2,k3]}`` (dict or None).
-            - kpoint_path : Labelled high-symmetry path such as
-                            ``G-X-M-G|R-X`` (str or None).
 
     Raises:
         FileNotFoundError: If the input file cannot be found.
@@ -343,8 +339,6 @@ def read_win(topdir, seedname):
         "atoms_cart": atoms_cart,
         "mp_grid": mp_grid,
         "kpoints": [[0.0, 0.0, 0.0]],
-        "kpoint": None,
-        "kpoint_path": None,
     }
 
     # --- explicit k points ---
@@ -356,30 +350,6 @@ def read_win(topdir, seedname):
                 f"mp_grid gives {d['num_k']}, but the kpoints block contains {len(kpoints)}"
             )
         d["kpoints"] = kpoints.tolist()
-
-    # --- labelled high-symmetry k-point path ---
-    if rows := blocks.get("kpoint_path"):
-        points, paths = {}, []
-
-        for row in rows:
-            if not row.strip():
-                continue
-
-            values = row.split()
-            if len(values) != 8:
-                raise ValueError(f"invalid kpoint_path entry: {row}")
-
-            X, x1, x2, x3, Y, y1, y2, y3 = values
-            points.setdefault(X, list(map(float, (x1, x2, x3))))
-            points.setdefault(Y, list(map(float, (y1, y2, y3))))
-
-            if paths and paths[-1][-1] == X:
-                paths[-1].append(Y)
-            else:
-                paths.append([X, Y])
-
-        d["kpoint"] = points
-        d["kpoint_path"] = "|".join("-".join(path) for path in paths)
 
     return d
 
@@ -405,8 +375,6 @@ def read_nnkp(topdir, seedname):
             - num_b            : Number of b-vectors per k point (int).
             - kpoints          : k points in crystal coordinates, reduced to
                                  ``0 <= k_i < 1``, shape ``[num_k][3]`` (list).
-            - kpoints_wo_shift : Original k points before modulo reduction,
-                                 shape ``[num_k][3]`` (list).
             - nnkpts           : Nearest-neighbour table
                                  ``[ik,ikb,G1,G2,G3]``, shape
                                  ``[num_k][num_b][5]`` (list).
@@ -487,7 +455,6 @@ def read_nnkp(topdir, seedname):
         "num_atom": 0,
         "num_b": num_b,
         "kpoints": kpoints.tolist(),
-        "kpoints_wo_shift": kpoints_wo_shift.tolist(),
         "nnkpts": nnkpts.tolist(),
         "nw2n": None,
         "nw2l": None,
