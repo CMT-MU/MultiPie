@@ -30,8 +30,6 @@ from multipie.util.util_wannier import (
     read_nnkp,
     merge_wannier_info,
     read_hr,
-    read_umat,
-    read_eig,
     read_mmn,
     read_spn,
     read_uHu,
@@ -305,12 +303,6 @@ class ModelAnalyzer(dict):
 
         # Check common values and merge.
         wannier_info = merge_wannier_info(win, nnkp, seedname)
-
-        # read seedname_u_dis.mat, seedname_u.mat
-        # Uk = read_umat(topdir, seedname)
-
-        # # read seedname.eig
-        # Ek = read_eig(topdir, seedname)
 
         # read seedname.mmn
         # Mkb = read_mmn(topdir, seedname)
