@@ -733,7 +733,7 @@ class MaterialModel(BinaryManager):
         return combined_id, samb_select, select
 
     # ==================================================
-    def get_combined_samb_matrix(self, select=None, fmt="sympy", digit=14):
+    def get_combined_samb_matrix(self, select=None, fmt="sympy", digit=14, bond=True):
         """
         Get combined SAMBs in matrix form (real-space).
 
@@ -741,6 +741,7 @@ class MaterialModel(BinaryManager):
             select (dict, optional): select conditions for multipoles with keywords (see, select_combined_samb).
             fmt (str, optional): sympy/value.
             digit (int, optional): digit for value output.
+            bond (bool, optional): include bond_d ?
 
         Returns:
             - (dict) -- combined SAMB in matrix form, dict[zj, dict[ (n1, n2, n3, m, n), (matrix element, bond_no)] ].
@@ -841,7 +842,11 @@ class MaterialModel(BinaryManager):
             norm_sq = sum(v * sp.conjugate(v) for v in d.values())
             norm = sp.sqrt(sp.expand(norm_sq))
 
-            matrix[zi] = {Rmn: (_format_val(v / norm), bond_d[Rmn]) for Rmn, v in d.items() if not v.is_zero}
+            matrix[zi] = {
+                Rmn: (_format_val(v / norm), bond_d[Rmn]) if bond else _format_val(v / norm)
+                for Rmn, v in d.items()
+                if not v.is_zero
+            }
 
         matrix = dict(sorted(matrix.items(), key=lambda x: int(x[0][1:])))
 
