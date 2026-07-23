@@ -23,6 +23,7 @@ from multipie.util.util_model_analyzer import (
     add_local_parameter,
     convert_zj_atomic_var,
 )
+from multipie.util.util_wannier import read_win, read_nnkp, merge_wannier_info, read_hr, read_mmn, read_spn, read_uHu, read_uIu
 from multipie.util.util import read_dict, str_to_sympy, write_dict
 
 _k_matrix_comment = """Selected SAMB matrix in momentum representation.
@@ -197,7 +198,7 @@ class ModelAnalyzer(dict):
             self.set_samb()
 
         # exec. wannier control.
-        if self._wannier.get("cw", None) is not None:
+        if self._wannier.get("seedname", None) is not None:
             # self._name = self.wannier["model"]
             self.set_from_wannier()
 
@@ -275,7 +276,38 @@ class ModelAnalyzer(dict):
 
         :meta private:
         """
-        pass
+        seedname = self._wannier["seedname"]
+
+        # read seedname.win
+        win = read_win(self._topdir, seedname)
+
+        # read seedname.nnkp
+        nnkp = read_nnkp(self._topdir, seedname)
+
+        # Check common values and merge.
+        wannier_info = merge_wannier_info(win, nnkp, seedname)
+
+        # read seedname_hr.dat
+        HR = read_hr(self._topdir, seedname)
+
+        # read seedname.mmn
+        # mmn = read_mmn(self._topdir, seedname)
+
+        # read seedname.spn
+        # spn = read_spn(self._topdir, seedname)
+
+        # read seedname.uHu
+        # uHu = read_uHu(self._topdir, seedname)
+
+        # read seedname.uIu
+        # uIu = read_uIu(self._topdir, seedname)
+
+        self["wannier"]["wannier_info"] = wannier_info
+        self["wannier"]["HR"] = HR
+        # self["wannier"]["mmn"] = mmn
+        # self["wannier"]["spn"] = spn
+        # self["wannier"]["uHu"] = uHu
+        # self["wannier"]["uIu"] = uIu
 
     # ==================================================
     def compute_physical_quantity(self):

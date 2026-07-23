@@ -23,7 +23,7 @@ default_control = {
         "NG_sum_rule": False,  # Nambu-Goldstone sum rule ?
     },
     "wannier": {  # Closest Wannier (CW) or SymWannier setting.
-        "seedname": None,  # read seedname.win, seedname.nnkp, seedname_hr.dat, (seedname.eig, seedname.mmn, seedname_u.mat, seedname_u_dis.mat, seedname.spn, seedname.uHu, ...).
+        "seedname": None,  # read seedname.win, seedname.nnkp, seedname_hr.dat, (seedname.mmn, seedname.spn, seedname.uHu, seedname.uIu ...).
     },
     "output": {  # physical quantity setting.
         "dir": "output",  #  output directory.
