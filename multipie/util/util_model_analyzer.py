@@ -450,15 +450,15 @@ def create_k_multipole(cluster_samb, cluster_vector):
     for k, v in cluster_samb.items():
         if "@" in k:  # bond.
             d = len(next(iter(v.values()))[0][0])
-            kb = np.array([sp.Symbol(f"kb_{i+1}", real=True) for i in range(d)], dtype=object)
+            kb = np.array([sp.Symbol(f"p_{i+1}", real=True) for i in range(d)], dtype=object)
             c = list(map(sp.cos, kb))
             s = list(map(sp.sin, kb))
             d_wp = {}
             for idx, (samb, sym) in v.items():
                 if idx[0] == "Q":
-                    d_wp[idx] = (sp.sqrt(2) * samb @ c, sym)
+                    d_wp[idx] = (np.sqrt(2) * np.vectorize(sp.re)(samb).astype(float) @ c, sym)
                 else:
-                    d_wp[idx] = (sp.sqrt(2) * sp.I * samb @ s, sym)
+                    d_wp[idx] = (sp.I * (np.sqrt(2) * np.vectorize(sp.im)(samb).astype(float)) @ s, sym)
             k_multipole[k] = d_wp
         else:  # site.
             k_multipole[k] = v
@@ -468,7 +468,7 @@ def create_k_multipole(cluster_samb, cluster_vector):
     for sb, lst in cluster_vector.items():
         if ";" in sb:
             d = len(lst[0])
-            kb = np.array([sp.Symbol(f"kb_{i+1}", real=True) for i in range(d)], dtype=object)
+            kb = np.array([sp.Symbol(f"p_{i+1}", real=True) for i in range(d)], dtype=object)
             kb_dic[sb] = {i: j @ kv for i, j in zip(kb, lst)}
         else:
             kb_dic[sb] = {}
@@ -499,7 +499,7 @@ def create_k_matrix(matrix, cluster_dict, vector_dict):
         if ";" in cluster:
             vec = vector_dict[cluster]
             mat = defaultdict(lambda: sp.S(0))
-            kb = np.array([sp.Symbol(f"kb_{i+1}", real=True) for i in range(len(vec))], dtype=object)
+            kb = np.array([sp.Symbol(f"p_{i+1}", real=True) for i in range(len(vec))], dtype=object)
             for (n1, n2, n3, m, n), (value, b_no) in OR.items():
                 k = kb[b_no - 1] if b_no > 0 else -kb[-b_no - 1]
                 mat[(m, n)] += value * sp.exp(sp.I * k)
