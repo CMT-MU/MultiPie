@@ -23,7 +23,9 @@ default_control = {
         "NG_sum_rule": False,  # Nambu-Goldstone sum rule ?
     },
     "wannier": {  # Closest Wannier (CW) or SymWannier setting.
-        "cw": None,  # CW or SymWannier file.
+        "seedname": None,  # read seedname.win, seedname.nnkp, (seedname.mmn, seedname.spn, seedname.uHu, seedname.uIu ...).
+        "ket_wannier": "auto",  # Wannier basis, [[site, sublattice, rank, component, orbital], ...]. "auto" is allowed only when the Wannier and MultiPie site positions coincide.
+        "hr_file": None,  # read seedname_hr.dat.
     },
     "output": {  # physical quantity setting.
         "dir": "output",  #  output directory.

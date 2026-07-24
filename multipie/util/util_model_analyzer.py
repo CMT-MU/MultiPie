@@ -1,5 +1,5 @@
 """
-Utility for ModelAnalyzer calss.
+Utility for ModelAnalyzer class.
 """
 
 import os
@@ -11,6 +11,7 @@ from matplotlib.collections import LineCollection
 from matplotlib.colors import Normalize
 from multipie import Group
 from multipie.util.util import str_to_sympy
+from multipie.util.util_constant import M_ZERO, k_B_SI, elem_charge_SI
 
 
 # ==================================================
@@ -89,14 +90,14 @@ def fourier_r_to_k(OR, atom, kv, s=True):
 
     Args:
         OR (dict): matrix dict, dict[(n1,n2,n3,m,n): value].
-        atom (ndarray): atomic postions.
+        atom (ndarray): atomic positions.
         kv (ndarray): list of k vector.
         s (bool, optional): include phase of atomic position ?
 
     Returns:
         - (ndarray) -- O(k) = sum_s Omn exp( 2pi i k*Rs ), Rs = (n1,n2,n3)-s(R[m]-R[n]).
     """
-    eRa = np.exp(1j * (kv @ atom.T))
+    eRa = np.exp(1j * (2 * np.pi * kv @ atom.T))
 
     Nk = len(kv)
     d = len(atom)
@@ -109,6 +110,48 @@ def fourier_r_to_k(OR, atom, kv, s=True):
             S[:, m, n] += value * eR
 
     return S
+
+
+# ==================================================
+def fourier_k_to_r(Ok, atom, kv, irvec, s=True):
+    """
+    Fourier transformation from k to R (inverse of fourier_r_to_k).
+
+    Args:
+        Ok (ndarray): O(k) matrix, shape (Nk, d, d).
+        atom (ndarray): atomic positions.
+        kv (ndarray): list of k vector.
+        irvec (iterable): list/array of R = (n1, n2, n3) lattice vectors to
+            evaluate O_R at.
+        s (bool, optional): include phase of atomic position ? (must match the
+            value used to generate `Ok`).
+
+    Returns:
+        dict: dict[(n1,n2,n3,m,n): value], O_R = (1/Nk) sum_k O(k) exp(-2pi i k*Rs),
+        Rs = (n1,n2,n3)-s(R[m]-R[n]), i.e. the inverse of `fourier_r_to_k`.
+    """
+    eRa = np.exp(1j * (2 * np.pi * kv @ atom.T))
+
+    Nk = len(kv)
+    d = len(atom)
+
+    OR = {}
+    for R in irvec:
+        R = tuple(int(v) for v in R)
+        eR = np.exp(-1j * (2 * np.pi * kv @ np.asarray(R, dtype=float)))
+
+        if s:
+            phase = eR[:, None, None] * eRa[:, :, None] * np.conj(eRa)[:, None, :]
+        else:
+            phase = eR[:, None, None] * np.ones((Nk, d, d), dtype=complex)
+
+        value = np.sum(Ok * phase, axis=0) / Nk
+
+        for m in range(d):
+            for n in range(d):
+                OR[(R, m, n)] = value[m, n]
+
+    return OR
 
 
 # ==================================================
@@ -695,3 +738,71 @@ def read_text_data(filename):
         bands.append(np.array(band))
 
     return bands
+
+
+# ==================================================
+def is_almost_zero(x):
+    """check if x is numerically zero (within a tolerance)."""
+    return np.abs(x) < M_ZERO * 100
+
+
+# ==================================================
+def kelvin_to_ev(T_kelvin):
+    """convert temperature from Kelvin to eV (k_B * T)."""
+    return T_kelvin * k_B_SI / elem_charge_SI
+
+
+# ==================================================
+def fermi_dirac(x, T=0.0, unit="Kelvin"):
+    """
+    Fermi-Dirac distribution function, f(x) = 1 / (1 + exp(x/T)).
+
+    Args:
+        x (ndarray): energy relative to the chemical potential (E - mu), in eV.
+        T (float, optional): temperature (Kelvin or eV, see `unit`).
+        unit (str, optional): unit of T, "Kelvin" or "eV".
+
+    Returns:
+        ndarray: Fermi-Dirac occupation, 0 <= f(x) <= 1.
+    """
+    if T == 0.0:
+        return np.where(x < 0.0, 1.0, np.where(x > 0.0, 0.0, 0.5))
+
+    T_eV = kelvin_to_ev(T) if unit == "Kelvin" else T
+    return 0.5 * (1.0 - np.tanh(0.5 * x / T_eV))
+
+
+# ==================================================
+def fermi_dirac_deriv(x, T=0.01, unit="Kelvin"):
+    """
+    Minus the derivative of the Fermi-Dirac distribution w.r.t. x, -df/dx = f(x)*f(-x)/T.
+    A positive, bell-shaped function peaked at x=0 (used e.g. for smearing/DOS broadening).
+
+    Args:
+        x (ndarray): energy relative to the chemical potential (E - mu), in eV.
+        T (float, optional): temperature (Kelvin or eV, see `unit`). Must be nonzero.
+        unit (str, optional): unit of T, "Kelvin" or "eV".
+
+    Returns:
+        ndarray: -df/dx.
+    """
+    T_eV = kelvin_to_ev(T) if unit == "Kelvin" else T
+    return fermi_dirac(x, T, unit) * fermi_dirac(-x, T, unit) / T_eV
+
+
+# ==================================================
+def fermi_dirac_deriv2(x, T=0.01, unit="Kelvin"):
+    """
+    Second derivative of the Fermi-Dirac distribution w.r.t. x, -d^2f/dx^2
+    (i.e. the derivative of `fermi_dirac_deriv`).
+
+    Args:
+        x (ndarray): energy relative to the chemical potential (E - mu), in eV.
+        T (float, optional): temperature (Kelvin or eV, see `unit`). Must be nonzero.
+        unit (str, optional): unit of T, "Kelvin" or "eV".
+
+    Returns:
+        ndarray: -d^2f/dx^2.
+    """
+    T_eV = kelvin_to_ev(T) if unit == "Kelvin" else T
+    return (1 - 2 * fermi_dirac(-x, T, unit)) * fermi_dirac(x, T, unit) * fermi_dirac(-x, T, unit) / T_eV / T_eV

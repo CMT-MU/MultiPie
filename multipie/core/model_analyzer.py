@@ -11,17 +11,33 @@ import seekpath
 from multipie.core.material_model import MaterialModel
 from multipie.core.default_control import default_control
 from multipie.util.util_model_analyzer import (
-    fourier_r_to_k,
     grid_path,
+    fourier_r_to_k,
+    fourier_k_to_r,
     output_dispersion,
-    plot_save_dispersion,
     create_gnuplot_cmd,
+    plot_save_dispersion,
     create_all_local_operator,
     create_local_operator,
     create_k_multipole,
     create_k_matrix,
     add_local_parameter,
     convert_zj_atomic_var,
+    fermi_dirac,
+)
+from multipie.util.util_wannier import (
+    read_win,
+    read_nnkp,
+    merge_wannier_info,
+    read_hr,
+    read_mmn,
+    read_spn,
+    read_uHu,
+    read_uIu,
+    build_ket_wannier,
+    sort_ket_list,
+    sort_ket_matrix_dict,
+    decompose_operator_by_SAMB,
 )
 from multipie.util.util import read_dict, str_to_sympy, write_dict
 
@@ -199,7 +215,7 @@ class ModelAnalyzer(dict):
             self.set_samb()
 
         # exec. wannier control.
-        if self._wannier.get("cw", None) is not None:
+        if self._wannier.get("seedname", None) is not None:
             # self._name = self.wannier["model"]
             self.set_from_wannier()
 
@@ -247,7 +263,7 @@ class ModelAnalyzer(dict):
         if self.samb.get("samb_figure", False):
             self.model.save_samb_qtdraw()
 
-        # output matrx.py and hr.dat.
+        # output matrix.py and hr.dat.
         if parameter:
             self._HR = self.model.get_hr(parameter, matrix_info["matrix"])
             self.model.save_samb_hr(matrix_info, parameter, self._HR)
@@ -277,7 +293,102 @@ class ModelAnalyzer(dict):
 
         :meta private:
         """
-        pass
+        topdir = os.path.join(self._topdir, self.name)
+        seedname = self._wannier.get("seedname", None)
+
+        # read seedname.win
+        win = read_win(topdir, seedname)
+
+        # read seedname.nnkp
+        nnkp = read_nnkp(topdir, seedname)
+
+        # Check common values and merge.
+        wannier_info = merge_wannier_info(win, nnkp, seedname)
+
+        # ワニエ関数の並び順をMultiPieのketに揃える。
+        ket_multipie = self.model["full_matrix"]["ket"]
+        ket_wannier = self._wannier.get("ket_wannier", "auto")
+
+        if ket_wannier == "auto":
+            site_dict = {
+                (k, vi.sublattice): vi.position_primitive.tolist()
+                for k, v in self._mm["site"]["cell"].items()
+                for vi in v
+                if vi.plus_set == 1
+            }
+            ket_wannier = build_ket_wannier(nnkp, site_dict, rtol=1e-4, atol=1e-4)
+
+        atoms_list = list(wannier_info["atoms_frac"].values())
+        atoms_frac = np.array([atoms_list[i] for i in wannier_info["nw2n"]])
+        atoms_frac = sort_ket_list(atoms_frac, ket_wannier, ket_multipie)
+
+        atoms_list = list(wannier_info["atoms_cart"].values())
+        atoms_cart = np.array([atoms_list[i] for i in wannier_info["nw2n"]])
+        atoms_cart = sort_ket_list(atoms_cart, ket_wannier, ket_multipie)
+
+        info = {
+            # Wannier info
+            "A": wannier_info["A"],
+            "B": wannier_info["B"],
+            "ket": ket_multipie,  # sorted as MultiPie ket
+            "num_wann": wannier_info["num_wann"],
+            "atoms_frac": atoms_frac,
+            "atoms_cart": atoms_cart,
+            "spinors": wannier_info["spinors"],
+            "fermi_energy": wannier_info["fermi_energy"],
+            # DFT info
+            "num_bands": wannier_info["num_bands"],
+            "mp_grid": wannier_info["mp_grid"],
+            "num_k": wannier_info["num_k"],
+            "num_b": wannier_info["num_b"],
+            "kpoints": wannier_info["kpoints"],
+            "nnkpts": wannier_info["nnkpts"],
+            "bvec_cart": wannier_info["bvec_cart"],
+            "bvec_crys": wannier_info["bvec_crys"],
+            "wb": wannier_info["wb"],
+            "wk": wannier_info["wk"],
+            "bveck": wannier_info["bveck"],
+            "kb2k": wannier_info["kb2k"],
+        }
+
+        Zr_dict = self._mm.get_combined_samb_matrix(fmt="value", digit=15, bond=False)
+
+        # read seedname_hr.dat
+        hr_dict, irvec, _ = read_hr(topdir, self._wannier.get("hr_file", None))
+        hr_dict = sort_ket_matrix_dict(hr_dict, ket_wannier, ket_multipie)
+        z_j = decompose_operator_by_SAMB(hr_dict, Zr_dict)
+
+        # nk = np.array([np.diag(fermi_dirac(eki - win["fermi_energy"], T=0.0)) for eki in Ek], dtype=float)
+        # nk = Uk.transpose(0, 2, 1).conjugate() @ nk @ Uk
+
+        # nr_dict = fourier_k_to_r(nk, win["kpoints"], irvec, s=False)
+        # nr_dict = sort_ket_matrix_dict(nr_dict, ket_wannier, ket_multipie)
+        # z_j_exp = decompose_operator_by_SAMB(nr_dict, Zr_dict)
+
+        # read seedname.mmn
+        # Mkb = read_mmn(topdir, seedname)
+
+        # read seedname.spn
+        # Sk = read_spn(topdir, seedname)
+
+        # read seedname.uHu
+        # uHu = read_uHu(topdir, seedname)
+
+        # read seedname.uIu
+        # uIu = read_uIu(topdir, seedname)
+
+        self["wannier"]["info"] = info
+        self["wannier"]["ket"] = ket_multipie
+        self["wannier"]["HR"] = hr_dict
+        self["wannier"]["z_j"] = z_j
+        # self["wannier"]["z_j_exp"] = z_j_exp
+        # self["wannier"]["mmn"] = mmn
+        # self["wannier"]["spn"] = spn
+        # self["wannier"]["uHu"] = uHu
+        # self["wannier"]["uIu"] = uIu
+
+        for k, v in z_j.items():
+            print(k, v)
 
     # ==================================================
     def compute_physical_quantity(self):

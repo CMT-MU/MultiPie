@@ -8,13 +8,18 @@ This class has the following dict data.
   - **grid**: (list) grid size, N1, N2, N3.
   - **A** (ndarray): translational vectors for primitive cell, [a1,a2,a3] (3x3).
   - **B** (ndarray): translational vectors for primitive reciprocal cell, [b1,b2,b3] (3x3).
-  - **unit_cell_volume** (float): volumne of primitive cell.
+  - **unit_cell_volume** (float): volume of primitive cell.
 
 - **samb** (dict): SAMB related.
   - **parameter** (dict): used parameter for each SAMB.
   - **matrix_info** (dict): matrix information.
 
-- **wannier** (dict): Wannier realted.
+- **wannier** (dict): Wannier related.
+  - **info** (dict): minimal information used for wannier90.x, read from seedname.win and seedname.nnkp files.
+  - **ket** (list): sorted Wannier functions.
+  - **HR** (dict): Wannier Hamiltonian.
+  - **z_j** (dict): expansion coefficients of the Wannier Hamiltonian expressed as a linear combination of SAMBs.
+  - **z_j_exp** (dict): expansion coefficients of the electronic density matrix expressed as a linear combination of SAMBs, which equal the expectation values of the SAMBs.
 
 - **output** (dict): output of physical quantities.
   - **dispersion** (dict): dispersion related.
