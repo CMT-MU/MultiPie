@@ -42,6 +42,9 @@ from multipie.util.util_wannier import (
 from multipie.util.util import read_dict, str_to_sympy, write_dict
 
 _k_matrix_comment = """Selected SAMB matrix in momentum representation.
+- model (str): model name.
+- source (str): source binary.
+- date (str): binary created date.
 - dimension (int): matrix size.
 - ket_site (list): ket info., [ket_name].
 - index (dict): ket index, dict[(site,sublattice,rank), (top_index,size)].
@@ -55,7 +58,7 @@ _zj_var_comment = """Correspondence between zj and atomic variable.
 - only for SAMB with identity irrep.
 """
 
-_param_comment = """Parameter dict.
+_param_comment = """Parameter dict (sorted by descending absolute value).
 - finite parameter, dict[zj, value].
 """
 
@@ -77,16 +80,22 @@ class ModelAnalyzer(dict):
         if topdir is None:
             topdir = os.getcwd()
 
+        self._topdir = topdir
+        self._verbose = verbose
+        self._mm = MaterialModel(topdir, verbose=verbose)
+        self._local = create_all_local_operator()
+
+        self._mode = default_control["mode"]
         self._samb = default_control["samb"]
         self._wannier = default_control["wannier"]
         self._output = default_control["output"]
 
-        self._topdir = topdir
-        self._verbose = verbose
+        self._name = None
+        self._parameter = None
         self._HR = None
-        self._name = ""
-        self._mm = MaterialModel(topdir, verbose=verbose)
-        self._local = create_all_local_operator()
+        self._basis_type = None
+        self._basis = None
+
         self.set_grid_size(N1, N2, N3)
         self["samb"] = {}
         self["wannier"] = {}
@@ -140,6 +149,17 @@ class ModelAnalyzer(dict):
 
     # ==================================================
     @property
+    def mode(self):
+        """
+        Analysis mode.
+
+        Returns:
+            - (str) -- mode, "samb/wannier/symcw".
+        """
+        return self._mode
+
+    # ==================================================
+    @property
     def name(self):
         """
         Model name.
@@ -148,6 +168,39 @@ class ModelAnalyzer(dict):
             - (str) -- model name.
         """
         return self._name
+
+    # ==================================================
+    @property
+    def parameter(self):
+        """
+        Parameter of SAMBs.
+
+        Returns:
+            - (dict) -- parameter dict.
+        """
+        return self._parameter
+
+    # ==================================================
+    @property
+    def basis_type(self):
+        """
+        Atomic basis type.
+
+        Returns:
+            - (str) -- basis type, "lg/lgs/jml".
+        """
+        return self._basis_type
+
+    # ==================================================
+    @property
+    def basis(self):
+        """
+        Full-matrix basis.
+
+        Returns:
+            - (list) -- list of basis, (atom, sublattice, rank, component, tag).
+        """
+        return self._basis
 
     # ==================================================
     @property
@@ -195,6 +248,7 @@ class ModelAnalyzer(dict):
         Args:
             control (str or dict): control file (.py) or model name.
         """
+        # read control.
         if type(control) == str:  # read control file or from dict.
             if control.endswith(".py"):
                 file = os.path.join(self._topdir, control)
@@ -205,39 +259,45 @@ class ModelAnalyzer(dict):
                 self.model.save_samb_matrix(matrix_info)
                 return
 
+        # set property dict.
         self._samb |= control.get("samb", {})
         self._wannier |= control.get("wannier", {})
         self._output |= control.get("output", {})
 
-        # exec. SAMB control.
-        if self.samb.get("model", None) is not None:
-            self._name = self.samb["model"]
-            self.set_samb()
+        # update mode.
+        mode = control.get("mode", None)
+        if mode:
+            self._mode = mode
 
-        # exec. wannier control.
-        if self._wannier.get("seedname", None) is not None:
-            # self._name = self.wannier["model"]
-            self.set_from_wannier()
+        # set SAMB.
+        if mode in ["samb", "symcw"]:
+            self.set_samb()  # create SAMBs, and H(R) if zj are provided.
+
+        # set wannier.
+        if mode in ["wannier", "symcw"]:
+            hr_dict = self.set_wannier()  # create H(R), and zj in case of "symcw".
+            if mode == "symcw":
+                matrix_info = self["samb"]["matrix_info"]
+                Zr_dict = matrix_info["matrix"]
+                parameter = decompose_operator_by_SAMB(hr_dict, Zr_dict)
+                self._HR = self.model.get_hr(parameter, Zr_dict)
+                self.model.save_samb_hr(matrix_info, parameter, self.HR)
+                self._parameter = parameter
+            else:
+                self._HR = hr_dict
+
+        # create z file.
+        if self.parameter:
+            z_file = self.name + "_z.py"
+            comment = _param_comment + f"- by using '{mode}' mode.\n"
+            dic = {tag: float(v) for tag, v in self.parameter.items()}
+            dic = dict(sorted(dic.items(), key=lambda item: abs(item[1]), reverse=True))
+            write_dict(dic, z_file, comment=comment, w_dir=self.name)
+            if self._verbose:
+                print(f"save z to '{self._topdir}/{z_file}'.")
 
         # compute physical quanties and output data.
         self.compute_physical_quantity()
-
-    # ==================================================
-    def local_operator(self, name):
-        """
-        Create local operator.
-
-        Args:
-            name (str): operator name, "Sx/Sy/Sz/Lx/Ly/Lz/Qu/Qv/Qyz/Qzx/Qxy".
-
-        Returns:
-            - (ndarray) -- operator matrix (dim x dim).
-
-        :meta private:
-        """
-        ket = self.model["full_matrix"]["ket"]
-        basis_type = self.model["basis_type"]
-        return create_local_operator(ket, name, self._local, basis_type == "lgs")
 
     # ==================================================
     def set_samb(self):
@@ -246,97 +306,131 @@ class ModelAnalyzer(dict):
 
         :meta private:
         """
-        self.model.load(self.name)
+        name = self.samb["model"]
+        self._name = name
+
+        # read model.
+        self.model.load(name)
+        self._basis_type = self.model["basis_type"]
+        self._basis = self.model["full_matrix"]["ket"]
+
+        # set primitive cell.
         self.set_primitive_cell(np.array(self.model["unit_vector_primitive"]))
+
+        # set selected SAMBs.
         select = self.samb.get("select", {})
         matrix_info = self.model.get_samb_matrix(select)
+        self["samb"]["matrix_info"] = matrix_info
 
-        parameter = self.samb.get("parameter", {})
-        if type(parameter) == str:  # when parameter is str, which means filename of z_j dict.
-            z_file = os.path.join(self._topdir, self.name, parameter)
-            parameter = read_dict(z_file)
-            parameter = {tag: float(str_to_sympy(v, rational=False)) if type(v) == str else v for tag, v in parameter.items()}
+        # create var file.
+        IR = next(iter(self.model.group.character["table"].keys()))  # identity irrep.
+        conv_dict = convert_zj_atomic_var(matrix_info, self.model["combined_cluster"], self.model["combined_id"], IR)
+        conv_dict = {name: {zj: str(ex).replace(" ", "") for zj, ex in dic.items()} for name, dic in conv_dict.items()}
+        var_file = name + "_var.py"
+        write_dict(conv_dict, var_file, comment=_zj_var_comment, w_dir=name)
+        if self._verbose:
+            print(f"save var to '{self._topdir}/{var_file}'.")
 
-        if self.samb.get("NG_sum_rule", False):
-            parameter = add_local_parameter(matrix_info, parameter)
+        # create k-multipole file.
+        if self.samb.get("k_multipole", False):
+            k_multipole = self.set_k_multipole(matrix_info)
+            k_file = name + "_k.py"
+            write_dict(k_multipole, k_file, comment=_k_matrix_comment, w_dir=name)
+            if self._verbose:
+                print(f"save k-multipole to '{self._topdir}/{k_file}'.")
+            self["samb"]["k_multipole"] = k_multipole
+        else:
+            self["samb"]["k_multipole"] = {}
 
+        # create SAMB qtdraw.
         if self.samb.get("samb_figure", False):
             self.model.save_samb_qtdraw()
+
+        parameter = self.samb.get("parameter", {})
+        if type(parameter) == str:  # when parameter is str, read z file.
+            z_file = parameter
+            parameter = read_dict(z_file, name)
+            parameter = {tag: float(str_to_sympy(v, rational=False)) if type(v) == str else v for tag, v in parameter.items()}
+            if self._verbose:
+                print(f"load parameter from '{self._topdir}/{z_file}'.")
+
+        # determine local weight if NG_sum_rule is True.
+        if self.samb.get("NG_sum_rule", False) and parameter:
+            parameter = add_local_parameter(matrix_info, parameter)
 
         # output matrix.py and hr.dat.
         if parameter:
             self._HR = self.model.get_hr(parameter, matrix_info["matrix"])
-            self.model.save_samb_hr(matrix_info, parameter, self._HR)
-            z_file = os.path.join(self._topdir, self.name, self.name + "_z.py")
-            write_dict({tag: float(v) for tag, v in parameter.items()}, z_file, comment=_param_comment, w_dir=self.name)
-            if self._verbose:
-                print(f"save z to '{z_file}'.")
+            self.model.save_samb_hr(matrix_info, parameter, self.HR)
+        else:
+            self._HR = None
         self.model.save_samb_matrix(matrix_info)
 
-        IR = next(iter(self.model.group.character["table"].keys()))  # identity irrep.
-        conv_dict = convert_zj_atomic_var(matrix_info, self.model["combined_cluster"], self.model["combined_id"], IR)
-        conv_dict = {name: {zj: str(ex).replace(" ", "") for zj, ex in dic.items()} for name, dic in conv_dict.items()}
-        var_file = os.path.join(self._topdir, self.name, self.name + "_var.py")
-        write_dict(conv_dict, var_file, comment=_zj_var_comment, w_dir=self.name)
-        if self._verbose:
-            print(f"save var to '{var_file}'.")
-
-        self.set_k_multipole(matrix_info)
-
-        self["samb"]["parameter"] = parameter
-        self["samb"]["matrix_info"] = matrix_info
+        self._parameter = parameter
 
     # ==================================================
-    def set_from_wannier(self):
+    def set_wannier(self):
         """
         Set data for wannier-based input.
 
         :meta private:
         """
-        topdir = os.path.join(self._topdir, self.name)
-        seedname = self._wannier.get("seedname", None)
+        topdir = os.path.join(self._topdir, self.name, "wannier")
+        seedname = self.wannier.get("seedname", None)
 
         # read seedname.win
         win = read_win(topdir, seedname)
-
         # read seedname.nnkp
         nnkp = read_nnkp(topdir, seedname)
+        # read seedname_hr.dat
+        hr_dict, irvec, _ = read_hr(topdir, self._wannier.get("hr_file", None))
+        # read seedname.mmn
+        # Mkb = read_mmn(topdir, seedname)
+        # read seedname.spn
+        # Sk = read_spn(topdir, seedname)
+        # read seedname.uHu
+        # uHu = read_uHu(topdir, seedname)
+        # read seedname.uIu
+        # uIu = read_uIu(topdir, seedname)
 
-        # Check common values and merge.
+        # check common values and merge.
         wannier_info = merge_wannier_info(win, nnkp, seedname)
-
-        # ワニエ関数の並び順をMultiPieのketに揃える。
-        ket_multipie = self.model["full_matrix"]["ket"]
-        ket_wannier = self._wannier.get("ket_wannier", "auto")
-
-        if ket_wannier == "auto":
-            site_dict = {
-                (k, vi.sublattice): vi.position_primitive.tolist()
-                for k, v in self._mm["site"]["cell"].items()
-                for vi in v
-                if vi.plus_set == 1
-            }
-            ket_wannier = build_ket_wannier(nnkp, site_dict, rtol=1e-4, atol=1e-4)
 
         atoms_list = list(wannier_info["atoms_frac"].values())
         atoms_frac = np.array([atoms_list[i] for i in wannier_info["nw2n"]])
-        atoms_frac = sort_ket_list(atoms_frac, ket_wannier, ket_multipie)
 
         atoms_list = list(wannier_info["atoms_cart"].values())
         atoms_cart = np.array([atoms_list[i] for i in wannier_info["nw2n"]])
-        atoms_cart = sort_ket_list(atoms_cart, ket_wannier, ket_multipie)
+
+        if True:  # MultiPie dependent part.
+            # sort wannier basis as those of MultiPie.
+            ket_wannier = self.wannier.get("ket_wannier", [])
+            if not ket_wannier:
+                site_dict = {
+                    (k, vi.sublattice): vi.position_primitive.tolist()
+                    for k, v in self._mm["site"]["cell"].items()
+                    for vi in v
+                    if vi.plus_set == 1
+                }
+                ket_wannier = build_ket_wannier(nnkp, site_dict, rtol=1e-4, atol=1e-4)
+
+            # convert ket_wannier to ket_multipie.
+            ket_multipie = self.model["full_matrix"]["ket"]
+            atoms_frac = sort_ket_list(atoms_frac, ket_wannier, ket_multipie)
+            atoms_cart = sort_ket_list(atoms_cart, ket_wannier, ket_multipie)
+            hr_dict = sort_ket_matrix_dict(hr_dict, ket_wannier, ket_multipie)
 
         info = {
-            # Wannier info
+            # Wannier info.
             "A": wannier_info["A"],
             "B": wannier_info["B"],
-            "ket": ket_multipie,  # sorted as MultiPie ket
+            # "ket": ket_multipie,  # sorted as MultiPie ket.
             "num_wann": wannier_info["num_wann"],
             "atoms_frac": atoms_frac,
             "atoms_cart": atoms_cart,
             "spinors": wannier_info["spinors"],
             "fermi_energy": wannier_info["fermi_energy"],
-            # DFT info
+            # DFT info.
             "num_bands": wannier_info["num_bands"],
             "mp_grid": wannier_info["mp_grid"],
             "num_k": wannier_info["num_k"],
@@ -351,49 +445,29 @@ class ModelAnalyzer(dict):
             "kb2k": wannier_info["kb2k"],
         }
 
-        Zr_dict = self._mm.get_combined_samb_matrix(fmt="value", digit=15, bond=False)
-
-        # read seedname_hr.dat
-        hr_dict, irvec, _ = read_hr(topdir, self._wannier.get("hr_file", None))
-        hr_dict = sort_ket_matrix_dict(hr_dict, ket_wannier, ket_multipie)
-        z_j = decompose_operator_by_SAMB(hr_dict, Zr_dict)
-
-        # nk = np.array([np.diag(fermi_dirac(eki - win["fermi_energy"], T=0.0)) for eki in Ek], dtype=float)
-        # nk = Uk.transpose(0, 2, 1).conjugate() @ nk @ Uk
-
-        # nr_dict = fourier_k_to_r(nk, win["kpoints"], irvec, s=False)
-        # nr_dict = sort_ket_matrix_dict(nr_dict, ket_wannier, ket_multipie)
-        # z_j_exp = decompose_operator_by_SAMB(nr_dict, Zr_dict)
-
-        # read seedname.mmn
-        # Mkb = read_mmn(topdir, seedname)
-
-        # read seedname.spn
-        # Sk = read_spn(topdir, seedname)
-
-        # read seedname.uHu
-        # uHu = read_uHu(topdir, seedname)
-
-        # read seedname.uIu
-        # uIu = read_uIu(topdir, seedname)
-
         self["wannier"]["info"] = info
-        self["wannier"]["ket"] = ket_multipie
-        self["wannier"]["HR"] = hr_dict
-        self["wannier"]["z_j"] = z_j
         # self["wannier"]["z_j_exp"] = z_j_exp
         # self["wannier"]["mmn"] = mmn
         # self["wannier"]["spn"] = spn
         # self["wannier"]["uHu"] = uHu
         # self["wannier"]["uIu"] = uIu
 
-        for k, v in z_j.items():
-            print(k, v)
+        ### physical qunatity.
+        # nk = np.array([np.diag(fermi_dirac(eki - win["fermi_energy"], T=0.0)) for eki in Ek], dtype=float)
+        # nk = Uk.transpose(0, 2, 1).conjugate() @ nk @ Uk
+        # nr_dict = fourier_k_to_r(nk, win["kpoints"], irvec, s=False)
+        # nr_dict = sort_ket_matrix_dict(nr_dict, ket_wannier, ket_multipie)
+        # z_j_exp = decompose_operator_by_SAMB(nr_dict, Zr_dict)
+
+        return hr_dict
 
     # ==================================================
     def compute_physical_quantity(self):
         """
         Compute physical quantities by parsing the control file.
+
+        Args:
+            name (str): model name.
 
         :meta private:
         """
@@ -424,53 +498,76 @@ class ModelAnalyzer(dict):
         pass
 
     # ==================================================
+    def local_operator(self, name):
+        """
+        Create local operator.
+
+        Args:
+            name (str): operator name, "Sx/Sy/Sz/Lx/Ly/Lz/Qu/Qv/Qyz/Qzx/Qxy".
+
+        Returns:
+            - (ndarray) -- operator matrix (dim x dim).
+
+        :meta private:
+        """
+        return create_local_operator(self.basis, name, self._local, self.basis_type == "lgs")
+
+    # ==================================================
     def compute_dispersion(self):
         """
         Compute dispersion.
 
         :meta private:
         """
+        # check if dispersion can be computed.
         if "dispersion" not in self.output:
             return
-
         k_path = self.output["dispersion"].get("k_path", None)
         if k_path is None or self.model.group.group_type != "SG":
             return
 
+        name = self.name
+
+        # get k_point and k_path.
         k_point, k_path = self.get_kpath(k_path)
         k_point_path, k_linear, k_dis_pos = grid_path(k_point, k_path, self["grid"][0], self["B"])
 
-        tb_gauge = self.output["fourier"]["tb_gauge"]
-        atom = np.asarray(list(self.model.get_ket_site().values()), dtype=float)
-        basis_type = self.model["basis_type"]
-        if basis_type == "jml":
+        # get local operator list.
+        if self._basis_type == "jml" or self._basis_type is None:
             op_lst = []
         else:
             op_lst = self.output["dispersion"].get("local", [])
 
+        # get info.
+        tb_gauge = self.output["fourier"]["tb_gauge"]
+        atom = np.asarray(list(self.model.get_ket_site().values()), dtype=float)
+
+        # set H(R) and H(k).
         HR = {((n1, n2, n3), m, n): complex(v) for (n1, n2, n3, m, n), v in self._HR.items()}
         Hk = fourier_r_to_k(HR, atom, k_point_path, tb_gauge)
 
+        # set eigen system.
         Ek, Uk = np.linalg.eigh(Hk)
         power = self.output["dispersion"].get("power", None)
         if power is not None:
             Ek = np.power(Ek, power)
 
+        # set local operators.
         Ok = [np.einsum("kmi,mn,kni->ki", Uk.conj(), self.local_operator(name), Uk).real for name in op_lst]
 
-        fname = self.name + "_dispersion.txt"
+        # output dispersion data, plot, and gnuplot.
+        fname = name + "_dispersion.txt"
         colormap = len(Ok) > 0
         if Ok:
-            output_dispersion(fname, k_linear, Ek, Ok)
+            output_dispersion(fname, k_linear, Ek, Ok, op_lst)
         else:
             output_dispersion(fname, k_linear, Ek)
         plot_save_dispersion(fname, k_dis_pos, colormap)
         create_gnuplot_cmd(fname, k_dis_pos, np.max(k_linear), np.max(Ek), np.min(Ek), colormap)
-
         if self._verbose:
-            outdir = os.path.join(self._topdir, self.name, self.output["dir"])
-            print(f"save dispersion to '{outdir}/{fname}'.")
+            print(f"save dispersion files into '{self._topdir}/{name}/{self.output["dir"]}.")
 
+        # save dispersion info.
         self["output"]["dispersion"] = {
             "k_path": k_path,
             "k_point": k_point,
@@ -543,13 +640,16 @@ class ModelAnalyzer(dict):
         Args:
             matrix_info (dict): matrix info.
 
+        Returns:
+            - (dict) -- k-multipole dict.
+
         Notes:
             - only tight-binding gauge is supported.
 
         :meta private:
         """
         if not self.samb.get("k_multipole", False):
-            return
+            return {}
 
         combined_id = self.model["combined_id"]
 
@@ -570,6 +670,9 @@ class ModelAnalyzer(dict):
         }
 
         k_multipole = {
+            "model": matrix_info["model"],
+            "source": matrix_info["source"],
+            "date": matrix_info["date"],
             "dimension": matrix_info["dimension"],
             "ket_site": list(matrix_info["ket_site"].keys()),
             "index": matrix_info["index"],
@@ -578,12 +681,4 @@ class ModelAnalyzer(dict):
             "k_matrix": k_matrix,
         }
 
-        # output.
-        outdir = os.path.join(self._topdir, self.name)
-        fname = self.name + "_k.py"
-        write_dict(k_multipole, fname, comment=_k_matrix_comment, w_dir=outdir)
-
-        if self._verbose:
-            print(f"save k-multipole to '{outdir}/{fname}'.")
-
-        self["samb"]["k_multipole"] = k_multipole
+        return k_multipole

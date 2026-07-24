@@ -155,7 +155,7 @@ def fourier_k_to_r(Ok, atom, kv, irvec, s=True):
 
 
 # ==================================================
-def output_dispersion(filename, k, e, o=None):
+def output_dispersion(filename, k, e, o=None, olist=None):
     """
     Output band dispersion along high-symmetry lines.
 
@@ -164,13 +164,18 @@ def output_dispersion(filename, k, e, o=None):
         k (ndarray): k points along high-symmetry lines.
         e (ndarray): eigen values.
         o (list, optional): expectation value of any operator for each band, [[num_k, num_band]].
+        olist (list, optional): list of local operator.
     """
     emax = np.max(e)
     emin = np.min(e)
     ef = 0.0
 
     fs = open(filename, "w")
-    fs.write("# k Energy [eV] \n")
+    if olist:
+        ke_ol = "# k Energy [eV] " + " ".join(olist) + "\n"
+    else:
+        ke_ol = "# k Energy [eV]\n"
+    fs.write(ke_ol)
     fs.write(f"# Emax = {emax}\n")
     fs.write(f"# Emin = {emin}\n")
     fs.write(f"# ef = {ef}\n\n")
@@ -183,12 +188,12 @@ def output_dispersion(filename, k, e, o=None):
         en = e[n] - ef
         s = ""
         for i in range(num_k):
-            s += "{k:0<20} {e:<20}".format(k=kv[i], e=en[i])
+            s += "{k: .15f} {e: .15f}".format(k=kv[i], e=en[i])
             if o is None:
                 s += "\n"
             else:
                 for oi in o:
-                    s += " {o:<20}".format(o=oi[i, n])
+                    s += " {o: .15f}".format(o=oi[i, n])
                 s += "\n"
             if np.abs(kv[i] - kv[i + 1]) < 1e-5:
                 s += "\n"
@@ -606,12 +611,12 @@ def add_local_parameter(matrix_info, parameter):
 
 
 # ==================================================
-def build_and_solve_hermitian(mat, z_symbols, labels=None):
+def build_and_solve(mat, z_symbols, labels=None):
     """
-    Build linear equations from a Hermitian matrix and solve for z_j.
+    Build linear equations from a matrix and solve for z_j.
 
     Args:
-        mat (ndarray): hermitian matrix, only upper triangle is required.
+        mat (ndarray): bond1-projected matrix.
         z_symbols (list): zj variables.
         labels (list, optional): name for bra-ket.
 
@@ -624,7 +629,7 @@ def build_and_solve_hermitian(mat, z_symbols, labels=None):
     expr_to_positions = {}
 
     for m in range(rows):
-        for n in range(m, cols):
+        for n in range(cols):
             expr = sp.sympify(mat[m, n])
             if expr == 0:
                 continue
@@ -680,10 +685,12 @@ def convert_zj_atomic_var(matrix_info, combined_cluster, combined_id, IR):
     # classify zj for each cluster.
     cluster = {}
     for tag, name in combined_cluster.items():
-        if ";" in name and combined_id[tag][2][2] == IR:
+        X = combined_id[tag][2][0]
+        Gamma = combined_id[tag][2][2]
+        if ";" in name and X in ["Q", "G"] and Gamma == IR:
             cluster.setdefault(name, []).append(tag)
 
-    # construct upper-triangle matrix.
+    # construct bond1-projected matrix.
     dic = {}
     for name, tags in cluster.items():
         var = []
@@ -692,14 +699,14 @@ def convert_zj_atomic_var(matrix_info, combined_cluster, combined_id, IR):
             zjv = sp.Symbol(zj, real=True)
             var.append(zjv)
             for (n1, n2, n3, m, n), (val, no) in matrix_info["matrix"][zj].items():
-                if no in (1, -1) and m <= n:  # only upper triangle.
+                if no == 1:  # only representative bond 1.
                     mat[m, n] += val * zjv
         dic[name] = (mat, var)
 
     # solve zj for each cluster.
     result = {}
     for name, (mat, var) in dic.items():
-        g_syms, lin_eqs, sol = build_and_solve_hermitian(mat, var, ket)
+        g_syms, lin_eqs, sol = build_and_solve(mat, var, ket)
         result[name] = sol
 
     return result

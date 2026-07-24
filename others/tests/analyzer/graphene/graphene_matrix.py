@@ -1,5 +1,9 @@
 """
 Selected SAMB matrix.
+- model (str): model name.
+- source (str): source binary.
+- date (str): binary created date.
+- select (dict): select condition used.
 - dimension (int): matrix size.
 - ket_site (dict): ket info., dict[ket_name, position (fractional, primitive)].
 - index (dict): ket index, dict[(site,sublattice,rank), (top_index,size)].
@@ -11,7 +15,7 @@ Selected SAMB matrix.
 graphene = {
     "model": "graphene",
     "source": "graphene.pkl",
-    "date": "2026-07-22 08:01:29",
+    "date": "2026-07-24 19:12:19",
     "select": {
         "X": ["Q", "G"],
         "l": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],

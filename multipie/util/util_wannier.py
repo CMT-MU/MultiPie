@@ -834,7 +834,7 @@ def sort_ket_matrix_dict(Or_dict, ket1, ket2):
         Or_dict (dict):  dictionary form of an arbitrary operator matrix.
     """
     idx_list = [ket2.index(o) for o in ket1]
-    Or_dict = {(n1, n2, n3, idx_list[a], idx_list[b]): v for (n1, n2, n3, a, b), v in Or_dict.items()}
+    Or_dict = {(n1, n2, n3, idx_list[a], idx_list[b]): complex(v) for (n1, n2, n3, a, b), v in Or_dict.items()}
 
     return Or_dict
 
@@ -869,19 +869,25 @@ def sort_ket_list(lst, ket1, ket2):
 
 
 # ==================================================
-def decompose_operator_by_SAMB(Or_dict, Zr_dict):
+def decompose_operator_by_SAMB(Or_dict, Zr_dict, digit=15):
     """
     decompose arbitrary operator into linear combination of SAMBs.
 
     Args:
         Or_dict (dict): dictionary form of an arbitrary operator matrix in real-space/k-space representation.
         Zr_dict (dict): dictionary form of SAMBs.
+        digit (int, optional): round digit for Zr_dict.
 
     Returns:
         z (dict): parameter set, {zj: coeff}.
     """
+
+    def _round(v):
+        c_val = complex(v)
+        return round(c_val.real, digit) + round(c_val.imag, digit) * 1j
+
     z = {
-        zj: np.real(np.sum([v * Or_dict.get((-k[0], -k[1], -k[2], k[4], k[3]), 0) for k, v in d.items()]))
+        zj: float(np.real(np.sum([_round(v) * Or_dict.get((-k[0], -k[1], -k[2], k[4], k[3]), 0) for k, (v, b_no) in d.items()])))
         for zj, d in Zr_dict.items()
     }
 

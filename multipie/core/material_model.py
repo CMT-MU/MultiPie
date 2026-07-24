@@ -44,6 +44,10 @@ from multipie.core.default_model import default_model
 from multipie.util.util_plot import plot_site, plot_bond, plot_site_samb, plot_bond_samb, plot_harmonics
 
 _matrix_comment = """Selected SAMB matrix.
+- model (str): model name.
+- source (str): source binary.
+- date (str): binary created date.
+- select (dict): select condition used.
 - dimension (int): matrix size.
 - ket_site (dict): ket info., dict[ket_name, position (fractional, primitive)].
 - index (dict): ket index, dict[(site,sublattice,rank), (top_index,size)].

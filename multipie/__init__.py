@@ -347,33 +347,26 @@ __all__ = ["Group", "MaterialModel", "ModelAnalyzer", "create_samb", "create_sam
 
 if TYPE_CHECKING:
     from multipie.core.group import Group
-    from multipie.core.cmd import create_samb
-    from multipie.core.cmd import create_samb_qtdraw
-    from multipie.core.cmd import create_samb_matrix
+    from multipie.core.cmd import create_model, analyze_model
     from multipie.core.material_model import MaterialModel
     from multipie.core.model_analyzer import ModelAnalyzer
 
 
 def __getattr__(name):
+    if name == "create_model":
+        from multipie.core.cmd import create_model
+
+        return create_model
+
+    if name == "analyze_mode":
+        from multipie.core.cmd import analyze_model
+
+        return analyze_model
+
     if name == "Group":
         from multipie.core.group import Group
 
         return Group
-
-    if name == "create_samb":
-        from multipie.core.cmd import create_samb
-
-        return create_samb
-
-    if name == "create_samb_qtdraw":
-        from multipie.core.cmd import create_samb_qtdraw
-
-        return create_samb_qtdraw
-
-    if name == "create_samb_matrix":
-        from multipie.core.cmd import create_samb_matrix
-
-        return create_samb_matrix
 
     if name == "MaterialModel":
         from multipie.core.material_model import MaterialModel

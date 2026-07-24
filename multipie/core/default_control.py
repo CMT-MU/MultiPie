@@ -5,6 +5,7 @@ Default control for ModelAnalyzer.
 # ==================================================
 # default control.
 default_control = {
+    "mode": "samb",  # samb (SAMB-based only), wannier (wannier-based only), symcw (SAMB and wannier based).
     "samb": {
         "model": None,  # model name for .pkl.
         "select": {  # SAMB select condition, where S=site name, R=orbital rank, N=neighbor bond.
@@ -16,7 +17,7 @@ default_control = {
             # "s": [],  # SAMB internal rank, 0,1 in list. empty []=all
         },
         "parameter": {  # SAMB with finite weight (float or sympy const.), or filename of z_j dict.
-            "z1": 1.0,
+            # "z1": 1.0,
         },
         "samb_figure": False,  # save SAMB QtDraw files ?
         "k_multipole": False,  # compute momentum multipole ?
@@ -24,7 +25,7 @@ default_control = {
     },
     "wannier": {  # Closest Wannier (CW) or SymWannier setting.
         "seedname": None,  # read seedname.win, seedname.nnkp, (seedname.mmn, seedname.spn, seedname.uHu, seedname.uIu ...).
-        "ket_wannier": "auto",  # Wannier basis, [[site, sublattice, rank, component, orbital], ...]. "auto" is allowed only when the Wannier and MultiPie site positions coincide.
+        "ket_wannier": [],  # Wannier basis, [[site, sublattice, rank, component, orbital], ...]. empty is allowed only when the Wannier and MultiPie site positions coincide.
         "hr_file": None,  # read seedname_hr.dat.
     },
     "output": {  # physical quantity setting.
