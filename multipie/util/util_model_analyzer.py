@@ -155,20 +155,20 @@ def fourier_k_to_r(Ok, atom, kv, irvec, s=True):
 
 
 # ==================================================
-def output_dispersion(filename, k, e, o=None, olist=None):
+def output_dispersion(filename, k, ef, e, o=None, olist=None):
     """
     Output band dispersion along high-symmetry lines.
 
     Args:
         filename (str): file name.
         k (ndarray): k points along high-symmetry lines.
+        ef (float): fermi energy.
         e (ndarray): eigen values.
         o (list, optional): expectation value of any operator for each band, [[num_k, num_band]].
         olist (list, optional): list of local operator.
     """
     emax = np.max(e)
     emin = np.min(e)
-    ef = 0.0
 
     fs = open(filename, "w")
     if olist:
@@ -205,7 +205,7 @@ def output_dispersion(filename, k, e, o=None, olist=None):
 
 
 # ==================================================
-def create_gnuplot_cmd(filename, k_dis_pos, kmax, emax, emin, colormap=False, lwidth=2, lc="salmon"):
+def create_gnuplot_cmd(filename, k_dis_pos, kmax, emax, emin, ef, colormap=False, lwidth=2, lc="salmon"):
     """
     Create gnuplot file.
 
@@ -215,12 +215,12 @@ def create_gnuplot_cmd(filename, k_dis_pos, kmax, emax, emin, colormap=False, lw
         kmax (float): maximum value in kpoints.
         emax (float): maximum value of eigen values.
         emin (float): minimum value of eigen values.
+        ef (float): fermi energy.
         colormap (bool, optional): with colormap of first expectation value of operator.
         lwidth (int, optional): line width.
         lc (str, optional): line color.
     """
     offset = (emax - emin) * 0.1
-    ef = 0.0
 
     fs = open("plot_band.gnu", "w")
 
@@ -276,13 +276,14 @@ def create_gnuplot_cmd(filename, k_dis_pos, kmax, emax, emin, colormap=False, lw
 
 
 # ==================================================
-def plot_save_dispersion(filename, k_dis_pos, colormap=False, lwidth=1, lc="salmon"):
+def plot_save_dispersion(filename, k_dis_pos, ef, colormap=False, lwidth=1, lc="salmon"):
     """
     Generate plot window for band dispersion (matplotlib).
 
     Args:
         filename (str): file name.
         k_dis_pos (dict): info. of high-symmetry point in linear k, dict[disconnected position, label].
+        ef (float): fermi energy.
         colormap (bool, optional): with colormap of first expectation value of operator.
         lwidth (int, optional): line width.
         lc (str, optional): line color.
@@ -292,7 +293,6 @@ def plot_save_dispersion(filename, k_dis_pos, colormap=False, lwidth=1, lc="salm
     emax = max(a[:, 1].max() for a in bands)
     emin = min(a[:, 1].min() for a in bands)
     kmax = max(a[:, 0].max() for a in bands)
-    ef = 0.0
 
     offset = (emax - emin) * 0.1
 

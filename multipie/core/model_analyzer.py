@@ -303,23 +303,27 @@ class ModelAnalyzer(dict):
         self.compute_physical_quantity()
 
         # output info.
-        """
         if "samb" in self.keys():
+            ex = []
             samb_file = self.name + "_info_samb.py"
-            write_dict(self["samb"], samb_file, comment=comment, w_dir=self.name)
+            dic = {k: v for k, v in self["samb"].items() if k not in ex}
+            write_dict(dic, samb_file, w_dir=self.name)
             if self._verbose:
                 print(f"save info (samb) to '{self._topdir}/{samb_file}'.")
         if "wannier" in self.keys():
+            ex = ["kpoints", "nnkpts", "wk", "bveck", "kb2k"]
             wannier_file = self.name + "_info_wannier.py"
-            write_dict(self["wannier"], wannier_file, comment=comment, w_dir=self.name)
+            dic = {k: v for k, v in self["wannier"].items() if k not in ex}
+            write_dict(dic, wannier_file, w_dir=self.name)
             if self._verbose:
                 print(f"save info (wannier) to '{self._topdir}/{wannier_file}'.")
         if "output" in self.keys():
+            ex = []
             output_file = self.name + "_info_output.py"
-            write_dict(self["output"], output_file, comment=comment, w_dir=self.name)
+            dic = {k: v for k, v in self["output"].items() if k not in ex}
+            write_dict(dic, output_file, w_dir=self.name)
             if self._verbose:
                 print(f"save info (output) to '{self._topdir}/{output_file}'.")
-        """
 
     # ==================================================
     def set_samb(self):
@@ -394,6 +398,7 @@ class ModelAnalyzer(dict):
         self.model.save_samb_matrix(matrix_info)
 
         self._parameter = parameter
+        self["fermi_energy"] = 0.0
 
     # ==================================================
     def set_wannier(self):
@@ -478,7 +483,8 @@ class ModelAnalyzer(dict):
             "kb2k": wannier_info["kb2k"],
         }
 
-        self["wannier"]["info"] = info
+        self["wannier"] = info
+        self["fermi_energy"] = info["fermi_energy"]
         # self["wannier"]["z_j_exp"] = z_j_exp
         # self["wannier"]["mmn"] = mmn
         # self["wannier"]["spn"] = spn
@@ -591,12 +597,13 @@ class ModelAnalyzer(dict):
         # output dispersion data, plot, and gnuplot.
         fname = name + "_dispersion.txt"
         colormap = len(Ok) > 0
+        ef = self.get("fermi_energy", 0.0)
         if Ok:
-            output_dispersion(fname, k_linear, Ek, Ok, op_lst)
+            output_dispersion(fname, k_linear, ef, Ek, Ok, op_lst)
         else:
-            output_dispersion(fname, k_linear, Ek)
-        plot_save_dispersion(fname, k_dis_pos, colormap)
-        create_gnuplot_cmd(fname, k_dis_pos, np.max(k_linear), np.max(Ek), np.min(Ek), colormap)
+            output_dispersion(fname, k_linear, ef, Ek)
+        plot_save_dispersion(fname, k_dis_pos, ef, colormap)
+        create_gnuplot_cmd(fname, k_dis_pos, np.max(k_linear), np.max(Ek), np.min(Ek), ef, colormap)
         if self._verbose:
             print(f"save dispersion files into '{self._topdir}/{name}/{self.output["dir"]}.")
 
@@ -604,9 +611,8 @@ class ModelAnalyzer(dict):
         self["output"]["dispersion"] = {
             "k_path": k_path,
             "k_point": k_point,
-            "e_max": np.max(Ek),
-            "e_min": np.min(Ek),
-            "ef": 0.0,
+            "e_max": float(np.max(Ek)),
+            "e_min": float(np.min(Ek)),
         }
 
     # ==================================================
