@@ -22,6 +22,7 @@ from multipie.util.util_model_analyzer import (
     create_k_multipole,
     create_k_matrix,
     add_local_parameter,
+    add_local_parameter_sym,
     convert_zj_atomic_var,
     fermi_dirac,
     convert_orbital_to_detail,
@@ -262,12 +263,12 @@ class ModelAnalyzer(dict):
                 return
 
         # set property dict.
-        self._samb |= control.get("samb", {})
-        self._wannier |= control.get("wannier", {})
-        self._output |= control.get("output", {})
+        self._samb = default_control["samb"] | control.get("samb", {})
+        self._wannier = default_control["wannier"] | control.get("wannier", {})
+        self._output = default_control["output"] | control.get("output", {})
 
         # update mode.
-        mode = control.get("mode", None)
+        mode = control.get("mode", default_control["mode"])
         if mode:
             self._mode = mode
 
@@ -300,6 +301,25 @@ class ModelAnalyzer(dict):
 
         # compute physical quanties and output data.
         self.compute_physical_quantity()
+
+        # output info.
+        """
+        if "samb" in self.keys():
+            samb_file = self.name + "_info_samb.py"
+            write_dict(self["samb"], samb_file, comment=comment, w_dir=self.name)
+            if self._verbose:
+                print(f"save info (samb) to '{self._topdir}/{samb_file}'.")
+        if "wannier" in self.keys():
+            wannier_file = self.name + "_info_wannier.py"
+            write_dict(self["wannier"], wannier_file, comment=comment, w_dir=self.name)
+            if self._verbose:
+                print(f"save info (wannier) to '{self._topdir}/{wannier_file}'.")
+        if "output" in self.keys():
+            output_file = self.name + "_info_output.py"
+            write_dict(self["output"], output_file, comment=comment, w_dir=self.name)
+            if self._verbose:
+                print(f"save info (output) to '{self._topdir}/{output_file}'.")
+        """
 
     # ==================================================
     def set_samb(self):
@@ -358,7 +378,12 @@ class ModelAnalyzer(dict):
 
         # determine local weight if NG_sum_rule is True.
         if self.samb.get("NG_sum_rule", False) and parameter:
-            parameter = add_local_parameter(matrix_info, parameter)
+            parameter = add_local_parameter(matrix_info, parameter, self.model["full_matrix"]["ket"])
+        if self.samb.get("NG_sum_rule", False):
+            parameter_sym = add_local_parameter_sym(matrix_info, self.model["full_matrix"]["ket"])
+            self["samb"]["NG_sum_rule"] = parameter_sym
+        else:
+            self["samb"]["NG_sum_rule"] = None
 
         # output matrix.py and hr.dat.
         if parameter:
@@ -408,7 +433,7 @@ class ModelAnalyzer(dict):
         atoms_list = list(wannier_info["atoms_cart"].values())
         atoms_cart = np.array([atoms_list[i] for i in wannier_info["nw2n"]])
 
-        if True:  # MultiPie dependent part.
+        if True:  # MultiPie dependent part. => replace it with create_ket_wannier independent of MultiPie.
             # sort wannier basis as those of MultiPie.
             ket_wannier = self.wannier.get("ket_wannier", [])
             if ket_wannier:

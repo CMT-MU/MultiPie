@@ -560,23 +560,44 @@ def create_k_matrix(matrix, cluster_dict, vector_dict):
 
 
 # ==================================================
-def add_local_parameter(matrix_info, parameter):
+def check_same_orbital_block(ket):
+    """
+    Check same orbital block for all atoms.
+
+    Args:
+        ket (list): ket list.
+
+    Returns:
+        - (bool) -- same block ?
+        - (int) -- block size.
+    """
+    d = {}
+    for atom, sl, rank, comp, orb in ket:
+        d[atom] = d.get(atom, []) + [orb]
+    d = {atom: tuple(sorted(list(set(lst)))) for atom, lst in d.items()}
+    orb_set = list(set(d.values()))
+    same = len(orb_set) == 1
+    orb_dim = len(orb_set[0])
+    return same, orb_dim
+
+
+# ==================================================
+def add_local_parameter(matrix_info, parameter, ket):
     """
     Add local parameter for given nonlocal parameter.
 
     Args:
         matrix_info (dict): matrix info.
         parameter (dict): parameter dict without site cluster.
+        ket (list): ket list.
 
     Returns:
         - (dict) -- parameter dict with adding local one.
     """
-    if not len(set([i[2] for i in matrix_info["index"].keys()])) == 1:  # only for the same ranks.
+    same, d = check_same_orbital_block(ket)
+    if not same:
         return
-    rank = next(iter(matrix_info["index"]))[2]
     dim = matrix_info["dimension"]
-
-    d = 2 * rank + 1
     nn = dim // d
 
     local = {}
@@ -605,7 +626,58 @@ def add_local_parameter(matrix_info, parameter):
         if not val.is_zero:
             parameter[zk] = val
 
-    parameter = dict(sorted(parameter.items()))
+    parameter = dict(sorted(parameter.items(), key=lambda x: int(x[0][1:])))
+
+    return parameter
+
+
+# ==================================================
+def add_local_parameter_sym(matrix_info, ket):
+    """
+    Add local parameter for given nonlocal parameter.
+
+    Args:
+        matrix_info (dict): matrix info.
+        ket (list): ket list.
+
+    Returns:
+        - (dict) -- parameter dict with adding local one.
+    """
+    same, d = check_same_orbital_block(ket)
+    if not same:
+        return
+    dim = matrix_info["dimension"]
+    nn = dim // d
+
+    local = {}
+    nonlocal_z = []
+    local_z = {}
+    for tag, mat in matrix_info["matrix"].items():
+        v = np.full((dim, dim), sp.S(0))
+        for (n1, n2, n3, m, n), (val, no) in mat.items():
+            v[m, n] += val
+        if ";" in matrix_info["cluster"][tag]:  # nonlocal SAMB with parameter key.
+            vd = v.reshape(nn, d, nn, d).sum(axis=0).transpose(1, 0, 2)
+            s = np.full((dim, dim), sp.S(0))
+            for i in range(nn):
+                s[i * d : (i + 1) * d, i * d : (i + 1) * d] = vd[i]
+            local[tag] = s
+            nonlocal_z.append(tag)
+        else:  # local SAMB.
+            local_z[tag] = v
+    coeff = {tag: np.array([np.einsum("ij,ji->", z, s) for z in local_z.values()]) for tag, s in local.items()}
+
+    zt = np.full(len(local_z.keys()), sp.S(0))
+    for zj in nonlocal_z:
+        zjv = sp.Symbol(zj, real=True)
+        zt -= zjv * coeff[zj]
+
+    parameter = {}
+    for zk, val in zip(local_z.keys(), zt):
+        if not val.is_zero:
+            parameter[zk] = val
+
+    parameter = dict(sorted(parameter.items(), key=lambda x: int(x[0][1:])))
 
     return parameter
 
