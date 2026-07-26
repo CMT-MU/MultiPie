@@ -17,7 +17,9 @@ BOHR2ANG = 0.529177249
 # ==================================================
 @contextmanager
 def _open_text(path):
-    """Open a plain, ``.gz``, or ``.tar.gz`` text file."""
+    """
+    Open a plain, ``.gz``, or ``.tar.gz`` text file.
+    """
     path = Path(path)
 
     if path.exists():
@@ -57,14 +59,18 @@ def _open_text(path):
 
 # ==================================================
 def _read_lines(path):
-    """Read a plain, ``.gz``, or ``.tar.gz`` text file as a list of lines."""
+    """
+    Read a plain, ``.gz``, or ``.tar.gz`` text file as a list of lines.
+    """
     with _open_text(path) as f:
         return f.read().splitlines()
 
 
 # ==================================================
 def _blocks(lines):
-    """Return ``{block_name: lines_between_begin_and_end}``."""
+    """
+    Return ``{block_name: lines_between_begin_and_end}``.
+    """
     blocks = {}
     i = 0
 
@@ -93,7 +99,9 @@ def _blocks(lines):
 
 # ==================================================
 def _array(lines, dtype=float):
-    """Read numerical rows and always return a two-dimensional array."""
+    """
+    Read numerical rows and always return a two-dimensional array.
+    """
     return np.atleast_2d(np.loadtxt(lines, dtype=dtype))
 
 
@@ -110,16 +118,10 @@ def _convert_w90_orbital(l, m, r, s):
                  for a non-spinor projection.
 
     Returns:
-        str: MultiPie orbital label, such as ``s``, ``px``, ``du``,
-             ``(px,u)``, or ``(px,d)``.
-
-    Raises:
-        ValueError: If ``(l,m)`` or ``s`` is not supported.
+        - (str) -- MultiPie orbital label, such as ``s``, ``px``, ``du``, ``(px,u)``, or ``(px,d)``.
 
     Notes:
-        The radial index ``r`` is currently not encoded in the returned
-        MultiPie orbital label, but it is retained in the argument list for
-        consistency with the Wannier90 projection format.
+        - The radial index ``r`` is currently not encoded in the returned MultiPie orbital label, but it is retained in the argument list for consistency with the Wannier90 projection format.
     """
     orbitals = {
         0: {1: (0, "s")},
@@ -153,7 +155,9 @@ def _convert_w90_orbital(l, m, r, s):
 
 # ==================================================
 def _projection_data(rows, spinors):
-    """Read Wannier projection metadata from an ``nnkp`` projection block."""
+    """
+    Read Wannier projection metadata from an ``nnkp`` projection block.
+    """
     num_wann = int(rows[0])
     step = 3 if spinors else 2
 
@@ -222,7 +226,7 @@ def read_win(topdir, seedname):
         seedname (str): Wannier90 seedname.
 
     Returns:
-        dict:
+        - (dict) -- info. dict.
             - num_k       : Number of k points inferred from ``mp_grid`` (int).
             - num_bands   : Number of Bloch bands passed to Wannier90 (int).
             - num_wann    : Number of Wannier functions (int).
@@ -238,14 +242,9 @@ def read_win(topdir, seedname):
             - kpoints     : Explicit k points in crystal coordinates, reduced
                             to ``0 <= k_i < 1``, shape ``[num_k][3]`` (list).
 
-    Raises:
-        FileNotFoundError: If the input file cannot be found.
-        ValueError: If the file contents are inconsistent with the expected
-                    Wannier90 format.
-
     Notes:
-        If only one of ``atoms_frac`` and ``atoms_cart`` is present, the other
-        is calculated using ``A``.  Cartesian lengths are returned in angstrom.
+        - If only one of ``atoms_frac`` and ``atoms_cart`` is present, the other is calculated using ``A``.
+        - Cartesian lengths are returned in angstrom.
     """
     lines = _read_lines(Path(topdir) / f"{seedname}.win")
     blocks = _blocks(lines)
@@ -364,7 +363,7 @@ def read_nnkp(topdir, seedname):
         seedname (str): Wannier90 seedname.
 
     Returns:
-        dict:
+        - (dict) -- info. dict.
             - A                : Real lattice vectors ``[a1,a2,a3]`` in
                                  Cartesian coordinates, shape ``[3][3]`` (list).
             - B                : Reciprocal lattice vectors ``[b1,b2,b3]`` in
@@ -407,16 +406,9 @@ def read_nnkp(topdir, seedname):
             - kb2k             : Zero-based index of ``k+b`` for each pair,
                                  shape ``[num_k][num_b]`` (list).
 
-    Raises:
-        FileNotFoundError: If the input file cannot be found.
-        ValueError: If required blocks are missing or the file contents are
-                    inconsistent with the expected Wannier90 format.
-
     Notes:
-        ``num_atom`` and ``atom_pos_r`` describe Wannier projection centers,
-        which need not coincide with the physical atoms in ``seedname.win``.
-        For ``auto_projections``, only ``num_wann`` is available; the detailed
-        projection entries are returned as ``None``.
+        - ``num_atom`` and ``atom_pos_r`` describe Wannier projection centers, which need not coincide with the physical atoms in ``seedname.win``.
+        - For ``auto_projections``, only ``num_wann`` is available; the detailed projection entries are returned as ``None``.
     """
     blocks = _blocks(_read_lines(Path(topdir) / f"{seedname}.nnkp"))
 
@@ -541,16 +533,7 @@ def merge_wannier_info(win, nnkp, seedname):
         seedname (str): Wannier90 seedname used in error messages.
 
     Returns:
-        dict:
-            Merged Wannier90 information.  Every key present in both input
-            dictionaries is checked for consistency, and the value from
-            ``win`` is retained for the duplicated key.  With the current
-            readers, the duplicated entries are ``A``, ``num_k``,
-            ``num_wann``, and ``kpoints``.
-
-    Raises:
-        ValueError: If any duplicated entry is inconsistent between
-                    ``seedname.win`` and ``seedname.nnkp``.
+        - (dict) -- Merged Wannier90 information.  Every key present in both input dictionaries is checked for consistency, and the value from ``win`` is retained for the duplicated key.  With the current readers, the duplicated entries are ``A``, ``num_k``, ``num_wann``, and ``kpoints``.
     """
     common_keys = win.keys() & nnkp.keys()
 
@@ -595,7 +578,7 @@ def matrix_dict_r(Or, rpoints, diagonal=False):
         diagonal (bool, optional): diagonal matrix ?
 
     Returns:
-        dict: real-space representation of the given operator, {(n2,n2,n3,a,b) = O_{ab}(R)}.
+        - (dict) -- real-space representation of the given operator, {(n2,n2,n3,a,b) = O_{ab}(R)}.
     """
     # number of pseudo atomic orbitals
     dim_r = len(Or[0])
@@ -624,7 +607,7 @@ def read_hr(topdir, hr_file):
         hr_file (str): Wannier90 Hamiltonian file.
 
     Returns:
-        dict:
+        - (dict) -- info. dict.
             - HH_R   : Real-space Hamiltonian matrices ``H_mn(R)`` in eV,
                        shape ``[num_R][num_wann][num_wann]`` (ndarray).
             - irvec  : Lattice vectors ``R = n1*a1 + n2*a2 + n3*a3`` in
@@ -632,17 +615,8 @@ def read_hr(topdir, hr_file):
             - ndegen : Wigner-Seitz degeneracy of each ``R`` vector, shape
                        ``[num_R]`` (ndarray).
 
-    Raises:
-        FileNotFoundError: If the input file cannot be found.
-        ValueError: If the file is incomplete, contains invalid indices, has
-                    inconsistent ``R`` blocks, or violates
-                    ``H(R) = H(-R)^dagger``.
-
     Notes:
-        Wannier indices in the file are one-based and are converted to
-        zero-based array indices.  ``ndegen`` is the denominator used in the
-        Wannier90 Fourier interpolation over ``R`` vectors.  The file is read
-        sequentially to avoid storing the full text representation in memory.
+        - Wannier indices in the file are one-based and are converted to zero-based array indices.  ``ndegen`` is the denominator used in the Wannier90 Fourier interpolation over ``R`` vectors.  The file is read sequentially to avoid storing the full text representation in memory.
     """
 
     def next_nonempty(f):
@@ -740,25 +714,14 @@ def build_ket_wannier(nnkp, site_dict, rtol=1e-4, atol=1e-4):
         nnkp (dict): Information returned by :func:`read_nnkp`.
         site_dict (dict): MultiPie sites in the form
                           ``{(name, sublattice): fractional_position}``.
-        rtol (float, optional): Relative tolerance for comparing fractional
-                               positions.
-        atol (float, optional): Absolute tolerance for comparing fractional
-                               positions.
+        rtol (float, optional): Relative tolerance for comparing fractional positions.
+        atol (float, optional): Absolute tolerance for comparing fractional positions.
 
     Returns:
-        list:
-            Wannier ket basis with one entry per Wannier function.  Each entry
-            has the form ``[name, sublattice, l, orbital]``.
-
-    Raises:
-        ValueError: If detailed projection information is unavailable, a
-                    projection center cannot be matched to exactly one
-                    MultiPie site, or the projection metadata are inconsistent.
+        - (list) -- Wannier ket basis with one entry per Wannier function.  Each entry has the form ``[name, sublattice, l, orbital]``.
 
     Notes:
-        Fractional positions are compared modulo lattice translations, so
-        coordinates differing by an integer lattice vector are treated as the
-        same site.
+        - Fractional positions are compared modulo lattice translations, so coordinates differing by an integer lattice vector are treated as the same site.
     """
     keys = ("nw2n", "nw2l", "nw2m", "nw2r", "nw2s", "atom_pos_r")
     missing = [key for key in keys if nnkp.get(key) is None]
@@ -803,7 +766,7 @@ def build_ket_wannier(nnkp, site_dict, rtol=1e-4, atol=1e-4):
 # ==================================================
 def sort_ket_matrix(Ok, ket1, ket2):
     """
-    sort ket to align with the MultiPie definition (ket2).
+    Sort ket to align with the MultiPie definition (ket2).
 
     Args:
         Ok (ndarray): arbitrary operator in k-space representation, O_{ab}(k) = <φ_{a}(k)|H|φ_{b}(k)>.
@@ -811,7 +774,7 @@ def sort_ket_matrix(Ok, ket1, ket2):
         ket2 (list): ket basis list, orbital@site.
 
     Returns:
-        Ok (ndarray): operator.
+        - (ndarray) -- operator.
     """
     idx_list = [ket1.index(o) for o in ket2]
     Ok = Ok[:, idx_list, :]
@@ -823,7 +786,7 @@ def sort_ket_matrix(Ok, ket1, ket2):
 # ==================================================
 def sort_ket_matrix_dict(Or_dict, ket1, ket2):
     """
-    sort ket to align with the MultiPie definition (ket2).
+    Sort ket to align with the MultiPie definition (ket2).
 
     Args:
         Or_dict (dict): dictionary form of an arbitrary operator matrix in reak-space/k-space representation.
@@ -831,7 +794,7 @@ def sort_ket_matrix_dict(Or_dict, ket1, ket2):
         ket2 (list): ket basis list, orbital@site.
 
     Returns:
-        Or_dict (dict):  dictionary form of an arbitrary operator matrix.
+        - (dict) -- dictionary form of an arbitrary operator matrix.
     """
     idx_list = [ket2.index(o) for o in ket1]
     Or_dict = {(n1, n2, n3, idx_list[a], idx_list[b]): complex(v) for (n1, n2, n3, a, b), v in Or_dict.items()}
@@ -842,15 +805,15 @@ def sort_ket_matrix_dict(Or_dict, ket1, ket2):
 # ==================================================
 def sort_ket_list(lst, ket1, ket2):
     """
-    sort ket to align with the MultiPie definition (ket2).
+    Sort ket to align with the MultiPie definition (ket2).
 
     Args:
         lst (list): arbitrary list that has the same dimensions as the ket.
         ket1 (list): ket basis list, [[atom name, sublattice, rank, orbital]]
-                ket2 (list): ket basis list, orbital@site.
+        ket2 (list): ket basis list, orbital@site.
 
     Returns:
-        lst (list): arbitrary list that has the same dimensions as the ket.
+        - (list) -- arbitrary list that has the same dimensions as the ket.
     """
     idx_list = [ket1.index(o) for o in ket2]
 
@@ -871,7 +834,7 @@ def sort_ket_list(lst, ket1, ket2):
 # ==================================================
 def decompose_operator_by_SAMB(Or_dict, Zr_dict, digit=15):
     """
-    decompose arbitrary operator into linear combination of SAMBs.
+    Decompose arbitrary operator into linear combination of SAMBs.
 
     Args:
         Or_dict (dict): dictionary form of an arbitrary operator matrix in real-space/k-space representation.
@@ -879,7 +842,7 @@ def decompose_operator_by_SAMB(Or_dict, Zr_dict, digit=15):
         digit (int, optional): round digit for Zr_dict.
 
     Returns:
-        z (dict): parameter set, {zj: coeff}.
+        - (dict) -- parameter set, dict[zj, coeff].
     """
 
     def _round(v):
@@ -896,35 +859,47 @@ def decompose_operator_by_SAMB(Or_dict, Zr_dict, digit=15):
 
 # ==================================================
 def read_umat(topdir, seedname):
-    """Read ``seedname_u.mat``, ``seedname_u_dis.mat``.  Not implemented yet."""
+    """
+    Read ``seedname_u.mat``, ``seedname_u_dis.mat``.  Not implemented yet.
+    """
     pass
 
 
 # ==================================================
 def read_eig(topdir, seedname):
-    """Read ``seedname.eig``.  Not implemented yet."""
+    """
+    Read ``seedname.eig``.  Not implemented yet.
+    """
     pass
 
 
 # ==================================================
 def read_mmn(topdir, seedname):
-    """Read ``seedname.mmn``.  Not implemented yet."""
+    """
+    Read ``seedname.mmn``.  Not implemented yet.
+    """
     pass
 
 
 # ==================================================
 def read_spn(topdir, seedname):
-    """Read ``seedname.spn``.  Not implemented yet."""
+    """
+    Read ``seedname.spn``.  Not implemented yet.
+    """
     pass
 
 
 # ==================================================
 def read_uHu(topdir, seedname):
-    """Read ``seedname.uHu``.  Not implemented yet."""
+    """
+    Read ``seedname.uHu``.  Not implemented yet.
+    """
     pass
 
 
 # ==================================================
 def read_uIu(topdir, seedname):
-    """Read ``seedname.uIu``.  Not implemented yet."""
+    """
+    Read ``seedname.uIu``.  Not implemented yet.
+    """
     pass

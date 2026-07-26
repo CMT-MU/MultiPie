@@ -749,13 +749,17 @@ def read_text_data(filename):
 
 # ==================================================
 def is_almost_zero(x):
-    """check if x is numerically zero (within a tolerance)."""
+    """
+    Check if x is numerically zero (within a tolerance).
+    """
     return np.abs(x) < M_ZERO * 100
 
 
 # ==================================================
 def kelvin_to_ev(T_kelvin):
-    """convert temperature from Kelvin to eV (k_B * T)."""
+    """
+    Convert temperature from Kelvin to eV (k_B * T).
+    """
     return T_kelvin * k_B_SI / elem_charge_SI
 
 
@@ -770,7 +774,7 @@ def fermi_dirac(x, T=0.0, unit="Kelvin"):
         unit (str, optional): unit of T, "Kelvin" or "eV".
 
     Returns:
-        ndarray: Fermi-Dirac occupation, 0 <= f(x) <= 1.
+        - (ndarray) -- Fermi-Dirac occupation, 0 <= f(x) <= 1.
     """
     if T == 0.0:
         return np.where(x < 0.0, 1.0, np.where(x > 0.0, 0.0, 0.5))
@@ -791,7 +795,7 @@ def fermi_dirac_deriv(x, T=0.01, unit="Kelvin"):
         unit (str, optional): unit of T, "Kelvin" or "eV".
 
     Returns:
-        ndarray: -df/dx.
+        - (ndarray) -- -df/dx.
     """
     T_eV = kelvin_to_ev(T) if unit == "Kelvin" else T
     return fermi_dirac(x, T, unit) * fermi_dirac(-x, T, unit) / T_eV
@@ -809,7 +813,7 @@ def fermi_dirac_deriv2(x, T=0.01, unit="Kelvin"):
         unit (str, optional): unit of T, "Kelvin" or "eV".
 
     Returns:
-        ndarray: -d^2f/dx^2.
+        - (ndarray) -- -d^2f/dx^2.
     """
     T_eV = kelvin_to_ev(T) if unit == "Kelvin" else T
     return (1 - 2 * fermi_dirac(-x, T, unit)) * fermi_dirac(x, T, unit) * fermi_dirac(-x, T, unit) / T_eV / T_eV

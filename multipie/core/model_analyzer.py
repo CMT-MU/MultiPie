@@ -383,7 +383,7 @@ class ModelAnalyzer(dict):
         # read seedname.nnkp
         nnkp = read_nnkp(topdir, seedname)
         # read seedname_hr.dat
-        hr_dict, irvec, _ = read_hr(topdir, self._wannier.get("hr_file", None))
+        hr_dict, irvec, ndegen = read_hr(topdir, self._wannier.get("hr_file", None))
         # read seedname.mmn
         # Mkb = read_mmn(topdir, seedname)
         # read seedname.spn
