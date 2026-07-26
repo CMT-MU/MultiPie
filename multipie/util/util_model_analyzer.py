@@ -611,58 +611,36 @@ def add_local_parameter(matrix_info, parameter):
 
 
 # ==================================================
-def build_and_solve(mat, z_symbols, labels=None):
+def solve_z(Z_dict, names, simplify=True):
     """
-    Build linear equations from a matrix and solve for z_j.
+    Solve z parameter in terms of atomic parameters on bond 1.
 
     Args:
-        mat (ndarray): bond1-projected matrix.
-        z_symbols (list): zj variables.
-        labels (list, optional): name for bra-ket.
+        Z_dict (dict): bond-1 basis, dict[(m,n), val].
+        names (list): ket string.
+        simplify (bool, optional): simplify result ?
 
     Returns:
-        - (dict) -- dict from matrix index to name, dict[(int,int), name].
-        - (list) -- equations used to solve.
-        - (dict) -- solution dict, if failed, empty.
+        - (dict) -- z parameter.
     """
-    rows, cols = mat.shape
-    expr_to_positions = {}
+    j_names = list(Z_dict.keys())
+    mn_keys = sorted({mn for d in Z_dict.values() for mn in d})
+    N, M = len(j_names), len(mn_keys)
 
-    for m in range(rows):
-        for n in range(cols):
-            expr = sp.sympify(mat[m, n])
-            if expr == 0:
-                continue
-            expr_expanded = sp.expand(expr)
-            coeffs = tuple(expr_expanded.coeff(z) for z in z_symbols)
-            const = expr_expanded - sum(c * z for c, z in zip(coeffs, z_symbols))
-            key = coeffs + (const,)
-            expr_to_positions.setdefault(key, []).append((m, n, expr_expanded))
+    Z = sp.Matrix(M, N, lambda r, c: Z_dict[j_names[c]].get(mn_keys[r], 0))
 
-    g_syms = {}
-    lin_eqs = []
-    for key, positions in expr_to_positions.items():
-        m0, n0, expr0 = positions[0]
+    g = [sp.Symbol(f"g_{{{names[m]},{names[n]}}}", real=True) for m, n in mn_keys]
+    h = [sp.Symbol(f"h_{{{names[m]},{names[n]}}}", real=True) for m, n in mn_keys]
+    gg = sp.Matrix([gi + sp.I * hi for gi, hi in zip(g, h)])
 
-        if labels is not None:
-            label_str = ",".join(f"({labels[m]},{labels[n]})" for m, n, _ in positions)
-        else:
-            label_str = ",".join(f"({m},{n})" for m, n, _ in positions)
+    normal_mat = sp.re(Z.H * Z)  # N x N real symmetric.
+    rhs = sp.re(Z.H * gg)  # N x 1 (including re(g_mn), im(g_mn))
 
-        g = sp.Symbol(f"g_{{{label_str}}}")
-        for m, n, _ in positions:
-            g_syms[(m, n)] = g
-        lin_eqs.append(sp.Eq(g, expr0))
+    z_vec = normal_mat.pinv(method="RD") * rhs  # 'RD' is robust for analytic matrix.
+    if simplify:
+        z_vec = sp.simplify(z_vec)
 
-    sol = sp.linsolve(lin_eqs, z_symbols)
-
-    if sol == sp.EmptySet:
-        sol_dict = {}
-    else:
-        (values,) = sol  # take unique tuple in FiniteSet.
-        sol_dict = {str(zj): val for zj, val in zip(z_symbols, values)}
-
-    return g_syms, lin_eqs, sol_dict
+    return {j_names[i]: z_vec[i] for i in range(N)}
 
 
 # ==================================================
@@ -679,7 +657,6 @@ def convert_zj_atomic_var(matrix_info, combined_cluster, combined_id, IR):
     Returns:
         - (dict) -- zj to var for each cluster, dict[bond name, dict[zj, var] ].
     """
-    dim = matrix_info["dimension"]
     ket = [i.replace("@", "_").replace("(", "").replace(")", "") for i in matrix_info["ket_site"].keys()]
 
     # classify zj for each cluster.
@@ -693,20 +670,16 @@ def convert_zj_atomic_var(matrix_info, combined_cluster, combined_id, IR):
     # construct bond1-projected matrix.
     dic = {}
     for name, tags in cluster.items():
-        var = []
-        mat = np.full((dim, dim), sp.S(0))
+        d = {}
         for zj in tags:
-            zjv = sp.Symbol(zj, real=True)
-            var.append(zjv)
-            for (n1, n2, n3, m, n), (val, no) in matrix_info["matrix"][zj].items():
-                if no == 1:  # only representative bond 1.
-                    mat[m, n] += val * zjv
-        dic[name] = (mat, var)
+            # only representative bond 1.
+            d[zj] = {(m, n): val for (n1, n2, n3, m, n), (val, no) in matrix_info["matrix"][zj].items() if no == 1}
+        dic[name] = d
 
     # solve zj for each cluster.
     result = {}
-    for name, (mat, var) in dic.items():
-        g_syms, lin_eqs, sol = build_and_solve(mat, var, ket)
+    for name, d in dic.items():
+        sol = solve_z(d, ket)
         result[name] = sol
 
     return result

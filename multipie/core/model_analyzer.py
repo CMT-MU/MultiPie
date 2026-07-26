@@ -56,6 +56,7 @@ _k_matrix_comment = """Selected SAMB matrix in momentum representation.
 _zj_var_comment = """Correspondence between zj and atomic variable.
 - correspondence for each bond cluster, dict[bond_name, dict[zj, expression in terms of atomic variables] ].
 - only for SAMB with identity irrep.
+- atomic variable of (m,n) component at bond 1 is given by g(m,n) +i h(m,n).
 """
 
 _param_comment = """Parameter dict (sorted by descending absolute value).
