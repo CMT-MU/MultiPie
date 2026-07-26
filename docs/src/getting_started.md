@@ -8,7 +8,7 @@ As a tutorial, we describe the procedure for generating model in the case of **g
 2. At the same place where the above two files are, run the following:
 
     ```bash
-    $ mp_create graphene_in.py
+    $ mp_create -v graphene_in.py
     ```
 
     It creates four files under `graphene` directory:
@@ -20,7 +20,7 @@ As a tutorial, we describe the procedure for generating model in the case of **g
 3. To analyze the model, e.g., draw dispersion, run the following:
 
     ```bash
-    $ mp_analyze graphene_ctrl.py
+    $ mp_analyze -v graphene_ctrl.py
     ```
 
     It creates the following files under `graphene` directory:
