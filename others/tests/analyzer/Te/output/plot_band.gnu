@@ -15,7 +15,7 @@ set arrow from  0.5302266082008102,  1.458507150108365 to 0.5302266082008102, 8.
 set arrow from  1.06045321640162,  1.458507150108365 to 1.06045321640162, 8.115331862239202 nohead 
 set xtics ("A'" 0,"Γ" 0.5302266082008102,"A" 1.06045321640162,) 
 
-ef = 0.0 
+Ef = 0.0 
 set terminal postscript eps color enhanced 
 
 set output 'Te_dispersion.eps' 

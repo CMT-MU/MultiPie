@@ -16,7 +16,7 @@ set arrow from  2.2855900490007173,  -9.947911407510002 to 2.2855900490007173, 1
 set arrow from  3.9669822705649658,  -9.947911407510002 to 3.9669822705649658, 14.139327908730003 nohead 
 set xtics ("Γ" 0,"M" 1.2901817879218849,"K" 2.2855900490007173,"Γ" 3.9669822705649658,) 
 
-ef = -0.4603 
+Ef = -0.4603 
 set terminal postscript eps color enhanced 
 
 set output 'graphene_dispersion.eps' 

@@ -178,7 +178,7 @@ def output_dispersion(filename, k, ef, e, o=None, olist=None):
     fs.write(ke_ol)
     fs.write(f"# Emax = {emax}\n")
     fs.write(f"# Emin = {emin}\n")
-    fs.write(f"# ef = {ef}\n\n")
+    fs.write(f"# shifted by fermi energy = {ef} [eV]\n\n")
 
     num_k, Nm = e.shape
     e = e.T
@@ -242,7 +242,7 @@ def create_gnuplot_cmd(filename, k_dis_pos, kmax, emax, emin, ef, colormap=False
         k_dis_pos = {pos: label.replace("G", "{/Symbol G}").replace("|", ":") for pos, label in k_dis_pos.items()}
         fs.write("set xtics (" + "".join([f'"{label}" {pos},' for pos, label in k_dis_pos.items()]) + ") \n\n")
 
-    fs.write(f"ef = {ef} \n")
+    fs.write(f"Ef = {ef} \n")
 
     fs.write("set terminal postscript eps color enhanced \n\n")
 
@@ -297,7 +297,6 @@ def plot_save_dispersion(filename, k_dis_pos, ef, colormap=False, lwidth=1, lc="
     offset = (emax - emin) * 0.1
 
     fig, ax = plt.subplots(figsize=(6, 3.5))  # aspect ratio 0.7
-    # ax = fig.add_subplot(111)
     fig.subplots_adjust(right=0.84)
 
     ax.set_xlim(0, kmax)
@@ -320,7 +319,7 @@ def plot_save_dispersion(filename, k_dis_pos, ef, colormap=False, lwidth=1, lc="
         all_colors = []
         for band in bands:
             x = band[:, 0]
-            y = band[:, 1] - ef
+            y = band[:, 1]
             c = band[:, 2]
             points = np.column_stack((x, y)).reshape(-1, 1, 2)
             seg = np.concatenate([points[:-1], points[1:]], axis=1)
