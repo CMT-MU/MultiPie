@@ -75,8 +75,8 @@ def analyze_model(controls, N1=50, N2=50, N3=50, topdir=None, verbose=False):
     """
     setup_logging()
 
-    def create(ma, control):
-        @timer(f"analyze model by '{control}'", verbose=verbose)
+    def create(ma, control, name):
+        @timer(f"analyze model by '{name}'", verbose=verbose)
         def create0():
             ma.analyze(control)
 
@@ -90,7 +90,12 @@ def analyze_model(controls, N1=50, N2=50, N3=50, topdir=None, verbose=False):
     ma = ModelAnalyzer(N1, N2, N3, topdir, verbose=verbose)
     for control in controls:
         try:
-            create(ma, control)
+            name = control["samb"]["model"]
+            if name is None:
+                name = control["wannier"]["seedname"]
+                if name is None:
+                    raise Exception("no model is specified.")
+            create(ma, control, name)
         except Exception:
             logging.exception("in analyze_model")
             raise
