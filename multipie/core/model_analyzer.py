@@ -324,6 +324,12 @@ class ModelAnalyzer(dict):
             write_dict(dic, output_file, w_dir=self.name)
             if self._verbose:
                 print(f"save info (output) to '{self._topdir}/{output_file}'.")
+        ex = ["samb", "wannier", "output"]
+        output_file = self.name + "_info.py"
+        dic = {k: v for k, v in self.items() if k not in ex}
+        write_dict(dic, output_file, w_dir=self.name)
+        if self._verbose:
+            print(f"save info to '{self._topdir}/{output_file}'.")
 
     # ==================================================
     def set_samb(self):
