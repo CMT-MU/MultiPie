@@ -2,14 +2,13 @@
 Utility functions for reading Wannier90 files used by ModelAnalyzer.
 """
 
+import numpy as np
 from contextlib import contextmanager
 from io import TextIOWrapper
 from pathlib import Path
 import gzip
 import re
 import tarfile
-
-import numpy as np
 
 BOHR2ANG = 0.529177249
 

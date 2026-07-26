@@ -790,3 +790,35 @@ def fermi_dirac_deriv2(x, T=0.01, unit="Kelvin"):
     """
     T_eV = kelvin_to_ev(T) if unit == "Kelvin" else T
     return (1 - 2 * fermi_dirac(-x, T, unit)) * fermi_dirac(x, T, unit) * fermi_dirac(-x, T, unit) / T_eV / T_eV
+
+
+# ==================================================
+def convert_orbital_to_detail(tag):
+    """
+    Convert orbital name to (rank, comp).
+
+    Args:
+        tag (str): "name" or "(name,u/d)". name = wannier90 or multipie.
+
+    Returns:
+        - (tuple) -- orbital (rank, comp, tag).
+    """
+    rank_d = {"s": 0, "p": 1, "d": 2, "f": 3}
+    wannier = Group.global_info()["harmonics"]["wannier90"]
+    tesseral = Group.global_info()["harmonics"]["tesseral"]
+
+    if tag.count(","):
+        name, spin = tag.strip("()").split(",")
+        basis = Group.global_info()["harmonics"]["atomic_basis"]["spinful"]["lgs"]
+    else:
+        name = tag
+        basis = Group.global_info()["harmonics"]["atomic_basis"]["spinless"]["lg"]
+
+    if name not in tesseral.keys():
+        name = wannier[name]
+    rank = rank_d[name[0]]
+    basis = basis[rank]
+
+    comp = basis.index(tag)
+
+    return (rank, comp, tag)

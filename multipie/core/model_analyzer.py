@@ -24,6 +24,7 @@ from multipie.util.util_model_analyzer import (
     add_local_parameter,
     convert_zj_atomic_var,
     fermi_dirac,
+    convert_orbital_to_detail,
 )
 from multipie.util.util_wannier import (
     read_win,
@@ -379,12 +380,16 @@ class ModelAnalyzer(dict):
         topdir = os.path.join(self._topdir, self.name, "wannier")
         seedname = self.wannier.get("seedname", None)
 
+        hr_file = seedname + "_hr.dat"  # first try _hr.dat, then _hr_cw.dat
+        if not os.path.exists(os.path.join(topdir, hr_file)):
+            hr_file = seedname + "_hr_cw.dat"
+
         # read seedname.win
         win = read_win(topdir, seedname)
         # read seedname.nnkp
         nnkp = read_nnkp(topdir, seedname)
         # read seedname_hr.dat
-        hr_dict, irvec, ndegen = read_hr(topdir, self._wannier.get("hr_file", None))
+        hr_dict, irvec, ndegen = read_hr(topdir, hr_file)
         # read seedname.mmn
         # Mkb = read_mmn(topdir, seedname)
         # read seedname.spn
@@ -406,7 +411,9 @@ class ModelAnalyzer(dict):
         if True:  # MultiPie dependent part.
             # sort wannier basis as those of MultiPie.
             ket_wannier = self.wannier.get("ket_wannier", [])
-            if not ket_wannier:
+            if ket_wannier:
+                ket_wannier = [[atom, sl, *convert_orbital_to_detail(tag)] for atom, sl, tag in ket_wannier]
+            else:
                 site_dict = {
                     (k, vi.sublattice): vi.position_primitive.tolist()
                     for k, v in self._mm["site"]["cell"].items()
