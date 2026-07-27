@@ -40,6 +40,7 @@ from multipie.util.util_wannier import (
     sort_ket_list,
     sort_ket_matrix_dict,
     decompose_operator_by_SAMB,
+    create_ket_wannier_multipie,
 )
 from multipie.util.util import read_dict, str_to_sympy, write_dict
 
@@ -413,62 +414,67 @@ class ModelAnalyzer(dict):
 
         :meta private:
         """
-        topdir = os.path.join(self._topdir, self.name, "wannier")
-        seedname = self.wannier.get("seedname", None)
-
-        hr_file = seedname + "_hr.dat"  # first try _hr.dat, then _hr_cw.dat
-        if not os.path.exists(os.path.join(topdir, hr_file)):
-            hr_file = seedname + "_hr_cw.dat"
+        wannier_dir = self.wannier["dir"]
+        seedname = self.wannier["seedname"]
+        topdir = os.path.join(self._topdir, seedname, wannier_dir)
+        cwd = os.getcwd()
+        os.chdir(topdir)
 
         # read seedname.win
         win = read_win(topdir, seedname)
         # read seedname.nnkp
         nnkp = read_nnkp(topdir, seedname)
-        # read seedname_hr.dat
-        hr_dict, irvec, ndegen = read_hr(topdir, hr_file)
-        # read seedname.mmn
-        # Mkb = read_mmn(topdir, seedname)
-        # read seedname.spn
-        # Sk = read_spn(topdir, seedname)
-        # read seedname.uHu
-        # uHu = read_uHu(topdir, seedname)
-        # read seedname.uIu
-        # uIu = read_uIu(topdir, seedname)
-
         # check common values and merge.
         wannier_info = merge_wannier_info(win, nnkp, seedname)
 
+        wannier_ket_info = {
+            "A": win["A"],
+            "atoms_frac": win["atoms_frac"],
+            "nw2n": nnkp["nw2n"],
+            "nw2l": nnkp["nw2l"],
+            "nw2m": nnkp["nw2m"],
+            "nw2r": nnkp["nw2r"],
+            "nw2s": nnkp["nw2s"],
+        }
+        wannier2multipie, ket_wannier, ket_multipie = create_ket_wannier_multipie(wannier_info)
+        ket = self.wannier.get("ket_wannier", [])
+        if ket:
+            wannier2multipie = [ket.index(i) for i in ket_multipie]
+
+        nw2n = nnkp["nw2n"]
         atoms_list = list(wannier_info["atoms_frac"].values())
-        atoms_frac = np.array([atoms_list[i] for i in wannier_info["nw2n"]])
-
+        atoms_frac = [atoms_list[nw2n[i]] for i in wannier2multipie]
         atoms_list = list(wannier_info["atoms_cart"].values())
-        atoms_cart = np.array([atoms_list[i] for i in wannier_info["nw2n"]])
+        atoms_cart = [atoms_list[nw2n[i]] for i in wannier2multipie]
 
-        if True:  # MultiPie dependent part. => replace it with create_ket_wannier independent of MultiPie.
-            # sort wannier basis as those of MultiPie.
-            ket_wannier = self.wannier.get("ket_wannier", [])
-            if ket_wannier:
-                ket_wannier = [[atom, sl, *convert_orbital_to_detail(tag)] for atom, sl, tag in ket_wannier]
-            else:
-                site_dict = {
-                    (k, vi.sublattice): vi.position_primitive.tolist()
-                    for k, v in self._mm["site"]["cell"].items()
-                    for vi in v
-                    if vi.plus_set == 1
-                }
-                ket_wannier = build_ket_wannier(nnkp, site_dict, rtol=1e-4, atol=1e-4)
-
-            # convert ket_wannier to ket_multipie.
-            ket_multipie = self.model["full_matrix"]["ket"]
-            atoms_frac = sort_ket_list(atoms_frac, ket_wannier, ket_multipie)
-            atoms_cart = sort_ket_list(atoms_cart, ket_wannier, ket_multipie)
-            hr_dict = sort_ket_matrix_dict(hr_dict, ket_wannier, ket_multipie)
+        if self.wannier["read_KS"]:
+            # read KS Ek and Uk, and convert to MultiPie standard order(*) of ket by changing indices of Uk.
+            # create H(R), and various matrix elements in real space by Fourier transformation with DFT k-grid.
+            # (*) use wannier2multipie.
+            #
+            # read seedname.mmn
+            # Mkb = read_mmn(topdir, seedname)
+            # read seedname.spn
+            # Sk = read_spn(topdir, seedname)
+            # read seedname.uHu
+            # uHu = read_uHu(topdir, seedname)
+            # read seedname.uIu
+            # uIu = read_uIu(topdir, seedname)
+            pass
+        else:
+            hr_file = seedname + "_hr.dat"
+            # read seedname_hr.dat
+            hr_dict, irvec, ndegen = read_hr(".", hr_file)
+            idx = {i: no for no, i in enumerate(wannier2multipie)}
+            hr_dict = {(n1, n2, n3, idx[a], idx[b]): complex(v) for (n1, n2, n3, a, b), v in hr_dict.items()}
 
         info = {
             # Wannier info.
             "A": wannier_info["A"],
             "B": wannier_info["B"],
-            # "ket": ket_multipie,  # sorted as MultiPie ket.
+            "ket_wannier": ket_wannier,
+            "ket_multipie": ket_multipie,
+            "wannier_to_multipie": wannier2multipie,  # multipie = wannier[wannier2multipie].
             "num_wann": wannier_info["num_wann"],
             "atoms_frac": atoms_frac,
             "atoms_cart": atoms_cart,
@@ -491,11 +497,6 @@ class ModelAnalyzer(dict):
 
         self["wannier"] = info
         self["fermi_energy"] = info["fermi_energy"]
-        # self["wannier"]["z_j_exp"] = z_j_exp
-        # self["wannier"]["mmn"] = mmn
-        # self["wannier"]["spn"] = spn
-        # self["wannier"]["uHu"] = uHu
-        # self["wannier"]["uIu"] = uIu
 
         ### physical qunatity.
         # nk = np.array([np.diag(fermi_dirac(eki - win["fermi_energy"], T=0.0)) for eki in Ek], dtype=float)
@@ -503,6 +504,13 @@ class ModelAnalyzer(dict):
         # nr_dict = fourier_k_to_r(nk, win["kpoints"], irvec, s=False)
         # nr_dict = sort_ket_matrix_dict(nr_dict, ket_wannier, ket_multipie)
         # z_j_exp = decompose_operator_by_SAMB(nr_dict, Zr_dict)
+        # self["wannier"]["z_j_exp"] = z_j_exp
+        # self["wannier"]["mmn"] = mmn
+        # self["wannier"]["spn"] = spn
+        # self["wannier"]["uHu"] = uHu
+        # self["wannier"]["uIu"] = uIu
+
+        os.chdir(cwd)
 
         return hr_dict
 

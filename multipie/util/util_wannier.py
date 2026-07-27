@@ -9,6 +9,8 @@ from pathlib import Path
 import gzip
 import re
 import tarfile
+import spglib
+from multipie import Group
 
 BOHR2ANG = 0.529177249
 
@@ -902,3 +904,128 @@ def read_uIu(topdir, seedname):
     Read ``seedname.uIu``.  Not implemented yet.
     """
     pass
+
+
+# ==================================================
+# ==================================================
+SYMPREC = 1e-4
+
+
+# ==================================================
+def find_sg(A, atoms_frac, symprec=SYMPREC):
+    """
+    Find space group via spglib.
+
+    Args:
+        A (ndarray): lattice vector, [a1,a2,a3]. (conventional, standard setting).
+        atoms_frac (dict): atoms_frac in "win".
+        symprec (float, optional): precision for spglib.
+
+    Returns:
+        - (int) -- space group no.
+    """
+    positions = list(atoms_frac.values())
+    elements = list(set([i[0] for i in atoms_frac.keys()]))
+    elements = {i: no for no, i in enumerate(elements)}
+    numbers = [elements[i[0]] for i in atoms_frac.keys()]
+    cell = (A, positions, numbers)
+
+    dataset = spglib.get_symmetry_dataset(cell, symprec=symprec)
+    if dataset:
+        return dataset.number
+    else:
+        return None
+
+
+# ==================================================
+def find_vector_index(vector_list, vector, symprec=SYMPREC):
+    """
+    Find vector index.
+
+    Args:
+        vector_list (list): vector list.
+        vector (ndarray): vector to find.
+        symprec (float, optional): precision.
+
+    Returns:
+        - (int) -- index.
+    """
+    for idx, v in enumerate(vector_list):
+        if np.allclose(v, vector, rtol=0, atol=symprec):
+            return idx
+    return None
+
+
+# ==================================================
+def get_or_add_vector(existing_list, target_vector, symprec=SYMPREC):
+    """
+    Get and add vector.
+
+    Args:
+        existing_list (list): vector list previously appeared.
+        target_vector (ndarray): vector.
+        symprec (float, optional): precision.
+
+    Returns:
+        - (int) -- index.
+    """
+    target_arr = np.asarray(target_vector).reshape(-1)
+
+    for idx, v in enumerate(existing_list):
+        if np.allclose(v, target_arr, rtol=0, atol=symprec):
+            return idx
+
+    existing_list.append(target_arr)
+    return len(existing_list) - 1
+
+
+# ==================================================
+def create_ket_wannier_multipie(wannier_info):
+    """
+    Create wannier and MultiPie ket, and conversion index.
+
+    Args:
+        wannier_info (dict): wannier_info dict. A, atoms_frac, nw2n, nw2l, nw2m, nw2r, nw2s.
+
+    Returns:
+        - (list) -- sorted_idx from wannier to multipie.
+        - (list) ket_wannier name.
+        - (list) ket_multipie name.
+    """
+    # create orbital list.
+    orbital_info = [wannier_info[key] for key in ("nw2n", "nw2l", "nw2m", "nw2r", "nw2s")]
+    orbital_list = []
+    for n, l, m, r, s in zip(*orbital_info):
+        comp, orbital = _convert_w90_orbital(l, m, r, s)
+        orbital_list.append((n, l, comp, orbital))
+
+    # determine space group by spglib.
+    space_group_no = find_sg(wannier_info["A"], wannier_info["atoms_frac"])
+    group = Group(space_group_no)
+
+    # create atom site-cluster info.
+    existing_list = []
+    site_cluster = {}
+    atom_info = []
+    for (atom, _), pos in wannier_info["atoms_frac"].items():
+        wp, sites = group.find_wyckoff_site(pos)
+        idx = get_or_add_vector(existing_list, sites)
+        if (atom, wp, idx + 1) not in site_cluster.keys():
+            site_cluster[(atom, wp, idx + 1)] = sites
+        atom_info.append((atom, wp, idx + 1, pos))
+
+    # create ket info. name, (atom, sublattice, rank, component, orbital), frac_position, (wycokff, multiplicity).
+    ket = []
+    for n, l, comp, orbital in orbital_list:
+        atom, wp, idx, pos = atom_info[n]
+        sites = site_cluster[(atom, wp, idx)]
+        site_idx = find_vector_index(sites, pos)
+        name = f"{orbital}@{atom}({site_idx+1})"
+        ket.append((name, (atom, site_idx + 1, l, comp, orbital), pos, (wp, idx)))
+    sorted_idx = sorted(range(len(ket)), key=lambda i: ket[i][1][:4])
+    ket_wannier = [i[0] for i in ket]
+    ket_multipie = [ket[i][0] for i in sorted_idx]
+
+    # for debug.
+    # return space_group_no, str(group), site_cluster, ket, sorted_idx, ket_wannier, ket_multipie
+    return sorted_idx, ket_wannier, ket_multipie
