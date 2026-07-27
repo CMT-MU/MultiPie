@@ -503,9 +503,9 @@ def create_k_multipole(cluster_samb, cluster_vector):
             d_wp = {}
             for idx, (samb, sym) in v.items():
                 if idx[0] == "Q":
-                    d_wp[idx] = (np.sqrt(2) * np.vectorize(sp.re)(samb).astype(float) @ c, sym)
+                    d_wp[idx] = (sp.sqrt(2) * np.vectorize(sp.re)(samb) @ c, sym)
                 else:
-                    d_wp[idx] = (sp.I * (np.sqrt(2) * np.vectorize(sp.im)(samb).astype(float)) @ s, sym)
+                    d_wp[idx] = (sp.I * sp.sqrt(2) * np.vectorize(sp.im)(samb) @ s, sym)
             k_multipole[k] = d_wp
         else:  # site.
             k_multipole[k] = v
@@ -549,8 +549,8 @@ def create_k_matrix(matrix, cluster_dict, vector_dict):
             kb = np.array([sp.Symbol(f"p_{i+1}", real=True) for i in range(len(vec))], dtype=object)
             for (n1, n2, n3, m, n), (value, b_no) in OR.items():
                 k = kb[b_no - 1] if b_no > 0 else -kb[-b_no - 1]
-                mat[(m, n)] += value * sp.exp(sp.I * k)
-            mat = {Rmn: v for Rmn, v in mat.items() if not v.is_zero}
+                mat[(m, n)] += value * (sp.cos(k) + sp.I * sp.sin(k))
+            mat = {Rmn: v.expand() for Rmn, v in mat.items() if not v.is_zero}
             k_matrix[tag] = mat
         else:
             k_matrix[tag] = {(m, n): v for (n1, n2, n3, m, n), (v, b) in OR.items()}
