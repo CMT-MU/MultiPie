@@ -505,7 +505,7 @@ def create_k_multipole(cluster_samb, cluster_vector):
                 if idx[0] == "Q":
                     d_wp[idx] = (sp.sqrt(2) * np.vectorize(sp.re)(samb) @ c, sym)
                 else:
-                    d_wp[idx] = (sp.I * sp.sqrt(2) * np.vectorize(sp.im)(samb) @ s, sym)
+                    d_wp[idx] = (sp.sqrt(2) * np.vectorize(sp.im)(samb) @ s, sym)
             k_multipole[k] = d_wp
         else:  # site.
             k_multipole[k] = v
