@@ -343,7 +343,7 @@ Fields:
 """
 
 
-__all__ = ["Group", "MaterialModel", "ModelAnalyzer", "create_samb", "create_samb_qtdraw", "create_samb_matrix"]
+__all__ = ["Group", "MaterialModel", "ModelAnalyzer", "create_model", "analyze_model"]
 
 if TYPE_CHECKING:
     from multipie.core.group import Group
@@ -358,7 +358,7 @@ def __getattr__(name):
 
         return create_model
 
-    if name == "analyze_mode":
+    if name == "analyze_model":
         from multipie.core.cmd import analyze_model
 
         return analyze_model
@@ -378,4 +378,4 @@ def __getattr__(name):
 
         return ModelAnalyzer
 
-    raise AttributeError
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")

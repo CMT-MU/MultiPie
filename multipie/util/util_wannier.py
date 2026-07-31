@@ -857,7 +857,11 @@ def decompose_operator_by_SAMB(Or_dict, Zr_dict, digit=15):
         return round(c_val.real, digit) + round(c_val.imag, digit) * 1j
 
     z = {
-        zj: float(np.real(np.sum([_round(v) * Or_dict.get((-k[0], -k[1], -k[2], k[4], k[3]), 0) for k, (v, b_no) in d.items()])))
+        zj: float(
+            np.real(
+                np.sum([_round(v) * Or_dict.get((-k[0], -k[1], -k[2], k[4], k[3]), (0, None))[0] for k, (v, b_no) in d.items()])
+            )
+        )
         for zj, d in Zr_dict.items()
     }
 
@@ -991,12 +995,14 @@ def create_ket_wannier_multipie(wannier_info):
     Create wannier and MultiPie ket, and conversion index.
 
     Args:
-        wannier_info (dict): wannier_info dict. A, atoms_frac, nw2n, nw2l, nw2m, nw2r, nw2s.
+        wannier_info (dict): wannier_info dict. A, atoms_frac, atomc_cart, nw2n, nw2l, nw2m, nw2r, nw2s.
 
     Returns:
-        - (list) -- sorted_idx from wannier to multipie.
-        - (list) ket_wannier name.
-        - (list) ket_multipie name.
+        - (list) -- idx for converting from wannier to multipie.
+        - (list) -- idx for converting from multipie to wannier.
+        - (list) -- ket_multipie name.
+        - (list) -- atom position in fractional coordinate (in multipie order).
+        - (list) -- atom position in cartesian coordinate (in multipie order).
     """
     # create orbital list.
     orbital_info = [wannier_info[key] for key in ("nw2n", "nw2l", "nw2m", "nw2r", "nw2s")]
@@ -1028,10 +1034,18 @@ def create_ket_wannier_multipie(wannier_info):
         site_idx = find_vector_index(sites, pos)
         name = f"{orbital}@{atom}({site_idx+1})"
         ket.append((name, (atom, site_idx + 1, l, comp, orbital), pos, (wp, idx)))
-    sorted_idx = sorted(range(len(ket)), key=lambda i: ket[i][1][:4])
+    w2m = sorted(range(len(ket)), key=lambda i: ket[i][1][:4])
+    m2w = [no for no, i in sorted(enumerate(w2m), key=lambda x: x[1])]
+
     ket_wannier = [i[0] for i in ket]
-    ket_multipie = [ket[i][0] for i in sorted_idx]
+    ket_multipie = [ket[i][0] for i in w2m]
+
+    nw2n = wannier_info["nw2n"]
+    atoms_frac = list(wannier_info["atoms_frac"].values())
+    atoms_frac = [atoms_frac[nw2n[i]] for i in w2m]
+    atoms_cart = list(wannier_info["atoms_cart"].values())
+    atoms_cart = [atoms_cart[nw2n[i]] for i in w2m]
 
     # for debug.
     # return space_group_no, str(group), site_cluster, ket, sorted_idx, ket_wannier, ket_multipie
-    return sorted_idx, ket_wannier, ket_multipie
+    return w2m, m2w, ket_multipie, atoms_frac, atoms_cart

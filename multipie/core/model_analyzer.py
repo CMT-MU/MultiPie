@@ -14,7 +14,6 @@ from multipie.core.default_control import default_control
 from multipie.util.util_model_analyzer import (
     grid_path,
     fourier_r_to_k,
-    fourier_k_to_r,
     output_dispersion,
     create_gnuplot_cmd,
     plot_save_dispersion,
@@ -25,21 +24,12 @@ from multipie.util.util_model_analyzer import (
     add_local_parameter,
     add_local_parameter_sym,
     convert_zj_atomic_var,
-    fermi_dirac,
-    convert_orbital_to_detail,
 )
 from multipie.util.util_wannier import (
     read_win,
     read_nnkp,
     merge_wannier_info,
     read_hr,
-    read_mmn,
-    read_spn,
-    read_uHu,
-    read_uIu,
-    build_ket_wannier,
-    sort_ket_list,
-    sort_ket_matrix_dict,
     decompose_operator_by_SAMB,
     create_ket_wannier_multipie,
 )
@@ -732,7 +722,7 @@ class ModelAnalyzer(dict):
             if mode == "symcw":
                 matrix_info = self["samb"]["matrix_info"]  # created by exec_samb.
                 Zr_dict = matrix_info["matrix"]
-                parameter = decompose_operator_by_SAMB(HR, Zr_dict)
+                parameter = decompose_operator_by_SAMB(self.HR, Zr_dict)
                 HR = self.model.get_hr(parameter, Zr_dict)  # overwrite HR by MultiPie.
                 self.write_samb_hr(matrix_info, parameter, HR)
                 self.set_HR(HR)
@@ -817,28 +807,23 @@ class ModelAnalyzer(dict):
         win = read_win(seedname, wannier_dir)
         # read seedname.nnkp
         nnkp = read_nnkp(seedname, wannier_dir)
-        # check common values and merge.
-        wannier_info = merge_wannier_info(win, nnkp, seedname)
 
         wannier_ket_info = {
             "A": win["A"],
             "atoms_frac": win["atoms_frac"],
+            "atoms_cart": win["atoms_cart"],
+            "fermi_energy": win["fermi_energy"],
             "nw2n": nnkp["nw2n"],
             "nw2l": nnkp["nw2l"],
             "nw2m": nnkp["nw2m"],
             "nw2r": nnkp["nw2r"],
             "nw2s": nnkp["nw2s"],
         }
-        wannier2multipie, ket_wannier, ket_multipie = create_ket_wannier_multipie(wannier_info)
+        w2m, m2w, ket_multipie, atoms_frac, atoms_cart = create_ket_wannier_multipie(wannier_ket_info)
         ket = self.wannier.get("ket_wannier", [])
         if ket:
-            wannier2multipie = [ket.index(i) for i in ket_multipie]
-
-        nw2n = nnkp["nw2n"]
-        atoms_list = list(wannier_info["atoms_frac"].values())
-        atoms_frac = [atoms_list[nw2n[i]] for i in wannier2multipie]
-        atoms_list = list(wannier_info["atoms_cart"].values())
-        atoms_cart = [atoms_list[nw2n[i]] for i in wannier2multipie]
+            w2m = [ket.index(i) for i in ket_multipie]
+            m2w = [no for no, i in sorted(enumerate(w2m), key=lambda x: x[1])]
 
         if self.wannier["read_KS"]:
             # read KS Ek and Uk, and convert to MultiPie standard order(*) of ket by changing indices of Uk.
@@ -856,40 +841,20 @@ class ModelAnalyzer(dict):
             pass
         else:
             hr_file = seedname + "_hr.dat"
-            # read seedname_hr.dat
             hr_dict, irvec, ndegen = read_hr(hr_file, wannier_dir)
-            idx = {i: no for no, i in enumerate(wannier2multipie)}
-            hr_dict = {(n1, n2, n3, idx[a], idx[b]): complex(v) for (n1, n2, n3, a, b), v in hr_dict.items()}
+            # convert from wannier index to multipie index.
+            HR = {(n1, n2, n3, m2w[a], m2w[b]): (complex(v), None) for (n1, n2, n3, a, b), v in hr_dict.items()}
 
         info = {
-            # Wannier info.
-            "A": wannier_info["A"],
-            "B": wannier_info["B"],
-            "ket_wannier": ket_wannier,
             "ket_multipie": ket_multipie,
-            "wannier_to_multipie": wannier2multipie,  # multipie = wannier[wannier2multipie].
-            "num_wann": wannier_info["num_wann"],
+            "wannier_to_multipie": w2m,
+            "multipie_to_wannier": m2w,
             "atoms_frac": atoms_frac,
             "atoms_cart": atoms_cart,
-            "spinors": wannier_info["spinors"],
-            "fermi_energy": wannier_info["fermi_energy"],
-            # DFT info.
-            "num_bands": wannier_info["num_bands"],
-            "mp_grid": wannier_info["mp_grid"],
-            "num_k": wannier_info["num_k"],
-            "num_b": wannier_info["num_b"],
-            "kpoints": wannier_info["kpoints"],
-            "nnkpts": wannier_info["nnkpts"],
-            "bvec_cart": wannier_info["bvec_cart"],
-            "bvec_crys": wannier_info["bvec_crys"],
-            "wb": wannier_info["wb"],
-            "wk": wannier_info["wk"],
-            "bveck": wannier_info["bveck"],
-            "kb2k": wannier_info["kb2k"],
         }
 
         self["wannier"] = info
-        self.set_fermi_energy(info["fermi_energy"])
+        self.set_fermi_energy(wannier_ket_info["fermi_energy"])
 
         ### physical qunatity.
         # nk = np.array([np.diag(fermi_dirac(eki - win["fermi_energy"], T=0.0)) for eki in Ek], dtype=float)
@@ -903,7 +868,7 @@ class ModelAnalyzer(dict):
         # self["wannier"]["uHu"] = uHu
         # self["wannier"]["uIu"] = uIu
 
-        self.set_HR(hr_dict)
+        self.set_HR(HR)
 
     # ==================================================
     def compute_physical_quantity(self):
