@@ -735,7 +735,7 @@ def convert_zj_atomic_var(matrix_info, combined_cluster, combined_id, IR):
     Returns:
         - (dict) -- zj to var for each cluster, dict[bond name, dict[zj, var] ].
     """
-    ket = [i.replace("@", "_").replace("(", "").replace(")", "") for i in matrix_info["ket_site"].keys()]
+    ket = [i.replace("@", "_").replace("(", "").replace(")", "") for i in matrix_info["ket"]]
 
     # classify zj for each cluster.
     cluster = {}

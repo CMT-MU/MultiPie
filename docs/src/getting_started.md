@@ -64,20 +64,21 @@ The typical use of generating SAMBs, you first create the SAMBs for all irreps.,
 The description of the output files is as follows (with model_name prefixed):
 
 - **model_name** : all files are created under `model_name`.
-  - **_hr.dat** : H[R] matrix data.
-  - **_info_output.py** : info. of output.
-  - **_info_samb.py** : info. of model and SAMBs.
-  - **_info_wannier.py** : info. of wannier.
-  - **_info.py** : global info.
-  - **_k.py** : SAMBs in momentum rep.
-  - **_matrix.py** : SAMB matrix data.
-  - **_var.py** : relation between zj and atomic parameters at bond 1.
-  - **_z.py** : zj parameters.
   - **.pdf** : model info. in PDF.
   - **.pkl** : model data (binary).
   - **.qtdw** : model structure in QtDraw.
   - **.tex** : model info. source.
   - **samb** : graphical definitions of site, bond, and SAMBs.
+  - **info/**
+    - **_hr.dat** : H[R] matrix data.
+    - **_info_output.py** : info. of output.
+    - **_info_samb.py** : info. of model and SAMBs.
+    - **_info_wannier.py** : info. of wannier.
+    - **_info.py** : global info.
+    - **_k.py** : SAMBs in momentum rep.
+    - **_matrix.py** : SAMB matrix data.
+    - **_var.py** : relation between zj and atomic parameters at bond 1.
+    - **_z.py** : zj parameters.
   - **output** : computed physical quantities.
     - **_dispersion.eps** : dispersion in EPS.
     - **_dispersion.pdf** : dispersion in PDF.

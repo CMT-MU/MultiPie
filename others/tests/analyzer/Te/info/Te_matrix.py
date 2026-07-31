@@ -5,7 +5,8 @@ Selected SAMB matrix.
 - created (str): binary created date.
 - select (dict): select condition used.
 - dimension (int): matrix size.
-- ket_site (dict): ket info., dict[ket_name, position (fractional, primitive)].
+- ket (list): ket name of full matrix, [name].
+- ket_pos (list): ket position (fractional, primitive), [pos].
 - index (dict): ket index, dict[(site,sublattice,rank), (top_index,size)].
 - vector (dict): primitive bond vector, dict[cluster name, [primitive bond vector]].
 - cluster (dict): cluster name, dict[SAMB ID, cluster name].
@@ -15,20 +16,11 @@ Selected SAMB matrix.
 Te_matrix = {
     "model": "Te",
     "source": "Te.pkl",
-    "created": "2026-07-31 08:49:45",
+    "created": "2026-08-01 07:49:50",
     "select": {"X": ["Q", "G"], "l": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], "Gamma": ["A1", "A2", "E"], "s": [0, 1], "site": [("A", [1])], "bond": [("A", "A", 1, [1], [1])]},
     "dimension": 9,
-    "ket_site": {
-        "px@A(1)": [0.274, 0.0, 0.3333333333333333],
-        "py@A(1)": [0.274, 0.0, 0.3333333333333333],
-        "pz@A(1)": [0.274, 0.0, 0.3333333333333333],
-        "px@A(2)": [0.0, 0.274, 0.6666666666666666],
-        "py@A(2)": [0.0, 0.274, 0.6666666666666666],
-        "pz@A(2)": [0.0, 0.274, 0.6666666666666666],
-        "px@A(3)": [0.726, 0.726, 0.0],
-        "py@A(3)": [0.726, 0.726, 0.0],
-        "pz@A(3)": [0.726, 0.726, 0.0],
-    },
+    "ket": ["px@A(1)", "py@A(1)", "pz@A(1)", "px@A(2)", "py@A(2)", "pz@A(2)", "px@A(3)", "py@A(3)", "pz@A(3)"],
+    "ket_pos": [[0.274, 0.0, 0.3333333333333333], [0.274, 0.0, 0.3333333333333333], [0.274, 0.0, 0.3333333333333333], [0.0, 0.274, 0.6666666666666666], [0.0, 0.274, 0.6666666666666666], [0.0, 0.274, 0.6666666666666666], [0.726, 0.726, 0.0], [0.726, 0.726, 0.0], [0.726, 0.726, 0.0]],
     "index": {("A", 1, 1): (0, 3), ("A", 2, 1): (3, 3), ("A", 3, 1): (6, 3)},
     "vector": {"A": [[0.0, 0.0, 0.0]], "A;A_001_1": [[-0.274, -0.548, 0.33333333], [0.548, 0.274, 0.33333333], [-0.274, 0.274, 0.33333333]]},
     "cluster": {

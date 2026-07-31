@@ -256,7 +256,8 @@ class MaterialModel(BinaryManager):
             "created": f"{self["created"]}",
             "select": regularized_select,
             "dimension": len(ket_site),
-            "ket_site": ket_site,
+            "ket": list(ket_site.keys()),
+            "ket_pos": list(ket_site.values()),
             "index": self["full_matrix"]["index"],
             "vector": self["cluster_vector"],
             "cluster": self["combined_cluster"],
@@ -648,7 +649,7 @@ class MaterialModel(BinaryManager):
             - (dict) -- combined SAMB in matrix form, dict[zj, dict[ (n1, n2, n3, m, n), (matrix element, bond_no)] ].
 
         Note:
-            - R = (n1,n2,n3) and m and n are lattice indices, bra and ket indexes, respectively.
+            - R = (n1,n2,n3) and m and n are lattice indices (corresponding to bond_no), bra and ket indexes, respectively.
         """
 
         def _format_val(v):
@@ -839,10 +840,10 @@ class MaterialModel(BinaryManager):
             fmt (str, optional): sympy/value.
 
         Returns:
-            - (dict) -- Hamiltonian matrix (real-space), dict[(n1, n2, n3, m, n), matrix element].
+            - (dict) -- Hamiltonian matrix (real-space), dict[(n1, n2, n3, m, n), (matrix element, bond_no)].
 
         Note:
-            - R = (n1,n2,n3) and m and n are a lattie vector, bra and ket indexes, respectively.
+            - R = (n1,n2,n3) and m and n are a lattie vector (corresponding to bond_no), bra and ket indexes, respectively.
         """
         Hamiltonian = defaultdict(lambda: sp.S(0) if fmt == "sympy" else 0.0)
         for zj, cj in parameter.items():

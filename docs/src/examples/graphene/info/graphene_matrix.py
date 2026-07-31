@@ -5,7 +5,8 @@ Selected SAMB matrix.
 - created (str): binary created date.
 - select (dict): select condition used.
 - dimension (int): matrix size.
-- ket_site (dict): ket info., dict[ket_name, position (fractional, primitive)].
+- ket (list): ket name of full matrix, [name].
+- ket_pos (list): ket position (fractional, primitive), [pos].
 - index (dict): ket index, dict[(site,sublattice,rank), (top_index,size)].
 - vector (dict): primitive bond vector, dict[cluster name, [primitive bond vector]].
 - cluster (dict): cluster name, dict[SAMB ID, cluster name].
@@ -15,10 +16,11 @@ Selected SAMB matrix.
 graphene_matrix = {
     "model": "graphene",
     "source": "graphene.pkl",
-    "created": "2026-07-31 15:25:13",
+    "created": "2026-08-01 07:39:04",
     "select": {"X": ["Q", "G", "M", "T"], "l": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], "Gamma": ["A1g", "A1u", "A2g", "A2u", "B1g", "B1u", "B2g", "B2u", "E1g", "E1u", "E2g", "E2u"], "s": [0, 1], "site": [("C", [1])], "bond": [("C", "C", 1, [1], [1]), ("C", "C", 2, [1], [1])]},
     "dimension": 2,
-    "ket_site": {"pz@C(1)": [0.3333333333333333, 0.6666666666666666, 0.0], "pz@C(2)": [0.6666666666666666, 0.3333333333333333, 0.0]},
+    "ket": ["pz@C(1)", "pz@C(2)"],
+    "ket_pos": [[0.3333333333333333, 0.6666666666666666, 0.0], [0.6666666666666666, 0.3333333333333333, 0.0]],
     "index": {("C", 1, 1): (0, 1), ("C", 2, 1): (1, 1)},
     "vector": {"C": [[0.0, 0.0, 0.0]], "C;C_001_1": [[0.33333333, 0.66666666, 0.0], [-0.66666666, -0.33333333, 0.0], [0.33333333, -0.33333333, 0.0]], "C;C_002_1": [[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [-1.0, -1.0, 0.0], [-1.0, 0.0, 0.0], [0.0, -1.0, 0.0], [1.0, 1.0, 0.0]]},
     "cluster": {

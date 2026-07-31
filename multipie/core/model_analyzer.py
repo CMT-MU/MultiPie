@@ -41,7 +41,8 @@ _matrix_comment = """Selected SAMB matrix.
 - created (str): binary created date.
 - select (dict): select condition used.
 - dimension (int): matrix size.
-- ket_site (dict): ket info., dict[ket_name, position (fractional, primitive)].
+- ket (list): ket name of full matrix, [name].
+- ket_pos (list): ket position (fractional, primitive), [pos].
 - index (dict): ket index, dict[(site,sublattice,rank), (top_index,size)].
 - vector (dict): primitive bond vector, dict[cluster name, [primitive bond vector]].
 - cluster (dict): cluster name, dict[SAMB ID, cluster name].
@@ -53,7 +54,7 @@ _k_matrix_comment = """Selected SAMB matrix in momentum representation.
 - source (str): source binary.
 - created (str): binary created date.
 - dimension (int): matrix size.
-- ket (list): ket info., [ket_name].
+- ket (list): ket name of full matrix, [name].
 - index (dict): ket index, dict[(site,sublattice,rank), (top_index,size)].
 - cluster_vector (dict): cluster vector, dict[site/bond name, dict[kb, expression] ].
 - k_multipole (dict): momentum multipole in terms of p_n=k.b_n, dict[wyckoff, dict[idx, (k_multipole, symmetry)] ].
@@ -257,13 +258,15 @@ class ModelAnalyzer(dict):
         # write hr.
         name = self["info"]["name"]
         filename = os.path.join(self._topdir, name, "info", name + "_hr.dat")
+        ket = matrix_info["ket"]
+        pos = matrix_info["ket_pos"]
         with open(filename, mode="w", encoding="utf-8") as f:
             print(f"# SAMB matrix from {matrix_info["source"]} ({matrix_info["created"]})", file=f)
             print("# select", file=f)
             for k, v in matrix_info["select"].items():
                 print(f"#   {k}: {str(v).replace(" ", "")}", file=f)
             print(f"# basis ({matrix_info["dimension"]})", file=f)
-            for no, (b, p) in enumerate(matrix_info["ket_site"].items()):
+            for no, (b, p) in enumerate(zip(ket, pos)):
                 print(f"#   {no:2d} {b}: [{p[0]: .6f}, {p[1]: .6f}, {p[2]: .6f}]", file=f)
             for z, v in parameter.items():
                 print(f"# {z:<4} = {v}", file=f)
@@ -678,7 +681,7 @@ class ModelAnalyzer(dict):
             "source": matrix_info["source"],
             "created": matrix_info["created"],
             "dimension": matrix_info["dimension"],
-            "ket": list(matrix_info["ket_site"].keys()),
+            "ket": matrix_info["ket"],
             "index": matrix_info["index"],
             "cluster_vector": cluster_vec,
             "k_multipole": k_multipole,
@@ -820,15 +823,15 @@ class ModelAnalyzer(dict):
             "nw2s": nnkp["nw2s"],
         }
         w2m, m2w, ket_multipie, atoms_frac, atoms_cart = create_ket_wannier_multipie(wannier_ket_info)
-        ket = self.wannier.get("ket_wannier", [])
-        if ket:
-            w2m = [ket.index(i) for i in ket_multipie]
-            m2w = [no for no, i in sorted(enumerate(w2m), key=lambda x: x[1])]
+        w_ket = self.wannier.get("ket_wannier", [])
+        if w_ket:
+            m2w = [w_ket.index(m) for m in ket_multipie]
+            w2m = [no for no, i in sorted(enumerate(m2w), key=lambda x: x[1])]
 
         if self.wannier["read_KS"]:
             # read KS Ek and Uk, and convert to MultiPie standard order(*) of ket by changing indices of Uk.
             # create H(R), and various matrix elements in real space by Fourier transformation with DFT k-grid.
-            # (*) use wannier2multipie.
+            # (*) Ek_m = [Ek[w] for w in m2w], Uk_m1m2 = [[Uk[w1,w2] for w2 in m2w] for w1 in m2w].
             #
             # read seedname.mmn
             # Mkb = read_mmn(seedname, wannier_dir)
@@ -843,14 +846,14 @@ class ModelAnalyzer(dict):
             hr_file = seedname + "_hr.dat"
             hr_dict, irvec, ndegen = read_hr(hr_file, wannier_dir)
             # convert from wannier index to multipie index.
-            HR = {(n1, n2, n3, m2w[a], m2w[b]): (complex(v), None) for (n1, n2, n3, a, b), v in hr_dict.items()}
+            HR = {(n1, n2, n3, w2m[w1], w2m[w2]): (complex(v), None) for (n1, n2, n3, w1, w2), v in hr_dict.items()}
 
         info = {
-            "ket_multipie": ket_multipie,
-            "wannier_to_multipie": w2m,
-            "multipie_to_wannier": m2w,
+            "ket": ket_multipie,
             "atoms_frac": atoms_frac,
             "atoms_cart": atoms_cart,
+            "wannier_to_multipie": w2m,
+            "multipie_to_wannier": m2w,
         }
 
         self["wannier"] = info

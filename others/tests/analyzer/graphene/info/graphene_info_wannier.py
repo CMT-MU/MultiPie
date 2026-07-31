@@ -1,7 +1,7 @@
 graphene_info_wannier = {
-    "ket_multipie": ["pz@C(1)", "pz@C(2)"],
-    "wannier_to_multipie": [1, 0],
-    "multipie_to_wannier": [1, 0],
+    "ket": ["pz@C(1)", "pz@C(2)"],
     "atoms_frac": [[0.3333333333333333, 0.6666666666666666, 0.0], [0.6666666666666666, 0.3333333333333333, 0.0]],
     "atoms_cart": [[4.5056551082805335e-17, 1.405847905479892, 0.0], [1.217500000002731, 0.702923952739946, 0.0]],
+    "wannier_to_multipie": [1, 0],
+    "multipie_to_wannier": [1, 0],
 }
