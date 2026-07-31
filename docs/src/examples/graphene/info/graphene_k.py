@@ -4,7 +4,7 @@ Selected SAMB matrix in momentum representation.
 - source (str): source binary.
 - created (str): binary created date.
 - dimension (int): matrix size.
-- ket_site (list): ket info., [ket_name].
+- ket (list): ket info., [ket_name].
 - index (dict): ket index, dict[(site,sublattice,rank), (top_index,size)].
 - cluster_vector (dict): cluster vector, dict[site/bond name, dict[kb, expression] ].
 - k_multipole (dict): momentum multipole in terms of p_n=k.b_n, dict[wyckoff, dict[idx, (k_multipole, symmetry)] ].
@@ -14,9 +14,9 @@ Selected SAMB matrix in momentum representation.
 graphene_k = {
     "model": "graphene",
     "source": "graphene.pkl",
-    "created": "2026-07-31 10:06:01",
+    "created": "2026-07-31 15:25:13",
     "dimension": 2,
-    "ket_site": ["pz@C(1)", "pz@C(2)"],
+    "ket": ["pz@C(1)", "pz@C(2)"],
     "index": {("C", 1, 1): (0, 1), ("C", 2, 1): (1, 1)},
     "cluster_vector": {"C": {}, "C;C_001_1": {"p_1": "0.33333333*k_1+0.66666666*k_2", "p_2": "-0.66666666*k_1-0.33333333*k_2", "p_3": "0.33333333*k_1-0.33333333*k_2"}, "C;C_002_1": {"p_1": "1.0*k_1", "p_2": "1.0*k_2", "p_3": "-1.0*k_1-1.0*k_2"}},
     "k_multipole": {

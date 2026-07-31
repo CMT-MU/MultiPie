@@ -1,1 +1,1 @@
-Te_info_samb = {"NG_sum_rule": None}
+Te_info_samb = {}

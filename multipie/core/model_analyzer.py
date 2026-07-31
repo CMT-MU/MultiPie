@@ -63,7 +63,7 @@ _k_matrix_comment = """Selected SAMB matrix in momentum representation.
 - source (str): source binary.
 - created (str): binary created date.
 - dimension (int): matrix size.
-- ket_site (list): ket info., [ket_name].
+- ket (list): ket info., [ket_name].
 - index (dict): ket index, dict[(site,sublattice,rank), (top_index,size)].
 - cluster_vector (dict): cluster vector, dict[site/bond name, dict[kb, expression] ].
 - k_multipole (dict): momentum multipole in terms of p_n=k.b_n, dict[wyckoff, dict[idx, (k_multipole, symmetry)] ].
@@ -111,6 +111,8 @@ class ModelAnalyzer(dict):
 
         Returns:
             - (dict) -- SAMB control.
+
+        :meta private:
         """
         return self._samb
 
@@ -122,6 +124,8 @@ class ModelAnalyzer(dict):
 
         Returns:
             - (dict) -- Wannier control.
+
+        :meta private:
         """
         return self._wannier
 
@@ -133,6 +137,8 @@ class ModelAnalyzer(dict):
 
         Returns:
             - (dict) -- output for physical quantities control.
+
+        :meta private:
         """
         return self._output
 
@@ -144,6 +150,8 @@ class ModelAnalyzer(dict):
 
         Returns:
             - (MaterialModel) -- matrial model.
+
+        :meta private:
         """
         return self._mm
 
@@ -155,6 +163,8 @@ class ModelAnalyzer(dict):
 
         Returns:
             - (dict) -- parameter dict.
+
+        :meta private:
         """
         return self._parameter
 
@@ -166,6 +176,8 @@ class ModelAnalyzer(dict):
 
         Returns:
             - (str) -- basis type, "lg/lgs/jml".
+
+        :meta private:
         """
         return self._basis_type
 
@@ -177,6 +189,8 @@ class ModelAnalyzer(dict):
 
         Returns:
             - (list) -- basis, list of "orbital@atom(sublattice)".
+
+        :meta private:
         """
         return self._basis
 
@@ -188,6 +202,8 @@ class ModelAnalyzer(dict):
 
         Returns:
             - (dict) -- H(R), dict[(n1,n2,n3,m,n), val or (val, bond_no)].
+
+        :meta private:
         """
         return self._HR
 
@@ -201,6 +217,8 @@ class ModelAnalyzer(dict):
             ext (str): filename is name_ + ext.
             comment (str, optional): comment.
             w_dir (str, optional): directory (topdir/name/w_dir) to write, if None, topdir/name is used.
+
+        :meta private:
         """
         name = self["info"]["name"]
         path = os.path.join(self._topdir, name)
@@ -215,7 +233,205 @@ class ModelAnalyzer(dict):
             print(f"save {ext} to '{path}/{filename}'.")
 
     # ==================================================
+    def write_samb_matrix(self, matrix_info):
+        """
+        Save SAMB matrix.
+
+        Args:
+            matrix_info (dict): matrix info.
+
+        :meta private:
+        """
+        # convert sympy to str.
+        mi = matrix_info.copy()
+        matrix = matrix_info["matrix"]
+        mi["matrix"] = {z: {k: (str(v[0]).replace(" ", ""), v[1]) for k, v in elm.items()} for z, elm in matrix.items()}
+
+        self.write_dict(mi, "matrix.py", _matrix_comment, "info")
+
+    # ==================================================
+    def write_samb_hr(self, matrix_info, parameter, HR):
+        """
+        Save SAMB matrix in hr format.
+
+        Args:
+            matrix_info (dict): matrix info.
+            parameter (dict): parameter dict, dict[z#, value].
+            HR (dict, optional): H(R) matrix. if None, H(R) is generated.
+
+        :meta private:
+        """
+        if HR is None:
+            return
+
+        # write hr.
+        name = self["info"]["name"]
+        filename = os.path.join(self._topdir, name, "info", name + "_hr.dat")
+        with open(filename, mode="w", encoding="utf-8") as f:
+            print(f"# SAMB matrix from {matrix_info["source"]} ({matrix_info["created"]})", file=f)
+            print("# select", file=f)
+            for k, v in matrix_info["select"].items():
+                print(f"#   {k}: {str(v).replace(" ", "")}", file=f)
+            print(f"# basis ({matrix_info["dimension"]})", file=f)
+            for no, (b, p) in enumerate(matrix_info["ket_site"].items()):
+                print(f"#   {no:2d} {b}: [{p[0]: .6f}, {p[1]: .6f}, {p[2]: .6f}]", file=f)
+            for z, v in parameter.items():
+                print(f"# {z:<4} = {v}", file=f)
+            print("#", file=f)
+            print("# n1   n2   n3    m    n    re                        im", file=f)
+            for (n1, n2, n3, m, n), v in HR.items():
+                v = complex(v)
+                r, i = v.real, v.imag
+                s = f"{n1: 4d} {n2: 4d} {n3: 4d} {m: 4d} {n: 4d}    {r: .15e}    {i: .15e}"
+                print(s, file=f)
+
+        if self._verbose:
+            print(f"save hr to '{filename}'.")
+
+    # ==================================================
+    def write_info(self):
+        """
+        Save info. (samb, wannier, output, and info).
+
+        :meta private:
+        """
+        if "samb" in self.keys():
+            dic = {k: v for k, v in self["samb"].items() if k not in ["matrix_info", "var", "k_multipole"]}
+            self.write_dict(dic, "info_samb.py", w_dir="info")
+        if "wannier" in self.keys():
+            dic = {k: v for k, v in self["wannier"].items() if k not in ["kpoints", "nnkpts", "wk", "bveck", "kb2k"]}
+            self.write_dict(dic, "info_wannier.py", w_dir="info")
+        if "output" in self.keys():
+            dic = {k: v for k, v in self["output"].items() if k not in []}
+            self.write_dict(dic, "info_output.py", w_dir="info")
+        dic = {k: v for k, v in self.items() if k not in ["samb", "wannier", "output"]}
+        self.write_dict(dic, "info.py", w_dir="info")
+
+    # ==================================================
+    def write_z_file(self, parameter):
+        """
+        Save z file.
+
+        Args:
+            parameter (dict): parameter dict.
+
+        :meta private:
+        """
+        if not parameter:
+            return
+
+        dic = {tag: float(v) for tag, v in parameter.items()}
+        dic = dict(sorted(dic.items(), key=lambda item: abs(item[1]), reverse=True))
+
+        comment = _param_comment + f"- by using '{self["info"]["mode"]}' mode.\n"
+        self.write_dict(dic, "z.py", comment, "info")
+
+    # ==================================================
+    def write_var_file(self, var):
+        """
+        Save var file.
+
+        Args:
+            var (dict): var dict.
+
+        :meta private:
+        """
+        d = {name: {zj: str(ex).replace(" ", "") for zj, ex in dic.items()} for name, dic in var.items()}
+
+        self.write_dict(d, "var.py", _zj_var_comment, "info")
+
+    # ==================================================
+    def write_k_multipole(self, k_multipole):
+        """
+        Save k multipole.
+
+        Args:
+            k_multipole (dict): k-multipole dict.
+
+        :meta private:
+        """
+        self.write_dict(k_multipole, "k.py", _k_matrix_comment, "info")
+
+    # ==================================================
+    def write_dispersion(self, Ek, Ok, op_lst, k_linear, k_dis_pos):
+        """
+        Save dispersion.
+
+        Args:
+            Ek (ndarray): energy eigen values.
+            Ok (ndarray): expectation values of local operators.
+            op_lst (list_): operator name list.
+            k_linear (ndarray): linear k position along high-symmetry line.
+            k_dis_pos (dict): k discrete point.
+
+        :meta private:
+        """
+        name = self["info"]["name"]
+        ef = self["info"]["fermi_energy"]
+
+        path = os.path.join(self._topdir, name, self.output["dir"])
+        fname = os.path.join(path, name + "_dispersion.txt")
+        colormap = len(Ok) > 0
+        if Ok:
+            output_dispersion(fname, k_linear, ef, Ek, Ok, op_lst)
+        else:
+            output_dispersion(fname, k_linear, ef, Ek)
+        plot_save_dispersion(fname, k_dis_pos, ef, colormap)
+        create_gnuplot_cmd(fname, k_dis_pos, np.max(k_linear), np.max(Ek), np.min(Ek), ef, colormap)
+        if self._verbose:
+            print(f"save dispersion files into '{path}'.")
+
+    # ==================================================
+    def read_controle(self, control):
+        """
+        Read controle file.
+
+        Args:
+            control (str): control file name.
+
+        Returns:
+            - (bool) -- if error occurs.
+
+        :meta private:
+        """
+        if control.endswith(".py"):
+            control = read_dict(control)
+            return False
+        else:
+            return True
+
+    # ==================================================
+    def read_parameter(self, filename=None):
+        """
+        Read parameter file.
+
+        Args:
+            filename (str, optional): file name under 'topdir/name'. for empty str, use default, 'topdir/name/info/name_z.py'.
+
+        :meta private:
+        """
+        name = self["info"]["name"]
+        if filename:
+            filename = "info/" + filename
+        else:
+            filename = f"info/{name}_z.py"
+
+        filename = os.path.join(self._topdir, name, filename)
+        parameter = read_dict(filename)
+        parameter = {tag: float(str_to_sympy(v, rational=False)) if type(v) == str else v for tag, v in parameter.items()}
+        if self._verbose:
+            print(f"load parameter from '{filename}'.")
+
+    # ==================================================
     def reset(self, control=None):
+        """
+        Reset all data, and overwrite from control.
+
+        Args:
+            control (dict, optional): control dict.
+
+        :meta private:
+        """
         if control is None:
             control = {}
 
@@ -246,6 +462,8 @@ class ModelAnalyzer(dict):
 
         Args:
             mode (str): analysis mode, "samb/wannier/symcw".
+
+        :meta private:
         """
         self["info"]["mode"] = mode
 
@@ -256,6 +474,8 @@ class ModelAnalyzer(dict):
 
         Args:
             name (str): model name.
+
+        :meta private:
         """
         self["info"]["name"] = name
 
@@ -268,6 +488,8 @@ class ModelAnalyzer(dict):
             N1 (int): number of divisions in b1.
             N2 (int): number of divisions in b2.
             N3 (int): number of divisions in b3.
+
+        :meta private:
         """
         self["info"]["grid"] = [N1, N2, N3]
 
@@ -278,6 +500,8 @@ class ModelAnalyzer(dict):
 
         Args:
             parameter (dict): parameter dict.
+
+        :meta private:
         """
         self._parameter = parameter
 
@@ -288,6 +512,8 @@ class ModelAnalyzer(dict):
 
         Args:
             basis_type (str): basis type, "lg/lgs/jml".
+
+        :meta private:
         """
         self._basis_type = basis_type
 
@@ -298,6 +524,8 @@ class ModelAnalyzer(dict):
 
         Args:
             basis (list): basis, list of "orbital@atom(sublattice)".
+
+        :meta private:
         """
         self._basis = basis
 
@@ -308,6 +536,8 @@ class ModelAnalyzer(dict):
 
         Args:
             HR (dict): H(R), dict[(n1,n2,n3,m,n), val or (val, bond_no)].
+
+        :meta private:
         """
         self._HR = HR
 
@@ -328,111 +558,153 @@ class ModelAnalyzer(dict):
         self["info"]["volume"] = float(np.dot(A[0], np.cross(A[1], A[2])))  # volume of primitive cell.
 
     # ==================================================
-    def read_controle(self, control):
-        if control.endswith(".py"):
-            control = read_dict(control)
-            return False
-        else:
-            return True
-
-    # ==================================================
-    def write_samb_matrix(self, matrix_info):
+    def set_fermi_energy(self, ef):
         """
-        Save SAMB matrix.
+        Set Fermi energy.
 
         Args:
-            matrix_info (dict): matrix info.
-        """
-        # convert sympy to str.
-        mi = matrix_info.copy()
-        matrix = matrix_info["matrix"]
-        mi["matrix"] = {z: {k: (str(v[0]).replace(" ", ""), v[1]) for k, v in elm.items()} for z, elm in matrix.items()}
+            ef (float): Fermi energy.
 
-        self.write_dict(mi, "matrix.py", _matrix_comment, "info")
+        :meta private:
+        """
+        self["info"]["fermi_energy"] = ef
 
     # ==================================================
-    def write_samb_hr(self, matrix_info, parameter):
+    def get_var(self, matrix_info):
         """
-        Save SAMB matrix in hr format.
+        Get var dict.
 
         Args:
-            matrix_info (dict): matrix info.
-            parameter (dict): parameter dict, dict[z#, value].
-            HR (dict, optional): H(R) matrix. if None, H(R) is generated.
-            verbose (bool, optional): verboser ?
+            matrix_info (dict): matrix info dict.
+
+        Returns:
+            - (dict) -- var dict.
+
+        :meta private:
         """
-        if self.HR is None:
-            return
-        HR = self.HR
-
-        # write hr.
-        name = self["info"]["name"]
-        filename = os.path.join(self._topdir, name, "info", name + "_hr.dat")
-        with open(filename, mode="w", encoding="utf-8") as f:
-            print(f"# SAMB matrix from {matrix_info["source"]} ({matrix_info["created"]})", file=f)
-            print("# select", file=f)
-            for k, v in matrix_info["select"].items():
-                print(f"#   {k}: {str(v).replace(" ", "")}", file=f)
-            print(f"# basis ({matrix_info["dimension"]})", file=f)
-            for no, (b, p) in enumerate(matrix_info["ket_site"].items()):
-                print(f"#   {no:2d} {b}: [{p[0]: .6f}, {p[1]: .6f}, {p[2]: .6f}]", file=f)
-            for z, v in parameter.items():
-                print(f"# {z:<4} = {v}", file=f)
-            print("#", file=f)
-            print("# n1   n2   n3    m    n    re                        im", file=f)
-            for (n1, n2, n3, m, n), v in HR.items():
-                v = complex(v)
-                r, i = v.real, v.imag
-                s = f"{n1: 4d} {n2: 4d} {n3: 4d} {m: 4d} {n: 4d}    {r: .15e}    {i: .15e}"
-                print(s, file=f)
-
-        if self._verbose:
-            print(f"save hr to '{filename}'.")
-
-    # ==================================================
-    def write_info(self):
-        if "samb" in self.keys():
-            dic = {k: v for k, v in self["samb"].items() if k not in ["matrix_info", "var", "k_multipole"]}
-            self.write_dict(dic, "info_samb.py", w_dir="info")
-        if "wannier" in self.keys():
-            dic = {k: v for k, v in self["wannier"].items() if k not in ["kpoints", "nnkpts", "wk", "bveck", "kb2k"]}
-            self.write_dict(dic, "info_wannier.py", w_dir="info")
-        if "output" in self.keys():
-            dic = {k: v for k, v in self["output"].items() if k not in []}
-            self.write_dict(dic, "info_output.py", w_dir="info")
-        dic = {k: v for k, v in self.items() if k not in ["samb", "wannier", "output"]}
-        self.write_dict(dic, "info.py", w_dir="info")
-
-    # ==================================================
-    def write_z_file(self):
-        parameter = self.parameter
-        if not parameter:
-            return
-
-        dic = {tag: float(v) for tag, v in parameter.items()}
-        dic = dict(sorted(dic.items(), key=lambda item: abs(item[1]), reverse=True))
-
-        comment = _param_comment + f"- by using '{self["info"]["mode"]}' mode.\n"
-        self.write_dict(dic, "z.py", comment, "info")
-
-    # ==================================================
-    def set_var(self, matrix_info):
         IR = next(iter(self.model.group.character["table"].keys()))  # identity irrep.
         conv_dict = convert_zj_atomic_var(matrix_info, self.model["combined_cluster"], self.model["combined_id"], IR)
         return conv_dict
 
     # ==================================================
-    def write_var_file(self):
-        d = self["samb"]["var"]
-        d = {name: {zj: str(ex).replace(" ", "") for zj, ex in dic.items()} for name, dic in d.items()}
+    def get_local_operator(self, tag):
+        """
+        Create local operator.
 
-        self.write_dict(d, "var.py", _zj_var_comment, "info")
+        Args:
+            tag (str): operator name, "Sx/Sy/Sz/Lx/Ly/Lz/Qu/Qv/Qyz/Qzx/Qxy".
+
+        Returns:
+            - (ndarray) -- operator matrix (dim x dim).
+
+        :meta private:
+        """
+        spinful = self.basis_type == "lgs"
+        return create_local_operator(self.basis, tag, self._local, spinful)
 
     # ==================================================
-    def write_k_multipole(self):
-        d = self["samb"]["k_multipole"]
-        if d:
-            self.write_dict(d, "k.py", _k_matrix_comment, "info")
+    def get_kpath(self, k_path):
+        """
+        Get k path.
+
+        Args:
+            k_path (str): k path.
+        Returns:
+            - (dict) -- k point dict.
+            - (str) -- k path.
+
+        :meta private:
+        """
+        if k_path == "":  # create default path.
+            A = self["A"]
+            gp = next(reversed(self.model.group.wyckoff["site"].values()))  # general point.
+            positions = gp["reference"].astype(float)  # fractional, conventional, plus set.
+            numbers = np.full(len(positions), 1, dtype=int)
+
+            structure = (A, positions, numbers)
+            info = seekpath.get_path(structure)
+
+            if info["spacegroup_number"] != int(self.model.group.ID):
+                logging.exception("obtained SG is different with given group.")
+                raise
+
+            k_point = info["point_coords"]
+            k_point["Γ"] = k_point["GAMMA"]
+            del k_point["GAMMA"]
+
+            path = info["path"]
+            k_path = path[0][0] + "-" + path[0][1]
+            for (a, b), (c, d) in zip(path, path[1:]):
+                if b == c:
+                    k_path += "-" + d
+                else:
+                    k_path += "|" + c + "-" + d
+            k_path = k_path.replace("GAMMA", "Γ")
+        else:
+            k_point = self.output["dispersion"].get("k_point", {})
+            k_point = {k: str_to_sympy(v).astype(float) for k, v, in k_point.items()}
+
+        return k_point, k_path
+
+    # ==================================================
+    def get_k_multipole(self, matrix_info):
+        """
+        Set momentum multipole.
+
+        Args:
+            matrix_info (dict): matrix info.
+
+        Returns:
+            - (dict) -- k-multipole dict.
+
+        Notes:
+            - only tight-binding gauge is supported.
+
+        :meta private:
+        """
+        if not self.samb["k_multipole"]:
+            return {}
+
+        combined_id = self.model["combined_id"]
+
+        k_multipole, cluster_vec = create_k_multipole(self.model["cluster_samb"], self.model["cluster_vector"])
+        cluster_vec = {sb: {str(kb): str(v).replace(" ", "") for kb, v in lst.items()} for sb, lst in cluster_vec.items()}
+        k_matrix = create_k_matrix(matrix_info["matrix"], matrix_info["cluster"], matrix_info["vector"])
+        k_matrix = {
+            tag: (matrix_info["cluster"][tag], combined_id[tag][1].samb_type.wyckoff, mat) for tag, mat in k_matrix.items()
+        }
+
+        # convert to str for output.
+        k_multipole = {
+            wp: {idx: (str(samb.tolist()).replace(" ", ""), str(sym.tolist()).replace(" ", "")) for idx, (samb, sym) in v.items()}
+            for wp, v in k_multipole.items()
+        }
+        k_matrix = {
+            tag: (cn, wp, {Rmn: str(v).replace(" ", "") for Rmn, v in mat.items()}) for tag, (cn, wp, mat) in k_matrix.items()
+        }
+
+        k_multipole = {
+            "model": matrix_info["model"],
+            "source": matrix_info["source"],
+            "created": matrix_info["created"],
+            "dimension": matrix_info["dimension"],
+            "ket": list(matrix_info["ket_site"].keys()),
+            "index": matrix_info["index"],
+            "cluster_vector": cluster_vec,
+            "k_multipole": k_multipole,
+            "k_matrix": k_matrix,
+        }
+
+        return k_multipole
+
+    # ==================================================
+    def get_eigen_system(self):
+        """
+        Get eigen system by checking control/output if E and/or U is required.
+
+        :meta private:
+        """
+        pass
 
     # ==================================================
     def analyze(self, control):
@@ -450,25 +722,24 @@ class ModelAnalyzer(dict):
         self.reset(control)
         mode = self["info"]["mode"]
 
-        # set SAMB.
+        # execute SAMB mode.
         if mode in ["samb", "symcw"]:
-            self.set_samb()  # create SAMBs, and H(R) if zj are provided.
+            self.exec_samb()  # create SAMBs, and H(R) if zj are provided.
 
-        # set wannier.
+        # execute wannier mode.
         if mode in ["wannier", "symcw"]:
-            HR = self.set_wannier()  # create H(R), and zj in case of "symcw".
-            self.set_HR(HR)
+            self.exec_wannier()  # create H(R), and zj in case of "symcw".
             if mode == "symcw":
-                matrix_info = self["samb"]["matrix_info"]
+                matrix_info = self["samb"]["matrix_info"]  # created by exec_samb.
                 Zr_dict = matrix_info["matrix"]
                 parameter = decompose_operator_by_SAMB(HR, Zr_dict)
-                HR = self.model.get_hr(parameter, Zr_dict)
+                HR = self.model.get_hr(parameter, Zr_dict)  # overwrite HR by MultiPie.
+                self.write_samb_hr(matrix_info, parameter, HR)
                 self.set_HR(HR)
-                self.write_samb_hr(matrix_info, parameter)  # overwrite HR by MultiPie.
                 self.set_parameter(parameter)
 
         # create z file.
-        self.write_z_file()
+        self.write_z_file(self.parameter)
 
         # compute physical quanties and output data.
         self.compute_physical_quantity()
@@ -477,20 +748,9 @@ class ModelAnalyzer(dict):
         self.write_info()
 
     # ==================================================
-    def read_parameter(self, filename=None):
-        name = self["info"]["name"]
-        if filename is None:
-            filename = f"info/{name}_z.py"
-        filename = os.path.join(self._topdir, name, filename)
-        parameter = read_dict(filename)
-        parameter = {tag: float(str_to_sympy(v, rational=False)) if type(v) == str else v for tag, v in parameter.items()}
-        if self._verbose:
-            print(f"load parameter from '{filename}'.")
-
-    # ==================================================
-    def set_samb(self):
+    def exec_samb(self):
         """
-        Calculate SAMB related quantities.
+        Execute SAMB mode.
 
         :meta private:
         """
@@ -504,16 +764,17 @@ class ModelAnalyzer(dict):
         self.set_primitive_cell(self.model["unit_vector_primitive"])
 
         # set selected SAMBs.
-        self["samb"]["matrix_info"] = self.model.get_samb_matrix(self.samb["select"])
+        matrix_info = self.model.get_samb_matrix(self.samb["select"])
 
         # create var file.
-        self["samb"]["var"] = self.set_var(self["samb"]["matrix_info"])
-        self.write_var_file()
+        var = self.get_var(matrix_info)
+        self.write_var_file(var)
 
         # create k-multipole file.
         if self.samb["k_multipole"]:
-            self["samb"]["k_multipole"] = self.set_k_multipole(self["samb"]["matrix_info"])
-            self.write_k_multipole()
+            k_multipole = self.get_k_multipole(matrix_info)
+            if k_multipole:
+                self.write_k_multipole(k_multipole)
 
         # create SAMB qtdraw.
         if self.samb["samb_figure"]:
@@ -521,35 +782,31 @@ class ModelAnalyzer(dict):
 
         parameter = self.samb["parameter"]
         if type(parameter) == str:  # when parameter is str, read z file.
-            if parameter:
-                z_file = "info/" + parameter
-            else:
-                z_file = None  # user default.
-            parameter = self.read_parameter(z_file)
+            parameter = self.read_parameter(parameter)
 
         # determine local weight if NG_sum_rule is True.
         ng = self.samb["NG_sum_rule"]
         if ng and parameter:
-            parameter = add_local_parameter(self["samb"]["matrix_info"], parameter, self.model["full_matrix"]["ket"])
+            parameter = add_local_parameter(matrix_info, parameter, self.model["full_matrix"]["ket"])
         if ng:
-            parameter_sym = add_local_parameter_sym(self["samb"]["matrix_info"], self.model["full_matrix"]["ket"])
+            parameter_sym = add_local_parameter_sym(matrix_info, self.model["full_matrix"]["ket"])
             self["samb"]["NG_sum_rule"] = parameter_sym
-        else:
-            self["samb"]["NG_sum_rule"] = None
 
         # output matrix.py and hr.dat.
         if parameter:
-            self.set_HR(self.model.get_hr(parameter, self["samb"]["matrix_info"]["matrix"]))
-            self.write_samb_hr(self["samb"]["matrix_info"], parameter)
-        self.write_samb_matrix(self["samb"]["matrix_info"])
+            HR = self.model.get_hr(parameter, matrix_info["matrix"])
+            self.write_samb_hr(matrix_info, parameter, HR)
+            self.set_HR(HR)
+        self.write_samb_matrix(matrix_info)
 
         self.set_parameter(parameter)
-        self["info"]["fermi_energy"] = 0.0
+        self.set_fermi_energy(0.0)
+        self["samb"]["matrix_info"] = matrix_info
 
     # ==================================================
-    def set_wannier(self):
+    def exec_wannier(self):
         """
-        Set data for wannier-based input.
+        Execute wannier mode.
 
         :meta private:
         """
@@ -632,7 +889,7 @@ class ModelAnalyzer(dict):
         }
 
         self["wannier"] = info
-        self["info"]["fermi_energy"] = info["fermi_energy"]
+        self.set_fermi_energy(info["fermi_energy"])
 
         ### physical qunatity.
         # nk = np.array([np.diag(fermi_dirac(eki - win["fermi_energy"], T=0.0)) for eki in Ek], dtype=float)
@@ -646,15 +903,12 @@ class ModelAnalyzer(dict):
         # self["wannier"]["uHu"] = uHu
         # self["wannier"]["uIu"] = uIu
 
-        return hr_dict
+        self.set_HR(hr_dict)
 
     # ==================================================
     def compute_physical_quantity(self):
         """
         Compute physical quantities by parsing the control file.
-
-        Args:
-            name (str): model name.
 
         :meta private:
         """
@@ -666,50 +920,11 @@ class ModelAnalyzer(dict):
         path = os.path.join(self._topdir, name, self.output["dir"])
         os.makedirs(path, exist_ok=True)
 
-        self.set_eigen_system()
-        self.compute_dispersion()
+        disp = self.compute_dispersion()
+        self["output"]["dispersion"] = disp
+
+        self.get_eigen_system()
         self.compute_dos()
-
-    # ==================================================
-    def set_eigen_system(self):
-        """
-        Set eigen system by checking control/output if E and/or U is required.
-
-        :meta private:
-        """
-        pass
-
-    # ==================================================
-    def local_operator(self, tag):
-        """
-        Create local operator.
-
-        Args:
-            tag (str): operator name, "Sx/Sy/Sz/Lx/Ly/Lz/Qu/Qv/Qyz/Qzx/Qxy".
-
-        Returns:
-            - (ndarray) -- operator matrix (dim x dim).
-
-        :meta private:
-        """
-        spinful = self.basis_type == "lgs"
-        return create_local_operator(self.basis, tag, self._local, spinful)
-
-    # ==================================================
-    def write_dispersion(self, Ek, Ok, op_lst, k_linear, k_dis_pos):
-        name = self["info"]["name"]
-        path = os.path.join(self._topdir, name, self.output["dir"])
-        fname = os.path.join(path, name + "_dispersion.txt")
-        colormap = len(Ok) > 0
-        ef = self["info"]["fermi_energy"]
-        if Ok:
-            output_dispersion(fname, k_linear, ef, Ek, Ok, op_lst)
-        else:
-            output_dispersion(fname, k_linear, ef, Ek)
-        plot_save_dispersion(fname, k_dis_pos, ef, colormap)
-        create_gnuplot_cmd(fname, k_dis_pos, np.max(k_linear), np.max(Ek), np.min(Ek), ef, colormap)
-        if self._verbose:
-            print(f"save dispersion files into '{path}'.")
 
     # ==================================================
     def compute_dispersion(self):
@@ -752,18 +967,20 @@ class ModelAnalyzer(dict):
             Ek = np.power(Ek, power)
 
         # set local operators.
-        Ok = [np.einsum("kmi,mn,kni->ki", Uk.conj(), self.local_operator(tag), Uk).real for tag in op_lst]
+        Ok = [np.einsum("kmi,mn,kni->ki", Uk.conj(), self.get_local_operator(tag), Uk).real for tag in op_lst]
 
         # output dispersion data, plot, and gnuplot.
         self.write_dispersion(Ek, Ok, op_lst, k_linear, k_dis_pos)
 
         # save dispersion info.
-        self["output"]["dispersion"] = {
+        d = {
             "k_path": k_path,
             "k_point": {k: str(v.tolist()).replace(" ", "") for k, v in k_point.items()},
             "e_max": float(np.max(Ek)),
             "e_min": float(np.min(Ek)),
         }
+
+        return d
 
     # ==================================================
     def compute_dos(self):
@@ -776,98 +993,3 @@ class ModelAnalyzer(dict):
             return
 
         print("compute and output dos.")
-
-    # ==================================================
-    def get_kpath(self, k_path):
-        """
-        Get k path.
-
-        Args:
-            k_path (str): k path.
-        Returns:
-            - (dict) -- k point dict.
-            - (str) -- k path.
-
-        :meta private:
-        """
-        if k_path == "":  # create default path.
-            A = self["A"]
-            gp = next(reversed(self.model.group.wyckoff["site"].values()))  # general point.
-            positions = gp["reference"].astype(float)  # fractional, conventional, plus set.
-            numbers = np.full(len(positions), 1, dtype=int)
-
-            structure = (A, positions, numbers)
-            info = seekpath.get_path(structure)
-
-            if info["spacegroup_number"] != int(self.model.group.ID):
-                logging.exception("obtained SG is different with given group.")
-                raise
-
-            k_point = info["point_coords"]
-            k_point["Γ"] = k_point["GAMMA"]
-            del k_point["GAMMA"]
-
-            path = info["path"]
-            k_path = path[0][0] + "-" + path[0][1]
-            for (a, b), (c, d) in zip(path, path[1:]):
-                if b == c:
-                    k_path += "-" + d
-                else:
-                    k_path += "|" + c + "-" + d
-            k_path = k_path.replace("GAMMA", "Γ")
-        else:
-            k_point = self.output["dispersion"].get("k_point", {})
-            k_point = {k: str_to_sympy(v).astype(float) for k, v, in k_point.items()}
-
-        return k_point, k_path
-
-    # ==================================================
-    def set_k_multipole(self, matrix_info):
-        """
-        Set momentum multipole.
-
-        Args:
-            matrix_info (dict): matrix info.
-
-        Returns:
-            - (dict) -- k-multipole dict.
-
-        Notes:
-            - only tight-binding gauge is supported.
-
-        :meta private:
-        """
-        if not self.samb["k_multipole"]:
-            return {}
-
-        combined_id = self.model["combined_id"]
-
-        k_multipole, cluster_vec = create_k_multipole(self.model["cluster_samb"], self.model["cluster_vector"])
-        cluster_vec = {sb: {str(kb): str(v).replace(" ", "") for kb, v in lst.items()} for sb, lst in cluster_vec.items()}
-        k_matrix = create_k_matrix(matrix_info["matrix"], matrix_info["cluster"], matrix_info["vector"])
-        k_matrix = {
-            tag: (matrix_info["cluster"][tag], combined_id[tag][1].samb_type.wyckoff, mat) for tag, mat in k_matrix.items()
-        }
-
-        # convert to str for output.
-        k_multipole = {
-            wp: {idx: (str(samb.tolist()).replace(" ", ""), str(sym.tolist()).replace(" ", "")) for idx, (samb, sym) in v.items()}
-            for wp, v in k_multipole.items()
-        }
-        k_matrix = {
-            tag: (cn, wp, {Rmn: str(v).replace(" ", "") for Rmn, v in mat.items()}) for tag, (cn, wp, mat) in k_matrix.items()
-        }
-
-        k_multipole = {
-            "model": matrix_info["model"],
-            "source": matrix_info["source"],
-            "created": matrix_info["created"],
-            "dimension": matrix_info["dimension"],
-            "ket_site": list(matrix_info["ket_site"].keys()),
-            "index": matrix_info["index"],
-            "cluster_vector": cluster_vec,
-            "k_multipole": k_multipole,
-            "k_matrix": k_matrix,
-        }
-
-        return k_multipole
