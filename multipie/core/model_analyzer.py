@@ -609,7 +609,7 @@ class ModelAnalyzer(dict):
         :meta private:
         """
         if k_path == "":  # create default path.
-            A = self["A"]
+            A = self["info"]["A"]
             gp = next(reversed(self.model.group.wyckoff["site"].values()))  # general point.
             positions = gp["reference"].astype(float)  # fractional, conventional, plus set.
             numbers = np.full(len(positions), 1, dtype=int)
@@ -943,7 +943,7 @@ class ModelAnalyzer(dict):
         # save dispersion info.
         d = {
             "k_path": k_path,
-            "k_point": {k: str(v.tolist()).replace(" ", "") for k, v in k_point.items()},
+            "k_point": {k: str(v).replace(" ", "") for k, v in k_point.items()},
             "e_max": float(np.max(Ek)),
             "e_min": float(np.min(Ek)),
         }
