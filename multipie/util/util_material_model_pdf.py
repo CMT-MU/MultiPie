@@ -131,7 +131,7 @@ class ModelPDF:
     # ==================================================
     def group_cell_info(self):
         gp = self.mm.group.latex(detail=True)
-        cell = self.mm["cell"]
+        cell = self.mm["cell_info"]["cell"]
 
         a = self.fmt_number(cell["a"])
         b = self.fmt_number(cell["b"])

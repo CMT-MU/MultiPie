@@ -6,6 +6,7 @@ Default control for ModelAnalyzer.
 # default control.
 default_control = {
     "mode": "samb",  # samb (SAMB-based only), wannier (wannier-based only), symcw (SAMB and wannier based).
+    "grid": (50, 50, 50),  # k-grid size (b1, b2, b3).
     "samb": {
         "model": None,  # model name for .pkl.
         "select": {  # SAMB select condition, where S=site name, R=orbital rank, N=neighbor bond.

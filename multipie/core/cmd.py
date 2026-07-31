@@ -55,15 +55,12 @@ def create_model(models, topdir=None, verbose=False):
 
 
 # ==================================================
-def analyze_model(controls, N1=50, N2=50, N3=50, topdir=None, verbose=False):
+def analyze_model(controls, topdir=None, verbose=False):
     """
     Analyze model.
 
     Args:
         controls (str or [str] or dict or [dict]): control file(s) or dict(s).
-        N1 (int, optional): number of divisions in a1.
-        N2 (int, optional): number of divisions in a2.
-        N3 (int, optional): number of divisions in a3.
         topdir (str, optional): top directory.
         verbose (bool, optional): verbose ?
 
@@ -87,7 +84,7 @@ def analyze_model(controls, N1=50, N2=50, N3=50, topdir=None, verbose=False):
 
     controls = list(read_dict_file(controls, topdir, verbose).values())
 
-    ma = ModelAnalyzer(N1, N2, N3, topdir, verbose=verbose)
+    ma = ModelAnalyzer(topdir, verbose=verbose)
     for control in controls:
         try:
             name = control["samb"]["model"]

@@ -2,7 +2,7 @@
 Selected SAMB matrix.
 - model (str): model name.
 - source (str): source binary.
-- date (str): binary created date.
+- created (str): binary created date.
 - select (dict): select condition used.
 - dimension (int): matrix size.
 - ket_site (dict): ket info., dict[ket_name, position (fractional, primitive)].
@@ -12,10 +12,10 @@ Selected SAMB matrix.
 - matrix (dict): matrix, dict[zi, dict[(R,row,column), (value, bond_no)] ] (R=n1,n2,n3, primitive).
 """
 
-graphene = {
+graphene_matrix = {
     "model": "graphene",
     "source": "graphene.pkl",
-    "date": "2026-07-26 21:05:10",
+    "created": "2026-07-31 10:06:01",
     "select": {"X": ["Q", "G", "M", "T"], "l": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], "Gamma": ["A1g", "A1u", "A2g", "A2u", "B1g", "B1u", "B2g", "B2u", "E1g", "E1u", "E2g", "E2u"], "s": [0, 1], "site": [("C", [1])], "bond": [("C", "C", 1, [1], [1]), ("C", "C", 2, [1], [1])]},
     "dimension": 2,
     "ket_site": {"pz@C(1)": [0.3333333333333333, 0.6666666666666666, 0.0], "pz@C(2)": [0.6666666666666666, 0.3333333333333333, 0.0]},

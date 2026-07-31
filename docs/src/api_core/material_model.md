@@ -12,20 +12,20 @@ This class has the following dict data.
 - Structural info.
   - **group** (str): group tag.
   - **crystal** (str): crystal class.
-  - **cell** (dict): unit-cell parameters.
-    - **a** (float): a.
-    - **b** (float): b.
-    - **c** (float): c.
-    - **alpha** (float): alpha (deg.).
-    - **beta** (float): beta (deg.).
-    - **gamma** (float): gamma (deg.).
   - **cell_info** (dict): unit-cell information
-    - **cell** (dict): = cell.
+    - **cell** (dict): unit-cell parameters.
+      - **a** (float): a.
+      - **b** (float): b.
+      - **c** (float): c.
+      - **alpha** (float): alpha (deg.).
+      - **beta** (float): beta (deg.).
+      - **gamma** (float): gamma (deg.).
     - **volume** (float): volume.
-    - **A** (list): [a1,a2,a3,t] (4x4, each column).
-    - **G** (list): metric matrix (4x4).
+    - **A** (list): [a1,a2,a3,t] conventional lattice and translational vectors (4x4, each column).
+    - **G** (list): metric matrix for conventional lattice (4x4).
   - **unit_vector** (list): unit vectors, a1, a2, a3 (conventional cell).
   - **unit_vector_primitive** (list): unit vectors, a1p, a2p, a3p (primitive cell).
+  - **reciprocal_vector_primitive** (list): reciprocal vectors, b1p, b2p, b3p (primitive cell).
 
 - Generation condition.
   - **SAMB_select** (dict): SAMB selection.

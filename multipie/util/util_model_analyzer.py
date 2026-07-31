@@ -172,13 +172,13 @@ def output_dispersion(filename, k, ef, e, o=None, olist=None):
 
     fs = open(filename, "w")
     if olist:
-        ke_ol = "# k Energy [eV] " + " ".join(olist) + "\n"
+        ke_ol = "# k Energy " + " ".join(olist) + "\n"
     else:
-        ke_ol = "# k Energy [eV]\n"
+        ke_ol = "# k Energy\n"
     fs.write(ke_ol)
     fs.write(f"# Emax = {emax}\n")
     fs.write(f"# Emin = {emin}\n")
-    fs.write(f"# shifted by fermi energy = {ef} [eV]\n\n")
+    fs.write(f"# shifted by fermi energy = {ef}\n\n")
 
     num_k, Nm = e.shape
     e = e.T
@@ -222,53 +222,57 @@ def create_gnuplot_cmd(filename, k_dis_pos, kmax, emax, emin, ef, colormap=False
     """
     offset = (emax - emin) * 0.1
 
-    fs = open("plot_band.gnu", "w")
+    gnufile = os.path.dirname(filename) + "/plot_band.gnu"
+    fs = open(gnufile, "w")
 
-    fs.write("unset key \n")
-    fs.write("unset grid \n")
-    fs.write(f"lwidth = {lwidth} \n")
-    fs.write(f"set xrange [:{kmax}] \n")
-    fs.write(f"set yrange [{emin-ef-offset}:{emax-ef+offset}] \n")
-    fs.write("set tics font 'Times New Roman, 14' \n\n")
-    fs.write("set size ratio 0.7 \n\n")
+    fs.write("unset key\n")
+    fs.write("unset grid\n")
+    fs.write(f"lwidth = {lwidth}\n")
+    fs.write(f"set xrange [:{kmax}]\n")
+    fs.write(f"set yrange [{emin-ef-offset}:{emax-ef+offset}]\n")
+    fs.write("set tics font 'Times New Roman, 14'\n\n")
+    fs.write("set size ratio 0.7\n\n")
 
     fs.write('set palette defined ( -1.0 "royalblue", 0 "gray90", 1.0 "salmon")\n')
     fs.write("set cbrange [-1.0:1.0]\n\n")
 
     if k_dis_pos is not None:
         for pos, label in k_dis_pos.items():
-            fs.write(f"set arrow from  {pos},  {emin-ef-offset} to {pos}, {emax-ef+offset} nohead \n")
+            fs.write(f"set arrow from  {pos},  {emin-ef-offset} to {pos}, {emax-ef+offset} nohead\n")
 
         k_dis_pos = {pos: label.replace("G", "{/Symbol G}").replace("|", ":") for pos, label in k_dis_pos.items()}
-        fs.write("set xtics (" + "".join([f'"{label}" {pos},' for pos, label in k_dis_pos.items()]) + ") \n\n")
+        fs.write("set xtics (" + "".join([f'"{label}" {pos},' for pos, label in k_dis_pos.items()]) + ")\n\n")
 
-    fs.write(f"Ef = {ef} \n")
+    fs.write(f"Ef = {ef}\n")
 
-    fs.write("set terminal postscript eps color enhanced \n\n")
+    fs.write("set terminal postscript eps color enhanced\n\n")
 
-    fn_eps = os.path.splitext(filename)[0] + ".eps"
-    fs.write(f"set output '{fn_eps}' \n\n")
+    filename = os.path.basename(filename)
+    basename = os.path.splitext(filename)[0]
+
+    fn_eps = basename + ".eps"
+    fs.write(f"set output '{fn_eps}'\n\n")
     fs.write("plot ")
 
     if colormap:
-        fs.write(f"'{filename}' u 1:2:3 w l lw lwidth lc palette, ")
+        fs.write(f"'{filename}' u 1:2:3 w l lw lwidth lc palette,")
     else:
-        fs.write(f"'{filename}' u 1:2 w l lw lwidth lc '{lc}', ")
+        fs.write(f"'{filename}' u 1:2 w l lw lwidth lc '{lc}',")
 
     fs.write(f"{0.0} lw 0.5 lc 'black'")
 
-    fs.write(" \n\n")
+    fs.write("\n\n")
 
-    fs.write("set terminal pdf \n\n")
+    fs.write("set terminal pdf\n\n")
 
-    fn_pdf = os.path.splitext(filename)[0] + ".pdf"
-    fs.write(f"set output '{fn_pdf}' \n\n")
+    fn_pdf = basename + ".pdf"
+    fs.write(f"set output '{fn_pdf}'\n\n")
     fs.write("plot ")
 
     if colormap:
-        fs.write(f"'{filename}' u 1:2:3 w l lw lwidth lc palette, ")
+        fs.write(f"'{filename}' u 1:2:3 w l lw lwidth lc palette,")
     else:
-        fs.write(f"'{filename}' u 1:2 w l lw lwidth lc '{lc}', ")
+        fs.write(f"'{filename}' u 1:2 w l lw lwidth lc '{lc}',")
 
     fs.write(f"{0.0} lw 0.5 lc 'black'")
 
@@ -602,28 +606,30 @@ def add_local_parameter(matrix_info, parameter, ket):
     local = {}
     local_z = {}
     for tag, mat in matrix_info["matrix"].items():
-        v = np.full((dim, dim), sp.S(0))
+        v = np.full((dim, dim), 0.0, dtype=complex)
         for (n1, n2, n3, m, n), (val, no) in mat.items():
-            v[m, n] += val
+            v[m, n] += complex(val)
         if ";" in matrix_info["cluster"][tag]:  # nonlocal SAMB with parameter key.
             if tag not in parameter.keys():
                 continue
             vd = v.reshape(nn, d, nn, d).sum(axis=0).transpose(1, 0, 2)
-            s = np.full((dim, dim), sp.S(0))
+            s = np.full((dim, dim), 0.0, dtype=complex)
             for i in range(nn):
                 s[i * d : (i + 1) * d, i * d : (i + 1) * d] = vd[i]
             local[tag] = s
         else:  # local SAMB.
             local_z[tag] = v
-    coeff = {tag: np.array([np.einsum("ij,ji->", z, s) for z in local_z.values()]) for tag, s in local.items()}
 
-    zt = np.full(len(local_z.keys()), sp.S(0))
+    coeff = {tag: np.array([np.real(np.einsum("ij,ji->", z, s)) for z in local_z.values()]) for tag, s in local.items()}
+
+    zt = np.full(len(local_z.keys()), 0.0)
     for zj, val in parameter.items():
-        zt -= val * coeff[zj]
+        if zj not in local_z.keys():
+            zt -= val * coeff[zj]
 
     for zk, val in zip(local_z.keys(), zt):
-        if not val.is_zero:
-            parameter[zk] = val
+        if abs(val) > 1e-8:
+            parameter[zk] = float(val)
 
     parameter = dict(sorted(parameter.items(), key=lambda x: int(x[0][1:])))
 
@@ -664,6 +670,7 @@ def add_local_parameter_sym(matrix_info, ket):
             nonlocal_z.append(tag)
         else:  # local SAMB.
             local_z[tag] = v
+
     coeff = {tag: np.array([np.einsum("ij,ji->", z, s) for z in local_z.values()]) for tag, s in local.items()}
 
     zt = np.full(len(local_z.keys()), sp.S(0))
@@ -674,7 +681,7 @@ def add_local_parameter_sym(matrix_info, ket):
     parameter = {}
     for zk, val in zip(local_z.keys(), zt):
         if not val.is_zero:
-            parameter[zk] = val
+            parameter[zk] = str(val).replace(" ", "")
 
     parameter = dict(sorted(parameter.items(), key=lambda x: int(x[0][1:])))
 

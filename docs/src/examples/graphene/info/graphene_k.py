@@ -2,7 +2,7 @@
 Selected SAMB matrix in momentum representation.
 - model (str): model name.
 - source (str): source binary.
-- date (str): binary created date.
+- created (str): binary created date.
 - dimension (int): matrix size.
 - ket_site (list): ket info., [ket_name].
 - index (dict): ket index, dict[(site,sublattice,rank), (top_index,size)].
@@ -14,7 +14,7 @@ Selected SAMB matrix in momentum representation.
 graphene_k = {
     "model": "graphene",
     "source": "graphene.pkl",
-    "date": "2026-07-26 21:05:10",
+    "created": "2026-07-31 10:06:01",
     "dimension": 2,
     "ket_site": ["pz@C(1)", "pz@C(2)"],
     "index": {("C", 1, 1): (0, 1), ("C", 2, 1): (1, 1)},

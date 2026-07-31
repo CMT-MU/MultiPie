@@ -1,6 +1,7 @@
 # default control.
 default_control = {
     "mode": "samb",  # samb (SAMB-based only), wannier (wannier-based only), symcw (SAMB and wannier based).
+    "grid": (50, 50, 50),  # k-grid size (b1, b2, b3).
     "samb": {
         "model": None,  # model name for .pkl.
         "select": {  # SAMB select condition, where S=site name, R=orbital rank, N=neighbor bond.
@@ -19,8 +20,10 @@ default_control = {
         "NG_sum_rule": False,  # Nambu-Goldstone sum rule ?
     },
     "wannier": {  # Closest Wannier (CW) or SymWannier setting.
-        "seedname": None,  # read +(.win, .nnkp, hr.dat/hr_cw.dat). Not yet: (seedname.mmn, seedname.spn, seedname.uHu, seedname.uIu ...).
-        "ket_wannier": [],  # Wannier basis, [[site-cluster, sublattice, orbital], ...]. empty is allowed only when the Wannier and MultiPie site positions coincide.
+        "dir": "wannier",  # directory for wannier input, i.e., "./seedname/wannier".
+        "seedname": None,  # read +(.win, .nnkp, hr.dat/hr_cw.dat). Not yet:
+        "read_KS": False,  # read Kohn-Sham Ek, Uk, +(seedname.mmn, seedname.spn, seedname.uHu, seedname.uIu ...). If False, read _hr.dat.
+        "ket_wannier": [],  # correspondence between Wannier and MultiPie basis, [MultiPie ket name]. If empty, automatically determined.
     },
     "output": {  # physical quantity setting.
         "dir": "output",  #  output directory.

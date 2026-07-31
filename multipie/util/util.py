@@ -375,7 +375,7 @@ def write_dict(dic, filename, var=None, comment="", w_dir=None):
         print(s, file=f)
 
     if ext in [".py", ".qtdw"]:
-        do_black(w_dir, ext)
+        do_black(os.path.dirname(filename), base + ext)
 
 
 # ==================================================
@@ -485,14 +485,14 @@ def check_latex():
 
 
 # ==================================================
-def do_black(w_dir, ext=".py"):
+def do_black(w_dir, pattern="*.py"):
     """
     Execute black for Python file.
 
     Args:
         w_dir (str): directory.
-        ext (str, optional): extention.
+        pattern (str, optional): pattern for black.
     """
     if check_black():
-        cmd = _FORMATTER_cmd + " *" + ext
+        cmd = _FORMATTER_cmd + " " + pattern
         subprocess.run(cmd, shell=True, capture_output=True, cwd=w_dir, text=True)
