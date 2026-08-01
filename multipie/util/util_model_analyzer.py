@@ -518,7 +518,7 @@ def create_k_multipole(cluster_samb, cluster_vector):
     kv = np.array([sp.Symbol(f"k_{i}", real=True) for i in range(1, 4)], dtype=object)
     for sb, lst in cluster_vector.items():
         if ";" in sb:
-            d = len(lst[0])
+            d = len(lst)
             kb = np.array([sp.Symbol(f"p_{i+1}", real=True) for i in range(d)], dtype=object)
             kb_dic[sb] = {i: j @ kv for i, j in zip(kb, lst)}
         else:
