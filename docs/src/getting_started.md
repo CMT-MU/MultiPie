@@ -79,7 +79,7 @@ The description of the output files is as follows (with model_name prefixed):
     - **_matrix.py** : SAMB matrix data.
     - **_var.py** : relation between zj and atomic parameters at bond 1.
     - **_z.py** : zj parameters.
-  - **output** : computed physical quantities.
+  - **output/**
     - **_dispersion.eps** : dispersion in EPS.
     - **_dispersion.pdf** : dispersion in PDF.
     - **_dispersion.txt** : dispersion data.
