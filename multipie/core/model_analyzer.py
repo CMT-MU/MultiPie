@@ -880,8 +880,9 @@ class ModelAnalyzer(dict):
 
         :meta private:
         """
-        if self.HR is None and self._verbose:
-            print("set H(R) first before calculating physical quantities.")
+        if self.HR is None:
+            if self._verbose:
+                print("set H(R) first before calculating physical quantities.")
             return
 
         name = self["info"]["name"]
