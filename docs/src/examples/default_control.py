@@ -21,7 +21,7 @@ default_control = {
     },
     "wannier": {  # Closest Wannier (CW) or SymWannier setting.
         "dir": "wannier",  # directory for wannier input, i.e., "./seedname/wannier".
-        "seedname": None,  # read +(.win, .nnkp, hr.dat/hr_cw.dat). Not yet:
+        "seedname": None,  # read +(.win, .nnkp, hr.dat, ...).
         "read_KS": False,  # read Kohn-Sham Ek, Uk, +(seedname.mmn, seedname.spn, seedname.uHu, seedname.uIu ...). If False, read _hr.dat.
         "ket_wannier": [],  # correspondence between Wannier and MultiPie basis, [MultiPie ket name]. If empty, automatically determined.
     },
