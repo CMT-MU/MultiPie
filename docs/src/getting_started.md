@@ -68,7 +68,12 @@ The description of the output files is as follows (with model_name prefixed):
   - **.pkl** : model data (binary).
   - **.qtdw** : model structure in QtDraw.
   - **.tex** : model info. source.
-  - **samb** : graphical definitions of site, bond, and SAMBs.
+  - **samb**/
+    - **_atomic_samb.qtdw** : atomic SAMBs.
+    - **_A_def.qtdw** : definition of A-site cluster.
+    - **_A.qtdw** : A-site-cluster SAMBs.
+    - **_A;B_n_m_def.qtdw** : definition of A;B (n-neighbor, m) bond cluster.
+    - **_A;B_n_m.qtdw** : A;B (n-neighbor, m) bond-cluster SAMBs.
   - **info/**
     - **_hr.dat** : H[R] matrix data.
     - **_info_output.py** : info. of output.
