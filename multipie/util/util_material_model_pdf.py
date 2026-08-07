@@ -5,7 +5,7 @@ Create PDF for material model.
 import numpy as np
 import sympy as sp
 
-from multipie.util.util import to_latex
+from multipie.util.util import to_latex, simplify
 from multipie.core.group import Group
 
 
@@ -303,6 +303,7 @@ class ModelPDF:
                         t1 = self.mm.group.tag_multipole(t1, c1, latex=True, superscript="a")
                         t2 = self.mm.group.tag_multipole(t2, c2, latex=True, superscript=clustar_str)
                         ex += cg * sp.Symbol(t1, commutative=False) * sp.Symbol(t2, commutative=False)
+                    ex = simplify(ex)
 
                     d = r"\hspace*{3mm}" + self.number_tag(zi)
                     d += sp.latex(sp.Symbol(t)) + "=" + sp.latex(ex)
@@ -505,6 +506,7 @@ class ModelPDF:
                 for i, ex in enumerate(ex_set):
                     sym = "$" + self.mm.group.tag_multipole(idx, comp=i, latex=True) + "$"
                     row.append(str(no + 1))
+                    ex = simplify(ex)
                     if i == 0:
                         tbl.append([sym, irrep, rank, XX, n, str(i + 1), "$" + sp.latex(ex) + "$"])
                     else:

@@ -16,7 +16,7 @@ Selected SAMB matrix.
 graphene_matrix = {
     "model": "graphene",
     "source": "graphene.pkl",
-    "created": "2026-08-01 07:39:04",
+    "created": "2026-08-07 20:31:51",
     "select": {"X": ["Q", "G", "M", "T"], "l": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], "Gamma": ["A1g", "A1u", "A2g", "A2u", "B1g", "B1u", "B2g", "B2u", "E1g", "E1u", "E2g", "E2u"], "s": [0, 1], "site": [("C", [1])], "bond": [("C", "C", 1, [1], [1]), ("C", "C", 2, [1], [1])]},
     "dimension": 2,
     "ket": ["pz@C(1)", "pz@C(2)"],

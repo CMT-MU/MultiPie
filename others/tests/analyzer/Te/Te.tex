@@ -52,7 +52,7 @@
 Model for ``\texttt{Te}''
 \end{center}
 \begin{flushright}
-Generated on 2026-08-01 07:49:50 by MultiPie 2.3.2
+Generated on 2026-08-07 20:24:52 by MultiPie 2.3.2
 \end{flushright}
 \setlength{\baselineskip}{16pt}
 \footnotesize
@@ -187,16 +187,16 @@ Generated on 2026-08-01 07:49:50 by MultiPie 2.3.2
 12 & $\mathbb{Q}_{1,2}(E)$ &  &  &  &  & 2 & $y$ \\ \hline
 13 & $\mathbb{G}_{2,1}(E,1)$ & $E$ & 2 & $G$, $M$ & 1 & 1 & $\sqrt{3} y z$ \\
 14 & $\mathbb{G}_{2,2}(E,1)$ &  &  &  &  & 2 & $- \sqrt{3} x z$ \\ \hline
-15 & $\mathbb{G}_{2,1}(E,2)$ & $E$ & 2 & $G$, $M$ & 2 & 1 & $\frac{\sqrt{3} \left(x - y\right) \left(x + y\right)}{2}$ \\
+15 & $\mathbb{G}_{2,1}(E,2)$ & $E$ & 2 & $G$, $M$ & 2 & 1 & $\frac{\sqrt{3} \left(x^{2} - y^{2}\right)}{2}$ \\
 16 & $\mathbb{G}_{2,2}(E,2)$ &  &  &  &  & 2 & $- \sqrt{3} x y$ \\ \hline
 17 & $\mathbb{Q}_{2,1}(E,1)$ & $E$ & 2 & $Q$, $T$ & 1 & 1 & $\sqrt{3} y z$ \\
 18 & $\mathbb{Q}_{2,2}(E,1)$ &  &  &  &  & 2 & $- \sqrt{3} x z$ \\ \hline
-19 & $\mathbb{Q}_{2,1}(E,2)$ & $E$ & 2 & $Q$, $T$ & 2 & 1 & $\frac{\sqrt{3} \left(x - y\right) \left(x + y\right)}{2}$ \\
+19 & $\mathbb{Q}_{2,1}(E,2)$ & $E$ & 2 & $Q$, $T$ & 2 & 1 & $\frac{\sqrt{3} \left(x^{2} - y^{2}\right)}{2}$ \\
 20 & $\mathbb{Q}_{2,2}(E,2)$ &  &  &  &  & 2 & $- \sqrt{3} x y$ \\ \hline
-21 & $\mathbb{Q}_{3,1}(E,1)$ & $E$ & 3 & $Q$, $T$ & 1 & 1 & $- \frac{\sqrt{6} x \left(x^{2} + y^{2} - 4 z^{2}\right)}{4}$ \\
-22 & $\mathbb{Q}_{3,2}(E,1)$ &  &  &  &  & 2 & $- \frac{\sqrt{6} y \left(x^{2} + y^{2} - 4 z^{2}\right)}{4}$ \\ \hline
+21 & $\mathbb{Q}_{3,1}(E,1)$ & $E$ & 3 & $Q$, $T$ & 1 & 1 & $\frac{\sqrt{6} x \left(- x^{2} - y^{2} + 4 z^{2}\right)}{4}$ \\
+22 & $\mathbb{Q}_{3,2}(E,1)$ &  &  &  &  & 2 & $\frac{\sqrt{6} y \left(- x^{2} - y^{2} + 4 z^{2}\right)}{4}$ \\ \hline
 23 & $\mathbb{Q}_{3,1}(E,2)$ & $E$ & 3 & $Q$, $T$ & 2 & 1 & $\sqrt{15} x y z$ \\
-24 & $\mathbb{Q}_{3,2}(E,2)$ &  &  &  &  & 2 & $\frac{\sqrt{15} z \left(x - y\right) \left(x + y\right)}{2}$ \\
+24 & $\mathbb{Q}_{3,2}(E,2)$ &  &  &  &  & 2 & $\frac{\sqrt{15} z \left(x^{2} - y^{2}\right)}{2}$ \\
 \end{longtable}
 \vspace{5mm}
 \noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{Basis in full matrix}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
@@ -266,16 +266,16 @@ $ \ket{p_{z}} $ & $ z $ \\
 \hspace*{3mm}\fbox{z2}\quad \mathbb{Q}_{2}^{(c)}(A_{1})=\mathbb{Q}_{2}^{(a)}(A_{1}) \mathbb{Q}_{0}^{(s)}(A_{1})
 \end{dmath*}
 \begin{dmath*}
-\hspace*{3mm}\fbox{z3}\quad \mathbb{Q}_{3}^{(c)}(A_{1})=\frac{\sqrt{2} \mathbb{Q}_{2,1}^{(a)}(E,2) \mathbb{Q}_{1,1}^{(s)}(E)}{2} + \frac{\sqrt{2} \mathbb{Q}_{2,2}^{(a)}(E,2) \mathbb{Q}_{1,2}^{(s)}(E)}{2}
+\hspace*{3mm}\fbox{z3}\quad \mathbb{Q}_{3}^{(c)}(A_{1})=\frac{\sqrt{2} \left(\mathbb{Q}_{2,1}^{(a)}(E,2) \mathbb{Q}_{1,1}^{(s)}(E) + \mathbb{Q}_{2,2}^{(a)}(E,2) \mathbb{Q}_{1,2}^{(s)}(E)\right)}{2}
 \end{dmath*}
 \begin{dmath*}
-\hspace*{3mm}\fbox{z4}\quad \mathbb{G}_{2}^{(c)}(A_{1})=- \frac{\sqrt{2} \mathbb{Q}_{2,1}^{(a)}(E,1) \mathbb{Q}_{1,1}^{(s)}(E)}{2} - \frac{\sqrt{2} \mathbb{Q}_{2,2}^{(a)}(E,1) \mathbb{Q}_{1,2}^{(s)}(E)}{2}
+\hspace*{3mm}\fbox{z4}\quad \mathbb{G}_{2}^{(c)}(A_{1})=- \frac{\sqrt{2} \left(\mathbb{Q}_{2,1}^{(a)}(E,1) \mathbb{Q}_{1,1}^{(s)}(E) + \mathbb{Q}_{2,2}^{(a)}(E,1) \mathbb{Q}_{1,2}^{(s)}(E)\right)}{2}
 \end{dmath*}
 \begin{dmath*}
-\hspace*{3mm}\fbox{z11}\quad \mathbb{Q}_{1}^{(c)}(A_{2})=\frac{\sqrt{2} \mathbb{Q}_{2,1}^{(a)}(E,1) \mathbb{Q}_{1,2}^{(s)}(E)}{2} - \frac{\sqrt{2} \mathbb{Q}_{2,2}^{(a)}(E,1) \mathbb{Q}_{1,1}^{(s)}(E)}{2}
+\hspace*{3mm}\fbox{z11}\quad \mathbb{Q}_{1}^{(c)}(A_{2})=\frac{\sqrt{2} \left(\mathbb{Q}_{2,1}^{(a)}(E,1) \mathbb{Q}_{1,2}^{(s)}(E) - \mathbb{Q}_{2,2}^{(a)}(E,1) \mathbb{Q}_{1,1}^{(s)}(E)\right)}{2}
 \end{dmath*}
 \begin{dmath*}
-\hspace*{3mm}\fbox{z12}\quad \mathbb{Q}_{3}^{(c)}(A_{2},2)=\frac{\sqrt{2} \mathbb{Q}_{2,1}^{(a)}(E,2) \mathbb{Q}_{1,2}^{(s)}(E)}{2} - \frac{\sqrt{2} \mathbb{Q}_{2,2}^{(a)}(E,2) \mathbb{Q}_{1,1}^{(s)}(E)}{2}
+\hspace*{3mm}\fbox{z12}\quad \mathbb{Q}_{3}^{(c)}(A_{2},2)=\frac{\sqrt{2} \left(\mathbb{Q}_{2,1}^{(a)}(E,2) \mathbb{Q}_{1,2}^{(s)}(E) - \mathbb{Q}_{2,2}^{(a)}(E,2) \mathbb{Q}_{1,1}^{(s)}(E)\right)}{2}
 \end{dmath*}
 \begin{dmath*}
 \hspace*{3mm}\fbox{z16}\quad \mathbb{Q}_{1,1}^{(c)}(E,a)=\frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1}) \mathbb{Q}_{1,1}^{(s)}(E)}{2}
@@ -284,10 +284,10 @@ $ \ket{p_{z}} $ & $ z $ \\
 \hspace*{3mm}\fbox{z17}\quad \mathbb{Q}_{1,2}^{(c)}(E,a)=\frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1}) \mathbb{Q}_{1,2}^{(s)}(E)}{2}
 \end{dmath*}
 \begin{dmath*}
-\hspace*{3mm}\fbox{z18}\quad \mathbb{Q}_{1,1}^{(c)}(E,b)=\frac{\sqrt{42} \mathbb{Q}_{2,1}^{(a)}(E,2) \mathbb{Q}_{1,1}^{(s)}(E)}{14} - \frac{\sqrt{42} \mathbb{Q}_{2,2}^{(a)}(E,2) \mathbb{Q}_{1,2}^{(s)}(E)}{14} - \frac{\sqrt{14} \mathbb{Q}_{2}^{(a)}(A_{1}) \mathbb{Q}_{1,1}^{(s)}(E)}{14}
+\hspace*{3mm}\fbox{z18}\quad \mathbb{Q}_{1,1}^{(c)}(E,b)=\frac{\sqrt{14} \left(\sqrt{3} \mathbb{Q}_{2,1}^{(a)}(E,2) \mathbb{Q}_{1,1}^{(s)}(E) - \sqrt{3} \mathbb{Q}_{2,2}^{(a)}(E,2) \mathbb{Q}_{1,2}^{(s)}(E) - \mathbb{Q}_{2}^{(a)}(A_{1}) \mathbb{Q}_{1,1}^{(s)}(E)\right)}{14}
 \end{dmath*}
 \begin{dmath*}
-\hspace*{3mm}\fbox{z19}\quad \mathbb{Q}_{1,2}^{(c)}(E,b)=- \frac{\sqrt{42} \mathbb{Q}_{2,1}^{(a)}(E,2) \mathbb{Q}_{1,2}^{(s)}(E)}{14} - \frac{\sqrt{42} \mathbb{Q}_{2,2}^{(a)}(E,2) \mathbb{Q}_{1,1}^{(s)}(E)}{14} - \frac{\sqrt{14} \mathbb{Q}_{2}^{(a)}(A_{1}) \mathbb{Q}_{1,2}^{(s)}(E)}{14}
+\hspace*{3mm}\fbox{z19}\quad \mathbb{Q}_{1,2}^{(c)}(E,b)=- \frac{\sqrt{14} \left(\sqrt{3} \mathbb{Q}_{2,1}^{(a)}(E,2) \mathbb{Q}_{1,2}^{(s)}(E) + \sqrt{3} \mathbb{Q}_{2,2}^{(a)}(E,2) \mathbb{Q}_{1,1}^{(s)}(E) + \mathbb{Q}_{2}^{(a)}(A_{1}) \mathbb{Q}_{1,2}^{(s)}(E)\right)}{14}
 \end{dmath*}
 \begin{dmath*}
 \hspace*{3mm}\fbox{z20}\quad \mathbb{Q}_{2,1}^{(c)}(E,1)=\frac{\sqrt{2} \mathbb{Q}_{2,1}^{(a)}(E,1) \mathbb{Q}_{0}^{(s)}(A_{1})}{2}
@@ -302,16 +302,16 @@ $ \ket{p_{z}} $ & $ z $ \\
 \hspace*{3mm}\fbox{z23}\quad \mathbb{Q}_{2,2}^{(c)}(E,2)=\frac{\sqrt{2} \mathbb{Q}_{2,2}^{(a)}(E,2) \mathbb{Q}_{0}^{(s)}(A_{1})}{2}
 \end{dmath*}
 \begin{dmath*}
-\hspace*{3mm}\fbox{z24}\quad \mathbb{Q}_{3,1}^{(c)}(E,1)=\frac{\sqrt{7} \mathbb{Q}_{2,1}^{(a)}(E,2) \mathbb{Q}_{1,1}^{(s)}(E)}{14} - \frac{\sqrt{7} \mathbb{Q}_{2,2}^{(a)}(E,2) \mathbb{Q}_{1,2}^{(s)}(E)}{14} + \frac{\sqrt{21} \mathbb{Q}_{2}^{(a)}(A_{1}) \mathbb{Q}_{1,1}^{(s)}(E)}{7}
+\hspace*{3mm}\fbox{z24}\quad \mathbb{Q}_{3,1}^{(c)}(E,1)=\frac{\sqrt{7} \left(\mathbb{Q}_{2,1}^{(a)}(E,2) \mathbb{Q}_{1,1}^{(s)}(E) - \mathbb{Q}_{2,2}^{(a)}(E,2) \mathbb{Q}_{1,2}^{(s)}(E) + 2 \sqrt{3} \mathbb{Q}_{2}^{(a)}(A_{1}) \mathbb{Q}_{1,1}^{(s)}(E)\right)}{14}
 \end{dmath*}
 \begin{dmath*}
-\hspace*{3mm}\fbox{z25}\quad \mathbb{Q}_{3,2}^{(c)}(E,1)=- \frac{\sqrt{7} \mathbb{Q}_{2,1}^{(a)}(E,2) \mathbb{Q}_{1,2}^{(s)}(E)}{14} - \frac{\sqrt{7} \mathbb{Q}_{2,2}^{(a)}(E,2) \mathbb{Q}_{1,1}^{(s)}(E)}{14} + \frac{\sqrt{21} \mathbb{Q}_{2}^{(a)}(A_{1}) \mathbb{Q}_{1,2}^{(s)}(E)}{7}
+\hspace*{3mm}\fbox{z25}\quad \mathbb{Q}_{3,2}^{(c)}(E,1)=\frac{\sqrt{7} \left(- \mathbb{Q}_{2,1}^{(a)}(E,2) \mathbb{Q}_{1,2}^{(s)}(E) - \mathbb{Q}_{2,2}^{(a)}(E,2) \mathbb{Q}_{1,1}^{(s)}(E) + 2 \sqrt{3} \mathbb{Q}_{2}^{(a)}(A_{1}) \mathbb{Q}_{1,2}^{(s)}(E)\right)}{14}
 \end{dmath*}
 \begin{dmath*}
-\hspace*{3mm}\fbox{z26}\quad \mathbb{Q}_{3,1}^{(c)}(E,2)=\frac{\mathbb{Q}_{2,1}^{(a)}(E,1) \mathbb{Q}_{1,1}^{(s)}(E)}{2} - \frac{\mathbb{Q}_{2,2}^{(a)}(E,1) \mathbb{Q}_{1,2}^{(s)}(E)}{2}
+\hspace*{3mm}\fbox{z26}\quad \mathbb{Q}_{3,1}^{(c)}(E,2)=\frac{\mathbb{Q}_{2,1}^{(a)}(E,1) \mathbb{Q}_{1,1}^{(s)}(E) - \mathbb{Q}_{2,2}^{(a)}(E,1) \mathbb{Q}_{1,2}^{(s)}(E)}{2}
 \end{dmath*}
 \begin{dmath*}
-\hspace*{3mm}\fbox{z27}\quad \mathbb{Q}_{3,2}^{(c)}(E,2)=- \frac{\mathbb{Q}_{2,1}^{(a)}(E,1) \mathbb{Q}_{1,2}^{(s)}(E)}{2} - \frac{\mathbb{Q}_{2,2}^{(a)}(E,1) \mathbb{Q}_{1,1}^{(s)}(E)}{2}
+\hspace*{3mm}\fbox{z27}\quad \mathbb{Q}_{3,2}^{(c)}(E,2)=- \frac{\mathbb{Q}_{2,1}^{(a)}(E,1) \mathbb{Q}_{1,2}^{(s)}(E) + \mathbb{Q}_{2,2}^{(a)}(E,1) \mathbb{Q}_{1,1}^{(s)}(E)}{2}
 \end{dmath*}
 \vspace{5mm}
 
@@ -330,25 +330,25 @@ $ \ket{p_{z}} $ & $ z $ \\
 \hspace*{3mm}\fbox{z6}\quad \mathbb{Q}_{2}^{(c)}(A_{1})=\mathbb{Q}_{2}^{(a)}(A_{1}) \mathbb{Q}_{0}^{(b)}(A_{1})
 \end{dmath*}
 \begin{dmath*}
-\hspace*{3mm}\fbox{z7}\quad \mathbb{Q}_{3}^{(c)}(A_{1})=\frac{\sqrt{2} \mathbb{Q}_{2,1}^{(a)}(E,2) \mathbb{Q}_{1,1}^{(b)}(E)}{2} + \frac{\sqrt{2} \mathbb{Q}_{2,2}^{(a)}(E,2) \mathbb{Q}_{1,2}^{(b)}(E)}{2}
+\hspace*{3mm}\fbox{z7}\quad \mathbb{Q}_{3}^{(c)}(A_{1})=\frac{\sqrt{2} \left(\mathbb{Q}_{2,1}^{(a)}(E,2) \mathbb{Q}_{1,1}^{(b)}(E) + \mathbb{Q}_{2,2}^{(a)}(E,2) \mathbb{Q}_{1,2}^{(b)}(E)\right)}{2}
 \end{dmath*}
 \begin{dmath*}
-\hspace*{3mm}\fbox{z8}\quad \mathbb{G}_{0}^{(c)}(A_{1})=\frac{\sqrt{3} \mathbb{M}_{1,1}^{(a)}(E) \mathbb{T}_{1,1}^{(b)}(E)}{3} + \frac{\sqrt{3} \mathbb{M}_{1,2}^{(a)}(E) \mathbb{T}_{1,2}^{(b)}(E)}{3} + \frac{\sqrt{3} \mathbb{M}_{1}^{(a)}(A_{2}) \mathbb{T}_{1}^{(b)}(A_{2})}{3}
+\hspace*{3mm}\fbox{z8}\quad \mathbb{G}_{0}^{(c)}(A_{1})=\frac{\sqrt{3} \left(\mathbb{M}_{1,1}^{(a)}(E) \mathbb{T}_{1,1}^{(b)}(E) + \mathbb{M}_{1,2}^{(a)}(E) \mathbb{T}_{1,2}^{(b)}(E) + \mathbb{M}_{1}^{(a)}(A_{2}) \mathbb{T}_{1}^{(b)}(A_{2})\right)}{3}
 \end{dmath*}
 \begin{dmath*}
-\hspace*{3mm}\fbox{z9}\quad \mathbb{G}_{2}^{(c)}(A_{1},a)=- \frac{\sqrt{2} \mathbb{Q}_{2,1}^{(a)}(E,1) \mathbb{Q}_{1,1}^{(b)}(E)}{2} - \frac{\sqrt{2} \mathbb{Q}_{2,2}^{(a)}(E,1) \mathbb{Q}_{1,2}^{(b)}(E)}{2}
+\hspace*{3mm}\fbox{z9}\quad \mathbb{G}_{2}^{(c)}(A_{1},a)=- \frac{\sqrt{2} \left(\mathbb{Q}_{2,1}^{(a)}(E,1) \mathbb{Q}_{1,1}^{(b)}(E) + \mathbb{Q}_{2,2}^{(a)}(E,1) \mathbb{Q}_{1,2}^{(b)}(E)\right)}{2}
 \end{dmath*}
 \begin{dmath*}
-\hspace*{3mm}\fbox{z10}\quad \mathbb{G}_{2}^{(c)}(A_{1},b)=- \frac{\sqrt{6} \mathbb{M}_{1,1}^{(a)}(E) \mathbb{T}_{1,1}^{(b)}(E)}{6} - \frac{\sqrt{6} \mathbb{M}_{1,2}^{(a)}(E) \mathbb{T}_{1,2}^{(b)}(E)}{6} + \frac{\sqrt{6} \mathbb{M}_{1}^{(a)}(A_{2}) \mathbb{T}_{1}^{(b)}(A_{2})}{3}
+\hspace*{3mm}\fbox{z10}\quad \mathbb{G}_{2}^{(c)}(A_{1},b)=\frac{\sqrt{6} \left(- \mathbb{M}_{1,1}^{(a)}(E) \mathbb{T}_{1,1}^{(b)}(E) - \mathbb{M}_{1,2}^{(a)}(E) \mathbb{T}_{1,2}^{(b)}(E) + 2 \mathbb{M}_{1}^{(a)}(A_{2}) \mathbb{T}_{1}^{(b)}(A_{2})\right)}{6}
 \end{dmath*}
 \begin{dmath*}
-\hspace*{3mm}\fbox{z13}\quad \mathbb{Q}_{1}^{(c)}(A_{2},a)=\frac{\sqrt{2} \mathbb{Q}_{2,1}^{(a)}(E,1) \mathbb{Q}_{1,2}^{(b)}(E)}{2} - \frac{\sqrt{2} \mathbb{Q}_{2,2}^{(a)}(E,1) \mathbb{Q}_{1,1}^{(b)}(E)}{2}
+\hspace*{3mm}\fbox{z13}\quad \mathbb{Q}_{1}^{(c)}(A_{2},a)=\frac{\sqrt{2} \left(\mathbb{Q}_{2,1}^{(a)}(E,1) \mathbb{Q}_{1,2}^{(b)}(E) - \mathbb{Q}_{2,2}^{(a)}(E,1) \mathbb{Q}_{1,1}^{(b)}(E)\right)}{2}
 \end{dmath*}
 \begin{dmath*}
-\hspace*{3mm}\fbox{z14}\quad \mathbb{Q}_{1}^{(c)}(A_{2},b)=\frac{\sqrt{2} \mathbb{M}_{1,1}^{(a)}(E) \mathbb{T}_{1,2}^{(b)}(E)}{2} - \frac{\sqrt{2} \mathbb{M}_{1,2}^{(a)}(E) \mathbb{T}_{1,1}^{(b)}(E)}{2}
+\hspace*{3mm}\fbox{z14}\quad \mathbb{Q}_{1}^{(c)}(A_{2},b)=\frac{\sqrt{2} \left(\mathbb{M}_{1,1}^{(a)}(E) \mathbb{T}_{1,2}^{(b)}(E) - \mathbb{M}_{1,2}^{(a)}(E) \mathbb{T}_{1,1}^{(b)}(E)\right)}{2}
 \end{dmath*}
 \begin{dmath*}
-\hspace*{3mm}\fbox{z15}\quad \mathbb{Q}_{3}^{(c)}(A_{2},2)=\frac{\sqrt{2} \mathbb{Q}_{2,1}^{(a)}(E,2) \mathbb{Q}_{1,2}^{(b)}(E)}{2} - \frac{\sqrt{2} \mathbb{Q}_{2,2}^{(a)}(E,2) \mathbb{Q}_{1,1}^{(b)}(E)}{2}
+\hspace*{3mm}\fbox{z15}\quad \mathbb{Q}_{3}^{(c)}(A_{2},2)=\frac{\sqrt{2} \left(\mathbb{Q}_{2,1}^{(a)}(E,2) \mathbb{Q}_{1,2}^{(b)}(E) - \mathbb{Q}_{2,2}^{(a)}(E,2) \mathbb{Q}_{1,1}^{(b)}(E)\right)}{2}
 \end{dmath*}
 \begin{dmath*}
 \hspace*{3mm}\fbox{z28}\quad \mathbb{Q}_{1,1}^{(c)}(E,a)=\frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1}) \mathbb{Q}_{1,1}^{(b)}(E)}{2}
@@ -357,16 +357,16 @@ $ \ket{p_{z}} $ & $ z $ \\
 \hspace*{3mm}\fbox{z29}\quad \mathbb{Q}_{1,2}^{(c)}(E,a)=\frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1}) \mathbb{Q}_{1,2}^{(b)}(E)}{2}
 \end{dmath*}
 \begin{dmath*}
-\hspace*{3mm}\fbox{z30}\quad \mathbb{Q}_{1,1}^{(c)}(E,b)=\frac{\sqrt{42} \mathbb{Q}_{2,1}^{(a)}(E,2) \mathbb{Q}_{1,1}^{(b)}(E)}{14} - \frac{\sqrt{42} \mathbb{Q}_{2,2}^{(a)}(E,2) \mathbb{Q}_{1,2}^{(b)}(E)}{14} - \frac{\sqrt{14} \mathbb{Q}_{2}^{(a)}(A_{1}) \mathbb{Q}_{1,1}^{(b)}(E)}{14}
+\hspace*{3mm}\fbox{z30}\quad \mathbb{Q}_{1,1}^{(c)}(E,b)=\frac{\sqrt{14} \left(\sqrt{3} \mathbb{Q}_{2,1}^{(a)}(E,2) \mathbb{Q}_{1,1}^{(b)}(E) - \sqrt{3} \mathbb{Q}_{2,2}^{(a)}(E,2) \mathbb{Q}_{1,2}^{(b)}(E) - \mathbb{Q}_{2}^{(a)}(A_{1}) \mathbb{Q}_{1,1}^{(b)}(E)\right)}{14}
 \end{dmath*}
 \begin{dmath*}
-\hspace*{3mm}\fbox{z31}\quad \mathbb{Q}_{1,2}^{(c)}(E,b)=- \frac{\sqrt{42} \mathbb{Q}_{2,1}^{(a)}(E,2) \mathbb{Q}_{1,2}^{(b)}(E)}{14} - \frac{\sqrt{42} \mathbb{Q}_{2,2}^{(a)}(E,2) \mathbb{Q}_{1,1}^{(b)}(E)}{14} - \frac{\sqrt{14} \mathbb{Q}_{2}^{(a)}(A_{1}) \mathbb{Q}_{1,2}^{(b)}(E)}{14}
+\hspace*{3mm}\fbox{z31}\quad \mathbb{Q}_{1,2}^{(c)}(E,b)=- \frac{\sqrt{14} \left(\sqrt{3} \mathbb{Q}_{2,1}^{(a)}(E,2) \mathbb{Q}_{1,2}^{(b)}(E) + \sqrt{3} \mathbb{Q}_{2,2}^{(a)}(E,2) \mathbb{Q}_{1,1}^{(b)}(E) + \mathbb{Q}_{2}^{(a)}(A_{1}) \mathbb{Q}_{1,2}^{(b)}(E)\right)}{14}
 \end{dmath*}
 \begin{dmath*}
-\hspace*{3mm}\fbox{z32}\quad \mathbb{Q}_{1,1}^{(c)}(E,c)=\frac{\mathbb{M}_{1,2}^{(a)}(E) \mathbb{T}_{1}^{(b)}(A_{2})}{2} - \frac{\mathbb{M}_{1}^{(a)}(A_{2}) \mathbb{T}_{1,2}^{(b)}(E)}{2}
+\hspace*{3mm}\fbox{z32}\quad \mathbb{Q}_{1,1}^{(c)}(E,c)=\frac{\mathbb{M}_{1,2}^{(a)}(E) \mathbb{T}_{1}^{(b)}(A_{2}) - \mathbb{M}_{1}^{(a)}(A_{2}) \mathbb{T}_{1,2}^{(b)}(E)}{2}
 \end{dmath*}
 \begin{dmath*}
-\hspace*{3mm}\fbox{z33}\quad \mathbb{Q}_{1,2}^{(c)}(E,c)=- \frac{\mathbb{M}_{1,1}^{(a)}(E) \mathbb{T}_{1}^{(b)}(A_{2})}{2} + \frac{\mathbb{M}_{1}^{(a)}(A_{2}) \mathbb{T}_{1,1}^{(b)}(E)}{2}
+\hspace*{3mm}\fbox{z33}\quad \mathbb{Q}_{1,2}^{(c)}(E,c)=\frac{- \mathbb{M}_{1,1}^{(a)}(E) \mathbb{T}_{1}^{(b)}(A_{2}) + \mathbb{M}_{1}^{(a)}(A_{2}) \mathbb{T}_{1,1}^{(b)}(E)}{2}
 \end{dmath*}
 \begin{dmath*}
 \hspace*{3mm}\fbox{z34}\quad \mathbb{Q}_{2,1}^{(c)}(E,1)=\frac{\sqrt{2} \mathbb{Q}_{2,1}^{(a)}(E,1) \mathbb{Q}_{0}^{(b)}(A_{1})}{2}
@@ -381,28 +381,28 @@ $ \ket{p_{z}} $ & $ z $ \\
 \hspace*{3mm}\fbox{z37}\quad \mathbb{Q}_{2,2}^{(c)}(E,2)=\frac{\sqrt{2} \mathbb{Q}_{2,2}^{(a)}(E,2) \mathbb{Q}_{0}^{(b)}(A_{1})}{2}
 \end{dmath*}
 \begin{dmath*}
-\hspace*{3mm}\fbox{z38}\quad \mathbb{Q}_{3,1}^{(c)}(E,1)=\frac{\sqrt{7} \mathbb{Q}_{2,1}^{(a)}(E,2) \mathbb{Q}_{1,1}^{(b)}(E)}{14} - \frac{\sqrt{7} \mathbb{Q}_{2,2}^{(a)}(E,2) \mathbb{Q}_{1,2}^{(b)}(E)}{14} + \frac{\sqrt{21} \mathbb{Q}_{2}^{(a)}(A_{1}) \mathbb{Q}_{1,1}^{(b)}(E)}{7}
+\hspace*{3mm}\fbox{z38}\quad \mathbb{Q}_{3,1}^{(c)}(E,1)=\frac{\sqrt{7} \left(\mathbb{Q}_{2,1}^{(a)}(E,2) \mathbb{Q}_{1,1}^{(b)}(E) - \mathbb{Q}_{2,2}^{(a)}(E,2) \mathbb{Q}_{1,2}^{(b)}(E) + 2 \sqrt{3} \mathbb{Q}_{2}^{(a)}(A_{1}) \mathbb{Q}_{1,1}^{(b)}(E)\right)}{14}
 \end{dmath*}
 \begin{dmath*}
-\hspace*{3mm}\fbox{z39}\quad \mathbb{Q}_{3,2}^{(c)}(E,1)=- \frac{\sqrt{7} \mathbb{Q}_{2,1}^{(a)}(E,2) \mathbb{Q}_{1,2}^{(b)}(E)}{14} - \frac{\sqrt{7} \mathbb{Q}_{2,2}^{(a)}(E,2) \mathbb{Q}_{1,1}^{(b)}(E)}{14} + \frac{\sqrt{21} \mathbb{Q}_{2}^{(a)}(A_{1}) \mathbb{Q}_{1,2}^{(b)}(E)}{7}
+\hspace*{3mm}\fbox{z39}\quad \mathbb{Q}_{3,2}^{(c)}(E,1)=\frac{\sqrt{7} \left(- \mathbb{Q}_{2,1}^{(a)}(E,2) \mathbb{Q}_{1,2}^{(b)}(E) - \mathbb{Q}_{2,2}^{(a)}(E,2) \mathbb{Q}_{1,1}^{(b)}(E) + 2 \sqrt{3} \mathbb{Q}_{2}^{(a)}(A_{1}) \mathbb{Q}_{1,2}^{(b)}(E)\right)}{14}
 \end{dmath*}
 \begin{dmath*}
-\hspace*{3mm}\fbox{z40}\quad \mathbb{Q}_{3,1}^{(c)}(E,2)=\frac{\mathbb{Q}_{2,1}^{(a)}(E,1) \mathbb{Q}_{1,1}^{(b)}(E)}{2} - \frac{\mathbb{Q}_{2,2}^{(a)}(E,1) \mathbb{Q}_{1,2}^{(b)}(E)}{2}
+\hspace*{3mm}\fbox{z40}\quad \mathbb{Q}_{3,1}^{(c)}(E,2)=\frac{\mathbb{Q}_{2,1}^{(a)}(E,1) \mathbb{Q}_{1,1}^{(b)}(E) - \mathbb{Q}_{2,2}^{(a)}(E,1) \mathbb{Q}_{1,2}^{(b)}(E)}{2}
 \end{dmath*}
 \begin{dmath*}
-\hspace*{3mm}\fbox{z41}\quad \mathbb{Q}_{3,2}^{(c)}(E,2)=- \frac{\mathbb{Q}_{2,1}^{(a)}(E,1) \mathbb{Q}_{1,2}^{(b)}(E)}{2} - \frac{\mathbb{Q}_{2,2}^{(a)}(E,1) \mathbb{Q}_{1,1}^{(b)}(E)}{2}
+\hspace*{3mm}\fbox{z41}\quad \mathbb{Q}_{3,2}^{(c)}(E,2)=- \frac{\mathbb{Q}_{2,1}^{(a)}(E,1) \mathbb{Q}_{1,2}^{(b)}(E) + \mathbb{Q}_{2,2}^{(a)}(E,1) \mathbb{Q}_{1,1}^{(b)}(E)}{2}
 \end{dmath*}
 \begin{dmath*}
-\hspace*{3mm}\fbox{z42}\quad \mathbb{G}_{2,1}^{(c)}(E,1)=\frac{\mathbb{M}_{1,2}^{(a)}(E) \mathbb{T}_{1}^{(b)}(A_{2})}{2} + \frac{\mathbb{M}_{1}^{(a)}(A_{2}) \mathbb{T}_{1,2}^{(b)}(E)}{2}
+\hspace*{3mm}\fbox{z42}\quad \mathbb{G}_{2,1}^{(c)}(E,1)=\frac{\mathbb{M}_{1,2}^{(a)}(E) \mathbb{T}_{1}^{(b)}(A_{2}) + \mathbb{M}_{1}^{(a)}(A_{2}) \mathbb{T}_{1,2}^{(b)}(E)}{2}
 \end{dmath*}
 \begin{dmath*}
-\hspace*{3mm}\fbox{z43}\quad \mathbb{G}_{2,2}^{(c)}(E,1)=- \frac{\mathbb{M}_{1,1}^{(a)}(E) \mathbb{T}_{1}^{(b)}(A_{2})}{2} - \frac{\mathbb{M}_{1}^{(a)}(A_{2}) \mathbb{T}_{1,1}^{(b)}(E)}{2}
+\hspace*{3mm}\fbox{z43}\quad \mathbb{G}_{2,2}^{(c)}(E,1)=- \frac{\mathbb{M}_{1,1}^{(a)}(E) \mathbb{T}_{1}^{(b)}(A_{2}) + \mathbb{M}_{1}^{(a)}(A_{2}) \mathbb{T}_{1,1}^{(b)}(E)}{2}
 \end{dmath*}
 \begin{dmath*}
-\hspace*{3mm}\fbox{z44}\quad \mathbb{G}_{2,1}^{(c)}(E,2)=\frac{\mathbb{M}_{1,1}^{(a)}(E) \mathbb{T}_{1,1}^{(b)}(E)}{2} - \frac{\mathbb{M}_{1,2}^{(a)}(E) \mathbb{T}_{1,2}^{(b)}(E)}{2}
+\hspace*{3mm}\fbox{z44}\quad \mathbb{G}_{2,1}^{(c)}(E,2)=\frac{\mathbb{M}_{1,1}^{(a)}(E) \mathbb{T}_{1,1}^{(b)}(E) - \mathbb{M}_{1,2}^{(a)}(E) \mathbb{T}_{1,2}^{(b)}(E)}{2}
 \end{dmath*}
 \begin{dmath*}
-\hspace*{3mm}\fbox{z45}\quad \mathbb{G}_{2,2}^{(c)}(E,2)=- \frac{\mathbb{M}_{1,1}^{(a)}(E) \mathbb{T}_{1,2}^{(b)}(E)}{2} - \frac{\mathbb{M}_{1,2}^{(a)}(E) \mathbb{T}_{1,1}^{(b)}(E)}{2}
+\hspace*{3mm}\fbox{z45}\quad \mathbb{G}_{2,2}^{(c)}(E,2)=- \frac{\mathbb{M}_{1,1}^{(a)}(E) \mathbb{T}_{1,2}^{(b)}(E) + \mathbb{M}_{1,2}^{(a)}(E) \mathbb{T}_{1,1}^{(b)}(E)}{2}
 \end{dmath*}
 \vspace{5mm}
 

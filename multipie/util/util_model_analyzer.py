@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 from matplotlib.collections import LineCollection
 from matplotlib.colors import Normalize
 from multipie import Group
-from multipie.util.util import str_to_sympy
+from multipie.util.util import str_to_sympy, simplify
 from multipie.util.util_constant import M_ZERO, k_B_SI, elem_charge_SI
 
 
@@ -554,7 +554,7 @@ def create_k_matrix(matrix, cluster_dict, vector_dict):
             for (n1, n2, n3, m, n), (value, b_no) in OR.items():
                 k = kb[b_no - 1] if b_no > 0 else -kb[-b_no - 1]
                 mat[(m, n)] += value * (sp.cos(k) + sp.I * sp.sin(k))
-            mat = {Rmn: v.expand() for Rmn, v in mat.items() if not v.is_zero}
+            mat = {Rmn: simplify(v) for Rmn, v in mat.items() if not v.is_zero}
             k_matrix[tag] = mat
         else:
             k_matrix[tag] = {(m, n): v for (n1, n2, n3, m, n), (v, b) in OR.items()}

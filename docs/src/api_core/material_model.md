@@ -25,7 +25,6 @@ This class has the following dict data.
     - **G** (list): metric matrix for conventional lattice (4x4).
   - **unit_vector** (list): unit vectors, a1, a2, a3 (conventional cell).
   - **unit_vector_primitive** (list): unit vectors, a1p, a2p, a3p (primitive cell).
-  - **reciprocal_vector_primitive** (list): reciprocal vectors, b1p, b2p, b3p (primitive cell).
 
 - Generation condition.
   - **SAMB_select** (dict): SAMB selection.

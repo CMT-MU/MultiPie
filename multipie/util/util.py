@@ -496,3 +496,48 @@ def do_black(w_dir, pattern="*.py"):
     if check_black():
         cmd = _FORMATTER_cmd + " " + pattern
         subprocess.run(cmd, shell=True, capture_output=True, cwd=w_dir, text=True)
+
+
+# ==================================================
+def simplify_ex(ex, full_factor=False):
+    """
+    Simplify expression.
+
+    Args:
+        ex (sympy): sympy expression.
+        full_factor (bool, optional): use factor at last?
+
+    Returns
+        - (sympy) -- simplified expression.
+    """
+    ex = sp.together(ex)
+    ex = sp.cancel(ex)
+    ex = sp.factor_terms(ex, radical=True)
+    ex = sp.radsimp(ex)
+
+    if full_factor:
+        ex = sp.factor(ex)
+
+    return ex
+
+
+# ==================================================
+def simplify(obj, full_factor=False):
+    """
+    Simplify expressions.
+
+    Args:
+        obj (sympy or ndarray): expressions.
+        full_factor (bool, optional): use factor at last?
+
+    Returns:
+        - (sympy or ndarray) -- simplied expressions.
+    """
+    if isinstance(obj, sp.Expr):
+        return simplify_ex(obj, full_factor)
+
+    if isinstance(obj, np.ndarray):
+        f = np.vectorize(lambda x: simplify_ex(x, full_factor) if isinstance(x, sp.Expr) else x, otypes=[object])
+        return f(obj)
+
+    raise TypeError(f"Unsupported type: {type(obj)}")

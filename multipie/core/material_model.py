@@ -331,7 +331,6 @@ class MaterialModel(BinaryManager):
         A = cell_info["A"][0:3, 0:3].T
         lattice = group.info.lattice
         Ap = convert_to_primitive(lattice, A, shift=False)
-        Bp = 2 * np.pi * np.linalg.inv(Ap).T
 
         # site_bond => wyckoff, braket.
         wyckoff_dict = create_wyckoff_dict(site_dict["representative"], bond_dict["representative"])
@@ -348,7 +347,6 @@ class MaterialModel(BinaryManager):
         self["crystal"] = crystal
         self["unit_vector"] = A.tolist()
         self["unit_vector_primitive"] = Ap.tolist()
-        self["reciprocal_vector_primitive"] = Bp.tolist()
         self["basis_type"] = basis_type
         self["cell_info"] = cell_info
         self["toroidal_priority"] = toroidal_priority

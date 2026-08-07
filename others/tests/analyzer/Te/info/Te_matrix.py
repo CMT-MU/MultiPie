@@ -16,7 +16,7 @@ Selected SAMB matrix.
 Te_matrix = {
     "model": "Te",
     "source": "Te.pkl",
-    "created": "2026-08-01 07:49:50",
+    "created": "2026-08-07 20:24:52",
     "select": {"X": ["Q", "G"], "l": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], "Gamma": ["A1", "A2", "E"], "s": [0, 1], "site": [("A", [1])], "bond": [("A", "A", 1, [1], [1])]},
     "dimension": 9,
     "ket": ["px@A(1)", "py@A(1)", "pz@A(1)", "px@A(2)", "py@A(2)", "pz@A(2)", "px@A(3)", "py@A(3)", "pz@A(3)"],
