@@ -174,29 +174,31 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API reference</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../src/api_core.html">Core</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_core/init.html">Type</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../src/api_core/cmd.html">Create function</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../src/api_core/model_analyzer.html">ModelAnalyzer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../src/api_core/group.html">Group</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../src/api_core/material_model.html">Material Model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../src/api_core/init.html">Type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_core/model_analyzer.html">ModelAnalyzer</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../src/api_util.html">Utility</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_atomic_multipole.html">Atomic multipole</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_binary.html">Binary data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_crystal.html">Crystal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_dict.html">Dict</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_tag.html">Tag</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_wyckoff.html">Wyckoff position</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_harmonics.html">Harmonics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util.html">Versatile</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_gram_schmidt.html">Grad-Schmidt orthonormalization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_material_model.html">Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_harmonics.html">Harmonics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_material_model_pdf.html">PDF creator for Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_material_model.html">Material Model</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_model_analyzer.html">Model Analyzer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_pdf_latex.html">PDF creator</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_plot.html">Plot</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_response_tensor.html">Response tensor</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_samb.html">SAMB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_tag.html">Tag</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_wannier.html">Wannier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_wyckoff.html">Wyckoff position</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util.html">Versatile</a></li>
 </ul>
 </details></li>
 </ul>
@@ -323,27 +325,54 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">seekpath</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">multipie.core.material_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">MaterialModel</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">multipie.core.default_control</span><span class="w"> </span><span class="kn">import</span> <span class="n">default_control</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">multipie.util.util_model_analyzer</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-    <span class="n">fourier_r_to_k</span><span class="p">,</span>
     <span class="n">grid_path</span><span class="p">,</span>
+    <span class="n">fourier_r_to_k</span><span class="p">,</span>
     <span class="n">output_dispersion</span><span class="p">,</span>
-    <span class="n">plot_save_dispersion</span><span class="p">,</span>
     <span class="n">create_gnuplot_cmd</span><span class="p">,</span>
+    <span class="n">plot_save_dispersion</span><span class="p">,</span>
     <span class="n">create_all_local_operator</span><span class="p">,</span>
     <span class="n">create_local_operator</span><span class="p">,</span>
     <span class="n">create_k_multipole</span><span class="p">,</span>
     <span class="n">create_k_matrix</span><span class="p">,</span>
     <span class="n">add_local_parameter</span><span class="p">,</span>
+    <span class="n">add_local_parameter_sym</span><span class="p">,</span>
     <span class="n">convert_zj_atomic_var</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">multipie.util.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">read_dict</span><span class="p">,</span> <span class="n">str_to_sympy</span><span class="p">,</span> <span class="n">write_dict</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">multipie.util.util_wannier</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">read_win</span><span class="p">,</span>
+    <span class="n">read_nnkp</span><span class="p">,</span>
+    <span class="n">merge_wannier_info</span><span class="p">,</span>
+    <span class="n">read_hr</span><span class="p">,</span>
+    <span class="n">decompose_operator_by_SAMB</span><span class="p">,</span>
+    <span class="n">create_ket_wannier_multipie</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">multipie.util.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">read_dict</span><span class="p">,</span> <span class="n">str_to_sympy</span><span class="p">,</span> <span class="n">write_dict</span><span class="p">,</span> <span class="n">deep_update</span>
+
+<span class="n">_matrix_comment</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Selected SAMB matrix.</span>
+<span class="s2">- model (str): model name.</span>
+<span class="s2">- source (str): source binary.</span>
+<span class="s2">- created (str): binary created date.</span>
+<span class="s2">- select (dict): select condition used.</span>
+<span class="s2">- dimension (int): matrix size.</span>
+<span class="s2">- ket (list): ket name of full matrix, [name].</span>
+<span class="s2">- ket_pos (list): ket position (fractional, primitive), [pos].</span>
+<span class="s2">- index (dict): ket index, dict[(site,sublattice,rank), (top_index,size)].</span>
+<span class="s2">- vector (dict): primitive bond vector, dict[cluster name, [primitive bond vector]].</span>
+<span class="s2">- cluster (dict): cluster name, dict[SAMB ID, cluster name].</span>
+<span class="s2">- matrix (dict): matrix, dict[zi, dict[(R,row,column), (value, bond_no)] ] (R=n1,n2,n3, primitive).</span>
+<span class="s2">&quot;&quot;&quot;</span>
 
 <span class="n">_k_matrix_comment</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Selected SAMB matrix in momentum representation.</span>
+<span class="s2">- model (str): model name.</span>
+<span class="s2">- source (str): source binary.</span>
+<span class="s2">- created (str): binary created date.</span>
 <span class="s2">- dimension (int): matrix size.</span>
-<span class="s2">- ket_site (list): ket info., [ket_name].</span>
+<span class="s2">- ket (list): ket name of full matrix, [name].</span>
 <span class="s2">- index (dict): ket index, dict[(site,sublattice,rank), (top_index,size)].</span>
 <span class="s2">- cluster_vector (dict): cluster vector, dict[site/bond name, dict[kb, expression] ].</span>
 <span class="s2">- k_multipole (dict): momentum multipole in terms of p_n=k.b_n, dict[wyckoff, dict[idx, (k_multipole, symmetry)] ].</span>
@@ -353,9 +382,10 @@
 <span class="n">_zj_var_comment</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Correspondence between zj and atomic variable.</span>
 <span class="s2">- correspondence for each bond cluster, dict[bond_name, dict[zj, expression in terms of atomic variables] ].</span>
 <span class="s2">- only for SAMB with identity irrep.</span>
+<span class="s2">- atomic variable of (m,n) component at bond 1 is given by g(m,n) +i h(m,n).</span>
 <span class="s2">&quot;&quot;&quot;</span>
 
-<span class="n">_param_comment</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Parameter dict.</span>
+<span class="n">_param_comment</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Parameter dict (sorted by descending absolute value).</span>
 <span class="s2">- finite parameter, dict[zj, value].</span>
 <span class="s2">&quot;&quot;&quot;</span>
 
@@ -365,36 +395,24 @@
 <a class="viewcode-back" href="../../../src/api_core/model_analyzer.html#multipie.core.model_analyzer.ModelAnalyzer">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ModelAnalyzer</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
     <span class="c1"># ==================================================</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">N1</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">N2</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">N3</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">topdir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">topdir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Model analyzer.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            N1 (int, optional): number of divisions in a1.</span>
-<span class="sd">            N2 (int, optional): number of divisions in a2.</span>
-<span class="sd">            N3 (int, optional): number of divisions in a3.</span>
 <span class="sd">            topdir (str, optional): top directory. [default: cwd]</span>
 <span class="sd">            verbose (bool, optional): verbose comment ?</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">topdir</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">topdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_samb</span> <span class="o">=</span> <span class="n">default_control</span><span class="p">[</span><span class="s2">&quot;samb&quot;</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_wannier</span> <span class="o">=</span> <span class="n">default_control</span><span class="p">[</span><span class="s2">&quot;wannier&quot;</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_output</span> <span class="o">=</span> <span class="n">default_control</span><span class="p">[</span><span class="s2">&quot;output&quot;</span><span class="p">]</span>
-
         <span class="bp">self</span><span class="o">.</span><span class="n">_topdir</span> <span class="o">=</span> <span class="n">topdir</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_verbose</span> <span class="o">=</span> <span class="n">verbose</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_HR</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_mm</span> <span class="o">=</span> <span class="n">MaterialModel</span><span class="p">(</span><span class="n">topdir</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_local</span> <span class="o">=</span> <span class="n">create_all_local_operator</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_grid_size</span><span class="p">(</span><span class="n">N1</span><span class="p">,</span> <span class="n">N2</span><span class="p">,</span> <span class="n">N3</span><span class="p">)</span>
-        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;samb&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;wannier&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;output&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
-
         <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_topdir</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
 
     <span class="c1"># ==================================================</span>
     <span class="nd">@property</span>
@@ -404,6 +422,8 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            - (dict) -- SAMB control.</span>
+
+<span class="sd">        :meta private:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_samb</span>
 
@@ -415,6 +435,8 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            - (dict) -- Wannier control.</span>
+
+<span class="sd">        :meta private:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wannier</span>
 
@@ -426,6 +448,8 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            - (dict) -- output for physical quantities control.</span>
+
+<span class="sd">        :meta private:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_output</span>
 
@@ -437,272 +461,459 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            - (MaterialModel) -- matrial model.</span>
+
+<span class="sd">        :meta private:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mm</span>
 
     <span class="c1"># ==================================================</span>
     <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">parameter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Model name.</span>
+<span class="sd">        Parameter of SAMBs.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            - (str) -- model name.</span>
+<span class="sd">            - (dict) -- parameter dict.</span>
+
+<span class="sd">        :meta private:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parameter</span>
+
+    <span class="c1"># ==================================================</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">basis_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Atomic basis type.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            - (str) -- basis type, &quot;lg/lgs/jml&quot;.</span>
+
+<span class="sd">        :meta private:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_basis_type</span>
+
+    <span class="c1"># ==================================================</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">basis</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Full-matrix basis.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            - (list) -- basis, list of &quot;orbital@atom(sublattice)&quot;.</span>
+
+<span class="sd">        :meta private:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_basis</span>
 
     <span class="c1"># ==================================================</span>
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">HR</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Hamiltonian matrix in real space.</span>
+<span class="sd">        Real-space hamiltonian, H(R).</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            - (dict) -- H(R).</span>
+<span class="sd">            - (dict) -- H(R), dict[(n1,n2,n3,m,n), val or (val, bond_no)].</span>
+
+<span class="sd">        :meta private:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_HR</span>
 
     <span class="c1"># ==================================================</span>
-<div class="viewcode-block" id="ModelAnalyzer.set_grid_size">
-<a class="viewcode-back" href="../../../src/api_core/model_analyzer.html#multipie.core.model_analyzer.ModelAnalyzer.set_grid_size">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">set_grid_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">N1</span><span class="p">,</span> <span class="n">N2</span><span class="p">,</span> <span class="n">N3</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">write_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dic</span><span class="p">,</span> <span class="n">ext</span><span class="p">,</span> <span class="n">comment</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">w_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Set grid size.</span>
+<span class="sd">        Write dict.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            N1 (int): number of divisions in a1.</span>
-<span class="sd">            N2 (int): number of divisions in a2.</span>
-<span class="sd">            N3 (int): number of divisions in a3.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;grid&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">N1</span><span class="p">,</span> <span class="n">N2</span><span class="p">,</span> <span class="n">N3</span><span class="p">]</span></div>
+<span class="sd">            dic (dict): dict to write.</span>
+<span class="sd">            ext (str): filename is name_ + ext.</span>
+<span class="sd">            comment (str, optional): comment.</span>
+<span class="sd">            w_dir (str, optional): directory (topdir/name/w_dir) to write, if None, topdir/name is used.</span>
 
+<span class="sd">        :meta private:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_topdir</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">w_dir</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">w_dir</span><span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="n">ext</span>
+        <span class="n">write_dict</span><span class="p">(</span><span class="n">dic</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">comment</span><span class="o">=</span><span class="n">comment</span><span class="p">,</span> <span class="n">w_dir</span><span class="o">=</span><span class="n">path</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_verbose</span><span class="p">:</span>
+            <span class="n">ext</span> <span class="o">=</span> <span class="n">ext</span><span class="p">[:</span> <span class="n">ext</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)]</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;save </span><span class="si">{</span><span class="n">ext</span><span class="si">}</span><span class="s2"> to &#39;</span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># ==================================================</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">write_samb_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">matrix_info</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Save SAMB matrix.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            matrix_info (dict): matrix info.</span>
+
+<span class="sd">        :meta private:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># convert sympy to str.</span>
+        <span class="n">mi</span> <span class="o">=</span> <span class="n">matrix_info</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">matrix</span> <span class="o">=</span> <span class="n">matrix_info</span><span class="p">[</span><span class="s2">&quot;matrix&quot;</span><span class="p">]</span>
+        <span class="n">mi</span><span class="p">[</span><span class="s2">&quot;matrix&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">z</span><span class="p">:</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span> <span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">elm</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span> <span class="k">for</span> <span class="n">z</span><span class="p">,</span> <span class="n">elm</span> <span class="ow">in</span> <span class="n">matrix</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">write_dict</span><span class="p">(</span><span class="n">mi</span><span class="p">,</span> <span class="s2">&quot;matrix.py&quot;</span><span class="p">,</span> <span class="n">_matrix_comment</span><span class="p">,</span> <span class="s2">&quot;info&quot;</span><span class="p">)</span>
+
+    <span class="c1"># ==================================================</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">write_samb_hr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">matrix_info</span><span class="p">,</span> <span class="n">parameter</span><span class="p">,</span> <span class="n">HR</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Save SAMB matrix in hr format.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            matrix_info (dict): matrix info.</span>
+<span class="sd">            parameter (dict): parameter dict, dict[z#, value].</span>
+<span class="sd">            HR (dict, optional): H(R) matrix. if None, H(R) is generated.</span>
+
+<span class="sd">        :meta private:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">HR</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="c1"># write hr.</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_topdir</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="s2">&quot;info&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;_hr.dat&quot;</span><span class="p">)</span>
+        <span class="n">ket</span> <span class="o">=</span> <span class="n">matrix_info</span><span class="p">[</span><span class="s2">&quot;ket&quot;</span><span class="p">]</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="n">matrix_info</span><span class="p">[</span><span class="s2">&quot;ket_pos&quot;</span><span class="p">]</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;# SAMB matrix from </span><span class="si">{</span><span class="n">matrix_info</span><span class="p">[</span><span class="s2">&quot;source&quot;</span><span class="p">]</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">matrix_info</span><span class="p">[</span><span class="s2">&quot;created&quot;</span><span class="p">]</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;# select&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">matrix_info</span><span class="p">[</span><span class="s2">&quot;select&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;#   </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;# basis (</span><span class="si">{</span><span class="n">matrix_info</span><span class="p">[</span><span class="s2">&quot;dimension&quot;</span><span class="p">]</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">no</span><span class="p">,</span> <span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">ket</span><span class="p">,</span> <span class="n">pos</span><span class="p">)):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;#   </span><span class="si">{</span><span class="n">no</span><span class="si">:</span><span class="s2">2d</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s2">: [</span><span class="si">{</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2"> .6f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2"> .6f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">p</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">:</span><span class="s2"> .6f</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">z</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">parameter</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;# </span><span class="si">{</span><span class="n">z</span><span class="si">:</span><span class="s2">&lt;4</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;#&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;# n1   n2   n3    m    n    re                        im&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+            <span class="k">for</span> <span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="n">n3</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">HR</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">v</span> <span class="o">=</span> <span class="nb">complex</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+                <span class="n">r</span><span class="p">,</span> <span class="n">i</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="n">v</span><span class="o">.</span><span class="n">imag</span>
+                <span class="n">s</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">n1</span><span class="si">:</span><span class="s2"> 4d</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">n2</span><span class="si">:</span><span class="s2"> 4d</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">n3</span><span class="si">:</span><span class="s2"> 4d</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">m</span><span class="si">:</span><span class="s2"> 4d</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">n</span><span class="si">:</span><span class="s2"> 4d</span><span class="si">}</span><span class="s2">    </span><span class="si">{</span><span class="n">r</span><span class="si">:</span><span class="s2"> .15e</span><span class="si">}</span><span class="s2">    </span><span class="si">{</span><span class="n">i</span><span class="si">:</span><span class="s2"> .15e</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;save hr to &#39;</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># ==================================================</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">write_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Save info. (samb, wannier, output, and info).</span>
+
+<span class="sd">        :meta private:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="s2">&quot;samb&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">dic</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;samb&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;matrix_info&quot;</span><span class="p">,</span> <span class="s2">&quot;var&quot;</span><span class="p">,</span> <span class="s2">&quot;k_multipole&quot;</span><span class="p">]}</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write_dict</span><span class="p">(</span><span class="n">dic</span><span class="p">,</span> <span class="s2">&quot;info_samb.py&quot;</span><span class="p">,</span> <span class="n">w_dir</span><span class="o">=</span><span class="s2">&quot;info&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s2">&quot;wannier&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">dic</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;wannier&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;kpoints&quot;</span><span class="p">,</span> <span class="s2">&quot;nnkpts&quot;</span><span class="p">,</span> <span class="s2">&quot;wk&quot;</span><span class="p">,</span> <span class="s2">&quot;bveck&quot;</span><span class="p">,</span> <span class="s2">&quot;kb2k&quot;</span><span class="p">]}</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write_dict</span><span class="p">(</span><span class="n">dic</span><span class="p">,</span> <span class="s2">&quot;info_wannier.py&quot;</span><span class="p">,</span> <span class="n">w_dir</span><span class="o">=</span><span class="s2">&quot;info&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s2">&quot;output&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">dic</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;output&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[]}</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write_dict</span><span class="p">(</span><span class="n">dic</span><span class="p">,</span> <span class="s2">&quot;info_output.py&quot;</span><span class="p">,</span> <span class="n">w_dir</span><span class="o">=</span><span class="s2">&quot;info&quot;</span><span class="p">)</span>
+        <span class="n">dic</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;samb&quot;</span><span class="p">,</span> <span class="s2">&quot;wannier&quot;</span><span class="p">,</span> <span class="s2">&quot;output&quot;</span><span class="p">]}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write_dict</span><span class="p">(</span><span class="n">dic</span><span class="p">,</span> <span class="s2">&quot;info.py&quot;</span><span class="p">,</span> <span class="n">w_dir</span><span class="o">=</span><span class="s2">&quot;info&quot;</span><span class="p">)</span>
+
+    <span class="c1"># ==================================================</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">write_z_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameter</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Save z file.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            parameter (dict): parameter dict.</span>
+
+<span class="sd">        :meta private:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">parameter</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="n">dic</span> <span class="o">=</span> <span class="p">{</span><span class="n">tag</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">tag</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">parameter</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+        <span class="n">dic</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">dic</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">item</span><span class="p">:</span> <span class="nb">abs</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+
+        <span class="n">comment</span> <span class="o">=</span> <span class="n">_param_comment</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;- by using &#39;</span><span class="si">{</span><span class="bp">self</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;mode&quot;</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39; mode.</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write_dict</span><span class="p">(</span><span class="n">dic</span><span class="p">,</span> <span class="s2">&quot;z.py&quot;</span><span class="p">,</span> <span class="n">comment</span><span class="p">,</span> <span class="s2">&quot;info&quot;</span><span class="p">)</span>
+
+    <span class="c1"># ==================================================</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">write_var_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Save var file.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            var (dict): var dict.</span>
+
+<span class="sd">        :meta private:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="p">{</span><span class="n">zj</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">ex</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">zj</span><span class="p">,</span> <span class="n">ex</span> <span class="ow">in</span> <span class="n">dic</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">dic</span> <span class="ow">in</span> <span class="n">var</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">write_dict</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="s2">&quot;var.py&quot;</span><span class="p">,</span> <span class="n">_zj_var_comment</span><span class="p">,</span> <span class="s2">&quot;info&quot;</span><span class="p">)</span>
+
+    <span class="c1"># ==================================================</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">write_k_multipole</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k_multipole</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Save k multipole.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            k_multipole (dict): k-multipole dict.</span>
+
+<span class="sd">        :meta private:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write_dict</span><span class="p">(</span><span class="n">k_multipole</span><span class="p">,</span> <span class="s2">&quot;k.py&quot;</span><span class="p">,</span> <span class="n">_k_matrix_comment</span><span class="p">,</span> <span class="s2">&quot;info&quot;</span><span class="p">)</span>
+
+    <span class="c1"># ==================================================</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">write_dispersion</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Ek</span><span class="p">,</span> <span class="n">Ok</span><span class="p">,</span> <span class="n">op_lst</span><span class="p">,</span> <span class="n">k_linear</span><span class="p">,</span> <span class="n">k_dis_pos</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Save dispersion.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            Ek (ndarray): energy eigen values.</span>
+<span class="sd">            Ok (ndarray): expectation values of local operators.</span>
+<span class="sd">            op_lst (list_): operator name list.</span>
+<span class="sd">            k_linear (ndarray): linear k position along high-symmetry line.</span>
+<span class="sd">            k_dis_pos (dict): k discrete point.</span>
+
+<span class="sd">        :meta private:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+        <span class="n">ef</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;fermi_energy&quot;</span><span class="p">]</span>
+
+        <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_topdir</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">[</span><span class="s2">&quot;dir&quot;</span><span class="p">])</span>
+        <span class="n">fname</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;_dispersion.txt&quot;</span><span class="p">)</span>
+        <span class="n">colormap</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">Ok</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="n">Ok</span><span class="p">:</span>
+            <span class="n">output_dispersion</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">k_linear</span><span class="p">,</span> <span class="n">ef</span><span class="p">,</span> <span class="n">Ek</span><span class="p">,</span> <span class="n">Ok</span><span class="p">,</span> <span class="n">op_lst</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">output_dispersion</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">k_linear</span><span class="p">,</span> <span class="n">ef</span><span class="p">,</span> <span class="n">Ek</span><span class="p">)</span>
+        <span class="n">plot_save_dispersion</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">k_dis_pos</span><span class="p">,</span> <span class="n">ef</span><span class="p">,</span> <span class="n">colormap</span><span class="p">)</span>
+        <span class="n">create_gnuplot_cmd</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">k_dis_pos</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">k_linear</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">Ek</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">Ek</span><span class="p">),</span> <span class="n">ef</span><span class="p">,</span> <span class="n">colormap</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;save dispersion files into &#39;</span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># ==================================================</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">read_controle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">control</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Read controle file.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            control (str): control file name.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            - (bool) -- if error occurs.</span>
+
+<span class="sd">        :meta private:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">control</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.py&quot;</span><span class="p">):</span>
+            <span class="n">control</span> <span class="o">=</span> <span class="n">read_dict</span><span class="p">(</span><span class="n">control</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="c1"># ==================================================</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">read_parameter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Read parameter file.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            filename (str, optional): file name under &#39;topdir/name&#39;. for empty str, use default, &#39;topdir/name/info/name_z.py&#39;.</span>
+
+<span class="sd">        :meta private:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">filename</span><span class="p">:</span>
+            <span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;info/&quot;</span> <span class="o">+</span> <span class="n">filename</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;info/</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">_z.py&quot;</span>
+
+        <span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_topdir</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="n">parameter</span> <span class="o">=</span> <span class="n">read_dict</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+        <span class="n">parameter</span> <span class="o">=</span> <span class="p">{</span><span class="n">tag</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">str_to_sympy</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">rational</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span> <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span> <span class="k">else</span> <span class="n">v</span> <span class="k">for</span> <span class="n">tag</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">parameter</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;load parameter from &#39;</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># ==================================================</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">control</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reset all data, and overwrite from control.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            control (dict, optional): control dict.</span>
+
+<span class="sd">        :meta private:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">control</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">control</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;samb&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;wannier&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;output&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_samb</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">default_control</span><span class="p">[</span><span class="s2">&quot;samb&quot;</span><span class="p">])</span>
+        <span class="n">deep_update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_samb</span><span class="p">,</span> <span class="n">control</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;samb&quot;</span><span class="p">,</span> <span class="p">{}))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_wannier</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">default_control</span><span class="p">[</span><span class="s2">&quot;wannier&quot;</span><span class="p">])</span>
+        <span class="n">deep_update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_wannier</span><span class="p">,</span> <span class="n">control</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;wannier&quot;</span><span class="p">,</span> <span class="p">{}))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_output</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">default_control</span><span class="p">[</span><span class="s2">&quot;output&quot;</span><span class="p">])</span>
+        <span class="n">deep_update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_output</span><span class="p">,</span> <span class="n">control</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;output&quot;</span><span class="p">,</span> <span class="p">{}))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_mode</span><span class="p">(</span><span class="n">control</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;mode&quot;</span><span class="p">,</span> <span class="n">default_control</span><span class="p">[</span><span class="s2">&quot;mode&quot;</span><span class="p">]))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_grid</span><span class="p">(</span><span class="o">*</span><span class="n">control</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;grid&quot;</span><span class="p">,</span> <span class="n">default_control</span><span class="p">[</span><span class="s2">&quot;grid&quot;</span><span class="p">]))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_name</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">samb</span><span class="p">[</span><span class="s2">&quot;model&quot;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_parameter</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_basis_type</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_basis</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_HR</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+
+    <span class="c1"># ==================================================</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set analysis mode.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            mode (str): analysis mode, &quot;samb/wannier/symcw&quot;.</span>
+
+<span class="sd">        :meta private:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;mode&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mode</span>
+
+    <span class="c1"># ==================================================</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set model name.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name (str): model name.</span>
+
+<span class="sd">        :meta private:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">name</span>
+
+    <span class="c1"># ==================================================</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_grid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">N1</span><span class="p">,</span> <span class="n">N2</span><span class="p">,</span> <span class="n">N3</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set k-grid size.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            N1 (int): number of divisions in b1.</span>
+<span class="sd">            N2 (int): number of divisions in b2.</span>
+<span class="sd">            N3 (int): number of divisions in b3.</span>
+
+<span class="sd">        :meta private:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;grid&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">N1</span><span class="p">,</span> <span class="n">N2</span><span class="p">,</span> <span class="n">N3</span><span class="p">]</span>
+
+    <span class="c1"># ==================================================</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_parameter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameter</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set parameter, zj.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            parameter (dict): parameter dict.</span>
+
+<span class="sd">        :meta private:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_parameter</span> <span class="o">=</span> <span class="n">parameter</span>
+
+    <span class="c1"># ==================================================</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_basis_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">basis_type</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set atomic basis type.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            basis_type (str): basis type, &quot;lg/lgs/jml&quot;.</span>
+
+<span class="sd">        :meta private:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_basis_type</span> <span class="o">=</span> <span class="n">basis_type</span>
+
+    <span class="c1"># ==================================================</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_basis</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">basis</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set full-matrix basis.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            basis (list): basis, list of &quot;orbital@atom(sublattice)&quot;.</span>
+
+<span class="sd">        :meta private:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_basis</span> <span class="o">=</span> <span class="n">basis</span>
+
+    <span class="c1"># ==================================================</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_HR</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">HR</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set real-space hamiltonian, H(R).</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            HR (dict): H(R), dict[(n1,n2,n3,m,n), val or (val, bond_no)].</span>
+
+<span class="sd">        :meta private:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_HR</span> <span class="o">=</span> <span class="n">HR</span>
 
     <span class="c1"># ==================================================</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">set_primitive_cell</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">A</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Set primitive cell info.</span>
+<span class="sd">        Set primitive cell info., A, B, volume.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            A (ndarray): [a1, a2, a3] (3x3).</span>
+<span class="sd">            A (ndarray): translational vectors of primitive cell, [a1, a2, a3] (3x3).</span>
 
 <span class="sd">        :meta private:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
         <span class="n">B</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
-        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span>  <span class="c1"># primitive cell.</span>
-        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;B&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">B</span>  <span class="c1"># reciprocal cell.</span>
-        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;unit_cell_volume&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">A</span><span class="p">[</span><span class="mi">2</span><span class="p">])))</span>  <span class="c1"># volume of primitive cell.</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;A&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>  <span class="c1"># primitive cell.</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;B&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">B</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>  <span class="c1"># reciprocal cell.</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;volume&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">A</span><span class="p">[</span><span class="mi">2</span><span class="p">])))</span>  <span class="c1"># volume of primitive cell.</span>
 
     <span class="c1"># ==================================================</span>
-<div class="viewcode-block" id="ModelAnalyzer.analyze">
-<a class="viewcode-back" href="../../../src/api_core/model_analyzer.html#multipie.core.model_analyzer.ModelAnalyzer.analyze">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">analyze</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">control</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_fermi_energy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ef</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Analyze model with control file.</span>
+<span class="sd">        Set Fermi energy.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            control (str or dict): control file (.py) or model name.</span>
+<span class="sd">            ef (float): Fermi energy.</span>
+
+<span class="sd">        :meta private:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">control</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>  <span class="c1"># read control file or from dict.</span>
-            <span class="k">if</span> <span class="n">control</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.py&quot;</span><span class="p">):</span>
-                <span class="n">file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_topdir</span><span class="p">,</span> <span class="n">control</span><span class="p">)</span>
-                <span class="n">control</span> <span class="o">=</span> <span class="n">read_dict</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>  <span class="c1"># w/o control and model_name is given.</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">control</span><span class="p">)</span>
-                <span class="n">matrix_info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">get_samb_matrix</span><span class="p">({})</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">save_samb_matrix</span><span class="p">(</span><span class="n">matrix_info</span><span class="p">)</span>
-                <span class="k">return</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">_samb</span> <span class="o">|=</span> <span class="n">control</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;samb&quot;</span><span class="p">,</span> <span class="p">{})</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_wannier</span> <span class="o">|=</span> <span class="n">control</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;wannier&quot;</span><span class="p">,</span> <span class="p">{})</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_output</span> <span class="o">|=</span> <span class="n">control</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;output&quot;</span><span class="p">,</span> <span class="p">{})</span>
-
-        <span class="c1"># exec. SAMB control.</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">samb</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;model&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">samb</span><span class="p">[</span><span class="s2">&quot;model&quot;</span><span class="p">]</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">set_samb</span><span class="p">()</span>
-
-        <span class="c1"># exec. wannier control.</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wannier</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;cw&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="c1"># self._name = self.wannier[&quot;model&quot;]</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">set_from_wannier</span><span class="p">()</span>
-
-        <span class="c1"># compute physical quanties and output data.</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">compute_physical_quantity</span><span class="p">()</span></div>
-
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;fermi_energy&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ef</span>
 
     <span class="c1"># ==================================================</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">local_operator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_var</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">matrix_info</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get var dict.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            matrix_info (dict): matrix info dict.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            - (dict) -- var dict.</span>
+
+<span class="sd">        :meta private:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">IR</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">character</span><span class="p">[</span><span class="s2">&quot;table&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>  <span class="c1"># identity irrep.</span>
+        <span class="n">conv_dict</span> <span class="o">=</span> <span class="n">convert_zj_atomic_var</span><span class="p">(</span><span class="n">matrix_info</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;combined_cluster&quot;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;combined_id&quot;</span><span class="p">],</span> <span class="n">IR</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">conv_dict</span>
+
+    <span class="c1"># ==================================================</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_local_operator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tag</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create local operator.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            name (str): operator name, &quot;Sx/Sy/Sz/Lx/Ly/Lz/Qu/Qv/Qyz/Qzx/Qxy&quot;.</span>
+<span class="sd">            tag (str): operator name, &quot;Sx/Sy/Sz/Lx/Ly/Lz/Qu/Qv/Qyz/Qzx/Qxy&quot;.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            - (ndarray) -- operator matrix (dim x dim).</span>
 
 <span class="sd">        :meta private:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">ket</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;full_matrix&quot;</span><span class="p">][</span><span class="s2">&quot;ket&quot;</span><span class="p">]</span>
-        <span class="n">basis_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;basis_type&quot;</span><span class="p">]</span>
-        <span class="k">return</span> <span class="n">create_local_operator</span><span class="p">(</span><span class="n">ket</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_local</span><span class="p">,</span> <span class="n">basis_type</span> <span class="o">==</span> <span class="s2">&quot;lgs&quot;</span><span class="p">)</span>
-
-    <span class="c1"># ==================================================</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">set_samb</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Calculate SAMB related quantities.</span>
-
-<span class="sd">        :meta private:</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_primitive_cell</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;unit_vector_primitive&quot;</span><span class="p">]))</span>
-        <span class="n">select</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">samb</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;select&quot;</span><span class="p">,</span> <span class="p">{})</span>
-        <span class="n">matrix_info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">get_samb_matrix</span><span class="p">(</span><span class="n">select</span><span class="p">)</span>
-
-        <span class="n">parameter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">samb</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;parameter&quot;</span><span class="p">,</span> <span class="p">{})</span>
-        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">parameter</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>  <span class="c1"># when parameter is str, which means filename of z_j dict.</span>
-            <span class="n">z_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_topdir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">parameter</span><span class="p">)</span>
-            <span class="n">parameter</span> <span class="o">=</span> <span class="n">read_dict</span><span class="p">(</span><span class="n">z_file</span><span class="p">)</span>
-            <span class="n">parameter</span> <span class="o">=</span> <span class="p">{</span><span class="n">tag</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">str_to_sympy</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">rational</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span> <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span> <span class="k">else</span> <span class="n">v</span> <span class="k">for</span> <span class="n">tag</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">parameter</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
-
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">samb</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;NG_sum_rule&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
-            <span class="n">parameter</span> <span class="o">=</span> <span class="n">add_local_parameter</span><span class="p">(</span><span class="n">matrix_info</span><span class="p">,</span> <span class="n">parameter</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">samb</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;samb_figure&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">save_samb_qtdraw</span><span class="p">()</span>
-
-        <span class="c1"># output matrx.py and hr.dat.</span>
-        <span class="k">if</span> <span class="n">parameter</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_HR</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">get_hr</span><span class="p">(</span><span class="n">parameter</span><span class="p">,</span> <span class="n">matrix_info</span><span class="p">[</span><span class="s2">&quot;matrix&quot;</span><span class="p">])</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">save_samb_hr</span><span class="p">(</span><span class="n">matrix_info</span><span class="p">,</span> <span class="n">parameter</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_HR</span><span class="p">)</span>
-            <span class="n">z_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_topdir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;_z.py&quot;</span><span class="p">)</span>
-            <span class="n">write_dict</span><span class="p">({</span><span class="n">tag</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">tag</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">parameter</span><span class="o">.</span><span class="n">items</span><span class="p">()},</span> <span class="n">z_file</span><span class="p">,</span> <span class="n">comment</span><span class="o">=</span><span class="n">_param_comment</span><span class="p">,</span> <span class="n">w_dir</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_verbose</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;save z to &#39;</span><span class="si">{</span><span class="n">z_file</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">save_samb_matrix</span><span class="p">(</span><span class="n">matrix_info</span><span class="p">)</span>
-
-        <span class="n">IR</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">character</span><span class="p">[</span><span class="s2">&quot;table&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>  <span class="c1"># identity irrep.</span>
-        <span class="n">conv_dict</span> <span class="o">=</span> <span class="n">convert_zj_atomic_var</span><span class="p">(</span><span class="n">matrix_info</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;combined_cluster&quot;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;combined_id&quot;</span><span class="p">],</span> <span class="n">IR</span><span class="p">)</span>
-        <span class="n">conv_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="p">{</span><span class="n">zj</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">ex</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">zj</span><span class="p">,</span> <span class="n">ex</span> <span class="ow">in</span> <span class="n">dic</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">dic</span> <span class="ow">in</span> <span class="n">conv_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
-        <span class="n">var_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_topdir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;_var.py&quot;</span><span class="p">)</span>
-        <span class="n">write_dict</span><span class="p">(</span><span class="n">conv_dict</span><span class="p">,</span> <span class="n">var_file</span><span class="p">,</span> <span class="n">comment</span><span class="o">=</span><span class="n">_zj_var_comment</span><span class="p">,</span> <span class="n">w_dir</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_verbose</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;save var to &#39;</span><span class="si">{</span><span class="n">var_file</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_k_multipole</span><span class="p">(</span><span class="n">matrix_info</span><span class="p">)</span>
-
-        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;samb&quot;</span><span class="p">][</span><span class="s2">&quot;parameter&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">parameter</span>
-        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;samb&quot;</span><span class="p">][</span><span class="s2">&quot;matrix_info&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">matrix_info</span>
-
-    <span class="c1"># ==================================================</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">set_from_wannier</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Set data for wannier-based input.</span>
-
-<span class="sd">        :meta private:</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">pass</span>
-
-    <span class="c1"># ==================================================</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">compute_physical_quantity</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Compute physical quantities by parsing the control file.</span>
-
-<span class="sd">        :meta private:</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_HR</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_verbose</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;set H(R) first before calculating physical quantities.&quot;</span><span class="p">)</span>
-            <span class="k">return</span>
-
-        <span class="n">cwd</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
-
-        <span class="n">outdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_topdir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">[</span><span class="s2">&quot;dir&quot;</span><span class="p">])</span>
-        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">outdir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">outdir</span><span class="p">)</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_eigen_system</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">compute_dispersion</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">compute_dos</span><span class="p">()</span>
-
-        <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">cwd</span><span class="p">)</span>
-
-    <span class="c1"># ==================================================</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">set_eigen_system</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Set eigen system by checking control/output if E and/or U is required.</span>
-
-<span class="sd">        :meta private:</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">pass</span>
-
-    <span class="c1"># ==================================================</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">compute_dispersion</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Compute dispersion.</span>
-
-<span class="sd">        :meta private:</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="s2">&quot;dispersion&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">:</span>
-            <span class="k">return</span>
-
-        <span class="n">k_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">[</span><span class="s2">&quot;dispersion&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;k_path&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">k_path</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">group_type</span> <span class="o">!=</span> <span class="s2">&quot;SG&quot;</span><span class="p">:</span>
-            <span class="k">return</span>
-
-        <span class="n">k_point</span><span class="p">,</span> <span class="n">k_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_kpath</span><span class="p">(</span><span class="n">k_path</span><span class="p">)</span>
-        <span class="n">k_point_path</span><span class="p">,</span> <span class="n">k_linear</span><span class="p">,</span> <span class="n">k_dis_pos</span> <span class="o">=</span> <span class="n">grid_path</span><span class="p">(</span><span class="n">k_point</span><span class="p">,</span> <span class="n">k_path</span><span class="p">,</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;grid&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;B&quot;</span><span class="p">])</span>
-
-        <span class="n">tb_gauge</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">[</span><span class="s2">&quot;fourier&quot;</span><span class="p">][</span><span class="s2">&quot;tb_gauge&quot;</span><span class="p">]</span>
-        <span class="n">atom</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">get_ket_site</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">()),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
-        <span class="n">basis_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;basis_type&quot;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">basis_type</span> <span class="o">==</span> <span class="s2">&quot;jml&quot;</span><span class="p">:</span>
-            <span class="n">op_lst</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">op_lst</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">[</span><span class="s2">&quot;dispersion&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;local&quot;</span><span class="p">,</span> <span class="p">[])</span>
-
-        <span class="n">HR</span> <span class="o">=</span> <span class="p">{((</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="n">n3</span><span class="p">),</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span> <span class="nb">complex</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="n">n3</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_HR</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
-        <span class="n">Hk</span> <span class="o">=</span> <span class="n">fourier_r_to_k</span><span class="p">(</span><span class="n">HR</span><span class="p">,</span> <span class="n">atom</span><span class="p">,</span> <span class="n">k_point_path</span><span class="p">,</span> <span class="n">tb_gauge</span><span class="p">)</span>
-
-        <span class="n">Ek</span><span class="p">,</span> <span class="n">Uk</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigh</span><span class="p">(</span><span class="n">Hk</span><span class="p">)</span>
-        <span class="n">power</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">[</span><span class="s2">&quot;dispersion&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;power&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">power</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">Ek</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">Ek</span><span class="p">,</span> <span class="n">power</span><span class="p">)</span>
-
-        <span class="n">Ok</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;kmi,mn,kni-&gt;ki&quot;</span><span class="p">,</span> <span class="n">Uk</span><span class="o">.</span><span class="n">conj</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">local_operator</span><span class="p">(</span><span class="n">name</span><span class="p">),</span> <span class="n">Uk</span><span class="p">)</span><span class="o">.</span><span class="n">real</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">op_lst</span><span class="p">]</span>
-
-        <span class="n">fname</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;_dispersion.txt&quot;</span>
-        <span class="n">colormap</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">Ok</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span>
-        <span class="k">if</span> <span class="n">Ok</span><span class="p">:</span>
-            <span class="n">output_dispersion</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">k_linear</span><span class="p">,</span> <span class="n">Ek</span><span class="p">,</span> <span class="n">Ok</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">output_dispersion</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">k_linear</span><span class="p">,</span> <span class="n">Ek</span><span class="p">)</span>
-        <span class="n">plot_save_dispersion</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">k_dis_pos</span><span class="p">,</span> <span class="n">colormap</span><span class="p">)</span>
-        <span class="n">create_gnuplot_cmd</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">k_dis_pos</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">k_linear</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">Ek</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">Ek</span><span class="p">),</span> <span class="n">colormap</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_verbose</span><span class="p">:</span>
-            <span class="n">outdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_topdir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">[</span><span class="s2">&quot;dir&quot;</span><span class="p">])</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;save dispersion to &#39;</span><span class="si">{</span><span class="n">outdir</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">fname</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
-
-        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;output&quot;</span><span class="p">][</span><span class="s2">&quot;dispersion&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s2">&quot;k_path&quot;</span><span class="p">:</span> <span class="n">k_path</span><span class="p">,</span>
-            <span class="s2">&quot;k_point&quot;</span><span class="p">:</span> <span class="n">k_point</span><span class="p">,</span>
-            <span class="s2">&quot;e_max&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">Ek</span><span class="p">),</span>
-            <span class="s2">&quot;e_min&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">Ek</span><span class="p">),</span>
-            <span class="s2">&quot;ef&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
-        <span class="p">}</span>
-
-    <span class="c1"># ==================================================</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">compute_dos</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Compute DOS.</span>
-
-<span class="sd">        :meta private:</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;dos&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
-            <span class="k">return</span>
-
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;compute and output dos.&quot;</span><span class="p">)</span>
+        <span class="n">spinful</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">basis_type</span> <span class="o">==</span> <span class="s2">&quot;lgs&quot;</span>
+        <span class="k">return</span> <span class="n">create_local_operator</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">basis</span><span class="p">,</span> <span class="n">tag</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_local</span><span class="p">,</span> <span class="n">spinful</span><span class="p">)</span>
 
     <span class="c1"># ==================================================</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_kpath</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k_path</span><span class="p">):</span>
@@ -718,7 +929,7 @@
 <span class="sd">        :meta private:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">k_path</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>  <span class="c1"># create default path.</span>
-            <span class="n">A</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">]</span>
+            <span class="n">A</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;A&quot;</span><span class="p">]</span>
             <span class="n">gp</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">wyckoff</span><span class="p">[</span><span class="s2">&quot;site&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>  <span class="c1"># general point.</span>
             <span class="n">positions</span> <span class="o">=</span> <span class="n">gp</span><span class="p">[</span><span class="s2">&quot;reference&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>  <span class="c1"># fractional, conventional, plus set.</span>
             <span class="n">numbers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">positions</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
@@ -749,20 +960,23 @@
         <span class="k">return</span> <span class="n">k_point</span><span class="p">,</span> <span class="n">k_path</span>
 
     <span class="c1"># ==================================================</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">set_k_multipole</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">matrix_info</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_k_multipole</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">matrix_info</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set momentum multipole.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            matrix_info (dict): matrix info.</span>
 
+<span class="sd">        Returns:</span>
+<span class="sd">            - (dict) -- k-multipole dict.</span>
+
 <span class="sd">        Notes:</span>
 <span class="sd">            - only tight-binding gauge is supported.</span>
 
 <span class="sd">        :meta private:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">samb</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;k_multipole&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
-            <span class="k">return</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">samb</span><span class="p">[</span><span class="s2">&quot;k_multipole&quot;</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="p">{}</span>
 
         <span class="n">combined_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;combined_id&quot;</span><span class="p">]</span>
 
@@ -783,23 +997,294 @@
         <span class="p">}</span>
 
         <span class="n">k_multipole</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="n">matrix_info</span><span class="p">[</span><span class="s2">&quot;model&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="n">matrix_info</span><span class="p">[</span><span class="s2">&quot;source&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="n">matrix_info</span><span class="p">[</span><span class="s2">&quot;created&quot;</span><span class="p">],</span>
             <span class="s2">&quot;dimension&quot;</span><span class="p">:</span> <span class="n">matrix_info</span><span class="p">[</span><span class="s2">&quot;dimension&quot;</span><span class="p">],</span>
-            <span class="s2">&quot;ket_site&quot;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">matrix_info</span><span class="p">[</span><span class="s2">&quot;ket_site&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span>
+            <span class="s2">&quot;ket&quot;</span><span class="p">:</span> <span class="n">matrix_info</span><span class="p">[</span><span class="s2">&quot;ket&quot;</span><span class="p">],</span>
             <span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="n">matrix_info</span><span class="p">[</span><span class="s2">&quot;index&quot;</span><span class="p">],</span>
             <span class="s2">&quot;cluster_vector&quot;</span><span class="p">:</span> <span class="n">cluster_vec</span><span class="p">,</span>
             <span class="s2">&quot;k_multipole&quot;</span><span class="p">:</span> <span class="n">k_multipole</span><span class="p">,</span>
             <span class="s2">&quot;k_matrix&quot;</span><span class="p">:</span> <span class="n">k_matrix</span><span class="p">,</span>
         <span class="p">}</span>
 
-        <span class="c1"># output.</span>
-        <span class="n">outdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_topdir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-        <span class="n">fname</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;_k.py&quot;</span>
-        <span class="n">write_dict</span><span class="p">(</span><span class="n">k_multipole</span><span class="p">,</span> <span class="n">fname</span><span class="p">,</span> <span class="n">comment</span><span class="o">=</span><span class="n">_k_matrix_comment</span><span class="p">,</span> <span class="n">w_dir</span><span class="o">=</span><span class="n">outdir</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">k_multipole</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_verbose</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;save k-multipole to &#39;</span><span class="si">{</span><span class="n">outdir</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">fname</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
+    <span class="c1"># ==================================================</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_eigen_system</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get eigen system by checking control/output if E and/or U is required.</span>
 
-        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;samb&quot;</span><span class="p">][</span><span class="s2">&quot;k_multipole&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">k_multipole</span></div>
+<span class="sd">        :meta private:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="ModelAnalyzer.analyze">
+<a class="viewcode-back" href="../../../src/api_core/model_analyzer.html#multipie.core.model_analyzer.ModelAnalyzer.analyze">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">analyze</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">control</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Analyze model with control file.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            control (str or dict): control file (.py) or model name.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># read control.</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">control</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>  <span class="c1"># read control file.</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_controle</span><span class="p">(</span><span class="n">control</span><span class="p">):</span>  <span class="c1"># if error.</span>
+                <span class="k">return</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="n">control</span><span class="p">)</span>
+        <span class="n">mode</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;mode&quot;</span><span class="p">]</span>
+
+        <span class="c1"># execute SAMB mode.</span>
+        <span class="k">if</span> <span class="n">mode</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;samb&quot;</span><span class="p">,</span> <span class="s2">&quot;symcw&quot;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">exec_samb</span><span class="p">()</span>  <span class="c1"># create SAMBs, and H(R) if zj are provided.</span>
+
+        <span class="c1"># execute wannier mode.</span>
+        <span class="k">if</span> <span class="n">mode</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;wannier&quot;</span><span class="p">,</span> <span class="s2">&quot;symcw&quot;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">exec_wannier</span><span class="p">()</span>  <span class="c1"># create H(R), and zj in case of &quot;symcw&quot;.</span>
+            <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;symcw&quot;</span><span class="p">:</span>
+                <span class="n">matrix_info</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;samb&quot;</span><span class="p">][</span><span class="s2">&quot;matrix_info&quot;</span><span class="p">]</span>  <span class="c1"># created by exec_samb.</span>
+                <span class="n">Zr_dict</span> <span class="o">=</span> <span class="n">matrix_info</span><span class="p">[</span><span class="s2">&quot;matrix&quot;</span><span class="p">]</span>
+                <span class="n">parameter</span> <span class="o">=</span> <span class="n">decompose_operator_by_SAMB</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">HR</span><span class="p">,</span> <span class="n">Zr_dict</span><span class="p">)</span>
+                <span class="n">HR</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">get_hr</span><span class="p">(</span><span class="n">parameter</span><span class="p">,</span> <span class="n">Zr_dict</span><span class="p">)</span>  <span class="c1"># overwrite HR by MultiPie.</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">write_samb_hr</span><span class="p">(</span><span class="n">matrix_info</span><span class="p">,</span> <span class="n">parameter</span><span class="p">,</span> <span class="n">HR</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">set_HR</span><span class="p">(</span><span class="n">HR</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">set_parameter</span><span class="p">(</span><span class="n">parameter</span><span class="p">)</span>
+
+        <span class="c1"># create z file.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write_z_file</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parameter</span><span class="p">)</span>
+
+        <span class="c1"># compute physical quanties and output data.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">compute_physical_quantity</span><span class="p">()</span>
+
+        <span class="c1"># output info.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write_info</span><span class="p">()</span></div>
+
+
+    <span class="c1"># ==================================================</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">exec_samb</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Execute SAMB mode.</span>
+
+<span class="sd">        :meta private:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">samb</span><span class="p">[</span><span class="s2">&quot;model&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_name</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+        <span class="c1"># read and set model.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_basis_type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;basis_type&quot;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_basis</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;full_matrix&quot;</span><span class="p">][</span><span class="s2">&quot;ket&quot;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_primitive_cell</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;unit_vector_primitive&quot;</span><span class="p">])</span>
+
+        <span class="c1"># set selected SAMBs.</span>
+        <span class="n">matrix_info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">get_samb_matrix</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">samb</span><span class="p">[</span><span class="s2">&quot;select&quot;</span><span class="p">])</span>
+
+        <span class="c1"># create var file.</span>
+        <span class="n">var</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_var</span><span class="p">(</span><span class="n">matrix_info</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write_var_file</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
+
+        <span class="c1"># create k-multipole file.</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">samb</span><span class="p">[</span><span class="s2">&quot;k_multipole&quot;</span><span class="p">]:</span>
+            <span class="n">k_multipole</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_k_multipole</span><span class="p">(</span><span class="n">matrix_info</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">k_multipole</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">write_k_multipole</span><span class="p">(</span><span class="n">k_multipole</span><span class="p">)</span>
+
+        <span class="c1"># create SAMB qtdraw.</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">samb</span><span class="p">[</span><span class="s2">&quot;samb_figure&quot;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">save_samb_qtdraw</span><span class="p">()</span>
+
+        <span class="n">parameter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">samb</span><span class="p">[</span><span class="s2">&quot;parameter&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">parameter</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>  <span class="c1"># when parameter is str, read z file.</span>
+            <span class="n">parameter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_parameter</span><span class="p">(</span><span class="n">parameter</span><span class="p">)</span>
+
+        <span class="c1"># determine local weight if NG_sum_rule is True.</span>
+        <span class="n">ng</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">samb</span><span class="p">[</span><span class="s2">&quot;NG_sum_rule&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">ng</span> <span class="ow">and</span> <span class="n">parameter</span><span class="p">:</span>
+            <span class="n">parameter</span> <span class="o">=</span> <span class="n">add_local_parameter</span><span class="p">(</span><span class="n">matrix_info</span><span class="p">,</span> <span class="n">parameter</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;full_matrix&quot;</span><span class="p">][</span><span class="s2">&quot;ket&quot;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">ng</span><span class="p">:</span>
+            <span class="n">parameter_sym</span> <span class="o">=</span> <span class="n">add_local_parameter_sym</span><span class="p">(</span><span class="n">matrix_info</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;full_matrix&quot;</span><span class="p">][</span><span class="s2">&quot;ket&quot;</span><span class="p">])</span>
+            <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;samb&quot;</span><span class="p">][</span><span class="s2">&quot;NG_sum_rule&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">parameter_sym</span>
+
+        <span class="c1"># output matrix.py and hr.dat.</span>
+        <span class="k">if</span> <span class="n">parameter</span><span class="p">:</span>
+            <span class="n">HR</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">get_hr</span><span class="p">(</span><span class="n">parameter</span><span class="p">,</span> <span class="n">matrix_info</span><span class="p">[</span><span class="s2">&quot;matrix&quot;</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write_samb_hr</span><span class="p">(</span><span class="n">matrix_info</span><span class="p">,</span> <span class="n">parameter</span><span class="p">,</span> <span class="n">HR</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_HR</span><span class="p">(</span><span class="n">HR</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write_samb_matrix</span><span class="p">(</span><span class="n">matrix_info</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_parameter</span><span class="p">(</span><span class="n">parameter</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_fermi_energy</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;samb&quot;</span><span class="p">][</span><span class="s2">&quot;matrix_info&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">matrix_info</span>
+
+    <span class="c1"># ==================================================</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">exec_wannier</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Execute wannier mode.</span>
+
+<span class="sd">        :meta private:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">seedname</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">wannier</span><span class="p">[</span><span class="s2">&quot;seedname&quot;</span><span class="p">]</span>
+        <span class="n">wannier_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_topdir</span><span class="p">,</span> <span class="n">seedname</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">wannier</span><span class="p">[</span><span class="s2">&quot;dir&quot;</span><span class="p">])</span>
+
+        <span class="c1"># read seedname.win</span>
+        <span class="n">win</span> <span class="o">=</span> <span class="n">read_win</span><span class="p">(</span><span class="n">seedname</span><span class="p">,</span> <span class="n">wannier_dir</span><span class="p">)</span>
+        <span class="c1"># read seedname.nnkp</span>
+        <span class="n">nnkp</span> <span class="o">=</span> <span class="n">read_nnkp</span><span class="p">(</span><span class="n">seedname</span><span class="p">,</span> <span class="n">wannier_dir</span><span class="p">)</span>
+
+        <span class="n">wannier_ket_info</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;A&quot;</span><span class="p">:</span> <span class="n">win</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;atoms_frac&quot;</span><span class="p">:</span> <span class="n">win</span><span class="p">[</span><span class="s2">&quot;atoms_frac&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;atoms_cart&quot;</span><span class="p">:</span> <span class="n">win</span><span class="p">[</span><span class="s2">&quot;atoms_cart&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;fermi_energy&quot;</span><span class="p">:</span> <span class="n">win</span><span class="p">[</span><span class="s2">&quot;fermi_energy&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;nw2n&quot;</span><span class="p">:</span> <span class="n">nnkp</span><span class="p">[</span><span class="s2">&quot;nw2n&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;nw2l&quot;</span><span class="p">:</span> <span class="n">nnkp</span><span class="p">[</span><span class="s2">&quot;nw2l&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;nw2m&quot;</span><span class="p">:</span> <span class="n">nnkp</span><span class="p">[</span><span class="s2">&quot;nw2m&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;nw2r&quot;</span><span class="p">:</span> <span class="n">nnkp</span><span class="p">[</span><span class="s2">&quot;nw2r&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;nw2s&quot;</span><span class="p">:</span> <span class="n">nnkp</span><span class="p">[</span><span class="s2">&quot;nw2s&quot;</span><span class="p">],</span>
+        <span class="p">}</span>
+        <span class="n">w2m</span><span class="p">,</span> <span class="n">m2w</span><span class="p">,</span> <span class="n">ket_multipie</span><span class="p">,</span> <span class="n">atoms_frac</span><span class="p">,</span> <span class="n">atoms_cart</span> <span class="o">=</span> <span class="n">create_ket_wannier_multipie</span><span class="p">(</span><span class="n">wannier_ket_info</span><span class="p">)</span>
+        <span class="n">w_ket</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">wannier</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;ket_wannier&quot;</span><span class="p">,</span> <span class="p">[])</span>
+        <span class="k">if</span> <span class="n">w_ket</span><span class="p">:</span>
+            <span class="n">m2w</span> <span class="o">=</span> <span class="p">[</span><span class="n">w_ket</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">ket_multipie</span><span class="p">]</span>
+            <span class="n">w2m</span> <span class="o">=</span> <span class="p">[</span><span class="n">no</span> <span class="k">for</span> <span class="n">no</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">enumerate</span><span class="p">(</span><span class="n">m2w</span><span class="p">),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">wannier</span><span class="p">[</span><span class="s2">&quot;read_KS&quot;</span><span class="p">]:</span>
+            <span class="c1"># read KS Ek and Uk, and convert to MultiPie standard order(*) of ket by changing indices of Uk.</span>
+            <span class="c1"># create H(R), and various matrix elements in real space by Fourier transformation with DFT k-grid.</span>
+            <span class="c1"># (*) Ek_m = [Ek[w] for w in m2w], Uk_m1m2 = [[Uk[w1,w2] for w2 in m2w] for w1 in m2w].</span>
+            <span class="c1">#</span>
+            <span class="c1"># read seedname.mmn</span>
+            <span class="c1"># Mkb = read_mmn(seedname, wannier_dir)</span>
+            <span class="c1"># read seedname.spn</span>
+            <span class="c1"># Sk = read_spn(seedname, wannier_dir)</span>
+            <span class="c1"># read seedname.uHu</span>
+            <span class="c1"># uHu = read_uHu(seedname, wannier_dir)</span>
+            <span class="c1"># read seedname.uIu</span>
+            <span class="c1"># uIu = read_uIu(seedname, wannier_dir)</span>
+            <span class="k">pass</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">hr_file</span> <span class="o">=</span> <span class="n">seedname</span> <span class="o">+</span> <span class="s2">&quot;_hr.dat&quot;</span>
+            <span class="n">hr_dict</span><span class="p">,</span> <span class="n">irvec</span><span class="p">,</span> <span class="n">ndegen</span> <span class="o">=</span> <span class="n">read_hr</span><span class="p">(</span><span class="n">hr_file</span><span class="p">,</span> <span class="n">wannier_dir</span><span class="p">)</span>
+            <span class="c1"># convert from wannier index to multipie index.</span>
+            <span class="n">HR</span> <span class="o">=</span> <span class="p">{(</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="n">n3</span><span class="p">,</span> <span class="n">w2m</span><span class="p">[</span><span class="n">w1</span><span class="p">],</span> <span class="n">w2m</span><span class="p">[</span><span class="n">w2</span><span class="p">]):</span> <span class="p">(</span><span class="nb">complex</span><span class="p">(</span><span class="n">v</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span> <span class="k">for</span> <span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="n">n3</span><span class="p">,</span> <span class="n">w1</span><span class="p">,</span> <span class="n">w2</span><span class="p">),</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">hr_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+
+        <span class="n">info</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;ket&quot;</span><span class="p">:</span> <span class="n">ket_multipie</span><span class="p">,</span>
+            <span class="s2">&quot;atoms_frac&quot;</span><span class="p">:</span> <span class="n">atoms_frac</span><span class="p">,</span>
+            <span class="s2">&quot;atoms_cart&quot;</span><span class="p">:</span> <span class="n">atoms_cart</span><span class="p">,</span>
+            <span class="s2">&quot;wannier_to_multipie&quot;</span><span class="p">:</span> <span class="n">w2m</span><span class="p">,</span>
+            <span class="s2">&quot;multipie_to_wannier&quot;</span><span class="p">:</span> <span class="n">m2w</span><span class="p">,</span>
+        <span class="p">}</span>
+
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;wannier&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">info</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_fermi_energy</span><span class="p">(</span><span class="n">wannier_ket_info</span><span class="p">[</span><span class="s2">&quot;fermi_energy&quot;</span><span class="p">])</span>
+
+        <span class="c1">### physical qunatity.</span>
+        <span class="c1"># nk = np.array([np.diag(fermi_dirac(eki - win[&quot;fermi_energy&quot;], T=0.0)) for eki in Ek], dtype=float)</span>
+        <span class="c1"># nk = Uk.transpose(0, 2, 1).conjugate() @ nk @ Uk</span>
+        <span class="c1"># nr_dict = fourier_k_to_r(nk, win[&quot;kpoints&quot;], irvec, s=False)</span>
+        <span class="c1"># nr_dict = sort_ket_matrix_dict(nr_dict, ket_wannier, ket_multipie)</span>
+        <span class="c1"># z_j_exp = decompose_operator_by_SAMB(nr_dict, Zr_dict)</span>
+        <span class="c1"># self[&quot;wannier&quot;][&quot;z_j_exp&quot;] = z_j_exp</span>
+        <span class="c1"># self[&quot;wannier&quot;][&quot;mmn&quot;] = mmn</span>
+        <span class="c1"># self[&quot;wannier&quot;][&quot;spn&quot;] = spn</span>
+        <span class="c1"># self[&quot;wannier&quot;][&quot;uHu&quot;] = uHu</span>
+        <span class="c1"># self[&quot;wannier&quot;][&quot;uIu&quot;] = uIu</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_HR</span><span class="p">(</span><span class="n">HR</span><span class="p">)</span>
+
+    <span class="c1"># ==================================================</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">compute_physical_quantity</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute physical quantities by parsing the control file.</span>
+
+<span class="sd">        :meta private:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">HR</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;set H(R) first before calculating physical quantities.&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_topdir</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">[</span><span class="s2">&quot;dir&quot;</span><span class="p">])</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">disp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_dispersion</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;output&quot;</span><span class="p">][</span><span class="s2">&quot;dispersion&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">disp</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">get_eigen_system</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">compute_dos</span><span class="p">()</span>
+
+    <span class="c1"># ==================================================</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">compute_dispersion</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute dispersion.</span>
+
+<span class="sd">        :meta private:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># check if dispersion can be computed.</span>
+        <span class="k">if</span> <span class="s2">&quot;dispersion&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="n">k_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">[</span><span class="s2">&quot;dispersion&quot;</span><span class="p">][</span><span class="s2">&quot;k_path&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">k_path</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">group_type</span> <span class="o">!=</span> <span class="s2">&quot;SG&quot;</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="c1"># get k_point and k_path.</span>
+        <span class="n">k_point</span><span class="p">,</span> <span class="n">k_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_kpath</span><span class="p">(</span><span class="n">k_path</span><span class="p">)</span>
+        <span class="n">N1</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;grid&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">][</span><span class="s2">&quot;B&quot;</span><span class="p">])</span>
+        <span class="n">k_point_path</span><span class="p">,</span> <span class="n">k_linear</span><span class="p">,</span> <span class="n">k_dis_pos</span> <span class="o">=</span> <span class="n">grid_path</span><span class="p">(</span><span class="n">k_point</span><span class="p">,</span> <span class="n">k_path</span><span class="p">,</span> <span class="n">N1</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>
+
+        <span class="c1"># get local operator list.</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">basis_type</span> <span class="o">==</span> <span class="s2">&quot;jml&quot;</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">basis_type</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">op_lst</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">op_lst</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">[</span><span class="s2">&quot;dispersion&quot;</span><span class="p">][</span><span class="s2">&quot;local&quot;</span><span class="p">]</span>
+
+        <span class="c1"># get info.</span>
+        <span class="n">tb_gauge</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">[</span><span class="s2">&quot;fourier&quot;</span><span class="p">][</span><span class="s2">&quot;tb_gauge&quot;</span><span class="p">]</span>
+        <span class="n">atom</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">get_ket_site</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">()),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+
+        <span class="c1"># set H(R) and H(k).</span>
+        <span class="n">HR</span> <span class="o">=</span> <span class="p">{((</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="n">n3</span><span class="p">),</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span> <span class="nb">complex</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="n">n3</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">HR</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+        <span class="n">Hk</span> <span class="o">=</span> <span class="n">fourier_r_to_k</span><span class="p">(</span><span class="n">HR</span><span class="p">,</span> <span class="n">atom</span><span class="p">,</span> <span class="n">k_point_path</span><span class="p">,</span> <span class="n">tb_gauge</span><span class="p">)</span>
+
+        <span class="c1"># set eigen system.</span>
+        <span class="n">Ek</span><span class="p">,</span> <span class="n">Uk</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigh</span><span class="p">(</span><span class="n">Hk</span><span class="p">)</span>
+        <span class="n">power</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">[</span><span class="s2">&quot;dispersion&quot;</span><span class="p">][</span><span class="s2">&quot;power&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">power</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">Ek</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">Ek</span><span class="p">,</span> <span class="n">power</span><span class="p">)</span>
+
+        <span class="c1"># set local operators.</span>
+        <span class="n">Ok</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;kmi,mn,kni-&gt;ki&quot;</span><span class="p">,</span> <span class="n">Uk</span><span class="o">.</span><span class="n">conj</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_local_operator</span><span class="p">(</span><span class="n">tag</span><span class="p">),</span> <span class="n">Uk</span><span class="p">)</span><span class="o">.</span><span class="n">real</span> <span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">op_lst</span><span class="p">]</span>
+
+        <span class="c1"># output dispersion data, plot, and gnuplot.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write_dispersion</span><span class="p">(</span><span class="n">Ek</span><span class="p">,</span> <span class="n">Ok</span><span class="p">,</span> <span class="n">op_lst</span><span class="p">,</span> <span class="n">k_linear</span><span class="p">,</span> <span class="n">k_dis_pos</span><span class="p">)</span>
+
+        <span class="c1"># save dispersion info.</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;k_path&quot;</span><span class="p">:</span> <span class="n">k_path</span><span class="p">,</span>
+            <span class="s2">&quot;k_point&quot;</span><span class="p">:</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">k_point</span><span class="o">.</span><span class="n">items</span><span class="p">()},</span>
+            <span class="s2">&quot;e_max&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">Ek</span><span class="p">)),</span>
+            <span class="s2">&quot;e_min&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">Ek</span><span class="p">)),</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="n">d</span>
+
+    <span class="c1"># ==================================================</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">compute_dos</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute DOS.</span>
+
+<span class="sd">        :meta private:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">[</span><span class="s2">&quot;dos&quot;</span><span class="p">]:</span>
+            <span class="k">return</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;compute and output dos.&quot;</span><span class="p">)</span></div>
 
 </pre></div>
 

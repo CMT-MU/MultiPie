@@ -1,0 +1,867 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>multipie.util.util_atomic_multipole &#8212; MultiPie</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=4418a689" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=34ddd5e8" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../../_static/documentation_options.js?v=a8e58a58"></script>
+    <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/multipie/util/util_atomic_multipole';</script>
+    <script src="../../../_static/custom.js?v=9c3a2667"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../README.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/multipie_logo.png" class="logo__image only-light" alt="MultiPie - Home"/>
+    <img src="../../../_static/multipie_logo.png" class="logo__image only-dark pst-js-only" alt="MultiPie - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../src/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/install.html">Installing MultiPie</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/getting_started.html">Getting Started</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../src/manual.html">Brief Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/group_doc.html">Group information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/tech_note.html">Technical Note</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../src/api_core.html">Core</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_core/init.html">Type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_core/cmd.html">Create function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_core/group.html">Group</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_core/material_model.html">Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_core/model_analyzer.html">ModelAnalyzer</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../src/api_util.html">Utility</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_atomic_multipole.html">Atomic multipole</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_binary.html">Binary data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_crystal.html">Crystal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_dict.html">Dict</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_gram_schmidt.html">Grad-Schmidt orthonormalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_harmonics.html">Harmonics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_material_model_pdf.html">PDF creator for Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_material_model.html">Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_model_analyzer.html">Model Analyzer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_pdf_latex.html">PDF creator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_plot.html">Plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_response_tensor.html">Response tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_samb.html">SAMB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_tag.html">Tag</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_wannier.html">Wannier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_wyckoff.html">Wyckoff position</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util.html">Versatile</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/CMT-MU/MultiPie.git" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for multipie.util.util_atomic_multipole</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">For creating atomic multipole data.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sp</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sympy.physics.wigner</span><span class="w"> </span><span class="kn">import</span> <span class="n">wigner_3j</span><span class="p">,</span> <span class="n">wigner_6j</span><span class="p">,</span> <span class="n">wigner_9j</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">joblib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Parallel</span><span class="p">,</span> <span class="n">delayed</span>
+
+<span class="n">orbital</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="s2">&quot;p&quot;</span><span class="p">,</span> <span class="s2">&quot;d&quot;</span><span class="p">,</span> <span class="s2">&quot;f&quot;</span><span class="p">]</span>
+<span class="n">spin</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;1/2&quot;</span><span class="p">,</span> <span class="s2">&quot;-1/2&quot;</span><span class="p">]</span>
+
+<span class="c1"># ==================================================</span>
+<span class="sd">&quot;&quot;&quot; standard spinful basis &quot;&quot;&quot;</span>
+<span class="n">_standard_spinful_basis</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;jml&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="n">L</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sp</span><span class="o">.</span><span class="n">S</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">sp</span><span class="o">.</span><span class="n">S</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">L</span><span class="si">}</span><span class="s2">)&quot;</span>
+        <span class="k">for</span> <span class="n">L</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">orbital</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">L</span> <span class="o">+</span> <span class="n">s</span><span class="p">),</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">L</span> <span class="o">+</span> <span class="n">s</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;lms&quot;</span><span class="p">:</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="n">l</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s2">)&quot;</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">orbital</span><span class="p">))</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="n">l</span><span class="p">,</span> <span class="n">l</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">spin</span><span class="p">],</span>
+<span class="p">}</span>
+
+
+<span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="pauli_matrix_n">
+<a class="viewcode-back" href="../../../src/api_util/util_atomic_multipole.html#multipie.util.util_atomic_multipole.pauli_matrix_n">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">pauli_matrix_n</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Pauli matrices (σ00, σ11, σ10, σ1-1)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        s (int): 0/1</span>
+<span class="sd">        n (int): 0/+1/-1</span>
+<span class="sd">        s1 (sympy): ±1/2</span>
+<span class="sd">        s2 (sympy): ±1/2</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">       sympy: matrix element</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">s1</span> <span class="o">==</span> <span class="n">s2</span> <span class="k">else</span> <span class="mi">0</span>
+    <span class="k">elif</span> <span class="n">s</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">sp</span><span class="o">.</span><span class="n">Rational</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="n">s1</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">2</span><span class="p">))</span> <span class="o">*</span> <span class="n">sp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="o">*</span> <span class="n">wigner_3j</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span></div>
+
+
+
+<span class="c1"># ==================================================</span>
+<span class="n">_lm_basis</span> <span class="o">=</span> <span class="p">[</span><span class="n">sp</span><span class="o">.</span><span class="n">sympify</span><span class="p">(</span><span class="n">o</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;U&quot;</span><span class="p">,</span> <span class="s2">&quot;1/2&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;D&quot;</span><span class="p">,</span> <span class="s2">&quot;-1/2&quot;</span><span class="p">))</span> <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">_standard_spinful_basis</span><span class="p">[</span><span class="s2">&quot;lms&quot;</span><span class="p">]]</span>
+<span class="n">_jm_basis</span> <span class="o">=</span> <span class="p">[</span><span class="n">sp</span><span class="o">.</span><span class="n">sympify</span><span class="p">(</span><span class="n">o</span><span class="p">)</span> <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">_standard_spinful_basis</span><span class="p">[</span><span class="s2">&quot;jml&quot;</span><span class="p">]]</span>
+
+
+<span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="sort_matrix">
+<a class="viewcode-back" href="../../../src/api_util/util_atomic_multipole.html#multipie.util.util_atomic_multipole.sort_matrix">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">sort_matrix</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">idx_row_list</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">idx_col_list</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    sort row and col of given matrix.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        M (sympy): Matrix.</span>
+<span class="sd">        idx_row_list (list, optional): list of row indexes after sorting.</span>
+<span class="sd">        idx_col_list (list, optional): list of column indexes after sorting.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        sympy: sorted Matrix.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">N_row</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">S</span><span class="p">(</span><span class="n">M</span><span class="o">.</span><span class="n">rows</span><span class="p">)</span>
+    <span class="n">N_col</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">S</span><span class="p">(</span><span class="n">M</span><span class="o">.</span><span class="n">cols</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">idx_row_list</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">idx_row_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N_row</span><span class="p">)]</span>
+    <span class="k">if</span> <span class="n">idx_col_list</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">idx_col_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N_col</span><span class="p">)]</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">idx_row_list</span><span class="p">)</span> <span class="o">!=</span> <span class="n">N_row</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;invalid len(idx_row_list) = </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">idx_row_list</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">idx_col_list</span><span class="p">)</span> <span class="o">!=</span> <span class="n">N_col</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;invalid len(idx_col_list) = </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">idx_col_list</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">M_sorted</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N_row</span><span class="p">,</span> <span class="n">N_col</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">idx_row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">idx_row_list</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">idx_col</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">idx_col_list</span><span class="p">):</span>
+            <span class="n">M_sorted</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">M</span><span class="p">[</span><span class="n">idx_row</span><span class="p">,</span> <span class="n">idx_col</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">M_sorted</span></div>
+
+
+
+<span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="Rl_l1l2">
+<a class="viewcode-back" href="../../../src/api_util/util_atomic_multipole.html#multipie.util.util_atomic_multipole.Rl_l1l2">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">Rl_l1l2</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">l1</span><span class="p">,</span> <span class="n">l2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Proportionality coefficients of magnetic (electric) toroidal multipoles.</span>
+<span class="sd">    T(G) = Rl_l1l2 * Q(M)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        l (int): rank of multipole.</span>
+<span class="sd">        l1 (int): bra &lt;l1|.</span>
+<span class="sd">        l2 (int): ket |l2&gt;.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        sympy: coefficient</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="o">-</span><span class="n">sp</span><span class="o">.</span><span class="n">S</span><span class="p">(</span><span class="n">l1</span> <span class="o">*</span> <span class="p">(</span><span class="n">l1</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">l2</span> <span class="o">*</span> <span class="p">(</span><span class="n">l2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="n">l</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">l</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="Ql_l1l2">
+<a class="viewcode-back" href="../../../src/api_util/util_atomic_multipole.html#multipie.util.util_atomic_multipole.Ql_l1l2">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">Ql_l1l2</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">l1</span><span class="p">,</span> <span class="n">l2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    reduced matrix element of Q.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        l (int): rank of multipole.</span>
+<span class="sd">        l1 (int): bra &lt;l1|.</span>
+<span class="sd">        l2 (int): ket |l2&gt;.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        sympy: reduced matrix element.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">**</span> <span class="n">l1</span> <span class="o">*</span> <span class="n">sp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="mi">2</span> <span class="o">*</span> <span class="n">l1</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">l2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span> <span class="o">*</span> <span class="n">wigner_3j</span><span class="p">(</span><span class="n">l1</span><span class="p">,</span> <span class="n">l2</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="Ml_l1l2">
+<a class="viewcode-back" href="../../../src/api_util/util_atomic_multipole.html#multipie.util.util_atomic_multipole.Ml_l1l2">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">Ml_l1l2</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">l1</span><span class="p">,</span> <span class="n">l2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    reduced matrix element of M.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        l (int): rank of multipole.</span>
+<span class="sd">        l1 (int): bra &lt;l1|.</span>
+<span class="sd">        l2 (int): ket |l2&gt;.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        sympy: reduced matrix element.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">**</span> <span class="n">l1</span>
+        <span class="o">*</span> <span class="n">sp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">l</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">l</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">l</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">l1</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">l2</span> <span class="o">*</span> <span class="p">(</span><span class="n">l2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="o">*</span> <span class="n">sp</span><span class="o">.</span><span class="n">S</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">l2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="o">/</span> <span class="p">(</span><span class="n">l</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="o">*</span> <span class="n">wigner_3j</span><span class="p">(</span><span class="n">l1</span><span class="p">,</span> <span class="n">l2</span><span class="p">,</span> <span class="n">l</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="o">*</span> <span class="n">wigner_6j</span><span class="p">(</span><span class="n">l</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">l2</span><span class="p">,</span> <span class="n">l2</span><span class="p">,</span> <span class="n">l1</span><span class="p">)</span>
+    <span class="p">)</span></div>
+
+
+
+<span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="Tl_l1l2">
+<a class="viewcode-back" href="../../../src/api_util/util_atomic_multipole.html#multipie.util.util_atomic_multipole.Tl_l1l2">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">Tl_l1l2</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">l1</span><span class="p">,</span> <span class="n">l2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    reduced matrix element of T.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        l (int): rank of multipole.</span>
+<span class="sd">        l1 (int): bra &lt;l1|.</span>
+<span class="sd">        l2 (int): ket |l2&gt;.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        sympy: reduced matrix element.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">l</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">sp</span><span class="o">.</span><span class="n">I</span> <span class="o">*</span> <span class="n">Rl_l1l2</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">l1</span><span class="p">,</span> <span class="n">l2</span><span class="p">)</span> <span class="o">*</span> <span class="n">Ql_l1l2</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">l1</span><span class="p">,</span> <span class="n">l2</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="Gl_l1l2">
+<a class="viewcode-back" href="../../../src/api_util/util_atomic_multipole.html#multipie.util.util_atomic_multipole.Gl_l1l2">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">Gl_l1l2</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">l1</span><span class="p">,</span> <span class="n">l2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    reduced matrix element of G.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        l (int): rank of multipole.</span>
+<span class="sd">        l1 (int): bra &lt;l1|.</span>
+<span class="sd">        l2 (int): ket |l2&gt;.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        sympy: reduced matrix element.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">l</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="k">else</span> <span class="n">sp</span><span class="o">.</span><span class="n">I</span> <span class="o">*</span> <span class="n">Rl_l1l2</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">l1</span><span class="p">,</span> <span class="n">l2</span><span class="p">)</span> <span class="o">*</span> <span class="n">Ml_l1l2</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">l1</span><span class="p">,</span> <span class="n">l2</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="Xl_l1l2">
+<a class="viewcode-back" href="../../../src/api_util/util_atomic_multipole.html#multipie.util.util_atomic_multipole.Xl_l1l2">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">Xl_l1l2</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">l1</span><span class="p">,</span> <span class="n">l2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    reduced matrix element of X (Q/M/T/G).</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        X (str): &quot;Q&quot;/&quot;M&quot;/&quot;T&quot;/&quot;G&quot;.</span>
+<span class="sd">        l (int): rank of multipole.</span>
+<span class="sd">        l1 (int): bra &lt;l1|.</span>
+<span class="sd">        l2 (int): ket |l2&gt;.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        sympy: reduced matrix element.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">qmtg_map</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Q&quot;</span><span class="p">:</span> <span class="n">Ql_l1l2</span><span class="p">,</span> <span class="s2">&quot;M&quot;</span><span class="p">:</span> <span class="n">Ml_l1l2</span><span class="p">,</span> <span class="s2">&quot;T&quot;</span><span class="p">:</span> <span class="n">Tl_l1l2</span><span class="p">,</span> <span class="s2">&quot;G&quot;</span><span class="p">:</span> <span class="n">Gl_l1l2</span><span class="p">}</span>
+    <span class="k">return</span> <span class="n">qmtg_map</span><span class="p">[</span><span class="n">X</span><span class="p">](</span><span class="n">l</span><span class="p">,</span> <span class="n">l1</span><span class="p">,</span> <span class="n">l2</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="is_zero">
+<a class="viewcode-back" href="../../../src/api_util/util_atomic_multipole.html#multipie.util.util_atomic_multipole.is_zero">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">is_zero</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">l1</span><span class="p">,</span> <span class="n">l2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    matrix element is zero ?</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        X (str): &quot;Q&quot;/&quot;M&quot;/&quot;T&quot;/&quot;G&quot;.</span>
+<span class="sd">        l (int): rank of multipole.</span>
+<span class="sd">        l1 (int): bra &lt;l1|.</span>
+<span class="sd">        l2 (int): ket |l2&gt;.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        bool: zero ?</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="c1"># odd parity multipoles are zero if (l1 + l2) % 2 == 0</span>
+        <span class="p">((</span><span class="n">l1</span> <span class="o">+</span> <span class="n">l2</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="p">((</span><span class="n">X</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;Q&quot;</span><span class="p">,</span> <span class="s2">&quot;T&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">l</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">X</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;M&quot;</span><span class="p">,</span> <span class="s2">&quot;G&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">l</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)))</span>
+        <span class="c1"># even parity multipoles are zero if (l1 + l2) % 2 == 1</span>
+        <span class="ow">or</span> <span class="p">((</span><span class="n">l1</span> <span class="o">+</span> <span class="n">l2</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="p">((</span><span class="n">X</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;Q&quot;</span><span class="p">,</span> <span class="s2">&quot;T&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">l</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">X</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;M&quot;</span><span class="p">,</span> <span class="s2">&quot;G&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">l</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)))</span>
+    <span class="p">)</span></div>
+
+
+
+<span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="Xlm_lm">
+<a class="viewcode-back" href="../../../src/api_util/util_atomic_multipole.html#multipie.util.util_atomic_multipole.Xlm_lm">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">Xlm_lm</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">b1</span><span class="p">,</span> <span class="n">b2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    matrix element of spinless atomic multipoles (LM basis).</span>
+<span class="sd">    &lt;b1|X_{lm}|b2&gt;</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        X (str): &quot;Q&quot;/&quot;M&quot;/&quot;T&quot;/&quot;G&quot;.</span>
+<span class="sd">        l (int): rank.</span>
+<span class="sd">        m (int): component.</span>
+<span class="sd">        b1 (list): bra &lt;l1, m1|.</span>
+<span class="sd">        b2 (list): ket |l2, m2&gt;.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        sympy: matrix element.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="p">(</span><span class="n">l1</span><span class="p">,</span> <span class="n">m1</span><span class="p">)</span> <span class="o">=</span> <span class="n">b1</span>
+    <span class="p">(</span><span class="n">l2</span><span class="p">,</span> <span class="n">m2</span><span class="p">)</span> <span class="o">=</span> <span class="n">b2</span>
+
+    <span class="k">if</span> <span class="n">is_zero</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">l1</span><span class="p">,</span> <span class="n">l2</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">l</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">l1</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">l2</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="n">l1</span> <span class="o">+</span> <span class="n">m1</span><span class="p">)</span> <span class="o">*</span> <span class="n">wigner_3j</span><span class="p">(</span><span class="n">l1</span><span class="p">,</span> <span class="n">l2</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="o">-</span><span class="n">m1</span><span class="p">,</span> <span class="n">m2</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span> <span class="o">*</span> <span class="n">Xl_l1l2</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">l1</span><span class="p">,</span> <span class="n">l2</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="Pl_sk_J1J2L1L2">
+<a class="viewcode-back" href="../../../src/api_util/util_atomic_multipole.html#multipie.util.util_atomic_multipole.Pl_sk_J1J2L1L2">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">Pl_sk_J1J2L1L2</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">J1</span><span class="p">,</span> <span class="n">J2</span><span class="p">,</span> <span class="n">l1</span><span class="p">,</span> <span class="n">l2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    proportionality coefficient of spinful atomic multipole.</span>
+<span class="sd">    P_{l}(s,k;J1,J2;L1,L2)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        l (int) : rank of multipole.</span>
+<span class="sd">        s (int) : 0 (spinless) or 1 (spinful).</span>
+<span class="sd">        k (int) : -s &lt;= k &lt;= s.</span>
+<span class="sd">        J1 (sympy) : J1.</span>
+<span class="sd">        J2 (sympy) : J2.</span>
+<span class="sd">        l1 (int) : l1.</span>
+<span class="sd">        l2 (int) : l2.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        sympy: coefficient.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">sp</span><span class="o">.</span><span class="n">I</span> <span class="o">**</span> <span class="p">(</span><span class="n">s</span> <span class="o">+</span> <span class="n">k</span><span class="p">)</span>
+        <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">**</span> <span class="n">s</span>
+        <span class="o">*</span> <span class="n">sp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="mi">2</span> <span class="o">*</span> <span class="n">l</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">J1</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">J2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">sp</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">s</span><span class="p">)</span> <span class="o">*</span> <span class="n">sp</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="n">s</span><span class="p">))</span>
+        <span class="o">*</span> <span class="n">wigner_9j</span><span class="p">(</span><span class="n">l1</span><span class="p">,</span> <span class="n">J1</span><span class="p">,</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">l2</span><span class="p">,</span> <span class="n">J2</span><span class="p">,</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">l</span> <span class="o">+</span> <span class="n">k</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+    <span class="p">)</span></div>
+
+
+
+<span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="qmtg_map_spinful">
+<a class="viewcode-back" href="../../../src/api_util/util_atomic_multipole.html#multipie.util.util_atomic_multipole.qmtg_map_spinful">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">qmtg_map_spinful</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    relation between spinful multipoles head (X) and spinless multipole (Q/M/T/G).</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        X (str): &quot;Q&quot;/&quot;M&quot;/&quot;T&quot;/&quot;G&quot;.</span>
+<span class="sd">        s (int) : 0 (spinless) or 1(spinful).</span>
+<span class="sd">        k (int) : -s &lt;= k &lt;= s.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: &quot;Q&quot;/&quot;M&quot;/&quot;T&quot;/&quot;G&quot;.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">qmtg_map</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span> <span class="p">{</span><span class="s2">&quot;Q&quot;</span><span class="p">:</span> <span class="s2">&quot;Q&quot;</span><span class="p">,</span> <span class="s2">&quot;M&quot;</span><span class="p">:</span> <span class="s2">&quot;M&quot;</span><span class="p">,</span> <span class="s2">&quot;T&quot;</span><span class="p">:</span> <span class="s2">&quot;T&quot;</span><span class="p">,</span> <span class="s2">&quot;G&quot;</span><span class="p">:</span> <span class="s2">&quot;G&quot;</span><span class="p">},</span>
+        <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span> <span class="p">{</span><span class="s2">&quot;Q&quot;</span><span class="p">:</span> <span class="s2">&quot;M&quot;</span><span class="p">,</span> <span class="s2">&quot;M&quot;</span><span class="p">:</span> <span class="s2">&quot;Q&quot;</span><span class="p">,</span> <span class="s2">&quot;T&quot;</span><span class="p">:</span> <span class="s2">&quot;G&quot;</span><span class="p">,</span> <span class="s2">&quot;G&quot;</span><span class="p">:</span> <span class="s2">&quot;T&quot;</span><span class="p">},</span>
+        <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span> <span class="p">{</span><span class="s2">&quot;Q&quot;</span><span class="p">:</span> <span class="s2">&quot;T&quot;</span><span class="p">,</span> <span class="s2">&quot;M&quot;</span><span class="p">:</span> <span class="s2">&quot;G&quot;</span><span class="p">,</span> <span class="s2">&quot;T&quot;</span><span class="p">:</span> <span class="s2">&quot;Q&quot;</span><span class="p">,</span> <span class="s2">&quot;G&quot;</span><span class="p">:</span> <span class="s2">&quot;M&quot;</span><span class="p">},</span>
+        <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span> <span class="p">{</span><span class="s2">&quot;Q&quot;</span><span class="p">:</span> <span class="s2">&quot;M&quot;</span><span class="p">,</span> <span class="s2">&quot;M&quot;</span><span class="p">:</span> <span class="s2">&quot;Q&quot;</span><span class="p">,</span> <span class="s2">&quot;T&quot;</span><span class="p">:</span> <span class="s2">&quot;G&quot;</span><span class="p">,</span> <span class="s2">&quot;G&quot;</span><span class="p">:</span> <span class="s2">&quot;T&quot;</span><span class="p">},</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">qmtg_map</span><span class="p">[(</span><span class="n">s</span><span class="p">,</span> <span class="n">k</span><span class="p">)][</span><span class="n">X</span><span class="p">]</span></div>
+
+
+
+<span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="atomic_multipole_matrix_lm_basis">
+<a class="viewcode-back" href="../../../src/api_util/util_atomic_multipole.html#multipie.util.util_atomic_multipole.atomic_multipole_matrix_lm_basis">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">atomic_multipole_matrix_lm_basis</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">b1</span><span class="p">,</span> <span class="n">b2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    matrix element of spinless/spinful multipoles (LMS basis).</span>
+<span class="sd">    &lt;b1|X_{lm}^{(s)}(k)|b2&gt;</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        X (str): &quot;Q&quot;/&quot;M&quot;/&quot;T&quot;/&quot;G&quot;.</span>
+<span class="sd">        l (int): rank.</span>
+<span class="sd">        m (int): component.</span>
+<span class="sd">        s (int) : 0 (spinless) or 1(spinful).</span>
+<span class="sd">        k (int) : -s &lt;= k &lt;= s.</span>
+<span class="sd">        b1 (list): bra &lt;l1, m1, s1|.</span>
+<span class="sd">        b2 (list): ket |l2, m2, s2&gt;.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        sympy: matrix element.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="p">(</span><span class="n">l1</span><span class="p">,</span> <span class="n">m1</span><span class="p">,</span> <span class="n">s1</span><span class="p">)</span> <span class="o">=</span> <span class="n">b1</span>
+    <span class="p">(</span><span class="n">l2</span><span class="p">,</span> <span class="n">m2</span><span class="p">,</span> <span class="n">s2</span><span class="p">)</span> <span class="o">=</span> <span class="n">b2</span>
+
+    <span class="c1"># spinless</span>
+    <span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Xlm_lm</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="p">(</span><span class="n">l1</span><span class="p">,</span> <span class="n">m1</span><span class="p">),</span> <span class="p">(</span><span class="n">l2</span><span class="p">,</span> <span class="n">m2</span><span class="p">))</span> <span class="k">if</span> <span class="n">s1</span> <span class="o">==</span> <span class="n">s2</span> <span class="k">else</span> <span class="mi">0</span>
+    <span class="c1"># spinful</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="n">qmtg_map_spinful</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+        <span class="n">xlmsk</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+            <span class="n">xlm</span> <span class="o">=</span> <span class="n">Xlm_lm</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">l</span> <span class="o">+</span> <span class="n">k</span><span class="p">,</span> <span class="n">m</span> <span class="o">-</span> <span class="n">n</span><span class="p">,</span> <span class="p">(</span><span class="n">l1</span><span class="p">,</span> <span class="n">m1</span><span class="p">),</span> <span class="p">(</span><span class="n">l2</span><span class="p">,</span> <span class="n">m2</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">xlm</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="n">wig3j</span> <span class="o">=</span> <span class="n">wigner_3j</span><span class="p">(</span><span class="n">l</span> <span class="o">+</span> <span class="n">k</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">m</span> <span class="o">-</span> <span class="n">n</span><span class="p">,</span> <span class="o">-</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">wig3j</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="n">xlmsk</span> <span class="o">+=</span> <span class="n">wig3j</span> <span class="o">*</span> <span class="n">xlm</span> <span class="o">*</span> <span class="n">pauli_matrix_n</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">xlmsk</span> <span class="o">*</span> <span class="n">sp</span><span class="o">.</span><span class="n">I</span> <span class="o">**</span> <span class="p">(</span><span class="n">s</span> <span class="o">+</span> <span class="n">k</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="n">l</span> <span class="o">+</span> <span class="n">m</span><span class="p">)</span> <span class="o">*</span> <span class="n">sp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">l</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="atomic_multipole_matrix_jm_basis">
+<a class="viewcode-back" href="../../../src/api_util/util_atomic_multipole.html#multipie.util.util_atomic_multipole.atomic_multipole_matrix_jm_basis">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">atomic_multipole_matrix_jm_basis</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">b1</span><span class="p">,</span> <span class="n">b2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    matrix element of spinless/spinful multipoles (JM basis)</span>
+<span class="sd">    &lt;b1|X_{lm}^{(s)}(k)|b2&gt;</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        X (str): &quot;Q&quot;/&quot;M&quot;/&quot;T&quot;/&quot;G&quot;.</span>
+<span class="sd">        l (int): rank.</span>
+<span class="sd">        m (int): component.</span>
+<span class="sd">        s (int) : 0 (spinless) or 1(spinful).</span>
+<span class="sd">        k (int) : -s &lt;= k &lt;= s.</span>
+<span class="sd">        b1 (list): bra &lt;J1, M1, l1|.</span>
+<span class="sd">        b2 (list): ket |J2, M2, l2&gt;.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Matrix: matrix element.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="p">(</span><span class="n">J1</span><span class="p">,</span> <span class="n">M1</span><span class="p">,</span> <span class="n">l1</span><span class="p">)</span> <span class="o">=</span> <span class="n">b1</span>
+    <span class="p">(</span><span class="n">J2</span><span class="p">,</span> <span class="n">M2</span><span class="p">,</span> <span class="n">l2</span><span class="p">)</span> <span class="o">=</span> <span class="n">b2</span>
+
+    <span class="n">wig3j</span> <span class="o">=</span> <span class="n">wigner_3j</span><span class="p">(</span><span class="n">J1</span><span class="p">,</span> <span class="n">J2</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="o">-</span><span class="n">M1</span><span class="p">,</span> <span class="n">M2</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">wig3j</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+
+    <span class="n">P</span> <span class="o">=</span> <span class="n">Pl_sk_J1J2L1L2</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">J1</span><span class="p">,</span> <span class="n">J2</span><span class="p">,</span> <span class="n">l1</span><span class="p">,</span> <span class="n">l2</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">P</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+
+    <span class="n">X</span> <span class="o">=</span> <span class="n">qmtg_map_spinful</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="n">J1</span> <span class="o">+</span> <span class="n">M1</span><span class="p">)</span> <span class="o">*</span> <span class="n">wig3j</span> <span class="o">*</span> <span class="n">P</span> <span class="o">*</span> <span class="n">Xl_l1l2</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">l</span> <span class="o">+</span> <span class="n">k</span><span class="p">,</span> <span class="n">l1</span><span class="p">,</span> <span class="n">l2</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="atomic_multipole_matrix">
+<a class="viewcode-back" href="../../../src/api_util/util_atomic_multipole.html#multipie.util.util_atomic_multipole.atomic_multipole_matrix">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">atomic_multipole_matrix</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">b1</span><span class="p">,</span> <span class="n">b2</span><span class="p">,</span> <span class="n">b_type</span><span class="o">=</span><span class="s2">&quot;lms&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    matrix element of spinless/spinful multipoles (LMS/JM basis).</span>
+<span class="sd">    &lt;b1|X_{lm}^{(s)}(k)|b2&gt;</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        X (str): &quot;Q&quot;/&quot;M&quot;/&quot;T&quot;/&quot;G&quot;.</span>
+<span class="sd">        l (int): rank.</span>
+<span class="sd">        m (int): component.</span>
+<span class="sd">        s (int) : 0 (spinless) or 1(spinful).</span>
+<span class="sd">        k (int) : -s &lt;= k &lt;= s.</span>
+<span class="sd">        b1 (list): bra &lt;l1, m1, s1|.</span>
+<span class="sd">        b2 (list): ket |l2, m2, s2&gt;.</span>
+<span class="sd">        b_type (str, optional): type of basis, ``lms/jml``.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        sympy: matrix element.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">b_type</span> <span class="o">==</span> <span class="s2">&quot;lms&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">atomic_multipole_matrix_lm_basis</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">b1</span><span class="p">,</span> <span class="n">b2</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>  <span class="c1"># &quot;jml&quot;</span>
+        <span class="k">return</span> <span class="n">atomic_multipole_matrix_jm_basis</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">b1</span><span class="p">,</span> <span class="n">b2</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="create_atomic_multipole_matrix">
+<a class="viewcode-back" href="../../../src/api_util/util_atomic_multipole.html#multipie.util.util_atomic_multipole.create_atomic_multipole_matrix">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_atomic_multipole_matrix</span><span class="p">(</span><span class="n">b_type</span><span class="o">=</span><span class="s2">&quot;lms&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    create atomic multipoles X_{lm}^{(s)}(k) (LMS/JM basis).</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        b_type (str, optional): type of basis, ``lms/jml``.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: atomic multipoles, m=(l,l-1,...,-l), {(head,l,s,k): [[[sympy]]]}.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">verbose</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># 0, 1, 10.</span>
+
+    <span class="k">if</span> <span class="n">b_type</span> <span class="o">==</span> <span class="s2">&quot;lms&quot;</span><span class="p">:</span>
+        <span class="n">basis</span> <span class="o">=</span> <span class="n">_lm_basis</span>
+    <span class="k">elif</span> <span class="n">b_type</span> <span class="o">==</span> <span class="s2">&quot;jml&quot;</span><span class="p">:</span>
+        <span class="n">basis</span> <span class="o">=</span> <span class="n">_jm_basis</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;b_type: invalid basis type. choose &#39;lms&#39;/&#39;jml&#39;.&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">proc</span><span class="p">(</span><span class="n">xlmsk</span><span class="p">):</span>
+        <span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="o">=</span> <span class="n">xlmsk</span>
+        <span class="n">am</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Matrix</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">b1</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">basis</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">b2</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">basis</span><span class="p">):</span>
+                <span class="n">b1</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">sympify</span><span class="p">(</span><span class="n">b1</span><span class="p">)</span>
+                <span class="n">b2</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">sympify</span><span class="p">(</span><span class="n">b2</span><span class="p">)</span>
+                <span class="n">v</span> <span class="o">=</span> <span class="n">atomic_multipole_matrix</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">b1</span><span class="p">,</span> <span class="n">b2</span><span class="p">,</span> <span class="n">b_type</span><span class="p">)</span>
+                <span class="n">am</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">simplify</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">xlmsk</span><span class="p">,</span> <span class="n">am</span>
+
+    <span class="n">max_l</span> <span class="o">=</span> <span class="mi">7</span>
+    <span class="n">max_s</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">Xlmsk_list</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">X</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;Q&quot;</span><span class="p">,</span> <span class="s2">&quot;M&quot;</span><span class="p">,</span> <span class="s2">&quot;T&quot;</span><span class="p">,</span> <span class="s2">&quot;G&quot;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_l</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="n">l</span><span class="p">,</span> <span class="n">l</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_s</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="n">s</span><span class="p">,</span> <span class="n">s</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="p">]</span>
+
+    <span class="n">sub</span> <span class="o">=</span> <span class="n">Parallel</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)([</span><span class="n">delayed</span><span class="p">(</span><span class="n">proc</span><span class="p">)(</span><span class="n">xlmsk</span><span class="p">)</span> <span class="k">for</span> <span class="n">xlmsk</span> <span class="ow">in</span> <span class="n">Xlmsk_list</span><span class="p">])</span>
+
+    <span class="n">Xlmsk</span> <span class="o">=</span> <span class="p">{</span><span class="n">tag</span><span class="p">:</span> <span class="n">am</span> <span class="k">for</span> <span class="n">tag</span><span class="p">,</span> <span class="n">am</span> <span class="ow">in</span> <span class="n">sub</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">am</span><span class="o">.</span><span class="n">is_zero_matrix</span><span class="p">}</span>
+
+    <span class="n">Xlsk</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">k</span><span class="p">),</span> <span class="n">am</span> <span class="ow">in</span> <span class="n">Xlmsk</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">Xlsk</span><span class="p">[(</span><span class="n">X</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">k</span><span class="p">)]</span> <span class="o">=</span> <span class="n">Xlsk</span><span class="o">.</span><span class="n">get</span><span class="p">((</span><span class="n">X</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">k</span><span class="p">),</span> <span class="p">[])</span> <span class="o">+</span> <span class="p">[</span><span class="n">am</span><span class="o">.</span><span class="n">tolist</span><span class="p">()]</span>
+
+    <span class="k">return</span> <span class="n">Xlsk</span></div>
+
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Hiroaki Kusunose and Rikuto Oiwa
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2021-.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

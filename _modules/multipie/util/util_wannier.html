@@ -1,0 +1,1492 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>multipie.util.util_wannier &#8212; MultiPie</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=4418a689" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=34ddd5e8" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../../_static/documentation_options.js?v=a8e58a58"></script>
+    <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/multipie/util/util_wannier';</script>
+    <script src="../../../_static/custom.js?v=9c3a2667"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../README.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/multipie_logo.png" class="logo__image only-light" alt="MultiPie - Home"/>
+    <img src="../../../_static/multipie_logo.png" class="logo__image only-dark pst-js-only" alt="MultiPie - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../src/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/install.html">Installing MultiPie</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/getting_started.html">Getting Started</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../src/manual.html">Brief Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/group_doc.html">Group information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../src/tech_note.html">Technical Note</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../src/api_core.html">Core</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_core/init.html">Type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_core/cmd.html">Create function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_core/group.html">Group</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_core/material_model.html">Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_core/model_analyzer.html">ModelAnalyzer</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../src/api_util.html">Utility</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_atomic_multipole.html">Atomic multipole</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_binary.html">Binary data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_crystal.html">Crystal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_dict.html">Dict</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_gram_schmidt.html">Grad-Schmidt orthonormalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_harmonics.html">Harmonics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_material_model_pdf.html">PDF creator for Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_material_model.html">Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_model_analyzer.html">Model Analyzer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_pdf_latex.html">PDF creator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_plot.html">Plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_response_tensor.html">Response tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_samb.html">SAMB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_tag.html">Tag</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_wannier.html">Wannier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_wyckoff.html">Wyckoff position</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util.html">Versatile</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/CMT-MU/MultiPie.git" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for multipie.util.util_wannier</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Utility functions for reading Wannier90 files used by ModelAnalyzer.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">contextlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">contextmanager</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">io</span><span class="w"> </span><span class="kn">import</span> <span class="n">TextIOWrapper</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">gzip</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tarfile</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">spglib</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">multipie</span><span class="w"> </span><span class="kn">import</span> <span class="n">Group</span>
+
+<span class="n">BOHR2ANG</span> <span class="o">=</span> <span class="mf">0.529177249</span>
+
+
+<span class="c1"># ==================================================</span>
+<span class="nd">@contextmanager</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_open_text</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Open a plain, ``.gz``, or ``.tar.gz`` text file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+        <span class="k">with</span> <span class="n">path</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="n">f</span>
+        <span class="k">return</span>
+
+    <span class="n">gz_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;.gz&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">gz_path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+        <span class="k">with</span> <span class="n">gzip</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">gz_path</span><span class="p">,</span> <span class="s2">&quot;rt&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="n">f</span>
+        <span class="k">return</span>
+
+    <span class="n">tar_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;.tar.gz&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">tar_path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+        <span class="k">with</span> <span class="n">tarfile</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">tar_path</span><span class="p">,</span> <span class="s2">&quot;r:gz&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">tf</span><span class="p">:</span>
+            <span class="n">files</span> <span class="o">=</span> <span class="p">[</span><span class="n">member</span> <span class="k">for</span> <span class="n">member</span> <span class="ow">in</span> <span class="n">tf</span><span class="o">.</span><span class="n">getmembers</span><span class="p">()</span> <span class="k">if</span> <span class="n">member</span><span class="o">.</span><span class="n">isfile</span><span class="p">()]</span>
+            <span class="n">exact</span> <span class="o">=</span> <span class="p">[</span><span class="n">member</span> <span class="k">for</span> <span class="n">member</span> <span class="ow">in</span> <span class="n">files</span> <span class="k">if</span> <span class="n">Path</span><span class="p">(</span><span class="n">member</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">path</span><span class="o">.</span><span class="n">name</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="n">exact</span><span class="p">:</span>
+                <span class="n">member</span> <span class="o">=</span> <span class="n">exact</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">files</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">member</span> <span class="o">=</span> <span class="n">files</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">path</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> is not found in </span><span class="si">{</span><span class="n">tar_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+            <span class="n">raw</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">extractfile</span><span class="p">(</span><span class="n">member</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">raw</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;failed to read </span><span class="si">{</span><span class="n">member</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> in </span><span class="si">{</span><span class="n">tar_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+            <span class="k">with</span> <span class="n">TextIOWrapper</span><span class="p">(</span><span class="n">raw</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="k">yield</span> <span class="n">f</span>
+        <span class="k">return</span>
+
+    <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;failed to read file: </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<span class="c1"># ==================================================</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_read_lines</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Read a plain, ``.gz``, or ``.tar.gz`` text file as a list of lines.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="n">_open_text</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+
+
+<span class="c1"># ==================================================</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_blocks</span><span class="p">(</span><span class="n">lines</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return ``{block_name: lines_between_begin_and_end}``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">blocks</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">lines</span><span class="p">):</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="n">lines</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;begin &quot;</span><span class="p">):</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">continue</span>
+
+        <span class="n">name</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">6</span><span class="p">:]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="n">end</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;end </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span>
+
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">blocks</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;block &#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39; is defined more than once&quot;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">lines</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">lines</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="n">end</span><span class="p">:</span>
+                <span class="n">blocks</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">lines</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">:</span> <span class="n">j</span><span class="p">]</span>
+                <span class="n">i</span> <span class="o">=</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span>
+                <span class="k">break</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;missing &#39;</span><span class="si">{</span><span class="n">end</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">blocks</span>
+
+
+<span class="c1"># ==================================================</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_array</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Read numerical rows and always return a two-dimensional array.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_2d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">))</span>
+
+
+<span class="c1"># ==================================================</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_convert_w90_orbital</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert a Wannier90 projection label to a MultiPie orbital label.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        l (int): Angular-momentum index.</span>
+<span class="sd">        m (int): Wannier90 angular-function index.</span>
+<span class="sd">        r (int): Wannier90 radial-function index.</span>
+<span class="sd">        s (int): Spin component: ``1`` for up, ``-1`` for down, and ``0``</span>
+<span class="sd">                 for a non-spinor projection.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        - (str) -- MultiPie orbital label, such as ``s``, ``px``, ``du``, ``(px,u)``, or ``(px,d)``.</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        - The radial index ``r`` is currently not encoded in the returned MultiPie orbital label, but it is retained in the argument list for consistency with the Wannier90 projection format.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">orbitals</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="mi">0</span><span class="p">:</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;s&quot;</span><span class="p">)},</span>
+        <span class="mi">1</span><span class="p">:</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;pz&quot;</span><span class="p">),</span> <span class="mi">2</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;px&quot;</span><span class="p">),</span> <span class="mi">3</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;py&quot;</span><span class="p">)},</span>
+        <span class="mi">2</span><span class="p">:</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;du&quot;</span><span class="p">),</span> <span class="mi">2</span><span class="p">:</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;dxz&quot;</span><span class="p">),</span> <span class="mi">3</span><span class="p">:</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;dyz&quot;</span><span class="p">),</span> <span class="mi">4</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;dv&quot;</span><span class="p">),</span> <span class="mi">5</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;dxy&quot;</span><span class="p">)},</span>
+        <span class="mi">3</span><span class="p">:</span> <span class="p">{</span>
+            <span class="mi">1</span><span class="p">:</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;faz&quot;</span><span class="p">),</span>
+            <span class="mi">2</span><span class="p">:</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;f3x&quot;</span><span class="p">),</span>
+            <span class="mi">3</span><span class="p">:</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;f3y&quot;</span><span class="p">),</span>
+            <span class="mi">4</span><span class="p">:</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;fbz&quot;</span><span class="p">),</span>
+            <span class="mi">5</span><span class="p">:</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;f3&quot;</span><span class="p">),</span>
+            <span class="mi">6</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;f2&quot;</span><span class="p">),</span>
+            <span class="mi">7</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;f1&quot;</span><span class="p">),</span>
+        <span class="p">},</span>
+    <span class="p">}</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">orbital</span> <span class="o">=</span> <span class="n">orbitals</span><span class="p">[</span><span class="n">l</span><span class="p">][</span><span class="n">m</span><span class="p">]</span>
+    <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;invalid orbital projection: l=</span><span class="si">{</span><span class="n">l</span><span class="si">}</span><span class="s2">, m=</span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2">, r=</span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2">, s=</span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">exc</span>
+
+    <span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">orbital</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="n">orbital</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">,u)&quot;</span>
+    <span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">orbital</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="n">orbital</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">,d)&quot;</span>
+    <span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">orbital</span>
+
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;invalid spin component: s=</span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<span class="c1"># ==================================================</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_projection_data</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">spinors</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Read Wannier projection metadata from an ``nnkp`` projection block.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">num_wann</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">rows</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">step</span> <span class="o">=</span> <span class="mi">3</span> <span class="k">if</span> <span class="n">spinors</span> <span class="k">else</span> <span class="mi">2</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">step</span> <span class="o">*</span> <span class="n">num_wann</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;incomplete projection block&quot;</span><span class="p">)</span>
+
+    <span class="n">projections</span> <span class="o">=</span> <span class="p">[</span><span class="n">rows</span><span class="p">[</span><span class="mi">1</span> <span class="o">+</span> <span class="n">step</span> <span class="o">*</span> <span class="n">iw</span><span class="p">]</span> <span class="k">for</span> <span class="n">iw</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_wann</span><span class="p">)]</span>
+    <span class="n">orbital</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">num_wann</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">spin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">num_wann</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">spin_axis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">num_wann</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">iw</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">projections</span><span class="p">):</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">6</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;invalid projection entry: </span><span class="si">{</span><span class="n">row</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Columns 4--6 contain l, m, and the radial-function index.</span>
+        <span class="n">orbital</span><span class="p">[</span><span class="n">iw</span><span class="p">]</span> <span class="o">=</span> <span class="n">values</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">spinors</span><span class="p">:</span>
+            <span class="n">values</span> <span class="o">=</span> <span class="n">rows</span><span class="p">[</span><span class="mi">1</span> <span class="o">+</span> <span class="n">step</span> <span class="o">*</span> <span class="n">iw</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;invalid spinor projection entry&quot;</span><span class="p">)</span>
+            <span class="n">spin</span><span class="p">[</span><span class="n">iw</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">spin_axis</span><span class="p">[</span><span class="n">iw</span><span class="p">]</span> <span class="o">=</span> <span class="n">values</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
+
+    <span class="c1"># Wannier90 uses fixed-width projection strings.  These slices retain the</span>
+    <span class="c1"># original convention for identifying orbital specifications and centers.</span>
+    <span class="n">orb_key</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span><span class="p">[:</span><span class="mi">40</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">projections</span><span class="p">]</span>
+    <span class="n">pos_key</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span><span class="p">[:</span><span class="mi">35</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">projections</span><span class="p">]</span>
+    <span class="n">orb_unique</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">dict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="n">orb_key</span><span class="p">))</span>
+    <span class="n">pos_unique</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">dict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="n">pos_key</span><span class="p">))</span>
+
+    <span class="n">atom_orb</span> <span class="o">=</span> <span class="p">[[</span><span class="n">iw</span> <span class="k">for</span> <span class="n">iw</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">orb_key</span><span class="p">)</span> <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="n">key</span><span class="p">]</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">orb_unique</span><span class="p">]</span>
+    <span class="n">atom_pos</span> <span class="o">=</span> <span class="p">[[</span><span class="n">iorb</span> <span class="k">for</span> <span class="n">iorb</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">orb_unique</span><span class="p">)</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">value</span><span class="p">]</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">pos_unique</span><span class="p">]</span>
+    <span class="n">atom_pos_r</span> <span class="o">=</span> <span class="p">[[</span><span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">key</span><span class="o">.</span><span class="n">split</span><span class="p">()[:</span><span class="mi">3</span><span class="p">]]</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">pos_unique</span><span class="p">]</span>
+
+    <span class="c1"># Map each Wannier function to its zero-based projection-center index.</span>
+    <span class="n">nw2n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">num_wann</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">ia</span><span class="p">,</span> <span class="n">positions</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">atom_pos</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">ipos</span> <span class="ow">in</span> <span class="n">positions</span><span class="p">:</span>
+            <span class="n">nw2n</span><span class="p">[</span><span class="n">atom_orb</span><span class="p">[</span><span class="n">ipos</span><span class="p">]]</span> <span class="o">=</span> <span class="n">ia</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;num_wann&quot;</span><span class="p">:</span> <span class="n">num_wann</span><span class="p">,</span>
+        <span class="s2">&quot;num_atom&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">atom_pos_r</span><span class="p">),</span>
+        <span class="s2">&quot;nw2n&quot;</span><span class="p">:</span> <span class="n">nw2n</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+        <span class="s2">&quot;nw2l&quot;</span><span class="p">:</span> <span class="n">orbital</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+        <span class="s2">&quot;nw2m&quot;</span><span class="p">:</span> <span class="n">orbital</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+        <span class="s2">&quot;nw2r&quot;</span><span class="p">:</span> <span class="n">orbital</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+        <span class="s2">&quot;nw2s&quot;</span><span class="p">:</span> <span class="n">spin</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+        <span class="s2">&quot;nw2saxis&quot;</span><span class="p">:</span> <span class="n">spin_axis</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+        <span class="s2">&quot;atom_orb&quot;</span><span class="p">:</span> <span class="n">atom_orb</span><span class="p">,</span>
+        <span class="s2">&quot;atom_pos&quot;</span><span class="p">:</span> <span class="n">atom_pos</span><span class="p">,</span>
+        <span class="s2">&quot;atom_pos_r&quot;</span><span class="p">:</span> <span class="n">atom_pos_r</span><span class="p">,</span>
+    <span class="p">}</span>
+
+
+<span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="read_win">
+<a class="viewcode-back" href="../../../src/api_util/util_wannier.html#multipie.util.util_wannier.read_win">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">read_win</span><span class="p">(</span><span class="n">seedname</span><span class="p">,</span> <span class="n">topdir</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Read ``seedname.win``.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        seedname (str): Wannier90 seedname.</span>
+<span class="sd">        topdir (str, optional): directory containing ``seedname.win``.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        - (dict) -- info. dict.</span>
+<span class="sd">            - num_k       : Number of k points inferred from ``mp_grid`` (int).</span>
+<span class="sd">            - num_bands   : Number of Bloch bands passed to Wannier90 (int).</span>
+<span class="sd">            - num_wann    : Number of Wannier functions (int).</span>
+<span class="sd">            - spinors     : Whether the Wannier functions are spinors (bool).</span>
+<span class="sd">            - fermi_energy: Fermi energy in eV (float).</span>
+<span class="sd">            - A           : Real lattice vectors ``[a1,a2,a3]`` in angstrom,</span>
+<span class="sd">                            shape ``[3][3]`` (list).</span>
+<span class="sd">            - atoms_frac  : Atomic positions in fractional coordinates,</span>
+<span class="sd">                            ``{(symbol, occurrence): [r1,r2,r3]}`` (dict).</span>
+<span class="sd">            - atoms_cart  : Atomic positions in Cartesian coordinates in</span>
+<span class="sd">                            angstrom, ``{(symbol, occurrence): [x,y,z]}`` (dict).</span>
+<span class="sd">            - mp_grid     : Monkhorst-Pack grid ``[nk1,nk2,nk3]`` (list).</span>
+<span class="sd">            - kpoints     : Explicit k points in crystal coordinates, reduced</span>
+<span class="sd">                            to ``0 &lt;= k_i &lt; 1``, shape ``[num_k][3]`` (list).</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        - If only one of ``atoms_frac`` and ``atoms_cart`` is present, the other is calculated using ``A``.</span>
+<span class="sd">        - Cartesian lengths are returned in angstrom.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">topdir</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">topdir</span> <span class="o">=</span> <span class="s2">&quot;.&quot;</span>
+    <span class="n">lines</span> <span class="o">=</span> <span class="n">_read_lines</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">topdir</span><span class="p">)</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">seedname</span><span class="si">}</span><span class="s2">.win&quot;</span><span class="p">)</span>
+    <span class="n">blocks</span> <span class="o">=</span> <span class="n">_blocks</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">param</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">default</span><span class="p">,</span> <span class="n">cast</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Read a scalar ``name = value`` or ``name : value`` parameter.&quot;&quot;&quot;</span>
+        <span class="n">pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">rf</span><span class="s2">&quot;^\s*</span><span class="si">{</span><span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="si">}</span><span class="s2">\s*[=:]\s*([^!]*)&quot;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">)</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span> <span class="k">if</span> <span class="p">(</span><span class="n">match</span> <span class="o">:=</span> <span class="n">pattern</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">line</span><span class="p">))]</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> is defined more than once&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">values</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">default</span>
+
+        <span class="n">value</span> <span class="o">=</span> <span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">cast</span> <span class="ow">is</span> <span class="nb">bool</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">value</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;true&quot;</span><span class="p">,</span> <span class="s2">&quot;.true.&quot;</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">True</span>
+            <span class="k">if</span> <span class="n">value</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;false&quot;</span><span class="p">,</span> <span class="s2">&quot;.false.&quot;</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;invalid boolean value for </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">cast</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">vectors</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Read a three-vector block and convert bohr to angstrom.&quot;&quot;&quot;</span>
+        <span class="n">rows</span> <span class="o">=</span> <span class="n">blocks</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">rows</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="n">unit</span> <span class="o">=</span> <span class="n">rows</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">unit</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;ang&quot;</span><span class="p">,</span> <span class="s2">&quot;bohr&quot;</span><span class="p">))</span>
+        <span class="n">scale</span> <span class="o">=</span> <span class="n">BOHR2ANG</span> <span class="k">if</span> <span class="n">unit</span> <span class="o">==</span> <span class="s2">&quot;bohr&quot;</span> <span class="k">else</span> <span class="mf">1.0</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">_array</span><span class="p">([</span><span class="n">row</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">[</span><span class="n">start</span><span class="p">:]</span> <span class="k">if</span> <span class="n">row</span><span class="o">.</span><span class="n">strip</span><span class="p">()])</span> <span class="o">*</span> <span class="n">scale</span>
+
+        <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> must contain three three-dimensional vectors&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">data</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">atoms</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Read an atoms block as ``{(symbol, occurrence): position}``.&quot;&quot;&quot;</span>
+        <span class="n">rows</span> <span class="o">=</span> <span class="n">blocks</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">rows</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="n">unit</span> <span class="o">=</span> <span class="n">rows</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">unit</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;ang&quot;</span><span class="p">,</span> <span class="s2">&quot;bohr&quot;</span><span class="p">))</span>
+        <span class="n">scale</span> <span class="o">=</span> <span class="n">BOHR2ANG</span> <span class="k">if</span> <span class="n">unit</span> <span class="o">==</span> <span class="s2">&quot;bohr&quot;</span> <span class="k">else</span> <span class="mf">1.0</span>
+        <span class="n">count</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="p">{},</span> <span class="p">{}</span>
+
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">[</span><span class="n">start</span><span class="p">:]:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">row</span><span class="o">.</span><span class="n">strip</span><span class="p">():</span>
+                <span class="k">continue</span>
+
+            <span class="n">values</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">4</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;invalid entry in </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">row</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+            <span class="n">symbol</span><span class="p">,</span> <span class="o">*</span><span class="n">xyz</span> <span class="o">=</span> <span class="n">values</span>
+            <span class="n">count</span><span class="p">[</span><span class="n">symbol</span><span class="p">]</span> <span class="o">=</span> <span class="n">count</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">symbol</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="n">out</span><span class="p">[</span><span class="n">symbol</span><span class="p">,</span> <span class="n">count</span><span class="p">[</span><span class="n">symbol</span><span class="p">]]</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">xyz</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span> <span class="o">*</span> <span class="n">scale</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">out</span>
+
+    <span class="c1"># --- scalar parameters ---</span>
+    <span class="n">mp_grid</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">param</span><span class="p">(</span><span class="s2">&quot;mp_grid&quot;</span><span class="p">,</span> <span class="s2">&quot;1 1 1&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()]</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">mp_grid</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;mp_grid must contain three integers&quot;</span><span class="p">)</span>
+
+    <span class="c1"># --- lattice vectors and atomic positions ---</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">vectors</span><span class="p">(</span><span class="s2">&quot;unit_cell_cart&quot;</span><span class="p">)</span>
+    <span class="n">atoms_frac</span> <span class="o">=</span> <span class="n">atoms</span><span class="p">(</span><span class="s2">&quot;atoms_frac&quot;</span><span class="p">)</span>
+    <span class="n">atoms_cart</span> <span class="o">=</span> <span class="n">atoms</span><span class="p">(</span><span class="s2">&quot;atoms_cart&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">A</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">atoms_cart</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">atoms_frac</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">atoms_frac</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">A</span><span class="p">))</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">pos</span> <span class="ow">in</span> <span class="n">atoms_cart</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+        <span class="k">elif</span> <span class="n">atoms_frac</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">atoms_cart</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">atoms_cart</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span> <span class="o">@</span> <span class="n">A</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">pos</span> <span class="ow">in</span> <span class="n">atoms_frac</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+
+    <span class="n">d</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;num_k&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">mp_grid</span><span class="p">)),</span>
+        <span class="s2">&quot;num_bands&quot;</span><span class="p">:</span> <span class="n">param</span><span class="p">(</span><span class="s2">&quot;num_bands&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">int</span><span class="p">),</span>
+        <span class="s2">&quot;num_wann&quot;</span><span class="p">:</span> <span class="n">param</span><span class="p">(</span><span class="s2">&quot;num_wann&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">int</span><span class="p">),</span>
+        <span class="s2">&quot;spinors&quot;</span><span class="p">:</span> <span class="n">param</span><span class="p">(</span><span class="s2">&quot;spinors&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="nb">bool</span><span class="p">),</span>
+        <span class="s2">&quot;fermi_energy&quot;</span><span class="p">:</span> <span class="n">param</span><span class="p">(</span><span class="s2">&quot;fermi_energy&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="nb">float</span><span class="p">),</span>
+        <span class="s2">&quot;A&quot;</span><span class="p">:</span> <span class="kc">None</span> <span class="k">if</span> <span class="n">A</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">A</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+        <span class="s2">&quot;atoms_frac&quot;</span><span class="p">:</span> <span class="n">atoms_frac</span><span class="p">,</span>
+        <span class="s2">&quot;atoms_cart&quot;</span><span class="p">:</span> <span class="n">atoms_cart</span><span class="p">,</span>
+        <span class="s2">&quot;mp_grid&quot;</span><span class="p">:</span> <span class="n">mp_grid</span><span class="p">,</span>
+        <span class="s2">&quot;kpoints&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]],</span>
+    <span class="p">}</span>
+
+    <span class="c1"># --- explicit k points ---</span>
+    <span class="k">if</span> <span class="n">rows</span> <span class="o">:=</span> <span class="n">blocks</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;kpoints&quot;</span><span class="p">):</span>
+        <span class="n">kpoints</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mod</span><span class="p">(</span><span class="n">_array</span><span class="p">([</span><span class="n">row</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span> <span class="k">if</span> <span class="n">row</span><span class="o">.</span><span class="n">strip</span><span class="p">()])[:,</span> <span class="p">:</span><span class="mi">3</span><span class="p">],</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">kpoints</span><span class="p">)</span> <span class="o">!=</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;num_k&quot;</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;inconsistent number of k points in </span><span class="si">{</span><span class="n">seedname</span><span class="si">}</span><span class="s2">.win: &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;mp_grid gives </span><span class="si">{</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;num_k&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">, but the kpoints block contains </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">kpoints</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+        <span class="n">d</span><span class="p">[</span><span class="s2">&quot;kpoints&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kpoints</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">d</span></div>
+
+
+
+<span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="read_nnkp">
+<a class="viewcode-back" href="../../../src/api_util/util_wannier.html#multipie.util.util_wannier.read_nnkp">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">read_nnkp</span><span class="p">(</span><span class="n">seedname</span><span class="p">,</span> <span class="n">topdir</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Read ``seedname.nnkp`` generated by Wannier90.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        seedname (str): Wannier90 seedname.</span>
+<span class="sd">        topdir (str, optional): directory containing ``seedname.nnkp``.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        - (dict) -- info. dict.</span>
+<span class="sd">            - A                : Real lattice vectors ``[a1,a2,a3]`` in</span>
+<span class="sd">                                 Cartesian coordinates, shape ``[3][3]`` (list).</span>
+<span class="sd">            - B                : Reciprocal lattice vectors ``[b1,b2,b3]`` in</span>
+<span class="sd">                                 Cartesian coordinates, shape ``[3][3]`` (list).</span>
+<span class="sd">            - num_k            : Number of k points (int).</span>
+<span class="sd">            - num_wann         : Number of Wannier projections (int).</span>
+<span class="sd">            - num_atom         : Number of distinct projection centers (int).</span>
+<span class="sd">            - num_b            : Number of b-vectors per k point (int).</span>
+<span class="sd">            - kpoints          : k points in crystal coordinates, reduced to</span>
+<span class="sd">                                 ``0 &lt;= k_i &lt; 1``, shape ``[num_k][3]`` (list).</span>
+<span class="sd">            - nnkpts           : Nearest-neighbour table</span>
+<span class="sd">                                 ``[ik,ikb,G1,G2,G3]``, shape</span>
+<span class="sd">                                 ``[num_k][num_b][5]`` (list).</span>
+<span class="sd">            - nw2n             : Zero-based projection-center index of each</span>
+<span class="sd">                                 Wannier function, shape ``[num_wann]`` (list).</span>
+<span class="sd">            - nw2l, nw2m       : Angular indices ``l`` and ``m`` of each</span>
+<span class="sd">                                 projection, shape ``[num_wann]`` (list).</span>
+<span class="sd">            - nw2r             : Radial-function index of each projection,</span>
+<span class="sd">                                 shape ``[num_wann]`` (list).</span>
+<span class="sd">            - nw2s             : Spin component of each projection; zero for</span>
+<span class="sd">                                 non-spinor projections (list).</span>
+<span class="sd">            - nw2saxis         : Spin-quantization axis of each projection,</span>
+<span class="sd">                                 shape ``[num_wann][3]`` (list).</span>
+<span class="sd">            - atom_orb         : Wannier-function indices grouped by orbital</span>
+<span class="sd">                                 projection (list).</span>
+<span class="sd">            - atom_pos         : Orbital-projection indices grouped by</span>
+<span class="sd">                                 projection center (list).</span>
+<span class="sd">            - atom_pos_r       : Projection-center positions in fractional</span>
+<span class="sd">                                 coordinates, shape ``[num_atom][3]`` (list).</span>
+<span class="sd">            - bvec_cart        : b-vectors at Gamma in Cartesian reciprocal</span>
+<span class="sd">                                 coordinates, shape ``[num_b][3]`` (list).</span>
+<span class="sd">            - bvec_crys        : The same b-vectors in crystal coordinates,</span>
+<span class="sd">                                 shape ``[num_b][3]`` (list).</span>
+<span class="sd">            - wb               : Finite-difference weights of ``bvec_cart``,</span>
+<span class="sd">                                 shape ``[num_b]`` (list).</span>
+<span class="sd">            - bveck            : Cartesian b-vector for each ``(k,b)`` pair,</span>
+<span class="sd">                                 shape ``[num_k][num_b][3]`` (list).</span>
+<span class="sd">            - wk               : Finite-difference weight for each ``(k,b)``</span>
+<span class="sd">                                 pair, shape ``[num_k][num_b]`` (list).</span>
+<span class="sd">            - kb2k             : Zero-based index of ``k+b`` for each pair,</span>
+<span class="sd">                                 shape ``[num_k][num_b]`` (list).</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        - ``num_atom`` and ``atom_pos_r`` describe Wannier projection centers, which need not coincide with the physical atoms in ``seedname.win``.</span>
+<span class="sd">        - For ``auto_projections``, only ``num_wann`` is available; the detailed projection entries are returned as ``None``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">topdir</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">topdir</span> <span class="o">=</span> <span class="s2">&quot;.&quot;</span>
+    <span class="n">blocks</span> <span class="o">=</span> <span class="n">_blocks</span><span class="p">(</span><span class="n">_read_lines</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">topdir</span><span class="p">)</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">seedname</span><span class="si">}</span><span class="s2">.nnkp&quot;</span><span class="p">))</span>
+
+    <span class="n">required</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;real_lattice&quot;</span><span class="p">,</span> <span class="s2">&quot;recip_lattice&quot;</span><span class="p">,</span> <span class="s2">&quot;kpoints&quot;</span><span class="p">,</span> <span class="s2">&quot;nnkpts&quot;</span><span class="p">)</span>
+    <span class="n">missing</span> <span class="o">=</span> <span class="p">[</span><span class="n">name</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">required</span> <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">blocks</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">missing</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;missing blocks in </span><span class="si">{</span><span class="n">seedname</span><span class="si">}</span><span class="s2">.nnkp: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">missing</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># --- lattice vectors ---</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">_array</span><span class="p">(</span><span class="n">blocks</span><span class="p">[</span><span class="s2">&quot;real_lattice&quot;</span><span class="p">])</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">_array</span><span class="p">(</span><span class="n">blocks</span><span class="p">[</span><span class="s2">&quot;recip_lattice&quot;</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="ow">or</span> <span class="n">B</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;real_lattice and recip_lattice must have shape [3][3]&quot;</span><span class="p">)</span>
+
+    <span class="c1"># --- k points ---</span>
+    <span class="n">rows</span> <span class="o">=</span> <span class="n">blocks</span><span class="p">[</span><span class="s2">&quot;kpoints&quot;</span><span class="p">]</span>
+    <span class="n">num_k</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">rows</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">kpoints_wo_shift</span> <span class="o">=</span> <span class="n">_array</span><span class="p">(</span><span class="n">rows</span><span class="p">[</span><span class="mi">1</span> <span class="p">:</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">num_k</span><span class="p">])</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">kpoints_wo_shift</span><span class="p">)</span> <span class="o">!=</span> <span class="n">num_k</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;invalid number of k points&quot;</span><span class="p">)</span>
+    <span class="n">kpoints</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mod</span><span class="p">(</span><span class="n">kpoints_wo_shift</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># --- nearest-neighbour k points ---</span>
+    <span class="n">rows</span> <span class="o">=</span> <span class="n">blocks</span><span class="p">[</span><span class="s2">&quot;nnkpts&quot;</span><span class="p">]</span>
+    <span class="n">num_b</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">rows</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">nnkpts</span> <span class="o">=</span> <span class="n">_array</span><span class="p">(</span><span class="n">rows</span><span class="p">[</span><span class="mi">1</span> <span class="p">:</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">num_k</span> <span class="o">*</span> <span class="n">num_b</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">nnkpts</span><span class="p">)</span> <span class="o">!=</span> <span class="n">num_k</span> <span class="o">*</span> <span class="n">num_b</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;invalid number of nearest-neighbour k-point entries&quot;</span><span class="p">)</span>
+    <span class="n">nnkpts</span> <span class="o">=</span> <span class="n">nnkpts</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">num_k</span><span class="p">,</span> <span class="n">num_b</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+
+    <span class="n">d</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;A&quot;</span><span class="p">:</span> <span class="n">A</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+        <span class="s2">&quot;B&quot;</span><span class="p">:</span> <span class="n">B</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+        <span class="s2">&quot;num_k&quot;</span><span class="p">:</span> <span class="n">num_k</span><span class="p">,</span>
+        <span class="s2">&quot;num_wann&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;num_atom&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;num_b&quot;</span><span class="p">:</span> <span class="n">num_b</span><span class="p">,</span>
+        <span class="s2">&quot;kpoints&quot;</span><span class="p">:</span> <span class="n">kpoints</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+        <span class="s2">&quot;nnkpts&quot;</span><span class="p">:</span> <span class="n">nnkpts</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+        <span class="s2">&quot;nw2n&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s2">&quot;nw2l&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s2">&quot;nw2m&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s2">&quot;nw2r&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s2">&quot;nw2s&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s2">&quot;nw2saxis&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s2">&quot;atom_orb&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s2">&quot;atom_pos&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s2">&quot;atom_pos_r&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s2">&quot;bvec_cart&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s2">&quot;bvec_crys&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s2">&quot;wb&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s2">&quot;bveck&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s2">&quot;wk&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s2">&quot;kb2k&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="c1"># --- projection information ---</span>
+    <span class="n">projection_block</span> <span class="o">=</span> <span class="s2">&quot;spinor_projections&quot;</span> <span class="k">if</span> <span class="s2">&quot;spinor_projections&quot;</span> <span class="ow">in</span> <span class="n">blocks</span> <span class="k">else</span> <span class="s2">&quot;projections&quot;</span>
+    <span class="n">projection_rows</span> <span class="o">=</span> <span class="n">blocks</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">projection_block</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">projection_rows</span> <span class="ow">and</span> <span class="nb">int</span><span class="p">(</span><span class="n">projection_rows</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">d</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+            <span class="n">_projection_data</span><span class="p">(</span>
+                <span class="n">projection_rows</span><span class="p">,</span>
+                <span class="n">spinors</span><span class="o">=</span><span class="n">projection_block</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;spinor&quot;</span><span class="p">),</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="k">elif</span> <span class="s2">&quot;auto_projections&quot;</span> <span class="ow">in</span> <span class="n">blocks</span><span class="p">:</span>
+        <span class="c1"># With automatic projections, nnkp stores num_wann but does not store</span>
+        <span class="c1"># the per-Wannier projection metadata listed above.</span>
+        <span class="n">d</span><span class="p">[</span><span class="s2">&quot;num_wann&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">blocks</span><span class="p">[</span><span class="s2">&quot;auto_projections&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;projection information is missing in </span><span class="si">{</span><span class="n">seedname</span><span class="si">}</span><span class="s2">.nnkp&quot;</span><span class="p">)</span>
+
+    <span class="c1"># b = k_ikb + G - k_ik in crystal coordinates, followed by conversion to</span>
+    <span class="c1"># Cartesian reciprocal coordinates using the row-vector convention.</span>
+    <span class="n">b_crys</span> <span class="o">=</span> <span class="n">kpoints_wo_shift</span><span class="p">[</span><span class="n">nnkpts</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">nnkpts</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span> <span class="o">-</span> <span class="n">kpoints_wo_shift</span><span class="p">[</span><span class="n">nnkpts</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">bveck</span> <span class="o">=</span> <span class="n">b_crys</span> <span class="o">@</span> <span class="n">B</span>
+
+    <span class="c1"># Wannier90 finite-difference shells are identified using the Gamma point.</span>
+    <span class="n">gamma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flatnonzero</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">kpoints_wo_shift</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">gamma</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Gamma point must be included&quot;</span><span class="p">)</span>
+
+    <span class="n">bvec_cart</span> <span class="o">=</span> <span class="n">bveck</span><span class="p">[</span><span class="n">gamma</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+    <span class="n">bvec_crys</span> <span class="o">=</span> <span class="n">bvec_cart</span> <span class="o">@</span> <span class="n">A</span><span class="o">.</span><span class="n">T</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
+
+    <span class="c1"># Solve sum_b w_b b_a b_c = delta_ac using the pseudoinverse.</span>
+    <span class="n">bbmat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;bi,bj-&gt;bij&quot;</span><span class="p">,</span> <span class="n">bvec_cart</span><span class="p">,</span> <span class="n">bvec_cart</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">num_b</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+    <span class="n">wb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">pinv</span><span class="p">(</span><span class="n">bbmat</span><span class="p">)</span>
+
+    <span class="c1"># Assign the corresponding Gamma-shell weight to every (k,b) pair.</span>
+    <span class="n">match</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span>
+        <span class="n">bveck</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:],</span>
+        <span class="n">bvec_cart</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span>
+        <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">,</span>
+        <span class="n">atol</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">,</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">match</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;unknown b-vector&quot;</span><span class="p">)</span>
+
+    <span class="n">d</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+        <span class="n">bvec_cart</span><span class="o">=</span><span class="n">bvec_cart</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+        <span class="n">bvec_crys</span><span class="o">=</span><span class="n">bvec_crys</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+        <span class="n">wb</span><span class="o">=</span><span class="n">wb</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+        <span class="n">bveck</span><span class="o">=</span><span class="n">bveck</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+        <span class="n">wk</span><span class="o">=</span><span class="n">wb</span><span class="p">[</span><span class="n">match</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)]</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+        <span class="n">kb2k</span><span class="o">=</span><span class="p">(</span><span class="n">nnkpts</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">d</span></div>
+
+
+
+<span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="merge_wannier_info">
+<a class="viewcode-back" href="../../../src/api_util/util_wannier.html#multipie.util.util_wannier.merge_wannier_info">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">merge_wannier_info</span><span class="p">(</span><span class="n">win</span><span class="p">,</span> <span class="n">nnkp</span><span class="p">,</span> <span class="n">seedname</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Check duplicated entries in ``win`` and ``nnkp``, then merge them.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        win (dict): Information returned by :func:`read_win`.</span>
+<span class="sd">        nnkp (dict): Information returned by :func:`read_nnkp`.</span>
+<span class="sd">        seedname (str): Wannier90 seedname used in error messages.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        - (dict) -- Merged Wannier90 information.  Every key present in both input dictionaries is checked for consistency, and the value from ``win`` is retained for the duplicated key.  With the current readers, the duplicated entries are ``A``, ``num_k``, ``num_wann``, and ``kpoints``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">common_keys</span> <span class="o">=</span> <span class="n">win</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="o">&amp;</span> <span class="n">nnkp</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">common_keys</span><span class="p">):</span>
+        <span class="n">value_win</span> <span class="o">=</span> <span class="n">win</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+        <span class="n">value_nnkp</span> <span class="o">=</span> <span class="n">nnkp</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value_win</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">))</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value_nnkp</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)):</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">value_win</span><span class="p">)</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">value_nnkp</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">a</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">b</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;inconsistent </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> between </span><span class="si">{</span><span class="n">seedname</span><span class="si">}</span><span class="s2">.win and &quot;</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">seedname</span><span class="si">}</span><span class="s2">.nnkp: shape </span><span class="si">{</span><span class="n">a</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2"> != </span><span class="si">{</span><span class="n">b</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">number</span><span class="p">)</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">number</span><span class="p">):</span>
+                <span class="n">same</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-7</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">)</span>
+                <span class="n">detail</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;maximum difference = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">b</span><span class="p">))</span><span class="si">:</span><span class="s2">.3e</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">same</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+                <span class="n">detail</span> <span class="o">=</span> <span class="s2">&quot;values differ&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">same</span> <span class="o">=</span> <span class="n">value_win</span> <span class="o">==</span> <span class="n">value_nnkp</span>
+            <span class="n">detail</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;win=</span><span class="si">{</span><span class="n">value_win</span><span class="si">!r}</span><span class="s2">, nnkp=</span><span class="si">{</span><span class="n">value_nnkp</span><span class="si">!r}</span><span class="s2">&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">same</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;inconsistent </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> between </span><span class="si">{</span><span class="n">seedname</span><span class="si">}</span><span class="s2">.win and &quot;</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">seedname</span><span class="si">}</span><span class="s2">.nnkp: </span><span class="si">{</span><span class="n">detail</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Duplicated entries have already been checked; retain the win values.</span>
+    <span class="k">return</span> <span class="n">win</span> <span class="o">|</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">nnkp</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">common_keys</span><span class="p">}</span></div>
+
+
+
+<span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="matrix_dict_r">
+<a class="viewcode-back" href="../../../src/api_util/util_wannier.html#multipie.util.util_wannier.matrix_dict_r">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">matrix_dict_r</span><span class="p">(</span><span class="n">Or</span><span class="p">,</span> <span class="n">rpoints</span><span class="p">,</span> <span class="n">diagonal</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    dictionary form of an arbitrary operator matrix in real-space representation.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        Or (ndarray): real-space representation of the given operator, O_{ab}(R) = &lt;φ_{a}(0)|O|φ_{b}(R)&gt;.</span>
+<span class="sd">        rpoints (ndarray): lattice points (crystal coordinate, [[n1,n2,n3]], nj: integer).</span>
+<span class="sd">        diagonal (bool, optional): diagonal matrix ?</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        - (dict) -- real-space representation of the given operator, {(n2,n2,n3,a,b) = O_{ab}(R)}.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># number of pseudo atomic orbitals</span>
+    <span class="n">dim_r</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">Or</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">diagonal</span><span class="p">:</span>
+        <span class="n">dim_c</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">Or</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="n">Or_dict</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="n">r_list</span> <span class="o">=</span> <span class="p">[[</span><span class="n">r</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">n1</span><span class="p">),</span> <span class="nb">round</span><span class="p">(</span><span class="n">n2</span><span class="p">),</span> <span class="nb">round</span><span class="p">(</span><span class="n">n3</span><span class="p">)]</span> <span class="k">for</span> <span class="n">r</span><span class="p">,</span> <span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="n">n3</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">rpoints</span><span class="p">)]</span>
+
+    <span class="k">if</span> <span class="n">diagonal</span><span class="p">:</span>
+        <span class="n">Or_dict</span> <span class="o">=</span> <span class="p">{(</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="n">n3</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span> <span class="n">Or</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">a</span><span class="p">]</span> <span class="k">for</span> <span class="n">r</span><span class="p">,</span> <span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="n">n3</span> <span class="ow">in</span> <span class="n">r_list</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dim_r</span><span class="p">)}</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">Or_dict</span> <span class="o">=</span> <span class="p">{(</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="n">n3</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span> <span class="n">Or</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">a</span><span class="p">][</span><span class="n">b</span><span class="p">]</span> <span class="k">for</span> <span class="n">r</span><span class="p">,</span> <span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="n">n3</span> <span class="ow">in</span> <span class="n">r_list</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dim_r</span><span class="p">)</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dim_c</span><span class="p">)}</span>
+
+    <span class="k">return</span> <span class="n">Or_dict</span></div>
+
+
+
+<span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="read_hr">
+<a class="viewcode-back" href="../../../src/api_util/util_wannier.html#multipie.util.util_wannier.read_hr">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">read_hr</span><span class="p">(</span><span class="n">hr_file</span><span class="p">,</span> <span class="n">topdir</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Read ``seedname_hr.dat`` generated by Wannier90.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        hr_file (str): Wannier90 Hamiltonian file.</span>
+<span class="sd">        topdir (str, optional): directory containing ``seedname_hr.dat``.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        - (dict) -- info. dict.</span>
+<span class="sd">            - HH_R   : Real-space Hamiltonian matrices ``H_mn(R)`` in eV,</span>
+<span class="sd">                       shape ``[num_R][num_wann][num_wann]`` (ndarray).</span>
+<span class="sd">            - irvec  : Lattice vectors ``R = n1*a1 + n2*a2 + n3*a3`` in</span>
+<span class="sd">                       crystal coordinates, shape ``[num_R][3]`` (ndarray).</span>
+<span class="sd">            - ndegen : Wigner-Seitz degeneracy of each ``R`` vector, shape</span>
+<span class="sd">                       ``[num_R]`` (ndarray).</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        - Wannier indices in the file are one-based and are converted to zero-based array indices.  ``ndegen`` is the denominator used in the Wannier90 Fourier interpolation over ``R`` vectors.  The file is read sequentially to avoid storing the full text representation in memory.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">topdir</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">topdir</span> <span class="o">=</span> <span class="s2">&quot;.&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">next_nonempty</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the next non-empty line or raise a format error.&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">():</span>
+                <span class="k">return</span> <span class="n">line</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;unexpected end of </span><span class="si">{</span><span class="n">hr_file</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="n">_open_text</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">topdir</span><span class="p">)</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">hr_file</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="c1"># The first line is a comment written by Wannier90.</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="nb">next</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">StopIteration</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;invalid hr file: </span><span class="si">{</span><span class="n">hr_file</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">exc</span>
+
+        <span class="n">num_wann</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">next_nonempty</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
+        <span class="n">num_R</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">next_nonempty</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">num_wann</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">num_R</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;num_wann and num_R must be positive&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Degeneracies are normally written with at most 15 integers per line.</span>
+        <span class="n">ndegen</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">ndegen</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">num_R</span><span class="p">:</span>
+            <span class="n">ndegen</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">next_nonempty</span><span class="p">(</span><span class="n">f</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()))</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ndegen</span><span class="p">)</span> <span class="o">!=</span> <span class="n">num_R</span> <span class="ow">or</span> <span class="nb">any</span><span class="p">(</span><span class="n">value</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">ndegen</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;invalid degeneracies in </span><span class="si">{</span><span class="n">hr_file</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="n">ndegen</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">ndegen</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+        <span class="n">irvec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">num_R</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+        <span class="n">HH_R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">num_R</span><span class="p">,</span> <span class="n">num_wann</span><span class="p">,</span> <span class="n">num_wann</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+        <span class="n">r_index</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="c1"># Each R block contains num_wann**2 Hamiltonian matrix elements.</span>
+        <span class="k">for</span> <span class="n">iR</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_R</span><span class="p">):</span>
+            <span class="n">R_block</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">assigned</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">num_wann</span><span class="p">,</span> <span class="n">num_wann</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_wann</span> <span class="o">*</span> <span class="n">num_wann</span><span class="p">):</span>
+                <span class="n">values</span> <span class="o">=</span> <span class="n">next_nonempty</span><span class="p">(</span><span class="n">f</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">7</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;invalid Hamiltonian entry: </span><span class="si">{</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">values</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+                <span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="n">n3</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">values</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
+                <span class="n">R</span> <span class="o">=</span> <span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="n">n3</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">R_block</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">R_block</span> <span class="o">=</span> <span class="n">R</span>
+                <span class="k">elif</span> <span class="n">R</span> <span class="o">!=</span> <span class="n">R_block</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;inconsistent R vectors within block </span><span class="si">{</span><span class="n">iR</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">m</span> <span class="o">&lt;=</span> <span class="n">num_wann</span> <span class="ow">and</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="n">num_wann</span><span class="p">):</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;invalid Wannier indices m=</span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2">, n=</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">assigned</span><span class="p">[</span><span class="n">m</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;duplicated Hamiltonian entry for R=</span><span class="si">{</span><span class="n">R</span><span class="si">}</span><span class="s2">, m=</span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2">, n=</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+                <span class="n">assigned</span><span class="p">[</span><span class="n">m</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="n">HH_R</span><span class="p">[</span><span class="n">iR</span><span class="p">,</span> <span class="n">m</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="nb">float</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="mi">6</span><span class="p">])</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">assigned</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;incomplete Hamiltonian block for R=</span><span class="si">{</span><span class="n">R_block</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">R_block</span> <span class="ow">in</span> <span class="n">r_index</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;duplicated R vector: </span><span class="si">{</span><span class="n">R_block</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+            <span class="n">irvec</span><span class="p">[</span><span class="n">iR</span><span class="p">]</span> <span class="o">=</span> <span class="n">R_block</span>
+            <span class="n">r_index</span><span class="p">[</span><span class="n">R_block</span><span class="p">]</span> <span class="o">=</span> <span class="n">iR</span>
+
+        <span class="c1"># No additional non-empty Hamiltonian rows should remain.</span>
+        <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;too many Hamiltonian entries in </span><span class="si">{</span><span class="n">hr_file</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Check H(R) = H(-R)^dagger.</span>
+    <span class="k">for</span> <span class="n">iR</span><span class="p">,</span> <span class="n">R</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">tuple</span><span class="p">,</span> <span class="n">irvec</span><span class="p">)):</span>
+        <span class="n">minus_R</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">R</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">minus_R</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">r_index</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;missing -R vector for R=</span><span class="si">{</span><span class="n">R</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="n">jR</span> <span class="o">=</span> <span class="n">r_index</span><span class="p">[</span><span class="n">minus_R</span><span class="p">]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">HH_R</span><span class="p">[</span><span class="n">iR</span><span class="p">],</span> <span class="n">HH_R</span><span class="p">[</span><span class="n">jR</span><span class="p">]</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">):</span>
+            <span class="n">diff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">HH_R</span><span class="p">[</span><span class="n">iR</span><span class="p">]</span> <span class="o">-</span> <span class="n">HH_R</span><span class="p">[</span><span class="n">jR</span><span class="p">]</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Hermiticity is violated for R=</span><span class="si">{</span><span class="n">R</span><span class="si">}</span><span class="s2">: maximum difference = </span><span class="si">{</span><span class="n">diff</span><span class="si">:</span><span class="s2">.3e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">hr_dict</span> <span class="o">=</span> <span class="n">matrix_dict_r</span><span class="p">(</span><span class="n">HH_R</span><span class="p">,</span> <span class="n">irvec</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">hr_dict</span><span class="p">,</span> <span class="n">irvec</span><span class="p">,</span> <span class="n">ndegen</span></div>
+
+
+
+<span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="build_ket_wannier">
+<a class="viewcode-back" href="../../../src/api_util/util_wannier.html#multipie.util.util_wannier.build_ket_wannier">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">build_ket_wannier</span><span class="p">(</span><span class="n">nnkp</span><span class="p">,</span> <span class="n">site_dict</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Construct the MultiPie ket basis from Wannier90 projection information.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        nnkp (dict): Information returned by :func:`read_nnkp`.</span>
+<span class="sd">        site_dict (dict): MultiPie sites in the form</span>
+<span class="sd">                          ``{(name, sublattice): fractional_position}``.</span>
+<span class="sd">        rtol (float, optional): Relative tolerance for comparing fractional positions.</span>
+<span class="sd">        atol (float, optional): Absolute tolerance for comparing fractional positions.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        - (list) -- Wannier ket basis with one entry per Wannier function.  Each entry has the form ``[name, sublattice, l, orbital]``.</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">        - Fractional positions are compared modulo lattice translations, so coordinates differing by an integer lattice vector are treated as the same site.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">keys</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;nw2n&quot;</span><span class="p">,</span> <span class="s2">&quot;nw2l&quot;</span><span class="p">,</span> <span class="s2">&quot;nw2m&quot;</span><span class="p">,</span> <span class="s2">&quot;nw2r&quot;</span><span class="p">,</span> <span class="s2">&quot;nw2s&quot;</span><span class="p">,</span> <span class="s2">&quot;atom_pos_r&quot;</span><span class="p">)</span>
+    <span class="n">missing</span> <span class="o">=</span> <span class="p">[</span><span class="n">key</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys</span> <span class="k">if</span> <span class="n">nnkp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">missing</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;ket_wannier cannot be constructed because detailed projection &quot;</span> <span class="sa">f</span><span class="s2">&quot;information is unavailable: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">missing</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+
+    <span class="n">arrays</span> <span class="o">=</span> <span class="p">[</span><span class="n">nnkp</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;nw2n&quot;</span><span class="p">,</span> <span class="s2">&quot;nw2l&quot;</span><span class="p">,</span> <span class="s2">&quot;nw2m&quot;</span><span class="p">,</span> <span class="s2">&quot;nw2r&quot;</span><span class="p">,</span> <span class="s2">&quot;nw2s&quot;</span><span class="p">)]</span>
+    <span class="n">lengths</span> <span class="o">=</span> <span class="p">{</span><span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="k">for</span> <span class="n">values</span> <span class="ow">in</span> <span class="n">arrays</span><span class="p">}</span>
+    <span class="k">if</span> <span class="n">lengths</span> <span class="o">!=</span> <span class="p">{</span><span class="n">nnkp</span><span class="p">[</span><span class="s2">&quot;num_wann&quot;</span><span class="p">]}:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;inconsistent number of Wannier projection entries&quot;</span><span class="p">)</span>
+
+    <span class="n">site_items</span> <span class="o">=</span> <span class="p">[((</span><span class="n">name</span><span class="p">,</span> <span class="n">sublattice</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">))</span> <span class="k">for</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">sublattice</span><span class="p">),</span> <span class="n">position</span> <span class="ow">in</span> <span class="n">site_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
+
+    <span class="n">ket_wannier</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">iw</span><span class="p">,</span> <span class="p">(</span><span class="n">pos_idx</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">arrays</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">pos_idx</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">nnkp</span><span class="p">[</span><span class="s2">&quot;atom_pos_r&quot;</span><span class="p">]):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;invalid projection-center index for Wannier function </span><span class="si">{</span><span class="n">iw</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">pos_idx</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="n">position</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">nnkp</span><span class="p">[</span><span class="s2">&quot;atom_pos_r&quot;</span><span class="p">][</span><span class="n">pos_idx</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="n">matches</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">site</span><span class="p">,</span> <span class="n">site_position</span> <span class="ow">in</span> <span class="n">site_items</span><span class="p">:</span>
+            <span class="n">delta</span> <span class="o">=</span> <span class="n">position</span> <span class="o">-</span> <span class="n">site_position</span>
+            <span class="n">delta</span> <span class="o">-=</span> <span class="n">np</span><span class="o">.</span><span class="n">rint</span><span class="p">(</span><span class="n">delta</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">delta</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="n">rtol</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="n">atol</span><span class="p">):</span>
+                <span class="n">matches</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">site</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">matches</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;no MultiPie site matches Wannier projection center </span><span class="si">{</span><span class="n">position</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">matches</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;multiple MultiPie sites match Wannier projection center &quot;</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">position</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">matches</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="n">name</span><span class="p">,</span> <span class="n">sublattice</span> <span class="o">=</span> <span class="n">matches</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">comp</span><span class="p">,</span> <span class="n">orbital</span> <span class="o">=</span> <span class="n">_convert_w90_orbital</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+        <span class="n">ket_wannier</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">name</span><span class="p">,</span> <span class="n">sublattice</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">comp</span><span class="p">,</span> <span class="n">orbital</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">ket_wannier</span></div>
+
+
+
+<span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="sort_ket_matrix">
+<a class="viewcode-back" href="../../../src/api_util/util_wannier.html#multipie.util.util_wannier.sort_ket_matrix">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">sort_ket_matrix</span><span class="p">(</span><span class="n">Ok</span><span class="p">,</span> <span class="n">ket1</span><span class="p">,</span> <span class="n">ket2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Sort ket to align with the MultiPie definition (ket2).</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        Ok (ndarray): arbitrary operator in k-space representation, O_{ab}(k) = &lt;φ_{a}(k)|H|φ_{b}(k)&gt;.</span>
+<span class="sd">        ket1 (list): ket basis list, [[atom name, sublattice, rank, orbital]]</span>
+<span class="sd">        ket2 (list): ket basis list, orbital@site.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        - (ndarray) -- operator.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">idx_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">ket1</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">o</span><span class="p">)</span> <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">ket2</span><span class="p">]</span>
+    <span class="n">Ok</span> <span class="o">=</span> <span class="n">Ok</span><span class="p">[:,</span> <span class="n">idx_list</span><span class="p">,</span> <span class="p">:]</span>
+    <span class="n">Ok</span> <span class="o">=</span> <span class="n">Ok</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">idx_list</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">Ok</span></div>
+
+
+
+<span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="sort_ket_matrix_dict">
+<a class="viewcode-back" href="../../../src/api_util/util_wannier.html#multipie.util.util_wannier.sort_ket_matrix_dict">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">sort_ket_matrix_dict</span><span class="p">(</span><span class="n">Or_dict</span><span class="p">,</span> <span class="n">ket1</span><span class="p">,</span> <span class="n">ket2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Sort ket to align with the MultiPie definition (ket2).</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        Or_dict (dict): dictionary form of an arbitrary operator matrix in reak-space/k-space representation.</span>
+<span class="sd">        ket1 (list): ket basis list, [[atom name, sublattice, rank, orbital]]</span>
+<span class="sd">        ket2 (list): ket basis list, orbital@site.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        - (dict) -- dictionary form of an arbitrary operator matrix.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">idx_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">ket2</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">o</span><span class="p">)</span> <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">ket1</span><span class="p">]</span>
+    <span class="n">Or_dict</span> <span class="o">=</span> <span class="p">{(</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="n">n3</span><span class="p">,</span> <span class="n">idx_list</span><span class="p">[</span><span class="n">a</span><span class="p">],</span> <span class="n">idx_list</span><span class="p">[</span><span class="n">b</span><span class="p">]):</span> <span class="nb">complex</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="n">n3</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">Or_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+
+    <span class="k">return</span> <span class="n">Or_dict</span></div>
+
+
+
+<span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="sort_ket_list">
+<a class="viewcode-back" href="../../../src/api_util/util_wannier.html#multipie.util.util_wannier.sort_ket_list">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">sort_ket_list</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span> <span class="n">ket1</span><span class="p">,</span> <span class="n">ket2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Sort ket to align with the MultiPie definition (ket2).</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        lst (list): arbitrary list that has the same dimensions as the ket.</span>
+<span class="sd">        ket1 (list): ket basis list, [[atom name, sublattice, rank, orbital]]</span>
+<span class="sd">        ket2 (list): ket basis list, orbital@site.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        - (list) -- arbitrary list that has the same dimensions as the ket.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">idx_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">ket1</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">o</span><span class="p">)</span> <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">ket2</span><span class="p">]</span>
+
+    <span class="n">lst</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">lst</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">lst</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">lst</span><span class="p">)[</span><span class="n">idx_list</span><span class="p">])</span>
+    <span class="k">elif</span> <span class="n">lst</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">lst</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">lst</span><span class="p">)[</span><span class="n">idx_list</span><span class="p">,</span> <span class="p">:])</span>
+    <span class="k">elif</span> <span class="n">lst</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="n">lst</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">lst</span><span class="p">)[</span><span class="n">idx_list</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;invalid dimension of lst = </span><span class="si">{</span><span class="n">lst</span><span class="o">.</span><span class="n">ndim</span><span class="si">}</span><span class="s2"> was given.&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="decompose_operator_by_SAMB">
+<a class="viewcode-back" href="../../../src/api_util/util_wannier.html#multipie.util.util_wannier.decompose_operator_by_SAMB">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">decompose_operator_by_SAMB</span><span class="p">(</span><span class="n">Or_dict</span><span class="p">,</span> <span class="n">Zr_dict</span><span class="p">,</span> <span class="n">digit</span><span class="o">=</span><span class="mi">15</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Decompose arbitrary operator into linear combination of SAMBs.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        Or_dict (dict): dictionary form of an arbitrary operator matrix in real-space/k-space representation.</span>
+<span class="sd">        Zr_dict (dict): dictionary form of SAMBs.</span>
+<span class="sd">        digit (int, optional): round digit for Zr_dict.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        - (dict) -- parameter set, dict[zj, coeff].</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_round</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+        <span class="n">c_val</span> <span class="o">=</span> <span class="nb">complex</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">c_val</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="n">digit</span><span class="p">)</span> <span class="o">+</span> <span class="nb">round</span><span class="p">(</span><span class="n">c_val</span><span class="o">.</span><span class="n">imag</span><span class="p">,</span> <span class="n">digit</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1</span><span class="n">j</span>
+
+    <span class="n">z</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">zj</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span>
+                <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">([</span><span class="n">_round</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">*</span> <span class="n">Or_dict</span><span class="o">.</span><span class="n">get</span><span class="p">((</span><span class="o">-</span><span class="n">k</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">-</span><span class="n">k</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="o">-</span><span class="n">k</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">k</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">k</span><span class="p">[</span><span class="mi">3</span><span class="p">]),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">b_no</span><span class="p">)</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">()])</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">for</span> <span class="n">zj</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">Zr_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">z</span></div>
+
+
+
+<span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="read_umat">
+<a class="viewcode-back" href="../../../src/api_util/util_wannier.html#multipie.util.util_wannier.read_umat">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">read_umat</span><span class="p">(</span><span class="n">seedname</span><span class="p">,</span> <span class="n">topdir</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Read ``seedname_u.mat``, ``seedname_u_dis.mat``.  Not implemented yet.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+
+
+<span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="read_eig">
+<a class="viewcode-back" href="../../../src/api_util/util_wannier.html#multipie.util.util_wannier.read_eig">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">read_eig</span><span class="p">(</span><span class="n">seedname</span><span class="p">,</span> <span class="n">topdir</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Read ``seedname.eig``.  Not implemented yet.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+
+
+<span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="read_mmn">
+<a class="viewcode-back" href="../../../src/api_util/util_wannier.html#multipie.util.util_wannier.read_mmn">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">read_mmn</span><span class="p">(</span><span class="n">seedname</span><span class="p">,</span> <span class="n">topdir</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Read ``seedname.mmn``.  Not implemented yet.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+
+
+<span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="read_spn">
+<a class="viewcode-back" href="../../../src/api_util/util_wannier.html#multipie.util.util_wannier.read_spn">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">read_spn</span><span class="p">(</span><span class="n">seedname</span><span class="p">,</span> <span class="n">topdir</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Read ``seedname.spn``.  Not implemented yet.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+
+
+<span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="read_uHu">
+<a class="viewcode-back" href="../../../src/api_util/util_wannier.html#multipie.util.util_wannier.read_uHu">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">read_uHu</span><span class="p">(</span><span class="n">seedname</span><span class="p">,</span> <span class="n">topdir</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Read ``seedname.uHu``.  Not implemented yet.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+
+
+<span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="read_uIu">
+<a class="viewcode-back" href="../../../src/api_util/util_wannier.html#multipie.util.util_wannier.read_uIu">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">read_uIu</span><span class="p">(</span><span class="n">seedname</span><span class="p">,</span> <span class="n">topdir</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Read ``seedname.uIu``.  Not implemented yet.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+
+
+<span class="c1"># ==================================================</span>
+<span class="c1"># ==================================================</span>
+<span class="n">SYMPREC</span> <span class="o">=</span> <span class="mf">1e-4</span>
+
+
+<span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="find_sg">
+<a class="viewcode-back" href="../../../src/api_util/util_wannier.html#multipie.util.util_wannier.find_sg">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">find_sg</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">atoms_frac</span><span class="p">,</span> <span class="n">symprec</span><span class="o">=</span><span class="n">SYMPREC</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Find space group via spglib.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        A (ndarray): lattice vector, [a1,a2,a3]. (conventional, standard setting).</span>
+<span class="sd">        atoms_frac (dict): atoms_frac in &quot;win&quot;.</span>
+<span class="sd">        symprec (float, optional): precision for spglib.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        - (int) -- space group no.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">positions</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">atoms_frac</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+    <span class="n">elements</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">atoms_frac</span><span class="o">.</span><span class="n">keys</span><span class="p">()]))</span>
+    <span class="n">elements</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="n">no</span> <span class="k">for</span> <span class="n">no</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">elements</span><span class="p">)}</span>
+    <span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="n">elements</span><span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">atoms_frac</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
+    <span class="n">cell</span> <span class="o">=</span> <span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">positions</span><span class="p">,</span> <span class="n">numbers</span><span class="p">)</span>
+
+    <span class="n">dataset</span> <span class="o">=</span> <span class="n">spglib</span><span class="o">.</span><span class="n">get_symmetry_dataset</span><span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="n">symprec</span><span class="o">=</span><span class="n">symprec</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">dataset</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">dataset</span><span class="o">.</span><span class="n">number</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+
+
+<span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="find_vector_index">
+<a class="viewcode-back" href="../../../src/api_util/util_wannier.html#multipie.util.util_wannier.find_vector_index">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">find_vector_index</span><span class="p">(</span><span class="n">vector_list</span><span class="p">,</span> <span class="n">vector</span><span class="p">,</span> <span class="n">symprec</span><span class="o">=</span><span class="n">SYMPREC</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Find vector index.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        vector_list (list): vector list.</span>
+<span class="sd">        vector (ndarray): vector to find.</span>
+<span class="sd">        symprec (float, optional): precision.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        - (int) -- index.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">vector_list</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">vector</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="n">symprec</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">idx</span>
+    <span class="k">return</span> <span class="kc">None</span></div>
+
+
+
+<span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="get_or_add_vector">
+<a class="viewcode-back" href="../../../src/api_util/util_wannier.html#multipie.util.util_wannier.get_or_add_vector">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_or_add_vector</span><span class="p">(</span><span class="n">existing_list</span><span class="p">,</span> <span class="n">target_vector</span><span class="p">,</span> <span class="n">symprec</span><span class="o">=</span><span class="n">SYMPREC</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get and add vector.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        existing_list (list): vector list previously appeared.</span>
+<span class="sd">        target_vector (ndarray): vector.</span>
+<span class="sd">        symprec (float, optional): precision.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        - (int) -- index.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">target_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">target_vector</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">existing_list</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">target_arr</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="n">symprec</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">idx</span>
+
+    <span class="n">existing_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">target_arr</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">existing_list</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span></div>
+
+
+
+<span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="create_ket_wannier_multipie">
+<a class="viewcode-back" href="../../../src/api_util/util_wannier.html#multipie.util.util_wannier.create_ket_wannier_multipie">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_ket_wannier_multipie</span><span class="p">(</span><span class="n">wannier_info</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create wannier and MultiPie ket, and conversion index.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        wannier_info (dict): wannier_info dict. A, atoms_frac, atomc_cart, nw2n, nw2l, nw2m, nw2r, nw2s.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        - (list) -- idx for converting from wannier to multipie. &lt;m|w&gt; = delta(m.w2m(w)).</span>
+<span class="sd">        - (list) -- idx for converting from multipie to wannier. &lt;m|w&gt; = delta(w,m2w(m)).</span>
+<span class="sd">        - (list) -- ket_multipie name. |m&gt;.</span>
+<span class="sd">        - (list) -- atom position in fractional coordinate (in multipie order). |m&gt;(pos).</span>
+<span class="sd">        - (list) -- atom position in cartesian coordinate (in multipie order). |m&gt;(pos).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># create orbital list.</span>
+    <span class="n">orbital_info</span> <span class="o">=</span> <span class="p">[</span><span class="n">wannier_info</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;nw2n&quot;</span><span class="p">,</span> <span class="s2">&quot;nw2l&quot;</span><span class="p">,</span> <span class="s2">&quot;nw2m&quot;</span><span class="p">,</span> <span class="s2">&quot;nw2r&quot;</span><span class="p">,</span> <span class="s2">&quot;nw2s&quot;</span><span class="p">)]</span>
+    <span class="n">orbital_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">orbital_info</span><span class="p">):</span>
+        <span class="n">comp</span><span class="p">,</span> <span class="n">orbital</span> <span class="o">=</span> <span class="n">_convert_w90_orbital</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+        <span class="n">orbital_list</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">comp</span><span class="p">,</span> <span class="n">orbital</span><span class="p">))</span>
+
+    <span class="c1"># determine space group by spglib.</span>
+    <span class="n">space_group_no</span> <span class="o">=</span> <span class="n">find_sg</span><span class="p">(</span><span class="n">wannier_info</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">],</span> <span class="n">wannier_info</span><span class="p">[</span><span class="s2">&quot;atoms_frac&quot;</span><span class="p">])</span>
+    <span class="n">group</span> <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="n">space_group_no</span><span class="p">)</span>
+
+    <span class="c1"># create atom site-cluster info.</span>
+    <span class="n">existing_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">site_cluster</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">atom_info</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">atom</span><span class="p">,</span> <span class="n">_</span><span class="p">),</span> <span class="n">pos</span> <span class="ow">in</span> <span class="n">wannier_info</span><span class="p">[</span><span class="s2">&quot;atoms_frac&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">wp</span><span class="p">,</span> <span class="n">sites</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">find_wyckoff_site</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="n">get_or_add_vector</span><span class="p">(</span><span class="n">existing_list</span><span class="p">,</span> <span class="n">sites</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">atom</span><span class="p">,</span> <span class="n">wp</span><span class="p">,</span> <span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">site_cluster</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">site_cluster</span><span class="p">[(</span><span class="n">atom</span><span class="p">,</span> <span class="n">wp</span><span class="p">,</span> <span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="n">sites</span>
+        <span class="n">atom_info</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">atom</span><span class="p">,</span> <span class="n">wp</span><span class="p">,</span> <span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">pos</span><span class="p">))</span>
+
+    <span class="c1"># create ket info. name, (atom, sublattice, rank, component, orbital), frac_position, (wycokff, multiplicity).</span>
+    <span class="n">w_ket</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">comp</span><span class="p">,</span> <span class="n">orbital</span> <span class="ow">in</span> <span class="n">orbital_list</span><span class="p">:</span>
+        <span class="n">atom</span><span class="p">,</span> <span class="n">wp</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="n">atom_info</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+        <span class="n">sites</span> <span class="o">=</span> <span class="n">site_cluster</span><span class="p">[(</span><span class="n">atom</span><span class="p">,</span> <span class="n">wp</span><span class="p">,</span> <span class="n">idx</span><span class="p">)]</span>
+        <span class="n">site_idx</span> <span class="o">=</span> <span class="n">find_vector_index</span><span class="p">(</span><span class="n">sites</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">orbital</span><span class="si">}</span><span class="s2">@</span><span class="si">{</span><span class="n">atom</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="n">site_idx</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">)&quot;</span>
+        <span class="n">w_ket</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">name</span><span class="p">,</span> <span class="p">(</span><span class="n">atom</span><span class="p">,</span> <span class="n">site_idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">comp</span><span class="p">,</span> <span class="n">orbital</span><span class="p">),</span> <span class="n">pos</span><span class="p">,</span> <span class="p">(</span><span class="n">wp</span><span class="p">,</span> <span class="n">idx</span><span class="p">)))</span>
+    <span class="n">m2w</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">w_ket</span><span class="p">)),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="n">w_ket</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">][:</span><span class="mi">4</span><span class="p">])</span>
+    <span class="n">w2m</span> <span class="o">=</span> <span class="p">[</span><span class="n">no</span> <span class="k">for</span> <span class="n">no</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">enumerate</span><span class="p">(</span><span class="n">m2w</span><span class="p">),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span>
+
+    <span class="n">ket_wannier</span> <span class="o">=</span> <span class="p">[</span><span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">w_ket</span><span class="p">]</span>
+    <span class="n">ket_multipie</span> <span class="o">=</span> <span class="p">[</span><span class="n">w_ket</span><span class="p">[</span><span class="n">w</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">m2w</span><span class="p">]</span>
+
+    <span class="n">nw2n</span> <span class="o">=</span> <span class="n">wannier_info</span><span class="p">[</span><span class="s2">&quot;nw2n&quot;</span><span class="p">]</span>
+    <span class="n">atoms_frac</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">wannier_info</span><span class="p">[</span><span class="s2">&quot;atoms_frac&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+    <span class="n">atoms_frac</span> <span class="o">=</span> <span class="p">[</span><span class="n">atoms_frac</span><span class="p">[</span><span class="n">nw2n</span><span class="p">[</span><span class="n">w</span><span class="p">]]</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">m2w</span><span class="p">]</span>
+    <span class="n">atoms_cart</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">wannier_info</span><span class="p">[</span><span class="s2">&quot;atoms_cart&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+    <span class="n">atoms_cart</span> <span class="o">=</span> <span class="p">[</span><span class="n">atoms_cart</span><span class="p">[</span><span class="n">nw2n</span><span class="p">[</span><span class="n">w</span><span class="p">]]</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">m2w</span><span class="p">]</span>
+
+    <span class="c1"># for debug.</span>
+    <span class="c1"># return space_group_no, str(group), site_cluster, w_ket, m2w, ket_wannier, ket_multipie</span>
+    <span class="k">return</span> <span class="n">w2m</span><span class="p">,</span> <span class="n">m2w</span><span class="p">,</span> <span class="n">ket_multipie</span><span class="p">,</span> <span class="n">atoms_frac</span><span class="p">,</span> <span class="n">atoms_cart</span></div>
+
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Hiroaki Kusunose and Rikuto Oiwa
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2021-.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

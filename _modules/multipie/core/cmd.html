@@ -174,29 +174,31 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API reference</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../src/api_core.html">Core</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_core/init.html">Type</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../src/api_core/cmd.html">Create function</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../src/api_core/model_analyzer.html">ModelAnalyzer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../src/api_core/group.html">Group</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../src/api_core/material_model.html">Material Model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../src/api_core/init.html">Type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_core/model_analyzer.html">ModelAnalyzer</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../src/api_util.html">Utility</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_atomic_multipole.html">Atomic multipole</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_binary.html">Binary data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_crystal.html">Crystal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_dict.html">Dict</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_tag.html">Tag</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_wyckoff.html">Wyckoff position</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_harmonics.html">Harmonics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util.html">Versatile</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_gram_schmidt.html">Grad-Schmidt orthonormalization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_material_model.html">Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_harmonics.html">Harmonics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_material_model_pdf.html">PDF creator for Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_material_model.html">Material Model</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_model_analyzer.html">Model Analyzer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_pdf_latex.html">PDF creator</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_plot.html">Plot</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_response_tensor.html">Response tensor</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_samb.html">SAMB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_tag.html">Tag</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_wannier.html">Wannier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_wyckoff.html">Wyckoff position</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util.html">Versatile</a></li>
 </ul>
 </details></li>
 </ul>
@@ -376,15 +378,12 @@
 <span class="c1"># ==================================================</span>
 <div class="viewcode-block" id="analyze_model">
 <a class="viewcode-back" href="../../../src/api_core/cmd.html#multipie.core.cmd.analyze_model">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">analyze_model</span><span class="p">(</span><span class="n">controls</span><span class="p">,</span> <span class="n">N1</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">N2</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">N3</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">topdir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">analyze_model</span><span class="p">(</span><span class="n">controls</span><span class="p">,</span> <span class="n">topdir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Analyze model.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        controls (str or [str] or dict or [dict]): control file(s) or dict(s).</span>
-<span class="sd">        N1 (int, optional): number of divisions in a1.</span>
-<span class="sd">        N2 (int, optional): number of divisions in a2.</span>
-<span class="sd">        N3 (int, optional): number of divisions in a3.</span>
 <span class="sd">        topdir (str, optional): top directory.</span>
 <span class="sd">        verbose (bool, optional): verbose ?</span>
 
@@ -396,8 +395,8 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">setup_logging</span><span class="p">()</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">create</span><span class="p">(</span><span class="n">ma</span><span class="p">,</span> <span class="n">control</span><span class="p">):</span>
-        <span class="nd">@timer</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;analyze model by &#39;</span><span class="si">{</span><span class="n">control</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create</span><span class="p">(</span><span class="n">ma</span><span class="p">,</span> <span class="n">control</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="nd">@timer</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;analyze model by &#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
         <span class="k">def</span><span class="w"> </span><span class="nf">create0</span><span class="p">():</span>
             <span class="n">ma</span><span class="o">.</span><span class="n">analyze</span><span class="p">(</span><span class="n">control</span><span class="p">)</span>
 
@@ -408,10 +407,15 @@
 
     <span class="n">controls</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">read_dict_file</span><span class="p">(</span><span class="n">controls</span><span class="p">,</span> <span class="n">topdir</span><span class="p">,</span> <span class="n">verbose</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
 
-    <span class="n">ma</span> <span class="o">=</span> <span class="n">ModelAnalyzer</span><span class="p">(</span><span class="n">N1</span><span class="p">,</span> <span class="n">N2</span><span class="p">,</span> <span class="n">N3</span><span class="p">,</span> <span class="n">topdir</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+    <span class="n">ma</span> <span class="o">=</span> <span class="n">ModelAnalyzer</span><span class="p">(</span><span class="n">topdir</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">control</span> <span class="ow">in</span> <span class="n">controls</span><span class="p">:</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">create</span><span class="p">(</span><span class="n">ma</span><span class="p">,</span> <span class="n">control</span><span class="p">)</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">control</span><span class="p">[</span><span class="s2">&quot;samb&quot;</span><span class="p">][</span><span class="s2">&quot;model&quot;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">name</span> <span class="o">=</span> <span class="n">control</span><span class="p">[</span><span class="s2">&quot;wannier&quot;</span><span class="p">][</span><span class="s2">&quot;seedname&quot;</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;no model is specified.&quot;</span><span class="p">)</span>
+            <span class="n">create</span><span class="p">(</span><span class="n">ma</span><span class="p">,</span> <span class="n">control</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
             <span class="n">logging</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s2">&quot;in analyze_model&quot;</span><span class="p">)</span>
             <span class="k">raise</span>

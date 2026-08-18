@@ -174,29 +174,31 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API reference</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../src/api_core.html">Core</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_core/init.html">Type</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../src/api_core/cmd.html">Create function</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../src/api_core/model_analyzer.html">ModelAnalyzer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../src/api_core/group.html">Group</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../src/api_core/material_model.html">Material Model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../src/api_core/init.html">Type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_core/model_analyzer.html">ModelAnalyzer</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../src/api_util.html">Utility</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_atomic_multipole.html">Atomic multipole</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_binary.html">Binary data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_crystal.html">Crystal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_dict.html">Dict</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_tag.html">Tag</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_wyckoff.html">Wyckoff position</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_harmonics.html">Harmonics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util.html">Versatile</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_gram_schmidt.html">Grad-Schmidt orthonormalization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_material_model.html">Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_harmonics.html">Harmonics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_material_model_pdf.html">PDF creator for Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_material_model.html">Material Model</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_model_analyzer.html">Model Analyzer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_pdf_latex.html">PDF creator</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_plot.html">Plot</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_response_tensor.html">Response tensor</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_samb.html">SAMB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_tag.html">Tag</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_wannier.html">Wannier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util_wyckoff.html">Wyckoff position</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../src/api_util/util.html">Versatile</a></li>
 </ul>
 </details></li>
 </ul>
@@ -321,7 +323,7 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sp</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">multipie.util.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">to_latex</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">multipie.util.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">to_latex</span><span class="p">,</span> <span class="n">simplify</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">multipie.core.group</span><span class="w"> </span><span class="kn">import</span> <span class="n">Group</span>
 
 
@@ -475,7 +477,7 @@
 <a class="viewcode-back" href="../../../src/api_util/util_material_model_pdf.html#multipie.util.util_material_model_pdf.ModelPDF.group_cell_info">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">group_cell_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">gp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mm</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">latex</span><span class="p">(</span><span class="n">detail</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="n">cell</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mm</span><span class="p">[</span><span class="s2">&quot;cell&quot;</span><span class="p">]</span>
+        <span class="n">cell</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mm</span><span class="p">[</span><span class="s2">&quot;cell_info&quot;</span><span class="p">][</span><span class="s2">&quot;cell&quot;</span><span class="p">]</span>
 
         <span class="n">a</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fmt_number</span><span class="p">(</span><span class="n">cell</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">])</span>
         <span class="n">b</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fmt_number</span><span class="p">(</span><span class="n">cell</span><span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">])</span>
@@ -656,6 +658,7 @@
                         <span class="n">t1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mm</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">tag_multipole</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span> <span class="n">c1</span><span class="p">,</span> <span class="n">latex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">superscript</span><span class="o">=</span><span class="s2">&quot;a&quot;</span><span class="p">)</span>
                         <span class="n">t2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mm</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">tag_multipole</span><span class="p">(</span><span class="n">t2</span><span class="p">,</span> <span class="n">c2</span><span class="p">,</span> <span class="n">latex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">superscript</span><span class="o">=</span><span class="n">clustar_str</span><span class="p">)</span>
                         <span class="n">ex</span> <span class="o">+=</span> <span class="n">cg</span> <span class="o">*</span> <span class="n">sp</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span> <span class="n">commutative</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">*</span> <span class="n">sp</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="n">t2</span><span class="p">,</span> <span class="n">commutative</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                    <span class="n">ex</span> <span class="o">=</span> <span class="n">simplify</span><span class="p">(</span><span class="n">ex</span><span class="p">)</span>
 
                     <span class="n">d</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;\hspace*</span><span class="si">{3mm}</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_tag</span><span class="p">(</span><span class="n">zi</span><span class="p">)</span>
                     <span class="n">d</span> <span class="o">+=</span> <span class="n">sp</span><span class="o">.</span><span class="n">latex</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="n">t</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span> <span class="o">+</span> <span class="n">sp</span><span class="o">.</span><span class="n">latex</span><span class="p">(</span><span class="n">ex</span><span class="p">)</span>
@@ -870,6 +873,7 @@
                 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">ex</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ex_set</span><span class="p">):</span>
                     <span class="n">sym</span> <span class="o">=</span> <span class="s2">&quot;$&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">mm</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">tag_multipole</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">comp</span><span class="o">=</span><span class="n">i</span><span class="p">,</span> <span class="n">latex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;$&quot;</span>
                     <span class="n">row</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">no</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+                    <span class="n">ex</span> <span class="o">=</span> <span class="n">simplify</span><span class="p">(</span><span class="n">ex</span><span class="p">)</span>
                     <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                         <span class="n">tbl</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">sym</span><span class="p">,</span> <span class="n">irrep</span><span class="p">,</span> <span class="n">rank</span><span class="p">,</span> <span class="n">XX</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">&quot;$&quot;</span> <span class="o">+</span> <span class="n">sp</span><span class="o">.</span><span class="n">latex</span><span class="p">(</span><span class="n">ex</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;$&quot;</span><span class="p">])</span>
                     <span class="k">else</span><span class="p">:</span>

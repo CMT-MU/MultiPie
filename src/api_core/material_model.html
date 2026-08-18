@@ -65,7 +65,7 @@
     <script src="../../_static/custom.js?v=9c3a2667"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Type" href="init.html" />
+    <link rel="next" title="ModelAnalyzer" href="model_analyzer.html" />
     <link rel="prev" title="Group" href="group.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -177,29 +177,31 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API reference</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../api_core.html">Core</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="init.html">Type</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cmd.html">Create function</a></li>
-<li class="toctree-l2"><a class="reference internal" href="model_analyzer.html">ModelAnalyzer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="group.html">Group</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Material Model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="init.html">Type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="model_analyzer.html">ModelAnalyzer</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../api_util.html">Utility</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_atomic_multipole.html">Atomic multipole</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api_util/util_binary.html">Binary data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api_util/util_crystal.html">Crystal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api_util/util_dict.html">Dict</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api_util/util_tag.html">Tag</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api_util/util_wyckoff.html">Wyckoff position</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api_util/util_harmonics.html">Harmonics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api_util/util.html">Versatile</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api_util/util_gram_schmidt.html">Grad-Schmidt orthonormalization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api_util/util_material_model.html">Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_harmonics.html">Harmonics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api_util/util_material_model_pdf.html">PDF creator for Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_material_model.html">Material Model</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api_util/util_model_analyzer.html">Model Analyzer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api_util/util_pdf_latex.html">PDF creator</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api_util/util_plot.html">Plot</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api_util/util_response_tensor.html">Response tensor</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../api_util/util_samb.html">SAMB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_tag.html">Tag</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_wannier.html">Wannier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_wyckoff.html">Wyckoff position</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util.html">Versatile</a></li>
 </ul>
 </details></li>
 </ul>
@@ -384,8 +386,6 @@
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.load"><code class="docutils literal notranslate"><span class="pre">MaterialModel.load()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.save"><code class="docutils literal notranslate"><span class="pre">MaterialModel.save()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.save_pdf"><code class="docutils literal notranslate"><span class="pre">MaterialModel.save_pdf()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.save_samb_hr"><code class="docutils literal notranslate"><span class="pre">MaterialModel.save_samb_hr()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.save_samb_matrix"><code class="docutils literal notranslate"><span class="pre">MaterialModel.save_samb_matrix()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.save_samb_qtdraw"><code class="docutils literal notranslate"><span class="pre">MaterialModel.save_samb_qtdraw()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.save_view"><code class="docutils literal notranslate"><span class="pre">MaterialModel.save_view()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.group"><code class="docutils literal notranslate"><span class="pre">MaterialModel.group</span></code></a></li>
@@ -421,6 +421,8 @@
 <ul>
 <li><p><strong>group</strong> (str): group tag.</p></li>
 <li><p><strong>crystal</strong> (str): crystal class.</p></li>
+<li><p><strong>cell_info</strong> (dict): unit-cell information</p>
+<ul>
 <li><p><strong>cell</strong> (dict): unit-cell parameters.</p>
 <ul>
 <li><p><strong>a</strong> (float): a.</p></li>
@@ -431,12 +433,9 @@
 <li><p><strong>gamma</strong> (float): gamma (deg.).</p></li>
 </ul>
 </li>
-<li><p><strong>cell_info</strong> (dict): unit-cell information</p>
-<ul>
-<li><p><strong>cell</strong> (dict): = cell.</p></li>
 <li><p><strong>volume</strong> (float): volume.</p></li>
-<li><p><strong>A</strong> (list): [a1,a2,a3,t] (4x4, each column).</p></li>
-<li><p><strong>G</strong> (list): metric matrix (4x4).</p></li>
+<li><p><strong>A</strong> (list): [a1,a2,a3,t] conventional lattice and translational vectors (4x4, each column).</p></li>
+<li><p><strong>G</strong> (list): metric matrix for conventional lattice (4x4).</p></li>
 </ul>
 </li>
 <li><p><strong>unit_vector</strong> (list): unit vectors, a1, a2, a3 (conventional cell).</p></li>
@@ -722,7 +721,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="multipie.core.material_model.MaterialModel.get_combined_samb_matrix">
-<span class="sig-name descname"><span class="pre">get_combined_samb_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">select</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fmt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sympy'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">digit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">14</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/core/material_model.html#MaterialModel.get_combined_samb_matrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.core.material_model.MaterialModel.get_combined_samb_matrix" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">get_combined_samb_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">select</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fmt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sympy'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">digit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">14</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bond</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/core/material_model.html#MaterialModel.get_combined_samb_matrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.core.material_model.MaterialModel.get_combined_samb_matrix" title="Link to this definition">#</a></dt>
 <dd><p>Get combined SAMBs in matrix form (real-space).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -730,6 +729,7 @@
 <li><p><strong>select</strong> (<em>dict</em><em>, </em><em>optional</em>) – select conditions for multipoles with keywords (see, select_combined_samb).</p></li>
 <li><p><strong>fmt</strong> (<em>str</em><em>, </em><em>optional</em>) – sympy/value.</p></li>
 <li><p><strong>digit</strong> (<em>int</em><em>, </em><em>optional</em>) – digit for value output.</p></li>
+<li><p><strong>bond</strong> (<em>bool</em><em>, </em><em>optional</em>) – include bond_d ?</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -742,7 +742,7 @@
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <ul class="simple">
-<li><p>R = (n1,n2,n3) and m and n are lattice indices, bra and ket indexes, respectively.</p></li>
+<li><p>R = (n1,n2,n3) and m and n are lattice indices (corresponding to bond_no), bra and ket indexes, respectively.</p></li>
 </ul>
 </div>
 </dd></dl>
@@ -761,7 +761,7 @@
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
-<li><p>(dict) – Hamiltonian matrix (real-space), dict[(n1, n2, n3, m, n), matrix element].</p></li>
+<li><p>(dict) – Hamiltonian matrix (real-space), dict[(n1, n2, n3, m, n), (matrix element, bond_no)].</p></li>
 </ul>
 </p>
 </dd>
@@ -769,7 +769,7 @@
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <ul class="simple">
-<li><p>R = (n1,n2,n3) and m and n are a lattie vector, bra and ket indexes, respectively.</p></li>
+<li><p>R = (n1,n2,n3) and m and n are a lattie vector (corresponding to bond_no), bra and ket indexes, respectively.</p></li>
 </ul>
 </div>
 </dd></dl>
@@ -854,36 +854,6 @@
 <dt class="sig sig-object py" id="multipie.core.material_model.MaterialModel.save_pdf">
 <span class="sig-name descname"><span class="pre">save_pdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/core/material_model.html#MaterialModel.save_pdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.core.material_model.MaterialModel.save_pdf" title="Link to this definition">#</a></dt>
 <dd><p>Save model as PDF file.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="multipie.core.material_model.MaterialModel.save_samb_hr">
-<span class="sig-name descname"><span class="pre">save_samb_hr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">matrix_info</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">HR</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/core/material_model.html#MaterialModel.save_samb_hr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.core.material_model.MaterialModel.save_samb_hr" title="Link to this definition">#</a></dt>
-<dd><p>Save SAMB matrix in hr format.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>matrix_info</strong> (<em>dict</em>) – matrix info.</p></li>
-<li><p><strong>parameter</strong> (<em>dict</em>) – parameter dict, dict[z#, value].</p></li>
-<li><p><strong>HR</strong> (<em>dict</em><em>, </em><em>optional</em>) – H(R) matrix. if None, H(R) is generated.</p></li>
-<li><p><strong>verbose</strong> (<em>bool</em><em>, </em><em>optional</em>) – verboser ?</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="multipie.core.material_model.MaterialModel.save_samb_matrix">
-<span class="sig-name descname"><span class="pre">save_samb_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">matrix_info</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/core/material_model.html#MaterialModel.save_samb_matrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.core.material_model.MaterialModel.save_samb_matrix" title="Link to this definition">#</a></dt>
-<dd><p>Save SAMB matrix.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>matrix_info</strong> (<em>dict</em>) – matrix info.</p></li>
-<li><p><strong>verbose</strong> (<em>bool</em><em>, </em><em>optional</em>) – verboser ?</p></li>
-</ul>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -981,8 +951,6 @@
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.load"><code class="docutils literal notranslate"><span class="pre">MaterialModel.load()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.save"><code class="docutils literal notranslate"><span class="pre">MaterialModel.save()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.save_pdf"><code class="docutils literal notranslate"><span class="pre">MaterialModel.save_pdf()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.save_samb_hr"><code class="docutils literal notranslate"><span class="pre">MaterialModel.save_samb_hr()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.save_samb_matrix"><code class="docutils literal notranslate"><span class="pre">MaterialModel.save_samb_matrix()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.save_samb_qtdraw"><code class="docutils literal notranslate"><span class="pre">MaterialModel.save_samb_qtdraw()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.save_view"><code class="docutils literal notranslate"><span class="pre">MaterialModel.save_view()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.group"><code class="docutils literal notranslate"><span class="pre">MaterialModel.group</span></code></a></li>
