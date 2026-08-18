@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 from matplotlib.collections import LineCollection
 from matplotlib.colors import Normalize
 from multipie import Group
-from multipie.util.util import str_to_sympy
+from multipie.util.util import str_to_sympy, simplify
 from multipie.util.util_constant import M_ZERO, k_B_SI, elem_charge_SI
 
 
@@ -155,25 +155,30 @@ def fourier_k_to_r(Ok, atom, kv, irvec, s=True):
 
 
 # ==================================================
-def output_dispersion(filename, k, e, o=None):
+def output_dispersion(filename, k, ef, e, o=None, olist=None):
     """
     Output band dispersion along high-symmetry lines.
 
     Args:
         filename (str): file name.
         k (ndarray): k points along high-symmetry lines.
+        ef (float): fermi energy.
         e (ndarray): eigen values.
         o (list, optional): expectation value of any operator for each band, [[num_k, num_band]].
+        olist (list, optional): list of local operator.
     """
     emax = np.max(e)
     emin = np.min(e)
-    ef = 0.0
 
     fs = open(filename, "w")
-    fs.write("# k Energy [eV] \n")
+    if olist:
+        ke_ol = "# k Energy " + " ".join(olist) + "\n"
+    else:
+        ke_ol = "# k Energy\n"
+    fs.write(ke_ol)
     fs.write(f"# Emax = {emax}\n")
     fs.write(f"# Emin = {emin}\n")
-    fs.write(f"# ef = {ef}\n\n")
+    fs.write(f"# shifted by fermi energy = {ef}\n\n")
 
     num_k, Nm = e.shape
     e = e.T
@@ -183,12 +188,12 @@ def output_dispersion(filename, k, e, o=None):
         en = e[n] - ef
         s = ""
         for i in range(num_k):
-            s += "{k:0<20} {e:<20}".format(k=kv[i], e=en[i])
+            s += "{k: .15f} {e: .15f}".format(k=kv[i], e=en[i])
             if o is None:
                 s += "\n"
             else:
                 for oi in o:
-                    s += " {o:<20}".format(o=oi[i, n])
+                    s += " {o: .15f}".format(o=oi[i, n])
                 s += "\n"
             if np.abs(kv[i] - kv[i + 1]) < 1e-5:
                 s += "\n"
@@ -200,7 +205,7 @@ def output_dispersion(filename, k, e, o=None):
 
 
 # ==================================================
-def create_gnuplot_cmd(filename, k_dis_pos, kmax, emax, emin, colormap=False, lwidth=2, lc="salmon"):
+def create_gnuplot_cmd(filename, k_dis_pos, kmax, emax, emin, ef, colormap=False, lwidth=2, lc="salmon"):
     """
     Create gnuplot file.
 
@@ -210,60 +215,64 @@ def create_gnuplot_cmd(filename, k_dis_pos, kmax, emax, emin, colormap=False, lw
         kmax (float): maximum value in kpoints.
         emax (float): maximum value of eigen values.
         emin (float): minimum value of eigen values.
+        ef (float): fermi energy.
         colormap (bool, optional): with colormap of first expectation value of operator.
         lwidth (int, optional): line width.
         lc (str, optional): line color.
     """
     offset = (emax - emin) * 0.1
-    ef = 0.0
 
-    fs = open("plot_band.gnu", "w")
+    gnufile = os.path.dirname(filename) + "/plot_band.gnu"
+    fs = open(gnufile, "w")
 
-    fs.write("unset key \n")
-    fs.write("unset grid \n")
-    fs.write(f"lwidth = {lwidth} \n")
-    fs.write(f"set xrange [:{kmax}] \n")
-    fs.write(f"set yrange [{emin-ef-offset}:{emax-ef+offset}] \n")
-    fs.write("set tics font 'Times New Roman, 14' \n\n")
-    fs.write("set size ratio 0.7 \n\n")
+    fs.write("unset key\n")
+    fs.write("unset grid\n")
+    fs.write(f"lwidth = {lwidth}\n")
+    fs.write(f"set xrange [:{kmax}]\n")
+    fs.write(f"set yrange [{emin-ef-offset}:{emax-ef+offset}]\n")
+    fs.write("set tics font 'Times New Roman, 14'\n\n")
+    fs.write("set size ratio 0.7\n\n")
 
     fs.write('set palette defined ( -1.0 "royalblue", 0 "gray90", 1.0 "salmon")\n')
     fs.write("set cbrange [-1.0:1.0]\n\n")
 
     if k_dis_pos is not None:
         for pos, label in k_dis_pos.items():
-            fs.write(f"set arrow from  {pos},  {emin-ef-offset} to {pos}, {emax-ef+offset} nohead \n")
+            fs.write(f"set arrow from  {pos},  {emin-ef-offset} to {pos}, {emax-ef+offset} nohead\n")
 
         k_dis_pos = {pos: label.replace("G", "{/Symbol G}").replace("|", ":") for pos, label in k_dis_pos.items()}
-        fs.write("set xtics (" + "".join([f'"{label}" {pos},' for pos, label in k_dis_pos.items()]) + ") \n\n")
+        fs.write("set xtics (" + "".join([f'"{label}" {pos},' for pos, label in k_dis_pos.items()]) + ")\n\n")
 
-    fs.write(f"ef = {ef} \n")
+    fs.write(f"Ef = {ef}\n")
 
-    fs.write("set terminal postscript eps color enhanced \n\n")
+    fs.write("set terminal postscript eps color enhanced\n\n")
 
-    fn_eps = os.path.splitext(filename)[0] + ".eps"
-    fs.write(f"set output '{fn_eps}' \n\n")
+    filename = os.path.basename(filename)
+    basename = os.path.splitext(filename)[0]
+
+    fn_eps = basename + ".eps"
+    fs.write(f"set output '{fn_eps}'\n\n")
     fs.write("plot ")
 
     if colormap:
-        fs.write(f"'{filename}' u 1:2:3 w l lw lwidth lc palette, ")
+        fs.write(f"'{filename}' u 1:2:3 w l lw lwidth lc palette,")
     else:
-        fs.write(f"'{filename}' u 1:2 w l lw lwidth lc '{lc}', ")
+        fs.write(f"'{filename}' u 1:2 w l lw lwidth lc '{lc}',")
 
     fs.write(f"{0.0} lw 0.5 lc 'black'")
 
-    fs.write(" \n\n")
+    fs.write("\n\n")
 
-    fs.write("set terminal pdf \n\n")
+    fs.write("set terminal pdf\n\n")
 
-    fn_pdf = os.path.splitext(filename)[0] + ".pdf"
-    fs.write(f"set output '{fn_pdf}' \n\n")
+    fn_pdf = basename + ".pdf"
+    fs.write(f"set output '{fn_pdf}'\n\n")
     fs.write("plot ")
 
     if colormap:
-        fs.write(f"'{filename}' u 1:2:3 w l lw lwidth lc palette, ")
+        fs.write(f"'{filename}' u 1:2:3 w l lw lwidth lc palette,")
     else:
-        fs.write(f"'{filename}' u 1:2 w l lw lwidth lc '{lc}', ")
+        fs.write(f"'{filename}' u 1:2 w l lw lwidth lc '{lc}',")
 
     fs.write(f"{0.0} lw 0.5 lc 'black'")
 
@@ -271,13 +280,14 @@ def create_gnuplot_cmd(filename, k_dis_pos, kmax, emax, emin, colormap=False, lw
 
 
 # ==================================================
-def plot_save_dispersion(filename, k_dis_pos, colormap=False, lwidth=1, lc="salmon"):
+def plot_save_dispersion(filename, k_dis_pos, ef, colormap=False, lwidth=1, lc="salmon"):
     """
     Generate plot window for band dispersion (matplotlib).
 
     Args:
         filename (str): file name.
         k_dis_pos (dict): info. of high-symmetry point in linear k, dict[disconnected position, label].
+        ef (float): fermi energy.
         colormap (bool, optional): with colormap of first expectation value of operator.
         lwidth (int, optional): line width.
         lc (str, optional): line color.
@@ -287,12 +297,10 @@ def plot_save_dispersion(filename, k_dis_pos, colormap=False, lwidth=1, lc="salm
     emax = max(a[:, 1].max() for a in bands)
     emin = min(a[:, 1].min() for a in bands)
     kmax = max(a[:, 0].max() for a in bands)
-    ef = 0.0
 
     offset = (emax - emin) * 0.1
 
     fig, ax = plt.subplots(figsize=(6, 3.5))  # aspect ratio 0.7
-    # ax = fig.add_subplot(111)
     fig.subplots_adjust(right=0.84)
 
     ax.set_xlim(0, kmax)
@@ -315,7 +323,7 @@ def plot_save_dispersion(filename, k_dis_pos, colormap=False, lwidth=1, lc="salm
         all_colors = []
         for band in bands:
             x = band[:, 0]
-            y = band[:, 1] - ef
+            y = band[:, 1]
             c = band[:, 2]
             points = np.column_stack((x, y)).reshape(-1, 1, 2)
             seg = np.concatenate([points[:-1], points[1:]], axis=1)
@@ -499,9 +507,9 @@ def create_k_multipole(cluster_samb, cluster_vector):
             d_wp = {}
             for idx, (samb, sym) in v.items():
                 if idx[0] == "Q":
-                    d_wp[idx] = (np.sqrt(2) * np.vectorize(sp.re)(samb).astype(float) @ c, sym)
+                    d_wp[idx] = (sp.sqrt(2) * np.vectorize(sp.re)(samb) @ c, sym)
                 else:
-                    d_wp[idx] = (sp.I * (np.sqrt(2) * np.vectorize(sp.im)(samb).astype(float)) @ s, sym)
+                    d_wp[idx] = (sp.sqrt(2) * np.vectorize(sp.im)(samb) @ s, sym)
             k_multipole[k] = d_wp
         else:  # site.
             k_multipole[k] = v
@@ -510,7 +518,7 @@ def create_k_multipole(cluster_samb, cluster_vector):
     kv = np.array([sp.Symbol(f"k_{i}", real=True) for i in range(1, 4)], dtype=object)
     for sb, lst in cluster_vector.items():
         if ";" in sb:
-            d = len(lst[0])
+            d = len(lst)
             kb = np.array([sp.Symbol(f"p_{i+1}", real=True) for i in range(d)], dtype=object)
             kb_dic[sb] = {i: j @ kv for i, j in zip(kb, lst)}
         else:
@@ -545,8 +553,8 @@ def create_k_matrix(matrix, cluster_dict, vector_dict):
             kb = np.array([sp.Symbol(f"p_{i+1}", real=True) for i in range(len(vec))], dtype=object)
             for (n1, n2, n3, m, n), (value, b_no) in OR.items():
                 k = kb[b_no - 1] if b_no > 0 else -kb[-b_no - 1]
-                mat[(m, n)] += value * sp.exp(sp.I * k)
-            mat = {Rmn: v for Rmn, v in mat.items() if not v.is_zero}
+                mat[(m, n)] += value * (sp.cos(k) + sp.I * sp.sin(k))
+            mat = {Rmn: simplify(v) for Rmn, v in mat.items() if not v.is_zero}
             k_matrix[tag] = mat
         else:
             k_matrix[tag] = {(m, n): v for (n1, n2, n3, m, n), (v, b) in OR.items()}
@@ -555,109 +563,162 @@ def create_k_matrix(matrix, cluster_dict, vector_dict):
 
 
 # ==================================================
-def add_local_parameter(matrix_info, parameter):
+def check_same_orbital_block(ket):
+    """
+    Check same orbital block for all atoms.
+
+    Args:
+        ket (list): ket list.
+
+    Returns:
+        - (bool) -- same block ?
+        - (int) -- block size.
+    """
+    d = {}
+    for atom, sl, rank, comp, orb in ket:
+        d[atom] = d.get(atom, []) + [orb]
+    d = {atom: tuple(sorted(list(set(lst)))) for atom, lst in d.items()}
+    orb_set = list(set(d.values()))
+    same = len(orb_set) == 1
+    orb_dim = len(orb_set[0])
+    return same, orb_dim
+
+
+# ==================================================
+def add_local_parameter(matrix_info, parameter, ket):
     """
     Add local parameter for given nonlocal parameter.
 
     Args:
         matrix_info (dict): matrix info.
         parameter (dict): parameter dict without site cluster.
+        ket (list): ket list.
 
     Returns:
         - (dict) -- parameter dict with adding local one.
     """
-    if not len(set([i[2] for i in matrix_info["index"].keys()])) == 1:  # only for the same ranks.
+    same, d = check_same_orbital_block(ket)
+    if not same:
         return
-    rank = next(iter(matrix_info["index"]))[2]
     dim = matrix_info["dimension"]
-
-    d = 2 * rank + 1
     nn = dim // d
 
     local = {}
+    local_z = {}
+    for tag, mat in matrix_info["matrix"].items():
+        v = np.full((dim, dim), 0.0, dtype=complex)
+        for (n1, n2, n3, m, n), (val, no) in mat.items():
+            v[m, n] += complex(val)
+        if ";" in matrix_info["cluster"][tag]:  # nonlocal SAMB with parameter key.
+            if tag not in parameter.keys():
+                continue
+            vd = v.reshape(nn, d, nn, d).sum(axis=0).transpose(1, 0, 2)
+            s = np.full((dim, dim), 0.0, dtype=complex)
+            for i in range(nn):
+                s[i * d : (i + 1) * d, i * d : (i + 1) * d] = vd[i]
+            local[tag] = s
+        else:  # local SAMB.
+            local_z[tag] = v
+
+    coeff = {tag: np.array([np.real(np.einsum("ij,ji->", z, s)) for z in local_z.values()]) for tag, s in local.items()}
+
+    zt = np.full(len(local_z.keys()), 0.0)
+    for zj, val in parameter.items():
+        if zj not in local_z.keys():
+            zt -= val * coeff[zj]
+
+    for zk, val in zip(local_z.keys(), zt):
+        if abs(val) > 1e-8:
+            parameter[zk] = float(val)
+
+    parameter = dict(sorted(parameter.items(), key=lambda x: int(x[0][1:])))
+
+    return parameter
+
+
+# ==================================================
+def add_local_parameter_sym(matrix_info, ket):
+    """
+    Add local parameter for given nonlocal parameter.
+
+    Args:
+        matrix_info (dict): matrix info.
+        ket (list): ket list.
+
+    Returns:
+        - (dict) -- parameter dict with adding local one.
+    """
+    same, d = check_same_orbital_block(ket)
+    if not same:
+        return
+    dim = matrix_info["dimension"]
+    nn = dim // d
+
+    local = {}
+    nonlocal_z = []
     local_z = {}
     for tag, mat in matrix_info["matrix"].items():
         v = np.full((dim, dim), sp.S(0))
         for (n1, n2, n3, m, n), (val, no) in mat.items():
             v[m, n] += val
         if ";" in matrix_info["cluster"][tag]:  # nonlocal SAMB with parameter key.
-            if tag not in parameter.keys():
-                continue
             vd = v.reshape(nn, d, nn, d).sum(axis=0).transpose(1, 0, 2)
             s = np.full((dim, dim), sp.S(0))
             for i in range(nn):
                 s[i * d : (i + 1) * d, i * d : (i + 1) * d] = vd[i]
             local[tag] = s
+            nonlocal_z.append(tag)
         else:  # local SAMB.
             local_z[tag] = v
+
     coeff = {tag: np.array([np.einsum("ij,ji->", z, s) for z in local_z.values()]) for tag, s in local.items()}
 
     zt = np.full(len(local_z.keys()), sp.S(0))
-    for zj, val in parameter.items():
-        zt -= val * coeff[zj]
+    for zj in nonlocal_z:
+        zjv = sp.Symbol(zj, real=True)
+        zt -= zjv * coeff[zj]
 
+    parameter = {}
     for zk, val in zip(local_z.keys(), zt):
         if not val.is_zero:
-            parameter[zk] = val
+            parameter[zk] = str(val).replace(" ", "")
 
-    parameter = dict(sorted(parameter.items()))
+    parameter = dict(sorted(parameter.items(), key=lambda x: int(x[0][1:])))
 
     return parameter
 
 
 # ==================================================
-def build_and_solve_hermitian(mat, z_symbols, labels=None):
+def solve_z(Z_dict, names, simplify=True):
     """
-    Build linear equations from a Hermitian matrix and solve for z_j.
+    Solve z parameter in terms of atomic parameters on bond 1.
 
     Args:
-        mat (ndarray): hermitian matrix, only upper triangle is required.
-        z_symbols (list): zj variables.
-        labels (list, optional): name for bra-ket.
+        Z_dict (dict): bond-1 basis, dict[(m,n), val].
+        names (list): ket string.
+        simplify (bool, optional): simplify result ?
 
     Returns:
-        - (dict) -- dict from matrix index to name, dict[(int,int), name].
-        - (list) -- equations used to solve.
-        - (dict) -- solution dict, if failed, empty.
+        - (dict) -- z parameter.
     """
-    rows, cols = mat.shape
-    expr_to_positions = {}
+    j_names = list(Z_dict.keys())
+    mn_keys = sorted({mn for d in Z_dict.values() for mn in d})
+    N, M = len(j_names), len(mn_keys)
 
-    for m in range(rows):
-        for n in range(m, cols):
-            expr = sp.sympify(mat[m, n])
-            if expr == 0:
-                continue
-            expr_expanded = sp.expand(expr)
-            coeffs = tuple(expr_expanded.coeff(z) for z in z_symbols)
-            const = expr_expanded - sum(c * z for c, z in zip(coeffs, z_symbols))
-            key = coeffs + (const,)
-            expr_to_positions.setdefault(key, []).append((m, n, expr_expanded))
+    Z = sp.Matrix(M, N, lambda r, c: Z_dict[j_names[c]].get(mn_keys[r], 0))
 
-    g_syms = {}
-    lin_eqs = []
-    for key, positions in expr_to_positions.items():
-        m0, n0, expr0 = positions[0]
+    g = [sp.Symbol(f"g_{{{names[m]},{names[n]}}}", real=True) for m, n in mn_keys]
+    h = [sp.Symbol(f"h_{{{names[m]},{names[n]}}}", real=True) for m, n in mn_keys]
+    gg = sp.Matrix([gi + sp.I * hi for gi, hi in zip(g, h)])
 
-        if labels is not None:
-            label_str = ",".join(f"({labels[m]},{labels[n]})" for m, n, _ in positions)
-        else:
-            label_str = ",".join(f"({m},{n})" for m, n, _ in positions)
+    normal_mat = sp.re(Z.H * Z)  # N x N real symmetric.
+    rhs = sp.re(Z.H * gg)  # N x 1 (including re(g_mn), im(g_mn))
 
-        g = sp.Symbol(f"g_{{{label_str}}}")
-        for m, n, _ in positions:
-            g_syms[(m, n)] = g
-        lin_eqs.append(sp.Eq(g, expr0))
+    z_vec = normal_mat.pinv(method="RD") * rhs  # 'RD' is robust for analytic matrix.
+    if simplify:
+        z_vec = sp.simplify(z_vec)
 
-    sol = sp.linsolve(lin_eqs, z_symbols)
-
-    if sol == sp.EmptySet:
-        sol_dict = {}
-    else:
-        (values,) = sol  # take unique tuple in FiniteSet.
-        sol_dict = {str(zj): val for zj, val in zip(z_symbols, values)}
-
-    return g_syms, lin_eqs, sol_dict
+    return {j_names[i]: z_vec[i] for i in range(N)}
 
 
 # ==================================================
@@ -674,32 +735,29 @@ def convert_zj_atomic_var(matrix_info, combined_cluster, combined_id, IR):
     Returns:
         - (dict) -- zj to var for each cluster, dict[bond name, dict[zj, var] ].
     """
-    dim = matrix_info["dimension"]
-    ket = [i.replace("@", "_").replace("(", "").replace(")", "") for i in matrix_info["ket_site"].keys()]
+    ket = [i.replace("@", "_").replace("(", "").replace(")", "") for i in matrix_info["ket"]]
 
     # classify zj for each cluster.
     cluster = {}
     for tag, name in combined_cluster.items():
-        if ";" in name and combined_id[tag][2][2] == IR:
+        X = combined_id[tag][2][0]
+        Gamma = combined_id[tag][2][2]
+        if ";" in name and X in ["Q", "G"] and Gamma == IR:
             cluster.setdefault(name, []).append(tag)
 
-    # construct upper-triangle matrix.
+    # construct bond1-projected matrix.
     dic = {}
     for name, tags in cluster.items():
-        var = []
-        mat = np.full((dim, dim), sp.S(0))
+        d = {}
         for zj in tags:
-            zjv = sp.Symbol(zj, real=True)
-            var.append(zjv)
-            for (n1, n2, n3, m, n), (val, no) in matrix_info["matrix"][zj].items():
-                if no in (1, -1) and m <= n:  # only upper triangle.
-                    mat[m, n] += val * zjv
-        dic[name] = (mat, var)
+            # only representative bond 1.
+            d[zj] = {(m, n): val for (n1, n2, n3, m, n), (val, no) in matrix_info["matrix"][zj].items() if no == 1}
+        dic[name] = d
 
     # solve zj for each cluster.
     result = {}
-    for name, (mat, var) in dic.items():
-        g_syms, lin_eqs, sol = build_and_solve_hermitian(mat, var, ket)
+    for name, d in dic.items():
+        sol = solve_z(d, ket)
         result[name] = sol
 
     return result
@@ -742,13 +800,17 @@ def read_text_data(filename):
 
 # ==================================================
 def is_almost_zero(x):
-    """check if x is numerically zero (within a tolerance)."""
+    """
+    Check if x is numerically zero (within a tolerance).
+    """
     return np.abs(x) < M_ZERO * 100
 
 
 # ==================================================
 def kelvin_to_ev(T_kelvin):
-    """convert temperature from Kelvin to eV (k_B * T)."""
+    """
+    Convert temperature from Kelvin to eV (k_B * T).
+    """
     return T_kelvin * k_B_SI / elem_charge_SI
 
 
@@ -763,7 +825,7 @@ def fermi_dirac(x, T=0.0, unit="Kelvin"):
         unit (str, optional): unit of T, "Kelvin" or "eV".
 
     Returns:
-        ndarray: Fermi-Dirac occupation, 0 <= f(x) <= 1.
+        - (ndarray) -- Fermi-Dirac occupation, 0 <= f(x) <= 1.
     """
     if T == 0.0:
         return np.where(x < 0.0, 1.0, np.where(x > 0.0, 0.0, 0.5))
@@ -784,7 +846,7 @@ def fermi_dirac_deriv(x, T=0.01, unit="Kelvin"):
         unit (str, optional): unit of T, "Kelvin" or "eV".
 
     Returns:
-        ndarray: -df/dx.
+        - (ndarray) -- -df/dx.
     """
     T_eV = kelvin_to_ev(T) if unit == "Kelvin" else T
     return fermi_dirac(x, T, unit) * fermi_dirac(-x, T, unit) / T_eV
@@ -802,7 +864,39 @@ def fermi_dirac_deriv2(x, T=0.01, unit="Kelvin"):
         unit (str, optional): unit of T, "Kelvin" or "eV".
 
     Returns:
-        ndarray: -d^2f/dx^2.
+        - (ndarray) -- -d^2f/dx^2.
     """
     T_eV = kelvin_to_ev(T) if unit == "Kelvin" else T
     return (1 - 2 * fermi_dirac(-x, T, unit)) * fermi_dirac(x, T, unit) * fermi_dirac(-x, T, unit) / T_eV / T_eV
+
+
+# ==================================================
+def convert_orbital_to_detail(tag):
+    """
+    Convert orbital name to (rank, comp).
+
+    Args:
+        tag (str): "name" or "(name,u/d)". name = wannier90 or multipie.
+
+    Returns:
+        - (tuple) -- orbital (rank, comp, tag).
+    """
+    rank_d = {"s": 0, "p": 1, "d": 2, "f": 3}
+    wannier = Group.global_info()["harmonics"]["wannier90"]
+    tesseral = Group.global_info()["harmonics"]["tesseral"]
+
+    if tag.count(","):
+        name, spin = tag.strip("()").split(",")
+        basis = Group.global_info()["harmonics"]["atomic_basis"]["spinful"]["lgs"]
+    else:
+        name = tag
+        basis = Group.global_info()["harmonics"]["atomic_basis"]["spinless"]["lg"]
+
+    if name not in tesseral.keys():
+        name = wannier[name]
+    rank = rank_d[name[0]]
+    basis = basis[rank]
+
+    comp = basis.index(tag)
+
+    return (rank, comp, tag)

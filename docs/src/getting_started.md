@@ -8,7 +8,7 @@ As a tutorial, we describe the procedure for generating model in the case of **g
 2. At the same place where the above two files are, run the following:
 
     ```bash
-    $ mp_create graphene_in.py
+    $ mp_create -v graphene_in.py
     ```
 
     It creates four files under `graphene` directory:
@@ -20,7 +20,7 @@ As a tutorial, we describe the procedure for generating model in the case of **g
 3. To analyze the model, e.g., draw dispersion, run the following:
 
     ```bash
-    $ mp_analyze graphene_ctrl.py
+    $ mp_analyze -v graphene_ctrl.py
     ```
 
     It creates the following files under `graphene` directory:
@@ -58,3 +58,34 @@ The default values of control file are provided as follows:
 ```
 
 The typical use of generating SAMBs, you first create the SAMBs for all irreps., and then choose the necessary SAMBs, such as the symmetry-breaking terms in addition to the identity irreps., by specifying `samb/select` and/or `samb/parameter` in the control file.
+
+## Output files
+
+The description of the output files is as follows (with model_name prefixed):
+
+- **model_name** : all files are created under `model_name`.
+  - **.pdf** : model info. in PDF.
+  - **.pkl** : model data (binary).
+  - **.qtdw** : model structure in QtDraw.
+  - **.tex** : model info. source.
+  - **samb**/
+    - **_atomic_samb.qtdw** : atomic SAMBs.
+    - **_A_def.qtdw** : definition of A-site cluster.
+    - **_A.qtdw** : A-site-cluster SAMBs.
+    - **_A;B_n_m_def.qtdw** : definition of A;B (n-neighbor, m) bond cluster.
+    - **_A;B_n_m.qtdw** : A;B (n-neighbor, m) bond-cluster SAMBs.
+  - **info/**
+    - **_hr.dat** : H[R] matrix data.
+    - **_info_output.py** : info. of output.
+    - **_info_samb.py** : info. of model and SAMBs.
+    - **_info_wannier.py** : info. of wannier.
+    - **_info.py** : global info.
+    - **_k.py** : SAMBs in momentum rep.
+    - **_matrix.py** : SAMB matrix data.
+    - **_var.py** : relation between zj and atomic parameters at bond 1.
+    - **_z.py** : zj parameters.
+  - **output/**
+    - **_dispersion.eps** : dispersion in EPS.
+    - **_dispersion.pdf** : dispersion in PDF.
+    - **_dispersion.txt** : dispersion data.
+    - **plot_band.gnu** : command script to plot by gnuplot.

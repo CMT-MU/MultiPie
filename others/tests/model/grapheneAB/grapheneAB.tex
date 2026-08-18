@@ -52,7 +52,7 @@
 Model for ``\texttt{grapheneAB}''
 \end{center}
 \begin{flushright}
-Generated on 2026-07-22 08:01:20 by MultiPie 2.2.8
+Generated on 2026-08-07 20:25:54 by MultiPie 2.3.2
 \end{flushright}
 \setlength{\baselineskip}{16pt}
 \footnotesize
@@ -181,7 +181,7 @@ Generated on 2026-07-22 08:01:20 by MultiPie 2.2.8
 5 & $\mathbb{Q}_{1,1}(E^{\prime})$ & $E^{\prime}$ & 1 & $Q$, $T$ & - & 1 & $x$ \\
 6 & $\mathbb{Q}_{1,2}(E^{\prime})$ &  &  &  &  & 2 & $y$ \\ \hline
 7 & $\mathbb{Q}_{2,1}(E^{\prime})$ & $E^{\prime}$ & 2 & $Q$, $T$ & - & 1 & $\sqrt{3} x y$ \\
-8 & $\mathbb{Q}_{2,2}(E^{\prime})$ &  &  &  &  & 2 & $\frac{\sqrt{3} \left(x - y\right) \left(x + y\right)}{2}$ \\
+8 & $\mathbb{Q}_{2,2}(E^{\prime})$ &  &  &  &  & 2 & $\frac{\sqrt{3} \left(x^{2} - y^{2}\right)}{2}$ \\
 \end{longtable}
 \vspace{5mm}
 \noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{Basis in full matrix}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
@@ -295,10 +295,10 @@ $ \ket{p_{y}} $ & $ y $ \\
 \noindent\quad * wyckoff: \texttt{3a@3j}
 
 \begin{dmath*}
-\hspace*{3mm}\fbox{z4}\quad \mathbb{Q}_{0}^{(c)}(A_{1}^{\prime})=\frac{\sqrt{2} \mathbb{Q}_{1,1}^{(a)}(E^{\prime}) \mathbb{Q}_{1,1}^{(b)}(E^{\prime})}{2} + \frac{\sqrt{2} \mathbb{Q}_{1,2}^{(a)}(E^{\prime}) \mathbb{Q}_{1,2}^{(b)}(E^{\prime})}{2}
+\hspace*{3mm}\fbox{z4}\quad \mathbb{Q}_{0}^{(c)}(A_{1}^{\prime})=\frac{\sqrt{2} \left(\mathbb{Q}_{1,1}^{(a)}(E^{\prime}) \mathbb{Q}_{1,1}^{(b)}(E^{\prime}) + \mathbb{Q}_{1,2}^{(a)}(E^{\prime}) \mathbb{Q}_{1,2}^{(b)}(E^{\prime})\right)}{2}
 \end{dmath*}
 \begin{dmath*}
-\hspace*{3mm}\fbox{z8}\quad \mathbb{G}_{1}^{(c)}(A_{2}^{\prime})=\frac{\sqrt{2} \mathbb{Q}_{1,1}^{(a)}(E^{\prime}) \mathbb{Q}_{1,2}^{(b)}(E^{\prime})}{2} - \frac{\sqrt{2} \mathbb{Q}_{1,2}^{(a)}(E^{\prime}) \mathbb{Q}_{1,1}^{(b)}(E^{\prime})}{2}
+\hspace*{3mm}\fbox{z8}\quad \mathbb{G}_{1}^{(c)}(A_{2}^{\prime})=\frac{\sqrt{2} \left(\mathbb{Q}_{1,1}^{(a)}(E^{\prime}) \mathbb{Q}_{1,2}^{(b)}(E^{\prime}) - \mathbb{Q}_{1,2}^{(a)}(E^{\prime}) \mathbb{Q}_{1,1}^{(b)}(E^{\prime})\right)}{2}
 \end{dmath*}
 \begin{dmath*}
 \hspace*{3mm}\fbox{z14}\quad \mathbb{Q}_{1,1}^{(c)}(E^{\prime})=\frac{\sqrt{2} \mathbb{Q}_{1,1}^{(a)}(E^{\prime}) \mathbb{Q}_{0}^{(b)}(A_{1}^{\prime})}{2}
@@ -307,10 +307,10 @@ $ \ket{p_{y}} $ & $ y $ \\
 \hspace*{3mm}\fbox{z15}\quad \mathbb{Q}_{1,2}^{(c)}(E^{\prime})=\frac{\sqrt{2} \mathbb{Q}_{1,2}^{(a)}(E^{\prime}) \mathbb{Q}_{0}^{(b)}(A_{1}^{\prime})}{2}
 \end{dmath*}
 \begin{dmath*}
-\hspace*{3mm}\fbox{z16}\quad \mathbb{Q}_{2,1}^{(c)}(E^{\prime})=\frac{\mathbb{Q}_{1,1}^{(a)}(E^{\prime}) \mathbb{Q}_{1,2}^{(b)}(E^{\prime})}{2} + \frac{\mathbb{Q}_{1,2}^{(a)}(E^{\prime}) \mathbb{Q}_{1,1}^{(b)}(E^{\prime})}{2}
+\hspace*{3mm}\fbox{z16}\quad \mathbb{Q}_{2,1}^{(c)}(E^{\prime})=\frac{\mathbb{Q}_{1,1}^{(a)}(E^{\prime}) \mathbb{Q}_{1,2}^{(b)}(E^{\prime}) + \mathbb{Q}_{1,2}^{(a)}(E^{\prime}) \mathbb{Q}_{1,1}^{(b)}(E^{\prime})}{2}
 \end{dmath*}
 \begin{dmath*}
-\hspace*{3mm}\fbox{z17}\quad \mathbb{Q}_{2,2}^{(c)}(E^{\prime})=\frac{\mathbb{Q}_{1,1}^{(a)}(E^{\prime}) \mathbb{Q}_{1,1}^{(b)}(E^{\prime})}{2} - \frac{\mathbb{Q}_{1,2}^{(a)}(E^{\prime}) \mathbb{Q}_{1,2}^{(b)}(E^{\prime})}{2}
+\hspace*{3mm}\fbox{z17}\quad \mathbb{Q}_{2,2}^{(c)}(E^{\prime})=\frac{\mathbb{Q}_{1,1}^{(a)}(E^{\prime}) \mathbb{Q}_{1,1}^{(b)}(E^{\prime}) - \mathbb{Q}_{1,2}^{(a)}(E^{\prime}) \mathbb{Q}_{1,2}^{(b)}(E^{\prime})}{2}
 \end{dmath*}
 \vspace{5mm}
 
@@ -329,10 +329,10 @@ $ \ket{p_{y}} $ & $ y $ \\
 \hspace*{3mm}\fbox{z6}\quad \mathbb{Q}_{0}^{(c)}(A_{1}^{\prime},b)=\mathbb{M}_{1}^{(a)}(A_{2}^{\prime}) \mathbb{M}_{1}^{(b)}(A_{2}^{\prime})
 \end{dmath*}
 \begin{dmath*}
-\hspace*{3mm}\fbox{z7}\quad \mathbb{Q}_{3}^{(c)}(A_{1}^{\prime})=\frac{\sqrt{2} \mathbb{Q}_{2,1}^{(a)}(E^{\prime}) \mathbb{Q}_{1,1}^{(b)}(E^{\prime})}{2} + \frac{\sqrt{2} \mathbb{Q}_{2,2}^{(a)}(E^{\prime}) \mathbb{Q}_{1,2}^{(b)}(E^{\prime})}{2}
+\hspace*{3mm}\fbox{z7}\quad \mathbb{Q}_{3}^{(c)}(A_{1}^{\prime})=\frac{\sqrt{2} \left(\mathbb{Q}_{2,1}^{(a)}(E^{\prime}) \mathbb{Q}_{1,1}^{(b)}(E^{\prime}) + \mathbb{Q}_{2,2}^{(a)}(E^{\prime}) \mathbb{Q}_{1,2}^{(b)}(E^{\prime})\right)}{2}
 \end{dmath*}
 \begin{dmath*}
-\hspace*{3mm}\fbox{z9}\quad \mathbb{Q}_{3}^{(c)}(A_{2}^{\prime})=- \frac{\sqrt{2} \mathbb{Q}_{2,1}^{(a)}(E^{\prime}) \mathbb{Q}_{1,2}^{(b)}(E^{\prime})}{2} + \frac{\sqrt{2} \mathbb{Q}_{2,2}^{(a)}(E^{\prime}) \mathbb{Q}_{1,1}^{(b)}(E^{\prime})}{2}
+\hspace*{3mm}\fbox{z9}\quad \mathbb{Q}_{3}^{(c)}(A_{2}^{\prime})=\frac{\sqrt{2} \left(- \mathbb{Q}_{2,1}^{(a)}(E^{\prime}) \mathbb{Q}_{1,2}^{(b)}(E^{\prime}) + \mathbb{Q}_{2,2}^{(a)}(E^{\prime}) \mathbb{Q}_{1,1}^{(b)}(E^{\prime})\right)}{2}
 \end{dmath*}
 \begin{dmath*}
 \hspace*{3mm}\fbox{z18}\quad \mathbb{Q}_{1,1}^{(c)}(E^{\prime},a)=\frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1}^{\prime}) \mathbb{Q}_{1,1}^{(b)}(E^{\prime})}{2}
@@ -341,10 +341,10 @@ $ \ket{p_{y}} $ & $ y $ \\
 \hspace*{3mm}\fbox{z19}\quad \mathbb{Q}_{1,2}^{(c)}(E^{\prime},a)=\frac{\sqrt{2} \mathbb{Q}_{0}^{(a)}(A_{1}^{\prime}) \mathbb{Q}_{1,2}^{(b)}(E^{\prime})}{2}
 \end{dmath*}
 \begin{dmath*}
-\hspace*{3mm}\fbox{z20}\quad \mathbb{Q}_{1,1}^{(c)}(E^{\prime},b)=\frac{\mathbb{Q}_{2,1}^{(a)}(E^{\prime}) \mathbb{Q}_{1,2}^{(b)}(E^{\prime})}{2} + \frac{\mathbb{Q}_{2,2}^{(a)}(E^{\prime}) \mathbb{Q}_{1,1}^{(b)}(E^{\prime})}{2}
+\hspace*{3mm}\fbox{z20}\quad \mathbb{Q}_{1,1}^{(c)}(E^{\prime},b)=\frac{\mathbb{Q}_{2,1}^{(a)}(E^{\prime}) \mathbb{Q}_{1,2}^{(b)}(E^{\prime}) + \mathbb{Q}_{2,2}^{(a)}(E^{\prime}) \mathbb{Q}_{1,1}^{(b)}(E^{\prime})}{2}
 \end{dmath*}
 \begin{dmath*}
-\hspace*{3mm}\fbox{z21}\quad \mathbb{Q}_{1,2}^{(c)}(E^{\prime},b)=\frac{\mathbb{Q}_{2,1}^{(a)}(E^{\prime}) \mathbb{Q}_{1,1}^{(b)}(E^{\prime})}{2} - \frac{\mathbb{Q}_{2,2}^{(a)}(E^{\prime}) \mathbb{Q}_{1,2}^{(b)}(E^{\prime})}{2}
+\hspace*{3mm}\fbox{z21}\quad \mathbb{Q}_{1,2}^{(c)}(E^{\prime},b)=\frac{\mathbb{Q}_{2,1}^{(a)}(E^{\prime}) \mathbb{Q}_{1,1}^{(b)}(E^{\prime}) - \mathbb{Q}_{2,2}^{(a)}(E^{\prime}) \mathbb{Q}_{1,2}^{(b)}(E^{\prime})}{2}
 \end{dmath*}
 \begin{dmath*}
 \hspace*{3mm}\fbox{z22}\quad \mathbb{Q}_{1,1}^{(c)}(E^{\prime},c)=- \frac{\sqrt{2} \mathbb{M}_{1}^{(a)}(A_{2}^{\prime}) \mathbb{T}_{1,2}^{(b)}(E^{\prime})}{2}
@@ -435,13 +435,13 @@ $ \ket{p_{y}} $ & $ y $ \\
 
 \vspace{5mm}
 
-\noindent ** Wyckoff: \texttt{3b@3j}
+\noindent ** Wyckoff: \texttt{3a@3j}
 
 \begin{dmath*}
 \fbox{y3}\quad \mathbb{Q}_{0}^{(b)}(A_{1}^{\prime})=\left[ \frac{\sqrt{3}}{3},\, \frac{\sqrt{3}}{3},\, \frac{\sqrt{3}}{3} \right]
 \end{dmath*}
 \begin{dmath*}
-\fbox{y4}\quad \mathbb{M}_{1}^{(b)}(A_{2}^{\prime})=\left[ \frac{\sqrt{3} i}{3},\, \frac{\sqrt{3} i}{3},\, \frac{\sqrt{3} i}{3} \right]
+\fbox{y4}\quad \mathbb{T}_{0}^{(b)}(A_{1}^{\prime})=\left[ \frac{\sqrt{3} i}{3},\, \frac{\sqrt{3} i}{3},\, \frac{\sqrt{3} i}{3} \right]
 \end{dmath*}
 \begin{dmath*}
 \fbox{y5}\quad \mathbb{Q}_{1,1}^{(b)}(E^{\prime})=\left[ \frac{\sqrt{2}}{2},\, 0,\, - \frac{\sqrt{2}}{2} \right]
@@ -450,20 +450,20 @@ $ \ket{p_{y}} $ & $ y $ \\
 \fbox{y6}\quad \mathbb{Q}_{1,2}^{(b)}(E^{\prime})=\left[ - \frac{\sqrt{6}}{6},\, \frac{\sqrt{6}}{3},\, - \frac{\sqrt{6}}{6} \right]
 \end{dmath*}
 \begin{dmath*}
-\fbox{y7}\quad \mathbb{T}_{1,1}^{(b)}(E^{\prime})=\left[ \frac{\sqrt{6} i}{6},\, - \frac{\sqrt{6} i}{3},\, \frac{\sqrt{6} i}{6} \right]
+\fbox{y7}\quad \mathbb{T}_{1,1}^{(b)}(E^{\prime})=\left[ \frac{\sqrt{2} i}{2},\, 0,\, - \frac{\sqrt{2} i}{2} \right]
 \end{dmath*}
 \begin{dmath*}
-\fbox{y8}\quad \mathbb{T}_{1,2}^{(b)}(E^{\prime})=\left[ \frac{\sqrt{2} i}{2},\, 0,\, - \frac{\sqrt{2} i}{2} \right]
+\fbox{y8}\quad \mathbb{T}_{1,2}^{(b)}(E^{\prime})=\left[ - \frac{\sqrt{6} i}{6},\, \frac{\sqrt{6} i}{3},\, - \frac{\sqrt{6} i}{6} \right]
 \end{dmath*}
 \vspace{5mm}
 
-\noindent ** Wyckoff: \texttt{3a@3j}
+\noindent ** Wyckoff: \texttt{3b@3j}
 
 \begin{dmath*}
 \fbox{y9}\quad \mathbb{Q}_{0}^{(b)}(A_{1}^{\prime})=\left[ \frac{\sqrt{3}}{3},\, \frac{\sqrt{3}}{3},\, \frac{\sqrt{3}}{3} \right]
 \end{dmath*}
 \begin{dmath*}
-\fbox{y10}\quad \mathbb{T}_{0}^{(b)}(A_{1}^{\prime})=\left[ \frac{\sqrt{3} i}{3},\, \frac{\sqrt{3} i}{3},\, \frac{\sqrt{3} i}{3} \right]
+\fbox{y10}\quad \mathbb{M}_{1}^{(b)}(A_{2}^{\prime})=\left[ \frac{\sqrt{3} i}{3},\, \frac{\sqrt{3} i}{3},\, \frac{\sqrt{3} i}{3} \right]
 \end{dmath*}
 \begin{dmath*}
 \fbox{y11}\quad \mathbb{Q}_{1,1}^{(b)}(E^{\prime})=\left[ \frac{\sqrt{2}}{2},\, 0,\, - \frac{\sqrt{2}}{2} \right]
@@ -472,10 +472,10 @@ $ \ket{p_{y}} $ & $ y $ \\
 \fbox{y12}\quad \mathbb{Q}_{1,2}^{(b)}(E^{\prime})=\left[ - \frac{\sqrt{6}}{6},\, \frac{\sqrt{6}}{3},\, - \frac{\sqrt{6}}{6} \right]
 \end{dmath*}
 \begin{dmath*}
-\fbox{y13}\quad \mathbb{T}_{1,1}^{(b)}(E^{\prime})=\left[ \frac{\sqrt{2} i}{2},\, 0,\, - \frac{\sqrt{2} i}{2} \right]
+\fbox{y13}\quad \mathbb{T}_{1,1}^{(b)}(E^{\prime})=\left[ \frac{\sqrt{6} i}{6},\, - \frac{\sqrt{6} i}{3},\, \frac{\sqrt{6} i}{6} \right]
 \end{dmath*}
 \begin{dmath*}
-\fbox{y14}\quad \mathbb{T}_{1,2}^{(b)}(E^{\prime})=\left[ - \frac{\sqrt{6} i}{6},\, \frac{\sqrt{6} i}{3},\, - \frac{\sqrt{6} i}{6} \right]
+\fbox{y14}\quad \mathbb{T}_{1,2}^{(b)}(E^{\prime})=\left[ \frac{\sqrt{2} i}{2},\, 0,\, - \frac{\sqrt{2} i}{2} \right]
 \end{dmath*}
 \vspace{5mm}
 \noindent \rule[0.5mm]{5mm}{0.5mm}\hspace{3mm}\textbf{Site and Bond}\hspace{3mm}\leaders\hrule height 0.5mm\hfill\kern0pt
