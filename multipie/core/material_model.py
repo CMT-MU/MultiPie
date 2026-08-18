@@ -14,7 +14,7 @@ from collections import defaultdict
 from multipie import __version__, SAMBType, UniqueSAMBType
 from multipie.core.group import Group
 from multipie.util.util_binary import BinaryManager
-from multipie.util.util import deep_update, time_stamp, check_latex, check_qtdraw, read_dict, write_dict
+from multipie.util.util import deep_update, time_stamp, check_latex, check_qtdraw, read_dict
 from multipie.util.util_pdf_latex import PDFviaLaTeX
 from multipie.util.util_crystal import get_cell_info, create_igrid, convert_to_primitive
 from multipie.util.util_material_model import (
@@ -42,15 +42,6 @@ from multipie.util.util_material_model import (
 from multipie.util.util_material_model_pdf import ModelPDF
 from multipie.core.default_model import default_model
 from multipie.util.util_plot import plot_site, plot_bond, plot_site_samb, plot_bond_samb, plot_harmonics
-
-_matrix_comment = """Selected SAMB matrix.
-- dimension (int): matrix size.
-- ket_site (dict): ket info., dict[ket_name, position (fractional, primitive)].
-- index (dict): ket index, dict[(site,sublattice,rank), (top_index,size)].
-- vector (dict): primitive bond vector, dict[cluster name, [primitive bond vector]].
-- cluster (dict): cluster name, dict[SAMB ID, cluster name].
-- matrix (dict): matrix, dict[zi, dict[(R,row,column), (value, bond_no)] ] (R=n1,n2,n3, primitive).
-"""
 
 
 # ==================================================
@@ -155,16 +146,8 @@ class MaterialModel(BinaryManager):
         if check_qtdraw() and self["qtdraw_prop"]["create"]:
             from qtdraw import create_qtdraw_file
 
-            cwd = os.getcwd()
-            path = self.get_cwd()
-            os.chdir(path)
-            os.makedirs("samb", exist_ok=True)
-            os.chdir("samb")
-
             name = self["model"] + "_atomic_samb"
             create_qtdraw_file(filename=f"{name}.qtdw", callback=lambda qtdraw: create_atomic_samb_qtdraw(qtdraw, self, name))
-
-            os.chdir(cwd)
 
     # ==================================================
     def save_cluster_samb(self, site_bond):
@@ -179,12 +162,6 @@ class MaterialModel(BinaryManager):
         if check_qtdraw() and self["qtdraw_prop"]["create"]:
             from qtdraw import create_qtdraw_file
 
-            cwd = os.getcwd()
-            path = self.get_cwd()
-            os.chdir(path)
-            os.makedirs("samb", exist_ok=True)
-            os.chdir("samb")
-
             if type(site_bond) == str:
                 site_bond = [site_bond]
             name = self["model"] + "_" + "-".join(site_bond)
@@ -193,8 +170,6 @@ class MaterialModel(BinaryManager):
                 filename=f"{name}.qtdw",
                 callback=lambda qtdraw: create_cluster_samb_qtdraw(qtdraw, self, site_bond, name),
             )
-
-            os.chdir(cwd)
 
     # ==================================================
     def save_site_bond(self, site_bond):
@@ -222,18 +197,11 @@ class MaterialModel(BinaryManager):
         if check_qtdraw() and self["qtdraw_prop"]["create"]:
             from qtdraw import create_qtdraw_file
 
-            cwd = os.getcwd()
-            path = self.get_cwd()
-            os.chdir(path)
-            os.makedirs("samb", exist_ok=True)
-            os.chdir("samb")
-
             if type(site_bond) == str:
                 site_bond = [site_bond]
 
             name = self["model"] + "_" + "-".join(site_bond) + "_def"
             create_qtdraw_file(filename=f"{name}.qtdw", callback=draw)
-            os.chdir(cwd)
 
     # ==================================================
     def save_samb_qtdraw(self, verbose=None):
@@ -246,6 +214,12 @@ class MaterialModel(BinaryManager):
         site = [s for s in site_bond if s.count(";") == 0]
         bond = [s for s in site_bond if s.count(";") > 0]
 
+        cwd = os.getcwd()
+        path = self.get_cwd()
+        os.chdir(path)
+        os.makedirs("samb", exist_ok=True)
+        os.chdir("samb")
+
         self.save_atomic_samb()
         self.save_site_bond(site)
         self.save_cluster_samb(site)
@@ -257,6 +231,8 @@ class MaterialModel(BinaryManager):
             verbose = self.verbose
         if verbose:
             print(f"save SAMB QtDraw files in '{self.get_cwd()}/samb/'.")
+
+        os.chdir(cwd)
 
     # ==================================================
     def get_samb_matrix(self, select):
@@ -277,10 +253,11 @@ class MaterialModel(BinaryManager):
         matrix_info = {
             "model": self["model"],
             "source": f"{self["model"]}.pkl",
-            "date": f"{self["created"]}",
+            "created": f"{self["created"]}",
             "select": regularized_select,
             "dimension": len(ket_site),
-            "ket_site": ket_site,
+            "ket": list(ket_site.keys()),
+            "ket_pos": list(ket_site.values()),
             "index": self["full_matrix"]["index"],
             "vector": self["cluster_vector"],
             "cluster": self["combined_cluster"],
@@ -288,82 +265,6 @@ class MaterialModel(BinaryManager):
         }
 
         return matrix_info
-
-    # ==================================================
-    def save_samb_matrix(self, matrix_info, verbose=None):
-        """
-        Save SAMB matrix.
-
-        Args:
-            matrix_info (dict): matrix info.
-            verbose (bool, optional): verboser ?
-        """
-        if verbose is None:
-            verbose = self.verbose
-
-        # convert sympy to str.
-        mi = matrix_info.copy()
-        matrix = matrix_info["matrix"]
-        mi["matrix"] = {z: {k: (str(v[0]).replace(" ", ""), v[1]) for k, v in elm.items()} for z, elm in matrix.items()}
-
-        # write matrix.
-        cwd = os.getcwd()
-        path = self.get_cwd()
-        os.chdir(path)
-
-        var = self["model"]
-        filename = var + "_matrix.py"
-
-        write_dict(mi, filename, var, _matrix_comment)
-        if verbose:
-            print(f"save matrix to '{path}/{filename}'.")
-
-        os.chdir(cwd)
-
-    # ==================================================
-    def save_samb_hr(self, matrix_info, parameter, HR=None, verbose=None):
-        """
-        Save SAMB matrix in hr format.
-
-        Args:
-            matrix_info (dict): matrix info.
-            parameter (dict): parameter dict, dict[z#, value].
-            HR (dict, optional): H(R) matrix. if None, H(R) is generated.
-            verbose (bool, optional): verboser ?
-        """
-        if verbose is None:
-            verbose = self.verbose
-
-        if HR is None:
-            HR = self.get_hr(parameter, combined_samb_matrix=matrix_info["matrix"])
-
-        # write hr.
-        cwd = os.getcwd()
-        path = self.get_cwd()
-        os.chdir(path)
-
-        filename = self["model"] + "_hr.dat"
-        with open(filename, mode="w", encoding="utf-8") as f:
-            print(f"# SAMB matrix from {matrix_info["source"]} ({self["created"]})", file=f)
-            print("# select", file=f)
-            for k, v in matrix_info["select"].items():
-                print(f"#   {k}: {str(v).replace(" ", "")}", file=f)
-            print(f"# basis ({matrix_info["dimension"]})", file=f)
-            for no, (b, p) in enumerate(matrix_info["ket_site"].items()):
-                print(f"#   {no:2d} {b}: [{p[0]: .6f}, {p[1]: .6f}, {p[2]: .6f}]", file=f)
-            for z, v in parameter.items():
-                print(f"# {z:<4} = {v}", file=f)
-            print("#", file=f)
-            print("# n1   n2   n3    m    n    re                        im", file=f)
-            for (n1, n2, n3, m, n), v in HR.items():
-                v = complex(v)
-                r, i = v.real, v.imag
-                s = f"{n1: 4d} {n2: 4d} {n3: 4d} {m: 4d} {n: 4d}    {r: .15e}    {i: .15e}"
-                print(s, file=f)
-        if verbose:
-            print(f"save hr to '{path}/{filename}'.")
-
-        os.chdir(cwd)
 
     # ==================================================
     def analyze(self, model_in):
@@ -447,7 +348,6 @@ class MaterialModel(BinaryManager):
         self["unit_vector"] = A.tolist()
         self["unit_vector_primitive"] = Ap.tolist()
         self["basis_type"] = basis_type
-        self["cell"] = cell_info["cell"]
         self["cell_info"] = cell_info
         self["toroidal_priority"] = toroidal_priority
         self["SAMB_select"] = samb_select
@@ -733,7 +633,7 @@ class MaterialModel(BinaryManager):
         return combined_id, samb_select, select
 
     # ==================================================
-    def get_combined_samb_matrix(self, select=None, fmt="sympy", digit=14):
+    def get_combined_samb_matrix(self, select=None, fmt="sympy", digit=14, bond=True):
         """
         Get combined SAMBs in matrix form (real-space).
 
@@ -741,12 +641,13 @@ class MaterialModel(BinaryManager):
             select (dict, optional): select conditions for multipoles with keywords (see, select_combined_samb).
             fmt (str, optional): sympy/value.
             digit (int, optional): digit for value output.
+            bond (bool, optional): include bond_d ?
 
         Returns:
             - (dict) -- combined SAMB in matrix form, dict[zj, dict[ (n1, n2, n3, m, n), (matrix element, bond_no)] ].
 
         Note:
-            - R = (n1,n2,n3) and m and n are lattice indices, bra and ket indexes, respectively.
+            - R = (n1,n2,n3) and m and n are lattice indices (corresponding to bond_no), bra and ket indexes, respectively.
         """
 
         def _format_val(v):
@@ -841,7 +742,11 @@ class MaterialModel(BinaryManager):
             norm_sq = sum(v * sp.conjugate(v) for v in d.values())
             norm = sp.sqrt(sp.expand(norm_sq))
 
-            matrix[zi] = {Rmn: (_format_val(v / norm), bond_d[Rmn]) for Rmn, v in d.items() if not v.is_zero}
+            matrix[zi] = {
+                Rmn: (_format_val(v / norm), bond_d[Rmn]) if bond else _format_val(v / norm)
+                for Rmn, v in d.items()
+                if not v.is_zero
+            }
 
         matrix = dict(sorted(matrix.items(), key=lambda x: int(x[0][1:])))
 
@@ -933,10 +838,10 @@ class MaterialModel(BinaryManager):
             fmt (str, optional): sympy/value.
 
         Returns:
-            - (dict) -- Hamiltonian matrix (real-space), dict[(n1, n2, n3, m, n), matrix element].
+            - (dict) -- Hamiltonian matrix (real-space), dict[(n1, n2, n3, m, n), (matrix element, bond_no)].
 
         Note:
-            - R = (n1,n2,n3) and m and n are a lattie vector, bra and ket indexes, respectively.
+            - R = (n1,n2,n3) and m and n are a lattie vector (corresponding to bond_no), bra and ket indexes, respectively.
         """
         Hamiltonian = defaultdict(lambda: sp.S(0) if fmt == "sympy" else 0.0)
         for zj, cj in parameter.items():

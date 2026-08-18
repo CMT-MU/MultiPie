@@ -5,6 +5,8 @@ Default control for ModelAnalyzer.
 # ==================================================
 # default control.
 default_control = {
+    "mode": "samb",  # samb (SAMB-based only), wannier (wannier-based only), symcw (SAMB and wannier based).
+    "grid": (50, 50, 50),  # k-grid size (b1, b2, b3).
     "samb": {
         "model": None,  # model name for .pkl.
         "select": {  # SAMB select condition, where S=site name, R=orbital rank, N=neighbor bond.
@@ -16,14 +18,17 @@ default_control = {
             # "s": [],  # SAMB internal rank, 0,1 in list. empty []=all
         },
         "parameter": {  # SAMB with finite weight (float or sympy const.), or filename of z_j dict.
-            "z1": 1.0,
+            # "z1": 1.0,
         },
         "samb_figure": False,  # save SAMB QtDraw files ?
         "k_multipole": False,  # compute momentum multipole ?
         "NG_sum_rule": False,  # Nambu-Goldstone sum rule ?
     },
     "wannier": {  # Closest Wannier (CW) or SymWannier setting.
-        "cw": None,  # CW or SymWannier file.
+        "dir": "wannier",  # directory for wannier input, i.e., "./seedname/wannier".
+        "seedname": None,  # read +(.win, .nnkp, hr.dat, ...).
+        "read_KS": False,  # read Kohn-Sham Ek, Uk, +(seedname.mmn, seedname.spn, seedname.uHu, seedname.uIu ...). If False, read _hr.dat.
+        "ket_wannier": [],  # correspondence between Wannier and MultiPie basis, [MultiPie ket name]. If empty, automatically determined.
     },
     "output": {  # physical quantity setting.
         "dir": "output",  #  output directory.
