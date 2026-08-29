@@ -327,6 +327,44 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="kn">import</span> <span class="n">LeviCivita</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">product</span>
 
+<span class="n">mp_alias</span> <span class="o">=</span> <span class="p">{</span>  <span class="c1"># symbol =&gt; (lower, upper).</span>
+    <span class="s2">&quot;s&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;px&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;py&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;pz&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;z&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;du&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;u&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;dv&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;v&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;dyz&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;yz&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;dxz&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;xz&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;dxy&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;xy&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;f3&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;xyz&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;fax&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;\alpha&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;fay&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;\alpha&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;faz&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;z&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;\alpha&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;fbx&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;\beta&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;fby&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;\beta&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;fbz&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;z&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;\beta&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;f2&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;3a&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;f1&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;3b&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;f3x&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;3u&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;f3y&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;3v&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;g&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;gu&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;4u&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;gv&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;4v&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;gax&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;4x&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;\alpha&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;gay&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;4y&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;\alpha&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;gaz&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;4z&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;\alpha&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;gbx&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;\beta&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;gby&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;\beta&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;gbz&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;z&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;\beta&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;g0&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;40&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;gb&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;4a&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;gav&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;4u&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;\alpha&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;gau&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;4v&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;\alpha&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;gc&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;4u&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;\beta1&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;ga&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;4b&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+<span class="p">}</span>
+
 
 <span class="c1"># ==================================================</span>
 <div class="viewcode-block" id="delta">
@@ -598,7 +636,7 @@
 <a class="viewcode-back" href="../../../src/api_util/util_response_tensor.html#multipie.util.util_response_tensor.S123">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">S123</span><span class="p">(</span><span class="n">i1</span><span class="p">,</span> <span class="n">i2</span><span class="p">,</span> <span class="n">i3</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Symmetric part of rank 3 tensor component.</span>
+<span class="sd">    Full symmetric part of rank 3 tensor component.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        i1 (int): index 1, 1-3.</span>
@@ -617,17 +655,47 @@
     <span class="k">for</span> <span class="n">i4</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>
         <span class="n">d</span> <span class="o">=</span> <span class="n">d1234</span><span class="p">(</span><span class="n">i1</span><span class="p">,</span> <span class="n">i2</span><span class="p">,</span> <span class="n">i3</span><span class="p">,</span> <span class="n">i4</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">d</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">l2</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">d</span><span class="p">,</span> <span class="n">mp_string</span><span class="p">([</span><span class="n">i4</span><span class="p">],</span> <span class="s2">&quot;Q^{(2)}&quot;</span><span class="p">)))</span>
+            <span class="n">l2</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">d</span><span class="p">,</span> <span class="n">mp_string</span><span class="p">([</span><span class="n">i4</span><span class="p">],</span> <span class="s2">&quot;Q^{(1)}&quot;</span><span class="p">)))</span>
+
+    <span class="n">l3</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="n">mp_string</span><span class="p">([</span><span class="n">i1</span><span class="p">,</span> <span class="n">i2</span><span class="p">,</span> <span class="n">i3</span><span class="p">],</span> <span class="s2">&quot;Q^{(1)}&quot;</span><span class="p">))]</span>
+
+    <span class="k">return</span> <span class="n">l1</span> <span class="o">+</span> <span class="n">l2</span> <span class="o">+</span> <span class="n">l3</span></div>
+
+
+
+<span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="Sb123">
+<a class="viewcode-back" href="../../../src/api_util/util_response_tensor.html#multipie.util.util_response_tensor.Sb123">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">Sb123</span><span class="p">(</span><span class="n">i1</span><span class="p">,</span> <span class="n">i2</span><span class="p">,</span> <span class="n">i3</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Symmetric anti-symetric part of rank 3 tensor component.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        i1 (int): index 1, 1-3.</span>
+<span class="sd">        i2 (int): index 2, 1-3.</span>
+<span class="sd">        i3 (int): index 3, 1-3.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        - (list) -- expression list, (coeff, multipole).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">i1</span> <span class="o">==</span> <span class="n">i2</span><span class="p">:</span>
+        <span class="n">l1</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">2</span><span class="p">,</span> <span class="n">mp_string</span><span class="p">([</span><span class="n">i3</span><span class="p">],</span> <span class="s2">&quot;Q^{(2)}&quot;</span><span class="p">))]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">l1</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="n">l2</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i4</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">d1234</span><span class="p">(</span><span class="n">i1</span><span class="p">,</span> <span class="n">i2</span><span class="p">,</span> <span class="n">i3</span><span class="p">,</span> <span class="n">i4</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">d</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">l2</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="o">-</span><span class="n">d</span><span class="p">,</span> <span class="n">mp_string</span><span class="p">([</span><span class="n">i4</span><span class="p">],</span> <span class="s2">&quot;Q^{(2)}&quot;</span><span class="p">)))</span>
 
     <span class="n">l3</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">i4</span><span class="p">,</span> <span class="n">i5</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)):</span>
         <span class="n">g</span> <span class="o">=</span> <span class="n">g12534</span><span class="p">(</span><span class="n">i1</span><span class="p">,</span> <span class="n">i2</span><span class="p">,</span> <span class="n">i3</span><span class="p">,</span> <span class="n">i4</span><span class="p">,</span> <span class="n">i5</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">g</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">l3</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">g</span><span class="p">,</span> <span class="n">mp_string</span><span class="p">([</span><span class="n">i4</span><span class="p">,</span> <span class="n">i5</span><span class="p">],</span> <span class="s2">&quot;G^{(1)}&quot;</span><span class="p">)))</span>
+            <span class="n">l3</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="o">-</span><span class="n">g</span><span class="p">,</span> <span class="n">mp_string</span><span class="p">([</span><span class="n">i4</span><span class="p">,</span> <span class="n">i5</span><span class="p">],</span> <span class="s2">&quot;G^{(1)}&quot;</span><span class="p">)))</span>
 
-    <span class="n">l4</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="n">mp_string</span><span class="p">([</span><span class="n">i1</span><span class="p">,</span> <span class="n">i2</span><span class="p">,</span> <span class="n">i3</span><span class="p">],</span> <span class="s2">&quot;Q^{(1)}&quot;</span><span class="p">))]</span>
-
-    <span class="k">return</span> <span class="n">l1</span> <span class="o">+</span> <span class="n">l2</span> <span class="o">+</span> <span class="n">l3</span> <span class="o">+</span> <span class="n">l4</span></div>
+    <span class="k">return</span> <span class="n">l1</span> <span class="o">+</span> <span class="n">l2</span> <span class="o">+</span> <span class="n">l3</span></div>
 
 
 
@@ -1021,15 +1089,17 @@
 <span class="sd">        i1 (int): index 1, 1-3.</span>
 <span class="sd">        i2 (int): index 2, 1-3.</span>
 <span class="sd">        i3 (int): index 3, 1-3.</span>
-<span class="sd">        opt (str, optional): part, s/a.</span>
+<span class="sd">        opt (str, optional): part, ss/sa/a.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        - (list) -- expression list, (coeff, multipole).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">opt</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">S123</span><span class="p">(</span><span class="n">i1</span><span class="p">,</span> <span class="n">i2</span><span class="p">,</span> <span class="n">i3</span><span class="p">)</span> <span class="o">+</span> <span class="n">A123</span><span class="p">(</span><span class="n">i1</span><span class="p">,</span> <span class="n">i2</span><span class="p">,</span> <span class="n">i3</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">opt</span> <span class="o">==</span> <span class="s2">&quot;s&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">S123</span><span class="p">(</span><span class="n">i1</span><span class="p">,</span> <span class="n">i2</span><span class="p">,</span> <span class="n">i3</span><span class="p">)</span> <span class="o">+</span> <span class="n">Sb123</span><span class="p">(</span><span class="n">i1</span><span class="p">,</span> <span class="n">i2</span><span class="p">,</span> <span class="n">i3</span><span class="p">)</span> <span class="o">+</span> <span class="n">A123</span><span class="p">(</span><span class="n">i1</span><span class="p">,</span> <span class="n">i2</span><span class="p">,</span> <span class="n">i3</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">opt</span> <span class="o">==</span> <span class="s2">&quot;ss&quot;</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">S123</span><span class="p">(</span><span class="n">i1</span><span class="p">,</span> <span class="n">i2</span><span class="p">,</span> <span class="n">i3</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">opt</span> <span class="o">==</span> <span class="s2">&quot;sa&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Sb123</span><span class="p">(</span><span class="n">i1</span><span class="p">,</span> <span class="n">i2</span><span class="p">,</span> <span class="n">i3</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">opt</span> <span class="o">==</span> <span class="s2">&quot;a&quot;</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">A123</span><span class="p">(</span><span class="n">i1</span><span class="p">,</span> <span class="n">i2</span><span class="p">,</span> <span class="n">i3</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
@@ -1140,9 +1210,40 @@
 
     <span class="n">s</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">S</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">c</span><span class="p">,</span> <span class="n">ss</span><span class="p">,</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">ex_lst</span><span class="p">:</span>
-        <span class="n">s</span> <span class="o">+=</span> <span class="n">c</span> <span class="o">*</span> <span class="n">sp</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="n">m</span> <span class="o">+</span> <span class="s2">&quot;^{&quot;</span> <span class="o">+</span> <span class="n">ss</span> <span class="o">+</span> <span class="s2">&quot;}&quot;</span><span class="p">)</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">sub</span> <span class="o">=</span> <span class="n">m</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">sub</span><span class="p">,</span> <span class="n">sup</span> <span class="o">=</span> <span class="n">mp_alias</span><span class="p">[</span><span class="n">sub</span><span class="p">]</span>
+        <span class="n">sl</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;\mathbb{&quot;</span> <span class="o">+</span> <span class="n">X</span> <span class="o">+</span> <span class="s2">&quot;}_{&quot;</span> <span class="o">+</span> <span class="n">sub</span> <span class="o">+</span> <span class="s2">&quot;}^{&quot;</span> <span class="o">+</span> <span class="n">sup</span> <span class="o">+</span> <span class="n">ss</span> <span class="o">+</span> <span class="s2">&quot;}&quot;</span>
+        <span class="n">s</span> <span class="o">+=</span> <span class="n">c</span> <span class="o">*</span> <span class="n">sp</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="n">sl</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">s</span></div>
+
+
+
+<span class="c1"># ==================================================</span>
+<div class="viewcode-block" id="convert_mp_alias">
+<a class="viewcode-back" href="../../../src/api_util/util_response_tensor.html#multipie.util.util_response_tensor.convert_mp_alias">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">convert_mp_alias</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="n">latex</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert standard active multipole tag to alias name.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        tag (str): active multipole tag.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        - (str) -- alias name.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">tag</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">tag</span> <span class="o">=</span> <span class="n">tag</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+    <span class="n">sub</span><span class="p">,</span> <span class="n">sup</span> <span class="o">=</span> <span class="n">mp_alias</span><span class="p">[</span><span class="n">tag</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">latex</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">r</span><span class="s2">&quot;\mathbb{&quot;</span> <span class="o">+</span> <span class="n">X</span> <span class="o">+</span> <span class="s2">&quot;}_{&quot;</span> <span class="o">+</span> <span class="n">sub</span> <span class="o">+</span> <span class="s2">&quot;}^{&quot;</span> <span class="o">+</span> <span class="n">sup</span> <span class="o">+</span> <span class="s2">&quot;}&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">X</span><span class="si">}{</span><span class="n">sub</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">if</span> <span class="n">sup</span><span class="p">:</span>
+            <span class="n">sup</span> <span class="o">=</span> <span class="n">sup</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\alpha&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\u03b1</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\beta&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\u03b2</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">s</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;^</span><span class="si">{</span><span class="n">sup</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">return</span> <span class="n">s</span></div>
 
 
 
