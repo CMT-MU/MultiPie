@@ -14,6 +14,7 @@
 \usepackage{multirow}
 \usepackage{booktabs}
 \usepackage{longtable}
+\usepackage{caption}
 
 %%% layout setting
 
@@ -51,7 +52,7 @@ MPG No. 28.2.108\quad$231'$\quad[ Type II, cubic ] [G tensor]
 \begin{bmatrix} G \end{bmatrix}
 \end{align*}
 \begin{align*}
-& G = G_{s}^{(1)}
+& G = \mathbb{G}_{0}^{(1)}
 \end{align*}
 * Rank 1 tensor.
 * Rank 2 tensor (s).
@@ -59,45 +60,46 @@ MPG No. 28.2.108\quad$231'$\quad[ Type II, cubic ] [G tensor]
 \begin{bmatrix} G_{xx} & 0 & 0 \\ 0 & G_{xx} & 0 \\ 0 & 0 & G_{xx} \end{bmatrix}
 \end{align*}
 \begin{align*}
-& G_{xx} = G_{s}^{(1)}
+& G_{xx} = \mathbb{G}_{0}^{(1)}
 \end{align*}
 * Rank 2 tensor (a).
-* Rank 3 tensor (s).
+* Rank 3 tensor (ss).
 \begin{align*}
 \begin{bmatrix} 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \\ G_{yzx} & 0 & 0 \\ 0 & G_{yzx} & 0 \\ 0 & 0 & G_{yzx} \end{bmatrix}
 \end{align*}
 \begin{align*}
-& G_{yzx} = G_{f3}^{(1)}
+& G_{yzx} = \mathbb{G}_{xyz}^{(1)}
 \end{align*}
+* Rank 3 tensor (sa).
 * Rank 3 tensor (a).
 \begin{align*}
 \begin{bmatrix} G_{yzx} & 0 & 0 \\ 0 & G_{yzx} & 0 \\ 0 & 0 & G_{yzx} \end{bmatrix}
 \end{align*}
 \begin{align*}
-& G_{yzx} = Q_{s}^{(1)}
+& G_{yzx} = \mathbb{Q}_{0}^{(1)}
 \end{align*}
 * Rank 4 tensor (sss).
 \begin{align*}
 \begin{bmatrix} G_{xxxx} & G_{xxyy} & G_{xxyy} & 0 & 0 & 0 \\ G_{xxyy} & G_{xxxx} & G_{xxyy} & 0 & 0 & 0 \\ G_{xxyy} & G_{xxyy} & G_{xxxx} & 0 & 0 & 0 \\ 0 & 0 & 0 & G_{yzyz} & 0 & 0 \\ 0 & 0 & 0 & 0 & G_{yzyz} & 0 \\ 0 & 0 & 0 & 0 & 0 & G_{yzyz} \end{bmatrix}
 \end{align*}
 \begin{align*}
-& G_{xxxx} = 2 G_{g}^{(1)} + G_{s}^{(1)} + 2 G_{s}^{(2)} \\
-& G_{xxyy} = - G_{g}^{(1)} + G_{s}^{(1)} \\
-& G_{yzyz} = - G_{g}^{(1)} + G_{s}^{(2)}
+& G_{xxxx} = \mathbb{G}_{0}^{(1)} + 2 \mathbb{G}_{0}^{(2)} + 2 \mathbb{G}_{4}^{(1)} \\
+& G_{xxyy} = \mathbb{G}_{0}^{(1)} - \mathbb{G}_{4}^{(1)} \\
+& G_{yzyz} = \mathbb{G}_{0}^{(2)} - \mathbb{G}_{4}^{(1)}
 \end{align*}
 * Rank 4 tensor (ssa).
 \begin{align*}
 \begin{bmatrix} 0 & G_{xxyy} & - G_{xxyy} & 0 & 0 & 0 \\ - G_{xxyy} & 0 & G_{xxyy} & 0 & 0 & 0 \\ G_{xxyy} & - G_{xxyy} & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& G_{xxyy} = 4 Q_{f3}^{(1)}
+& G_{xxyy} = 4 \mathbb{Q}_{xyz}^{(1)}
 \end{align*}
 * Rank 4 tensor (aas).
 \begin{align*}
 \begin{bmatrix} G_{yzyz} & 0 & 0 \\ 0 & G_{yzyz} & 0 \\ 0 & 0 & G_{yzyz} \end{bmatrix}
 \end{align*}
 \begin{align*}
-& G_{yzyz} = G_{s}^{(3)}
+& G_{yzyz} = \mathbb{G}_{0}^{(3)}
 \end{align*}
 * Rank 4 tensor (aaa).
 * Rank 4 tensor (sa).
@@ -105,41 +107,41 @@ MPG No. 28.2.108\quad$231'$\quad[ Type II, cubic ] [G tensor]
 \begin{bmatrix} 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \\ G_{yzyz} & 0 & 0 \\ 0 & G_{yzyz} & 0 \\ 0 & 0 & G_{yzyz} \end{bmatrix}
 \end{align*}
 \begin{align*}
-& G_{yzyz} = Q_{f3}^{(2)}
+& G_{yzyz} = \mathbb{Q}_{xyz}^{(2)}
 \end{align*}
 * Rank 4 tensor (as).
 \begin{align*}
 \begin{bmatrix} 0 & 0 & 0 & G_{yzyz} & 0 & 0 \\ 0 & 0 & 0 & 0 & G_{yzyz} & 0 \\ 0 & 0 & 0 & 0 & 0 & G_{yzyz} \end{bmatrix}
 \end{align*}
 \begin{align*}
-& G_{yzyz} = Q_{f3}^{(3)}
+& G_{yzyz} = \mathbb{Q}_{xyz}^{(3)}
 \end{align*}
 * Rank 4 tensor (s).
 \begin{align*}
 \begin{bmatrix} G_{xxxx} & G_{xxyy} & G_{xxzz} & 0 & 0 & 0 & 0 & 0 & 0 \\ G_{xxzz} & G_{xxxx} & G_{xxyy} & 0 & 0 & 0 & 0 & 0 & 0 \\ G_{xxyy} & G_{xxzz} & G_{xxxx} & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & G_{yzyz} & 0 & 0 & G_{yzzy} & 0 & 0 \\ 0 & 0 & 0 & 0 & G_{yzyz} & 0 & 0 & G_{yzzy} & 0 \\ 0 & 0 & 0 & 0 & 0 & G_{yzyz} & 0 & 0 & G_{yzzy} \end{bmatrix}
 \end{align*}
 \begin{align*}
-& G_{xxxx} = 2 G_{g}^{(1)} + G_{s}^{(1)} + 2 G_{s}^{(2)} \\
-& G_{xxyy} = - G_{g}^{(1)} + G_{s}^{(1)} + 4 Q_{f3}^{(1)} \\
-& G_{xxzz} = - G_{g}^{(1)} + G_{s}^{(1)} - 4 Q_{f3}^{(1)} \\
-& G_{yzyz} = - G_{g}^{(1)} + G_{s}^{(2)} + Q_{f3}^{(2)} \\
-& G_{yzzy} = - G_{g}^{(1)} + G_{s}^{(2)} - Q_{f3}^{(2)}
+& G_{xxxx} = \mathbb{G}_{0}^{(1)} + 2 \mathbb{G}_{0}^{(2)} + 2 \mathbb{G}_{4}^{(1)} \\
+& G_{xxyy} = \mathbb{G}_{0}^{(1)} - \mathbb{G}_{4}^{(1)} + 4 \mathbb{Q}_{xyz}^{(1)} \\
+& G_{xxzz} = \mathbb{G}_{0}^{(1)} - \mathbb{G}_{4}^{(1)} - 4 \mathbb{Q}_{xyz}^{(1)} \\
+& G_{yzyz} = \mathbb{G}_{0}^{(2)} - \mathbb{G}_{4}^{(1)} + \mathbb{Q}_{xyz}^{(2)} \\
+& G_{yzzy} = \mathbb{G}_{0}^{(2)} - \mathbb{G}_{4}^{(1)} - \mathbb{Q}_{xyz}^{(2)}
 \end{align*}
 * Rank 4 tensor (a).
 \begin{align*}
 \begin{bmatrix} 0 & 0 & 0 & G_{yzyz} & 0 & 0 & G_{yzzy} & 0 & 0 \\ 0 & 0 & 0 & 0 & G_{yzyz} & 0 & 0 & G_{yzzy} & 0 \\ 0 & 0 & 0 & 0 & 0 & G_{yzyz} & 0 & 0 & G_{yzzy} \end{bmatrix}
 \end{align*}
 \begin{align*}
-& G_{yzyz} = G_{s}^{(3)} + Q_{f3}^{(3)} \\
-& G_{yzzy} = - G_{s}^{(3)} + Q_{f3}^{(3)}
+& G_{yzyz} = \mathbb{G}_{0}^{(3)} + \mathbb{Q}_{xyz}^{(3)} \\
+& G_{yzzy} = - \mathbb{G}_{0}^{(3)} + \mathbb{Q}_{xyz}^{(3)}
 \end{align*}
 * Rank 4 tensor (t).
 \begin{align*}
 \begin{bmatrix} G_{xxxx} & 0 & 0 \\ 0 & G_{xxxx} & 0 \\ 0 & 0 & G_{xxxx} \\ 0 & 0 & G_{yyzz} \\ G_{yyzz} & 0 & 0 \\ 0 & G_{yyzz} & 0 \\ 0 & G_{yyzz} & 0 \\ 0 & 0 & G_{yyzz} \\ G_{yyzz} & 0 & 0 \\ 0 & 0 & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& G_{xxxx} = 2 G_{g}^{(1)} + 3 G_{s}^{(1)} \\
-& G_{yyzz} = - G_{g}^{(1)} + G_{s}^{(1)}
+& G_{xxxx} = 3 \mathbb{G}_{0}^{(1)} + 2 \mathbb{G}_{4}^{(1)} \\
+& G_{yyzz} = \mathbb{G}_{0}^{(1)} - \mathbb{G}_{4}^{(1)}
 \end{align*}
 
 \end{document}

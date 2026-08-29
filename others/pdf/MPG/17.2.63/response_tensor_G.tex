@@ -14,6 +14,7 @@
 \usepackage{multirow}
 \usepackage{booktabs}
 \usepackage{longtable}
+\usepackage{caption}
 
 %%% layout setting
 
@@ -52,30 +53,37 @@ MPG No. 17.2.63\quad$\bar{3}1'$\quad[ Type II, trigonal ] [G tensor]
 \begin{bmatrix} 0 & 0 & G_{z} \end{bmatrix}
 \end{align*}
 \begin{align*}
-& G_{z} = G_{pz}^{(1)}
+& G_{z} = \mathbb{G}_{z}^{(1)}
 \end{align*}
 * Rank 2 tensor (s).
 * Rank 2 tensor (a).
-* Rank 3 tensor (s).
+* Rank 3 tensor (ss).
 \begin{align*}
-\begin{bmatrix} G_{xxx} & G_{xxy} & G_{xxz} \\ - G_{xxx} & - G_{xxy} & G_{xxz} \\ 0 & 0 & G_{zzz} \\ G_{yzx} & G_{yzy} & 0 \\ G_{yzy} & - G_{yzx} & 0 \\ G_{xxy} & - G_{xxx} & 0 \end{bmatrix}
+\begin{bmatrix} G_{xxx} & G_{xxy} & G_{xxz} \\ - G_{xxx} & - G_{xxy} & G_{xxz} \\ 0 & 0 & G_{zzz} \\ 0 & G_{xxz} & 0 \\ G_{xxz} & 0 & 0 \\ G_{xxy} & - G_{xxx} & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& G_{xxx} = G_{f2}^{(1)} \\
-& G_{xxy} = G_{f1}^{(1)} \\
-& G_{xxz} = - G_{faz}^{(1)} + G_{pz}^{(1)} \\
-& G_{zzz} = 2 G_{faz}^{(1)} + G_{pz}^{(1)} + 2 G_{pz}^{(2)} \\
-& G_{yzx} = - 3 Q_{du}^{(1)} \\
-& G_{yzy} = - G_{faz}^{(1)} + G_{pz}^{(2)}
+& G_{xxx} = \mathbb{G}_{3a}^{(1)} \\
+& G_{xxy} = \mathbb{G}_{3b}^{(1)} \\
+& G_{xxz} = \mathbb{G}_{z}^{(1)} - \mathbb{G}_{z}^{\alpha(1)} \\
+& G_{zzz} = 3 \mathbb{G}_{z}^{(1)} + 2 \mathbb{G}_{z}^{\alpha(1)}
+\end{align*}
+* Rank 3 tensor (sa).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & G_{xxz} \\ 0 & 0 & G_{xxz} \\ 0 & 0 & 0 \\ G_{yzx} & - \frac{G_{xxz}}{2} & 0 \\ - \frac{G_{xxz}}{2} & - G_{yzx} & 0 \\ 0 & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& G_{xxz} = 2 \mathbb{G}_{z}^{(2)} \\
+& G_{yzx} = 3 \mathbb{Q}_{u}^{(1)} \\
+& \frac{G_{xxz}}{2} = \mathbb{G}_{z}^{(2)}
 \end{align*}
 * Rank 3 tensor (a).
 \begin{align*}
 \begin{bmatrix} G_{yzx} & G_{yzy} & 0 \\ - G_{yzy} & G_{yzx} & 0 \\ 0 & 0 & G_{xyz} \end{bmatrix}
 \end{align*}
 \begin{align*}
-& G_{yzx} = - Q_{du}^{(2)} + Q_{s}^{(1)} \\
-& G_{yzy} = G_{pz}^{(3)} \\
-& G_{xyz} = 2 Q_{du}^{(2)} + Q_{s}^{(1)}
+& G_{yzx} = \mathbb{Q}_{0}^{(1)} - \mathbb{Q}_{u}^{(2)} \\
+& G_{yzy} = \mathbb{G}_{z}^{(3)} \\
+& G_{xyz} = \mathbb{Q}_{0}^{(1)} + 2 \mathbb{Q}_{u}^{(2)}
 \end{align*}
 * Rank 4 tensor (sss).
 * Rank 4 tensor (ssa).

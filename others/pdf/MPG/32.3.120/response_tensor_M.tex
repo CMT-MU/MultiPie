@@ -14,6 +14,7 @@
 \usepackage{multirow}
 \usepackage{booktabs}
 \usepackage{longtable}
+\usepackage{caption}
 
 %%% layout setting
 
@@ -50,7 +51,8 @@ MPG No. 32.3.120\quad$m'\bar{3}'m$\quad[ Type III, cubic ] [M tensor]
 * Rank 1 tensor.
 * Rank 2 tensor (s).
 * Rank 2 tensor (a).
-* Rank 3 tensor (s).
+* Rank 3 tensor (ss).
+* Rank 3 tensor (sa).
 * Rank 3 tensor (a).
 * Rank 4 tensor (sss).
 * Rank 4 tensor (ssa).
@@ -58,7 +60,7 @@ MPG No. 32.3.120\quad$m'\bar{3}'m$\quad[ Type III, cubic ] [M tensor]
 \begin{bmatrix} 0 & M_{xxyy} & - M_{xxyy} & 0 & 0 & 0 \\ - M_{xxyy} & 0 & M_{xxyy} & 0 & 0 & 0 \\ M_{xxyy} & - M_{xxyy} & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& M_{xxyy} = 4 T_{f3}^{(1)}
+& M_{xxyy} = 4 \mathbb{T}_{xyz}^{(1)}
 \end{align*}
 * Rank 4 tensor (aas).
 * Rank 4 tensor (aaa).
@@ -67,29 +69,29 @@ MPG No. 32.3.120\quad$m'\bar{3}'m$\quad[ Type III, cubic ] [M tensor]
 \begin{bmatrix} 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \\ M_{yzyz} & 0 & 0 \\ 0 & M_{yzyz} & 0 \\ 0 & 0 & M_{yzyz} \end{bmatrix}
 \end{align*}
 \begin{align*}
-& M_{yzyz} = T_{f3}^{(2)}
+& M_{yzyz} = \mathbb{T}_{xyz}^{(2)}
 \end{align*}
 * Rank 4 tensor (as).
 \begin{align*}
 \begin{bmatrix} 0 & 0 & 0 & M_{yzyz} & 0 & 0 \\ 0 & 0 & 0 & 0 & M_{yzyz} & 0 \\ 0 & 0 & 0 & 0 & 0 & M_{yzyz} \end{bmatrix}
 \end{align*}
 \begin{align*}
-& M_{yzyz} = T_{f3}^{(3)}
+& M_{yzyz} = \mathbb{T}_{xyz}^{(3)}
 \end{align*}
 * Rank 4 tensor (s).
 \begin{align*}
 \begin{bmatrix} 0 & M_{xxyy} & - M_{xxyy} & 0 & 0 & 0 & 0 & 0 & 0 \\ - M_{xxyy} & 0 & M_{xxyy} & 0 & 0 & 0 & 0 & 0 & 0 \\ M_{xxyy} & - M_{xxyy} & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & M_{yzyz} & 0 & 0 & - M_{yzyz} & 0 & 0 \\ 0 & 0 & 0 & 0 & M_{yzyz} & 0 & 0 & - M_{yzyz} & 0 \\ 0 & 0 & 0 & 0 & 0 & M_{yzyz} & 0 & 0 & - M_{yzyz} \end{bmatrix}
 \end{align*}
 \begin{align*}
-& M_{xxyy} = 4 T_{f3}^{(1)} \\
-& M_{yzyz} = T_{f3}^{(2)}
+& M_{xxyy} = 4 \mathbb{T}_{xyz}^{(1)} \\
+& M_{yzyz} = \mathbb{T}_{xyz}^{(2)}
 \end{align*}
 * Rank 4 tensor (a).
 \begin{align*}
 \begin{bmatrix} 0 & 0 & 0 & M_{yzyz} & 0 & 0 & M_{yzyz} & 0 & 0 \\ 0 & 0 & 0 & 0 & M_{yzyz} & 0 & 0 & M_{yzyz} & 0 \\ 0 & 0 & 0 & 0 & 0 & M_{yzyz} & 0 & 0 & M_{yzyz} \end{bmatrix}
 \end{align*}
 \begin{align*}
-& M_{yzyz} = T_{f3}^{(3)}
+& M_{yzyz} = \mathbb{T}_{xyz}^{(3)}
 \end{align*}
 * Rank 4 tensor (t).
 
