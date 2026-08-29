@@ -52,7 +52,7 @@ MPG No. 30.1.112\quad$432$\quad[ Type I, cubic ] [Q tensor]
 \begin{bmatrix} Q \end{bmatrix}
 \end{align*}
 \begin{align*}
-& Q = Q_{s}^{(1)}
+& Q = \mathbb{Q}_{0}^{(1)}
 \end{align*}
 * Rank 1 tensor.
 * Rank 2 tensor (s).
@@ -60,7 +60,7 @@ MPG No. 30.1.112\quad$432$\quad[ Type I, cubic ] [Q tensor]
 \begin{bmatrix} Q_{xx} & 0 & 0 \\ 0 & Q_{xx} & 0 \\ 0 & 0 & Q_{xx} \end{bmatrix}
 \end{align*}
 \begin{align*}
-& Q_{xx} = Q_{s}^{(1)}
+& Q_{xx} = \mathbb{Q}_{0}^{(1)}
 \end{align*}
 * Rank 2 tensor (a).
 * Rank 3 tensor (ss).
@@ -70,16 +70,16 @@ MPG No. 30.1.112\quad$432$\quad[ Type I, cubic ] [Q tensor]
 \begin{bmatrix} Q_{yzx} & 0 & 0 \\ 0 & Q_{yzx} & 0 \\ 0 & 0 & Q_{yzx} \end{bmatrix}
 \end{align*}
 \begin{align*}
-& Q_{yzx} = G_{s}^{(1)}
+& Q_{yzx} = \mathbb{G}_{0}^{(1)}
 \end{align*}
 * Rank 4 tensor (sss).
 \begin{align*}
 \begin{bmatrix} Q_{xxxx} & Q_{xxyy} & Q_{xxyy} & 0 & 0 & 0 \\ Q_{xxyy} & Q_{xxxx} & Q_{xxyy} & 0 & 0 & 0 \\ Q_{xxyy} & Q_{xxyy} & Q_{xxxx} & 0 & 0 & 0 \\ 0 & 0 & 0 & Q_{yzyz} & 0 & 0 \\ 0 & 0 & 0 & 0 & Q_{yzyz} & 0 \\ 0 & 0 & 0 & 0 & 0 & Q_{yzyz} \end{bmatrix}
 \end{align*}
 \begin{align*}
-& Q_{xxxx} = 2 Q_{g}^{(1)} + Q_{s}^{(1)} + 2 Q_{s}^{(2)} \\
-& Q_{xxyy} = - Q_{g}^{(1)} + Q_{s}^{(1)} \\
-& Q_{yzyz} = - Q_{g}^{(1)} + Q_{s}^{(2)}
+& Q_{xxxx} = \mathbb{Q}_{0}^{(1)} + 2 \mathbb{Q}_{0}^{(2)} + 2 \mathbb{Q}_{4}^{(1)} \\
+& Q_{xxyy} = \mathbb{Q}_{0}^{(1)} - \mathbb{Q}_{4}^{(1)} \\
+& Q_{yzyz} = \mathbb{Q}_{0}^{(2)} - \mathbb{Q}_{4}^{(1)}
 \end{align*}
 * Rank 4 tensor (ssa).
 * Rank 4 tensor (aas).
@@ -87,7 +87,7 @@ MPG No. 30.1.112\quad$432$\quad[ Type I, cubic ] [Q tensor]
 \begin{bmatrix} Q_{yzyz} & 0 & 0 \\ 0 & Q_{yzyz} & 0 \\ 0 & 0 & Q_{yzyz} \end{bmatrix}
 \end{align*}
 \begin{align*}
-& Q_{yzyz} = Q_{s}^{(3)}
+& Q_{yzyz} = \mathbb{Q}_{0}^{(3)}
 \end{align*}
 * Rank 4 tensor (aaa).
 * Rank 4 tensor (sa).
@@ -97,24 +97,24 @@ MPG No. 30.1.112\quad$432$\quad[ Type I, cubic ] [Q tensor]
 \begin{bmatrix} Q_{xxxx} & Q_{xxyy} & Q_{xxyy} & 0 & 0 & 0 & 0 & 0 & 0 \\ Q_{xxyy} & Q_{xxxx} & Q_{xxyy} & 0 & 0 & 0 & 0 & 0 & 0 \\ Q_{xxyy} & Q_{xxyy} & Q_{xxxx} & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & Q_{yzyz} & 0 & 0 & Q_{yzyz} & 0 & 0 \\ 0 & 0 & 0 & 0 & Q_{yzyz} & 0 & 0 & Q_{yzyz} & 0 \\ 0 & 0 & 0 & 0 & 0 & Q_{yzyz} & 0 & 0 & Q_{yzyz} \end{bmatrix}
 \end{align*}
 \begin{align*}
-& Q_{xxxx} = 2 Q_{g}^{(1)} + Q_{s}^{(1)} + 2 Q_{s}^{(2)} \\
-& Q_{xxyy} = - Q_{g}^{(1)} + Q_{s}^{(1)} \\
-& Q_{yzyz} = - Q_{g}^{(1)} + Q_{s}^{(2)}
+& Q_{xxxx} = \mathbb{Q}_{0}^{(1)} + 2 \mathbb{Q}_{0}^{(2)} + 2 \mathbb{Q}_{4}^{(1)} \\
+& Q_{xxyy} = \mathbb{Q}_{0}^{(1)} - \mathbb{Q}_{4}^{(1)} \\
+& Q_{yzyz} = \mathbb{Q}_{0}^{(2)} - \mathbb{Q}_{4}^{(1)}
 \end{align*}
 * Rank 4 tensor (a).
 \begin{align*}
 \begin{bmatrix} 0 & 0 & 0 & Q_{yzyz} & 0 & 0 & - Q_{yzyz} & 0 & 0 \\ 0 & 0 & 0 & 0 & Q_{yzyz} & 0 & 0 & - Q_{yzyz} & 0 \\ 0 & 0 & 0 & 0 & 0 & Q_{yzyz} & 0 & 0 & - Q_{yzyz} \end{bmatrix}
 \end{align*}
 \begin{align*}
-& Q_{yzyz} = Q_{s}^{(3)}
+& Q_{yzyz} = \mathbb{Q}_{0}^{(3)}
 \end{align*}
 * Rank 4 tensor (t).
 \begin{align*}
 \begin{bmatrix} Q_{xxxx} & 0 & 0 \\ 0 & Q_{xxxx} & 0 \\ 0 & 0 & Q_{xxxx} \\ 0 & 0 & Q_{yyzz} \\ Q_{yyzz} & 0 & 0 \\ 0 & Q_{yyzz} & 0 \\ 0 & Q_{yyzz} & 0 \\ 0 & 0 & Q_{yyzz} \\ Q_{yyzz} & 0 & 0 \\ 0 & 0 & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& Q_{xxxx} = 2 Q_{g}^{(1)} + 3 Q_{s}^{(1)} \\
-& Q_{yyzz} = - Q_{g}^{(1)} + Q_{s}^{(1)}
+& Q_{xxxx} = 3 \mathbb{Q}_{0}^{(1)} + 2 \mathbb{Q}_{4}^{(1)} \\
+& Q_{yyzz} = \mathbb{Q}_{0}^{(1)} - \mathbb{Q}_{4}^{(1)}
 \end{align*}
 
 \end{document}

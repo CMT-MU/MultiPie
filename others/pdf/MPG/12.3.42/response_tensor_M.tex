@@ -54,7 +54,7 @@ MPG No. 12.3.42\quad$4'22'$\quad(4'22' setting)\quad[ Type III, tetragonal ] [M 
 \begin{bmatrix} M_{xx} & 0 & 0 \\ 0 & - M_{xx} & 0 \\ 0 & 0 & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& M_{xx} = M_{dv}^{(1)}
+& M_{xx} = \mathbb{M}_{v}^{(1)}
 \end{align*}
 * Rank 2 tensor (a).
 * Rank 3 tensor (ss).
@@ -62,46 +62,46 @@ MPG No. 12.3.42\quad$4'22'$\quad(4'22' setting)\quad[ Type III, tetragonal ] [M 
 \begin{bmatrix} 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \\ M_{yzx} & 0 & 0 \\ 0 & M_{yzx} & 0 \\ 0 & 0 & M_{yzx} \end{bmatrix}
 \end{align*}
 \begin{align*}
-& M_{yzx} = M_{f3}^{(1)}
+& M_{yzx} = \mathbb{M}_{xyz}^{(1)}
 \end{align*}
 * Rank 3 tensor (sa).
 \begin{align*}
 \begin{bmatrix} 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \\ M_{yzx} & 0 & 0 \\ 0 & M_{yzx} & 0 \\ 0 & 0 & - 2 M_{yzx} \end{bmatrix}
 \end{align*}
 \begin{align*}
-& M_{yzx} = T_{dv}^{(1)} \\
-& 2 M_{yzx} = 2 T_{dv}^{(1)}
+& M_{yzx} = \mathbb{T}_{v}^{(1)} \\
+& 2 M_{yzx} = 2 \mathbb{T}_{v}^{(1)}
 \end{align*}
 * Rank 3 tensor (a).
 \begin{align*}
 \begin{bmatrix} M_{yzx} & 0 & 0 \\ 0 & - M_{yzx} & 0 \\ 0 & 0 & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& M_{yzx} = T_{dv}^{(2)}
+& M_{yzx} = \mathbb{T}_{v}^{(2)}
 \end{align*}
 * Rank 4 tensor (sss).
 \begin{align*}
 \begin{bmatrix} M_{xxxx} & 0 & M_{xxzz} & 0 & 0 & 0 \\ 0 & - M_{xxxx} & - M_{xxzz} & 0 & 0 & 0 \\ M_{xxzz} & - M_{xxzz} & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & M_{yzyz} & 0 & 0 \\ 0 & 0 & 0 & 0 & - M_{yzyz} & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& M_{xxxx} = 2 M_{dv}^{(1)} + 4 M_{dv}^{(2)} + M_{gv}^{(1)} \\
-& M_{xxzz} = M_{dv}^{(1)} - M_{gv}^{(1)} \\
-& M_{yzyz} = - M_{dv}^{(2)} + M_{gv}^{(1)}
+& M_{xxxx} = \mathbb{M}_{4v}^{(1)} + 2 \mathbb{M}_{v}^{(1)} + 4 \mathbb{M}_{v}^{(2)} \\
+& M_{xxzz} = - \mathbb{M}_{4v}^{(1)} + \mathbb{M}_{v}^{(1)} \\
+& M_{yzyz} = \mathbb{M}_{4v}^{(1)} - \mathbb{M}_{v}^{(2)}
 \end{align*}
 * Rank 4 tensor (ssa).
 \begin{align*}
 \begin{bmatrix} 0 & M_{xxyy} & M_{xxzz} & 0 & 0 & 0 \\ - M_{xxyy} & 0 & - M_{xxzz} & 0 & 0 & 0 \\ - M_{xxzz} & M_{xxzz} & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& M_{xxyy} = - 2 M_{dv}^{(3)} + 4 T_{f3}^{(1)} \\
-& M_{xxzz} = - M_{dv}^{(3)} - 4 T_{f3}^{(1)}
+& M_{xxyy} = - 2 \mathbb{M}_{v}^{(3)} + 4 \mathbb{T}_{xyz}^{(1)} \\
+& M_{xxzz} = - \mathbb{M}_{v}^{(3)} - 4 \mathbb{T}_{xyz}^{(1)}
 \end{align*}
 * Rank 4 tensor (aas).
 \begin{align*}
 \begin{bmatrix} M_{yzyz} & 0 & 0 \\ 0 & - M_{yzyz} & 0 \\ 0 & 0 & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& M_{yzyz} = 2 M_{dv}^{(4)}
+& M_{yzyz} = 2 \mathbb{M}_{v}^{(4)}
 \end{align*}
 * Rank 4 tensor (aaa).
 * Rank 4 tensor (sa).
@@ -109,49 +109,49 @@ MPG No. 12.3.42\quad$4'22'$\quad(4'22' setting)\quad[ Type III, tetragonal ] [M 
 \begin{bmatrix} 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \\ M_{yzyz} & 0 & 0 \\ 0 & M_{yzyz} & 0 \\ 0 & 0 & M_{xyxy} \end{bmatrix}
 \end{align*}
 \begin{align*}
-& M_{yzyz} = - M_{dv}^{(5)} + T_{f3}^{(2)} \\
-& M_{xyxy} = 2 M_{dv}^{(5)} + T_{f3}^{(2)}
+& M_{yzyz} = - \mathbb{M}_{v}^{(5)} + \mathbb{T}_{xyz}^{(2)} \\
+& M_{xyxy} = 2 \mathbb{M}_{v}^{(5)} + \mathbb{T}_{xyz}^{(2)}
 \end{align*}
 * Rank 4 tensor (as).
 \begin{align*}
 \begin{bmatrix} 0 & 0 & 0 & M_{yzyz} & 0 & 0 \\ 0 & 0 & 0 & 0 & M_{yzyz} & 0 \\ 0 & 0 & 0 & 0 & 0 & M_{xyxy} \end{bmatrix}
 \end{align*}
 \begin{align*}
-& M_{yzyz} = - M_{dv}^{(6)} + T_{f3}^{(3)} \\
-& M_{xyxy} = 2 M_{dv}^{(6)} + T_{f3}^{(3)}
+& M_{yzyz} = - \mathbb{M}_{v}^{(6)} + \mathbb{T}_{xyz}^{(3)} \\
+& M_{xyxy} = 2 \mathbb{M}_{v}^{(6)} + \mathbb{T}_{xyz}^{(3)}
 \end{align*}
 * Rank 4 tensor (s).
 \begin{align*}
 \begin{bmatrix} M_{xxxx} & M_{xxyy} & M_{xxzz} & 0 & 0 & 0 & 0 & 0 & 0 \\ - M_{xxyy} & - M_{xxxx} & - M_{xxzz} & 0 & 0 & 0 & 0 & 0 & 0 \\ M_{zzxx} & - M_{zzxx} & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & M_{yzyz} & 0 & 0 & M_{yzzy} & 0 & 0 \\ 0 & 0 & 0 & 0 & - M_{yzzy} & 0 & 0 & - M_{yzyz} & 0 \\ 0 & 0 & 0 & 0 & 0 & M_{xyxy} & 0 & 0 & - M_{xyxy} \end{bmatrix}
 \end{align*}
 \begin{align*}
-& M_{xxxx} = 2 M_{dv}^{(1)} + 4 M_{dv}^{(2)} + M_{gv}^{(1)} \\
-& M_{xxyy} = - 2 M_{dv}^{(3)} + 4 T_{f3}^{(1)} \\
-& M_{xxzz} = M_{dv}^{(1)} - M_{dv}^{(3)} - M_{gv}^{(1)} - 4 T_{f3}^{(1)} \\
-& M_{zzxx} = M_{dv}^{(1)} + M_{dv}^{(3)} - M_{gv}^{(1)} + 4 T_{f3}^{(1)} \\
-& M_{yzyz} = - M_{dv}^{(2)} - M_{dv}^{(5)} + M_{gv}^{(1)} + T_{f3}^{(2)} \\
-& M_{yzzy} = - M_{dv}^{(2)} + M_{dv}^{(5)} + M_{gv}^{(1)} - T_{f3}^{(2)} \\
-& M_{xyxy} = 2 M_{dv}^{(5)} + T_{f3}^{(2)}
+& M_{xxxx} = \mathbb{M}_{4v}^{(1)} + 2 \mathbb{M}_{v}^{(1)} + 4 \mathbb{M}_{v}^{(2)} \\
+& M_{xxyy} = - 2 \mathbb{M}_{v}^{(3)} + 4 \mathbb{T}_{xyz}^{(1)} \\
+& M_{xxzz} = - \mathbb{M}_{4v}^{(1)} + \mathbb{M}_{v}^{(1)} - \mathbb{M}_{v}^{(3)} - 4 \mathbb{T}_{xyz}^{(1)} \\
+& M_{zzxx} = - \mathbb{M}_{4v}^{(1)} + \mathbb{M}_{v}^{(1)} + \mathbb{M}_{v}^{(3)} + 4 \mathbb{T}_{xyz}^{(1)} \\
+& M_{yzyz} = \mathbb{M}_{4v}^{(1)} - \mathbb{M}_{v}^{(2)} - \mathbb{M}_{v}^{(5)} + \mathbb{T}_{xyz}^{(2)} \\
+& M_{yzzy} = \mathbb{M}_{4v}^{(1)} - \mathbb{M}_{v}^{(2)} + \mathbb{M}_{v}^{(5)} - \mathbb{T}_{xyz}^{(2)} \\
+& M_{xyxy} = 2 \mathbb{M}_{v}^{(5)} + \mathbb{T}_{xyz}^{(2)}
 \end{align*}
 * Rank 4 tensor (a).
 \begin{align*}
 \begin{bmatrix} 0 & 0 & 0 & M_{yzyz} & 0 & 0 & M_{yzzy} & 0 & 0 \\ 0 & 0 & 0 & 0 & M_{yzzy} & 0 & 0 & M_{yzyz} & 0 \\ 0 & 0 & 0 & 0 & 0 & M_{xyxy} & 0 & 0 & M_{xyxy} \end{bmatrix}
 \end{align*}
 \begin{align*}
-& M_{yzyz} = 2 M_{dv}^{(4)} - M_{dv}^{(6)} + T_{f3}^{(3)} \\
-& M_{yzzy} = - 2 M_{dv}^{(4)} - M_{dv}^{(6)} + T_{f3}^{(3)} \\
-& M_{xyxy} = 2 M_{dv}^{(6)} + T_{f3}^{(3)}
+& M_{yzyz} = 2 \mathbb{M}_{v}^{(4)} - \mathbb{M}_{v}^{(6)} + \mathbb{T}_{xyz}^{(3)} \\
+& M_{yzzy} = - 2 \mathbb{M}_{v}^{(4)} - \mathbb{M}_{v}^{(6)} + \mathbb{T}_{xyz}^{(3)} \\
+& M_{xyxy} = 2 \mathbb{M}_{v}^{(6)} + \mathbb{T}_{xyz}^{(3)}
 \end{align*}
 * Rank 4 tensor (t).
 \begin{align*}
 \begin{bmatrix} M_{xxxx} & 0 & 0 \\ 0 & - M_{xxxx} & 0 \\ 0 & 0 & 0 \\ 0 & 0 & M_{yyzz} \\ M_{zzxx} & 0 & 0 \\ 0 & - M_{yyzz} - M_{zzxx} & 0 \\ 0 & M_{yzzy} & 0 \\ 0 & 0 & M_{zxxz} \\ - M_{yzzy} - M_{zxxz} & 0 & 0 \\ 0 & 0 & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& M_{xxxx} = 2 M_{dv}^{(1)} + 4 M_{dv}^{(2)} + M_{gv}^{(1)} \\
-& M_{yyzz} = - M_{dv}^{(1)} + M_{dv}^{(3)} + M_{gv}^{(1)} \\
-& M_{zzxx} = M_{dv}^{(1)} + M_{dv}^{(3)} - M_{gv}^{(1)} \\
-& M_{yzzy} = - M_{dv}^{(2)} + M_{dv}^{(5)} + M_{gv}^{(1)} \\
-& M_{zxxz} = M_{dv}^{(2)} + M_{dv}^{(5)} - M_{gv}^{(1)}
+& M_{xxxx} = \mathbb{M}_{4v}^{(1)} + 2 \mathbb{M}_{v}^{(1)} + 4 \mathbb{M}_{v}^{(2)} \\
+& M_{yyzz} = \mathbb{M}_{4v}^{(1)} - \mathbb{M}_{v}^{(1)} + \mathbb{M}_{v}^{(3)} \\
+& M_{zzxx} = - \mathbb{M}_{4v}^{(1)} + \mathbb{M}_{v}^{(1)} + \mathbb{M}_{v}^{(3)} \\
+& M_{yzzy} = \mathbb{M}_{4v}^{(1)} - \mathbb{M}_{v}^{(2)} + \mathbb{M}_{v}^{(5)} \\
+& M_{zxxz} = - \mathbb{M}_{4v}^{(1)} + \mathbb{M}_{v}^{(2)} + \mathbb{M}_{v}^{(5)}
 \end{align*}
 
 \end{document}

@@ -55,7 +55,7 @@ MPG No. 13.5.130\quad$4'm'm$\quad(4'mm' setting)\quad[ Type III, tetragonal ] [G
 \begin{bmatrix} 0 & G_{xy} & 0 \\ - G_{xy} & 0 & 0 \\ 0 & 0 & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& G_{xy} = Q_{pz}^{(1)}
+& G_{xy} = \mathbb{Q}_{z}^{(1)}
 \end{align*}
 * Rank 3 tensor (ss).
 * Rank 3 tensor (sa).
@@ -63,30 +63,30 @@ MPG No. 13.5.130\quad$4'm'm$\quad(4'mm' setting)\quad[ Type III, tetragonal ] [G
 \begin{bmatrix} 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \\ G_{yzx} & 0 & 0 \\ 0 & - G_{yzx} & 0 \\ 0 & 0 & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& G_{yzx} = 3 Q_{du}^{(1)}
+& G_{yzx} = 3 \mathbb{Q}_{u}^{(1)}
 \end{align*}
 * Rank 3 tensor (a).
 \begin{align*}
 \begin{bmatrix} G_{yzx} & 0 & 0 \\ 0 & G_{yzx} & 0 \\ 0 & 0 & G_{xyz} \end{bmatrix}
 \end{align*}
 \begin{align*}
-& G_{yzx} = - Q_{du}^{(2)} + Q_{s}^{(1)} \\
-& G_{xyz} = 2 Q_{du}^{(2)} + Q_{s}^{(1)}
+& G_{yzx} = \mathbb{Q}_{0}^{(1)} - \mathbb{Q}_{u}^{(2)} \\
+& G_{xyz} = \mathbb{Q}_{0}^{(1)} + 2 \mathbb{Q}_{u}^{(2)}
 \end{align*}
 * Rank 4 tensor (sss).
 \begin{align*}
 \begin{bmatrix} 0 & 0 & 0 & 0 & 0 & G_{xxxy} \\ 0 & 0 & 0 & 0 & 0 & - G_{xxxy} \\ 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 \\ G_{xxxy} & - G_{xxxy} & 0 & 0 & 0 & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& G_{xxxy} = G_{gaz}^{(1)}
+& G_{xxxy} = \mathbb{G}_{4z}^{\alpha(1)}
 \end{align*}
 * Rank 4 tensor (ssa).
 \begin{align*}
 \begin{bmatrix} 0 & 0 & 0 & 0 & 0 & G_{xxxy} \\ 0 & 0 & 0 & 0 & 0 & - G_{xxxy} \\ 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & G_{yzzx} & 0 \\ 0 & 0 & 0 & - G_{yzzx} & 0 & 0 \\ - G_{xxxy} & G_{xxxy} & 0 & 0 & 0 & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& G_{xxxy} = - 2 Q_{faz}^{(1)} + 2 Q_{pz}^{(1)} \\
-& G_{yzzx} = - 4 Q_{faz}^{(1)} - Q_{pz}^{(1)}
+& G_{xxxy} = 2 \mathbb{Q}_{z}^{(1)} - 2 \mathbb{Q}_{z}^{\alpha(1)} \\
+& G_{yzzx} = - \mathbb{Q}_{z}^{(1)} - 4 \mathbb{Q}_{z}^{\alpha(1)}
 \end{align*}
 * Rank 4 tensor (aas).
 * Rank 4 tensor (aaa).
@@ -94,54 +94,54 @@ MPG No. 13.5.130\quad$4'm'm$\quad(4'mm' setting)\quad[ Type III, tetragonal ] [G
 \begin{bmatrix} 0 & G_{yzzx} & 0 \\ - G_{yzzx} & 0 & 0 \\ 0 & 0 & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& G_{yzzx} = - Q_{pz}^{(2)}
+& G_{yzzx} = - \mathbb{Q}_{z}^{(2)}
 \end{align*}
 * Rank 4 tensor (sa).
 \begin{align*}
 \begin{bmatrix} 0 & 0 & G_{xxxy} \\ 0 & 0 & G_{xxxy} \\ 0 & 0 & G_{zzxy} \\ 0 & G_{yzzx} & 0 \\ G_{yzzx} & 0 & 0 \\ 0 & 0 & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& G_{xxxy} = - Q_{faz}^{(2)} + Q_{pz}^{(3)} \\
-& G_{zzxy} = 2 Q_{faz}^{(2)} + Q_{pz}^{(3)} + 2 Q_{pz}^{(4)} \\
-& G_{yzzx} = - Q_{faz}^{(2)} + Q_{pz}^{(4)}
+& G_{xxxy} = \mathbb{Q}_{z}^{(3)} - \mathbb{Q}_{z}^{\alpha(2)} \\
+& G_{zzxy} = \mathbb{Q}_{z}^{(3)} + 2 \mathbb{Q}_{z}^{(4)} + 2 \mathbb{Q}_{z}^{\alpha(2)} \\
+& G_{yzzx} = \mathbb{Q}_{z}^{(4)} - \mathbb{Q}_{z}^{\alpha(2)}
 \end{align*}
 * Rank 4 tensor (as).
 \begin{align*}
 \begin{bmatrix} 0 & 0 & 0 & 0 & G_{yzzx} & 0 \\ 0 & 0 & 0 & G_{yzzx} & 0 & 0 \\ G_{xyxx} & G_{xyxx} & G_{xyzz} & 0 & 0 & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& G_{yzzx} = - Q_{faz}^{(3)} + Q_{pz}^{(6)} \\
-& G_{xyxx} = - Q_{faz}^{(3)} + Q_{pz}^{(5)} \\
-& G_{xyzz} = 2 Q_{faz}^{(3)} + Q_{pz}^{(5)} + 2 Q_{pz}^{(6)}
+& G_{yzzx} = \mathbb{Q}_{z}^{(6)} - \mathbb{Q}_{z}^{\alpha(3)} \\
+& G_{xyxx} = \mathbb{Q}_{z}^{(5)} - \mathbb{Q}_{z}^{\alpha(3)} \\
+& G_{xyzz} = \mathbb{Q}_{z}^{(5)} + 2 \mathbb{Q}_{z}^{(6)} + 2 \mathbb{Q}_{z}^{\alpha(3)}
 \end{align*}
 * Rank 4 tensor (s).
 \begin{align*}
 \begin{bmatrix} 0 & 0 & 0 & 0 & 0 & G_{xxxy} & 0 & 0 & G_{xxyx} \\ 0 & 0 & 0 & 0 & 0 & - G_{xxyx} & 0 & 0 & - G_{xxxy} \\ 0 & 0 & 0 & 0 & 0 & G_{zzxy} & 0 & 0 & - G_{zzxy} \\ 0 & 0 & 0 & 0 & G_{yzzx} & 0 & 0 & G_{yzxz} & 0 \\ 0 & 0 & 0 & - G_{yzxz} & 0 & 0 & - G_{yzzx} & 0 & 0 \\ G_{xyxx} & - G_{xyxx} & 0 & 0 & 0 & 0 & 0 & 0 & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& G_{xxxy} = G_{gaz}^{(1)} - 2 Q_{faz}^{(1)} - Q_{faz}^{(2)} + 2 Q_{pz}^{(1)} + Q_{pz}^{(3)} \\
-& G_{xxyx} = G_{gaz}^{(1)} - 2 Q_{faz}^{(1)} + Q_{faz}^{(2)} + 2 Q_{pz}^{(1)} - Q_{pz}^{(3)} \\
-& G_{zzxy} = 2 Q_{faz}^{(2)} + Q_{pz}^{(3)} + 2 Q_{pz}^{(4)} \\
-& G_{yzzx} = - 4 Q_{faz}^{(1)} - Q_{faz}^{(2)} - Q_{pz}^{(1)} + Q_{pz}^{(4)} \\
-& G_{yzxz} = - 4 Q_{faz}^{(1)} + Q_{faz}^{(2)} - Q_{pz}^{(1)} - Q_{pz}^{(4)} \\
-& G_{xyxx} = G_{gaz}^{(1)} + 2 Q_{faz}^{(1)} - 2 Q_{pz}^{(1)}
+& G_{xxxy} = \mathbb{G}_{4z}^{\alpha(1)} + 2 \mathbb{Q}_{z}^{(1)} + \mathbb{Q}_{z}^{(3)} - 2 \mathbb{Q}_{z}^{\alpha(1)} - \mathbb{Q}_{z}^{\alpha(2)} \\
+& G_{xxyx} = \mathbb{G}_{4z}^{\alpha(1)} + 2 \mathbb{Q}_{z}^{(1)} - \mathbb{Q}_{z}^{(3)} - 2 \mathbb{Q}_{z}^{\alpha(1)} + \mathbb{Q}_{z}^{\alpha(2)} \\
+& G_{zzxy} = \mathbb{Q}_{z}^{(3)} + 2 \mathbb{Q}_{z}^{(4)} + 2 \mathbb{Q}_{z}^{\alpha(2)} \\
+& G_{yzzx} = - \mathbb{Q}_{z}^{(1)} + \mathbb{Q}_{z}^{(4)} - 4 \mathbb{Q}_{z}^{\alpha(1)} - \mathbb{Q}_{z}^{\alpha(2)} \\
+& G_{yzxz} = - \mathbb{Q}_{z}^{(1)} - \mathbb{Q}_{z}^{(4)} - 4 \mathbb{Q}_{z}^{\alpha(1)} + \mathbb{Q}_{z}^{\alpha(2)} \\
+& G_{xyxx} = \mathbb{G}_{4z}^{\alpha(1)} - 2 \mathbb{Q}_{z}^{(1)} + 2 \mathbb{Q}_{z}^{\alpha(1)}
 \end{align*}
 * Rank 4 tensor (a).
 \begin{align*}
 \begin{bmatrix} 0 & 0 & 0 & 0 & G_{yzzx} & 0 & 0 & G_{yzxz} & 0 \\ 0 & 0 & 0 & G_{yzxz} & 0 & 0 & G_{yzzx} & 0 & 0 \\ G_{xyxx} & G_{xyxx} & G_{xyzz} & 0 & 0 & 0 & 0 & 0 & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& G_{yzzx} = - Q_{faz}^{(3)} - Q_{pz}^{(2)} + Q_{pz}^{(6)} \\
-& G_{yzxz} = - Q_{faz}^{(3)} + Q_{pz}^{(2)} + Q_{pz}^{(6)} \\
-& G_{xyxx} = - Q_{faz}^{(3)} + Q_{pz}^{(5)} \\
-& G_{xyzz} = 2 Q_{faz}^{(3)} + Q_{pz}^{(5)} + 2 Q_{pz}^{(6)}
+& G_{yzzx} = - \mathbb{Q}_{z}^{(2)} + \mathbb{Q}_{z}^{(6)} - \mathbb{Q}_{z}^{\alpha(3)} \\
+& G_{yzxz} = \mathbb{Q}_{z}^{(2)} + \mathbb{Q}_{z}^{(6)} - \mathbb{Q}_{z}^{\alpha(3)} \\
+& G_{xyxx} = \mathbb{Q}_{z}^{(5)} - \mathbb{Q}_{z}^{\alpha(3)} \\
+& G_{xyzz} = \mathbb{Q}_{z}^{(5)} + 2 \mathbb{Q}_{z}^{(6)} + 2 \mathbb{Q}_{z}^{\alpha(3)}
 \end{align*}
 * Rank 4 tensor (t).
 \begin{align*}
 \begin{bmatrix} 0 & G_{xxxy} & 0 \\ - G_{xxxy} & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \\ G_{xxxy} & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & - G_{xxxy} & 0 \\ 0 & 0 & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& G_{xxxy} = G_{gaz}^{(1)}
+& G_{xxxy} = \mathbb{G}_{4z}^{\alpha(1)}
 \end{align*}
 
 \end{document}

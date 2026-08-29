@@ -9,6 +9,44 @@ from sympy.functions.special.tensor_functions import KroneckerDelta
 from sympy import LeviCivita
 from itertools import product
 
+mp_alias = {  # symbol => (lower, upper).
+    "s": ("0", ""),
+    "px": ("x", ""),
+    "py": ("y", ""),
+    "pz": ("z", ""),
+    "du": ("u", ""),
+    "dv": ("v", ""),
+    "dyz": ("yz", ""),
+    "dxz": ("xz", ""),
+    "dxy": ("xy", ""),
+    "f3": ("xyz", ""),
+    "fax": ("x", r"\alpha"),
+    "fay": ("y", r"\alpha"),
+    "faz": ("z", r"\alpha"),
+    "fbx": ("x", r"\beta"),
+    "fby": ("y", r"\beta"),
+    "fbz": ("z", r"\beta"),
+    "f2": ("3a", ""),
+    "f1": ("3b", ""),
+    "f3x": ("3u", ""),
+    "f3y": ("3v", ""),
+    "g": ("4", ""),
+    "gu": ("4u", ""),
+    "gv": ("4v", ""),
+    "gax": ("4x", r"\alpha"),
+    "gay": ("4y", r"\alpha"),
+    "gaz": ("4z", r"\alpha"),
+    "gbx": ("x", r"\beta"),
+    "gby": ("y", r"\beta"),
+    "gbz": ("z", r"\beta"),
+    "g0": ("40", ""),
+    "gb": ("4a", ""),
+    "gav": ("4u", r"\alpha"),
+    "gau": ("4v", r"\alpha"),
+    "gc": ("4u", r"\beta1"),
+    "ga": ("4b", ""),
+}
+
 
 # ==================================================
 def delta(i1, i2):
@@ -747,7 +785,11 @@ def get_response_tensor_mp(rt, active_dict, axial_tensor, magnetic_tensor):
 
     s = sp.S(0)
     for c, ss, m in ex_lst:
-        s += c * sp.Symbol(m + "^{" + ss + "}")
+        X = m[0]
+        sub = m[3:-1]
+        sub, sup = mp_alias[sub]
+        sl = r"\mathbb{" + X + "}_{" + sub + "}^{" + sup + ss + "}"
+        s += c * sp.Symbol(sl)
 
     return s
 

@@ -52,214 +52,214 @@ MPG No. 3.3.8\quad$2'$\quad[ Type III, monoclinic ] [Q tensor]
 \begin{bmatrix} Q \end{bmatrix}
 \end{align*}
 \begin{align*}
-& Q = Q_{s}^{(1)}
+& Q = \mathbb{Q}_{0}^{(1)}
 \end{align*}
 * Rank 1 tensor.
 \begin{align*}
 \begin{bmatrix} 0 & Q_{y} & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& Q_{y} = Q_{py}^{(1)}
+& Q_{y} = \mathbb{Q}_{y}^{(1)}
 \end{align*}
 * Rank 2 tensor (s).
 \begin{align*}
 \begin{bmatrix} Q_{xx} & 0 & Q_{xz} \\ 0 & Q_{yy} & 0 \\ Q_{xz} & 0 & Q_{zz} \end{bmatrix}
 \end{align*}
 \begin{align*}
-& Q_{xx} = - Q_{du}^{(1)} + Q_{dv}^{(1)} + Q_{s}^{(1)} \\
-& Q_{xz} = Q_{dxz}^{(1)} \\
-& Q_{yy} = - Q_{du}^{(1)} - Q_{dv}^{(1)} + Q_{s}^{(1)} \\
-& Q_{zz} = 2 Q_{du}^{(1)} + Q_{s}^{(1)}
+& Q_{xx} = \mathbb{Q}_{0}^{(1)} - \mathbb{Q}_{u}^{(1)} + \mathbb{Q}_{v}^{(1)} \\
+& Q_{xz} = \mathbb{Q}_{xz}^{(1)} \\
+& Q_{yy} = \mathbb{Q}_{0}^{(1)} - \mathbb{Q}_{u}^{(1)} - \mathbb{Q}_{v}^{(1)} \\
+& Q_{zz} = \mathbb{Q}_{0}^{(1)} + 2 \mathbb{Q}_{u}^{(1)}
 \end{align*}
 * Rank 2 tensor (a).
 \begin{align*}
 \begin{bmatrix} 0 & 0 & Q_{xz} \\ 0 & 0 & 0 \\ - Q_{xz} & 0 & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& Q_{xz} = - G_{py}^{(1)}
+& Q_{xz} = - \mathbb{G}_{y}^{(1)}
 \end{align*}
 * Rank 3 tensor (ss).
 \begin{align*}
 \begin{bmatrix} 0 & Q_{xxy} & 0 \\ 0 & Q_{yyy} & 0 \\ 0 & Q_{zzy} & 0 \\ Q_{yzx} & 0 & Q_{zzy} \\ 0 & Q_{yzx} & 0 \\ Q_{xxy} & 0 & Q_{yzx} \end{bmatrix}
 \end{align*}
 \begin{align*}
-& Q_{xxy} = - Q_{fay}^{(1)} - Q_{fby}^{(1)} + Q_{py}^{(1)} \\
-& Q_{yyy} = 2 Q_{fay}^{(1)} + 3 Q_{py}^{(1)} \\
-& Q_{zzy} = - Q_{fay}^{(1)} + Q_{fby}^{(1)} + Q_{py}^{(1)} \\
-& Q_{yzx} = Q_{f3}^{(1)}
+& Q_{xxy} = \mathbb{Q}_{y}^{(1)} - \mathbb{Q}_{y}^{\alpha(1)} - \mathbb{Q}_{y}^{\beta(1)} \\
+& Q_{yyy} = 3 \mathbb{Q}_{y}^{(1)} + 2 \mathbb{Q}_{y}^{\alpha(1)} \\
+& Q_{zzy} = \mathbb{Q}_{y}^{(1)} - \mathbb{Q}_{y}^{\alpha(1)} + \mathbb{Q}_{y}^{\beta(1)} \\
+& Q_{yzx} = \mathbb{Q}_{xyz}^{(1)}
 \end{align*}
 * Rank 3 tensor (sa).
 \begin{align*}
 \begin{bmatrix} 0 & Q_{xxy} & 0 \\ 0 & 0 & 0 \\ 0 & Q_{zzy} & 0 \\ Q_{yzx} & 0 & - \frac{Q_{zzy}}{2} \\ 0 & Q_{zxy} & 0 \\ - \frac{Q_{xxy}}{2} & 0 & - Q_{yzx} - Q_{zxy} \end{bmatrix}
 \end{align*}
 \begin{align*}
-& Q_{xxy} = - 2 G_{dxz}^{(1)} + 2 Q_{py}^{(2)} \\
-& Q_{zzy} = 2 G_{dxz}^{(1)} + 2 Q_{py}^{(2)} \\
-& Q_{yzx} = 3 G_{du}^{(1)} + G_{dv}^{(1)} \\
-& \frac{Q_{zzy}}{2} = G_{dxz}^{(1)} + Q_{py}^{(2)} \\
-& Q_{zxy} = - 3 G_{du}^{(1)} + G_{dv}^{(1)} \\
-& \frac{Q_{xxy}}{2} = - G_{dxz}^{(1)} + Q_{py}^{(2)}
+& Q_{xxy} = - 2 \mathbb{G}_{xz}^{(1)} + 2 \mathbb{Q}_{y}^{(2)} \\
+& Q_{zzy} = 2 \mathbb{G}_{xz}^{(1)} + 2 \mathbb{Q}_{y}^{(2)} \\
+& Q_{yzx} = 3 \mathbb{G}_{u}^{(1)} + \mathbb{G}_{v}^{(1)} \\
+& \frac{Q_{zzy}}{2} = \mathbb{G}_{xz}^{(1)} + \mathbb{Q}_{y}^{(2)} \\
+& Q_{zxy} = - 3 \mathbb{G}_{u}^{(1)} + \mathbb{G}_{v}^{(1)} \\
+& \frac{Q_{xxy}}{2} = - \mathbb{G}_{xz}^{(1)} + \mathbb{Q}_{y}^{(2)}
 \end{align*}
 * Rank 3 tensor (a).
 \begin{align*}
 \begin{bmatrix} Q_{yzx} & 0 & Q_{yzz} \\ 0 & Q_{zxy} & 0 \\ Q_{xyx} & 0 & Q_{xyz} \end{bmatrix}
 \end{align*}
 \begin{align*}
-& Q_{yzx} = - G_{du}^{(2)} + G_{dv}^{(2)} + G_{s}^{(1)} \\
-& Q_{yzz} = G_{dxz}^{(2)} - Q_{py}^{(3)} \\
-& Q_{zxy} = - G_{du}^{(2)} - G_{dv}^{(2)} + G_{s}^{(1)} \\
-& Q_{xyx} = G_{dxz}^{(2)} + Q_{py}^{(3)} \\
-& Q_{xyz} = 2 G_{du}^{(2)} + G_{s}^{(1)}
+& Q_{yzx} = \mathbb{G}_{0}^{(1)} - \mathbb{G}_{u}^{(2)} + \mathbb{G}_{v}^{(2)} \\
+& Q_{yzz} = \mathbb{G}_{xz}^{(2)} - \mathbb{Q}_{y}^{(3)} \\
+& Q_{zxy} = \mathbb{G}_{0}^{(1)} - \mathbb{G}_{u}^{(2)} - \mathbb{G}_{v}^{(2)} \\
+& Q_{xyx} = \mathbb{G}_{xz}^{(2)} + \mathbb{Q}_{y}^{(3)} \\
+& Q_{xyz} = \mathbb{G}_{0}^{(1)} + 2 \mathbb{G}_{u}^{(2)}
 \end{align*}
 * Rank 4 tensor (sss).
 \begin{align*}
 \begin{bmatrix} Q_{xxxx} & Q_{xxyy} & Q_{xxzz} & 0 & Q_{xxzx} & 0 \\ Q_{xxyy} & Q_{yyyy} & Q_{yyzz} & 0 & Q_{yyzx} & 0 \\ Q_{xxzz} & Q_{yyzz} & Q_{zzzz} & 0 & Q_{zzzx} & 0 \\ 0 & 0 & 0 & Q_{yzyz} & 0 & Q_{yzxy} \\ Q_{xxzx} & Q_{yyzx} & Q_{zzzx} & 0 & Q_{zxzx} & 0 \\ 0 & 0 & 0 & Q_{yzxy} & 0 & Q_{xyxy} \end{bmatrix}
 \end{align*}
 \begin{align*}
-& Q_{xxxx} = - 2 Q_{du}^{(1)} - 4 Q_{du}^{(2)} + 2 Q_{dv}^{(1)} + 4 Q_{dv}^{(2)} - Q_{gu}^{(1)} + Q_{gv}^{(1)} + 2 Q_{g}^{(1)} + Q_{s}^{(1)} + 2 Q_{s}^{(2)} \\
-& Q_{xxyy} = - 2 Q_{du}^{(1)} + 2 Q_{gu}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(1)} \\
-& Q_{xxzz} = Q_{du}^{(1)} + Q_{dv}^{(1)} - Q_{gu}^{(1)} - Q_{gv}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(1)} \\
-& Q_{xxzx} = Q_{dxz}^{(1)} + 2 Q_{dxz}^{(2)} - Q_{gay}^{(1)} - Q_{gby}^{(1)} \\
-& Q_{yyyy} = - 2 Q_{du}^{(1)} - 4 Q_{du}^{(2)} - 2 Q_{dv}^{(1)} - 4 Q_{dv}^{(2)} - Q_{gu}^{(1)} - Q_{gv}^{(1)} + 2 Q_{g}^{(1)} + Q_{s}^{(1)} + 2 Q_{s}^{(2)} \\
-& Q_{yyzz} = Q_{du}^{(1)} - Q_{dv}^{(1)} - Q_{gu}^{(1)} + Q_{gv}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(1)} \\
-& Q_{yyzx} = Q_{dxz}^{(1)} + 2 Q_{gby}^{(1)} \\
-& Q_{zzzz} = 4 Q_{du}^{(1)} + 8 Q_{du}^{(2)} + 2 Q_{gu}^{(1)} + 2 Q_{g}^{(1)} + Q_{s}^{(1)} + 2 Q_{s}^{(2)} \\
-& Q_{zzzx} = Q_{dxz}^{(1)} + 2 Q_{dxz}^{(2)} + Q_{gay}^{(1)} - Q_{gby}^{(1)} \\
-& Q_{yzyz} = Q_{du}^{(2)} - Q_{dv}^{(2)} - Q_{gu}^{(1)} + Q_{gv}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(2)} \\
-& Q_{yzxy} = Q_{dxz}^{(2)} + 2 Q_{gby}^{(1)} \\
-& Q_{zxzx} = Q_{du}^{(2)} + Q_{dv}^{(2)} - Q_{gu}^{(1)} - Q_{gv}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(2)} \\
-& Q_{xyxy} = - 2 Q_{du}^{(2)} + 2 Q_{gu}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(2)}
+& Q_{xxxx} = \mathbb{Q}_{0}^{(1)} + 2 \mathbb{Q}_{0}^{(2)} - \mathbb{Q}_{4u}^{(1)} + \mathbb{Q}_{4v}^{(1)} + 2 \mathbb{Q}_{4}^{(1)} - 2 \mathbb{Q}_{u}^{(1)} - 4 \mathbb{Q}_{u}^{(2)} + 2 \mathbb{Q}_{v}^{(1)} + 4 \mathbb{Q}_{v}^{(2)} \\
+& Q_{xxyy} = \mathbb{Q}_{0}^{(1)} + 2 \mathbb{Q}_{4u}^{(1)} - \mathbb{Q}_{4}^{(1)} - 2 \mathbb{Q}_{u}^{(1)} \\
+& Q_{xxzz} = \mathbb{Q}_{0}^{(1)} - \mathbb{Q}_{4u}^{(1)} - \mathbb{Q}_{4v}^{(1)} - \mathbb{Q}_{4}^{(1)} + \mathbb{Q}_{u}^{(1)} + \mathbb{Q}_{v}^{(1)} \\
+& Q_{xxzx} = - \mathbb{Q}_{4y}^{\alpha(1)} + \mathbb{Q}_{xz}^{(1)} + 2 \mathbb{Q}_{xz}^{(2)} - \mathbb{Q}_{y}^{\beta(1)} \\
+& Q_{yyyy} = \mathbb{Q}_{0}^{(1)} + 2 \mathbb{Q}_{0}^{(2)} - \mathbb{Q}_{4u}^{(1)} - \mathbb{Q}_{4v}^{(1)} + 2 \mathbb{Q}_{4}^{(1)} - 2 \mathbb{Q}_{u}^{(1)} - 4 \mathbb{Q}_{u}^{(2)} - 2 \mathbb{Q}_{v}^{(1)} - 4 \mathbb{Q}_{v}^{(2)} \\
+& Q_{yyzz} = \mathbb{Q}_{0}^{(1)} - \mathbb{Q}_{4u}^{(1)} + \mathbb{Q}_{4v}^{(1)} - \mathbb{Q}_{4}^{(1)} + \mathbb{Q}_{u}^{(1)} - \mathbb{Q}_{v}^{(1)} \\
+& Q_{yyzx} = \mathbb{Q}_{xz}^{(1)} + 2 \mathbb{Q}_{y}^{\beta(1)} \\
+& Q_{zzzz} = \mathbb{Q}_{0}^{(1)} + 2 \mathbb{Q}_{0}^{(2)} + 2 \mathbb{Q}_{4u}^{(1)} + 2 \mathbb{Q}_{4}^{(1)} + 4 \mathbb{Q}_{u}^{(1)} + 8 \mathbb{Q}_{u}^{(2)} \\
+& Q_{zzzx} = \mathbb{Q}_{4y}^{\alpha(1)} + \mathbb{Q}_{xz}^{(1)} + 2 \mathbb{Q}_{xz}^{(2)} - \mathbb{Q}_{y}^{\beta(1)} \\
+& Q_{yzyz} = \mathbb{Q}_{0}^{(2)} - \mathbb{Q}_{4u}^{(1)} + \mathbb{Q}_{4v}^{(1)} - \mathbb{Q}_{4}^{(1)} + \mathbb{Q}_{u}^{(2)} - \mathbb{Q}_{v}^{(2)} \\
+& Q_{yzxy} = \mathbb{Q}_{xz}^{(2)} + 2 \mathbb{Q}_{y}^{\beta(1)} \\
+& Q_{zxzx} = \mathbb{Q}_{0}^{(2)} - \mathbb{Q}_{4u}^{(1)} - \mathbb{Q}_{4v}^{(1)} - \mathbb{Q}_{4}^{(1)} + \mathbb{Q}_{u}^{(2)} + \mathbb{Q}_{v}^{(2)} \\
+& Q_{xyxy} = \mathbb{Q}_{0}^{(2)} + 2 \mathbb{Q}_{4u}^{(1)} - \mathbb{Q}_{4}^{(1)} - 2 \mathbb{Q}_{u}^{(2)}
 \end{align*}
 * Rank 4 tensor (ssa).
 \begin{align*}
 \begin{bmatrix} 0 & Q_{xxyy} & Q_{xxzz} & 0 & Q_{xxzx} & 0 \\ - Q_{xxyy} & 0 & Q_{yyzz} & 0 & Q_{yyzx} & 0 \\ - Q_{xxzz} & - Q_{yyzz} & 0 & 0 & Q_{zzzx} & 0 \\ 0 & 0 & 0 & 0 & 0 & Q_{yzxy} \\ - Q_{xxzx} & - Q_{yyzx} & - Q_{zzzx} & 0 & 0 & 0 \\ 0 & 0 & 0 & - Q_{yzxy} & 0 & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& Q_{xxyy} = 4 G_{f3}^{(1)} - 2 Q_{dv}^{(3)} \\
-& Q_{xxzz} = - 4 G_{f3}^{(1)} + 3 Q_{du}^{(3)} - Q_{dv}^{(3)} \\
-& Q_{xxzx} = 2 G_{fay}^{(1)} + 2 G_{fby}^{(1)} - 2 G_{py}^{(1)} + Q_{dxz}^{(3)} \\
-& Q_{yyzz} = 4 G_{f3}^{(1)} + 3 Q_{du}^{(3)} + Q_{dv}^{(3)} \\
-& Q_{yyzx} = - 4 G_{fby}^{(1)} + Q_{dxz}^{(3)} \\
-& Q_{zzzx} = - 2 G_{fay}^{(1)} + 2 G_{fby}^{(1)} + 2 G_{py}^{(1)} + Q_{dxz}^{(3)} \\
-& Q_{yzxy} = 4 G_{fay}^{(1)} + G_{py}^{(1)}
+& Q_{xxyy} = 4 \mathbb{G}_{xyz}^{(1)} - 2 \mathbb{Q}_{v}^{(3)} \\
+& Q_{xxzz} = - 4 \mathbb{G}_{xyz}^{(1)} + 3 \mathbb{Q}_{u}^{(3)} - \mathbb{Q}_{v}^{(3)} \\
+& Q_{xxzx} = - 2 \mathbb{G}_{y}^{(1)} + 2 \mathbb{G}_{y}^{\alpha(1)} + 2 \mathbb{G}_{y}^{\beta(1)} + \mathbb{Q}_{xz}^{(3)} \\
+& Q_{yyzz} = 4 \mathbb{G}_{xyz}^{(1)} + 3 \mathbb{Q}_{u}^{(3)} + \mathbb{Q}_{v}^{(3)} \\
+& Q_{yyzx} = - 4 \mathbb{G}_{y}^{\beta(1)} + \mathbb{Q}_{xz}^{(3)} \\
+& Q_{zzzx} = 2 \mathbb{G}_{y}^{(1)} - 2 \mathbb{G}_{y}^{\alpha(1)} + 2 \mathbb{G}_{y}^{\beta(1)} + \mathbb{Q}_{xz}^{(3)} \\
+& Q_{yzxy} = \mathbb{G}_{y}^{(1)} + 4 \mathbb{G}_{y}^{\alpha(1)}
 \end{align*}
 * Rank 4 tensor (aas).
 \begin{align*}
 \begin{bmatrix} Q_{yzyz} & 0 & Q_{yzxy} \\ 0 & Q_{zxzx} & 0 \\ Q_{yzxy} & 0 & Q_{xyxy} \end{bmatrix}
 \end{align*}
 \begin{align*}
-& Q_{yzyz} = - 2 Q_{du}^{(4)} + 2 Q_{dv}^{(4)} + Q_{s}^{(3)} \\
-& Q_{yzxy} = 2 Q_{dxz}^{(4)} \\
-& Q_{zxzx} = - 2 Q_{du}^{(4)} - 2 Q_{dv}^{(4)} + Q_{s}^{(3)} \\
-& Q_{xyxy} = 4 Q_{du}^{(4)} + Q_{s}^{(3)}
+& Q_{yzyz} = \mathbb{Q}_{0}^{(3)} - 2 \mathbb{Q}_{u}^{(4)} + 2 \mathbb{Q}_{v}^{(4)} \\
+& Q_{yzxy} = 2 \mathbb{Q}_{xz}^{(4)} \\
+& Q_{zxzx} = \mathbb{Q}_{0}^{(3)} - 2 \mathbb{Q}_{u}^{(4)} - 2 \mathbb{Q}_{v}^{(4)} \\
+& Q_{xyxy} = \mathbb{Q}_{0}^{(3)} + 4 \mathbb{Q}_{u}^{(4)}
 \end{align*}
 * Rank 4 tensor (aaa).
 \begin{align*}
 \begin{bmatrix} 0 & 0 & Q_{yzxy} \\ 0 & 0 & 0 \\ - Q_{yzxy} & 0 & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& Q_{yzxy} = G_{py}^{(2)}
+& Q_{yzxy} = \mathbb{G}_{y}^{(2)}
 \end{align*}
 * Rank 4 tensor (sa).
 \begin{align*}
 \begin{bmatrix} 0 & Q_{xxzx} & 0 \\ 0 & Q_{yyzx} & 0 \\ 0 & Q_{zzzx} & 0 \\ Q_{yzyz} & 0 & Q_{yzxy} \\ 0 & Q_{zxzx} & 0 \\ Q_{xyyz} & 0 & Q_{xyxy} \end{bmatrix}
 \end{align*}
 \begin{align*}
-& Q_{xxzx} = - G_{fay}^{(2)} - G_{fby}^{(2)} + G_{py}^{(3)} + 2 Q_{dxz}^{(5)} \\
-& Q_{yyzx} = 2 G_{fay}^{(2)} + G_{py}^{(3)} + 2 G_{py}^{(4)} \\
-& Q_{zzzx} = - G_{fay}^{(2)} + G_{fby}^{(2)} + G_{py}^{(3)} - 2 Q_{dxz}^{(5)} \\
-& Q_{yzyz} = G_{f3}^{(2)} - 3 Q_{du}^{(5)} - Q_{dv}^{(5)} \\
-& Q_{yzxy} = - G_{fay}^{(2)} + G_{fby}^{(2)} + G_{py}^{(4)} + Q_{dxz}^{(5)} \\
-& Q_{zxzx} = G_{f3}^{(2)} + 3 Q_{du}^{(5)} - Q_{dv}^{(5)} \\
-& Q_{xyyz} = - G_{fay}^{(2)} - G_{fby}^{(2)} + G_{py}^{(4)} - Q_{dxz}^{(5)} \\
-& Q_{xyxy} = G_{f3}^{(2)} + 2 Q_{dv}^{(5)}
+& Q_{xxzx} = \mathbb{G}_{y}^{(3)} - \mathbb{G}_{y}^{\alpha(2)} - \mathbb{G}_{y}^{\beta(2)} + 2 \mathbb{Q}_{xz}^{(5)} \\
+& Q_{yyzx} = \mathbb{G}_{y}^{(3)} + 2 \mathbb{G}_{y}^{(4)} + 2 \mathbb{G}_{y}^{\alpha(2)} \\
+& Q_{zzzx} = \mathbb{G}_{y}^{(3)} - \mathbb{G}_{y}^{\alpha(2)} + \mathbb{G}_{y}^{\beta(2)} - 2 \mathbb{Q}_{xz}^{(5)} \\
+& Q_{yzyz} = \mathbb{G}_{xyz}^{(2)} - 3 \mathbb{Q}_{u}^{(5)} - \mathbb{Q}_{v}^{(5)} \\
+& Q_{yzxy} = \mathbb{G}_{y}^{(4)} - \mathbb{G}_{y}^{\alpha(2)} + \mathbb{G}_{y}^{\beta(2)} + \mathbb{Q}_{xz}^{(5)} \\
+& Q_{zxzx} = \mathbb{G}_{xyz}^{(2)} + 3 \mathbb{Q}_{u}^{(5)} - \mathbb{Q}_{v}^{(5)} \\
+& Q_{xyyz} = \mathbb{G}_{y}^{(4)} - \mathbb{G}_{y}^{\alpha(2)} - \mathbb{G}_{y}^{\beta(2)} - \mathbb{Q}_{xz}^{(5)} \\
+& Q_{xyxy} = \mathbb{G}_{xyz}^{(2)} + 2 \mathbb{Q}_{v}^{(5)}
 \end{align*}
 * Rank 4 tensor (as).
 \begin{align*}
 \begin{bmatrix} 0 & 0 & 0 & Q_{yzyz} & 0 & Q_{yzxy} \\ Q_{zxxx} & Q_{zxyy} & Q_{zxzz} & 0 & Q_{zxzx} & 0 \\ 0 & 0 & 0 & Q_{xyyz} & 0 & Q_{xyxy} \end{bmatrix}
 \end{align*}
 \begin{align*}
-& Q_{yzyz} = G_{f3}^{(3)} - 3 Q_{du}^{(6)} - Q_{dv}^{(6)} \\
-& Q_{yzxy} = - G_{fay}^{(3)} - G_{fby}^{(3)} + G_{py}^{(6)} - Q_{dxz}^{(6)} \\
-& Q_{zxxx} = - G_{fay}^{(3)} - G_{fby}^{(3)} + G_{py}^{(5)} + 2 Q_{dxz}^{(6)} \\
-& Q_{zxyy} = 2 G_{fay}^{(3)} + G_{py}^{(5)} + 2 G_{py}^{(6)} \\
-& Q_{zxzz} = - G_{fay}^{(3)} + G_{fby}^{(3)} + G_{py}^{(5)} - 2 Q_{dxz}^{(6)} \\
-& Q_{zxzx} = G_{f3}^{(3)} + 3 Q_{du}^{(6)} - Q_{dv}^{(6)} \\
-& Q_{xyyz} = - G_{fay}^{(3)} + G_{fby}^{(3)} + G_{py}^{(6)} + Q_{dxz}^{(6)} \\
-& Q_{xyxy} = G_{f3}^{(3)} + 2 Q_{dv}^{(6)}
+& Q_{yzyz} = \mathbb{G}_{xyz}^{(3)} - 3 \mathbb{Q}_{u}^{(6)} - \mathbb{Q}_{v}^{(6)} \\
+& Q_{yzxy} = \mathbb{G}_{y}^{(6)} - \mathbb{G}_{y}^{\alpha(3)} - \mathbb{G}_{y}^{\beta(3)} - \mathbb{Q}_{xz}^{(6)} \\
+& Q_{zxxx} = \mathbb{G}_{y}^{(5)} - \mathbb{G}_{y}^{\alpha(3)} - \mathbb{G}_{y}^{\beta(3)} + 2 \mathbb{Q}_{xz}^{(6)} \\
+& Q_{zxyy} = \mathbb{G}_{y}^{(5)} + 2 \mathbb{G}_{y}^{(6)} + 2 \mathbb{G}_{y}^{\alpha(3)} \\
+& Q_{zxzz} = \mathbb{G}_{y}^{(5)} - \mathbb{G}_{y}^{\alpha(3)} + \mathbb{G}_{y}^{\beta(3)} - 2 \mathbb{Q}_{xz}^{(6)} \\
+& Q_{zxzx} = \mathbb{G}_{xyz}^{(3)} + 3 \mathbb{Q}_{u}^{(6)} - \mathbb{Q}_{v}^{(6)} \\
+& Q_{xyyz} = \mathbb{G}_{y}^{(6)} - \mathbb{G}_{y}^{\alpha(3)} + \mathbb{G}_{y}^{\beta(3)} + \mathbb{Q}_{xz}^{(6)} \\
+& Q_{xyxy} = \mathbb{G}_{xyz}^{(3)} + 2 \mathbb{Q}_{v}^{(6)}
 \end{align*}
 * Rank 4 tensor (s).
 \begin{align*}
 \begin{bmatrix} Q_{xxxx} & Q_{xxyy} & Q_{xxzz} & 0 & Q_{xxzx} & 0 & 0 & Q_{xxxz} & 0 \\ Q_{yyxx} & Q_{yyyy} & Q_{yyzz} & 0 & Q_{yyzx} & 0 & 0 & Q_{yyxz} & 0 \\ Q_{zzxx} & Q_{zzyy} & Q_{zzzz} & 0 & Q_{zzzx} & 0 & 0 & Q_{zzxz} & 0 \\ 0 & 0 & 0 & Q_{yzyz} & 0 & Q_{yzxy} & Q_{yzzy} & 0 & Q_{yzyx} \\ Q_{zxxx} & Q_{zxyy} & Q_{zxzz} & 0 & Q_{zxzx} & 0 & 0 & Q_{zxxz} & 0 \\ 0 & 0 & 0 & Q_{xyyz} & 0 & Q_{xyxy} & Q_{xyzy} & 0 & Q_{xyyx} \end{bmatrix}
 \end{align*}
 \begin{align*}
-& Q_{xxxx} = - 2 Q_{du}^{(1)} - 4 Q_{du}^{(2)} + 2 Q_{dv}^{(1)} + 4 Q_{dv}^{(2)} - Q_{gu}^{(1)} + Q_{gv}^{(1)} + 2 Q_{g}^{(1)} + Q_{s}^{(1)} + 2 Q_{s}^{(2)} \\
-& Q_{xxyy} = 4 G_{f3}^{(1)} - 2 Q_{du}^{(1)} - 2 Q_{dv}^{(3)} + 2 Q_{gu}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(1)} \\
-& Q_{xxzz} = - 4 G_{f3}^{(1)} + Q_{du}^{(1)} + 3 Q_{du}^{(3)} + Q_{dv}^{(1)} - Q_{dv}^{(3)} - Q_{gu}^{(1)} - Q_{gv}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(1)} \\
-& Q_{xxzx} = 2 G_{fay}^{(1)} - G_{fay}^{(2)} + 2 G_{fby}^{(1)} - G_{fby}^{(2)} - 2 G_{py}^{(1)} + G_{py}^{(3)} + Q_{dxz}^{(1)} + 2 Q_{dxz}^{(2)} + Q_{dxz}^{(3)} + 2 Q_{dxz}^{(5)} - Q_{gay}^{(1)} - Q_{gby}^{(1)} \\
-& Q_{xxxz} = 2 G_{fay}^{(1)} + G_{fay}^{(2)} + 2 G_{fby}^{(1)} + G_{fby}^{(2)} - 2 G_{py}^{(1)} - G_{py}^{(3)} + Q_{dxz}^{(1)} + 2 Q_{dxz}^{(2)} + Q_{dxz}^{(3)} - 2 Q_{dxz}^{(5)} - Q_{gay}^{(1)} - Q_{gby}^{(1)} \\
-& Q_{yyxx} = - 4 G_{f3}^{(1)} - 2 Q_{du}^{(1)} + 2 Q_{dv}^{(3)} + 2 Q_{gu}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(1)} \\
-& Q_{yyyy} = - 2 Q_{du}^{(1)} - 4 Q_{du}^{(2)} - 2 Q_{dv}^{(1)} - 4 Q_{dv}^{(2)} - Q_{gu}^{(1)} - Q_{gv}^{(1)} + 2 Q_{g}^{(1)} + Q_{s}^{(1)} + 2 Q_{s}^{(2)} \\
-& Q_{yyzz} = 4 G_{f3}^{(1)} + Q_{du}^{(1)} + 3 Q_{du}^{(3)} - Q_{dv}^{(1)} + Q_{dv}^{(3)} - Q_{gu}^{(1)} + Q_{gv}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(1)} \\
-& Q_{yyzx} = 2 G_{fay}^{(2)} - 4 G_{fby}^{(1)} + G_{py}^{(3)} + 2 G_{py}^{(4)} + Q_{dxz}^{(1)} + Q_{dxz}^{(3)} + 2 Q_{gby}^{(1)} \\
-& Q_{yyxz} = - 2 G_{fay}^{(2)} - 4 G_{fby}^{(1)} - G_{py}^{(3)} - 2 G_{py}^{(4)} + Q_{dxz}^{(1)} + Q_{dxz}^{(3)} + 2 Q_{gby}^{(1)} \\
-& Q_{zzxx} = 4 G_{f3}^{(1)} + Q_{du}^{(1)} - 3 Q_{du}^{(3)} + Q_{dv}^{(1)} + Q_{dv}^{(3)} - Q_{gu}^{(1)} - Q_{gv}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(1)} \\
-& Q_{zzyy} = - 4 G_{f3}^{(1)} + Q_{du}^{(1)} - 3 Q_{du}^{(3)} - Q_{dv}^{(1)} - Q_{dv}^{(3)} - Q_{gu}^{(1)} + Q_{gv}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(1)} \\
-& Q_{zzzz} = 4 Q_{du}^{(1)} + 8 Q_{du}^{(2)} + 2 Q_{gu}^{(1)} + 2 Q_{g}^{(1)} + Q_{s}^{(1)} + 2 Q_{s}^{(2)} \\
-& Q_{zzzx} = - 2 G_{fay}^{(1)} - G_{fay}^{(2)} + 2 G_{fby}^{(1)} + G_{fby}^{(2)} + 2 G_{py}^{(1)} + G_{py}^{(3)} + Q_{dxz}^{(1)} + 2 Q_{dxz}^{(2)} + Q_{dxz}^{(3)} - 2 Q_{dxz}^{(5)} + Q_{gay}^{(1)} - Q_{gby}^{(1)} \\
-& Q_{zzxz} = - 2 G_{fay}^{(1)} + G_{fay}^{(2)} + 2 G_{fby}^{(1)} - G_{fby}^{(2)} + 2 G_{py}^{(1)} - G_{py}^{(3)} + Q_{dxz}^{(1)} + 2 Q_{dxz}^{(2)} + Q_{dxz}^{(3)} + 2 Q_{dxz}^{(5)} + Q_{gay}^{(1)} - Q_{gby}^{(1)} \\
-& Q_{yzyz} = G_{f3}^{(2)} + Q_{du}^{(2)} - 3 Q_{du}^{(5)} - Q_{dv}^{(2)} - Q_{dv}^{(5)} - Q_{gu}^{(1)} + Q_{gv}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(2)} \\
-& Q_{yzxy} = 4 G_{fay}^{(1)} - G_{fay}^{(2)} + G_{fby}^{(2)} + G_{py}^{(1)} + G_{py}^{(4)} + Q_{dxz}^{(2)} + Q_{dxz}^{(5)} + 2 Q_{gby}^{(1)} \\
-& Q_{yzzy} = - G_{f3}^{(2)} + Q_{du}^{(2)} + 3 Q_{du}^{(5)} - Q_{dv}^{(2)} + Q_{dv}^{(5)} - Q_{gu}^{(1)} + Q_{gv}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(2)} \\
-& Q_{yzyx} = 4 G_{fay}^{(1)} + G_{fay}^{(2)} - G_{fby}^{(2)} + G_{py}^{(1)} - G_{py}^{(4)} + Q_{dxz}^{(2)} - Q_{dxz}^{(5)} + 2 Q_{gby}^{(1)} \\
-& Q_{zxxx} = - 2 G_{fay}^{(1)} - 2 G_{fby}^{(1)} + 2 G_{py}^{(1)} + Q_{dxz}^{(1)} + 2 Q_{dxz}^{(2)} - Q_{dxz}^{(3)} - Q_{gay}^{(1)} - Q_{gby}^{(1)} \\
-& Q_{zxyy} = 4 G_{fby}^{(1)} + Q_{dxz}^{(1)} - Q_{dxz}^{(3)} + 2 Q_{gby}^{(1)} \\
-& Q_{zxzz} = 2 G_{fay}^{(1)} - 2 G_{fby}^{(1)} - 2 G_{py}^{(1)} + Q_{dxz}^{(1)} + 2 Q_{dxz}^{(2)} - Q_{dxz}^{(3)} + Q_{gay}^{(1)} - Q_{gby}^{(1)} \\
-& Q_{zxzx} = G_{f3}^{(2)} + Q_{du}^{(2)} + 3 Q_{du}^{(5)} + Q_{dv}^{(2)} - Q_{dv}^{(5)} - Q_{gu}^{(1)} - Q_{gv}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(2)} \\
-& Q_{zxxz} = - G_{f3}^{(2)} + Q_{du}^{(2)} - 3 Q_{du}^{(5)} + Q_{dv}^{(2)} + Q_{dv}^{(5)} - Q_{gu}^{(1)} - Q_{gv}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(2)} \\
-& Q_{xyyz} = - 4 G_{fay}^{(1)} - G_{fay}^{(2)} - G_{fby}^{(2)} - G_{py}^{(1)} + G_{py}^{(4)} + Q_{dxz}^{(2)} - Q_{dxz}^{(5)} + 2 Q_{gby}^{(1)} \\
-& Q_{xyxy} = G_{f3}^{(2)} - 2 Q_{du}^{(2)} + 2 Q_{dv}^{(5)} + 2 Q_{gu}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(2)} \\
-& Q_{xyzy} = - 4 G_{fay}^{(1)} + G_{fay}^{(2)} + G_{fby}^{(2)} - G_{py}^{(1)} - G_{py}^{(4)} + Q_{dxz}^{(2)} + Q_{dxz}^{(5)} + 2 Q_{gby}^{(1)} \\
-& Q_{xyyx} = - G_{f3}^{(2)} - 2 Q_{du}^{(2)} - 2 Q_{dv}^{(5)} + 2 Q_{gu}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(2)}
+& Q_{xxxx} = \mathbb{Q}_{0}^{(1)} + 2 \mathbb{Q}_{0}^{(2)} - \mathbb{Q}_{4u}^{(1)} + \mathbb{Q}_{4v}^{(1)} + 2 \mathbb{Q}_{4}^{(1)} - 2 \mathbb{Q}_{u}^{(1)} - 4 \mathbb{Q}_{u}^{(2)} + 2 \mathbb{Q}_{v}^{(1)} + 4 \mathbb{Q}_{v}^{(2)} \\
+& Q_{xxyy} = 4 \mathbb{G}_{xyz}^{(1)} + \mathbb{Q}_{0}^{(1)} + 2 \mathbb{Q}_{4u}^{(1)} - \mathbb{Q}_{4}^{(1)} - 2 \mathbb{Q}_{u}^{(1)} - 2 \mathbb{Q}_{v}^{(3)} \\
+& Q_{xxzz} = - 4 \mathbb{G}_{xyz}^{(1)} + \mathbb{Q}_{0}^{(1)} - \mathbb{Q}_{4u}^{(1)} - \mathbb{Q}_{4v}^{(1)} - \mathbb{Q}_{4}^{(1)} + \mathbb{Q}_{u}^{(1)} + 3 \mathbb{Q}_{u}^{(3)} + \mathbb{Q}_{v}^{(1)} - \mathbb{Q}_{v}^{(3)} \\
+& Q_{xxzx} = - 2 \mathbb{G}_{y}^{(1)} + \mathbb{G}_{y}^{(3)} + 2 \mathbb{G}_{y}^{\alpha(1)} - \mathbb{G}_{y}^{\alpha(2)} + 2 \mathbb{G}_{y}^{\beta(1)} - \mathbb{G}_{y}^{\beta(2)} - \mathbb{Q}_{4y}^{\alpha(1)} + \mathbb{Q}_{xz}^{(1)} + 2 \mathbb{Q}_{xz}^{(2)} + \mathbb{Q}_{xz}^{(3)} + 2 \mathbb{Q}_{xz}^{(5)} - \mathbb{Q}_{y}^{\beta(1)} \\
+& Q_{xxxz} = - 2 \mathbb{G}_{y}^{(1)} - \mathbb{G}_{y}^{(3)} + 2 \mathbb{G}_{y}^{\alpha(1)} + \mathbb{G}_{y}^{\alpha(2)} + 2 \mathbb{G}_{y}^{\beta(1)} + \mathbb{G}_{y}^{\beta(2)} - \mathbb{Q}_{4y}^{\alpha(1)} + \mathbb{Q}_{xz}^{(1)} + 2 \mathbb{Q}_{xz}^{(2)} + \mathbb{Q}_{xz}^{(3)} - 2 \mathbb{Q}_{xz}^{(5)} - \mathbb{Q}_{y}^{\beta(1)} \\
+& Q_{yyxx} = - 4 \mathbb{G}_{xyz}^{(1)} + \mathbb{Q}_{0}^{(1)} + 2 \mathbb{Q}_{4u}^{(1)} - \mathbb{Q}_{4}^{(1)} - 2 \mathbb{Q}_{u}^{(1)} + 2 \mathbb{Q}_{v}^{(3)} \\
+& Q_{yyyy} = \mathbb{Q}_{0}^{(1)} + 2 \mathbb{Q}_{0}^{(2)} - \mathbb{Q}_{4u}^{(1)} - \mathbb{Q}_{4v}^{(1)} + 2 \mathbb{Q}_{4}^{(1)} - 2 \mathbb{Q}_{u}^{(1)} - 4 \mathbb{Q}_{u}^{(2)} - 2 \mathbb{Q}_{v}^{(1)} - 4 \mathbb{Q}_{v}^{(2)} \\
+& Q_{yyzz} = 4 \mathbb{G}_{xyz}^{(1)} + \mathbb{Q}_{0}^{(1)} - \mathbb{Q}_{4u}^{(1)} + \mathbb{Q}_{4v}^{(1)} - \mathbb{Q}_{4}^{(1)} + \mathbb{Q}_{u}^{(1)} + 3 \mathbb{Q}_{u}^{(3)} - \mathbb{Q}_{v}^{(1)} + \mathbb{Q}_{v}^{(3)} \\
+& Q_{yyzx} = \mathbb{G}_{y}^{(3)} + 2 \mathbb{G}_{y}^{(4)} + 2 \mathbb{G}_{y}^{\alpha(2)} - 4 \mathbb{G}_{y}^{\beta(1)} + \mathbb{Q}_{xz}^{(1)} + \mathbb{Q}_{xz}^{(3)} + 2 \mathbb{Q}_{y}^{\beta(1)} \\
+& Q_{yyxz} = - \mathbb{G}_{y}^{(3)} - 2 \mathbb{G}_{y}^{(4)} - 2 \mathbb{G}_{y}^{\alpha(2)} - 4 \mathbb{G}_{y}^{\beta(1)} + \mathbb{Q}_{xz}^{(1)} + \mathbb{Q}_{xz}^{(3)} + 2 \mathbb{Q}_{y}^{\beta(1)} \\
+& Q_{zzxx} = 4 \mathbb{G}_{xyz}^{(1)} + \mathbb{Q}_{0}^{(1)} - \mathbb{Q}_{4u}^{(1)} - \mathbb{Q}_{4v}^{(1)} - \mathbb{Q}_{4}^{(1)} + \mathbb{Q}_{u}^{(1)} - 3 \mathbb{Q}_{u}^{(3)} + \mathbb{Q}_{v}^{(1)} + \mathbb{Q}_{v}^{(3)} \\
+& Q_{zzyy} = - 4 \mathbb{G}_{xyz}^{(1)} + \mathbb{Q}_{0}^{(1)} - \mathbb{Q}_{4u}^{(1)} + \mathbb{Q}_{4v}^{(1)} - \mathbb{Q}_{4}^{(1)} + \mathbb{Q}_{u}^{(1)} - 3 \mathbb{Q}_{u}^{(3)} - \mathbb{Q}_{v}^{(1)} - \mathbb{Q}_{v}^{(3)} \\
+& Q_{zzzz} = \mathbb{Q}_{0}^{(1)} + 2 \mathbb{Q}_{0}^{(2)} + 2 \mathbb{Q}_{4u}^{(1)} + 2 \mathbb{Q}_{4}^{(1)} + 4 \mathbb{Q}_{u}^{(1)} + 8 \mathbb{Q}_{u}^{(2)} \\
+& Q_{zzzx} = 2 \mathbb{G}_{y}^{(1)} + \mathbb{G}_{y}^{(3)} - 2 \mathbb{G}_{y}^{\alpha(1)} - \mathbb{G}_{y}^{\alpha(2)} + 2 \mathbb{G}_{y}^{\beta(1)} + \mathbb{G}_{y}^{\beta(2)} + \mathbb{Q}_{4y}^{\alpha(1)} + \mathbb{Q}_{xz}^{(1)} + 2 \mathbb{Q}_{xz}^{(2)} + \mathbb{Q}_{xz}^{(3)} - 2 \mathbb{Q}_{xz}^{(5)} - \mathbb{Q}_{y}^{\beta(1)} \\
+& Q_{zzxz} = 2 \mathbb{G}_{y}^{(1)} - \mathbb{G}_{y}^{(3)} - 2 \mathbb{G}_{y}^{\alpha(1)} + \mathbb{G}_{y}^{\alpha(2)} + 2 \mathbb{G}_{y}^{\beta(1)} - \mathbb{G}_{y}^{\beta(2)} + \mathbb{Q}_{4y}^{\alpha(1)} + \mathbb{Q}_{xz}^{(1)} + 2 \mathbb{Q}_{xz}^{(2)} + \mathbb{Q}_{xz}^{(3)} + 2 \mathbb{Q}_{xz}^{(5)} - \mathbb{Q}_{y}^{\beta(1)} \\
+& Q_{yzyz} = \mathbb{G}_{xyz}^{(2)} + \mathbb{Q}_{0}^{(2)} - \mathbb{Q}_{4u}^{(1)} + \mathbb{Q}_{4v}^{(1)} - \mathbb{Q}_{4}^{(1)} + \mathbb{Q}_{u}^{(2)} - 3 \mathbb{Q}_{u}^{(5)} - \mathbb{Q}_{v}^{(2)} - \mathbb{Q}_{v}^{(5)} \\
+& Q_{yzxy} = \mathbb{G}_{y}^{(1)} + \mathbb{G}_{y}^{(4)} + 4 \mathbb{G}_{y}^{\alpha(1)} - \mathbb{G}_{y}^{\alpha(2)} + \mathbb{G}_{y}^{\beta(2)} + \mathbb{Q}_{xz}^{(2)} + \mathbb{Q}_{xz}^{(5)} + 2 \mathbb{Q}_{y}^{\beta(1)} \\
+& Q_{yzzy} = - \mathbb{G}_{xyz}^{(2)} + \mathbb{Q}_{0}^{(2)} - \mathbb{Q}_{4u}^{(1)} + \mathbb{Q}_{4v}^{(1)} - \mathbb{Q}_{4}^{(1)} + \mathbb{Q}_{u}^{(2)} + 3 \mathbb{Q}_{u}^{(5)} - \mathbb{Q}_{v}^{(2)} + \mathbb{Q}_{v}^{(5)} \\
+& Q_{yzyx} = \mathbb{G}_{y}^{(1)} - \mathbb{G}_{y}^{(4)} + 4 \mathbb{G}_{y}^{\alpha(1)} + \mathbb{G}_{y}^{\alpha(2)} - \mathbb{G}_{y}^{\beta(2)} + \mathbb{Q}_{xz}^{(2)} - \mathbb{Q}_{xz}^{(5)} + 2 \mathbb{Q}_{y}^{\beta(1)} \\
+& Q_{zxxx} = 2 \mathbb{G}_{y}^{(1)} - 2 \mathbb{G}_{y}^{\alpha(1)} - 2 \mathbb{G}_{y}^{\beta(1)} - \mathbb{Q}_{4y}^{\alpha(1)} + \mathbb{Q}_{xz}^{(1)} + 2 \mathbb{Q}_{xz}^{(2)} - \mathbb{Q}_{xz}^{(3)} - \mathbb{Q}_{y}^{\beta(1)} \\
+& Q_{zxyy} = 4 \mathbb{G}_{y}^{\beta(1)} + \mathbb{Q}_{xz}^{(1)} - \mathbb{Q}_{xz}^{(3)} + 2 \mathbb{Q}_{y}^{\beta(1)} \\
+& Q_{zxzz} = - 2 \mathbb{G}_{y}^{(1)} + 2 \mathbb{G}_{y}^{\alpha(1)} - 2 \mathbb{G}_{y}^{\beta(1)} + \mathbb{Q}_{4y}^{\alpha(1)} + \mathbb{Q}_{xz}^{(1)} + 2 \mathbb{Q}_{xz}^{(2)} - \mathbb{Q}_{xz}^{(3)} - \mathbb{Q}_{y}^{\beta(1)} \\
+& Q_{zxzx} = \mathbb{G}_{xyz}^{(2)} + \mathbb{Q}_{0}^{(2)} - \mathbb{Q}_{4u}^{(1)} - \mathbb{Q}_{4v}^{(1)} - \mathbb{Q}_{4}^{(1)} + \mathbb{Q}_{u}^{(2)} + 3 \mathbb{Q}_{u}^{(5)} + \mathbb{Q}_{v}^{(2)} - \mathbb{Q}_{v}^{(5)} \\
+& Q_{zxxz} = - \mathbb{G}_{xyz}^{(2)} + \mathbb{Q}_{0}^{(2)} - \mathbb{Q}_{4u}^{(1)} - \mathbb{Q}_{4v}^{(1)} - \mathbb{Q}_{4}^{(1)} + \mathbb{Q}_{u}^{(2)} - 3 \mathbb{Q}_{u}^{(5)} + \mathbb{Q}_{v}^{(2)} + \mathbb{Q}_{v}^{(5)} \\
+& Q_{xyyz} = - \mathbb{G}_{y}^{(1)} + \mathbb{G}_{y}^{(4)} - 4 \mathbb{G}_{y}^{\alpha(1)} - \mathbb{G}_{y}^{\alpha(2)} - \mathbb{G}_{y}^{\beta(2)} + \mathbb{Q}_{xz}^{(2)} - \mathbb{Q}_{xz}^{(5)} + 2 \mathbb{Q}_{y}^{\beta(1)} \\
+& Q_{xyxy} = \mathbb{G}_{xyz}^{(2)} + \mathbb{Q}_{0}^{(2)} + 2 \mathbb{Q}_{4u}^{(1)} - \mathbb{Q}_{4}^{(1)} - 2 \mathbb{Q}_{u}^{(2)} + 2 \mathbb{Q}_{v}^{(5)} \\
+& Q_{xyzy} = - \mathbb{G}_{y}^{(1)} - \mathbb{G}_{y}^{(4)} - 4 \mathbb{G}_{y}^{\alpha(1)} + \mathbb{G}_{y}^{\alpha(2)} + \mathbb{G}_{y}^{\beta(2)} + \mathbb{Q}_{xz}^{(2)} + \mathbb{Q}_{xz}^{(5)} + 2 \mathbb{Q}_{y}^{\beta(1)} \\
+& Q_{xyyx} = - \mathbb{G}_{xyz}^{(2)} + \mathbb{Q}_{0}^{(2)} + 2 \mathbb{Q}_{4u}^{(1)} - \mathbb{Q}_{4}^{(1)} - 2 \mathbb{Q}_{u}^{(2)} - 2 \mathbb{Q}_{v}^{(5)}
 \end{align*}
 * Rank 4 tensor (a).
 \begin{align*}
 \begin{bmatrix} 0 & 0 & 0 & Q_{yzyz} & 0 & Q_{yzxy} & Q_{yzzy} & 0 & Q_{yzyx} \\ Q_{zxxx} & Q_{zxyy} & Q_{zxzz} & 0 & Q_{zxzx} & 0 & 0 & Q_{zxxz} & 0 \\ 0 & 0 & 0 & Q_{xyyz} & 0 & Q_{xyxy} & Q_{xyzy} & 0 & Q_{xyyx} \end{bmatrix}
 \end{align*}
 \begin{align*}
-& Q_{yzyz} = G_{f3}^{(3)} - 2 Q_{du}^{(4)} - 3 Q_{du}^{(6)} + 2 Q_{dv}^{(4)} - Q_{dv}^{(6)} + Q_{s}^{(3)} \\
-& Q_{yzxy} = - G_{fay}^{(3)} - G_{fby}^{(3)} + G_{py}^{(2)} + G_{py}^{(6)} + 2 Q_{dxz}^{(4)} - Q_{dxz}^{(6)} \\
-& Q_{yzzy} = G_{f3}^{(3)} + 2 Q_{du}^{(4)} - 3 Q_{du}^{(6)} - 2 Q_{dv}^{(4)} - Q_{dv}^{(6)} - Q_{s}^{(3)} \\
-& Q_{yzyx} = - G_{fay}^{(3)} - G_{fby}^{(3)} - G_{py}^{(2)} + G_{py}^{(6)} - 2 Q_{dxz}^{(4)} - Q_{dxz}^{(6)} \\
-& Q_{zxxx} = - G_{fay}^{(3)} - G_{fby}^{(3)} + G_{py}^{(5)} + 2 Q_{dxz}^{(6)} \\
-& Q_{zxyy} = 2 G_{fay}^{(3)} + G_{py}^{(5)} + 2 G_{py}^{(6)} \\
-& Q_{zxzz} = - G_{fay}^{(3)} + G_{fby}^{(3)} + G_{py}^{(5)} - 2 Q_{dxz}^{(6)} \\
-& Q_{zxzx} = G_{f3}^{(3)} - 2 Q_{du}^{(4)} + 3 Q_{du}^{(6)} - 2 Q_{dv}^{(4)} - Q_{dv}^{(6)} + Q_{s}^{(3)} \\
-& Q_{zxxz} = G_{f3}^{(3)} + 2 Q_{du}^{(4)} + 3 Q_{du}^{(6)} + 2 Q_{dv}^{(4)} - Q_{dv}^{(6)} - Q_{s}^{(3)} \\
-& Q_{xyyz} = - G_{fay}^{(3)} + G_{fby}^{(3)} - G_{py}^{(2)} + G_{py}^{(6)} + 2 Q_{dxz}^{(4)} + Q_{dxz}^{(6)} \\
-& Q_{xyxy} = G_{f3}^{(3)} + 4 Q_{du}^{(4)} + 2 Q_{dv}^{(6)} + Q_{s}^{(3)} \\
-& Q_{xyzy} = - G_{fay}^{(3)} + G_{fby}^{(3)} + G_{py}^{(2)} + G_{py}^{(6)} - 2 Q_{dxz}^{(4)} + Q_{dxz}^{(6)} \\
-& Q_{xyyx} = G_{f3}^{(3)} - 4 Q_{du}^{(4)} + 2 Q_{dv}^{(6)} - Q_{s}^{(3)}
+& Q_{yzyz} = \mathbb{G}_{xyz}^{(3)} + \mathbb{Q}_{0}^{(3)} - 2 \mathbb{Q}_{u}^{(4)} - 3 \mathbb{Q}_{u}^{(6)} + 2 \mathbb{Q}_{v}^{(4)} - \mathbb{Q}_{v}^{(6)} \\
+& Q_{yzxy} = \mathbb{G}_{y}^{(2)} + \mathbb{G}_{y}^{(6)} - \mathbb{G}_{y}^{\alpha(3)} - \mathbb{G}_{y}^{\beta(3)} + 2 \mathbb{Q}_{xz}^{(4)} - \mathbb{Q}_{xz}^{(6)} \\
+& Q_{yzzy} = \mathbb{G}_{xyz}^{(3)} - \mathbb{Q}_{0}^{(3)} + 2 \mathbb{Q}_{u}^{(4)} - 3 \mathbb{Q}_{u}^{(6)} - 2 \mathbb{Q}_{v}^{(4)} - \mathbb{Q}_{v}^{(6)} \\
+& Q_{yzyx} = - \mathbb{G}_{y}^{(2)} + \mathbb{G}_{y}^{(6)} - \mathbb{G}_{y}^{\alpha(3)} - \mathbb{G}_{y}^{\beta(3)} - 2 \mathbb{Q}_{xz}^{(4)} - \mathbb{Q}_{xz}^{(6)} \\
+& Q_{zxxx} = \mathbb{G}_{y}^{(5)} - \mathbb{G}_{y}^{\alpha(3)} - \mathbb{G}_{y}^{\beta(3)} + 2 \mathbb{Q}_{xz}^{(6)} \\
+& Q_{zxyy} = \mathbb{G}_{y}^{(5)} + 2 \mathbb{G}_{y}^{(6)} + 2 \mathbb{G}_{y}^{\alpha(3)} \\
+& Q_{zxzz} = \mathbb{G}_{y}^{(5)} - \mathbb{G}_{y}^{\alpha(3)} + \mathbb{G}_{y}^{\beta(3)} - 2 \mathbb{Q}_{xz}^{(6)} \\
+& Q_{zxzx} = \mathbb{G}_{xyz}^{(3)} + \mathbb{Q}_{0}^{(3)} - 2 \mathbb{Q}_{u}^{(4)} + 3 \mathbb{Q}_{u}^{(6)} - 2 \mathbb{Q}_{v}^{(4)} - \mathbb{Q}_{v}^{(6)} \\
+& Q_{zxxz} = \mathbb{G}_{xyz}^{(3)} - \mathbb{Q}_{0}^{(3)} + 2 \mathbb{Q}_{u}^{(4)} + 3 \mathbb{Q}_{u}^{(6)} + 2 \mathbb{Q}_{v}^{(4)} - \mathbb{Q}_{v}^{(6)} \\
+& Q_{xyyz} = - \mathbb{G}_{y}^{(2)} + \mathbb{G}_{y}^{(6)} - \mathbb{G}_{y}^{\alpha(3)} + \mathbb{G}_{y}^{\beta(3)} + 2 \mathbb{Q}_{xz}^{(4)} + \mathbb{Q}_{xz}^{(6)} \\
+& Q_{xyxy} = \mathbb{G}_{xyz}^{(3)} + \mathbb{Q}_{0}^{(3)} + 4 \mathbb{Q}_{u}^{(4)} + 2 \mathbb{Q}_{v}^{(6)} \\
+& Q_{xyzy} = \mathbb{G}_{y}^{(2)} + \mathbb{G}_{y}^{(6)} - \mathbb{G}_{y}^{\alpha(3)} + \mathbb{G}_{y}^{\beta(3)} - 2 \mathbb{Q}_{xz}^{(4)} + \mathbb{Q}_{xz}^{(6)} \\
+& Q_{xyyx} = \mathbb{G}_{xyz}^{(3)} - \mathbb{Q}_{0}^{(3)} - 4 \mathbb{Q}_{u}^{(4)} + 2 \mathbb{Q}_{v}^{(6)}
 \end{align*}
 * Rank 4 tensor (t).
 \begin{align*}
 \begin{bmatrix} Q_{xxxx} & 0 & Q_{xxxz} \\ 0 & Q_{yyyy} & 0 \\ Q_{zzzx} & 0 & Q_{zzzz} \\ Q_{yyzx} & 0 & Q_{yyzz} \\ Q_{zzxx} & 0 & Q_{zzxz} \\ 0 & Q_{xxyy} & 0 \\ 0 & Q_{yzzy} & 0 \\ Q_{zxxx} & 0 & Q_{zxxz} \\ Q_{xxyy} + Q_{yyzz} - Q_{yzzy} - Q_{zxxz} + Q_{zzxx} & 0 & Q_{xyyz} \\ 0 & Q_{xyyz} + \frac{Q_{zzxz}}{2} - \frac{Q_{zzzx}}{2} & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& Q_{xxxx} = - 2 Q_{du}^{(1)} - 4 Q_{du}^{(2)} + 2 Q_{dv}^{(1)} + 4 Q_{dv}^{(2)} - Q_{gu}^{(1)} + Q_{gv}^{(1)} + 2 Q_{g}^{(1)} + 3 Q_{s}^{(1)} \\
-& Q_{xxxz} = Q_{dxz}^{(1)} + 2 Q_{dxz}^{(2)} + Q_{dxz}^{(3)} - 2 Q_{dxz}^{(5)} - Q_{gay}^{(1)} - Q_{gby}^{(1)} \\
-& Q_{yyyy} = - 2 Q_{du}^{(1)} - 4 Q_{du}^{(2)} - 2 Q_{dv}^{(1)} - 4 Q_{dv}^{(2)} - Q_{gu}^{(1)} - Q_{gv}^{(1)} + 2 Q_{g}^{(1)} + 3 Q_{s}^{(1)} \\
-& Q_{zzzx} = Q_{dxz}^{(1)} + 2 Q_{dxz}^{(2)} + Q_{dxz}^{(3)} - 2 Q_{dxz}^{(5)} + Q_{gay}^{(1)} - Q_{gby}^{(1)} \\
-& Q_{zzzz} = 4 Q_{du}^{(1)} + 8 Q_{du}^{(2)} + 2 Q_{gu}^{(1)} + 2 Q_{g}^{(1)} + 3 Q_{s}^{(1)} \\
-& Q_{yyzx} = Q_{dxz}^{(1)} + Q_{dxz}^{(3)} + 2 Q_{gby}^{(1)} \\
-& Q_{yyzz} = Q_{du}^{(1)} + 3 Q_{du}^{(3)} - Q_{dv}^{(1)} + Q_{dv}^{(3)} - Q_{gu}^{(1)} + Q_{gv}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(1)} \\
-& Q_{zzxx} = Q_{du}^{(1)} - 3 Q_{du}^{(3)} + Q_{dv}^{(1)} + Q_{dv}^{(3)} - Q_{gu}^{(1)} - Q_{gv}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(1)} \\
-& Q_{zzxz} = Q_{dxz}^{(1)} + 2 Q_{dxz}^{(2)} + Q_{dxz}^{(3)} + 2 Q_{dxz}^{(5)} + Q_{gay}^{(1)} - Q_{gby}^{(1)} \\
-& Q_{xxyy} = - 2 Q_{du}^{(1)} - 2 Q_{dv}^{(3)} + 2 Q_{gu}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(1)} \\
-& Q_{yzzy} = Q_{du}^{(2)} + 3 Q_{du}^{(5)} - Q_{dv}^{(2)} + Q_{dv}^{(5)} - Q_{gu}^{(1)} + Q_{gv}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(1)} \\
-& Q_{zxxx} = Q_{dxz}^{(1)} + 2 Q_{dxz}^{(2)} - Q_{dxz}^{(3)} - Q_{gay}^{(1)} - Q_{gby}^{(1)} \\
-& Q_{zxxz} = Q_{du}^{(2)} - 3 Q_{du}^{(5)} + Q_{dv}^{(2)} + Q_{dv}^{(5)} - Q_{gu}^{(1)} - Q_{gv}^{(1)} - Q_{g}^{(1)} + Q_{s}^{(1)} \\
-& Q_{xyyz} = Q_{dxz}^{(2)} - Q_{dxz}^{(5)} + 2 Q_{gby}^{(1)}
+& Q_{xxxx} = 3 \mathbb{Q}_{0}^{(1)} - \mathbb{Q}_{4u}^{(1)} + \mathbb{Q}_{4v}^{(1)} + 2 \mathbb{Q}_{4}^{(1)} - 2 \mathbb{Q}_{u}^{(1)} - 4 \mathbb{Q}_{u}^{(2)} + 2 \mathbb{Q}_{v}^{(1)} + 4 \mathbb{Q}_{v}^{(2)} \\
+& Q_{xxxz} = - \mathbb{Q}_{4y}^{\alpha(1)} + \mathbb{Q}_{xz}^{(1)} + 2 \mathbb{Q}_{xz}^{(2)} + \mathbb{Q}_{xz}^{(3)} - 2 \mathbb{Q}_{xz}^{(5)} - \mathbb{Q}_{y}^{\beta(1)} \\
+& Q_{yyyy} = 3 \mathbb{Q}_{0}^{(1)} - \mathbb{Q}_{4u}^{(1)} - \mathbb{Q}_{4v}^{(1)} + 2 \mathbb{Q}_{4}^{(1)} - 2 \mathbb{Q}_{u}^{(1)} - 4 \mathbb{Q}_{u}^{(2)} - 2 \mathbb{Q}_{v}^{(1)} - 4 \mathbb{Q}_{v}^{(2)} \\
+& Q_{zzzx} = \mathbb{Q}_{4y}^{\alpha(1)} + \mathbb{Q}_{xz}^{(1)} + 2 \mathbb{Q}_{xz}^{(2)} + \mathbb{Q}_{xz}^{(3)} - 2 \mathbb{Q}_{xz}^{(5)} - \mathbb{Q}_{y}^{\beta(1)} \\
+& Q_{zzzz} = 3 \mathbb{Q}_{0}^{(1)} + 2 \mathbb{Q}_{4u}^{(1)} + 2 \mathbb{Q}_{4}^{(1)} + 4 \mathbb{Q}_{u}^{(1)} + 8 \mathbb{Q}_{u}^{(2)} \\
+& Q_{yyzx} = \mathbb{Q}_{xz}^{(1)} + \mathbb{Q}_{xz}^{(3)} + 2 \mathbb{Q}_{y}^{\beta(1)} \\
+& Q_{yyzz} = \mathbb{Q}_{0}^{(1)} - \mathbb{Q}_{4u}^{(1)} + \mathbb{Q}_{4v}^{(1)} - \mathbb{Q}_{4}^{(1)} + \mathbb{Q}_{u}^{(1)} + 3 \mathbb{Q}_{u}^{(3)} - \mathbb{Q}_{v}^{(1)} + \mathbb{Q}_{v}^{(3)} \\
+& Q_{zzxx} = \mathbb{Q}_{0}^{(1)} - \mathbb{Q}_{4u}^{(1)} - \mathbb{Q}_{4v}^{(1)} - \mathbb{Q}_{4}^{(1)} + \mathbb{Q}_{u}^{(1)} - 3 \mathbb{Q}_{u}^{(3)} + \mathbb{Q}_{v}^{(1)} + \mathbb{Q}_{v}^{(3)} \\
+& Q_{zzxz} = \mathbb{Q}_{4y}^{\alpha(1)} + \mathbb{Q}_{xz}^{(1)} + 2 \mathbb{Q}_{xz}^{(2)} + \mathbb{Q}_{xz}^{(3)} + 2 \mathbb{Q}_{xz}^{(5)} - \mathbb{Q}_{y}^{\beta(1)} \\
+& Q_{xxyy} = \mathbb{Q}_{0}^{(1)} + 2 \mathbb{Q}_{4u}^{(1)} - \mathbb{Q}_{4}^{(1)} - 2 \mathbb{Q}_{u}^{(1)} - 2 \mathbb{Q}_{v}^{(3)} \\
+& Q_{yzzy} = \mathbb{Q}_{0}^{(1)} - \mathbb{Q}_{4u}^{(1)} + \mathbb{Q}_{4v}^{(1)} - \mathbb{Q}_{4}^{(1)} + \mathbb{Q}_{u}^{(2)} + 3 \mathbb{Q}_{u}^{(5)} - \mathbb{Q}_{v}^{(2)} + \mathbb{Q}_{v}^{(5)} \\
+& Q_{zxxx} = - \mathbb{Q}_{4y}^{\alpha(1)} + \mathbb{Q}_{xz}^{(1)} + 2 \mathbb{Q}_{xz}^{(2)} - \mathbb{Q}_{xz}^{(3)} - \mathbb{Q}_{y}^{\beta(1)} \\
+& Q_{zxxz} = \mathbb{Q}_{0}^{(1)} - \mathbb{Q}_{4u}^{(1)} - \mathbb{Q}_{4v}^{(1)} - \mathbb{Q}_{4}^{(1)} + \mathbb{Q}_{u}^{(2)} - 3 \mathbb{Q}_{u}^{(5)} + \mathbb{Q}_{v}^{(2)} + \mathbb{Q}_{v}^{(5)} \\
+& Q_{xyyz} = \mathbb{Q}_{xz}^{(2)} - \mathbb{Q}_{xz}^{(5)} + 2 \mathbb{Q}_{y}^{\beta(1)}
 \end{align*}
 
 \end{document}

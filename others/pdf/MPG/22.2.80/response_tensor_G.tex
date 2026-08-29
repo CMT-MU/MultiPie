@@ -53,7 +53,7 @@ MPG No. 22.2.80\quad$\bar{6}1'$\quad[ Type II, hexagonal ] [G tensor]
 \begin{bmatrix} 0 & 0 & G_{z} \end{bmatrix}
 \end{align*}
 \begin{align*}
-& G_{z} = G_{pz}^{(1)}
+& G_{z} = \mathbb{G}_{z}^{(1)}
 \end{align*}
 * Rank 2 tensor (s).
 * Rank 2 tensor (a).
@@ -62,42 +62,42 @@ MPG No. 22.2.80\quad$\bar{6}1'$\quad[ Type II, hexagonal ] [G tensor]
 \begin{bmatrix} 0 & 0 & G_{xxz} \\ 0 & 0 & G_{xxz} \\ 0 & 0 & G_{zzz} \\ 0 & G_{xxz} & 0 \\ G_{xxz} & 0 & 0 \\ 0 & 0 & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& G_{xxz} = - G_{faz}^{(1)} + G_{pz}^{(1)} \\
-& G_{zzz} = 2 G_{faz}^{(1)} + 3 G_{pz}^{(1)}
+& G_{xxz} = \mathbb{G}_{z}^{(1)} - \mathbb{G}_{z}^{\alpha(1)} \\
+& G_{zzz} = 3 \mathbb{G}_{z}^{(1)} + 2 \mathbb{G}_{z}^{\alpha(1)}
 \end{align*}
 * Rank 3 tensor (sa).
 \begin{align*}
 \begin{bmatrix} 0 & 0 & G_{xxz} \\ 0 & 0 & G_{xxz} \\ 0 & 0 & 0 \\ G_{yzx} & - \frac{G_{xxz}}{2} & 0 \\ - \frac{G_{xxz}}{2} & - G_{yzx} & 0 \\ 0 & 0 & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& G_{xxz} = 2 G_{pz}^{(2)} \\
-& G_{yzx} = 3 Q_{du}^{(1)} \\
-& \frac{G_{xxz}}{2} = G_{pz}^{(2)}
+& G_{xxz} = 2 \mathbb{G}_{z}^{(2)} \\
+& G_{yzx} = 3 \mathbb{Q}_{u}^{(1)} \\
+& \frac{G_{xxz}}{2} = \mathbb{G}_{z}^{(2)}
 \end{align*}
 * Rank 3 tensor (a).
 \begin{align*}
 \begin{bmatrix} G_{yzx} & G_{yzy} & 0 \\ - G_{yzy} & G_{yzx} & 0 \\ 0 & 0 & G_{xyz} \end{bmatrix}
 \end{align*}
 \begin{align*}
-& G_{yzx} = - Q_{du}^{(2)} + Q_{s}^{(1)} \\
-& G_{yzy} = G_{pz}^{(3)} \\
-& G_{xyz} = 2 Q_{du}^{(2)} + Q_{s}^{(1)}
+& G_{yzx} = \mathbb{Q}_{0}^{(1)} - \mathbb{Q}_{u}^{(2)} \\
+& G_{yzy} = \mathbb{G}_{z}^{(3)} \\
+& G_{xyz} = \mathbb{Q}_{0}^{(1)} + 2 \mathbb{Q}_{u}^{(2)}
 \end{align*}
 * Rank 4 tensor (sss).
 \begin{align*}
 \begin{bmatrix} 0 & 0 & 0 & G_{xxyz} & G_{xxzx} & 0 \\ 0 & 0 & 0 & - G_{xxyz} & - G_{xxzx} & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 \\ G_{xxyz} & - G_{xxyz} & 0 & 0 & 0 & - G_{xxzx} \\ G_{xxzx} & - G_{xxzx} & 0 & 0 & 0 & G_{xxyz} \\ 0 & 0 & 0 & - G_{xxzx} & G_{xxyz} & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& G_{xxyz} = G_{gb}^{(1)} \\
-& G_{xxzx} = G_{ga}^{(1)}
+& G_{xxyz} = \mathbb{G}_{4a}^{(1)} \\
+& G_{xxzx} = \mathbb{G}_{4b}^{(1)}
 \end{align*}
 * Rank 4 tensor (ssa).
 \begin{align*}
 \begin{bmatrix} 0 & 0 & 0 & G_{xxyz} & G_{xxzx} & 0 \\ 0 & 0 & 0 & - G_{xxyz} & - G_{xxzx} & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 \\ - G_{xxyz} & G_{xxyz} & 0 & 0 & 0 & G_{xxzx} \\ - G_{xxzx} & G_{xxzx} & 0 & 0 & 0 & - G_{xxyz} \\ 0 & 0 & 0 & - G_{xxzx} & G_{xxyz} & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& G_{xxyz} = 2 Q_{f2}^{(1)} \\
-& G_{xxzx} = - 2 Q_{f1}^{(1)}
+& G_{xxyz} = 2 \mathbb{Q}_{3a}^{(1)} \\
+& G_{xxzx} = - 2 \mathbb{Q}_{3b}^{(1)}
 \end{align*}
 * Rank 4 tensor (aas).
 * Rank 4 tensor (aaa).
@@ -106,44 +106,44 @@ MPG No. 22.2.80\quad$\bar{6}1'$\quad[ Type II, hexagonal ] [G tensor]
 \begin{bmatrix} G_{xxyz} & G_{xxzx} & 0 \\ - G_{xxyz} & - G_{xxzx} & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \\ G_{xxzx} & - G_{xxyz} & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& G_{xxyz} = Q_{f2}^{(2)} \\
-& G_{xxzx} = Q_{f1}^{(2)}
+& G_{xxyz} = \mathbb{Q}_{3a}^{(2)} \\
+& G_{xxzx} = \mathbb{Q}_{3b}^{(2)}
 \end{align*}
 * Rank 4 tensor (as).
 \begin{align*}
 \begin{bmatrix} G_{yzxx} & - G_{yzxx} & 0 & 0 & 0 & G_{yzxy} \\ G_{yzxy} & - G_{yzxy} & 0 & 0 & 0 & - G_{yzxx} \\ 0 & 0 & 0 & 0 & 0 & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& G_{yzxx} = Q_{f2}^{(3)} \\
-& G_{yzxy} = Q_{f1}^{(3)}
+& G_{yzxx} = \mathbb{Q}_{3a}^{(3)} \\
+& G_{yzxy} = \mathbb{Q}_{3b}^{(3)}
 \end{align*}
 * Rank 4 tensor (s).
 \begin{align*}
 \begin{bmatrix} 0 & 0 & 0 & G_{xxyz} & G_{xxzx} & 0 & G_{xxzy} & G_{xxxz} & 0 \\ 0 & 0 & 0 & - G_{xxyz} & - G_{xxzx} & 0 & - G_{xxzy} & - G_{xxxz} & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ G_{yzxx} & - G_{yzxx} & 0 & 0 & 0 & G_{yzxy} & 0 & 0 & G_{yzxy} \\ - G_{yzxy} & G_{yzxy} & 0 & 0 & 0 & G_{yzxx} & 0 & 0 & G_{yzxx} \\ 0 & 0 & 0 & - G_{xxxz} & G_{xxzy} & 0 & - G_{xxzx} & G_{xxyz} & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& G_{xxyz} = G_{gb}^{(1)} + 2 Q_{f2}^{(1)} + Q_{f2}^{(2)} \\
-& G_{xxzx} = G_{ga}^{(1)} - 2 Q_{f1}^{(1)} + Q_{f1}^{(2)} \\
-& G_{xxzy} = G_{gb}^{(1)} + 2 Q_{f2}^{(1)} - Q_{f2}^{(2)} \\
-& G_{xxxz} = G_{ga}^{(1)} - 2 Q_{f1}^{(1)} - Q_{f1}^{(2)} \\
-& G_{yzxx} = G_{gb}^{(1)} - 2 Q_{f2}^{(1)} \\
-& G_{yzxy} = - G_{ga}^{(1)} - 2 Q_{f1}^{(1)}
+& G_{xxyz} = \mathbb{G}_{4a}^{(1)} + 2 \mathbb{Q}_{3a}^{(1)} + \mathbb{Q}_{3a}^{(2)} \\
+& G_{xxzx} = \mathbb{G}_{4b}^{(1)} - 2 \mathbb{Q}_{3b}^{(1)} + \mathbb{Q}_{3b}^{(2)} \\
+& G_{xxzy} = \mathbb{G}_{4a}^{(1)} + 2 \mathbb{Q}_{3a}^{(1)} - \mathbb{Q}_{3a}^{(2)} \\
+& G_{xxxz} = \mathbb{G}_{4b}^{(1)} - 2 \mathbb{Q}_{3b}^{(1)} - \mathbb{Q}_{3b}^{(2)} \\
+& G_{yzxx} = \mathbb{G}_{4a}^{(1)} - 2 \mathbb{Q}_{3a}^{(1)} \\
+& G_{yzxy} = - \mathbb{G}_{4b}^{(1)} - 2 \mathbb{Q}_{3b}^{(1)}
 \end{align*}
 * Rank 4 tensor (a).
 \begin{align*}
 \begin{bmatrix} G_{yzxx} & - G_{yzxx} & 0 & 0 & 0 & G_{yzxy} & 0 & 0 & G_{yzxy} \\ G_{yzxy} & - G_{yzxy} & 0 & 0 & 0 & - G_{yzxx} & 0 & 0 & - G_{yzxx} \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& G_{yzxx} = Q_{f2}^{(3)} \\
-& G_{yzxy} = Q_{f1}^{(3)}
+& G_{yzxx} = \mathbb{Q}_{3a}^{(3)} \\
+& G_{yzxy} = \mathbb{Q}_{3b}^{(3)}
 \end{align*}
 * Rank 4 tensor (t).
 \begin{align*}
 \begin{bmatrix} 0 & 0 & G_{xxxz} \\ 0 & 0 & G_{yyyz} \\ 0 & 0 & 0 \\ - G_{xxxz} & G_{yyyz} & 0 \\ 0 & 0 & 0 \\ 0 & 0 & - G_{yyyz} \\ 0 & 0 & 0 \\ G_{xxxz} & - G_{yyyz} & 0 \\ 0 & 0 & - G_{xxxz} \\ - G_{yyyz} & - G_{xxxz} & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& G_{xxxz} = G_{ga}^{(1)} \\
-& G_{yyyz} = - G_{gb}^{(1)}
+& G_{xxxz} = \mathbb{G}_{4b}^{(1)} \\
+& G_{yyyz} = - \mathbb{G}_{4a}^{(1)}
 \end{align*}
 
 \end{document}
