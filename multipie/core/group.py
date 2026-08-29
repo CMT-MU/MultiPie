@@ -1001,8 +1001,13 @@ class Group(dict):
         m = np.zeros((6, 3), dtype=object)
         for ii, i in enumerate(v):
             for jj, j in enumerate(c):
-                m[ii, jj] = (mp_string([*i, j], X, False), self.response_tensor(X, 3, (*i, j), "s"))
-        d[(X, 3, "s")] = simplify_tensor(m)
+                m[ii, jj] = (mp_string([*i, j], X, False), self.response_tensor(X, 3, (*i, j), "ss"))
+        d[(X, 3, "ss")] = simplify_tensor(m)
+        m = np.zeros((6, 3), dtype=object)
+        for ii, i in enumerate(v):
+            for jj, j in enumerate(c):
+                m[ii, jj] = (mp_string([*i, j], X, False), self.response_tensor(X, 3, (*i, j), "sa"))
+        d[(X, 3, "sa")] = simplify_tensor(m)
         m = np.zeros((3, 3), dtype=object)
         for ii, i in enumerate(a):
             for jj, j in enumerate(c):
@@ -1072,7 +1077,7 @@ class Group(dict):
             - (sympy) -- tensor component.
 
         Note:
-            - tensor type, None (rank 0,1), "s/a" (rank 2,3), "sss/ssa/aas/aaa/sa/as/s/a/t" (rank 4).
+            - tensor type, None (rank 0,1), "s/a" (rank 2), "ss/sa/a" (rank 3), "sss/ssa/aas/aaa/sa/as/s/a/t" (rank 4).
         """
         hexagonal = "hexagonal" if self.is_hexagonal_subgroup else "cubic"
         cartesian_mp = self.global_info()["response_tensor"]["cartesian_multipole"][hexagonal]

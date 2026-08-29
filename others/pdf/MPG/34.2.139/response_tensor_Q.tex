@@ -14,6 +14,7 @@
 \usepackage{multirow}
 \usepackage{booktabs}
 \usepackage{longtable}
+\usepackage{caption}
 
 %%% layout setting
 
@@ -63,13 +64,19 @@ MPG No. 34.2.139\quad$321'$\quad(3121' setting)\quad[ Type II, trigonal ] [Q ten
 & Q_{zz} = 2 Q_{du}^{(1)} + Q_{s}^{(1)}
 \end{align*}
 * Rank 2 tensor (a).
-* Rank 3 tensor (s).
+* Rank 3 tensor (ss).
 \begin{align*}
-\begin{bmatrix} 0 & Q_{xxy} & 0 \\ 0 & - Q_{xxy} & 0 \\ 0 & 0 & 0 \\ Q_{yzx} & 0 & 0 \\ 0 & - Q_{yzx} & 0 \\ Q_{xxy} & 0 & 0 \end{bmatrix}
+\begin{bmatrix} 0 & Q_{xxy} & 0 \\ 0 & - Q_{xxy} & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \\ Q_{xxy} & 0 & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& Q_{xxy} = Q_{f1}^{(1)} \\
-& Q_{yzx} = - 3 G_{du}^{(1)}
+& Q_{xxy} = Q_{f1}^{(1)}
+\end{align*}
+* Rank 3 tensor (sa).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \\ Q_{yzx} & 0 & 0 \\ 0 & - Q_{yzx} & 0 \\ 0 & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& Q_{yzx} = 3 G_{du}^{(1)}
 \end{align*}
 * Rank 3 tensor (a).
 \begin{align*}

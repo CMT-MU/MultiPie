@@ -14,6 +14,7 @@
 \usepackage{multirow}
 \usepackage{booktabs}
 \usepackage{longtable}
+\usepackage{caption}
 
 %%% layout setting
 
@@ -57,21 +58,31 @@ MPG No. 5.3.14\quad$2'/m$\quad[ Type III, monoclinic ] [T tensor]
 \end{align*}
 * Rank 2 tensor (s).
 * Rank 2 tensor (a).
-* Rank 3 tensor (s).
+* Rank 3 tensor (ss).
 \begin{align*}
-\begin{bmatrix} T_{xxx} & 0 & T_{xxz} \\ T_{yyx} & 0 & T_{yyz} \\ T_{zzx} & 0 & T_{zzz} \\ 0 & T_{yzy} & 0 \\ T_{zxx} & 0 & T_{zxz} \\ 0 & T_{xyy} & 0 \end{bmatrix}
+\begin{bmatrix} T_{xxx} & 0 & T_{xxz} \\ T_{yyx} & 0 & T_{yyz} \\ T_{zzx} & 0 & T_{zzz} \\ 0 & T_{yyz} & 0 \\ T_{xxz} & 0 & T_{zzx} \\ 0 & T_{yyx} & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& T_{xxx} = 2 T_{fax}^{(1)} + T_{px}^{(1)} + 2 T_{px}^{(2)} \\
-& T_{xxz} = - 2 M_{dxy}^{(1)} - T_{faz}^{(1)} + T_{fbz}^{(1)} + T_{pz}^{(1)} \\
-& T_{yyx} = - 2 M_{dyz}^{(1)} - T_{fax}^{(1)} + T_{fbx}^{(1)} + T_{px}^{(1)} \\
-& T_{yyz} = 2 M_{dxy}^{(1)} - T_{faz}^{(1)} - T_{fbz}^{(1)} + T_{pz}^{(1)} \\
-& T_{zzx} = 2 M_{dyz}^{(1)} - T_{fax}^{(1)} - T_{fbx}^{(1)} + T_{px}^{(1)} \\
-& T_{zzz} = 2 T_{faz}^{(1)} + T_{pz}^{(1)} + 2 T_{pz}^{(2)} \\
-& T_{yzy} = - M_{dxy}^{(1)} - T_{faz}^{(1)} - T_{fbz}^{(1)} + T_{pz}^{(2)} \\
-& T_{zxx} = M_{dxy}^{(1)} - T_{faz}^{(1)} + T_{fbz}^{(1)} + T_{pz}^{(2)} \\
-& T_{zxz} = - M_{dyz}^{(1)} - T_{fax}^{(1)} - T_{fbx}^{(1)} + T_{px}^{(2)} \\
-& T_{xyy} = M_{dyz}^{(1)} - T_{fax}^{(1)} + T_{fbx}^{(1)} + T_{px}^{(2)}
+& T_{xxx} = 2 T_{fax}^{(1)} + 3 T_{px}^{(1)} \\
+& T_{xxz} = - T_{faz}^{(1)} + T_{fbz}^{(1)} + T_{pz}^{(1)} \\
+& T_{yyx} = - T_{fax}^{(1)} + T_{fbx}^{(1)} + T_{px}^{(1)} \\
+& T_{yyz} = - T_{faz}^{(1)} - T_{fbz}^{(1)} + T_{pz}^{(1)} \\
+& T_{zzx} = - T_{fax}^{(1)} - T_{fbx}^{(1)} + T_{px}^{(1)} \\
+& T_{zzz} = 2 T_{faz}^{(1)} + 3 T_{pz}^{(1)}
+\end{align*}
+* Rank 3 tensor (sa).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & T_{xxz} \\ T_{yyx} & 0 & T_{yyz} \\ T_{zzx} & 0 & 0 \\ 0 & - \frac{T_{yyz}}{2} & 0 \\ - \frac{T_{xxz}}{2} & 0 & - \frac{T_{zzx}}{2} \\ 0 & - \frac{T_{yyx}}{2} & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& T_{xxz} = 2 M_{dxy}^{(1)} + 2 T_{pz}^{(2)} \\
+& T_{yyx} = 2 M_{dyz}^{(1)} + 2 T_{px}^{(2)} \\
+& T_{yyz} = - 2 M_{dxy}^{(1)} + 2 T_{pz}^{(2)} \\
+& T_{zzx} = - 2 M_{dyz}^{(1)} + 2 T_{px}^{(2)} \\
+& \frac{T_{yyz}}{2} = - M_{dxy}^{(1)} + T_{pz}^{(2)} \\
+& \frac{T_{xxz}}{2} = M_{dxy}^{(1)} + T_{pz}^{(2)} \\
+& \frac{T_{zzx}}{2} = - M_{dyz}^{(1)} + T_{px}^{(2)} \\
+& \frac{T_{yyx}}{2} = M_{dyz}^{(1)} + T_{px}^{(2)}
 \end{align*}
 * Rank 3 tensor (a).
 \begin{align*}

@@ -224,7 +224,7 @@ def A12(i1, i2):
 # ==================================================
 def S123(i1, i2, i3):
     """
-    Symmetric part of rank 3 tensor component.
+    Full symmetric part of rank 3 tensor component.
 
     Args:
         i1 (int): index 1, 1-3.
@@ -243,17 +243,44 @@ def S123(i1, i2, i3):
     for i4 in range(1, 4):
         d = d1234(i1, i2, i3, i4)
         if d != 0:
-            l2.append((d, mp_string([i4], "Q^{(2)}")))
+            l2.append((d, mp_string([i4], "Q^{(1)}")))
+
+    l3 = [(1, mp_string([i1, i2, i3], "Q^{(1)}"))]
+
+    return l1 + l2 + l3
+
+
+# ==================================================
+def Sb123(i1, i2, i3):
+    """
+    Symmetric anti-symetric part of rank 3 tensor component.
+
+    Args:
+        i1 (int): index 1, 1-3.
+        i2 (int): index 2, 1-3.
+        i3 (int): index 3, 1-3.
+
+    Returns:
+        - (list) -- expression list, (coeff, multipole).
+    """
+    if i1 == i2:
+        l1 = [(2, mp_string([i3], "Q^{(2)}"))]
+    else:
+        l1 = []
+
+    l2 = []
+    for i4 in range(1, 4):
+        d = d1234(i1, i2, i3, i4)
+        if d != 0:
+            l2.append((-d, mp_string([i4], "Q^{(2)}")))
 
     l3 = []
     for i4, i5 in product(range(1, 4), range(1, 4)):
         g = g12534(i1, i2, i3, i4, i5)
         if g != 0:
-            l3.append((g, mp_string([i4, i5], "G^{(1)}")))
+            l3.append((-g, mp_string([i4, i5], "G^{(1)}")))
 
-    l4 = [(1, mp_string([i1, i2, i3], "Q^{(1)}"))]
-
-    return l1 + l2 + l3 + l4
+    return l1 + l2 + l3
 
 
 # ==================================================
@@ -611,15 +638,17 @@ def P3(i1, i2, i3, opt=None):
         i1 (int): index 1, 1-3.
         i2 (int): index 2, 1-3.
         i3 (int): index 3, 1-3.
-        opt (str, optional): part, s/a.
+        opt (str, optional): part, ss/sa/a.
 
     Returns:
         - (list) -- expression list, (coeff, multipole).
     """
     if opt is None:
-        return S123(i1, i2, i3) + A123(i1, i2, i3)
-    elif opt == "s":
+        return S123(i1, i2, i3) + Sb123(i1, i2, i3) + A123(i1, i2, i3)
+    elif opt == "ss":
         return S123(i1, i2, i3)
+    elif opt == "sa":
+        return Sb123(i1, i2, i3)
     elif opt == "a":
         return A123(i1, i2, i3)
     else:

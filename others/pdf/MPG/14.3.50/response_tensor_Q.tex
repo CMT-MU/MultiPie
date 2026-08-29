@@ -14,6 +14,7 @@
 \usepackage{multirow}
 \usepackage{booktabs}
 \usepackage{longtable}
+\usepackage{caption}
 
 %%% layout setting
 
@@ -63,13 +64,20 @@ MPG No. 14.3.50\quad$\bar{4}'2'm$\quad(-4'2'm setting)\quad[ Type III, tetragona
 & Q_{zz} = 2 Q_{du}^{(1)} + Q_{s}^{(1)}
 \end{align*}
 * Rank 2 tensor (a).
-* Rank 3 tensor (s).
+* Rank 3 tensor (ss).
 \begin{align*}
-\begin{bmatrix} 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \\ Q_{yzx} & 0 & 0 \\ 0 & Q_{yzx} & 0 \\ 0 & 0 & Q_{xyz} \end{bmatrix}
+\begin{bmatrix} 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \\ Q_{yzx} & 0 & 0 \\ 0 & Q_{yzx} & 0 \\ 0 & 0 & Q_{yzx} \end{bmatrix}
 \end{align*}
 \begin{align*}
-& Q_{yzx} = - G_{dv}^{(1)} + Q_{f3}^{(1)} \\
-& Q_{xyz} = 2 G_{dv}^{(1)} + Q_{f3}^{(1)}
+& Q_{yzx} = Q_{f3}^{(1)}
+\end{align*}
+* Rank 3 tensor (sa).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \\ Q_{yzx} & 0 & 0 \\ 0 & Q_{yzx} & 0 \\ 0 & 0 & - 2 Q_{yzx} \end{bmatrix}
+\end{align*}
+\begin{align*}
+& Q_{yzx} = G_{dv}^{(1)} \\
+& 2 Q_{yzx} = 2 G_{dv}^{(1)}
 \end{align*}
 * Rank 3 tensor (a).
 \begin{align*}

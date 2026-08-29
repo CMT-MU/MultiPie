@@ -14,6 +14,7 @@
 \usepackage{multirow}
 \usepackage{booktabs}
 \usepackage{longtable}
+\usepackage{caption}
 
 %%% layout setting
 
@@ -50,13 +51,19 @@ MPG No. 20.2.72\quad$\bar{3}m1'$\quad(-3m11' setting)\quad[ Type II, trigonal ] 
 * Rank 1 tensor.
 * Rank 2 tensor (s).
 * Rank 2 tensor (a).
-* Rank 3 tensor (s).
+* Rank 3 tensor (ss).
 \begin{align*}
-\begin{bmatrix} G_{xxx} & 0 & 0 \\ - G_{xxx} & 0 & 0 \\ 0 & 0 & 0 \\ G_{yzx} & 0 & 0 \\ 0 & - G_{yzx} & 0 \\ 0 & - G_{xxx} & 0 \end{bmatrix}
+\begin{bmatrix} G_{xxx} & 0 & 0 \\ - G_{xxx} & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & - G_{xxx} & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& G_{xxx} = G_{f2}^{(1)} \\
-& G_{yzx} = - 3 Q_{du}^{(1)}
+& G_{xxx} = G_{f2}^{(1)}
+\end{align*}
+* Rank 3 tensor (sa).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \\ G_{yzx} & 0 & 0 \\ 0 & - G_{yzx} & 0 \\ 0 & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& G_{yzx} = 3 Q_{du}^{(1)}
 \end{align*}
 * Rank 3 tensor (a).
 \begin{align*}

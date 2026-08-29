@@ -14,6 +14,7 @@
 \usepackage{multirow}
 \usepackage{booktabs}
 \usepackage{longtable}
+\usepackage{caption}
 
 %%% layout setting
 
@@ -83,29 +84,41 @@ MPG No. 1.2.2\quad$11'$\quad[ Type II, triclinic ] [Q tensor]
 & Q_{xz} = - G_{py}^{(1)} \\
 & Q_{yz} = G_{px}^{(1)}
 \end{align*}
-* Rank 3 tensor (s).
+* Rank 3 tensor (ss).
 \begin{align*}
-\begin{bmatrix} Q_{xxx} & Q_{xxy} & Q_{xxz} \\ Q_{yyx} & Q_{yyy} & Q_{yyz} \\ Q_{zzx} & Q_{zzy} & Q_{zzz} \\ Q_{yzx} & Q_{yzy} & Q_{yzz} \\ Q_{zxx} & Q_{zxy} & Q_{zxz} \\ Q_{xyx} & Q_{xyy} & Q_{xyz} \end{bmatrix}
+\begin{bmatrix} Q_{xxx} & Q_{xxy} & Q_{xxz} \\ Q_{yyx} & Q_{yyy} & Q_{yyz} \\ Q_{zzx} & Q_{zzy} & Q_{zzz} \\ Q_{yzx} & Q_{yyz} & Q_{zzy} \\ Q_{xxz} & Q_{yzx} & Q_{zzx} \\ Q_{xxy} & Q_{yyx} & Q_{yzx} \end{bmatrix}
 \end{align*}
 \begin{align*}
-& Q_{xxx} = 2 Q_{fax}^{(1)} + Q_{px}^{(1)} + 2 Q_{px}^{(2)} \\
-& Q_{xxy} = 2 G_{dxz}^{(1)} - Q_{fay}^{(1)} - Q_{fby}^{(1)} + Q_{py}^{(1)} \\
-& Q_{xxz} = - 2 G_{dxy}^{(1)} - Q_{faz}^{(1)} + Q_{fbz}^{(1)} + Q_{pz}^{(1)} \\
-& Q_{yyx} = - 2 G_{dyz}^{(1)} - Q_{fax}^{(1)} + Q_{fbx}^{(1)} + Q_{px}^{(1)} \\
-& Q_{yyy} = 2 Q_{fay}^{(1)} + Q_{py}^{(1)} + 2 Q_{py}^{(2)} \\
-& Q_{yyz} = 2 G_{dxy}^{(1)} - Q_{faz}^{(1)} - Q_{fbz}^{(1)} + Q_{pz}^{(1)} \\
-& Q_{zzx} = 2 G_{dyz}^{(1)} - Q_{fax}^{(1)} - Q_{fbx}^{(1)} + Q_{px}^{(1)} \\
-& Q_{zzy} = - 2 G_{dxz}^{(1)} - Q_{fay}^{(1)} + Q_{fby}^{(1)} + Q_{py}^{(1)} \\
-& Q_{zzz} = 2 Q_{faz}^{(1)} + Q_{pz}^{(1)} + 2 Q_{pz}^{(2)} \\
-& Q_{yzx} = - 3 G_{du}^{(1)} - G_{dv}^{(1)} + Q_{f3}^{(1)} \\
-& Q_{yzy} = - G_{dxy}^{(1)} - Q_{faz}^{(1)} - Q_{fbz}^{(1)} + Q_{pz}^{(2)} \\
-& Q_{yzz} = G_{dxz}^{(1)} - Q_{fay}^{(1)} + Q_{fby}^{(1)} + Q_{py}^{(2)} \\
-& Q_{zxx} = G_{dxy}^{(1)} - Q_{faz}^{(1)} + Q_{fbz}^{(1)} + Q_{pz}^{(2)} \\
-& Q_{zxy} = 3 G_{du}^{(1)} - G_{dv}^{(1)} + Q_{f3}^{(1)} \\
-& Q_{zxz} = - G_{dyz}^{(1)} - Q_{fax}^{(1)} - Q_{fbx}^{(1)} + Q_{px}^{(2)} \\
-& Q_{xyx} = - G_{dxz}^{(1)} - Q_{fay}^{(1)} - Q_{fby}^{(1)} + Q_{py}^{(2)} \\
-& Q_{xyy} = G_{dyz}^{(1)} - Q_{fax}^{(1)} + Q_{fbx}^{(1)} + Q_{px}^{(2)} \\
-& Q_{xyz} = 2 G_{dv}^{(1)} + Q_{f3}^{(1)}
+& Q_{xxx} = 2 Q_{fax}^{(1)} + 3 Q_{px}^{(1)} \\
+& Q_{xxy} = - Q_{fay}^{(1)} - Q_{fby}^{(1)} + Q_{py}^{(1)} \\
+& Q_{xxz} = - Q_{faz}^{(1)} + Q_{fbz}^{(1)} + Q_{pz}^{(1)} \\
+& Q_{yyx} = - Q_{fax}^{(1)} + Q_{fbx}^{(1)} + Q_{px}^{(1)} \\
+& Q_{yyy} = 2 Q_{fay}^{(1)} + 3 Q_{py}^{(1)} \\
+& Q_{yyz} = - Q_{faz}^{(1)} - Q_{fbz}^{(1)} + Q_{pz}^{(1)} \\
+& Q_{zzx} = - Q_{fax}^{(1)} - Q_{fbx}^{(1)} + Q_{px}^{(1)} \\
+& Q_{zzy} = - Q_{fay}^{(1)} + Q_{fby}^{(1)} + Q_{py}^{(1)} \\
+& Q_{zzz} = 2 Q_{faz}^{(1)} + 3 Q_{pz}^{(1)} \\
+& Q_{yzx} = Q_{f3}^{(1)}
+\end{align*}
+* Rank 3 tensor (sa).
+\begin{align*}
+\begin{bmatrix} 0 & Q_{xxy} & Q_{xxz} \\ Q_{yyx} & 0 & Q_{yyz} \\ Q_{zzx} & Q_{zzy} & 0 \\ Q_{yzx} & - \frac{Q_{yyz}}{2} & - \frac{Q_{zzy}}{2} \\ - \frac{Q_{xxz}}{2} & Q_{zxy} & - \frac{Q_{zzx}}{2} \\ - \frac{Q_{xxy}}{2} & - \frac{Q_{yyx}}{2} & - Q_{yzx} - Q_{zxy} \end{bmatrix}
+\end{align*}
+\begin{align*}
+& Q_{xxy} = - 2 G_{dxz}^{(1)} + 2 Q_{py}^{(2)} \\
+& Q_{xxz} = 2 G_{dxy}^{(1)} + 2 Q_{pz}^{(2)} \\
+& Q_{yyx} = 2 G_{dyz}^{(1)} + 2 Q_{px}^{(2)} \\
+& Q_{yyz} = - 2 G_{dxy}^{(1)} + 2 Q_{pz}^{(2)} \\
+& Q_{zzx} = - 2 G_{dyz}^{(1)} + 2 Q_{px}^{(2)} \\
+& Q_{zzy} = 2 G_{dxz}^{(1)} + 2 Q_{py}^{(2)} \\
+& Q_{yzx} = 3 G_{du}^{(1)} + G_{dv}^{(1)} \\
+& \frac{Q_{yyz}}{2} = - G_{dxy}^{(1)} + Q_{pz}^{(2)} \\
+& \frac{Q_{zzy}}{2} = G_{dxz}^{(1)} + Q_{py}^{(2)} \\
+& \frac{Q_{xxz}}{2} = G_{dxy}^{(1)} + Q_{pz}^{(2)} \\
+& Q_{zxy} = - 3 G_{du}^{(1)} + G_{dv}^{(1)} \\
+& \frac{Q_{zzx}}{2} = - G_{dyz}^{(1)} + Q_{px}^{(2)} \\
+& \frac{Q_{xxy}}{2} = - G_{dxz}^{(1)} + Q_{py}^{(2)} \\
+& \frac{Q_{yyx}}{2} = G_{dyz}^{(1)} + Q_{px}^{(2)}
 \end{align*}
 * Rank 3 tensor (a).
 \begin{align*}

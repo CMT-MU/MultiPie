@@ -14,6 +14,7 @@
 \usepackage{multirow}
 \usepackage{booktabs}
 \usepackage{longtable}
+\usepackage{caption}
 
 %%% layout setting
 
@@ -63,13 +64,19 @@ MPG No. 34.1.138\quad$32$\quad(312 setting)\quad[ Type I, trigonal ] [M tensor]
 & M_{zz} = 2 M_{du}^{(1)} + M_{s}^{(1)}
 \end{align*}
 * Rank 2 tensor (a).
-* Rank 3 tensor (s).
+* Rank 3 tensor (ss).
 \begin{align*}
-\begin{bmatrix} 0 & M_{xxy} & 0 \\ 0 & - M_{xxy} & 0 \\ 0 & 0 & 0 \\ M_{yzx} & 0 & 0 \\ 0 & - M_{yzx} & 0 \\ M_{xxy} & 0 & 0 \end{bmatrix}
+\begin{bmatrix} 0 & M_{xxy} & 0 \\ 0 & - M_{xxy} & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \\ M_{xxy} & 0 & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& M_{xxy} = M_{f1}^{(1)} \\
-& M_{yzx} = - 3 T_{du}^{(1)}
+& M_{xxy} = M_{f1}^{(1)}
+\end{align*}
+* Rank 3 tensor (sa).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \\ M_{yzx} & 0 & 0 \\ 0 & - M_{yzx} & 0 \\ 0 & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{yzx} = 3 T_{du}^{(1)}
 \end{align*}
 * Rank 3 tensor (a).
 \begin{align*}

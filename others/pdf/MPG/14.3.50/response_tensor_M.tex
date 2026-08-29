@@ -14,6 +14,7 @@
 \usepackage{multirow}
 \usepackage{booktabs}
 \usepackage{longtable}
+\usepackage{caption}
 
 %%% layout setting
 
@@ -56,13 +57,20 @@ MPG No. 14.3.50\quad$\bar{4}'2'm$\quad(-4'2'm setting)\quad[ Type III, tetragona
 \begin{align*}
 & M_{xy} = T_{pz}^{(1)}
 \end{align*}
-* Rank 3 tensor (s).
+* Rank 3 tensor (ss).
 \begin{align*}
-\begin{bmatrix} 0 & 0 & M_{xxz} \\ 0 & 0 & - M_{xxz} \\ 0 & 0 & 0 \\ 0 & M_{yzy} & 0 \\ - M_{yzy} & 0 & 0 \\ 0 & 0 & 0 \end{bmatrix}
+\begin{bmatrix} 0 & 0 & M_{xxz} \\ 0 & 0 & - M_{xxz} \\ 0 & 0 & 0 \\ 0 & - M_{xxz} & 0 \\ M_{xxz} & 0 & 0 \\ 0 & 0 & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& M_{xxz} = M_{fbz}^{(1)} - 2 T_{dxy}^{(1)} \\
-& M_{yzy} = - M_{fbz}^{(1)} - T_{dxy}^{(1)}
+& M_{xxz} = M_{fbz}^{(1)}
+\end{align*}
+* Rank 3 tensor (sa).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & M_{xxz} \\ 0 & 0 & - M_{xxz} \\ 0 & 0 & 0 \\ 0 & \frac{M_{xxz}}{2} & 0 \\ - \frac{M_{xxz}}{2} & 0 & 0 \\ 0 & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{xxz} = 2 T_{dxy}^{(1)} \\
+& \frac{M_{xxz}}{2} = T_{dxy}^{(1)}
 \end{align*}
 * Rank 3 tensor (a).
 \begin{align*}

@@ -14,6 +14,7 @@
 \usepackage{multirow}
 \usepackage{booktabs}
 \usepackage{longtable}
+\usepackage{caption}
 
 %%% layout setting
 
@@ -64,14 +65,20 @@ MPG No. 6.1.17\quad$222$\quad[ Type I, orthorhombic ] [T tensor]
 & T_{zz} = 2 T_{du}^{(1)} + T_{s}^{(1)}
 \end{align*}
 * Rank 2 tensor (a).
-* Rank 3 tensor (s).
+* Rank 3 tensor (ss).
 \begin{align*}
-\begin{bmatrix} 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \\ T_{yzx} & 0 & 0 \\ 0 & T_{zxy} & 0 \\ 0 & 0 & T_{xyz} \end{bmatrix}
+\begin{bmatrix} 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \\ T_{yzx} & 0 & 0 \\ 0 & T_{yzx} & 0 \\ 0 & 0 & T_{yzx} \end{bmatrix}
 \end{align*}
 \begin{align*}
-& T_{yzx} = - 3 M_{du}^{(1)} - M_{dv}^{(1)} + T_{f3}^{(1)} \\
-& T_{zxy} = 3 M_{du}^{(1)} - M_{dv}^{(1)} + T_{f3}^{(1)} \\
-& T_{xyz} = 2 M_{dv}^{(1)} + T_{f3}^{(1)}
+& T_{yzx} = T_{f3}^{(1)}
+\end{align*}
+* Rank 3 tensor (sa).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \\ T_{yzx} & 0 & 0 \\ 0 & T_{zxy} & 0 \\ 0 & 0 & - T_{yzx} - T_{zxy} \end{bmatrix}
+\end{align*}
+\begin{align*}
+& T_{yzx} = 3 M_{du}^{(1)} + M_{dv}^{(1)} \\
+& T_{zxy} = - 3 M_{du}^{(1)} + M_{dv}^{(1)}
 \end{align*}
 * Rank 3 tensor (a).
 \begin{align*}
