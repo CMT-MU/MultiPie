@@ -795,6 +795,30 @@ def get_response_tensor_mp(rt, active_dict, axial_tensor, magnetic_tensor):
 
 
 # ==================================================
+def convert_mp_alias(tag, latex=False):
+    """
+    Convert standard active multipole tag to alias name.
+
+    Args:
+        tag (str): active multipole tag.
+
+    Returns:
+        - (str) -- alias name.
+    """
+    X = tag[0]
+    tag = tag[1:]
+    sub, sup = mp_alias[tag]
+    if latex:
+        return r"\mathbb{" + X + "}_{" + sub + "}^{" + sup + "}"
+    else:
+        s = f"{X}{sub}"
+        if sup:
+            sup = sup.replace(r"\alpha", "\u03b1").replace(r"\beta", "\u03b2")
+            s += f"^{sup}"
+        return s
+
+
+# ==================================================
 def simplify_tensor(M):
     """
     Simplify tensor.
