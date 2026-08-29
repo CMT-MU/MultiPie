@@ -14,6 +14,7 @@
 \usepackage{multirow}
 \usepackage{booktabs}
 \usepackage{longtable}
+\usepackage{caption}
 
 %%% layout setting
 
@@ -51,7 +52,7 @@ MPG No. 20.3.73\quad$\bar{3}'m$\quad(-3'm1 setting)\quad[ Type III, trigonal ] [
 \begin{bmatrix} Q \end{bmatrix}
 \end{align*}
 \begin{align*}
-& Q = Q_{s}^{(1)}
+& Q = \mathbb{Q}_{0}^{(1)}
 \end{align*}
 * Rank 1 tensor.
 * Rank 2 tensor (s).
@@ -59,39 +60,40 @@ MPG No. 20.3.73\quad$\bar{3}'m$\quad(-3'm1 setting)\quad[ Type III, trigonal ] [
 \begin{bmatrix} Q_{xx} & 0 & 0 \\ 0 & Q_{xx} & 0 \\ 0 & 0 & Q_{zz} \end{bmatrix}
 \end{align*}
 \begin{align*}
-& Q_{xx} = - Q_{du}^{(1)} + Q_{s}^{(1)} \\
-& Q_{zz} = 2 Q_{du}^{(1)} + Q_{s}^{(1)}
+& Q_{xx} = \mathbb{Q}_{0}^{(1)} - \mathbb{Q}_{u}^{(1)} \\
+& Q_{zz} = \mathbb{Q}_{0}^{(1)} + 2 \mathbb{Q}_{u}^{(1)}
 \end{align*}
 * Rank 2 tensor (a).
-* Rank 3 tensor (s).
+* Rank 3 tensor (ss).
+* Rank 3 tensor (sa).
 * Rank 3 tensor (a).
 * Rank 4 tensor (sss).
 \begin{align*}
 \begin{bmatrix} Q_{xxxx} & Q_{xxyy} & Q_{xxzz} & Q_{xxyz} & 0 & 0 \\ Q_{xxyy} & Q_{xxxx} & Q_{xxzz} & - Q_{xxyz} & 0 & 0 \\ Q_{xxzz} & Q_{xxzz} & Q_{zzzz} & 0 & 0 & 0 \\ Q_{xxyz} & - Q_{xxyz} & 0 & Q_{yzyz} & 0 & 0 \\ 0 & 0 & 0 & 0 & Q_{yzyz} & Q_{xxyz} \\ 0 & 0 & 0 & 0 & Q_{xxyz} & \frac{Q_{xxxx}}{2} - \frac{Q_{xxyy}}{2} \end{bmatrix}
 \end{align*}
 \begin{align*}
-& Q_{xxxx} = - 2 Q_{du}^{(1)} - 4 Q_{du}^{(2)} + 3 Q_{g0}^{(1)} + Q_{s}^{(1)} + 2 Q_{s}^{(2)} \\
-& Q_{xxyy} = - 2 Q_{du}^{(1)} + Q_{g0}^{(1)} + Q_{s}^{(1)} \\
-& Q_{xxzz} = Q_{du}^{(1)} - 4 Q_{g0}^{(1)} + Q_{s}^{(1)} \\
-& Q_{xxyz} = Q_{gb}^{(1)} \\
-& Q_{zzzz} = 4 Q_{du}^{(1)} + 8 Q_{du}^{(2)} + 8 Q_{g0}^{(1)} + Q_{s}^{(1)} + 2 Q_{s}^{(2)} \\
-& Q_{yzyz} = Q_{du}^{(2)} - 4 Q_{g0}^{(1)} + Q_{s}^{(2)}
+& Q_{xxxx} = \mathbb{Q}_{0}^{(1)} + 2 \mathbb{Q}_{0}^{(2)} + 3 \mathbb{Q}_{40}^{(1)} - 2 \mathbb{Q}_{u}^{(1)} - 4 \mathbb{Q}_{u}^{(2)} \\
+& Q_{xxyy} = \mathbb{Q}_{0}^{(1)} + \mathbb{Q}_{40}^{(1)} - 2 \mathbb{Q}_{u}^{(1)} \\
+& Q_{xxzz} = \mathbb{Q}_{0}^{(1)} - 4 \mathbb{Q}_{40}^{(1)} + \mathbb{Q}_{u}^{(1)} \\
+& Q_{xxyz} = \mathbb{Q}_{4a}^{(1)} \\
+& Q_{zzzz} = \mathbb{Q}_{0}^{(1)} + 2 \mathbb{Q}_{0}^{(2)} + 8 \mathbb{Q}_{40}^{(1)} + 4 \mathbb{Q}_{u}^{(1)} + 8 \mathbb{Q}_{u}^{(2)} \\
+& Q_{yzyz} = \mathbb{Q}_{0}^{(2)} - 4 \mathbb{Q}_{40}^{(1)} + \mathbb{Q}_{u}^{(2)}
 \end{align*}
 * Rank 4 tensor (ssa).
 \begin{align*}
 \begin{bmatrix} 0 & 0 & Q_{xxzz} & Q_{xxyz} & 0 & 0 \\ 0 & 0 & Q_{xxzz} & - Q_{xxyz} & 0 & 0 \\ - Q_{xxzz} & - Q_{xxzz} & 0 & 0 & 0 & 0 \\ - Q_{xxyz} & Q_{xxyz} & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & - Q_{xxyz} \\ 0 & 0 & 0 & 0 & Q_{xxyz} & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& Q_{xxzz} = 3 Q_{du}^{(3)} \\
-& Q_{xxyz} = 2 G_{f2}^{(1)}
+& Q_{xxzz} = 3 \mathbb{Q}_{u}^{(3)} \\
+& Q_{xxyz} = 2 \mathbb{G}_{3a}^{(1)}
 \end{align*}
 * Rank 4 tensor (aas).
 \begin{align*}
 \begin{bmatrix} Q_{yzyz} & 0 & 0 \\ 0 & Q_{yzyz} & 0 \\ 0 & 0 & Q_{xyxy} \end{bmatrix}
 \end{align*}
 \begin{align*}
-& Q_{yzyz} = - 2 Q_{du}^{(4)} + Q_{s}^{(3)} \\
-& Q_{xyxy} = 4 Q_{du}^{(4)} + Q_{s}^{(3)}
+& Q_{yzyz} = \mathbb{Q}_{0}^{(3)} - 2 \mathbb{Q}_{u}^{(4)} \\
+& Q_{xyxy} = \mathbb{Q}_{0}^{(3)} + 4 \mathbb{Q}_{u}^{(4)}
 \end{align*}
 * Rank 4 tensor (aaa).
 * Rank 4 tensor (sa).
@@ -99,55 +101,55 @@ MPG No. 20.3.73\quad$\bar{3}'m$\quad(-3'm1 setting)\quad[ Type III, trigonal ] [
 \begin{bmatrix} Q_{xxyz} & 0 & 0 \\ - Q_{xxyz} & 0 & 0 \\ 0 & 0 & 0 \\ Q_{yzyz} & 0 & 0 \\ 0 & - Q_{yzyz} & 0 \\ 0 & - Q_{xxyz} & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& Q_{xxyz} = G_{f2}^{(2)} \\
-& Q_{yzyz} = - 3 Q_{du}^{(5)}
+& Q_{xxyz} = \mathbb{G}_{3a}^{(2)} \\
+& Q_{yzyz} = - 3 \mathbb{Q}_{u}^{(5)}
 \end{align*}
 * Rank 4 tensor (as).
 \begin{align*}
 \begin{bmatrix} Q_{yzxx} & - Q_{yzxx} & 0 & Q_{yzyz} & 0 & 0 \\ 0 & 0 & 0 & 0 & - Q_{yzyz} & - Q_{yzxx} \\ 0 & 0 & 0 & 0 & 0 & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& Q_{yzxx} = G_{f2}^{(3)} \\
-& Q_{yzyz} = - 3 Q_{du}^{(6)}
+& Q_{yzxx} = \mathbb{G}_{3a}^{(3)} \\
+& Q_{yzyz} = - 3 \mathbb{Q}_{u}^{(6)}
 \end{align*}
 * Rank 4 tensor (s).
 \begin{align*}
 \begin{bmatrix} Q_{xxxx} & Q_{xxyy} & Q_{xxzz} & Q_{xxyz} & 0 & 0 & Q_{xxzy} & 0 & 0 \\ Q_{xxyy} & Q_{xxxx} & Q_{xxzz} & - Q_{xxyz} & 0 & 0 & - Q_{xxzy} & 0 & 0 \\ Q_{zzxx} & Q_{zzxx} & Q_{zzzz} & 0 & 0 & 0 & 0 & 0 & 0 \\ Q_{yzxx} & - Q_{yzxx} & 0 & Q_{yzyz} & 0 & 0 & Q_{yzzy} & 0 & 0 \\ 0 & 0 & 0 & 0 & Q_{yzzy} & Q_{yzxx} & 0 & Q_{yzyz} & Q_{yzxx} \\ 0 & 0 & 0 & 0 & Q_{xxzy} & \frac{Q_{xxxx}}{2} - \frac{Q_{xxyy}}{2} & 0 & Q_{xxyz} & \frac{Q_{xxxx}}{2} - \frac{Q_{xxyy}}{2} \end{bmatrix}
 \end{align*}
 \begin{align*}
-& Q_{xxxx} = - 2 Q_{du}^{(1)} - 4 Q_{du}^{(2)} + 3 Q_{g0}^{(1)} + Q_{s}^{(1)} + 2 Q_{s}^{(2)} \\
-& Q_{xxyy} = - 2 Q_{du}^{(1)} + Q_{g0}^{(1)} + Q_{s}^{(1)} \\
-& Q_{xxzz} = Q_{du}^{(1)} + 3 Q_{du}^{(3)} - 4 Q_{g0}^{(1)} + Q_{s}^{(1)} \\
-& Q_{xxyz} = 2 G_{f2}^{(1)} + G_{f2}^{(2)} + Q_{gb}^{(1)} \\
-& Q_{xxzy} = 2 G_{f2}^{(1)} - G_{f2}^{(2)} + Q_{gb}^{(1)} \\
-& Q_{zzxx} = Q_{du}^{(1)} - 3 Q_{du}^{(3)} - 4 Q_{g0}^{(1)} + Q_{s}^{(1)} \\
-& Q_{zzzz} = 4 Q_{du}^{(1)} + 8 Q_{du}^{(2)} + 8 Q_{g0}^{(1)} + Q_{s}^{(1)} + 2 Q_{s}^{(2)} \\
-& Q_{yzxx} = - 2 G_{f2}^{(1)} + Q_{gb}^{(1)} \\
-& Q_{yzyz} = Q_{du}^{(2)} - 3 Q_{du}^{(5)} - 4 Q_{g0}^{(1)} + Q_{s}^{(2)} \\
-& Q_{yzzy} = Q_{du}^{(2)} + 3 Q_{du}^{(5)} - 4 Q_{g0}^{(1)} + Q_{s}^{(2)}
+& Q_{xxxx} = \mathbb{Q}_{0}^{(1)} + 2 \mathbb{Q}_{0}^{(2)} + 3 \mathbb{Q}_{40}^{(1)} - 2 \mathbb{Q}_{u}^{(1)} - 4 \mathbb{Q}_{u}^{(2)} \\
+& Q_{xxyy} = \mathbb{Q}_{0}^{(1)} + \mathbb{Q}_{40}^{(1)} - 2 \mathbb{Q}_{u}^{(1)} \\
+& Q_{xxzz} = \mathbb{Q}_{0}^{(1)} - 4 \mathbb{Q}_{40}^{(1)} + \mathbb{Q}_{u}^{(1)} + 3 \mathbb{Q}_{u}^{(3)} \\
+& Q_{xxyz} = 2 \mathbb{G}_{3a}^{(1)} + \mathbb{G}_{3a}^{(2)} + \mathbb{Q}_{4a}^{(1)} \\
+& Q_{xxzy} = 2 \mathbb{G}_{3a}^{(1)} - \mathbb{G}_{3a}^{(2)} + \mathbb{Q}_{4a}^{(1)} \\
+& Q_{zzxx} = \mathbb{Q}_{0}^{(1)} - 4 \mathbb{Q}_{40}^{(1)} + \mathbb{Q}_{u}^{(1)} - 3 \mathbb{Q}_{u}^{(3)} \\
+& Q_{zzzz} = \mathbb{Q}_{0}^{(1)} + 2 \mathbb{Q}_{0}^{(2)} + 8 \mathbb{Q}_{40}^{(1)} + 4 \mathbb{Q}_{u}^{(1)} + 8 \mathbb{Q}_{u}^{(2)} \\
+& Q_{yzxx} = - 2 \mathbb{G}_{3a}^{(1)} + \mathbb{Q}_{4a}^{(1)} \\
+& Q_{yzyz} = \mathbb{Q}_{0}^{(2)} - 4 \mathbb{Q}_{40}^{(1)} + \mathbb{Q}_{u}^{(2)} - 3 \mathbb{Q}_{u}^{(5)} \\
+& Q_{yzzy} = \mathbb{Q}_{0}^{(2)} - 4 \mathbb{Q}_{40}^{(1)} + \mathbb{Q}_{u}^{(2)} + 3 \mathbb{Q}_{u}^{(5)}
 \end{align*}
 * Rank 4 tensor (a).
 \begin{align*}
 \begin{bmatrix} Q_{yzxx} & - Q_{yzxx} & 0 & Q_{yzyz} & 0 & 0 & Q_{yzzy} & 0 & 0 \\ 0 & 0 & 0 & 0 & - Q_{yzzy} & - Q_{yzxx} & 0 & - Q_{yzyz} & - Q_{yzxx} \\ 0 & 0 & 0 & 0 & 0 & Q_{xyxy} & 0 & 0 & - Q_{xyxy} \end{bmatrix}
 \end{align*}
 \begin{align*}
-& Q_{yzxx} = G_{f2}^{(3)} \\
-& Q_{yzyz} = - 2 Q_{du}^{(4)} - 3 Q_{du}^{(6)} + Q_{s}^{(3)} \\
-& Q_{yzzy} = 2 Q_{du}^{(4)} - 3 Q_{du}^{(6)} - Q_{s}^{(3)} \\
-& Q_{xyxy} = 4 Q_{du}^{(4)} + Q_{s}^{(3)}
+& Q_{yzxx} = \mathbb{G}_{3a}^{(3)} \\
+& Q_{yzyz} = \mathbb{Q}_{0}^{(3)} - 2 \mathbb{Q}_{u}^{(4)} - 3 \mathbb{Q}_{u}^{(6)} \\
+& Q_{yzzy} = - \mathbb{Q}_{0}^{(3)} + 2 \mathbb{Q}_{u}^{(4)} - 3 \mathbb{Q}_{u}^{(6)} \\
+& Q_{xyxy} = \mathbb{Q}_{0}^{(3)} + 4 \mathbb{Q}_{u}^{(4)}
 \end{align*}
 * Rank 4 tensor (t).
 \begin{align*}
 \begin{bmatrix} Q_{xxxx} & 0 & 0 \\ 0 & Q_{xxxx} & Q_{yyyz} \\ 0 & 0 & Q_{zzzz} \\ 0 & Q_{yyyz} & Q_{yyzz} \\ Q_{zzxx} & 0 & 0 \\ 0 & Q_{xxyy} & - Q_{yyyz} \\ 0 & Q_{yzzy} & 0 \\ 0 & - Q_{yyyz} & - \frac{Q_{xxxx}}{2} + \frac{3 Q_{xxyy}}{2} + Q_{yyzz} - Q_{yzzy} + Q_{zzxx} \\ \frac{Q_{xxxx}}{2} - \frac{Q_{xxyy}}{2} & 0 & 0 \\ - Q_{yyyz} & 0 & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& Q_{xxxx} = - 2 Q_{du}^{(1)} - 4 Q_{du}^{(2)} + 3 Q_{g0}^{(1)} + 3 Q_{s}^{(1)} \\
-& Q_{yyyz} = - Q_{gb}^{(1)} \\
-& Q_{zzzz} = 4 Q_{du}^{(1)} + 8 Q_{du}^{(2)} + 8 Q_{g0}^{(1)} + 3 Q_{s}^{(1)} \\
-& Q_{yyzz} = Q_{du}^{(1)} + 3 Q_{du}^{(3)} - 4 Q_{g0}^{(1)} + Q_{s}^{(1)} \\
-& Q_{zzxx} = Q_{du}^{(1)} - 3 Q_{du}^{(3)} - 4 Q_{g0}^{(1)} + Q_{s}^{(1)} \\
-& Q_{xxyy} = - 2 Q_{du}^{(1)} + Q_{g0}^{(1)} + Q_{s}^{(1)} \\
-& Q_{yzzy} = Q_{du}^{(2)} + 3 Q_{du}^{(5)} - 4 Q_{g0}^{(1)} + Q_{s}^{(1)}
+& Q_{xxxx} = 3 \mathbb{Q}_{0}^{(1)} + 3 \mathbb{Q}_{40}^{(1)} - 2 \mathbb{Q}_{u}^{(1)} - 4 \mathbb{Q}_{u}^{(2)} \\
+& Q_{yyyz} = - \mathbb{Q}_{4a}^{(1)} \\
+& Q_{zzzz} = 3 \mathbb{Q}_{0}^{(1)} + 8 \mathbb{Q}_{40}^{(1)} + 4 \mathbb{Q}_{u}^{(1)} + 8 \mathbb{Q}_{u}^{(2)} \\
+& Q_{yyzz} = \mathbb{Q}_{0}^{(1)} - 4 \mathbb{Q}_{40}^{(1)} + \mathbb{Q}_{u}^{(1)} + 3 \mathbb{Q}_{u}^{(3)} \\
+& Q_{zzxx} = \mathbb{Q}_{0}^{(1)} - 4 \mathbb{Q}_{40}^{(1)} + \mathbb{Q}_{u}^{(1)} - 3 \mathbb{Q}_{u}^{(3)} \\
+& Q_{xxyy} = \mathbb{Q}_{0}^{(1)} + \mathbb{Q}_{40}^{(1)} - 2 \mathbb{Q}_{u}^{(1)} \\
+& Q_{yzzy} = \mathbb{Q}_{0}^{(1)} - 4 \mathbb{Q}_{40}^{(1)} + \mathbb{Q}_{u}^{(2)} + 3 \mathbb{Q}_{u}^{(5)}
 \end{align*}
 
 \end{document}

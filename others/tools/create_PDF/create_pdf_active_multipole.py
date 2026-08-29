@@ -9,6 +9,7 @@ from multipie.core.group import Group
 from multipie.util.util import timer, to_latex
 from multipie.util.util_binary import BinaryManager
 from multipie.util.util_pdf_latex import PDFviaLaTeX
+from multipie.util.util_response_tensor import mp_alias
 
 h_dir = os.path.join(__top_dir__, "others/pdf/info")
 
@@ -40,9 +41,21 @@ def create_active_multipole():
     hl = [0, 3, 8, 19]
     for key, b in basis_orbital.items():
         row.append(r"\texttt{" + key + "}")
-        tbl.append(["$" + to_latex(b[0]) + "$"])
+        sub, sup = mp_alias[key]
+        sl = r"\mathbb{X}_{" + sub + "}^{" + sup + "}"
+        tbl.append(["$" + sl + "$", "$" + to_latex(b[0]) + "$"])
 
-    pdf.table(tbl, row, ["symmetry"], "tag", cpos="ll", long=True, stretch=1.6, caption="Multipoles in response tensor.", hl=hl)
+    pdf.table(
+        tbl,
+        row,
+        ["symbol", "symmetry"],
+        "tag",
+        cpos="lll",
+        long=True,
+        stretch=1.6,
+        caption="Multipoles in response tensor.",
+        hl=hl,
+    )
 
     cap = "Active Multipole (cubic subgroups)"
     lst = [r"\texttt{" + i + "}" for i in basis["cubic"]]

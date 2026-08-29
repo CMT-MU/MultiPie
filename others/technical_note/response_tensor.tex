@@ -183,17 +183,42 @@ $(1,2)$の入れ替えについて対称であれば$G^{(1)}=Q_1^{(3)}=G_{12}^{(
 $P_{123}$を表すための独立なパラメータ数は$G^{(1)}$, $Q_1^{(1,2,3)}$, $G_{12}^{(1,2)}$, $Q_{123}^{(1)}$の$1+3\cdot 3+2\cdot 5+7=27$個で、全成分数と一致している。
 拘束条件を具体的に書くと$Q_{xxx}^{(1)}+Q_{xyy}^{(1)}+Q_{xzz}^{(1)}=0$, $Q_{xxy}^{(1)}+Q_{yyy}^{(1)}+Q_{yzz}^{(1)}=0$, $Q_{xxz}^{(1)}+Q_{yyz}^{(1)}+Q_{zzz}^{(1)}=0$。
 
-
-Voigt表記($1=xx$, $2=yy$, $3=zz$, $4=yz$, $5=zx$, $6=xy$)を用いて、行列形式$(1,2,3,4,5,6)\times(x,y,z)$および$(4,5,6)\times(x,y,z)$で書くと、対称成分と反対称成分は
+さらに、$P_{12;3}^s$は全対称成分$P_{123}^{ss}$と反対称成分$P_{12;3}^{sa}$に分解できる。
 \begin{align}
 &
-\hat{P}^s=\begin{pmatrix}
-S_{1x} & S_{1y} & S_{1z} \\
-S_{2x} & S_{2y} & S_{2z} \\
-S_{3x} & S_{3y} & S_{3z} \\
-S_{4x} & S_{4y} & S_{4z} \\
-S_{5x} & S_{5y} & S_{5z} \\
-S_{6x} & S_{6y} & S_{6z}
+P_{12;3}^s=P_{123}^{ss}+P_{12;3}^{sa}
+\cr&\quad
+P_{123}^{ss}=\frac{1}{3}(P_{12;3}^s+P_{13;2}^s+P_{23;1}^s)
+=(\delta_{12}\delta_{34}+\delta_{12;34})\tilde{Q}_{4}^{(1)}+Q_{123}^{(1)}
+=P_{132}^{ss}=P_{231}^{ss}=\cdots
+\cr&\quad
+P_{12;3}^{sa}=\frac{1}{3}(2P_{12;3}^s-P_{13;2}^s-P_{23;1}^s)
+=(2\delta_{12}\delta_{34}-\delta_{12;34})\tilde{Q}_4^{(2)}-\gamma_{12;5}^{34}\tilde{G}_{45}^{(1)}
+=-(P_{13;2}^{sa}+P_{23;1}^{sa})
+\end{align}
+ここで、$\tilde{Q}_1^{(1)}=(Q_1^{(1)}+2Q_1^{(2)})/3$, $\tilde{Q}_1^{(2)}=(Q_1^{(1)}-Q_1^{(2)})/3$, $\tilde{G}_{12}^{(1)}=-G_{12}^{(1)}$とおいた\footnote{論文\cite{Yatsushiro22a,Hayami2024}の表記と合わせるため。}。
+以後、チルダ記号は省略する。
+
+
+Voigt表記($1=xx$, $2=yy$, $3=zz$, $4=yz$, $5=zx$, $6=xy$)および$(\textbf{1}=(xxx),\textbf{2}=(yyy),\textbf{3}=(zzz),\textbf{4}=(yyz),\textbf{5}=(zzx),\textbf{6}=(xxy),\textbf{7}=(yzz),\textbf{8}=(zxx),\textbf{9}=(xyy),\textbf{10}=(xyz))$を用いて、行列形式$(1,2,3,4,5,6)\times(x,y,z)$および$(4,5,6)\times(x,y,z)$で書くと、対称成分と反対称成分は
+\begin{align}
+&
+\hat{P}^{ss}=\begin{pmatrix}
+S_{\textbf{1}} & S_{\textbf{6}} & S_{\textbf{8}} \\
+S_{\textbf{9}} & S_{\textbf{2}} & S_{\textbf{4}} \\
+S_{\textbf{5}} & S_{\textbf{7}} & S_{\textbf{3}} \\
+S_{\textbf{10}} & S_{\textbf{4}} & S_{\textbf{7}} \\
+S_{\textbf{8}} & S_{\textbf{10}} & S_{\textbf{5}} \\
+S_{\textbf{6}} & S_{\textbf{9}} & S_{\textbf{10}}
+\end{pmatrix},
+\quad
+\hat{P}^{sa}=\begin{pmatrix}
+0 & \bar{S}_{1y} & \bar{S}_{1z} \\
+\bar{S}_{2x} & 0 & \bar{S}_{2z} \\
+\bar{S}_{3x} & \bar{S}_{3y} & 0 \\
+\bar{S}_{4x} & -\frac{1}{2}\bar{S}_{2z} & -\frac{1}{2}\bar{S}_{3y} \\
+-\frac{1}{2}\bar{S}_{1z} & \bar{S}_{5y} & -\frac{1}{2}\bar{S}_{3x} \\
+-\frac{1}{2}\bar{S}_{1y} & -\frac{1}{2}\bar{S}_{2x} & -\bar{S}_{4x}-\bar{S}_{5y}
 \end{pmatrix},
 \quad
 \hat{P}^a=\begin{pmatrix}
@@ -361,7 +386,8 @@ $c$テンソルなら$(Q,G)\to(T,M)$に置き換える。
 1 & - & $Q_1^{(1)}$ & 3 & - \\ \hline
 2 & s & $Q^{(1)}$, $Q_{12}^{(1)}$ & 6 & $P_{12}^s=P_{21}^s$ \\
   & a & $G_1^{(1)}$ & 3 & $P_{12}^a=-P_{21}^a$ \\ \hline
-3 & s & $Q_1^{(1)}$, $Q_1^{(2)}$, $G_{12}^{(1)}$, $Q_{123}^{(1)}$ & 18 & $P_{12;3}^s=P_{21;3}^s$ \\
+3 & ss & $Q_1^{(1)}$, $Q_{123}^{(1)}$ & 10 & $P_{123}^{ss}=P_{132}^{ss}=P_{213}^{ss}=P_{231}^{ss}=P_{312}^{ss}=P_{321}^{ss}$ \\
+  & sa & $Q_1^{(2)}$, $G_{12}^{(1)}$ & 8 & $P_{12;3}^{sa}=P_{21;3}^{sa}=-(P_{13;2}^{sa}+P_{23;1}^{sa})$ \\
   & a & $G^{(1)}$, $Q_1^{(3)}$, $G_{12}^{(2)}$ & 9 & $P_{12;3}^a=-P_{21;3}^a$ \\ \hline
 4 & sss & $Q^{(1)}$, $Q^{(2)}$, $Q_{12}^{(1)}$, $Q_{12}^{(2)}$, $Q_{1234}^{(1)}$ & 21 & $P_{12;34}^{sss}=P_{21;34}^{sss}=P_{12;43}^{sss}=P_{34;12}^{sss}$ \\
   & ssa & $G_1^{(1)}$, $Q_{12}^{(3)}$, $G_{123}^{(1)}$ & 15 & $P_{12;34}^{ssa}=P_{21;34}^{ssa}=P_{12;43}^{ssa}=-P_{34;12}^{ssa}$ \\
@@ -652,41 +678,41 @@ A_{xy}=G^{(1)}_{z}
 \subsection{3階テンソル}
 \begin{align}
 &
-S_{1x}=Q^{(1)}_{xxx} + Q^{(1)}_{x} + 2Q^{(2)}_{x},
+S_{\textbf{1}}=Q^{(1)}_{xxx} + Q^{(1)}_{x} + 2Q^{(2)}_{x},
 \quad
-S_{1y}=2G^{(1)}_{xz} + Q^{(1)}_{xxy} + Q^{(1)}_{y},
+S_{\textbf{2}}=Q^{(1)}_{yyy} + Q^{(1)}_{y} + 2Q^{(2)}_{y},
 \quad
-S_{1z}=-2G^{(1)}_{xy} + Q^{(1)}_{xxz} + Q^{(1)}_{z}
+S_{\textbf{3}}=Q^{(1)}_{zzz} + Q^{(1)}_{z} + 2Q^{(2)}_{z}
 \cr&
-S_{2x}=-2G^{(1)}_{yz} + Q^{(1)}_{xyy} + Q^{(1)}_{x},
+S_{\textbf{4}}=Q^{(1)}_{yyz} + Q^{(1)}_{z},
 \quad
-S_{2y}=Q^{(1)}_{yyy} + Q^{(1)}_{y} + 2Q^{(2)}_{y},
+S_{\textbf{5}}=Q^{(1)}_{xzz} + Q^{(1)}_{x},
 \quad
-S_{2z}=2G^{(1)}_{xy} + Q^{(1)}_{yyz} + Q^{(1)}_{z}
+S_{\textbf{6}}=Q^{(1)}_{xxy} + Q^{(1)}_{y}
 \cr&
-S_{3x}=2G^{(1)}_{yz} + Q^{(1)}_{xzz} + Q^{(1)}_{x},
+S_{\textbf{7}}=Q^{(1)}_{yzz} + Q^{(1)}_{y},
 \quad
-S_{3y}=-2G^{(1)}_{xz} + Q^{(1)}_{yzz} + Q^{(1)}_{y},
+S_{\textbf{8}}=Q^{(1)}_{xxz} + Q^{(1)}_{z},
 \quad
-S_{3z}=Q^{(1)}_{zzz} + Q^{(1)}_{z} + 2Q^{(2)}_{z}
+S_{\textbf{9}}=Q^{(1)}_{xyy} + Q^{(1)}_{x},
+\quad
+S_{\textbf{10}}=Q^{(1)}_{xyz}
 \cr&
-S_{4x}=G^{(1)}_{yy} - G^{(1)}_{zz} + Q^{(1)}_{xyz},
+\bar{S}_{1y}=-2G^{(1)}_{xz} + 2Q^{(2)}_{y},
 \quad
-S_{4y}=-G^{(1)}_{xy} + Q^{(1)}_{yyz} + Q^{(2)}_{z},
+\bar{S}_{1z}=2G^{(1)}_{xy} + 2Q^{(2)}_{z},
 \quad
-S_{4z}=G^{(1)}_{xz} + Q^{(1)}_{yzz} + Q^{(2)}_{y}
+\bar{S}_{2x}=2G^{(1)}_{yz} + 2Q^{(2)}_{x},
+\quad
+\bar{S}_{2z}=-2G^{(1)}_{xy} + 2Q^{(2)}_{z}
 \cr&
-S_{5x}=G^{(1)}_{xy} + Q^{(1)}_{xxz} + Q^{(2)}_{z},
+\bar{S}_{3x}=-2G^{(1)}_{yz} + 2Q^{(2)}_{x},
 \quad
-S_{5y}=-G^{(1)}_{xx} + G^{(1)}_{zz} + Q^{(1)}_{xyz},
+\bar{S}_{3y}=2G^{(1)}_{xz} + 2Q^{(2)}_{y},
 \quad
-S_{5z}=-G^{(1)}_{yz} + Q^{(1)}_{xzz} + Q^{(2)}_{x}
-\cr&
-S_{6x}=-G^{(1)}_{xz} + Q^{(1)}_{xxy} + Q^{(2)}_{y},
+\bar{S}_{4x}=G^{(1)}_{zz} - G^{(1)}_{yy},
 \quad
-S_{6y}=G^{(1)}_{yz} + Q^{(1)}_{xyy} + Q^{(2)}_{x},
-\quad
-S_{6z}=G^{(1)}_{xx} - G^{(1)}_{yy} + Q^{(1)}_{xyz}
+\bar{S}_{5y}=G^{(1)}_{xx} - G^{(1)}_{zz}
 \\&
 A_{4x}=G^{(1)} + G^{(2)}_{xx},
 \quad
@@ -1099,6 +1125,8 @@ V_{69}=G^{(3)}_{xyz} - Q^{(3)} - 2Q^{(4)}_{zz} + Q^{(6)}_{xx} - Q^{(6)}_{yy}
 \begin{thebibliography}{99}%
 \bibitem{Hayami18} S. Hayami, M. Yatsushiro, Y. Yanagi, and H. Kusunose, Phys. Rev. B \textbf{98} 165110 (2018). 表XV, XVI
 \bibitem{Yatsushiro22} M. Yatsushiro, \textit{Classification of Multipole in Magnetic Point Group and Exploration of Augmented Odd-Parity Multipole Physics}, Ph.D thesis (Hokkaido University, 2022.3).
+\bibitem{Yatsushiro22a} M. Yatsushiro, R. Oiwa, H. Kusunose, and S. Hayami, Phys. Rev. B \textbf{105}, 155157 (2022).
+\bibitem{Hayami2024} S. Hayami and H. Kusunose, J. Phys. Soc. Jpn. \textbf{93}, 072001 (2024).
 \end{thebibliography}
 
 \end{document}

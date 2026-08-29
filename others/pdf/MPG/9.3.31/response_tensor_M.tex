@@ -14,6 +14,7 @@
 \usepackage{multirow}
 \usepackage{booktabs}
 \usepackage{longtable}
+\usepackage{caption}
 
 %%% layout setting
 
@@ -53,57 +54,65 @@ MPG No. 9.3.31\quad$4'$\quad[ Type III, tetragonal ] [M tensor]
 \begin{bmatrix} M_{xx} & M_{xy} & 0 \\ M_{xy} & - M_{xx} & 0 \\ 0 & 0 & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& M_{xx} = M_{dv}^{(1)} \\
-& M_{xy} = M_{dxy}^{(1)}
+& M_{xx} = \mathbb{M}_{v}^{(1)} \\
+& M_{xy} = \mathbb{M}_{xy}^{(1)}
 \end{align*}
 * Rank 2 tensor (a).
-* Rank 3 tensor (s).
+* Rank 3 tensor (ss).
 \begin{align*}
-\begin{bmatrix} 0 & 0 & M_{xxz} \\ 0 & 0 & - M_{xxz} \\ 0 & 0 & 0 \\ M_{yzx} & M_{yzy} & 0 \\ - M_{yzy} & M_{yzx} & 0 \\ 0 & 0 & M_{xyz} \end{bmatrix}
+\begin{bmatrix} 0 & 0 & M_{xxz} \\ 0 & 0 & - M_{xxz} \\ 0 & 0 & 0 \\ M_{yzx} & - M_{xxz} & 0 \\ M_{xxz} & M_{yzx} & 0 \\ 0 & 0 & M_{yzx} \end{bmatrix}
 \end{align*}
 \begin{align*}
-& M_{xxz} = M_{fbz}^{(1)} - 2 T_{dxy}^{(1)} \\
-& M_{yzx} = M_{f3}^{(1)} - T_{dv}^{(1)} \\
-& M_{yzy} = - M_{fbz}^{(1)} - T_{dxy}^{(1)} \\
-& M_{xyz} = M_{f3}^{(1)} + 2 T_{dv}^{(1)}
+& M_{xxz} = \mathbb{M}_{z}^{\beta(1)} \\
+& M_{yzx} = \mathbb{M}_{xyz}^{(1)}
+\end{align*}
+* Rank 3 tensor (sa).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & M_{xxz} \\ 0 & 0 & - M_{xxz} \\ 0 & 0 & 0 \\ M_{yzx} & \frac{M_{xxz}}{2} & 0 \\ - \frac{M_{xxz}}{2} & M_{yzx} & 0 \\ 0 & 0 & - 2 M_{yzx} \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{xxz} = 2 \mathbb{T}_{xy}^{(1)} \\
+& M_{yzx} = \mathbb{T}_{v}^{(1)} \\
+& \frac{M_{xxz}}{2} = \mathbb{T}_{xy}^{(1)} \\
+& 2 M_{yzx} = 2 \mathbb{T}_{v}^{(1)}
 \end{align*}
 * Rank 3 tensor (a).
 \begin{align*}
 \begin{bmatrix} M_{yzx} & M_{yzy} & 0 \\ M_{yzy} & - M_{yzx} & 0 \\ 0 & 0 & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& M_{yzx} = T_{dv}^{(2)} \\
-& M_{yzy} = T_{dxy}^{(2)}
+& M_{yzx} = \mathbb{T}_{v}^{(2)} \\
+& M_{yzy} = \mathbb{T}_{xy}^{(2)}
 \end{align*}
 * Rank 4 tensor (sss).
 \begin{align*}
 \begin{bmatrix} M_{xxxx} & 0 & M_{xxzz} & 0 & 0 & M_{xxxy} \\ 0 & - M_{xxxx} & - M_{xxzz} & 0 & 0 & M_{xxxy} \\ M_{xxzz} & - M_{xxzz} & 0 & 0 & 0 & M_{zzxy} \\ 0 & 0 & 0 & M_{yzyz} & M_{yzzx} & 0 \\ 0 & 0 & 0 & M_{yzzx} & - M_{yzyz} & 0 \\ M_{xxxy} & M_{xxxy} & M_{zzxy} & 0 & 0 & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& M_{xxxx} = 2 M_{dv}^{(1)} + 4 M_{dv}^{(2)} + M_{gv}^{(1)} \\
-& M_{xxzz} = M_{dv}^{(1)} - M_{gv}^{(1)} \\
-& M_{xxxy} = M_{dxy}^{(1)} + 2 M_{dxy}^{(2)} - M_{gbz}^{(1)} \\
-& M_{zzxy} = M_{dxy}^{(1)} + 2 M_{gbz}^{(1)} \\
-& M_{yzyz} = - M_{dv}^{(2)} + M_{gv}^{(1)} \\
-& M_{yzzx} = M_{dxy}^{(2)} + 2 M_{gbz}^{(1)}
+& M_{xxxx} = \mathbb{M}_{4v}^{(1)} + 2 \mathbb{M}_{v}^{(1)} + 4 \mathbb{M}_{v}^{(2)} \\
+& M_{xxzz} = - \mathbb{M}_{4v}^{(1)} + \mathbb{M}_{v}^{(1)} \\
+& M_{xxxy} = \mathbb{M}_{xy}^{(1)} + 2 \mathbb{M}_{xy}^{(2)} - \mathbb{M}_{z}^{\beta(1)} \\
+& M_{zzxy} = \mathbb{M}_{xy}^{(1)} + 2 \mathbb{M}_{z}^{\beta(1)} \\
+& M_{yzyz} = \mathbb{M}_{4v}^{(1)} - \mathbb{M}_{v}^{(2)} \\
+& M_{yzzx} = \mathbb{M}_{xy}^{(2)} + 2 \mathbb{M}_{z}^{\beta(1)}
 \end{align*}
 * Rank 4 tensor (ssa).
 \begin{align*}
 \begin{bmatrix} 0 & M_{xxyy} & M_{xxzz} & 0 & 0 & M_{xxxy} \\ - M_{xxyy} & 0 & - M_{xxzz} & 0 & 0 & M_{xxxy} \\ - M_{xxzz} & M_{xxzz} & 0 & 0 & 0 & M_{zzxy} \\ 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 \\ - M_{xxxy} & - M_{xxxy} & - M_{zzxy} & 0 & 0 & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& M_{xxyy} = - 2 M_{dv}^{(3)} + 4 T_{f3}^{(1)} \\
-& M_{xxzz} = - M_{dv}^{(3)} - 4 T_{f3}^{(1)} \\
-& M_{xxxy} = M_{dxy}^{(3)} + 2 T_{fbz}^{(1)} \\
-& M_{zzxy} = M_{dxy}^{(3)} - 4 T_{fbz}^{(1)}
+& M_{xxyy} = - 2 \mathbb{M}_{v}^{(3)} + 4 \mathbb{T}_{xyz}^{(1)} \\
+& M_{xxzz} = - \mathbb{M}_{v}^{(3)} - 4 \mathbb{T}_{xyz}^{(1)} \\
+& M_{xxxy} = \mathbb{M}_{xy}^{(3)} + 2 \mathbb{T}_{z}^{\beta(1)} \\
+& M_{zzxy} = \mathbb{M}_{xy}^{(3)} - 4 \mathbb{T}_{z}^{\beta(1)}
 \end{align*}
 * Rank 4 tensor (aas).
 \begin{align*}
 \begin{bmatrix} M_{yzyz} & M_{yzzx} & 0 \\ M_{yzzx} & - M_{yzyz} & 0 \\ 0 & 0 & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& M_{yzyz} = 2 M_{dv}^{(4)} \\
-& M_{yzzx} = 2 M_{dxy}^{(4)}
+& M_{yzyz} = 2 \mathbb{M}_{v}^{(4)} \\
+& M_{yzzx} = 2 \mathbb{M}_{xy}^{(4)}
 \end{align*}
 * Rank 4 tensor (aaa).
 * Rank 4 tensor (sa).
@@ -111,68 +120,68 @@ MPG No. 9.3.31\quad$4'$\quad[ Type III, tetragonal ] [M tensor]
 \begin{bmatrix} 0 & 0 & M_{xxxy} \\ 0 & 0 & - M_{xxxy} \\ 0 & 0 & 0 \\ M_{yzyz} & M_{yzzx} & 0 \\ - M_{yzzx} & M_{yzyz} & 0 \\ 0 & 0 & M_{xyxy} \end{bmatrix}
 \end{align*}
 \begin{align*}
-& M_{xxxy} = - 2 M_{dxy}^{(5)} + T_{fbz}^{(2)} \\
-& M_{yzyz} = - M_{dv}^{(5)} + T_{f3}^{(2)} \\
-& M_{yzzx} = - M_{dxy}^{(5)} - T_{fbz}^{(2)} \\
-& M_{xyxy} = 2 M_{dv}^{(5)} + T_{f3}^{(2)}
+& M_{xxxy} = - 2 \mathbb{M}_{xy}^{(5)} + \mathbb{T}_{z}^{\beta(2)} \\
+& M_{yzyz} = - \mathbb{M}_{v}^{(5)} + \mathbb{T}_{xyz}^{(2)} \\
+& M_{yzzx} = - \mathbb{M}_{xy}^{(5)} - \mathbb{T}_{z}^{\beta(2)} \\
+& M_{xyxy} = 2 \mathbb{M}_{v}^{(5)} + \mathbb{T}_{xyz}^{(2)}
 \end{align*}
 * Rank 4 tensor (as).
 \begin{align*}
 \begin{bmatrix} 0 & 0 & 0 & M_{yzyz} & M_{yzzx} & 0 \\ 0 & 0 & 0 & - M_{yzzx} & M_{yzyz} & 0 \\ M_{xyxx} & - M_{xyxx} & 0 & 0 & 0 & M_{xyxy} \end{bmatrix}
 \end{align*}
 \begin{align*}
-& M_{yzyz} = - M_{dv}^{(6)} + T_{f3}^{(3)} \\
-& M_{yzzx} = M_{dxy}^{(6)} + T_{fbz}^{(3)} \\
-& M_{xyxx} = - 2 M_{dxy}^{(6)} + T_{fbz}^{(3)} \\
-& M_{xyxy} = 2 M_{dv}^{(6)} + T_{f3}^{(3)}
+& M_{yzyz} = - \mathbb{M}_{v}^{(6)} + \mathbb{T}_{xyz}^{(3)} \\
+& M_{yzzx} = \mathbb{M}_{xy}^{(6)} + \mathbb{T}_{z}^{\beta(3)} \\
+& M_{xyxx} = - 2 \mathbb{M}_{xy}^{(6)} + \mathbb{T}_{z}^{\beta(3)} \\
+& M_{xyxy} = 2 \mathbb{M}_{v}^{(6)} + \mathbb{T}_{xyz}^{(3)}
 \end{align*}
 * Rank 4 tensor (s).
 \begin{align*}
 \begin{bmatrix} M_{xxxx} & M_{xxyy} & M_{xxzz} & 0 & 0 & M_{xxxy} & 0 & 0 & M_{xxyx} \\ - M_{xxyy} & - M_{xxxx} & - M_{xxzz} & 0 & 0 & M_{xxyx} & 0 & 0 & M_{xxxy} \\ M_{zzxx} & - M_{zzxx} & 0 & 0 & 0 & M_{zzxy} & 0 & 0 & M_{zzxy} \\ 0 & 0 & 0 & M_{yzyz} & M_{yzzx} & 0 & M_{yzzy} & M_{yzxz} & 0 \\ 0 & 0 & 0 & M_{yzxz} & - M_{yzzy} & 0 & M_{yzzx} & - M_{yzyz} & 0 \\ M_{xyxx} & M_{xyxx} & M_{xyzz} & 0 & 0 & M_{xyxy} & 0 & 0 & - M_{xyxy} \end{bmatrix}
 \end{align*}
 \begin{align*}
-& M_{xxxx} = 2 M_{dv}^{(1)} + 4 M_{dv}^{(2)} + M_{gv}^{(1)} \\
-& M_{xxyy} = - 2 M_{dv}^{(3)} + 4 T_{f3}^{(1)} \\
-& M_{xxzz} = M_{dv}^{(1)} - M_{dv}^{(3)} - M_{gv}^{(1)} - 4 T_{f3}^{(1)} \\
-& M_{xxxy} = M_{dxy}^{(1)} + 2 M_{dxy}^{(2)} + M_{dxy}^{(3)} - 2 M_{dxy}^{(5)} - M_{gbz}^{(1)} + 2 T_{fbz}^{(1)} + T_{fbz}^{(2)} \\
-& M_{xxyx} = M_{dxy}^{(1)} + 2 M_{dxy}^{(2)} + M_{dxy}^{(3)} + 2 M_{dxy}^{(5)} - M_{gbz}^{(1)} + 2 T_{fbz}^{(1)} - T_{fbz}^{(2)} \\
-& M_{zzxx} = M_{dv}^{(1)} + M_{dv}^{(3)} - M_{gv}^{(1)} + 4 T_{f3}^{(1)} \\
-& M_{zzxy} = M_{dxy}^{(1)} + M_{dxy}^{(3)} + 2 M_{gbz}^{(1)} - 4 T_{fbz}^{(1)} \\
-& M_{yzyz} = - M_{dv}^{(2)} - M_{dv}^{(5)} + M_{gv}^{(1)} + T_{f3}^{(2)} \\
-& M_{yzzx} = M_{dxy}^{(2)} - M_{dxy}^{(5)} + 2 M_{gbz}^{(1)} - T_{fbz}^{(2)} \\
-& M_{yzzy} = - M_{dv}^{(2)} + M_{dv}^{(5)} + M_{gv}^{(1)} - T_{f3}^{(2)} \\
-& M_{yzxz} = M_{dxy}^{(2)} + M_{dxy}^{(5)} + 2 M_{gbz}^{(1)} + T_{fbz}^{(2)} \\
-& M_{xyxx} = M_{dxy}^{(1)} + 2 M_{dxy}^{(2)} - M_{dxy}^{(3)} - M_{gbz}^{(1)} - 2 T_{fbz}^{(1)} \\
-& M_{xyzz} = M_{dxy}^{(1)} - M_{dxy}^{(3)} + 2 M_{gbz}^{(1)} + 4 T_{fbz}^{(1)} \\
-& M_{xyxy} = 2 M_{dv}^{(5)} + T_{f3}^{(2)}
+& M_{xxxx} = \mathbb{M}_{4v}^{(1)} + 2 \mathbb{M}_{v}^{(1)} + 4 \mathbb{M}_{v}^{(2)} \\
+& M_{xxyy} = - 2 \mathbb{M}_{v}^{(3)} + 4 \mathbb{T}_{xyz}^{(1)} \\
+& M_{xxzz} = - \mathbb{M}_{4v}^{(1)} + \mathbb{M}_{v}^{(1)} - \mathbb{M}_{v}^{(3)} - 4 \mathbb{T}_{xyz}^{(1)} \\
+& M_{xxxy} = \mathbb{M}_{xy}^{(1)} + 2 \mathbb{M}_{xy}^{(2)} + \mathbb{M}_{xy}^{(3)} - 2 \mathbb{M}_{xy}^{(5)} - \mathbb{M}_{z}^{\beta(1)} + 2 \mathbb{T}_{z}^{\beta(1)} + \mathbb{T}_{z}^{\beta(2)} \\
+& M_{xxyx} = \mathbb{M}_{xy}^{(1)} + 2 \mathbb{M}_{xy}^{(2)} + \mathbb{M}_{xy}^{(3)} + 2 \mathbb{M}_{xy}^{(5)} - \mathbb{M}_{z}^{\beta(1)} + 2 \mathbb{T}_{z}^{\beta(1)} - \mathbb{T}_{z}^{\beta(2)} \\
+& M_{zzxx} = - \mathbb{M}_{4v}^{(1)} + \mathbb{M}_{v}^{(1)} + \mathbb{M}_{v}^{(3)} + 4 \mathbb{T}_{xyz}^{(1)} \\
+& M_{zzxy} = \mathbb{M}_{xy}^{(1)} + \mathbb{M}_{xy}^{(3)} + 2 \mathbb{M}_{z}^{\beta(1)} - 4 \mathbb{T}_{z}^{\beta(1)} \\
+& M_{yzyz} = \mathbb{M}_{4v}^{(1)} - \mathbb{M}_{v}^{(2)} - \mathbb{M}_{v}^{(5)} + \mathbb{T}_{xyz}^{(2)} \\
+& M_{yzzx} = \mathbb{M}_{xy}^{(2)} - \mathbb{M}_{xy}^{(5)} + 2 \mathbb{M}_{z}^{\beta(1)} - \mathbb{T}_{z}^{\beta(2)} \\
+& M_{yzzy} = \mathbb{M}_{4v}^{(1)} - \mathbb{M}_{v}^{(2)} + \mathbb{M}_{v}^{(5)} - \mathbb{T}_{xyz}^{(2)} \\
+& M_{yzxz} = \mathbb{M}_{xy}^{(2)} + \mathbb{M}_{xy}^{(5)} + 2 \mathbb{M}_{z}^{\beta(1)} + \mathbb{T}_{z}^{\beta(2)} \\
+& M_{xyxx} = \mathbb{M}_{xy}^{(1)} + 2 \mathbb{M}_{xy}^{(2)} - \mathbb{M}_{xy}^{(3)} - \mathbb{M}_{z}^{\beta(1)} - 2 \mathbb{T}_{z}^{\beta(1)} \\
+& M_{xyzz} = \mathbb{M}_{xy}^{(1)} - \mathbb{M}_{xy}^{(3)} + 2 \mathbb{M}_{z}^{\beta(1)} + 4 \mathbb{T}_{z}^{\beta(1)} \\
+& M_{xyxy} = 2 \mathbb{M}_{v}^{(5)} + \mathbb{T}_{xyz}^{(2)}
 \end{align*}
 * Rank 4 tensor (a).
 \begin{align*}
 \begin{bmatrix} 0 & 0 & 0 & M_{yzyz} & M_{yzzx} & 0 & M_{yzzy} & M_{yzxz} & 0 \\ 0 & 0 & 0 & - M_{yzxz} & M_{yzzy} & 0 & - M_{yzzx} & M_{yzyz} & 0 \\ M_{xyxx} & - M_{xyxx} & 0 & 0 & 0 & M_{xyxy} & 0 & 0 & M_{xyxy} \end{bmatrix}
 \end{align*}
 \begin{align*}
-& M_{yzyz} = 2 M_{dv}^{(4)} - M_{dv}^{(6)} + T_{f3}^{(3)} \\
-& M_{yzzx} = 2 M_{dxy}^{(4)} + M_{dxy}^{(6)} + T_{fbz}^{(3)} \\
-& M_{yzzy} = - 2 M_{dv}^{(4)} - M_{dv}^{(6)} + T_{f3}^{(3)} \\
-& M_{yzxz} = - 2 M_{dxy}^{(4)} + M_{dxy}^{(6)} + T_{fbz}^{(3)} \\
-& M_{xyxx} = - 2 M_{dxy}^{(6)} + T_{fbz}^{(3)} \\
-& M_{xyxy} = 2 M_{dv}^{(6)} + T_{f3}^{(3)}
+& M_{yzyz} = 2 \mathbb{M}_{v}^{(4)} - \mathbb{M}_{v}^{(6)} + \mathbb{T}_{xyz}^{(3)} \\
+& M_{yzzx} = 2 \mathbb{M}_{xy}^{(4)} + \mathbb{M}_{xy}^{(6)} + \mathbb{T}_{z}^{\beta(3)} \\
+& M_{yzzy} = - 2 \mathbb{M}_{v}^{(4)} - \mathbb{M}_{v}^{(6)} + \mathbb{T}_{xyz}^{(3)} \\
+& M_{yzxz} = - 2 \mathbb{M}_{xy}^{(4)} + \mathbb{M}_{xy}^{(6)} + \mathbb{T}_{z}^{\beta(3)} \\
+& M_{xyxx} = - 2 \mathbb{M}_{xy}^{(6)} + \mathbb{T}_{z}^{\beta(3)} \\
+& M_{xyxy} = 2 \mathbb{M}_{v}^{(6)} + \mathbb{T}_{xyz}^{(3)}
 \end{align*}
 * Rank 4 tensor (t).
 \begin{align*}
 \begin{bmatrix} M_{xxxx} & M_{xxxy} & 0 \\ M_{xxxy} & - M_{xxxx} & 0 \\ 0 & 0 & 0 \\ 0 & 0 & M_{yyzz} \\ M_{zzxx} & M_{zzxy} & 0 \\ M_{xxyx} & - M_{yyzz} - M_{zzxx} & 0 \\ M_{yzzx} & M_{yzzy} & 0 \\ 0 & 0 & M_{zxxz} \\ - M_{yzzy} - M_{zxxz} & M_{xyyy} & 0 \\ 0 & 0 & - \frac{M_{xxxy}}{2} - \frac{M_{xxyx}}{2} + M_{xyyy} + M_{zzxy} \end{bmatrix}
 \end{align*}
 \begin{align*}
-& M_{xxxx} = 2 M_{dv}^{(1)} + 4 M_{dv}^{(2)} + M_{gv}^{(1)} \\
-& M_{xxxy} = M_{dxy}^{(1)} + 2 M_{dxy}^{(2)} + M_{dxy}^{(3)} - 2 M_{dxy}^{(5)} - M_{gbz}^{(1)} \\
-& M_{yyzz} = - M_{dv}^{(1)} + M_{dv}^{(3)} + M_{gv}^{(1)} \\
-& M_{zzxx} = M_{dv}^{(1)} + M_{dv}^{(3)} - M_{gv}^{(1)} \\
-& M_{zzxy} = M_{dxy}^{(1)} + M_{dxy}^{(3)} + 2 M_{gbz}^{(1)} \\
-& M_{xxyx} = M_{dxy}^{(1)} + 2 M_{dxy}^{(2)} + M_{dxy}^{(3)} + 2 M_{dxy}^{(5)} - M_{gbz}^{(1)} \\
-& M_{yzzx} = M_{dxy}^{(2)} - M_{dxy}^{(5)} + 2 M_{gbz}^{(1)} \\
-& M_{yzzy} = - M_{dv}^{(2)} + M_{dv}^{(5)} + M_{gv}^{(1)} \\
-& M_{zxxz} = M_{dv}^{(2)} + M_{dv}^{(5)} - M_{gv}^{(1)} \\
-& M_{xyyy} = M_{dxy}^{(1)} + 2 M_{dxy}^{(2)} - M_{dxy}^{(3)} - M_{gbz}^{(1)}
+& M_{xxxx} = \mathbb{M}_{4v}^{(1)} + 2 \mathbb{M}_{v}^{(1)} + 4 \mathbb{M}_{v}^{(2)} \\
+& M_{xxxy} = \mathbb{M}_{xy}^{(1)} + 2 \mathbb{M}_{xy}^{(2)} + \mathbb{M}_{xy}^{(3)} - 2 \mathbb{M}_{xy}^{(5)} - \mathbb{M}_{z}^{\beta(1)} \\
+& M_{yyzz} = \mathbb{M}_{4v}^{(1)} - \mathbb{M}_{v}^{(1)} + \mathbb{M}_{v}^{(3)} \\
+& M_{zzxx} = - \mathbb{M}_{4v}^{(1)} + \mathbb{M}_{v}^{(1)} + \mathbb{M}_{v}^{(3)} \\
+& M_{zzxy} = \mathbb{M}_{xy}^{(1)} + \mathbb{M}_{xy}^{(3)} + 2 \mathbb{M}_{z}^{\beta(1)} \\
+& M_{xxyx} = \mathbb{M}_{xy}^{(1)} + 2 \mathbb{M}_{xy}^{(2)} + \mathbb{M}_{xy}^{(3)} + 2 \mathbb{M}_{xy}^{(5)} - \mathbb{M}_{z}^{\beta(1)} \\
+& M_{yzzx} = \mathbb{M}_{xy}^{(2)} - \mathbb{M}_{xy}^{(5)} + 2 \mathbb{M}_{z}^{\beta(1)} \\
+& M_{yzzy} = \mathbb{M}_{4v}^{(1)} - \mathbb{M}_{v}^{(2)} + \mathbb{M}_{v}^{(5)} \\
+& M_{zxxz} = - \mathbb{M}_{4v}^{(1)} + \mathbb{M}_{v}^{(2)} + \mathbb{M}_{v}^{(5)} \\
+& M_{xyyy} = \mathbb{M}_{xy}^{(1)} + 2 \mathbb{M}_{xy}^{(2)} - \mathbb{M}_{xy}^{(3)} - \mathbb{M}_{z}^{\beta(1)}
 \end{align*}
 
 \end{document}

@@ -9,6 +9,44 @@ from sympy.functions.special.tensor_functions import KroneckerDelta
 from sympy import LeviCivita
 from itertools import product
 
+mp_alias = {  # symbol => (lower, upper).
+    "s": ("0", ""),
+    "px": ("x", ""),
+    "py": ("y", ""),
+    "pz": ("z", ""),
+    "du": ("u", ""),
+    "dv": ("v", ""),
+    "dyz": ("yz", ""),
+    "dxz": ("xz", ""),
+    "dxy": ("xy", ""),
+    "f3": ("xyz", ""),
+    "fax": ("x", r"\alpha"),
+    "fay": ("y", r"\alpha"),
+    "faz": ("z", r"\alpha"),
+    "fbx": ("x", r"\beta"),
+    "fby": ("y", r"\beta"),
+    "fbz": ("z", r"\beta"),
+    "f2": ("3a", ""),
+    "f1": ("3b", ""),
+    "f3x": ("3u", ""),
+    "f3y": ("3v", ""),
+    "g": ("4", ""),
+    "gu": ("4u", ""),
+    "gv": ("4v", ""),
+    "gax": ("4x", r"\alpha"),
+    "gay": ("4y", r"\alpha"),
+    "gaz": ("4z", r"\alpha"),
+    "gbx": ("x", r"\beta"),
+    "gby": ("y", r"\beta"),
+    "gbz": ("z", r"\beta"),
+    "g0": ("40", ""),
+    "gb": ("4a", ""),
+    "gav": ("4u", r"\alpha"),
+    "gau": ("4v", r"\alpha"),
+    "gc": ("4u", r"\beta1"),
+    "ga": ("4b", ""),
+}
+
 
 # ==================================================
 def delta(i1, i2):
@@ -224,7 +262,7 @@ def A12(i1, i2):
 # ==================================================
 def S123(i1, i2, i3):
     """
-    Symmetric part of rank 3 tensor component.
+    Full symmetric part of rank 3 tensor component.
 
     Args:
         i1 (int): index 1, 1-3.
@@ -243,17 +281,44 @@ def S123(i1, i2, i3):
     for i4 in range(1, 4):
         d = d1234(i1, i2, i3, i4)
         if d != 0:
-            l2.append((d, mp_string([i4], "Q^{(2)}")))
+            l2.append((d, mp_string([i4], "Q^{(1)}")))
+
+    l3 = [(1, mp_string([i1, i2, i3], "Q^{(1)}"))]
+
+    return l1 + l2 + l3
+
+
+# ==================================================
+def Sb123(i1, i2, i3):
+    """
+    Symmetric anti-symetric part of rank 3 tensor component.
+
+    Args:
+        i1 (int): index 1, 1-3.
+        i2 (int): index 2, 1-3.
+        i3 (int): index 3, 1-3.
+
+    Returns:
+        - (list) -- expression list, (coeff, multipole).
+    """
+    if i1 == i2:
+        l1 = [(2, mp_string([i3], "Q^{(2)}"))]
+    else:
+        l1 = []
+
+    l2 = []
+    for i4 in range(1, 4):
+        d = d1234(i1, i2, i3, i4)
+        if d != 0:
+            l2.append((-d, mp_string([i4], "Q^{(2)}")))
 
     l3 = []
     for i4, i5 in product(range(1, 4), range(1, 4)):
         g = g12534(i1, i2, i3, i4, i5)
         if g != 0:
-            l3.append((g, mp_string([i4, i5], "G^{(1)}")))
+            l3.append((-g, mp_string([i4, i5], "G^{(1)}")))
 
-    l4 = [(1, mp_string([i1, i2, i3], "Q^{(1)}"))]
-
-    return l1 + l2 + l3 + l4
+    return l1 + l2 + l3
 
 
 # ==================================================
@@ -611,15 +676,17 @@ def P3(i1, i2, i3, opt=None):
         i1 (int): index 1, 1-3.
         i2 (int): index 2, 1-3.
         i3 (int): index 3, 1-3.
-        opt (str, optional): part, s/a.
+        opt (str, optional): part, ss/sa/a.
 
     Returns:
         - (list) -- expression list, (coeff, multipole).
     """
     if opt is None:
-        return S123(i1, i2, i3) + A123(i1, i2, i3)
-    elif opt == "s":
+        return S123(i1, i2, i3) + Sb123(i1, i2, i3) + A123(i1, i2, i3)
+    elif opt == "ss":
         return S123(i1, i2, i3)
+    elif opt == "sa":
+        return Sb123(i1, i2, i3)
     elif opt == "a":
         return A123(i1, i2, i3)
     else:
@@ -718,9 +785,37 @@ def get_response_tensor_mp(rt, active_dict, axial_tensor, magnetic_tensor):
 
     s = sp.S(0)
     for c, ss, m in ex_lst:
-        s += c * sp.Symbol(m + "^{" + ss + "}")
+        X = m[0]
+        sub = m[3:-1]
+        sub, sup = mp_alias[sub]
+        sl = r"\mathbb{" + X + "}_{" + sub + "}^{" + sup + ss + "}"
+        s += c * sp.Symbol(sl)
 
     return s
+
+
+# ==================================================
+def convert_mp_alias(tag, latex=False):
+    """
+    Convert standard active multipole tag to alias name.
+
+    Args:
+        tag (str): active multipole tag.
+
+    Returns:
+        - (str) -- alias name.
+    """
+    X = tag[0]
+    tag = tag[1:]
+    sub, sup = mp_alias[tag]
+    if latex:
+        return r"\mathbb{" + X + "}_{" + sub + "}^{" + sup + "}"
+    else:
+        s = f"{X}{sub}"
+        if sup:
+            sup = sup.replace(r"\alpha", "\u03b1").replace(r"\beta", "\u03b2")
+            s += f"^{sup}"
+        return s
 
 
 # ==================================================

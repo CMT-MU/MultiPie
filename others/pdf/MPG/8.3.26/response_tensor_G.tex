@@ -14,6 +14,7 @@
 \usepackage{multirow}
 \usepackage{booktabs}
 \usepackage{longtable}
+\usepackage{caption}
 
 %%% layout setting
 
@@ -50,23 +51,29 @@ MPG No. 8.3.26\quad$m'mm$\quad(m'mm setting)\quad[ Type III, orthorhombic ] [G t
 * Rank 1 tensor.
 * Rank 2 tensor (s).
 * Rank 2 tensor (a).
-* Rank 3 tensor (s).
+* Rank 3 tensor (ss).
 \begin{align*}
-\begin{bmatrix} 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \\ G_{yzx} & 0 & 0 \\ 0 & G_{zxy} & 0 \\ 0 & 0 & G_{xyz} \end{bmatrix}
+\begin{bmatrix} 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \\ G_{yzx} & 0 & 0 \\ 0 & G_{yzx} & 0 \\ 0 & 0 & G_{yzx} \end{bmatrix}
 \end{align*}
 \begin{align*}
-& G_{yzx} = G_{f3}^{(1)} - 3 Q_{du}^{(1)} - Q_{dv}^{(1)} \\
-& G_{zxy} = G_{f3}^{(1)} + 3 Q_{du}^{(1)} - Q_{dv}^{(1)} \\
-& G_{xyz} = G_{f3}^{(1)} + 2 Q_{dv}^{(1)}
+& G_{yzx} = \mathbb{G}_{xyz}^{(1)}
+\end{align*}
+* Rank 3 tensor (sa).
+\begin{align*}
+\begin{bmatrix} 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \\ G_{yzx} & 0 & 0 \\ 0 & G_{zxy} & 0 \\ 0 & 0 & - G_{yzx} - G_{zxy} \end{bmatrix}
+\end{align*}
+\begin{align*}
+& G_{yzx} = 3 \mathbb{Q}_{u}^{(1)} + \mathbb{Q}_{v}^{(1)} \\
+& G_{zxy} = - 3 \mathbb{Q}_{u}^{(1)} + \mathbb{Q}_{v}^{(1)}
 \end{align*}
 * Rank 3 tensor (a).
 \begin{align*}
 \begin{bmatrix} G_{yzx} & 0 & 0 \\ 0 & G_{zxy} & 0 \\ 0 & 0 & G_{xyz} \end{bmatrix}
 \end{align*}
 \begin{align*}
-& G_{yzx} = - Q_{du}^{(2)} + Q_{dv}^{(2)} + Q_{s}^{(1)} \\
-& G_{zxy} = - Q_{du}^{(2)} - Q_{dv}^{(2)} + Q_{s}^{(1)} \\
-& G_{xyz} = 2 Q_{du}^{(2)} + Q_{s}^{(1)}
+& G_{yzx} = \mathbb{Q}_{0}^{(1)} - \mathbb{Q}_{u}^{(2)} + \mathbb{Q}_{v}^{(2)} \\
+& G_{zxy} = \mathbb{Q}_{0}^{(1)} - \mathbb{Q}_{u}^{(2)} - \mathbb{Q}_{v}^{(2)} \\
+& G_{xyz} = \mathbb{Q}_{0}^{(1)} + 2 \mathbb{Q}_{u}^{(2)}
 \end{align*}
 * Rank 4 tensor (sss).
 * Rank 4 tensor (ssa).

@@ -14,6 +14,7 @@
 \usepackage{multirow}
 \usepackage{booktabs}
 \usepackage{longtable}
+\usepackage{caption}
 
 %%% layout setting
 
@@ -50,27 +51,28 @@ MPG No. 24.5.149\quad$6'22'$\quad(6'2'2 setting)\quad[ Type III, hexagonal ] [M 
 * Rank 1 tensor.
 * Rank 2 tensor (s).
 * Rank 2 tensor (a).
-* Rank 3 tensor (s).
+* Rank 3 tensor (ss).
 \begin{align*}
 \begin{bmatrix} 0 & M_{xxy} & 0 \\ 0 & - M_{xxy} & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \\ M_{xxy} & 0 & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& M_{xxy} = M_{f1}^{(1)}
+& M_{xxy} = \mathbb{M}_{3b}^{(1)}
 \end{align*}
+* Rank 3 tensor (sa).
 * Rank 3 tensor (a).
 * Rank 4 tensor (sss).
 \begin{align*}
 \begin{bmatrix} 0 & 0 & 0 & 0 & M_{xxzx} & 0 \\ 0 & 0 & 0 & 0 & - M_{xxzx} & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & - M_{xxzx} \\ M_{xxzx} & - M_{xxzx} & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & - M_{xxzx} & 0 & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& M_{xxzx} = M_{ga}^{(1)}
+& M_{xxzx} = \mathbb{M}_{4b}^{(1)}
 \end{align*}
 * Rank 4 tensor (ssa).
 \begin{align*}
 \begin{bmatrix} 0 & 0 & 0 & 0 & M_{xxzx} & 0 \\ 0 & 0 & 0 & 0 & - M_{xxzx} & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & M_{xxzx} \\ - M_{xxzx} & M_{xxzx} & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & - M_{xxzx} & 0 & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& M_{xxzx} = - 2 T_{f1}^{(1)}
+& M_{xxzx} = - 2 \mathbb{T}_{3b}^{(1)}
 \end{align*}
 * Rank 4 tensor (aas).
 * Rank 4 tensor (aaa).
@@ -79,37 +81,37 @@ MPG No. 24.5.149\quad$6'22'$\quad(6'2'2 setting)\quad[ Type III, hexagonal ] [M 
 \begin{bmatrix} 0 & M_{xxzx} & 0 \\ 0 & - M_{xxzx} & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \\ M_{xxzx} & 0 & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& M_{xxzx} = T_{f1}^{(2)}
+& M_{xxzx} = \mathbb{T}_{3b}^{(2)}
 \end{align*}
 * Rank 4 tensor (as).
 \begin{align*}
 \begin{bmatrix} 0 & 0 & 0 & 0 & 0 & M_{yzxy} \\ M_{yzxy} & - M_{yzxy} & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& M_{yzxy} = T_{f1}^{(3)}
+& M_{yzxy} = \mathbb{T}_{3b}^{(3)}
 \end{align*}
 * Rank 4 tensor (s).
 \begin{align*}
 \begin{bmatrix} 0 & 0 & 0 & 0 & M_{xxzx} & 0 & 0 & M_{xxxz} & 0 \\ 0 & 0 & 0 & 0 & - M_{xxzx} & 0 & 0 & - M_{xxxz} & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & M_{yzxy} & 0 & 0 & M_{yzxy} \\ - M_{yzxy} & M_{yzxy} & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & - M_{xxxz} & 0 & 0 & - M_{xxzx} & 0 & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& M_{xxzx} = M_{ga}^{(1)} - 2 T_{f1}^{(1)} + T_{f1}^{(2)} \\
-& M_{xxxz} = M_{ga}^{(1)} - 2 T_{f1}^{(1)} - T_{f1}^{(2)} \\
-& M_{yzxy} = - M_{ga}^{(1)} - 2 T_{f1}^{(1)}
+& M_{xxzx} = \mathbb{M}_{4b}^{(1)} - 2 \mathbb{T}_{3b}^{(1)} + \mathbb{T}_{3b}^{(2)} \\
+& M_{xxxz} = \mathbb{M}_{4b}^{(1)} - 2 \mathbb{T}_{3b}^{(1)} - \mathbb{T}_{3b}^{(2)} \\
+& M_{yzxy} = - \mathbb{M}_{4b}^{(1)} - 2 \mathbb{T}_{3b}^{(1)}
 \end{align*}
 * Rank 4 tensor (a).
 \begin{align*}
 \begin{bmatrix} 0 & 0 & 0 & 0 & 0 & M_{yzxy} & 0 & 0 & M_{yzxy} \\ M_{yzxy} & - M_{yzxy} & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& M_{yzxy} = T_{f1}^{(3)}
+& M_{yzxy} = \mathbb{T}_{3b}^{(3)}
 \end{align*}
 * Rank 4 tensor (t).
 \begin{align*}
 \begin{bmatrix} 0 & 0 & M_{xxxz} \\ 0 & 0 & 0 \\ 0 & 0 & 0 \\ - M_{xxxz} & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \\ M_{xxxz} & 0 & 0 \\ 0 & 0 & - M_{xxxz} \\ 0 & - M_{xxxz} & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& M_{xxxz} = M_{ga}^{(1)}
+& M_{xxxz} = \mathbb{M}_{4b}^{(1)}
 \end{align*}
 
 \end{document}

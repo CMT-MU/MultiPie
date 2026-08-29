@@ -14,6 +14,7 @@
 \usepackage{multirow}
 \usepackage{booktabs}
 \usepackage{longtable}
+\usepackage{caption}
 
 %%% layout setting
 
@@ -52,28 +53,36 @@ MPG No. 8.8.127\quad$m'm'm$\quad(m'mm' setting)\quad[ Type III, orthorhombic ] [
 \begin{bmatrix} 0 & M_{y} & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& M_{y} = M_{py}^{(1)}
+& M_{y} = \mathbb{M}_{y}^{(1)}
 \end{align*}
 * Rank 2 tensor (s).
 * Rank 2 tensor (a).
-* Rank 3 tensor (s).
+* Rank 3 tensor (ss).
 \begin{align*}
-\begin{bmatrix} 0 & M_{xxy} & 0 \\ 0 & M_{yyy} & 0 \\ 0 & M_{zzy} & 0 \\ 0 & 0 & M_{yzz} \\ 0 & 0 & 0 \\ M_{xyx} & 0 & 0 \end{bmatrix}
+\begin{bmatrix} 0 & M_{xxy} & 0 \\ 0 & M_{yyy} & 0 \\ 0 & M_{zzy} & 0 \\ 0 & 0 & M_{zzy} \\ 0 & 0 & 0 \\ M_{xxy} & 0 & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& M_{xxy} = - M_{fay}^{(1)} - M_{fby}^{(1)} + M_{py}^{(1)} + 2 T_{dxz}^{(1)} \\
-& M_{yyy} = 2 M_{fay}^{(1)} + M_{py}^{(1)} + 2 M_{py}^{(2)} \\
-& M_{zzy} = - M_{fay}^{(1)} + M_{fby}^{(1)} + M_{py}^{(1)} - 2 T_{dxz}^{(1)} \\
-& M_{yzz} = - M_{fay}^{(1)} + M_{fby}^{(1)} + M_{py}^{(2)} + T_{dxz}^{(1)} \\
-& M_{xyx} = - M_{fay}^{(1)} - M_{fby}^{(1)} + M_{py}^{(2)} - T_{dxz}^{(1)}
+& M_{xxy} = \mathbb{M}_{y}^{(1)} - \mathbb{M}_{y}^{\alpha(1)} - \mathbb{M}_{y}^{\beta(1)} \\
+& M_{yyy} = 3 \mathbb{M}_{y}^{(1)} + 2 \mathbb{M}_{y}^{\alpha(1)} \\
+& M_{zzy} = \mathbb{M}_{y}^{(1)} - \mathbb{M}_{y}^{\alpha(1)} + \mathbb{M}_{y}^{\beta(1)}
+\end{align*}
+* Rank 3 tensor (sa).
+\begin{align*}
+\begin{bmatrix} 0 & M_{xxy} & 0 \\ 0 & 0 & 0 \\ 0 & M_{zzy} & 0 \\ 0 & 0 & - \frac{M_{zzy}}{2} \\ 0 & 0 & 0 \\ - \frac{M_{xxy}}{2} & 0 & 0 \end{bmatrix}
+\end{align*}
+\begin{align*}
+& M_{xxy} = 2 \mathbb{M}_{y}^{(2)} - 2 \mathbb{T}_{xz}^{(1)} \\
+& M_{zzy} = 2 \mathbb{M}_{y}^{(2)} + 2 \mathbb{T}_{xz}^{(1)} \\
+& \frac{M_{zzy}}{2} = \mathbb{M}_{y}^{(2)} + \mathbb{T}_{xz}^{(1)} \\
+& \frac{M_{xxy}}{2} = \mathbb{M}_{y}^{(2)} - \mathbb{T}_{xz}^{(1)}
 \end{align*}
 * Rank 3 tensor (a).
 \begin{align*}
 \begin{bmatrix} 0 & 0 & M_{yzz} \\ 0 & 0 & 0 \\ M_{xyx} & 0 & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& M_{yzz} = - M_{py}^{(3)} + T_{dxz}^{(2)} \\
-& M_{xyx} = M_{py}^{(3)} + T_{dxz}^{(2)}
+& M_{yzz} = - \mathbb{M}_{y}^{(3)} + \mathbb{T}_{xz}^{(2)} \\
+& M_{xyx} = \mathbb{M}_{y}^{(3)} + \mathbb{T}_{xz}^{(2)}
 \end{align*}
 * Rank 4 tensor (sss).
 * Rank 4 tensor (ssa).

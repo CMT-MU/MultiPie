@@ -14,6 +14,7 @@
 \usepackage{multirow}
 \usepackage{booktabs}
 \usepackage{longtable}
+\usepackage{caption}
 
 %%% layout setting
 
@@ -54,15 +55,16 @@ MPG No. 26.4.98\quad$\bar{6}'m2'$\quad(-6'm2' setting)\quad[ Type III, hexagonal
 \begin{bmatrix} 0 & M_{xy} & 0 \\ - M_{xy} & 0 & 0 \\ 0 & 0 & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& M_{xy} = T_{pz}^{(1)}
+& M_{xy} = \mathbb{T}_{z}^{(1)}
 \end{align*}
-* Rank 3 tensor (s).
+* Rank 3 tensor (ss).
 \begin{align*}
 \begin{bmatrix} M_{xxx} & 0 & 0 \\ - M_{xxx} & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & - M_{xxx} & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& M_{xxx} = M_{f2}^{(1)}
+& M_{xxx} = \mathbb{M}_{3a}^{(1)}
 \end{align*}
+* Rank 3 tensor (sa).
 * Rank 3 tensor (a).
 * Rank 4 tensor (sss).
 * Rank 4 tensor (ssa).
@@ -70,8 +72,8 @@ MPG No. 26.4.98\quad$\bar{6}'m2'$\quad(-6'm2' setting)\quad[ Type III, hexagonal
 \begin{bmatrix} 0 & 0 & 0 & 0 & 0 & M_{xxxy} \\ 0 & 0 & 0 & 0 & 0 & - M_{xxxy} \\ 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & M_{yzzx} & 0 \\ 0 & 0 & 0 & - M_{yzzx} & 0 & 0 \\ - M_{xxxy} & M_{xxxy} & 0 & 0 & 0 & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& M_{xxxy} = - 2 T_{faz}^{(1)} + 2 T_{pz}^{(1)} \\
-& M_{yzzx} = - 4 T_{faz}^{(1)} - T_{pz}^{(1)}
+& M_{xxxy} = 2 \mathbb{T}_{z}^{(1)} - 2 \mathbb{T}_{z}^{\alpha(1)} \\
+& M_{yzzx} = - \mathbb{T}_{z}^{(1)} - 4 \mathbb{T}_{z}^{\alpha(1)}
 \end{align*}
 * Rank 4 tensor (aas).
 * Rank 4 tensor (aaa).
@@ -79,46 +81,46 @@ MPG No. 26.4.98\quad$\bar{6}'m2'$\quad(-6'm2' setting)\quad[ Type III, hexagonal
 \begin{bmatrix} 0 & M_{yzzx} & 0 \\ - M_{yzzx} & 0 & 0 \\ 0 & 0 & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& M_{yzzx} = - T_{pz}^{(2)}
+& M_{yzzx} = - \mathbb{T}_{z}^{(2)}
 \end{align*}
 * Rank 4 tensor (sa).
 \begin{align*}
 \begin{bmatrix} 0 & 0 & M_{xxxy} \\ 0 & 0 & M_{xxxy} \\ 0 & 0 & M_{zzxy} \\ 0 & M_{yzzx} & 0 \\ M_{yzzx} & 0 & 0 \\ 0 & 0 & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& M_{xxxy} = - T_{faz}^{(2)} + T_{pz}^{(3)} \\
-& M_{zzxy} = 2 T_{faz}^{(2)} + T_{pz}^{(3)} + 2 T_{pz}^{(4)} \\
-& M_{yzzx} = - T_{faz}^{(2)} + T_{pz}^{(4)}
+& M_{xxxy} = \mathbb{T}_{z}^{(3)} - \mathbb{T}_{z}^{\alpha(2)} \\
+& M_{zzxy} = \mathbb{T}_{z}^{(3)} + 2 \mathbb{T}_{z}^{(4)} + 2 \mathbb{T}_{z}^{\alpha(2)} \\
+& M_{yzzx} = \mathbb{T}_{z}^{(4)} - \mathbb{T}_{z}^{\alpha(2)}
 \end{align*}
 * Rank 4 tensor (as).
 \begin{align*}
 \begin{bmatrix} 0 & 0 & 0 & 0 & M_{yzzx} & 0 \\ 0 & 0 & 0 & M_{yzzx} & 0 & 0 \\ M_{xyxx} & M_{xyxx} & M_{xyzz} & 0 & 0 & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& M_{yzzx} = - T_{faz}^{(3)} + T_{pz}^{(6)} \\
-& M_{xyxx} = - T_{faz}^{(3)} + T_{pz}^{(5)} \\
-& M_{xyzz} = 2 T_{faz}^{(3)} + T_{pz}^{(5)} + 2 T_{pz}^{(6)}
+& M_{yzzx} = \mathbb{T}_{z}^{(6)} - \mathbb{T}_{z}^{\alpha(3)} \\
+& M_{xyxx} = \mathbb{T}_{z}^{(5)} - \mathbb{T}_{z}^{\alpha(3)} \\
+& M_{xyzz} = \mathbb{T}_{z}^{(5)} + 2 \mathbb{T}_{z}^{(6)} + 2 \mathbb{T}_{z}^{\alpha(3)}
 \end{align*}
 * Rank 4 tensor (s).
 \begin{align*}
 \begin{bmatrix} 0 & 0 & 0 & 0 & 0 & M_{xxxy} & 0 & 0 & M_{xxyx} \\ 0 & 0 & 0 & 0 & 0 & - M_{xxyx} & 0 & 0 & - M_{xxxy} \\ 0 & 0 & 0 & 0 & 0 & M_{zzxy} & 0 & 0 & - M_{zzxy} \\ 0 & 0 & 0 & 0 & M_{yzzx} & 0 & 0 & M_{yzxz} & 0 \\ 0 & 0 & 0 & - M_{yzxz} & 0 & 0 & - M_{yzzx} & 0 & 0 \\ - \frac{M_{xxxy}}{2} - \frac{M_{xxyx}}{2} & \frac{M_{xxxy}}{2} + \frac{M_{xxyx}}{2} & 0 & 0 & 0 & 0 & 0 & 0 & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& M_{xxxy} = - 2 T_{faz}^{(1)} - T_{faz}^{(2)} + 2 T_{pz}^{(1)} + T_{pz}^{(3)} \\
-& M_{xxyx} = - 2 T_{faz}^{(1)} + T_{faz}^{(2)} + 2 T_{pz}^{(1)} - T_{pz}^{(3)} \\
-& M_{zzxy} = 2 T_{faz}^{(2)} + T_{pz}^{(3)} + 2 T_{pz}^{(4)} \\
-& M_{yzzx} = - 4 T_{faz}^{(1)} - T_{faz}^{(2)} - T_{pz}^{(1)} + T_{pz}^{(4)} \\
-& M_{yzxz} = - 4 T_{faz}^{(1)} + T_{faz}^{(2)} - T_{pz}^{(1)} - T_{pz}^{(4)}
+& M_{xxxy} = 2 \mathbb{T}_{z}^{(1)} + \mathbb{T}_{z}^{(3)} - 2 \mathbb{T}_{z}^{\alpha(1)} - \mathbb{T}_{z}^{\alpha(2)} \\
+& M_{xxyx} = 2 \mathbb{T}_{z}^{(1)} - \mathbb{T}_{z}^{(3)} - 2 \mathbb{T}_{z}^{\alpha(1)} + \mathbb{T}_{z}^{\alpha(2)} \\
+& M_{zzxy} = \mathbb{T}_{z}^{(3)} + 2 \mathbb{T}_{z}^{(4)} + 2 \mathbb{T}_{z}^{\alpha(2)} \\
+& M_{yzzx} = - \mathbb{T}_{z}^{(1)} + \mathbb{T}_{z}^{(4)} - 4 \mathbb{T}_{z}^{\alpha(1)} - \mathbb{T}_{z}^{\alpha(2)} \\
+& M_{yzxz} = - \mathbb{T}_{z}^{(1)} - \mathbb{T}_{z}^{(4)} - 4 \mathbb{T}_{z}^{\alpha(1)} + \mathbb{T}_{z}^{\alpha(2)}
 \end{align*}
 * Rank 4 tensor (a).
 \begin{align*}
 \begin{bmatrix} 0 & 0 & 0 & 0 & M_{yzzx} & 0 & 0 & M_{yzxz} & 0 \\ 0 & 0 & 0 & M_{yzxz} & 0 & 0 & M_{yzzx} & 0 & 0 \\ M_{xyxx} & M_{xyxx} & M_{xyzz} & 0 & 0 & 0 & 0 & 0 & 0 \end{bmatrix}
 \end{align*}
 \begin{align*}
-& M_{yzzx} = - T_{faz}^{(3)} - T_{pz}^{(2)} + T_{pz}^{(6)} \\
-& M_{yzxz} = - T_{faz}^{(3)} + T_{pz}^{(2)} + T_{pz}^{(6)} \\
-& M_{xyxx} = - T_{faz}^{(3)} + T_{pz}^{(5)} \\
-& M_{xyzz} = 2 T_{faz}^{(3)} + T_{pz}^{(5)} + 2 T_{pz}^{(6)}
+& M_{yzzx} = - \mathbb{T}_{z}^{(2)} + \mathbb{T}_{z}^{(6)} - \mathbb{T}_{z}^{\alpha(3)} \\
+& M_{yzxz} = \mathbb{T}_{z}^{(2)} + \mathbb{T}_{z}^{(6)} - \mathbb{T}_{z}^{\alpha(3)} \\
+& M_{xyxx} = \mathbb{T}_{z}^{(5)} - \mathbb{T}_{z}^{\alpha(3)} \\
+& M_{xyzz} = \mathbb{T}_{z}^{(5)} + 2 \mathbb{T}_{z}^{(6)} + 2 \mathbb{T}_{z}^{\alpha(3)}
 \end{align*}
 * Rank 4 tensor (t).
 
