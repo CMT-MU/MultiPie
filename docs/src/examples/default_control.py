@@ -23,7 +23,7 @@ default_control = {
         "dir": "wannier",  # directory for wannier input, i.e., "./seedname/wannier".
         "seedname": None,  # read +(.win, .nnkp, hr.dat, ...).
         "read_KS": False,  # read Kohn-Sham Ek, Uk, +(seedname.mmn, seedname.spn, seedname.uHu, seedname.uIu ...). If False, read _hr.dat.
-        "ket_wannier": [],  # correspondence between Wannier and MultiPie basis, [MultiPie ket name]. If empty, automatically determined.
+        "ket_wannier": [],  # correspondence between Wannier and MultiPie basis, [MultiPie ket name, "orbital@site(sublattice)"] in Wannier order. If empty, automatically determined.
     },
     "output": {  # physical quantity setting.
         "dir": "output",  #  output directory.

@@ -8,9 +8,11 @@ from io import TextIOWrapper
 from pathlib import Path
 import gzip
 import re
+import warnings
 import tarfile
 import spglib
 from multipie import Group
+from multipie.util.util_crystal import P_dict
 
 BOHR2ANG = 0.529177249
 
@@ -934,17 +936,57 @@ def find_sg(A, atoms_frac, symprec=SYMPREC):
     Returns:
         - (int) -- space group no.
     """
+    dataset = _symmetry_dataset(A, atoms_frac, symprec)
+    if dataset:
+        return dataset.number
+    else:
+        return None
+
+
+# ==================================================
+def _symmetry_dataset(A, atoms_frac, symprec=SYMPREC):
+    """
+    Get spglib symmetry dataset of the structure in "win".
+    """
     positions = list(atoms_frac.values())
     elements = list(set([i[0] for i in atoms_frac.keys()]))
     elements = {i: no for no, i in enumerate(elements)}
     numbers = [elements[i[0]] for i in atoms_frac.keys()]
     cell = (A, positions, numbers)
 
-    dataset = spglib.get_symmetry_dataset(cell, symprec=symprec)
-    if dataset:
-        return dataset.number
-    else:
-        return None
+    return spglib.get_symmetry_dataset(cell, symprec=symprec)
+
+
+# ==================================================
+def convert_to_conventional_frac(A, atoms_frac, symprec=SYMPREC):
+    """
+    Convert atomic positions in "win" to fractional coordinates of the conventional cell.
+
+    Args:
+        A (ndarray): lattice vector in "win", [a1,a2,a3].
+        atoms_frac (dict): atoms_frac in "win".
+        symprec (float, optional): precision for spglib.
+
+    Returns:
+        - (int) -- space group no.
+        - (dict) -- atoms_frac in conventional cell.
+
+    Note:
+        - for a centred lattice, the positions are transformed into the standard conventional cell of spglib, x' = P x + p.
+        - for a primitive lattice, the positions are returned as they are.
+    """
+    dataset = _symmetry_dataset(A, atoms_frac, symprec)
+    if not dataset:
+        raise ValueError("space group cannot be determined from the structure in 'win'.")
+
+    if dataset.international[0] == "P":
+        return dataset.number, atoms_frac
+
+    P = np.asarray(dataset.transformation_matrix, dtype=float)
+    p = np.asarray(dataset.origin_shift, dtype=float)
+    atoms_frac = {k: (P @ np.asarray(v, dtype=float) + p).tolist() for k, v in atoms_frac.items()}
+
+    return dataset.number, atoms_frac
 
 
 # ==================================================
@@ -958,10 +1000,16 @@ def find_vector_index(vector_list, vector, symprec=SYMPREC):
         symprec (float, optional): precision.
 
     Returns:
-        - (int) -- index.
+        - (int) -- index (None if not found).
+
+    Note:
+        - vectors differing by a lattice translation are regarded as the same.
     """
+    vector = np.asarray(vector, dtype=float)
     for idx, v in enumerate(vector_list):
-        if np.allclose(v, vector, rtol=0, atol=symprec):
+        # compare modulo lattice translations.
+        delta = np.asarray(v, dtype=float) - vector
+        if np.allclose(delta - np.rint(delta), 0.0, rtol=0, atol=symprec):
             return idx
     return None
 
@@ -982,7 +1030,8 @@ def get_or_add_vector(existing_list, target_vector, symprec=SYMPREC):
     target_arr = np.asarray(target_vector).reshape(-1)
 
     for idx, v in enumerate(existing_list):
-        if np.allclose(v, target_arr, rtol=0, atol=symprec):
+        # Wyckoff orbits with different multiplicities have different lengths.
+        if v.shape == target_arr.shape and np.allclose(v, target_arr, rtol=0, atol=symprec):
             return idx
 
     existing_list.append(target_arr)
@@ -1011,15 +1060,15 @@ def create_ket_wannier_multipie(wannier_info):
         comp, orbital = _convert_w90_orbital(l, m, r, s)
         orbital_list.append((n, l, comp, orbital))
 
-    # determine space group by spglib.
-    space_group_no = find_sg(wannier_info["A"], wannier_info["atoms_frac"])
+    # determine space group by spglib, and convert positions into conventional cell.
+    space_group_no, atoms_conv = convert_to_conventional_frac(wannier_info["A"], wannier_info["atoms_frac"])
     group = Group(space_group_no)
 
     # create atom site-cluster info.
     existing_list = []
     site_cluster = {}
     atom_info = []
-    for (atom, _), pos in wannier_info["atoms_frac"].items():
+    for (atom, _), pos in atoms_conv.items():
         wp, sites = group.find_wyckoff_site(pos)
         idx = get_or_add_vector(existing_list, sites)
         if (atom, wp, idx + 1) not in site_cluster.keys():
@@ -1049,3 +1098,224 @@ def create_ket_wannier_multipie(wannier_info):
     # for debug.
     # return space_group_no, str(group), site_cluster, w_ket, m2w, ket_wannier, ket_multipie
     return w2m, m2w, ket_multipie, atoms_frac, atoms_cart
+
+
+# ==================================================
+def find_lattice_transformation(A_wannier, A_model, tol=0.1):
+    """
+    Find integer unimodular matrix U such that A_wannier = U A_model.
+
+    Args:
+        A_wannier (ndarray): primitive lattice vectors in "win", [a1,a2,a3] (Cartesian).
+        A_model (ndarray): primitive lattice vectors of the model, [a1,a2,a3] (Cartesian).
+        tol (float, optional): tolerance for the deviation of U from integers.
+
+    Returns:
+        - (ndarray) -- U (int), or None if not found.
+        - (float) -- maximum deviation of U from integers.
+
+    Note:
+        - both lattices must be given in the same Cartesian frame (no rotation).
+        - fractional coordinates are converted as x_model = x_wannier U.
+    """
+    U = np.asarray(A_wannier, dtype=float) @ np.linalg.inv(np.asarray(A_model, dtype=float))
+    Ui = np.rint(U)
+    residual = float(np.max(np.abs(U - Ui)))
+    if residual > tol or round(abs(np.linalg.det(Ui))) != 1:
+        return None, residual
+
+    return Ui.astype(int), residual
+
+
+# ==================================================
+def model_primitive_vector(model):
+    """
+    Get primitive lattice vectors of a MultiPie model.
+
+    Args:
+        model (MaterialModel): loaded MultiPie model.
+
+    Returns:
+        - (ndarray) -- primitive lattice vectors, [a1,a2,a3] (Cartesian), consistent with the primitive fractional coordinates of the model.
+    """
+    A = np.asarray(model["unit_vector"], dtype=float)
+    P = np.asarray(P_dict[model.group.info.lattice], dtype=float)[0:3, 0:3]
+
+    return P.T @ A
+
+
+# ==================================================
+def _parse_ket_name(ket):
+    """
+    Parse MultiPie ket name, "orbital@site(sublattice)" or [site, sublattice, orbital].
+    """
+    if isinstance(ket, str):
+        m = re.fullmatch(r"\s*(.+)@(.+)\((\d+)\)\s*", ket)
+        if m is None:
+            raise ValueError(f"invalid ket name '{ket}', use 'orbital@site(sublattice)'.")
+        orbital, site, sl = m.groups()
+    else:
+        site, sl, orbital = ket
+    return site, int(sl), str(orbital).replace(" ", "")
+
+
+# ==================================================
+def map_wannier_to_model(nnkp, A_wannier, model, ket_wannier=None, tol=SYMPREC, lattice_tol=0.1):
+    """
+    Map Wannier functions onto the kets of a MultiPie model.
+
+    Args:
+        nnkp (dict): information returned by :func:`read_nnkp`.
+        A_wannier (ndarray): lattice vectors in "win", [a1,a2,a3] (Cartesian).
+        model (MaterialModel): loaded MultiPie model.
+        ket_wannier (list, optional): MultiPie ket for each Wannier function, ["orbital@site(sublattice)"] or [[site, sublattice, orbital]]. If empty, it is determined from the projection centres.
+        tol (float, optional): tolerance for fractional positions.
+        lattice_tol (float, optional): tolerance for the lattice transformation.
+
+    Returns:
+        - (dict) -- mapping information.
+            - w2m: MultiPie ket index of each Wannier function (list).
+            - U: lattice transformation, x_model = x_wannier U + t (ndarray).
+            - t: origin shift (ndarray).
+            - offset: lattice offset L of each Wannier function, c U + t = r + L, where c and r are the projection centre and the position of MultiPie ket (int ndarray).
+
+    Note:
+        - the lattice of "win" must be related to the primitive lattice of the model by an integer unimodular matrix in the same Cartesian frame. Otherwise, the lattice vectors of "win" are assumed to be those of the model (with warning).
+        - the origin shift t is chosen so that all the projection centres coincide with the sites of the model. When several shifts are possible, the smallest one is used (with warning if the mapping depends on the choice).
+    """
+    keys = ("nw2n", "nw2l", "nw2m", "nw2r", "nw2s", "atom_pos_r")
+    missing = [key for key in keys if nnkp.get(key) is None]
+    if missing:
+        raise ValueError(f"projection information is unavailable in nnkp: {', '.join(missing)}")
+
+    model_ket = [tuple(k) for k in model["full_matrix"]["ket"]]
+    ket_pos = np.asarray(list(model.get_ket_site().values()), dtype=float)
+    num_wann = len(nnkp["nw2n"])
+    if num_wann != len(model_ket):
+        raise ValueError(f"number of Wannier functions ({num_wann}) differs from the dimension of the model ({len(model_ket)}).")
+
+    # lattice transformation.
+    Ap = model_primitive_vector(model)
+    U, residual = find_lattice_transformation(A_wannier, Ap, lattice_tol)
+    if U is None:
+        warnings.warn(
+            "lattice vectors in 'win' do not match the primitive lattice of the model "
+            f"(maximum deviation from integer transformation = {residual:.3e}). "
+            "The fractional coordinates in 'win' are used as those of the model primitive cell.",
+            stacklevel=2,
+        )
+        U = np.eye(3, dtype=int)
+
+    center = np.asarray(nnkp["atom_pos_r"], dtype=float)
+    center_m = center @ U
+    # projection centres in nnkp are rounded to 5 decimals, which is amplified by U.
+    # a residual contains the rounding errors of two centres (the one checked and the one fixing t).
+    tol = tol + 1e-5 * float(np.max(np.abs(U).sum(axis=0)))
+
+    orbitals = [
+        (l, *_convert_w90_orbital(l, m, r, s)) for l, m, r, s in zip(*[nnkp[k] for k in ("nw2l", "nw2m", "nw2r", "nw2s")])
+    ]
+
+    def same(x, y):
+        d = np.asarray(x) - np.asarray(y)
+        return np.allclose(d - np.rint(d), 0.0, rtol=0, atol=tol)
+
+    def assign_ket(site_of_center):
+        w2m = []
+        for iw, (l, _, orbital) in enumerate(orbitals):
+            site, sl = site_of_center[nnkp["nw2n"][iw]]
+            idx = [i for i, k in enumerate(model_ket) if k[0] == site and k[1] == sl and k[2] == l and k[4] == orbital]
+            if len(idx) != 1:
+                return None
+            w2m.append(idx[0])
+        if sorted(w2m) != list(range(len(model_ket))):
+            return None
+        return w2m
+
+    if ket_wannier:
+        # user-given correspondence.
+        if len(ket_wannier) != num_wann:
+            raise ValueError(f"ket_wannier must have {num_wann} entries.")
+        w2m = []
+        for ket in ket_wannier:
+            site, sl, orbital = _parse_ket_name(ket)
+            idx = [i for i, k in enumerate(model_ket) if k[0] == site and k[1] == sl and k[4] == orbital]
+            if len(idx) != 1:
+                raise ValueError(f"ket '{ket}' is not found in the model.")
+            w2m.append(idx[0])
+        if sorted(w2m) != list(range(len(model_ket))):
+            raise ValueError("ket_wannier must contain every ket of the model exactly once.")
+        t = ket_pos[w2m[0]] - center_m[nnkp["nw2n"][0]]
+        t -= np.rint(t)
+    else:
+        # determine origin shift and site of each projection centre.
+        sites = {}
+        for k, p in zip(model_ket, ket_pos):
+            sites.setdefault((k[0], k[1]), p)
+        site_list = list(sites.items())
+
+        candidates = []
+        for _, p in site_list:
+            t = p - center_m[0]
+            t -= np.rint(t)
+            site_of_center = []
+            for c in center_m:
+                match = [s for s, q in site_list if same(c + t, q)]
+                if len(match) != 1:
+                    break
+                site_of_center.append(match[0])
+            else:
+                if len(set(site_of_center)) == len(site_of_center):
+                    w2m = assign_ket(site_of_center)
+                    if w2m is not None:
+                        candidates.append((round(float(np.linalg.norm(t)), 6), t, w2m))
+
+        if not candidates:
+            raise ValueError(
+                "Wannier projection centres cannot be mapped onto the sites and orbitals of the model. "
+                "Check that the lattice vectors and positions in 'win' agree with the model (cell, site and orbital), "
+                "or give 'ket_wannier' in the control."
+            )
+        _, t, w2m = min(candidates, key=lambda c: c[0])
+        if len({tuple(c[2]) for c in candidates}) > 1:
+            warnings.warn(
+                "Wannier functions can be mapped onto the model in several ways. "
+                f"The origin shift {np.round(t, 6).tolist()} is used. Give 'ket_wannier' in the control to specify the mapping.",
+                stacklevel=2,
+            )
+
+    # check consistency of positions, and get lattice offset of each Wannier function, x_win U + t = x_model + offset.
+    offset = []
+    for iw in range(num_wann):
+        d = center_m[nnkp["nw2n"][iw]] + t - ket_pos[w2m[iw]]
+        if not same(d, 0.0):
+            raise ValueError(f"position of Wannier function {iw+1} does not coincide with that of ket {model_ket[w2m[iw]]}.")
+        offset.append(np.rint(d).astype(int))
+
+    return {"w2m": w2m, "U": U, "t": t, "offset": np.asarray(offset, dtype=int)}
+
+
+# ==================================================
+def convert_hr_to_model(hr_dict, mapping):
+    """
+    Convert H(R) in "hr.dat" into the ket and lattice of a MultiPie model.
+
+    Args:
+        hr_dict (dict): H(R) in Wannier index, dict[(n1,n2,n3,a,b), value].
+        mapping (dict): mapping information returned by :func:`map_wannier_to_model`.
+
+    Returns:
+        - (dict) -- H(R) in MultiPie index and primitive lattice of the model, dict[(n1,n2,n3,m,n), (value, None)].
+
+    Note:
+        - H_ab(R) = <0,a|H|R,b> is re-indexed through the bond vector, (c_b + R - c_a) U = r_n + (R U + L_b - L_a) - r_m, where c and r are the projection centre and the position of MultiPie ket, and L is the lattice offset.
+    """
+    w2m, U, offset = mapping["w2m"], mapping["U"], mapping["offset"]
+
+    HR = {}
+    for (n1, n2, n3, a, b), v in hr_dict.items():
+        R = np.array([n1, n2, n3], dtype=int) @ U + offset[b] - offset[a]
+        key = (int(R[0]), int(R[1]), int(R[2]), w2m[a], w2m[b])
+        HR[key] = HR.get(key, 0.0) + complex(v)
+
+    return {k: (v, None) for k, v in HR.items()}

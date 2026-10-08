@@ -21,6 +21,12 @@ This class has the following dict data.
   - **atoms_cart** (list): atom position in primitive cell (cartesian) [in multipie order].
   - **wannier_to_multipie** (list): converting index from wannier to multipie.
   - **multipie_to_wannier** (list): converting index from multipie to wannier.
+  - **lattice_transformation** (list): integer matrix U, x_model = x_wannier U + t (symcw only).
+  - **origin_shift** (list): origin shift t (symcw only).
+
+In symcw mode, the Wannier functions are mapped onto the kets of the model by their projection centres and orbitals, and H(R) in `seedname_hr.dat` is re-indexed into the primitive cell of the model through bond vectors.
+The lattice vectors in `seedname.win` may be any primitive cell of the model lattice in the same Cartesian frame (e.g., `ibrav=7` of Quantum ESPRESSO for a body-centred lattice), and the origin may be shifted.
+Otherwise, the fractional coordinates in `seedname.win` are used as those of the model primitive cell with a warning.
 
 - **output** (dict): output of physical quantities.
   - **dispersion** (dict): dispersion related.
