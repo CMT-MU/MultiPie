@@ -102,17 +102,18 @@ class MaterialModel(BinaryManager):
 
             cwd = os.getcwd()
             path = self.get_cwd()
-            os.chdir(path)
             filename = self["model"]
+            os.chdir(path)
 
-            create_qtdraw_file(
-                filename=f"{filename}.qtdw",
-                callback=lambda qtdraw: create_qtdraw(
-                    qtdraw, self.group, filename, self["cell_info"], self["site"], self["bond"], self["qtdraw_prop"]
-                ),
-            )
-
-            os.chdir(cwd)
+            try:
+                create_qtdraw_file(
+                    filename=f"{filename}.qtdw",
+                    callback=lambda qtdraw: create_qtdraw(
+                        qtdraw, self.group, filename, self["cell_info"], self["site"], self["bond"], self["qtdraw_prop"]
+                    ),
+                )
+            finally:
+                os.chdir(cwd)
             if self.verbose:
                 print(f"save qtdraw to '{path}/{filename}.qtdw'.")
 
@@ -221,23 +222,23 @@ class MaterialModel(BinaryManager):
 
         cwd = os.getcwd()
         path = self.get_cwd()
-        os.chdir(path)
-        os.makedirs("samb", exist_ok=True)
-        os.chdir("samb")
+        os.makedirs(os.path.join(path, "samb"), exist_ok=True)
+        os.chdir(os.path.join(path, "samb"))
 
-        self.save_atomic_samb()
-        self.save_site_bond(site)
-        self.save_cluster_samb(site)
-        for b in bond:
-            self.save_site_bond(b)
-            self.save_cluster_samb(b)
+        try:
+            self.save_atomic_samb()
+            self.save_site_bond(site)
+            self.save_cluster_samb(site)
+            for b in bond:
+                self.save_site_bond(b)
+                self.save_cluster_samb(b)
+        finally:
+            os.chdir(cwd)
 
         if verbose is None:
             verbose = self.verbose
         if verbose:
             print(f"save SAMB QtDraw files in '{self.get_cwd()}/samb/'.")
-
-        os.chdir(cwd)
 
     # ==================================================
     def get_samb_matrix(self, select):

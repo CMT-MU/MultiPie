@@ -90,11 +90,11 @@ class ModelAnalyzer(dict):
         if topdir is None:
             topdir = os.getcwd()
 
-        self._topdir = topdir
+        # absolute path, so that the results do not depend on the current directory.
+        self._topdir = os.path.abspath(topdir)
         self._verbose = verbose
-        self._mm = MaterialModel(topdir, verbose=verbose)
+        self._mm = MaterialModel(self._topdir, verbose=verbose)
         self._local = create_all_local_operator()
-        os.chdir(self._topdir)
 
         self.reset()
 
@@ -386,7 +386,7 @@ class ModelAnalyzer(dict):
         Read controle file.
 
         Args:
-            control (str): control file name.
+            control (str): control file name (relative to topdir).
 
         Returns:
             - (dict) -- control dict.
@@ -396,7 +396,7 @@ class ModelAnalyzer(dict):
         if not control.endswith(".py"):
             raise ValueError(f"control file must be '.py' file, '{control}' is given.")
 
-        return read_dict(control)
+        return read_dict(control, self._topdir)
 
     # ==================================================
     def read_parameter(self, filename=None):

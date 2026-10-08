@@ -154,13 +154,15 @@ class BinaryManager(dict):
             filename (str): file name. (extension is .pkl).
 
         Returns:
-            - (bool) -- return True if error occurs, otherwise False.
+            - (bool) -- False (for compatibility).
+
+        Raises:
+            FileNotFoundError: if the file does not exist.
         """
         self.clear()
         fullpath = self.get_fullpath(filename)
         if not os.path.exists(fullpath):
-            print(f"cannot open '{fullpath}'.")
-            return True
+            raise FileNotFoundError(f"cannot open '{fullpath}'.")
 
         with gzip.open(fullpath, "rb") as f:
             bs = f.read()
