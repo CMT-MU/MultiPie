@@ -9,6 +9,8 @@ import sys
 import subprocess
 import shutil
 import ast
+import io
+import tokenize
 import time
 import logging
 import copy
@@ -288,6 +290,123 @@ def deep_update(d, u):
 
 
 # ==================================================
+def _is_assignable(target):
+    """
+    Is target a valid python assignment target ?
+    """
+    try:
+        ast.parse(f"{target} = 0")
+        return True
+    except SyntaxError:
+        return False
+
+
+# ==================================================
+def _rename_targets(src):
+    """
+    Replace assignment targets which are not identifiers, e.g., "my-model_z = {...}" written by write_dict.
+
+    Args:
+        src (str): source.
+
+    Returns:
+        - (str) -- source with temporary identifiers.
+        - (dict) -- original names, dict[temporary identifier, name].
+
+    Note:
+        - only a target at the beginning of a logical line, consisting of names, numbers and operators without spaces, followed by "= {", and not a valid python assignment target is replaced. Strings and comments are not changed.
+    """
+    try:
+        tokens = list(tokenize.generate_tokens(io.StringIO(src).readline))
+    except (tokenize.TokenError, SyntaxError):
+        return src, {}
+
+    skip = (tokenize.NL, tokenize.COMMENT, tokenize.INDENT, tokenize.DEDENT, tokenize.ENCODING)
+    targets = []
+    line = []
+    for tok in tokens:
+        if tok.type in skip:
+            continue
+        if tok.type not in (tokenize.NEWLINE, tokenize.ENDMARKER):
+            line.append(tok)
+            continue
+        k = next((i for i, t in enumerate(line) if t.type == tokenize.OP and t.string == "="), None)
+        if k and k + 1 < len(line) and line[k + 1].string == "{":
+            target = line[:k]
+            contiguous = all(a.end == b.start for a, b in zip(target, target[1:]))
+            if (
+                target[0].start[1] == 0
+                and contiguous
+                and all(t.type in (tokenize.NAME, tokenize.NUMBER, tokenize.OP) for t in target)
+            ):
+                name = "".join(t.string for t in target)
+                if not _is_assignable(name):
+                    targets.append((target[0].start, target[-1].end, name))
+        line = []
+
+    names = {}
+    # split lines in the same way as tokenize.
+    lines = io.StringIO(src).readlines()
+    for (row, col0), (_, col1), name in reversed(targets):
+        n = len(names)
+        tmp = f"_multipie_var{n}"
+        while tmp in src or tmp in names:
+            n += 1
+            tmp = f"_multipie_var{n}"
+        names[tmp] = name
+        lines[row - 1] = lines[row - 1][:col0] + tmp + lines[row - 1][col1:]
+
+    return "".join(lines), names
+
+
+# ==================================================
+def _parse_dict_source(src, filename="<string>", strict=False):
+    """
+    Parse dicts in python source without executing it.
+
+    Args:
+        src (str): source.
+        filename (str, optional): file name for error message.
+        strict (bool, optional): raise ValueError for statements other than dicts and docstrings ?
+
+    Returns:
+        - (list) -- list of (variable name, dict), "dict" is used for a dict without assignment.
+
+    Note:
+        - only literals are allowed (ast.literal_eval).
+        - "var = {...}" and a bare "{...}" are read, other statements are ignored (strict=False).
+        - var need not be a python identifier (write_dict uses file name, e.g., "my-model_z = {...}").
+    """
+    names = {}
+    try:
+        tree = ast.parse(src, filename)
+    except SyntaxError:
+        src, names = _rename_targets(src)
+        if not names:
+            raise
+        tree = ast.parse(src, filename)
+
+    lst = []
+    for node in tree.body:
+        if isinstance(node, ast.Expr) and isinstance(node.value, ast.Dict):
+            lst.append(("dict", ast.literal_eval(node.value)))
+        elif (
+            isinstance(node, ast.Assign)
+            and len(node.targets) == 1
+            and isinstance(node.targets[0], ast.Name)
+            and isinstance(node.value, ast.Dict)
+        ):
+            name = node.targets[0].id
+            lst.append((names.get(name, name), ast.literal_eval(node.value)))
+        elif strict and not (
+            isinstance(node, ast.Expr) and isinstance(node.value, ast.Constant) and isinstance(node.value.value, str)
+        ):
+            raise ValueError(f"'{filename}' (line {node.lineno}): only a dict (and docstrings) is allowed.")
+
+    return lst
+
+
+# ==================================================
 def read_dict(filename, r_dir=None):
     """
     Read dict.
@@ -298,23 +417,22 @@ def read_dict(filename, r_dir=None):
 
     Returns:
         - (dict) -- read dict.
+
+    Note:
+        - the file must contain exactly one dict, "var = {...}" or "{...}", and no other statements except for docstrings and comments.
     """
     if r_dir is None:
         r_dir = os.getcwd()
     filename = os.path.join(r_dir, filename)
 
     with open(filename, mode="r", encoding="utf-8") as f:
-        s = f.read()
+        src = f.read()
 
-    if s[: s.find("{")].count("=") > 0:
-        s = s.split("=")[-1].strip(" ")
+    lst = _parse_dict_source(src, filename, strict=True)
+    if len(lst) != 1:
+        raise ValueError(f"'{filename}' must contain exactly one dict, but {len(lst)} found.")
 
-    c = ast.get_docstring(ast.parse(s))
-    if c is not None:
-        s = s.replace(c, "").replace('"""', "")
-    dic = ast.literal_eval(s)
-
-    return dic
+    return lst[0][1]
 
 
 # ==================================================
@@ -332,12 +450,10 @@ def read_dict_file(data, topdir=None, verbose=False):
 
     Note:
         - if topdir is None, current directory is used.
+        - relative file names are read from topdir. The current directory is not changed.
     """
     if topdir is None:
         topdir = os.getcwd()
-
-    cwd = os.getcwd()
-    os.chdir(topdir)
 
     # dict or [dict].
     if isinstance(data, dict):
@@ -366,27 +482,11 @@ def read_dict_file(data, topdir=None, verbose=False):
             result[f"{name}{n}"] = value
 
     for filename in data:
-        with open(filename, "r", encoding="utf-8") as f:
+        with open(os.path.join(topdir, filename), "r", encoding="utf-8") as f:
             src = f.read()
 
-        tree = ast.parse(src, filename)
-
-        # for single {...}.
-        if len(tree.body) == 1 and isinstance(tree.body[0], ast.Expr) and isinstance(tree.body[0].value, ast.Dict):
-            add("dict", ast.literal_eval(tree.body[0].value))
-            continue
-
-        #  for A = {...}.
-        for node in tree.body:
-            if (
-                isinstance(node, ast.Assign)
-                and len(node.targets) == 1
-                and isinstance(node.targets[0], ast.Name)
-                and isinstance(node.value, ast.Dict)
-            ):
-                add(node.targets[0].id, ast.literal_eval(node.value))
-
-    os.chdir(cwd)
+        for name, value in _parse_dict_source(src, filename):
+            add(name, value)
 
     if not result:
         raise ValueError(f"no dict is found in {data}.")
