@@ -772,7 +772,7 @@ class ModelAnalyzer(dict):
         self.model.load(name)
         self.set_basis_type(self.model["basis_type"])
         self.set_basis(self.model["full_matrix"]["ket"])
-        self.set_primitive_cell(self.model["unit_vector_primitive"])
+        self.set_primitive_cell(model_primitive_vector(self.model))
 
         # set selected SAMBs.
         matrix_info = self.model.get_samb_matrix(self.samb["select"])
@@ -870,7 +870,9 @@ class ModelAnalyzer(dict):
             # uHu = read_uHu(seedname, wannier_dir)
             # read seedname.uIu
             # uIu = read_uIu(seedname, wannier_dir)
-            pass
+            #
+            # when implemented, H(R) must be converted to the primitive cell of the model as convert_hr_to_model does.
+            raise NotImplementedError("read_KS = True is not implemented yet. Use seedname_hr.dat (read_KS = False).")
         else:
             hr_file = seedname + "_hr.dat"
             hr_dict, irvec, ndegen = read_hr(hr_file, wannier_dir)

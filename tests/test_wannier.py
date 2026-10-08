@@ -292,6 +292,9 @@ def test_symcw_centred_lattice(centred_model, cell, shift, site_order, translati
 
     ma = run_symcw(topdir, name)
     assert ma["wannier"]["multipie_to_wannier"] == m2w
+    # primitive cell of analyzer is the same as that used for the mapping.
+    assert np.allclose(ma["info"]["A"], Ap)
+    assert np.allclose(np.asarray(ma["info"]["A"]) @ np.asarray(ma["info"]["B"]).T, 2 * np.pi * np.eye(3))
     assert max(abs(ma.parameter[z] - v) for z, v in parameter.items()) < 1e-8
 
     # user-given correspondence gives the same result.
@@ -389,3 +392,54 @@ def test_symcw_rounding_of_centres(tmp_path):
         m = mapping["w2m"]
         HR = convert_hr_to_model(hr_dict, mapping)
         assert set(HR) == {(0, 0, 0, m[0], m[0]), (0, 0, 0, m[1], m[1]), (4, 0, 0, m[0], m[1]), (-4, 0, 0, m[1], m[0])}
+
+
+# ==================================================
+def test_symcw_periodic_images_of_site(tmp_path):
+    # s and px projections on the same site, but at centres differing by a lattice vector.
+    topdir = str(tmp_path)
+    name = "image"
+    model = {
+        "model": name,
+        "group": 1,
+        "cell": {"a": 4.0, "b": 3.0, "c": 5.0},
+        "site": {"A": ("[0.1,0.2,0.3]", ["s", "px"])},
+        "pdf": {"create": False},
+        "qtdraw": {"create": False},
+    }
+    create_model(model, topdir=topdir)
+    mm = MaterialModel(topdir=topdir)
+    mm.load(name)
+    path = os.path.join(topdir, name, "wannier")
+    c = [np.array([0.1, 0.2, 0.3]), np.array([1.1, 0.2, 0.3])]
+    HR_w = {((0, 0, 0), 0, 0): 1.0, ((0, 0, 0), 1, 1): 2.0, ((0, 0, 0), 0, 1): 0.5, ((0, 0, 0), 1, 0): 0.5}
+    write_wannier(path, name, model_primitive_vector(mm), c, [(0, 0, 1), (1, 1, 2)], HR_w)
+    win, nnkp = read_win(name, path), read_nnkp(name, path)
+    hr_dict, _, _ = read_hr(f"{name}_hr.dat", path)
+
+    for ket_wannier in [None, ["s@A(1)", "px@A(1)"], [["A", 1, "s"], ["A", 1, "px"]]]:
+        mapping = map_wannier_to_model(nnkp, win["A"], mm, ket_wannier)
+        m = mapping["w2m"]
+        assert [mm["full_matrix"]["ket"][i][4] for i in m] == ["s", "px"]
+        assert set(convert_hr_to_model(hr_dict, mapping)) == {
+            (0, 0, 0, m[0], m[0]),
+            (0, 0, 0, m[1], m[1]),
+            (1, 0, 0, m[0], m[1]),
+            (-1, 0, 0, m[1], m[0]),
+        }
+
+
+# ==================================================
+def test_symcw_read_ks_not_implemented(centred_model):
+    topdir, name, mm, _, HR = centred_model
+    centers, wann, HR_w, _ = model_to_wannier(mm, HR, A_QE, np.zeros(3), [("Mn", 1), ("Au", 1), ("Mn", 2)])
+    path = os.path.join(topdir, name, "wannier")
+    shutil.rmtree(path, ignore_errors=True)
+    write_wannier(path, name, A_QE, centers, wann, HR_w)
+    control = {"mode": "symcw", "samb": {"model": name}, "wannier": {"seedname": name, "read_KS": True}}
+    cwd = os.getcwd()
+    try:
+        with pytest.raises(NotImplementedError):
+            ModelAnalyzer(topdir).analyze(control)
+    finally:
+        os.chdir(cwd)

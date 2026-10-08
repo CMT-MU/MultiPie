@@ -1265,10 +1265,10 @@ def map_wannier_to_model(nnkp, A_wannier, model, ket_wannier=None, tol=SYMPREC, 
                     break
                 site_of_center.append(match[0])
             else:
-                if len(set(site_of_center)) == len(site_of_center):
-                    w2m = assign_ket(site_of_center)
-                    if w2m is not None:
-                        candidates.append((round(float(np.linalg.norm(t)), 6), t, w2m))
+                # several centres may be periodic images of the same site (with different orbitals).
+                w2m = assign_ket(site_of_center)
+                if w2m is not None:
+                    candidates.append((round(float(np.linalg.norm(t)), 6), t, w2m))
 
         if not candidates:
             raise ValueError(
