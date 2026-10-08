@@ -11,11 +11,13 @@ As a tutorial, we describe the procedure for generating model in the case of **g
     $ mp_create -v graphene_in.py
     ```
 
-    It creates four files under `graphene` directory:
+    It creates the following files under `graphene` directory:
 
      - `graphene.pkl` : Model information file (binary)
-     - `graphene.tex`, `graphene.pdf` : Summary of the model information
-     - `graphene.qtdw` : QtDraw file of the model structure
+     - `graphene.tex`, `graphene.pdf` : Summary of the model information (requires LaTeX, see [Installation](install.md))
+     - `graphene.qtdw` : QtDraw file of the model structure (requires QtDraw)
+
+    The PDF and QtDraw files are skipped when LaTeX or QtDraw is not available.
 
 3. To analyze the model, e.g., draw dispersion, run the following:
 
@@ -25,9 +27,9 @@ As a tutorial, we describe the procedure for generating model in the case of **g
 
     It creates the following files under `graphene` directory:
 
-     - `graphene_matrix.py`, `graphene_hr.dat` : Full matrix information for selected SAMBs
+     - `info/graphene_matrix.py`, `info/graphene_hr.dat` : Full matrix information for selected SAMBs
      - `output/` : Various output for physical quantities
-     - `samb/` : QtDraw files for SAMBs
+     - `samb/` : QtDraw files for SAMBs (when `samb_figure` is `True` and QtDraw is installed)
 
 4. In order to handle `graphene.pkl` interactively, use IPython interface. See in detail [analyze_model.ipynb](examples/analyze_model.ipynb)
 
@@ -58,6 +60,19 @@ The default values of control file are provided as follows:
 ```
 
 The typical use of generating SAMBs, you first create the SAMBs for all irreps., and then choose the necessary SAMBs, such as the symmetry-breaking terms in addition to the identity irreps., by specifying `samb/select` and/or `samb/parameter` in the control file.
+
+## Format of input files
+
+Model input files and control files are Python files that contain dictionaries, e.g., `graphene_in = {...}`.
+
+- They are not executed as Python code. Each dictionary is read with `ast.literal_eval`, so only literals (strings, numbers, lists, tuples, dictionaries, `True`/`False`/`None`) are allowed. Arithmetic such as `2*2`, variables and `import` cannot be used.
+- Fractions and symbolic values are given as strings, e.g., `"[1/3,2/3,0]"`. These strings are parsed by SymPy.
+- Every dictionary in a model input file, `name = {...}`, is treated as a separate model.
+
+```{note}
+String values in input files are parsed by SymPy's `parse_expr`, which uses `eval` internally, and the model file `model_name.pkl` is stored with Python's `pickle`.
+Use input files and `.pkl` files only from trusted sources.
+```
 
 ## Output files
 
