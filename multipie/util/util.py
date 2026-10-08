@@ -495,15 +495,16 @@ def do_black(w_dir, pattern="*.py"):
         pattern (str, optional): pattern for black.
     """
     if check_black():
-        w_dir = w_dir if w_dir else "."
+        w_dir = os.path.abspath(w_dir if w_dir else ".")
         if os.path.exists(os.path.join(w_dir, pattern)):  # file name.
-            files = [pattern]
+            files = [os.path.join(w_dir, pattern)]
         else:  # glob pattern, expanded here without shell.
-            files = sorted(os.path.relpath(f, w_dir) for f in glob.glob(os.path.join(glob.escape(w_dir), pattern)))
+            files = sorted(glob.glob(os.path.join(glob.escape(w_dir), pattern)))
         if files:
-            # -P: do not add w_dir to sys.path, so that a file such as w_dir/black.py is not imported.
+            # run with absolute paths and without changing cwd, and with -P (cwd is not added to sys.path),
+            # so that a file such as w_dir/black.py is never imported instead of black.
             cmd = [sys.executable, "-P", "-m", "black"] + _FORMATTER_opt + ["--"] + files
-            subprocess.run(cmd, capture_output=True, cwd=w_dir, text=True)
+            subprocess.run(cmd, capture_output=True, text=True)
 
 
 # ==================================================
