@@ -52,6 +52,7 @@ dev = [
     "jupyter-book==1.0.4.post1",
     "ghp-import",
     "qtdraw",
+    "pytest",
 ]
 
 [tool.setuptools.dynamic]
@@ -65,6 +66,9 @@ exclude = ["build", "tests"]
 
 [tool.black]
 line-length = 130
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
 
 [tool.build_sphinx]
 source-dir = "docs"
