@@ -63,13 +63,21 @@ def test_number_of_samb(graphene_dir):
 # ==================================================
 def test_dispersion(graphene_dir):
     """
-    Nearest-neighbor graphene: E = ±sqrt(3/2) at Gamma (z2=1), and the bands touch at K.
+    Nearest-neighbor graphene (z2=1, hopping t=1/sqrt(6)) along Gamma-M-K-Gamma:
+    E = ±3t at Gamma, ±t at M, and both bands touch at E = 0 at K.
     """
     topdir, ma = graphene_dir
     assert ma.HR is not None
 
     data = np.loadtxt(os.path.join(topdir, "graphene", "output", "graphene_dispersion.txt"))
-    energy = data[:, 1]
-    assert energy.max() == pytest.approx(np.sqrt(1.5), abs=1e-8)
-    assert energy.min() == pytest.approx(-np.sqrt(1.5), abs=1e-8)
-    assert np.abs(energy).min() == pytest.approx(0.0, abs=1e-8)
+    # rows are ordered as band 1 (3 segments), then band 2 (3 segments); each segment includes both end points.
+    n_band = 2
+    assert len(data) % (3 * n_band) == 0
+    energy = data[:, 1].reshape(n_band, -1)
+    n_seg = energy.shape[1] // 3
+    idx = {"Gamma": 0, "M": n_seg - 1, "K": 2 * n_seg - 1}
+
+    t = 1 / np.sqrt(6)
+    expected = {"Gamma": [-3 * t, 3 * t], "M": [-t, t], "K": [0.0, 0.0]}
+    for point, i in idx.items():
+        assert np.sort(energy[:, i]) == pytest.approx(expected[point], abs=1e-8), point

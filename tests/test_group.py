@@ -51,7 +51,7 @@ def test_space_group_number():
 
 # ==================================================
 def test_unknown_tag():
-    with pytest.raises(Exception):
+    with pytest.raises(Exception, match="unknown tag"):
         Group("XYZ")
 
 

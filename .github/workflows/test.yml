@@ -22,5 +22,11 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           python -m pip install . pytest
+      # run outside the checkout, so that the installed package (not the source tree) is tested.
       - name: Test
-        run: python -m pytest -v
+        working-directory: ${{ runner.temp }}
+        env:
+          MPLBACKEND: Agg
+        run: |
+          python -c "import multipie, os, sys; f, w = os.path.realpath(multipie.__file__), os.path.realpath(os.environ['GITHUB_WORKSPACE']); print(f); sys.exit(os.path.commonpath([f, w]) == w)"
+          python -m pytest -v -p no:cacheprovider "$GITHUB_WORKSPACE/tests"
