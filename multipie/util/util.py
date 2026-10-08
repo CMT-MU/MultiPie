@@ -4,6 +4,7 @@ For versatile utility.
 
 import os
 import re
+import glob
 import sys
 import subprocess
 import shutil
@@ -19,7 +20,7 @@ from sympy.parsing.sympy_parser import parse_expr, standard_transformations, imp
 from functools import wraps
 
 TOL = 1e-11
-_FORMATTER_cmd = "black --line-length=300"
+_FORMATTER_opt = ["--line-length=300"]
 
 
 # ==================================================
@@ -494,8 +495,14 @@ def do_black(w_dir, pattern="*.py"):
         pattern (str, optional): pattern for black.
     """
     if check_black():
-        cmd = _FORMATTER_cmd + " " + pattern
-        subprocess.run(cmd, shell=True, capture_output=True, cwd=w_dir, text=True)
+        w_dir = w_dir if w_dir else "."
+        if os.path.exists(os.path.join(w_dir, pattern)):  # file name.
+            files = [pattern]
+        else:  # glob pattern, expanded here without shell.
+            files = sorted(os.path.relpath(f, w_dir) for f in glob.glob(os.path.join(glob.escape(w_dir), pattern)))
+        if files:
+            cmd = [sys.executable, "-m", "black"] + _FORMATTER_opt + ["--"] + files
+            subprocess.run(cmd, capture_output=True, cwd=w_dir, text=True)
 
 
 # ==================================================
