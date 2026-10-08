@@ -4,6 +4,7 @@ This class mangaes PDF creation via LaTeX.
 
 import os
 import shutil
+import signal
 import subprocess
 import math
 import numpy as np
@@ -18,6 +19,41 @@ class LaTeXError(Exception):
     """
 
     pass
+
+
+# ==================================================
+def _run_tex(cmd, timeout):
+    """
+    Run TeX command, and kill all its child processes when timeout occurs.
+
+    Args:
+        cmd (list): command.
+        timeout (float): timeout in seconds.
+
+    Returns:
+        - (int) -- return code.
+
+    Note:
+        - ptex2pdf runs TeX and dvipdfmx as child processes.
+    """
+    if os.name == "nt":
+        opt = {"creationflags": subprocess.CREATE_NEW_PROCESS_GROUP}
+    else:
+        opt = {"start_new_session": True}
+
+    p = subprocess.Popen(cmd, stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, **opt)
+    try:
+        return p.wait(timeout=timeout)
+    except subprocess.TimeoutExpired:
+        if os.name == "nt":
+            subprocess.run(["taskkill", "/F", "/T", "/PID", str(p.pid)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        else:
+            try:
+                os.killpg(p.pid, signal.SIGKILL)
+            except ProcessLookupError:
+                pass
+        p.wait()
+        raise
 
 
 # ==================================================
@@ -157,7 +193,7 @@ class PDFviaLaTeX:
         for x in self.__replace:
             txt = txt.replace(*x)
 
-        pdfdir = self.__dir
+        pdfdir = os.path.abspath(self.__dir)
         cwd = os.getcwd()
         os.chdir(pdfdir)
         try:
@@ -165,6 +201,8 @@ class PDFviaLaTeX:
             f.write(txt)
             f.close()
 
+            if shutil.which("ptex2pdf") is None:
+                raise LaTeXError("ptex2pdf is not found.")
             self._check_package()
 
             # TeX options must be given as one argument of -ot. nonstopmode and closed stdin
@@ -173,17 +211,13 @@ class PDFviaLaTeX:
             rm_file = [self.__fname + ext for ext in [".aux", ".log"]]
 
             n_run = 2 if self.__twice else 1
-            try:
-                for _ in range(n_run):
-                    subprocess.run(
-                        cmd, capture_output=True, check=True, cwd=pdfdir, stdin=subprocess.DEVNULL, timeout=_LATEX_TIMEOUT
-                    )
-            except FileNotFoundError:
-                raise LaTeXError("ptex2pdf is not found.")
-            except subprocess.CalledProcessError:
-                raise LaTeXError(f"LaTeX compile error. See, {self.__fname}.log")
-            except subprocess.TimeoutExpired:
-                raise LaTeXError(f"LaTeX did not finish in {_LATEX_TIMEOUT} sec. See, {self.__fname}.log")
+            for _ in range(n_run):
+                try:
+                    rc = _run_tex(cmd, _LATEX_TIMEOUT)
+                except subprocess.TimeoutExpired:
+                    raise LaTeXError(f"LaTeX did not finish in {_LATEX_TIMEOUT} sec. See, {self.__fname}.log")
+                if rc != 0:
+                    raise LaTeXError(f"LaTeX compile error. See, {self.__fname}.log")
 
             for rm in rm_file:
                 if os.path.exists(rm):
@@ -201,10 +235,15 @@ class PDFviaLaTeX:
         if shutil.which("kpsewhich") is None:
             return
 
-        sty = [name + ".sty" for name, _ in self.__package]
-        result = subprocess.run(["kpsewhich"] + sty, capture_output=True, text=True, stdin=subprocess.DEVNULL)
-        found = {os.path.basename(i.strip()) for i in result.stdout.splitlines() if i.strip()}
-        missing = [i for i in sty if i not in found]
+        # a package entry may contain several names, e.g., "amsmath,amssymb".
+        names = [i.strip() for name, _ in self.__package for i in name.split(",") if i.strip()]
+        missing = []
+        for name in names:
+            result = subprocess.run(
+                ["kpsewhich", name + ".sty"], stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
+            )
+            if result.returncode != 0:
+                missing.append(name + ".sty")
         if missing:
             raise LaTeXError(f"LaTeX package(s) not found: {', '.join(missing)}.")
 
