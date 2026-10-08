@@ -258,8 +258,8 @@ class MaterialModel(BinaryManager):
         ket_site = self.get_ket_site()
         matrix_info = {
             "model": self["model"],
-            "source": f"{self["model"]}.pkl",
-            "created": f"{self["created"]}",
+            "source": f"{self['model']}.pkl",
+            "created": f"{self['created']}",
             "select": regularized_select,
             "dimension": len(ket_site),
             "ket": list(ket_site.keys()),
@@ -401,12 +401,12 @@ class MaterialModel(BinaryManager):
         self["version"] = __version__
         self["created"] = time_stamp()
 
-        comment = f"Model: {self["model"]}\n"
+        comment = f"Model: {self['model']}\n"
         comment += f"* Group: " + self.group.name() + "\n"
-        comment += f"* SAMB selection: {self["SAMB_select"]}\n"
-        comment += f"* atomic selection: {self["atomic_select"]}\n"
-        comment += f"* site-cluster selection: {self["site_select"]}\n"
-        comment += f"* bond-cluster selection: {self["bond_select"]}\n"
+        comment += f"* SAMB selection: {self['SAMB_select']}\n"
+        comment += f"* atomic selection: {self['atomic_select']}\n"
+        comment += f"* site-cluster selection: {self['site_select']}\n"
+        comment += f"* bond-cluster selection: {self['bond_select']}\n"
         comment += f"  {combined_min_num} (all {combined_num}) basis set"
         self.add_comment(comment)
         if self.verbose:
@@ -1000,7 +1000,7 @@ class MaterialModel(BinaryManager):
         samb = self["cluster_samb"][wp][idx][0][comp]
 
         if label:
-            qtdraw.add_text2d(f"idx = ({",".join(map(str,idx[:4]))},{comp})")
+            qtdraw.add_text2d(f"idx = ({','.join(map(str,idx[:4]))},{comp})")
         if site_bond.count(";") > 0:
             bonds = np.array([np.concat([i.vector, i.center]) for i in self["bond"]["cell"][site_bond]])
             sym = idx[0] not in ["T", "M"]
@@ -1033,7 +1033,7 @@ class MaterialModel(BinaryManager):
         bk_info, idx, comp = self["atomic_id"][atomic_id]
 
         if label:
-            qtdraw.add_text2d(f"idx = ({",".join(map(str,idx[:4]))},{comp})")
+            qtdraw.add_text2d(f"idx = ({','.join(map(str,idx[:4]))},{comp})")
         if site_bond is None:
             point = [[0, 0, 0]]
         else:

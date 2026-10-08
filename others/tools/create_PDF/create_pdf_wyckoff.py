@@ -172,7 +172,7 @@ def create_wyckoff():
     for id_s in info["id_set"]["SG"]["all"]:
         no = int(id_s.split(":")[1])
         tag = info["tag"][id_s]
-        h_dir = os.path.join(__top_dir__, f"{pdfdir}SG/{no:03d}-{tag.replace("^", "_")}")
+        h_dir = os.path.join(__top_dir__, f"{pdfdir}SG/{no:03d}-{tag.replace('^', '_')}")
         create_wyckoff_site_each(tag, h_dir)
         create_wyckoff_bond_each(tag, h_dir)
 
