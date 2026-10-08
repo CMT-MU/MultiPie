@@ -34,6 +34,7 @@ from multipie.util.util_wannier import (
     create_ket_wannier_multipie,
 )
 from multipie.util.util import read_dict, str_to_sympy, write_dict, deep_update
+from multipie.util.util import check_dict_keys
 
 _matrix_comment = """Selected SAMB matrix.
 - model (str): model name.
@@ -427,6 +428,15 @@ class ModelAnalyzer(dict):
         """
         if control is None:
             control = {}
+
+        # check unknown keys, e.g., typo.
+        check_dict_keys(
+            control,
+            default_control,
+            name="control",
+            allowed={"samb/select": ["site", "bond", "X", "l", "Gamma", "s"]},
+            free=["samb/parameter", "output/dispersion/k_point"],
+        )
 
         self["info"] = {}
         self["samb"] = {}
