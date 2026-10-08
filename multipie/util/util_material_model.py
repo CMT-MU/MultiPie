@@ -203,7 +203,7 @@ def get_basis_type(site_data, spinful):
         elif tp == dict:
             raise Exception("not implemented.")
         else:
-            raise Exception(f"invalid orbital format, {orb}.")
+            raise ValueError(f"invalid orbital format, {orb}.")
 
     if all(lst):
         basis_type = "jml"
@@ -213,7 +213,7 @@ def get_basis_type(site_data, spinful):
         else:
             basis_type = "lg"
     else:
-        raise Exception("jml, lgs, and lg formats coexist.")
+        raise ValueError("jml, lgs, and lg formats coexist.")
 
     return basis_type
 
@@ -251,7 +251,7 @@ def parse_orbital(orbital, basis_type, basis_info):
                 j = v[0]
                 basis = [i for i in basis_info["jml"][rank] if i.split(",")[0][1:] == j]
             else:
-                raise Exception(f"invalid orbital format, {orbital}.")
+                raise ValueError(f"invalid orbital format, {orbital}.")
         elif basis_type == "lgs":
             if check_block(orb):
                 rank = str_rank[orb[0]]
@@ -260,7 +260,7 @@ def parse_orbital(orbital, basis_type, basis_info):
                 else:
                     basis = [f"({orb},u)", f"({orb},d)"]
             else:
-                raise Exception(f"invalid orbital, {orb}.")
+                raise ValueError(f"invalid orbital, {orb}.")
         elif basis_type == "lg":
             if check_block(orb):
                 rank = str_rank[orb[0]]
@@ -269,9 +269,18 @@ def parse_orbital(orbital, basis_type, basis_info):
                 else:
                     basis = [orb]
             else:
-                raise Exception(f"invalid orbital, {orb}.")
+                raise ValueError(f"invalid orbital, {orb}.")
         else:
-            raise Exception(f"invalid orbital format, {orbital}.")
+            raise ValueError(f"invalid orbital format, {orbital}.")
+
+        if not basis or any(i not in basis_info[basis_type][rank] for i in basis):
+            block = "spdf"[rank]
+            if basis_type == "jml":
+                j = dict.fromkeys(i.split(",")[0][1:] for i in basis_info["jml"][rank])
+                acceptable = [f"({i},{block})" for i in j]
+            else:
+                acceptable = [block] + basis_info["lg"][rank]
+            raise ValueError(f"unknown orbital '{orb}', acceptable: {', '.join(acceptable)}.")
         return rank, basis
 
     tp = type(orbital)
@@ -286,7 +295,7 @@ def parse_orbital(orbital, basis_type, basis_info):
     elif tp == dict:
         raise Exception(f"to be available.")
     else:
-        raise Exception(f"invalid orbital format, {orbital}.")
+        raise ValueError(f"invalid orbital format, {orbital}.")
 
     basis_set = [sorted(block, key=lambda x: basis_info[basis_type][rank].index(x)) for rank, block in enumerate(basis_set)]
 
@@ -756,13 +765,17 @@ def parse_representative_site(group, site_data, basis_type, basis_info):
     rep_site = {}
     cell_site = {}
     for c_no, (name, (pos, orb)) in enumerate(site_data.items()):
-        pos = str(pos)
-        wp, sites = group.find_wyckoff_site(pos)
-        sites_primitive = convert_to_primitive(lattice, sites, shift=True)
-        wyckoff_site = group.wyckoff["site"][wp]
-        sym = wyckoff_site["symmetry"]
-        pos = sites[0].tolist()
-        orb = parse_orbital(orb, basis_type, basis_info)
+        try:
+            pos = str(pos)
+            wp, sites = group.find_wyckoff_site(pos)
+            sites_primitive = convert_to_primitive(lattice, sites, shift=True)
+            wyckoff_site = group.wyckoff["site"][wp]
+            sym = wyckoff_site["symmetry"]
+            pos = sites[0].tolist()
+            orb = parse_orbital(orb, basis_type, basis_info)
+        except Exception as e:
+            e.add_note(f"in site '{name}'.")
+            raise
 
         mapping = wyckoff_site["mapping"]
         n_sub = len(mapping)

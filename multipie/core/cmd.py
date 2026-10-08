@@ -3,7 +3,6 @@ Create command for model and analyze
 """
 
 import os
-import logging
 from multipie.util.util import timer, read_dict_file, setup_logging
 from multipie.core.material_model import MaterialModel
 from multipie.core.model_analyzer import ModelAnalyzer
@@ -47,8 +46,8 @@ def create_model(models, topdir=None, verbose=False):
     for model in models:
         try:
             create(mm, model)
-        except Exception:
-            logging.exception("in create_model")
+        except Exception as e:
+            e.add_note(f"while creating model '{model.get('model')}'.")
             raise
 
     return False
@@ -86,15 +85,17 @@ def analyze_model(controls, topdir=None, verbose=False):
 
     ma = ModelAnalyzer(topdir, verbose=verbose)
     for control in controls:
+        name = None
         try:
-            name = control["samb"]["model"]
+            name = control.get("samb", {}).get("model")
             if name is None:
-                name = control["wannier"]["seedname"]
+                name = control.get("wannier", {}).get("seedname")
                 if name is None:
-                    raise Exception("no model is specified.")
+                    raise ValueError("no model is specified in 'samb/model' or 'wannier/seedname'.")
             create(ma, control, name)
-        except Exception:
-            logging.exception("in analyze_model")
+        except Exception as e:
+            if name is not None:
+                e.add_note(f"while analyzing model '{name}'.")
             raise
 
     return False
