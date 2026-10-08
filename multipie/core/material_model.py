@@ -42,6 +42,7 @@ from multipie.util.util_material_model import (
 )
 from multipie.util.util_material_model_pdf import ModelPDF
 from multipie.core.default_model import default_model
+from multipie.util.util import check_dict_keys
 from multipie.util.util_plot import plot_site, plot_bond, plot_site_samb, plot_bond_samb, plot_harmonics
 
 
@@ -286,6 +287,22 @@ class MaterialModel(BinaryManager):
             model_in = read_dict(model_in, self.topdir)
 
         self.clear()
+
+        # check unknown keys, e.g., typo.
+        select_key = ["X", "l", "Gamma", "s"]
+        check_dict_keys(
+            model_in,
+            default_model,
+            name=f"model '{model_in.get('model', default_model['model'])}'",
+            allowed={
+                "cell": ["a", "b", "c", "alpha", "beta", "gamma"],
+                "SAMB_select": select_key,
+                "atomic_select": select_key,
+                "site_select": select_key,
+                "bond_select": select_key,
+            },
+            free=["site"],
+        )
 
         # set model based on default model.
         model = {}

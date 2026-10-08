@@ -11,6 +11,7 @@ import ast
 import time
 import logging
 import copy
+import difflib
 import numpy as np
 import sympy as sp
 from datetime import datetime
@@ -222,6 +223,50 @@ def normalize_vector(vec, tol=TOL):
     vec = vec / n_vec[:, np.newaxis]
 
     return vec
+
+
+# ==================================================
+def check_dict_keys(d, ref, name="input", allowed=None, free=None):
+    """
+    Check if all keys in dict are known, and raise error for unknown keys.
+
+    Args:
+        d (dict): dict to check.
+        ref (dict): reference dict (default values).
+        name (str, optional): name of dict used in error message.
+        allowed (dict, optional): dict[path, [key]], acceptable keys at path instead of those in ref.
+        free (list, optional): paths whose keys are not checked.
+
+    Raises:
+        ValueError: if unknown keys are found.
+
+    Note:
+        - path is keys joined by "/", e.g., "output/dispersion".
+        - sub dicts are checked recursively when both values in d and ref are dict.
+    """
+    if allowed is None:
+        allowed = {}
+    if free is None:
+        free = []
+
+    unknown = []
+
+    def check(d, ref, path):
+        if path in free:
+            return
+        known = allowed[path] if path in allowed else ref.keys()
+        for k, v in d.items():
+            p = f"{path}/{k}" if path else str(k)
+            if k not in known:
+                close = difflib.get_close_matches(str(k), [str(i) for i in known], n=1)
+                hint = f" (did you mean '{close[0]}'?)" if close else ""
+                unknown.append(f"'{p}'{hint}")
+            elif isinstance(v, dict) and isinstance(ref.get(k), dict):
+                check(v, ref[k], p)
+
+    check(d, ref, "")
+    if unknown:
+        raise ValueError(f"unknown key(s) in {name}: {', '.join(unknown)}.")
 
 
 # ==================================================
