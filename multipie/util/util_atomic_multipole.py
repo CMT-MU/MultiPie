@@ -5,6 +5,7 @@ For creating atomic multipole data.
 import sympy as sp
 from sympy.physics.wigner import wigner_3j, wigner_6j, wigner_9j
 from joblib import Parallel, delayed
+from multipie.util.util import get_n_jobs
 
 orbital = ["s", "p", "d", "f"]
 spin = ["1/2", "-1/2"]
@@ -427,7 +428,7 @@ def create_atomic_multipole_matrix(b_type="lms"):
         for k in reversed(range(-s, s + 1))
     ]
 
-    sub = Parallel(n_jobs=-1, verbose=verbose)([delayed(proc)(xlmsk) for xlmsk in Xlmsk_list])
+    sub = Parallel(n_jobs=get_n_jobs(), verbose=verbose)([delayed(proc)(xlmsk) for xlmsk in Xlmsk_list])
 
     Xlmsk = {tag: am for tag, am in sub if not am.is_zero_matrix}
 
