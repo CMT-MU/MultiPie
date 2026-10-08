@@ -32,6 +32,9 @@ from multipie.util.util_wannier import (
     read_hr,
     decompose_operator_by_SAMB,
     create_ket_wannier_multipie,
+    map_wannier_to_model,
+    convert_hr_to_model,
+    model_primitive_vector,
 )
 from multipie.util.util import read_dict, str_to_sympy, write_dict, deep_update
 from multipie.util.util import check_dict_keys
@@ -268,12 +271,14 @@ class ModelAnalyzer(dict):
                 print(f"#   {k}: {str(v).replace(' ', '')}", file=f)
             print(f"# basis ({matrix_info['dimension']})", file=f)
             for no, (b, p) in enumerate(zip(ket, pos)):
+                p = [float(i) for i in p]
                 print(f"#   {no:2d} {b}: [{p[0]: .6f}, {p[1]: .6f}, {p[2]: .6f}]", file=f)
             for z, v in parameter.items():
                 print(f"# {z:<4} = {v}", file=f)
             print("#", file=f)
             print("# n1   n2   n3    m    n    re                        im", file=f)
             for (n1, n2, n3, m, n), v in HR.items():
+                n1, n2, n3, m, n = int(n1), int(n2), int(n3), int(m), int(n)
                 v = complex(v)
                 r, i = v.real, v.imag
                 s = f"{n1: 4d} {n2: 4d} {n3: 4d} {m: 4d} {n: 4d}    {r: .15e}    {i: .15e}"
@@ -767,7 +772,7 @@ class ModelAnalyzer(dict):
         self.model.load(name)
         self.set_basis_type(self.model["basis_type"])
         self.set_basis(self.model["full_matrix"]["ket"])
-        self.set_primitive_cell(self.model["unit_vector_primitive"])
+        self.set_primitive_cell(model_primitive_vector(self.model))
 
         # set selected SAMBs.
         matrix_info = self.model.get_samb_matrix(self.samb["select"])
@@ -824,22 +829,33 @@ class ModelAnalyzer(dict):
         # read seedname.nnkp
         nnkp = read_nnkp(seedname, wannier_dir)
 
-        wannier_ket_info = {
-            "A": win["A"],
-            "atoms_frac": win["atoms_frac"],
-            "atoms_cart": win["atoms_cart"],
-            "fermi_energy": win["fermi_energy"],
-            "nw2n": nnkp["nw2n"],
-            "nw2l": nnkp["nw2l"],
-            "nw2m": nnkp["nw2m"],
-            "nw2r": nnkp["nw2r"],
-            "nw2s": nnkp["nw2s"],
-        }
-        w2m, m2w, ket_multipie, atoms_frac, atoms_cart = create_ket_wannier_multipie(wannier_ket_info)
-        w_ket = self.wannier.get("ket_wannier", [])
-        if w_ket:
-            m2w = [w_ket.index(m) for m in ket_multipie]
-            w2m = [no for no, i in sorted(enumerate(m2w), key=lambda x: x[1])]
+        if self["info"]["mode"] == "symcw":
+            # map Wannier functions onto the model (loaded by exec_samb).
+            mapping = map_wannier_to_model(nnkp, win["A"], self.model, self.wannier.get("ket_wannier", []))
+            w2m = mapping["w2m"]
+            m2w = [w2m.index(m) for m in range(len(w2m))]
+            model_ket = self.model.get_ket_site()
+            ket_multipie = list(model_ket.keys())
+            atoms_frac = [list(v) for v in model_ket.values()]
+            atoms_cart = (np.asarray(atoms_frac, dtype=float) @ model_primitive_vector(self.model)).tolist()
+        else:
+            wannier_ket_info = {
+                "A": win["A"],
+                "atoms_frac": win["atoms_frac"],
+                "atoms_cart": win["atoms_cart"],
+                "fermi_energy": win["fermi_energy"],
+                "nw2n": nnkp["nw2n"],
+                "nw2l": nnkp["nw2l"],
+                "nw2m": nnkp["nw2m"],
+                "nw2r": nnkp["nw2r"],
+                "nw2s": nnkp["nw2s"],
+            }
+            w2m, m2w, ket_multipie, atoms_frac, atoms_cart = create_ket_wannier_multipie(wannier_ket_info)
+            w_ket = self.wannier.get("ket_wannier", [])
+            if w_ket:
+                m2w = [w_ket.index(m) for m in ket_multipie]
+                w2m = [no for no, i in sorted(enumerate(m2w), key=lambda x: x[1])]
+            mapping = None
 
         if self.wannier["read_KS"]:
             # read KS Ek and Uk, and convert to MultiPie standard order(*) of ket by changing indices of Uk.
@@ -854,12 +870,18 @@ class ModelAnalyzer(dict):
             # uHu = read_uHu(seedname, wannier_dir)
             # read seedname.uIu
             # uIu = read_uIu(seedname, wannier_dir)
-            pass
+            #
+            # when implemented, H(R) must be converted to the primitive cell of the model as convert_hr_to_model does.
+            raise NotImplementedError("read_KS = True is not implemented yet. Use seedname_hr.dat (read_KS = False).")
         else:
             hr_file = seedname + "_hr.dat"
             hr_dict, irvec, ndegen = read_hr(hr_file, wannier_dir)
-            # convert from wannier index to multipie index.
-            HR = {(n1, n2, n3, w2m[w1], w2m[w2]): (complex(v), None) for (n1, n2, n3, w1, w2), v in hr_dict.items()}
+            if mapping is None:
+                # convert from wannier index to multipie index.
+                HR = {(n1, n2, n3, w2m[w1], w2m[w2]): (complex(v), None) for (n1, n2, n3, w1, w2), v in hr_dict.items()}
+            else:
+                # convert to multipie index and primitive lattice of the model through bond vectors.
+                HR = convert_hr_to_model(hr_dict, mapping)
 
         info = {
             "ket": ket_multipie,
@@ -868,9 +890,12 @@ class ModelAnalyzer(dict):
             "wannier_to_multipie": w2m,
             "multipie_to_wannier": m2w,
         }
+        if mapping is not None:
+            info["lattice_transformation"] = mapping["U"].tolist()
+            info["origin_shift"] = mapping["t"].tolist()
 
         self["wannier"] = info
-        self.set_fermi_energy(wannier_ket_info["fermi_energy"])
+        self.set_fermi_energy(win["fermi_energy"])
 
         ### physical qunatity.
         # nk = np.array([np.diag(fermi_dirac(eki - win["fermi_energy"], T=0.0)) for eki in Ek], dtype=float)
