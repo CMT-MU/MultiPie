@@ -124,12 +124,12 @@ class MaterialModel(BinaryManager):
         """
         if check_latex() and self["pdf_ctrl"]["create"]:
             cwd = os.getcwd()
-            path = self.get_cwd()
+            path = os.path.abspath(self.get_cwd())
             os.chdir(path)
             filename = self["model"]
 
             try:
-                pdf = PDFviaLaTeX(filename, landscape=True, english=True, dir=self.get_cwd())
+                pdf = PDFviaLaTeX(filename, landscape=True, english=True, dir=path)
                 ModelPDF(self, pdf)
             except LaTeXError as e:
                 logging.warning(f"skip PDF creation: {e}")

@@ -22,9 +22,37 @@ class LaTeXError(Exception):
 
 
 # ==================================================
+def _kill_tree(p):
+    """
+    Kill process and all its child processes started by _run_tex.
+
+    Args:
+        p (subprocess.Popen): process.
+    """
+    if os.name == "nt":
+        try:
+            subprocess.run(
+                ["taskkill", "/F", "/T", "/PID", str(p.pid)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=30
+            )
+        except (OSError, subprocess.TimeoutExpired):
+            pass
+        if p.poll() is None:
+            p.kill()
+    else:
+        try:
+            os.killpg(p.pid, signal.SIGKILL)
+        except ProcessLookupError:
+            pass
+    try:
+        p.wait(timeout=30)
+    except subprocess.TimeoutExpired:
+        pass
+
+
+# ==================================================
 def _run_tex(cmd, timeout):
     """
-    Run TeX command, and kill all its child processes when timeout occurs.
+    Run TeX command, and kill all its child processes when it does not finish normally.
 
     Args:
         cmd (list): command.
@@ -35,6 +63,7 @@ def _run_tex(cmd, timeout):
 
     Note:
         - ptex2pdf runs TeX and dvipdfmx as child processes.
+        - the process tree is killed on timeout or interruption (e.g., Ctrl-C).
     """
     if os.name == "nt":
         opt = {"creationflags": subprocess.CREATE_NEW_PROCESS_GROUP}
@@ -44,15 +73,8 @@ def _run_tex(cmd, timeout):
     p = subprocess.Popen(cmd, stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, **opt)
     try:
         return p.wait(timeout=timeout)
-    except subprocess.TimeoutExpired:
-        if os.name == "nt":
-            subprocess.run(["taskkill", "/F", "/T", "/PID", str(p.pid)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        else:
-            try:
-                os.killpg(p.pid, signal.SIGKILL)
-            except ProcessLookupError:
-                pass
-        p.wait()
+    except BaseException:
+        _kill_tree(p)
         raise
 
 
@@ -201,13 +223,16 @@ class PDFviaLaTeX:
             f.write(txt)
             f.close()
 
-            if shutil.which("ptex2pdf") is None:
+            ptex2pdf = shutil.which("ptex2pdf")
+            if ptex2pdf is None:
                 raise LaTeXError("ptex2pdf is not found.")
             self._check_package()
 
             # TeX options must be given as one argument of -ot. nonstopmode and closed stdin
             # prevent TeX from waiting for input, e.g., when a package is missing.
-            cmd = ["ptex2pdf", "-l", "-ot", "-synctex=0 -halt-on-error -interaction=nonstopmode", f"{self.__fname}.tex"]
+            cmd = [ptex2pdf, "-l", "-ot", "-synctex=0 -halt-on-error -interaction=nonstopmode", f"{self.__fname}.tex"]
+            if ptex2pdf.lower().endswith(".lua"):  # script found via PATHEXT on Windows.
+                cmd = ["texlua"] + cmd
             rm_file = [self.__fname + ext for ext in [".aux", ".log"]]
 
             n_run = 2 if self.__twice else 1
@@ -216,6 +241,8 @@ class PDFviaLaTeX:
                     rc = _run_tex(cmd, _LATEX_TIMEOUT)
                 except subprocess.TimeoutExpired:
                     raise LaTeXError(f"LaTeX did not finish in {_LATEX_TIMEOUT} sec. See, {self.__fname}.log")
+                except OSError as e:
+                    raise LaTeXError(f"cannot run ptex2pdf: {e}")
                 if rc != 0:
                     raise LaTeXError(f"LaTeX compile error. See, {self.__fname}.log")
 
@@ -237,11 +264,20 @@ class PDFviaLaTeX:
 
         # a package entry may contain several names, e.g., "amsmath,amssymb".
         names = [i.strip() for name, _ in self.__package for i in name.split(",") if i.strip()]
+        names = list(dict.fromkeys(names))
         missing = []
         for name in names:
-            result = subprocess.run(
-                ["kpsewhich", name + ".sty"], stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
-            )
+            # search in the same way as platex, which is used by ptex2pdf -l.
+            try:
+                result = subprocess.run(
+                    ["kpsewhich", "-progname=platex", name + ".sty"],
+                    stdin=subprocess.DEVNULL,
+                    stdout=subprocess.DEVNULL,
+                    stderr=subprocess.DEVNULL,
+                    timeout=60,
+                )
+            except (OSError, subprocess.TimeoutExpired):
+                return  # cannot check, let LaTeX report errors.
             if result.returncode != 0:
                 missing.append(name + ".sty")
         if missing:
