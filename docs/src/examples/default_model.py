@@ -4,7 +4,7 @@ default_model = {
     "group": "C1",
     "cell": {},
     "spinful": False,
-    # acceptable orbital names (tesesral) in site:
+    # acceptable orbital names (tesseral) in site:
     #   s, p=(px, py, pz), d=(dv, dxy, dxz, dyz, du), f=(f2, f1, fbz, f3, f3x, f3y, faz).
     #   (s,u), (s,d), ...
     #   (1/2,s), (1/2,p), (3/2,p), (3/2,d), (5/2,d), (5/2,f), (7/2,f).
