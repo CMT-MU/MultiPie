@@ -383,15 +383,14 @@ class ModelAnalyzer(dict):
             control (str): control file name.
 
         Returns:
-            - (bool) -- if error occurs.
+            - (dict) -- control dict.
 
         :meta private:
         """
-        if control.endswith(".py"):
-            control = read_dict(control)
-            return False
-        else:
-            return True
+        if not control.endswith(".py"):
+            raise ValueError(f"control file must be '.py' file, '{control}' is given.")
+
+        return read_dict(control)
 
     # ==================================================
     def read_parameter(self, filename=None):
@@ -400,6 +399,9 @@ class ModelAnalyzer(dict):
 
         Args:
             filename (str, optional): file name under 'topdir/name'. for empty str, use default, 'topdir/name/info/name_z.py'.
+
+        Returns:
+            - (dict) -- parameter dict.
 
         :meta private:
         """
@@ -414,6 +416,8 @@ class ModelAnalyzer(dict):
         parameter = {tag: float(str_to_sympy(v, rational=False)) if type(v) == str else v for tag, v in parameter.items()}
         if self._verbose:
             print(f"load parameter from '{filename}'.")
+
+        return parameter
 
     # ==================================================
     def reset(self, control=None):
@@ -705,12 +709,11 @@ class ModelAnalyzer(dict):
         Analyze model with control file.
 
         Args:
-            control (str or dict): control file (.py) or model name.
+            control (str or dict): control file (.py) or control dict.
         """
         # read control.
         if type(control) == str:  # read control file.
-            if self.read_controle(control):  # if error.
-                return
+            control = self.read_controle(control)
 
         self.reset(control)
         mode = self["info"]["mode"]

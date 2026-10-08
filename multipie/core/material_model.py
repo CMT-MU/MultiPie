@@ -5,6 +5,7 @@ This module provides material model construction.
 """
 
 import os
+import logging
 import numpy as np
 import sympy as sp
 import multiprocessing
@@ -15,7 +16,7 @@ from multipie import __version__, SAMBType, UniqueSAMBType
 from multipie.core.group import Group
 from multipie.util.util_binary import BinaryManager
 from multipie.util.util import deep_update, time_stamp, check_latex, check_qtdraw, read_dict
-from multipie.util.util_pdf_latex import PDFviaLaTeX
+from multipie.util.util_pdf_latex import PDFviaLaTeX, LaTeXError
 from multipie.util.util_crystal import get_cell_info, create_igrid, convert_to_primitive
 from multipie.util.util_material_model import (
     get_basis_type,
@@ -123,14 +124,19 @@ class MaterialModel(BinaryManager):
         """
         if check_latex() and self["pdf_ctrl"]["create"]:
             cwd = os.getcwd()
-            path = self.get_cwd()
+            path = os.path.abspath(self.get_cwd())
             os.chdir(path)
             filename = self["model"]
 
-            pdf = PDFviaLaTeX(filename, landscape=True, english=True, dir=self.get_cwd())
-            ModelPDF(self, pdf)
+            try:
+                pdf = PDFviaLaTeX(filename, landscape=True, english=True, dir=path)
+                ModelPDF(self, pdf)
+            except LaTeXError as e:
+                logging.warning(f"skip PDF creation: {e}")
+                return
+            finally:
+                os.chdir(cwd)
 
-            os.chdir(cwd)
             if verbose is None:
                 verbose = self.verbose
             if verbose:
