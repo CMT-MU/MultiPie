@@ -21,6 +21,7 @@ from functools import wraps
 
 TOL = 1e-11
 _FORMATTER_opt = ["--line-length=300"]
+_FORMATTER_max_length = 8000  # max. total length of file names in one black command.
 
 
 # ==================================================
@@ -500,11 +501,19 @@ def do_black(w_dir, pattern="*.py"):
             files = [os.path.join(w_dir, pattern)]
         else:  # glob pattern, expanded here without shell.
             files = sorted(glob.glob(os.path.join(glob.escape(w_dir), pattern)))
-        if files:
-            # run with absolute paths and without changing cwd, and with -P (cwd is not added to sys.path),
-            # so that a file such as w_dir/black.py is never imported instead of black.
-            cmd = [sys.executable, "-P", "-m", "black"] + _FORMATTER_opt + ["--"] + files
-            subprocess.run(cmd, capture_output=True, text=True)
+        # run with absolute paths and without changing cwd, and with -P (cwd is not added to sys.path),
+        # so that a file such as w_dir/black.py is never imported instead of black.
+        cmd = [sys.executable, "-P", "-m", "black"] + _FORMATTER_opt + ["--"]
+        # split into batches to keep the command line short (e.g., 32767 characters on Windows).
+        batch, length = [], 0
+        for f in files:
+            if batch and length + len(f) + 1 > _FORMATTER_max_length:
+                subprocess.run(cmd + batch, capture_output=True, text=True)
+                batch, length = [], 0
+            batch.append(f)
+            length += len(f) + 1
+        if batch:
+            subprocess.run(cmd + batch, capture_output=True, text=True)
 
 
 # ==================================================
