@@ -3,9 +3,21 @@ This class mangaes PDF creation via LaTeX.
 """
 
 import os
+import shutil
 import subprocess
 import math
 import numpy as np
+
+_LATEX_TIMEOUT = 1800  # timeout for each LaTeX run in seconds.
+
+
+# ==================================================
+class LaTeXError(Exception):
+    """
+    Error in PDF creation via LaTeX.
+    """
+
+    pass
 
 
 # ==================================================
@@ -148,26 +160,53 @@ class PDFviaLaTeX:
         pdfdir = self.__dir
         cwd = os.getcwd()
         os.chdir(pdfdir)
-        f = open(self.__fname + ".tex", mode="wt")
-        f.write(txt)
-        f.close()
-
-        cmd = f"ptex2pdf -l -ot -synctex=0 -halt-on-error {self.__fname}.tex"  # for texlive.
-        rm_file = [self.__fname + ext for ext in [".aux", ".log"]]
-
         try:
-            subprocess.run(cmd.split(), capture_output=True, check=True, cwd=pdfdir)
-            if self.__twice:
-                subprocess.run(cmd.split(), capture_output=True, check=True, cwd=pdfdir)
-        except subprocess.CalledProcessError:
-            raise Exception(f"LaTeX compile error. See, {self.__fname}.log")
+            f = open(self.__fname + ".tex", mode="wt")
+            f.write(txt)
+            f.close()
 
-        for rm in rm_file:
-            if os.path.exists(rm):
-                os.remove(rm)
+            self._check_package()
 
-        if pdfdir:
+            # TeX options must be given as one argument of -ot. nonstopmode and closed stdin
+            # prevent TeX from waiting for input, e.g., when a package is missing.
+            cmd = ["ptex2pdf", "-l", "-ot", "-synctex=0 -halt-on-error -interaction=nonstopmode", f"{self.__fname}.tex"]
+            rm_file = [self.__fname + ext for ext in [".aux", ".log"]]
+
+            n_run = 2 if self.__twice else 1
+            try:
+                for _ in range(n_run):
+                    subprocess.run(
+                        cmd, capture_output=True, check=True, cwd=pdfdir, stdin=subprocess.DEVNULL, timeout=_LATEX_TIMEOUT
+                    )
+            except FileNotFoundError:
+                raise LaTeXError("ptex2pdf is not found.")
+            except subprocess.CalledProcessError:
+                raise LaTeXError(f"LaTeX compile error. See, {self.__fname}.log")
+            except subprocess.TimeoutExpired:
+                raise LaTeXError(f"LaTeX did not finish in {_LATEX_TIMEOUT} sec. See, {self.__fname}.log")
+
+            for rm in rm_file:
+                if os.path.exists(rm):
+                    os.remove(rm)
+        finally:
             os.chdir(cwd)
+
+    # ==================================================
+    def _check_package(self):
+        """
+        Check if all LaTeX packages are installed (only when kpsewhich is available).
+
+        :meta private:
+        """
+        if shutil.which("kpsewhich") is None:
+            return
+
+        sty = [name + ".sty" for name, _ in self.__package]
+        result = subprocess.run(["kpsewhich"] + sty, capture_output=True, text=True, stdin=subprocess.DEVNULL)
+        found = {os.path.basename(i.strip()) for i in result.stdout.splitlines() if i.strip()}
+        missing = [i for i in sty if i not in found]
+        if missing:
+            raise LaTeXError(f"LaTeX package(s) not found: {', '.join(missing)}.")
 
     # ==================================================
     def _create_source(self, content, package=[], style="normal", pt=10, no_page=False, landscape=False, english=False):
