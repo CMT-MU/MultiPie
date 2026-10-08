@@ -17,7 +17,7 @@ As a tutorial, we describe the procedure for generating model in the case of **g
      - `graphene.tex`, `graphene.pdf` : Summary of the model information
      - `graphene.qtdw` : QtDraw file of the model structure
 
-    The `.tex`/`.pdf` files are created only when `"pdf": {"create": True}` (default) and LaTeX is installed (see [Installation](install.md) for the required TeX components).
+    The `.tex`/`.pdf` files are created only when `"pdf": {"create": True}` (default) and the TeX components listed in [Installation](install.md) (pLaTeX, `ptex2pdf` and the LaTeX packages) are available.
     The `.qtdw` file is created only when `"qtdraw": {"create": True}` (default) and QtDraw is installed.
 
 3. To analyze the model, e.g., draw dispersion, run the following:
