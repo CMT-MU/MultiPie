@@ -541,3 +541,24 @@ def simplify(obj, full_factor=False):
         return f(obj)
 
     raise TypeError(f"Unsupported type: {type(obj)}")
+
+
+# ==================================================
+def get_n_jobs():
+    """
+    Get number of parallel jobs.
+
+    Returns:
+        - (int) -- number of jobs for joblib, given by environment variable MULTIPIE_N_JOBS. [default: -1 (all cores)]
+    """
+    n = os.environ.get("MULTIPIE_N_JOBS", "").strip()
+    if n == "":
+        return -1
+    try:
+        n = int(n)
+    except ValueError:
+        raise ValueError(f"MULTIPIE_N_JOBS must be integer, '{n}' is given.")
+    if n == 0:
+        raise ValueError("MULTIPIE_N_JOBS must not be 0.")
+
+    return n

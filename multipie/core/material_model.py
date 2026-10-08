@@ -7,7 +7,6 @@ This module provides material model construction.
 import os
 import numpy as np
 import sympy as sp
-import multiprocessing
 from itertools import product
 from collections import defaultdict
 
@@ -58,7 +57,6 @@ class MaterialModel(BinaryManager):
         if topdir is None:
             topdir = os.getcwd()
         super().__init__(topdir=topdir, verbose=verbose)
-        self._num_proc = multiprocessing.cpu_count()
         self._jl_verbose = 10 if verbose else 0
 
     # ==================================================

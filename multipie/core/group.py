@@ -8,12 +8,11 @@ import re
 import numpy as np
 import sympy as sp
 from itertools import product
-from sympy.physics.quantum.cg import CG
 from joblib import Parallel, delayed
 
 
 from multipie import PGMultipoleType, SphericalMultipoleType
-from multipie.util.util import str_to_sympy
+from multipie.util.util import str_to_sympy, get_n_jobs
 from multipie.util.util_binary import BinaryManager
 from multipie.util.util_dict import Dict
 from multipie.util.util_gram_schmidt import gram_schmidt
@@ -1304,6 +1303,8 @@ class Group(dict):
         if self.group_type in ["MPG", "MSG"]:
             return None
 
+        from sympy.physics.quantum.cg import CG  # import here, as sympy.physics.quantum is slow to import.
+
         harmonics = self.harmonics
         t_even = {"Q": "Q", "T": "Q", "G": "G", "M": "G"}
         t_val = {"Q": 1, "G": 1, "T": -1, "M": -1}
@@ -1382,7 +1383,7 @@ class Group(dict):
         max_l = 2 * L
         Xlmsk_list = [(X, l, m, 0, 0) for X in ["Q", "M"] for l in range(max_l + 1) for m in reversed(range(-l, l + 1))]
 
-        sub = Parallel(n_jobs=-1, verbose=verbose)([delayed(proc)(xlmsk) for xlmsk in Xlmsk_list])
+        sub = Parallel(n_jobs=get_n_jobs(), verbose=verbose)([delayed(proc)(xlmsk) for xlmsk in Xlmsk_list])
 
         Xlmsk = {tag: am for tag, am in sub if not am.is_zero_matrix}
 
