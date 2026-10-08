@@ -5,8 +5,10 @@ The symcw tests write synthetic Wannier90 files (win, nnkp, hr.dat) from the H(R
 expressed in another primitive cell, origin and orbital order, and check that the SAMB parameters are recovered.
 """
 
+import gzip
 import os
 import shutil
+import tarfile
 
 import numpy as np
 import pytest
@@ -23,9 +25,11 @@ from multipie.util.util_wannier import (
     get_or_add_vector,
     map_wannier_to_model,
     model_primitive_vector,
+    apply_ws_degeneracy,
     read_hr,
     read_nnkp,
     read_win,
+    read_wsvec,
 )
 
 # Mn2Au-type, I4/mmm (Mn 4e, Au 2a).
@@ -106,14 +110,17 @@ def test_wyckoff_centred_lattice_in_primitive_cell():
 
 
 # ==================================================
-def write_wannier(path, seed, A, centers, wann, HR):
+def write_wannier(path, seed, A, centers, wann, HR, ndegen=None, wsvec=None):
     """
-    Write seed.win, seed.nnkp and seed_hr.dat.
+    Write seed.win, seed.nnkp and seed_hr.dat (and seed_wsvec.dat if wsvec is given).
 
     Args:
         wann (list): (centre index, l, m) of each Wannier function.
-        HR (dict): H(R), dict[((n1,n2,n3), a, b), value].
+        HR (dict): H(R), dict[((n1,n2,n3), a, b), value], written as it is.
+        ndegen (dict, optional): dict[(n1,n2,n3), ndegen], 1 if not given.
+        wsvec (dict, optional): dict[((n1,n2,n3), a, b), [T]], [(0,0,0)] if not given.
     """
+    ndegen = ndegen or {}
     os.makedirs(path, exist_ok=True)
     nw = len(wann)
     A = np.asarray(A)
@@ -140,12 +147,23 @@ def write_wannier(path, seed, A, centers, wann, HR):
         f.write("end nnkpts\n")
     Rs = sorted({k[0] for k in HR})
     with open(os.path.join(path, f"{seed}_hr.dat"), "w") as f:
-        f.write(f"synthetic\n{nw}\n{len(Rs)}\n" + " ".join(["1"] * len(Rs)) + "\n")
+        f.write(f"synthetic\n{nw}\n{len(Rs)}\n")
+        for i in range(0, len(Rs), 15):
+            f.write(" ".join(str(ndegen.get(R, 1)) for R in Rs[i : i + 15]) + "\n")
         for R in Rs:
             for b in range(nw):
                 for a in range(nw):
                     v = HR.get((R, a, b), 0.0)
                     f.write(f"{R[0]:5d}{R[1]:5d}{R[2]:5d}{a+1:5d}{b+1:5d}{v.real:20.12f}{v.imag:20.12f}\n")
+    if wsvec is not None:
+        with open(os.path.join(path, f"{seed}_wsvec.dat"), "w") as f:
+            f.write("## synthetic with use_ws_distance=T\n")
+            for R in Rs:
+                for a in range(nw):
+                    for b in range(nw):
+                        T = wsvec.get((R, a, b), [(0, 0, 0)])
+                        f.write(f"{R[0]:5d}{R[1]:5d}{R[2]:5d}{a+1:5d}{b+1:5d}\n{len(T):5d}\n")
+                        f.writelines(f"{t[0]:5d}{t[1]:5d}{t[2]:5d}\n" for t in T)
 
 
 # ==================================================
@@ -468,3 +486,134 @@ def test_point_group_model(tmp_path):
     ma = ModelAnalyzer(topdir)
     ma.analyze({"samb": {"model": "mol", "parameter": {"z1": 1.0}}})
     assert np.allclose(ma["info"]["A"], mm["unit_vector"])
+
+
+def test_apply_ws_degeneracy(tmp_path):
+    # one orbital: the hopping at R=+-2 is on the boundary of the Wigner-Seitz supercell (ndegen=2).
+    hr = {(0, 0, 0, 0, 0): 1.0, (1, 0, 0, 0, 0): 0.5, (-1, 0, 0, 0, 0): 0.5, (2, 0, 0, 0, 0): 0.2, (-2, 0, 0, 0, 0): 0.2}
+    irvec = [(-2, 0, 0), (-1, 0, 0), (0, 0, 0), (1, 0, 0), (2, 0, 0)]
+    ndegen = [2, 1, 1, 1, 2]
+    expected = {(0, 0, 0, 0, 0): 1.0, (1, 0, 0, 0, 0): 0.5, (-1, 0, 0, 0, 0): 0.5, (2, 0, 0, 0, 0): 0.1, (-2, 0, 0, 0, 0): 0.1}
+    assert apply_ws_degeneracy(hr, irvec, ndegen) == pytest.approx(expected)
+
+    # use_ws_distance: H(R=1) is distributed over R+T, T=(0,0,0) and (0,1,0).
+    (tmp_path / "x_wsvec.dat").write_text(
+        "## header\n"
+        + "".join(f"{R[0]:5d}{R[1]:5d}{R[2]:5d}    1    1\n    1\n    0    0    0\n" for R in irvec if R[0] not in (1, -1))
+        + "    1    0    0    1    1\n    2\n    0    0    0\n    0    1    0\n"
+        + "   -1    0    0    1    1\n    2\n    0    0    0\n    0   -1    0\n"
+    )
+    wsvec = read_wsvec("x", str(tmp_path))
+    assert wsvec[(1, 0, 0, 0, 0)] == [(0, 0, 0), (0, 1, 0)]
+    expected = {
+        (0, 0, 0, 0, 0): 1.0,
+        (1, 0, 0, 0, 0): 0.25,
+        (1, 1, 0, 0, 0): 0.25,
+        (-1, 0, 0, 0, 0): 0.25,
+        (-1, -1, 0, 0, 0): 0.25,
+        (2, 0, 0, 0, 0): 0.1,
+        (-2, 0, 0, 0, 0): 0.1,
+    }
+    assert apply_ws_degeneracy(hr, irvec, ndegen, wsvec) == pytest.approx(expected)
+
+    assert read_wsvec("missing", str(tmp_path)) is None
+
+    # compressed file is read in the same way, and an archive without the file is an error.
+    with gzip.open(tmp_path / "y_wsvec.dat.gz", "wt") as f:
+        f.write((tmp_path / "x_wsvec.dat").read_text())
+    assert read_wsvec("y", str(tmp_path)) == wsvec
+    with tarfile.open(tmp_path / "z_wsvec.dat.tar.gz", "w:gz") as tf:
+        tf.add(tmp_path / "x_wsvec.dat", arcname="a.dat")
+        tf.add(tmp_path / "x_wsvec.dat", arcname="b.dat")
+    with pytest.raises(FileNotFoundError):
+        read_wsvec("z", str(tmp_path))
+    (tmp_path / "bad_wsvec.dat").write_text("    0    0    0    1    1\n    2\n    0    0    0\n")
+    with pytest.raises(ValueError, match="invalid format"):
+        read_wsvec("bad", str(tmp_path))
+    (tmp_path / "dup_wsvec.dat").write_text("    0    0    0    1    1\n    1\n    0    0    0\n" * 2)
+    with pytest.raises(ValueError, match="invalid format"):
+        read_wsvec("dup", str(tmp_path))
+
+    # inconsistent degeneracies or shifts of R and -R break the Hermiticity.
+    with pytest.raises(ValueError, match="Hermiticity"):
+        apply_ws_degeneracy(hr, irvec, [1, 1, 1, 1, 2])
+    bad = {k: [(0, 0, 0)] for k in hr}
+    bad[(1, 0, 0, 0, 0)] = [(0, 1, 0)]
+    with pytest.raises(ValueError, match="Hermiticity"):
+        apply_ws_degeneracy(hr, irvec, ndegen, bad)
+
+
+# ==================================================
+def test_apply_ws_degeneracy_fourier():
+    # two orbitals, complex H(R), orbital-dependent shifts with nT > 1, and shifted elements landing on existing R.
+    rng = np.random.default_rng(3)
+    irvec = [(i, j, 0) for i in range(-2, 3) for j in range(-1, 2)]
+    nw = 2
+    H = {}
+    for R in irvec:
+        mR = tuple(-i for i in R)
+        for a in range(nw):
+            for b in range(nw):
+                if (mR, b, a) in H:
+                    H[(R, a, b)] = np.conj(H[(mR, b, a)])
+                else:
+                    H[(R, a, b)] = complex(rng.normal(), rng.normal()) if R != (0, 0, 0) or a != b else rng.normal()
+    ndegen = [1 + (abs(R[0]) == 2) + (abs(R[1]) == 1) for R in irvec]
+    shifts = [[(0, 0, 0)], [(0, 0, 0), (-1, 0, 0)], [(0, 1, 0), (0, 0, 0), (1, -1, 0)]]
+    wsvec = {}
+    for R in irvec:
+        mR = tuple(-i for i in R)
+        for a in range(nw):
+            for b in range(nw):
+                if (mR + (b, a)) in wsvec:  # T(-R,b,a) = -T(R,a,b).
+                    wsvec[R + (a, b)] = [tuple(-t for t in T) for T in wsvec[mR + (b, a)]]
+                else:
+                    wsvec[R + (a, b)] = shifts[(sum(map(abs, R)) + 2 * a + b) % 3]
+    hr = {R + (a, b): v for (R, a, b), v in H.items()}
+
+    HR = apply_ws_degeneracy(hr, irvec, ndegen, wsvec)
+    assert len(HR) < sum(len(wsvec[k]) for k in hr)  # some elements are accumulated.
+
+    for k in rng.random((4, 3)):
+        Hk_w90 = np.zeros((nw, nw), dtype=complex)
+        for (R, a, b), v in H.items():
+            nd = ndegen[irvec.index(R)]
+            for T in wsvec[R + (a, b)]:
+                Hk_w90[a, b] += v * np.exp(2j * np.pi * np.dot(k, np.add(R, T))) / (nd * len(wsvec[R + (a, b)]))
+        Hk = np.zeros((nw, nw), dtype=complex)
+        for (n1, n2, n3, a, b), v in HR.items():
+            Hk[a, b] += v * np.exp(2j * np.pi * np.dot(k, (n1, n2, n3)))
+        assert np.allclose(Hk, Hk_w90)
+        assert np.allclose(Hk, Hk.conj().T)
+
+
+# ==================================================
+@pytest.mark.parametrize("use_wsvec", [False, True])
+def test_symcw_ws_degeneracy(centred_model, use_wsvec):
+    # hr.dat with ndegen > 1, and (with wsvec) the elements of R0 and -R0 written at another image R0+S.
+    topdir, name, mm, parameter, HR = centred_model
+    centers, wann, HR_w, _ = model_to_wannier(mm, HR, A_QE, np.zeros(3), [("Mn", 1), ("Au", 1), ("Mn", 2)])
+    Rs = sorted({k[0] for k, v in HR_w.items() if abs(v) > 1e-10})
+    ndegen = {R: 1 + sum(map(abs, R)) % 3 for R in Rs}
+    ndegen = {R: max(n, ndegen.get(tuple(-i for i in R), 1)) for R, n in ndegen.items()}  # n(R) = n(-R).
+    assert max(ndegen.values()) > 1
+
+    R0 = next(R for R in Rs if R != (0, 0, 0))
+    S = (5, 0, 0)
+    HR_file, wsvec = {}, {}
+    for (R, a, b), v in HR_w.items():
+        n = ndegen.get(R, 1)
+        if use_wsvec and R in (R0, tuple(-i for i in R0)):
+            sign = 1 if R == R0 else -1
+            Rf = tuple(r + sign * s for r, s in zip(R, S))
+            ndegen[Rf] = n
+            wsvec[(Rf, a, b)] = [tuple(-sign * s for s in S)]
+            R = Rf
+        HR_file[(R, a, b)] = v * n
+
+    path = os.path.join(topdir, name, "wannier")
+    shutil.rmtree(path, ignore_errors=True)
+    write_wannier(path, name, A_QE, centers, wann, HR_file, ndegen, wsvec if use_wsvec else None)
+
+    ma = run_symcw(topdir, name)
+    assert max(abs(ma.parameter[z] - v) for z, v in parameter.items()) < 1e-8

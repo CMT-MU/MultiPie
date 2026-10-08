@@ -30,6 +30,8 @@ from multipie.util.util_wannier import (
     read_nnkp,
     merge_wannier_info,
     read_hr,
+    read_wsvec,
+    apply_ws_degeneracy,
     decompose_operator_by_SAMB,
     create_ket_wannier_multipie,
     map_wannier_to_model,
@@ -876,6 +878,8 @@ class ModelAnalyzer(dict):
         else:
             hr_file = seedname + "_hr.dat"
             hr_dict, irvec, ndegen = read_hr(hr_file, wannier_dir)
+            # real-space hoppings with Wigner-Seitz degeneracy (and use_ws_distance if seedname_wsvec.dat exists).
+            hr_dict = apply_ws_degeneracy(hr_dict, irvec, ndegen, read_wsvec(seedname, wannier_dir))
             if mapping is None:
                 # convert from wannier index to multipie index.
                 HR = {(n1, n2, n3, w2m[w1], w2m[w2]): (complex(v), None) for (n1, n2, n3, w1, w2), v in hr_dict.items()}

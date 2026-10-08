@@ -28,6 +28,9 @@ In symcw mode, the Wannier functions are mapped onto the kets of the model by th
 The lattice vectors in `seedname.win` may be any primitive cell of the model lattice in the same Cartesian frame (e.g., `ibrav=7` of Quantum ESPRESSO for a body-centred lattice), and the origin may be shifted.
 Otherwise, the fractional coordinates in `seedname.win` are used as those of the model primitive cell with a warning.
 
+In wannier and symcw modes, H(R) in `seedname_hr.dat` is divided by the Wigner-Seitz degeneracy `ndegen(R)`, as in the Fourier interpolation of Wannier90.
+If `seedname_wsvec.dat` exists (`use_ws_distance`), each matrix element is further distributed over its shortest images R+T with the weight 1/nT.
+
 - **output** (dict): output of physical quantities.
   - **dispersion** (dict): dispersion related.
     - **k_path** (str): k path.
