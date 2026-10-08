@@ -103,6 +103,8 @@ def test_save_samb_qtdraw_restores_cwd(in_tmp, monkeypatch):
     def fail(*args, **kwargs):
         raise RuntimeError("failure while writing")
 
+    mm["qtdraw_prop"]["create"] = True
+    monkeypatch.setattr("multipie.core.material_model.check_qtdraw", lambda: True)
     monkeypatch.setattr(mm, "save_atomic_samb", fail)
     with pytest.raises(RuntimeError, match="failure while writing"):
         mm.save_samb_qtdraw()

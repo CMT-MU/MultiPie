@@ -97,7 +97,12 @@ class MaterialModel(BinaryManager):
         """
         Save model view QtDraw file.
         """
-        if check_qtdraw() and self["qtdraw_prop"]["create"]:
+        if self["qtdraw_prop"]["create"] and not check_qtdraw():
+            if self.verbose:
+                print("QtDraw not found; skipping .qtdw output.")
+            return
+
+        if self["qtdraw_prop"]["create"]:
             from qtdraw import create_qtdraw_file
 
             cwd = os.getcwd()
@@ -122,7 +127,14 @@ class MaterialModel(BinaryManager):
         """
         Save model as PDF file.
         """
-        if check_latex() and self["pdf_ctrl"]["create"]:
+        if verbose is None:
+            verbose = self.verbose
+        if self["pdf_ctrl"]["create"] and not check_latex():
+            if verbose:
+                print("LaTeX not found; skipping PDF output.")
+            return
+
+        if self["pdf_ctrl"]["create"]:
             cwd = os.getcwd()
             path = os.path.abspath(self.get_cwd())
             os.chdir(path)
@@ -137,8 +149,6 @@ class MaterialModel(BinaryManager):
             finally:
                 os.chdir(cwd)
 
-            if verbose is None:
-                verbose = self.verbose
             if verbose:
                 print(f"save PDF to '{path}/{filename}.pdf'.")
 
@@ -214,6 +224,15 @@ class MaterialModel(BinaryManager):
         """
         Save SAMB QtDraw file.
         """
+        if verbose is None:
+            verbose = self.verbose
+        if not check_qtdraw():
+            logging.warning("QtDraw not found; skipping SAMB .qtdw output.")
+            return
+        if not self["qtdraw_prop"]["create"]:
+            logging.warning("'qtdraw/create' of the model is False; skipping SAMB .qtdw output.")
+            return
+
         site_bond = [
             s for s in self["wyckoff"].keys() if s.count(";") == 0 or int(s.split("_")[1]) < self["qtdraw_prop"]["max_neighbor"]
         ]
@@ -235,8 +254,6 @@ class MaterialModel(BinaryManager):
         finally:
             os.chdir(cwd)
 
-        if verbose is None:
-            verbose = self.verbose
         if verbose:
             print(f"save SAMB QtDraw files in '{self.get_cwd()}/samb/'.")
 
@@ -311,6 +328,11 @@ class MaterialModel(BinaryManager):
         # get basic data.
         cell = model["cell"]
         site_data = model["site"]
+        if not isinstance(site_data, dict) or not site_data:
+            raise ValueError(f"model '{model['model']}': no site is given in 'site'.")
+        for name, value in site_data.items():
+            if not isinstance(value, (tuple, list)) or len(value) != 2:
+                raise ValueError(f"model '{model['model']}': site '{name}' must be (position, orbital), but {value!r} is given.")
         bond_data = model["bond"]
         spinful = model["spinful"]
         max_neighbor = model["max_neighbor"]

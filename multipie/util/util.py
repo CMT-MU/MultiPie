@@ -93,7 +93,7 @@ def str_to_sympy(s, check_var=None, check_shape=None, rational=True, subs=None, 
     try:
         s = re.sub(r",\s*]", "]", s)
         expression = parse_expr(s, transformations=transformations, local_dict=local_dict)
-    except (SympifyError, SyntaxError, TypeError):
+    except (SympifyError, SyntaxError, TypeError, tokenize.TokenError):
         raise ValueError(f"invalid string '{s}'.")
 
     expression = np.asarray(expression, dtype=object)
@@ -386,10 +386,36 @@ def _parse_dict_source(src, filename="<string>", strict=False):
             raise
         tree = ast.parse(src, filename)
 
+    def literal(node):
+        try:
+            return ast.literal_eval(node)
+        except ValueError:
+            pass
+
+        # find the outermost expression which is not a literal.
+        def find(n):
+            try:
+                ast.literal_eval(n)
+                return None
+            except ValueError:
+                pass
+            if isinstance(n, (ast.Dict, ast.List, ast.Tuple, ast.Set)):
+                for c in ast.iter_child_nodes(n):
+                    bad = find(c) if isinstance(c, ast.expr) else None
+                    if bad is not None:
+                        return bad
+            return n
+
+        bad = find(node)
+        raise ValueError(
+            f"'{filename}' (line {bad.lineno}): '{ast.unparse(bad)}' is not a literal. "
+            "Only literals (numbers, strings, lists, tuples, dicts, ...) are allowed, and expressions such as 2*2 are not."
+        )
+
     lst = []
     for node in tree.body:
         if isinstance(node, ast.Expr) and isinstance(node.value, ast.Dict):
-            lst.append(("dict", ast.literal_eval(node.value)))
+            lst.append(("dict", literal(node.value)))
         elif (
             isinstance(node, ast.Assign)
             and len(node.targets) == 1
@@ -397,7 +423,7 @@ def _parse_dict_source(src, filename="<string>", strict=False):
             and isinstance(node.value, ast.Dict)
         ):
             name = node.targets[0].id
-            lst.append((names.get(name, name), ast.literal_eval(node.value)))
+            lst.append((names.get(name, name), literal(node.value)))
         elif strict and not (
             isinstance(node, ast.Expr) and isinstance(node.value, ast.Constant) and isinstance(node.value.value, str)
         ):
