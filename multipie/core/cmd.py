@@ -29,7 +29,7 @@ def create_model(models, topdir=None, verbose=False):
     setup_logging()
 
     def create(mm, model):
-        @timer(f"create model='{model["model"]}'", verbose=verbose)
+        @timer(f"create model='{model['model']}'", verbose=verbose)
         def create0():
             mm.analyze(model)
             mm.save()

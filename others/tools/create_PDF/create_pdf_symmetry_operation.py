@@ -94,7 +94,7 @@ def create_symmetry_operation():
     for id_s in info["id_set"]["SG"]["all"]:
         no = int(id_s.split(":")[1])
         tag = info["tag"][id_s]
-        h_dir = os.path.join(__top_dir__, f"{pdfdir}SG/{no:03d}-{tag.replace("^", "_")}")
+        h_dir = os.path.join(__top_dir__, f"{pdfdir}SG/{no:03d}-{tag.replace('^', '_')}")
         create_symmetry_operation_each(id_s, h_dir)
 
     for id_s in info["id_set"]["MPG"]["all"]:

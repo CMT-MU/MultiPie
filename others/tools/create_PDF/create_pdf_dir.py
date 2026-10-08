@@ -25,7 +25,7 @@ def create_pdf_dir():
 
     os.makedirs(os.path.join(pdfdir, "SG"), exist_ok=True)
     for id_s, (d, md, no, tag, name, pg, sg, mpg, msg) in group_name_list["SG"].items():
-        os.makedirs(os.path.join(pdfdir, f"SG/{no:03d}-{tag.replace("^", "_")}"), exist_ok=True)
+        os.makedirs(os.path.join(pdfdir, f"SG/{no:03d}-{tag.replace('^', '_')}"), exist_ok=True)
 
     os.makedirs(os.path.join(pdfdir, "MPG"), exist_ok=True)
     for id_s, (d, md, no, tag, name, pg, sg, mpg, msg) in group_name_list["MPG"].items():

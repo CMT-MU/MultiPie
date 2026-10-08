@@ -621,10 +621,10 @@ class TagBasis:
                 s = s_rank[rank] + info["orbital"]
         else:
             if info["spherical"]:
-                s = f"({info["orbital"]},{info["spin"]})"
+                s = f"({info['orbital']},{info['spin']})"
             else:
                 orb = s_rank[rank] + info["orbital"]
-                s = f"({orb},{info["spin"]})"
+                s = f"({orb},{info['spin']})"
 
         return s
 
@@ -647,12 +647,12 @@ class TagBasis:
         s_rank = {0: "s", 1: "p", 2: "d", 3: "f"}
         if info["spinless"]:
             if info["spherical"]:
-                s = f"{s_rank[rank]},{info["orbital"]}"
+                s = f"{s_rank[rank]},{info['orbital']}"
             else:
                 if rank == 0:
                     s = f"{s_rank[rank]}"
                 else:
-                    s = f"{s_rank[rank]}" + "_{" + f"{info["orbital"]}" + "}"
+                    s = f"{s_rank[rank]}" + "_{" + f"{info['orbital']}" + "}"
         else:
             spin_block = info["spin"] in ["u", "d"]
             if spin_block:
@@ -661,13 +661,13 @@ class TagBasis:
                 spin = info["spin"]
             if info["spherical"]:
                 if spin_block:
-                    s = f"{s_rank[rank]},{info["orbital"]},{spin}"
+                    s = f"{s_rank[rank]},{info['orbital']},{spin}"
                 else:
                     orbital = sp.latex(sp.sympify(info["orbital"]))
                     spin = sp.latex(sp.sympify(info["spin"]))
                     s = f"{orbital},{spin};{s_rank[rank]}"
             else:
-                orb = f"{s_rank[rank]}" + "_{" + f"{info["orbital"]}" + "}"
+                orb = f"{s_rank[rank]}" + "_{" + f"{info['orbital']}" + "}"
                 s = f"{orb},{spin}"
 
         if ket:

@@ -261,11 +261,11 @@ class ModelAnalyzer(dict):
         ket = matrix_info["ket"]
         pos = matrix_info["ket_pos"]
         with open(filename, mode="w", encoding="utf-8") as f:
-            print(f"# SAMB matrix from {matrix_info["source"]} ({matrix_info["created"]})", file=f)
+            print(f"# SAMB matrix from {matrix_info['source']} ({matrix_info['created']})", file=f)
             print("# select", file=f)
             for k, v in matrix_info["select"].items():
-                print(f"#   {k}: {str(v).replace(" ", "")}", file=f)
-            print(f"# basis ({matrix_info["dimension"]})", file=f)
+                print(f"#   {k}: {str(v).replace(' ', '')}", file=f)
+            print(f"# basis ({matrix_info['dimension']})", file=f)
             for no, (b, p) in enumerate(zip(ket, pos)):
                 print(f"#   {no:2d} {b}: [{p[0]: .6f}, {p[1]: .6f}, {p[2]: .6f}]", file=f)
             for z, v in parameter.items():
@@ -316,7 +316,7 @@ class ModelAnalyzer(dict):
         dic = {tag: float(v) for tag, v in parameter.items()}
         dic = dict(sorted(dic.items(), key=lambda item: abs(item[1]), reverse=True))
 
-        comment = _param_comment + f"- by using '{self["info"]["mode"]}' mode.\n"
+        comment = _param_comment + f"- by using '{self['info']['mode']}' mode.\n"
         self.write_dict(dic, "z.py", comment, "info")
 
     # ==================================================
