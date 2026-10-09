@@ -453,7 +453,7 @@ class ModelAnalyzer(dict):
         Read parameter file.
 
         Args:
-            filename (str, optional): file name under 'topdir/name'. for empty str, use default, 'topdir/name/info/name_z.py'.
+            filename (str, optional): '.py' file name relative to 'topdir/name/info'. for empty str, use default, 'topdir/name/info/name_z.py'.
 
         Returns:
             - (dict) -- parameter dict.
@@ -461,14 +461,18 @@ class ModelAnalyzer(dict):
         :meta private:
         """
         name = self["info"]["name"]
-        if filename:
-            filename = "info/" + filename
-        else:
-            filename = f"info/{name}_z.py"
+        if not filename:
+            filename = f"{name}_z.py"
+        path = os.path.join(self._topdir, name, "info")
+        if not filename.endswith(".py"):
+            raise ValueError(f"parameter file must be '.py' file, '{filename}' is given.")
+        if os.path.isabs(filename):
+            raise ValueError(f"parameter file must be relative to '{path}', '{filename}' is given.")
 
-        filename = os.path.join(self._topdir, name, filename)
+        filename = os.path.join(path, filename)
+        if not os.path.isfile(filename):
+            raise FileNotFoundError(f"parameter file '{filename}' is not found (samb/parameter is relative to '{path}').")
         parameter = read_dict(filename)
-        parameter = {tag: float(str_to_sympy(v, rational=False)) if type(v) == str else v for tag, v in parameter.items()}
         if self._verbose:
             print(f"load parameter from '{filename}'.")
 
@@ -832,6 +836,8 @@ class ModelAnalyzer(dict):
         parameter = self.samb["parameter"]
         if type(parameter) == str:  # when parameter is str, read z file.
             parameter = self.read_parameter(parameter)
+        # a value given as str, e.g., "1/2" or "sqrt(2)", is evaluated by SymPy.
+        parameter = {tag: float(str_to_sympy(v, rational=False)) if type(v) == str else v for tag, v in parameter.items()}
 
         # determine local weight if NG_sum_rule is True.
         ng = self.samb["NG_sum_rule"]

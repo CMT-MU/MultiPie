@@ -15,7 +15,7 @@ from multipie import __version__, SAMBType, UniqueSAMBType
 from multipie.core.group import Group
 from multipie.util.util_binary import BinaryManager
 from multipie.util.util import deep_update, time_stamp, check_latex, check_qtdraw, read_dict
-from multipie.util.util_pdf_latex import PDFviaLaTeX, LaTeXError
+from multipie.util.util_pdf_latex import PDFviaLaTeX, LaTeXError, tex_text
 from multipie.util.util_crystal import get_cell_info, create_igrid, convert_to_primitive_vector
 from multipie.util.util_material_model import (
     get_basis_type,
@@ -959,7 +959,7 @@ class MaterialModel(BinaryManager):
         lst = []
         for atom, sublattice, rank, idx, orbital in self["full_matrix"]["ket"]:
             orb = self.group.tag_atomic_basis(orbital, rank, latex=True)
-            orb += "@" + r"{\rm " + atom + "}(" + str(sublattice) + ")"
+            orb += "@" + r"{\rm " + tex_text(atom, math=True) + "}(" + str(sublattice) + ")"
             lst.append(orb)
 
         return lst

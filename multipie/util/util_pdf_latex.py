@@ -1,5 +1,5 @@
 """
-This class mangaes PDF creation via LaTeX.
+This class manages PDF creation via LaTeX.
 """
 
 import os
@@ -10,6 +10,35 @@ import math
 import numpy as np
 
 _LATEX_TIMEOUT = 1800  # timeout for each LaTeX run in seconds.
+
+# LaTeX special characters, and their replacements in text and math modes.
+_TEX_SPECIAL = {
+    "\\": (r"\textbackslash{}", r"\backslash{}"),
+    "{": (r"\{", r"\{"),
+    "}": (r"\}", r"\}"),
+    "_": (r"\texttt{\symbol{95}}", r"\texttt{\symbol{95}}"),  # underscore glyph (\_ is drawn as a rule).
+    "#": (r"\#", r"\#"),
+    "%": (r"\%", r"\%"),
+    "&": (r"\&", r"\&"),
+    "$": (r"\$", r"\$"),
+    "^": (r"\^{}", r"\wedge{}"),
+    "~": (r"\~{}", r"\sim{}"),
+}
+
+
+# ==================================================
+def tex_text(name, math=False):
+    """
+    Escape LaTeX special characters in a name given by the user, e.g., model and site names.
+
+    Args:
+        name (str): name.
+        math (bool, optional): escape for math mode ? otherwise for text mode.
+
+    Returns:
+        - (str) -- escaped name.
+    """
+    return "".join(_TEX_SPECIAL[c][math] if c in _TEX_SPECIAL else c for c in str(name))
 
 
 # ==================================================
@@ -218,6 +247,8 @@ class PDFviaLaTeX:
         pdfdir = os.path.abspath(self.__dir)
         cwd = os.getcwd()
         os.chdir(pdfdir)
+        pdf = os.path.join(pdfdir, self.__fname + ".pdf")
+        done = False
         try:
             f = open(self.__fname + ".tex", mode="wt")
             f.write(txt)
@@ -245,12 +276,19 @@ class PDFviaLaTeX:
                     raise LaTeXError(f"cannot run ptex2pdf: {e}")
                 if rc != 0:
                     raise LaTeXError(f"LaTeX compile error. See, {self.__fname}.log")
+            done = True
 
             for rm in rm_file:
                 if os.path.exists(rm):
                     os.remove(rm)
         finally:
             os.chdir(cwd)
+            # when this run fails or is interrupted, remove the PDF, which is from an earlier run or incomplete.
+            if not done and os.path.exists(pdf):
+                try:
+                    os.remove(pdf)
+                except OSError:  # keep the original error.
+                    pass
 
     # ==================================================
     def _check_package(self):
