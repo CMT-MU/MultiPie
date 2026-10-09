@@ -202,6 +202,7 @@ class MaterialModel(BinaryManager):
             qtdraw.clear_data()
             qtdraw.set_model(name)
             qtdraw.set_crystal(self["crystal"])
+            qtdraw.set_unit_cell(self["cell_info"]["cell"])
             if self.group.is_point_group:
                 qtdraw.set_cell("off")
             else:

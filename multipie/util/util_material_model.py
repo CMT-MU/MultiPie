@@ -1236,6 +1236,7 @@ def create_cluster_samb_qtdraw(qtdraw, mm, site_bond, name):
     qtdraw.clear_data()
     qtdraw.set_model(name)
     qtdraw.set_crystal(mm["crystal"])
+    qtdraw.set_unit_cell(mm["cell_info"]["cell"])
     if mm.group.is_point_group:
         qtdraw.set_cell("off")
     else:

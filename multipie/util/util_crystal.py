@@ -424,16 +424,21 @@ def get_cell_info(crystal, cell):
     elif crystal == "cubic":
         alpha = beta = gamma = 90.0
         b = c = a
-    elif crystal == "triclinic":
-        a = b = c = 1.0
-        alpha = beta = gamma = 90.0
+    # triclinic: all of a, b, c, alpha, beta, gamma are free.
+
+    if not all(np.isfinite(x) and x > 0 for x in (a, b, c)):
+        raise ValueError(f"lattice constants must be positive, but a={a}, b={b}, c={c} are given.")
+    if not all(np.isfinite(x) and 0 < x < 180 for x in (alpha, beta, gamma)):
+        raise ValueError(f"cell angles must be in (0, 180) degree, but alpha={alpha}, beta={beta}, gamma={gamma} are given.")
 
     ca = np.cos(alpha * np.pi / 180)
     cb = np.cos(beta * np.pi / 180)
     cc = np.cos(gamma * np.pi / 180)
     sc = np.sin(gamma * np.pi / 180)
     s = 1.0 - ca * ca - cb * cb - cc * cc + 2.0 * ca * cb * cc
-    s = max(CHOP, np.sqrt(s))
+    if s <= 1e-12:  # (volume / abc)^2, zero within rounding errors, e.g., 8.6e-16 for alpha=beta=gamma=120.
+        raise ValueError(f"cell angles alpha={alpha}, beta={beta}, gamma={gamma} do not form a cell (zero or negative volume).")
+    s = np.sqrt(s)
 
     a1 = np.array([a, 0, 0])
     a2 = np.array([b * cc, b * sc, 0])
