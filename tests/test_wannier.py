@@ -37,6 +37,19 @@ W90_LM = {"s": (0, 1), "pz": (1, 1), "px": (1, 2), "py": (1, 3)}
 
 
 # ==================================================
+@pytest.fixture(autouse=True)
+def unchanged_cwd():
+    """
+    Check that the working directory is not changed by MultiPie (restored for the following tests).
+    """
+    cwd = os.getcwd()
+    yield
+    changed = os.getcwd()
+    os.chdir(cwd)
+    assert changed == cwd
+
+
+# ==================================================
 def wannier_info(A, cart):
     """
     Wannier info. for create_ket_wannier_multipie (one s projection per atom).
@@ -192,9 +205,15 @@ def centred_model(tmp_path_factory):
         "pdf": {"create": False},
         "qtdraw": {"create": False},
     }
-    create_model(model, topdir=topdir)
-    mm = MaterialModel(topdir=topdir)
-    mm.load(name)
+    cwd = os.getcwd()
+    try:
+        create_model(model, topdir=topdir)
+        mm = MaterialModel(topdir=topdir)
+        mm.load(name)
+    finally:
+        changed = os.getcwd()
+        os.chdir(cwd)
+    assert changed == cwd  # the working directory is not changed (checked here, before the autouse fixture).
     Zr = mm.get_samb_matrix({})["matrix"]
     rng = np.random.default_rng(1)
     parameter = {z: float(rng.normal()) for z in Zr}
@@ -211,12 +230,8 @@ def run_symcw(topdir, name, ket_wannier=None):
         "wannier": {"seedname": name, "ket_wannier": ket_wannier or []},
         "output": {"dispersion": {"k_path": None}},
     }
-    cwd = os.getcwd()
-    try:
-        ma = ModelAnalyzer(topdir)
-        ma.analyze(control)
-    finally:
-        os.chdir(cwd)
+    ma = ModelAnalyzer(topdir)
+    ma.analyze(control)
     return ma
 
 
@@ -437,9 +452,19 @@ def test_symcw_read_ks_not_implemented(centred_model):
     shutil.rmtree(path, ignore_errors=True)
     write_wannier(path, name, A_QE, centers, wann, HR_w)
     control = {"mode": "symcw", "samb": {"model": name}, "wannier": {"seedname": name, "read_KS": True}}
-    cwd = os.getcwd()
-    try:
-        with pytest.raises(NotImplementedError):
-            ModelAnalyzer(topdir).analyze(control)
-    finally:
-        os.chdir(cwd)
+    with pytest.raises(NotImplementedError):
+        ModelAnalyzer(topdir).analyze(control)
+
+
+# ==================================================
+def test_point_group_model(tmp_path):
+    # the model of a point group has no centring.
+    topdir = str(tmp_path)
+    model = {"model": "mol", "group": "D3h", "site": {"A": ("[1,0,0]", "s")}, "bond": [("A", "A", [1])]}
+    create_model(model | {"pdf": {"create": False}, "qtdraw": {"create": False}}, topdir=topdir)
+    mm = MaterialModel(topdir=topdir)
+    mm.load("mol")
+    assert np.allclose(model_primitive_vector(mm), mm["unit_vector"])
+    ma = ModelAnalyzer(topdir)
+    ma.analyze({"samb": {"model": "mol", "parameter": {"z1": 1.0}}})
+    assert np.allclose(ma["info"]["A"], mm["unit_vector"])
