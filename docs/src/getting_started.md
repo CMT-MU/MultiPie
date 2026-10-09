@@ -20,7 +20,7 @@ As a tutorial, we describe the procedure for generating model in the case of **g
     The `.tex`/`.pdf` files are created only when `"pdf": {"create": True}` (default) and the TeX components listed in [Installation](install.md) (pLaTeX, `ptex2pdf` and the LaTeX packages) are available:
 
      - If `latex` is not found, neither file is written (with `-v`, a notice is printed).
-     - Otherwise the `.tex` file is written first. If `ptex2pdf` or a LaTeX package is then found missing, or the compilation fails or does not finish, a warning is printed and a correct `.pdf` file is not guaranteed (a `.pdf` file from an earlier run or from an earlier pass of the compilation may remain).
+     - Otherwise the `.tex` file is written first. If `ptex2pdf` or a LaTeX package is then found missing, or the compilation fails or does not finish, a warning is printed and a correct `.pdf` file is not guaranteed (a `.pdf` file from an earlier run or from an earlier pass of the compilation may remain; remove it before re-running if you rely on the PDF).
      - The `.pkl` file and the other outputs are written in any case.
 
     The `.qtdw` file is created only when `"qtdraw": {"create": True}` (default) and QtDraw is installed (with `-v`, a notice is printed if QtDraw is not found).
@@ -73,7 +73,7 @@ Model input files and control files are Python files that contain dictionaries, 
 
 - They are not executed as Python code. Each dictionary is read with `ast.literal_eval`, so only literals (strings, numbers, lists, tuples, dictionaries, `True`/`False`/`None`) are allowed. Arithmetic such as `2*2`, variables and `import` cannot be used.
 - Fractions and symbolic values are given as strings, e.g., `"[1/3,2/3,0]"`. Strings representing mathematical expressions are parsed by SymPy.
-- With `mp_create` (or `create_model`), every dictionary in a model input file, `name = {...}`, is treated as a separate model. `MaterialModel.analyze(filename)` expects one model dictionary per file.
+- With `mp_create` (or `create_model`), every dictionary in a model input file, `name = {...}`, is treated as a separate model, and with `mp_analyze` (or `analyze_model`), every dictionary in a control file is treated as a separate control. `MaterialModel.analyze(filename)` and `ModelAnalyzer.analyze(filename)` expect one dictionary per file.
 - Unknown keys, e.g., a typo such as `"spinfull"`, are errors: `ValueError: unknown key(s) in model 'x': 'spinfull' (did you mean 'spinful'?).` The accepted keys are those in the default model and the default control above, and also
   - `cell`: `a`, `b`, `c`, `alpha`, `beta`, `gamma`,
   - `SAMB_select`, `atomic_select`, `site_select`, `bond_select`: `X`, `l`, `Gamma`, `s`,
@@ -81,20 +81,26 @@ Model input files and control files are Python files that contain dictionaries, 
 
   The keys of the following dictionaries are not checked against the defaults, but have their own rules:
 
-  - site names in `site`: non-empty strings without `;`, and without `_` for sites used in `bond` (`;` and `_` are used in the names of site and bond clusters). Letters and digits, e.g., `"Fe1"`, are recommended, since the names also appear in the PDF (LaTeX) and in file names.
-  - SAMB names in `samb/parameter`: names of the generated SAMBs, e.g., `"z1"`.
+  - site names in `site`: non-empty strings without `;`, and without `_` for sites used in `bond` (`;` and `_` are used in the names of site and bond clusters). Letters and digits, e.g., `"Fe1"`, are recommended for all sites, since the names also appear in the PDF (LaTeX) and in file names. A name with a LaTeX special character, e.g., `#` or `%`, makes the PDF compilation fail (the other outputs are written).
+  - SAMB names in `samb/parameter`: names of the generated SAMBs, e.g., `"z1"`. `samb/parameter` may also be the name of a Python file containing one dictionary of the same form, given relative to `model_name/info/`, with the extension, e.g., `"my_z.py"` for `model_name/info/my_z.py` (not `"info/my_z.py"` or `"my_z"`).
   - k-point labels in `output/dispersion/k_point`: labels used in `k_path`, without `-`, `|` and spaces, which separate the points in `k_path`.
+
+```{note}
+Strings representing mathematical expressions in input files are parsed by SymPy's `parse_expr`, which uses `eval` internally, and the model file `model_name.pkl` is stored with Python's `pickle`.
+Use input files and `.pkl` files only from trusted sources.
+```
 
 ## Command-line tools
 
-- `mp_create` and `mp_analyze` exit with status 1 when an error occurs (status 2 when no input file is given). The error is printed in one message with the input file, the site and the model concerned; with `-v`, the full traceback is printed instead.
+- `mp_create` and `mp_analyze` exit with status 1 when an error occurs, and with status 2 for a usage error, e.g., no input file or an unknown option. The error is printed in one message with the input file and, when applicable, the model and the site concerned; with `-v`, the full traceback is printed instead.
 - When several input files are given, all of them are read before any model is created or analyzed.
 - `mp_create -i` and `mp_analyze -i` print the default model and control, which can be used as a template of an input file.
 - `python -m multipie.scripts.mp_create` and `python -m multipie.scripts.mp_analyze` work in the same way.
 
 ## Parallel computation
 
-Some steps, e.g., the atomic multipoles, are computed in parallel with joblib.
+The atomic multipole matrices, `create_atomic_multipole_matrix` in `multipie.util.util_atomic_multipole`, and the atomic SAMBs, `Group.create_atomic_samb_L`, are computed in parallel with joblib.
+These are used to generate the database; `mp_create` and `mp_analyze` use the precomputed data and are not affected.
 The number of processes is given by the environment variable `MULTIPIE_N_JOBS`:
 
 - not set or empty: all cores (`-1`, default),
@@ -103,13 +109,10 @@ The number of processes is given by the environment variable `MULTIPIE_N_JOBS`:
 - `0` or a non-integer value is an error.
 
 ```bash
-$ MULTIPIE_N_JOBS=4 mp_create -v graphene_in.py
+$ MULTIPIE_N_JOBS=4 python my_script.py   # a script calling the functions above
 ```
 
-```{note}
-Strings representing mathematical expressions in input files are parsed by SymPy's `parse_expr`, which uses `eval` internally, and the model file `model_name.pkl` is stored with Python's `pickle`.
-Use input files and `.pkl` files only from trusted sources.
-```
+In PowerShell on Windows, use `$env:MULTIPIE_N_JOBS = "4"` before running the script; the setting remains for the session until it is removed by `Remove-Item env:MULTIPIE_N_JOBS`.
 
 ## Output files
 
