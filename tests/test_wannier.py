@@ -6,16 +6,19 @@ expressed in another primitive cell, origin and orbital order, and check that th
 """
 
 import gzip
+import copy
 import os
 import shutil
 import tarfile
+import warnings
 
 import numpy as np
 import pytest
+import seekpath
 
 from multipie import Group, MaterialModel
 from multipie.core.cmd import create_model
-from multipie.core.model_analyzer import ModelAnalyzer
+from multipie.core.model_analyzer import ModelAnalyzer, _join_kpath
 from multipie.util.util_model_analyzer import fourier_r_to_k
 from multipie.util.util_wannier import (
     convert_hr_to_model,
@@ -71,6 +74,7 @@ def wannier_info(A, cart):
         nw2m=[1] * len(n),
         nw2r=[1] * len(n),
         nw2s=[0] * len(n),
+        atom_pos_r=list(frac.values()),
     )
 
 
@@ -110,7 +114,47 @@ def test_wyckoff_centred_lattice_in_primitive_cell():
 
 
 # ==================================================
-def write_wannier(path, seed, A, centers, wann, HR, ndegen=None, wsvec=None):
+def test_ket_projection_centres_not_in_atom_order():
+    # rutile TiO2: projections on O(4), Ti(1) and O(2) shifted by a lattice vector, not in the order of atoms.
+    a, c, u = 4.594, 2.959, 0.305
+    cart = {
+        ("Ti", 1): [0, 0, 0],
+        ("Ti", 2): [a / 2, a / 2, c / 2],
+        ("O", 1): [u * a, u * a, 0],
+        ("O", 2): [-u * a, -u * a, 0],
+        ("O", 3): [(0.5 + u) * a, (0.5 - u) * a, c / 2],
+        ("O", 4): [(0.5 - u) * a, (0.5 + u) * a, c / 2],
+    }
+    info = wannier_info(np.diag([a, a, c]), cart)
+    frac = info["atoms_frac"]
+    centres = [frac[("O", 4)], frac[("Ti", 1)], (np.asarray(frac[("O", 2)]) + [1, 0, -1]).tolist()]
+    info.update(nw2n=[0, 1, 2], nw2l=[0] * 3, nw2m=[1] * 3, nw2r=[1] * 3, nw2s=[0] * 3, atom_pos_r=centres)
+    w2m, m2w, ket, pos, cart_pos = create_ket_wannier_multipie(info)
+    assert [ket[w2m[w]].split("@")[1][:2] for w in range(3)] == ["O(", "Ti", "O("]
+    assert np.allclose([pos[w2m[w]] for w in range(3)], centres)
+    assert np.allclose(cart_pos, np.asarray(pos) @ info["A"])
+
+    # a projection centre not on an atom (e.g., bond centre) is named X1.
+    info["atom_pos_r"] = [[0.1, 0.2, 0.3]] + centres[1:]
+    w2m, _, ket, pos, _ = create_ket_wannier_multipie(info)
+    assert ket[w2m[0]] == "s@X1(1)"
+    assert np.allclose(pos[w2m[0]], [0.1, 0.2, 0.3])
+
+
+# ==================================================
+def test_ket_without_projection_centres():
+    # without atom_pos_r, the n-th projection centre is the n-th atom in seedname.win.
+    cart = {("Mn", 1): [0, 0, Z_MN * C_LAT], ("Mn", 2): [0, 0, -Z_MN * C_LAT], ("Au", 1): [0, 0, 0]}
+    info = wannier_info(A_QE, cart)
+    legacy = {k: v for k, v in info.items() if k != "atom_pos_r"}
+    result, result_legacy = create_ket_wannier_multipie(info), create_ket_wannier_multipie(legacy)
+    assert result[:3] == result_legacy[:3]
+    assert np.allclose(result[3], result_legacy[3])
+    assert np.allclose(result[4], result_legacy[4])
+
+
+# ==================================================
+def write_wannier(path, seed, A, centers, wann, HR, ndegen=None, wsvec=None, species=None, atoms=None):
     """
     Write seed.win, seed.nnkp and seed_hr.dat (and seed_wsvec.dat if wsvec is given).
 
@@ -119,7 +163,11 @@ def write_wannier(path, seed, A, centers, wann, HR, ndegen=None, wsvec=None):
         HR (dict): H(R), dict[((n1,n2,n3), a, b), value], written as it is.
         ndegen (dict, optional): dict[(n1,n2,n3), ndegen], 1 if not given.
         wsvec (dict, optional): dict[((n1,n2,n3), a, b), [T]], [(0,0,0)] if not given.
+        species (list, optional): element of each centre, "X" if not given.
+        atoms (list, optional): atoms in seedname.win, [(element, position)], (species, centers) if not given.
     """
+    species = species or ["X"] * len(centers)
+    atoms = atoms or list(zip(species, centers))
     ndegen = ndegen or {}
     os.makedirs(path, exist_ok=True)
     nw = len(wann)
@@ -129,7 +177,7 @@ def write_wannier(path, seed, A, centers, wann, HR, ndegen=None, wsvec=None):
         f.write(f"num_wann = {nw}\nnum_bands = {nw}\nmp_grid = 1 1 1\n\nbegin unit_cell_cart\nAng\n")
         f.writelines("  %.10f %.10f %.10f\n" % tuple(v) for v in A)
         f.write("end unit_cell_cart\n\nbegin atoms_frac\n")
-        f.writelines("X %.10f %.10f %.10f\n" % tuple(c) for c in centers)
+        f.writelines("%s %.10f %.10f %.10f\n" % (e, *c) for e, c in atoms)
         f.write("end atoms_frac\n")
     with open(os.path.join(path, f"{seed}.nnkp"), "w") as f:
         f.write("synthetic\n\nbegin real_lattice\n")
@@ -617,3 +665,213 @@ def test_symcw_ws_degeneracy(centred_model, use_wsvec):
 
     ma = run_symcw(topdir, name)
     assert max(abs(ma.parameter[z] - v) for z, v in parameter.items()) < 1e-8
+
+
+# ==================================================
+def test_wannier_mode(centred_model):
+    # wannier mode with and without model, for seedname.win in the primitive cell of QE (ibrav=7),
+    # with the atoms of seedname.win not in the order of projection centres, and seedname different from the model name.
+    topdir, name, mm, parameter, HR = centred_model
+    seed = name + "_w"
+    site_order = [("Mn", 1), ("Au", 1), ("Mn", 2)]
+    species = ["Mn", "Au", "Mn"]
+    centers, wann, HR_w, _ = model_to_wannier(mm, HR, A_QE, np.zeros(3), site_order)
+    atoms = [("Au", centers[1]), ("Mn", centers[2]), ("Mn", centers[0])]
+    path = os.path.join(topdir, seed, "wannier")
+    shutil.rmtree(path, ignore_errors=True)
+    write_wannier(path, seed, A_QE, centers, wann, HR_w, atoms=atoms)
+
+    # the same Cartesian k path, in the reciprocal basis of the model and of seedname.win.
+    U = np.rint(np.asarray(A_QE) @ np.linalg.inv(model_primitive_vector(mm)))
+    k_m = {"Γ": [0, 0, 0], "X": [0.5, 0, 0], "Z": [0.5, 0.5, -0.5], "P": [0.25, 0.25, 0.25]}
+    k_w = {k: (np.asarray(v) @ U.T).tolist() for k, v in k_m.items()}
+
+    ma = ModelAnalyzer(topdir)  # the same analyzer is used for all runs.
+
+    def run(mode, model, k_point, tb_gauge=True, samb_parameter=None):
+        control = {
+            "mode": mode,
+            "wannier": {"seedname": seed},
+            "output": {
+                "fourier": {"tb_gauge": tb_gauge},
+                "dispersion": {"k_path": "Γ-X-P-Z|X-Γ", "k_point": {k: str(v) for k, v in k_point.items()}},
+            },
+        }
+        if model:
+            control["samb"] = {"model": name}
+            if samb_parameter:
+                control["samb"]["parameter"] = samb_parameter
+        ma.analyze(control)
+        out = name if model else seed  # output directory.
+        disp = np.loadtxt(os.path.join(topdir, out, "output", f"{out}_dispersion.txt"))
+        assert ma["info"]["name"] == out
+        HR = {k: complex(v[0] if isinstance(v, tuple) else v) for k, v in ma.HR.items()}
+        return copy.deepcopy(dict(ma)), HR, disp
+
+    # model-free -> model -> samb with the same analyzer: no state is carried over.
+    without_model, HR_without, disp_without = run("wannier", False, k_w)
+    with_model, _, disp_with = run("wannier", True, k_m)
+    _, _, disp_samb = run("samb", True, k_m, samb_parameter=parameter)
+    _, _, disp_gauge = run("wannier", False, k_w, tb_gauge=False)
+    symcw, _, disp_symcw = run("symcw", True, k_m)
+    # the same k path (Cartesian distance) and bands.
+    for disp in [disp_with, disp_without, disp_gauge, disp_samb]:
+        assert np.allclose(disp, disp_symcw, atol=1e-8)
+    B_m = 2 * np.pi * np.linalg.inv(model_primitive_vector(mm)).T
+    segments = [("Γ", "X"), ("X", "P"), ("P", "Z"), ("X", "Γ")]
+    length = sum(np.linalg.norm((np.asarray(k_m[e]) - np.asarray(k_m[s])) @ B_m) for s, e in segments)
+    assert disp_symcw[:, 0].max() == pytest.approx(length)
+
+    # with model: lattice of the model. without model: those of seedname.win.
+    assert np.allclose(with_model["info"]["A"], model_primitive_vector(mm))
+    assert np.allclose(without_model["info"]["A"], A_QE)
+    w2m = without_model["wannier"]["wannier_to_multipie"]
+    HR_ma = {k: v for k, v in HR_without.items() if abs(v) > 1e-10}
+    assert HR_ma == pytest.approx({(*R, w2m[a], w2m[b]): v for (R, a, b), v in HR_w.items() if abs(v) > 1e-10})
+    # ket names and positions (projection centres) of each Wannier function; the names are those of the model.
+    ket = without_model["wannier"]["ket"]
+    assert sorted(ket) == sorted(symcw["wannier"]["ket"])
+    for w, (ic, _, _) in enumerate(wann):
+        assert ket[w2m[w]].split("@")[1].startswith(species[ic] + "(")
+        assert np.allclose(without_model["wannier"]["atoms_frac"][w2m[w]], centers[ic])
+
+    # projection centres in other periodic images, with the atoms of seedname.win unchanged:
+    # the positions are the projection centres, and the dispersion is the same in both gauges.
+    centers_s, wann, HR_w, _ = model_to_wannier(mm, HR, A_QE, np.zeros(3), site_order, [(0, 1, 0), (-1, 0, 2), (0, 0, 0)])
+    assert not np.allclose(centers_s, centers)
+    shutil.rmtree(path, ignore_errors=True)
+    write_wannier(path, seed, A_QE, centers_s, wann, HR_w, atoms=atoms)
+    for tb_gauge in [True, False]:
+        d, _, disp = run("wannier", False, k_w, tb_gauge)
+        assert np.allclose(disp, disp_symcw, atol=1e-8)
+        w2m = d["wannier"]["wannier_to_multipie"]
+        for w, (ic, _, _) in enumerate(wann):
+            assert np.allclose(d["wannier"]["atoms_frac"][w2m[w]], centers_s[ic])
+
+    # explicit ket_wannier (not the automatic correspondence) without model: H(R), positions and H(k) in the
+    # tight-binding gauge follow it.
+    d_auto = without_model
+    w2m_auto = d_auto["wannier"]["wannier_to_multipie"]
+    ket_auto = d_auto["wannier"]["ket"]
+    perm = list(range(len(ket_auto)))
+    perm[0], perm[-1] = perm[-1], perm[0]  # exchange kets on different centres.
+    ket_wannier = [ket_auto[perm[w2m_auto[w]]] for w in range(len(ket_auto))]
+    ma.analyze(
+        {"mode": "wannier", "wannier": {"seedname": seed, "ket_wannier": ket_wannier}, "output": {"dispersion": {"k_path": None}}}
+    )
+    w2m = ma["wannier"]["wannier_to_multipie"]
+    m2w = ma["wannier"]["multipie_to_wannier"]
+    assert [ket_wannier[w] for w in m2w] == ma["wannier"]["ket"]
+    atom = np.asarray(ma["wannier"]["atoms_frac"])
+    for m, w in enumerate(m2w):
+        assert np.allclose(atom[m], centers_s[wann[w][0]], atol=1e-5)
+    k = np.random.default_rng(2).random((4, 3))
+    HR_m = {((n1, n2, n3), m, n): complex(v[0]) for (n1, n2, n3, m, n), v in ma.HR.items()}
+    Hk = fourier_r_to_k(HR_m, atom, k, s=True)
+    Hk_ref = np.zeros((len(k), len(wann), len(wann)), dtype=complex)
+    for (R, a, b), v in HR_w.items():
+        r = np.asarray(R) + centers_s[wann[b][0]] - centers_s[wann[a][0]]
+        Hk_ref[:, a, b] += v * np.exp(2j * np.pi * k @ r)
+    assert np.allclose(Hk, Hk_ref[:, m2w][:, :, m2w], atol=1e-3)  # centres in seedname.nnkp have 5 decimals.
+    with pytest.raises(ValueError, match="permutation"):
+        ma.analyze({"mode": "wannier", "wannier": {"seedname": seed, "ket_wannier": ket_wannier[:-1]}})
+
+    # without projections in seedname.nnkp (auto_projections).
+    nnkp = os.path.join(path, f"{seed}.nnkp")
+    text = open(nnkp).read()
+    i, j = text.index("begin projections"), text.index("end projections") + len("end projections")
+    with open(nnkp, "w") as f:
+        f.write(text[:i] + f"begin auto_projections\n {len(wann)}\n 0\nend auto_projections" + text[j:])
+    with pytest.raises(ValueError, match="projection information is missing"):
+        ma.analyze({"mode": "wannier", "wannier": {"seedname": seed}})
+    with open(nnkp, "w") as f:
+        f.write(text)
+
+    # default k path for seedname.win (body-centred tetragonal, in the reciprocal basis of A_QE).
+    with warnings.catch_warnings():
+        warnings.simplefilter("error", seekpath.SupercellWarning)
+        ma.analyze({"mode": "wannier", "wannier": {"seedname": seed}, "grid": (10, 10, 10)})
+    disp = ma["output"]["dispersion"]
+    # the same path and Cartesian k points as in the standardised cell of seekpath (no rotation for this cell).
+    info = seekpath.get_path((A_QE, [p for _, p in atoms], [2, 1, 1]))
+    assert np.allclose(info["rotation_matrix"], np.eye(3))
+    assert disp["k_path"] == _join_kpath(info["path"])
+    B = np.asarray(ma["info"]["B"])
+    B_std = np.asarray(info["reciprocal_primitive_lattice"])
+    assert len(disp["k_point"]) == len(info["point_coords"])
+    for label, k in disp["k_point"].items():
+        k_std = np.asarray(info["point_coords"]["GAMMA" if label == "Γ" else label])
+        k = np.asarray([float(i) for i in k.strip("[]").split(",")])
+        assert np.allclose(k @ B, k_std @ B_std)
+
+
+# ==================================================
+@pytest.mark.parametrize(
+    "A, cart, ket",
+    [
+        # primitive cell (QE ibrav=7) of I4/mmm: sublattices as in a model.
+        (
+            A_QE,
+            {("Mn", 1): [0, 0, Z_MN * C_LAT], ("Mn", 2): [0, 0, -Z_MN * C_LAT], ("Au", 1): [0, 0, 0]},
+            ["s@Au(1)", "s@Mn(1)", "s@Mn(2)"],
+        ),
+        # conventional cell of bcc: atoms related by the centring translation.
+        (np.diag([3.0, 3.0, 3.0]), {("Fe", 1): [0, 0, 0], ("Fe", 2): [1.5, 1.5, 1.5]}, ["s@Fe(1)", "s@Fe(2)"]),
+        # cubic cell of a rhombohedral structure, species interleaved.
+        (
+            np.diag([3.0, 3.0, 3.0]),
+            {("Fe", 1): [0, 0, 0], ("Co", 1): [0.75, 0.75, 0.75], ("Fe", 2): [1.5, 1.5, 1.5], ("Co", 2): [2.25, 2.25, 2.25]},
+            ["s@Co(1)", "s@Co(2)", "s@Fe(1)", "s@Fe(2)"],
+        ),
+        # the same element in two Wyckoff orbits.
+        (
+            np.diag([3.0, 3.0, 3.0]),
+            {("Fe", 1): [0, 0, 0], ("Fe", 2): [1.5, 1.5, 1.5], ("O", 1): [1.5, 0, 0]},
+            ["s@Fe1(1)", "s@Fe2(1)", "s@O(2)"],
+        ),
+    ],
+)
+def test_ket_names_unique(A, cart, ket):
+    assert create_ket_wannier_multipie(wannier_info(A, cart))[2] == ket
+
+
+# ==================================================
+def test_ket_off_atom_label_not_used_by_atoms():
+    # atoms labelled X in two Wyckoff orbits (X1, X2) and a projection centre not on an atom: the latter is X3.
+    cart = {("X", 1): [0, 0, 0], ("X", 2): [1.5, 1.5, 1.5], ("O", 1): [1.5, 0, 0]}
+    info = wannier_info(np.diag([3.0, 3.0, 3.0]), cart)
+    info["atom_pos_r"] = info["atom_pos_r"] + [[0.25, 0, 0]]
+    info.update(nw2n=[0, 1, 2, 3], nw2l=[0] * 4, nw2m=[1] * 4, nw2r=[1] * 4, nw2s=[0] * 4)
+    w2m, _, ket, _, _ = create_ket_wannier_multipie(info)
+    assert [ket[w2m[w]] for w in range(4)] == ["s@X1(1)", "s@X2(1)", "s@O(2)", "s@X3(1)"]
+
+
+# ==================================================
+def test_ket_wannier_not_unique(tmp_path):
+    # two s projections on one atom have the same name: ket_wannier cannot be used, but the automatic correspondence works.
+    topdir, seed = str(tmp_path), "two_s"
+    A = np.diag([3.0, 3.0, 3.0])
+    HR = {((0, 0, 0), 0, 0): 1.0, ((0, 0, 0), 1, 1): -1.0, ((1, 0, 0), 0, 0): 0.1, ((-1, 0, 0), 0, 0): 0.1}
+    write_wannier(os.path.join(topdir, seed, "wannier"), seed, A, [[0, 0, 0]], [(0, 0, 1), (0, 0, 1)], HR, species=["Fe"])
+    ma = ModelAnalyzer(topdir)
+    ma.analyze({"mode": "wannier", "wannier": {"seedname": seed}, "output": {"dispersion": {"k_path": None}}})
+    assert ma["wannier"]["ket"] == ["s@Fe(1)", "s@Fe(1)"]
+    with pytest.raises(ValueError, match="not unique"):
+        ma.analyze({"mode": "wannier", "wannier": {"seedname": seed, "ket_wannier": ["s@Fe(1)", "s@Fe(1)"]}})
+
+
+# ==================================================
+def test_wannier_mode_bond_centre(tmp_path):
+    # model-free wannier mode with a projection centre on a bond (not on an atom).
+    topdir, seed = str(tmp_path), "bond"
+    A = np.diag([3.0, 6.0, 6.0])
+    centers = [[0.0, 0.0, 0.0], [0.5, 0.0, 0.0]]
+    HR = {((0, 0, 0), 0, 0): 1.0, ((0, 0, 0), 1, 1): -1.0, ((0, 0, 0), 0, 1): 0.3, ((0, 0, 0), 1, 0): 0.3}
+    HR |= {((-1, 0, 0), 0, 1): 0.3, ((1, 0, 0), 1, 0): 0.3}
+    write_wannier(os.path.join(topdir, seed, "wannier"), seed, A, centers, [(0, 0, 1), (1, 0, 1)], HR, atoms=[("Fe", centers[0])])
+    ma = ModelAnalyzer(topdir)
+    ma.analyze({"mode": "wannier", "wannier": {"seedname": seed}, "grid": (10, 1, 1)})
+    w2m = ma["wannier"]["wannier_to_multipie"]
+    assert [ma["wannier"]["ket"][w2m[w]] for w in range(2)] == ["s@Fe(1)", "s@X1(1)"]
+    assert np.allclose([ma["wannier"]["atoms_frac"][w2m[w]] for w in range(2)], centers)
+    assert os.path.isfile(os.path.join(topdir, seed, "output", f"{seed}_dispersion.txt"))

@@ -1131,19 +1131,26 @@ def get_or_add_vector(existing_list, target_vector, symprec=SYMPREC):
 
 
 # ==================================================
-def create_ket_wannier_multipie(wannier_info):
+def create_ket_wannier_multipie(wannier_info, tol=1e-4):
     """
     Create wannier and MultiPie ket, and conversion index.
 
     Args:
-        wannier_info (dict): wannier_info dict. A, atoms_frac, atomc_cart, nw2n, nw2l, nw2m, nw2r, nw2s.
+        wannier_info (dict): wannier_info dict. A, atoms_frac, atomc_cart, nw2n, nw2l, nw2m, nw2r, nw2s, atom_pos_r.
+        tol (float, optional): tolerance to match projection centres with atoms (fractional).
 
     Returns:
         - (list) -- idx for converting from wannier to multipie. <m|w> = delta(m.w2m(w)).
         - (list) -- idx for converting from multipie to wannier. <m|w> = delta(w,m2w(m)).
         - (list) -- ket_multipie name. |m>.
-        - (list) -- atom position in fractional coordinate (in multipie order). |m>(pos).
-        - (list) -- atom position in cartesian coordinate (in multipie order). |m>(pos).
+        - (list) -- projection centre in fractional coordinate (in multipie order). |m>(pos).
+        - (list) -- projection centre in cartesian coordinate (in multipie order). |m>(pos).
+
+    Note:
+        - each projection centre (nw2n is its index in "nnkp") is matched with an atom in "win" modulo lattice translations.
+          a centre which is not on an atom (e.g., bond centre) is named X1, X2, ... in order of appearance.
+          if atom_pos_r is not given, the n-th projection centre is the n-th atom in "win".
+        - the positions are those of the projection centres, to which R of H(R) refers.
     """
     # create orbital list.
     orbital_info = [wannier_info[key] for key in ("nw2n", "nw2l", "nw2m", "nw2r", "nw2s")]
@@ -1156,25 +1163,62 @@ def create_ket_wannier_multipie(wannier_info):
     space_group_no, atoms_conv = convert_to_conventional_frac(wannier_info["A"], wannier_info["atoms_frac"])
     group = Group(space_group_no)
 
+    # match projection centres with atoms in "win" (if atom_pos_r is not given, centre n is atom n).
+    # a centre which is not on an atom (e.g., bond centre) is None.
+    atoms = [np.asarray(p, dtype=float) for p in wannier_info["atoms_frac"].values()]
+    centres = np.asarray(wannier_info.get("atom_pos_r", atoms), dtype=float)
+    c2a = []
+    for c in centres:
+        d = [float(np.max(np.abs((c - p) - np.rint(c - p)))) for p in atoms]
+        i = int(np.argmin(d))
+        c2a.append(i if d[i] <= tol else None)
+    off_atom = [n for n, i in enumerate(c2a) if i is None]
+
     # create atom site-cluster info.
     existing_list = []
     site_cluster = {}
     atom_info = []
     for (atom, _), pos in atoms_conv.items():
         wp, sites = group.find_wyckoff_site(pos)
-        idx = get_or_add_vector(existing_list, sites)
-        if (atom, wp, idx + 1) not in site_cluster.keys():
-            site_cluster[(atom, wp, idx + 1)] = sites
-        atom_info.append((atom, wp, idx + 1, pos))
+        # an atom in an orbit found before belongs to the same site cluster.
+        key = next((k for k, v in site_cluster.items() if k[:2] == (atom, wp) and find_vector_index(v, pos) is not None), None)
+        if key is None:
+            key = (atom, wp, get_or_add_vector(existing_list, sites) + 1)
+            site_cluster[key] = sites
+        atom_info.append((*key, pos))
+
+    # sublattice number of each atom: as in a model (in a plus set) for a primitive cell. if the cell is not primitive,
+    # e.g., the conventional cell of a centred lattice, the atoms in each site cluster are numbered in order of appearance.
+    plus_set = group.symmetry_operation.get("plus_set", None)
+    npset = 1 if plus_set is None else len(plus_set)
+    cluster = [(atom, wp, idx) for atom, wp, idx, _ in atom_info]
+    sublattice = [
+        find_vector_index(site_cluster[c], pos) % (len(site_cluster[c]) // npset) + 1 for c, (*_, pos) in zip(cluster, atom_info)
+    ]
+    if len(set(zip(cluster, sublattice))) != len(atom_info):
+        sublattice = [cluster[: i + 1].count(c) for i, c in enumerate(cluster)]
+
+    # label of atom: element, or element with the number of its site cluster if it has several site clusters.
+    clusters = list(dict.fromkeys(cluster))
+    label = {}
+    for c in clusters:
+        same = [k for k in clusters if k[0] == c[0]]
+        label[c] = c[0] if len(same) == 1 else f"{c[0]}{same.index(c) + 1}"
+    # label of projection centre not on an atom: X1, X2, ... not used by atoms.
+    free = (f"X{k}" for k in range(1, len(label) + len(off_atom) + 2) if f"X{k}" not in label.values())
+    off_label = {n: next(free) for n in off_atom}
 
     # create ket info. name, (atom, sublattice, rank, component, orbital), frac_position, (wycokff, multiplicity).
     w_ket = []
     for n, l, comp, orbital in orbital_list:
-        atom, wp, idx, pos = atom_info[n]
-        sites = site_cluster[(atom, wp, idx)]
-        site_idx = find_vector_index(sites, pos)
-        name = f"{orbital}@{atom}({site_idx+1})"
-        w_ket.append((name, (atom, site_idx + 1, l, comp, orbital), pos, (wp, idx)))
+        if c2a[n] is None:  # projection centre not on an atom, X1, X2, ...
+            atom, sl, pos, wp, idx = off_label[n], 1, centres[n].tolist(), None, None
+        else:
+            atom, wp, idx, pos = atom_info[c2a[n]]
+            sl = sublattice[c2a[n]]
+            atom = label[(atom, wp, idx)]
+        name = f"{orbital}@{atom}({sl})"
+        w_ket.append((name, (atom, sl, l, comp, orbital), pos, (wp, idx)))
     m2w = sorted(range(len(w_ket)), key=lambda i: w_ket[i][1][:4])
     w2m = [no for no, i in sorted(enumerate(m2w), key=lambda x: x[1])]
 
@@ -1182,10 +1226,8 @@ def create_ket_wannier_multipie(wannier_info):
     ket_multipie = [w_ket[w][0] for w in m2w]
 
     nw2n = wannier_info["nw2n"]
-    atoms_frac = list(wannier_info["atoms_frac"].values())
-    atoms_frac = [atoms_frac[nw2n[w]] for w in m2w]
-    atoms_cart = list(wannier_info["atoms_cart"].values())
-    atoms_cart = [atoms_cart[nw2n[w]] for w in m2w]
+    atoms_frac = [centres[nw2n[w]].tolist() for w in m2w]
+    atoms_cart = (np.asarray(atoms_frac) @ np.asarray(wannier_info["A"], dtype=float)).tolist()
 
     # for debug.
     # return space_group_no, str(group), site_cluster, w_ket, m2w, ket_wannier, ket_multipie
