@@ -5,6 +5,9 @@ This module provides Group database maneger.
 """
 
 import re
+import copy
+import functools
+from collections.abc import MutableMapping
 import numpy as np
 import sympy as sp
 from itertools import product
@@ -58,6 +61,98 @@ def replace_bar(s):
 
 
 # ==================================================
+def _read_only(obj):
+    """
+    Make the NumPy arrays in obj read only (recursively in dicts, lists and tuples).
+
+    Args:
+        obj (any): object.
+
+    Returns:
+        - (any) -- obj itself.
+
+    :meta private:
+    """
+    if isinstance(obj, np.ndarray):
+        obj.flags.writeable = False  # the elements of an object array are not searched (no array in the group data).
+    elif isinstance(obj, MutableMapping):
+        for v in obj.values():
+            _read_only(v)
+    elif isinstance(obj, (list, tuple)):
+        for v in obj:
+            _read_only(v)
+    return obj
+
+
+# ==================================================
+def _copy_containers(obj):
+    """
+    Copy the containers (dict, list, tuple, Dict, BinaryManager) in obj recursively, sharing the other objects.
+
+    Args:
+        obj (any): object.
+
+    Returns:
+        - (any) -- copied object.
+
+    Note:
+        - the shared objects are immutable (str, int, SymPy expression) or read-only NumPy arrays.
+
+    :meta private:
+    """
+    if isinstance(obj, Dict):
+        new = copy.copy(obj)
+        new._data = {k: _copy_containers(v) for k, v in obj._data.items()}
+        return new
+    if isinstance(obj, dict):  # including BinaryManager.
+        new = copy.copy(obj)
+        for k, v in obj.items():
+            dict.__setitem__(new, k, _copy_containers(v))
+        return new
+    if isinstance(obj, list):
+        return [_copy_containers(v) for v in obj]
+    if isinstance(obj, tuple):
+        items = [_copy_containers(v) for v in obj]
+        if all(i is j for i, j in zip(items, obj)):  # no container inside.
+            return obj
+        return type(obj)(*items) if hasattr(obj, "_fields") else type(obj)(items)
+    return obj
+
+
+# ==================================================
+@functools.lru_cache(maxsize=16)
+def _load_group_data(file):
+    """
+    Load group data, which is shared by the Group objects of the same group (read only).
+
+    Args:
+        file (str): file name in binary_data, e.g., "PG/PG:32".
+
+    Returns:
+        - (BinaryManager) -- group data.
+
+    Note:
+        - the data of the 16 groups used last are kept in memory (in each process).
+        - the NumPy arrays in the data are read only, as they are shared. Copy the containers with _copy_containers
+          before giving the data to a Group object.
+
+    :meta private:
+    """
+    return _read_only(BinaryManager(file))
+
+
+# ==================================================
+@functools.lru_cache(maxsize=2)
+def _load_group_opt_data(file):
+    """
+    Load optional group data, shared as _load_group_data (large, so that only two are kept).
+
+    :meta private:
+    """
+    return _read_only(BinaryManager(file))
+
+
+# ==================================================
 class Group(dict):
     _info = BinaryManager("info")
 
@@ -75,6 +170,9 @@ class Group(dict):
             - SG tag is SG:1-230, Schoenflies, or number (1-230).
             - MPG tag is MPG:HM_ID or HM_ID, HM_ID=(PG.no.ID).
             - MSG tag is MSG:BNS_ID or BNS_ID, BNS_ID=(SG.no).
+            - the group data is loaded once and kept in memory. The Group objects of the same group share its NumPy arrays,
+              which are read only, and SymPy expressions; dicts and lists are copied for each Group object.
+              Group.clear_cache() releases the data kept in memory (existing Group objects keep theirs).
         """
         if is_integer(tag):
             tag = f"SG:{tag}"
@@ -91,11 +189,20 @@ class Group(dict):
 
         file = f"{self._type}/{self._id}"
 
-        self._group_dict[self._type] = BinaryManager(file)
+        self._group_dict[self._type] = _copy_containers(_load_group_data(file))
 
         if with_opt:
             pg_file = self._group(self._type)["info"].PG
-            self._group_dict["opt"] = BinaryManager("PG/" + pg_file + "_opt")
+            self._group_dict["opt"] = _copy_containers(_load_group_opt_data("PG/" + pg_file + "_opt"))
+
+    # ==================================================
+    @staticmethod
+    def clear_cache():
+        """
+        Clear the group data kept in memory (loaded again when used).
+        """
+        _load_group_data.cache_clear()
+        _load_group_opt_data.cache_clear()
 
     # ==================================================
     @classmethod
@@ -161,7 +268,7 @@ class Group(dict):
                 id_s = self.info.MSG
 
             file = f"{tp}/{id_s}"
-            self._group_dict[tp] = BinaryManager(file)
+            self._group_dict[tp] = _copy_containers(_load_group_data(file))
 
     # ==================================================
     def _group(self, tp=None):

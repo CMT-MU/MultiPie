@@ -62,7 +62,6 @@ class MaterialModel(BinaryManager):
         if topdir is None:
             topdir = os.getcwd()
         super().__init__(topdir=topdir, verbose=verbose)
-        self._jl_verbose = 10 if verbose else 0
 
     # ==================================================
     @property
