@@ -404,7 +404,7 @@ class TagMultipole:
             elif n_idx == 5:
                 X, l, s, k, x = idx
             else:
-                raise Exception(f"invalid index (spherical), {idx}.")
+                raise ValueError(f"invalid index (spherical), {idx}.")
             d.update({"X": X, "l": l, "s": s, "k": k, "x": x})
         elif mp_type == "point_group":
             if component is None:
@@ -418,12 +418,12 @@ class TagMultipole:
             elif n_idx == 8:
                 X, l, Gamma, n, p, s, k, x = idx
             else:
-                raise Exception(f"invalid index (point group), {idx}.")
+                raise ValueError(f"invalid index (point group), {idx}.")
             if Gamma[0] in ["A", "B"]:
                 component = -1
             d.update({"X": X, "l": l, "Gamma": Gamma, "n": n, "p": p, "s": s, "k": k, "x": x})
         else:
-            raise Exception(f"invalid multipole type, {mp_type}.")
+            raise ValueError(f"invalid multipole type, {mp_type}.")
 
         X = d["X"]
         d.update({"t_type": cls.t_dict[X], "p_type": cls.p_dict[X], "component": component, "mp_type": mp_type})

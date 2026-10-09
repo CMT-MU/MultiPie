@@ -15,6 +15,7 @@ import time
 import logging
 import copy
 import difflib
+import numbers
 import numpy as np
 import sympy as sp
 from datetime import datetime
@@ -730,6 +731,20 @@ def simplify(obj, full_factor=False):
         return f(obj)
 
     raise TypeError(f"Unsupported type: {type(obj)}")
+
+
+# ==================================================
+def is_integer(x):
+    """
+    Is x an integer (Python or NumPy integer, but not bool) ?
+
+    Args:
+        x (any): object.
+
+    Returns:
+        - (bool) -- is integer ?
+    """
+    return isinstance(x, numbers.Integral) and not isinstance(x, bool)
 
 
 # ==================================================

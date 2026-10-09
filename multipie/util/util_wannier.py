@@ -927,7 +927,7 @@ def sort_ket_list(lst, ket1, ket2):
     elif lst.ndim == 3:
         lst = list(np.array(lst)[idx_list, :, :])
     else:
-        raise Exception(f"invalid dimension of lst = {lst.ndim} was given.")
+        raise ValueError(f"invalid dimension of lst = {lst.ndim} was given.")
 
     return list(lst)
 

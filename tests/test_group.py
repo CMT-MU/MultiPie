@@ -4,6 +4,7 @@ Regression tests for the group database (Group).
 
 from collections import Counter
 
+import numpy as np
 import pytest
 
 from multipie.core.group import Group
@@ -45,14 +46,16 @@ def test_group_data(tag, group_id, n_so, irreps):
 
 
 # ==================================================
-def test_space_group_number():
-    assert Group(221)._id == "SG:221"
+@pytest.mark.parametrize("no", [221, np.int64(221)])
+def test_space_group_number(no):
+    assert Group(no)._id == "SG:221"
 
 
 # ==================================================
-def test_unknown_tag():
-    with pytest.raises(Exception, match="unknown tag"):
-        Group("XYZ")
+@pytest.mark.parametrize("tag", ["XYZ", True, 231])
+def test_unknown_tag(tag):
+    with pytest.raises(ValueError, match="unknown tag"):
+        Group(tag)
 
 
 # ==================================================

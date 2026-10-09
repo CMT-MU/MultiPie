@@ -5,7 +5,7 @@ Utility for MaterialModel class.
 import numpy as np
 
 from multipie import RepSiteType, CellSiteType, BondInfoType, RepBondType, CellBondType, BraketInfoType
-from multipie.util.util import progress_bar_step, progress_bar_done
+from multipie.util.util import progress_bar_step, progress_bar_done, is_integer
 from multipie.util.util_crystal import site_distance, shift_site, convert_to_primitive, TOL_SAME_SITE
 from multipie.util.util_wyckoff import find_vector
 from multipie.core.default_model import _site_property, _bond_property
@@ -201,7 +201,7 @@ def get_basis_type(site_data, spinful):
         elif tp == list:
             lst += [i.count("(") > 0 for i in orb]
         elif tp == dict:
-            raise Exception("not implemented.")
+            raise NotImplementedError("not implemented.")
         else:
             raise ValueError(f"invalid orbital format, {orb}.")
 
@@ -293,7 +293,7 @@ def parse_orbital(orbital, basis_type, basis_info):
             rank, basis = regularize(i, basis_type, basis_info)
             basis_set[rank] += basis
     elif tp == dict:
-        raise Exception(f"to be available.")
+        raise NotImplementedError("to be available.")
     else:
         raise ValueError(f"invalid orbital format, {orbital}.")
 
@@ -334,27 +334,29 @@ def parse_neighbor(neighbor, tail_rank, head_rank):
     """
     rank = {"s": 0, "p": 1, "d": 2, "f": 3, 0: 0, 1: 1, 2: 2, 3: 3}
 
-    if type(neighbor) == int:  # max neighbor.
+    if is_integer(neighbor):  # max neighbor.
         tail_rank = sorted(list(set(tail_rank)))
         head_rank = sorted(list(set(head_rank)))
-        neighbor = (list(range(1, neighbor + 1)), tail_rank, head_rank)
-    elif type(neighbor) == list:
+        neighbor = (list(range(1, int(neighbor) + 1)), tail_rank, head_rank)  # int: no overflow of NumPy integers.
+    elif isinstance(neighbor, list):
         tail_rank = sorted(list(set(tail_rank)))
         head_rank = sorted(list(set(head_rank)))
         neighbor = (neighbor, tail_rank, head_rank)
-    elif type(neighbor) == tuple:
+    elif isinstance(neighbor, tuple):
         max_neighbor, tail, head = neighbor
+        if not is_integer(max_neighbor):
+            raise ValueError(f"max. neighbor must be integer, but {max_neighbor!r} is given in {neighbor}.")
         tail1 = set([rank[i] for i in tail])
         head1 = set([rank[i] for i in head])
         if not tail1.issubset(tail_rank):
-            raise Exception(f"{tail} are not in {tail_rank}.")
+            raise ValueError(f"{tail} are not in {tail_rank}.")
         if not head1.issubset(head_rank):
-            raise Exception(f"{head} are not in {head_rank}.")
+            raise ValueError(f"{head} are not in {head_rank}.")
         tail_rank = sorted(list(tail1))
         head_rank = sorted(list(head1))
-        neighbor = (list(range(1, max_neighbor + 1)), tail_rank, head_rank)
+        neighbor = (list(range(1, int(max_neighbor) + 1)), tail_rank, head_rank)
     else:
-        raise Exception(f"unknown format for neighbor {neighbor}")
+        raise ValueError(f"unknown format for neighbor {neighbor}")
 
     return neighbor
 
@@ -386,7 +388,7 @@ def parse_samb_select(select, irreps):
     if "Gamma" in select.keys() and select["Gamma"] == "IR":
         select["Gamma"] = [irreps[0]]
 
-    select = {k: [v] if type(v) != list else v for k, v in select.items()}
+    select = {k: [v] if not isinstance(v, list) else v for k, v in select.items()}
 
     if "X" not in select.keys() or len(select["X"]) == 0:
         select["X"] = ["Q", "G", "M", "T"]
@@ -892,9 +894,9 @@ def parse_representative_bond(group, G, site_grid, site_so, site_dict, bond_data
     c_no = 0
     for tail_tag, head_tag, neighbor in bond_data:
         if tail_tag not in site_dict["representative"].keys():
-            raise Exception(f"{tail_tag} is not found in sites.")
+            raise ValueError(f"{tail_tag} is not found in sites.")
         if head_tag not in site_dict["representative"].keys():
-            raise Exception(f"{head_tag} is not found in sites.")
+            raise ValueError(f"{head_tag} is not found in sites.")
 
         # swap if head_tag > tail_tag.
         if head_tag > tail_tag:

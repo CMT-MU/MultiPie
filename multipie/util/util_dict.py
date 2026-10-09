@@ -17,7 +17,7 @@ class Dict(MutableMapping):
             name_field (namedtuple): Dict name, field.
         """
         self._key_type = name_field
-        if len(args) == 1 and type(args[0]) == dict:
+        if len(args) == 1 and isinstance(args[0], dict):
             self._data = {self._key_type(*tuple(k)): v for k, v in args[0].items()}
         else:
             self._data = dict(*args, **kwargs)

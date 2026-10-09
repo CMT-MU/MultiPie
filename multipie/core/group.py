@@ -12,7 +12,7 @@ from joblib import Parallel, delayed
 
 
 from multipie import PGMultipoleType, SphericalMultipoleType
-from multipie.util.util import str_to_sympy, get_n_jobs
+from multipie.util.util import str_to_sympy, get_n_jobs, is_integer
 from multipie.util.util_binary import BinaryManager
 from multipie.util.util_dict import Dict
 from multipie.util.util_gram_schmidt import gram_schmidt
@@ -76,10 +76,10 @@ class Group(dict):
             - MPG tag is MPG:HM_ID or HM_ID, HM_ID=(PG.no.ID).
             - MSG tag is MSG:BNS_ID or BNS_ID, BNS_ID=(SG.no).
         """
-        if type(tag) == int:
+        if is_integer(tag):
             tag = f"SG:{tag}"
         if tag not in self._info["id"].keys() and tag not in self._info["tag"].keys():
-            raise Exception(f"unknown tag, '{tag}'.")
+            raise ValueError(f"unknown tag, '{tag}'.")
 
         self._group_dict = {"PG": None, "SG": None, "MPG": None, "MSG": None, "opt": None}
 
@@ -199,13 +199,13 @@ class Group(dict):
                 U = np.kron(U, np.eye(2, dtype=object))
             return U
 
-        if type(U_ket) == int:
+        if is_integer(U_ket):
             U_ket = get_u_matrix(U_ket)
 
         if U_bra is None:
             U_bra = U_ket
         else:
-            if type(U_bra) == int:
+            if is_integer(U_bra):
                 U_bra = get_u_matrix(U_bra)
 
         U_bra = U_bra.conjugate().T
@@ -441,7 +441,7 @@ class Group(dict):
             - (list) -- list of basis in sympy.
         """
         if basis_type not in ["jml", "lgs", "lg"]:
-            raise Exception(f"unknown basis_type, '{basis_type}'.")
+            raise ValueError(f"unknown basis_type, '{basis_type}'.")
 
         basis = self.atomic_basis(basis_type)[rank]
 
@@ -589,7 +589,7 @@ class Group(dict):
         """
         harm_info = self.global_info()["harmonics"]["atomic_basis"]
         if basis_type not in ["jml", "lgs", "lg"]:
-            raise Exception(f"unknown basis type, '{basis_type}'.")
+            raise ValueError(f"unknown basis type, '{basis_type}'.")
         if basis_type in ["jml", "lgs"]:
             basis = harm_info["spinful"][basis_type]
         else:
@@ -698,7 +698,7 @@ class Group(dict):
             return None
 
         if basis_type not in ["jml", "lgs", "lg"]:
-            raise Exception(f"unknown basis_type, '{basis_type}'.")
+            raise ValueError(f"unknown basis_type, '{basis_type}'.")
 
         a_samb = self._group("PG")["atomic_samb"]
         bra_rank, ket_rank = rank_bra_ket
@@ -712,7 +712,7 @@ class Group(dict):
         if mask_bra_ket is not None:
             tp = check_mask(mask_bra_ket)
             if tp is None:
-                raise Exception(f"unknown mask_bra_ket, '{mask_bra_ket}'.")
+                raise ValueError(f"unknown mask_bra_ket, '{mask_bra_ket}'.")
 
             bra_mask, ket_mask = mask_bra_ket
             if tp in ["int", "str"]:
@@ -770,7 +770,7 @@ class Group(dict):
             cluster_type = "site"
 
         if cluster_type not in ["site", "bond_s", "bond_a", "vector", "bond"]:
-            raise Exception(f"unknown cluster_type, '{cluster_type}'.")
+            raise ValueError(f"unknown cluster_type, '{cluster_type}'.")
 
         if self.group_type in ["MPG", "MSG"]:
             return None
@@ -781,7 +781,7 @@ class Group(dict):
 
         ct = "site" if cluster_type == "site" else "bond_s"
         if wp not in c_samb[ct].keys():
-            raise Exception(f"unknown tag, '{wp}'.")
+            raise ValueError(f"unknown tag, '{wp}'.")
 
         if cluster_type == "bond":
             s = c_samb["bond_s"][wp]
@@ -1114,7 +1114,7 @@ class Group(dict):
         Returns:
             - (ndarray) -- transformed vectors in order of symmetry operations.
         """
-        if type(vector) == str:
+        if isinstance(vector, str):
             vector = str_to_sympy(vector)
 
         so = "cartesian" if cartesian else "fractional"
@@ -1227,7 +1227,7 @@ class Group(dict):
             - if group is PG/SG, return Wyckoff site as well.
             - result in order of plus_set for SG.
         """
-        if type(vector_site) == str:
+        if isinstance(vector_site, str):
             vector, site_bond = vector_site.split("#")
             vector = str_to_sympy(vector)
             if "@" in site_bond or ";" in site_bond or ":" in site_bond:
@@ -1268,7 +1268,7 @@ class Group(dict):
             - if group is PG/SG, return Wyckoff site as well.
             - result in order of plus_set for SG.
         """
-        if type(multipole_site) == str:
+        if isinstance(multipole_site, str):
             multipole, site_bond = multipole_site.split("#")
             if "@" in site_bond or ";" in site_bond or ":" in site_bond:
                 site_bond = convert_to_bond(site_bond)

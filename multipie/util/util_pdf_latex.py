@@ -135,7 +135,7 @@ def regularize_table(lst2d, padding=None):
     Returns:
         - (list) -- regularized 2d list.
     """
-    if type(lst2d) != list:
+    if not isinstance(lst2d, list):
         raise KeyError(f"non list type ({type(lst2d)}) is given.")
 
     col = max(map(len, lst2d))
@@ -160,7 +160,7 @@ def list_to_table(lst1d, col, p=None):
     Returns:
         - (list) -- 2d list.
     """
-    if type(lst1d) != list:
+    if not isinstance(lst1d, list):
         raise KeyError(f"non list type ({type(lst1d)}) is given.")
 
     n = len(lst1d)
@@ -421,11 +421,11 @@ class PDFviaLaTeX:
             - (list) -- 2d table with given cols [[str]].
             - (list) -- number of divisions in each rows [int].
         """
-        if type(tbl) != list:
+        if not isinstance(tbl, list):
             raise KeyError("non-list type is given for table.")
         if len(tbl) == 0:
             raise KeyError("empty list is given for table.")
-        if type(tbl[0]) != list:  # in case of 1d list
+        if not isinstance(tbl[0], list):  # in case of 1d list
             tbl = [tbl]
         nmax = max(map(len, tbl))
         if cols is None or nmax <= cols:
@@ -467,7 +467,7 @@ class PDFviaLaTeX:
         Args:
             content (str or list, optional): text.
         """
-        if type(content) == list:
+        if isinstance(content, list):
             self.__content += content
         else:
             self.__content += [content]
@@ -483,7 +483,7 @@ class PDFviaLaTeX:
             long (bool, optional): long eq. ? (single eq. only).
         """
         n = "" if num else "*"
-        if type(eqs) == list:
+        if isinstance(eqs, list):
             if long:
                 raise KeyError("long equation is unsupported.")
             if not eqs:
