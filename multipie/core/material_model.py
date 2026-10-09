@@ -330,7 +330,13 @@ class MaterialModel(BinaryManager):
         site_data = model["site"]
         if not isinstance(site_data, dict) or not site_data:
             raise ValueError(f"model '{model['model']}': no site is given in 'site'.")
+        # '_' and ';' are used in the names of site and bond clusters.
+        bond_sites = {tag for b in model["bond"] if isinstance(b, (tuple, list)) for tag in b[:2]}
         for name, value in site_data.items():
+            if not isinstance(name, str) or not name or ";" in name:
+                raise ValueError(f"model '{model['model']}': site name {name!r} must be a non-empty string without ';'.")
+            if "_" in name and name in bond_sites:
+                raise ValueError(f"model '{model['model']}': site name {name!r} used in bond must not contain '_'.")
             if not isinstance(value, (tuple, list)) or len(value) != 2:
                 raise ValueError(f"model '{model['model']}': site '{name}' must be (position, orbital), but {value!r} is given.")
         bond_data = model["bond"]
