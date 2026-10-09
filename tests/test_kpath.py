@@ -3,6 +3,8 @@ Regression tests for the primitive cell of centred lattices and the default k pa
 """
 
 import os
+import sys
+import types
 import warnings
 
 import numpy as np
@@ -222,6 +224,7 @@ def test_triclinic_cell(tmp_path, group):
         ({"gamma": 180.0}, r"must be in \(0, 180\)"),
         ({"alpha": 120.0, "beta": 120.0, "gamma": 120.0}, "do not form a cell"),  # zero volume.
         ({"alpha": 10.0, "beta": 10.0, "gamma": 170.0}, "do not form a cell"),  # negative (V/abc)^2.
+        ({"beta": 0.00003}, "do not form a cell"),  # (V/abc)^2 = 2.7e-13, zero within rounding errors.
     ],
 )
 def test_invalid_cell(cell, match):
@@ -248,7 +251,55 @@ def test_default_cell(crystal, gamma):
     assert info["cell"] == {"a": 1.0, "b": 1.0, "c": 1.0, "alpha": 90.0, "beta": 90.0, "gamma": float(gamma)}
 
 
-def test_nearly_flat_monoclinic_cell():
-    # a valid but nearly flat cell is accepted.
-    info = get_cell_info("monoclinic", {"a": 3.0, "b": 4.0, "c": 5.0, "beta": 179.999})
-    assert info["volume"] == pytest.approx(3.0 * 4.0 * 5.0 * np.sin(np.radians(179.999)))
+@pytest.mark.parametrize("beta", [179.999, 0.0001])
+def test_nearly_flat_monoclinic_cell(beta):
+    # a valid but nearly flat cell is accepted ((V/abc)^2 = 3.0e-10, 3.0e-12).
+    info = get_cell_info("monoclinic", {"a": 3.0, "b": 4.0, "c": 5.0, "beta": beta})
+    # 1 - cos(beta)^2 loses digits near 0 and 180 degrees.
+    assert info["volume"] == pytest.approx(3.0 * 4.0 * 5.0 * np.sin(np.radians(beta)), rel=1e-3)
+
+
+# ==================================================
+@pytest.mark.parametrize("group", ["C1", "Ci"])
+def test_triclinic_cell_point_group(tmp_path, group):
+    # the given cell is used also for the triclinic point groups.
+    cell = CASES["triclinic"][1]
+    site = {"X": ("[0.1,0.2,0.3]", "s"), "Y": ("[0,0,0.4]", "s")} if group == "C1" else {"X": ("[0.1,0.2,0.3]", "s")}
+    bond = [("X", "Y", [1])] if group == "C1" else [("X", "X", [1])]
+    model = {"model": "mol", "group": group, "cell": cell, "site": site, "bond": bond}
+    create_model(model | {"pdf": {"create": False}, "qtdraw": {"create": False}}, topdir=str(tmp_path))
+    mm = MaterialModel(topdir=str(tmp_path))
+    mm.load("mol")
+    A = cell_vectors(**cell)
+    assert np.allclose(np.asarray(mm["unit_vector"], dtype=float), A)
+    v = np.array([0.1, 0.2, -0.1]) if group == "C1" else np.array([0.2, 0.4, 0.6])  # X-Y, or X-(-X).
+    distance = [b.distance for b in mm["bond"]["representative"].values()]
+    assert distance == pytest.approx([np.linalg.norm(v @ A)])
+
+
+# ==================================================
+def test_qtdraw_unit_cell(tmp_path, monkeypatch):
+    # QtDraw files of site/bond clusters and cluster SAMBs have the unit cell of the model.
+    calls = []
+
+    class Recorder:
+        def __getattr__(self, method):
+            return lambda *args, **kwargs: calls.append((method, args))
+
+    qtdraw = types.ModuleType("qtdraw")
+    qtdraw.create_qtdraw_file = lambda filename, callback: callback(Recorder())
+    monkeypatch.setitem(sys.modules, "qtdraw", qtdraw)
+    monkeypatch.setattr("multipie.core.material_model.check_qtdraw", lambda: True)
+
+    cell = CASES["triclinic"][1]
+    model = {"model": "tri", "group": 2, "cell": cell, "site": {"X": ("[0,0,0]", "s")}, "bond": [("X", "X", [1])]}
+    create_model(model | {"pdf": {"create": False}, "qtdraw": {"create": False}}, topdir=str(tmp_path))
+    mm = MaterialModel(topdir=str(tmp_path))
+    mm.load("tri")
+    mm["qtdraw_prop"]["create"] = True
+    for save in [mm.save_site_bond, mm.save_cluster_samb]:
+        calls.clear()
+        save("X")
+        methods = [m for m, _ in calls]
+        assert ("set_unit_cell", (cell,)) in calls
+        assert methods.index("set_unit_cell") < min(i for i, m in enumerate(methods) if m.startswith("add_"))
