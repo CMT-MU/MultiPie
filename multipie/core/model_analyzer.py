@@ -430,9 +430,9 @@ class ModelAnalyzer(dict):
             print(f"save dispersion files into '{path}'.")
 
     # ==================================================
-    def read_controle(self, control):
+    def read_control(self, control):
         """
-        Read controle file.
+        Read control file.
 
         Args:
             control (str): control file name (relative to topdir).
@@ -774,7 +774,7 @@ class ModelAnalyzer(dict):
         """
         # read control.
         if isinstance(control, str):  # read control file.
-            control = self.read_controle(control)
+            control = self.read_control(control)
 
         self.reset(control)
         mode = self["info"]["mode"]
