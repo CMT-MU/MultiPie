@@ -27,6 +27,7 @@ CASES = {
     "hexagonal": (191, {"a": 2.5, "c": 6.0}, "[1/3,2/3,0]"),
     "cubic": (221, {"a": 3.0}, "[0,0,0]"),
     "monoclinic": (10, {"a": 5.3, "b": 4.1, "c": 3.0, "beta": 100.0}, "[0,0,0]"),  # seekpath changes the basis.
+    "triclinic": (2, {"a": 3.0, "b": 4.0, "c": 5.0, "alpha": 80.0, "beta": 100.0, "gamma": 110.0}, "[0,0,0]"),
 }
 
 
@@ -192,3 +193,62 @@ def test_kpath_space_group_mismatch(models, monkeypatch):
     ma = ModelAnalyzer(models)
     with pytest.raises(ValueError, match="differs from that of the model"):
         ma.analyze({"samb": {"model": "bct", "parameter": {"z1": 1.0}}, "grid": (10, 10, 10)})
+
+
+# ==================================================
+@pytest.mark.parametrize("group", [1, 2])
+def test_triclinic_cell(tmp_path, group):
+    # the given cell is used for triclinic groups, also for the neighbour order of bonds.
+    cell = CASES["triclinic"][1]
+    model = {"model": "tri", "group": group, "cell": cell, "site": {"X": ("[0,0,0]", "s")}, "bond": [("X", "X", [1, 2, 3])]}
+    create_model(model | {"pdf": {"create": False}, "qtdraw": {"create": False}}, topdir=str(tmp_path))
+    mm = MaterialModel(topdir=str(tmp_path))
+    mm.load("tri")
+    assert mm["cell_info"]["cell"] == cell
+    assert np.allclose(np.asarray(mm["unit_vector"], dtype=float), cell_vectors(**cell))
+    # neighbours: a1 (3.0), a2 (4.0), a1+a2 (4.098, shorter than a3 = 5.0 since gamma > 90).
+    distance = [round(b.distance, 3) for b in mm["bond"]["representative"].values()]
+    assert distance == [3.0, 4.0, 4.098]
+
+
+# ==================================================
+@pytest.mark.parametrize(
+    "cell, match",
+    [
+        ({"a": 0.0}, "lattice constants must be positive"),
+        ({"b": float("nan")}, "lattice constants must be positive"),
+        ({"c": float("inf")}, "lattice constants must be positive"),
+        ({"beta": float("nan")}, r"must be in \(0, 180\)"),
+        ({"gamma": 180.0}, r"must be in \(0, 180\)"),
+        ({"alpha": 120.0, "beta": 120.0, "gamma": 120.0}, "do not form a cell"),  # zero volume.
+        ({"alpha": 10.0, "beta": 10.0, "gamma": 170.0}, "do not form a cell"),  # negative (V/abc)^2.
+    ],
+)
+def test_invalid_cell(cell, match):
+    with pytest.raises(ValueError, match=match):
+        get_cell_info("triclinic", cell)
+
+
+# ==================================================
+@pytest.mark.parametrize(
+    "crystal, gamma",
+    [
+        ("triclinic", 90),
+        ("monoclinic", 90),
+        ("orthorhombic", 90),
+        ("tetragonal", 90),
+        ("trigonal", 120),
+        ("hexagonal", 120),
+        ("cubic", 90),
+    ],
+)
+def test_default_cell(crystal, gamma):
+    # without cell, a = b = c = 1 and right angles (except for gamma of trigonal and hexagonal).
+    info = get_cell_info(crystal, {})
+    assert info["cell"] == {"a": 1.0, "b": 1.0, "c": 1.0, "alpha": 90.0, "beta": 90.0, "gamma": float(gamma)}
+
+
+def test_nearly_flat_monoclinic_cell():
+    # a valid but nearly flat cell is accepted.
+    info = get_cell_info("monoclinic", {"a": 3.0, "b": 4.0, "c": 5.0, "beta": 179.999})
+    assert info["volume"] == pytest.approx(3.0 * 4.0 * 5.0 * np.sin(np.radians(179.999)))
