@@ -8,7 +8,7 @@ default_control = {
     "mode": "samb",  # samb (SAMB-based only), wannier (wannier-based only), symcw (SAMB and wannier based).
     "grid": (50, 50, 50),  # k-grid size (b1, b2, b3).
     "samb": {
-        "model": None,  # model name for .pkl.
+        "model": None,  # model name for .pkl (optional in wannier mode).
         "select": {  # SAMB select condition, where S=site name, R=orbital rank, N=neighbor bond.
             # "site": [("A", [1, 2])],  # S or (S, [R]) in list.
             # "bond": [[0, 1, 2]],  # S1;S2, [N], (S1;S2, [N]), (S1;S2, R;R2), (S1;S2, [N]) or (S1;S2, R1;R2, [N]) in list.
@@ -37,7 +37,7 @@ default_control = {
         "dispersion": {  # dispersion info.
             "power": None,  # plot as Ek^power. if None, power=1.
             "k_path": "",  # symmetry line, separated by "-". disconnected points by "|". if empty str, default values are used for k_path and k_point.
-            "k_point": {"Γ": "[0,0,0]"},  # k-point definition (primitive, fractional).
+            "k_point": {"Γ": "[0,0,0]"},  # k-point (fractional, primitive cell of model, or of seedname.win without model).
             "local": [],  # local quantity, "Sx/Sy/Sz/Lx/Ly/Lz/Qu/Qv/Qyz/Qzx/Qxy".
             "z": [],  # expectation value of Z_j. [Under Construction]
         },

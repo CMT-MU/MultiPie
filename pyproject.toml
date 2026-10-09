@@ -7,7 +7,7 @@ name = "multipie"
 dependencies = [
     "joblib",
     "click",
-    "seekpath",
+    "seekpath>=2.1",  # get_path_orig_cell requires seekpath 2.1 or later.
     "numpy>=2",  # np.concat requires NumPy 2.0 or later.
     "sympy",
     "scipy",
