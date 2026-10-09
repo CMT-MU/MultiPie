@@ -853,7 +853,7 @@ def simplify_tensor(M):
                 if len(sym) > 1:
                     for s in sym:
                         if s not in d.keys():
-                            raise Exception(f"fail to solve.")
+                            raise RuntimeError("fail to solve.")
                 else:
                     if c.could_extract_minus_sign():
                         c = -c

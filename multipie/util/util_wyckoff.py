@@ -448,7 +448,7 @@ def find_wyckoff_site(group, site, msg=False):
     Note:
         - site string is "[x,y,z]".
     """
-    if type(site) == str:
+    if isinstance(site, str):
         site = str_to_sympy(site)
     wyckoff_site = group["wyckoff"]["site"]
 
@@ -634,7 +634,7 @@ def find_wyckoff_bond(group, bond):
     Note:
         - bond string is "[tail];[head]/[vector]@[center]/[start]:[vector]".
     """
-    if type(bond) == str:
+    if isinstance(bond, str):
         bond = convert_to_bond(bond)
     wyckoff_site = group["wyckoff"]["site"]
     wyckoff_bond = group["wyckoff"]["bond"]
@@ -674,7 +674,7 @@ def create_cell_site(group, site):
     Note:
         - site string is "[x,y,z]".
     """
-    if type(site) == str:
+    if isinstance(site, str):
         site = str_to_sympy(site)
     if group["info"].lattice != "0":
         site = shift_site(site)
@@ -718,7 +718,7 @@ def create_cell_bond(group, bond):
         - bond string is "[tail];[head]/[vector]@[center]/[start]:[vector]".
         - negative value in mapping represents reversed bond.
     """
-    if type(bond) == str:
+    if isinstance(bond, str):
         bond = convert_to_bond(bond)
     v0, s0 = bond[0:3], bond[3:6]
     if group["info"].lattice != "0":

@@ -72,9 +72,9 @@ def sort_matrix(M, idx_row_list=None, idx_col_list=None):
         idx_col_list = [i for i in range(N_col)]
 
     if len(idx_row_list) != N_row:
-        raise Exception(f"invalid len(idx_row_list) = {len(idx_row_list)}")
+        raise ValueError(f"invalid len(idx_row_list) = {len(idx_row_list)}")
     if len(idx_col_list) != N_col:
-        raise Exception(f"invalid len(idx_col_list) = {len(idx_col_list)}")
+        raise ValueError(f"invalid len(idx_col_list) = {len(idx_col_list)}")
 
     M_sorted = sp.zeros(N_row, N_col)
     for i, idx_row in enumerate(idx_row_list):
@@ -403,7 +403,7 @@ def create_atomic_multipole_matrix(b_type="lms"):
     elif b_type == "jml":
         basis = _jm_basis
     else:
-        raise Exception("b_type: invalid basis type. choose 'lms'/'jml'.")
+        raise ValueError("b_type: invalid basis type. choose 'lms'/'jml'.")
 
     def proc(xlmsk):
         (X, l, m, s, k) = xlmsk

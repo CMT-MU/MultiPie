@@ -5,12 +5,14 @@ Tests for input keys, parameter files, PDF failures, and the number of parallel 
 import os
 import shutil
 
+import numpy as np
 import pytest
 
 from multipie import MaterialModel
 from multipie.core.cmd import create_model
 from multipie.core.model_analyzer import ModelAnalyzer
-from multipie.util.util import get_n_jobs, write_dict
+from multipie.util.util import get_n_jobs, is_integer, write_dict
+from multipie.util.util_material_model import parse_neighbor
 from multipie.util.util_pdf_latex import LaTeXError, PDFviaLaTeX, tex_text
 
 MODEL = {
@@ -288,3 +290,44 @@ def test_pdf_build_cleanup_error(tmp_path, monkeypatch):
     with pytest.raises(LaTeXError, match="compile error"):
         PDFviaLaTeX("x", dir=str(tmp_path)).build()
     assert os.getcwd() == cwd
+
+
+# ==================================================
+@pytest.mark.parametrize(
+    "value, expected", [(3, True), (np.int64(3), True), (True, False), (np.True_, False), (3.0, False), ("3", False)]
+)
+def test_is_integer(value, expected):
+    assert is_integer(value) == expected
+
+
+# ==================================================
+@pytest.mark.parametrize("bond, error", [(("A", "A", "x"), ValueError), (("A", "B", [1]), ValueError)])
+def test_invalid_bond(bond, error):
+    # an invalid neighbour or an unknown site in bond raises ValueError.
+    with pytest.raises(error):
+        MaterialModel().analyze(MODEL | {"site": {"A": ("[0,0,0]", "s")}, "bond": [bond]})
+
+
+# ==================================================
+def test_max_neighbor_numpy_integer():
+    # the neighbour given as a NumPy integer is the maximum neighbour, as for int.
+    neighbor = []
+    for n in [2, np.int64(2)]:
+        mm = MaterialModel()
+        mm.analyze(MODEL | {"site": {"A": ("[0,0,0]", "s")}, "bond": [("A", "A", n)]})
+        neighbor.append({b.neighbor for b in mm["bond"]["representative"].values()})
+    assert neighbor == [{1, 2}, {1, 2}]
+
+
+# ==================================================
+@pytest.mark.parametrize("n", [np.int8(127), np.uint8(255)])
+def test_parse_neighbor_numpy_max(n):
+    # no overflow at the maximum of a NumPy integer type.
+    assert parse_neighbor(n, [0], [0])[0] == list(range(1, int(n) + 1))
+    assert parse_neighbor((n, [0], [0]), [0], [0])[0] == list(range(1, int(n) + 1))
+
+
+@pytest.mark.parametrize("n", [2.9, np.float64(2.9), "2"])
+def test_parse_neighbor_not_integer(n):
+    with pytest.raises(ValueError, match="max. neighbor must be integer"):
+        parse_neighbor((n, [0], [0]), [0], [0])

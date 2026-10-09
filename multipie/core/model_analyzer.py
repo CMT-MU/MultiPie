@@ -773,7 +773,7 @@ class ModelAnalyzer(dict):
             control (str or dict): control file (.py) or control dict.
         """
         # read control.
-        if type(control) == str:  # read control file.
+        if isinstance(control, str):  # read control file.
             control = self.read_controle(control)
 
         self.reset(control)
@@ -834,10 +834,10 @@ class ModelAnalyzer(dict):
             self.model.save_samb_qtdraw()
 
         parameter = self.samb["parameter"]
-        if type(parameter) == str:  # when parameter is str, read z file.
+        if isinstance(parameter, str):  # when parameter is str, read z file.
             parameter = self.read_parameter(parameter)
         # a value given as str, e.g., "1/2" or "sqrt(2)", is evaluated by SymPy.
-        parameter = {tag: float(str_to_sympy(v, rational=False)) if type(v) == str else v for tag, v in parameter.items()}
+        parameter = {tag: float(str_to_sympy(v, rational=False)) if isinstance(v, str) else v for tag, v in parameter.items()}
 
         # determine local weight if NG_sum_rule is True.
         ng = self.samb["NG_sum_rule"]

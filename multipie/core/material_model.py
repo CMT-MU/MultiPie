@@ -178,7 +178,7 @@ class MaterialModel(BinaryManager):
         if check_qtdraw() and self["qtdraw_prop"]["create"]:
             from qtdraw import create_qtdraw_file
 
-            if type(site_bond) == str:
+            if isinstance(site_bond, str):
                 site_bond = [site_bond]
             name = self["model"] + "_" + "-".join(site_bond)
 
@@ -213,7 +213,7 @@ class MaterialModel(BinaryManager):
         if check_qtdraw() and self["qtdraw_prop"]["create"]:
             from qtdraw import create_qtdraw_file
 
-            if type(site_bond) == str:
+            if isinstance(site_bond, str):
                 site_bond = [site_bond]
 
             name = self["model"] + "_" + "-".join(site_bond) + "_def"
@@ -297,7 +297,7 @@ class MaterialModel(BinaryManager):
         Args:
             model_in (dict or str): model input dict or file name.
         """
-        if type(model_in) == str:
+        if isinstance(model_in, str):
             if self.verbose:
                 print(f"read '{model_in}'.")
             model_in = read_dict(model_in, self.topdir)
@@ -896,7 +896,7 @@ class MaterialModel(BinaryManager):
         Hamiltonian = defaultdict(lambda: sp.S(0) if fmt == "sympy" else 0.0)
         for zj, cj in parameter.items():
             if zj not in combined_samb_matrix.keys():
-                raise Exception(f"parameter {zj} is missing.")
+                raise ValueError(f"parameter {zj} is missing.")
             d = combined_samb_matrix[zj]
             for Rmn, (Zj, _) in d.items():
                 Hamiltonian[Rmn] += cj * Zj
