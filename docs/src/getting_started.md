@@ -81,7 +81,7 @@ Model input files and control files are Python files that contain dictionaries, 
 
   The keys of the following dictionaries are not checked against the defaults, but have their own rules:
 
-  - site names in `site`: non-empty strings without `;`, and without `_` for sites used in `bond` (`;` and `_` are used in the names of site and bond clusters). Letters and digits, e.g., `"Fe1"`, are recommended for all sites, since the names also appear in the PDF (LaTeX) and in file names. Avoid `_` even for sites not used in `bond`: such a name is accepted, but the PDF compilation fails (the other outputs are written).
+  - site names in `site`: non-empty strings without `;`, and without `_` for sites used in `bond` (`;` and `_` are used in the names of site and bond clusters). Letters and digits, e.g., `"Fe1"`, are recommended for all sites, since the names also appear in the PDF (LaTeX) and in file names. A name with a LaTeX special character, e.g., `#` or `%`, makes the PDF compilation fail (the other outputs are written).
   - SAMB names in `samb/parameter`: names of the generated SAMBs, e.g., `"z1"`. `samb/parameter` may also be the name of a Python file containing one dictionary of the same form, given relative to `model_name/info/`, with the extension, e.g., `"my_z.py"` for `model_name/info/my_z.py` (not `"info/my_z.py"` or `"my_z"`).
   - k-point labels in `output/dispersion/k_point`: labels used in `k_path`, without `-`, `|` and spaces, which separate the points in `k_path`.
 
