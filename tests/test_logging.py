@@ -6,6 +6,7 @@ import contextlib
 import io
 import logging
 import os
+import shutil
 
 import pytest
 
@@ -109,3 +110,16 @@ def test_dos_message_verbose(in_tmp, capsys, verbose):
         {"samb": {"model": "chain", "parameter": {"z1": 1.0}}, "grid": (4, 4, 4), "output": {"dos": True}}
     )
     assert ("compute and output dos." in capsys.readouterr().out) == verbose
+
+
+# ==================================================
+def test_warning_once_to_stdout(in_tmp, monkeypatch, capsys):
+    # a warning (here, PDF skipped as ptex2pdf is not found) is written once to stdout, also without verbose.
+    monkeypatch.setattr("multipie.core.material_model.check_latex", lambda: True)
+    which = shutil.which
+    monkeypatch.setattr(shutil, "which", lambda cmd: None if cmd == "ptex2pdf" else which(cmd))
+    setup_logging()
+    create_model(MODEL | {"pdf": {"create": True}}, topdir="out")
+    out = capsys.readouterr()
+    assert out.out.count("skip PDF creation: ptex2pdf is not found") == 1
+    assert "skip PDF creation" not in out.err
