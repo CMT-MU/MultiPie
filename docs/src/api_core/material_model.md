@@ -24,7 +24,7 @@ This class has the following dict data.
     - **A** (list): [a1,a2,a3,t] conventional lattice and translational vectors (4x4, each column).
     - **G** (list): metric matrix for conventional lattice (4x4).
   - **unit_vector** (list): unit vectors, a1, a2, a3 (conventional cell).
-  - **unit_vector_primitive** (list): unit vectors, a1p, a2p, a3p (primitive cell).
+  - **unit_vector_primitive** (list): unit vectors, a1p, a2p, a3p (primitive cell), A_p = P^T A, consistent with the primitive fractional coordinates of the sites (x_c = P x_p). Models created before this was fixed store A Pi^T for centred lattices; ModelAnalyzer recomputes A_p from unit_vector.
 
 - Generation condition.
   - **SAMB_select** (dict): SAMB selection.

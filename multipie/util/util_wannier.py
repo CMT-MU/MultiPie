@@ -12,7 +12,7 @@ import warnings
 import tarfile
 import spglib
 from multipie import Group
-from multipie.util.util_crystal import P_dict
+from multipie.util.util_crystal import convert_to_primitive_vector
 
 BOHR2ANG = 0.529177249
 
@@ -1272,13 +1272,7 @@ def model_primitive_vector(model):
     Returns:
         - (ndarray) -- primitive lattice vectors, [a1,a2,a3] (Cartesian), consistent with the primitive fractional coordinates of the model.
     """
-    A = np.asarray(model["unit_vector"], dtype=float)
-    lattice = model.group.info.lattice
-    if lattice == "0":  # point group.
-        return A
-    P = np.asarray(P_dict[lattice], dtype=float)[0:3, 0:3]
-
-    return P.T @ A
+    return convert_to_primitive_vector(model.group.info.lattice, model["unit_vector"])
 
 
 # ==================================================

@@ -5,11 +5,11 @@ This module provides model analyzer.
 """
 
 import os
-import logging
 import numpy as np
 import copy
 import seekpath
 from multipie.core.material_model import MaterialModel
+from multipie.util.util_crystal import convert_to_primitive
 from multipie.core.default_control import default_control
 from multipie.util.util_model_analyzer import (
     grid_path,
@@ -97,6 +97,32 @@ def _join_kpath(path):
             k_path += "|" + c + "-" + d
 
     return k_path.replace("GAMMA", "Γ")
+
+
+# ==================================================
+def _kpath_structure(group, A):
+    """
+    Structure for seekpath, which has the symmetry of the group in its primitive cell.
+
+    Args:
+        group (Group): space group.
+        A (array-like): primitive lattice vectors, [a1,a2,a3] (Cartesian, rows).
+
+    Returns:
+        - (tuple) -- (A, positions (fractional), numbers) in the primitive cell.
+
+    Note:
+        - two orbits of generic points with different species are used, since a single orbit can have higher symmetry than the group, e.g., inversion for a polar group.
+    """
+    positions, numbers = [], []
+    for no, pos in enumerate(["[0.1213,0.2347,0.3571]", "[0.3119,0.1723,0.0791]"]):
+        _, sites = group.find_wyckoff_site(pos)
+        sites = np.asarray(convert_to_primitive(group.info.lattice, sites, shift=True), dtype=float)
+        sites = np.unique(np.round(sites, 8) % 1, axis=0)
+        positions += sites.tolist()
+        numbers += [no + 1] * len(sites)
+
+    return (np.asarray(A, dtype=float).tolist(), positions, numbers)
 
 
 # ==================================================
@@ -653,28 +679,20 @@ class ModelAnalyzer(dict):
 
         :meta private:
         """
-        if k_path == "" and not self._use_model:  # default path for the cell of seedname.win.
-            info = seekpath.get_path_orig_cell(self._win_structure)
+        if k_path == "":  # create default path for the primitive cell, info/A.
+            if self._use_model:
+                structure = _kpath_structure(self.model.group, self["info"]["A"])
+            else:
+                structure = self._win_structure
+
+            info = seekpath.get_path_orig_cell(structure)
+            if self._use_model and info["spacegroup_number"] != int(self.model.group.ID):
+                raise ValueError(
+                    f"space group found by seekpath (No. {info['spacegroup_number']}) differs from that of the model, "
+                    f"{self.model.group}. Give k_path and k_point explicitly."
+                )
             k_point = {k: [float(i) for i in v] for k, v in info["point_coords"].items()}
             k_point["Γ"] = k_point.pop("GAMMA")
-            k_path = _join_kpath(info["path"])
-        elif k_path == "":  # create default path.
-            A = self["info"]["A"]
-            gp = next(reversed(self.model.group.wyckoff["site"].values()))  # general point.
-            positions = gp["reference"].astype(float)  # fractional, conventional, plus set.
-            numbers = np.full(len(positions), 1, dtype=int)
-
-            structure = (A, positions, numbers)
-            info = seekpath.get_path(structure)
-
-            if info["spacegroup_number"] != int(self.model.group.ID):
-                logging.exception("obtained SG is different with given group.")
-                raise
-
-            k_point = info["point_coords"]
-            k_point["Γ"] = k_point["GAMMA"]
-            del k_point["GAMMA"]
-
             k_path = _join_kpath(info["path"])
         else:
             k_point = self.output["dispersion"].get("k_point", {})
