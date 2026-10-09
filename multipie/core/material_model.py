@@ -16,7 +16,7 @@ from multipie.core.group import Group
 from multipie.util.util_binary import BinaryManager
 from multipie.util.util import deep_update, time_stamp, check_latex, check_qtdraw, read_dict
 from multipie.util.util_pdf_latex import PDFviaLaTeX, LaTeXError
-from multipie.util.util_crystal import get_cell_info, create_igrid, convert_to_primitive
+from multipie.util.util_crystal import get_cell_info, create_igrid, convert_to_primitive_vector
 from multipie.util.util_material_model import (
     get_basis_type,
     get_bond,
@@ -374,7 +374,7 @@ class MaterialModel(BinaryManager):
         bond_dict = parse_representative_bond(group, G, site_grid, site_so, site_dict, bond_data, max_neighbor, self.verbose)
         A = cell_info["A"][0:3, 0:3].T
         lattice = group.info.lattice
-        Ap = convert_to_primitive(lattice, A, shift=False)
+        Ap = convert_to_primitive_vector(lattice, A)
 
         # site_bond => wyckoff, braket.
         wyckoff_dict = create_wyckoff_dict(site_dict["representative"], bond_dict["representative"])

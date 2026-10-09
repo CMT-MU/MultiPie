@@ -185,6 +185,30 @@ def convert_to_primitive(lattice, vec_cf, shift=True):
 
 
 # ==================================================
+def convert_to_primitive_vector(lattice, A):
+    """
+    Convert lattice vectors of conventional cell to those of primitive cell.
+
+    Args:
+        lattice (str): crystal lattice, (A/B/C/P/I/F/R/0). [0: point group].
+        A (ndarray): lattice vectors of conventional cell, [a1,a2,a3] (Cartesian, rows).
+
+    Returns:
+        - (ndarray) -- lattice vectors of primitive cell, [a1p,a2p,a3p] (Cartesian, rows).
+
+    Note:
+        - A_p = P^T A, consistent with the primitive fractional coordinates, x_c = P x_p (see convert_to_primitive).
+        - for point group (0), A is returned as it is.
+    """
+    A = np.asarray(A, dtype=float)
+    if lattice == "0":
+        return A
+    P = np.asarray(P_dict[lattice], dtype=float)[0:3, 0:3]
+
+    return P.T @ A
+
+
+# ==================================================
 def convert_to_primitive_matrix(lattice, mat_cf):
     """
     Convert matrix to primitive cell in fractional coordinate.

@@ -18,7 +18,7 @@ import seekpath
 
 from multipie import Group, MaterialModel
 from multipie.core.cmd import create_model
-from multipie.core.model_analyzer import ModelAnalyzer, _join_kpath
+from multipie.core.model_analyzer import ModelAnalyzer, _join_kpath, _kpath_structure
 from multipie.util.util_model_analyzer import fourier_r_to_k
 from multipie.util.util_wannier import (
     convert_hr_to_model,
@@ -786,6 +786,17 @@ def test_wannier_mode(centred_model):
         ma.analyze({"mode": "wannier", "wannier": {"seedname": seed}})
     with open(nnkp, "w") as f:
         f.write(text)
+
+    # default k path with model: the path of the model, and the same bands as symcw mode.
+    disp_default = {}
+    for mode in ["wannier", "symcw"]:
+        ma.analyze({"mode": mode, "samb": {"model": name}, "wannier": {"seedname": seed}, "grid": (10, 10, 10)})
+        disp_default[mode] = np.loadtxt(os.path.join(topdir, name, "output", f"{name}_dispersion.txt"))
+        assert np.allclose(ma["info"]["A"], model_primitive_vector(mm))
+        assert ma["output"]["dispersion"]["k_path"] == _join_kpath(
+            seekpath.get_path_orig_cell(_kpath_structure(mm.group, ma["info"]["A"]))["path"]
+        )
+    assert np.allclose(disp_default["wannier"], disp_default["symcw"], atol=1e-8)
 
     # default k path for seedname.win (body-centred tetragonal, in the reciprocal basis of A_QE).
     with warnings.catch_warnings():
