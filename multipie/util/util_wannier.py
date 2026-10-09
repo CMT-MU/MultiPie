@@ -1139,7 +1139,10 @@ def model_primitive_vector(model):
         - (ndarray) -- primitive lattice vectors, [a1,a2,a3] (Cartesian), consistent with the primitive fractional coordinates of the model.
     """
     A = np.asarray(model["unit_vector"], dtype=float)
-    P = np.asarray(P_dict[model.group.info.lattice], dtype=float)[0:3, 0:3]
+    lattice = model.group.info.lattice
+    if lattice == "0":  # point group.
+        return A
+    P = np.asarray(P_dict[lattice], dtype=float)[0:3, 0:3]
 
     return P.T @ A
 
