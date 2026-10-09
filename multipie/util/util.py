@@ -22,6 +22,8 @@ from sympy import SympifyError
 from sympy.parsing.sympy_parser import parse_expr, standard_transformations, implicit_multiplication, rationalize
 from functools import wraps
 
+logger = logging.getLogger(__name__)
+
 TOL = 1e-11
 _FORMATTER_opt = ["--line-length=300"]
 _FORMATTER_max_length = 8000  # max. total length of file names in one black command.
@@ -182,11 +184,11 @@ def timer(name=None, verbose=True):
         def wrapper(*args, **kwargs):
             start = time.time()
             if verbose:
-                logging.info(f"=== ({label}) begin ===")
+                logger.info(f"=== ({label}) begin ===")
             result = func(*args, **kwargs)
             end = time.time()
             if verbose:
-                logging.info(f"=== ({label}) end ({end - start:.7f} [s] elapsed) ===")
+                logger.info(f"=== ({label}) end ({end - start:.7f} [s] elapsed) ===")
             return result
 
         return wrapper
@@ -552,14 +554,42 @@ def write_dict(dic, filename, var=None, comment="", w_dir=None):
 
 
 # ==================================================
+class _StdoutHandler(logging.StreamHandler):
+    """
+    Handler writing to the current sys.stdout (which may be replaced, e.g., in Jupyter or tests).
+    """
+
+    def __init__(self):
+        super().__init__()
+        self.setFormatter(logging.Formatter("%(message)s"))
+
+    @property
+    def stream(self):
+        return sys.stdout
+
+    @stream.setter
+    def stream(self, value):
+        pass
+
+
+# ==================================================
 def setup_logging(level=logging.INFO):
     """
-    Setup logging.
+    Setup logging of MultiPie, i.e., the "multipie" logger, to write messages to stdout.
 
     Args:
         level (int, optional): log level.
+
+    Note:
+        - the root logger and the other loggers of the application are not changed.
+        - if the "multipie" logger already has a handler (set by MultiPie or by the user), nothing is changed.
     """
-    logging.basicConfig(format="%(message)s", level=level, force=True, stream=sys.stdout)
+    mp_logger = logging.getLogger("multipie")
+    if mp_logger.handlers:
+        return
+    mp_logger.addHandler(_StdoutHandler())
+    mp_logger.setLevel(level)
+    mp_logger.propagate = False
 
 
 # ==================================================

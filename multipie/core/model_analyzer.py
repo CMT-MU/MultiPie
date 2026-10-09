@@ -1090,4 +1090,5 @@ class ModelAnalyzer(dict):
         if not self.output["dos"]:
             return
 
-        print("compute and output dos.")
+        if self._verbose:
+            print("compute and output dos.")

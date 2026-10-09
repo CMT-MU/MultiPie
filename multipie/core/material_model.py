@@ -45,6 +45,9 @@ from multipie.util.util import check_dict_keys
 from multipie.util.util_plot import plot_site, plot_bond, plot_site_samb, plot_bond_samb, plot_harmonics
 
 
+logger = logging.getLogger(__name__)
+
+
 # ==================================================
 class MaterialModel(BinaryManager):
     # ==================================================
@@ -144,7 +147,7 @@ class MaterialModel(BinaryManager):
                 pdf = PDFviaLaTeX(filename, landscape=True, english=True, dir=path)
                 ModelPDF(self, pdf)
             except LaTeXError as e:
-                logging.warning(f"skip PDF creation: {e}")
+                logger.warning(f"skip PDF creation: {e}")
                 return
             finally:
                 os.chdir(cwd)
@@ -227,10 +230,10 @@ class MaterialModel(BinaryManager):
         if verbose is None:
             verbose = self.verbose
         if not check_qtdraw():
-            logging.warning("QtDraw not found; skipping SAMB .qtdw output.")
+            logger.warning("QtDraw not found; skipping SAMB .qtdw output.")
             return
         if not self["qtdraw_prop"]["create"]:
-            logging.warning("'qtdraw/create' of the model is False; skipping SAMB .qtdw output.")
+            logger.warning("'qtdraw/create' of the model is False; skipping SAMB .qtdw output.")
             return
 
         site_bond = [

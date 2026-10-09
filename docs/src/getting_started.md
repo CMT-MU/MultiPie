@@ -96,6 +96,7 @@ Use input files and `.pkl` files only from trusted sources.
 - When several input files are given, all of them are read before any model is created or analyzed.
 - `mp_create -i` and `mp_analyze -i` print the default model and control, which can be used as a template of an input file.
 - `python -m multipie.scripts.mp_create` and `python -m multipie.scripts.mp_analyze` work in the same way.
+- Messages such as the elapsed time and warnings are written to stdout through the `multipie` logger. `create_model` and `analyze_model` (and so `mp_create` and `mp_analyze`) set it up unless it already has a handler; the logging configuration of the application, e.g., the root logger in Jupyter, is not changed.
 
 ## Parallel computation
 
