@@ -20,7 +20,7 @@ As a tutorial, we describe the procedure for generating model in the case of **g
     The `.tex`/`.pdf` files are created only when `"pdf": {"create": True}` (default) and the TeX components listed in [Installation](install.md) (pLaTeX, `ptex2pdf` and the LaTeX packages) are available:
 
      - If `latex` is not found, neither file is written (with `-v`, a notice is printed).
-     - Otherwise the `.tex` file is written first. If `ptex2pdf` or a LaTeX package is then found missing, or the compilation fails or does not finish, a warning is printed and a correct `.pdf` file is not guaranteed (a `.pdf` file from an earlier run or from an earlier pass of the compilation may remain; remove it before re-running if you rely on the PDF).
+     - Otherwise the `.tex` file is written first. If `ptex2pdf` or a LaTeX package is then found missing, or the compilation fails or does not finish, a warning is printed and the `.pdf` file, from an earlier run or incomplete, is removed (unless it cannot be removed, e.g., for lack of permission).
      - The `.pkl` file and the other outputs are written in any case.
 
     The `.qtdw` file is created only when `"qtdraw": {"create": True}` (default) and QtDraw is installed (with `-v`, a notice is printed if QtDraw is not found).
@@ -81,8 +81,8 @@ Model input files and control files are Python files that contain dictionaries, 
 
   The keys of the following dictionaries are not checked against the defaults, but have their own rules:
 
-  - site names in `site`: non-empty strings without `;`, and without `_` for sites used in `bond` (`;` and `_` are used in the names of site and bond clusters). Letters and digits, e.g., `"Fe1"`, are recommended for all sites, since the names also appear in the PDF (LaTeX) and in file names. A name with a LaTeX special character, e.g., `#` or `%`, makes the PDF compilation fail (the other outputs are written).
-  - SAMB names in `samb/parameter`: names of the generated SAMBs, e.g., `"z1"`. `samb/parameter` may also be the name of a Python file containing one dictionary of the same form, given relative to `model_name/info/`, with the extension, e.g., `"my_z.py"` for `model_name/info/my_z.py` (not `"info/my_z.py"` or `"my_z"`).
+  - site names in `site`: non-empty strings without `;`, and without `_` for sites used in `bond` (`;` and `_` are used in the names of site and bond clusters). Letters and digits, e.g., `"Fe1"`, are recommended for all sites, since the names also appear in the PDF (LaTeX) and in file names. LaTeX special characters, e.g., `#` or `%`, in the model and site names are escaped in the PDF.
+  - SAMB names in `samb/parameter`: names of the generated SAMBs, e.g., `"z1"`. `samb/parameter` may also be the name of a Python file containing one dictionary of the same form, given relative to `model_name/info/`, with the extension, e.g., `"my_z.py"` for `model_name/info/my_z.py` (not `"info/my_z.py"`, `"my_z"` or an absolute path). When the parameters are not empty, `mp_analyze` writes them to `model_name/info/model_name_z.py`, which is overwritten at each run; copy it to another name to edit it.
   - k-point labels in `output/dispersion/k_point`: labels used in `k_path`, without `-`, `|` and spaces, which separate the points in `k_path`.
 
 ```{note}
