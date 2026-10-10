@@ -7,6 +7,7 @@ This module provides model analyzer.
 import os
 import numpy as np
 import copy
+import functools
 import seekpath
 from multipie.core.material_model import MaterialModel
 from multipie.util.util_crystal import convert_to_primitive
@@ -286,10 +287,11 @@ class ModelAnalyzer(dict):
 
         :meta private:
         """
-        # convert sympy to str.
+        # convert sympy to str (the same expressions appear many times, so that each is converted once).
+        to_str = functools.cache(lambda v: str(v).replace(" ", ""))
         mi = matrix_info.copy()
         matrix = matrix_info["matrix"]
-        mi["matrix"] = {z: {k: (str(v[0]).replace(" ", ""), v[1]) for k, v in elm.items()} for z, elm in matrix.items()}
+        mi["matrix"] = {z: {k: (to_str(v[0]), v[1]) for k, v in elm.items()} for z, elm in matrix.items()}
 
         self.write_dict(mi, "matrix.py", _matrix_comment, "info")
 

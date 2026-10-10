@@ -896,15 +896,18 @@ class MaterialModel(BinaryManager):
         Note:
             - R = (n1,n2,n3) and m and n are a lattie vector (corresponding to bond_no), bra and ket indexes, respectively.
         """
-        Hamiltonian = defaultdict(lambda: sp.S(0) if fmt == "sympy" else 0.0)
+        # collect the terms of each matrix element, and sum them at once (adding sympy terms one by one is slow).
+        terms = defaultdict(list)
         for zj, cj in parameter.items():
             if zj not in combined_samb_matrix.keys():
                 raise ValueError(f"parameter {zj} is missing.")
             d = combined_samb_matrix[zj]
             for Rmn, (Zj, _) in d.items():
-                Hamiltonian[Rmn] += cj * Zj
+                terms[Rmn].append(cj * Zj)
 
-        return dict(Hamiltonian)
+        if fmt == "sympy":
+            return {Rmn: sp.Add(*t) for Rmn, t in terms.items()}
+        return {Rmn: sum(t, 0.0) for Rmn, t in terms.items()}
 
     # ==================================================
     def get_multipole_expression(self):
