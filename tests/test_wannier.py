@@ -886,3 +886,36 @@ def test_wannier_mode_bond_centre(tmp_path):
     assert [ma["wannier"]["ket"][w2m[w]] for w in range(2)] == ["s@Fe(1)", "s@X1(1)"]
     assert np.allclose([ma["wannier"]["atoms_frac"][w2m[w]] for w in range(2)], centers)
     assert os.path.isfile(os.path.join(topdir, seed, "output", f"{seed}_dispersion.txt"))
+
+
+# ==================================================
+@pytest.mark.parametrize(
+    "lattice, group, site",
+    [("P", 221, "[0,0,0]"), ("I", 139, "[0,0,0.3]"), ("F", 225, "[0.3,0,0]"), ("F", 227, "[1/8,1/8,1/8]"), ("C", 65, "[0.3,0,0]"), ("A", 38, "[0,0.3,0.1]"), ("R", 166, "[0,0,0.3]")],
+)
+def test_cell_bond_lattice_vector(lattice, group, site):
+    # the lattice vector R of each cell bond must connect the ket sites (position_primitive of the plus_set-1 sites):
+    # H_mn(R) = <m,0|H|n,R> with m at head and n at tail, so that pos[tail] + R - pos[head] = -vector_primitive.
+    # For centred lattices, R was computed from positions converted to the primitive cell without the shift
+    # into [0,1) used for position_primitive, which displaced R by a primitive lattice vector.
+    mm = MaterialModel()
+    mm.analyze(
+        {
+            "model": "test",
+            "group": group,
+            "cell": {"a": 3.0, "b": 4.0, "c": 5.0},
+            "site": {"X": (site, "s")},
+            "bond": [("X", "X", [1, 2])],
+            "pdf": {"create": False},
+            "qtdraw": {"create": False},
+        }
+    )
+    assert mm.group.info.lattice == lattice
+    Ap = model_primitive_vector(mm)
+    pos = {s.sublattice: np.asarray(s.position_primitive, dtype=float) for s in mm["site"]["cell"]["X"] if s.plus_set == 1}
+    for name, bonds in mm["bond"]["cell"].items():
+        distance = mm["bond"]["representative"][name].distance
+        for b in bonds:
+            implied = pos[b.t_idx[0]] + np.asarray(b.R_primitive, dtype=float) - pos[b.h_idx[0]]
+            assert np.allclose(implied, -np.asarray(b.vector_primitive, dtype=float), atol=1e-8), (name, b.no)
+            assert np.isclose(np.linalg.norm(implied @ Ap), distance, atol=1e-6), (name, b.no)

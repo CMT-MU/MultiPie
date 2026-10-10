@@ -959,10 +959,13 @@ def parse_representative_bond(group, G, site_grid, site_so, site_dict, bond_data
                 for k, (v, vp, c, cp, m, sl, pi, ti, hi) in enumerate(
                     zip(vector, vector_p, center, center_p, mapping, sublattice, pset, tail_idx, head_idx)
                 ):
-                    s_tail = tail_pos[ti[0] - 1]
-                    s_tail = convert_to_primitive(lattice, s_tail, shift=False)
-                    s_head = head_pos[hi[0] - 1]
-                    s_head = convert_to_primitive(lattice, s_head, shift=False)
+                    # positions of the plus_set-1 sites in the primitive cell, shifted into [0,1) exactly
+                    # as position_primitive (used for the kets by get_ket_site). The unshifted
+                    # convert_to_primitive(...) differs by a primitive lattice vector for centred
+                    # lattices (e.g. Fd-3m Si: site 2 at (-1/8,7/8,7/8) vs (7/8,7/8,7/8)), which put the
+                    # nearest-neighbour SAMB on 4.53 and 5.96 A bonds.
+                    s_tail = np.asarray(tail_info[ti[0] - 1].position_primitive, dtype=float)
+                    s_head = np.asarray(head_info[hi[0] - 1].position_primitive, dtype=float)
                     n1, n2, n3 = -(vp - (s_head - s_tail))
                     n1, n2, n3 = round(n1), round(n2), round(n3)
                     cell_bond[name].append(CellBondType(k + 1, v, vp, c, cp, m, sl, pi, ti, hi, (n1, n2, n3)))
