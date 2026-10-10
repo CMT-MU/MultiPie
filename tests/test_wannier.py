@@ -943,3 +943,24 @@ def test_cell_bond_lattice_vector(lattice, group, site):
             assert np.isclose(np.linalg.norm(implied @ Ap), rep.distance, atol=1e-6), (name, b.no)
     # the bond list must include a bond between the two site tags.
     assert len(tags) == 1 or any(t != h for t, h in pairs), pairs
+
+
+# ==================================================
+@pytest.mark.parametrize("s", [True, False])
+def test_fourier_r_to_k(s):
+    # compare with the definition, O(k)_mn = sum_R O_mn(R) exp(2pi i k*(R - s(r_m - r_n))), element by element.
+    rng = np.random.default_rng(1)
+    atom = rng.random((3, 3))
+    kv = rng.random((7, 3))
+    OR = {
+        (tuple(R), m, n): complex(*rng.normal(size=2))
+        for R in [(0, 0, 0), (1, 0, -1), (0, 2, 1)]
+        for m in range(3)
+        for n in range(3)
+    }
+    OR[((1, 0, -1), 0, 1)] = 0.5j  # overwritten entry.
+    ref = np.zeros((len(kv), 3, 3), dtype=complex)
+    for (R, m, n), v in OR.items():
+        ref[:, m, n] += v * np.exp(2j * np.pi * kv @ (np.asarray(R) - s * (atom[m] - atom[n])))
+    assert np.allclose(fourier_r_to_k(OR, atom, kv, s), ref, atol=1e-12)
+    assert np.allclose(fourier_r_to_k({}, atom, kv, s), 0)
