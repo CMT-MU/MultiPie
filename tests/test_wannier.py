@@ -891,31 +891,55 @@ def test_wannier_mode_bond_centre(tmp_path):
 # ==================================================
 @pytest.mark.parametrize(
     "lattice, group, site",
-    [("P", 221, "[0,0,0]"), ("I", 139, "[0,0,0.3]"), ("F", 225, "[0.3,0,0]"), ("F", 227, "[1/8,1/8,1/8]"), ("C", 65, "[0.3,0,0]"), ("A", 38, "[0,0.3,0.1]"), ("R", 166, "[0,0,0.3]")],
+    [
+        # one site tag (X-X bonds).
+        ("P", 221, {"X": "[0,0,0]"}),
+        ("I", 139, {"X": "[0,0,0.3]"}),
+        ("F", 225, {"X": "[0.3,0,0]"}),
+        ("F", 227, {"X": "[1/8,1/8,1/8]"}),
+        ("C", 65, {"X": "[0.3,0,0]"}),
+        ("A", 38, {"X": "[0,0.3,0.1]"}),
+        ("R", 166, {"X": "[0,0,0.3]"}),
+        # two site tags with different multiplicities (X-X, X-Y and Y-Y bonds).
+        ("I", 139, {"X": "[0,0,0]", "Y": "[0,1/2,1/4]"}),
+        ("F", 225, {"X": "[0,0,0]", "Y": "[1/4,1/4,1/4]"}),
+        ("F", 227, {"X": "[1/8,1/8,1/8]", "Y": "[1/2,1/2,1/2]"}),
+        ("C", 65, {"X": "[0,0,0]", "Y": "[0.3,0,1/2]"}),
+        ("A", 38, {"X": "[0,0,0.1]", "Y": "[0,0.3,0.4]"}),
+        ("R", 166, {"X": "[0,0,0]", "Y": "[0,0,0.3]"}),
+    ],
 )
 def test_cell_bond_lattice_vector(lattice, group, site):
     # the lattice vector R of each cell bond must connect the ket sites (position_primitive of the plus_set-1 sites):
     # H_mn(R) = <m,0|H|n,R> with m at head and n at tail, so that pos[tail] + R - pos[head] = -vector_primitive.
     # For centred lattices, R was computed from positions converted to the primitive cell without the shift
     # into [0,1) used for position_primitive, which displaced R by a primitive lattice vector.
+    tags = list(site)
     mm = MaterialModel()
     mm.analyze(
         {
             "model": "test",
             "group": group,
             "cell": {"a": 3.0, "b": 4.0, "c": 5.0},
-            "site": {"X": (site, "s")},
-            "bond": [("X", "X", [1, 2])],
+            "site": {tag: (s, "s") for tag, s in site.items()},
+            "bond": [(t, h, [1, 2]) for i, t in enumerate(tags) for h in tags[i:]],
             "pdf": {"create": False},
             "qtdraw": {"create": False},
         }
     )
     assert mm.group.info.lattice == lattice
     Ap = model_primitive_vector(mm)
-    pos = {s.sublattice: np.asarray(s.position_primitive, dtype=float) for s in mm["site"]["cell"]["X"] if s.plus_set == 1}
+    pos = {
+        tag: {s.sublattice: np.asarray(s.position_primitive, dtype=float) for s in mm["site"]["cell"][tag] if s.plus_set == 1}
+        for tag in tags
+    }
+    pairs = set()
     for name, bonds in mm["bond"]["cell"].items():
-        distance = mm["bond"]["representative"][name].distance
+        rep = mm["bond"]["representative"][name]
+        pairs.add((rep.tail, rep.head))
         for b in bonds:
-            implied = pos[b.t_idx[0]] + np.asarray(b.R_primitive, dtype=float) - pos[b.h_idx[0]]
+            implied = pos[rep.tail][b.t_idx[0]] + np.asarray(b.R_primitive, dtype=float) - pos[rep.head][b.h_idx[0]]
             assert np.allclose(implied, -np.asarray(b.vector_primitive, dtype=float), atol=1e-8), (name, b.no)
-            assert np.isclose(np.linalg.norm(implied @ Ap), distance, atol=1e-6), (name, b.no)
+            assert np.isclose(np.linalg.norm(implied @ Ap), rep.distance, atol=1e-6), (name, b.no)
+    # the bond list must include a bond between the two site tags.
+    assert len(tags) == 1 or any(t != h for t, h in pairs), pairs
