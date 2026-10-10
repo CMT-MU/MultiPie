@@ -140,3 +140,64 @@ def test_group_data_lazy_and_after_clear():
     assert g2.character["table"] and Group(221).character["table"]
     Group.clear_cache()
     assert g2.character["table"] and len(g2.symmetry_operation["tag"]) == 48
+
+
+# ==================================================
+def _cg_direct(group, tag1, tag2, tag):
+    # Group.cg computed term by term, as in the definition (reference for the implementation with cached coefficients).
+    import sympy as sp
+    from itertools import product
+    from sympy.physics.quantum.cg import CG
+
+    t_even = {"Q": "Q", "T": "Q", "G": "G", "M": "G"}
+    u1, u2, u = (group.harmonics[[t_even[t[0]], *t[1:4], -1, 0, 0, "q"]][1].T for t in (tag1, tag2, tag))
+    l1, l2, l = tag1[1], tag2[1], tag[1]
+    ml1, ml2, ml = (list(range(i, -i - 1, -1)) for i in (l1, l2, l))
+    cg = np.full((len(u1), len(u2), len(u)), sp.S(0), dtype=object)
+    for g1, g2, g in product(range(len(u1)), range(len(u2)), range(len(u))):
+        s = sp.S(0)
+        for i, j in product(range(len(ml1)), range(len(ml2))):
+            m = ml1[i] + ml2[j]
+            if m in ml:
+                s += (
+                    (-sp.I) ** (l1 + l2 - l)
+                    * CG(l1, ml1[i], l2, ml2[j], l, m).doit()
+                    * sp.conjugate(u1[g1, i] * u2[g2, j])
+                    * u[g, ml.index(m)]
+                )
+        cg[g1, g2, g] = s
+    return cg
+
+
+@pytest.mark.parametrize("tag", ["D4h", "Oh", "D3d"])
+def test_cg(tag):
+    import sympy as sp
+
+    g = Group(tag)
+    keys = [k for k in g.harmonics.named_keys() if k.X == "Q" and k.l <= 2]
+    n = 0
+    for tag1 in keys:
+        for tag2 in keys:
+            for tag3 in keys:
+                cg = g.cg(tag1, tag2, tag3)
+                if cg is None:
+                    continue
+                ref = _cg_direct(g, tag1, tag2, tag3)
+                assert cg.shape == ref.shape
+                assert all(sp.simplify(a - b) == 0 for a, b in zip(cg.ravel(), ref.ravel())), (tag1, tag2, tag3)
+                n += 1
+    assert n > 0
+
+
+# ==================================================
+def test_find_xyz():
+    from multipie.util.util import str_to_sympy
+    from multipie.util.util_wyckoff import find_xyz
+
+    pos = str_to_sympy("[x, 2*x + 1/2, -z]")
+    sol = find_xyz(pos, [0.1, 0.7, 0.3])
+    assert sol.keys() == {"x", "y", "z"} and np.isclose(sol["x"], 0.1) and np.isclose(sol["z"], -0.3)
+    assert find_xyz(pos, [0.1, 0.6, 0.3]) is None  # y != 2x+1/2.
+    pos = str_to_sympy("[X, -X, 0]")
+    assert np.isclose(find_xyz(pos, [0.25, -0.25, 0], ["X", "Y", "Z"])["X"], 0.25)
+    assert find_xyz(pos, [0.25, 0.25, 0], ["X", "Y", "Z"]) is None
