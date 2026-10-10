@@ -2,6 +2,7 @@
 For Wyckoff related.
 """
 
+import functools
 import numpy as np
 from itertools import product
 
@@ -104,25 +105,43 @@ def find_xyz(pos, site, var=["x", "y", "z"]):
     Returns:
         - (dict) -- (x,y,z) value (return None when not found).
     """
-    sc = np.zeros(3)
-    sxyz = np.eye(3)
-
     site = np.asarray(site, dtype=float)
-    pos = np.asarray(pos, dtype=object)
+    A, b = _affine_coefficient(tuple(pos), tuple(var))
 
-    sub_b = dict(zip(var, sc))
-    b = np.asarray([p.subs(sub_b) for p in pos], dtype=float)
-    sub_A = [dict(zip(var, si)) for si in sxyz]
-    A = np.array([[p.subs(subs) for subs in sub_A] for p in pos - b], dtype=float)
-
-    solution = np.linalg.lstsq(A, site - b, rcond=None)[0].tolist()
-    solution = dict(zip(var, solution))
-
-    sol_site = replace(pos, solution).astype(float)
-    if not np.allclose(sol_site, site, atol=TOL_SAME_SITE):
+    solution = np.linalg.lstsq(A, site - b, rcond=None)[0]
+    if not np.allclose(A @ solution + b, site, atol=TOL_SAME_SITE):
         return None
 
-    return solution
+    return dict(zip(var, solution.tolist()))
+
+
+# ==================================================
+@functools.lru_cache(maxsize=None)
+def _affine_coefficient(pos, var):
+    """
+    Coefficients of vector affine in var, pos = A @ var + b.
+
+    Args:
+        pos (tuple): vector in terms of var, (sympy).
+        var (tuple): variable.
+
+    Returns:
+        - (ndarray) -- A (float).
+        - (ndarray) -- b (float).
+
+    Note:
+        - the coefficients are kept in memory, as find_xyz is called repeatedly for the same Wyckoff positions.
+        - the returned arrays are read only, as they are shared.
+
+    :meta private:
+    """
+    zero = dict.fromkeys(var, 0)
+    b = np.array([p.subs(zero) for p in pos], dtype=float)
+    A = np.array([[p.subs(zero | {v: 1}) for v in var] for p in pos], dtype=float) - b[:, None]
+    A.flags.writeable = False
+    b.flags.writeable = False
+
+    return A, b
 
 
 # ==================================================

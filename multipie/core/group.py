@@ -153,6 +153,22 @@ def _load_group_opt_data(file):
 
 
 # ==================================================
+@functools.lru_cache(maxsize=None)
+def _cg_coefficient(l1, m1, l2, m2, l, m):
+    """
+    Clebsch-Gordan coefficient, < l1 m1; l2 m2 | l m > (sympy).
+
+    Note:
+        - the values are kept in memory, as the same coefficients are used repeatedly in Group.cg.
+
+    :meta private:
+    """
+    from sympy.physics.quantum.cg import CG  # import here, as sympy.physics.quantum is slow to import.
+
+    return CG(l1, m1, l2, m2, l, m).doit()
+
+
+# ==================================================
 class Group(dict):
     _info = BinaryManager("info")
 
@@ -1410,8 +1426,6 @@ class Group(dict):
         if self.group_type in ["MPG", "MSG"]:
             return None
 
-        from sympy.physics.quantum.cg import CG  # import here, as sympy.physics.quantum is slow to import.
-
         harmonics = self.harmonics
         t_even = {"Q": "Q", "T": "Q", "G": "G", "M": "G"}
         t_val = {"Q": 1, "G": 1, "T": -1, "M": -1}
@@ -1437,19 +1451,23 @@ class Group(dict):
         phase = (-sp.I) ** (l1 + l2 - l)
         m_to_idx = {m: k for k, m in enumerate(ml)}
 
+        # nonzero CG coefficients (i, j, k, coefficient), which do not depend on g1, g2, g.
+        cg_lm = []
+        for i, j in product(range(len(ml1)), range(len(ml2))):
+            m1, m2 = ml1[i], ml2[j]
+            m = m1 + m2
+            if m not in m_to_idx:
+                continue
+            c = _cg_coefficient(l1, m1, l2, m2, l, m)
+            if c:
+                cg_lm.append((i, j, m_to_idx[m], phase * c))
+
         cg_array = np.full((len(u1), len(u2), len(u)), sp.S(0), dtype=object)
 
         for g1, g2, g in product(range(len(u1)), range(len(u2)), range(len(u))):
             s = sp.S(0)
-            for i, j in product(range(len(ml1)), range(len(ml2))):
-                m1, m2 = ml1[i], ml2[j]
-                m = m1 + m2
-                if m not in m_to_idx:
-                    continue
-                k = m_to_idx[m]
-                c = CG(l1, m1, l2, m2, l, m).doit()
-                if c:
-                    s += phase * c * sp.conjugate(u1[g1, i] * u2[g2, j]) * u[g, k]
+            for i, j, k, c in cg_lm:
+                s += c * sp.conjugate(u1[g1, i] * u2[g2, j]) * u[g, k]
             if s != 0:
                 cg_array[g1, g2, g] = s
 

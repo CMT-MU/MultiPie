@@ -130,7 +130,7 @@ class BinaryManager(dict):
         """
         fullpath = self.get_fullpath(filename)
         os.makedirs(os.path.dirname(fullpath), exist_ok=True)
-        dic = self.to_dict()
+        dic = {"header": self.comment, "data": dict(self)}  # same as to_dict, without deep copy, as pickle does not modify data.
         bs = pickle.dumps(dic, protocol=pickle.HIGHEST_PROTOCOL)
         with gzip.open(fullpath, mode="wb") as f:
             f.write(bs)
