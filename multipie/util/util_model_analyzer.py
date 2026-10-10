@@ -97,17 +97,22 @@ def fourier_r_to_k(OR, atom, kv, s=True):
     Returns:
         - (ndarray) -- O(k) = sum_s Omn exp( 2pi i k*Rs ), Rs = (n1,n2,n3)-s(R[m]-R[n]).
     """
-    eRa = np.exp(1j * (2 * np.pi * kv @ atom.T))
-
     Nk = len(kv)
     d = len(atom)
-    S = np.zeros((Nk, d, d), dtype=complex)
+
+    # O_R as d x d matrix for each R, so that exp(2pi i k*R) is computed once for each R.
+    OR_mat = {}
     for (R, m, n), value in OR.items():
-        eR = np.exp(1j * (2 * np.pi * kv @ np.asarray(R)))
-        if s:
-            S[:, m, n] += value * eR * np.conj(eRa[:, m]) * eRa[:, n]
-        else:
-            S[:, m, n] += value * eR
+        OR_mat.setdefault(tuple(R), np.zeros((d, d), dtype=complex))[m, n] += value
+    if not OR_mat:
+        return np.zeros((Nk, d, d), dtype=complex)
+
+    R = np.asarray(list(OR_mat.keys()), dtype=float)
+    eR = np.exp(1j * (2 * np.pi * kv @ R.T))  # (Nk, number of R).
+    S = np.tensordot(eR, np.asarray(list(OR_mat.values())), axes=(1, 0))
+    if s:
+        eRa = np.exp(1j * (2 * np.pi * kv @ atom.T))
+        S *= np.conj(eRa)[:, :, None] * eRa[:, None, :]
 
     return S
 
