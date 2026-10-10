@@ -719,6 +719,12 @@ class MaterialModel(BinaryManager):
         atomic_samb_data = self["atomic_samb"]
         cluster_samb_data = self["cluster_samb"]
 
+        # kets of plus_set-1 sites for each site name.
+        ket_list = {}
+        for o in self["full_matrix"]["ket"]:
+            if o[1] == 1:
+                ket_list.setdefault(o[0], []).append(o)
+
         matrix = {}
         for zi, (s_symbol, u_samb_type, index, comp) in combined_id.items():
             st = u_samb_type.samb_type
@@ -742,7 +748,8 @@ class MaterialModel(BinaryManager):
             a_samb = atomic_samb_data[bk]
             c_samb = cluster_samb_data[wp]
 
-            d = defaultdict(lambda: sp.S(0) if fmt == "sympy" else 0.0)
+            # collect the terms of each matrix element, and sum them at once (adding sympy terms one by one is slow).
+            terms = defaultdict(list)
             bond_d = {}
 
             for cg, t1, c1, t2, c2 in lc:
@@ -768,7 +775,7 @@ class MaterialModel(BinaryManager):
                         for c in range(k_dim):
                             val = scale * atomic_matrix[r, c]
                             if val != 0:
-                                d[(n1, n2, n3, row_idx, k_top + c)] += val
+                                terms[(n1, n2, n3, row_idx, k_top + c)].append(val)
                                 bond_d[(n1, n2, n3, row_idx, k_top + c)] = 0 if is_site else bi.no
 
                     if not is_site:
@@ -776,23 +783,27 @@ class MaterialModel(BinaryManager):
                             if h_sl == t_sl:
                                 b2_top, k2_top = k_top, b_top
                             else:
-                                ket_list = [o for o in self["full_matrix"]["ket"] if o[0] == head and o[1] == 1]
-                                bra_orb = [o for o in ket_list if o[2] == b_rank][0]
-                                ket_orb = [o for o in ket_list if o[2] == k_rank][0]
-                                delta = ket_list.index(ket_orb) - ket_list.index(bra_orb)
+                                bra_orb = [o for o in ket_list[head] if o[2] == b_rank][0]
+                                ket_orb = [o for o in ket_list[head] if o[2] == k_rank][0]
+                                delta = ket_list[head].index(ket_orb) - ket_list[head].index(bra_orb)
                                 b2_top = b_top + delta
                                 k2_top = k_top - delta
 
                             for r, c in product(range(k_dim), range(b_dim)):
-                                d[(n1, n2, n3, b2_top + r, k2_top + c)] += cg * yi * atomic_matrix[c, r].conjugate()
+                                terms[(n1, n2, n3, b2_top + r, k2_top + c)].append(cg * yi * atomic_matrix[c, r].conjugate())
                                 bond_d[(n1, n2, n3, b2_top + r, k2_top + c)] = 0 if is_site else bi.no
 
-            # add hermite conjugate elements.
-            for (n1, n2, n3, m, n), val in list(d.items()):
-                d[(-n1, -n2, -n3, n, m)] += sp.conjugate(val)
-                bond_d[(-n1, -n2, -n3, n, m)] = -bond_d[(n1, n2, n3, m, n)]
+            d = {Rmn: sp.Add(*t) for Rmn, t in terms.items()}
 
-            norm_sq = sum(v * sp.conjugate(v) for v in d.values())
+            # add hermite conjugate elements.
+            hc = defaultdict(list)
+            for (n1, n2, n3, m, n), val in d.items():
+                hc[(-n1, -n2, -n3, n, m)].append(sp.conjugate(val))
+                bond_d[(-n1, -n2, -n3, n, m)] = -bond_d[(n1, n2, n3, m, n)]
+            for Rmn, t in hc.items():
+                d[Rmn] = sp.Add(d.get(Rmn, sp.S(0)), *t)
+
+            norm_sq = sp.Add(*[v * sp.conjugate(v) for v in d.values()])
             norm = sp.sqrt(sp.expand(norm_sq))
 
             matrix[zi] = {
