@@ -15,7 +15,7 @@ from joblib import Parallel, delayed
 
 
 from multipie import PGMultipoleType, SphericalMultipoleType
-from multipie.util.util import str_to_sympy, get_n_jobs, is_integer
+from multipie.util.util import str_to_sympy, get_n_jobs, is_integer, parallel_map
 from multipie.util.util_binary import BinaryManager
 from multipie.util.util_dict import Dict
 from multipie.util.util_gram_schmidt import gram_schmidt
@@ -944,6 +944,8 @@ class Group(dict):
 
         key_of = lambda tg, i: (tg.X, tg.l, tg.Gamma, tg.n, i, tg.s, tg.k, tg.x)
 
+        # collect blocks to be orthogonalized.
+        blocks = []
         for (X, l1, s, k, p1), (Y, l2, p2) in product(X_l_s_k_p_list, Y_l_p_list):
             tag1_list = Dict.select_key(a_samb_key, X=X, l=l1, s=s, k=k, p=p1)
             tag2_list = Dict.select_key(c_samb_key, X=Y, l=l2, p=p2)
@@ -967,30 +969,33 @@ class Group(dict):
                         tag_list.append(tag)
                         tag12_list.append(tag12)
 
-                # orthogonalize
-                if not coeff_list:
-                    continue
+                if coeff_list:
+                    blocks.append((s, k, tag_list, coeff_list, tag12_list))
 
-                coeff_list, idx = gram_schmidt(coeff_list)
-                tag_list, tag12_list = [tag_list[i] for i in idx], [tag12_list[i] for i in idx]
-                for tag, tag12, coeff in zip(tag_list, tag12_list, coeff_list):
-                    ex = list(harmonics[tag._replace(X="Q" if tag.X == "T" else "G" if tag.X == "M" else tag.X)][0])
-                    tag = tag._replace(**{"s": s, "k": k})
+        # orthogonalize each block (in parallel).
+        size = sum(np.size(c) for _, _, _, coeff_list, _ in blocks for coeff in coeff_list for c in coeff)
+        ortho = parallel_map(gram_schmidt, [(coeff_list,) for _, _, _, coeff_list, _ in blocks], size)
 
-                    dim = TagIrrep.parse(tag.Gamma)["dimension"]
-                    lst = [[(cg[g], *entry) for entry, cg in zip(tag12, coeff) if cg[g] != 0] for g in range(dim)]
+        for (s, k, tag_list, _, tag12_list), (coeff_list, idx) in zip(blocks, ortho):
+            tag_list, tag12_list = [tag_list[i] for i in idx], [tag12_list[i] for i in idx]
+            for tag, tag12, coeff in zip(tag_list, tag12_list, coeff_list):
+                ex = list(harmonics[tag._replace(X="Q" if tag.X == "T" else "G" if tag.X == "M" else tag.X)][0])
+                tag = tag._replace(**{"s": s, "k": k})
 
-                    cnt = len(dic.select(X=tag.X, l=tag.l, Gamma=tag.Gamma, n=tag.n, s=tag.s, k=tag.k, x=tag.x))
-                    if cnt == 0:
-                        tag = key_of(tag, -1)
-                    elif cnt == 1:
-                        base, tag1, tag = key_of(tag, -1), key_of(tag, 1), key_of(tag, 2)
-                        dic[tag1] = dic[base]
-                        del dic[base]
-                    else:
-                        tag = key_of(tag, cnt + 1)
+                dim = TagIrrep.parse(tag.Gamma)["dimension"]
+                lst = [[(cg[g], *entry) for entry, cg in zip(tag12, coeff) if cg[g] != 0] for g in range(dim)]
 
-                    dic[tag] = (lst, ex)
+                cnt = len(dic.select(X=tag.X, l=tag.l, Gamma=tag.Gamma, n=tag.n, s=tag.s, k=tag.k, x=tag.x))
+                if cnt == 0:
+                    tag = key_of(tag, -1)
+                elif cnt == 1:
+                    base, tag1, tag = key_of(tag, -1), key_of(tag, 1), key_of(tag, 2)
+                    dic[tag1] = dic[base]
+                    del dic[base]
+                else:
+                    tag = key_of(tag, cnt + 1)
+
+                dic[tag] = (lst, ex)
 
         dic = dic.sort("Gamma", ("X", ["Q", "G", "M", "T"]), "s", "k", "l", "n", "p")
 
