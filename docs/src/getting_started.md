@@ -101,7 +101,9 @@ Use input files and `.pkl` files only from trusted sources.
 ## Parallel computation
 
 The atomic multipole matrices, `create_atomic_multipole_matrix` in `multipie.util.util_atomic_multipole`, and the atomic SAMBs, `Group.create_atomic_samb_L`, are computed in parallel with joblib.
-These are used to generate the database; `mp_create` and `mp_analyze` use the precomputed data and are not affected.
+These are used to generate the database.
+In `mp_create` (`MaterialModel.analyze`), the orthogonalization of the atomic and combined SAMBs is also done in parallel for a large model, e.g., a spinful model with d orbitals; a small model is processed serially, since starting the processes would take longer than the computation.
+The output does not depend on the number of processes.
 The number of processes is given by the environment variable `MULTIPIE_N_JOBS`:
 
 - not set or empty: all cores (`-1`, default),

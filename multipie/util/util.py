@@ -22,6 +22,7 @@ from datetime import datetime
 from sympy import SympifyError
 from sympy.parsing.sympy_parser import parse_expr, standard_transformations, implicit_multiplication, rationalize
 from functools import wraps
+from joblib import Parallel, delayed
 
 logger = logging.getLogger(__name__)
 
@@ -796,3 +797,33 @@ def get_n_jobs():
         raise ValueError("MULTIPIE_N_JOBS must not be 0.")
 
     return n
+
+
+# ==================================================
+# min. size of work (no. of sympy elements) for parallel_map to run in parallel.
+# below this, starting worker processes costs more than it saves (about 0.3-0.6 ms per element).
+PARALLEL_MIN_SIZE = 3000
+
+
+# ==================================================
+def parallel_map(func, args_list, size):
+    """
+    Apply function to each argument tuple in parallel (joblib).
+
+    Args:
+        func (callable): function, picklable (module-level).
+        args_list (list): list of argument tuples, [tuple].
+        size (int): size of total work, e.g., no. of sympy elements.
+
+    Returns:
+        - (list) -- results in the order of args_list.
+
+    Note:
+        - the number of jobs is given by get_n_jobs().
+        - it runs serially for MULTIPIE_N_JOBS=1, a single task, or size < PARALLEL_MIN_SIZE.
+    """
+    n_jobs = get_n_jobs()
+    if n_jobs == 1 or len(args_list) < 2 or size < PARALLEL_MIN_SIZE:
+        return [func(*args) for args in args_list]
+
+    return Parallel(n_jobs=n_jobs)(delayed(func)(*args) for args in args_list)

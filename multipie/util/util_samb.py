@@ -6,6 +6,7 @@ import numpy as np
 import sympy as sp
 
 from multipie import PGMultipoleType
+from multipie.util.util import parallel_map
 from multipie.util.util_dict import Dict
 from multipie.util.util_gram_schmidt import gram_schmidt
 
@@ -62,12 +63,19 @@ def orthogonalize_multipole(samb, diagonal_block):
     """
     irreps = set([i.Gamma for i in samb.named_keys()])
 
-    samb_ortho = Dict(PGMultipoleType)
+    blocks = []
     for X in [["Q", "G"], ["M", "T"]]:
         for Gamma in irreps:
             samb1 = samb.select(X=X, Gamma=Gamma)
             samb1 = samb1.sort(("X", X), "s", "k", "l", "n", "p")
-            samb_ortho.update(orthogonalize_samb(samb1, diagonal_block))
+            if len(samb1) > 0:
+                blocks.append((samb1, diagonal_block))
+
+    # orthogonalize each block (in parallel).
+    samb_ortho = Dict(PGMultipoleType)
+    size = sum(np.size(m) for m, _ in samb.values())
+    for samb1 in parallel_map(orthogonalize_samb, blocks, size):
+        samb_ortho.update(samb1)
 
     samb_ortho = samb_ortho.sort(("X", ["Q", "G", "M", "T"]), "s", "k", "Gamma", "l", "n", "p")
 
