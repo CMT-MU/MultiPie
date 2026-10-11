@@ -6,6 +6,7 @@ from collections.abc import Mapping
 
 import numpy as np
 
+import multipie.util.util as util
 from multipie.core.material_model import MaterialModel
 
 MODEL = dict(
@@ -46,10 +47,19 @@ def test_parallel_samb_same_as_serial(monkeypatch):
     monkeypatch.setenv("MULTIPIE_N_JOBS", "1")
     serial = create_samb()
 
-    # run in parallel even for this small model.
+    # run in parallel even for this small model, and record the functions run in parallel.
     monkeypatch.setenv("MULTIPIE_N_JOBS", "2")
-    monkeypatch.setattr("multipie.util.util.PARALLEL_MIN_SIZE", 0)
+    monkeypatch.setattr(util, "PARALLEL_MIN_SIZE", 0)
+    funcs = set()
+    delayed = util.delayed
+
+    def record(func):
+        funcs.add(func.__name__)
+        return delayed(func)
+
+    monkeypatch.setattr(util, "delayed", record)
     parallel = create_samb()
 
+    assert funcs == {"orthogonalize_samb", "gram_schmidt"}
     for s, p in zip(serial, parallel):
         assert same(s, p)

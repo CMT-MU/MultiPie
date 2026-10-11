@@ -68,7 +68,8 @@ def orthogonalize_multipole(samb, diagonal_block):
         for Gamma in irreps:
             samb1 = samb.select(X=X, Gamma=Gamma)
             samb1 = samb1.sort(("X", X), "s", "k", "l", "n", "p")
-            blocks.append((samb1, diagonal_block))
+            if len(samb1) > 0:
+                blocks.append((samb1, diagonal_block))
 
     # orthogonalize each block (in parallel).
     samb_ortho = Dict(PGMultipoleType)
