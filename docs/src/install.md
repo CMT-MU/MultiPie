@@ -17,7 +17,7 @@
 
 - **macOS**
 
-  - Install [Homebrew](https://brew.sh) (if not already installed):
+  - Install [Homebrew](https://brew.sh) (if not already installed).
   - Install Python:
     ```bash
     brew install python@3.13
@@ -45,16 +45,14 @@
   https://microsoft.com/PowerShell
   - Ensure that Python path is added to your system PATH during installation.
 
-2. Install MultiPie
-All required dependencies will be installed automatically.
+2. Install MultiPie. All required dependencies will be installed automatically:
     ```bash
     pip install multipie
     ```
-3. Install QtDraw
-Install the visualization tool QtDraw:
+3. Install the visualization tool QtDraw:
     ```bash
     pip install qtdraw
-    playwright install chromium  # for Linux use `playwright install-deps chromium` instead.
+    playwright install chromium  # on Linux, also run `playwright install-deps chromium`.
     ```
 
 - **Linux** (Ubuntu 22.04.4 LTS on WSL2)

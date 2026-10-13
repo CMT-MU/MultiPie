@@ -75,17 +75,17 @@ This class has the following dict data.
 Combined, atomic, and site/bond-cluster SAMBs have the following dict data.
 
 - Combined SAMB, $Z_i$, Dict[index, SAMB].
-  - index (PGMultipoleType): (X,l,$\Gamma$,s,k,n,p,x)
+  - index (PGMultipoleType): (X,l,$\Gamma$,n,p,s,k,x)
   - SAMB (tuple): SAMB data for set of components.
     - (list) [[(coeff, X_index, X_component, Y_index, Y_component)]],
     - (list) [symmetry].
 - Atomic SAMB, $X_j$, Dict[index, SAMB].
-  - index (PGMultipoleType): (X,l,$\Gamma$,s,k,n,p,x)
+  - index (PGMultipoleType): (X,l,$\Gamma$,n,p,s,k,x)
   - SAMB (tuple): SAMB data for set of components.
     - (list) [matrix],
     - (list) [symmetry]
 - Site/bond-cluster SAMB, $Y_k$, Dict[index, SAMB].
-  - index (PGMultipoleType): (X,l,$\Gamma$,s,k,n,p,x)
+  - index (PGMultipoleType): (X,l,$\Gamma$,n,p,s,k,x)
   - SAMB (tuple): SAMB data for set of components.
     - (list) [vector],
     - (list) [symmetry]
