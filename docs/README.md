@@ -5,7 +5,7 @@ Molecular or crystal structures and generated SAMB are best drawn by using [QtDr
 
 - **Authors**: Hiroaki Kusunose and Rikuto Oiwa
 
-- **Installation**: MultiPie can be installed from PyPI using pip on Python >= 3.11:
+- **Installation**: MultiPie can be installed from PyPI using pip on Python >= 3.12:
   ```
   pip install multipie
   ```
