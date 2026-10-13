@@ -11,7 +11,7 @@ default_control = {
         "model": None,  # model name for .pkl (optional in wannier mode).
         "select": {  # SAMB select condition, where S=site name, R=orbital rank, N=neighbor bond.
             # "site": [("A", [1, 2])],  # S or (S, [R]) in list.
-            # "bond": [[0, 1, 2]],  # S1;S2, [N], (S1;S2, [N]), (S1;S2, R;R2), (S1;S2, [N]) or (S1;S2, R1;R2, [N]) in list.
+            # "bond": [[0, 1, 2]],  # S1;S2, N, [N], (S1;S2, N), (S1;S2, [N]), (S1;S2, R1;R2), (S1;S2, R1;R2, N) or (S1;S2, R1;R2, [N]) in list.
             # "X": [],  # SAMB type Q/G/T/M in list. empty []=all.
             # "l": [],  # SAMB rank, 0, 1, ..., 11 in list. empty []=all.
             # "Gamma": ["A1g"],  # SAMB irreps. in list. "IR"=identity irrep., empty []=all.
@@ -33,12 +33,12 @@ default_control = {
     "output": {  # physical quantity setting.
         "dir": "output",  #  output directory.
         "fourier": {"tb_gauge": True},  # TB gauge ?
-        "dos": False,  # compute DOS ?
+        "dos": False,  # compute DOS ? [Under Construction]
         "dispersion": {  # dispersion info.
             "power": None,  # plot as Ek^power. if None, power=1.
             "k_path": "",  # symmetry line, separated by "-". disconnected points by "|". if empty str, default values are used for k_path and k_point.
             "k_point": {"Γ": "[0,0,0]"},  # k-point (fractional, primitive cell of model, or of seedname.win without model).
-            "local": [],  # local quantity, "Sx/Sy/Sz/Lx/Ly/Lz/Qu/Qv/Qyz/Qzx/Qxy".
+            "local": [],  # local quantity, "Sx/Sy/Sz/Lx/Ly/Lz/Qu/Qv/Qyz/Qxz/Qxy".
             "z": [],  # expectation value of Z_j. [Under Construction]
         },
     },

@@ -4,7 +4,7 @@
   - Related group
     - PG : [$C_{\rm s}$ ($m$)](../PG/No_4.md)
     - SG : [$C_{\rm s}^{1}$ ($Pm$)](../SG/No_6.md)
-    - MPG : [$m1'$](../MPG/No_4.2.10.md)
+    - MPG : [$m$](../MPG/No_4.1.9.md)
   - Symmetry operation : [PDF](../../../others/pdf/MSG/6.18/symmetry_operation.pdf)
   - Wyckoff
     - site : [PDF](../../../others/pdf/MSG/6.18/wyckoff_site.pdf)
@@ -20,7 +20,7 @@
   - Related group
     - PG : [$C_{\rm s}$ ($m$)](../PG/No_4.md)
     - SG : [$C_{\rm s}^{1}$ ($Pm$)](../SG/No_6.md)
-    - MPG : [$m1'$](../MPG/No_4.2.10.md)
+    - MPG : [$m'$](../MPG/No_4.3.11.md)
   - Symmetry operation : [PDF](../../../others/pdf/MSG/6.20/symmetry_operation.pdf)
   - Wyckoff
     - site : [PDF](../../../others/pdf/MSG/6.20/wyckoff_site.pdf)

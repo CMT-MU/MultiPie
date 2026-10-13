@@ -4,7 +4,7 @@
   - Related group
     - PG : [$C_{\rm 1}$ ($1$)](../PG/No_1.md)
     - SG : [$C_{\rm 1}^{1}$ ($P1$)](../SG/No_1.md)
-    - MPG : [$11'$](../MPG/No_1.2.2.md)
+    - MPG : [$1$](../MPG/No_1.1.1.md)
   - Symmetry operation : [PDF](../../../others/pdf/MSG/1.1/symmetry_operation.pdf)
   - Wyckoff
     - site : [PDF](../../../others/pdf/MSG/1.1/wyckoff_site.pdf)

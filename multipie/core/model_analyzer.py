@@ -662,7 +662,7 @@ class ModelAnalyzer(dict):
         Create local operator.
 
         Args:
-            tag (str): operator name, "Sx/Sy/Sz/Lx/Ly/Lz/Qu/Qv/Qyz/Qzx/Qxy".
+            tag (str): operator name, "Sx/Sy/Sz/Lx/Ly/Lz/Qu/Qv/Qyz/Qxz/Qxy".
 
         Returns:
             - (ndarray) -- operator matrix (dim x dim).

@@ -139,7 +139,7 @@ def create_markdown():
                 "axial": f"[PDF]({dd}/harmonics_axial.pdf)",
             },
             "Multipolar Harmonics (internal)": {
-                "dipolar internal polar(Q)/axial(G) varialble": {
+                "dipolar internal polar(Q)/axial(G) variable": {
                     "polar (Q)": f"[PDF]({dd}/harmonics_s1_polar_q.pdf)",
                     "axial (Q)": f"[PDF]({dd}/harmonics_s1_axial_q.pdf)",
                     "polar (G)": f"[PDF]({dd}/harmonics_s1_polar_g.pdf)",
@@ -263,12 +263,13 @@ def create_markdown():
             tag_c = f"#{no_c}:  {msg_info[4]}"  # name.
             dd = f"{dir_pdf2}MSG/{no_c}"
 
-            pg_md = group_name_list["PG"][pg][1]
-            sg_md = group_name_list["SG"][sg][1]
-            mpg_md = group_name_list["MPG"][mpg][1]
-            pg_name = group_name_list["PG"][pg][4]
-            sg_name = group_name_list["SG"][sg][4]
-            mpg_name = group_name_list["MPG"][mpg][4]
+            pg_c, sg_c, mpg_c = msg_info[5:8]  # related groups of this MSG, not of the SG.
+            pg_md = group_name_list["PG"][pg_c][1]
+            sg_md = group_name_list["SG"][sg_c][1]
+            mpg_md = group_name_list["MPG"][mpg_c][1]
+            pg_name = group_name_list["PG"][pg_c][4]
+            sg_name = group_name_list["SG"][sg_c][4]
+            mpg_name = group_name_list["MPG"][mpg_c][4]
 
             cg_dict[f"{tag_c}"] = {
                 "Related group": {
