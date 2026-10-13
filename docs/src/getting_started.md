@@ -37,7 +37,7 @@ As a tutorial, we describe the procedure for generating model in the case of **g
      - `output/` : Various output for physical quantities
      - `samb/` : QtDraw files for SAMBs, written when `samb_figure` is `True`, QtDraw is installed, and the model was created with `"qtdraw": {"create": True}`. If `samb_figure` is `True` but one of the others is not satisfied, a warning is printed and the directory is not created.
 
-4. In order to handle `graphene.pkl` interactively, use IPython interface. See in detail [analyze_model.ipynb](examples/analyze_model.ipynb)
+4. In order to handle `graphene.pkl` interactively, use the IPython interface. See [analyze_model.ipynb](examples/analyze_model.ipynb) for details.
 
 ## Model input file
 
@@ -46,7 +46,7 @@ In case of graphene, the model input file is
 ```{literalinclude} examples/graphene_in.py
 ```
 
-The other setting are provided as default values, which are given as follows:
+The other settings are provided as default values, which are given as follows:
 
 ```{literalinclude} examples/default_model.py
 ```
@@ -65,7 +65,7 @@ The default values of control file are provided as follows:
 ```{literalinclude} examples/default_control.py
 ```
 
-The typical use of generating SAMBs, you first create the SAMBs for all irreps., and then choose the necessary SAMBs, such as the symmetry-breaking terms in addition to the identity irreps., by specifying `samb/select` and/or `samb/parameter` in the control file.
+In a typical use, you first create the SAMBs for all irreps, and then choose the necessary SAMBs, such as the symmetry-breaking terms in addition to the identity irreps., by specifying `samb/select` and/or `samb/parameter` in the control file.
 
 ## Format of input files
 
@@ -128,10 +128,10 @@ The description of the output files is as follows (with model_name prefixed):
   - **.tex** : model info. source.
   - **samb**/
     - **_atomic_samb.qtdw** : atomic SAMBs.
-    - **_A_def.qtdw** : definition of A-site cluster.
-    - **_A.qtdw** : A-site-cluster SAMBs.
-    - **_A;B_n_m_def.qtdw** : definition of A;B (n-neighbor, m) bond cluster.
-    - **_A;B_n_m.qtdw** : A;B (n-neighbor, m) bond-cluster SAMBs.
+    - **_A-B-..._def.qtdw** : definition of the site clusters (all sites in one file).
+    - **_A-B-....qtdw** : site-cluster SAMBs (all sites in one file).
+    - **_A;B_nnn_m_def.qtdw** : definition of A;B (nnn-neighbor, m) bond cluster (nnn: neighbor, 3 digits, e.g., 001).
+    - **_A;B_nnn_m.qtdw** : A;B (nnn-neighbor, m) bond-cluster SAMBs.
   - **info/**
     - **_hr.dat** : H[R] matrix data.
     - **_info_output.py** : info. of output.
