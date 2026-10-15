@@ -427,7 +427,7 @@ class ModelAnalyzer(dict):
         else:
             output_dispersion(fname, k_linear, ef, Ek)
         plot_save_dispersion(fname, k_dis_pos, ef, colormap)
-        create_gnuplot_cmd(fname, k_dis_pos, np.max(k_linear), np.max(Ek), np.min(Ek), ef, colormap)
+        create_gnuplot_cmd(fname, k_dis_pos, np.max(k_linear), np.nanmax(Ek), np.nanmin(Ek), ef, colormap)
         if self._verbose:
             print(f"save dispersion files into '{path}'.")
 
@@ -1064,7 +1064,12 @@ class ModelAnalyzer(dict):
         Ek, Uk = np.linalg.eigh(Hk)
         power = self.output["dispersion"]["power"]
         if power is not None:
-            Ek = np.power(Ek, power)
+            with np.errstate(invalid="ignore", divide="ignore"):
+                Ek = np.power(Ek, power)
+            Ek = np.where(np.isfinite(Ek), Ek, np.nan)
+            n_skip = np.count_nonzero(~np.isfinite(Ek))
+            if n_skip > 0 and self._verbose:
+                print(f"skip {n_skip} values of Ek^{power} that cannot be computed (e.g., negative Ek).")
 
         # set local operators.
         Ok = [np.einsum("kmi,mn,kni->ki", Uk.conj(), self.get_local_operator(tag), Uk).real for tag in op_lst]
@@ -1076,8 +1081,8 @@ class ModelAnalyzer(dict):
         d = {
             "k_path": k_path,
             "k_point": {k: str(v).replace(" ", "") for k, v in k_point.items()},
-            "e_max": float(np.max(Ek)),
-            "e_min": float(np.min(Ek)),
+            "e_max": float(np.nanmax(Ek)),
+            "e_min": float(np.nanmin(Ek)),
         }
 
         return d
