@@ -67,83 +67,9 @@ The default values of control file are provided as follows:
 
 In a typical use, you first create the SAMBs for all irreps, and then choose the necessary SAMBs, such as the symmetry-breaking terms in addition to the identity irreps., by specifying `samb/select` and/or `samb/parameter` in the control file.
 
-### Density of states
+### Post-processing tools
 
-When `output/dos` is not `False`, the density of states (DOS) per primitive cell is computed on the k grid given by `grid` (the Γ point only for a model of a point group), and written to `output/model_name_dos.txt`.
-
-- `"auto"` (or `True`): the partial DOS for each site cluster and orbital, with the spin summed, e.g., `s@A` for `(s,u)@A(1)`, `(s,d)@A(1)`, `(s,u)@A(2)`, .... With `"dos_spin": True`, the spin of a spinful basis is resolved, e.g., `(s,u)@A` and `(s,d)@A`.
-- `[[ket name]]`: for each list of ket names, the sum of the partial DOS of the kets, e.g., `[["pz@C(1)"], ["pz@C(1)", "pz@C(2)"]]`, labeled by the ket names joined by `+`. The ket names are those of the basis in `info/model_name_hr.dat` (or `info/model_name_info_wannier.py` in wannier mode).
-
-The columns are the energy measured from the Fermi energy, as in the dispersion, the total DOS, the integrated total DOS N(E), and the partial DOS; the comment lines at the top give the content of each column. The DOS is normalized so that the total DOS integrates to the number of bands. The energy range includes all the eigenvalues, with `output/dos_e_num` points. The plot (`_dos.pdf`, `_dos.eps`) and the gnuplot script (`plot_dos.gnu`) are also written.
-
-The method is chosen by `output/dos_method`:
-
-- `"gaussian"` (default): the delta functions are broadened by a Gaussian with the standard deviation `output/dos_width` (1% of the band width if `None`, and not smaller than the energy step). A width smaller than the energy step is an error; increase `dos_e_num` in that case (`dos_e_num` must be at least 12).
-- `"tetrahedron"`: the optimized tetrahedron method by [libtetrabz](https://mitsuaki1987.github.io/libtetrabz/), which is installed separately (see [Installation](install.md)). N(E) is computed by the tetrahedron method, and the DOS is its difference over each energy step, (N(E+dE/2)-N(E-dE/2))/dE, so that the normalization is kept also for flat bands. It gives a sharp DOS without broadening (`dos_width` is not used), but cannot be used for a model of a point group. It is slower and uses more memory than `"gaussian"`; use a moderate `grid` and `dos_e_num` for a large model.
-
-### Fermi energy
-
-The Fermi energy is 0 in samb mode, and that of `seedname.win` in wannier and symcw modes. When `output/n_electron` is given, the Fermi energy is determined from the eigenvalues on the full k grid so that `n_electron` states per primitive cell are occupied, and it is used for all the output (dispersion, DOS, and the values passed to the callbacks).
-Each band holds one state, so that `n_electron` is the number of electrons for a spinful model, and half of it for a spinless model. With `"dos_method": "gaussian"`, the states are occupied in ascending order of energy (T = 0), and the Fermi energy is placed at the middle of the highest occupied and the lowest unoccupied states. With `"tetrahedron"`, it is computed by libtetrabz. For an insulator (integer `n_electron` with a gap), both methods place the Fermi energy at the middle of the gap.
-
-### Orbital weight (fat band)
-
-When `output/dispersion/weight` is given in the same way as `output/dos` (`"auto"` or `[[ket name]]`), the weight of the kets in each eigenvector, sum of |U_k[m,n]|^2 over the kets m, is written along the k path in `output/model_name_weight.txt` (columns: k, energy measured from the Fermi energy as in the dispersion, weights). `"auto"` always sums over the spin (`dos_spin` is not used); give `[[ket name]]` for spin-resolved weights, e.g., `[["(pz,u)@C(1)", "(pz,u)@C(2)"]]`. The bands are plotted with the color of the weight, one page for each weight, in `_weight.pdf` and by the gnuplot script `plot_weight.gnu`.
-
-### Eigenvalues and eigenvectors
-
-With `"save_k_path": True` and/or `"save_k_full": True` in `output`, the eigenvalues and eigenvectors along the k path and/or on the full k grid are saved in `output/model_name_eigen_k_path.npz` and `output/model_name_eigen_k_full.npz`, which can be read by `numpy.load`. They contain `Ek`, `Uk`, `k_grid`, `ket`, and `fermi_energy` as described for the callbacks below, and also `k_linear` (along the k path) or `grid` (on the full k grid). As for the callbacks, `save_k_path` requires the dispersion, and `save_k_full` keeps all the eigenvectors on the full grid in memory.
-
-For example, the following `output` in the control file computes the DOS by the tetrahedron method with the Fermi energy for 4 occupied states per primitive cell, the fat band of the s orbital at A, and calls the callbacks in `my_callback.py` (see below):
-
-```python
-"output": {
-    "dos": "auto",
-    "dos_method": "tetrahedron",
-    "n_electron": 4,
-    "callback_k_path": "my_callback.py",
-    "dispersion": {"k_path": "", "weight": [["s@A(1)"]]},
-},
-```
-
-### Callback for custom calculations
-
-Quantities not provided by MultiPie can be computed by user-defined functions, which receive the eigenvalues and eigenvectors of H(k).
-Give a Python file, relative to the top directory (where the control file is), in `output/callback_k_path` and/or `output/callback_k_full`, and define the function of the same name in the file (one file can define both):
-
-```python
-# my_callback.py
-import os
-import numpy as np
-
-
-def callback_k_path(Ek, Uk, info):
-    # eigen system along the k path of the dispersion.
-    # "output" is the default of output/dir; change it if output/dir is changed.
-    np.savetxt(os.path.join(info["_topdir"], info["name"], "output", "my_band.txt"), Ek - info["fermi_energy"])
-
-
-def callback_k_full(Ek, Uk, info):
-    # eigen system on the full k grid.
-    ...
-```
-
-- `Ek[k, n]`: eigenvalues in ascending order (not shifted by the Fermi energy, and not raised to `output/dispersion/power`).
-- `Uk[k, :, n]`: eigenvector of `Ek[k, n]`, i.e., `H(k) = Uk @ diag(Ek) @ Uk^†` for each k, in the order of `info["ket"]` and in the gauge given by `output/fourier/tb_gauge`.
-- `info` (dict):
-  - `k_path` (str), `k_point` (dict, label to fractional coordinates): k path and k points of the dispersion (`None` if the dispersion is not computed).
-  - `k_grid` (ndarray): k points of `Ek` and `Uk` (fractional, in the primitive cell), `[number of k, 3]`.
-  - `ket` (list): ket names.
-  - `fermi_energy` (float), `name` (str): Fermi energy, and model name (or seedname in wannier mode without model).
-  - `_topdir` (str), `_verbose` (bool): top directory (absolute path), and verbose option.
-  - for `callback_k_path` only, `k_linear` (ndarray) and `k_dis_pos` (dict): position along the k path, and positions of the labels, as used to plot the dispersion.
-  - for `callback_k_full` only, `grid` (list): `[N1, N2, N3]`.
-
-The functions are called after the other output, at the end of the analysis. `callback_k_path` requires the dispersion, i.e., `output/dispersion/k_path` is not `None`. For `callback_k_full`, all the eigenvectors on the full grid are kept in memory, `N1 x N2 x N3 x (number of kets)^2` complex numbers, so that a coarse `grid` may be needed for a large model.
-
-```{note}
-Unlike the input files, the callback files are executed as Python code. Use only callback files you trust.
-```
+The density of states, the Fermi energy from the filling, the orbital weight (fat band), the output of the eigenvalues and eigenvectors, and callbacks for custom calculations are set in `output` of the control file. See [Post-processing tools](post_processing.md) for details and an example.
 
 ## Format of input files
 

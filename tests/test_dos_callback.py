@@ -5,12 +5,14 @@ and user-defined callbacks in ModelAnalyzer.
 
 import os
 import pickle
+import shutil
 
 import numpy as np
 import pytest
 
 from multipie.core.cmd import create_model
 from multipie.core.model_analyzer import ModelAnalyzer
+from multipie.util.util import read_dict
 
 # spinful s and p orbitals at A, and s orbital at B (simple cubic, CsCl type), with SAMBs of identity irrep.
 MODEL = {
@@ -495,3 +497,32 @@ def test_callback_same_file(sp_model):
     }
     run(parameter, output, grid=(2, 2, 2))
     assert (topdir / "out" / "count.txt").read_text() == "1"
+
+
+# ==================================================
+def test_docs_post_processing_example(in_tmp):
+    # the example of docs/src/post_processing.md works as documented.
+    example = os.path.join(os.path.dirname(__file__), os.pardir, "docs", "src", "examples")
+    for f in ["graphene_in.py", "graphene_post_ctrl.py", "graphene_callback.py"]:
+        shutil.copy(os.path.join(example, f), in_tmp)
+    model = read_dict("graphene_in.py")
+    model["pdf"] = {"create": False}
+    model["qtdraw"] = {"create": False}
+    create_model(model, topdir=".")
+    control = read_dict("graphene_post_ctrl.py")
+    ma = ModelAnalyzer(".")
+    ma.analyze(control)
+
+    assert ma["info"]["fermi_energy"] == pytest.approx(0.0, abs=1e-12)
+    out = in_tmp / "graphene" / "output"
+    for f in ["graphene_dos.txt", "graphene_weight.pdf", "graphene_eigen_k_path.npz", "my_band.txt", "plot_dos.gnu"]:
+        assert os.path.isfile(out / f)
+    with open(out / "graphene_dos.txt") as f:
+        assert "# column 4: pz@C = pz@C(1) + pz@C(2)\n" in f.readlines()
+    occupation = dict(line.split() for line in (out / "my_occupation.txt").read_text().splitlines())
+    assert {k: float(v) for k, v in occupation.items()} == pytest.approx({"pz@C(1)": 0.5, "pz@C(2)": 0.5})
+
+    # weight of pz@C(1) is 1/2 by the symmetry between the sublattices.
+    z = np.load(out / "graphene_eigen_k_path.npz")
+    ket = list(z["ket"])
+    assert np.allclose(np.abs(z["Uk"][:, ket.index("pz@C(1)"), :]) ** 2, 0.5)
