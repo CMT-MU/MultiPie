@@ -426,7 +426,7 @@ class ModelAnalyzer(dict):
             output_dispersion(fname, k_linear, ef, Ek, Ok, op_lst)
         else:
             output_dispersion(fname, k_linear, ef, Ek)
-        plot_save_dispersion(fname, k_dis_pos, colormap)
+        plot_save_dispersion(fname, k_dis_pos, ef, colormap)
         create_gnuplot_cmd(fname, k_dis_pos, np.max(k_linear), np.max(Ek), np.min(Ek), ef, colormap)
         if self._verbose:
             print(f"save dispersion files into '{path}'.")

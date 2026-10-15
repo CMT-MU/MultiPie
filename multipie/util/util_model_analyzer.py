@@ -285,13 +285,14 @@ def create_gnuplot_cmd(filename, k_dis_pos, kmax, emax, emin, ef, colormap=False
 
 
 # ==================================================
-def plot_save_dispersion(filename, k_dis_pos, colormap=False, lwidth=1, lc="salmon"):
+def plot_save_dispersion(filename, k_dis_pos, ef=None, colormap=False, lwidth=1, lc="salmon"):
     """
     Generate plot window for band dispersion (matplotlib).
 
     Args:
         filename (str): file name.
         k_dis_pos (dict): info. of high-symmetry point in linear k, dict[disconnected position, label].
+        ef (float, optional): not used, kept for compatibility.
         colormap (bool, optional): with colormap of first expectation value of operator.
         lwidth (int, optional): line width.
         lc (str, optional): line color.
