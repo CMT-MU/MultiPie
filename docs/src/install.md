@@ -54,6 +54,10 @@
     pip install qtdraw
     playwright install chromium  # on Linux, also run `playwright install-deps chromium`.
     ```
+4. (Optional) To compute the DOS by the optimized tetrahedron method (`"dos_method": "tetrahedron"` in the control file), install [libtetrabz](https://mitsuaki1987.github.io/libtetrabz/), which needs a C compiler:
+    ```bash
+    pip install "multipie[tetrahedron]"  # or pip install libtetrabz
+    ```
 
 - **Linux** (Ubuntu 22.04.4 LTS on WSL2)
   - Add the following line to your `.bashrc`:

@@ -46,6 +46,9 @@ Issues = "https://github.com/CMT-MU/MultiPie/issues"
 "mp_analyze" = "multipie.scripts.mp_analyze:cmd"
 
 [project.optional-dependencies]
+tetrahedron = [
+    "libtetrabz",  # optimized tetrahedron method for DOS (output/dos_method = "tetrahedron").
+]
 dev = [
     "black",
     "jupyter-book==1.0.4.post1",

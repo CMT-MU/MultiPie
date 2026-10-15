@@ -511,15 +511,49 @@ def test_symcw_periodic_images_of_site(tmp_path):
 
 
 # ==================================================
-def test_symcw_read_ks_not_implemented(centred_model):
-    topdir, name, mm, _, HR = centred_model
+def test_symcw_read_ks_removed(centred_model, caplog):
+    # wannier/read_KS has been removed: True is an error, and False is ignored with a warning.
+    topdir, name, mm, parameter, HR = centred_model
     centers, wann, HR_w, _ = model_to_wannier(mm, HR, A_QE, np.zeros(3), [("Mn", 1), ("Au", 1), ("Mn", 2)])
     path = os.path.join(topdir, name, "wannier")
     shutil.rmtree(path, ignore_errors=True)
     write_wannier(path, name, A_QE, centers, wann, HR_w)
     control = {"mode": "symcw", "samb": {"model": name}, "wannier": {"seedname": name, "read_KS": True}}
-    with pytest.raises(NotImplementedError):
+    with pytest.raises(ValueError, match="'wannier/read_KS' has been removed"):
         ModelAnalyzer(topdir).analyze(control)
+
+    control["wannier"]["read_KS"] = False
+    control["output"] = {"dispersion": {"k_path": None}}
+    ma = ModelAnalyzer(topdir)
+    ma.analyze(control)
+    assert "'wannier/read_KS' has been removed and is ignored" in caplog.text
+    assert control["wannier"]["read_KS"] is False  # the given control is not changed.
+    assert ma.parameter == pytest.approx(parameter)
+
+
+# ==================================================
+def test_wannier_mode_dos(centred_model):
+    # DOS in wannier mode without model is the same as that of the model, as the full k grid is the same set of k points.
+    topdir, name, mm, parameter, HR = centred_model
+    seed = name + "_dos"
+    site_order = [("Mn", 1), ("Au", 1), ("Mn", 2)]
+    centers, wann, HR_w, _ = model_to_wannier(mm, HR, A_QE, np.zeros(3), site_order)
+    path = os.path.join(topdir, seed, "wannier")
+    shutil.rmtree(path, ignore_errors=True)
+    write_wannier(path, seed, A_QE, centers, wann, HR_w, species=["Mn", "Au", "Mn"])
+
+    output = {"dispersion": {"k_path": None}, "dos": "auto", "dos_width": 0.2}
+    ma_w = ModelAnalyzer(topdir)
+    ma_w.analyze({"mode": "wannier", "wannier": {"seedname": seed}, "grid": (6, 6, 6), "output": output})
+    ma_m = ModelAnalyzer(topdir)
+    ma_m.analyze({"samb": {"model": name, "parameter": parameter}, "grid": (6, 6, 6), "output": output})
+
+    dos_w = np.loadtxt(os.path.join(topdir, seed, "output", f"{seed}_dos.txt"))
+    dos_m = np.loadtxt(os.path.join(topdir, name, "output", f"{name}_dos.txt"))
+    column_w, column_m = ma_w["output"]["dos"]["column"], ma_m["output"]["dos"]["column"]
+    assert sorted(column_w) == sorted(column_m) == sorted(["E", "total", "N(E)", "px@Mn", "py@Mn", "pz@Mn", "s@Au"])
+    for no, c in enumerate(column_w):
+        assert np.allclose(dos_w[:, no], dos_m[:, column_m.index(c)])
 
 
 # ==================================================

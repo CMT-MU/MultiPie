@@ -5,19 +5,30 @@ This module provides model analyzer.
 """
 
 import os
+import re
+import logging
+import importlib.util
 import numpy as np
 import copy
 import functools
 import seekpath
+from scipy.integrate import cumulative_trapezoid
+from scipy.ndimage import gaussian_filter1d
 from multipie.core.material_model import MaterialModel
 from multipie.util.util_crystal import convert_to_primitive
 from multipie.core.default_control import default_control
 from multipie.util.util_model_analyzer import (
     grid_path,
+    grid_all,
     fourier_r_to_k,
     output_dispersion,
     create_gnuplot_cmd,
     plot_save_dispersion,
+    plot_save_weight,
+    create_gnuplot_weight,
+    output_dos,
+    plot_save_dos,
+    create_gnuplot_dos,
     create_all_local_operator,
     create_local_operator,
     create_k_multipole,
@@ -41,6 +52,8 @@ from multipie.util.util_wannier import (
 )
 from multipie.util.util import read_dict, str_to_sympy, write_dict, deep_update
 from multipie.util.util import check_dict_keys
+
+logger = logging.getLogger(__name__)
 
 _matrix_comment = """Selected SAMB matrix.
 - model (str): model name.
@@ -77,6 +90,40 @@ _zj_var_comment = """Correspondence between zj and atomic variable.
 _param_comment = """Parameter dict (sorted by descending absolute value).
 - finite parameter, dict[zj, value].
 """
+
+
+# ==================================================
+def import_libtetrabz():
+    """
+    Import libtetrabz (optional dependency for the tetrahedron method).
+
+    Returns:
+        - (module) -- libtetrabz.
+    """
+    try:
+        import libtetrabz
+    except ImportError as e:
+        raise ImportError(
+            "libtetrabz is required for 'output/dos_method' = 'tetrahedron'. install it by 'pip install libtetrabz' "
+            "(or 'pip install multipie[tetrahedron]')."
+        ) from e
+
+    return libtetrabz
+
+
+# ==================================================
+def _k_chunk(dim, budget=64e6):
+    """
+    Number of k points in a chunk, so that H(k) and its eigen system for the chunk fit in the memory budget.
+
+    Args:
+        dim (int): matrix size of H(k).
+        budget (float, optional): memory budget in bytes.
+
+    Returns:
+        - (int) -- number of k points.
+    """
+    return max(1, int(budget // (48 * dim * dim)))  # complex H(k), U(k), and work space.
 
 
 # ==================================================
@@ -493,6 +540,14 @@ class ModelAnalyzer(dict):
         if control is None:
             control = {}
 
+        # wannier/read_KS has been removed: H(R) is always read from seedname_hr.dat.
+        if "read_KS" in control.get("wannier", {}):
+            if control["wannier"]["read_KS"]:
+                raise ValueError("'wannier/read_KS' has been removed. H(R) is read from seedname_hr.dat.")
+            logger.warning("'wannier/read_KS' has been removed and is ignored. remove it from the control.")
+            control = copy.deepcopy(control)
+            del control["wannier"]["read_KS"]
+
         # check unknown keys, e.g., typo.
         check_dict_keys(
             control,
@@ -515,7 +570,10 @@ class ModelAnalyzer(dict):
         deep_update(self._output, control.get("output", {}))
 
         self.set_mode(control.get("mode", default_control["mode"]))
-        self.set_grid(*control.get("grid", default_control["grid"]))
+        grid = control.get("grid", default_control["grid"])
+        if not isinstance(grid, (list, tuple)) or len(grid) != 3:
+            raise ValueError(f"'grid' must be three positive integers, '{grid}' is given.")
+        self.set_grid(*grid)
         # in wannier mode without a model, the name is seedname.
         self.set_name(self.samb["model"] if self.samb["model"] is not None else self.wannier["seedname"])
         self._use_model = False
@@ -524,6 +582,9 @@ class ModelAnalyzer(dict):
         self.set_basis_type(None)
         self.set_basis(None)
         self.set_HR(None)
+        self._k_path_info = None  # k path info. of the dispersion, used for callback.
+        self._eigen_path = None  # (Ek, Uk) along k path.
+        self._eigenvalue_full = None  # (kv, Ek) on full k grid.
 
     # ==================================================
     def set_mode(self, mode):
@@ -561,7 +622,9 @@ class ModelAnalyzer(dict):
 
         :meta private:
         """
-        self["info"]["grid"] = [N1, N2, N3]
+        if any(isinstance(n, bool) or not isinstance(n, (int, np.integer)) or n < 1 for n in (N1, N2, N3)):
+            raise ValueError(f"'grid' must be three positive integers, '{(N1, N2, N3)}' is given.")
+        self["info"]["grid"] = [int(N1), int(N2), int(N3)]
 
     # ==================================================
     def set_parameter(self, parameter):
@@ -758,15 +821,6 @@ class ModelAnalyzer(dict):
         return k_multipole
 
     # ==================================================
-    def get_eigen_system(self):
-        """
-        Get eigen system by checking control/output if E and/or U is required.
-
-        :meta private:
-        """
-        pass
-
-    # ==================================================
     def analyze(self, control):
         """
         Analyze model with control file.
@@ -942,33 +996,16 @@ class ModelAnalyzer(dict):
             numbers = [species.setdefault(atom, len(species) + 1) for atom, _ in win["atoms_frac"].keys()]
             self._win_structure = (win["A"], list(win["atoms_frac"].values()), numbers)
 
-        if self.wannier["read_KS"]:
-            # read KS Ek and Uk, and convert to MultiPie standard order(*) of ket by changing indices of Uk.
-            # create H(R), and various matrix elements in real space by Fourier transformation with DFT k-grid.
-            # (*) Ek_m = [Ek[w] for w in m2w], Uk_m1m2 = [[Uk[w1,w2] for w2 in m2w] for w1 in m2w].
-            #
-            # read seedname.mmn
-            # Mkb = read_mmn(seedname, wannier_dir)
-            # read seedname.spn
-            # Sk = read_spn(seedname, wannier_dir)
-            # read seedname.uHu
-            # uHu = read_uHu(seedname, wannier_dir)
-            # read seedname.uIu
-            # uIu = read_uIu(seedname, wannier_dir)
-            #
-            # when implemented, H(R) must be converted to the primitive cell of the model as convert_hr_to_model does.
-            raise NotImplementedError("read_KS = True is not implemented yet. Use seedname_hr.dat (read_KS = False).")
+        hr_file = seedname + "_hr.dat"
+        hr_dict, irvec, ndegen = read_hr(hr_file, wannier_dir)
+        # real-space hoppings with Wigner-Seitz degeneracy (and use_ws_distance if seedname_wsvec.dat exists).
+        hr_dict = apply_ws_degeneracy(hr_dict, irvec, ndegen, read_wsvec(seedname, wannier_dir))
+        if mapping is None:
+            # convert from wannier index to multipie index.
+            HR = {(n1, n2, n3, w2m[w1], w2m[w2]): (complex(v), None) for (n1, n2, n3, w1, w2), v in hr_dict.items()}
         else:
-            hr_file = seedname + "_hr.dat"
-            hr_dict, irvec, ndegen = read_hr(hr_file, wannier_dir)
-            # real-space hoppings with Wigner-Seitz degeneracy (and use_ws_distance if seedname_wsvec.dat exists).
-            hr_dict = apply_ws_degeneracy(hr_dict, irvec, ndegen, read_wsvec(seedname, wannier_dir))
-            if mapping is None:
-                # convert from wannier index to multipie index.
-                HR = {(n1, n2, n3, w2m[w1], w2m[w2]): (complex(v), None) for (n1, n2, n3, w1, w2), v in hr_dict.items()}
-            else:
-                # convert to multipie index and primitive lattice of the model through bond vectors.
-                HR = convert_hr_to_model(hr_dict, mapping)
+            # convert to multipie index and primitive lattice of the model through bond vectors.
+            HR = convert_hr_to_model(hr_dict, mapping)
 
         info = {
             "ket": ket_multipie,
@@ -1014,11 +1051,221 @@ class ModelAnalyzer(dict):
         path = os.path.join(self._topdir, name, self.output["dir"])
         os.makedirs(path, exist_ok=True)
 
+        # check before the computation: callbacks are loaded, and the dispersion exists if it is required.
+        modules = {}  # a file given for both callbacks is loaded once.
+        callback = {key: self.load_callback(key, modules) for key in ["callback_k_path", "callback_k_full"]}
+        for key in ["callback_k_path", "save_k_path"]:
+            if self.output[key] and not self.has_dispersion():
+                raise ValueError(
+                    f"'output/{key}' requires the dispersion, which is not computed "
+                    "('output/dispersion/k_path' is None, or the group of the model is not a space group)."
+                )
+
+        # eigen system on the full k grid is kept only when it is required (otherwise, it is computed in chunks).
+        need_full = callback["callback_k_full"] is not None or self.output["save_k_full"]
+        eigen_full = self.get_eigen_full() if need_full else None
+
+        # fermi energy from the number of occupied states.
+        if self.output["n_electron"] is not None:
+            self.set_fermi_energy(self.compute_fermi_energy(eigen_full))
+
         disp = self.compute_dispersion()
         self["output"]["dispersion"] = disp
 
-        self.get_eigen_system()
-        self.compute_dos()
+        self.compute_dos(eigen_full)
+        self.save_eigen(eigen_full)
+
+        # user-defined calculations.
+        if callback["callback_k_path"] is not None:
+            Ek, Uk = self._eigen_path
+            info = self.get_callback_info(self._k_path_info["k_grid"])
+            info["k_linear"] = self._k_path_info["k_linear"]
+            info["k_dis_pos"] = self._k_path_info["k_dis_pos"]
+            callback["callback_k_path"](Ek, Uk, info)
+        if callback["callback_k_full"] is not None:
+            kv, Ek, Uk = eigen_full
+            info = self.get_callback_info(kv)
+            info["grid"] = list(self["info"]["grid"])
+            callback["callback_k_full"](Ek, Uk, info)
+
+    # ==================================================
+    def has_dispersion(self):
+        """
+        Is the dispersion computed ?
+
+        Returns:
+            - (bool) -- True if the dispersion is computed.
+
+        :meta private:
+        """
+        if "dispersion" not in self.output or self.output["dispersion"]["k_path"] is None:
+            return False
+
+        return not (self._use_model and self.model.group.group_type != "SG")
+
+    # ==================================================
+    def get_ket(self):
+        """
+        Get ket names in the order of the matrix of H(k).
+
+        Returns:
+            - (list) -- ket names, "orbital@atom(sublattice)".
+
+        :meta private:
+        """
+        if self._use_model:
+            return list(self.model.get_ket_site().keys())
+        else:
+            return list(self["wannier"]["ket"])
+
+    # ==================================================
+    def get_hk_data(self):
+        """
+        Get data to compute H(k).
+
+        Returns:
+            - (dict) -- H(R), dict[((n1,n2,n3),m,n), value].
+            - (ndarray) -- atomic positions (fractional).
+            - (bool) -- TB gauge ?
+
+        :meta private:
+        """
+        tb_gauge = self.output["fourier"]["tb_gauge"]
+        if self._use_model:
+            atom = np.asarray(list(self.model.get_ket_site().values()), dtype=float)
+        else:
+            atom = np.asarray(self["wannier"]["atoms_frac"], dtype=float)
+
+        HR = {
+            ((int(n1), int(n2), int(n3)), int(m), int(n)): complex(v[0] if isinstance(v, tuple) else v)
+            for (n1, n2, n3, m, n), v in self.HR.items()
+        }
+
+        return HR, atom, tb_gauge
+
+    # ==================================================
+    def get_k_full(self):
+        """
+        Get k points on the full grid.
+
+        Returns:
+            - (ndarray) -- k points (fractional, primitive), [N1*N2*N3, 3], or Γ point only for a model of point group.
+
+        :meta private:
+        """
+        if self._use_model and self.model.group.group_type != "SG":
+            return np.zeros((1, 3))
+
+        return grid_all(*self["info"]["grid"])
+
+    # ==================================================
+    def eigen_chunks(self, kv, vectors=True, chunk=None):
+        """
+        Eigen system of H(k) for chunks of k points.
+
+        Args:
+            kv (ndarray): k points (fractional).
+            vectors (bool, optional): compute eigen vectors ? if False, Uk is None.
+            chunk (int, optional): number of k points in a chunk. if None, it is determined by the matrix size.
+
+        Yields:
+            - (tuple) -- (Ek, Uk) of the chunk, Ek[k,n], Uk[k,:,n].
+
+        :meta private:
+        """
+        HR, atom, tb_gauge = self.get_hk_data()
+        if chunk is None:
+            chunk = _k_chunk(len(atom))
+        for i in range(0, len(kv), chunk):
+            Hk = fourier_r_to_k(HR, atom, kv[i : i + chunk], tb_gauge)
+            if vectors:
+                yield np.linalg.eigh(Hk)
+            else:
+                yield np.linalg.eigvalsh(Hk), None
+
+    # ==================================================
+    def get_eigen_full(self):
+        """
+        Get eigen system on the full k grid.
+
+        Returns:
+            - (ndarray) -- k points (fractional, primitive).
+            - (ndarray) -- eigen values, Ek[k,n].
+            - (ndarray) -- eigen vectors, Uk[k,:,n].
+
+        :meta private:
+        """
+        kv = self.get_k_full()
+        Ek, Uk = zip(*self.eigen_chunks(kv))
+
+        return kv, np.concatenate(Ek), np.concatenate(Uk)
+
+    # ==================================================
+    def get_callback_info(self, k_grid):
+        """
+        Get info. dict passed to callback.
+
+        Args:
+            k_grid (ndarray): k points of Ek and Uk (fractional, primitive).
+
+        Returns:
+            - (dict) -- info. dict.
+
+        :meta private:
+        """
+        k_path = self._k_path_info if self._k_path_info is not None else {}
+        info = {
+            "k_path": k_path.get("k_path"),
+            "k_point": k_path.get("k_point"),
+            "k_grid": k_grid,
+            "ket": self.get_ket(),
+            "fermi_energy": self["info"]["fermi_energy"],
+            "name": self["info"]["name"],
+            "_topdir": self._topdir,
+            "_verbose": self._verbose,
+        }
+
+        return info
+
+    # ==================================================
+    def load_callback(self, key, modules=None):
+        """
+        Load callback function.
+
+        Args:
+            key (str): "callback_k_path" or "callback_k_full", which is also the function name.
+            modules (dict, optional): loaded modules, dict[path, module], to load a file once.
+
+        Returns:
+            - (function) -- callback function, or None if not given.
+
+        :meta private:
+        """
+        filename = self.output[key]
+        if filename is None:
+            return None
+        if not isinstance(filename, str) or not filename.endswith(".py"):
+            raise ValueError(f"'output/{key}' must be '.py' file, '{filename}' is given.")
+
+        path = os.path.join(self._topdir, filename)
+        if not os.path.isfile(path):
+            raise FileNotFoundError(f"callback file '{path}' is not found ('output/{key}' is relative to '{self._topdir}').")
+        if modules is None:
+            modules = {}
+        path = os.path.realpath(path)
+        if path not in modules:
+            spec = importlib.util.spec_from_file_location(f"_multipie_callback_{len(modules)}", path)
+            module = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(module)
+            modules[path] = module
+        module = modules[path]
+        func = getattr(module, key, None)
+        if not callable(func):
+            raise ValueError(f"function '{key}' is not defined in '{path}'.")
+        if self._verbose:
+            print(f"load {key} from '{path}'.")
+
+        return func
 
     # ==================================================
     def compute_dispersion(self):
@@ -1028,14 +1275,11 @@ class ModelAnalyzer(dict):
         :meta private:
         """
         # check if dispersion can be computed.
-        if "dispersion" not in self.output:
-            return
-        k_path = self.output["dispersion"]["k_path"]
-        if k_path is None or (self._use_model and self.model.group.group_type != "SG"):
+        if not self.has_dispersion():
             return
 
         # get k_point and k_path.
-        k_point, k_path = self.get_kpath(k_path)
+        k_point, k_path = self.get_kpath(self.output["dispersion"]["k_path"])
         N1 = self["info"]["grid"][0]
         B = np.asarray(self["info"]["B"])  # [b1,b2,b3] as rows, k_cart = k_frac @ B.
         k_point_path, k_linear, k_dis_pos = grid_path(k_point, k_path, N1, B.T)
@@ -1046,22 +1290,16 @@ class ModelAnalyzer(dict):
         else:
             op_lst = self.output["dispersion"]["local"]
 
-        # get info.
-        tb_gauge = self.output["fourier"]["tb_gauge"]
-        if self._use_model:
-            atom = np.asarray(list(self.model.get_ket_site().values()), dtype=float)
-        else:
-            atom = np.asarray(self["wannier"]["atoms_frac"], dtype=float)
-
-        # set H(R) and H(k).
-        HR = {
-            ((int(n1), int(n2), int(n3)), int(m), int(n)): complex(v[0] if isinstance(v, tuple) else v)
-            for (n1, n2, n3, m, n), v in self.HR.items()
-        }
-        Hk = fourier_r_to_k(HR, atom, k_point_path, tb_gauge)
-
         # set eigen system.
-        Ek, Uk = np.linalg.eigh(Hk)
+        Ek, Uk = next(self.eigen_chunks(k_point_path, chunk=len(k_point_path)))
+        self._eigen_path = (Ek, Uk)
+        self._k_path_info = {
+            "k_path": k_path,
+            "k_point": {k: np.asarray(v, dtype=float).tolist() for k, v in k_point.items()},
+            "k_grid": k_point_path,
+            "k_linear": k_linear,
+            "k_dis_pos": k_dis_pos,
+        }
         power = self.output["dispersion"]["power"]
         if power is not None:
             with np.errstate(invalid="ignore", divide="ignore"):
@@ -1079,6 +1317,13 @@ class ModelAnalyzer(dict):
         # output dispersion data, plot, and gnuplot.
         self.write_dispersion(Ek, Ok, op_lst, k_linear, k_dis_pos)
 
+        # orbital weight (fat band).
+        weight = self.output["dispersion"]["weight"]
+        if weight is not False and weight is not None:
+            labels, group = self.get_ket_group(weight, self.get_ket(), "output/dispersion/weight")
+            Wk = [np.sum(np.abs(Uk[:, g, :]) ** 2, axis=1) for g in group]
+            self.write_weight(Ek, Wk, labels, k_linear, k_dis_pos)
+
         # save dispersion info.
         d = {
             "k_path": k_path,
@@ -1090,14 +1335,349 @@ class ModelAnalyzer(dict):
         return d
 
     # ==================================================
-    def compute_dos(self):
+    def write_weight(self, Ek, Wk, labels, k_linear, k_dis_pos):
         """
-        Compute DOS.
+        Save dispersion with orbital weight (fat band).
+
+        Args:
+            Ek (ndarray): energy eigen values.
+            Wk (list): orbital weight for each group, [Ek.shape].
+            labels (list): label of each group.
+            k_linear (ndarray): linear k position along high-symmetry line.
+            k_dis_pos (dict): k discrete point.
 
         :meta private:
         """
-        if not self.output["dos"]:
+        name = self["info"]["name"]
+        ef = self["info"]["fermi_energy"]
+
+        path = os.path.join(self._topdir, name, self.output["dir"])
+        fname = os.path.join(path, name + "_weight.txt")
+        output_dispersion(fname, k_linear, ef, Ek, Wk, labels)
+        plot_save_weight(fname, k_dis_pos, labels)
+        create_gnuplot_weight(fname, k_dis_pos, np.max(k_linear), np.nanmax(Ek), np.nanmin(Ek), ef, labels)
+        if self._verbose:
+            print(f"save weight files into '{path}'.")
+
+    # ==================================================
+    def get_ket_group(self, spec, ket, key, spin=False):
+        """
+        Get groups of kets for partial DOS or orbital weight.
+
+        Args:
+            spec (str or list): "auto" (or True), or [[ket name]].
+            ket (list): ket names.
+            key (str): control key used in error message.
+            spin (bool, optional): resolve spin, u/d, for "auto" ?
+
+        Returns:
+            - (list) -- label of each group.
+            - (list) -- ket indices of each group.
+
+        Note:
+            - for "auto", kets are grouped by the site cluster and the orbital, and the spin, "u" or "d", is summed unless spin is True.
+            - for [[ket name]], the label is the ket names joined by "+".
+
+        :meta private:
+        """
+        if spec is True or spec == "auto":
+            group = {}
+            for no, k in enumerate(ket):
+                orbital, site = k.rsplit("@", 1)
+                m = re.fullmatch(r"\((.+),([ud])\)", orbital)  # (orbital,spin).
+                if m and not spin:
+                    orbital = m.group(1)
+                site = re.sub(r"\(\d+\)$", "", site)  # remove sublattice.
+                group.setdefault(f"{orbital}@{site}", []).append(no)
+            return list(group.keys()), list(group.values())
+
+        msg = f"'{key}' must be False, 'auto', or a list of lists of ket names, e.g., [['s@A(1)', 's@A(2)']]"
+        if not isinstance(spec, (list, tuple)) or not spec or not all(isinstance(g, (list, tuple)) and g for g in spec):
+            raise ValueError(f"{msg}, '{spec}' is given.")
+        unknown = [k for g in spec for k in g if k not in ket]
+        if unknown:
+            raise ValueError(f"unknown ket(s) in '{key}': {unknown}. kets are {ket}.")
+
+        labels = ["+".join(g) for g in spec]
+        group = [[no for no, k in enumerate(ket) if k in g] for g in spec]
+
+        return labels, group
+
+    # ==================================================
+    def get_dos_method(self):
+        """
+        Get DOS method (also used for fermi energy).
+
+        Returns:
+            - (str) -- "gaussian" or "tetrahedron".
+
+        :meta private:
+        """
+        method = self.output["dos_method"]
+        if method not in ["gaussian", "tetrahedron"]:
+            raise ValueError(f"'output/dos_method' must be 'gaussian' or 'tetrahedron', '{method}' is given.")
+        if method == "tetrahedron" and self._use_model and self.model.group.group_type != "SG":
+            raise ValueError("'output/dos_method' = 'tetrahedron' cannot be used for a model of point group (Γ point only).")
+
+        return method
+
+    # ==================================================
+    def get_eigenvalue_full(self, eigen_full=None):
+        """
+        Get eigen values on the full k grid (computed once).
+
+        Args:
+            eigen_full (tuple, optional): (kv, Ek, Uk) on the full k grid. if None, the eigen values are computed.
+
+        Returns:
+            - (ndarray) -- k points (fractional, primitive).
+            - (ndarray) -- eigen values, Ek[k,n].
+
+        :meta private:
+        """
+        if eigen_full is not None:
+            return eigen_full[0], eigen_full[1]
+        if self._eigenvalue_full is None:
+            kv = self.get_k_full()
+            Ek = np.concatenate([e for e, _ in self.eigen_chunks(kv, vectors=False)])
+            self._eigenvalue_full = (kv, Ek)
+
+        return self._eigenvalue_full
+
+    # ==================================================
+    def compute_fermi_energy(self, eigen_full=None):
+        """
+        Compute fermi energy from the number of occupied states, output/n_electron.
+
+        Args:
+            eigen_full (tuple, optional): (kv, Ek, Uk) on the full k grid. if None, the eigen values are computed.
+
+        Returns:
+            - (float) -- fermi energy.
+
+        Note:
+            - n_electron is the number of occupied states per primitive cell, where each band has one state.
+            - for "gaussian" method, the states are occupied in ascending order at T=0 (fermi energy is at the middle of
+              the highest occupied and the lowest unoccupied states). for "tetrahedron" method, libtetrabz is used, and
+              the middle of the gap is used for an insulator.
+
+        :meta private:
+        """
+        n = self.output["n_electron"]
+        kv, Ek = self.get_eigenvalue_full(eigen_full)
+        nk, nb = Ek.shape
+        if isinstance(n, bool) or not isinstance(n, (int, float)) or not 0 <= n <= nb:
+            raise ValueError(f"'output/n_electron' must be a number in [0, {nb}] (number of bands), '{n}' is given.")
+
+        method = self.get_dos_method()
+        if method == "tetrahedron":
+            libtetrabz = import_libtetrabz()
+            eig = Ek.reshape(*self["info"]["grid"], nb)
+            ef, _, _ = libtetrabz.fermieng(np.asarray(self["info"]["B"]), eig, float(n))
+            # in a gap, the bisection of libtetrabz stops at any point, so that the middle of the gap is used as in "gaussian".
+            if n == int(n) and 0 < n < nb and np.max(Ek[:, : int(n)]) < np.min(Ek[:, int(n) :]):
+                ef = 0.5 * (np.max(Ek[:, : int(n)]) + np.min(Ek[:, int(n) :]))
+        else:
+            e = np.sort(Ek.ravel())
+            ns = n * nk  # number of occupied states.
+            ns_i = int(np.rint(ns))
+            if abs(ns - ns_i) > 1e-8:  # partially occupied level.
+                ef = e[int(np.floor(ns))]
+            elif ns_i == 0:
+                ef = e[0]
+            elif ns_i == len(e):
+                ef = e[-1]
+            else:
+                ef = 0.5 * (e[ns_i - 1] + e[ns_i])
+        ef = float(ef)
+
+        self["info"]["n_electron"] = n
+        if self._verbose:
+            print(f"fermi energy = {ef} for n_electron = {n} ({method}).")
+
+        return ef
+
+    # ==================================================
+    def compute_dos(self, eigen_full=None):
+        """
+        Compute DOS (total and partial).
+
+        Args:
+            eigen_full (tuple, optional): (kv, Ek, Uk) on the full k grid. if None, it is computed in chunks.
+
+        Note:
+            - DOS per primitive cell (summed over spin), D(E) = (1/Nk) sum_{kn} w_kn delta(E-E_kn).
+            - w_kn = 1 for total DOS, and sum_{m in group} |U_k[m,n]|^2 for partial DOS. sum of partial DOS of all kets is total DOS.
+            - "gaussian": delta function is broadened by Gaussian, and energy range includes all eigen values with margin of 5 x width.
+              the width must not be smaller than the energy step.
+            - "tetrahedron": integrated DOS N(E) by optimized tetrahedron method of libtetrabz, and DOS as (N(E+dE/2)-N(E-dE/2))/dE.
+              energy range includes all eigen values with margin of 5% of the band width.
+
+        :meta private:
+        """
+        dos = self.output["dos"]
+        if dos is False or dos is None:
             return
 
         if self._verbose:
             print("compute and output dos.")
+
+        ket = self.get_ket()
+        labels, group = self.get_ket_group(dos, ket, "output/dos", self.output["dos_spin"])
+        e_num = self.output["dos_e_num"]
+        if isinstance(e_num, bool) or not isinstance(e_num, int) or e_num < 2:
+            raise ValueError(f"'output/dos_e_num' must be integer larger than 1, '{e_num}' is given.")
+        method = self.get_dos_method()
+
+        # projection to groups.
+        P = np.zeros((len(ket), len(group)))
+        for g, idx in enumerate(group):
+            P[idx, g] = 1.0
+
+        # energy range from the eigen values.
+        kv, Ek = self.get_eigenvalue_full(eigen_full)
+        if eigen_full is None:
+            chunks = self.eigen_chunks(kv)
+        else:
+            chunk = _k_chunk(len(ket))
+            Uk = eigen_full[2]
+            chunks = ((Ek[i : i + chunk], Uk[i : i + chunk]) for i in range(0, len(kv), chunk))
+        e_min, e_max = float(np.min(Ek)), float(np.max(Ek))
+
+        if method == "gaussian":
+            if e_num < 12:  # energy step must not exceed the width, with the margin of 5 x width on both sides.
+                raise ValueError(f"'output/dos_e_num' must be at least 12 for 'gaussian' method, '{e_num}' is given.")
+            width = self.output["dos_width"]
+            e_range = e_max - e_min
+            if width is None:
+                width = 0.01 * e_range if e_range > 0 else 0.01
+                if e_num > 11:
+                    width = max(width, e_range / (e_num - 11))  # not smaller than the energy step.
+            elif isinstance(width, bool) or not isinstance(width, (int, float)) or width <= 0:
+                raise ValueError(f"'output/dos_width' must be positive or None, '{width}' is given.")
+            width = float(width)
+            energy = np.linspace(e_min - 5 * width, e_max + 5 * width, e_num)
+            dE = energy[1] - energy[0]
+            if width < dE * (1 - 1e-10):
+                raise ValueError(
+                    f"Gaussian width of DOS, {width}, is smaller than the energy step, {dE}. "
+                    "increase 'output/dos_e_num' or 'output/dos_width'."
+                )
+
+            # histogram on the energy grid (linear interpolation between the two nearest points, which keeps the
+            # weight and the mean energy), and Gaussian broadening.
+            hist = np.zeros((e_num, len(group) + 1))
+            for Ec, Uc in chunks:
+                x = ((Ec - energy[0]) / dE).ravel()
+                i0 = np.clip(np.floor(x).astype(int), 0, e_num - 2)
+                f = x - i0
+                w = np.einsum("kmn,mg->kng", np.abs(Uc) ** 2, P).reshape(-1, len(group))
+                for g in range(len(group) + 1):
+                    wg = 1.0 if g == 0 else w[:, g - 1]
+                    hist[:, g] += np.bincount(i0, weights=wg * (1 - f), minlength=e_num)
+                    hist[:, g] += np.bincount(i0 + 1, weights=wg * f, minlength=e_num)
+            dos = gaussian_filter1d(hist / (len(kv) * dE), width / dE, axis=0, mode="constant", truncate=5.0)
+            integrated = cumulative_trapezoid(dos[:, 0], energy, initial=0.0)
+        else:
+            libtetrabz = import_libtetrabz()
+            width = None
+            margin = 0.05 * (e_max - e_min) if e_max > e_min else 0.1
+            energy = np.linspace(e_min - margin, e_max + margin, e_num)
+            dE = energy[1] - energy[0]
+
+            # weight of each group, W[k,n,g].
+            W = np.concatenate([np.einsum("kmn,mg->kng", np.abs(Uc) ** 2, P) for _, Uc in chunks])
+            nk, nb = Ek.shape
+            eig = Ek.reshape(*self["info"]["grid"], nb)
+            B = np.asarray(self["info"]["B"])
+
+            # integrated DOS by tetrahedron method at the energy grid and its mid points, for chunks of energy (to limit
+            # memory). DOS is (N(E+dE/2)-N(E-dE/2))/dE, which keeps the normalization including flat bands.
+            e_fine = energy[0] - dE / 2 + np.arange(2 * e_num + 1) * (dE / 2)
+            N = np.zeros((len(e_fine), len(group) + 1))
+            e_chunk = max(1, int(5e6 // (nk * nb)))
+            for i in range(0, len(e_fine), e_chunk):
+                w = libtetrabz.intdos(B, eig, e_fine[i : i + e_chunk]).reshape(nk, nb, -1)
+                N[i : i + e_chunk, 0] = w.sum(axis=(0, 1))
+                N[i : i + e_chunk, 1:] = np.einsum("kne,kng->eg", w, W)
+            dos = (N[2::2] - N[0:-2:2]) / dE
+            integrated = N[1::2, 0]
+
+        # columns: total, integrated total, partial.
+        dos = np.column_stack([dos[:, 0], integrated, dos[:, 1:]])
+
+        self.write_dos(energy, dos, labels, [[ket[i] for i in g] for g in group], len(kv), method, width)
+        self["output"]["dos"] = {
+            "method": method,
+            "e_max": e_max,
+            "e_min": e_min,
+            "width": width,
+            "column": ["E", "total", "N(E)"] + labels,
+        }
+
+    # ==================================================
+    def write_dos(self, energy, dos, labels, group, nk, method, width):
+        """
+        Save DOS, plot, and gnuplot.
+
+        Args:
+            energy (ndarray): energy grid.
+            dos (ndarray): DOS, [energy, column], columns (total, integrated total, partial, ...).
+            labels (list): label of partial DOS.
+            group (list): ket names of partial DOS.
+            nk (int): number of k points.
+            method (str): DOS method.
+            width (float): Gaussian broadening (None for tetrahedron method).
+
+        :meta private:
+        """
+        name = self["info"]["name"]
+        ef = self["info"]["fermi_energy"]
+        path = os.path.join(self._topdir, name, self.output["dir"])
+        fname = os.path.join(path, name + "_dos.txt")
+
+        comment = [
+            "DOS per primitive cell (summed over spin).",
+            f"shifted by fermi energy = {ef}",
+            f"number of k points = {nk} (grid = {list(self['info']['grid'])})" if nk > 1 else "Γ point only",
+            f"Gaussian width = {width}" if method == "gaussian" else "optimized tetrahedron method (libtetrabz)",
+            "column 1: E",
+            "column 2: total",
+            "column 3: N(E), integrated total DOS",
+        ]
+        comment += [f"column {no + 4}: {label} = {' + '.join(kets)}" for no, (label, kets) in enumerate(zip(labels, group))]
+        output_dos(fname, energy, ef, dos, labels, comment)
+        plot_save_dos(fname, labels)
+        create_gnuplot_dos(fname, energy[0], energy[-1], np.max(dos[:, 0]), ef, labels)
+
+        if self._verbose:
+            print(f"save dos files into '{path}'.")
+
+    # ==================================================
+    def save_eigen(self, eigen_full=None):
+        """
+        Save eigen system along k path and/or on full k grid in .npz.
+
+        Args:
+            eigen_full (tuple, optional): (kv, Ek, Uk) on the full k grid.
+
+        :meta private:
+        """
+        name = self["info"]["name"]
+        path = os.path.join(self._topdir, name, self.output["dir"])
+        common = {"ket": np.asarray(self.get_ket()), "fermi_energy": self["info"]["fermi_energy"]}
+
+        if self.output["save_k_path"]:
+            Ek, Uk = self._eigen_path
+            info = self._k_path_info
+            fname = os.path.join(path, name + "_eigen_k_path.npz")
+            np.savez(fname, Ek=Ek, Uk=Uk, k_grid=info["k_grid"], k_linear=info["k_linear"], **common)
+            if self._verbose:
+                print(f"save eigen system along k path to '{fname}'.")
+
+        if self.output["save_k_full"]:
+            kv, Ek, Uk = eigen_full
+            fname = os.path.join(path, name + "_eigen_k_full.npz")
+            np.savez(fname, Ek=Ek, Uk=Uk, k_grid=kv, grid=np.asarray(self["info"]["grid"]), **common)
+            if self._verbose:
+                print(f"save eigen system on full k grid to '{fname}'.")
