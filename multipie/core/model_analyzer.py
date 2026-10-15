@@ -1068,6 +1068,8 @@ class ModelAnalyzer(dict):
                 Ek = np.power(Ek, power)
             Ek = np.where(np.isfinite(Ek), Ek, np.nan)
             n_skip = np.count_nonzero(~np.isfinite(Ek))
+            if n_skip == Ek.size:
+                raise ValueError(f"no value of Ek^{power} can be computed (e.g., all Ek are negative). check 'power'.")
             if n_skip > 0 and self._verbose:
                 print(f"skip {n_skip} values of Ek^{power} that cannot be computed (e.g., negative Ek).")
 
