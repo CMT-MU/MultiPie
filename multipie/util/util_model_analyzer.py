@@ -172,8 +172,8 @@ def output_dispersion(filename, k, ef, e, o=None, olist=None):
         o (list, optional): expectation value of any operator for each band, [[num_k, num_band]].
         olist (list, optional): list of local operator.
     """
-    emax = np.max(e)
-    emin = np.min(e)
+    emax = np.nanmax(np.where(np.isfinite(e), e, np.nan))
+    emin = np.nanmin(np.where(np.isfinite(e), e, np.nan))
 
     fs = open(filename, "w")
     if olist:
@@ -193,6 +193,11 @@ def output_dispersion(filename, k, ef, e, o=None, olist=None):
         en = e[n] - ef
         s = ""
         for i in range(num_k):
+            # skip values that cannot be computed (e.g., negative Ek with power=0.5), and break the line there.
+            if not np.isfinite(en[i]):
+                if s != "" and not s.endswith("\n\n"):
+                    s += "\n"
+                continue
             s += "{k: .15f} {e: .15f}".format(k=kv[i], e=en[i])
             if o is None:
                 s += "\n"
@@ -200,13 +205,31 @@ def output_dispersion(filename, k, ef, e, o=None, olist=None):
                 for oi in o:
                     s += " {o: .15f}".format(o=oi[i, n])
                 s += "\n"
-            if np.abs(kv[i] - kv[i + 1]) < 1e-5:
+            if np.abs(kv[i] - kv[i + 1]) < 1e-5 and not s.endswith("\n\n"):
                 s += "\n"
 
         s += "\n"
         fs.write(s)
 
     fs.close()
+
+
+# ==================================================
+def k_label(label, style="latex"):
+    """
+    Convert k-point label for plot.
+
+    Args:
+        label (str): k-point label, e.g., "Γ", "GAMMA", "G", "X|M".
+        style (str, optional): "latex" (matplotlib) or "gnuplot" (enhanced text).
+
+    Returns:
+        - (str) -- converted label.
+    """
+    gamma = r"$\Gamma$" if style == "latex" else "{/Symbol G}"
+    lst = [gamma if v in ["Γ", "GAMMA", "G"] else v for v in label.split("|")]
+
+    return ":".join(lst)
 
 
 # ==================================================
@@ -224,17 +247,27 @@ def create_gnuplot_cmd(filename, k_dis_pos, kmax, emax, emin, ef, colormap=False
         colormap (bool, optional): with colormap of first expectation value of operator.
         lwidth (int, optional): line width.
         lc (str, optional): line color.
+
+    Notes:
+        - values that cannot be computed are not written in data file, so that they are skipped in the plot.
     """
     offset = (emax - emin) * 0.1
 
     gnufile = os.path.dirname(filename) + "/plot_band.gnu"
     fs = open(gnufile, "w")
 
+    fs.write(f"Ef = {ef}  # fermi energy (data are already shifted by Ef).\n")
+    fs.write("Ef_line = 0.0  # position of fermi level in plot.\n")
+    fs.write("xmin = 0.0\n")
+    fs.write(f"xmax = {kmax}\n")
+    fs.write(f"ymin = {emin-ef-offset}\n")
+    fs.write(f"ymax = {emax-ef+offset}\n")
+    fs.write(f"lwidth = {lwidth}\n\n")
+
     fs.write("unset key\n")
     fs.write("unset grid\n")
-    fs.write(f"lwidth = {lwidth}\n")
-    fs.write(f"set xrange [:{kmax}]\n")
-    fs.write(f"set yrange [{emin-ef-offset}:{emax-ef+offset}]\n")
+    fs.write("set xrange [xmin:xmax]\n")
+    fs.write("set yrange [ymin:ymax]\n")
     fs.write("set tics font 'Times New Roman, 14'\n\n")
     fs.write("set size ratio 0.7\n\n")
 
@@ -242,44 +275,28 @@ def create_gnuplot_cmd(filename, k_dis_pos, kmax, emax, emin, ef, colormap=False
     fs.write("set cbrange [-1.0:1.0]\n\n")
 
     if k_dis_pos is not None:
-        for pos, label in k_dis_pos.items():
-            fs.write(f"set arrow from  {pos},  {emin-ef-offset} to {pos}, {emax-ef+offset} nohead\n")
+        for pos in k_dis_pos.keys():
+            fs.write(f"set arrow from {pos}, ymin to {pos}, ymax nohead\n")
 
-        k_dis_pos = {pos: label.replace("G", "{/Symbol G}").replace("|", ":") for pos, label in k_dis_pos.items()}
-        fs.write("set xtics (" + "".join([f'"{label}" {pos},' for pos, label in k_dis_pos.items()]) + ")\n\n")
-
-    fs.write(f"Ef = {ef}\n")
-
-    fs.write("set terminal postscript eps color enhanced\n\n")
+        fs.write(
+            "set xtics (" + ", ".join([f'"{k_label(label, "gnuplot")}" {pos}' for pos, label in k_dis_pos.items()]) + ")\n\n"
+        )
 
     filename = os.path.basename(filename)
     basename = os.path.splitext(filename)[0]
 
-    fn_eps = basename + ".eps"
-    fs.write(f"set output '{fn_eps}'\n\n")
-    fs.write("plot ")
-
     if colormap:
-        fs.write(f"'{filename}' u 1:2:3 w l lw lwidth lc palette,")
+        plot_cmd = f"plot '{filename}' u 1:2:3 w l lw lwidth lc palette, Ef_line lw 0.5 lc 'black'\n\n"
     else:
-        fs.write(f"'{filename}' u 1:2 w l lw lwidth lc '{lc}',")
+        plot_cmd = f"plot '{filename}' u 1:2 w l lw lwidth lc '{lc}', Ef_line lw 0.5 lc 'black'\n\n"
 
-    fs.write(f"{0.0} lw 0.5 lc 'black'")
+    fs.write("set terminal postscript eps color enhanced\n")
+    fs.write(f"set output '{basename}.eps'\n")
+    fs.write(plot_cmd)
 
-    fs.write("\n\n")
-
-    fs.write("set terminal pdf\n\n")
-
-    fn_pdf = basename + ".pdf"
-    fs.write(f"set output '{fn_pdf}'\n\n")
-    fs.write("plot ")
-
-    if colormap:
-        fs.write(f"'{filename}' u 1:2:3 w l lw lwidth lc palette,")
-    else:
-        fs.write(f"'{filename}' u 1:2 w l lw lwidth lc '{lc}',")
-
-    fs.write(f"{0.0} lw 0.5 lc 'black'")
+    fs.write("set terminal pdf enhanced\n")
+    fs.write(f"set output '{basename}.pdf'\n")
+    fs.write(plot_cmd)
 
     fs.close()
 
@@ -317,7 +334,7 @@ def plot_save_dispersion(filename, k_dis_pos, ef, colormap=False, lwidth=1, lc="
 
     # vertical lines.
     positions = list(k_dis_pos.keys())
-    labels = [v.replace("G", r"$\Gamma$").replace("|", ":") for v in k_dis_pos.values()]
+    labels = [k_label(v, "latex") for v in k_dis_pos.values()]
     for x in positions:
         ax.axvline(x, color="black", lw=0.5)
     ax.set_xticks(positions)
