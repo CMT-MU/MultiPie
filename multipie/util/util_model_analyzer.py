@@ -285,17 +285,19 @@ def create_gnuplot_cmd(filename, k_dis_pos, kmax, emax, emin, ef, colormap=False
 
 
 # ==================================================
-def plot_save_dispersion(filename, k_dis_pos, ef, colormap=False, lwidth=1, lc="salmon"):
+def plot_save_dispersion(filename, k_dis_pos, colormap=False, lwidth=1, lc="salmon"):
     """
     Generate plot window for band dispersion (matplotlib).
 
     Args:
         filename (str): file name.
         k_dis_pos (dict): info. of high-symmetry point in linear k, dict[disconnected position, label].
-        ef (float): fermi energy.
         colormap (bool, optional): with colormap of first expectation value of operator.
         lwidth (int, optional): line width.
         lc (str, optional): line color.
+
+    Notes:
+        - energies in data file are already shifted by fermi energy.
     """
     # read file.
     bands = read_text_data(filename)
@@ -309,7 +311,7 @@ def plot_save_dispersion(filename, k_dis_pos, ef, colormap=False, lwidth=1, lc="
     fig.subplots_adjust(right=0.84)
 
     ax.set_xlim(0, kmax)
-    ax.set_ylim(emin - ef - offset, emax - ef + offset)
+    ax.set_ylim(emin - offset, emax + offset)
 
     ax.axhline(0, color="black", lw=0.5)
     ax.tick_params(axis="x", which="both", bottom=False, top=False, labelbottom=True)
@@ -343,7 +345,7 @@ def plot_save_dispersion(filename, k_dis_pos, ef, colormap=False, lwidth=1, lc="
         cbar.set_ticklabels(["-1", "-0.5", "0", "0.5", "1"])
     else:
         for band in bands:
-            ax.plot(band[:, 0], band[:, 1] - ef, color=lc, lw=lwidth)
+            ax.plot(band[:, 0], band[:, 1], color=lc, lw=lwidth)
 
     fn_pdf = os.path.splitext(filename)[0] + ".pdf"
     fn_eps = os.path.splitext(filename)[0] + ".eps"
