@@ -941,6 +941,12 @@ def test_wannier_mode_bond_centre(tmp_path):
         ("C", 65, {"X": "[0,0,0]", "Y": "[0.3,0,1/2]"}),
         ("A", 38, {"X": "[0,0,0.1]", "Y": "[0,0.3,0.4]"}),
         ("R", 166, {"X": "[0,0,0]", "Y": "[0,0,0.3]"}),
+        # I and R lattices with sites whose conversion to the primitive cell leaves [0,1): in the I and R cases above,
+        # all sites convert into [0,1) (e.g. on the c axis), where the old R_primitive happened to be right.
+        ("I", 139, {"X": "[0.1,0.2,0.3]"}),
+        ("R", 146, {"X": "[0.1,0.2,0.3]"}),
+        ("I", 87, {"X": "[0,0,0]", "Y": "[0.3,0.1,0.2]"}),
+        ("R", 166, {"X": "[1/2,0,0]", "Y": "[0,0,0.2]"}),
     ],
 )
 def test_cell_bond_lattice_vector(lattice, group, site):
