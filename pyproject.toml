@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=64"]  # 64: editable install (PEP 660) without setup.py.
+requires = ["setuptools>=77"]  # 77: license as an SPDX expression (PEP 639).
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -22,14 +22,14 @@ authors = [
 ]
 description = "A python library for crystallographic symmetry operations and Symmetry-Adapted Multipole Basis (SAMB)."
 readme = {file = "docs/README.md", content-type = "text/markdown"}
-license = {file = "LICENSE"}
+license = "MPL-2.0"
+license-files = ["LICENSE"]
 keywords = ["group theory", "condensed matter", "materials science", "symmetry-adapted basis"]
 classifiers = [
     "Intended Audience :: Science/Research",
     "Topic :: Scientific/Engineering :: Information Analysis",
     "Topic :: Scientific/Engineering :: Physics",
     "Topic :: Scientific/Engineering :: Mathematics",
-    "License :: OSI Approved :: MIT License",
     "Operating System :: Microsoft :: Windows",
     "Operating System :: POSIX",
     "Operating System :: MacOS",
