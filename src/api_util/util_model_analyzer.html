@@ -1,0 +1,1216 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Model Analyzer &#8212; MultiPie</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=34ddd5e8" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../../_static/documentation_options.js?v=a8e58a58"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'src/api_util/util_model_analyzer';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script src="../../_static/custom.js?v=9c3a2667"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="PDF creator" href="util_pdf_latex.html" />
+    <link rel="prev" title="Material Model" href="util_material_model.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../_static/searchtools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../README.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/multipie_logo.png" class="logo__image only-light" alt="MultiPie - Home"/>
+    <img src="../../_static/multipie_logo.png" class="logo__image only-dark pst-js-only" alt="MultiPie - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installing MultiPie</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../manual.html">Brief Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../post_processing.html">Post-processing tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../group_doc.html">Group information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tech_note.html">Technical Note</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API reference</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../api_core.html">Core</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api_core/init.html">Type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_core/cmd.html">Create function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_core/group.html">Group</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_core/material_model.html">Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_core/model_analyzer.html">ModelAnalyzer</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../api_util.html">Utility</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="util_atomic_multipole.html">Atomic multipole</a></li>
+<li class="toctree-l2"><a class="reference internal" href="util_binary.html">Binary data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="util_crystal.html">Crystal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="util_dict.html">Dict</a></li>
+<li class="toctree-l2"><a class="reference internal" href="util_gram_schmidt.html">Gram-Schmidt orthonormalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="util_harmonics.html">Harmonics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="util_material_model_pdf.html">PDF creator for Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="util_material_model.html">Material Model</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Model Analyzer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="util_pdf_latex.html">PDF creator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="util_plot.html">Plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="util_response_tensor.html">Response tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="util_samb.html">SAMB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="util_tag.html">Tag</a></li>
+<li class="toctree-l2"><a class="reference internal" href="util_wannier.html">Wannier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="util_wyckoff.html">Wyckoff position</a></li>
+<li class="toctree-l2"><a class="reference internal" href="util.html">Versatile</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/CMT-MU/MultiPie.git" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Model Analyzer</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.add_local_parameter"><code class="docutils literal notranslate"><span class="pre">add_local_parameter()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.add_local_parameter_sym"><code class="docutils literal notranslate"><span class="pre">add_local_parameter_sym()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.check_same_orbital_block"><code class="docutils literal notranslate"><span class="pre">check_same_orbital_block()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.convert_orbital_to_detail"><code class="docutils literal notranslate"><span class="pre">convert_orbital_to_detail()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.convert_zj_atomic_var"><code class="docutils literal notranslate"><span class="pre">convert_zj_atomic_var()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.create_all_local_operator"><code class="docutils literal notranslate"><span class="pre">create_all_local_operator()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.create_gnuplot_cmd"><code class="docutils literal notranslate"><span class="pre">create_gnuplot_cmd()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.create_gnuplot_dos"><code class="docutils literal notranslate"><span class="pre">create_gnuplot_dos()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.create_gnuplot_weight"><code class="docutils literal notranslate"><span class="pre">create_gnuplot_weight()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.create_k_matrix"><code class="docutils literal notranslate"><span class="pre">create_k_matrix()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.create_k_multipole"><code class="docutils literal notranslate"><span class="pre">create_k_multipole()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.create_local_operator"><code class="docutils literal notranslate"><span class="pre">create_local_operator()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.create_operator_index"><code class="docutils literal notranslate"><span class="pre">create_operator_index()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.fermi_dirac"><code class="docutils literal notranslate"><span class="pre">fermi_dirac()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.fermi_dirac_deriv"><code class="docutils literal notranslate"><span class="pre">fermi_dirac_deriv()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.fermi_dirac_deriv2"><code class="docutils literal notranslate"><span class="pre">fermi_dirac_deriv2()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.fourier_k_to_r"><code class="docutils literal notranslate"><span class="pre">fourier_k_to_r()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.fourier_r_to_k"><code class="docutils literal notranslate"><span class="pre">fourier_r_to_k()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.grid_all"><code class="docutils literal notranslate"><span class="pre">grid_all()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.grid_path"><code class="docutils literal notranslate"><span class="pre">grid_path()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.is_almost_zero"><code class="docutils literal notranslate"><span class="pre">is_almost_zero()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.k_label"><code class="docutils literal notranslate"><span class="pre">k_label()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.kelvin_to_ev"><code class="docutils literal notranslate"><span class="pre">kelvin_to_ev()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.output_dispersion"><code class="docutils literal notranslate"><span class="pre">output_dispersion()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.output_dos"><code class="docutils literal notranslate"><span class="pre">output_dos()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.parse_orbital"><code class="docutils literal notranslate"><span class="pre">parse_orbital()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.plot_save_dispersion"><code class="docutils literal notranslate"><span class="pre">plot_save_dispersion()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.plot_save_dos"><code class="docutils literal notranslate"><span class="pre">plot_save_dos()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.plot_save_weight"><code class="docutils literal notranslate"><span class="pre">plot_save_weight()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.read_text_data"><code class="docutils literal notranslate"><span class="pre">read_text_data()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.solve_z"><code class="docutils literal notranslate"><span class="pre">solve_z()</span></code></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="module-multipie.util.util_model_analyzer">
+<span id="model-analyzer"></span><h1>Model Analyzer<a class="headerlink" href="#module-multipie.util.util_model_analyzer" title="Link to this heading">#</a></h1>
+<p>Utility for ModelAnalyzer class.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_model_analyzer.add_local_parameter">
+<span class="sig-name descname"><span class="pre">add_local_parameter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">matrix_info</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ket</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_model_analyzer.html#add_local_parameter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_model_analyzer.add_local_parameter" title="Link to this definition">#</a></dt>
+<dd><p>Add local parameter for given nonlocal parameter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>matrix_info</strong> (<em>dict</em>) – matrix info.</p></li>
+<li><p><strong>parameter</strong> (<em>dict</em>) – parameter dict without site cluster.</p></li>
+<li><p><strong>ket</strong> (<em>list</em>) – ket list.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(dict) – parameter dict with adding local one.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_model_analyzer.add_local_parameter_sym">
+<span class="sig-name descname"><span class="pre">add_local_parameter_sym</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">matrix_info</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ket</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_model_analyzer.html#add_local_parameter_sym"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_model_analyzer.add_local_parameter_sym" title="Link to this definition">#</a></dt>
+<dd><p>Add local parameter for given nonlocal parameter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>matrix_info</strong> (<em>dict</em>) – matrix info.</p></li>
+<li><p><strong>ket</strong> (<em>list</em>) – ket list.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(dict) – parameter dict with adding local one.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_model_analyzer.check_same_orbital_block">
+<span class="sig-name descname"><span class="pre">check_same_orbital_block</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ket</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_model_analyzer.html#check_same_orbital_block"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_model_analyzer.check_same_orbital_block" title="Link to this definition">#</a></dt>
+<dd><p>Check same orbital block for all atoms.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ket</strong> (<em>list</em>) – ket list.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(bool) – same block ?</p></li>
+<li><p>(int) – block size.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_model_analyzer.convert_orbital_to_detail">
+<span class="sig-name descname"><span class="pre">convert_orbital_to_detail</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tag</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_model_analyzer.html#convert_orbital_to_detail"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_model_analyzer.convert_orbital_to_detail" title="Link to this definition">#</a></dt>
+<dd><p>Convert orbital name to (rank, comp).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>tag</strong> (<em>str</em>) – “name” or “(name,u/d)”. name = wannier90 or multipie.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(tuple) – orbital (rank, comp, tag).</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_model_analyzer.convert_zj_atomic_var">
+<span class="sig-name descname"><span class="pre">convert_zj_atomic_var</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">matrix_info</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">combined_cluster</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">combined_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">IR</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_model_analyzer.html#convert_zj_atomic_var"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_model_analyzer.convert_zj_atomic_var" title="Link to this definition">#</a></dt>
+<dd><p>Convert from zj to atomic variable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>matrix_info</strong> (<em>dict</em>) – matrix info.</p></li>
+<li><p><strong>combined_cluster</strong> (<em>dict</em>) – combined cluster.</p></li>
+<li><p><strong>combined_id</strong> (<em>dict</em>) – combined id.</p></li>
+<li><p><strong>IR</strong> (<em>str</em>) – identity irrep.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(dict) – zj to var for each cluster, dict[bond name, dict[zj, var] ].</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_model_analyzer.create_all_local_operator">
+<span class="sig-name descname"><span class="pre">create_all_local_operator</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_model_analyzer.html#create_all_local_operator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_model_analyzer.create_all_local_operator" title="Link to this definition">#</a></dt>
+<dd><p>Create local operators.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p>(dict) – local operators, dict[rank, dict[name, matrix]].</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>atomic basis is tesseral harmonics, s, px, py, pz, dv, dxy, dxz, dyz, du, f2, f1, fbz, f3, f3x, f3y, faz.</p></li>
+<li><p>operator names are Lx, Ly, Lz, Qu, Qv, Qyz, Qxz, Qxy, which are not normalized as defined.</p></li>
+<li><p>it is used for basis, lg and lgs, not for jml.</p></li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_model_analyzer.create_gnuplot_cmd">
+<span class="sig-name descname"><span class="pre">create_gnuplot_cmd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_dis_pos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kmax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">emax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">emin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ef</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colormap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lwidth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'salmon'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_model_analyzer.html#create_gnuplot_cmd"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_model_analyzer.create_gnuplot_cmd" title="Link to this definition">#</a></dt>
+<dd><p>Create gnuplot file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<em>str</em>) – file name.</p></li>
+<li><p><strong>k_dis_pos</strong> (<em>dict</em>) – info. of high-symmetry point in linear k, dict[disconnected position, label].</p></li>
+<li><p><strong>kmax</strong> (<em>float</em>) – maximum value in kpoints.</p></li>
+<li><p><strong>emax</strong> (<em>float</em>) – maximum value of eigen values.</p></li>
+<li><p><strong>emin</strong> (<em>float</em>) – minimum value of eigen values.</p></li>
+<li><p><strong>ef</strong> (<em>float</em>) – fermi energy.</p></li>
+<li><p><strong>colormap</strong> (<em>bool</em><em>, </em><em>optional</em>) – with colormap of first expectation value of operator.</p></li>
+<li><p><strong>lwidth</strong> (<em>int</em><em>, </em><em>optional</em>) – line width.</p></li>
+<li><p><strong>lc</strong> (<em>str</em><em>, </em><em>optional</em>) – line color.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>values that cannot be computed are not written in data file, so that they are skipped in the plot.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_model_analyzer.create_gnuplot_dos">
+<span class="sig-name descname"><span class="pre">create_gnuplot_dos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">emin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">emax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dmax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ef</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lwidth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_model_analyzer.html#create_gnuplot_dos"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_model_analyzer.create_gnuplot_dos" title="Link to this definition">#</a></dt>
+<dd><p>Create gnuplot file for DOS.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<em>str</em>) – file name of data, columns (E, total, N(E), partial, …).</p></li>
+<li><p><strong>emin</strong> (<em>float</em>) – minimum of energy grid (not shifted).</p></li>
+<li><p><strong>emax</strong> (<em>float</em>) – maximum of energy grid (not shifted).</p></li>
+<li><p><strong>dmax</strong> (<em>float</em>) – maximum of total DOS.</p></li>
+<li><p><strong>ef</strong> (<em>float</em>) – fermi energy.</p></li>
+<li><p><strong>labels</strong> (<em>list</em>) – label of partial DOS.</p></li>
+<li><p><strong>lwidth</strong> (<em>int</em><em>, </em><em>optional</em>) – line width.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_model_analyzer.create_gnuplot_weight">
+<span class="sig-name descname"><span class="pre">create_gnuplot_weight</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_dis_pos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kmax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">emax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">emin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ef</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lwidth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_model_analyzer.html#create_gnuplot_weight"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_model_analyzer.create_gnuplot_weight" title="Link to this definition">#</a></dt>
+<dd><p>Create gnuplot file for band dispersion colored by orbital weight (fat band), one page for each weight.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<em>str</em>) – file name of data, columns (k, E, weight1, weight2, …).</p></li>
+<li><p><strong>k_dis_pos</strong> (<em>dict</em>) – info. of high-symmetry point in linear k, dict[disconnected position, label].</p></li>
+<li><p><strong>kmax</strong> (<em>float</em>) – maximum value in kpoints.</p></li>
+<li><p><strong>emax</strong> (<em>float</em>) – maximum value of eigen values.</p></li>
+<li><p><strong>emin</strong> (<em>float</em>) – minimum value of eigen values.</p></li>
+<li><p><strong>ef</strong> (<em>float</em>) – fermi energy.</p></li>
+<li><p><strong>labels</strong> (<em>list</em>) – label of weights (without spaces).</p></li>
+<li><p><strong>lwidth</strong> (<em>int</em><em>, </em><em>optional</em>) – line width.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_model_analyzer.create_k_matrix">
+<span class="sig-name descname"><span class="pre">create_k_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cluster_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vector_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_model_analyzer.html#create_k_matrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_model_analyzer.create_k_matrix" title="Link to this definition">#</a></dt>
+<dd><p>Create momentum matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>matrix</strong> (<em>dict</em>) – O(R) matrix dict.</p></li>
+<li><p><strong>cluster_dict</strong> (<em>dict</em>) – cluster dict.</p></li>
+<li><p><strong>vector_dict</strong> (<em>dict</em>) – vector dict.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(dict) – momentum matrix, dict[tag, dict[(m,n), value] ].</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>only tight-binding gauge is supported.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_model_analyzer.create_k_multipole">
+<span class="sig-name descname"><span class="pre">create_k_multipole</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cluster_samb</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cluster_vector</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_model_analyzer.html#create_k_multipole"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_model_analyzer.create_k_multipole" title="Link to this definition">#</a></dt>
+<dd><p>Create momentum multipole.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cluster_samb</strong> (<em>dict</em>) – cluster SAMB.</p></li>
+<li><p><strong>cluster_vector</strong> (<em>dict</em>) – cluster vector.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(dict) – momentum multipole in terms of k.b_n, dict[wyckoff, dict[idx, (k_multipole, symmetry)] ].</p></li>
+<li><p>(dict) – cluster vector, dict[site/bond name, dict[kb, expression] ].</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_model_analyzer.create_local_operator">
+<span class="sig-name descname"><span class="pre">create_local_operator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ket</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">op_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">op_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spinful</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_model_analyzer.html#create_local_operator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_model_analyzer.create_local_operator" title="Link to this definition">#</a></dt>
+<dd><p>Create local operator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ket</strong> (<em>list</em>) – ket set.</p></li>
+<li><p><strong>op_name</strong> (<em>str</em>) – operator name.</p></li>
+<li><p><strong>op_dict</strong> (<em>dict</em>) – operator dict.</p></li>
+<li><p><strong>spinful</strong> (<em>bool</em>) – lgs basis ?</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(ndarray) – matrix for given operator.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_model_analyzer.create_operator_index">
+<span class="sig-name descname"><span class="pre">create_operator_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ket</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_model_analyzer.html#create_operator_index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_model_analyzer.create_operator_index" title="Link to this definition">#</a></dt>
+<dd><p>Create operator index.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ket</strong> (<em>list</em>) – ket list.</p></li>
+<li><p><strong>mode</strong> (<em>str</em><em>, </em><em>optional</em>) – “orbital” or “spin”.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(list) – index pair list.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>atom, sublattice, rank is the same in pair.</p></li>
+<li><p>spin is the same for “orbital” mode.</p></li>
+<li><p>orbital is the same for “spin” mode.</p></li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_model_analyzer.fermi_dirac">
+<span class="sig-name descname"><span class="pre">fermi_dirac</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Kelvin'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_model_analyzer.html#fermi_dirac"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_model_analyzer.fermi_dirac" title="Link to this definition">#</a></dt>
+<dd><p>Fermi-Dirac distribution function, f(x) = 1 / (1 + exp(x/T)).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>ndarray</em>) – energy relative to the chemical potential (E - mu), in eV.</p></li>
+<li><p><strong>T</strong> (<em>float</em><em>, </em><em>optional</em>) – temperature (Kelvin or eV, see <cite>unit</cite>).</p></li>
+<li><p><strong>unit</strong> (<em>str</em><em>, </em><em>optional</em>) – unit of T, “Kelvin” or “eV”.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(ndarray) – Fermi-Dirac occupation, 0 &lt;= f(x) &lt;= 1.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_model_analyzer.fermi_dirac_deriv">
+<span class="sig-name descname"><span class="pre">fermi_dirac_deriv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Kelvin'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_model_analyzer.html#fermi_dirac_deriv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_model_analyzer.fermi_dirac_deriv" title="Link to this definition">#</a></dt>
+<dd><p>Minus the derivative of the Fermi-Dirac distribution w.r.t. x, -df/dx = f(x)*f(-x)/T.
+A positive, bell-shaped function peaked at x=0 (used e.g. for smearing/DOS broadening).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>ndarray</em>) – energy relative to the chemical potential (E - mu), in eV.</p></li>
+<li><p><strong>T</strong> (<em>float</em><em>, </em><em>optional</em>) – temperature (Kelvin or eV, see <cite>unit</cite>). Must be nonzero.</p></li>
+<li><p><strong>unit</strong> (<em>str</em><em>, </em><em>optional</em>) – unit of T, “Kelvin” or “eV”.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(ndarray) – -df/dx.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_model_analyzer.fermi_dirac_deriv2">
+<span class="sig-name descname"><span class="pre">fermi_dirac_deriv2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Kelvin'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_model_analyzer.html#fermi_dirac_deriv2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_model_analyzer.fermi_dirac_deriv2" title="Link to this definition">#</a></dt>
+<dd><p>Second derivative of the Fermi-Dirac distribution w.r.t. x, -d^2f/dx^2
+(i.e. the derivative of <cite>fermi_dirac_deriv</cite>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>ndarray</em>) – energy relative to the chemical potential (E - mu), in eV.</p></li>
+<li><p><strong>T</strong> (<em>float</em><em>, </em><em>optional</em>) – temperature (Kelvin or eV, see <cite>unit</cite>). Must be nonzero.</p></li>
+<li><p><strong>unit</strong> (<em>str</em><em>, </em><em>optional</em>) – unit of T, “Kelvin” or “eV”.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(ndarray) – -d^2f/dx^2.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_model_analyzer.fourier_k_to_r">
+<span class="sig-name descname"><span class="pre">fourier_k_to_r</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Ok</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kv</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">irvec</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_model_analyzer.html#fourier_k_to_r"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_model_analyzer.fourier_k_to_r" title="Link to this definition">#</a></dt>
+<dd><p>Fourier transformation from k to R (inverse of fourier_r_to_k).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Ok</strong> (<em>ndarray</em>) – O(k) matrix, shape (Nk, d, d).</p></li>
+<li><p><strong>atom</strong> (<em>ndarray</em>) – atomic positions.</p></li>
+<li><p><strong>kv</strong> (<em>ndarray</em>) – list of k vector.</p></li>
+<li><p><strong>irvec</strong> (<em>iterable</em>) – list/array of R = (n1, n2, n3) lattice vectors to
+evaluate O_R at.</p></li>
+<li><p><strong>s</strong> (<em>bool</em><em>, </em><em>optional</em>) – include phase of atomic position ? (must match the
+value used to generate <cite>Ok</cite>).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict[(n1,n2,n3,m,n): value], O_R = (1/Nk) sum_k O(k) exp(-2pi i k*Rs),
+Rs = (n1,n2,n3)-s(R[m]-R[n]), i.e. the inverse of <cite>fourier_r_to_k</cite>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_model_analyzer.fourier_r_to_k">
+<span class="sig-name descname"><span class="pre">fourier_r_to_k</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">OR</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kv</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_model_analyzer.html#fourier_r_to_k"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_model_analyzer.fourier_r_to_k" title="Link to this definition">#</a></dt>
+<dd><p>Fourier transformation from R to k.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>OR</strong> (<em>dict</em>) – matrix dict, dict[(n1,n2,n3,m,n): value].</p></li>
+<li><p><strong>atom</strong> (<em>ndarray</em>) – atomic positions.</p></li>
+<li><p><strong>kv</strong> (<em>ndarray</em>) – list of k vector.</p></li>
+<li><p><strong>s</strong> (<em>bool</em><em>, </em><em>optional</em>) – include phase of atomic position ?</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(ndarray) – O(k) = sum_s Omn exp( 2pi i k*Rs ), Rs = (n1,n2,n3)-s(R[m]-R[n]).</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_model_analyzer.grid_all">
+<span class="sig-name descname"><span class="pre">grid_all</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_model_analyzer.html#grid_all"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_model_analyzer.grid_all" title="Link to this definition">#</a></dt>
+<dd><p>Create N1 x N2 x N3 grid points.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>N1</strong> (<em>int</em>) – number of divisions for a1.</p></li>
+<li><p><strong>N2</strong> (<em>int</em>) – number of divisions for a2.</p></li>
+<li><p><strong>N3</strong> (<em>int</em>) – number of divisions for a3.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(ndarray) – grid points.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_model_analyzer.grid_path">
+<span class="sig-name descname"><span class="pre">grid_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_model_analyzer.html#grid_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_model_analyzer.grid_path" title="Link to this definition">#</a></dt>
+<dd><p>Create grid points along path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pts</strong> (<em>dict</em>) – definitions of points, e.g., {“A”:[1,2,3],”B”:[3,4,5]}.</p></li>
+<li><p><strong>gpath</strong> (<em>str</em>) – path, e.g., “A-B|C-D-E”.</p></li>
+<li><p><strong>N1</strong> (<em>int</em><em>, </em><em>optional</em>) – number of divisions.</p></li>
+<li><p><strong>A</strong> (<em>ndarray</em><em>, </em><em>optional</em>) – conversion matrix.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(ndarray) – grid points.</p></li>
+<li><p>(ndarray) – linear positions.</p></li>
+<li><p>(dict) – dict[disconnected linear position, label].</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_model_analyzer.is_almost_zero">
+<span class="sig-name descname"><span class="pre">is_almost_zero</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_model_analyzer.html#is_almost_zero"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_model_analyzer.is_almost_zero" title="Link to this definition">#</a></dt>
+<dd><p>Check if x is numerically zero (within a tolerance).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_model_analyzer.k_label">
+<span class="sig-name descname"><span class="pre">k_label</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">style</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'latex'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_model_analyzer.html#k_label"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_model_analyzer.k_label" title="Link to this definition">#</a></dt>
+<dd><p>Convert k-point label for plot.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>label</strong> (<em>str</em>) – k-point label, e.g., “Γ”, “GAMMA”, “G”, “X|M”.</p></li>
+<li><p><strong>style</strong> (<em>str</em><em>, </em><em>optional</em>) – “latex” (matplotlib) or “gnuplot” (enhanced text).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(str) – converted label.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_model_analyzer.kelvin_to_ev">
+<span class="sig-name descname"><span class="pre">kelvin_to_ev</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T_kelvin</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_model_analyzer.html#kelvin_to_ev"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_model_analyzer.kelvin_to_ev" title="Link to this definition">#</a></dt>
+<dd><p>Convert temperature from Kelvin to eV (k_B * T).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_model_analyzer.output_dispersion">
+<span class="sig-name descname"><span class="pre">output_dispersion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ef</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">o</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">olist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_model_analyzer.html#output_dispersion"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_model_analyzer.output_dispersion" title="Link to this definition">#</a></dt>
+<dd><p>Output band dispersion along high-symmetry lines.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<em>str</em>) – file name.</p></li>
+<li><p><strong>k</strong> (<em>ndarray</em>) – k points along high-symmetry lines.</p></li>
+<li><p><strong>ef</strong> (<em>float</em>) – fermi energy.</p></li>
+<li><p><strong>e</strong> (<em>ndarray</em>) – eigen values.</p></li>
+<li><p><strong>o</strong> (<em>list</em><em>, </em><em>optional</em>) – expectation value of any operator for each band, [[num_k, num_band]].</p></li>
+<li><p><strong>olist</strong> (<em>list</em><em>, </em><em>optional</em>) – list of local operator.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_model_analyzer.output_dos">
+<span class="sig-name descname"><span class="pre">output_dos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ef</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comment</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_model_analyzer.html#output_dos"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_model_analyzer.output_dos" title="Link to this definition">#</a></dt>
+<dd><p>Output DOS.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<em>str</em>) – file name.</p></li>
+<li><p><strong>energy</strong> (<em>ndarray</em>) – energy grid (not shifted).</p></li>
+<li><p><strong>ef</strong> (<em>float</em>) – fermi energy.</p></li>
+<li><p><strong>dos</strong> (<em>ndarray</em>) – DOS, [energy, column], columns (total, integrated total, partial, …).</p></li>
+<li><p><strong>labels</strong> (<em>list</em>) – label of partial DOS.</p></li>
+<li><p><strong>comment</strong> (<em>list</em>) – comment lines (without “#”).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_model_analyzer.parse_orbital">
+<span class="sig-name descname"><span class="pre">parse_orbital</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">orbital_str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_model_analyzer.html#parse_orbital"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_model_analyzer.parse_orbital" title="Link to this definition">#</a></dt>
+<dd><p>Parse orbital string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>orbital_str</strong> (<em>str</em>) – orbital string, (orbital, spin).</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(tuple or str) – orbital, spin or orbital.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_model_analyzer.plot_save_dispersion">
+<span class="sig-name descname"><span class="pre">plot_save_dispersion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_dis_pos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ef</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colormap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lwidth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'salmon'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_model_analyzer.html#plot_save_dispersion"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_model_analyzer.plot_save_dispersion" title="Link to this definition">#</a></dt>
+<dd><p>Generate plot window for band dispersion (matplotlib).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<em>str</em>) – file name.</p></li>
+<li><p><strong>k_dis_pos</strong> (<em>dict</em>) – info. of high-symmetry point in linear k, dict[disconnected position, label].</p></li>
+<li><p><strong>ef</strong> (<em>float</em><em>, </em><em>optional</em>) – not used, kept for compatibility.</p></li>
+<li><p><strong>colormap</strong> (<em>bool</em><em>, </em><em>optional</em>) – with colormap of first expectation value of operator.</p></li>
+<li><p><strong>lwidth</strong> (<em>int</em><em>, </em><em>optional</em>) – line width.</p></li>
+<li><p><strong>lc</strong> (<em>str</em><em>, </em><em>optional</em>) – line color.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>energies in data file are already shifted by fermi energy.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_model_analyzer.plot_save_dos">
+<span class="sig-name descname"><span class="pre">plot_save_dos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lwidth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_model_analyzer.html#plot_save_dos"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_model_analyzer.plot_save_dos" title="Link to this definition">#</a></dt>
+<dd><p>Plot DOS (matplotlib).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<em>str</em>) – file name of data, columns (E, total, N(E), partial, …).</p></li>
+<li><p><strong>labels</strong> (<em>list</em>) – label of partial DOS.</p></li>
+<li><p><strong>lwidth</strong> (<em>float</em><em>, </em><em>optional</em>) – line width.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>energies in data file are already shifted by fermi energy.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_model_analyzer.plot_save_weight">
+<span class="sig-name descname"><span class="pre">plot_save_weight</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_dis_pos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lwidth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.5</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_model_analyzer.html#plot_save_weight"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_model_analyzer.plot_save_weight" title="Link to this definition">#</a></dt>
+<dd><p>Plot band dispersion colored by orbital weight (fat band), one page for each weight (matplotlib).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<em>str</em>) – file name of data, columns (k, E, weight1, weight2, …).</p></li>
+<li><p><strong>k_dis_pos</strong> (<em>dict</em>) – info. of high-symmetry point in linear k, dict[disconnected position, label].</p></li>
+<li><p><strong>labels</strong> (<em>list</em>) – label of weights.</p></li>
+<li><p><strong>lwidth</strong> (<em>float</em><em>, </em><em>optional</em>) – line width.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>energies in data file are already shifted by fermi energy.</p></li>
+<li><p>the plots are saved in one PDF file (filename with .pdf).</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_model_analyzer.read_text_data">
+<span class="sig-name descname"><span class="pre">read_text_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_model_analyzer.html#read_text_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_model_analyzer.read_text_data" title="Link to this definition">#</a></dt>
+<dd><p>Read text data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – file name.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(list) – block of data (ndarray) separated by empty line, [block][x, y].</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="multipie.util.util_model_analyzer.solve_z">
+<span class="sig-name descname"><span class="pre">solve_z</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Z_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">simplify</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/util/util_model_analyzer.html#solve_z"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.util.util_model_analyzer.solve_z" title="Link to this definition">#</a></dt>
+<dd><p>Solve z parameter in terms of atomic parameters on bond 1.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Z_dict</strong> (<em>dict</em>) – bond-1 basis, dict[(m,n), val].</p></li>
+<li><p><strong>names</strong> (<em>list</em>) – ket string.</p></li>
+<li><p><strong>simplify</strong> (<em>bool</em><em>, </em><em>optional</em>) – simplify result ?</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(dict) – z parameter.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./src/api_util"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.add_local_parameter"><code class="docutils literal notranslate"><span class="pre">add_local_parameter()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.add_local_parameter_sym"><code class="docutils literal notranslate"><span class="pre">add_local_parameter_sym()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.check_same_orbital_block"><code class="docutils literal notranslate"><span class="pre">check_same_orbital_block()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.convert_orbital_to_detail"><code class="docutils literal notranslate"><span class="pre">convert_orbital_to_detail()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.convert_zj_atomic_var"><code class="docutils literal notranslate"><span class="pre">convert_zj_atomic_var()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.create_all_local_operator"><code class="docutils literal notranslate"><span class="pre">create_all_local_operator()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.create_gnuplot_cmd"><code class="docutils literal notranslate"><span class="pre">create_gnuplot_cmd()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.create_gnuplot_dos"><code class="docutils literal notranslate"><span class="pre">create_gnuplot_dos()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.create_gnuplot_weight"><code class="docutils literal notranslate"><span class="pre">create_gnuplot_weight()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.create_k_matrix"><code class="docutils literal notranslate"><span class="pre">create_k_matrix()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.create_k_multipole"><code class="docutils literal notranslate"><span class="pre">create_k_multipole()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.create_local_operator"><code class="docutils literal notranslate"><span class="pre">create_local_operator()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.create_operator_index"><code class="docutils literal notranslate"><span class="pre">create_operator_index()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.fermi_dirac"><code class="docutils literal notranslate"><span class="pre">fermi_dirac()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.fermi_dirac_deriv"><code class="docutils literal notranslate"><span class="pre">fermi_dirac_deriv()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.fermi_dirac_deriv2"><code class="docutils literal notranslate"><span class="pre">fermi_dirac_deriv2()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.fourier_k_to_r"><code class="docutils literal notranslate"><span class="pre">fourier_k_to_r()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.fourier_r_to_k"><code class="docutils literal notranslate"><span class="pre">fourier_r_to_k()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.grid_all"><code class="docutils literal notranslate"><span class="pre">grid_all()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.grid_path"><code class="docutils literal notranslate"><span class="pre">grid_path()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.is_almost_zero"><code class="docutils literal notranslate"><span class="pre">is_almost_zero()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.k_label"><code class="docutils literal notranslate"><span class="pre">k_label()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.kelvin_to_ev"><code class="docutils literal notranslate"><span class="pre">kelvin_to_ev()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.output_dispersion"><code class="docutils literal notranslate"><span class="pre">output_dispersion()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.output_dos"><code class="docutils literal notranslate"><span class="pre">output_dos()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.parse_orbital"><code class="docutils literal notranslate"><span class="pre">parse_orbital()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.plot_save_dispersion"><code class="docutils literal notranslate"><span class="pre">plot_save_dispersion()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.plot_save_dos"><code class="docutils literal notranslate"><span class="pre">plot_save_dos()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.plot_save_weight"><code class="docutils literal notranslate"><span class="pre">plot_save_weight()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.read_text_data"><code class="docutils literal notranslate"><span class="pre">read_text_data()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.util.util_model_analyzer.solve_z"><code class="docutils literal notranslate"><span class="pre">solve_z()</span></code></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Hiroaki Kusunose and Rikuto Oiwa
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2021-.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

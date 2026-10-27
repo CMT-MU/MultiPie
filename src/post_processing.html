@@ -1,0 +1,789 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Post-processing tools &#8212; MultiPie</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=34ddd5e8" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=a8e58a58"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"loader": {"load": ["[tex]/physics"]}, "tex": {"packages": {"[+]": ["physics"]}, "macros": {"bm": ["\\boldsymbol{#1}", 1]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'src/post_processing';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script src="../_static/custom.js?v=9c3a2667"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Group information" href="group_doc.html" />
+    <link rel="prev" title="Brief Manual" href="manual.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../README.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/multipie_logo.png" class="logo__image only-light" alt="MultiPie - Home"/>
+    <img src="../_static/multipie_logo.png" class="logo__image only-dark pst-js-only" alt="MultiPie - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installing MultiPie</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="manual.html">Brief Manual</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Post-processing tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="group_doc.html">Group information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tech_note.html">Technical Note</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="api_core.html">Core</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="api_core/init.html">Type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_core/cmd.html">Create function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_core/group.html">Group</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_core/material_model.html">Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_core/model_analyzer.html">ModelAnalyzer</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="api_util.html">Utility</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_atomic_multipole.html">Atomic multipole</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_binary.html">Binary data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_crystal.html">Crystal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_dict.html">Dict</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_gram_schmidt.html">Gram-Schmidt orthonormalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_harmonics.html">Harmonics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_material_model_pdf.html">PDF creator for Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_material_model.html">Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_model_analyzer.html">Model Analyzer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_pdf_latex.html">PDF creator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_plot.html">Plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_response_tensor.html">Response tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_samb.html">SAMB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_tag.html">Tag</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_wannier.html">Wannier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_wyckoff.html">Wyckoff position</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util.html">Versatile</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/CMT-MU/MultiPie.git" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Post-processing tools</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-graphene">Example: graphene</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#density-of-states">Density of states</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fermi-energy">Fermi energy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#orbital-weight-fat-band">Orbital weight (fat band)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-with-several-orbitals">Example with several orbitals</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eigenvalues-and-eigenvectors">Eigenvalues and eigenvectors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#callbacks-for-custom-calculations">Callbacks for custom calculations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-by-gnuplot">Plotting by gnuplot</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="post-processing-tools">
+<h1>Post-processing tools<a class="headerlink" href="#post-processing-tools" title="Link to this heading">#</a></h1>
+<p>After a tight-binding model is built (by SAMBs, or from Wannier90 <code class="docutils literal notranslate"><span class="pre">seedname_hr.dat</span></code>), <code class="docutils literal notranslate"><span class="pre">mp_analyze</span></code> computes physical quantities from its eigenvalues and eigenvectors.
+This page explains the tools, set in <code class="docutils literal notranslate"><span class="pre">output</span></code> of the control file:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>tool</p></th>
+<th class="head"><p>keys in <code class="docutils literal notranslate"><span class="pre">output</span></code></p></th>
+<th class="head"><p>output files (in <code class="docutils literal notranslate"><span class="pre">model_name/output/</span></code>, prefixed with <code class="docutils literal notranslate"><span class="pre">model_name</span></code>)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="#pp-density-of-states">Density of states</a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">dos</span></code>, <code class="docutils literal notranslate"><span class="pre">dos_e_num</span></code>, <code class="docutils literal notranslate"><span class="pre">dos_width</span></code>, <code class="docutils literal notranslate"><span class="pre">dos_method</span></code>, <code class="docutils literal notranslate"><span class="pre">dos_spin</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">_dos.txt</span></code>, <code class="docutils literal notranslate"><span class="pre">_dos.pdf</span></code>, <code class="docutils literal notranslate"><span class="pre">_dos.eps</span></code>, <code class="docutils literal notranslate"><span class="pre">plot_dos.gnu</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pp-fermi-energy">Fermi energy from the filling</a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">n_electron</span></code></p></td>
+<td><p>(used for all output)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pp-orbital-weight-fat-band">Orbital weight (fat band)</a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">dispersion/weight</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">_weight.txt</span></code>, <code class="docutils literal notranslate"><span class="pre">_weight.pdf</span></code>, <code class="docutils literal notranslate"><span class="pre">plot_weight.gnu</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pp-eigenvalues-and-eigenvectors">Eigenvalues and eigenvectors</a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">save_k_path</span></code>, <code class="docutils literal notranslate"><span class="pre">save_k_full</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">_eigen_k_path.npz</span></code>, <code class="docutils literal notranslate"><span class="pre">_eigen_k_full.npz</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pp-callbacks-for-custom-calculations">Callbacks for custom calculations</a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">callback_k_path</span></code>, <code class="docutils literal notranslate"><span class="pre">callback_k_full</span></code></p></td>
+<td><p>(written by the callbacks)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>All of them are off by default, and the dispersion (<code class="docutils literal notranslate"><span class="pre">_dispersion.txt</span></code>, <code class="docutils literal notranslate"><span class="pre">.pdf</span></code>, <code class="docutils literal notranslate"><span class="pre">.eps</span></code>, <code class="docutils literal notranslate"><span class="pre">plot_band.gnu</span></code>) is computed as before.</p>
+<section id="example-graphene">
+<h2>Example: graphene<a class="headerlink" href="#example-graphene" title="Link to this heading">#</a></h2>
+<p>The files are in <a class="reference external" href="https://github.com/CMT-MU/MultiPie/tree/main/docs/src/examples">docs/src/examples</a>: the model input <code class="docutils literal notranslate"><span class="pre">graphene_in.py</span></code> (see <a class="reference internal" href="getting_started.html"><span class="std std-doc">Getting Started</span></a>), the control file <code class="docutils literal notranslate"><span class="pre">graphene_post_ctrl.py</span></code>, and the callbacks <code class="docutils literal notranslate"><span class="pre">graphene_callback.py</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># graphene_post_ctrl.py</span>
+<span class="n">graphene_post_ctrl</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"samb"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"model"</span><span class="p">:</span> <span class="s2">"graphene"</span><span class="p">,</span>
+        <span class="s2">"parameter"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"z2"</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="p">},</span>
+    <span class="p">},</span>
+    <span class="s2">"grid"</span><span class="p">:</span> <span class="p">(</span><span class="mi">120</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>  <span class="c1"># k grid for DOS, Fermi energy, and callback_k_full (2D: N3 = 1).</span>
+    <span class="s2">"output"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"dos"</span><span class="p">:</span> <span class="s2">"auto"</span><span class="p">,</span>  <span class="c1"># partial DOS for each site cluster and orbital.</span>
+        <span class="s2">"n_electron"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>  <span class="c1"># half filling (spinless: one state per band, two bands).</span>
+        <span class="s2">"save_k_path"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>  <span class="c1"># save Ek, Uk along k path in .npz.</span>
+        <span class="s2">"callback_k_path"</span><span class="p">:</span> <span class="s2">"graphene_callback.py"</span><span class="p">,</span>
+        <span class="s2">"callback_k_full"</span><span class="p">:</span> <span class="s2">"graphene_callback.py"</span><span class="p">,</span>
+        <span class="s2">"dispersion"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"k_path"</span><span class="p">:</span> <span class="s2">"Γ-M-K-Γ"</span><span class="p">,</span>
+            <span class="s2">"k_point"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"Γ"</span><span class="p">:</span> <span class="s2">"[0,0,0]"</span><span class="p">,</span> <span class="s2">"K"</span><span class="p">:</span> <span class="s2">"[1/3,1/3,0]"</span><span class="p">,</span> <span class="s2">"M"</span><span class="p">:</span> <span class="s2">"[1/2,0,0]"</span><span class="p">},</span>
+            <span class="s2">"weight"</span><span class="p">:</span> <span class="p">[[</span><span class="s2">"pz@C(1)"</span><span class="p">]],</span>  <span class="c1"># fat band of pz at C(1).</span>
+        <span class="p">},</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Put the three files in one directory, and run</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>mp_create<span class="w"> </span>graphene_in.py
+$<span class="w"> </span>mp_analyze<span class="w"> </span>-v<span class="w"> </span>graphene_post_ctrl.py
+</pre></div>
+</div>
+<p>Then <code class="docutils literal notranslate"><span class="pre">graphene/output/</span></code> contains, in addition to the dispersion,</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">graphene_dos.txt</span></code>, <code class="docutils literal notranslate"><span class="pre">graphene_dos.pdf</span></code>, <code class="docutils literal notranslate"><span class="pre">graphene_dos.eps</span></code>, <code class="docutils literal notranslate"><span class="pre">plot_dos.gnu</span></code> : DOS.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">graphene_weight.txt</span></code>, <code class="docutils literal notranslate"><span class="pre">graphene_weight.pdf</span></code>, <code class="docutils literal notranslate"><span class="pre">plot_weight.gnu</span></code> : orbital weight of <code class="docutils literal notranslate"><span class="pre">pz&#64;C(1)</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">graphene_eigen_k_path.npz</span></code> : eigenvalues and eigenvectors along the k path.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">my_band.txt</span></code>, <code class="docutils literal notranslate"><span class="pre">my_occupation.txt</span></code> : written by the callbacks.</p></li>
+</ul>
+<p>The Fermi energy is 0 for <code class="docutils literal notranslate"><span class="pre">&quot;n_electron&quot;:</span> <span class="pre">1</span></code> (half filling of the two bands), and <code class="docutils literal notranslate"><span class="pre">-v</span></code> prints <code class="docutils literal notranslate"><span class="pre">fermi</span> <span class="pre">energy</span> <span class="pre">=</span> <span class="pre">0.0</span> <span class="pre">for</span> <span class="pre">n_electron</span> <span class="pre">=</span> <span class="pre">1</span> <span class="pre">(gaussian).</span></code></p>
+</section>
+<section id="density-of-states">
+<span id="pp-density-of-states"></span><h2>Density of states<a class="headerlink" href="#density-of-states" title="Link to this heading">#</a></h2>
+<p>When <code class="docutils literal notranslate"><span class="pre">output/dos</span></code> is not <code class="docutils literal notranslate"><span class="pre">False</span></code>, the density of states (DOS) per primitive cell is computed on the k grid given by <code class="docutils literal notranslate"><span class="pre">grid</span></code> (the Γ point only for a model of a point group).</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;auto&quot;</span></code> (or <code class="docutils literal notranslate"><span class="pre">True</span></code>): the partial DOS for each site cluster and orbital, with the spin summed, e.g., <code class="docutils literal notranslate"><span class="pre">s&#64;A</span></code> for <code class="docutils literal notranslate"><span class="pre">(s,u)&#64;A(1)</span></code>, <code class="docutils literal notranslate"><span class="pre">(s,d)&#64;A(1)</span></code>, <code class="docutils literal notranslate"><span class="pre">(s,u)&#64;A(2)</span></code>, … With <code class="docutils literal notranslate"><span class="pre">&quot;dos_spin&quot;:</span> <span class="pre">True</span></code>, the spin of a spinful basis is resolved, e.g., <code class="docutils literal notranslate"><span class="pre">(s,u)&#64;A</span></code> and <code class="docutils literal notranslate"><span class="pre">(s,d)&#64;A</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[[ket</span> <span class="pre">name]]</span></code>: for each list of ket names, the sum of the partial DOS of the kets, e.g., <code class="docutils literal notranslate"><span class="pre">[[&quot;pz&#64;C(1)&quot;],</span> <span class="pre">[&quot;pz&#64;C(1)&quot;,</span> <span class="pre">&quot;pz&#64;C(2)&quot;]]</span></code>, labeled by the ket names joined by <code class="docutils literal notranslate"><span class="pre">+</span></code>. The ket names are those of the basis in <code class="docutils literal notranslate"><span class="pre">info/model_name_hr.dat</span></code> (or <code class="docutils literal notranslate"><span class="pre">info/model_name_info_wannier.py</span></code> in wannier mode).</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">model_name_dos.txt</span></code> has the columns: the energy measured from the Fermi energy (as in the dispersion), the total DOS, the integrated total DOS N(E), and the partial DOS. The comment lines at the top give the content of each column, e.g., for graphene,</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span># DOS per primitive cell (summed over spin).
+# shifted by fermi energy = 0.0
+# number of k points = 14400 (grid = [120, 120, 1])
+# Gaussian width = 0.02449489742783178
+# column 1: E
+# column 2: total
+# column 3: N(E), integrated total DOS
+# column 4: pz@C = pz@C(1) + pz@C(2)
+</pre></div>
+</div>
+<p>The DOS is normalized so that the total DOS integrates to the number of bands. The energy range includes all the eigenvalues, with <code class="docutils literal notranslate"><span class="pre">dos_e_num</span></code> points (1000 by default).</p>
+<p>The method is chosen by <code class="docutils literal notranslate"><span class="pre">dos_method</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;gaussian&quot;</span></code> (default): the delta functions are broadened by a Gaussian with the standard deviation <code class="docutils literal notranslate"><span class="pre">dos_width</span></code> (1% of the band width if <code class="docutils literal notranslate"><span class="pre">None</span></code>, and not smaller than the energy step). A width smaller than the energy step is an error; increase <code class="docutils literal notranslate"><span class="pre">dos_e_num</span></code> in that case (<code class="docutils literal notranslate"><span class="pre">dos_e_num</span></code> must be at least 12).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;tetrahedron&quot;</span></code>: the optimized tetrahedron method by <a class="reference external" href="https://mitsuaki1987.github.io/libtetrabz/">libtetrabz</a>, which is installed separately (see <a class="reference internal" href="install.html"><span class="std std-doc">Installation</span></a>). N(E) is computed by the tetrahedron method, and the DOS is its difference over each energy step, <span class="math notranslate nohighlight">\((N(E+dE/2)-N(E-dE/2))/dE\)</span>, so that the normalization is kept also for flat bands. It gives a sharp DOS without broadening (<code class="docutils literal notranslate"><span class="pre">dos_width</span></code> is not used), but cannot be used for a model of a point group. It is slower and uses more memory than <code class="docutils literal notranslate"><span class="pre">&quot;gaussian&quot;</span></code>; use a moderate <code class="docutils literal notranslate"><span class="pre">grid</span></code> and <code class="docutils literal notranslate"><span class="pre">dos_e_num</span></code> for a large model.</p></li>
+</ul>
+<p>DOS of graphene with <code class="docutils literal notranslate"><span class="pre">&quot;gaussian&quot;</span></code> (left) and <code class="docutils literal notranslate"><span class="pre">&quot;tetrahedron&quot;</span></code> (right). The tetrahedron method resolves the van Hove singularities and the band edges sharply:</p>
+<a class="reference internal image-reference" href="../_images/graphene_dos_gaussian.png"><img alt="../_images/graphene_dos_gaussian.png" src="../_images/graphene_dos_gaussian.png" style="width: 48%;" />
+</a>
+<a class="reference internal image-reference" href="../_images/graphene_dos_tetrahedron.png"><img alt="../_images/graphene_dos_tetrahedron.png" src="../_images/graphene_dos_tetrahedron.png" style="width: 48%;" />
+</a>
+</section>
+<section id="fermi-energy">
+<span id="pp-fermi-energy"></span><h2>Fermi energy<a class="headerlink" href="#fermi-energy" title="Link to this heading">#</a></h2>
+<p>The Fermi energy is 0 in samb mode, and that of <code class="docutils literal notranslate"><span class="pre">seedname.win</span></code> in wannier and symcw modes. When <code class="docutils literal notranslate"><span class="pre">output/n_electron</span></code> is given, the Fermi energy is determined from the eigenvalues on the full k grid so that <code class="docutils literal notranslate"><span class="pre">n_electron</span></code> states per primitive cell are occupied, and it is used for all the output (dispersion, DOS, orbital weight, saved eigen systems, and the values passed to the callbacks).</p>
+<p>Each band holds one state, so that <code class="docutils literal notranslate"><span class="pre">n_electron</span></code> is the number of electrons for a spinful model, and half of it for a spinless model, e.g., <code class="docutils literal notranslate"><span class="pre">&quot;n_electron&quot;:</span> <span class="pre">1</span></code> for graphene at half filling.
+With <code class="docutils literal notranslate"><span class="pre">&quot;dos_method&quot;:</span> <span class="pre">&quot;gaussian&quot;</span></code>, the states are occupied in ascending order of energy (T = 0), and the Fermi energy is placed at the middle of the highest occupied and the lowest unoccupied states. With <code class="docutils literal notranslate"><span class="pre">&quot;tetrahedron&quot;</span></code>, it is computed by libtetrabz. For an insulator (integer <code class="docutils literal notranslate"><span class="pre">n_electron</span></code> with a gap), both methods place the Fermi energy at the middle of the gap.</p>
+</section>
+<section id="orbital-weight-fat-band">
+<span id="pp-orbital-weight-fat-band"></span><h2>Orbital weight (fat band)<a class="headerlink" href="#orbital-weight-fat-band" title="Link to this heading">#</a></h2>
+<p>When <code class="docutils literal notranslate"><span class="pre">output/dispersion/weight</span></code> is given in the same way as <code class="docutils literal notranslate"><span class="pre">output/dos</span></code> (<code class="docutils literal notranslate"><span class="pre">&quot;auto&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">[[ket</span> <span class="pre">name]]</span></code>), the weight of the kets in each eigenvector, the sum of <span class="math notranslate nohighlight">\(|U_k[m,n]|^2\)</span> over the kets <span class="math notranslate nohighlight">\(m\)</span>, is computed along the k path.
+<code class="docutils literal notranslate"><span class="pre">model_name_weight.txt</span></code> has the columns: k, the energy measured from the Fermi energy (as in the dispersion), and the weights. The bands are plotted with the color of the weight, one page for each weight, in <code class="docutils literal notranslate"><span class="pre">_weight.pdf</span></code> and by <code class="docutils literal notranslate"><span class="pre">plot_weight.gnu</span></code>.
+<code class="docutils literal notranslate"><span class="pre">&quot;auto&quot;</span></code> always sums over the spin (<code class="docutils literal notranslate"><span class="pre">dos_spin</span></code> is not used); give <code class="docutils literal notranslate"><span class="pre">[[ket</span> <span class="pre">name]]</span></code> for spin-resolved weights, e.g., <code class="docutils literal notranslate"><span class="pre">[[&quot;(pz,u)&#64;C(1)&quot;,</span> <span class="pre">&quot;(pz,u)&#64;C(2)&quot;]]</span></code>.</p>
+<p>For graphene, the weight of <code class="docutils literal notranslate"><span class="pre">pz&#64;C(1)</span></code> is 1/2 on every band, by the symmetry between the two sublattices:</p>
+<a class="reference internal image-reference" href="../_images/graphene_weight.png"><img alt="../_images/graphene_weight.png" src="../_images/graphene_weight.png" style="width: 60%;" />
+</a>
+</section>
+<section id="example-with-several-orbitals">
+<h2>Example with several orbitals<a class="headerlink" href="#example-with-several-orbitals" title="Link to this heading">#</a></h2>
+<p>For a model with several orbitals, the partial DOS and the orbital weights show the character of the bands. The following is a spinful model with s and p orbitals at A and an s orbital at B (CsCl type, space group 221, SAMBs of the identity irrep. with arbitrary parameters), computed with <code class="docutils literal notranslate"><span class="pre">&quot;dos&quot;:</span> <span class="pre">&quot;auto&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;dos_method&quot;:</span> <span class="pre">&quot;tetrahedron&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;n_electron&quot;:</span> <span class="pre">4</span></code>, and <code class="docutils literal notranslate"><span class="pre">&quot;weight&quot;:</span> <span class="pre">&quot;auto&quot;</span></code>.</p>
+<p>Dispersion and DOS (the sharp peak is the narrow band of s at B):</p>
+<a class="reference internal image-reference" href="../_images/sp_dispersion.png"><img alt="../_images/sp_dispersion.png" src="../_images/sp_dispersion.png" style="width: 48%;" />
+</a>
+<a class="reference internal image-reference" href="../_images/sp_dos.png"><img alt="../_images/sp_dos.png" src="../_images/sp_dos.png" style="width: 48%;" />
+</a>
+<p>Orbital weights of <code class="docutils literal notranslate"><span class="pre">s&#64;A</span></code> and <code class="docutils literal notranslate"><span class="pre">s&#64;B</span></code> (two of the five pages of <code class="docutils literal notranslate"><span class="pre">_weight.pdf</span></code>):</p>
+<a class="reference internal image-reference" href="../_images/sp_weight_s_A.png"><img alt="../_images/sp_weight_s_A.png" src="../_images/sp_weight_s_A.png" style="width: 48%;" />
+</a>
+<a class="reference internal image-reference" href="../_images/sp_weight_s_B.png"><img alt="../_images/sp_weight_s_B.png" src="../_images/sp_weight_s_B.png" style="width: 48%;" />
+</a>
+</section>
+<section id="eigenvalues-and-eigenvectors">
+<span id="pp-eigenvalues-and-eigenvectors"></span><h2>Eigenvalues and eigenvectors<a class="headerlink" href="#eigenvalues-and-eigenvectors" title="Link to this heading">#</a></h2>
+<p>With <code class="docutils literal notranslate"><span class="pre">&quot;save_k_path&quot;:</span> <span class="pre">True</span></code> and/or <code class="docutils literal notranslate"><span class="pre">&quot;save_k_full&quot;:</span> <span class="pre">True</span></code>, the eigenvalues and eigenvectors along the k path and/or on the full k grid are saved in <code class="docutils literal notranslate"><span class="pre">model_name_eigen_k_path.npz</span></code> and <code class="docutils literal notranslate"><span class="pre">model_name_eigen_k_full.npz</span></code>. They contain</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Ek[k,</span> <span class="pre">n]</span></code>, <code class="docutils literal notranslate"><span class="pre">Uk[k,</span> <span class="pre">:,</span> <span class="pre">n]</span></code>, <code class="docutils literal notranslate"><span class="pre">k_grid</span></code>, <code class="docutils literal notranslate"><span class="pre">ket</span></code>, <code class="docutils literal notranslate"><span class="pre">fermi_energy</span></code>: as described for the callbacks below,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">k_linear</span></code> (along the k path) or <code class="docutils literal notranslate"><span class="pre">grid</span></code> (on the full k grid).</p></li>
+</ul>
+<p>They can be read by <code class="docutils literal notranslate"><span class="pre">numpy.load</span></code>, e.g., to analyze the eigenvectors in Jupyter:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">"graphene/output/graphene_eigen_k_path.npz"</span><span class="p">)</span>
+<span class="n">Ek</span><span class="p">,</span> <span class="n">Uk</span><span class="p">,</span> <span class="n">ket</span> <span class="o">=</span> <span class="n">z</span><span class="p">[</span><span class="s2">"Ek"</span><span class="p">],</span> <span class="n">z</span><span class="p">[</span><span class="s2">"Uk"</span><span class="p">],</span> <span class="nb">list</span><span class="p">(</span><span class="n">z</span><span class="p">[</span><span class="s2">"ket"</span><span class="p">])</span>
+<span class="n">weight</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">Uk</span><span class="p">[:,</span> <span class="n">ket</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s2">"pz@C(1)"</span><span class="p">),</span> <span class="p">:])</span> <span class="o">**</span> <span class="mi">2</span>  <span class="c1"># weight[k, n] of pz@C(1).</span>
+</pre></div>
+</div>
+<p>As for the callbacks, <code class="docutils literal notranslate"><span class="pre">save_k_path</span></code> requires the dispersion (<code class="docutils literal notranslate"><span class="pre">output/dispersion/k_path</span></code> is not <code class="docutils literal notranslate"><span class="pre">None</span></code>, and the model is of a space group), and <code class="docutils literal notranslate"><span class="pre">save_k_full</span></code> keeps all the eigenvectors on the full grid in memory.</p>
+</section>
+<section id="callbacks-for-custom-calculations">
+<span id="pp-callbacks-for-custom-calculations"></span><h2>Callbacks for custom calculations<a class="headerlink" href="#callbacks-for-custom-calculations" title="Link to this heading">#</a></h2>
+<p>Quantities not provided by MultiPie can be computed by user-defined functions, which receive the eigenvalues and eigenvectors of H(k).
+Give a Python file, relative to the top directory (where the control file is), in <code class="docutils literal notranslate"><span class="pre">output/callback_k_path</span></code> and/or <code class="docutils literal notranslate"><span class="pre">output/callback_k_full</span></code>, and define the function of the same name in the file. One file can define both, and it is loaded once.</p>
+<p>The example <code class="docutils literal notranslate"><span class="pre">graphene_callback.py</span></code> writes the band energies along the k path, and the occupation of each ket at <span class="math notranslate nohighlight">\(T = 0\)</span>, <span class="math notranslate nohighlight">\(n_m = (1/N_k) \sum_{k,n} \theta(E_F - E_{kn}) |U_k[m,n]|^2\)</span>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="sd">"""</span>
+<span class="sd">Example of callbacks for graphene_post_ctrl.py.</span>
+
+<span class="sd">The functions receive the eigenvalues Ek[k,n], the eigenvectors Uk[k,:,n], and the info dict,</span>
+<span class="sd">and write their results in the output directory of the model.</span>
+<span class="sd">"""</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+
+<span class="c1"># ==================================================</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">output_dir</span><span class="p">(</span><span class="n">info</span><span class="p">):</span>
+    <span class="c1"># "output" is the default of output/dir; change it if output/dir is changed.</span>
+    <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">info</span><span class="p">[</span><span class="s2">"_topdir"</span><span class="p">],</span> <span class="n">info</span><span class="p">[</span><span class="s2">"name"</span><span class="p">],</span> <span class="s2">"output"</span><span class="p">)</span>
+
+
+<span class="c1"># ==================================================</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">callback_k_path</span><span class="p">(</span><span class="n">Ek</span><span class="p">,</span> <span class="n">Uk</span><span class="p">,</span> <span class="n">info</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Band energies measured from the Fermi energy along the k path, with the position along the path.</span>
+<span class="sd">    """</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">([</span><span class="n">info</span><span class="p">[</span><span class="s2">"k_linear"</span><span class="p">],</span> <span class="n">Ek</span> <span class="o">-</span> <span class="n">info</span><span class="p">[</span><span class="s2">"fermi_energy"</span><span class="p">]])</span>
+    <span class="n">header</span> <span class="o">=</span> <span class="s2">"k "</span> <span class="o">+</span> <span class="s2">" "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">"E</span><span class="si">{</span><span class="n">n</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Ek</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir</span><span class="p">(</span><span class="n">info</span><span class="p">),</span> <span class="s2">"my_band.txt"</span><span class="p">),</span> <span class="n">data</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="n">header</span><span class="p">)</span>
+
+
+<span class="c1"># ==================================================</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">callback_k_full</span><span class="p">(</span><span class="n">Ek</span><span class="p">,</span> <span class="n">Uk</span><span class="p">,</span> <span class="n">info</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Occupation of each ket at T = 0, n_m = (1/Nk) sum_{k,n} theta(E_F - E_kn) |U_k[m,n]|^2.</span>
+<span class="sd">    """</span>
+    <span class="n">occupied</span> <span class="o">=</span> <span class="n">Ek</span> <span class="o">&lt;</span> <span class="n">info</span><span class="p">[</span><span class="s2">"fermi_energy"</span><span class="p">]</span>
+    <span class="n">n_m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">"kn,kmn-&gt;m"</span><span class="p">,</span> <span class="n">occupied</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">Uk</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">Ek</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir</span><span class="p">(</span><span class="n">info</span><span class="p">),</span> <span class="s2">"my_occupation.txt"</span><span class="p">),</span> <span class="s2">"w"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">ket</span><span class="p">,</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">info</span><span class="p">[</span><span class="s2">"ket"</span><span class="p">],</span> <span class="n">n_m</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">ket</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">n</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For graphene at half filling, <code class="docutils literal notranslate"><span class="pre">my_occupation.txt</span></code> is</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>pz@C(1) 0.500000
+pz@C(2) 0.500000
+</pre></div>
+</div>
+<p>The arguments of the callbacks are</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Ek[k,</span> <span class="pre">n]</span></code>: eigenvalues in ascending order (not shifted by the Fermi energy, and not raised to <code class="docutils literal notranslate"><span class="pre">output/dispersion/power</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Uk[k,</span> <span class="pre">:,</span> <span class="pre">n]</span></code>: eigenvector of <code class="docutils literal notranslate"><span class="pre">Ek[k,</span> <span class="pre">n]</span></code>, i.e., <code class="docutils literal notranslate"><span class="pre">H(k)</span> <span class="pre">=</span> <span class="pre">Uk</span> <span class="pre">&#64;</span> <span class="pre">diag(Ek)</span> <span class="pre">&#64;</span> <span class="pre">Uk^†</span></code> for each k, in the order of <code class="docutils literal notranslate"><span class="pre">info[&quot;ket&quot;]</span></code> and in the gauge given by <code class="docutils literal notranslate"><span class="pre">output/fourier/tb_gauge</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">info</span></code> (dict):</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">k_path</span></code> (str), <code class="docutils literal notranslate"><span class="pre">k_point</span></code> (dict, label to fractional coordinates): k path and k points of the dispersion (<code class="docutils literal notranslate"><span class="pre">None</span></code> if the dispersion is not computed).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">k_grid</span></code> (ndarray): k points of <code class="docutils literal notranslate"><span class="pre">Ek</span></code> and <code class="docutils literal notranslate"><span class="pre">Uk</span></code> (fractional, in the primitive cell), <code class="docutils literal notranslate"><span class="pre">[number</span> <span class="pre">of</span> <span class="pre">k,</span> <span class="pre">3]</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ket</span></code> (list): ket names.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fermi_energy</span></code> (float), <code class="docutils literal notranslate"><span class="pre">name</span></code> (str): Fermi energy, and model name (or seedname in wannier mode without model).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">_topdir</span></code> (str), <code class="docutils literal notranslate"><span class="pre">_verbose</span></code> (bool): top directory (absolute path), and verbose option.</p></li>
+<li><p>for <code class="docutils literal notranslate"><span class="pre">callback_k_path</span></code> only, <code class="docutils literal notranslate"><span class="pre">k_linear</span></code> (ndarray) and <code class="docutils literal notranslate"><span class="pre">k_dis_pos</span></code> (dict): position along the k path, and positions of the labels, as used to plot the dispersion.</p></li>
+<li><p>for <code class="docutils literal notranslate"><span class="pre">callback_k_full</span></code> only, <code class="docutils literal notranslate"><span class="pre">grid</span></code> (list): <code class="docutils literal notranslate"><span class="pre">[N1,</span> <span class="pre">N2,</span> <span class="pre">N3]</span></code>.</p></li>
+</ul>
+</li>
+</ul>
+<p>The functions are called after the other output, at the end of the analysis. <code class="docutils literal notranslate"><span class="pre">callback_k_path</span></code> requires the dispersion. For <code class="docutils literal notranslate"><span class="pre">callback_k_full</span></code>, all the eigenvectors on the full grid are kept in memory, <code class="docutils literal notranslate"><span class="pre">N1</span> <span class="pre">x</span> <span class="pre">N2</span> <span class="pre">x</span> <span class="pre">N3</span> <span class="pre">x</span> <span class="pre">(number</span> <span class="pre">of</span> <span class="pre">kets)^2</span></code> complex numbers, so that a coarse <code class="docutils literal notranslate"><span class="pre">grid</span></code> may be needed for a large model.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Unlike the input files, the callback files are executed as Python code. Use only callback files you trust.</p>
+</div>
+</section>
+<section id="plotting-by-gnuplot">
+<h2>Plotting by gnuplot<a class="headerlink" href="#plotting-by-gnuplot" title="Link to this heading">#</a></h2>
+<p>The plots in PDF and EPS are written by matplotlib. The gnuplot scripts write the same plots, and are convenient to adjust them:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>graphene/output
+$<span class="w"> </span>gnuplot<span class="w"> </span>plot_dos.gnu<span class="w">      </span><span class="c1"># graphene_dos.pdf and .eps</span>
+$<span class="w"> </span>gnuplot<span class="w"> </span>plot_weight.gnu<span class="w">   </span><span class="c1"># graphene_weight.pdf (one page for each weight)</span>
+</pre></div>
+</div>
+<p>The PDF/EPS files are overwritten. The plot ranges and the Fermi level are variables at the top of the scripts, e.g., in <code class="docutils literal notranslate"><span class="pre">plot_dos.gnu</span></code>,</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Ef = 0.0  # fermi energy (data are already shifted by Ef).
+Ef_line = 0.0  # position of fermi level in plot.
+xmin = -1.347219358530748
+xmax = 1.347219358530748
+ymin = 0.0
+ymax = 1.9823887755144438
+</pre></div>
+</div>
+<p>and <code class="docutils literal notranslate"><span class="pre">plot_weight.gnu</span></code> has <code class="docutils literal notranslate"><span class="pre">labels</span></code>, the list of the weights to plot.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./src"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-graphene">Example: graphene</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#density-of-states">Density of states</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fermi-energy">Fermi energy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#orbital-weight-fat-band">Orbital weight (fat band)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-with-several-orbitals">Example with several orbitals</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eigenvalues-and-eigenvectors">Eigenvalues and eigenvectors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#callbacks-for-custom-calculations">Callbacks for custom calculations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-by-gnuplot">Plotting by gnuplot</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Hiroaki Kusunose and Rikuto Oiwa
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2021-.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

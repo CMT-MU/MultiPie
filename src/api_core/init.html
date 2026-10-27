@@ -1,0 +1,939 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Type &#8212; MultiPie</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=34ddd5e8" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../../_static/documentation_options.js?v=a8e58a58"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'src/api_core/init';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script src="../../_static/custom.js?v=9c3a2667"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Create function" href="cmd.html" />
+    <link rel="prev" title="Core" href="../api_core.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../_static/searchtools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../README.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/multipie_logo.png" class="logo__image only-light" alt="MultiPie - Home"/>
+    <img src="../../_static/multipie_logo.png" class="logo__image only-dark pst-js-only" alt="MultiPie - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installing MultiPie</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../manual.html">Brief Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../post_processing.html">Post-processing tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../group_doc.html">Group information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tech_note.html">Technical Note</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API reference</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../api_core.html">Core</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmd.html">Create function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group.html">Group</a></li>
+<li class="toctree-l2"><a class="reference internal" href="material_model.html">Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="model_analyzer.html">ModelAnalyzer</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../api_util.html">Utility</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_atomic_multipole.html">Atomic multipole</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_binary.html">Binary data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_crystal.html">Crystal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_dict.html">Dict</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_gram_schmidt.html">Gram-Schmidt orthonormalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_harmonics.html">Harmonics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_material_model_pdf.html">PDF creator for Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_material_model.html">Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_model_analyzer.html">Model Analyzer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_pdf_latex.html">PDF creator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_plot.html">Plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_response_tensor.html">Response tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_samb.html">SAMB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_tag.html">Tag</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_wannier.html">Wannier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_wyckoff.html">Wyckoff position</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util.html">Versatile</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/CMT-MU/MultiPie.git" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Type</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#group">Group</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.PGInfoType"><code class="docutils literal notranslate"><span class="pre">PGInfoType</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.SGInfoType"><code class="docutils literal notranslate"><span class="pre">SGInfoType</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.MPGInfoType"><code class="docutils literal notranslate"><span class="pre">MPGInfoType</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.MSGInfoType"><code class="docutils literal notranslate"><span class="pre">MSGInfoType</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipole">Multipole</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.PGMultipoleType"><code class="docutils literal notranslate"><span class="pre">PGMultipoleType</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.SphericalMultipoleType"><code class="docutils literal notranslate"><span class="pre">SphericalMultipoleType</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#materialmodel">MaterialModel</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.RepSiteType"><code class="docutils literal notranslate"><span class="pre">RepSiteType</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.CellSiteType"><code class="docutils literal notranslate"><span class="pre">CellSiteType</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.RepBondType"><code class="docutils literal notranslate"><span class="pre">RepBondType</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.CellBondType"><code class="docutils literal notranslate"><span class="pre">CellBondType</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.BondInfoType"><code class="docutils literal notranslate"><span class="pre">BondInfoType</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.BraketInfoType"><code class="docutils literal notranslate"><span class="pre">BraketInfoType</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.SAMBType"><code class="docutils literal notranslate"><span class="pre">SAMBType</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.UniqueSAMBType"><code class="docutils literal notranslate"><span class="pre">UniqueSAMBType</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#misc">Misc.</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.InternalBasisType"><code class="docutils literal notranslate"><span class="pre">InternalBasisType</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.IrrepListType"><code class="docutils literal notranslate"><span class="pre">IrrepListType</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.RepMatrixType"><code class="docutils literal notranslate"><span class="pre">RepMatrixType</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.SOMatrixType"><code class="docutils literal notranslate"><span class="pre">SOMatrixType</span></code></a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="type">
+<h1>Type<a class="headerlink" href="#type" title="Link to this heading">#</a></h1>
+<section id="group">
+<h2>Group<a class="headerlink" href="#group" title="Link to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="multipie.PGInfoType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">PGInfoType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">international</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schoenflies</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crystal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">setting</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">PG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MPG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MSG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lattice</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hexagonal_g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SO</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SO_gen</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#multipie.PGInfoType" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
+<p>Point Group info type.</p>
+<dl class="simple">
+<dt>Fields:</dt><dd><ul class="simple">
+<li><p>tag (str): Schoenflies in text.</p></li>
+<li><p>international (str): international short symbol in LaTeX.</p></li>
+<li><p>schoenflies (str): Schoenflies symbol in LaTeX.</p></li>
+<li><p>crystal (str): triclinic, monoclinic, orthorhombic, tetragonal, trigonal, hexagonal, cubic.</p></li>
+<li><p>setting (str): setting.</p></li>
+<li><p>PG (str): = id.</p></li>
+<li><p>SG (str): associated SG, 1st SG in the same PGs.</p></li>
+<li><p>MPG (str): associated MPG, 1st MPG with type II in the same PGs.</p></li>
+<li><p>MSG (str): associated MSG, PG -&gt; MPG -&gt; MSG.</p></li>
+<li><p>lattice (str): “0”.</p></li>
+<li><p>hexagonal_g (bool): trigonal or hexagonal ?</p></li>
+<li><p>SO (list): symmetry operations.</p></li>
+<li><p>SO_gen (list): generator of SOs.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="multipie.SGInfoType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SGInfoType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">international</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schoenflies</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crystal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">setting</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">PG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MPG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MSG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lattice</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hexagonal_g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SO</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SO_gen</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#multipie.SGInfoType" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
+<p>Space Group info type.</p>
+<dl class="simple">
+<dt>Fields:</dt><dd><ul class="simple">
+<li><p>tag (str): Schoenflies in text.</p></li>
+<li><p>international (str): international short symbol in LaTeX.</p></li>
+<li><p>schoenflies (str): Schoenflies symbol in LaTeX.</p></li>
+<li><p>crystal (str): triclinic, monoclinic, orthorhombic, tetragonal, trigonal, hexagonal, cubic.</p></li>
+<li><p>setting (str): setting comment.</p></li>
+<li><p>PG (str): associated PG, unique.</p></li>
+<li><p>SG (str): = id.</p></li>
+<li><p>MPG (str): associated MPG, SG -&gt; PG -&gt; MPG.</p></li>
+<li><p>MSG (str): associated MSG, 1st MSG with type II in the same SGs.</p></li>
+<li><p>lattice (str): A, B, C, P, I, F, R.</p></li>
+<li><p>hexagonal_g (bool): trigonal or hexagonal ?</p></li>
+<li><p>SO (list): symmetry operations.</p></li>
+<li><p>SO_gen (list): generator of SOs.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="multipie.MPGInfoType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MPGInfoType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">international</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schoenflies</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crystal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">setting</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">PG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MPG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MSG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lattice</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hexagonal_g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SO</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#multipie.MPGInfoType" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
+<p>Magnetic Point Group info type.</p>
+<dl class="simple">
+<dt>Fields:</dt><dd><ul class="simple">
+<li><p>tag (str): MPG_id (PG.no.ID).</p></li>
+<li><p>international (str): international short symbol in LaTeX.</p></li>
+<li><p>schoenflies (str): Schoenflies symbol in LaTeX.</p></li>
+<li><p>crystal (str): triclinic, monoclinic, orthorhombic, tetragonal, trigonal, hexagonal, cubic.</p></li>
+<li><p>setting (str): setting.</p></li>
+<li><p>PG (str): associated PG, unique.</p></li>
+<li><p>SG (str): associated SG, MPG -&gt; MSG -&gt; SG.</p></li>
+<li><p>MPG (str): = id.</p></li>
+<li><p>MSG (str): associated MSG, 1st MSG in the same MPGs.</p></li>
+<li><p>lattice (str): “0”.</p></li>
+<li><p>hexagonal_g (bool): trigonal or hexagonal ?</p></li>
+<li><p>type (str): type I, II, III.</p></li>
+<li><p>SO (list): symmetry operations.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="multipie.MSGInfoType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MSGInfoType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">BNS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">OG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">schoenflies</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crystal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">setting</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">PG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MPG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MSG</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lattice</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hexagonal_g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SO</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#multipie.MSGInfoType" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
+<dl class="simple">
+<dt>Magnetic Space Group info type.</dt><dd><ul class="simple">
+<li><p>tag (str): BNS_id (SG.no).</p></li>
+<li><p>BNS (str): Belov-Neronova-Smirnova (international) notation in LaTeX.</p></li>
+<li><p>OG (str): Opechowski-Guccione notation in LaTeX.</p></li>
+<li><p>schoenflies (str): Schoenflies symbol in LaTeX.</p></li>
+<li><p>crystal (str): triclinic, monoclinic, orthorhombic, tetragonal, trigonal, hexagonal, cubic.</p></li>
+<li><p>setting (str): setting.</p></li>
+<li><p>PG (str): associated PG, unique.</p></li>
+<li><p>SG (str): associated SG, unique.</p></li>
+<li><p>MPG (str): associated MPG, unique.</p></li>
+<li><p>MSG (str): = id.</p></li>
+<li><p>lattice (str): A, B, C, P, I, F, R.</p></li>
+<li><p>hexagonal_g (bool): trigonal or hexagonal ?</p></li>
+<li><p>type (str): type I, II, III, IV.</p></li>
+<li><p>SO (list): symmetry operations.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="multipole">
+<h2>Multipole<a class="headerlink" href="#multipole" title="Link to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="multipie.PGMultipoleType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">PGMultipoleType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Gamma</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#multipie.PGMultipoleType" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
+<p>Point-group multipole type.</p>
+<dl class="simple">
+<dt>Fields:</dt><dd><ul class="simple">
+<li><p>type (str): type, Q, G, T, M.</p></li>
+<li><p>rank (int): rank, 0-11.</p></li>
+<li><p>irrep, (str): irrep.</p></li>
+<li><p>multiplicity (int): multiplicity.</p></li>
+<li><p>add_multiplicity (int): additional multiplicity.</p></li>
+<li><p>s (int): internal rank, 0, 1.</p></li>
+<li><p>k (int): internal component, -1, 0, 1.</p></li>
+<li><p>internal-type (str): internal type, q or g.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="multipie.SphericalMultipoleType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SphericalMultipoleType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#multipie.SphericalMultipoleType" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
+<p>Spherical multipole type.</p>
+<dl class="simple">
+<dt>Fields:</dt><dd><ul class="simple">
+<li><p>type (str): type, Q, G, T, M.</p></li>
+<li><p>rank (int): rank, 0-11.</p></li>
+<li><p>s (int): internal rank, 0, 1.</p></li>
+<li><p>k (int): internal component, -1, 0, 1.</p></li>
+<li><p>internal-type (str) internal type, q or g.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="materialmodel">
+<h2>MaterialModel<a class="headerlink" href="#materialmodel" title="Link to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="multipie.RepSiteType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">RepSiteType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">no</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wyckoff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symmetry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orbital</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#multipie.RepSiteType" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
+<p>Representative site type.</p>
+<dl class="simple">
+<dt>Fields:</dt><dd><ul class="simple">
+<li><p>no (int): ID (from 1).</p></li>
+<li><p>wyckoff (str): Wyckoff position.</p></li>
+<li><p>symmetry (str): site symmetry.</p></li>
+<li><p>position (list): site position.</p></li>
+<li><p>orbital (list): orbital list.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="multipie.CellSiteType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CellSiteType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">no</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position_primitive</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mapping</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sublattice</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plus_set</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#multipie.CellSiteType" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
+<p>Cell site type.</p>
+<dl class="simple">
+<dt>Fields:</dt><dd><ul class="simple">
+<li><p>no (int): ID (from 1).</p></li>
+<li><p>position (list): site position.</p></li>
+<li><p>position_primitive (list): position in primitive cell.</p></li>
+<li><p>mapping (list): SO mapping.</p></li>
+<li><p>sublattice (int): sublattice no.</p></li>
+<li><p>plus_set (int): plus set no.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="multipie.RepBondType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">RepBondType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">no</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tail</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">head</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neighbor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wyckoff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">directional</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vector</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_rank</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h_rank</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#multipie.RepBondType" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
+<p>Representative bond type.</p>
+<dl class="simple">
+<dt>Fields:</dt><dd><ul class="simple">
+<li><p>no (int): ID (from 1).</p></li>
+<li><p>tail (str): tail name.</p></li>
+<li><p>head (str): head name.</p></li>
+<li><p>neighbor (int): neighbor.</p></li>
+<li><p>wyckoff (str): Wyckoff position.</p></li>
+<li><p>directional (str): (non) directional bond (N)D.</p></li>
+<li><p>vector (list): bond vector.</p></li>
+<li><p>center (list): bond center.</p></li>
+<li><p>distance (float): bond length.</p></li>
+<li><p>t_rank (int): tail orbital rank.</p></li>
+<li><p>h_rank (int): head orbital rank.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="multipie.CellBondType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CellBondType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">no</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vector</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vector_primitive</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center_primitive</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mapping</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sublattice</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plus_set</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h_idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R_primitive</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#multipie.CellBondType" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
+<p>Cell bond type.</p>
+<dl class="simple">
+<dt>Feilds:</dt><dd><ul class="simple">
+<li><p>no (int): ID (from 1).</p></li>
+<li><p>vector (list): bond vector.</p></li>
+<li><p>vector_primitive (list) bond vector in primitive cell.</p></li>
+<li><p>center (list): bond center.</p></li>
+<li><p>center_primitive (list): bond center in primitive cell.</p></li>
+<li><p>mapping (list): SO mapping.</p></li>
+<li><p>sublattice (int): sublattice no.</p></li>
+<li><p>plus_set (int): plus set no.</p></li>
+<li><p>t_idx (tuple): tail index, (sublattice, plus set).</p></li>
+<li><p>h_idx (tuple): head index, (sublattice, plus set).</p></li>
+<li><p>R_primitive (list): R vector in primitive cell.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="multipie.BondInfoType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">BondInfoType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tail</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">head</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neighbor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_rank</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h_rank</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#multipie.BondInfoType" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
+<p>Bond info type.</p>
+<dl class="simple">
+<dt>Fields:</dt><dd><ul class="simple">
+<li><p>tail (str): tail name.</p></li>
+<li><p>head (str): head name.</p></li>
+<li><p>neighbor (int): neighbor.</p></li>
+<li><p>t_rank (int): tail orbital rank.</p></li>
+<li><p>h_rank (int): head orbital rank.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="multipie.BraketInfoType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">BraketInfoType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bh_rank</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bh_idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kt_rank</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kt_idx</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#multipie.BraketInfoType" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
+<p>Braket info type.</p>
+<dl class="simple">
+<dt>Fields:</dt><dd><ul class="simple">
+<li><p>bh_rank (int): bra-head orbital rank.</p></li>
+<li><p>bh_idx (int): bra-head orbital index.</p></li>
+<li><p>kt_rank (int): ket-tail orbital rank.</p></li>
+<li><p>kt_idx (int): ket-tail orbital index.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="multipie.SAMBType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SAMBType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">head</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tail</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wyckoff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bk_info</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#multipie.SAMBType" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
+<p>Combined SAMB type.</p>
+<dl class="simple">
+<dt>Fields:</dt><dd><ul class="simple">
+<li><p>head (str): head name.</p></li>
+<li><p>tail (str): tail name.</p></li>
+<li><p>wyckoff (str): Wyckoff position.</p></li>
+<li><p>bk_info (BraketInfoType): braket info.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="multipie.UniqueSAMBType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">UniqueSAMBType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">samb_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neighbor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#multipie.UniqueSAMBType" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
+<p>Unique combined SAMB type.</p>
+<dl class="simple">
+<dt>Fields:</dt><dd><ul class="simple">
+<li><p>samb_type(SAMTType): SAMB type.</p></li>
+<li><p>neighbor (int): neighbor.</p></li>
+<li><p>n (int): multiplicity for same neighbor.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="misc">
+<h2>Misc.<a class="headerlink" href="#misc" title="Link to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="multipie.InternalBasisType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">InternalBasisType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#multipie.InternalBasisType" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
+<p>Internal basis type.</p>
+<dl class="simple">
+<dt>Fields:</dt><dd><ul class="simple">
+<li><p>s (int): internal rank.</p></li>
+<li><p>x (str): internal type, q or g.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="multipie.IrrepListType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">IrrepListType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Gamma</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#multipie.IrrepListType" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
+<p>Irrep list type.</p>
+<dl class="simple">
+<dt>Fields:</dt><dd><ul class="simple">
+<li><p>X (str): type, Q, G, T, M.</p></li>
+<li><p>Gamma (str): irrep.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="multipie.RepMatrixType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">RepMatrixType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Gamma</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#multipie.RepMatrixType" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
+<p>Representation matrix type.</p>
+<dl class="simple">
+<dt>Fields:</dt><dd><ul class="simple">
+<li><p>Gamma (str): representation matrix irrep.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="multipie.SOMatrixType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SOMatrixType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#multipie.SOMatrixType" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
+<p>Symmetry operation matrix type.</p>
+<dl class="simple">
+<dt>Fields:</dt><dd><ul class="simple">
+<li><p>X (str): SO matrix type, Q, G, T, M.</p></li>
+<li><p>s (int): So matrix rank.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./src/api_core"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#group">Group</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.PGInfoType"><code class="docutils literal notranslate"><span class="pre">PGInfoType</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.SGInfoType"><code class="docutils literal notranslate"><span class="pre">SGInfoType</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.MPGInfoType"><code class="docutils literal notranslate"><span class="pre">MPGInfoType</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.MSGInfoType"><code class="docutils literal notranslate"><span class="pre">MSGInfoType</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipole">Multipole</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.PGMultipoleType"><code class="docutils literal notranslate"><span class="pre">PGMultipoleType</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.SphericalMultipoleType"><code class="docutils literal notranslate"><span class="pre">SphericalMultipoleType</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#materialmodel">MaterialModel</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.RepSiteType"><code class="docutils literal notranslate"><span class="pre">RepSiteType</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.CellSiteType"><code class="docutils literal notranslate"><span class="pre">CellSiteType</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.RepBondType"><code class="docutils literal notranslate"><span class="pre">RepBondType</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.CellBondType"><code class="docutils literal notranslate"><span class="pre">CellBondType</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.BondInfoType"><code class="docutils literal notranslate"><span class="pre">BondInfoType</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.BraketInfoType"><code class="docutils literal notranslate"><span class="pre">BraketInfoType</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.SAMBType"><code class="docutils literal notranslate"><span class="pre">SAMBType</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.UniqueSAMBType"><code class="docutils literal notranslate"><span class="pre">UniqueSAMBType</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#misc">Misc.</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.InternalBasisType"><code class="docutils literal notranslate"><span class="pre">InternalBasisType</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.IrrepListType"><code class="docutils literal notranslate"><span class="pre">IrrepListType</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.RepMatrixType"><code class="docutils literal notranslate"><span class="pre">RepMatrixType</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.SOMatrixType"><code class="docutils literal notranslate"><span class="pre">SOMatrixType</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Hiroaki Kusunose and Rikuto Oiwa
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2021-.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

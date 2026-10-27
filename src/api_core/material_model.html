@@ -1,0 +1,1069 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Material Model &#8212; MultiPie</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=34ddd5e8" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../../_static/documentation_options.js?v=a8e58a58"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"loader": {"load": ["[tex]/physics"]}, "tex": {"packages": {"[+]": ["physics"]}, "macros": {"bm": ["\\boldsymbol{#1}", 1]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'src/api_core/material_model';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script src="../../_static/custom.js?v=9c3a2667"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="ModelAnalyzer" href="model_analyzer.html" />
+    <link rel="prev" title="Group" href="group.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../_static/searchtools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../README.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/multipie_logo.png" class="logo__image only-light" alt="MultiPie - Home"/>
+    <img src="../../_static/multipie_logo.png" class="logo__image only-dark pst-js-only" alt="MultiPie - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installing MultiPie</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../manual.html">Brief Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../post_processing.html">Post-processing tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../group_doc.html">Group information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tech_note.html">Technical Note</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API reference</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../api_core.html">Core</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="init.html">Type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmd.html">Create function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group.html">Group</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="model_analyzer.html">ModelAnalyzer</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../api_util.html">Utility</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_atomic_multipole.html">Atomic multipole</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_binary.html">Binary data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_crystal.html">Crystal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_dict.html">Dict</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_gram_schmidt.html">Gram-Schmidt orthonormalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_harmonics.html">Harmonics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_material_model_pdf.html">PDF creator for Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_material_model.html">Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_model_analyzer.html">Model Analyzer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_pdf_latex.html">PDF creator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_plot.html">Plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_response_tensor.html">Response tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_samb.html">SAMB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_tag.html">Tag</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_wannier.html">Wannier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_wyckoff.html">Wyckoff position</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util.html">Versatile</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/CMT-MU/MultiPie.git" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Material Model</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dict-data">Dict data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#samb-dict-data">SAMB Dict data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-multipie.core.material_model">MaterialModel Class</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel"><code class="docutils literal notranslate"><span class="pre">MaterialModel</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.X"><code class="docutils literal notranslate"><span class="pre">MaterialModel.X()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.Y"><code class="docutils literal notranslate"><span class="pre">MaterialModel.Y()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.Z"><code class="docutils literal notranslate"><span class="pre">MaterialModel.Z()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.analyze"><code class="docutils literal notranslate"><span class="pre">MaterialModel.analyze()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.cell_site_primitive"><code class="docutils literal notranslate"><span class="pre">MaterialModel.cell_site_primitive()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.clear"><code class="docutils literal notranslate"><span class="pre">MaterialModel.clear()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.get_atomic_samb"><code class="docutils literal notranslate"><span class="pre">MaterialModel.get_atomic_samb()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.get_cluster_samb"><code class="docutils literal notranslate"><span class="pre">MaterialModel.get_cluster_samb()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.get_combined_samb"><code class="docutils literal notranslate"><span class="pre">MaterialModel.get_combined_samb()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.get_combined_samb_matrix"><code class="docutils literal notranslate"><span class="pre">MaterialModel.get_combined_samb_matrix()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.get_hr"><code class="docutils literal notranslate"><span class="pre">MaterialModel.get_hr()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.get_ket_site"><code class="docutils literal notranslate"><span class="pre">MaterialModel.get_ket_site()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.get_multipole_expression"><code class="docutils literal notranslate"><span class="pre">MaterialModel.get_multipole_expression()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.get_samb_matrix"><code class="docutils literal notranslate"><span class="pre">MaterialModel.get_samb_matrix()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.ket"><code class="docutils literal notranslate"><span class="pre">MaterialModel.ket()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.load"><code class="docutils literal notranslate"><span class="pre">MaterialModel.load()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.save"><code class="docutils literal notranslate"><span class="pre">MaterialModel.save()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.save_pdf"><code class="docutils literal notranslate"><span class="pre">MaterialModel.save_pdf()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.save_samb_qtdraw"><code class="docutils literal notranslate"><span class="pre">MaterialModel.save_samb_qtdraw()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.save_view"><code class="docutils literal notranslate"><span class="pre">MaterialModel.save_view()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.group"><code class="docutils literal notranslate"><span class="pre">MaterialModel.group</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="material-model">
+<h1>Material Model<a class="headerlink" href="#material-model" title="Link to this heading">#</a></h1>
+<section id="dict-data">
+<h2>Dict data<a class="headerlink" href="#dict-data" title="Link to this heading">#</a></h2>
+<p>This class has the following dict data.</p>
+<ul class="simple">
+<li><p>General info.</p>
+<ul>
+<li><p><strong>model</strong> (str): model name.</p></li>
+<li><p><strong>version</strong> (str): MultiPie version.</p></li>
+<li><p><strong>created</strong> (str): created time stamp.</p></li>
+</ul>
+</li>
+<li><p>Structural info.</p>
+<ul>
+<li><p><strong>group</strong> (str): group tag.</p></li>
+<li><p><strong>crystal</strong> (str): crystal class.</p></li>
+<li><p><strong>cell_info</strong> (dict): unit-cell information</p>
+<ul>
+<li><p><strong>cell</strong> (dict): unit-cell parameters.</p>
+<ul>
+<li><p><strong>a</strong> (float): a.</p></li>
+<li><p><strong>b</strong> (float): b.</p></li>
+<li><p><strong>c</strong> (float): c.</p></li>
+<li><p><strong>alpha</strong> (float): alpha (deg.).</p></li>
+<li><p><strong>beta</strong> (float): beta (deg.).</p></li>
+<li><p><strong>gamma</strong> (float): gamma (deg.).</p></li>
+</ul>
+</li>
+<li><p><strong>volume</strong> (float): volume.</p></li>
+<li><p><strong>A</strong> (list): [a1,a2,a3,t] conventional lattice and translational vectors (4x4, each column).</p></li>
+<li><p><strong>G</strong> (list): metric matrix for conventional lattice (4x4).</p></li>
+</ul>
+</li>
+<li><p><strong>unit_vector</strong> (list): unit vectors, a1, a2, a3 (conventional cell).</p></li>
+<li><p><strong>unit_vector_primitive</strong> (list): unit vectors, a1p, a2p, a3p (primitive cell), A_p = P^T A, consistent with the primitive fractional coordinates of the sites (x_c = P x_p). Models created before this was fixed store A Pi^T for centred lattices; ModelAnalyzer recomputes A_p from unit_vector.</p></li>
+</ul>
+</li>
+<li><p>Generation condition.</p>
+<ul>
+<li><p><strong>SAMB_select</strong> (dict): SAMB selection.</p></li>
+<li><p><strong>atomic_select</strong> (dict): atomic SAMB selection.</p></li>
+<li><p><strong>site_select</strong> (dict): site-cluster SAMB selection.</p></li>
+<li><p><strong>bond_select</strong> (dict): bond-cluster SAMB selection.</p></li>
+<li><p><strong>max_neighbor</strong> (int): max. neighbor in search of bonds.</p></li>
+<li><p><strong>search_cell_range</strong> (tuple): cell range in search of bonds, (a1,a2,b1,b2,c1,c2).</p></li>
+<li><p><strong>toroidal_priority</strong> (bool): toroidal priority, false=Q-G or true=G-Q.</p></li>
+</ul>
+</li>
+<li><p>Site and bond info.</p>
+<ul>
+<li><p><strong>site_grid</strong> (dict): site grid.</p></li>
+<li><p><strong>site</strong> (dict): site info.</p>
+<ul>
+<li><p><strong>representative</strong> (dict): representative site, dict[name, RepSiteType].</p></li>
+<li><p><strong>cell</strong> (dict): conventional cell site, dict[name, [CellSiteType]].</p></li>
+</ul>
+</li>
+<li><p><strong>bond</strong> (dict): bond info.</p>
+<ul>
+<li><p><strong>representative</strong> (dict): representative bond, dict[name, RepBondType].</p></li>
+<li><p><strong>cell</strong> (dict): conventional cell bond, dict[name, [CellBondType]]. The head of a bond is at position_primitive of the head site in the home cell, and its tail at position_primitive of the tail site plus R_primitive, so that vector_primitive = head - (tail + R_primitive). In models created before <a class="reference external" href="https://github.com/CMT-MU/MultiPie/pull/151">PR #151</a>, R_primitive is wrong by a primitive lattice vector for bonds of a centred lattice (I, F, C, A, R) whose head and tail sites need different shifts into [0,1) when converted to the primitive cell (P lattices are not affected). Loading such a model keeps the stored R_primitive, so the model and the files created from it (SAMB matrices, H®) must be created again.</p></li>
+<li><p><strong>info</strong> (list): bond properties, [BondInfoType].</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>SAMB.</p>
+<ul>
+<li><p><strong>SAMB_number</strong> (int): total number of SAMBs.</p></li>
+<li><p><strong>SAMB_number_min</strong> (int): total number of SAMBs excluding duplicated ones.</p></li>
+<li><p><strong>atomic_samb</strong> (dict): atomic SAMB, dict[BraketInfoType, SAMB Dict].</p></li>
+<li><p><strong>atomic_id</strong> (dict): atomic SAMB ID, dict[tag, (BraketInfoType, index, component)].</p></li>
+<li><p><strong>cluster_samb</strong> (dict): site/bond cluster SAMB, dict[wyckoff, SAMB Dict].</p></li>
+<li><p><strong>cluster_id</strong> (dict): site/bond cluster SAMB ID, dict[tag, (wyckoff, index, component)].</p></li>
+<li><p><strong>combined_samb</strong> (dict): combined SAMB, dict[SAMBType, SAMB Dict].</p></li>
+<li><p><strong>combined_id</strong> (dict): combined SAMB ID, dict[tag, (symbol, UniqueSAMBType, index, component)].</p></li>
+<li><p><strong>combined_cluster</strong> (dict): combined cluster info, dict[combined SAMB ID, site/bond_name].</p></li>
+<li><p><strong>irrep_id</strong> (dict): combined SAMB ID by irrep., dict[irrep, combined_id].</p></li>
+<li><p><strong>common_id</strong> (dict): common ID of combined SAMB, dict[SAMBType, ([Ztag_list], [site/bond-tag])].</p></li>
+<li><p><strong>cluster_info</strong> (dict): cluster info, dict[site/bond_name, dict[(bra_rank,ket_rank), (wyckoff,z_list)] ].</p></li>
+<li><p><strong>cluster_vector</strong> (dict): cluster vector info, dict[site/bond_name, [primitive_vector]].</p></li>
+</ul>
+</li>
+<li><p>Misc.</p>
+<ul>
+<li><p><strong>basis_type</strong> (str): atomic basis type.</p></li>
+<li><p><strong>full_matrix</strong> (dict): full matrix info.</p>
+<ul>
+<li><p><strong>ket</strong> (list): ket info., [(atom,sublattice,rank,basis_index,orbital)].</p></li>
+<li><p><strong>index</strong> (dict): index info., dict[(atom,SL,rank), (top,size)].</p></li>
+</ul>
+</li>
+<li><p><strong>braket</strong> (dict): braket info., dict[site/bond-tag, [BraketInfoType]].</p></li>
+<li><p><strong>wyckoff</strong> (dict): wyckoff info., dict[site/bond-tag, wyckoff].</p></li>
+<li><p><strong>qtdraw_prop</strong> (dict): QtDraw properties.</p></li>
+<li><p><strong>pdf_ctrl</strong> (dict): PDF creation control.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="samb-dict-data">
+<h2>SAMB Dict data<a class="headerlink" href="#samb-dict-data" title="Link to this heading">#</a></h2>
+<p>Combined, atomic, and site/bond-cluster SAMBs have the following dict data.</p>
+<ul class="simple">
+<li><p>Combined SAMB, <span class="math notranslate nohighlight">\(Z_i\)</span>, Dict[index, SAMB].</p>
+<ul>
+<li><p>index (PGMultipoleType): (X,l,<span class="math notranslate nohighlight">\(\Gamma\)</span>,n,p,s,k,x)</p></li>
+<li><p>SAMB (tuple): SAMB data for set of components.</p>
+<ul>
+<li><p>(list) [[(coeff, X_index, X_component, Y_index, Y_component)]],</p></li>
+<li><p>(list) [symmetry].</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Atomic SAMB, <span class="math notranslate nohighlight">\(X_j\)</span>, Dict[index, SAMB].</p>
+<ul>
+<li><p>index (PGMultipoleType): (X,l,<span class="math notranslate nohighlight">\(\Gamma\)</span>,n,p,s,k,x)</p></li>
+<li><p>SAMB (tuple): SAMB data for set of components.</p>
+<ul>
+<li><p>(list) [matrix],</p></li>
+<li><p>(list) [symmetry]</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Site/bond-cluster SAMB, <span class="math notranslate nohighlight">\(Y_k\)</span>, Dict[index, SAMB].</p>
+<ul>
+<li><p>index (PGMultipoleType): (X,l,<span class="math notranslate nohighlight">\(\Gamma\)</span>,n,p,s,k,x)</p></li>
+<li><p>SAMB (tuple): SAMB data for set of components.</p>
+<ul>
+<li><p>(list) [vector],</p></li>
+<li><p>(list) [symmetry]</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="module-multipie.core.material_model">
+<span id="materialmodel-class"></span><h2>MaterialModel Class<a class="headerlink" href="#module-multipie.core.material_model" title="Link to this heading">#</a></h2>
+<p>Material model construction class.</p>
+<p>This module provides material model construction.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="multipie.core.material_model.MaterialModel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MaterialModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">topdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/core/material_model.html#MaterialModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.core.material_model.MaterialModel" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../api_util/util_binary.html#multipie.util.util_binary.BinaryManager" title="multipie.util.util_binary.BinaryManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">BinaryManager</span></code></a></p>
+<p>Material model construction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>topdir</strong> (<em>str</em><em>, </em><em>optional</em>) – top directory. [default: cwd]</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em><em>, </em><em>optional</em>) – verbose comment ?</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="multipie.core.material_model.MaterialModel.X">
+<span class="sig-name descname"><span class="pre">X</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/core/material_model.html#MaterialModel.X"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.core.material_model.MaterialModel.X" title="Link to this definition">#</a></dt>
+<dd><p>Get atomic SAMB.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tag</strong> (<em>str</em>) – atomic tag, e.g. x1.</p></li>
+<li><p><strong>hc</strong> (<em>bool</em><em>, </em><em>optional</em>) – hermite conjugation ?</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(ndarray) – atomic SAMB matrix.</p></li>
+<li><p>(sympy) – symmetry.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multipie.core.material_model.MaterialModel.Y">
+<span class="sig-name descname"><span class="pre">Y</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tag</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/core/material_model.html#MaterialModel.Y"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.core.material_model.MaterialModel.Y" title="Link to this definition">#</a></dt>
+<dd><p>Get site/bond-cluster SAMB.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>tag</strong> (<em>str</em>) – cluster tag, e.g., y1.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(ndarray) – cluster SAMB vector.</p></li>
+<li><p>(sympy) – symmetry.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multipie.core.material_model.MaterialModel.Z">
+<span class="sig-name descname"><span class="pre">Z</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symbol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/core/material_model.html#MaterialModel.Z"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.core.material_model.MaterialModel.Z" title="Link to this definition">#</a></dt>
+<dd><p>Get combined SAMB.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tag</strong> (<em>str</em>) – combined tag, e.g., z1.</p></li>
+<li><p><strong>symbol</strong> (<em>bool</em><em>, </em><em>optional</em>) – symbol expression ?</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(list or sympy) – combined SAMB linear combination list or expression.</p></li>
+<li><p>(sympy) – symmetry.</p></li>
+<li><p>(str or sympy) – symbol in LaTex or expression.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multipie.core.material_model.MaterialModel.analyze">
+<span class="sig-name descname"><span class="pre">analyze</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_in</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/core/material_model.html#MaterialModel.analyze"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.core.material_model.MaterialModel.analyze" title="Link to this definition">#</a></dt>
+<dd><p>Set model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>model_in</strong> (<em>dict</em><em> or </em><em>str</em>) – model input dict or file name.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multipie.core.material_model.MaterialModel.cell_site_primitive">
+<span class="sig-name descname"><span class="pre">cell_site_primitive</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/core/material_model.html#MaterialModel.cell_site_primitive"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.core.material_model.MaterialModel.cell_site_primitive" title="Link to this definition">#</a></dt>
+<dd><p>Get site position in primitive unit cell.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p>(dict) – site dict, dict[name, [position]].</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multipie.core.material_model.MaterialModel.clear">
+<span class="sig-name descname"><span class="pre">clear</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/core/material_model.html#MaterialModel.clear"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.core.material_model.MaterialModel.clear" title="Link to this definition">#</a></dt>
+<dd><p>Clear all data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multipie.core.material_model.MaterialModel.get_atomic_samb">
+<span class="sig-name descname"><span class="pre">get_atomic_samb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">select</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/core/material_model.html#MaterialModel.get_atomic_samb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.core.material_model.MaterialModel.get_atomic_samb" title="Link to this definition">#</a></dt>
+<dd><p>Get all atomic SAMB.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>select</strong> (<em>dict</em>) – select dict.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(dict) – atomic SAMB, dict[BraketInfoType, SAMB Dict].</p></li>
+<li><p>(dict) – atomic id, dict[“x#”, (SAMB index, comp)].</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multipie.core.material_model.MaterialModel.get_cluster_samb">
+<span class="sig-name descname"><span class="pre">get_cluster_samb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">site_select</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bond_select</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/core/material_model.html#MaterialModel.get_cluster_samb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.core.material_model.MaterialModel.get_cluster_samb" title="Link to this definition">#</a></dt>
+<dd><p>Get all cluster SAMB.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>site_select</strong> (<em>dict</em>) – site select dict.</p></li>
+<li><p><strong>bond_select</strong> (<em>dict</em>) – bond select dict.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(dict) – cluster SAMB, dict[wyckoff, SAMB Dict].</p></li>
+<li><p>(dict) – cluster id, dict[“y#”, (wyckoff, SAMB index, comp)].</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multipie.core.material_model.MaterialModel.get_combined_samb">
+<span class="sig-name descname"><span class="pre">get_combined_samb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">atomic_samb</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cluster_samb</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">select</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toroidal_priority</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/core/material_model.html#MaterialModel.get_combined_samb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.core.material_model.MaterialModel.get_combined_samb" title="Link to this definition">#</a></dt>
+<dd><p>Get all combined SAMB.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>atomic_samb</strong> (<em>dict</em>) – all atomic SAMB, Dict[braket_info, SAMB].</p></li>
+<li><p><strong>cluster_samb</strong> (<em>dict</em>) – alll cluster SAMB, Dict[“site/bond”, SAMB].</p></li>
+<li><p><strong>select</strong> (<em>dict</em>) – SAMB select.</p></li>
+<li><p><strong>toroidal_priority</strong> (<em>bool</em><em>, </em><em>optional</em>) – use (G,T) prior to (Q,M) in creation ?</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(dict) – combined SAMB (minimal), dict[SAMBType, SAMB].</p></li>
+<li><p>(dict) – id to SAMB info, dict[str, (tag, UniqueSAMBType, component)].</p></li>
+<li><p>(int) – no. of minimal SAMBs.</p></li>
+<li><p>(int) – no. of all SAMBs.</p></li>
+<li><p>(dict) – comomon id, dict[SAMBType, [id]].</p></li>
+<li><p>(dict) – cluster info, dict[site/bond_name, dict[(bra_rank,ket_rank), (wyckoff,z_list)] ].</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multipie.core.material_model.MaterialModel.get_combined_samb_matrix">
+<span class="sig-name descname"><span class="pre">get_combined_samb_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">select</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fmt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sympy'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">digit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">14</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bond</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/core/material_model.html#MaterialModel.get_combined_samb_matrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.core.material_model.MaterialModel.get_combined_samb_matrix" title="Link to this definition">#</a></dt>
+<dd><p>Get combined SAMBs in matrix form (real-space).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>select</strong> (<em>dict</em><em>, </em><em>optional</em>) – select conditions for multipoles with keywords (see, select_combined_samb).</p></li>
+<li><p><strong>fmt</strong> (<em>str</em><em>, </em><em>optional</em>) – sympy/value.</p></li>
+<li><p><strong>digit</strong> (<em>int</em><em>, </em><em>optional</em>) – digit for value output.</p></li>
+<li><p><strong>bond</strong> (<em>bool</em><em>, </em><em>optional</em>) – include bond_d ?</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(dict) – combined SAMB in matrix form, dict[zj, dict[ (n1, n2, n3, m, n), (matrix element, bond_no)] ].</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>R = (n1,n2,n3) and m and n are lattice indices (corresponding to bond_no), bra and ket indexes, respectively.</p></li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multipie.core.material_model.MaterialModel.get_hr">
+<span class="sig-name descname"><span class="pre">get_hr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">combined_samb_matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fmt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sympy'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/core/material_model.html#MaterialModel.get_hr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.core.material_model.MaterialModel.get_hr" title="Link to this definition">#</a></dt>
+<dd><p>Get Hamiltonian matrix (real-space).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>parameter</strong> (<em>dict</em>) – parameter of SAMBs, dict[zj, float/sympy].</p></li>
+<li><p><strong>combined_samb_matrix</strong> (<em>dict</em>) – combined SAMBs in matrix form (real-space), dict[zj, dict[(n1, n2, n3, m, n), (matrix element, bond_no)] ].</p></li>
+<li><p><strong>fmt</strong> (<em>str</em><em>, </em><em>optional</em>) – sympy/value.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(dict) – Hamiltonian matrix (real-space), dict[(n1, n2, n3, m, n), (matrix element, bond_no)].</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>R = (n1,n2,n3) and m and n are a lattie vector (corresponding to bond_no), bra and ket indexes, respectively.</p></li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multipie.core.material_model.MaterialModel.get_ket_site">
+<span class="sig-name descname"><span class="pre">get_ket_site</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/core/material_model.html#MaterialModel.get_ket_site"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.core.material_model.MaterialModel.get_ket_site" title="Link to this definition">#</a></dt>
+<dd><p>Get ket and corresponding site.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p>(dict) – ket and site, dict[name, position].</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multipie.core.material_model.MaterialModel.get_multipole_expression">
+<span class="sig-name descname"><span class="pre">get_multipole_expression</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/core/material_model.html#MaterialModel.get_multipole_expression"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.core.material_model.MaterialModel.get_multipole_expression" title="Link to this definition">#</a></dt>
+<dd><p>Get all of harmonics expression.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p>(dict) – harmonics expression, dict[(X,Gamma,l,n), [expression]].</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multipie.core.material_model.MaterialModel.get_samb_matrix">
+<span class="sig-name descname"><span class="pre">get_samb_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">select</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/core/material_model.html#MaterialModel.get_samb_matrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.core.material_model.MaterialModel.get_samb_matrix" title="Link to this definition">#</a></dt>
+<dd><p>Get SAMB matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>select</strong> (<em>dict</em>) – select dict (see, select_combined_samb).</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>(dict) – matrix info.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multipie.core.material_model.MaterialModel.ket">
+<span class="sig-name descname"><span class="pre">ket</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/core/material_model.html#MaterialModel.ket"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.core.material_model.MaterialModel.ket" title="Link to this definition">#</a></dt>
+<dd><p>Get ket string list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p>(list) – ket string in LaTeX.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multipie.core.material_model.MaterialModel.load">
+<span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/core/material_model.html#MaterialModel.load"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.core.material_model.MaterialModel.load" title="Link to this definition">#</a></dt>
+<dd><p>Load model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – model name.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multipie.core.material_model.MaterialModel.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/core/material_model.html#MaterialModel.save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.core.material_model.MaterialModel.save" title="Link to this definition">#</a></dt>
+<dd><p>Save model data in subdir.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multipie.core.material_model.MaterialModel.save_pdf">
+<span class="sig-name descname"><span class="pre">save_pdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/core/material_model.html#MaterialModel.save_pdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.core.material_model.MaterialModel.save_pdf" title="Link to this definition">#</a></dt>
+<dd><p>Save model as PDF file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multipie.core.material_model.MaterialModel.save_samb_qtdraw">
+<span class="sig-name descname"><span class="pre">save_samb_qtdraw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/core/material_model.html#MaterialModel.save_samb_qtdraw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.core.material_model.MaterialModel.save_samb_qtdraw" title="Link to this definition">#</a></dt>
+<dd><p>Save SAMB QtDraw file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="multipie.core.material_model.MaterialModel.save_view">
+<span class="sig-name descname"><span class="pre">save_view</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/multipie/core/material_model.html#MaterialModel.save_view"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#multipie.core.material_model.MaterialModel.save_view" title="Link to this definition">#</a></dt>
+<dd><p>Save model view QtDraw file.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="multipie.core.material_model.MaterialModel.group">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">group</span></span><a class="headerlink" href="#multipie.core.material_model.MaterialModel.group" title="Link to this definition">#</a></dt>
+<dd><p>Group class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p>(Group) – group class.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./src/api_core"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dict-data">Dict data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#samb-dict-data">SAMB Dict data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-multipie.core.material_model">MaterialModel Class</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel"><code class="docutils literal notranslate"><span class="pre">MaterialModel</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.X"><code class="docutils literal notranslate"><span class="pre">MaterialModel.X()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.Y"><code class="docutils literal notranslate"><span class="pre">MaterialModel.Y()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.Z"><code class="docutils literal notranslate"><span class="pre">MaterialModel.Z()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.analyze"><code class="docutils literal notranslate"><span class="pre">MaterialModel.analyze()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.cell_site_primitive"><code class="docutils literal notranslate"><span class="pre">MaterialModel.cell_site_primitive()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.clear"><code class="docutils literal notranslate"><span class="pre">MaterialModel.clear()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.get_atomic_samb"><code class="docutils literal notranslate"><span class="pre">MaterialModel.get_atomic_samb()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.get_cluster_samb"><code class="docutils literal notranslate"><span class="pre">MaterialModel.get_cluster_samb()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.get_combined_samb"><code class="docutils literal notranslate"><span class="pre">MaterialModel.get_combined_samb()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.get_combined_samb_matrix"><code class="docutils literal notranslate"><span class="pre">MaterialModel.get_combined_samb_matrix()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.get_hr"><code class="docutils literal notranslate"><span class="pre">MaterialModel.get_hr()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.get_ket_site"><code class="docutils literal notranslate"><span class="pre">MaterialModel.get_ket_site()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.get_multipole_expression"><code class="docutils literal notranslate"><span class="pre">MaterialModel.get_multipole_expression()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.get_samb_matrix"><code class="docutils literal notranslate"><span class="pre">MaterialModel.get_samb_matrix()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.ket"><code class="docutils literal notranslate"><span class="pre">MaterialModel.ket()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.load"><code class="docutils literal notranslate"><span class="pre">MaterialModel.load()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.save"><code class="docutils literal notranslate"><span class="pre">MaterialModel.save()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.save_pdf"><code class="docutils literal notranslate"><span class="pre">MaterialModel.save_pdf()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.save_samb_qtdraw"><code class="docutils literal notranslate"><span class="pre">MaterialModel.save_samb_qtdraw()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.save_view"><code class="docutils literal notranslate"><span class="pre">MaterialModel.save_view()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie.core.material_model.MaterialModel.group"><code class="docutils literal notranslate"><span class="pre">MaterialModel.group</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Hiroaki Kusunose and Rikuto Oiwa
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2021-.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

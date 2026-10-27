@@ -1,0 +1,856 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Getting Started &#8212; MultiPie</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=34ddd5e8" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=a8e58a58"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'src/getting_started';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script src="../_static/custom.js?v=9c3a2667"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Brief Manual" href="manual.html" />
+    <link rel="prev" title="Installing MultiPie" href="install.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../README.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/multipie_logo.png" class="logo__image only-light" alt="MultiPie - Home"/>
+    <img src="../_static/multipie_logo.png" class="logo__image only-dark pst-js-only" alt="MultiPie - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installing MultiPie</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Getting Started</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="manual.html">Brief Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="post_processing.html">Post-processing tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="group_doc.html">Group information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tech_note.html">Technical Note</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="api_core.html">Core</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="api_core/init.html">Type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_core/cmd.html">Create function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_core/group.html">Group</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_core/material_model.html">Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_core/model_analyzer.html">ModelAnalyzer</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="api_util.html">Utility</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_atomic_multipole.html">Atomic multipole</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_binary.html">Binary data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_crystal.html">Crystal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_dict.html">Dict</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_gram_schmidt.html">Gram-Schmidt orthonormalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_harmonics.html">Harmonics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_material_model_pdf.html">PDF creator for Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_material_model.html">Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_model_analyzer.html">Model Analyzer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_pdf_latex.html">PDF creator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_plot.html">Plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_response_tensor.html">Response tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_samb.html">SAMB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_tag.html">Tag</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_wannier.html">Wannier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_wyckoff.html">Wyckoff position</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util.html">Versatile</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/CMT-MU/MultiPie.git" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Getting Started</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tutorial">Tutorial</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-input-file">Model input file</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#control-file">Control file</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#post-processing-tools">Post-processing tools</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#format-of-input-files">Format of input files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#command-line-tools">Command-line tools</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parallel-computation">Parallel computation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#output-files">Output files</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="getting-started">
+<h1>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading">#</a></h1>
+<section id="tutorial">
+<h2>Tutorial<a class="headerlink" href="#tutorial" title="Link to this heading">#</a></h2>
+<p>As a tutorial, we describe the procedure for generating model in the case of <strong>graphene</strong>.</p>
+<ol class="arabic">
+<li><p>Download <code class="docutils literal notranslate"><span class="pre">graphene_in.py</span></code> and <code class="docutils literal notranslate"><span class="pre">graphene_ctrl.py</span></code> from <a class="reference external" href="https://github.com/CMT-MU/MultiPie/tree/main/docs/src/examples">examples</a> directory.</p></li>
+<li><p>At the same place where the above two files are, run the following:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>mp_create<span class="w"> </span>-v<span class="w"> </span>graphene_in.py
+</pre></div>
+</div>
+<p>It creates the following files under <code class="docutils literal notranslate"><span class="pre">graphene</span></code> directory:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">graphene.pkl</span></code> : Model information file (binary)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">graphene.tex</span></code>, <code class="docutils literal notranslate"><span class="pre">graphene.pdf</span></code> : Summary of the model information</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">graphene.qtdw</span></code> : QtDraw file of the model structure</p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">.tex</span></code>/<code class="docutils literal notranslate"><span class="pre">.pdf</span></code> files are created only when <code class="docutils literal notranslate"><span class="pre">&quot;pdf&quot;:</span> <span class="pre">{&quot;create&quot;:</span> <span class="pre">True}</span></code> (default) and the TeX components listed in <a class="reference internal" href="install.html"><span class="std std-doc">Installation</span></a> (pLaTeX, <code class="docutils literal notranslate"><span class="pre">ptex2pdf</span></code> and the LaTeX packages) are available:</p>
+<ul class="simple">
+<li><p>If <code class="docutils literal notranslate"><span class="pre">latex</span></code> is not found, neither file is written (with <code class="docutils literal notranslate"><span class="pre">-v</span></code>, a notice is printed).</p></li>
+<li><p>Otherwise the <code class="docutils literal notranslate"><span class="pre">.tex</span></code> file is written first. If <code class="docutils literal notranslate"><span class="pre">ptex2pdf</span></code> or a LaTeX package is then found missing, or the compilation fails or does not finish, a warning is printed and the <code class="docutils literal notranslate"><span class="pre">.pdf</span></code> file, from an earlier run or incomplete, is removed (unless it cannot be removed, e.g., for lack of permission).</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">.pkl</span></code> file and the other outputs are written in any case.</p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">.qtdw</span></code> file is created only when <code class="docutils literal notranslate"><span class="pre">&quot;qtdraw&quot;:</span> <span class="pre">{&quot;create&quot;:</span> <span class="pre">True}</span></code> (default) and QtDraw is installed (with <code class="docutils literal notranslate"><span class="pre">-v</span></code>, a notice is printed if QtDraw is not found).</p>
+</li>
+<li><p>To analyze the model, e.g., draw dispersion, run the following:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>mp_analyze<span class="w"> </span>-v<span class="w"> </span>graphene_ctrl.py
+</pre></div>
+</div>
+<p>It creates the following files under <code class="docutils literal notranslate"><span class="pre">graphene</span></code> directory:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">info/graphene_matrix.py</span></code>, <code class="docutils literal notranslate"><span class="pre">info/graphene_hr.dat</span></code> : Full matrix information for selected SAMBs</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">output/</span></code> : Various output for physical quantities</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">samb/</span></code> : QtDraw files for SAMBs, written when <code class="docutils literal notranslate"><span class="pre">samb_figure</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>, QtDraw is installed, and the model was created with <code class="docutils literal notranslate"><span class="pre">&quot;qtdraw&quot;:</span> <span class="pre">{&quot;create&quot;:</span> <span class="pre">True}</span></code>. If <code class="docutils literal notranslate"><span class="pre">samb_figure</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code> but one of the others is not satisfied, a warning is printed and the directory is not created.</p></li>
+</ul>
+</li>
+<li><p>In order to handle <code class="docutils literal notranslate"><span class="pre">graphene.pkl</span></code> interactively, use the IPython interface. See <a class="reference internal" href="examples/analyze_model.html"><span class="std std-doc">analyze_model.ipynb</span></a> for details.</p></li>
+</ol>
+</section>
+<section id="model-input-file">
+<h2>Model input file<a class="headerlink" href="#model-input-file" title="Link to this heading">#</a></h2>
+<p>In case of graphene, the model input file is</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># graphene_in.py</span>
+<span class="n">graphene_in</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"model"</span><span class="p">:</span> <span class="s2">"graphene"</span><span class="p">,</span>  <span class="c1">#  name of model.</span>
+    <span class="s2">"group"</span><span class="p">:</span> <span class="mi">191</span><span class="p">,</span>  <span class="c1"># No. of space group.</span>
+    <span class="s2">"cell"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"c"</span><span class="p">:</span> <span class="mi">4</span><span class="p">},</span>  <span class="c1"># set large enough interlayer distance.</span>
+    <span class="c1">#</span>
+    <span class="s2">"site"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"C"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"[1/3,2/3,0]"</span><span class="p">,</span> <span class="s2">"pz"</span><span class="p">)},</span>  <span class="c1"># positions of C site and its orbital.</span>
+    <span class="s2">"bond"</span><span class="p">:</span> <span class="p">[(</span><span class="s2">"C"</span><span class="p">,</span> <span class="s2">"C"</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])],</span>  <span class="c1"># C-C bonds up to 2nd neighbors.</span>
+    <span class="c1">#</span>
+    <span class="s2">"spinful"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>  <span class="c1"># spinless.</span>
+    <span class="c1">#</span>
+    <span class="s2">"SAMB_select"</span><span class="p">:</span> <span class="p">{</span>  <span class="c1"># select combined SAMB.</span>
+        <span class="s2">"X"</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># all Q/G/M/T.</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The other settings are provided as default values, which are given as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># default model input.</span>
+<span class="n">default_model</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"model"</span><span class="p">:</span> <span class="s2">"unknown"</span><span class="p">,</span>
+    <span class="s2">"group"</span><span class="p">:</span> <span class="s2">"C1"</span><span class="p">,</span>
+    <span class="s2">"cell"</span><span class="p">:</span> <span class="p">{},</span>
+    <span class="s2">"spinful"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="c1"># acceptable orbital names (tesseral) in site:</span>
+    <span class="c1">#   s, p=(px, py, pz), d=(dv, dxy, dxz, dyz, du), f=(f2, f1, fbz, f3, f3x, f3y, faz).</span>
+    <span class="c1">#   (s,u), (s,d), ...</span>
+    <span class="c1">#   (1/2,s), (1/2,p), (3/2,p), (3/2,d), (5/2,d), (5/2,f), (7/2,f).</span>
+    <span class="s2">"site"</span><span class="p">:</span> <span class="p">{},</span>
+    <span class="s2">"bond"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"SAMB_select"</span><span class="p">:</span> <span class="p">{</span>  <span class="c1"># select combined SAMB.</span>
+        <span class="s2">"X"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"Q"</span><span class="p">,</span> <span class="s2">"G"</span><span class="p">],</span>  <span class="c1"># type, "Q/G/M/T", []=all.</span>
+        <span class="s2">"l"</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># rank, []=all.</span>
+        <span class="s2">"Gamma"</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># "IR"=identity, []=all, "..."/["...","..."]=specified irreps.</span>
+        <span class="s2">"s"</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># spin, 0/1, []=all.</span>
+    <span class="p">},</span>
+    <span class="s2">"atomic_select"</span><span class="p">:</span> <span class="p">{</span>  <span class="c1"># select atomic SAMB.</span>
+        <span class="s2">"X"</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># type, "Q/G/M/T", []=all.</span>
+        <span class="s2">"l"</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># rank, []=all.</span>
+        <span class="s2">"Gamma"</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># "IR"=identity, []=all, "..."/["...","..."]=specified irreps.</span>
+        <span class="s2">"s"</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># spin, 0/1, []=all.</span>
+    <span class="p">},</span>
+    <span class="s2">"site_select"</span><span class="p">:</span> <span class="p">{</span>  <span class="c1"># select site-cluster SAMB.</span>
+        <span class="s2">"l"</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># rank, []=all.</span>
+        <span class="s2">"Gamma"</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># "IR"=identity, []=all, "..."/["...","..."]=specified irreps.</span>
+    <span class="p">},</span>
+    <span class="s2">"bond_select"</span><span class="p">:</span> <span class="p">{</span>  <span class="c1"># select bond-cluster SAMB.</span>
+        <span class="s2">"X"</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># type, "Q/G/M/T", []=all.</span>
+        <span class="s2">"l"</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># rank, []=all.</span>
+        <span class="s2">"Gamma"</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># "IR"=identity, []=all, "..."/["...","..."]=specified irreps.</span>
+    <span class="p">},</span>
+    <span class="s2">"toroidal_priority"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s2">"max_neighbor"</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>  <span class="c1"># for DFT fitting, e.g. =200.</span>
+    <span class="s2">"search_cell_range"</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>  <span class="c1"># (a1, a2, a3) range. for DFT fitting, e.g.=(-10, 10, -10, 10, -10, 10).</span>
+    <span class="s2">"qtdraw"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"create"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>  <span class="c1"># create QtDraw file ?</span>
+        <span class="s2">"mode"</span><span class="p">:</span> <span class="s2">"standard"</span><span class="p">,</span>  <span class="c1"># mode, "standard/detail".</span>
+        <span class="s2">"view"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># [a,b,c], if None, default=[6,5,1].</span>
+        <span class="c1">#</span>
+        <span class="s2">"rep_site"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>  <span class="c1"># show representative site ?</span>
+        <span class="s2">"rep_bond"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>  <span class="c1"># show representative bond ?</span>
+        <span class="c1">#</span>
+        <span class="s2">"max_neighbor"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>  <span class="c1"># max. neighbor to draw.</span>
+        <span class="s2">"cell_mode"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># "off/single/all", if None, single for SG, off for PG.</span>
+        <span class="s2">"scale"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># default or magnification scale.</span>
+        <span class="s2">"site_radius"</span><span class="p">:</span> <span class="mf">0.07</span><span class="p">,</span>  <span class="c1"># base site radius.</span>
+        <span class="s2">"bond_width"</span><span class="p">:</span> <span class="mf">0.02</span><span class="p">,</span>  <span class="c1"># base bond width.</span>
+    <span class="p">},</span>
+    <span class="s2">"pdf"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"create"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>  <span class="c1"># create PDF file ?</span>
+        <span class="s2">"common_samb"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>  <span class="c1"># display common SAMB ?</span>
+        <span class="s2">"harmonics"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>  <span class="c1"># display harmonics ?</span>
+        <span class="s2">"max_neighbor"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>  <span class="c1"># max. neighbor to write (None: all).</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>You can overwrite whatever you want as in the case of graphene.</p>
+</section>
+<section id="control-file">
+<h2>Control file<a class="headerlink" href="#control-file" title="Link to this heading">#</a></h2>
+<p>In case of graphene, the control file is</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># graphene_ctrl.py</span>
+<span class="n">graphene_ctrl</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"samb"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"model"</span><span class="p">:</span> <span class="s2">"graphene"</span><span class="p">,</span>
+        <span class="s2">"parameter"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"z2"</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="s2">"samb_figure"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s2">"k_multipole"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="s2">"output"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"dispersion"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"k_path"</span><span class="p">:</span> <span class="s2">"Γ-M-K-Γ"</span><span class="p">,</span>
+            <span class="s2">"k_point"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"Γ"</span><span class="p">:</span> <span class="s2">"[0,0,0]"</span><span class="p">,</span> <span class="s2">"K"</span><span class="p">:</span> <span class="s2">"[1/3,1/3,0]"</span><span class="p">,</span> <span class="s2">"M"</span><span class="p">:</span> <span class="s2">"[1/2,0,0]"</span><span class="p">},</span>
+        <span class="p">},</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The default values of control file are provided as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># default control.</span>
+<span class="n">default_control</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"mode"</span><span class="p">:</span> <span class="s2">"samb"</span><span class="p">,</span>  <span class="c1"># samb (SAMB-based only), wannier (wannier-based only), symcw (SAMB and wannier based).</span>
+    <span class="s2">"grid"</span><span class="p">:</span> <span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">),</span>  <span class="c1"># k-grid size (b1, b2, b3).</span>
+    <span class="s2">"samb"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"model"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># model name for .pkl (optional in wannier mode).</span>
+        <span class="s2">"select"</span><span class="p">:</span> <span class="p">{</span>  <span class="c1"># SAMB select condition, where S=site name, R=orbital rank, N=neighbor bond.</span>
+            <span class="c1"># "site": [("A", [1, 2])],  # S or (S, [R]) in list.</span>
+            <span class="c1"># "bond": [[0, 1, 2]],  # S1;S2, N, [N], (S1;S2, N), (S1;S2, [N]), (S1;S2, R1;R2), (S1;S2, R1;R2, N) or (S1;S2, R1;R2, [N]) in list.</span>
+            <span class="c1"># "X": [],  # SAMB type Q/G/T/M in list. empty []=all.</span>
+            <span class="c1"># "l": [],  # SAMB rank, 0, 1, ..., 11 in list. empty []=all.</span>
+            <span class="c1"># "Gamma": ["A1g"],  # SAMB irreps. in list. "IR"=identity irrep., empty []=all.</span>
+            <span class="c1"># "s": [],  # SAMB internal rank, 0,1 in list. empty []=all</span>
+        <span class="p">},</span>
+        <span class="s2">"parameter"</span><span class="p">:</span> <span class="p">{</span>  <span class="c1"># SAMB with finite weight (float, or str of sympy const., e.g., "sqrt(2)"), or filename of z_j dict (.py file relative to model_name/info/).</span>
+            <span class="c1"># "z1": 1.0,</span>
+        <span class="p">},</span>
+        <span class="s2">"samb_figure"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>  <span class="c1"># save SAMB QtDraw files ?</span>
+        <span class="s2">"k_multipole"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>  <span class="c1"># compute momentum multipole ?</span>
+        <span class="s2">"NG_sum_rule"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>  <span class="c1"># Nambu-Goldstone sum rule ?</span>
+    <span class="p">},</span>
+    <span class="s2">"wannier"</span><span class="p">:</span> <span class="p">{</span>  <span class="c1"># Closest Wannier (CW) or SymWannier setting.</span>
+        <span class="s2">"dir"</span><span class="p">:</span> <span class="s2">"wannier"</span><span class="p">,</span>  <span class="c1"># directory for wannier input, i.e., "./seedname/wannier".</span>
+        <span class="s2">"seedname"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># read +(.win, .nnkp, _hr.dat, _wsvec.dat if exists, ...).</span>
+        <span class="s2">"ket_wannier"</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># correspondence between Wannier and MultiPie basis, [MultiPie ket name, "orbital@site(sublattice)"] in Wannier order. If empty, automatically determined.</span>
+    <span class="p">},</span>
+    <span class="s2">"output"</span><span class="p">:</span> <span class="p">{</span>  <span class="c1"># physical quantity setting.</span>
+        <span class="s2">"dir"</span><span class="p">:</span> <span class="s2">"output"</span><span class="p">,</span>  <span class="c1">#  output directory.</span>
+        <span class="s2">"fourier"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"tb_gauge"</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>  <span class="c1"># TB gauge ?</span>
+        <span class="s2">"dos"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>  <span class="c1"># DOS: False (none), "auto" (partial DOS for each site cluster and orbital, spin summed), or [[ket name]] (sum of partial DOS of the kets in each list). total DOS is always included.</span>
+        <span class="s2">"dos_e_num"</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>  <span class="c1"># number of energy points of DOS (range includes all eigenvalues).</span>
+        <span class="s2">"dos_width"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># Gaussian broadening of DOS. if None, 1% of the band width.</span>
+        <span class="s2">"dos_method"</span><span class="p">:</span> <span class="s2">"gaussian"</span><span class="p">,</span>  <span class="c1"># DOS method, "gaussian" or "tetrahedron" (optimized tetrahedron method by libtetrabz).</span>
+        <span class="s2">"dos_spin"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>  <span class="c1"># resolve spin, u/d, of spinful basis in "auto" DOS ?</span>
+        <span class="s2">"n_electron"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># number of occupied states per primitive cell (one per band) to determine fermi energy. if None, 0 (samb mode) or that of seedname.win.</span>
+        <span class="s2">"save_k_path"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>  <span class="c1"># save Ek, Uk along k path in .npz ?</span>
+        <span class="s2">"save_k_full"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>  <span class="c1"># save Ek, Uk on full k grid in .npz ?</span>
+        <span class="s2">"callback_k_path"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># file (.py, relative to topdir) defining callback_k_path(Ek, Uk, info), called with eigen system along k path.</span>
+        <span class="s2">"callback_k_full"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># file (.py, relative to topdir) defining callback_k_full(Ek, Uk, info), called with eigen system on full k grid.</span>
+        <span class="s2">"dispersion"</span><span class="p">:</span> <span class="p">{</span>  <span class="c1"># dispersion info.</span>
+            <span class="s2">"power"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># plot as Ek^power. if None, power=1.</span>
+            <span class="s2">"k_path"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>  <span class="c1"># symmetry line, separated by "-". disconnected points by "|". if empty str, default values are used for k_path and k_point.</span>
+            <span class="s2">"k_point"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"Γ"</span><span class="p">:</span> <span class="s2">"[0,0,0]"</span><span class="p">},</span>  <span class="c1"># k-point (fractional, primitive cell of model, or of seedname.win without model).</span>
+            <span class="s2">"local"</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># local quantity, "Sx/Sy/Sz/Lx/Ly/Lz/Qu/Qv/Qyz/Qxz/Qxy".</span>
+            <span class="s2">"weight"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>  <span class="c1"># orbital weight (fat band): False (none), "auto" (each site cluster and orbital, spin summed), or [[ket name]].</span>
+            <span class="s2">"z"</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># expectation value of Z_j. [Under Construction]</span>
+        <span class="p">},</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In a typical use, you first create the SAMBs for all irreps, and then choose the necessary SAMBs, such as the symmetry-breaking terms in addition to the identity irreps., by specifying <code class="docutils literal notranslate"><span class="pre">samb/select</span></code> and/or <code class="docutils literal notranslate"><span class="pre">samb/parameter</span></code> in the control file.</p>
+<section id="post-processing-tools">
+<h3>Post-processing tools<a class="headerlink" href="#post-processing-tools" title="Link to this heading">#</a></h3>
+<p>The density of states, the Fermi energy from the filling, the orbital weight (fat band), the output of the eigenvalues and eigenvectors, and callbacks for custom calculations are set in <code class="docutils literal notranslate"><span class="pre">output</span></code> of the control file. See <a class="reference internal" href="post_processing.html"><span class="std std-doc">Post-processing tools</span></a> for details and an example.</p>
+</section>
+</section>
+<section id="format-of-input-files">
+<h2>Format of input files<a class="headerlink" href="#format-of-input-files" title="Link to this heading">#</a></h2>
+<p>Model input files and control files are Python files that contain dictionaries, e.g., <code class="docutils literal notranslate"><span class="pre">graphene_in</span> <span class="pre">=</span> <span class="pre">{...}</span></code>.</p>
+<ul>
+<li><p>They are not executed as Python code. Each dictionary is read with <code class="docutils literal notranslate"><span class="pre">ast.literal_eval</span></code>, so only literals (strings, numbers, lists, tuples, dictionaries, <code class="docutils literal notranslate"><span class="pre">True</span></code>/<code class="docutils literal notranslate"><span class="pre">False</span></code>/<code class="docutils literal notranslate"><span class="pre">None</span></code>) are allowed. Arithmetic such as <code class="docutils literal notranslate"><span class="pre">2*2</span></code>, variables and <code class="docutils literal notranslate"><span class="pre">import</span></code> cannot be used.</p></li>
+<li><p>Fractions and symbolic values are given as strings, e.g., <code class="docutils literal notranslate"><span class="pre">&quot;[1/3,2/3,0]&quot;</span></code>. Strings representing mathematical expressions are parsed by SymPy.</p></li>
+<li><p>With <code class="docutils literal notranslate"><span class="pre">mp_create</span></code> (or <code class="docutils literal notranslate"><span class="pre">create_model</span></code>), every dictionary in a model input file, <code class="docutils literal notranslate"><span class="pre">name</span> <span class="pre">=</span> <span class="pre">{...}</span></code>, is treated as a separate model, and with <code class="docutils literal notranslate"><span class="pre">mp_analyze</span></code> (or <code class="docutils literal notranslate"><span class="pre">analyze_model</span></code>), every dictionary in a control file is treated as a separate control. <code class="docutils literal notranslate"><span class="pre">MaterialModel.analyze(filename)</span></code> and <code class="docutils literal notranslate"><span class="pre">ModelAnalyzer.analyze(filename)</span></code> expect one dictionary per file.</p></li>
+<li><p>Unknown keys, e.g., a typo such as <code class="docutils literal notranslate"><span class="pre">&quot;spinfull&quot;</span></code>, are errors: <code class="docutils literal notranslate"><span class="pre">ValueError:</span> <span class="pre">unknown</span> <span class="pre">key(s)</span> <span class="pre">in</span> <span class="pre">model</span> <span class="pre">'x':</span> <span class="pre">'spinfull'</span> <span class="pre">(did</span> <span class="pre">you</span> <span class="pre">mean</span> <span class="pre">'spinful'?).</span></code> The accepted keys are those in the default model and the default control above, and also</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">cell</span></code>: <code class="docutils literal notranslate"><span class="pre">a</span></code>, <code class="docutils literal notranslate"><span class="pre">b</span></code>, <code class="docutils literal notranslate"><span class="pre">c</span></code>, <code class="docutils literal notranslate"><span class="pre">alpha</span></code>, <code class="docutils literal notranslate"><span class="pre">beta</span></code>, <code class="docutils literal notranslate"><span class="pre">gamma</span></code>,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SAMB_select</span></code>, <code class="docutils literal notranslate"><span class="pre">atomic_select</span></code>, <code class="docutils literal notranslate"><span class="pre">site_select</span></code>, <code class="docutils literal notranslate"><span class="pre">bond_select</span></code>: <code class="docutils literal notranslate"><span class="pre">X</span></code>, <code class="docutils literal notranslate"><span class="pre">l</span></code>, <code class="docutils literal notranslate"><span class="pre">Gamma</span></code>, <code class="docutils literal notranslate"><span class="pre">s</span></code>,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">samb/select</span></code>: <code class="docutils literal notranslate"><span class="pre">site</span></code>, <code class="docutils literal notranslate"><span class="pre">bond</span></code>, <code class="docutils literal notranslate"><span class="pre">X</span></code>, <code class="docutils literal notranslate"><span class="pre">l</span></code>, <code class="docutils literal notranslate"><span class="pre">Gamma</span></code>, <code class="docutils literal notranslate"><span class="pre">s</span></code>.</p></li>
+</ul>
+<p>The keys of the following dictionaries are not checked against the defaults, but have their own rules:</p>
+<ul class="simple">
+<li><p>site names in <code class="docutils literal notranslate"><span class="pre">site</span></code>: non-empty strings without <code class="docutils literal notranslate"><span class="pre">;</span></code>, and without <code class="docutils literal notranslate"><span class="pre">_</span></code> for sites used in <code class="docutils literal notranslate"><span class="pre">bond</span></code> (<code class="docutils literal notranslate"><span class="pre">;</span></code> and <code class="docutils literal notranslate"><span class="pre">_</span></code> are used in the names of site and bond clusters). Letters and digits, e.g., <code class="docutils literal notranslate"><span class="pre">&quot;Fe1&quot;</span></code>, are recommended for all sites, since the names also appear in the PDF (LaTeX) and in file names. LaTeX special characters, e.g., <code class="docutils literal notranslate"><span class="pre">#</span></code> or <code class="docutils literal notranslate"><span class="pre">%</span></code>, in the model and site names are escaped in the PDF.</p></li>
+<li><p>SAMB names in <code class="docutils literal notranslate"><span class="pre">samb/parameter</span></code>: names of the generated SAMBs, e.g., <code class="docutils literal notranslate"><span class="pre">&quot;z1&quot;</span></code>. <code class="docutils literal notranslate"><span class="pre">samb/parameter</span></code> may also be the name of a Python file containing one dictionary of the same form, given relative to <code class="docutils literal notranslate"><span class="pre">model_name/info/</span></code>, with the extension, e.g., <code class="docutils literal notranslate"><span class="pre">&quot;my_z.py&quot;</span></code> for <code class="docutils literal notranslate"><span class="pre">model_name/info/my_z.py</span></code> (not <code class="docutils literal notranslate"><span class="pre">&quot;info/my_z.py&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;my_z&quot;</span></code> or an absolute path). When the parameters are not empty, <code class="docutils literal notranslate"><span class="pre">mp_analyze</span></code> writes them to <code class="docutils literal notranslate"><span class="pre">model_name/info/model_name_z.py</span></code>, which is overwritten at each run; copy it to another name to edit it.</p></li>
+<li><p>k-point labels in <code class="docutils literal notranslate"><span class="pre">output/dispersion/k_point</span></code>: labels used in <code class="docutils literal notranslate"><span class="pre">k_path</span></code>, without <code class="docutils literal notranslate"><span class="pre">-</span></code>, <code class="docutils literal notranslate"><span class="pre">|</span></code> and spaces, which separate the points in <code class="docutils literal notranslate"><span class="pre">k_path</span></code>.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">wannier/read_KS</span></code> has been removed: <code class="docutils literal notranslate"><span class="pre">&quot;read_KS&quot;:</span> <span class="pre">True</span></code> is an error, and <code class="docutils literal notranslate"><span class="pre">&quot;read_KS&quot;:</span> <span class="pre">False</span></code> in an old control file is ignored with a warning (remove it from the control file).</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Strings representing mathematical expressions in input files are parsed by SymPy’s <code class="docutils literal notranslate"><span class="pre">parse_expr</span></code>, which uses <code class="docutils literal notranslate"><span class="pre">eval</span></code> internally, and the model file <code class="docutils literal notranslate"><span class="pre">model_name.pkl</span></code> is stored with Python’s <code class="docutils literal notranslate"><span class="pre">pickle</span></code>.
+Use input files and <code class="docutils literal notranslate"><span class="pre">.pkl</span></code> files only from trusted sources.</p>
+</div>
+</section>
+<section id="command-line-tools">
+<h2>Command-line tools<a class="headerlink" href="#command-line-tools" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">mp_create</span></code> and <code class="docutils literal notranslate"><span class="pre">mp_analyze</span></code> exit with status 1 when an error occurs, and with status 2 for a usage error, e.g., no input file or an unknown option. The error is printed in one message with the input file and, when applicable, the model and the site concerned; with <code class="docutils literal notranslate"><span class="pre">-v</span></code>, the full traceback is printed instead.</p></li>
+<li><p>When several input files are given, all of them are read before any model is created or analyzed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mp_create</span> <span class="pre">-i</span></code> and <code class="docutils literal notranslate"><span class="pre">mp_analyze</span> <span class="pre">-i</span></code> print the default model and control, which can be used as a template of an input file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">multipie.scripts.mp_create</span></code> and <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">multipie.scripts.mp_analyze</span></code> work in the same way.</p></li>
+<li><p>Messages such as the elapsed time and warnings are written to stdout through the <code class="docutils literal notranslate"><span class="pre">multipie</span></code> logger. <code class="docutils literal notranslate"><span class="pre">create_model</span></code> and <code class="docutils literal notranslate"><span class="pre">analyze_model</span></code> (and so <code class="docutils literal notranslate"><span class="pre">mp_create</span></code> and <code class="docutils literal notranslate"><span class="pre">mp_analyze</span></code>) set it up unless it already has a handler; the logging configuration of the application, e.g., the root logger in Jupyter, is not changed. To collect the messages elsewhere, add a handler to the <code class="docutils literal notranslate"><span class="pre">multipie</span></code> logger before calling them.</p></li>
+</ul>
+</section>
+<section id="parallel-computation">
+<h2>Parallel computation<a class="headerlink" href="#parallel-computation" title="Link to this heading">#</a></h2>
+<p>The atomic multipole matrices, <code class="docutils literal notranslate"><span class="pre">create_atomic_multipole_matrix</span></code> in <code class="docutils literal notranslate"><span class="pre">multipie.util.util_atomic_multipole</span></code>, and the atomic SAMBs, <code class="docutils literal notranslate"><span class="pre">Group.create_atomic_samb_L</span></code>, are computed in parallel with joblib.
+These are used to generate the database.
+In <code class="docutils literal notranslate"><span class="pre">mp_create</span></code> (<code class="docutils literal notranslate"><span class="pre">MaterialModel.analyze</span></code>), the orthogonalization of the atomic and combined SAMBs is also done in parallel for a large model, e.g., a spinful model with d orbitals; a small model is processed serially, since starting the processes would take longer than the computation.
+The output does not depend on the number of processes.
+The number of processes is given by the environment variable <code class="docutils literal notranslate"><span class="pre">MULTIPIE_N_JOBS</span></code>:</p>
+<ul class="simple">
+<li><p>not set or empty: all cores (<code class="docutils literal notranslate"><span class="pre">-1</span></code>, default),</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span></code>: serial,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">&gt;</span> <span class="pre">1</span></code>: <code class="docutils literal notranslate"><span class="pre">n</span></code> processes, <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">&lt;</span> <span class="pre">0</span></code>: number of cores + 1 + n processes (at least 1), as in joblib,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">0</span></code> or a non-integer value is an error.</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nv">MULTIPIE_N_JOBS</span><span class="o">=</span><span class="m">4</span><span class="w"> </span>python<span class="w"> </span>my_script.py<span class="w">   </span><span class="c1"># a script calling the functions above</span>
+</pre></div>
+</div>
+<p>In PowerShell on Windows, use <code class="docutils literal notranslate"><span class="pre">$env:MULTIPIE_N_JOBS</span> <span class="pre">=</span> <span class="pre">&quot;4&quot;</span></code> before running the script; the setting remains for the session until it is removed by <code class="docutils literal notranslate"><span class="pre">Remove-Item</span> <span class="pre">env:MULTIPIE_N_JOBS</span></code>.</p>
+</section>
+<section id="output-files">
+<h2>Output files<a class="headerlink" href="#output-files" title="Link to this heading">#</a></h2>
+<p>The description of the output files is as follows (with model_name prefixed):</p>
+<ul class="simple">
+<li><p><strong>model_name</strong> : all files are created under <code class="docutils literal notranslate"><span class="pre">model_name</span></code>.</p>
+<ul>
+<li><p><strong>.pdf</strong> : model info. in PDF.</p></li>
+<li><p><strong>.pkl</strong> : model data (binary).</p></li>
+<li><p><strong>.qtdw</strong> : model structure in QtDraw.</p></li>
+<li><p><strong>.tex</strong> : model info. source.</p></li>
+<li><p><strong>samb</strong>/</p>
+<ul>
+<li><p><strong>_atomic_samb.qtdw</strong> : atomic SAMBs.</p></li>
+<li><p><strong>_A-B-…_def.qtdw</strong> : definition of the site clusters (all sites in one file).</p></li>
+<li><p><strong>_A-B-…qtdw</strong> : site-cluster SAMBs (all sites in one file).</p></li>
+<li><p><strong>_A;B_nnn_m_def.qtdw</strong> : definition of A;B (nnn-neighbor, m) bond cluster (nnn: neighbor, 3 digits, e.g., 001).</p></li>
+<li><p><strong>_A;B_nnn_m.qtdw</strong> : A;B (nnn-neighbor, m) bond-cluster SAMBs.</p></li>
+</ul>
+</li>
+<li><p><strong>info/</strong></p>
+<ul>
+<li><p><strong>_hr.dat</strong> : H[R] matrix data.</p></li>
+<li><p><strong>_info_output.py</strong> : info. of output.</p></li>
+<li><p><strong>_info_samb.py</strong> : info. of model and SAMBs.</p></li>
+<li><p><strong>_info_wannier.py</strong> : info. of wannier.</p></li>
+<li><p><strong>_info.py</strong> : global info.</p></li>
+<li><p><strong>_k.py</strong> : SAMBs in momentum rep.</p></li>
+<li><p><strong>_matrix.py</strong> : SAMB matrix data.</p></li>
+<li><p><strong>_var.py</strong> : relation between zj and atomic parameters at bond 1.</p></li>
+<li><p><strong>_z.py</strong> : zj parameters.</p></li>
+</ul>
+</li>
+<li><p><strong>output/</strong></p>
+<ul>
+<li><p><strong>_dispersion.eps</strong> : dispersion in EPS.</p></li>
+<li><p><strong>_dispersion.pdf</strong> : dispersion in PDF.</p></li>
+<li><p><strong>_dispersion.txt</strong> : dispersion data.</p></li>
+<li><p><strong>_dos.eps</strong> : DOS in EPS.</p></li>
+<li><p><strong>_dos.pdf</strong> : DOS in PDF.</p></li>
+<li><p><strong>_dos.txt</strong> : DOS data (when <code class="docutils literal notranslate"><span class="pre">output/dos</span></code> is not <code class="docutils literal notranslate"><span class="pre">False</span></code>).</p></li>
+<li><p><strong>_eigen_k_path.npz</strong>, <strong>_eigen_k_full.npz</strong> : eigenvalues and eigenvectors (when <code class="docutils literal notranslate"><span class="pre">output/save_k_path</span></code> or <code class="docutils literal notranslate"><span class="pre">output/save_k_full</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>).</p></li>
+<li><p><strong>_weight.pdf</strong> : dispersion colored by the orbital weight.</p></li>
+<li><p><strong>_weight.txt</strong> : dispersion with the orbital weight (when <code class="docutils literal notranslate"><span class="pre">output/dispersion/weight</span></code> is not <code class="docutils literal notranslate"><span class="pre">False</span></code>).</p></li>
+<li><p><strong>plot_dos.gnu</strong>, <strong>plot_weight.gnu</strong> : command scripts to plot DOS and orbital weight by gnuplot.</p></li>
+<li><p><strong>plot_band.gnu</strong> : command script to plot by gnuplot.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./src"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tutorial">Tutorial</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-input-file">Model input file</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#control-file">Control file</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#post-processing-tools">Post-processing tools</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#format-of-input-files">Format of input files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#command-line-tools">Command-line tools</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parallel-computation">Parallel computation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#output-files">Output files</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Hiroaki Kusunose and Rikuto Oiwa
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2021-.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
