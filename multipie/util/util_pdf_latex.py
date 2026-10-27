@@ -1,11 +1,117 @@
+# SPDX-License-Identifier: MPL-2.0
+# Copyright (C) 2021- The MultiPie developers
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
 """
-This class mangaes PDF creation via LaTeX.
+This class manages PDF creation via LaTeX.
 """
 
 import os
+import shutil
+import signal
 import subprocess
 import math
 import numpy as np
+
+_LATEX_TIMEOUT = 1800  # timeout for each LaTeX run in seconds.
+
+# LaTeX special characters, and their replacements in text and math modes.
+_TEX_SPECIAL = {
+    "\\": (r"\textbackslash{}", r"\backslash{}"),
+    "{": (r"\{", r"\{"),
+    "}": (r"\}", r"\}"),
+    "_": (r"\texttt{\symbol{95}}", r"\texttt{\symbol{95}}"),  # underscore glyph (\_ is drawn as a rule).
+    "#": (r"\#", r"\#"),
+    "%": (r"\%", r"\%"),
+    "&": (r"\&", r"\&"),
+    "$": (r"\$", r"\$"),
+    "^": (r"\^{}", r"\wedge{}"),
+    "~": (r"\~{}", r"\sim{}"),
+}
+
+
+# ==================================================
+def tex_text(name, math=False):
+    """
+    Escape LaTeX special characters in a name given by the user, e.g., model and site names.
+
+    Args:
+        name (str): name.
+        math (bool, optional): escape for math mode ? otherwise for text mode.
+
+    Returns:
+        - (str) -- escaped name.
+    """
+    return "".join(_TEX_SPECIAL[c][math] if c in _TEX_SPECIAL else c for c in str(name))
+
+
+# ==================================================
+class LaTeXError(Exception):
+    """
+    Error in PDF creation via LaTeX.
+    """
+
+    pass
+
+
+# ==================================================
+def _kill_tree(p):
+    """
+    Kill process and all its child processes started by _run_tex.
+
+    Args:
+        p (subprocess.Popen): process.
+    """
+    if os.name == "nt":
+        try:
+            subprocess.run(
+                ["taskkill", "/F", "/T", "/PID", str(p.pid)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=30
+            )
+        except (OSError, subprocess.TimeoutExpired):
+            pass
+        if p.poll() is None:
+            p.kill()
+    else:
+        try:
+            os.killpg(p.pid, signal.SIGKILL)
+        except ProcessLookupError:
+            pass
+    try:
+        p.wait(timeout=30)
+    except subprocess.TimeoutExpired:
+        pass
+
+
+# ==================================================
+def _run_tex(cmd, timeout):
+    """
+    Run TeX command, and kill all its child processes when it does not finish normally.
+
+    Args:
+        cmd (list): command.
+        timeout (float): timeout in seconds.
+
+    Returns:
+        - (int) -- return code.
+
+    Note:
+        - ptex2pdf runs TeX and dvipdfmx as child processes.
+        - the process tree is killed on timeout or interruption (e.g., Ctrl-C).
+    """
+    if os.name == "nt":
+        opt = {"creationflags": subprocess.CREATE_NEW_PROCESS_GROUP}
+    else:
+        opt = {"start_new_session": True}
+
+    p = subprocess.Popen(cmd, stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, **opt)
+    try:
+        return p.wait(timeout=timeout)
+    except BaseException:
+        _kill_tree(p)
+        raise
 
 
 # ==================================================
@@ -36,7 +142,7 @@ def regularize_table(lst2d, padding=None):
     Returns:
         - (list) -- regularized 2d list.
     """
-    if type(lst2d) != list:
+    if not isinstance(lst2d, list):
         raise KeyError(f"non list type ({type(lst2d)}) is given.")
 
     col = max(map(len, lst2d))
@@ -61,7 +167,7 @@ def list_to_table(lst1d, col, p=None):
     Returns:
         - (list) -- 2d list.
     """
-    if type(lst1d) != list:
+    if not isinstance(lst1d, list):
         raise KeyError(f"non list type ({type(lst1d)}) is given.")
 
     n = len(lst1d)
@@ -145,29 +251,82 @@ class PDFviaLaTeX:
         for x in self.__replace:
             txt = txt.replace(*x)
 
-        pdfdir = self.__dir
+        pdfdir = os.path.abspath(self.__dir)
         cwd = os.getcwd()
         os.chdir(pdfdir)
-        f = open(self.__fname + ".tex", mode="wt")
-        f.write(txt)
-        f.close()
-
-        cmd = f"ptex2pdf -l -ot -synctex=0 -halt-on-error {self.__fname}.tex"  # for texlive.
-        rm_file = [self.__fname + ext for ext in [".aux", ".log"]]
-
+        pdf = os.path.join(pdfdir, self.__fname + ".pdf")
+        done = False
         try:
-            subprocess.run(cmd.split(), capture_output=True, check=True, cwd=pdfdir)
-            if self.__twice:
-                subprocess.run(cmd.split(), capture_output=True, check=True, cwd=pdfdir)
-        except subprocess.CalledProcessError:
-            raise Exception(f"LaTeX compile error. See, {self.__fname}.log")
+            f = open(self.__fname + ".tex", mode="wt")
+            f.write(txt)
+            f.close()
 
-        for rm in rm_file:
-            if os.path.exists(rm):
-                os.remove(rm)
+            ptex2pdf = shutil.which("ptex2pdf")
+            if ptex2pdf is None:
+                raise LaTeXError("ptex2pdf is not found.")
+            self._check_package()
 
-        if pdfdir:
+            # TeX options must be given as one argument of -ot. nonstopmode and closed stdin
+            # prevent TeX from waiting for input, e.g., when a package is missing.
+            cmd = [ptex2pdf, "-l", "-ot", "-synctex=0 -halt-on-error -interaction=nonstopmode", f"{self.__fname}.tex"]
+            if ptex2pdf.lower().endswith(".lua"):  # script found via PATHEXT on Windows.
+                cmd = ["texlua"] + cmd
+            rm_file = [self.__fname + ext for ext in [".aux", ".log"]]
+
+            n_run = 2 if self.__twice else 1
+            for _ in range(n_run):
+                try:
+                    rc = _run_tex(cmd, _LATEX_TIMEOUT)
+                except subprocess.TimeoutExpired:
+                    raise LaTeXError(f"LaTeX did not finish in {_LATEX_TIMEOUT} sec. See, {self.__fname}.log")
+                except OSError as e:
+                    raise LaTeXError(f"cannot run ptex2pdf: {e}")
+                if rc != 0:
+                    raise LaTeXError(f"LaTeX compile error. See, {self.__fname}.log")
+            done = True
+
+            for rm in rm_file:
+                if os.path.exists(rm):
+                    os.remove(rm)
+        finally:
             os.chdir(cwd)
+            # when this run fails or is interrupted, remove the PDF, which is from an earlier run or incomplete.
+            if not done and os.path.exists(pdf):
+                try:
+                    os.remove(pdf)
+                except OSError:  # keep the original error.
+                    pass
+
+    # ==================================================
+    def _check_package(self):
+        """
+        Check if all LaTeX packages are installed (only when kpsewhich is available).
+
+        :meta private:
+        """
+        if shutil.which("kpsewhich") is None:
+            return
+
+        # a package entry may contain several names, e.g., "amsmath,amssymb".
+        names = [i.strip() for name, _ in self.__package for i in name.split(",") if i.strip()]
+        names = list(dict.fromkeys(names))
+        missing = []
+        for name in names:
+            # search in the same way as platex, which is used by ptex2pdf -l.
+            try:
+                result = subprocess.run(
+                    ["kpsewhich", "-progname=platex", name + ".sty"],
+                    stdin=subprocess.DEVNULL,
+                    stdout=subprocess.DEVNULL,
+                    stderr=subprocess.DEVNULL,
+                    timeout=60,
+                )
+            except (OSError, subprocess.TimeoutExpired):
+                return  # cannot check, let LaTeX report errors.
+            if result.returncode != 0:
+                missing.append(name + ".sty")
+        if missing:
+            raise LaTeXError(f"LaTeX package(s) not found: {', '.join(missing)}.")
 
     # ==================================================
     def _create_source(self, content, package=[], style="normal", pt=10, no_page=False, landscape=False, english=False):
@@ -269,11 +428,11 @@ class PDFviaLaTeX:
             - (list) -- 2d table with given cols [[str]].
             - (list) -- number of divisions in each rows [int].
         """
-        if type(tbl) != list:
+        if not isinstance(tbl, list):
             raise KeyError("non-list type is given for table.")
         if len(tbl) == 0:
             raise KeyError("empty list is given for table.")
-        if type(tbl[0]) != list:  # in case of 1d list
+        if not isinstance(tbl[0], list):  # in case of 1d list
             tbl = [tbl]
         nmax = max(map(len, tbl))
         if cols is None or nmax <= cols:
@@ -315,7 +474,7 @@ class PDFviaLaTeX:
         Args:
             content (str or list, optional): text.
         """
-        if type(content) == list:
+        if isinstance(content, list):
             self.__content += content
         else:
             self.__content += [content]
@@ -331,7 +490,7 @@ class PDFviaLaTeX:
             long (bool, optional): long eq. ? (single eq. only).
         """
         n = "" if num else "*"
-        if type(eqs) == list:
+        if isinstance(eqs, list):
             if long:
                 raise KeyError("long equation is unsupported.")
             if not eqs:

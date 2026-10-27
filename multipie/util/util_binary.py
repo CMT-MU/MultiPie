@@ -1,3 +1,10 @@
+# SPDX-License-Identifier: MPL-2.0
+# Copyright (C) 2021- The MultiPie developers
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
 """
 For binary data.
 """
@@ -130,7 +137,7 @@ class BinaryManager(dict):
         """
         fullpath = self.get_fullpath(filename)
         os.makedirs(os.path.dirname(fullpath), exist_ok=True)
-        dic = self.to_dict()
+        dic = {"header": self.comment, "data": dict(self)}  # same as to_dict, without deep copy, as pickle does not modify data.
         bs = pickle.dumps(dic, protocol=pickle.HIGHEST_PROTOCOL)
         with gzip.open(fullpath, mode="wb") as f:
             f.write(bs)
@@ -154,13 +161,15 @@ class BinaryManager(dict):
             filename (str): file name. (extension is .pkl).
 
         Returns:
-            - (bool) -- return True if error occurs, otherwise False.
+            - (bool) -- False (for compatibility).
+
+        Raises:
+            FileNotFoundError: if the file does not exist.
         """
         self.clear()
         fullpath = self.get_fullpath(filename)
         if not os.path.exists(fullpath):
-            print(f"cannot open '{fullpath}'.")
-            return True
+            raise FileNotFoundError(f"cannot open '{fullpath}'.")
 
         with gzip.open(fullpath, "rb") as f:
             bs = f.read()

@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools"]
+requires = ["setuptools>=77"]  # 77: license as an SPDX expression (PEP 639).
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -7,28 +7,32 @@ name = "multipie"
 dependencies = [
     "joblib",
     "click",
-    "seekpath",
+    "seekpath>=2.1",  # get_path_orig_cell requires seekpath 2.1 or later.
+    "numpy>=2",  # np.concat requires NumPy 2.0 or later.
+    "sympy",
+    "scipy",
+    "matplotlib",
+    "spglib>=2.5",  # attribute access to the symmetry dataset requires spglib 2.5 or later.
 ]
 dynamic = ["version"]
-requires-python = ">=3.11"
+requires-python = ">=3.12"
 authors = [
   { name="Hiroaki Kusunose", email="hiroaki.kusunose@gmail.com" },
   { name="Rikuto Oiwa", email="ro.qp.07@gmail.com" },
 ]
 description = "A python library for crystallographic symmetry operations and Symmetry-Adapted Multipole Basis (SAMB)."
 readme = {file = "docs/README.md", content-type = "text/markdown"}
-license = {file = "LICENSE"}
+license = "MPL-2.0"
+license-files = ["LICENSE"]
 keywords = ["group theory", "condensed matter", "materials science", "symmetry-adapted basis"]
 classifiers = [
     "Intended Audience :: Science/Research",
     "Topic :: Scientific/Engineering :: Information Analysis",
     "Topic :: Scientific/Engineering :: Physics",
     "Topic :: Scientific/Engineering :: Mathematics",
-    "License :: OSI Approved :: MIT License",
     "Operating System :: Microsoft :: Windows",
     "Operating System :: POSIX",
     "Operating System :: MacOS",
-    "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
 ]
@@ -42,11 +46,16 @@ Issues = "https://github.com/CMT-MU/MultiPie/issues"
 "mp_analyze" = "multipie.scripts.mp_analyze:cmd"
 
 [project.optional-dependencies]
+tetrahedron = [
+    "libtetrabz",  # optimized tetrahedron method for DOS (output/dos_method = "tetrahedron").
+]
 dev = [
     "black",
     "jupyter-book==1.0.4.post1",
     "ghp-import",
     "qtdraw",
+    "pytest",
+    "pytest-xdist",
 ]
 
 [tool.setuptools.dynamic]
@@ -61,10 +70,5 @@ exclude = ["build", "tests"]
 [tool.black]
 line-length = 130
 
-[tool.build_sphinx]
-source-dir = "docs"
-build-dir  = "./docs/_build"
-all_files  = 1
-
-[tool.upload_sphinx]
-upload-dir = "docs/_build/html"
+[tool.pytest.ini_options]
+testpaths = ["tests"]

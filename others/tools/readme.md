@@ -11,7 +11,7 @@ The `tools` folder is to create various binary database and PDF for crystallogra
 ## Create binary data
 
 1. Run `create_data.py` or the files in `create_binary` one by one.
-2. Comment out `from .core.group import Group` in `__init__.py`, and Run `create_final_data.py`. Then, uncomment it again.
+2. Run `create_final_data.py`. (Commenting out the import of `Group` in `multipie/__init__.py` is no longer needed, because the public API is now imported lazily.)
 3. The binary files are created in `tools/binary_data` as temporary ones.
 4. Run `create_final_data.py`, and the final binary files in `multipie/binary_data`.
 

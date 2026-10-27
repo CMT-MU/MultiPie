@@ -1,3 +1,10 @@
+# SPDX-License-Identifier: MPL-2.0
+# Copyright (C) 2021- The MultiPie developers
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
 """
 Create PDF for symmetry operation.
 """
@@ -94,7 +101,7 @@ def create_symmetry_operation():
     for id_s in info["id_set"]["SG"]["all"]:
         no = int(id_s.split(":")[1])
         tag = info["tag"][id_s]
-        h_dir = os.path.join(__top_dir__, f"{pdfdir}SG/{no:03d}-{tag.replace("^", "_")}")
+        h_dir = os.path.join(__top_dir__, f"{pdfdir}SG/{no:03d}-{tag.replace('^', '_')}")
         create_symmetry_operation_each(id_s, h_dir)
 
     for id_s in info["id_set"]["MPG"]["all"]:

@@ -1,3 +1,10 @@
+# SPDX-License-Identifier: MPL-2.0
+# Copyright (C) 2021- The MultiPie developers
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
 """
 For creating atomic multipole data.
 """
@@ -5,6 +12,7 @@ For creating atomic multipole data.
 import sympy as sp
 from sympy.physics.wigner import wigner_3j, wigner_6j, wigner_9j
 from joblib import Parallel, delayed
+from multipie.util.util import get_n_jobs
 
 orbital = ["s", "p", "d", "f"]
 spin = ["1/2", "-1/2"]
@@ -71,9 +79,9 @@ def sort_matrix(M, idx_row_list=None, idx_col_list=None):
         idx_col_list = [i for i in range(N_col)]
 
     if len(idx_row_list) != N_row:
-        raise Exception(f"invalid len(idx_row_list) = {len(idx_row_list)}")
+        raise ValueError(f"invalid len(idx_row_list) = {len(idx_row_list)}")
     if len(idx_col_list) != N_col:
-        raise Exception(f"invalid len(idx_col_list) = {len(idx_col_list)}")
+        raise ValueError(f"invalid len(idx_col_list) = {len(idx_col_list)}")
 
     M_sorted = sp.zeros(N_row, N_col)
     for i, idx_row in enumerate(idx_row_list):
@@ -402,7 +410,7 @@ def create_atomic_multipole_matrix(b_type="lms"):
     elif b_type == "jml":
         basis = _jm_basis
     else:
-        raise Exception("b_type: invalid basis type. choose 'lms'/'jml'.")
+        raise ValueError("b_type: invalid basis type. choose 'lms'/'jml'.")
 
     def proc(xlmsk):
         (X, l, m, s, k) = xlmsk
@@ -427,7 +435,7 @@ def create_atomic_multipole_matrix(b_type="lms"):
         for k in reversed(range(-s, s + 1))
     ]
 
-    sub = Parallel(n_jobs=-1, verbose=verbose)([delayed(proc)(xlmsk) for xlmsk in Xlmsk_list])
+    sub = Parallel(n_jobs=get_n_jobs(), verbose=verbose)([delayed(proc)(xlmsk) for xlmsk in Xlmsk_list])
 
     Xlmsk = {tag: am for tag, am in sub if not am.is_zero_matrix}
 

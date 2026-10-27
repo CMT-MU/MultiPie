@@ -1,3 +1,10 @@
+# SPDX-License-Identifier: MPL-2.0
+# Copyright (C) 2021- The MultiPie developers
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
 """
 Group database class.
 
@@ -5,15 +12,17 @@ This module provides Group database maneger.
 """
 
 import re
+import copy
+import functools
+from collections.abc import MutableMapping
 import numpy as np
 import sympy as sp
 from itertools import product
-from sympy.physics.quantum.cg import CG
 from joblib import Parallel, delayed
 
 
 from multipie import PGMultipoleType, SphericalMultipoleType
-from multipie.util.util import str_to_sympy
+from multipie.util.util import str_to_sympy, get_n_jobs, is_integer, parallel_map
 from multipie.util.util_binary import BinaryManager
 from multipie.util.util_dict import Dict
 from multipie.util.util_gram_schmidt import gram_schmidt
@@ -59,6 +68,114 @@ def replace_bar(s):
 
 
 # ==================================================
+def _read_only(obj):
+    """
+    Make the NumPy arrays in obj read only (recursively in dicts, lists and tuples).
+
+    Args:
+        obj (any): object.
+
+    Returns:
+        - (any) -- obj itself.
+
+    :meta private:
+    """
+    if isinstance(obj, np.ndarray):
+        obj.flags.writeable = False  # the elements of an object array are not searched (no array in the group data).
+    elif isinstance(obj, MutableMapping):
+        for v in obj.values():
+            _read_only(v)
+    elif isinstance(obj, (list, tuple)):
+        for v in obj:
+            _read_only(v)
+    return obj
+
+
+# ==================================================
+def _copy_containers(obj):
+    """
+    Copy the containers (dict, list, tuple, Dict, BinaryManager) in obj recursively, sharing the other objects.
+
+    Args:
+        obj (any): object.
+
+    Returns:
+        - (any) -- copied object.
+
+    Note:
+        - the shared objects are immutable (str, int, SymPy expression) or read-only NumPy arrays.
+
+    :meta private:
+    """
+    if isinstance(obj, Dict):
+        new = copy.copy(obj)
+        new._data = {k: _copy_containers(v) for k, v in obj._data.items()}
+        return new
+    if isinstance(obj, dict):  # including BinaryManager.
+        new = copy.copy(obj)
+        for k, v in obj.items():
+            dict.__setitem__(new, k, _copy_containers(v))
+        return new
+    if isinstance(obj, list):
+        return [_copy_containers(v) for v in obj]
+    if isinstance(obj, tuple):
+        items = [_copy_containers(v) for v in obj]
+        if all(i is j for i, j in zip(items, obj)):  # no container inside.
+            return obj
+        return type(obj)(*items) if hasattr(obj, "_fields") else type(obj)(items)
+    return obj
+
+
+# ==================================================
+@functools.lru_cache(maxsize=16)
+def _load_group_data(file):
+    """
+    Load group data, which is shared by the Group objects of the same group (read only).
+
+    Args:
+        file (str): file name in binary_data, e.g., "PG/PG:32".
+
+    Returns:
+        - (BinaryManager) -- group data.
+
+    Note:
+        - the data of the 16 groups used last are kept in memory (in each process).
+        - the NumPy arrays in the data are read only, as they are shared. Copy the containers with _copy_containers
+          before giving the data to a Group object.
+
+    :meta private:
+    """
+    return _read_only(BinaryManager(file))
+
+
+# ==================================================
+@functools.lru_cache(maxsize=2)
+def _load_group_opt_data(file):
+    """
+    Load optional group data, shared as _load_group_data (large, so that only two are kept).
+
+    :meta private:
+    """
+    return _read_only(BinaryManager(file))
+
+
+# ==================================================
+@functools.lru_cache(maxsize=None)
+def _cg_coefficient(l1, m1, l2, m2, l, m):
+    """
+    Clebsch-Gordan coefficient, < l1 m1; l2 m2 | l m > (sympy).
+
+    Note:
+        - the values are kept in memory, as the same coefficients are used repeatedly in Group.cg.
+
+    :meta private:
+    """
+    from sympy.physics.quantum.cg import CG  # import here, as sympy.physics.quantum is slow to import.
+
+    return CG(l1, m1, l2, m2, l, m).doit()
+
+
+# ==================================================
 class Group(dict):
     _info = BinaryManager("info")
 
@@ -76,11 +193,14 @@ class Group(dict):
             - SG tag is SG:1-230, Schoenflies, or number (1-230).
             - MPG tag is MPG:HM_ID or HM_ID, HM_ID=(PG.no.ID).
             - MSG tag is MSG:BNS_ID or BNS_ID, BNS_ID=(SG.no).
+            - the group data is loaded once and kept in memory. The Group objects of the same group share its NumPy arrays,
+              which are read only, and SymPy expressions; dicts and lists are copied for each Group object.
+              Group.clear_cache() releases the data kept in memory (existing Group objects keep theirs).
         """
-        if type(tag) == int:
+        if is_integer(tag):
             tag = f"SG:{tag}"
         if tag not in self._info["id"].keys() and tag not in self._info["tag"].keys():
-            raise Exception(f"unknown tag, '{tag}'.")
+            raise ValueError(f"unknown tag, '{tag}'.")
 
         self._group_dict = {"PG": None, "SG": None, "MPG": None, "MSG": None, "opt": None}
 
@@ -92,11 +212,20 @@ class Group(dict):
 
         file = f"{self._type}/{self._id}"
 
-        self._group_dict[self._type] = BinaryManager(file)
+        self._group_dict[self._type] = _copy_containers(_load_group_data(file))
 
         if with_opt:
             pg_file = self._group(self._type)["info"].PG
-            self._group_dict["opt"] = BinaryManager("PG/" + pg_file + "_opt")
+            self._group_dict["opt"] = _copy_containers(_load_group_opt_data("PG/" + pg_file + "_opt"))
+
+    # ==================================================
+    @staticmethod
+    def clear_cache():
+        """
+        Clear the group data kept in memory (loaded again when used).
+        """
+        _load_group_data.cache_clear()
+        _load_group_opt_data.cache_clear()
 
     # ==================================================
     @classmethod
@@ -162,7 +291,7 @@ class Group(dict):
                 id_s = self.info.MSG
 
             file = f"{tp}/{id_s}"
-            self._group_dict[tp] = BinaryManager(file)
+            self._group_dict[tp] = _copy_containers(_load_group_data(file))
 
     # ==================================================
     def _group(self, tp=None):
@@ -200,13 +329,13 @@ class Group(dict):
                 U = np.kron(U, np.eye(2, dtype=object))
             return U
 
-        if type(U_ket) == int:
+        if is_integer(U_ket):
             U_ket = get_u_matrix(U_ket)
 
         if U_bra is None:
             U_bra = U_ket
         else:
-            if type(U_bra) == int:
+            if is_integer(U_bra):
                 U_bra = get_u_matrix(U_bra)
 
         U_bra = U_bra.conjugate().T
@@ -442,7 +571,7 @@ class Group(dict):
             - (list) -- list of basis in sympy.
         """
         if basis_type not in ["jml", "lgs", "lg"]:
-            raise Exception(f"unknown basis_type, '{basis_type}'.")
+            raise ValueError(f"unknown basis_type, '{basis_type}'.")
 
         basis = self.atomic_basis(basis_type)[rank]
 
@@ -590,7 +719,7 @@ class Group(dict):
         """
         harm_info = self.global_info()["harmonics"]["atomic_basis"]
         if basis_type not in ["jml", "lgs", "lg"]:
-            raise Exception(f"unknown basis type, '{basis_type}'.")
+            raise ValueError(f"unknown basis type, '{basis_type}'.")
         if basis_type in ["jml", "lgs"]:
             basis = harm_info["spinful"][basis_type]
         else:
@@ -699,7 +828,7 @@ class Group(dict):
             return None
 
         if basis_type not in ["jml", "lgs", "lg"]:
-            raise Exception(f"unknown basis_type, '{basis_type}'.")
+            raise ValueError(f"unknown basis_type, '{basis_type}'.")
 
         a_samb = self._group("PG")["atomic_samb"]
         bra_rank, ket_rank = rank_bra_ket
@@ -713,7 +842,7 @@ class Group(dict):
         if mask_bra_ket is not None:
             tp = check_mask(mask_bra_ket)
             if tp is None:
-                raise Exception(f"unknown mask_bra_ket, '{mask_bra_ket}'.")
+                raise ValueError(f"unknown mask_bra_ket, '{mask_bra_ket}'.")
 
             bra_mask, ket_mask = mask_bra_ket
             if tp in ["int", "str"]:
@@ -771,7 +900,7 @@ class Group(dict):
             cluster_type = "site"
 
         if cluster_type not in ["site", "bond_s", "bond_a", "vector", "bond"]:
-            raise Exception(f"unknown cluster_type, '{cluster_type}'.")
+            raise ValueError(f"unknown cluster_type, '{cluster_type}'.")
 
         if self.group_type in ["MPG", "MSG"]:
             return None
@@ -782,7 +911,7 @@ class Group(dict):
 
         ct = "site" if cluster_type == "site" else "bond_s"
         if wp not in c_samb[ct].keys():
-            raise Exception(f"unknown tag, '{wp}'.")
+            raise ValueError(f"unknown tag, '{wp}'.")
 
         if cluster_type == "bond":
             s = c_samb["bond_s"][wp]
@@ -838,6 +967,8 @@ class Group(dict):
 
         key_of = lambda tg, i: (tg.X, tg.l, tg.Gamma, tg.n, i, tg.s, tg.k, tg.x)
 
+        # collect blocks to be orthogonalized.
+        blocks = []
         for (X, l1, s, k, p1), (Y, l2, p2) in product(X_l_s_k_p_list, Y_l_p_list):
             tag1_list = Dict.select_key(a_samb_key, X=X, l=l1, s=s, k=k, p=p1)
             tag2_list = Dict.select_key(c_samb_key, X=Y, l=l2, p=p2)
@@ -861,30 +992,33 @@ class Group(dict):
                         tag_list.append(tag)
                         tag12_list.append(tag12)
 
-                # orthogonalize
-                if not coeff_list:
-                    continue
+                if coeff_list:
+                    blocks.append((s, k, tag_list, coeff_list, tag12_list))
 
-                coeff_list, idx = gram_schmidt(coeff_list)
-                tag_list, tag12_list = [tag_list[i] for i in idx], [tag12_list[i] for i in idx]
-                for tag, tag12, coeff in zip(tag_list, tag12_list, coeff_list):
-                    ex = list(harmonics[tag._replace(X="Q" if tag.X == "T" else "G" if tag.X == "M" else tag.X)][0])
-                    tag = tag._replace(**{"s": s, "k": k})
+        # orthogonalize each block (in parallel).
+        size = sum(np.size(c) for _, _, _, coeff_list, _ in blocks for coeff in coeff_list for c in coeff)
+        ortho = parallel_map(gram_schmidt, [(coeff_list,) for _, _, _, coeff_list, _ in blocks], size)
 
-                    dim = TagIrrep.parse(tag.Gamma)["dimension"]
-                    lst = [[(cg[g], *entry) for entry, cg in zip(tag12, coeff) if cg[g] != 0] for g in range(dim)]
+        for (s, k, tag_list, _, tag12_list), (coeff_list, idx) in zip(blocks, ortho):
+            tag_list, tag12_list = [tag_list[i] for i in idx], [tag12_list[i] for i in idx]
+            for tag, tag12, coeff in zip(tag_list, tag12_list, coeff_list):
+                ex = list(harmonics[tag._replace(X="Q" if tag.X == "T" else "G" if tag.X == "M" else tag.X)][0])
+                tag = tag._replace(**{"s": s, "k": k})
 
-                    cnt = len(dic.select(X=tag.X, l=tag.l, Gamma=tag.Gamma, n=tag.n, s=tag.s, k=tag.k, x=tag.x))
-                    if cnt == 0:
-                        tag = key_of(tag, -1)
-                    elif cnt == 1:
-                        base, tag1, tag = key_of(tag, -1), key_of(tag, 1), key_of(tag, 2)
-                        dic[tag1] = dic[base]
-                        del dic[base]
-                    else:
-                        tag = key_of(tag, cnt + 1)
+                dim = TagIrrep.parse(tag.Gamma)["dimension"]
+                lst = [[(cg[g], *entry) for entry, cg in zip(tag12, coeff) if cg[g] != 0] for g in range(dim)]
 
-                    dic[tag] = (lst, ex)
+                cnt = len(dic.select(X=tag.X, l=tag.l, Gamma=tag.Gamma, n=tag.n, s=tag.s, k=tag.k, x=tag.x))
+                if cnt == 0:
+                    tag = key_of(tag, -1)
+                elif cnt == 1:
+                    base, tag1, tag = key_of(tag, -1), key_of(tag, 1), key_of(tag, 2)
+                    dic[tag1] = dic[base]
+                    del dic[base]
+                else:
+                    tag = key_of(tag, cnt + 1)
+
+                dic[tag] = (lst, ex)
 
         dic = dic.sort("Gamma", ("X", ["Q", "G", "M", "T"]), "s", "k", "l", "n", "p")
 
@@ -1115,7 +1249,7 @@ class Group(dict):
         Returns:
             - (ndarray) -- transformed vectors in order of symmetry operations.
         """
-        if type(vector) == str:
+        if isinstance(vector, str):
             vector = str_to_sympy(vector)
 
         so = "cartesian" if cartesian else "fractional"
@@ -1228,7 +1362,7 @@ class Group(dict):
             - if group is PG/SG, return Wyckoff site as well.
             - result in order of plus_set for SG.
         """
-        if type(vector_site) == str:
+        if isinstance(vector_site, str):
             vector, site_bond = vector_site.split("#")
             vector = str_to_sympy(vector)
             if "@" in site_bond or ";" in site_bond or ":" in site_bond:
@@ -1269,7 +1403,7 @@ class Group(dict):
             - if group is PG/SG, return Wyckoff site as well.
             - result in order of plus_set for SG.
         """
-        if type(multipole_site) == str:
+        if isinstance(multipole_site, str):
             multipole, site_bond = multipole_site.split("#")
             if "@" in site_bond or ";" in site_bond or ":" in site_bond:
                 site_bond = convert_to_bond(site_bond)
@@ -1329,19 +1463,23 @@ class Group(dict):
         phase = (-sp.I) ** (l1 + l2 - l)
         m_to_idx = {m: k for k, m in enumerate(ml)}
 
+        # nonzero CG coefficients (i, j, k, coefficient), which do not depend on g1, g2, g.
+        cg_lm = []
+        for i, j in product(range(len(ml1)), range(len(ml2))):
+            m1, m2 = ml1[i], ml2[j]
+            m = m1 + m2
+            if m not in m_to_idx:
+                continue
+            c = _cg_coefficient(l1, m1, l2, m2, l, m)
+            if c:
+                cg_lm.append((i, j, m_to_idx[m], phase * c))
+
         cg_array = np.full((len(u1), len(u2), len(u)), sp.S(0), dtype=object)
 
         for g1, g2, g in product(range(len(u1)), range(len(u2)), range(len(u))):
             s = sp.S(0)
-            for i, j in product(range(len(ml1)), range(len(ml2))):
-                m1, m2 = ml1[i], ml2[j]
-                m = m1 + m2
-                if m not in m_to_idx:
-                    continue
-                k = m_to_idx[m]
-                c = CG(l1, m1, l2, m2, l, m).doit()
-                if c:
-                    s += phase * c * sp.conjugate(u1[g1, i] * u2[g2, j]) * u[g, k]
+            for i, j, k, c in cg_lm:
+                s += c * sp.conjugate(u1[g1, i] * u2[g2, j]) * u[g, k]
             if s != 0:
                 cg_array[g1, g2, g] = s
 
@@ -1382,7 +1520,7 @@ class Group(dict):
         max_l = 2 * L
         Xlmsk_list = [(X, l, m, 0, 0) for X in ["Q", "M"] for l in range(max_l + 1) for m in reversed(range(-l, l + 1))]
 
-        sub = Parallel(n_jobs=-1, verbose=verbose)([delayed(proc)(xlmsk) for xlmsk in Xlmsk_list])
+        sub = Parallel(n_jobs=get_n_jobs(), verbose=verbose)([delayed(proc)(xlmsk) for xlmsk in Xlmsk_list])
 
         Xlmsk = {tag: am for tag, am in sub if not am.is_zero_matrix}
 

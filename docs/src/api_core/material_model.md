@@ -24,7 +24,7 @@ This class has the following dict data.
     - **A** (list): [a1,a2,a3,t] conventional lattice and translational vectors (4x4, each column).
     - **G** (list): metric matrix for conventional lattice (4x4).
   - **unit_vector** (list): unit vectors, a1, a2, a3 (conventional cell).
-  - **unit_vector_primitive** (list): unit vectors, a1p, a2p, a3p (primitive cell).
+  - **unit_vector_primitive** (list): unit vectors, a1p, a2p, a3p (primitive cell), A_p = P^T A, consistent with the primitive fractional coordinates of the sites (x_c = P x_p). Models created before this was fixed store A Pi^T for centred lattices; ModelAnalyzer recomputes A_p from unit_vector.
 
 - Generation condition.
   - **SAMB_select** (dict): SAMB selection.
@@ -42,7 +42,7 @@ This class has the following dict data.
     - **cell** (dict): conventional cell site, dict[name, [CellSiteType]].
   - **bond** (dict): bond info.
     - **representative** (dict): representative bond, dict[name, RepBondType].
-    - **cell** (dict): conventional cell bond, dict[name, [CellBondType]].
+    - **cell** (dict): conventional cell bond, dict[name, [CellBondType]]. The head of a bond is at position_primitive of the head site in the home cell, and its tail at position_primitive of the tail site plus R_primitive, so that vector_primitive = head - (tail + R_primitive). In models created before [PR #151](https://github.com/CMT-MU/MultiPie/pull/151), R_primitive is wrong by a primitive lattice vector for bonds of a centred lattice (I, F, C, A, R) whose head and tail sites need different shifts into [0,1) when converted to the primitive cell (P lattices are not affected). Loading such a model keeps the stored R_primitive, so the model and the files created from it (SAMB matrices, H(R)) must be created again.
     - **info** (list): bond properties, [BondInfoType].
 
 - SAMB.
@@ -75,17 +75,17 @@ This class has the following dict data.
 Combined, atomic, and site/bond-cluster SAMBs have the following dict data.
 
 - Combined SAMB, $Z_i$, Dict[index, SAMB].
-  - index (PGMultipoleType): (X,l,$\Gamma$,s,k,n,p,x)
+  - index (PGMultipoleType): (X,l,$\Gamma$,n,p,s,k,x)
   - SAMB (tuple): SAMB data for set of components.
     - (list) [[(coeff, X_index, X_component, Y_index, Y_component)]],
     - (list) [symmetry].
 - Atomic SAMB, $X_j$, Dict[index, SAMB].
-  - index (PGMultipoleType): (X,l,$\Gamma$,s,k,n,p,x)
+  - index (PGMultipoleType): (X,l,$\Gamma$,n,p,s,k,x)
   - SAMB (tuple): SAMB data for set of components.
     - (list) [matrix],
     - (list) [symmetry]
 - Site/bond-cluster SAMB, $Y_k$, Dict[index, SAMB].
-  - index (PGMultipoleType): (X,l,$\Gamma$,s,k,n,p,x)
+  - index (PGMultipoleType): (X,l,$\Gamma$,n,p,s,k,x)
   - SAMB (tuple): SAMB data for set of components.
     - (list) [vector],
     - (list) [symmetry]

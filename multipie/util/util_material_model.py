@@ -1,3 +1,10 @@
+# SPDX-License-Identifier: MPL-2.0
+# Copyright (C) 2021- The MultiPie developers
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
 """
 Utility for MaterialModel class.
 """
@@ -5,7 +12,7 @@ Utility for MaterialModel class.
 import numpy as np
 
 from multipie import RepSiteType, CellSiteType, BondInfoType, RepBondType, CellBondType, BraketInfoType
-from multipie.util.util import progress_bar_step, progress_bar_done
+from multipie.util.util import progress_bar_step, progress_bar_done, is_integer
 from multipie.util.util_crystal import site_distance, shift_site, convert_to_primitive, TOL_SAME_SITE
 from multipie.util.util_wyckoff import find_vector
 from multipie.core.default_model import _site_property, _bond_property
@@ -201,9 +208,9 @@ def get_basis_type(site_data, spinful):
         elif tp == list:
             lst += [i.count("(") > 0 for i in orb]
         elif tp == dict:
-            raise Exception("not implemented.")
+            raise NotImplementedError("not implemented.")
         else:
-            raise Exception(f"invalid orbital format, {orb}.")
+            raise ValueError(f"invalid orbital format, {orb}.")
 
     if all(lst):
         basis_type = "jml"
@@ -213,7 +220,7 @@ def get_basis_type(site_data, spinful):
         else:
             basis_type = "lg"
     else:
-        raise Exception("jml, lgs, and lg formats coexist.")
+        raise ValueError("jml, lgs, and lg formats coexist.")
 
     return basis_type
 
@@ -251,7 +258,7 @@ def parse_orbital(orbital, basis_type, basis_info):
                 j = v[0]
                 basis = [i for i in basis_info["jml"][rank] if i.split(",")[0][1:] == j]
             else:
-                raise Exception(f"invalid orbital format, {orbital}.")
+                raise ValueError(f"invalid orbital format, {orbital}.")
         elif basis_type == "lgs":
             if check_block(orb):
                 rank = str_rank[orb[0]]
@@ -260,7 +267,7 @@ def parse_orbital(orbital, basis_type, basis_info):
                 else:
                     basis = [f"({orb},u)", f"({orb},d)"]
             else:
-                raise Exception(f"invalid orbital, {orb}.")
+                raise ValueError(f"invalid orbital, {orb}.")
         elif basis_type == "lg":
             if check_block(orb):
                 rank = str_rank[orb[0]]
@@ -269,9 +276,18 @@ def parse_orbital(orbital, basis_type, basis_info):
                 else:
                     basis = [orb]
             else:
-                raise Exception(f"invalid orbital, {orb}.")
+                raise ValueError(f"invalid orbital, {orb}.")
         else:
-            raise Exception(f"invalid orbital format, {orbital}.")
+            raise ValueError(f"invalid orbital format, {orbital}.")
+
+        if not basis or any(i not in basis_info[basis_type][rank] for i in basis):
+            block = "spdf"[rank]
+            if basis_type == "jml":
+                j = dict.fromkeys(i.split(",")[0][1:] for i in basis_info["jml"][rank])
+                acceptable = [f"({i},{block})" for i in j]
+            else:
+                acceptable = [block] + basis_info["lg"][rank]
+            raise ValueError(f"unknown orbital '{orb}', acceptable: {', '.join(acceptable)}.")
         return rank, basis
 
     tp = type(orbital)
@@ -284,9 +300,9 @@ def parse_orbital(orbital, basis_type, basis_info):
             rank, basis = regularize(i, basis_type, basis_info)
             basis_set[rank] += basis
     elif tp == dict:
-        raise Exception(f"to be available.")
+        raise NotImplementedError("to be available.")
     else:
-        raise Exception(f"invalid orbital format, {orbital}.")
+        raise ValueError(f"invalid orbital format, {orbital}.")
 
     basis_set = [sorted(block, key=lambda x: basis_info[basis_type][rank].index(x)) for rank, block in enumerate(basis_set)]
 
@@ -325,27 +341,29 @@ def parse_neighbor(neighbor, tail_rank, head_rank):
     """
     rank = {"s": 0, "p": 1, "d": 2, "f": 3, 0: 0, 1: 1, 2: 2, 3: 3}
 
-    if type(neighbor) == int:  # max neighbor.
+    if is_integer(neighbor):  # max neighbor.
         tail_rank = sorted(list(set(tail_rank)))
         head_rank = sorted(list(set(head_rank)))
-        neighbor = (list(range(1, neighbor + 1)), tail_rank, head_rank)
-    elif type(neighbor) == list:
+        neighbor = (list(range(1, int(neighbor) + 1)), tail_rank, head_rank)  # int: no overflow of NumPy integers.
+    elif isinstance(neighbor, list):
         tail_rank = sorted(list(set(tail_rank)))
         head_rank = sorted(list(set(head_rank)))
         neighbor = (neighbor, tail_rank, head_rank)
-    elif type(neighbor) == tuple:
+    elif isinstance(neighbor, tuple):
         max_neighbor, tail, head = neighbor
+        if not is_integer(max_neighbor):
+            raise ValueError(f"max. neighbor must be integer, but {max_neighbor!r} is given in {neighbor}.")
         tail1 = set([rank[i] for i in tail])
         head1 = set([rank[i] for i in head])
         if not tail1.issubset(tail_rank):
-            raise Exception(f"{tail} are not in {tail_rank}.")
+            raise ValueError(f"{tail} are not in {tail_rank}.")
         if not head1.issubset(head_rank):
-            raise Exception(f"{head} are not in {head_rank}.")
+            raise ValueError(f"{head} are not in {head_rank}.")
         tail_rank = sorted(list(tail1))
         head_rank = sorted(list(head1))
-        neighbor = (list(range(1, max_neighbor + 1)), tail_rank, head_rank)
+        neighbor = (list(range(1, int(max_neighbor) + 1)), tail_rank, head_rank)
     else:
-        raise Exception(f"unknown format for neighbor {neighbor}")
+        raise ValueError(f"unknown format for neighbor {neighbor}")
 
     return neighbor
 
@@ -377,7 +395,7 @@ def parse_samb_select(select, irreps):
     if "Gamma" in select.keys() and select["Gamma"] == "IR":
         select["Gamma"] = [irreps[0]]
 
-    select = {k: [v] if type(v) != list else v for k, v in select.items()}
+    select = {k: [v] if not isinstance(v, list) else v for k, v in select.items()}
 
     if "X" not in select.keys() or len(select["X"]) == 0:
         select["X"] = ["Q", "G", "M", "T"]
@@ -756,13 +774,17 @@ def parse_representative_site(group, site_data, basis_type, basis_info):
     rep_site = {}
     cell_site = {}
     for c_no, (name, (pos, orb)) in enumerate(site_data.items()):
-        pos = str(pos)
-        wp, sites = group.find_wyckoff_site(pos)
-        sites_primitive = convert_to_primitive(lattice, sites, shift=True)
-        wyckoff_site = group.wyckoff["site"][wp]
-        sym = wyckoff_site["symmetry"]
-        pos = sites[0].tolist()
-        orb = parse_orbital(orb, basis_type, basis_info)
+        try:
+            pos = str(pos)
+            wp, sites = group.find_wyckoff_site(pos)
+            sites_primitive = convert_to_primitive(lattice, sites, shift=True)
+            wyckoff_site = group.wyckoff["site"][wp]
+            sym = wyckoff_site["symmetry"]
+            pos = sites[0].tolist()
+            orb = parse_orbital(orb, basis_type, basis_info)
+        except Exception as e:
+            e.add_note(f"in site '{name}'.")
+            raise
 
         mapping = wyckoff_site["mapping"]
         n_sub = len(mapping)
@@ -879,9 +901,9 @@ def parse_representative_bond(group, G, site_grid, site_so, site_dict, bond_data
     c_no = 0
     for tail_tag, head_tag, neighbor in bond_data:
         if tail_tag not in site_dict["representative"].keys():
-            raise Exception(f"{tail_tag} is not found in sites.")
+            raise ValueError(f"{tail_tag} is not found in sites.")
         if head_tag not in site_dict["representative"].keys():
-            raise Exception(f"{head_tag} is not found in sites.")
+            raise ValueError(f"{head_tag} is not found in sites.")
 
         # swap if head_tag > tail_tag.
         if head_tag > tail_tag:
@@ -944,10 +966,13 @@ def parse_representative_bond(group, G, site_grid, site_so, site_dict, bond_data
                 for k, (v, vp, c, cp, m, sl, pi, ti, hi) in enumerate(
                     zip(vector, vector_p, center, center_p, mapping, sublattice, pset, tail_idx, head_idx)
                 ):
-                    s_tail = tail_pos[ti[0] - 1]
-                    s_tail = convert_to_primitive(lattice, s_tail, shift=False)
-                    s_head = head_pos[hi[0] - 1]
-                    s_head = convert_to_primitive(lattice, s_head, shift=False)
+                    # positions of the plus_set-1 sites in the primitive cell, shifted into [0,1) exactly
+                    # as position_primitive (used for the kets by get_ket_site). The unshifted
+                    # convert_to_primitive(...) differs by a primitive lattice vector for centred
+                    # lattices (e.g. Fd-3m Si: site 2 at (-1/8,7/8,7/8) vs (7/8,7/8,7/8)), which put the
+                    # nearest-neighbour SAMB on 4.53 and 5.96 A bonds.
+                    s_tail = np.asarray(tail_info[ti[0] - 1].position_primitive, dtype=float)
+                    s_head = np.asarray(head_info[hi[0] - 1].position_primitive, dtype=float)
                     n1, n2, n3 = -(vp - (s_head - s_tail))
                     n1, n2, n3 = round(n1), round(n2), round(n3)
                     cell_bond[name].append(CellBondType(k + 1, v, vp, c, cp, m, sl, pi, ti, hi, (n1, n2, n3)))
@@ -1223,6 +1248,7 @@ def create_cluster_samb_qtdraw(qtdraw, mm, site_bond, name):
     qtdraw.clear_data()
     qtdraw.set_model(name)
     qtdraw.set_crystal(mm["crystal"])
+    qtdraw.set_unit_cell(mm["cell_info"]["cell"])
     if mm.group.is_point_group:
         qtdraw.set_cell("off")
     else:

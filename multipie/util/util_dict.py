@@ -1,3 +1,10 @@
+# SPDX-License-Identifier: MPL-2.0
+# Copyright (C) 2021- The MultiPie developers
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
 """
 For customized dict.
 """
@@ -17,7 +24,7 @@ class Dict(MutableMapping):
             name_field (namedtuple): Dict name, field.
         """
         self._key_type = name_field
-        if len(args) == 1 and type(args[0]) == dict:
+        if len(args) == 1 and isinstance(args[0], dict):
             self._data = {self._key_type(*tuple(k)): v for k, v in args[0].items()}
         else:
             self._data = dict(*args, **kwargs)

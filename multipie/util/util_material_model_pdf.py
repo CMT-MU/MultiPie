@@ -1,3 +1,10 @@
+# SPDX-License-Identifier: MPL-2.0
+# Copyright (C) 2021- The MultiPie developers
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
 """
 Create PDF for material model.
 """
@@ -7,6 +14,7 @@ import sympy as sp
 
 from multipie.util.util import to_latex, simplify
 from multipie.core.group import Group
+from multipie.util.util_pdf_latex import tex_text
 
 
 # ==================================================
@@ -28,11 +36,11 @@ class ModelPDF:
     # ==================================================
     def fmt_site_bond(self, site_bond):
         if ";" not in site_bond:
-            s = f"'{site_bond}'"
+            s = f"'{tex_text(site_bond)}'"
         else:
             tail, head = site_bond.split(";")
             head, n, m = head.split("_")
-            s = r"\texttt{" f"'{head}'" + r"}-\texttt{" + f"'{tail}'({int(n)}th,{m})" + "}"
+            s = r"\texttt{" f"'{tex_text(head)}'" + r"}-\texttt{" + f"'{tex_text(tail)}'({int(n)}th,{m})" + "}"
 
         return s
 
@@ -74,7 +82,7 @@ class ModelPDF:
         self.text(r"\footnotesize")
 
         # title.
-        self.pdf.title(r"Model for ``\texttt{" + f"{name}" + "}''")
+        self.pdf.title(r"Model for ``\texttt{" + tex_text(name) + "}''")
         self.text(r"\begin{flushright}")
         self.text("Generated on " + dt + f" by MultiPie {version}")
         self.text(r"\end{flushright}")
@@ -279,11 +287,11 @@ class ModelPDF:
             bra = "$" + r",\, ".join(bs1) + "$"
             ket = "$" + r",\, ".join(bs2) + "$"
             cluster = (
-                r"'\texttt{" + comb.head + "}' site-cluster"
+                r"'\texttt{" + tex_text(comb.head) + "}' site-cluster"
                 if clustar_str == "s"
-                else r"'\texttt{" + comb.head + r"}'-'\texttt{" + comb.tail + "}' bond-cluster"
+                else r"'\texttt{" + tex_text(comb.head) + r"}'-'\texttt{" + tex_text(comb.tail) + "}' bond-cluster"
             )
-            cluster = r"\texttt{" + sb_tag[0] + "} : " + cluster
+            cluster = r"\texttt{" + tex_text(sb_tag[0]) + "} : " + cluster
             wyckoff = r"\texttt{" + wp + "}"
 
             self.vspace("5mm")
@@ -315,7 +323,7 @@ class ModelPDF:
                     sb_str = np.array(no_tag).T.tolist()
                     sb_str = ", ".join(["(" + ", ".join(i) + ")" for i in sb_str])
                     self.text(r"\noindent * common SAMBs" + "\n")
-                    self.text(r"\noindent\texttt{" + sb_head + ", " + sb_str + "}")
+                    self.text(r"\noindent\texttt{" + tex_text(sb_head) + ", " + sb_str + "}")
                 else:
                     n = (len(no_tag) - 1) * len(no_tag[0])
                     self.text(r"\noindent\quad" + f"+ {n} common SAMBs" + "\n")
@@ -339,14 +347,14 @@ class ModelPDF:
             orb = sum([[self.mm.group.tag_atomic_basis(i, l, latex=True) for i in ol] for l, ol in enumerate(rep.orbital)], [])
             if len(orb) < 17:
                 orb = "$" + "$, $".join(orb) + "$"
-                name = r"\texttt{" + name + "}"
+                name = r"\texttt{" + tex_text(name) + "}"
                 row.append(rep.no)
                 tbl.append([name, orb])
                 hl.append(no)
                 no += 1
             else:
                 orb1 = "$" + "$, $".join(orb[:16]) + "$"
-                name = r"\texttt{" + name + "}"
+                name = r"\texttt{" + tex_text(name) + "}"
                 row.append(rep.no)
                 tbl.append([name, orb1])
                 orb2 = "$" + "$, $".join(orb[16:]) + "$"
@@ -362,8 +370,8 @@ class ModelPDF:
         row = []
         tbl = []
         for no, rep in enumerate(bond):
-            tail = r"\texttt{" + rep.tail + "}"
-            head = r"\texttt{" + rep.head + "}"
+            tail = r"\texttt{" + tex_text(rep.tail) + "}"
+            head = r"\texttt{" + tex_text(rep.head) + "}"
             nb = rep.neighbor
             if len(nb) > 9:
                 nb = (r"\texttt{" + str(nb[:4])[:-1] + r",$\cdots$," + str(nb[-1]) + "]}").replace(" ", "")
@@ -388,7 +396,7 @@ class ModelPDF:
             rep = self.mm["site"]["representative"][name]
             cap = (
                 r"'\texttt{"
-                + f"{name}"
+                + tex_text(name)
                 + r"}' (\#"
                 + f"{rep.no}) site cluster "
                 + r"(\texttt{"
@@ -439,9 +447,9 @@ class ModelPDF:
             cap = (
                 f"{rep.neighbor}-th "
                 + r"'\texttt{"
-                + f"{head_atom}"
+                + tex_text(head_atom)
                 + r"}'-'\texttt{"
-                + f"{tail_atom}"
+                + tex_text(tail_atom)
                 + "}'"
                 + f" [{mul}] ("
                 + r"\#"

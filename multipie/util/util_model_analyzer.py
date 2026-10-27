@@ -1,3 +1,10 @@
+# SPDX-License-Identifier: MPL-2.0
+# Copyright (C) 2021- The MultiPie developers
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
 """
 Utility for ModelAnalyzer class.
 """
@@ -8,7 +15,8 @@ import sympy as sp
 from collections import defaultdict
 import matplotlib.pyplot as plt
 from matplotlib.collections import LineCollection
-from matplotlib.colors import Normalize
+from matplotlib.colors import Normalize, LinearSegmentedColormap
+from matplotlib.backends.backend_pdf import PdfPages
 from multipie import Group
 from multipie.util.util import str_to_sympy, simplify
 from multipie.util.util_constant import M_ZERO, k_B_SI, elem_charge_SI
@@ -97,17 +105,22 @@ def fourier_r_to_k(OR, atom, kv, s=True):
     Returns:
         - (ndarray) -- O(k) = sum_s Omn exp( 2pi i k*Rs ), Rs = (n1,n2,n3)-s(R[m]-R[n]).
     """
-    eRa = np.exp(1j * (2 * np.pi * kv @ atom.T))
-
     Nk = len(kv)
     d = len(atom)
-    S = np.zeros((Nk, d, d), dtype=complex)
+
+    # O_R as d x d matrix for each R, so that exp(2pi i k*R) is computed once for each R.
+    OR_mat = {}
     for (R, m, n), value in OR.items():
-        eR = np.exp(1j * (2 * np.pi * kv @ np.asarray(R)))
-        if s:
-            S[:, m, n] += value * eR * np.conj(eRa[:, m]) * eRa[:, n]
-        else:
-            S[:, m, n] += value * eR
+        OR_mat.setdefault(tuple(R), np.zeros((d, d), dtype=complex))[m, n] += value
+    if not OR_mat:
+        return np.zeros((Nk, d, d), dtype=complex)
+
+    R = np.asarray(list(OR_mat.keys()), dtype=float)
+    eR = np.exp(1j * (2 * np.pi * kv @ R.T))  # (Nk, number of R).
+    S = np.tensordot(eR, np.asarray(list(OR_mat.values())), axes=(1, 0))
+    if s:
+        eRa = np.exp(1j * (2 * np.pi * kv @ atom.T))
+        S *= np.conj(eRa)[:, :, None] * eRa[:, None, :]
 
     return S
 
@@ -167,8 +180,8 @@ def output_dispersion(filename, k, ef, e, o=None, olist=None):
         o (list, optional): expectation value of any operator for each band, [[num_k, num_band]].
         olist (list, optional): list of local operator.
     """
-    emax = np.max(e)
-    emin = np.min(e)
+    emax = np.nanmax(np.where(np.isfinite(e), e, np.nan))
+    emin = np.nanmin(np.where(np.isfinite(e), e, np.nan))
 
     fs = open(filename, "w")
     if olist:
@@ -188,6 +201,11 @@ def output_dispersion(filename, k, ef, e, o=None, olist=None):
         en = e[n] - ef
         s = ""
         for i in range(num_k):
+            # skip values that cannot be computed (e.g., negative Ek with power=0.5), and break the line there.
+            if not np.isfinite(en[i]):
+                if s != "" and not s.endswith("\n\n"):
+                    s += "\n"
+                continue
             s += "{k: .15f} {e: .15f}".format(k=kv[i], e=en[i])
             if o is None:
                 s += "\n"
@@ -195,13 +213,31 @@ def output_dispersion(filename, k, ef, e, o=None, olist=None):
                 for oi in o:
                     s += " {o: .15f}".format(o=oi[i, n])
                 s += "\n"
-            if np.abs(kv[i] - kv[i + 1]) < 1e-5:
+            if np.abs(kv[i] - kv[i + 1]) < 1e-5 and not s.endswith("\n\n"):
                 s += "\n"
 
         s += "\n"
         fs.write(s)
 
     fs.close()
+
+
+# ==================================================
+def k_label(label, style="latex"):
+    """
+    Convert k-point label for plot.
+
+    Args:
+        label (str): k-point label, e.g., "Γ", "GAMMA", "G", "X|M".
+        style (str, optional): "latex" (matplotlib) or "gnuplot" (enhanced text).
+
+    Returns:
+        - (str) -- converted label.
+    """
+    gamma = r"$\Gamma$" if style == "latex" else "{/Symbol G}"
+    lst = [gamma if v in ["Γ", "GAMMA", "G"] else v for v in label.split("|")]
+
+    return ":".join(lst)
 
 
 # ==================================================
@@ -219,17 +255,27 @@ def create_gnuplot_cmd(filename, k_dis_pos, kmax, emax, emin, ef, colormap=False
         colormap (bool, optional): with colormap of first expectation value of operator.
         lwidth (int, optional): line width.
         lc (str, optional): line color.
+
+    Notes:
+        - values that cannot be computed are not written in data file, so that they are skipped in the plot.
     """
     offset = (emax - emin) * 0.1
 
     gnufile = os.path.dirname(filename) + "/plot_band.gnu"
     fs = open(gnufile, "w")
 
+    fs.write(f"Ef = {ef}  # fermi energy (data are already shifted by Ef).\n")
+    fs.write("Ef_line = 0.0  # position of fermi level in plot.\n")
+    fs.write("xmin = 0.0\n")
+    fs.write(f"xmax = {kmax}\n")
+    fs.write(f"ymin = {emin-ef-offset}\n")
+    fs.write(f"ymax = {emax-ef+offset}\n")
+    fs.write(f"lwidth = {lwidth}\n\n")
+
     fs.write("unset key\n")
     fs.write("unset grid\n")
-    fs.write(f"lwidth = {lwidth}\n")
-    fs.write(f"set xrange [:{kmax}]\n")
-    fs.write(f"set yrange [{emin-ef-offset}:{emax-ef+offset}]\n")
+    fs.write("set xrange [xmin:xmax]\n")
+    fs.write("set yrange [ymin:ymax]\n")
     fs.write("set tics font 'Times New Roman, 14'\n\n")
     fs.write("set size ratio 0.7\n\n")
 
@@ -237,60 +283,47 @@ def create_gnuplot_cmd(filename, k_dis_pos, kmax, emax, emin, ef, colormap=False
     fs.write("set cbrange [-1.0:1.0]\n\n")
 
     if k_dis_pos is not None:
-        for pos, label in k_dis_pos.items():
-            fs.write(f"set arrow from  {pos},  {emin-ef-offset} to {pos}, {emax-ef+offset} nohead\n")
+        for pos in k_dis_pos.keys():
+            fs.write(f"set arrow from {pos}, ymin to {pos}, ymax nohead\n")
 
-        k_dis_pos = {pos: label.replace("G", "{/Symbol G}").replace("|", ":") for pos, label in k_dis_pos.items()}
-        fs.write("set xtics (" + "".join([f'"{label}" {pos},' for pos, label in k_dis_pos.items()]) + ")\n\n")
-
-    fs.write(f"Ef = {ef}\n")
-
-    fs.write("set terminal postscript eps color enhanced\n\n")
+        fs.write(
+            "set xtics (" + ", ".join([f'"{k_label(label, "gnuplot")}" {pos}' for pos, label in k_dis_pos.items()]) + ")\n\n"
+        )
 
     filename = os.path.basename(filename)
     basename = os.path.splitext(filename)[0]
 
-    fn_eps = basename + ".eps"
-    fs.write(f"set output '{fn_eps}'\n\n")
-    fs.write("plot ")
-
     if colormap:
-        fs.write(f"'{filename}' u 1:2:3 w l lw lwidth lc palette,")
+        plot_cmd = f"plot '{filename}' u 1:2:3 w l lw lwidth lc palette, Ef_line lw 0.5 lc 'black'\n\n"
     else:
-        fs.write(f"'{filename}' u 1:2 w l lw lwidth lc '{lc}',")
+        plot_cmd = f"plot '{filename}' u 1:2 w l lw lwidth lc '{lc}', Ef_line lw 0.5 lc 'black'\n\n"
 
-    fs.write(f"{0.0} lw 0.5 lc 'black'")
+    fs.write("set terminal postscript eps color enhanced\n")
+    fs.write(f"set output '{basename}.eps'\n")
+    fs.write(plot_cmd)
 
-    fs.write("\n\n")
-
-    fs.write("set terminal pdf\n\n")
-
-    fn_pdf = basename + ".pdf"
-    fs.write(f"set output '{fn_pdf}'\n\n")
-    fs.write("plot ")
-
-    if colormap:
-        fs.write(f"'{filename}' u 1:2:3 w l lw lwidth lc palette,")
-    else:
-        fs.write(f"'{filename}' u 1:2 w l lw lwidth lc '{lc}',")
-
-    fs.write(f"{0.0} lw 0.5 lc 'black'")
+    fs.write("set terminal pdf enhanced\n")
+    fs.write(f"set output '{basename}.pdf'\n")
+    fs.write(plot_cmd)
 
     fs.close()
 
 
 # ==================================================
-def plot_save_dispersion(filename, k_dis_pos, ef, colormap=False, lwidth=1, lc="salmon"):
+def plot_save_dispersion(filename, k_dis_pos, ef=None, colormap=False, lwidth=1, lc="salmon"):
     """
     Generate plot window for band dispersion (matplotlib).
 
     Args:
         filename (str): file name.
         k_dis_pos (dict): info. of high-symmetry point in linear k, dict[disconnected position, label].
-        ef (float): fermi energy.
+        ef (float, optional): not used, kept for compatibility.
         colormap (bool, optional): with colormap of first expectation value of operator.
         lwidth (int, optional): line width.
         lc (str, optional): line color.
+
+    Notes:
+        - energies in data file are already shifted by fermi energy.
     """
     # read file.
     bands = read_text_data(filename)
@@ -304,7 +337,7 @@ def plot_save_dispersion(filename, k_dis_pos, ef, colormap=False, lwidth=1, lc="
     fig.subplots_adjust(right=0.84)
 
     ax.set_xlim(0, kmax)
-    ax.set_ylim(emin - ef - offset, emax - ef + offset)
+    ax.set_ylim(emin - offset, emax + offset)
 
     ax.axhline(0, color="black", lw=0.5)
     ax.tick_params(axis="x", which="both", bottom=False, top=False, labelbottom=True)
@@ -312,7 +345,7 @@ def plot_save_dispersion(filename, k_dis_pos, ef, colormap=False, lwidth=1, lc="
 
     # vertical lines.
     positions = list(k_dis_pos.keys())
-    labels = [v.replace("G", r"$\Gamma$").replace("|", ":") for v in k_dis_pos.values()]
+    labels = [k_label(v, "latex") for v in k_dis_pos.values()]
     for x in positions:
         ax.axvline(x, color="black", lw=0.5)
     ax.set_xticks(positions)
@@ -338,7 +371,7 @@ def plot_save_dispersion(filename, k_dis_pos, ef, colormap=False, lwidth=1, lc="
         cbar.set_ticklabels(["-1", "-0.5", "0", "0.5", "1"])
     else:
         for band in bands:
-            ax.plot(band[:, 0], band[:, 1] - ef, color=lc, lw=lwidth)
+            ax.plot(band[:, 0], band[:, 1], color=lc, lw=lwidth)
 
     fn_pdf = os.path.splitext(filename)[0] + ".pdf"
     fn_eps = os.path.splitext(filename)[0] + ".eps"
@@ -346,6 +379,217 @@ def plot_save_dispersion(filename, k_dis_pos, ef, colormap=False, lwidth=1, lc="
     fig.savefig(fn_eps)
 
     plt.close("all")
+
+
+# ==================================================
+def plot_save_weight(filename, k_dis_pos, labels, lwidth=1.5):
+    """
+    Plot band dispersion colored by orbital weight (fat band), one page for each weight (matplotlib).
+
+    Args:
+        filename (str): file name of data, columns (k, E, weight1, weight2, ...).
+        k_dis_pos (dict): info. of high-symmetry point in linear k, dict[disconnected position, label].
+        labels (list): label of weights.
+        lwidth (float, optional): line width.
+
+    Notes:
+        - energies in data file are already shifted by fermi energy.
+        - the plots are saved in one PDF file (filename with .pdf).
+    """
+    bands = read_text_data(filename)
+    emax = max(a[:, 1].max() for a in bands)
+    emin = min(a[:, 1].min() for a in bands)
+    kmax = max(a[:, 0].max() for a in bands)
+    offset = (emax - emin) * 0.1
+
+    positions = list(k_dis_pos.keys())
+    xlabels = [k_label(v, "latex") for v in k_dis_pos.values()]
+
+    cmap = LinearSegmentedColormap.from_list("weight", ["0.9", "red"])  # as palette of gnuplot.
+
+    fn_pdf = os.path.splitext(filename)[0] + ".pdf"
+    with PdfPages(fn_pdf) as pdf:
+        for no, label in enumerate(labels):
+            fig, ax = plt.subplots(figsize=(6, 3.5))
+            fig.subplots_adjust(right=0.84)
+            ax.set_xlim(0, kmax)
+            ax.set_ylim(emin - offset, emax + offset)
+            ax.set_title(label)
+            ax.axhline(0, color="black", lw=0.5)
+            ax.tick_params(axis="x", which="both", bottom=False, top=False, labelbottom=True)
+            ax.tick_params(axis="y", which="both", left=True, right=True, direction="in")
+            for x in positions:
+                ax.axvline(x, color="black", lw=0.5)
+            ax.set_xticks(positions)
+            ax.set_xticklabels(xlabels)
+
+            segments, colors = [], []
+            for band in bands:
+                points = band[:, :2].reshape(-1, 1, 2)
+                segments.extend(np.concatenate([points[:-1], points[1:]], axis=1))
+                colors.extend(band[:-1, 2 + no])
+            lcobj = LineCollection(segments, cmap=cmap, norm=Normalize(0.0, 1.0), linewidth=lwidth)
+            lcobj.set_array(np.asarray(colors))
+            ax.add_collection(lcobj)
+            fig.colorbar(lcobj, ax=ax, ticks=[0.0, 0.5, 1.0], fraction=0.035, pad=0.02)
+
+            pdf.savefig(fig)
+            plt.close(fig)
+
+
+# ==================================================
+def create_gnuplot_weight(filename, k_dis_pos, kmax, emax, emin, ef, labels, lwidth=2):
+    """
+    Create gnuplot file for band dispersion colored by orbital weight (fat band), one page for each weight.
+
+    Args:
+        filename (str): file name of data, columns (k, E, weight1, weight2, ...).
+        k_dis_pos (dict): info. of high-symmetry point in linear k, dict[disconnected position, label].
+        kmax (float): maximum value in kpoints.
+        emax (float): maximum value of eigen values.
+        emin (float): minimum value of eigen values.
+        ef (float): fermi energy.
+        labels (list): label of weights (without spaces).
+        lwidth (int, optional): line width.
+    """
+    offset = (emax - emin) * 0.1
+
+    gnufile = os.path.join(os.path.dirname(filename), "plot_weight.gnu")
+    basename = os.path.splitext(os.path.basename(filename))[0]
+    with open(gnufile, "w", encoding="utf-8") as fs:
+        fs.write(f"Ef = {ef}  # fermi energy (data are already shifted by Ef).\n")
+        fs.write("Ef_line = 0.0  # position of fermi level in plot.\n")
+        fs.write("xmin = 0.0\n")
+        fs.write(f"xmax = {kmax}\n")
+        fs.write(f"ymin = {emin-ef-offset}\n")
+        fs.write(f"ymax = {emax-ef+offset}\n")
+        fs.write(f"lwidth = {lwidth}\n")
+        fs.write(f'labels = "{" ".join(labels)}"  # weight of column 3, 4, ...\n\n')
+
+        fs.write("unset key\n")
+        fs.write("unset grid\n")
+        fs.write("set xrange [xmin:xmax]\n")
+        fs.write("set yrange [ymin:ymax]\n")
+        fs.write("set tics font 'Times New Roman, 14'\n\n")
+        fs.write("set size ratio 0.7\n\n")
+        fs.write('set palette defined ( 0 "gray90", 1.0 "red")\n')
+        fs.write("set cbrange [0.0:1.0]\n\n")
+
+        if k_dis_pos is not None:
+            for pos in k_dis_pos.keys():
+                fs.write(f"set arrow from {pos}, ymin to {pos}, ymax nohead\n")
+            fs.write(
+                "set xtics (" + ", ".join([f'"{k_label(label, "gnuplot")}" {pos}' for pos, label in k_dis_pos.items()]) + ")\n\n"
+            )
+
+        fs.write("set terminal pdf enhanced\n")
+        fs.write(f"set output '{basename}.pdf'\n")
+        fs.write("do for [i=1:words(labels)] {\n")
+        fs.write("    set title word(labels, i) noenhanced\n")
+        fs.write(f"    plot '{basename}.txt' u 1:2:(column(2+i)) w l lw lwidth lc palette, Ef_line lw 0.5 lc 'black'\n")
+        fs.write("}\n")
+
+
+# ==================================================
+def output_dos(filename, energy, ef, dos, labels, comment):
+    """
+    Output DOS.
+
+    Args:
+        filename (str): file name.
+        energy (ndarray): energy grid (not shifted).
+        ef (float): fermi energy.
+        dos (ndarray): DOS, [energy, column], columns (total, integrated total, partial, ...).
+        labels (list): label of partial DOS.
+        comment (list): comment lines (without "#").
+    """
+    with open(filename, mode="w", encoding="utf-8") as f:
+        for line in comment:
+            print(f"# {line}", file=f)
+        print("#", file=f)
+        print("# E total N(E) " + " ".join(labels), file=f)
+        for e, row in zip(energy - ef, dos):
+            print(f"{e: .15e} " + " ".join(f"{v: .15e}" for v in row), file=f)
+
+
+# ==================================================
+def plot_save_dos(filename, labels, lwidth=1):
+    """
+    Plot DOS (matplotlib).
+
+    Args:
+        filename (str): file name of data, columns (E, total, N(E), partial, ...).
+        labels (list): label of partial DOS.
+        lwidth (float, optional): line width.
+
+    Notes:
+        - energies in data file are already shifted by fermi energy.
+    """
+    data = np.loadtxt(filename, ndmin=2)
+    e = data[:, 0]
+
+    fig, ax = plt.subplots(figsize=(6, 3.5))
+    ax.set_xlim(e[0], e[-1])
+    ax.set_ylim(0, 1.1 * data[:, 1].max())
+    ax.axvline(0, color="black", lw=0.5)
+    ax.tick_params(axis="both", which="both", direction="in", top=True, right=True)
+    ax.set_xlabel("Energy")
+    ax.set_ylabel("DOS")
+    ax.plot(e, data[:, 1], color="black", lw=lwidth, label="total")
+    for no, label in enumerate(labels):
+        ax.plot(e, data[:, 3 + no], lw=lwidth, label=label)
+    ax.legend(fontsize="small", frameon=False)
+
+    fig.savefig(os.path.splitext(filename)[0] + ".pdf")
+    fig.savefig(os.path.splitext(filename)[0] + ".eps")
+    plt.close(fig)
+
+
+# ==================================================
+def create_gnuplot_dos(filename, emin, emax, dmax, ef, labels, lwidth=2):
+    """
+    Create gnuplot file for DOS.
+
+    Args:
+        filename (str): file name of data, columns (E, total, N(E), partial, ...).
+        emin (float): minimum of energy grid (not shifted).
+        emax (float): maximum of energy grid (not shifted).
+        dmax (float): maximum of total DOS.
+        ef (float): fermi energy.
+        labels (list): label of partial DOS.
+        lwidth (int, optional): line width.
+    """
+    gnufile = os.path.join(os.path.dirname(filename), "plot_dos.gnu")
+    basename = os.path.splitext(os.path.basename(filename))[0]
+    with open(gnufile, "w", encoding="utf-8") as fs:
+        fs.write(f"Ef = {ef}  # fermi energy (data are already shifted by Ef).\n")
+        fs.write("Ef_line = 0.0  # position of fermi level in plot.\n")
+        fs.write(f"xmin = {emin-ef}\n")
+        fs.write(f"xmax = {emax-ef}\n")
+        fs.write("ymin = 0.0\n")
+        fs.write(f"ymax = {1.1*dmax}\n")
+        fs.write(f"lwidth = {lwidth}\n\n")
+
+        fs.write("set key top right noenhanced\n")
+        fs.write("unset grid\n")
+        fs.write("set xrange [xmin:xmax]\n")
+        fs.write("set yrange [ymin:ymax]\n")
+        fs.write("set xlabel 'Energy'\n")
+        fs.write("set ylabel 'DOS'\n")
+        fs.write("set tics font 'Times New Roman, 14'\n\n")
+        fs.write("set size ratio 0.7\n\n")
+        fs.write("set arrow from Ef_line, ymin to Ef_line, ymax nohead lw 0.5 lc 'black'\n\n")
+
+        plot = [f"'{basename}.txt' u 1:2 w l lw lwidth lc 'black' title 'total'"]
+        plot += [f"'' u 1:{4 + no} w l lw lwidth title '{label}'" for no, label in enumerate(labels)]
+        plot_cmd = "plot " + ", \\\n     ".join(plot) + "\n\n"
+
+        fs.write("set terminal postscript eps color enhanced\n")
+        fs.write(f"set output '{basename}.eps'\n")
+        fs.write(plot_cmd)
+        fs.write("set terminal pdf enhanced\n")
+        fs.write(f"set output '{basename}.pdf'\n")
+        fs.write(plot_cmd)
 
 
 # ==================================================

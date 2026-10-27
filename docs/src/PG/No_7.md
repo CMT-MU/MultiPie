@@ -17,7 +17,7 @@
   - polar : [PDF](../../../others/pdf/PG/007-C2v/harmonics_polar.pdf)
   - axial : [PDF](../../../others/pdf/PG/007-C2v/harmonics_axial.pdf)
 - **Multipolar Harmonics (internal)**
-  - dipolar internal polar(Q)/axial(G) varialble
+  - dipolar internal polar(Q)/axial(G) variable
     - polar (Q) : [PDF](../../../others/pdf/PG/007-C2v/harmonics_s1_polar_q.pdf)
     - axial (Q) : [PDF](../../../others/pdf/PG/007-C2v/harmonics_s1_axial_q.pdf)
     - polar (G) : [PDF](../../../others/pdf/PG/007-C2v/harmonics_s1_polar_g.pdf)

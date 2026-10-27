@@ -1,3 +1,10 @@
+# SPDX-License-Identifier: MPL-2.0
+# Copyright (C) 2021- The MultiPie developers
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
 """
 Material model construction class.
 
@@ -5,9 +12,9 @@ This module provides material model construction.
 """
 
 import os
+import logging
 import numpy as np
 import sympy as sp
-import multiprocessing
 from itertools import product
 from collections import defaultdict
 
@@ -15,8 +22,8 @@ from multipie import __version__, SAMBType, UniqueSAMBType
 from multipie.core.group import Group
 from multipie.util.util_binary import BinaryManager
 from multipie.util.util import deep_update, time_stamp, check_latex, check_qtdraw, read_dict
-from multipie.util.util_pdf_latex import PDFviaLaTeX
-from multipie.util.util_crystal import get_cell_info, create_igrid, convert_to_primitive
+from multipie.util.util_pdf_latex import PDFviaLaTeX, LaTeXError, tex_text
+from multipie.util.util_crystal import get_cell_info, create_igrid, convert_to_primitive_vector
 from multipie.util.util_material_model import (
     get_basis_type,
     get_bond,
@@ -41,7 +48,11 @@ from multipie.util.util_material_model import (
 )
 from multipie.util.util_material_model_pdf import ModelPDF
 from multipie.core.default_model import default_model
+from multipie.util.util import check_dict_keys
 from multipie.util.util_plot import plot_site, plot_bond, plot_site_samb, plot_bond_samb, plot_harmonics
+
+
+logger = logging.getLogger(__name__)
 
 
 # ==================================================
@@ -58,8 +69,6 @@ class MaterialModel(BinaryManager):
         if topdir is None:
             topdir = os.getcwd()
         super().__init__(topdir=topdir, verbose=verbose)
-        self._num_proc = multiprocessing.cpu_count()
-        self._jl_verbose = 10 if verbose else 0
 
     # ==================================================
     @property
@@ -97,22 +106,28 @@ class MaterialModel(BinaryManager):
         """
         Save model view QtDraw file.
         """
-        if check_qtdraw() and self["qtdraw_prop"]["create"]:
+        if self["qtdraw_prop"]["create"] and not check_qtdraw():
+            if self.verbose:
+                print("QtDraw not found; skipping .qtdw output.")
+            return
+
+        if self["qtdraw_prop"]["create"]:
             from qtdraw import create_qtdraw_file
 
             cwd = os.getcwd()
             path = self.get_cwd()
-            os.chdir(path)
             filename = self["model"]
+            os.chdir(path)
 
-            create_qtdraw_file(
-                filename=f"{filename}.qtdw",
-                callback=lambda qtdraw: create_qtdraw(
-                    qtdraw, self.group, filename, self["cell_info"], self["site"], self["bond"], self["qtdraw_prop"]
-                ),
-            )
-
-            os.chdir(cwd)
+            try:
+                create_qtdraw_file(
+                    filename=f"{filename}.qtdw",
+                    callback=lambda qtdraw: create_qtdraw(
+                        qtdraw, self.group, filename, self["cell_info"], self["site"], self["bond"], self["qtdraw_prop"]
+                    ),
+                )
+            finally:
+                os.chdir(cwd)
             if self.verbose:
                 print(f"save qtdraw to '{path}/{filename}.qtdw'.")
 
@@ -121,18 +136,28 @@ class MaterialModel(BinaryManager):
         """
         Save model as PDF file.
         """
-        if check_latex() and self["pdf_ctrl"]["create"]:
+        if verbose is None:
+            verbose = self.verbose
+        if self["pdf_ctrl"]["create"] and not check_latex():
+            if verbose:
+                print("LaTeX not found; skipping PDF output.")
+            return
+
+        if self["pdf_ctrl"]["create"]:
             cwd = os.getcwd()
-            path = self.get_cwd()
+            path = os.path.abspath(self.get_cwd())
             os.chdir(path)
             filename = self["model"]
 
-            pdf = PDFviaLaTeX(filename, landscape=True, english=True, dir=self.get_cwd())
-            ModelPDF(self, pdf)
+            try:
+                pdf = PDFviaLaTeX(filename, landscape=True, english=True, dir=path)
+                ModelPDF(self, pdf)
+            except LaTeXError as e:
+                logger.warning(f"skip PDF creation: {e}")
+                return
+            finally:
+                os.chdir(cwd)
 
-            os.chdir(cwd)
-            if verbose is None:
-                verbose = self.verbose
             if verbose:
                 print(f"save PDF to '{path}/{filename}.pdf'.")
 
@@ -162,7 +187,7 @@ class MaterialModel(BinaryManager):
         if check_qtdraw() and self["qtdraw_prop"]["create"]:
             from qtdraw import create_qtdraw_file
 
-            if type(site_bond) == str:
+            if isinstance(site_bond, str):
                 site_bond = [site_bond]
             name = self["model"] + "_" + "-".join(site_bond)
 
@@ -186,6 +211,7 @@ class MaterialModel(BinaryManager):
             qtdraw.clear_data()
             qtdraw.set_model(name)
             qtdraw.set_crystal(self["crystal"])
+            qtdraw.set_unit_cell(self["cell_info"]["cell"])
             if self.group.is_point_group:
                 qtdraw.set_cell("off")
             else:
@@ -197,7 +223,7 @@ class MaterialModel(BinaryManager):
         if check_qtdraw() and self["qtdraw_prop"]["create"]:
             from qtdraw import create_qtdraw_file
 
-            if type(site_bond) == str:
+            if isinstance(site_bond, str):
                 site_bond = [site_bond]
 
             name = self["model"] + "_" + "-".join(site_bond) + "_def"
@@ -208,6 +234,15 @@ class MaterialModel(BinaryManager):
         """
         Save SAMB QtDraw file.
         """
+        if verbose is None:
+            verbose = self.verbose
+        if not check_qtdraw():
+            logger.warning("QtDraw not found; skipping SAMB .qtdw output.")
+            return
+        if not self["qtdraw_prop"]["create"]:
+            logger.warning("'qtdraw/create' of the model is False; skipping SAMB .qtdw output.")
+            return
+
         site_bond = [
             s for s in self["wyckoff"].keys() if s.count(";") == 0 or int(s.split("_")[1]) < self["qtdraw_prop"]["max_neighbor"]
         ]
@@ -216,23 +251,21 @@ class MaterialModel(BinaryManager):
 
         cwd = os.getcwd()
         path = self.get_cwd()
-        os.chdir(path)
-        os.makedirs("samb", exist_ok=True)
-        os.chdir("samb")
+        os.makedirs(os.path.join(path, "samb"), exist_ok=True)
+        os.chdir(os.path.join(path, "samb"))
 
-        self.save_atomic_samb()
-        self.save_site_bond(site)
-        self.save_cluster_samb(site)
-        for b in bond:
-            self.save_site_bond(b)
-            self.save_cluster_samb(b)
+        try:
+            self.save_atomic_samb()
+            self.save_site_bond(site)
+            self.save_cluster_samb(site)
+            for b in bond:
+                self.save_site_bond(b)
+                self.save_cluster_samb(b)
+        finally:
+            os.chdir(cwd)
 
-        if verbose is None:
-            verbose = self.verbose
         if verbose:
             print(f"save SAMB QtDraw files in '{self.get_cwd()}/samb/'.")
-
-        os.chdir(cwd)
 
     # ==================================================
     def get_samb_matrix(self, select):
@@ -252,8 +285,8 @@ class MaterialModel(BinaryManager):
         ket_site = self.get_ket_site()
         matrix_info = {
             "model": self["model"],
-            "source": f"{self["model"]}.pkl",
-            "created": f"{self["created"]}",
+            "source": f"{self['model']}.pkl",
+            "created": f"{self['created']}",
             "select": regularized_select,
             "dimension": len(ket_site),
             "ket": list(ket_site.keys()),
@@ -274,12 +307,28 @@ class MaterialModel(BinaryManager):
         Args:
             model_in (dict or str): model input dict or file name.
         """
-        if type(model_in) == str:
+        if isinstance(model_in, str):
             if self.verbose:
                 print(f"read '{model_in}'.")
             model_in = read_dict(model_in, self.topdir)
 
         self.clear()
+
+        # check unknown keys, e.g., typo.
+        select_key = ["X", "l", "Gamma", "s"]
+        check_dict_keys(
+            model_in,
+            default_model,
+            name=f"model '{model_in.get('model', default_model['model'])}'",
+            allowed={
+                "cell": ["a", "b", "c", "alpha", "beta", "gamma"],
+                "SAMB_select": select_key,
+                "atomic_select": select_key,
+                "site_select": select_key,
+                "bond_select": select_key,
+            },
+            free=["site"],
+        )
 
         # set model based on default model.
         model = {}
@@ -289,6 +338,17 @@ class MaterialModel(BinaryManager):
         # get basic data.
         cell = model["cell"]
         site_data = model["site"]
+        if not isinstance(site_data, dict) or not site_data:
+            raise ValueError(f"model '{model['model']}': no site is given in 'site'.")
+        # '_' and ';' are used in the names of site and bond clusters.
+        bond_sites = {tag for b in model["bond"] if isinstance(b, (tuple, list)) for tag in b[:2]}
+        for name, value in site_data.items():
+            if not isinstance(name, str) or not name or ";" in name:
+                raise ValueError(f"model '{model['model']}': site name {name!r} must be a non-empty string without ';'.")
+            if "_" in name and name in bond_sites:
+                raise ValueError(f"model '{model['model']}': site name {name!r} used in bond must not contain '_'.")
+            if not isinstance(value, (tuple, list)) or len(value) != 2:
+                raise ValueError(f"model '{model['model']}': site '{name}' must be (position, orbital), but {value!r} is given.")
         bond_data = model["bond"]
         spinful = model["spinful"]
         max_neighbor = model["max_neighbor"]
@@ -330,7 +390,7 @@ class MaterialModel(BinaryManager):
         bond_dict = parse_representative_bond(group, G, site_grid, site_so, site_dict, bond_data, max_neighbor, self.verbose)
         A = cell_info["A"][0:3, 0:3].T
         lattice = group.info.lattice
-        Ap = convert_to_primitive(lattice, A, shift=False)
+        Ap = convert_to_primitive_vector(lattice, A)
 
         # site_bond => wyckoff, braket.
         wyckoff_dict = create_wyckoff_dict(site_dict["representative"], bond_dict["representative"])
@@ -395,12 +455,12 @@ class MaterialModel(BinaryManager):
         self["version"] = __version__
         self["created"] = time_stamp()
 
-        comment = f"Model: {self["model"]}\n"
+        comment = f"Model: {self['model']}\n"
         comment += f"* Group: " + self.group.name() + "\n"
-        comment += f"* SAMB selection: {self["SAMB_select"]}\n"
-        comment += f"* atomic selection: {self["atomic_select"]}\n"
-        comment += f"* site-cluster selection: {self["site_select"]}\n"
-        comment += f"* bond-cluster selection: {self["bond_select"]}\n"
+        comment += f"* SAMB selection: {self['SAMB_select']}\n"
+        comment += f"* atomic selection: {self['atomic_select']}\n"
+        comment += f"* site-cluster selection: {self['site_select']}\n"
+        comment += f"* bond-cluster selection: {self['bond_select']}\n"
         comment += f"  {combined_min_num} (all {combined_num}) basis set"
         self.add_comment(comment)
         if self.verbose:
@@ -461,7 +521,10 @@ class MaterialModel(BinaryManager):
             - (dict) -- cluster SAMB, dict[wyckoff, SAMB Dict].
             - (dict) -- cluster id, dict["y#", (wyckoff, SAMB index, comp)].
         """
-        wp_lst = sorted(list(set([lst.wyckoff for lst in self["site"]["representative"].values()])), key=lambda i: int(i[:-1]))
+        # sort by multiplicity, and by name for the same multiplicity (the order of set changes from run to run).
+        wp_lst = sorted(
+            list(set([lst.wyckoff for lst in self["site"]["representative"].values()])), key=lambda i: (int(i[:-1]), i)
+        )
         site_samb = {
             wp: self.group.cluster_samb(wp).select(**site_select).sort("Gamma", "l", "k", ("X", ["Q", "G", "T", "M"]), "n")
             for wp in wp_lst
@@ -469,7 +532,7 @@ class MaterialModel(BinaryManager):
 
         wp_lst = sorted(
             list(set([lst.wyckoff for lst in self["bond"]["representative"].values()])),
-            key=lambda i: int(i.split("@")[0][:-1]),
+            key=lambda i: (int(i.split("@")[0][:-1]), i),
         )
         bond_samb = {
             wp: self.group.cluster_samb(wp, "bond")
@@ -666,6 +729,12 @@ class MaterialModel(BinaryManager):
         atomic_samb_data = self["atomic_samb"]
         cluster_samb_data = self["cluster_samb"]
 
+        # kets of plus_set-1 sites for each site name.
+        ket_list = {}
+        for o in self["full_matrix"]["ket"]:
+            if o[1] == 1:
+                ket_list.setdefault(o[0], []).append(o)
+
         matrix = {}
         for zi, (s_symbol, u_samb_type, index, comp) in combined_id.items():
             st = u_samb_type.samb_type
@@ -689,7 +758,8 @@ class MaterialModel(BinaryManager):
             a_samb = atomic_samb_data[bk]
             c_samb = cluster_samb_data[wp]
 
-            d = defaultdict(lambda: sp.S(0) if fmt == "sympy" else 0.0)
+            # collect the terms of each matrix element, and sum them at once (adding sympy terms one by one is slow).
+            terms = defaultdict(list)
             bond_d = {}
 
             for cg, t1, c1, t2, c2 in lc:
@@ -715,7 +785,7 @@ class MaterialModel(BinaryManager):
                         for c in range(k_dim):
                             val = scale * atomic_matrix[r, c]
                             if val != 0:
-                                d[(n1, n2, n3, row_idx, k_top + c)] += val
+                                terms[(n1, n2, n3, row_idx, k_top + c)].append(val)
                                 bond_d[(n1, n2, n3, row_idx, k_top + c)] = 0 if is_site else bi.no
 
                     if not is_site:
@@ -723,23 +793,27 @@ class MaterialModel(BinaryManager):
                             if h_sl == t_sl:
                                 b2_top, k2_top = k_top, b_top
                             else:
-                                ket_list = [o for o in self["full_matrix"]["ket"] if o[0] == head and o[1] == 1]
-                                bra_orb = [o for o in ket_list if o[2] == b_rank][0]
-                                ket_orb = [o for o in ket_list if o[2] == k_rank][0]
-                                delta = ket_list.index(ket_orb) - ket_list.index(bra_orb)
+                                bra_orb = [o for o in ket_list[head] if o[2] == b_rank][0]
+                                ket_orb = [o for o in ket_list[head] if o[2] == k_rank][0]
+                                delta = ket_list[head].index(ket_orb) - ket_list[head].index(bra_orb)
                                 b2_top = b_top + delta
                                 k2_top = k_top - delta
 
                             for r, c in product(range(k_dim), range(b_dim)):
-                                d[(n1, n2, n3, b2_top + r, k2_top + c)] += cg * yi * atomic_matrix[c, r].conjugate()
+                                terms[(n1, n2, n3, b2_top + r, k2_top + c)].append(cg * yi * atomic_matrix[c, r].conjugate())
                                 bond_d[(n1, n2, n3, b2_top + r, k2_top + c)] = 0 if is_site else bi.no
 
-            # add hermite conjugate elements.
-            for (n1, n2, n3, m, n), val in list(d.items()):
-                d[(-n1, -n2, -n3, n, m)] += sp.conjugate(val)
-                bond_d[(-n1, -n2, -n3, n, m)] = -bond_d[(n1, n2, n3, m, n)]
+            d = {Rmn: sp.Add(*t) for Rmn, t in terms.items()}
 
-            norm_sq = sum(v * sp.conjugate(v) for v in d.values())
+            # add hermite conjugate elements.
+            hc = defaultdict(list)
+            for (n1, n2, n3, m, n), val in d.items():
+                hc[(-n1, -n2, -n3, n, m)].append(sp.conjugate(val))
+                bond_d[(-n1, -n2, -n3, n, m)] = -bond_d[(n1, n2, n3, m, n)]
+            for Rmn, t in hc.items():
+                d[Rmn] = sp.Add(d.get(Rmn, sp.S(0)), *t)
+
+            norm_sq = sp.Add(*[v * sp.conjugate(v) for v in d.values()])
             norm = sp.sqrt(sp.expand(norm_sq))
 
             matrix[zi] = {
@@ -843,15 +917,18 @@ class MaterialModel(BinaryManager):
         Note:
             - R = (n1,n2,n3) and m and n are a lattie vector (corresponding to bond_no), bra and ket indexes, respectively.
         """
-        Hamiltonian = defaultdict(lambda: sp.S(0) if fmt == "sympy" else 0.0)
+        # collect the terms of each matrix element, and sum them at once (adding sympy terms one by one is slow).
+        terms = defaultdict(list)
         for zj, cj in parameter.items():
             if zj not in combined_samb_matrix.keys():
-                raise Exception(f"parameter {zj} is missing.")
+                raise ValueError(f"parameter {zj} is missing.")
             d = combined_samb_matrix[zj]
             for Rmn, (Zj, _) in d.items():
-                Hamiltonian[Rmn] += cj * Zj
+                terms[Rmn].append(cj * Zj)
 
-        return dict(Hamiltonian)
+        if fmt == "sympy":
+            return {Rmn: sp.Add(*t) for Rmn, t in terms.items()}
+        return {Rmn: sum(t, 0.0) for Rmn, t in terms.items()}
 
     # ==================================================
     def get_multipole_expression(self):
@@ -909,7 +986,7 @@ class MaterialModel(BinaryManager):
         lst = []
         for atom, sublattice, rank, idx, orbital in self["full_matrix"]["ket"]:
             orb = self.group.tag_atomic_basis(orbital, rank, latex=True)
-            orb += "@" + r"{\rm " + atom + "}(" + str(sublattice) + ")"
+            orb += "@" + r"{\rm " + tex_text(atom, math=True) + "}(" + str(sublattice) + ")"
             lst.append(orb)
 
         return lst
@@ -994,7 +1071,7 @@ class MaterialModel(BinaryManager):
         samb = self["cluster_samb"][wp][idx][0][comp]
 
         if label:
-            qtdraw.add_text2d(f"idx = ({",".join(map(str,idx[:4]))},{comp})")
+            qtdraw.add_text2d(f"idx = ({','.join(map(str,idx[:4]))},{comp})")
         if site_bond.count(";") > 0:
             bonds = np.array([np.concat([i.vector, i.center]) for i in self["bond"]["cell"][site_bond]])
             sym = idx[0] not in ["T", "M"]
@@ -1027,7 +1104,7 @@ class MaterialModel(BinaryManager):
         bk_info, idx, comp = self["atomic_id"][atomic_id]
 
         if label:
-            qtdraw.add_text2d(f"idx = ({",".join(map(str,idx[:4]))},{comp})")
+            qtdraw.add_text2d(f"idx = ({','.join(map(str,idx[:4]))},{comp})")
         if site_bond is None:
             point = [[0, 0, 0]]
         else:

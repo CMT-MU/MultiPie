@@ -1,3 +1,10 @@
+# SPDX-License-Identifier: MPL-2.0
+# Copyright (C) 2021- The MultiPie developers
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
 """
 Response tensors up to 4th rank.
 """
@@ -853,7 +860,7 @@ def simplify_tensor(M):
                 if len(sym) > 1:
                     for s in sym:
                         if s not in d.keys():
-                            raise Exception(f"fail to solve.")
+                            raise RuntimeError("fail to solve.")
                 else:
                     if c.could_extract_minus_sign():
                         c = -c

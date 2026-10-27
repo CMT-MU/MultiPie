@@ -1,3 +1,10 @@
+# SPDX-License-Identifier: MPL-2.0
+# Copyright (C) 2021- The MultiPie developers
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
 """
 For tag.
 """
@@ -404,7 +411,7 @@ class TagMultipole:
             elif n_idx == 5:
                 X, l, s, k, x = idx
             else:
-                raise Exception(f"invalid index (spherical), {idx}.")
+                raise ValueError(f"invalid index (spherical), {idx}.")
             d.update({"X": X, "l": l, "s": s, "k": k, "x": x})
         elif mp_type == "point_group":
             if component is None:
@@ -418,12 +425,12 @@ class TagMultipole:
             elif n_idx == 8:
                 X, l, Gamma, n, p, s, k, x = idx
             else:
-                raise Exception(f"invalid index (point group), {idx}.")
+                raise ValueError(f"invalid index (point group), {idx}.")
             if Gamma[0] in ["A", "B"]:
                 component = -1
             d.update({"X": X, "l": l, "Gamma": Gamma, "n": n, "p": p, "s": s, "k": k, "x": x})
         else:
-            raise Exception(f"invalid multipole type, {mp_type}.")
+            raise ValueError(f"invalid multipole type, {mp_type}.")
 
         X = d["X"]
         d.update({"t_type": cls.t_dict[X], "p_type": cls.p_dict[X], "component": component, "mp_type": mp_type})
@@ -621,10 +628,10 @@ class TagBasis:
                 s = s_rank[rank] + info["orbital"]
         else:
             if info["spherical"]:
-                s = f"({info["orbital"]},{info["spin"]})"
+                s = f"({info['orbital']},{info['spin']})"
             else:
                 orb = s_rank[rank] + info["orbital"]
-                s = f"({orb},{info["spin"]})"
+                s = f"({orb},{info['spin']})"
 
         return s
 
@@ -647,12 +654,12 @@ class TagBasis:
         s_rank = {0: "s", 1: "p", 2: "d", 3: "f"}
         if info["spinless"]:
             if info["spherical"]:
-                s = f"{s_rank[rank]},{info["orbital"]}"
+                s = f"{s_rank[rank]},{info['orbital']}"
             else:
                 if rank == 0:
                     s = f"{s_rank[rank]}"
                 else:
-                    s = f"{s_rank[rank]}" + "_{" + f"{info["orbital"]}" + "}"
+                    s = f"{s_rank[rank]}" + "_{" + f"{info['orbital']}" + "}"
         else:
             spin_block = info["spin"] in ["u", "d"]
             if spin_block:
@@ -661,13 +668,13 @@ class TagBasis:
                 spin = info["spin"]
             if info["spherical"]:
                 if spin_block:
-                    s = f"{s_rank[rank]},{info["orbital"]},{spin}"
+                    s = f"{s_rank[rank]},{info['orbital']},{spin}"
                 else:
                     orbital = sp.latex(sp.sympify(info["orbital"]))
                     spin = sp.latex(sp.sympify(info["spin"]))
                     s = f"{orbital},{spin};{s_rank[rank]}"
             else:
-                orb = f"{s_rank[rank]}" + "_{" + f"{info["orbital"]}" + "}"
+                orb = f"{s_rank[rank]}" + "_{" + f"{info['orbital']}" + "}"
                 s = f"{orb},{spin}"
 
         if ket:

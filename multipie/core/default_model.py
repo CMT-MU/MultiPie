@@ -1,3 +1,10 @@
+# SPDX-License-Identifier: MPL-2.0
+# Copyright (C) 2021- The MultiPie developers
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
 """
 Default setting for MaterialModel.
 """
@@ -11,7 +18,7 @@ default_model = {
     "group": "C1",
     "cell": {},
     "spinful": False,
-    # acceptable orbital names (tesesral) in site:
+    # acceptable orbital names (tesseral) in site:
     #   s, p=(px, py, pz), d=(dv, dxy, dxz, dyz, du), f=(f2, f1, fbz, f3, f3x, f3y, faz).
     #   (s,u), (s,d), ...
     #   (1/2,s), (1/2,p), (3/2,p), (3/2,d), (5/2,d), (5/2,f), (7/2,f).
