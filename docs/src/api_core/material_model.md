@@ -42,7 +42,7 @@ This class has the following dict data.
     - **cell** (dict): conventional cell site, dict[name, [CellSiteType]].
   - **bond** (dict): bond info.
     - **representative** (dict): representative bond, dict[name, RepBondType].
-    - **cell** (dict): conventional cell bond, dict[name, [CellBondType]].
+    - **cell** (dict): conventional cell bond, dict[name, [CellBondType]]. The head of a bond is at position_primitive of the head site in the home cell, and its tail at position_primitive of the tail site plus R_primitive, so that vector_primitive = head - (tail + R_primitive). In models created before [PR #151](https://github.com/CMT-MU/MultiPie/pull/151), R_primitive is wrong by a primitive lattice vector for bonds of a centred lattice (I, F, C, A, R) whose head and tail sites need different shifts into [0,1) when converted to the primitive cell (P lattices are not affected). Loading such a model keeps the stored R_primitive, so the model and the files created from it (SAMB matrices, H(R)) must be created again.
     - **info** (list): bond properties, [BondInfoType].
 
 - SAMB.
