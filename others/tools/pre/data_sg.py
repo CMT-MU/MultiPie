@@ -1,3 +1,10 @@
+# SPDX-License-Identifier: MPL-2.0
+# Copyright (C) 2021- The MultiPie developers
+#
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
 # SG_id: (schoenflies, international, setting, PG_id, SO, generator).
 _sg_info = {
     1: ("C1^1", "P1", "", 1, ["1:[0,0,0]"], ["1:[0,0,0]"]),
