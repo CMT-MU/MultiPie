@@ -12,6 +12,7 @@ and user-defined callbacks in ModelAnalyzer.
 
 import os
 import pickle
+import re
 import shutil
 
 import numpy as np
@@ -19,6 +20,7 @@ import pytest
 
 from multipie.core.cmd import create_model
 from multipie.core.model_analyzer import ModelAnalyzer
+from multipie.util.util_model_analyzer import local_expectation, output_dispersion, plot_save_dispersion, power_energy
 from multipie.util.util import read_dict
 
 # spinful s and p orbitals at A, and s orbital at B (simple cubic, CsCl type), with SAMBs of identity irrep.
@@ -533,3 +535,432 @@ def test_docs_post_processing_example(in_tmp):
     z = np.load(out / "graphene_eigen_k_path.npz")
     ket = list(z["ket"])
     assert np.allclose(np.abs(z["Uk"][:, ket.index("pz@C(1)"), :]) ** 2, 0.5)
+
+
+# ==================================================
+@pytest.mark.parametrize(
+    "power, e, expected",
+    [
+        (0.5, [-4.0, 0.0, 4.0], [-2.0, 0.0, 2.0]),  # negative Ek.
+        (1.5, [-4.0, 4.0], [-8.0, 8.0]),  # power > 1.
+        (2, [-3.0, 3.0], [9.0, 9.0]),  # Ek^power is computed for integer power.
+        (3, [-2.0, 2.0], [-8.0, 8.0]),
+        (-1, [-2.0, 2.0], [-0.5, 0.5]),
+        (-0.5, [-4.0, 4.0], [-0.5, 0.5]),
+        (-2, [-2.0, 2.0], [0.25, 0.25]),
+        (0, [-2.0, 0.0, 2.0], [1.0, 1.0, 1.0]),  # nothing diverges at power = 0.
+    ],
+)
+def test_power_energy(power, e, expected):
+    assert power_energy(np.array(e), power) == pytest.approx(expected)
+
+
+# ==================================================
+def test_power_energy_divergence():
+    # Ek = 0 with negative power cannot be plotted.
+    assert np.array_equal(power_energy(np.array([0.0, 4.0]), -0.5), [np.nan, 0.5], equal_nan=True)
+    # also within round-off error.
+    assert np.array_equal(power_energy(np.array([1e-16, -1e-16, 4.0]), -0.5), [np.nan, np.nan, 0.5], equal_nan=True)
+    # the threshold is relative to the largest value.
+    assert power_energy(np.array([1e-11, 1e-3]), -1) == pytest.approx([1e11, 1e3])
+    assert np.array_equal(power_energy(np.array([1e-7, 1e4]), -1), [np.nan, 1e-4], equal_nan=True)
+    assert np.array_equal(power_energy(np.array([5e-11, 1.0]), -1), [np.nan, 1.0], equal_nan=True)
+    assert power_energy(np.array([2e-10, 1.0]), -1) == pytest.approx([5e9, 1.0])
+    # the largest value is taken over all the bands and k points: a k point with small values only is also skipped.
+    assert np.array_equal(
+        power_energy(np.array([[1e-12, 1e-12], [1.0, 2.0]]), -1), [[np.nan, np.nan], [1.0, 0.5]], equal_nan=True
+    )
+    # small values are kept for positive power.
+    assert power_energy(np.array([1e-16, 4.0]), 0.5) == pytest.approx([1e-8, 2.0])
+
+
+# ==================================================
+def test_dispersion_power(sp_model):
+    # negative Ek are not skipped: all values are written as -|Ek|^power, for each band and k point (power > 0 keeps the order).
+    _, parameter = sp_model
+    k_point = {"Γ": "[0,0,0]", "X": "[1/2,0,0]"}
+    output = {"dispersion": {"k_path": "Γ-X", "k_point": k_point}, "save_k_path": True}
+    run(parameter, output)
+    path = os.path.join("out", "sp", "output")
+    z = np.load(os.path.join(path, "sp_eigen_k_path.npz"))
+    Ek = z["Ek"]
+    assert Ek.min() < 0 < Ek.max()
+
+    run(parameter, output | {"dispersion": output["dispersion"] | {"power": 0.5}})
+    data = np.loadtxt(os.path.join(path, "sp_dispersion.txt"))
+    assert data.shape[0] == Ek.size
+    n_k, n_band = Ek.shape
+    written = data[:, 1].reshape(n_band, n_k).T  # the file is written for each band.
+    assert written == pytest.approx(np.sign(Ek) * np.abs(Ek) ** 0.5)
+    assert np.all(np.diff(written, axis=1) >= -1e-12)
+    assert data[:, 0].reshape(n_band, n_k)[0] == pytest.approx(z["k_linear"])
+
+
+# ==================================================
+def test_dispersion_power_fermi_energy(sp_model):
+    # the power is taken from the fermi energy, also for the orbital weight.
+    _, parameter = sp_model
+    dispersion = {"k_path": "Γ-X-M", "k_point": {"Γ": "[0,0,0]", "X": "[1/2,0,0]", "M": "[1/2,1/2,0]"}, "weight": "auto"}
+    output = {"n_electron": 4, "save_k_path": True}
+    path = os.path.join("out", "sp", "output")
+
+    ma, _ = run(parameter, output | {"dispersion": dispersion}, grid=(3, 3, 3))
+    ef = ma["info"]["fermi_energy"]
+    assert ef != 0.0
+    z = np.load(os.path.join(path, "sp_eigen_k_path.npz"))
+    n_k, n_band = z["Ek"].shape
+    reference = np.loadtxt(os.path.join(path, "sp_dispersion.txt"))
+    assert reference[:, 1].reshape(n_band, n_k).T == pytest.approx(z["Ek"] - ef)
+
+    # power = 1 is the same as without power.
+    run(parameter, output | {"dispersion": dispersion | {"power": 1}}, grid=(3, 3, 3))
+    assert np.loadtxt(os.path.join(path, "sp_dispersion.txt")) == pytest.approx(reference)
+
+    run(parameter, output | {"dispersion": dispersion | {"power": 0.5}}, grid=(3, 3, 3))
+    x = z["Ek"] - ef
+    expected = np.sign(x) * np.abs(x) ** 0.5
+    for f in ["sp_dispersion.txt", "sp_weight.txt"]:
+        written = np.loadtxt(os.path.join(path, f))[:, 1].reshape(n_band, n_k).T
+        assert written == pytest.approx(expected)
+    assert np.array_equal(written < 0, z["Ek"] < ef)  # states below the fermi energy remain below it.
+    with open(os.path.join(path, "sp_dispersion.txt")) as f:
+        assert f"# shifted by fermi energy = {ef}\n" in f.readlines()
+
+
+# ==================================================
+def test_dispersion_power_all_divergent(sp_model):
+    _, parameter = sp_model
+    parameter = {z: 0.0 for z in parameter}
+    k_point = {"Γ": "[0,0,0]", "X": "[1/2,0,0]"}
+    with pytest.raises(ValueError, match=r"no value of \(Ek-Ef\)"):
+        run(parameter, {"dispersion": {"k_path": "Γ-X", "k_point": k_point, "power": -1}})
+
+
+# ==================================================
+def test_dispersion_power_partial_divergence(in_tmp):
+    # Ek = 0 with negative power is not written, and the line is broken there. the plot can be created.
+    k = np.array([0.0, 1.0, 2.0, 3.0])
+    Ek = power_energy(np.array([[-1.0, 1.0], [0.0, 2.0], [-4.0, 4.0], [-2.0, 2.0]]), -1)
+    assert np.isnan(Ek[1, 0]) and np.count_nonzero(np.isnan(Ek)) == 1
+
+    fname = str(in_tmp / "disp.txt")
+    output_dispersion(fname, k, 0.0, Ek)
+    with open(fname) as f:
+        body = "".join(line for line in f if not line.startswith("#")).strip()
+    block = [b.split("\n") for b in re.split(r"\n\s*\n+", body)]
+    assert [len(b) for b in block] == [1, 2, 4]  # the first band is broken at the second k point.
+    assert np.loadtxt(fname) == pytest.approx(
+        np.array([[0, -1], [2, -0.25], [3, -0.5], [0, 1], [1, 0.5], [2, 0.25], [3, 0.5]], dtype=float)
+    )
+    plot_save_dispersion(fname, {0.0: "G", 3.0: "X"})
+    assert os.path.isfile(in_tmp / "disp.pdf")
+
+
+# ==================================================
+def test_local_expectation():
+    # known spin states: Uk[k,:,n], in the (u, d) basis.
+    s = 1 / np.sqrt(2)
+    Uk = np.array(
+        [
+            [[1, 0], [0, 1]],  # Sz = 1/2, -1/2.
+            [[s, s], [s, -s]],  # Sx = 1/2, -1/2.
+            [[s, s], [1j * s, -1j * s]],  # Sy = 1/2, -1/2.
+        ]
+    )
+    operator = {
+        "Sz": ([[0.5, 0], [0, -0.5]], [[0.5, -0.5], [0, 0], [0, 0]]),
+        "Sx": ([[0, 0.5], [0.5, 0]], [[0, 0], [0.5, -0.5], [0, 0]]),
+        "Sy": ([[0, -0.5j], [0.5j, 0]], [[0, 0], [0, 0], [0.5, -0.5]]),
+    }
+    for op, expected in operator.values():
+        assert local_expectation(Uk, np.array(op)) == pytest.approx(np.array(expected))
+
+
+# ==================================================
+def test_dispersion_local(sp_model):
+    # columns of local operators in the dispersion file, for each band and k point.
+    _, parameter = sp_model
+    keywords = ["Sx", "Sz", "Lz"]
+    dispersion = {"k_path": "Γ-X", "k_point": {"Γ": "[0,0,0]", "X": "[1/2,0,0]"}, "local": keywords}
+    ma, _ = run(parameter, {"dispersion": dispersion, "save_k_path": True})
+    path = os.path.join("out", "sp", "output")
+    z = np.load(os.path.join(path, "sp_eigen_k_path.npz"))
+    data = np.loadtxt(os.path.join(path, "sp_dispersion.txt"))
+    n_k, n_band = z["Ek"].shape
+    assert data.shape == (n_k * n_band, 2 + len(keywords))
+    for no, tag in enumerate(keywords):
+        column = data[:, 2 + no].reshape(n_band, n_k).T
+        expected = np.einsum("kmi,mn,kni->ki", z["Uk"].conj(), ma.get_local_operator(tag), z["Uk"]).real
+        assert column == pytest.approx(expected, abs=1e-10)
+        assert column.sum(axis=1) == pytest.approx(np.zeros(n_k), abs=1e-10)  # the operators are traceless.
+
+
+# ==================================================
+@pytest.mark.parametrize(
+    "site",
+    [
+        {"A": ("[0,0,0]", ["s", "p", "d"])},
+        {"A": ("[0,0,0]", ["s", "p"]), "B": ("[1/2,1/2,1/2]", "s")},  # two sites.
+        {"A": ("[1/2,0,0]", ["s", "p"])},  # a site with three sublattices.
+        {"A": ("[0,0,0]", ["dv", "dxy"])},  # a subset of orbitals.
+        {"A": ("[0,0,0]", "f")},
+    ],
+)
+def test_spin_operator(in_tmp, site):
+    # spin operators in the (u, d) basis, the commutation relation of S and L, and S^2 = 3/4.
+    model = dict(MODEL) | {"model": "spd", "site": site, "bond": []}
+    create_model(model, topdir="out")
+    ma = ModelAnalyzer("out")
+    ma.analyze({"samb": {"model": "spd", "select": {}}, "output": {"dispersion": {"k_path": None}}})
+
+    ket = ma.get_ket()
+    orbital = [k.split(",")[0] + k.split("@")[1] for k in ket]  # orbital and site.
+    S2 = sum(np.linalg.matrix_power(ma.get_local_operator(t), 2) for t in ["Sx", "Sy", "Sz"])
+    assert np.allclose(S2, 0.75 * np.eye(len(ket)))
+    if "d" in str(site["A"][1]) and "s" in site["A"][1]:
+        # s, p and d orbitals with spin: Lz = 0 (x 2), -1, 0, 1 (x 2), and -2, ..., 2 (x 2).
+        assert np.linalg.eigvalsh(ma.get_local_operator("Lz")) == pytest.approx(
+            sorted(2 * [0] + 2 * [-1, 0, 1] + 2 * [-2, -1, 0, 1, 2]), abs=1e-10
+        )
+    pauli = {"Sx": [[0, 0.5], [0.5, 0]], "Sy": [[0, -0.5j], [0.5j, 0]], "Sz": [[0.5, 0], [0, -0.5]]}
+    for tag, s in pauli.items():
+        op = ma.get_local_operator(tag)
+        for i, ki in enumerate(ket):
+            for j, kj in enumerate(ket):
+                expected = s[int(",d)" in ki)][int(",d)" in kj)] if orbital[i] == orbital[j] else 0.0
+                assert op[i, j] == pytest.approx(expected)
+
+    for a, b, c in [("x", "y", "z"), ("y", "z", "x"), ("z", "x", "y")]:
+        # L of a subset of orbitals in a shell does not close.
+        for t in ["S"] if "dv" in site["A"][1] else ["S", "L"]:
+            A, B, C = (ma.get_local_operator(t + i) for i in (a, b, c))
+            assert np.allclose(A @ B - B @ A, 1j * C)
+        assert np.allclose(ma.get_local_operator("S" + a) @ ma.get_local_operator("L" + b),
+                           ma.get_local_operator("L" + b) @ ma.get_local_operator("S" + a))  # fmt: skip
+
+
+# ==================================================
+def test_callback_info(sp_model):
+    # expectation values on the full k grid are passed as info[keyword].
+    topdir, parameter = sp_model
+    (topdir / "out" / "cb.py").write_text(CALLBACK)
+    keywords = ["Sx", "Sy", "Sz", "Lx", "Ly", "Lz", "Qu", "Qv", "Qyz", "Qxz", "Qxy"]
+    output = {
+        "dispersion": {"k_path": "Γ-X", "k_point": {"Γ": "[0,0,0]", "X": "[1/2,0,0]"}},
+        "callback_k_path": "cb.py",
+        "callback_k_full": "cb.py",
+        "callback_info": keywords,
+    }
+    ma, _ = run(parameter, output, grid=(4, 3, 2))
+    Ek, Uk, info = load(topdir, "full")
+    for tag in keywords:
+        expected = np.einsum("kmi,mn,kni->ki", Uk.conj(), ma.get_local_operator(tag), Uk).real
+        assert info[tag].shape == Ek.shape
+        assert np.allclose(info[tag], expected)
+    # the band sum of S is the trace of the operator, which is zero.
+    for tag in ["Sx", "Sy", "Sz"]:
+        assert np.allclose(info[tag].sum(axis=1), 0.0)
+    # |<S>| <= 1/2 for each state.
+    assert np.all(info["Sx"] ** 2 + info["Sy"] ** 2 + info["Sz"] ** 2 <= 0.25 + 1e-10)
+    # the sum over degenerate bands of a time-odd operator vanishes by inversion and time-reversal symmetries.
+    for k in range(len(Ek)):
+        start = np.flatnonzero(np.r_[True, np.diff(Ek[k]) > 1e-8])
+        for tag in ["Sx", "Sy", "Sz", "Lz"]:
+            assert np.allclose(np.add.reduceat(info[tag][k], start), 0.0, atol=1e-8)
+
+    _, _, info_path = load(topdir, "path")
+    assert not set(keywords) & set(info_path)
+
+    # no quantity is added by default, nor by an empty list.
+    default = {key: value for key, value in output.items() if key != "callback_info"}
+    for out in [default, default | {"callback_info": []}]:
+        run(parameter, out, grid=(2, 2, 2))
+        assert not set(keywords) & set(load(topdir, "full")[2])
+
+
+# ==================================================
+@pytest.mark.parametrize(
+    "output, match",
+    [
+        ({"callback_info": ["Sw"]}, r"'output/callback_info' must be a list of"),
+        ({"callback_info": "Sx"}, r"'output/callback_info' must be a list of"),
+        ({"callback_info": [1]}, r"'output/callback_info' must be a list of"),
+        ({"callback_info": [None]}, r"'output/callback_info' must be a list of"),
+        ({"callback_info": [np.array(["Sx"])]}, r"'output/callback_info' must be a list of"),
+        ({"callback_info": ["Sx"], "callback_k_full": None}, r"'output/callback_info' requires 'output/callback_k_full'"),
+    ],
+)
+def test_callback_info_error(sp_model, output, match):
+    topdir, parameter = sp_model
+    (topdir / "out" / "cb.py").write_text(CALLBACK)
+    with pytest.raises(ValueError, match=match):
+        run(parameter, {"dispersion": {"k_path": None}, "callback_k_full": "cb.py"} | output, grid=(2, 2, 2))
+
+
+# ==================================================
+def test_callback_info_basis(in_tmp):
+    # spin operators for a spinless model are rejected, and orbital operators can be used.
+    model = dict(MODEL) | {"model": "lg", "spinful": False, "site": {"A": ("[0,0,0]", "p")}, "bond": [("A", "A", 1)]}
+    create_model(model, topdir="out")
+    (in_tmp / "out" / "cb.py").write_text(CALLBACK)
+    ma = ModelAnalyzer("out")
+    control = {"samb": {"model": "lg", "select": SELECT, "parameter": {"z1": 1.0}}, "grid": (2, 2, 2)}
+    output = {"dispersion": {"k_path": None}, "callback_k_full": "cb.py"}
+    with pytest.raises(ValueError, match="spin operator 'Sx' requires a spinful model"):
+        ma.analyze(control | {"output": output | {"callback_info": ["Sx"]}})
+    ma.analyze(control | {"output": output | {"callback_info": ["Lz"]}})
+    assert load(in_tmp, "full")[2]["Lz"].shape == (8, 3)
+
+    # no basis (wannier mode without a model) or jml basis.
+    for basis_type in [None, "jml"]:
+        ma.set_basis_type(basis_type)
+        with pytest.raises(ValueError, match="requires a model with lg or lgs basis"):
+            ma.get_callback_info_operator(True)
+
+
+# ==================================================
+def test_power_keeps_saved_eigen_system(sp_model):
+    # the eigen system passed to the callback and saved in .npz is not raised to the power.
+    topdir, parameter = sp_model
+    (topdir / "out" / "cb.py").write_text(CALLBACK)
+    dispersion = {"k_path": "Γ-X", "k_point": {"Γ": "[0,0,0]", "X": "[1/2,0,0]"}}
+    filename = os.path.join("out", "sp", "output", "sp_eigen_k_path.npz")
+    output = {"save_k_path": True, "n_electron": 4}
+    ma, _ = run(parameter, output | {"dispersion": dispersion})
+    assert ma["info"]["fermi_energy"] != 0.0
+    raw = np.load(filename)
+    Ek, Uk = raw["Ek"], raw["Uk"]
+    os.remove(filename)
+    run(parameter, output | {"dispersion": dispersion | {"power": 0.5}, "callback_k_path": "cb.py"})
+    z = np.load(filename)
+    assert z["Ek"] == pytest.approx(Ek) and z["Uk"] == pytest.approx(Uk)
+    Ek_callback, Uk_callback, _ = load(topdir, "path")
+    assert Ek_callback == pytest.approx(Ek) and Uk_callback == pytest.approx(Uk)
+
+
+# ==================================================
+def test_power_keeps_full_grid(sp_model):
+    # the DOS, the eigen system on the full k grid, and the callback are not raised to the power.
+    topdir, parameter = sp_model
+    (topdir / "out" / "cb.py").write_text(CALLBACK)
+    dispersion = {"k_path": "Γ-X", "k_point": {"Γ": "[0,0,0]", "X": "[1/2,0,0]"}}
+    filename = os.path.join("out", "sp", "output", "sp_eigen_k_full.npz")
+    output = {"dos": "auto", "save_k_full": True, "n_electron": 4, "callback_k_full": "cb.py"}
+    ma, dos = run(parameter, output | {"dispersion": dispersion})
+    assert ma["info"]["fermi_energy"] != 0.0
+    raw = np.load(filename)
+    Ek, Uk = raw["Ek"], raw["Uk"]
+    assert load(topdir, "full")[0] == pytest.approx(Ek)
+    _, dos_power = run(parameter, output | {"dispersion": dispersion | {"power": 0.5}})
+    assert dos_power == pytest.approx(dos)
+    z = np.load(filename)
+    assert z["Ek"] == pytest.approx(Ek) and z["Uk"] == pytest.approx(Uk)
+    Ek_callback, Uk_callback, _ = load(topdir, "full")
+    assert Ek_callback == pytest.approx(Ek) and Uk_callback == pytest.approx(Uk)
+
+
+# ==================================================
+def test_dispersion_power_plot_range(sp_model):
+    # the range of the gnuplot script is that of the raised energies, with a margin of 10 %, at a non-zero Fermi energy.
+    _, parameter = sp_model
+    dispersion = {"k_path": "Γ-X", "k_point": {"Γ": "[0,0,0]", "X": "[1/2,0,0]"}}
+    output = {"save_k_path": True, "n_electron": 4}
+    path = os.path.join("out", "sp", "output")
+    ma, _ = run(parameter, output | {"dispersion": dispersion})
+    ef = ma["info"]["fermi_energy"]
+    assert ef != 0.0
+    x = np.load(os.path.join(path, "sp_eigen_k_path.npz"))["Ek"] - ef
+    assert x.min() < 0.0 < x.max()
+
+    run(parameter, output | {"dispersion": dispersion | {"power": -1}})
+    # a Kramers doublet at the Fermi energy within round-off error is skipped, also at a non-zero Fermi energy.
+    cutoff = 1e-10 * np.abs(x).max()
+    assert np.count_nonzero(np.abs(x) <= cutoff) == 2
+    y = 1.0 / x[np.abs(x) > cutoff]
+    assert np.sort(np.loadtxt(os.path.join(path, "sp_dispersion.txt"))[:, 1]) == pytest.approx(np.sort(y))
+    with open(os.path.join(path, "plot_band.gnu")) as f:
+        value = dict(line.split("=") for line in f if line.startswith(("ymin =", "ymax =")))
+    margin = 0.1 * (y.max() - y.min())
+    assert float(value["ymin "]) == pytest.approx(y.min() - margin)
+    assert float(value["ymax "]) == pytest.approx(y.max() + margin)
+
+
+# ==================================================
+def test_dispersion_power_skip(in_tmp):
+    # flat s band at zero within round-off error with negative power: only the s band is skipped.
+    model = {"model": "flat", "group": 221, "cell": {"a": 1.0}, "site": {"A": ("[0,0,0]", ["s", "p"])}, "bond": [("A", "A", 1)]}
+    create_model(model | {"pdf": {"create": False}, "qtdraw": {"create": False}}, topdir="out")
+    dispersion = {"k_path": "Γ-X", "k_point": {"Γ": "[0,0,0]", "X": "[1/2,0,0]"}, "power": -1}
+    control = {"samb": {"model": "flat", "parameter": {"z1": 1e-13, "z2": 1.0}}, "grid": (4, 4, 4)}
+    ModelAnalyzer("out").analyze(control | {"output": {"dispersion": dispersion, "save_k_path": True}})
+    path = os.path.join("out", "flat", "output")
+    z = np.load(os.path.join(path, "flat_eigen_k_path.npz"))
+    data = np.loadtxt(os.path.join(path, "flat_dispersion.txt"))
+    n_k, n_band = z["Ek"].shape
+    assert np.max(np.abs(z["Ek"][:, 0])) < 1e-12 and 0.0 < np.min(np.abs(z["Ek"][:, 0]))
+    assert data.shape[0] == n_k * (n_band - 1)
+    assert data[:, 1] == pytest.approx(np.full(len(data), 1 / z["Ek"].max()))
+
+
+# ==================================================
+def test_weight_order(sp_model):
+    # orbital weight is written for each band and k point, with the energy raised to the power.
+    _, parameter = sp_model
+    k_point = {"Γ": "[0,0,0]", "X": "[1/2,0,0]", "M": "[1/2,1/2,0]"}
+    dispersion = {"k_path": "Γ-X-M", "k_point": k_point, "weight": [["(s,u)@B(1)", "(s,d)@B(1)"]], "power": 0.5}
+    ma, _ = run(parameter, {"dispersion": dispersion, "save_k_path": True, "n_electron": 4}, grid=(3, 3, 3))
+    path = os.path.join("out", "sp", "output")
+    z = np.load(os.path.join(path, "sp_eigen_k_path.npz"))
+    n_k, n_band = z["Ek"].shape
+    ket = list(z["ket"])
+    weight = np.abs(z["Uk"][:, ket.index("(s,u)@B(1)"), :]) ** 2 + np.abs(z["Uk"][:, ket.index("(s,d)@B(1)"), :]) ** 2
+    data = np.loadtxt(os.path.join(path, "sp_weight.txt"))
+    x = z["Ek"] - ma["info"]["fermi_energy"]
+    assert data[:, 1].reshape(n_band, n_k).T == pytest.approx(np.sign(x) * np.abs(x) ** 0.5)
+    assert data[:, 2].reshape(n_band, n_k).T == pytest.approx(weight, abs=1e-12)
+
+
+# ==================================================
+@pytest.mark.parametrize("spinful", [False, True])
+def test_orbital_operator(in_tmp, spinful):
+    # (L_a)_bc = -i eps_abc in (px, py, pz), and Q are the quadrupoles of L with common factors in each shell.
+    model = dict(MODEL) | {"model": "pd", "spinful": spinful, "site": {"A": ("[0,0,0]", ["p", "d"])}, "bond": []}
+    create_model(model, topdir="out")
+    ma = ModelAnalyzer("out")
+    ma.analyze({"samb": {"model": "pd", "select": {}}, "output": {"dispersion": {"k_path": None}}})
+    ket = ma.get_ket()
+
+    def block(tag, shell):
+        idx = [i for i, k in enumerate(ket) if k.replace("(", "").startswith(shell) and (not spinful or ",u" in k)]
+        return ma.get_local_operator(tag)[np.ix_(idx, idx)]
+
+    # orbital operators are diagonal in the spin, the same for u and d, and do not mix the shells.
+    p = [i for i, k in enumerate(ket) if k.replace("(", "").startswith("p")]
+    d = [i for i, k in enumerate(ket) if k.replace("(", "").startswith("d")]
+    assert len(p) == 3 * (1 + spinful) and len(d) == 5 * (1 + spinful)
+    for tag in ["Lx", "Ly", "Lz", "Qu", "Qv", "Qyz", "Qxz", "Qxy"]:
+        op = ma.get_local_operator(tag)
+        assert np.allclose(op[np.ix_(p, d)], 0.0)
+        if spinful:
+            u = [i for i, k in enumerate(ket) if ",u" in k]
+            dn = [i for i, k in enumerate(ket) if ",d" in k]
+            assert np.allclose(op[np.ix_(u, u)], op[np.ix_(dn, dn)])
+            assert np.allclose(op[np.ix_(u, dn)], 0.0)
+
+    eps = np.zeros((3, 3, 3))
+    for a, b, c in [(0, 1, 2), (1, 2, 0), (2, 0, 1)]:
+        eps[a, b, c], eps[a, c, b] = 1, -1
+    for a, tag in enumerate(["Lx", "Ly", "Lz"]):
+        assert block(tag, "p") == pytest.approx(-1j * eps[a])
+
+    for shell in ["p", "d"]:
+        x, y, z = (block(tag, shell) for tag in ["Lx", "Ly", "Lz"])
+        L2 = x @ x + y @ y + z @ z
+        Qxy = x @ y + y @ x
+        factor = np.sum(block("Qxy", shell) * Qxy.conj()).real / np.sum(np.abs(Qxy) ** 2)
+        assert factor != 0.0
+        assert np.allclose(block("Qxy", shell), factor * Qxy)
+        assert np.allclose(block("Qyz", shell), factor * (y @ z + z @ y))
+        assert np.allclose(block("Qxz", shell), factor * (x @ z + z @ x))
+        assert np.allclose(block("Qv", shell), factor * (x @ x - y @ y))
+        assert np.allclose(block("Qu", shell), factor * (3 * z @ z - L2) / np.sqrt(3))
