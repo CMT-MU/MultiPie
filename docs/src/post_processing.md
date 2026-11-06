@@ -9,7 +9,7 @@ This page explains the tools, set in `output` of the control file:
 | [Fermi energy from the filling](#pp-fermi-energy) | `n_electron` | (used for all output) |
 | [Orbital weight (fat band)](#pp-orbital-weight-fat-band) | `dispersion/weight` | `_weight.txt`, `_weight.pdf`, `plot_weight.gnu` |
 | [Eigenvalues and eigenvectors](#pp-eigenvalues-and-eigenvectors) | `save_k_path`, `save_k_full` | `_eigen_k_path.npz`, `_eigen_k_full.npz` |
-| [Callbacks for custom calculations](#pp-callbacks-for-custom-calculations) | `callback_k_path`, `callback_k_full` | (written by the callbacks) |
+| [Callbacks for custom calculations](#pp-callbacks-for-custom-calculations) | `callback_k_path`, `callback_k_full`, `callback_info` | (written by the callbacks) |
 
 All of them are off by default, and the dispersion (`_dispersion.txt`, `.pdf`, `.eps`, `plot_band.gnu`) is computed as before.
 
@@ -80,6 +80,8 @@ The Fermi energy is 0 in samb mode, and that of `seedname.win` in wannier and sy
 
 Each band holds one state, so that `n_electron` is the number of electrons for a spinful model, and half of it for a spinless model, e.g., `"n_electron": 1` for graphene at half filling.
 With `"dos_method": "gaussian"`, the states are occupied in ascending order of energy (T = 0), and the Fermi energy is placed at the middle of the highest occupied and the lowest unoccupied states. With `"tetrahedron"`, it is computed by libtetrabz. For an insulator (integer `n_electron` with a gap), both methods place the Fermi energy at the middle of the gap.
+
+With `output/dispersion/power`, the energies in the dispersion and the orbital weight are written and plotted as $x^p$ with $x = E_k - E_F$ and $p$ = `power`. Where $x^p$ is not a real number, i.e., negative $x$ with non-integer $p$, $-|x|^p$ is used, so that the states below the Fermi energy remain below it. For integer $p$, $x^p$ is used as it is, e.g., it is positive for even $p$. For negative $p$, the values with $|x| \le 10^{-10} \max |x|$, the maximum being over all the bands and k points, are regarded as divergent, and are not plotted, which breaks the line of the band there. The adjacent points that are plotted are connected, also across the Fermi energy, and the range of the plot is determined by the plotted point closest to the Fermi energy. The eigenvalues in the DOS, in the `.npz` files, and passed to the callbacks are not raised to the power.
 
 (pp-orbital-weight-fat-band)=
 ## Orbital weight (fat band)
@@ -166,8 +168,26 @@ The arguments of the callbacks are
   - `_topdir` (str), `_verbose` (bool): top directory (absolute path), and verbose option.
   - for `callback_k_path` only, `k_linear` (ndarray) and `k_dis_pos` (dict): position along the k path, and positions of the labels, as used to plot the dispersion.
   - for `callback_k_full` only, `grid` (list): `[N1, N2, N3]`.
+  - for `callback_k_full` only, the quantities given in `output/callback_info`, see below.
 
 The functions are called after the other output, at the end of the analysis. `callback_k_path` requires the dispersion. For `callback_k_full`, all the eigenvectors on the full grid are kept in memory, `N1 x N2 x N3 x (number of kets)^2` complex numbers, so that a coarse `grid` may be needed for a large model.
+
+Set `output/callback_info` to pass the expectation value of local operators in each eigenstate on the full k grid, as `info[keyword]`, `[k, n]`. The keywords are those of `output/dispersion/local`: spin `Sx`, `Sy`, `Sz`, orbital angular momentum `Lx`, `Ly`, `Lz`, and quadrupole `Qu`, `Qv`, `Qyz`, `Qxz`, `Qxy`. For example,
+
+```python
+"output": {
+    "callback_k_full": "my_callback.py",
+    "callback_info": ["Sx", "Sy", "Sz"],
+},
+```
+
+gives `info["Sx"]`, `info["Sy"]`, and `info["Sz"]` in `callback_k_full(Ek, Uk, info)`. `output/callback_info` requires `output/callback_k_full` and a model in the `lg` or `lgs` basis, and the spin operators require a spinful model.
+
+```{note}
+Within degenerate bands, the eigenvectors, and hence the value of each band, are arbitrary. For example, the bands of a spinful model with both inversion and time-reversal symmetries are doubly degenerate at every k. Only the sum over the degenerate bands is meaningful. The same holds for `output/dispersion/local`.
+
+The operators are defined along the axes of the model. With a Wannier input, the axes of the projections in `seedname.nnkp` (z-axis, x-axis, and spin-quantization axis) are not taken into account.
+```
 
 ```{note}
 Unlike the input files, the callback files are executed as Python code. Use only callback files you trust.

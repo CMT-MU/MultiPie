@@ -38,6 +38,8 @@ from multipie.util.util_model_analyzer import (
     create_gnuplot_dos,
     create_all_local_operator,
     create_local_operator,
+    local_expectation,
+    power_energy,
     create_k_multipole,
     create_k_matrix,
     add_local_parameter,
@@ -116,6 +118,9 @@ def import_libtetrabz():
         ) from e
 
     return libtetrabz
+
+
+LOCAL_OPERATOR = ["Sx", "Sy", "Sz", "Lx", "Ly", "Lz", "Qu", "Qv", "Qyz", "Qxz", "Qxy"]  # keywords of local operators.
 
 
 # ==================================================
@@ -1068,6 +1073,8 @@ class ModelAnalyzer(dict):
                     "('output/dispersion/k_path' is None, or the group of the model is not a space group)."
                 )
 
+        info_operator = self.get_callback_info_operator(callback["callback_k_full"] is not None)
+
         # eigen system on the full k grid is kept only when it is required (otherwise, it is computed in chunks).
         need_full = callback["callback_k_full"] is not None or self.output["save_k_full"]
         eigen_full = self.get_eigen_full() if need_full else None
@@ -1093,6 +1100,8 @@ class ModelAnalyzer(dict):
             kv, Ek, Uk = eigen_full
             info = self.get_callback_info(kv)
             info["grid"] = list(self["info"]["grid"])
+            for tag, op in info_operator.items():
+                info[tag] = local_expectation(Uk, op)
             callback["callback_k_full"](Ek, Uk, info)
 
     # ==================================================
@@ -1235,6 +1244,31 @@ class ModelAnalyzer(dict):
         return info
 
     # ==================================================
+    def get_callback_info_operator(self, has_callback_k_full):
+        """
+        Get local operators of 'output/callback_info'.
+
+        Args:
+            has_callback_k_full (bool): is callback_k_full given ?
+
+        Returns:
+            - (dict) -- operator matrix, dict[keyword, ndarray].
+
+        :meta private:
+        """
+        keywords = self.output["callback_info"]
+        if not isinstance(keywords, (list, tuple)) or not all(isinstance(k, str) and k in LOCAL_OPERATOR for k in keywords):
+            raise ValueError(f"'output/callback_info' must be a list of {LOCAL_OPERATOR}, '{keywords}' is given.")
+        if not keywords:
+            return {}
+        if not has_callback_k_full:
+            raise ValueError("'output/callback_info' requires 'output/callback_k_full'.")
+        if self.basis_type not in ["lg", "lgs"]:
+            raise ValueError(f"'output/callback_info' requires a model with lg or lgs basis, basis type is '{self.basis_type}'.")
+
+        return {tag: self.get_local_operator(tag) for tag in keywords}
+
+    # ==================================================
     def load_callback(self, key, modules=None):
         """
         Load callback function.
@@ -1309,17 +1343,19 @@ class ModelAnalyzer(dict):
         }
         power = self.output["dispersion"]["power"]
         if power is not None:
-            with np.errstate(invalid="ignore", divide="ignore"):
-                Ek = np.power(Ek, power)
-            Ek = np.where(np.isfinite(Ek), Ek, np.nan)
+            # the power is taken from the fermi energy, which is subtracted again in the output.
+            ef = self["info"]["fermi_energy"]
+            Ek = power_energy(Ek - ef, power) + ef
             n_skip = np.count_nonzero(~np.isfinite(Ek))
             if n_skip == Ek.size:
-                raise ValueError(f"no value of Ek^{power} can be computed (e.g., all Ek are negative). check 'power'.")
+                raise ValueError(
+                    f"no value of (Ek-Ef)^{power} can be computed (all Ek are at the fermi energy with negative power). check 'power'."
+                )
             if n_skip > 0 and self._verbose:
-                print(f"skip {n_skip} values of Ek^{power} that cannot be computed (e.g., negative Ek).")
+                print(f"skip {n_skip} values of (Ek-Ef)^{power} that diverge (Ek at the fermi energy with negative power).")
 
         # set local operators.
-        Ok = [np.einsum("kmi,mn,kni->ki", Uk.conj(), self.get_local_operator(tag), Uk).real for tag in op_lst]
+        Ok = [local_expectation(Uk, self.get_local_operator(tag)) for tag in op_lst]
 
         # output dispersion data, plot, and gnuplot.
         self.write_dispersion(Ek, Ok, op_lst, k_linear, k_dis_pos)
