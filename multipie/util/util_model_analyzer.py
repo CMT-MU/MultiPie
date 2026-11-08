@@ -708,19 +708,15 @@ def power_energy(Ek, power):
 
     Args:
         Ek (ndarray): energy eigen values.
-        power (float): power.
+        power (float): power (positive).
 
     Returns:
         - (ndarray) -- Ek^power, or -|Ek|^power where Ek^power is not a real number (negative Ek with non-integer power).
-          Divergent values (Ek = 0 within round-off error, with negative power) are NaN.
     """
-    with np.errstate(invalid="ignore", divide="ignore"):
+    with np.errstate(invalid="ignore"):
         value = np.power(Ek, power)
-        value = np.where(np.isnan(value), -np.power(np.abs(Ek), power), value)
-    if power < 0:
-        value = np.where(np.abs(Ek) <= 1e-10 * np.max(np.abs(Ek)), np.nan, value)
 
-    return np.where(np.isfinite(value), value, np.nan)
+    return np.where(np.isnan(value), -np.power(np.abs(Ek), power), value)
 
 
 # ==================================================
