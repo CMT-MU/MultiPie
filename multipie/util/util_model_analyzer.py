@@ -201,7 +201,7 @@ def output_dispersion(filename, k, ef, e, o=None, olist=None):
         en = e[n] - ef
         s = ""
         for i in range(num_k):
-            # skip values that cannot be computed (e.g., negative Ek with power=0.5), and break the line there.
+            # skip values that cannot be computed (Ek = 0 with negative power), and break the line there.
             if not np.isfinite(en[i]):
                 if s != "" and not s.endswith("\n\n"):
                     s += "\n"
@@ -664,6 +664,8 @@ def create_local_operator(ket, op_name, op_dict, spinful):
     """
     if op_name[0] == "S":
         mode = "spin"
+        if not spinful:
+            raise ValueError(f"spin operator '{op_name}' requires a spinful model.")
     else:
         mode = "orbital"
 
@@ -672,10 +674,8 @@ def create_local_operator(ket, op_name, op_dict, spinful):
     lst = create_operator_index(ket, mode)
     if mode == "spin":
         for m, n, rank, b_idx, k_idx in lst:
-            if spinful:
-                b_idx = b_idx // 2
-                k_idx = k_idx // 2
-            mat[m, n] += complex(op_dict["s"][op_name][b_idx, k_idx])
+            # kets of an orbital are in the order of (u, d), so that the odd index is d.
+            mat[m, n] += complex(op_dict["s"][op_name][b_idx % 2, k_idx % 2])
     else:
         for m, n, rank, b_idx, k_idx in lst:
             if spinful:
@@ -684,6 +684,39 @@ def create_local_operator(ket, op_name, op_dict, spinful):
             mat[m, n] += complex(op_dict[rank][op_name][b_idx, k_idx])
 
     return mat
+
+
+# ==================================================
+def local_expectation(Uk, op):
+    """
+    Expectation value of local operator for each eigen state.
+
+    Args:
+        Uk (ndarray): eigen vectors, Uk[k,:,n].
+        op (ndarray): operator matrix (dim x dim).
+
+    Returns:
+        - (ndarray) -- expectation values, [k,n].
+    """
+    return np.sum(Uk.conj() * (op @ Uk), axis=1).real
+
+
+# ==================================================
+def power_energy(Ek, power):
+    """
+    Raise energy to the power.
+
+    Args:
+        Ek (ndarray): energy eigen values.
+        power (float): power (positive).
+
+    Returns:
+        - (ndarray) -- Ek^power, or -|Ek|^power where Ek^power is not a real number (negative Ek with non-integer power).
+    """
+    with np.errstate(invalid="ignore"):
+        value = np.power(Ek, power)
+
+    return np.where(np.isnan(value), -np.power(np.abs(Ek), power), value)
 
 
 # ==================================================

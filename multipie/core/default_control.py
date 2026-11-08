@@ -49,8 +49,9 @@ default_control = {
         "save_k_full": False,  # save Ek, Uk on full k grid in .npz ?
         "callback_k_path": None,  # file (.py, relative to topdir) defining callback_k_path(Ek, Uk, info), called with eigen system along k path.
         "callback_k_full": None,  # file (.py, relative to topdir) defining callback_k_full(Ek, Uk, info), called with eigen system on full k grid.
+        "callback_info": [],  # quantities added to info of callback_k_full as info[keyword], [k,n] on full k grid. local quantity, "Sx/Sy/Sz/Lx/Ly/Lz/Qu/Qv/Qyz/Qxz/Qxy".
         "dispersion": {  # dispersion info.
-            "power": None,  # plot as Ek^power. if None, power=1.
+            "power": None,  # positive power p: Ek^p is used in the dispersion and DOS, with fermi energy = 0 (n_electron cannot be used). -|Ek|^p if Ek^p is not a real number (negative Ek with non-integer p). if None, power=1.
             "k_path": "",  # symmetry line, separated by "-". disconnected points by "|". if empty str, default values are used for k_path and k_point.
             "k_point": {"Γ": "[0,0,0]"},  # k-point (fractional, primitive cell of model, or of seedname.win without model).
             "local": [],  # local quantity, "Sx/Sy/Sz/Lx/Ly/Lz/Qu/Qv/Qyz/Qxz/Qxy".

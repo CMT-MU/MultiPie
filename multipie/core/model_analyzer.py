@@ -38,6 +38,8 @@ from multipie.util.util_model_analyzer import (
     create_gnuplot_dos,
     create_all_local_operator,
     create_local_operator,
+    local_expectation,
+    power_energy,
     create_k_multipole,
     create_k_matrix,
     add_local_parameter,
@@ -116,6 +118,9 @@ def import_libtetrabz():
         ) from e
 
     return libtetrabz
+
+
+LOCAL_OPERATOR = ["Sx", "Sy", "Sz", "Lx", "Ly", "Lz", "Qu", "Qv", "Qyz", "Qxz", "Qxy"]  # keywords of local operators.
 
 
 # ==================================================
@@ -1068,12 +1073,20 @@ class ModelAnalyzer(dict):
                     "('output/dispersion/k_path' is None, or the group of the model is not a space group)."
                 )
 
+        info_operator = self.get_callback_info_operator(callback["callback_k_full"] is not None)
+
         # eigen system on the full k grid is kept only when it is required (otherwise, it is computed in chunks).
         need_full = callback["callback_k_full"] is not None or self.output["save_k_full"]
         eigen_full = self.get_eigen_full() if need_full else None
 
-        # fermi energy from the number of occupied states.
-        if self.output["n_electron"] is not None:
+        # fermi energy from the number of occupied states, or 0 for the power of the energy.
+        if self.get_power() is not None:
+            if self.output["n_electron"] is not None:
+                raise ValueError(
+                    "'output/n_electron' cannot be used with 'output/dispersion/power', for which the fermi energy is 0."
+                )
+            self.set_fermi_energy(0.0)
+        elif self.output["n_electron"] is not None:
             self.set_fermi_energy(self.compute_fermi_energy(eigen_full))
 
         disp = self.compute_dispersion()
@@ -1093,7 +1106,48 @@ class ModelAnalyzer(dict):
             kv, Ek, Uk = eigen_full
             info = self.get_callback_info(kv)
             info["grid"] = list(self["info"]["grid"])
+            for tag, op in info_operator.items():
+                info[tag] = local_expectation(Uk, op)
             callback["callback_k_full"](Ek, Uk, info)
+
+    # ==================================================
+    def get_power(self):
+        """
+        Get the power of the energy, output/dispersion/power.
+
+        Returns:
+            - (float) -- power (positive), or None if it is not used.
+
+        :meta private:
+        """
+        if "dispersion" not in self.output:
+            return None
+        power = self.output["dispersion"].get("power")
+        if power is None:
+            return None
+        if isinstance(power, bool) or not isinstance(power, (int, float)) or not power > 0:
+            raise ValueError(f"'output/dispersion/power' must be a positive number or None, '{power}' is given.")
+
+        return power
+
+    # ==================================================
+    def power_eigenvalue(self, Ek):
+        """
+        Raise eigen values to the power, output/dispersion/power (the fermi energy is 0).
+
+        Args:
+            Ek (ndarray): eigen values.
+
+        Returns:
+            - (ndarray) -- Ek^power, or Ek if power is not used.
+
+        :meta private:
+        """
+        power = self.get_power()
+        if power is None:
+            return Ek
+
+        return power_energy(Ek, power)
 
     # ==================================================
     def has_dispersion(self):
@@ -1235,6 +1289,31 @@ class ModelAnalyzer(dict):
         return info
 
     # ==================================================
+    def get_callback_info_operator(self, has_callback_k_full):
+        """
+        Get local operators of 'output/callback_info'.
+
+        Args:
+            has_callback_k_full (bool): is callback_k_full given ?
+
+        Returns:
+            - (dict) -- operator matrix, dict[keyword, ndarray].
+
+        :meta private:
+        """
+        keywords = self.output["callback_info"]
+        if not isinstance(keywords, (list, tuple)) or not all(isinstance(k, str) and k in LOCAL_OPERATOR for k in keywords):
+            raise ValueError(f"'output/callback_info' must be a list of {LOCAL_OPERATOR}, '{keywords}' is given.")
+        if not keywords:
+            return {}
+        if not has_callback_k_full:
+            raise ValueError("'output/callback_info' requires 'output/callback_k_full'.")
+        if self.basis_type not in ["lg", "lgs"]:
+            raise ValueError(f"'output/callback_info' requires a model with lg or lgs basis, basis type is '{self.basis_type}'.")
+
+        return {tag: self.get_local_operator(tag) for tag in keywords}
+
+    # ==================================================
     def load_callback(self, key, modules=None):
         """
         Load callback function.
@@ -1307,19 +1386,10 @@ class ModelAnalyzer(dict):
             "k_linear": k_linear,
             "k_dis_pos": k_dis_pos,
         }
-        power = self.output["dispersion"]["power"]
-        if power is not None:
-            with np.errstate(invalid="ignore", divide="ignore"):
-                Ek = np.power(Ek, power)
-            Ek = np.where(np.isfinite(Ek), Ek, np.nan)
-            n_skip = np.count_nonzero(~np.isfinite(Ek))
-            if n_skip == Ek.size:
-                raise ValueError(f"no value of Ek^{power} can be computed (e.g., all Ek are negative). check 'power'.")
-            if n_skip > 0 and self._verbose:
-                print(f"skip {n_skip} values of Ek^{power} that cannot be computed (e.g., negative Ek).")
+        Ek = self.power_eigenvalue(Ek)
 
         # set local operators.
-        Ok = [np.einsum("kmi,mn,kni->ki", Uk.conj(), self.get_local_operator(tag), Uk).real for tag in op_lst]
+        Ok = [local_expectation(Uk, self.get_local_operator(tag)) for tag in op_lst]
 
         # output dispersion data, plot, and gnuplot.
         self.write_dispersion(Ek, Ok, op_lst, k_linear, k_dis_pos)
@@ -1542,13 +1612,17 @@ class ModelAnalyzer(dict):
             P[idx, g] = 1.0
 
         # energy range from the eigen values.
-        kv, Ek = self.get_eigenvalue_full(eigen_full)
+        # with output/dispersion/power, the DOS is that of Ek^power, D(E) = (1/Nk) sum_{kn} w_kn delta(E-E_kn^power).
+        # the chunks are evaluated lazily, so that the eigen values before the power are kept in E0.
+        kv, E0 = self.get_eigenvalue_full(eigen_full)
         if eigen_full is None:
             chunks = self.eigen_chunks(kv)
         else:
             chunk = _k_chunk(len(ket))
             Uk = eigen_full[2]
-            chunks = ((Ek[i : i + chunk], Uk[i : i + chunk]) for i in range(0, len(kv), chunk))
+            chunks = ((E0[i : i + chunk], Uk[i : i + chunk]) for i in range(0, len(kv), chunk))
+        chunks = ((self.power_eigenvalue(Ec), Uc) for Ec, Uc in chunks)
+        Ek = self.power_eigenvalue(E0)
         e_min, e_max = float(np.min(Ek)), float(np.max(Ek))
 
         if method == "gaussian":
