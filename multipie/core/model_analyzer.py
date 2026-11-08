@@ -1079,8 +1079,14 @@ class ModelAnalyzer(dict):
         need_full = callback["callback_k_full"] is not None or self.output["save_k_full"]
         eigen_full = self.get_eigen_full() if need_full else None
 
-        # fermi energy from the number of occupied states.
-        if self.output["n_electron"] is not None:
+        # fermi energy from the number of occupied states, or 0 for the power of the energy.
+        if self.get_power() is not None:
+            if self.output["n_electron"] is not None:
+                raise ValueError(
+                    "'output/n_electron' cannot be used with 'output/dispersion/power', for which the fermi energy is 0."
+                )
+            self.set_fermi_energy(0.0)
+        elif self.output["n_electron"] is not None:
             self.set_fermi_energy(self.compute_fermi_energy(eigen_full))
 
         disp = self.compute_dispersion()
@@ -1103,6 +1109,45 @@ class ModelAnalyzer(dict):
             for tag, op in info_operator.items():
                 info[tag] = local_expectation(Uk, op)
             callback["callback_k_full"](Ek, Uk, info)
+
+    # ==================================================
+    def get_power(self):
+        """
+        Get the power of the energy, output/dispersion/power.
+
+        Returns:
+            - (float) -- power (positive), or None if it is not used.
+
+        :meta private:
+        """
+        if "dispersion" not in self.output:
+            return None
+        power = self.output["dispersion"].get("power")
+        if power is None:
+            return None
+        if isinstance(power, bool) or not isinstance(power, (int, float)) or not power > 0:
+            raise ValueError(f"'output/dispersion/power' must be a positive number or None, '{power}' is given.")
+
+        return power
+
+    # ==================================================
+    def power_eigenvalue(self, Ek):
+        """
+        Raise eigen values to the power, output/dispersion/power (the fermi energy is 0).
+
+        Args:
+            Ek (ndarray): eigen values.
+
+        Returns:
+            - (ndarray) -- Ek^power, or Ek if power is not used.
+
+        :meta private:
+        """
+        power = self.get_power()
+        if power is None:
+            return Ek
+
+        return power_energy(Ek, power)
 
     # ==================================================
     def has_dispersion(self):
@@ -1341,18 +1386,7 @@ class ModelAnalyzer(dict):
             "k_linear": k_linear,
             "k_dis_pos": k_dis_pos,
         }
-        power = self.output["dispersion"]["power"]
-        if power is not None:
-            # the power is taken from the fermi energy, which is subtracted again in the output.
-            ef = self["info"]["fermi_energy"]
-            Ek = power_energy(Ek - ef, power) + ef
-            n_skip = np.count_nonzero(~np.isfinite(Ek))
-            if n_skip == Ek.size:
-                raise ValueError(
-                    f"no value of (Ek-Ef)^{power} can be computed (all Ek are at the fermi energy with negative power). check 'power'."
-                )
-            if n_skip > 0 and self._verbose:
-                print(f"skip {n_skip} values of (Ek-Ef)^{power} that diverge (Ek at the fermi energy with negative power).")
+        Ek = self.power_eigenvalue(Ek)
 
         # set local operators.
         Ok = [local_expectation(Uk, self.get_local_operator(tag)) for tag in op_lst]
@@ -1578,13 +1612,17 @@ class ModelAnalyzer(dict):
             P[idx, g] = 1.0
 
         # energy range from the eigen values.
-        kv, Ek = self.get_eigenvalue_full(eigen_full)
+        # with output/dispersion/power, the DOS is that of Ek^power, D(E) = (1/Nk) sum_{kn} w_kn delta(E-E_kn^power).
+        # the chunks are evaluated lazily, so that the eigen values before the power are kept in E0.
+        kv, E0 = self.get_eigenvalue_full(eigen_full)
         if eigen_full is None:
             chunks = self.eigen_chunks(kv)
         else:
             chunk = _k_chunk(len(ket))
             Uk = eigen_full[2]
-            chunks = ((Ek[i : i + chunk], Uk[i : i + chunk]) for i in range(0, len(kv), chunk))
+            chunks = ((E0[i : i + chunk], Uk[i : i + chunk]) for i in range(0, len(kv), chunk))
+        chunks = ((self.power_eigenvalue(Ec), Uc) for Ec, Uc in chunks)
+        Ek = self.power_eigenvalue(E0)
         e_min, e_max = float(np.min(Ek)), float(np.max(Ek))
 
         if method == "gaussian":

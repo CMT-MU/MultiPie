@@ -541,14 +541,11 @@ def test_docs_post_processing_example(in_tmp):
 @pytest.mark.parametrize(
     "power, e, expected",
     [
-        (0.5, [-4.0, 0.0, 4.0], [-2.0, 0.0, 2.0]),  # negative Ek.
+        (0.5, [-4.0, 0.0, 4.0], [-2.0, 0.0, 2.0]),  # negative Ek with non-integer power is -|Ek|^power.
+        (1, [-4.0, 4.0], [-4.0, 4.0]),
         (1.5, [-4.0, 4.0], [-8.0, 8.0]),  # power > 1.
         (2, [-3.0, 3.0], [9.0, 9.0]),  # Ek^power is computed for integer power.
         (3, [-2.0, 2.0], [-8.0, 8.0]),
-        (-1, [-2.0, 2.0], [-0.5, 0.5]),
-        (-0.5, [-4.0, 4.0], [-0.5, 0.5]),
-        (-2, [-2.0, 2.0], [0.25, 0.25]),
-        (0, [-2.0, 0.0, 2.0], [1.0, 1.0, 1.0]),  # nothing diverges at power = 0.
     ],
 )
 def test_power_energy(power, e, expected):
@@ -556,92 +553,84 @@ def test_power_energy(power, e, expected):
 
 
 # ==================================================
-def test_power_energy_divergence():
-    # Ek = 0 with negative power cannot be plotted.
-    assert np.array_equal(power_energy(np.array([0.0, 4.0]), -0.5), [np.nan, 0.5], equal_nan=True)
-    # also within round-off error.
-    assert np.array_equal(power_energy(np.array([1e-16, -1e-16, 4.0]), -0.5), [np.nan, np.nan, 0.5], equal_nan=True)
-    # the threshold is relative to the largest value.
-    assert power_energy(np.array([1e-11, 1e-3]), -1) == pytest.approx([1e11, 1e3])
-    assert np.array_equal(power_energy(np.array([1e-7, 1e4]), -1), [np.nan, 1e-4], equal_nan=True)
-    assert np.array_equal(power_energy(np.array([5e-11, 1.0]), -1), [np.nan, 1.0], equal_nan=True)
-    assert power_energy(np.array([2e-10, 1.0]), -1) == pytest.approx([5e9, 1.0])
-    # the largest value is taken over all the bands and k points: a k point with small values only is also skipped.
-    assert np.array_equal(
-        power_energy(np.array([[1e-12, 1e-12], [1.0, 2.0]]), -1), [[np.nan, np.nan], [1.0, 0.5]], equal_nan=True
-    )
-    # small values are kept for positive power.
-    assert power_energy(np.array([1e-16, 4.0]), 0.5) == pytest.approx([1e-8, 2.0])
+@pytest.mark.parametrize("power", [0, -1, -0.5, True, "2", [2]])
+def test_power_invalid(sp_model, power):
+    # the power must be a positive number.
+    _, parameter = sp_model
+    dispersion = {"k_path": "Γ-X", "k_point": {"Γ": "[0,0,0]", "X": "[1/2,0,0]"}, "power": power}
+    with pytest.raises(ValueError, match=r"'output/dispersion/power' must be a positive number or None"):
+        run(parameter, {"dispersion": dispersion})
+    # also without the dispersion.
+    with pytest.raises(ValueError, match=r"'output/dispersion/power' must be a positive number or None"):
+        run(parameter, {"dispersion": {"k_path": None, "power": power}, "dos": "auto"})
+
+
+# ==================================================
+def test_power_n_electron(sp_model):
+    # the fermi energy is 0 for the power, so that n_electron cannot be given.
+    _, parameter = sp_model
+    dispersion = {"k_path": "Γ-X", "k_point": {"Γ": "[0,0,0]", "X": "[1/2,0,0]"}, "power": 0.5}
+    with pytest.raises(ValueError, match=r"'output/n_electron' cannot be used with 'output/dispersion/power'"):
+        run(parameter, {"dispersion": dispersion, "n_electron": 4})
 
 
 # ==================================================
 def test_dispersion_power(sp_model):
-    # negative Ek are not skipped: all values are written as -|Ek|^power, for each band and k point (power > 0 keeps the order).
+    # Ek^power with fermi energy = 0, for the dispersion and the orbital weight. negative Ek are written as -|Ek|^power.
     _, parameter = sp_model
-    k_point = {"Γ": "[0,0,0]", "X": "[1/2,0,0]"}
-    output = {"dispersion": {"k_path": "Γ-X", "k_point": k_point}, "save_k_path": True}
-    run(parameter, output)
+    k_point = {"Γ": "[0,0,0]", "X": "[1/2,0,0]", "M": "[1/2,1/2,0]"}
+    dispersion = {"k_path": "Γ-X-M", "k_point": k_point, "weight": "auto"}
+    output = {"dispersion": dispersion, "save_k_path": True}
     path = os.path.join("out", "sp", "output")
+    run(parameter, output)
     z = np.load(os.path.join(path, "sp_eigen_k_path.npz"))
     Ek = z["Ek"]
-    assert Ek.min() < 0 < Ek.max()
-
-    run(parameter, output | {"dispersion": output["dispersion"] | {"power": 0.5}})
-    data = np.loadtxt(os.path.join(path, "sp_dispersion.txt"))
-    assert data.shape[0] == Ek.size
     n_k, n_band = Ek.shape
-    written = data[:, 1].reshape(n_band, n_k).T  # the file is written for each band.
-    assert written == pytest.approx(np.sign(Ek) * np.abs(Ek) ** 0.5)
-    assert np.all(np.diff(written, axis=1) >= -1e-12)
-    assert data[:, 0].reshape(n_band, n_k)[0] == pytest.approx(z["k_linear"])
-
-
-# ==================================================
-def test_dispersion_power_fermi_energy(sp_model):
-    # the power is taken from the fermi energy, also for the orbital weight.
-    _, parameter = sp_model
-    dispersion = {"k_path": "Γ-X-M", "k_point": {"Γ": "[0,0,0]", "X": "[1/2,0,0]", "M": "[1/2,1/2,0]"}, "weight": "auto"}
-    output = {"n_electron": 4, "save_k_path": True}
-    path = os.path.join("out", "sp", "output")
-
-    ma, _ = run(parameter, output | {"dispersion": dispersion}, grid=(3, 3, 3))
-    ef = ma["info"]["fermi_energy"]
-    assert ef != 0.0
-    z = np.load(os.path.join(path, "sp_eigen_k_path.npz"))
-    n_k, n_band = z["Ek"].shape
+    assert Ek.min() < 0 < Ek.max()
     reference = np.loadtxt(os.path.join(path, "sp_dispersion.txt"))
-    assert reference[:, 1].reshape(n_band, n_k).T == pytest.approx(z["Ek"] - ef)
 
     # power = 1 is the same as without power.
-    run(parameter, output | {"dispersion": dispersion | {"power": 1}}, grid=(3, 3, 3))
+    ma, _ = run(parameter, output | {"dispersion": dispersion | {"power": 1}})
     assert np.loadtxt(os.path.join(path, "sp_dispersion.txt")) == pytest.approx(reference)
 
-    run(parameter, output | {"dispersion": dispersion | {"power": 0.5}}, grid=(3, 3, 3))
-    x = z["Ek"] - ef
-    expected = np.sign(x) * np.abs(x) ** 0.5
+    ma, _ = run(parameter, output | {"dispersion": dispersion | {"power": 0.5}})
+    assert ma["info"]["fermi_energy"] == 0.0
+    expected = np.sign(Ek) * np.abs(Ek) ** 0.5
     for f in ["sp_dispersion.txt", "sp_weight.txt"]:
-        written = np.loadtxt(os.path.join(path, f))[:, 1].reshape(n_band, n_k).T
+        data = np.loadtxt(os.path.join(path, f))
+        assert data.shape[0] == Ek.size
+        written = data[:, 1].reshape(n_band, n_k).T  # the file is written for each band.
         assert written == pytest.approx(expected)
-    assert np.array_equal(written < 0, z["Ek"] < ef)  # states below the fermi energy remain below it.
+        assert data[:, 0].reshape(n_band, n_k)[0] == pytest.approx(z["k_linear"])
+    assert np.all(np.diff(written, axis=1) >= -1e-12)  # power > 0 keeps the order.
     with open(os.path.join(path, "sp_dispersion.txt")) as f:
-        assert f"# shifted by fermi energy = {ef}\n" in f.readlines()
+        assert "# shifted by fermi energy = 0.0\n" in f.readlines()
+    assert ma["output"]["dispersion"]["e_min"] == pytest.approx(expected.min())
+    assert ma["output"]["dispersion"]["e_max"] == pytest.approx(expected.max())
 
 
 # ==================================================
-def test_dispersion_power_all_divergent(sp_model):
+def test_dispersion_power_plot_range(sp_model):
+    # the range of the gnuplot script is that of the raised energies, with a margin of 10 %.
     _, parameter = sp_model
-    parameter = {z: 0.0 for z in parameter}
-    k_point = {"Γ": "[0,0,0]", "X": "[1/2,0,0]"}
-    with pytest.raises(ValueError, match=r"no value of \(Ek-Ef\)"):
-        run(parameter, {"dispersion": {"k_path": "Γ-X", "k_point": k_point, "power": -1}})
+    dispersion = {"k_path": "Γ-X", "k_point": {"Γ": "[0,0,0]", "X": "[1/2,0,0]"}}
+    path = os.path.join("out", "sp", "output")
+    run(parameter, {"dispersion": dispersion, "save_k_path": True})
+    x = np.load(os.path.join(path, "sp_eigen_k_path.npz"))["Ek"]
+    run(parameter, {"dispersion": dispersion | {"power": 2}})
+    y = x**2
+    with open(os.path.join(path, "plot_band.gnu")) as f:
+        value = dict(line.split("=") for line in f if line.startswith(("ymin =", "ymax =")))
+    margin = 0.1 * (y.max() - y.min())
+    assert float(value["ymin "]) == pytest.approx(y.min() - margin)
+    assert float(value["ymax "]) == pytest.approx(y.max() + margin)
 
 
 # ==================================================
-def test_dispersion_power_partial_divergence(in_tmp):
-    # Ek = 0 with negative power is not written, and the line is broken there. the plot can be created.
+def test_output_dispersion_nan(in_tmp):
+    # values that are not finite are not written, and the line is broken there. the plot can be created.
     k = np.array([0.0, 1.0, 2.0, 3.0])
-    Ek = power_energy(np.array([[-1.0, 1.0], [0.0, 2.0], [-4.0, 4.0], [-2.0, 2.0]]), -1)
-    assert np.isnan(Ek[1, 0]) and np.count_nonzero(np.isnan(Ek)) == 1
+    Ek = np.array([[-1.0, 1.0], [np.nan, 0.5], [-0.25, 0.25], [-0.5, 0.5]])
 
     fname = str(in_tmp / "disp.txt")
     output_dispersion(fname, k, 0.0, Ek)
@@ -819,87 +808,67 @@ def test_callback_info_basis(in_tmp):
 
 
 # ==================================================
-def test_power_keeps_saved_eigen_system(sp_model):
-    # the eigen system passed to the callback and saved in .npz is not raised to the power.
-    topdir, parameter = sp_model
-    (topdir / "out" / "cb.py").write_text(CALLBACK)
-    dispersion = {"k_path": "Γ-X", "k_point": {"Γ": "[0,0,0]", "X": "[1/2,0,0]"}}
-    filename = os.path.join("out", "sp", "output", "sp_eigen_k_path.npz")
-    output = {"save_k_path": True, "n_electron": 4}
-    ma, _ = run(parameter, output | {"dispersion": dispersion})
-    assert ma["info"]["fermi_energy"] != 0.0
-    raw = np.load(filename)
-    Ek, Uk = raw["Ek"], raw["Uk"]
-    os.remove(filename)
-    run(parameter, output | {"dispersion": dispersion | {"power": 0.5}, "callback_k_path": "cb.py"})
-    z = np.load(filename)
-    assert z["Ek"] == pytest.approx(Ek) and z["Uk"] == pytest.approx(Uk)
-    Ek_callback, Uk_callback, _ = load(topdir, "path")
-    assert Ek_callback == pytest.approx(Ek) and Uk_callback == pytest.approx(Uk)
-
-
-# ==================================================
-def test_power_keeps_full_grid(sp_model):
-    # the DOS, the eigen system on the full k grid, and the callback are not raised to the power.
-    topdir, parameter = sp_model
-    (topdir / "out" / "cb.py").write_text(CALLBACK)
-    dispersion = {"k_path": "Γ-X", "k_point": {"Γ": "[0,0,0]", "X": "[1/2,0,0]"}}
-    filename = os.path.join("out", "sp", "output", "sp_eigen_k_full.npz")
-    output = {"dos": "auto", "save_k_full": True, "n_electron": 4, "callback_k_full": "cb.py"}
-    ma, dos = run(parameter, output | {"dispersion": dispersion})
-    assert ma["info"]["fermi_energy"] != 0.0
-    raw = np.load(filename)
-    Ek, Uk = raw["Ek"], raw["Uk"]
-    assert load(topdir, "full")[0] == pytest.approx(Ek)
-    _, dos_power = run(parameter, output | {"dispersion": dispersion | {"power": 0.5}})
-    assert dos_power == pytest.approx(dos)
-    z = np.load(filename)
-    assert z["Ek"] == pytest.approx(Ek) and z["Uk"] == pytest.approx(Uk)
-    Ek_callback, Uk_callback, _ = load(topdir, "full")
-    assert Ek_callback == pytest.approx(Ek) and Uk_callback == pytest.approx(Uk)
-
-
-# ==================================================
-def test_dispersion_power_plot_range(sp_model):
-    # the range of the gnuplot script is that of the raised energies, with a margin of 10 %, at a non-zero Fermi energy.
+@pytest.mark.parametrize("method", ["gaussian", "tetrahedron"])
+@pytest.mark.parametrize("save_k_full", [False, True])
+def test_power_dos(sp_model, method, save_k_full):
+    # the DOS is that of Ek^power, delta(E-Ek^power), with fermi energy = 0. the eigen values are computed in chunks, or
+    # kept on the full k grid for save_k_full.
+    if method == "tetrahedron":
+        pytest.importorskip("libtetrabz")
     _, parameter = sp_model
-    dispersion = {"k_path": "Γ-X", "k_point": {"Γ": "[0,0,0]", "X": "[1/2,0,0]"}}
-    output = {"save_k_path": True, "n_electron": 4}
-    path = os.path.join("out", "sp", "output")
-    ma, _ = run(parameter, output | {"dispersion": dispersion})
-    ef = ma["info"]["fermi_energy"]
-    assert ef != 0.0
-    x = np.load(os.path.join(path, "sp_eigen_k_path.npz"))["Ek"] - ef
-    assert x.min() < 0.0 < x.max()
+    filename = os.path.join("out", "sp", "output", "sp_eigen_k_full.npz")
+    run(parameter, {"dispersion": {"k_path": None}, "save_k_full": True})
+    Ek = np.load(filename)["Ek"]
+    output = {"dispersion": {"k_path": None}, "dos": "auto", "dos_method": method, "save_k_full": save_k_full}
+    ma, reference = run(parameter, output)
 
-    run(parameter, output | {"dispersion": dispersion | {"power": -1}})
-    # a Kramers doublet at the Fermi energy within round-off error is skipped, also at a non-zero Fermi energy.
-    cutoff = 1e-10 * np.abs(x).max()
-    assert np.count_nonzero(np.abs(x) <= cutoff) == 2
-    y = 1.0 / x[np.abs(x) > cutoff]
-    assert np.sort(np.loadtxt(os.path.join(path, "sp_dispersion.txt"))[:, 1]) == pytest.approx(np.sort(y))
-    with open(os.path.join(path, "plot_band.gnu")) as f:
-        value = dict(line.split("=") for line in f if line.startswith(("ymin =", "ymax =")))
-    margin = 0.1 * (y.max() - y.min())
-    assert float(value["ymin "]) == pytest.approx(y.min() - margin)
-    assert float(value["ymax "]) == pytest.approx(y.max() + margin)
+    # power = 1 is the same as without power.
+    _, data = run(parameter, output | {"dispersion": {"k_path": None, "power": 1}})
+    assert data == pytest.approx(reference)
+
+    power = 2
+    ma, data = run(parameter, output | {"dispersion": {"k_path": None, "power": power}})
+    assert ma["info"]["fermi_energy"] == 0.0
+    y = Ek**power
+    dos = ma["output"]["dos"]
+    assert dos["e_min"] == pytest.approx(y.min()) and dos["e_max"] == pytest.approx(y.max())
+    assert data[0, 0] < y.min() and y.max() < data[-1, 0]  # the energy range includes all Ek^power.
+    dE = data[1, 0] - data[0, 0]
+    assert data[:, 1].sum() * dE == pytest.approx(10.0, rel=1e-3)  # number of bands.
+    assert data[-1, 2] == pytest.approx(10.0, rel=1e-3)
+    assert np.allclose(data[:, 3:].sum(axis=1), data[:, 1])
+    if method == "gaussian":
+        # the histogram and the broadening keep the mean energy.
+        assert np.sum(data[:, 0] * data[:, 1]) * dE == pytest.approx(y.sum() / len(Ek), rel=1e-6)
+    # the eigen values on the full grid are not raised to the power.
+    if save_k_full:
+        assert np.load(filename)["Ek"] == pytest.approx(Ek)
 
 
 # ==================================================
-def test_dispersion_power_skip(in_tmp):
-    # flat s band at zero within round-off error with negative power: only the s band is skipped.
-    model = {"model": "flat", "group": 221, "cell": {"a": 1.0}, "site": {"A": ("[0,0,0]", ["s", "p"])}, "bond": [("A", "A", 1)]}
-    create_model(model | {"pdf": {"create": False}, "qtdraw": {"create": False}}, topdir="out")
-    dispersion = {"k_path": "Γ-X", "k_point": {"Γ": "[0,0,0]", "X": "[1/2,0,0]"}, "power": -1}
-    control = {"samb": {"model": "flat", "parameter": {"z1": 1e-13, "z2": 1.0}}, "grid": (4, 4, 4)}
-    ModelAnalyzer("out").analyze(control | {"output": {"dispersion": dispersion, "save_k_path": True}})
-    path = os.path.join("out", "flat", "output")
-    z = np.load(os.path.join(path, "flat_eigen_k_path.npz"))
-    data = np.loadtxt(os.path.join(path, "flat_dispersion.txt"))
-    n_k, n_band = z["Ek"].shape
-    assert np.max(np.abs(z["Ek"][:, 0])) < 1e-12 and 0.0 < np.min(np.abs(z["Ek"][:, 0]))
-    assert data.shape[0] == n_k * (n_band - 1)
-    assert data[:, 1] == pytest.approx(np.full(len(data), 1 / z["Ek"].max()))
+def test_power_keeps_saved_eigen_system(sp_model):
+    # the eigen system passed to the callbacks and saved in .npz is not raised to the power. fermi energy is 0.
+    topdir, parameter = sp_model
+    (topdir / "out" / "cb.py").write_text(CALLBACK)
+    dispersion = {"k_path": "Γ-X", "k_point": {"Γ": "[0,0,0]", "X": "[1/2,0,0]"}}
+    path = os.path.join("out", "sp", "output")
+    output = {"save_k_path": True, "save_k_full": True, "callback_k_path": "cb.py", "callback_k_full": "cb.py"}
+    run(parameter, output | {"dispersion": dispersion})
+    raw = {key: np.load(os.path.join(path, f"sp_eigen_{key}.npz")) for key in ["k_path", "k_full"]}
+    raw = {key: (z["Ek"], z["Uk"]) for key, z in raw.items()}
+    for key in raw:
+        os.remove(os.path.join(path, f"sp_eigen_{key}.npz"))
+
+    ma, _ = run(parameter, output | {"dispersion": dispersion | {"power": 0.5}})
+    assert ma["info"]["fermi_energy"] == 0.0
+    for key, cb in [("k_path", "path"), ("k_full", "full")]:
+        Ek, Uk = raw[key]
+        z = np.load(os.path.join(path, f"sp_eigen_{key}.npz"))
+        assert z["Ek"] == pytest.approx(Ek) and z["Uk"] == pytest.approx(Uk)
+        assert float(z["fermi_energy"]) == 0.0
+        Ek_callback, Uk_callback, info = load(topdir, cb)
+        assert Ek_callback == pytest.approx(Ek) and Uk_callback == pytest.approx(Uk)
+        assert info["fermi_energy"] == 0.0
 
 
 # ==================================================
@@ -908,14 +877,14 @@ def test_weight_order(sp_model):
     _, parameter = sp_model
     k_point = {"Γ": "[0,0,0]", "X": "[1/2,0,0]", "M": "[1/2,1/2,0]"}
     dispersion = {"k_path": "Γ-X-M", "k_point": k_point, "weight": [["(s,u)@B(1)", "(s,d)@B(1)"]], "power": 0.5}
-    ma, _ = run(parameter, {"dispersion": dispersion, "save_k_path": True, "n_electron": 4}, grid=(3, 3, 3))
+    run(parameter, {"dispersion": dispersion, "save_k_path": True}, grid=(3, 3, 3))
     path = os.path.join("out", "sp", "output")
     z = np.load(os.path.join(path, "sp_eigen_k_path.npz"))
     n_k, n_band = z["Ek"].shape
     ket = list(z["ket"])
     weight = np.abs(z["Uk"][:, ket.index("(s,u)@B(1)"), :]) ** 2 + np.abs(z["Uk"][:, ket.index("(s,d)@B(1)"), :]) ** 2
     data = np.loadtxt(os.path.join(path, "sp_weight.txt"))
-    x = z["Ek"] - ma["info"]["fermi_energy"]
+    x = z["Ek"]
     assert data[:, 1].reshape(n_band, n_k).T == pytest.approx(np.sign(x) * np.abs(x) ** 0.5)
     assert data[:, 2].reshape(n_band, n_k).T == pytest.approx(weight, abs=1e-12)
 
