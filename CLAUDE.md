@@ -48,6 +48,6 @@ Input and control files are Python files holding exactly one dict literal. They 
 ## Data, examples, and tests
 
 - `docs/src/examples/` holds the worked example models (`*_in.py`, `*_ctrl.py`, and their generated outputs). `tests/test_model.py` uses the graphene example as a regression fixture.
-- `multipie/binary_data/` is generated, never edited by hand. The generation scripts are in `others/tools/` (`create_data.py`, then `create_final_data.py`; see `others/tools/readme.md`). After the binaries change, any tests that depend on them may need updating.
+- **Do not modify `multipie/binary_data/`, `others/tools/data/`, or `others/tools/pre/`.** That means no edits, no regeneration, and no deletion. These directories hold the group database and the source data it is built from, and only the maintainers change them. If a task seems to need a change there, stop and ask. For reference, the binaries are built by the scripts in `others/tools/` (see `others/tools/readme.md`).
 - `others/` holds development material outside the package: data generation tools, technical notes (LaTeX), group PDFs, and notebooks. `others/uc/` and `others/doc_src/` are gitignored.
 - Every source file starts with the MPL-2.0 SPDX header. Earlier versions, up to 2.3.4, were released under MIT.
