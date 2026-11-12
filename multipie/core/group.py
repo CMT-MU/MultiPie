@@ -949,7 +949,9 @@ class Group(dict):
         if self.group_type in ["MPG", "MSG"]:
             return None
 
-        c_samb = self._group()["cluster_samb"]
+        c_samb = self._group().get("cluster_samb")
+        if c_samb is None:  # complex PG (-c).
+            raise ValueError(f"no cluster SAMB for {self.info.tag}.")
         if wp not in c_samb[cluster_type].keys():
             raise ValueError(f"unknown tag, '{wp}'.")
 

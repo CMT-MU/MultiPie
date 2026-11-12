@@ -157,6 +157,16 @@ def test_removed_cluster_type(cluster_type):
         Group("Oh").cluster_samb("3a@1o", cluster_type)
 
 
+# ==================================================
+def test_complex_point_group():
+    # a complex PG (-c) has atomic SAMB and bonds, but no cluster SAMB.
+    g = Group("PG:38")
+    assert g.info.tag == "C4-c"
+    assert len(g.atomic_samb("lg", (1, 1))) > 0 and "1a@1a" in g.wyckoff["bond"]
+    with pytest.raises(ValueError, match="no cluster SAMB for C4-c"):
+        g.cluster_samb("1a@1a", "bond")
+
+
 def first_array(obj):
     """
     First NumPy array in nested dicts, lists and tuples.
