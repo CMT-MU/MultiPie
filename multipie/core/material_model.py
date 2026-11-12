@@ -12,6 +12,7 @@ This module provides material model construction.
 """
 
 import os
+import re
 import logging
 import numpy as np
 import sympy as sp
@@ -50,7 +51,6 @@ from multipie.util.util_material_model_pdf import ModelPDF
 from multipie.core.default_model import default_model
 from multipie.util.util import check_dict_keys
 from multipie.util.util_plot import plot_site, plot_bond, plot_site_samb, plot_bond_samb, plot_harmonics
-
 
 logger = logging.getLogger(__name__)
 
@@ -91,6 +91,13 @@ class MaterialModel(BinaryManager):
         """
         self.set_subdir(name)
         self.load_binary(name + ".pkl")
+        version = str(self.get("version", "0"))
+        m = re.match(r"(\d+)", version)
+        if m is None or int(m[1]) < 3:  # the group database (SAMB) of Ver.3 differs from that of Ver.2.
+            raise ValueError(
+                f"model '{name}' was created by MultiPie {version}, whose SAMB differ from those of MultiPie {__version__}. "
+                "Create the model again (e.g., mp_create)."
+            )
         self._group = Group(self["group"])
 
     # ==================================================

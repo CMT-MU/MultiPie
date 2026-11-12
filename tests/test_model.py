@@ -116,3 +116,22 @@ def test_cluster_order_does_not_depend_on_hash_seed():
         assert result.returncode == 0, result.stderr
         orders.add(result.stdout.strip().splitlines()[-1])
     assert orders == {"['8a', '16a@16c', '48a@48f', '48b@16d']"}
+
+
+# ==================================================
+@pytest.mark.parametrize("version, ok", [("2.5.0", False), ("2.3.4", False), ("3.0.0.dev0", True), ("3.1.0", True)])
+def test_model_of_older_version(tmp_path, version, ok):
+    # a model created by Ver.2 (another group database) must be created again.
+    from multipie import MaterialModel
+
+    mm = MaterialModel(topdir=str(tmp_path))
+    mm.analyze(read_example("graphene_in.py") | {"pdf": {"create": False}, "qtdraw": {"create": False}})
+    mm["version"] = version
+    mm.save()
+    mm = MaterialModel(topdir=str(tmp_path))
+    if ok:
+        mm.load("graphene")
+        assert mm["version"] == version
+    else:
+        with pytest.raises(ValueError, match=f"created by MultiPie {version}.*Create the model again"):
+            mm.load("graphene")
