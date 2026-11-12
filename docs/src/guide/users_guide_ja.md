@@ -209,7 +209,51 @@ z3 \mathbb{Q}_{0}^{(c)}(A_{1g}) 6b@6l 2
 (ja-response-tensors)=
 ## 7. 応答テンソル
 
-ランク 0〜4 の応答テンソルは、2 つの物理量（例えば電流と電場）を結び付けます。磁気点群について、`Group.response_tensor_all(X)` は、タイプ `X`（`Q` は極性、`G` は軸性で、時間反転で偶。`T` は極性、`M` は軸性で、奇）の、対称性で許されるテンソルを与えます。
+ランク 0〜4 の応答テンソルは、2 つの物理量（例えば電流と電場）を結び付けます。157 の磁気点群それぞれについて、`Group.response_tensor_all(X)` は対称性で許されるテンソルを与えます。
+
+**タイプ。** タイプ `X` は、テンソルの空間反転と時間反転での偶奇で決まります。
+
+| `X` | 空間反転 | 時間反転 | 例 |
+|:--|:--|:--|:--|
+| `Q` | 極性 | 偶 | 電気伝導度（対称部分）、誘電率テンソル |
+| `G` | 軸性 | 偶 | 自然旋光性（ジャイレーションテンソル） |
+| `T` | 極性 | 奇 | 異常ホール効果（伝導度の反対称部分） |
+| `M` | 軸性 | 奇 | 電気磁気効果 |
+
+**テンソルの部分（`opt`）。** ランク 2 以上のテンソルは、添字の対称性で部分に分けます。添字の組について `s` は対称、`a` は反対称です。下の表は `X = Q` の場合の関係です（ほかのタイプも同じ関係です）。`;` の前の添字が行列の行の組（または 3 つ組）、後ろの添字が列です。添字の組は
+
+- `c` = `[x, y, z]`
+- `v` = `[xx, yy, zz, yz, zx, xy]`（対称な組）
+- `a` = `[yz, zx, xy]`（反対称な組）
+- `u` = `[xx, yy, zz, yz, zx, xy, zy, xz, yx]`（すべての組）
+- `t` = `[xxx, yyy, zzz, yyz, zzx, xxy, yzz, zxx, xyy, xyz]`（対称な 3 つ組）
+
+で、「独立な数」は、対称性がないときのその部分の独立な成分の数です。
+
+| ランク | `opt` | 成分間の関係 | 独立な数 | 行列（行 x 列） |
+|:--|:--|:--|:--|:--|
+| 0 | `""` | - | 1 | 1 x 1 |
+| 1 | `""` | - | 3 | 1 x 3（`c`） |
+| 2 | `s` | $X_{ab} = X_{ba}$ | 6 | 3 x 3（`c` x `c`） |
+| 2 | `a` | $X_{ab} = -X_{ba}$ | 3 | 3 x 3（`c` x `c`） |
+| 3 | `ss` | $X_{abc}$ は $a, b, c$ について完全対称 | 10 | 6 x 3（`v` x `c`） |
+| 3 | `sa` | $X_{ab;c} = X_{ba;c} = -(X_{ac;b} + X_{bc;a})$ | 8 | 6 x 3（`v` x `c`） |
+| 3 | `a` | $X_{ab;c} = -X_{ba;c}$ | 9 | 3 x 3（`a` x `c`） |
+| 4 | `sss` | $X_{ab;cd} = X_{ba;cd} = X_{ab;dc} = X_{cd;ab}$ | 21 | 6 x 6（`v` x `v`） |
+| 4 | `ssa` | $X_{ab;cd} = X_{ba;cd} = X_{ab;dc} = -X_{cd;ab}$ | 15 | 6 x 6（`v` x `v`） |
+| 4 | `aas` | $X_{ab;cd} = -X_{ba;cd} = -X_{ab;dc} = X_{cd;ab}$ | 6 | 3 x 3（`a` x `a`） |
+| 4 | `aaa` | $X_{ab;cd} = -X_{ba;cd} = -X_{ab;dc} = -X_{cd;ab}$ | 3 | 3 x 3（`a` x `a`） |
+| 4 | `sa` | $X_{ab;cd} = X_{ba;cd} = -X_{ab;dc}$ | 18 | 6 x 3（`v` x `a`） |
+| 4 | `as` | $X_{ab;cd} = -X_{ba;cd} = X_{ab;dc}$ | 18 | 3 x 6（`a` x `v`） |
+| 4 | `s` | $X_{ab;c;d} = X_{ba;c;d}$（`sss` + `ssa` + `sa`） | 54 | 6 x 9（`v` x `u`） |
+| 4 | `a` | $X_{ab;c;d} = -X_{ba;c;d}$（`aas` + `aaa` + `as`） | 27 | 3 x 9（`a` x `u`） |
+| 4 | `t` | $X_{abc;d}$ は $a, b, c$ について完全対称 | 30 | 10 x 3（`t` x `c`） |
+
+例えば、電気伝導度 $\sigma_{ab}$（$j_a = \sigma_{ab} E_b$）はランク 2 のテンソルです。その対称部分（`Q`、`s`）が通常の伝導度で、反対称部分（`T`、`a`、時間反転で奇）が異常ホール伝導度です。
+
+**Active multipole。** テンソルの各成分を多極子（既約なデカルト成分）に分解します。0 でない値をとれるのは、群の active multipole（時間反転を含むすべての操作で不変な多極子）だけです。これから、0 でない成分とその間の関係が決まります。`Group.active_multipole` がその一覧で、名前は `X` と軌道名をつなげたもの（例：`Qdu`）です。`multipole_rank` はその名前のランクを、`convert_mp_alias` は別名を与えます（どちらも `multipie.util.util_response_tensor`）。例えば `Qdu` のランクは 2、別名は `Qu` です。
+
+**値。** 各キー `(X, rank, opt)` の値は、成分の行列（$Q_{xyz}$ のような記号。0 になる成分は `0`。行と列は上の表のとおり）と、0 でない各成分を active multipole で書いた式の辞書です。
 
 ```python
 >>> m = Group("MPG:15.1.53")  # 4/mmm.
@@ -222,14 +266,62 @@ array([[Q_{xx}, 0, 0],
        [0, 0, Q_{zz}]], dtype=object)
 >>> ex
 {Q_{xx}: \mathbb{Q}_{0}^{(1)} - \mathbb{Q}_{u}^{(1)}, Q_{zz}: \mathbb{Q}_{0}^{(1)} + 2*\mathbb{Q}_{u}^{(1)}}
+>>> m = Group("MPG:15.6.58")  # 4/mm'm', a ferromagnet along z.
+>>> tensor, ex = m.response_tensor_all("T")[("T", 2, "a")]  # e.g., the anomalous Hall effect.
+>>> tensor
+array([[0, T_{xy}, 0],
+       [-T_{xy}, 0, 0],
+       [0, 0, 0]], dtype=object)
+>>> ex
+{T_{xy}: \mathbb{M}_{z}^{(1)}}
 ```
 
-- キーは `(X, rank, opt)` です。`opt` は、添字の対称性で指定するテンソルの部分で、ランク 0 と 1 では `""`、ランク 2 では `s`/`a`（対称/反対称）、ランク 3 では `ss`/`sa`/`a`、ランク 4 では `sss`/`ssa`/`aas`/`aaa`/`sa`/`as`/`s`/`a`/`t` です。
-- 値は、成分の行列（0 になる成分は `0`）と、各成分を active multipole で書いた式です。active multipole は、時間反転を含む群のすべての操作で不変な多極子です。
-- active multipole の名前は、`X` に軌道の名前を付けたものです（例：`Qdu`）。`multipole_rank` はそのランクを、`convert_mp_alias` はその別名を与えます（どちらも `multipie.util.util_response_tensor` にあります）。例えば、`Qdu` のランクは 2、別名は `Qu` です。
+4/mmm では、伝導度は $\mathrm{diag}(Q_{xx}, Q_{xx}, Q_{zz})$ で、active な単極子 $\mathbb{Q}_0$ と四極子 $\mathbb{Q}_u$ で与えられます。強磁性体 4/mm'm' では、0 でない反対称成分は $T_{xy} = -T_{yx}$ だけで、active な磁気双極子 $\mathbb{M}_z$、つまり $z$ 方向の磁化で与えられます。
 
 (ja-multipolar-harmonics)=
 ## 8. 点群多極子調和関数
 
-点群多極子調和関数は、点群調和関数と、ランク `s = 1, 2, 3` で極性（`x = q`）または軸性（`x = g`）の内部自由度（例：変位やスピン）を組み合わせたものです。矢印と内部タイプを付けて書きます。例えば $\vec{\mathbb{G}}_{1}^{(1,0)}[q](T_{1g})$ は、O$_{\rm h}$ の電気トロイダル双極子 $\boldsymbol{Q} \times
-\boldsymbol{r}$ です。`Group.multipolar_harmonics` は、それらをランク 3 まで、内部基底の係数と式とともに与えます。内部基底は、ランク `s` の立方晶系または六方晶系の軌道で、$Q_{x}$ や $G_{x}$ のような記号で書きます。
+点群多極子調和関数は、点群調和関数と、各点の内部自由度（例えば変位、電気分極、スピン）を組み合わせたものです。
+
+**内部自由度。** 内部自由度は、そのランク `s`（`s = 1`：ベクトル、`s = 2, 3`：より高いランクのテンソル）とタイプ `x` で決めます。タイプは極性（`x = q`。例：変位、電気分極）か軸性（`x = g`。例：スピン、回転）です。その基底 $e_\nu$ は、そのタイプのランク `s` の軌道の組で、立方晶系（O$_{\rm h}$）または六方晶系（D$_{\rm 6h}$）のものです。記号は $Q_\nu$（`x = q`）または $G_\nu$（`x = g`）で、例えば `s = 1` では $(Q_x, Q_y, Q_z)$ または $(G_x, G_y, G_z)$ です。基底は `Group.global_info()["harmonics"]["internal_basis"]` に、系（`"cubic"` または `"hexagonal"`）と `(s, x)` ごとに入っています。
+
+**多極子球面調和関数。** 全ランク $l$ の多極子球面調和関数は、ランク $l + k$ の軌道部分と内部基底を結合したものです。
+
+$$
+O_{lm}^{(s)}(k) = i^{k+s} (-1)^{l+m} \sqrt{2l+1} \sum_{\nu}
+\begin{pmatrix} l+k & l & s \\ m-\nu & -m & \nu \end{pmatrix} O_{l+k, m-\nu}\, e_\nu,
+\qquad k = -s, \dots, s.
+$$
+
+**多極子のタイプ。** 内部タイプ `x` を固定すると、多極子のタイプ `X` は `s + k` の偶奇で決まります。
+
+| 内部タイプ | `s + k` 偶 | `s + k` 奇 |
+|:--|:--|:--|
+| `x = q`（極性） | `Q` | `G` |
+| `x = g`（軸性） | `G` | `Q` |
+
+つまり、`X` の極性・軸性は、`s + k` が偶なら内部基底と同じ、奇なら逆です。点群の点群多極子調和関数は、点群調和関数 `(X, l, Gamma, n)` の $U$ を使った $\sum_m U_{m\gamma} O_{lm}^{(s)}(k)$ です。
+
+**キーと値。** キーは `PGMultipoleType(X, l, Gamma, n, p, s, k, x)` で、`s = 1, 2, 3`、`l <= 3`、47 の点群すべてについて与えられます。`Group.multipolar_harmonics` は、各キーについて、内部基底の係数（`dim` x 内部基底の関数の数。$x, y, z$ の多項式）と、内部基底の記号で書いた式を与えます。記号には矢印と上付きの $(s, k)$ が付き、内部タイプは $[q]$ または $[g]$ と書きます（例：$\vec{\mathbb{G}}_{1}^{(1,0)}[q](T_{1g})$）。`Group.tag_multipole(key, latex=True, vector=True)` は矢印の付いた記号を与えます。
+
+```python
+>>> coeff, ex = g.multipolar_harmonics[("G", 1, "T1g", -1, -1, 1, 0, "q")]  # Oh.
+>>> coeff  # rows: components of T1g, columns: Q_x, Q_y, Q_z.
+array([[0, sqrt(2)*z/2, -sqrt(2)*y/2],
+       [-sqrt(2)*z/2, 0, sqrt(2)*x/2],
+       [sqrt(2)*y/2, -sqrt(2)*x/2, 0]], dtype=object)
+>>> ex
+array([sqrt(2)*Q_{y}*z/2 - sqrt(2)*Q_{z}*y/2, -sqrt(2)*Q_{x}*z/2 + sqrt(2)*Q_{z}*x/2,
+       sqrt(2)*Q_{x}*y/2 - sqrt(2)*Q_{y}*x/2], dtype=object)
+```
+
+*例（O$_{\rm h}$、`s = 1`）。* 内部基底を極性ベクトル $\boldsymbol{Q} = (Q_x, Q_y, Q_z)$（`x = q`）または軸性ベクトル $\boldsymbol{G} = (G_x, G_y, G_z)$（`x = g`）とすると：
+
+| キー | 記号 | 式 | 意味 |
+|:--|:--|:--|:--|
+| `("Q", 0, "A1g", -1, -1, 1, 1, "q")` | $\vec{\mathbb{Q}}_{0}^{(1,1)}[q](A_{1g})$ | $(xQ_x + yQ_y + zQ_z)/\sqrt{3}$ | $\boldsymbol{r} \cdot \boldsymbol{Q}$、電気単極子 |
+| `("Q", 1, "T1u", -1, -1, 1, -1, "q")` | $\vec{\mathbb{Q}}_{1}^{(1,-1)}[q](T_{1u})$ | $(Q_x, Q_y, Q_z)$ | 極性ベクトルそのもの |
+| `("G", 1, "T1g", -1, -1, 1, 0, "q")` | $\vec{\mathbb{G}}_{1}^{(1,0)}[q](T_{1g})$ | $(zQ_y - yQ_z, xQ_z - zQ_x, yQ_x - xQ_y)/\sqrt{2}$ | $\boldsymbol{Q} \times \boldsymbol{r}$、電気トロイダル双極子 |
+| `("G", 0, "A1u", -1, -1, 1, 1, "g")` | $\vec{\mathbb{G}}_{0}^{(1,1)}[g](A_{1u})$ | $(xG_x + yG_y + zG_z)/\sqrt{3}$ | $\boldsymbol{r} \cdot \boldsymbol{G}$、電気トロイダル単極子 |
+
+例えば、サイト $\boldsymbol{r}_i$ 上の電気双極子 $\boldsymbol{Q}(\boldsymbol{r}_i)$ が中心のまわりを回るような配置、$\boldsymbol{Q} \propto \hat{z} \times \boldsymbol{r}$ は、$z$ 方向の電気トロイダル双極子 $\vec{\mathbb{G}}_{1}^{(1,0)}[q](T_{1g})$ です。

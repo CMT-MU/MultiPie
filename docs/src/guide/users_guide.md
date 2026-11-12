@@ -255,9 +255,63 @@ Since each $Z_j$ is normalized, $z_j$ has the unit of energy. The numbering of $
 (response-tensors)=
 ## 7. Response tensors
 
-A response tensor of rank 0 to 4 relates two physical quantities, e.g., a current and an electric field. For a
-magnetic point group, `Group.response_tensor_all(X)` gives the tensors allowed by symmetry, for the type `X` (`Q`
-polar and `G` axial, time-reversal even; `T` polar and `M` axial, odd):
+A response tensor of rank 0 to 4 relates two physical quantities, e.g., a current and an electric field. For each of
+the 157 magnetic point groups, `Group.response_tensor_all(X)` gives the tensors allowed by symmetry.
+
+**Type.** The type `X` is given by the parity of the tensor under the spatial inversion and the time reversal:
+
+| `X` | spatial inversion | time reversal | example |
+|:--|:--|:--|:--|
+| `Q` | polar | even | electric conductivity (symmetric part), dielectric tensor |
+| `G` | axial | even | natural optical activity (gyration tensor) |
+| `T` | polar | odd | anomalous Hall effect (anti-symmetric part of the conductivity) |
+| `M` | axial | odd | magneto-electric effect |
+
+**Part of the tensor (`opt`).** A tensor of rank 2 or higher is divided into parts by the symmetry of its indices:
+`s` symmetric and `a` anti-symmetric in a pair of indices. The table below gives the relations for `X = Q` (the other
+types have the same relations). The indices before `;` form the pair (or the triple) of the rows of the matrix, and
+those after it the columns. The index sets are
+
+- `c` = `[x, y, z]`,
+- `v` = `[xx, yy, zz, yz, zx, xy]` (symmetric pairs),
+- `a` = `[yz, zx, xy]` (anti-symmetric pairs),
+- `u` = `[xx, yy, zz, yz, zx, xy, zy, xz, yx]` (all pairs),
+- `t` = `[xxx, yyy, zzz, yyz, zzx, xxy, yzz, zxx, xyy, xyz]` (symmetric triples),
+
+and "independent" is the number of independent components of the part without any symmetry.
+
+| rank | `opt` | relation among the components | independent | matrix (rows x columns) |
+|:--|:--|:--|:--|:--|
+| 0 | `""` | - | 1 | 1 x 1 |
+| 1 | `""` | - | 3 | 1 x 3 (`c`) |
+| 2 | `s` | $X_{ab} = X_{ba}$ | 6 | 3 x 3 (`c` x `c`) |
+| 2 | `a` | $X_{ab} = -X_{ba}$ | 3 | 3 x 3 (`c` x `c`) |
+| 3 | `ss` | $X_{abc}$ fully symmetric in $a, b, c$ | 10 | 6 x 3 (`v` x `c`) |
+| 3 | `sa` | $X_{ab;c} = X_{ba;c} = -(X_{ac;b} + X_{bc;a})$ | 8 | 6 x 3 (`v` x `c`) |
+| 3 | `a` | $X_{ab;c} = -X_{ba;c}$ | 9 | 3 x 3 (`a` x `c`) |
+| 4 | `sss` | $X_{ab;cd} = X_{ba;cd} = X_{ab;dc} = X_{cd;ab}$ | 21 | 6 x 6 (`v` x `v`) |
+| 4 | `ssa` | $X_{ab;cd} = X_{ba;cd} = X_{ab;dc} = -X_{cd;ab}$ | 15 | 6 x 6 (`v` x `v`) |
+| 4 | `aas` | $X_{ab;cd} = -X_{ba;cd} = -X_{ab;dc} = X_{cd;ab}$ | 6 | 3 x 3 (`a` x `a`) |
+| 4 | `aaa` | $X_{ab;cd} = -X_{ba;cd} = -X_{ab;dc} = -X_{cd;ab}$ | 3 | 3 x 3 (`a` x `a`) |
+| 4 | `sa` | $X_{ab;cd} = X_{ba;cd} = -X_{ab;dc}$ | 18 | 6 x 3 (`v` x `a`) |
+| 4 | `as` | $X_{ab;cd} = -X_{ba;cd} = X_{ab;dc}$ | 18 | 3 x 6 (`a` x `v`) |
+| 4 | `s` | $X_{ab;c;d} = X_{ba;c;d}$ (`sss` + `ssa` + `sa`) | 54 | 6 x 9 (`v` x `u`) |
+| 4 | `a` | $X_{ab;c;d} = -X_{ba;c;d}$ (`aas` + `aaa` + `as`) | 27 | 3 x 9 (`a` x `u`) |
+| 4 | `t` | $X_{abc;d}$ fully symmetric in $a, b, c$ | 30 | 10 x 3 (`t` x `c`) |
+
+For example, the electric conductivity $\sigma_{ab}$ ($j_a = \sigma_{ab} E_b$) is a rank-2 tensor; its symmetric part
+(`Q`, `s`) is the ordinary conductivity, and its anti-symmetric part (`T`, `a`, odd under the time reversal) the
+anomalous Hall conductivity.
+
+**Active multipoles.** Each tensor component is decomposed into multipoles (irreducible cartesian parts). Only the
+active multipoles of the group, those invariant under all its operations including the time reversal, can be nonzero.
+This gives the nonvanishing components and the relations among them. `Group.active_multipole` lists them, named by
+`X` + an orbital name, e.g., `Qdu`; `multipole_rank` gives the rank and `convert_mp_alias` the alias of a name (both in
+`multipie.util.util_response_tensor`), e.g., `Qdu` has the rank 2 and the alias `Qu`.
+
+**Value.** For each key `(X, rank, opt)`, the value is the matrix of the components (symbols such as $Q_{xyz}$, and `0`
+for the vanishing ones; rows and columns as in the table above), and a dict giving the expression of each nonzero
+component in terms of the active multipoles.
 
 ```python
 >>> m = Group("MPG:15.1.53")  # 4/mmm.
@@ -270,24 +324,82 @@ array([[Q_{xx}, 0, 0],
        [0, 0, Q_{zz}]], dtype=object)
 >>> ex
 {Q_{xx}: \mathbb{Q}_{0}^{(1)} - \mathbb{Q}_{u}^{(1)}, Q_{zz}: \mathbb{Q}_{0}^{(1)} + 2*\mathbb{Q}_{u}^{(1)}}
+>>> m = Group("MPG:15.6.58")  # 4/mm'm', a ferromagnet along z.
+>>> tensor, ex = m.response_tensor_all("T")[("T", 2, "a")]  # e.g., the anomalous Hall effect.
+>>> tensor
+array([[0, T_{xy}, 0],
+       [-T_{xy}, 0, 0],
+       [0, 0, 0]], dtype=object)
+>>> ex
+{T_{xy}: \mathbb{M}_{z}^{(1)}}
 ```
 
-- The key is `(X, rank, opt)`, where `opt` is the part of the tensor by the symmetry of its indices: `""` for rank 0
-  and 1, `s`/`a` (symmetric/anti-symmetric) for rank 2, `ss`/`sa`/`a` for rank 3, and
-  `sss`/`ssa`/`aas`/`aaa`/`sa`/`as`/`s`/`a`/`t` for rank 4.
-- The value is the matrix of the components (`0` for the vanishing ones) and the expression of each component in terms
-  of the active multipoles, the multipoles invariant under all the operations of the group including the time
-  reversal.
-- An active multipole is named `X` + an orbital name, e.g., `Qdu`; `multipole_rank` gives its rank and
-  `convert_mp_alias` its alias (both in `multipie.util.util_response_tensor`), e.g., `Qdu` has the rank 2 and the alias
-  `Qu`.
+In 4/mmm, the conductivity is $\mathrm{diag}(Q_{xx}, Q_{xx}, Q_{zz})$, given by the active monopole $\mathbb{Q}_0$ and
+quadrupole $\mathbb{Q}_u$. In the ferromagnet 4/mm'm', the only nonzero anti-symmetric components are
+$T_{xy} = -T_{yx}$, given by the active magnetic dipole $\mathbb{M}_z$, i.e., the magnetization along $z$.
 
 (multipolar-harmonics)=
 ## 8. Multipolar harmonics
 
-The multipolar harmonics combine a point-group harmonics with an internal degree of freedom of rank `s = 1, 2, 3`, of
-the polar (`x = q`) or axial (`x = g`) type, e.g., a displacement or a spin. They are written with an arrow and the
-internal type, e.g., $\vec{\mathbb{G}}_{1}^{(1,0)}[q](T_{1g})$, the electric toroidal dipole $\boldsymbol{Q} \times
-\boldsymbol{r}$ of O$_{\rm h}$. `Group.multipolar_harmonics` gives them up to rank 3, with the coefficients of the
-internal basis and the expressions; the internal bases are the cubic or the hexagonal orbitals of rank `s`, written with
-the symbols such as $Q_{x}$ or $G_{x}$.
+A multipolar harmonics combines a point-group harmonics with an internal degree of freedom, e.g., a displacement, an
+electric polarization, or a spin at each point.
+
+**Internal degree of freedom.** The internal degree of freedom is fixed by its rank `s` (`s = 1`: a vector;
+`s = 2, 3`: higher-rank tensors) and its type `x`: polar (`x = q`, e.g., a displacement or an electric polarization) or
+axial (`x = g`, e.g., a spin or a rotation). Its basis $e_\nu$ is the set of the rank-`s` orbitals of that type, of the
+cubic family (O$_{\rm h}$) or of the hexagonal family (D$_{\rm 6h}$), written with the symbols $Q_\nu$ (`x = q`) or
+$G_\nu$ (`x = g`), e.g., $(Q_x, Q_y, Q_z)$ or $(G_x, G_y, G_z)$ for `s = 1`. The bases are in
+`Group.global_info()["harmonics"]["internal_basis"]`, by the family (`"cubic"` or `"hexagonal"`) and `(s, x)`.
+
+**Multipolar spherical harmonics.** The multipolar spherical harmonics of total rank $l$ couple the orbital part of
+rank $l + k$ with the internal basis:
+
+$$
+O_{lm}^{(s)}(k) = i^{k+s} (-1)^{l+m} \sqrt{2l+1} \sum_{\nu}
+\begin{pmatrix} l+k & l & s \\ m-\nu & -m & \nu \end{pmatrix} O_{l+k, m-\nu}\, e_\nu,
+\qquad k = -s, \dots, s.
+$$
+
+**Type of the multipole.** For a fixed internal type `x`, the type `X` of the multipole is given by the parity of
+`s + k`:
+
+| internal type | `s + k` even | `s + k` odd |
+|:--|:--|:--|
+| `x = q` (polar) | `Q` | `G` |
+| `x = g` (axial) | `G` | `Q` |
+
+That is, `X` has the same polar or axial character as the internal basis if `s + k` is even, and the opposite one if
+`s + k` is odd. The multipolar harmonics of a point group is $\sum_m U_{m\gamma} O_{lm}^{(s)}(k)$, with $U$ of the
+point-group harmonics `(X, l, Gamma, n)`.
+
+**Key and value.** The key is `PGMultipoleType(X, l, Gamma, n, p, s, k, x)` with `s = 1, 2, 3` and `l <= 3`, for all 47
+point groups. `Group.multipolar_harmonics` gives, for each key, the coefficients of the internal basis (`dim x` the
+number of the internal basis functions, polynomials in $x, y, z$) and the expression in terms of the internal basis
+symbols. The symbol has an arrow and the superscript $(s, k)$, and the internal type is written as $[q]$ or $[g]$, e.g.,
+$\vec{\mathbb{G}}_{1}^{(1,0)}[q](T_{1g})$; `Group.tag_multipole(key, latex=True, vector=True)` gives the symbol with
+the arrow.
+
+```python
+>>> coeff, ex = g.multipolar_harmonics[("G", 1, "T1g", -1, -1, 1, 0, "q")]  # Oh.
+>>> coeff  # rows: components of T1g, columns: Q_x, Q_y, Q_z.
+array([[0, sqrt(2)*z/2, -sqrt(2)*y/2],
+       [-sqrt(2)*z/2, 0, sqrt(2)*x/2],
+       [sqrt(2)*y/2, -sqrt(2)*x/2, 0]], dtype=object)
+>>> ex
+array([sqrt(2)*Q_{y}*z/2 - sqrt(2)*Q_{z}*y/2, -sqrt(2)*Q_{x}*z/2 + sqrt(2)*Q_{z}*x/2,
+       sqrt(2)*Q_{x}*y/2 - sqrt(2)*Q_{y}*x/2], dtype=object)
+```
+
+*Examples (O$_{\rm h}$, `s = 1`).* With the polar vector $\boldsymbol{Q} = (Q_x, Q_y, Q_z)$ (`x = q`) or the axial
+vector $\boldsymbol{G} = (G_x, G_y, G_z)$ (`x = g`) as the internal basis:
+
+| key | symbol | expression | meaning |
+|:--|:--|:--|:--|
+| `("Q", 0, "A1g", -1, -1, 1, 1, "q")` | $\vec{\mathbb{Q}}_{0}^{(1,1)}[q](A_{1g})$ | $(xQ_x + yQ_y + zQ_z)/\sqrt{3}$ | $\boldsymbol{r} \cdot \boldsymbol{Q}$, electric monopole |
+| `("Q", 1, "T1u", -1, -1, 1, -1, "q")` | $\vec{\mathbb{Q}}_{1}^{(1,-1)}[q](T_{1u})$ | $(Q_x, Q_y, Q_z)$ | the polar vector itself |
+| `("G", 1, "T1g", -1, -1, 1, 0, "q")` | $\vec{\mathbb{G}}_{1}^{(1,0)}[q](T_{1g})$ | $(zQ_y - yQ_z, xQ_z - zQ_x, yQ_x - xQ_y)/\sqrt{2}$ | $\boldsymbol{Q} \times \boldsymbol{r}$, electric toroidal dipole |
+| `("G", 0, "A1u", -1, -1, 1, 1, "g")` | $\vec{\mathbb{G}}_{0}^{(1,1)}[g](A_{1u})$ | $(xG_x + yG_y + zG_z)/\sqrt{3}$ | $\boldsymbol{r} \cdot \boldsymbol{G}$, electric toroidal monopole |
+
+For example, an arrangement of electric dipoles $\boldsymbol{Q}(\boldsymbol{r}_i)$ on the sites $\boldsymbol{r}_i$ that
+curls around the center, $\boldsymbol{Q} \propto \hat{z} \times \boldsymbol{r}$, is the electric toroidal dipole
+$\vec{\mathbb{G}}_{1}^{(1,0)}[q](T_{1g})$ along $z$.
