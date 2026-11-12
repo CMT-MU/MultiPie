@@ -361,6 +361,11 @@ class MaterialModel(BinaryManager):
 
         # set group data.
         group = Group(model["group"])
+        if group.group_type not in ["PG", "SG"]:  # cluster and combined SAMB are for PG/SG only.
+            raise ValueError(
+                f"model '{model['model']}': 'group' must be a point group (PG) or space group (SG), "
+                f"but {model['group']!r} is a magnetic group ({group.group_type})."
+            )
         crystal = group.info.crystal
         irrep = list(group.character["table"].keys())
         samb_select = parse_samb_select(samb_select, irrep)

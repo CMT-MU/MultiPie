@@ -79,6 +79,13 @@ def test_find_wyckoff(tag, site, wyckoff):
 
 
 # ==================================================
+@pytest.mark.parametrize("tag", ["123.345", "MPG:32.4.121"])
+def test_find_wyckoff_bond_magnetic(tag):
+    # Wyckoff bonds are for PG/SG only; (wyckoff, bonds) = (None, None) as for a bond not found.
+    assert Group(tag).find_wyckoff_bond("[0,0,0]@[0,0,1/2]") == (None, None)
+
+
+# ==================================================
 def test_group_data_cache():
     # the data of a group is loaded once and shared (read only) by the Group objects of the same group.
     Group.clear_cache()

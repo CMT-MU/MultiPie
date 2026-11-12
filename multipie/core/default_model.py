@@ -15,7 +15,7 @@ from multipie import __version__
 # default model input.
 default_model = {
     "model": "unknown",
-    "group": "C1",
+    "group": "C1",  # PG or SG tag (MPG/MSG are not supported).
     "cell": {},
     "spinful": False,
     # acceptable orbital names (tesseral) in site:
