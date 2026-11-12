@@ -258,14 +258,16 @@ Since each $Z_j$ is normalized, $z_j$ has the unit of energy. The numbering of $
 A response tensor of rank 0 to 4 relates two physical quantities, e.g., a current and an electric field. For each of
 the 157 magnetic point groups, `Group.response_tensor_all(X)` gives the tensors allowed by symmetry.
 
-**Type.** The type `X` of a tensor is given by its parity under the spatial inversion and the time reversal:
+**Type.** The type `X` of a tensor is given by its parity under the spatial inversion and the time reversal. The four
+types are usually called i-polar, i-axial, c-polar, and c-axial tensors, where i (c) means that the tensor is invariant
+(changes sign) under the time reversal:
 
-| `X` | spatial inversion | time reversal |
-|:--|:--|:--|
-| `Q` | polar | even |
-| `G` | axial | even |
-| `T` | polar | odd |
-| `M` | axial | odd |
+| `X` | spatial inversion | time reversal | name |
+|:--|:--|:--|:--|
+| `Q` | polar | even | i-polar tensor |
+| `G` | axial | even | i-axial tensor |
+| `T` | polar | odd | c-polar tensor |
+| `M` | axial | odd | c-axial tensor |
 
 A response is carried by the multipoles in its tensor (see **Active multipoles** below), for example:
 
