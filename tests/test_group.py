@@ -46,6 +46,9 @@ def test_number_of_groups():
             ["A1g", "A2g", "B1g", "B2g", "E1g", "E2g", "A1u", "A2u", "B1u", "B2u", "E1u", "E2u"],
         ),
         ("MPG:1.1.1", "MPG:1.1.1", 1, ["A"]),
+        # Ver.3: the ' block comes before the '' block (Ver.2: A1', A2', A1'', A2'', E', E'').
+        ("D3h", "PG:26", 12, ["A1'", "A2'", "E'", "A1''", "A2''", "E''"]),
+        ("C3h", "PG:22", 6, ["A'", "E'", "A''", "E''"]),
     ],
 )
 def test_group_data(tag, group_id, n_so, irreps):
