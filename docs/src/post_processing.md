@@ -10,6 +10,7 @@ This page explains the tools, set in `output` of the control file:
 | [Orbital weight (fat band)](#pp-orbital-weight-fat-band) | `dispersion/weight` | `_weight.txt`, `_weight.pdf`, `plot_weight.gnu` |
 | [Eigenvalues and eigenvectors](#pp-eigenvalues-and-eigenvectors) | `save_k_path`, `save_k_full` | `_eigen_k_path.npz`, `_eigen_k_full.npz` |
 | [Callbacks for custom calculations](#pp-callbacks-for-custom-calculations) | `callback_k_path`, `callback_k_full`, `callback_info` | (written by the callbacks) |
+| [Local operators](#pp-local-operators) | `dispersion/local`, `callback_info` | `_dispersion.txt` (with `dispersion/local`), or passed to the callbacks |
 
 All of them are off by default, and the dispersion (`_dispersion.txt`, `.pdf`, `.eps`, `plot_band.gnu`) is computed as before.
 
@@ -172,7 +173,7 @@ The arguments of the callbacks are
 
 The functions are called after the other output, at the end of the analysis. `callback_k_path` requires the dispersion. For `callback_k_full`, all the eigenvectors on the full grid are kept in memory, `N1 x N2 x N3 x (number of kets)^2` complex numbers, so that a coarse `grid` may be needed for a large model.
 
-Set `output/callback_info` to pass the expectation value of local operators in each eigenstate on the full k grid, as `info[keyword]`, `[k, n]`. The keywords are those of `output/dispersion/local`: spin `Sx`, `Sy`, `Sz`, orbital angular momentum `Lx`, `Ly`, `Lz`, and quadrupole `Qu`, `Qv`, `Qyz`, `Qxz`, `Qxy`. For example,
+Set `output/callback_info` to pass the expectation value of local operators in each eigenstate on the full k grid, as `info[keyword]`, `[k, n]`. The keywords are those of `output/dispersion/local`: spin `Sx`, `Sy`, `Sz`, orbital angular momentum `Lx`, `Ly`, `Lz`, and quadrupole `Qu`, `Qv`, `Qyz`, `Qxz`, `Qxy` (see [Local operators](#pp-local-operators) for their definitions). For example,
 
 ```python
 "output": {
@@ -192,6 +193,27 @@ The operators are defined along the axes of the model. With a Wannier input, the
 ```{note}
 Unlike the input files, the callback files are executed as Python code. Use only callback files you trust.
 ```
+
+(pp-local-operators)=
+## Local operators
+
+The local operators of `output/dispersion/local` and `output/callback_info` are matrices $O_{mm'}$ in the atomic basis of the model, i.e., the tesseral orbitals `s`, `px`, `py`, `pz`, `dv`, `dxy`, `dxz`, `dyz`, `du`, `f2`, `f1`, `fbz`, `f3`, `f3x`, `f3y`, `faz`, with the spin `u`, `d` for a spinful model. The value for the eigenstate $n$ at $k$ is the expectation value $\langle O \rangle_{kn} = \sum_{mm'} U_k[m,n]^* \, O_{mm'} \, U_k[m',n]$.
+
+- **Spin** `Sx`, `Sy`, `Sz`: $\boldsymbol{S} = \boldsymbol{\sigma}/2$ (in units of $\hbar$), where $\boldsymbol{\sigma}$ are the Pauli matrices in the order of (`u`, `d`).
+- **Orbital angular momentum** `Lx`, `Ly`, `Lz`: the usual angular momentum operators (in units of $\hbar$) for the orbitals of rank $l$, satisfying $[L_x, L_y] = iL_z$ and $\boldsymbol{L}^2 = l(l+1)$.
+- **Quadrupole** `Qu`, `Qv`, `Qyz`, `Qxz`, `Qxy`: the matrix elements $\langle l m | Q(\hat{\boldsymbol{r}}) | l m' \rangle$ of the angular functions
+
+  | keyword | $Q(\hat{\boldsymbol{r}})$ |
+  |---|---|
+  | `Qu` | $(3z^2 - r^2)/(2r^2)$ |
+  | `Qv` | $\sqrt{3}(x^2 - y^2)/(2r^2)$ |
+  | `Qyz` | $\sqrt{3}\,yz/r^2$ |
+  | `Qxz` | $\sqrt{3}\,zx/r^2$ |
+  | `Qxy` | $\sqrt{3}\,xy/r^2$ |
+
+  For example, $\langle p_z | Q_u | p_z \rangle = 2/5$, $\langle d_u | Q_u | d_u \rangle = 2/7$, and $\langle f_{az} | Q_u | f_{az} \rangle = 4/15$.
+
+The operators act within each orbital rank $l$ of each site (atom and sublattice): the matrix elements between different sites, and between different ranks such as p and d, are zero. $\boldsymbol{L}$ and $Q$ are diagonal in the spin, and $\boldsymbol{S}$ is diagonal in the orbital. For the s orbital ($l = 0$), $\boldsymbol{L}$ and $Q$ are zero. The local operators are available for a model in the `lg` or `lgs` basis, not in the `jml` basis.
 
 ## Plotting by gnuplot
 
