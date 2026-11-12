@@ -276,6 +276,7 @@ A response is carried by the multipoles in its tensor (see **Active multipoles**
 | electric conductivity (symmetric part) | `("Q", 2, "s")` | electric monopole, electric quadrupole |
 | anomalous Hall effect | `("T", 2, "a")` | magnetic dipole (MD), e.g., $T_{xy} = \mathbb{M}_{z}$ |
 | magneto-electric effect | `("M", 2, "s")`, `("M", 2, "a")` | magnetic monopole (MM) and magnetic quadrupole (MQ) in the symmetric part, magnetic toroidal dipole (MTD) in the anti-symmetric part |
+| Edelstein (current-induced magnetization) effect | `("G", 2, "s")`, `("G", 2, "a")` | electric toroidal monopole (ETM) and electric toroidal quadrupole (ETQ) in the symmetric part, electric dipole (ED) in the anti-symmetric part |
 
 **Part of the tensor (`opt`).** A tensor of rank 2 or higher is divided into parts by the symmetry of its indices:
 `s` symmetric and `a` anti-symmetric in a pair of indices. The table below gives the relations for `X = Q` (the other
@@ -313,7 +314,10 @@ For example, the electric conductivity $\sigma_{ab}$ ($j_a = \sigma_{ab} E_b$) i
 (`s`) is the ordinary conductivity, and its anti-symmetric part (`a`, odd under the time reversal) the anomalous Hall
 conductivity, which is carried by the magnetic dipole. The magneto-electric tensor $\alpha_{ab}$
 ($P_a = \alpha_{ab} H_b$) is axial and odd under the time reversal (`M`): its symmetric part is carried by the
-magnetic monopole and the magnetic quadrupoles, and its anti-symmetric part by the magnetic toroidal dipole.
+magnetic monopole and the magnetic quadrupoles, and its anti-symmetric part by the magnetic toroidal dipole. The
+Edelstein (current-induced magnetization) tensor $\chi_{ab}$ ($M_a = \chi_{ab} j_b$) is axial and even under the time
+reversal (`G`): its symmetric part is carried by the electric toroidal monopole and quadrupoles, as in a chiral crystal,
+and its anti-symmetric part by the electric dipole, as in a polar crystal.
 
 **Active multipoles.** Each tensor component is decomposed into multipoles (irreducible cartesian parts). Only the
 active multipoles of the group, those invariant under all its operations including the time reversal, can be nonzero.
@@ -352,6 +356,22 @@ array([[M_{xx}, 0, 0],
        [0, 0, M_{zz}]], dtype=object)
 >>> ex
 {M_{xx}: \mathbb{M}_{0}^{(1)} - \mathbb{M}_{u}^{(1)}, M_{zz}: \mathbb{M}_{0}^{(1)} + 2*\mathbb{M}_{u}^{(1)}}
+>>> m = Group("MPG:13.2.45")  # 4mm1', a polar crystal (e.g., a Rashba system).
+>>> tensor, ex = m.response_tensor_all("G")[("G", 2, "a")]  # Edelstein effect.
+>>> tensor
+array([[0, G_{xy}, 0],
+       [-G_{xy}, 0, 0],
+       [0, 0, 0]], dtype=object)
+>>> ex
+{G_{xy}: \mathbb{Q}_{z}^{(1)}}
+>>> m = Group("MPG:18.2.66")  # 321', a chiral crystal (e.g., Te).
+>>> tensor, ex = m.response_tensor_all("G")[("G", 2, "s")]  # Edelstein effect.
+>>> tensor
+array([[G_{xx}, 0, 0],
+       [0, G_{xx}, 0],
+       [0, 0, G_{zz}]], dtype=object)
+>>> ex
+{G_{xx}: \mathbb{G}_{0}^{(1)} - \mathbb{G}_{u}^{(1)}, G_{zz}: \mathbb{G}_{0}^{(1)} + 2*\mathbb{G}_{u}^{(1)}}
 ```
 
 In 4/mmm, the conductivity is $\mathrm{diag}(Q_{xx}, Q_{xx}, Q_{zz})$, given by the active monopole $\mathbb{Q}_0$ and
@@ -359,7 +379,9 @@ quadrupole $\mathbb{Q}_u$. In the ferromagnet 4/mm'm', the only nonzero anti-sym
 $T_{xy} = -T_{yx}$, given by the active magnetic dipole $\mathbb{M}_z$, i.e., the magnetization along $z$: the
 anomalous Hall effect. In -3'm' (e.g., Cr$_2$O$_3$), the magneto-electric tensor is
 $\mathrm{diag}(M_{xx}, M_{xx}, M_{zz})$, given by the active magnetic monopole $\mathbb{M}_0$ and magnetic quadrupole
-$\mathbb{M}_u$.
+$\mathbb{M}_u$. The Edelstein effect appears in its anti-symmetric part in the polar 4mm1', given by the active electric
+dipole $\mathbb{Q}_z$, and in its symmetric part in the chiral 321', given by the active electric toroidal monopole
+$\mathbb{G}_0$ and quadrupole $\mathbb{G}_u$.
 
 (multipolar-harmonics)=
 ## 8. Multipolar harmonics
