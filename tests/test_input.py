@@ -62,6 +62,25 @@ def test_unknown_model_key(model, match):
 
 # ==================================================
 @pytest.mark.parametrize(
+    "orbital, spinful, new",
+    [("f2", False, "fc"), ("f1", False, "fs"), ("f3x", False, "fx"), (["s", "f3y"], False, "fy"), ("f1", True, "fs")],
+)
+def test_renamed_orbital(orbital, spinful, new):
+    # Ver.3 renamed f2, f1, f3x, f3y; the old names are not accepted, with the new name in the message.
+    model = MODEL | {"site": {"A": ("[0,0,0]", orbital)}, "bond": [], "spinful": spinful}
+    with pytest.raises(ValueError, match=f"is renamed to '{new}' in MultiPie Ver.3"):
+        MaterialModel().analyze(model)
+
+
+# ==================================================
+def test_new_f_orbital_names():
+    mm = MaterialModel()
+    mm.analyze(MODEL | {"site": {"A": ("[0,0,0]", ["fc", "fs", "fx", "fy"])}, "bond": []})
+    assert mm["site"]["representative"]["A"].orbital == [[], [], [], ["fc", "fs", "fx", "fy"]]
+
+
+# ==================================================
+@pytest.mark.parametrize(
     "name, bond, match",
     [
         ("A;B", [], "without ';'"),

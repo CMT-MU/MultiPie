@@ -19,7 +19,7 @@ from multipie.util.util_model_analyzer import create_all_local_operator
 ORBITAL = {
     1: ["px", "py", "pz"],
     2: ["dv", "dxy", "dxz", "dyz", "du"],
-    3: ["f2", "f1", "fbz", "f3", "f3x", "f3y", "faz"],
+    3: ["fc", "fs", "fbz", "f3", "fx", "fy", "faz"],
 }
 
 

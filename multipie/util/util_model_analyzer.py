@@ -728,7 +728,7 @@ def create_all_local_operator():
         - (dict) -- local operators, dict[rank, dict[name, matrix]].
 
     Note:
-        - atomic basis is tesseral harmonics, s, px, py, pz, dv, dxy, dxz, dyz, du, f2, f1, fbz, f3, f3x, f3y, faz.
+        - atomic basis is tesseral harmonics, s, px, py, pz, dv, dxy, dxz, dyz, du, fc, fs, fbz, f3, fx, fy, faz.
         - operator names are Lx, Ly, Lz, Qu, Qv, Qyz, Qxz, Qxy, and spin Sx, Sy, Sz (in d["s"]).
         - they are not normalized as SAMB (Tr X^2 = 1), but are the physical operators: the normalized atomic SAMB is
           multiplied by the factor in op_factor.

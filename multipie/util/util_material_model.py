@@ -226,6 +226,13 @@ def get_basis_type(site_data, spinful):
 
 
 # ==================================================
+RENAMED_ORBITAL = {"f2": "fc", "f1": "fs", "f3x": "fx", "f3y": "fy"}
+"""
+f orbitals renamed in MultiPie Ver.3 (old -> new). The old names are not accepted.
+"""
+
+
+# ==================================================
 def parse_orbital(orbital, basis_type, basis_info):
     """
     Parse atomic orbital information. ### input check needs to be implemented!!!
@@ -281,6 +288,8 @@ def parse_orbital(orbital, basis_type, basis_info):
             raise ValueError(f"invalid orbital format, {orbital}.")
 
         if not basis or any(i not in basis_info[basis_type][rank] for i in basis):
+            if orb in RENAMED_ORBITAL:
+                raise ValueError(f"orbital '{orb}' is renamed to '{RENAMED_ORBITAL[orb]}' in MultiPie Ver.3.")
             block = "spdf"[rank]
             if basis_type == "jml":
                 j = dict.fromkeys(i.split(",")[0][1:] for i in basis_info["jml"][rank])

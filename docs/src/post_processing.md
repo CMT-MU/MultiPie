@@ -197,7 +197,7 @@ Unlike the input files, the callback files are executed as Python code. Use only
 (pp-local-operators)=
 ## Local operators
 
-The local operators of `output/dispersion/local` and `output/callback_info` are matrices $O_{mm'}$ in the atomic basis of the model, i.e., the tesseral orbitals `s`, `px`, `py`, `pz`, `dv`, `dxy`, `dxz`, `dyz`, `du`, `f2`, `f1`, `fbz`, `f3`, `f3x`, `f3y`, `faz`, with the spin `u`, `d` for a spinful model. The value for the eigenstate $n$ at $k$ is the expectation value $\langle O \rangle_{kn} = \sum_{mm'} U_k[m,n]^* \, O_{mm'} \, U_k[m',n]$.
+The local operators of `output/dispersion/local` and `output/callback_info` are matrices $O_{mm'}$ in the atomic basis of the model, i.e., the tesseral orbitals `s`, `px`, `py`, `pz`, `dv`, `dxy`, `dxz`, `dyz`, `du`, `fc`, `fs`, `fbz`, `f3`, `fx`, `fy`, `faz`, with the spin `u`, `d` for a spinful model. The value for the eigenstate $n$ at $k$ is the expectation value $\langle O \rangle_{kn} = \sum_{mm'} U_k[m,n]^* \, O_{mm'} \, U_k[m',n]$.
 
 - **Spin** `Sx`, `Sy`, `Sz`: $\boldsymbol{S} = \boldsymbol{\sigma}/2$ (in units of $\hbar$), where $\boldsymbol{\sigma}$ are the Pauli matrices in the order of (`u`, `d`).
 - **Orbital angular momentum** `Lx`, `Ly`, `Lz`: the usual angular momentum operators (in units of $\hbar$) for the orbitals of rank $l$, satisfying $[L_x, L_y] = iL_z$ and $\boldsymbol{L}^2 = l(l+1)$.

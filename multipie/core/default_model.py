@@ -19,7 +19,8 @@ default_model = {
     "cell": {},
     "spinful": False,
     # acceptable orbital names (tesseral) in site:
-    #   s, p=(px, py, pz), d=(dv, dxy, dxz, dyz, du), f=(f2, f1, fbz, f3, f3x, f3y, faz).
+    #   s, p=(px, py, pz), d=(dv, dxy, dxz, dyz, du), f=(fc, fs, fbz, f3, fx, fy, faz).
+    #   (Ver.3 renamed f2, f1, f3x, f3y to fc, fs, fx, fy.)
     #   (s,u), (s,d), ...
     #   (1/2,s), (1/2,p), (3/2,p), (3/2,d), (5/2,d), (5/2,f), (7/2,f).
     "site": {},
