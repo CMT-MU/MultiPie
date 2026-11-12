@@ -44,8 +44,6 @@ from multipie.util.util_response_tensor import (
     P2,
     P3,
     P4,
-    mp_string,
-    simplify_tensor,
 )
 
 CHOP = 1e-6
@@ -1119,114 +1117,21 @@ class Group(dict):
     # ==================================================
     def response_tensor_all(self, X):
         """
-        Create all response tensors up to rank 4 (in accordance with MPG).
+        Get all response tensors up to rank 4 (in accordance with MPG).
 
         Args:
-            X (str): tensor type.
+            X (str): tensor type, "Q/G/T/M".
 
         Returns:
-            - (dict) -- response tensors.
+            - (dict) -- response tensors, {(X, rank, opt): (tensor of symbols, {symbol: expression})}.
+
+        Note:
+            - the tensors are in the group database (the same as those given by response_tensor).
+            - tensor type opt, "" (rank 0,1), "s/a" (rank 2), "ss/sa/a" (rank 3), "sss/ssa/aas/aaa/sa/as/s/a/t" (rank 4).
         """
-        c = [1, 2, 3]
-        v = [(1, 1), (2, 2), (3, 3), (2, 3), (3, 1), (1, 2)]
-        u = [(1, 1), (2, 2), (3, 3), (2, 3), (3, 1), (1, 2), (3, 2), (1, 3), (2, 1)]
-        a = [(2, 3), (3, 1), (1, 2)]
-        t = [
-            (1, 1, 1),
-            (2, 2, 2),
-            (3, 3, 3),
-            (2, 2, 3),
-            (3, 3, 1),
-            (1, 1, 2),
-            (2, 3, 3),
-            (3, 1, 1),
-            (1, 2, 2),
-            (1, 2, 3),
-        ]
-
-        d = {}
-
-        # rank 0.
-        m = np.zeros((1, 1), dtype=object)
-        m[0, 0] = (X, self.response_tensor(X, 0))
-        d[(X, 0, "")] = simplify_tensor(m)
-        # rank 1.
-        m = np.zeros((1, 3), dtype=object)
-        for ii, i in enumerate(c):
-            m[0, ii] = (mp_string([i], X, False), self.response_tensor(X, 1, i))
-        d[(X, 1, "")] = simplify_tensor(m)
-        # rank 2.
-        ms, ma = np.zeros((3, 3), dtype=object), np.zeros((3, 3), dtype=object)
-        for ii, i in enumerate(c):
-            for jj, j in enumerate(c):
-                ms[ii, jj] = (mp_string([i, j], X, False), self.response_tensor(X, 2, (i, j), "s"))
-                ma[ii, jj] = (mp_string([i, j], X, False), self.response_tensor(X, 2, (i, j), "a"))
-        d[(X, 2, "s")] = simplify_tensor(ms)
-        d[(X, 2, "a")] = simplify_tensor(ma)
-        # rank 3.
-        m = np.zeros((6, 3), dtype=object)
-        for ii, i in enumerate(v):
-            for jj, j in enumerate(c):
-                m[ii, jj] = (mp_string([*i, j], X, False), self.response_tensor(X, 3, (*i, j), "ss"))
-        d[(X, 3, "ss")] = simplify_tensor(m)
-        m = np.zeros((6, 3), dtype=object)
-        for ii, i in enumerate(v):
-            for jj, j in enumerate(c):
-                m[ii, jj] = (mp_string([*i, j], X, False), self.response_tensor(X, 3, (*i, j), "sa"))
-        d[(X, 3, "sa")] = simplify_tensor(m)
-        m = np.zeros((3, 3), dtype=object)
-        for ii, i in enumerate(a):
-            for jj, j in enumerate(c):
-                m[ii, jj] = (mp_string([*i, j], X, False), self.response_tensor(X, 3, (*i, j), "a"))
-        d[(X, 3, "a")] = simplify_tensor(m)
-        # rank 4.
-        m = np.zeros((6, 6), dtype=object)
-        for ii, i in enumerate(v):
-            for jj, j in enumerate(v):
-                m[ii, jj] = (mp_string([*i, *j], X, False), self.response_tensor(X, 4, (*i, *j), "sss"))
-        d[(X, 4, "sss")] = simplify_tensor(m)
-        m = np.zeros((6, 6), dtype=object)
-        for ii, i in enumerate(v):
-            for jj, j in enumerate(v):
-                m[ii, jj] = (mp_string([*i, *j], X, False), self.response_tensor(X, 4, (*i, *j), "ssa"))
-        d[(X, 4, "ssa")] = simplify_tensor(m)
-        m = np.zeros((3, 3), dtype=object)
-        for ii, i in enumerate(a):
-            for jj, j in enumerate(a):
-                m[ii, jj] = (mp_string([*i, *j], X, False), self.response_tensor(X, 4, (*i, *j), "aas"))
-        d[(X, 4, "aas")] = simplify_tensor(m)
-        m = np.zeros((3, 3), dtype=object)
-        for ii, i in enumerate(a):
-            for jj, j in enumerate(a):
-                m[ii, jj] = (mp_string([*i, *j], X, False), self.response_tensor(X, 4, (*i, *j), "aaa"))
-        d[(X, 4, "aaa")] = simplify_tensor(m)
-        m = np.zeros((6, 3), dtype=object)
-        for ii, i in enumerate(v):
-            for jj, j in enumerate(a):
-                m[ii, jj] = (mp_string([*i, *j], X, False), self.response_tensor(X, 4, (*i, *j), "sa"))
-        d[(X, 4, "sa")] = simplify_tensor(m)
-        m = np.zeros((3, 6), dtype=object)
-        for ii, i in enumerate(a):
-            for jj, j in enumerate(v):
-                m[ii, jj] = (mp_string([*i, *j], X, False), self.response_tensor(X, 4, (*i, *j), "as"))
-        d[(X, 4, "as")] = simplify_tensor(m)
-        m = np.zeros((6, 9), dtype=object)
-        for ii, i in enumerate(v):
-            for jj, j in enumerate(u):
-                m[ii, jj] = (mp_string([*i, *j], X, False), self.response_tensor(X, 4, (*i, *j), "s"))
-        d[(X, 4, "s")] = simplify_tensor(m)
-        m = np.zeros((3, 9), dtype=object)
-        for ii, i in enumerate(a):
-            for jj, j in enumerate(u):
-                m[ii, jj] = (mp_string([*i, *j], X, False), self.response_tensor(X, 4, (*i, *j), "a"))
-        d[(X, 4, "a")] = simplify_tensor(m)
-        m = np.zeros((10, 3), dtype=object)
-        for ii, i in enumerate(t):
-            for jj, j in enumerate(c):
-                m[ii, jj] = (mp_string([*i, j], X, False), self.response_tensor(X, 4, (*i, j), "t"))
-        d[(X, 4, "t")] = simplify_tensor(m)
-
-        return d
+        if X not in ["Q", "G", "T", "M"]:
+            raise ValueError(f"unknown tensor type, '{X}'.")
+        return {key: value for key, value in self._group("MPG")["response_tensor"].items() if key[0] == X}
 
     # ==================================================
     def response_tensor(self, X, rank, comp=None, opt=None):

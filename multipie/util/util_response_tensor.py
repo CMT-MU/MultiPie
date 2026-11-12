@@ -16,43 +16,38 @@ from sympy.functions.special.tensor_functions import KroneckerDelta
 from sympy import LeviCivita
 from itertools import product
 
-mp_alias = {  # symbol => (lower, upper).
-    "s": ("0", ""),
-    "px": ("x", ""),
-    "py": ("y", ""),
-    "pz": ("z", ""),
-    "du": ("u", ""),
-    "dv": ("v", ""),
-    "dyz": ("yz", ""),
-    "dxz": ("xz", ""),
-    "dxy": ("xy", ""),
-    "f3": ("xyz", ""),
-    "fax": ("x", r"\alpha"),
-    "fay": ("y", r"\alpha"),
-    "faz": ("z", r"\alpha"),
-    "fbx": ("x", r"\beta"),
-    "fby": ("y", r"\beta"),
-    "fbz": ("z", r"\beta"),
-    "f2": ("3a", ""),
-    "f1": ("3b", ""),
-    "f3x": ("3u", ""),
-    "f3y": ("3v", ""),
-    "g": ("4", ""),
-    "gu": ("4u", ""),
-    "gv": ("4v", ""),
-    "gax": ("4x", r"\alpha"),
-    "gay": ("4y", r"\alpha"),
-    "gaz": ("4z", r"\alpha"),
-    "gbx": ("x", r"\beta"),
-    "gby": ("y", r"\beta"),
-    "gbz": ("z", r"\beta"),
-    "g0": ("40", ""),
-    "gb": ("4a", ""),
-    "gav": ("4u", r"\alpha"),
-    "gau": ("4v", r"\alpha"),
-    "gc": ("4u", r"\beta1"),
-    "ga": ("4b", ""),
-}
+from multipie.util.util_binary import BinaryManager
+
+
+# ==================================================
+def _create_mp_alias(latex):
+    """
+    Create alias of multipole symbols from the LaTeX suffix of the orbital names.
+
+    Args:
+        latex (dict): LaTeX suffix of each orbital name, e.g., {"fax": "_{x}^{\\alpha}"} (info["harmonics"]["latex"]["orbital"]).
+
+    Returns:
+        - (dict) -- alias, {orbital name: (lower, upper)}.
+
+    :meta private:
+    """
+    alias = {}
+    for name, s in latex.items():
+        m = re.fullmatch(r"_\{(.*?)\}(?:\^\{(.*)\})?", s)
+        alias[name] = (m.group(1), m.group(2) or "")
+    return alias
+
+
+mp_alias = _create_mp_alias(BinaryManager("info")["harmonics"]["latex"]["orbital"])
+"""
+Alias of the multipole symbols, {orbital name: (lower, upper)}, e.g., {"fax": ("x", "\\alpha")}, from the group database.
+"""
+
+RANK_LETTER = "spdfghijkl"
+"""
+Letter of the rank of an orbital name (0-9), e.g., "fax" -> 3.
+"""
 
 
 # ==================================================
@@ -834,14 +829,14 @@ def multipole_rank(tag):
         tag (str): active multipole tag, e.g., "Qdu" (X=Q/G/M/T + symbol in mp_alias).
 
     Returns:
-        - (int) -- rank, 0-4.
+        - (int) -- rank, 0-4 for active multipoles (0-9 for any symbol in mp_alias).
 
     Note:
-        - the first letter of the symbol (s/p/d/f/g) gives the rank.
+        - the first letter of the symbol (s/p/d/f/g/h/i/j/k/l) gives the rank.
     """
     if not isinstance(tag, str) or len(tag) < 2 or tag[0] not in "QGMT" or tag[1:] not in mp_alias:
         raise ValueError(f"unknown active multipole tag, {tag!r}.")
-    return "spdfg".index(tag[1])
+    return RANK_LETTER.index(tag[1])
 
 
 # ==================================================
