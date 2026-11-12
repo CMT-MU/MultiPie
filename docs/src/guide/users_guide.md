@@ -262,12 +262,12 @@ the 157 magnetic point groups, `Group.response_tensor_all(X)` gives the tensors 
 types are usually called i-polar, i-axial, c-polar, and c-axial tensors, where i (c) means that the tensor is invariant
 (changes sign) under the time reversal:
 
-| `X` | spatial inversion | time reversal | name |
+| name | `X` | spatial inversion | time reversal |
 |:--|:--|:--|:--|
-| `Q` | polar | even | i-polar tensor |
-| `G` | axial | even | i-axial tensor |
-| `T` | polar | odd | c-polar tensor |
-| `M` | axial | odd | c-axial tensor |
+| i-polar tensor | `Q` | polar | even |
+| i-axial tensor | `G` | axial | even |
+| c-polar tensor | `T` | polar | odd |
+| c-axial tensor | `M` | axial | odd |
 
 A response is carried by the multipoles in its tensor (see **Active multipoles** below), for example:
 
