@@ -15,7 +15,9 @@ from collections.abc import MutableMapping
 import numpy as np
 import pytest
 
-from multipie.core.group import Group, _load_group_data, _load_group_opt_data
+from multipie import PGMultipoleType
+from multipie.core.group import Group, _load_group_data
+from multipie.util.util_dict import Dict
 
 
 # ==================================================
@@ -116,18 +118,43 @@ def test_group_data_containers_not_shared():
 
 
 # ==================================================
-def test_group_opt_data_cache():
-    # the optional data is cached in the same way (kept for two groups), with read-only arrays.
+def test_group_pg_data():
+    # representation matrix and multipolar harmonics are in the PG data, shared with read-only arrays.
     Group.clear_cache()
-    g1, g2 = Group("C1", with_opt=True), Group("C1", with_opt=True)  # loaded once (C1: the fastest to load).
-    assert _load_group_opt_data.cache_info().misses == 1
-    key = next(iter(g1.opt))
-    g1.opt[key] = None
-    assert g2.opt[key] is not None
+    g1, g2 = Group("Oh"), Group("Oh")
+    assert _load_group_data.cache_info().misses == 1
+    assert g1.representation_matrix["tag"] == g1.symmetry_operation["tag"]
+    assert isinstance(g1.multipolar_harmonics, Dict) and max(t.l for t in g1.multipolar_harmonics) == 3
+    g1.representation_matrix["tag"] = None
+    assert g2.representation_matrix["tag"] is not None
     with pytest.raises(ValueError, match="read-only"):
-        first_array(g2.opt["representation_matrix"]).flat[0] = 2
+        first_array(g2.representation_matrix["matrix"]).flat[0] = 2
     Group.clear_cache()
-    assert _load_group_data.cache_info().currsize == _load_group_opt_data.cache_info().currsize == 0
+    assert _load_group_data.cache_info().currsize == 0
+
+
+# ==================================================
+@pytest.mark.parametrize("tag, wp, bond", [("Oh", "6a", "3a@1o"), (221, "3c", "3a@1a")])
+def test_samb_with_expression(tag, wp, bond):
+    # cluster and atomic SAMB are Dict, {PGMultipoleType: (value, expression of the harmonics)}.
+    g = Group(tag)
+    harmonics = g.harmonics
+    for dic in [g.cluster_samb(wp), g.cluster_samb(bond, "bond"), g.atomic_samb("lg", (1, 2))]:
+        assert isinstance(dic, Dict) and dic.key_type._fields == PGMultipoleType._fields and len(dic) > 0
+        for t, (v, ex) in dic.items():
+            t = PGMultipoleType(*t)
+            h = PGMultipoleType({"T": "Q", "M": "G"}.get(t.X, t.X), t.l, t.Gamma, t.n, -1, 0, 0, "q")
+            assert list(ex) == list(harmonics[h][0])
+    for t, (v, ex) in g.cluster_samb(bond, "bond").items():  # Q/G: real, T/M: pure imaginary.
+        v = np.asarray(v, dtype=complex)
+        assert np.allclose(v.imag, 0) if t[0] in "QG" else np.allclose(v.real, 0) and not np.allclose(v.imag, 0)
+
+
+# ==================================================
+@pytest.mark.parametrize("cluster_type", ["vector", "bond_s", "bond_a"])
+def test_removed_cluster_type(cluster_type):
+    with pytest.raises(ValueError, match="unknown cluster_type"):
+        Group("Oh").cluster_samb("3a@1o", cluster_type)
 
 
 def first_array(obj):
