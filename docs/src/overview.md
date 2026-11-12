@@ -8,9 +8,7 @@ The brief manuals for MultiPie are given [here](manual.md). Moreover, informatio
 
 By installing the Python package [QtDraw](https://github.com/CMT-MU/QtDraw), crystal and molecular structures, as well as polar and axial vectors, orbitals, and the SAMB, can be visualized. This visualization capability makes the tool especially helpful for learning group theory in a transparent and intuitive manner. A practical tutorial of MultiPie via QtDraw is given by [Tutorial via QtDraw](manual.md).
 
-For implementation-related notes (in Japanese) and the API, please refer to the following:
+For the API, please refer to the following:
 
-- [Technical Note](tech_note.md) (in Japanese)
-- API
-    - [Core module](api_core.md) for `Group`, `MaterialModel`, `ModelAnalyzer`, and the create/analyze functions (`cmd`)
-    - [Utility module](api_util.md) for various utilities for implementation purpose.
+- [Core module](api_core.md) for `Group`, `MaterialModel`, `ModelAnalyzer`, and the create/analyze functions (`cmd`)
+- [Utility module](api_util.md) for various utilities for implementation purpose.
