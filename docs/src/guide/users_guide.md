@@ -258,14 +258,22 @@ Since each $Z_j$ is normalized, $z_j$ has the unit of energy. The numbering of $
 A response tensor of rank 0 to 4 relates two physical quantities, e.g., a current and an electric field. For each of
 the 157 magnetic point groups, `Group.response_tensor_all(X)` gives the tensors allowed by symmetry.
 
-**Type.** The type `X` is given by the parity of the tensor under the spatial inversion and the time reversal:
+**Type.** The type `X` of a tensor is given by its parity under the spatial inversion and the time reversal:
 
-| `X` | spatial inversion | time reversal | example |
-|:--|:--|:--|:--|
-| `Q` | polar | even | electric conductivity (symmetric part), dielectric tensor |
-| `G` | axial | even | natural optical activity (gyration tensor) |
-| `T` | polar | odd | anomalous Hall effect (anti-symmetric part of the conductivity) |
-| `M` | axial | odd | magneto-electric effect |
+| `X` | spatial inversion | time reversal |
+|:--|:--|:--|
+| `Q` | polar | even |
+| `G` | axial | even |
+| `T` | polar | odd |
+| `M` | axial | odd |
+
+A response is carried by the multipoles in its tensor (see **Active multipoles** below), for example:
+
+| response | tensor `(X, rank, opt)` | multipoles |
+|:--|:--|:--|
+| electric conductivity (symmetric part) | `("Q", 2, "s")` | electric monopole, electric quadrupole |
+| anomalous Hall effect | `("T", 2, "a")` | magnetic dipole (MD), e.g., $T_{xy} = \mathbb{M}_{z}$ |
+| magneto-electric effect | `("M", 2, "s")`, `("M", 2, "a")` | magnetic monopole (MM) and magnetic quadrupole (MQ) in the symmetric part, magnetic toroidal dipole (MTD) in the anti-symmetric part |
 
 **Part of the tensor (`opt`).** A tensor of rank 2 or higher is divided into parts by the symmetry of its indices:
 `s` symmetric and `a` anti-symmetric in a pair of indices. The table below gives the relations for `X = Q` (the other
@@ -300,8 +308,10 @@ and "independent" is the number of independent components of the part without an
 | 4 | `t` | $X_{abc;d}$ fully symmetric in $a, b, c$ | 30 | 10 x 3 (`t` x `c`) |
 
 For example, the electric conductivity $\sigma_{ab}$ ($j_a = \sigma_{ab} E_b$) is a rank-2 tensor; its symmetric part
-(`Q`, `s`) is the ordinary conductivity, and its anti-symmetric part (`T`, `a`, odd under the time reversal) the
-anomalous Hall conductivity.
+(`s`) is the ordinary conductivity, and its anti-symmetric part (`a`, odd under the time reversal) the anomalous Hall
+conductivity, which is carried by the magnetic dipole. The magneto-electric tensor $\alpha_{ab}$
+($P_a = \alpha_{ab} H_b$) is axial and odd under the time reversal (`M`): its symmetric part is carried by the
+magnetic monopole and the magnetic quadrupoles, and its anti-symmetric part by the magnetic toroidal dipole.
 
 **Active multipoles.** Each tensor component is decomposed into multipoles (irreducible cartesian parts). Only the
 active multipoles of the group, those invariant under all its operations including the time reversal, can be nonzero.
@@ -332,11 +342,22 @@ array([[0, T_{xy}, 0],
        [0, 0, 0]], dtype=object)
 >>> ex
 {T_{xy}: \mathbb{M}_{z}^{(1)}}
+>>> m = Group("MPG:20.4.74")  # -3'm', e.g., Cr2O3.
+>>> tensor, ex = m.response_tensor_all("M")[("M", 2, "s")]  # magneto-electric effect.
+>>> tensor
+array([[M_{xx}, 0, 0],
+       [0, M_{xx}, 0],
+       [0, 0, M_{zz}]], dtype=object)
+>>> ex
+{M_{xx}: \mathbb{M}_{0}^{(1)} - \mathbb{M}_{u}^{(1)}, M_{zz}: \mathbb{M}_{0}^{(1)} + 2*\mathbb{M}_{u}^{(1)}}
 ```
 
 In 4/mmm, the conductivity is $\mathrm{diag}(Q_{xx}, Q_{xx}, Q_{zz})$, given by the active monopole $\mathbb{Q}_0$ and
 quadrupole $\mathbb{Q}_u$. In the ferromagnet 4/mm'm', the only nonzero anti-symmetric components are
-$T_{xy} = -T_{yx}$, given by the active magnetic dipole $\mathbb{M}_z$, i.e., the magnetization along $z$.
+$T_{xy} = -T_{yx}$, given by the active magnetic dipole $\mathbb{M}_z$, i.e., the magnetization along $z$: the
+anomalous Hall effect. In -3'm' (e.g., Cr$_2$O$_3$), the magneto-electric tensor is
+$\mathrm{diag}(M_{xx}, M_{xx}, M_{zz})$, given by the active magnetic monopole $\mathbb{M}_0$ and magnetic quadrupole
+$\mathbb{M}_u$.
 
 (multipolar-harmonics)=
 ## 8. Multipolar harmonics
