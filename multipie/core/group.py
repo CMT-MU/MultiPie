@@ -461,10 +461,12 @@ class Group(dict):
         Get harmonics dict (in accordance with PG).
 
         Returns:
-            - (dict) -- harmonics dict.
+            - (Dict) -- harmonics, {PGMultipoleType: (expression, U)} of Q and G (rank <= 11).
 
         Note:
-            - Harmonics is sorted in order of (Q/G/T/M), s, k, l, Gamma, n, p.
+            - expression (ndarray): polynomial in x, y, z for each component.
+            - U (ndarray): (2l+1, dim) unitary matrix from the tesseral harmonics (rows: m = l, ..., -l).
+            - harmonics are sorted in order of Gamma, l, (Q/G), n.
         """
         return self._group("PG")["harmonics"]
 
@@ -1564,7 +1566,7 @@ class Group(dict):
         basis = [",".join(i.split(",")[:2]) + ")" for i in basis]
 
         dic1 = {}
-        for (X, l, irrep, n, p, _, _, _), (ex, U, _) in self.harmonics.items():
+        for (X, l, irrep, n, p, _, _, _), (ex, U) in self.harmonics.items():
             for (head, _, s, k, _), mat in samb.select(l=l).items():
                 if (X == "Q" and head in ["Q", "T"]) or (X == "G" and head in ["G", "M"]):
                     gx = np.vectorize(sp.expand)(np.einsum("mg,mij->gij", U, mat))
