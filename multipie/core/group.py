@@ -778,14 +778,15 @@ class Group(dict):
 
         Returns:
             - (str) -- Wyckoff bond (return None when not found).
-            - (ndarray) -- set of Wyckoff bond (vector+center).
+            - (ndarray) -- set of Wyckoff bond (vector+center) (return None when not found).
 
         Note:
             - bond string is "[tail];[head] / [vector]@[center] / [start]:[vector]".
             - for SG, Wyckoff bond in order of (plus_set1, plus_set2, ...).
+            - for MPG/MSG, (None, None) is returned.
         """
         if self.group_type in ["MPG", "MSG"]:
-            return None
+            return None, None
 
         return find_wyckoff_bond(self._group(), bond)
 

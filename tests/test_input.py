@@ -86,6 +86,23 @@ def test_site_name_with_underscore_without_bond():
 
 # ==================================================
 @pytest.mark.parametrize(
+    "group, site, bond, group_type",
+    [
+        ("123.345", "[0,0,0]", [("A", "A", [1])], "MSG"),  # failed in parsing bonds.
+        ("123.345", "[0,0,0]", [], "MSG"),  # failed in creating cluster SAMB.
+        ("MPG:32.4.121", "[1,0,0]", [("A", "A", [1])], "MPG"),
+        ("MPG:32.4.121", "[1,0,0]", [], "MPG"),
+    ],
+)
+def test_magnetic_group(group, site, bond, group_type):
+    # MaterialModel is for PG/SG only.
+    model = MODEL | {"group": group, "cell": {"a": 3.0, "c": 4.0}, "site": {"A": (site, "s")}, "bond": bond}
+    with pytest.raises(ValueError, match=rf"'group' must be a point group \(PG\) or space group \(SG\).*\({group_type}\)"):
+        MaterialModel().analyze(model)
+
+
+# ==================================================
+@pytest.mark.parametrize(
     "control, match",
     [
         ({"mdoe": "samb"}, r"'mdoe' \(did you mean 'mode'\?\)"),
