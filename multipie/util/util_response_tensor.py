@@ -826,6 +826,25 @@ def convert_mp_alias(tag, latex=False):
 
 
 # ==================================================
+def multipole_rank(tag):
+    """
+    Rank of standard active multipole tag.
+
+    Args:
+        tag (str): active multipole tag, e.g., "Qdu" (X=Q/G/M/T + symbol in mp_alias).
+
+    Returns:
+        - (int) -- rank, 0-4.
+
+    Note:
+        - the first letter of the symbol (s/p/d/f/g) gives the rank.
+    """
+    if not isinstance(tag, str) or len(tag) < 2 or tag[0] not in "QGMT" or tag[1:] not in mp_alias:
+        raise ValueError(f"unknown active multipole tag, {tag!r}.")
+    return "spdfg".index(tag[1])
+
+
+# ==================================================
 def simplify_tensor(M):
     """
     Simplify tensor.
