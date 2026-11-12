@@ -729,7 +729,15 @@ def create_all_local_operator():
 
     Note:
         - atomic basis is tesseral harmonics, s, px, py, pz, dv, dxy, dxz, dyz, du, f2, f1, fbz, f3, f3x, f3y, faz.
-        - operator names are Lx, Ly, Lz, Qu, Qv, Qyz, Qxz, Qxy, which are not normalized as defined.
+        - operator names are Lx, Ly, Lz, Qu, Qv, Qyz, Qxz, Qxy, and spin Sx, Sy, Sz (in d["s"]).
+        - they are not normalized as SAMB (Tr X^2 = 1), but are the physical operators: the normalized atomic SAMB is
+          multiplied by the factor in op_factor.
+        - Lx, Ly, Lz: orbital angular momentum (in units of hbar), [Lx, Ly] = i Lz, L^2 = l(l+1).
+        - Qu, Qv, Qyz, Qxz, Qxy: matrix elements <l m|Q(r)|l m'> of the angular functions,
+          Qu = (3z^2-r^2)/(2r^2), Qv = sqrt(3)(x^2-y^2)/(2r^2), Qyz = sqrt(3)yz/r^2, Qxz = sqrt(3)zx/r^2, Qxy = sqrt(3)xy/r^2,
+          e.g., <pz|Qu|pz> = 2/5, <du|Qu|du> = 2/7, <faz|Qu|faz> = 4/15.
+        - Sx, Sy, Sz: sigma/2 in the order of (u, d).
+        - L and Q are zero for rank 0 (s orbital).
         - it is used for basis, lg and lgs, not for jml.
     """
     op_key = [("M", 1, "T1g", -1, -1, 0, 0, "q"), ("Q", 2, "Eg", -1, -1, 0, 0, "q"), ("Q", 2, "T2g", -1, -1, 0, 0, "q")]
