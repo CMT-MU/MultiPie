@@ -50,7 +50,7 @@ are also renamed: `ga`, `gb`, `gc` are now `gc`, `gs`, `gc4` (note that `gc` now
 
 **Multiplicity.** The multiplicity `n` of a key is always that of the point-group harmonics `(X, l, Gamma)`, which fixes
 its xyz polynomial; entries sharing all the other fields are numbered by `p`. See the
-[User Guide](guide/users_guide.md).
+[User Guide](guide.md).
 
 ## Harmonics
 
