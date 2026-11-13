@@ -1,5 +1,7 @@
 # Examples of materials
 
+A Japanese version is [here](materials_ja.md).
+
 This page builds tight-binding models of three materials with MultiPie, step by step: SrVO$_3$ (a cubic perovskite),
 monolayer MoS$_2$ (a hexagonal layer without inversion), and Te (a chiral crystal with the spin-orbit coupling). They
 cover the main ingredients of a model: several sites with different orbitals, bonds between different sites up to

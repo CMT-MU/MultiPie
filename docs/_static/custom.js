@@ -39,8 +39,13 @@ document.addEventListener("DOMContentLoaded", function() {
 // contents (orphan); while one is open, its entry is marked as the current page. To add a pair, add a line to
 // LANGUAGE_PAIRS (paths from the root of the docs).
 var LANGUAGE_PAIRS = {
+    "src/overview.html": "src/overview_ja.html",
+    "src/install.html": "src/install_ja.html",
+    "src/getting_started.html": "src/getting_started_ja.html",
     "src/guide.html": "src/guide/users_guide_ja.html",
     "src/group.html": "src/group/group_ja.html",
+    "src/materials.html": "src/materials_ja.html",
+    "src/post_processing.html": "src/post_processing_ja.html",
     "src/changes.html": "src/changes_ja.html",
 };
 

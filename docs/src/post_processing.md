@@ -1,5 +1,7 @@
 # Post-processing tools
 
+A Japanese version is [here](post_processing_ja.md).
+
 After a tight-binding model is built (by SAMBs, or from Wannier90 `seedname_hr.dat`), `mp_analyze` computes physical quantities from its eigenvalues and eigenvectors.
 This page explains the tools, set in `output` of the control file:
 

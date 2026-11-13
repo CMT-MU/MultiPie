@@ -1,5 +1,7 @@
 # Getting Started
 
+A Japanese version is [here](getting_started_ja.md).
+
 ## Tutorial
 
 As a tutorial, we describe the procedure for generating model in the case of **graphene**.
