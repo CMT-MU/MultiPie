@@ -6,7 +6,7 @@ orphan: true
 
 このガイドでは、MultiPie が提供する量と、その読み方・使い方を説明します。扱うのは、多極子のキーとその記号、点群調和関数、原子軌道、原子・クラスター・結合 SAMB（対称性適合多極子基底）、それらから作る強束縛模型、応答テンソルです。英語版は[こちら](../guide.md)です。
 
-群のデータは、MultiPieGen が生成した群のデータベースから取ります。すべての群の表は[群の情報](../group_doc.md)にあります。コードの例では、`Group`（群のデータ）と `MaterialModel`（模型）を使います。
+群のデータは、MultiPieGen が生成した群のデータベースから取ります。すべての群の表は[群の情報](https://cmt-mu.github.io/MultiPieGen/src/group_info.html)にあります。コードの例では、`Group`（群のデータ）と `MaterialModel`（模型）を使います。
 
 ```python
 from multipie import Group, MaterialModel
@@ -22,6 +22,7 @@ from multipie import Group, MaterialModel
 6. [結合 SAMB と模型](#ja-combined-samb)
 7. [応答テンソル](#ja-response-tensors)
 8. [点群多極子調和関数](#ja-multipolar-harmonics)
+9. [簡易マニュアルとチュートリアル（PDF）](#ja-brief-manual)
 
 (ja-multipole-key)=
 ## 1. 多極子のキー
@@ -358,3 +359,25 @@ array([sqrt(2)*Q_{y}*z/2 - sqrt(2)*Q_{z}*y/2, -sqrt(2)*Q_{x}*z/2 + sqrt(2)*Q_{z}
 | `("G", 0, "A1u", -1, -1, 1, 1, "g")` | $\vec{\mathbb{G}}_{0}^{(1,1)}[g](A_{1u})$ | $(xG_x + yG_y + zG_z)/\sqrt{3}$ | $\boldsymbol{r} \cdot \boldsymbol{G}$、電気トロイダル単極子 |
 
 例えば、サイト $\boldsymbol{r}_i$ 上の電気双極子 $\boldsymbol{Q}(\boldsymbol{r}_i)$ が中心のまわりを回るような配置、$\boldsymbol{Q} \propto \hat{z} \times \boldsymbol{r}$ は、$z$ 方向の電気トロイダル双極子 $\vec{\mathbb{G}}_{1}^{(1,0)}[q](T_{1g})$ です。
+
+(ja-brief-manual)=
+
+## 9. 簡易マニュアルとチュートリアル（PDF）
+
+MultiPie を紹介する PDF の文書が二つあります。プログラムの簡易マニュアルと、MultiPie と QtDraw で多極子と群論を学ぶチュートリアル記事で、どちらも英語版（en）と日本語版（ja）があります。
+
+:::{note}
+どちらも MultiPie Ver.2 向けに書かれています（簡易マニュアルは Version 2.3、チュートリアルは MultiPie 2.0.7 と QtDraw 3.1.0）。考え方と作業の流れは Ver.3 でも同じですが、名前や結果の一部が異なります。例えば、f 軌道 `f2`, `f1`, `f3x`, `f3y` の名前が変わり、`Group(tag, with_opt=True)` は廃止され、SAMB の番号や符号が異なることがあります。現在の版については [Ver.2 からの変更点](../changes_ja.md)と上の各節を見てください。
+:::
+
+### MultiPie 簡易マニュアル
+
+[[en](../brief_manual_en.pdf), [ja](../brief_manual_ja.pdf)]
+
+MultiPie の概要をスライドでまとめたものです。群論的なデータ、SAMB（電気 `Q`、磁気 `M`、磁気トロイダル `T`、電気トロイダル `G` 多極子）、グラフェンの例、`mp_create` と `mp_analyze` による作業の流れ（入力ファイルと制御ファイルのすべてのキー）、`Group`、`MaterialModel`、`ModelAnalyzer` の各クラスの概要を扱います。
+
+### QtDraw を用いた MultiPie のチュートリアル
+
+[[en](../tutorial_via_qtdraw_en.pdf), [ja](../tutorial_via_qtdraw_ja.pdf)]
+
+*MultiPie と QtDraw で学ぶ多極子表現と群論*（大槻純也、岡山大学）。QtDraw の画面を使い、利用者の立場から MultiPie を紹介します。基本的な使い方、軌道の結晶場分裂と既約表現の積の分解、p 軌道の原子多極子、URhSn（D$_{\rm 3h}$）の U サイトの電気四極子のクラスター多極子による分類、iPython からの利用を扱います。

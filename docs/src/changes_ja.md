@@ -18,7 +18,7 @@ MultiPie Ver.3 は、MultiPieGen が生成した新しい群のデータベー�
 
 - データベース（`multipie/binary_data`）は別のプロジェクトである MultiPieGen が生成し、`tools/sync_binary_data.py` で MultiPie にコピーします。`multipie/binary_data/SOURCE.txt` に、元にした MultiPieGen のコミットが記録されています。Ver.2 でデータベースを作っていたツール（`others/tools`）は削除しました。
 - データベースは約 20 MB です（Ver.2 は 81 MB）。点群のオプションのデータ（`PG/*_opt.pkl`）は、各点群のデータにまとめました。ファイル名では群の ID の `:` を `_` に置き換えています（例：`PG:32` は `PG/PG_32.pkl`。Ver.2 は `PG/PG:32.pkl`）。Windows でも git から MultiPie を入れられるようにするためです。
-- 群の表（PDF）も MultiPieGen が生成します。[Group Information](group_doc.md) からリンクしています。Ver.2 のドキュメントにあった群のページは削除しました。
+- 群の表（PDF）も MultiPieGen が生成します。[Group Information](https://cmt-mu.github.io/MultiPieGen/src/group_info.html) からリンクしています。Ver.2 のドキュメントにあった群のページは削除しました。
 
 ## 規則
 
