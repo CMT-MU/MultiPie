@@ -81,10 +81,10 @@ orphan: true
 MultiPie は、次のコマンドラインユーティリティを提供します：
 - `mp_create [option] input1 input2 ...`
 
-  モデルの入力ファイルからモデルを作成します。
+  模型の入力ファイルから模型を作成します。
 - `mp_analyze [option] control1 control2 ...`
 
-  制御ファイルによってモデルを解析します。
+  制御ファイルによって模型を解析します。
 
 例については[はじめに](getting_started_ja.md)のガイドを参照してください。
 

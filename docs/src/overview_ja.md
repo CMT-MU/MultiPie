@@ -12,7 +12,7 @@ SAMB は完全な基底をなすので、任意の物理量をその対称性の
 
 MultiPie の簡易マニュアルとチュートリアルの PDF は、{ref}`ユーザーガイド <ja-brief-manual>`の最後にあります。また、サポートしているすべての群の情報は[群の情報](https://cmt-mu.github.io/MultiPieGen/src/group_info.html)にまとめています。
 
-[ユーザーガイド](guide/users_guide_ja.md)では、調和関数と SAMB の読み方と使い方を（英語と日本語で）説明しています。[Group クラスの使い方](group/group_ja.md)では、`Group` のプロパティとメソッドを例とともに示し、[物質の例](materials_ja.md)では、SrVO$_3$、MoS$_2$、Te のモデルを順を追って作ります。Ver.2 の利用者のために、[Ver.2 からの変更点](changes_ja.md)で Ver.3 での変更点をまとめています。
+[ユーザーガイド](guide/users_guide_ja.md)では、調和関数と SAMB の読み方と使い方を（英語と日本語で）説明しています。[Group クラスの使い方](group/group_ja.md)では、`Group` のプロパティとメソッドを例とともに示し、[物質の例](materials_ja.md)では、SrVO$_3$、MoS$_2$、Te の模型を順を追って作ります。Ver.2 の利用者のために、[Ver.2 からの変更点](changes_ja.md)で Ver.3 での変更点をまとめています。
 
 Python パッケージ [QtDraw](https://github.com/CMT-MU/QtDraw) をインストールすると、結晶や分子の構造、極性ベクトルと軸性ベクトル、軌道、SAMB を可視化できます。この可視化の機能により、群論を見通しよく直観的に学ぶのに特に役立ちます。QtDraw を使った MultiPie の実践的なチュートリアルは、{ref}`QtDraw を用いたチュートリアル <ja-brief-manual>`にあります。
 
