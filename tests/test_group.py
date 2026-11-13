@@ -15,7 +15,7 @@ from collections.abc import MutableMapping
 import numpy as np
 import pytest
 
-from multipie.core.group import Group, _load_group_data, _load_group_opt_data
+from multipie.core.group import Group, _group_file, _load_group_data, _load_group_opt_data
 
 
 # ==================================================
@@ -113,6 +113,20 @@ def test_group_data_containers_not_shared():
         assert g.symmetry_operation["cartesian"] is so
         assert "x" not in g.symmetry_operation["tag"]
         assert wp in g.wyckoff["site"]
+
+
+# ==================================================
+def test_group_file_names():
+    # the file names of binary_data have "_" instead of ":" (git on Windows cannot check out a name with ":").
+    import os
+    from multipie.core.multipie_info import __bin_dir__
+
+    assert _group_file("PG:32") == "PG/PG_32" and _group_file("MSG:123.345") == "MSG/MSG_123.345"
+    ids = list(Group.global_info()["tag"])
+    files = {f"{tp}/{f[:-4]}" for tp in ["PG", "SG", "MPG", "MSG"] for f in os.listdir(os.path.join(__bin_dir__, tp))}
+    pg = [gid for gid in ids if gid.startswith("PG:")]
+    assert files == {_group_file(gid) for gid in ids} | {_group_file(gid) + "_opt" for gid in pg}
+    assert not any(":" in f for f in files)
 
 
 # ==================================================
