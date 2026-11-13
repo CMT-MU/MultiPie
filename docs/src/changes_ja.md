@@ -95,4 +95,4 @@ MultiPie Ver.3 は、MultiPieGen が生成した新しい群のデータベー�
 
 ## 関連パッケージ
 
-- QtDraw 3.3.1 までは Ver.2 の MultiPie 2.5 以降で動き、Ver.3 では動きません。QtDraw 3.3.1 は`multipie~=2.5` を必要とします。Ver.3 に対応した QtDraw を予定しています。
+- QtDraw 3.4 は MultiPie Ver.3（`multipie~=3.0.dev0`）で、QtDraw 3.3 は Ver.2（`multipie~=2.5`）で動きます。リリースされるまでは、MultiPie Ver.3 を入れたあとで、QtDraw 3.4 を開発ブランチから入れてください：`pip install "git+https://github.com/CMT-MU/QtDraw.git@develop-v3.4"`。
