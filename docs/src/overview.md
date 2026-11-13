@@ -4,7 +4,7 @@
 
 The SAMB forms a complete basis set and is therefore useful for describing arbitrary physical quantities according to their symmetry classifications. Any physical quantity can also be decomposed in terms of the SAMB.
 
-The brief manuals for MultiPie are given [here](manual.md). Moreover, information for all supported groups is summarized in [Group Information](group_doc.md).
+The brief manuals for MultiPie are given [here](manual.md). Moreover, information for all supported groups is summarized in [Group Information](https://cmt-mu.github.io/MultiPieGen/src/group_info.html).
 
 The [User Guide](guide.md) explains how to read and use the harmonics and the SAMB (in English and Japanese), and [Examples of materials](materials.md) builds the models of SrVO$_3$, MoS$_2$, and Te step by step. For the users of Ver.2, [Changes from Ver.2](changes.md) summarizes what changes in Ver.3.
 

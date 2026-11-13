@@ -6,7 +6,7 @@ orphan: true
 
 このガイドでは、MultiPie が提供する量と、その読み方・使い方を説明します。扱うのは、多極子のキーとその記号、点群調和関数、原子軌道、原子・クラスター・結合 SAMB（対称性適合多極子基底）、それらから作る強束縛模型、応答テンソルです。英語版は[こちら](../guide.md)です。
 
-群のデータは、MultiPieGen が生成した群のデータベースから取ります。すべての群の表は[群の情報](../group_doc.md)にあります。コードの例では、`Group`（群のデータ）と `MaterialModel`（模型）を使います。
+群のデータは、MultiPieGen が生成した群のデータベースから取ります。すべての群の表は[群の情報](https://cmt-mu.github.io/MultiPieGen/src/group_info.html)にあります。コードの例では、`Group`（群のデータ）と `MaterialModel`（模型）を使います。
 
 ```python
 from multipie import Group, MaterialModel
