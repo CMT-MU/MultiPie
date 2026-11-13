@@ -121,5 +121,6 @@ the order of the irreps), and the data of MPG and MSG are unchanged.
 
 ## Related packages
 
-- QtDraw up to 3.3.1 works with MultiPie 2.5 or later in Ver.2, not with Ver.3; QtDraw 3.3.1 requires
-  `multipie~=2.5`. A version of QtDraw for Ver.3 is planned.
+- QtDraw 3.4 works with MultiPie Ver.3 (`multipie~=3.0.dev0`), and QtDraw 3.3 with Ver.2 (`multipie~=2.5`). Until
+  they are released, install QtDraw 3.4 from its development branch, after MultiPie Ver.3:
+  `pip install "git+https://github.com/CMT-MU/QtDraw.git@develop-v3.4"`.
