@@ -222,7 +222,7 @@ array([[X, 0, 0, 0, 0, 0],
 (ja-group-harmonics)=
 ## 5. 調和関数
 
-`harmonics` は点群調和関数（階数 $\le 11$）を、多極子のキー（{ref}`ja-multipole-key`）をキーとする `Dict` で与えます。値は各成分の多項式と、テッセラル調和関数からのユニタリー行列 $U$ です。`Dict` は `select()` でキーのフィールドによって要素を選び、`named_keys()` でキーを named tuple として与えます。
+`harmonics` は点群調和関数（階数 $\le 11$）を、多極子のキー（{ref}`ja-multipole-key`）をキーとする `Dict` で与えます。値は各成分の多項式と、方域調和関数からのユニタリー行列 $U$ です。`Dict` は `select()` でキーのフィールドによって要素を選び、`named_keys()` でキーを named tuple として与えます。
 
 ```python
 >>> h = g.harmonics
@@ -293,7 +293,7 @@ array([sqrt(3)*G_{x}*x/3 + sqrt(3)*G_{y}*y/3 + sqrt(3)*G_{z}*z/3],
 (22, 27)
 ```
 
-- `transform_atomic_samb(samb, U_ket, U_bra)` は原子 SAMB を別の基底に変換します。基底は、テッセラル基底からのユニタリー行列か、群の立方晶・六方晶の基底を表す階数で与えます。
+- `transform_atomic_samb(samb, U_ket, U_bra)` は原子 SAMB を別の基底に変換します。基底は、方域基底からのユニタリー行列か、群の立方晶・六方晶の基底を表す階数で与えます。
 - `create_atomic_samb_L(L)` は、$|L, M\rangle$ 基底（階数 $L$）の原子多極子を定義から作ります。
 
 (ja-group-cluster)=
