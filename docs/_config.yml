@@ -12,11 +12,15 @@ exclude_patterns:
 
 # ==================================================
 # Execution settings
+# The pages with {code-cell} (e.g. src/group.md) are executed when the docs are built, and the results are cached in
+# _build/.jupyter_cache. The notebooks of src/examples keep their saved outputs and are not executed.
 execute:
-  execute_notebooks: off
+  execute_notebooks: cache
+  exclude_patterns:
+    - "src/examples/*"
   stderr_output: "remove"
-  allow_errors: true
-  timeout: 120
+  allow_errors: false
+  timeout: 600
 
 # ==================================================
 # Parse and render settings
