@@ -1,5 +1,12 @@
 ---
 orphan: true
+jupytext:
+  text_representation:
+    format_name: myst
+kernelspec:
+  display_name: Python 3
+  language: python
+  name: python3
 ---
 
 # ユーザーガイド
@@ -8,7 +15,7 @@ orphan: true
 
 群のデータは、MultiPieGen が生成した群のデータベースから取ります。すべての群の表は[群の情報](https://cmt-mu.github.io/MultiPieGen/src/group_info.html)にあります。コードの例では、`Group`（群のデータ）と `MaterialModel`（模型）を使います。
 
-```python
+```{code-cell} ipython3
 from multipie import Group, MaterialModel
 ```
 
@@ -63,9 +70,8 @@ $$
 
 `Group.tag_multipole(key, comp=None, latex=False, superscript="")` で記号を作ります。`superscript` が tag です。
 
-```python
->>> Group.tag_multipole(("Q", 1, "T1u", -1, -1, 0, 0, "q"), 0, latex=True)
-'\\mathbb{Q}_{1,1}(T_{1u})'
+```{code-cell} ipython3
+Group.tag_multipole(("Q", 1, "T1u", -1, -1, 0, 0, "q"), 0, latex=True)
 ```
 
 | キー | 記号 | 意味 |
@@ -95,15 +101,14 @@ $$
 
 で、$U$ はユニタリ行列（`(2l+1) x dim`、行は $m = l, \dots, -l$）です。`Group.harmonics` は、各キーについて、成分の多項式と $U$ を与えます。
 
-```python
->>> g = Group("Oh")
->>> ex, U = g.harmonics[("Q", 1, "T1u", -1, -1, 0, 0, "q")]
->>> ex
-array([x, y, z], dtype=object)
->>> U
-array([[-sqrt(2)/2, sqrt(2)*I/2, 0],
-       [0, 0, 1],
-       [sqrt(2)/2, sqrt(2)*I/2, 0]], dtype=object)
+```{code-cell} ipython3
+g = Group("Oh")
+ex, U = g.harmonics[("Q", 1, "T1u", -1, -1, 0, 0, "q")]
+ex
+```
+
+```{code-cell} ipython3
+U
 ```
 
 - 調和関数は、`Q`（極性）と `G`（軸性）について、ランク 11 まで与えます。軸性の調和関数は、非固有な操作 $R$ で $\det R$ の因子が余分に付きます。そのため、同じ関数の `Q` と `G` が別の既約表現に属することがあります。例えば C$_{\rm 4v}$ では、$\mathbb{Q}_{1}(A_{1}) = z$ ですが、$\mathbb{G}_{1}(A_{2}) = z$ です。回転だけからなる群では、`Q` と `G` は同じです。
@@ -140,15 +145,14 @@ array([[-sqrt(2)/2, sqrt(2)*I/2, 0],
 
 `Group.atomic_samb(basis_type, (L1, L2))` は、各キーについて、成分の行列 `(dim, n1, n2)` と調和関数の式を与えます。
 
-```python
->>> a = g.atomic_samb("lg", (1, 1))  # p-p block of Oh.
->>> list(a.keys())
-[('Q', 0, 'A1g', -1, -1, 0, 0, 'q'), ('Q', 2, 'Eg', -1, -1, 0, 0, 'q'), ('Q', 2, 'T2g', -1, -1, 0, 0, 'q'), ('M', 1, 'T1g', -1, -1, 0, 0, 'q')]
->>> mat, ex = a[("M", 1, "T1g", -1, -1, 0, 0, "q")]
->>> mat[0]  # x component, l_x / sqrt(2) in (px, py, pz).
-array([[0, 0, 0],
-       [0, 0, -sqrt(2)*I/2],
-       [0, sqrt(2)*I/2, 0]], dtype=object)
+```{code-cell} ipython3
+a = g.atomic_samb("lg", (1, 1))  # p-p block of Oh.
+list(a.keys())
+```
+
+```{code-cell} ipython3
+mat, ex = a[("M", 1, "T1g", -1, -1, 0, 0, "q")]
+mat[0]  # x component, l_x / sqrt(2) in (px, py, pz).
 ```
 
 O$_{\rm h}$ の p 軌道では、$\mathbb{Q}_{0}^{(a)}(A_{1g})$ は電荷（$\propto$ 単位行列）、$\mathbb{Q}_{2}^{(a)}(E_{g})$ と $\mathbb{Q}_{2}^{(a)}(T_{2g})$ は軌道の四極子、$\mathbb{M}_{1}^{(a)}(T_{1g})$ は軌道角運動量です。スピンを含めると（`lgs`）、スピンの磁気双極子は $\mathbb{M}_{1}^{(1,-1;a)}(T_{1g})$ で、p 軌道のスピン軌道相互作用 $\boldsymbol{l} \cdot \boldsymbol{s}$ は $\mathbb{Q}_{0}^{(1,1;a)}(A_{1g})$ に比例します。
@@ -163,17 +167,17 @@ Wyckoff 位置のクラスター SAMB は、その $N$ 個の等価なサイト�
 
 `Group.cluster_samb(wp)` と `Group.cluster_samb(wp, "bond")` は、各キーについて、サイトまたはボンド上の値 `(dim, N)` と調和関数の式を与えます。D$_{\rm 4h}$ では：
 
-```python
->>> d = Group("D4h")
->>> d.find_wyckoff_site("[0,0,1/4]")[0]  # two sites at (0, 0, ±z).
-'2a'
->>> for key, (samb, ex) in d.cluster_samb("2a").items(): print(key[:3], samb, ex)
-('Q', 0, 'A1g') [[sqrt(2)/2 sqrt(2)/2]] [1]
-('Q', 1, 'A2u') [[sqrt(2)/2 -sqrt(2)/2]] [z]
->>> for key, (samb, ex) in d.cluster_samb("2b@1o", "bond").items(): print(key[:5], samb.tolist())
-('Q', 0, 'A1g', -1, -1) [[sqrt(2)/2, sqrt(2)/2]]
-('Q', 2, 'B1g', -1, -1) [[-sqrt(2)/2, sqrt(2)/2]]
-('T', 1, 'Eu', -1, 1) [[I, 0], [0, I]]
+```{code-cell} ipython3
+d = Group("D4h")
+d.find_wyckoff_site("[0,0,1/4]")[0]  # two sites at (0, 0, ±z).
+```
+
+```{code-cell} ipython3
+for key, (samb, ex) in d.cluster_samb("2a").items(): print(key[:3], samb, ex)
+```
+
+```{code-cell} ipython3
+for key, (samb, ex) in d.cluster_samb("2b@1o", "bond").items(): print(key[:5], samb.tolist())
 ```
 
 `2b@1o` のボンドは、原点を通る $x$ 方向と $y$ 方向のものです。$\mathbb{Q}_{0}^{(b)}(A_{1g})$ は一様な実数の飛び移り、$\mathbb{Q}_{2}^{(b)}(B_{1g})$ は 2 本のボンドで符号が逆の実数の飛び移り（$x^2 - y^2$ の対称性）、$\mathbb{T}_{1}^{(b)}(E_{u},a)$ は $(x, y)$ の対称性を持つ虚数の飛び移りで、各ボンドに沿った電流です。
@@ -190,14 +194,11 @@ $$
 
 `MaterialModel.analyze(model_input)`（または `mp_create`）は、模型のサイト、軌道、ボンドについて、それらをすべて作ります。恒等表現に属する、タイプ `Q` と `G`（時間反転で偶）の SAMB が、ハミルトニアンに許されるものです。`"SAMB_select": {"Gamma": "IR"}` でそれらを選びます。グラフェン（C の $p_z$ を持つ 2 つのサイト、第 2 近接までのボンド）では：
 
-```python
->>> mm = MaterialModel()
->>> mm.analyze({"model": "graphene", "group": 191, "cell": {"c": 4}, "site": {"C": ("[1/3,2/3,0]", "pz")},
-...             "bond": [("C", "C", [1, 2])], "SAMB_select": {"Gamma": "IR"}, "pdf": {"create": False}})
->>> for z, (symbol, u, key, comp) in mm["combined_id"].items(): print(z, symbol, u.samb_type.wyckoff, u.neighbor)
-z1 \mathbb{Q}_{0}^{(c)}(A_{1g}) 2c 0
-z2 \mathbb{Q}_{0}^{(c)}(A_{1g}) 3a@3f 1
-z3 \mathbb{Q}_{0}^{(c)}(A_{1g}) 6b@6l 2
+```{code-cell} ipython3
+mm = MaterialModel()
+mm.analyze({"model": "graphene", "group": 191, "cell": {"c": 4}, "site": {"C": ("[1/3,2/3,0]", "pz")},
+            "bond": [("C", "C", [1, 2])], "SAMB_select": {"Gamma": "IR"}, "pdf": {"create": False}})
+for z, (symbol, u, key, comp) in mm["combined_id"].items(): print(z, symbol, u.samb_type.wyckoff, u.neighbor)
 ```
 
 - `mm["combined_id"]` は、各 $z_j$ について、その記号、サイトまたはボンドのクラスターとその近接の次数（`u.samb_type` と `u.neighbor`）、キー、成分を与えます。
@@ -265,49 +266,58 @@ z3 \mathbb{Q}_{0}^{(c)}(A_{1g}) 6b@6l 2
 
 **値。** 各キー `(X, rank, opt)` の値は、成分の行列（$Q_{xyz}$ のような記号。0 になる成分は `0`。行と列は上の表のとおり）と、0 でない各成分を active multipole で書いた式の辞書です。
 
-```python
->>> m = Group("MPG:15.1.53")  # 4/mmm.
->>> m.active_multipole
-['Qs', 'Qdu', 'Qg', 'Qgu', 'Ts', 'Tdu', 'Tg', 'Tgu']
->>> tensor, ex = m.response_tensor_all("Q")[("Q", 2, "s")]  # e.g., the electric conductivity.
->>> tensor
-array([[Q_{xx}, 0, 0],
-       [0, Q_{xx}, 0],
-       [0, 0, Q_{zz}]], dtype=object)
->>> ex
-{Q_{xx}: \mathbb{Q}_{0}^{(1)} - \mathbb{Q}_{u}^{(1)}, Q_{zz}: \mathbb{Q}_{0}^{(1)} + 2*\mathbb{Q}_{u}^{(1)}}
->>> m = Group("MPG:15.6.58")  # 4/mm'm', a ferromagnet along z.
->>> tensor, ex = m.response_tensor_all("T")[("T", 2, "a")]  # e.g., the anomalous Hall effect.
->>> tensor
-array([[0, T_{xy}, 0],
-       [-T_{xy}, 0, 0],
-       [0, 0, 0]], dtype=object)
->>> ex
-{T_{xy}: \mathbb{M}_{z}^{(1)}}
->>> m = Group("MPG:20.4.74")  # -3'm', e.g., Cr2O3.
->>> tensor, ex = m.response_tensor_all("M")[("M", 2, "s")]  # magneto-electric effect.
->>> tensor
-array([[M_{xx}, 0, 0],
-       [0, M_{xx}, 0],
-       [0, 0, M_{zz}]], dtype=object)
->>> ex
-{M_{xx}: \mathbb{M}_{0}^{(1)} - \mathbb{M}_{u}^{(1)}, M_{zz}: \mathbb{M}_{0}^{(1)} + 2*\mathbb{M}_{u}^{(1)}}
->>> m = Group("MPG:13.2.45")  # 4mm1', a polar crystal (e.g., a Rashba system).
->>> tensor, ex = m.response_tensor_all("G")[("G", 2, "a")]  # Edelstein effect.
->>> tensor
-array([[0, G_{xy}, 0],
-       [-G_{xy}, 0, 0],
-       [0, 0, 0]], dtype=object)
->>> ex
-{G_{xy}: \mathbb{Q}_{z}^{(1)}}
->>> m = Group("MPG:18.2.66")  # 321', a chiral crystal (e.g., Te).
->>> tensor, ex = m.response_tensor_all("G")[("G", 2, "s")]  # Edelstein effect.
->>> tensor
-array([[G_{xx}, 0, 0],
-       [0, G_{xx}, 0],
-       [0, 0, G_{zz}]], dtype=object)
->>> ex
-{G_{xx}: \mathbb{G}_{0}^{(1)} - \mathbb{G}_{u}^{(1)}, G_{zz}: \mathbb{G}_{0}^{(1)} + 2*\mathbb{G}_{u}^{(1)}}
+```{code-cell} ipython3
+m = Group("MPG:15.1.53")  # 4/mmm.
+m.active_multipole
+```
+
+```{code-cell} ipython3
+tensor, ex = m.response_tensor_all("Q")[("Q", 2, "s")]  # e.g., the electric conductivity.
+tensor
+```
+
+```{code-cell} ipython3
+ex
+```
+
+```{code-cell} ipython3
+m = Group("MPG:15.6.58")  # 4/mm'm', a ferromagnet along z.
+tensor, ex = m.response_tensor_all("T")[("T", 2, "a")]  # e.g., the anomalous Hall effect.
+tensor
+```
+
+```{code-cell} ipython3
+ex
+```
+
+```{code-cell} ipython3
+m = Group("MPG:20.4.74")  # -3'm', e.g., Cr2O3.
+tensor, ex = m.response_tensor_all("M")[("M", 2, "s")]  # magneto-electric effect.
+tensor
+```
+
+```{code-cell} ipython3
+ex
+```
+
+```{code-cell} ipython3
+m = Group("MPG:13.2.45")  # 4mm1', a polar crystal (e.g., a Rashba system).
+tensor, ex = m.response_tensor_all("G")[("G", 2, "a")]  # Edelstein effect.
+tensor
+```
+
+```{code-cell} ipython3
+ex
+```
+
+```{code-cell} ipython3
+m = Group("MPG:18.2.66")  # 321', a chiral crystal (e.g., Te).
+tensor, ex = m.response_tensor_all("G")[("G", 2, "s")]  # Edelstein effect.
+tensor
+```
+
+```{code-cell} ipython3
+ex
 ```
 
 4/mmm では、伝導度は $\mathrm{diag}(Q_{xx}, Q_{xx}, Q_{zz})$ で、active な単極子 $\mathbb{Q}_0$ と四極子 $\mathbb{Q}_u$ で与えられます。強磁性体 4/mm'm' では、0 でない反対称成分は $T_{xy} = -T_{yx}$ だけで、active な磁気双極子 $\mathbb{M}_z$、つまり $z$ 方向の磁化で与えられます。これが異常ホール効果です。-3'm'（例えば Cr$_2$O$_3$）では、電気磁気テンソルは $\mathrm{diag}(M_{xx}, M_{xx}, M_{zz})$ で、active な磁気単極子 $\mathbb{M}_0$ と磁気四極子 $\mathbb{M}_u$ で与えられます。エーデルシュタイン効果は、極性の 4mm1' では反対称部分に現れ、active な電気双極子 $\mathbb{Q}_z$ で与えられます。キラルな 321' では対称部分に現れ、active な電気トロイダル単極子 $\mathbb{G}_0$ と四極子 $\mathbb{G}_u$ で与えられます。
@@ -338,15 +348,13 @@ $$
 
 **キーと値。** キーは `PGMultipoleType(X, l, Gamma, n, p, s, k, x)` で、`s = 1, 2, 3`、`l <= 3`、47 の点群すべてについて与えられます。`Group.multipolar_harmonics` は、各キーについて、内部基底の係数（`dim` x 内部基底の関数の数。$x, y, z$ の多項式）と、内部基底の記号で書いた式を与えます。記号には矢印と上付きの $(s, k)$ が付き、内部タイプは $[q]$ または $[g]$ と書きます（例：$\vec{\mathbb{G}}_{1}^{(1,0)}[q](T_{1g})$）。`Group.tag_multipole(key, latex=True, vector=True)` は矢印の付いた記号を与えます。
 
-```python
->>> coeff, ex = g.multipolar_harmonics[("G", 1, "T1g", -1, -1, 1, 0, "q")]  # Oh.
->>> coeff  # rows: components of T1g, columns: Q_x, Q_y, Q_z.
-array([[0, sqrt(2)*z/2, -sqrt(2)*y/2],
-       [-sqrt(2)*z/2, 0, sqrt(2)*x/2],
-       [sqrt(2)*y/2, -sqrt(2)*x/2, 0]], dtype=object)
->>> ex
-array([sqrt(2)*Q_{y}*z/2 - sqrt(2)*Q_{z}*y/2, -sqrt(2)*Q_{x}*z/2 + sqrt(2)*Q_{z}*x/2,
-       sqrt(2)*Q_{x}*y/2 - sqrt(2)*Q_{y}*x/2], dtype=object)
+```{code-cell} ipython3
+coeff, ex = g.multipolar_harmonics[("G", 1, "T1g", -1, -1, 1, 0, "q")]  # Oh.
+coeff  # rows: components of T1g, columns: Q_x, Q_y, Q_z.
+```
+
+```{code-cell} ipython3
+ex
 ```
 
 *例（O$_{\rm h}$、`s = 1`）。* 内部基底を極性ベクトル $\boldsymbol{Q} = (Q_x, Q_y, Q_z)$（`x = q`）または軸性ベクトル $\boldsymbol{G} = (G_x, G_y, G_z)$（`x = g`）とすると：

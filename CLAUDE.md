@@ -27,7 +27,7 @@ pytest -n auto                              # all tests in parallel (testpaths =
 pytest tests/test_model.py::test_model_files  # a single test
 MPLBACKEND=Agg pytest -n auto               # headless, as in CI
 black .                                     # formatter; line length 130 (pyproject.toml)
-make -C docs build                          # Jupyter Book docs -> docs/_build/html
+make -C docs build                          # Jupyter Book docs -> docs/_build/html; {code-cell} pages run at build (cached)
 mp_create model_in.py                       # CLI: create model(s); `mp_create -i` prints the input template
 mp_analyze model_ctrl.py                    # CLI: analyze model(s) from control file(s)
 ```
