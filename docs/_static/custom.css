@@ -39,3 +39,53 @@ dl.py.signal dl.field-list > dt {
     border: none !important;
     background-color: #f5f5f5 !important;
 }
+
+/* Tables: a plain, compact style.
+   Rows are separated by thin lines (no stripes), code in cells has no colored
+   background and does not break inside a short key, and a wide table scrolls
+   horizontally instead of squeezing its columns. */
+.bd-article-container {
+    max-width: 64em;
+}
+
+.bd-content table.table {
+    font-size: 0.9em;
+    width: auto;
+    margin-left: 0;
+    border-collapse: collapse;
+}
+
+.bd-content table.table th,
+.bd-content table.table td {
+    padding: 0.35em 0.8em;
+    vertical-align: top;
+    border: none;
+    border-bottom: 1px solid var(--pst-color-border);
+    background-color: transparent !important;
+}
+
+.bd-content table.table thead th {
+    border-bottom: 2px solid var(--pst-color-text-muted);
+    font-weight: 600;
+}
+
+.bd-content table.table tr,
+.bd-content table.table thead {
+    background-color: transparent !important;
+}
+
+.bd-content table.table tbody tr:hover {
+    background-color: var(--pst-color-surface) !important;
+}
+
+.bd-content table.table code.literal {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    color: var(--pst-color-inline-code);
+    white-space: nowrap;
+}
+
+.bd-content table.table code.literal.table-code-wrap {
+    white-space: normal;
+}
