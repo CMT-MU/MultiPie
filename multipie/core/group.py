@@ -127,13 +127,32 @@ def _copy_containers(obj):
 
 
 # ==================================================
+def _group_file(gid):
+    """
+    File name of a group in binary_data.
+
+    Args:
+        gid (str): group id, e.g., "PG:32".
+
+    Returns:
+        - (str) -- file name, e.g., "PG/PG_32".
+
+    Note:
+        - ":" of the id is replaced by "_", as a file name with ":" cannot be checked out by git on Windows.
+
+    :meta private:
+    """
+    return f"{gid.split(':')[0]}/{gid.replace(':', '_')}"
+
+
+# ==================================================
 @functools.lru_cache(maxsize=16)
 def _load_group_data(file):
     """
     Load group data, which is shared by the Group objects of the same group (read only).
 
     Args:
-        file (str): file name in binary_data, e.g., "PG/PG:32".
+        file (str): file name in binary_data, e.g., "PG/PG_32" (see _group_file).
 
     Returns:
         - (BinaryManager) -- group data.
@@ -210,13 +229,13 @@ class Group(dict):
             self._id = self._info["id"][tag]
         self._type = self._id.split(":")[0]
 
-        file = f"{self._type}/{self._id}"
+        file = _group_file(self._id)
 
         self._group_dict[self._type] = _copy_containers(_load_group_data(file))
 
         if with_opt:
             pg_file = self._group(self._type)["info"].PG
-            self._group_dict["opt"] = _copy_containers(_load_group_opt_data("PG/" + pg_file + "_opt"))
+            self._group_dict["opt"] = _copy_containers(_load_group_opt_data(_group_file(pg_file) + "_opt"))
 
     # ==================================================
     @staticmethod
@@ -290,7 +309,7 @@ class Group(dict):
             elif tp == "MSG":
                 id_s = self.info.MSG
 
-            file = f"{tp}/{id_s}"
+            file = _group_file(id_s)
             self._group_dict[tp] = _copy_containers(_load_group_data(file))
 
     # ==================================================
