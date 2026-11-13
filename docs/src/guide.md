@@ -451,7 +451,8 @@ $\vec{\mathbb{G}}_{1}^{(1,0)}[q](T_{1g})$ along $z$.
 ## 9. Brief manual and tutorial (PDF)
 
 Two documents in PDF introduce MultiPie: a brief manual of the program, and a tutorial article on learning multipoles
-and group theory with MultiPie and QtDraw. Both are available in English (en) and Japanese (ja).
+and group theory with MultiPie and QtDraw. The Japanese versions are in the
+{ref}`Japanese User Guide <ja-brief-manual>`.
 
 :::{note}
 Both documents were written for MultiPie Ver.2 (the brief manual for Version 2.3, the tutorial for MultiPie 2.0.7 and
@@ -462,7 +463,7 @@ SAMB can differ. See [Changes from Ver.2](changes.md) and the sections above for
 
 ### MultiPie brief manual
 
-[[en](brief_manual_en.pdf), [ja](brief_manual_ja.pdf)]
+[PDF](brief_manual_en.pdf)
 
 An overview of MultiPie in slides:
 
@@ -481,7 +482,7 @@ An overview of MultiPie in slides:
 
 ### Tutorial of MultiPie via QtDraw
 
-[[en](tutorial_via_qtdraw_en.pdf), [ja](tutorial_via_qtdraw_ja.pdf)]
+[PDF](tutorial_via_qtdraw_en.pdf)
 
 *Multipole Representation and Group Theory Learned through MultiPie and QtDraw*, by Junya Otsuki (Okayama University):
 an introduction to MultiPie from the user's point of view, using the graphical interface of QtDraw.
