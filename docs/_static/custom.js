@@ -8,3 +8,13 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 });
+
+// In tables, short code (e.g. ("M", 2, "s")) is kept on one line by custom.css;
+// a long one (e.g. a full multipole key) may wrap at its spaces.
+document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll('.bd-content table.table code.literal').forEach(function(code) {
+        if (code.textContent.length > 24) {
+            code.classList.add('table-code-wrap');
+        }
+    });
+});
