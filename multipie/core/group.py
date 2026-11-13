@@ -125,13 +125,33 @@ def _copy_containers(obj):
 
 
 # ==================================================
+def _group_file(gid):
+    """
+    File name of a group in binary_data.
+
+    Args:
+        gid (str): group id, e.g., "PG:32".
+
+    Returns:
+        - (str) -- file name, e.g., "PG/PG_32".
+
+    Note:
+        - ":" of the id is replaced by "_", as a file name with ":" cannot be checked out by git on Windows
+          (the same as MultiPieGen's util_binary_data.group_file).
+
+    :meta private:
+    """
+    return f"{gid.split(':')[0]}/{gid.replace(':', '_')}"
+
+
+# ==================================================
 @functools.lru_cache(maxsize=16)
-def _load_group_data(file):
+def _load_group_data(gid):
     """
     Load group data, which is shared by the Group objects of the same group (read only).
 
     Args:
-        file (str): file name in binary_data, e.g., "PG/PG:32".
+        gid (str): group id, e.g., "PG:32".
 
     Returns:
         - (BinaryManager) -- group data.
@@ -143,7 +163,7 @@ def _load_group_data(file):
 
     :meta private:
     """
-    data = BinaryManager(file)
+    data = BinaryManager(_group_file(gid))
     _set_samb_dict(data)
     return _read_only(data)
 
@@ -188,7 +208,7 @@ def _set_samb_dict(data):
         if "harmonics" in data:
             harmonics = data["harmonics"]
         else:
-            harmonics = _load_group_data(f"PG/{data['info'].PG}")["harmonics"]
+            harmonics = _load_group_data(data["info"].PG)["harmonics"]
 
         def with_expression(dic):
             return Dict(PGMultipoleType, {tag: (v, harmonics[_harmonics_key(tag)][0]) for tag, v in dic.items()})
@@ -249,9 +269,7 @@ class Group(dict):
             self._id = self._info["id"][tag]
         self._type = self._id.split(":")[0]
 
-        file = f"{self._type}/{self._id}"
-
-        self._group_dict[self._type] = _copy_containers(_load_group_data(file))
+        self._group_dict[self._type] = _copy_containers(_load_group_data(self._id))
 
     # ==================================================
     @staticmethod
@@ -328,8 +346,7 @@ class Group(dict):
             elif tp == "MSG":
                 id_s = self.info.MSG
 
-            file = f"{tp}/{id_s}"
-            self._group_dict[tp] = _copy_containers(_load_group_data(file))
+            self._group_dict[tp] = _copy_containers(_load_group_data(id_s))
 
     # ==================================================
     def _group(self, tp=None):
