@@ -411,7 +411,7 @@ def create_each_group():
         if tag.count("-c") == 0:
             each_group["cluster_samb"] = samb[id_s]
             each_group["atomic_samb"] = atomic_multipole_group[id_s]
-        each_group.save_binary(id_s)
+        each_group.save_binary(id_s.replace(":", "_"))  # no ":" in file names (git on Windows).
 
     for id_s in info["id_set"]["SG"]["all"]:
         tag = info["tag"][id_s]
@@ -422,7 +422,7 @@ def create_each_group():
         each_group["symmetry_operation"] = group[id_s]["symmetry_operation"]
         each_group["wyckoff"] = group[id_s]["wyckoff"]
         each_group["cluster_samb"] = samb[id_s]
-        each_group.save_binary(id_s)
+        each_group.save_binary(id_s.replace(":", "_"))  # no ":" in file names (git on Windows).
 
     for id_s in info["id_set"]["MPG"]["all"]:
         tag = info["tag"][id_s]
@@ -433,7 +433,7 @@ def create_each_group():
         each_group["symmetry_operation"] = group[id_s]["symmetry_operation"]
         each_group["wyckoff"] = group[id_s]["wyckoff"]
         each_group["active_multipole"] = group[id_s]["active_multipole"]
-        each_group.save_binary(id_s)
+        each_group.save_binary(id_s.replace(":", "_"))  # no ":" in file names (git on Windows).
 
     for id_s in info["id_set"]["MSG"]["all"]:
         tag = info["tag"][id_s]
@@ -443,7 +443,7 @@ def create_each_group():
         each_group["info"] = group[id_s]["info"]
         each_group["symmetry_operation"] = group[id_s]["symmetry_operation"]
         each_group["wyckoff"] = group[id_s]["wyckoff"]
-        each_group.save_binary(id_s)
+        each_group.save_binary(id_s.replace(":", "_"))  # no ":" in file names (git on Windows).
 
 
 # ==================================================
@@ -464,7 +464,7 @@ def create_each_group_opt():
         each_group["harmonics_multipole"] = harmonics_multipole[id_s]
         each_group["representation_matrix"] = representation_matrix[id_s]
 
-        each_group.save_binary(f"{id_s}_opt")
+        each_group.save_binary(f"{id_s.replace(':', '_')}_opt")  # no ":" in file names (git on Windows).
 
 
 # ================================================== main
