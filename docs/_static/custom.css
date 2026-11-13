@@ -90,3 +90,31 @@ dl.py.signal dl.field-list > dt {
 .bd-content table.table code.literal.table-code-wrap span.pre {
     white-space: normal;
 }
+
+/* Sidebar: "[en, ja]" links after the entries with a Japanese version (custom.js). */
+.bd-sidebar-primary li.toctree-l1:has(> .language-links) {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+}
+
+.bd-sidebar-primary li.toctree-l1 > a.reference {
+    flex: 0 1 auto;
+}
+
+.bd-sidebar-primary .language-links {
+    font-size: 0.8em;
+    color: var(--pst-color-text-muted);
+    white-space: nowrap;
+    margin-left: 0.2em;
+}
+
+.bd-sidebar-primary .language-links a {
+    display: inline;
+    padding: 0;
+    color: var(--pst-color-link);
+}
+
+.bd-sidebar-primary .language-links a.current-language {
+    font-weight: 700;
+}

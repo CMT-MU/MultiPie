@@ -205,7 +205,7 @@ z3 \mathbb{Q}_{0}^{(c)}(A_{1g}) 6b@6l 2
 - `mm.get_combined_samb_matrix(fmt="value")` は、各 $Z_j$ の実空間での行列を、キー `(n1, n2, n3, m, n)` で与えます。キーは、格子ベクトル $\boldsymbol{R} = (n_1, n_2, n_3)$ と、`mm["full_matrix"]["ket"]` の bra と ket の添字です。例えば、グラフェンの最近接の飛び移り $Z_2$ の要素は $1/\sqrt{6}$ です（6 本のボンド、規格化済み）。
 - 模型の PDF（`"pdf": {"create": True}` を付けた `mp_create`）には、すべての SAMB がその定義とともに載ります。
 
-重み $z_j$ は、`ModelAnalyzer`（または `mp_analyze`）の制御ファイル（control）`{"samb": {"parameter": {"z1": ...}}}` で与えます。各 $Z_j$ は規格化されているので、$z_j$ はエネルギーの単位を持ちます。$z_j$ の番号付けは群のデータベースに依存しますが（[Ver.2 からの変更点](../changes_ja.md)を参照）、SAMB が張る空間は依存しません。完全な例は[物質の例](../materials.md)を参照してください。
+重み $z_j$ は、`ModelAnalyzer`（または `mp_analyze`）の制御ファイル（control）`{"samb": {"parameter": {"z1": ...}}}` で与えます。各 $Z_j$ は規格化されているので、$z_j$ はエネルギーの単位を持ちます。$z_j$ の番号付けは群のデータベースに依存しますが（[Ver.2 からの変更点](../changes_ja.md)を参照）、SAMB が張る空間は依存しません。完全な例は[物質の例](../materials_ja.md)を参照してください。
 
 (ja-response-tensors)=
 ## 7. 応答テンソル

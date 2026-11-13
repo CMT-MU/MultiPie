@@ -34,3 +34,55 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 });
+
+// Sidebar: "[en, ja]" after the entries that have a Japanese version. The Japanese pages are not in the table of
+// contents (orphan); while one is open, its entry is marked as the current page. To add a pair, add a line to
+// LANGUAGE_PAIRS (paths from the root of the docs).
+var LANGUAGE_PAIRS = {
+    "src/overview.html": "src/overview_ja.html",
+    "src/install.html": "src/install_ja.html",
+    "src/getting_started.html": "src/getting_started_ja.html",
+    "src/guide.html": "src/guide/users_guide_ja.html",
+    "src/group.html": "src/group/group_ja.html",
+    "src/materials.html": "src/materials_ja.html",
+    "src/post_processing.html": "src/post_processing_ja.html",
+    "src/changes.html": "src/changes_ja.html",
+};
+
+document.addEventListener("DOMContentLoaded", function() {
+    var root = new URL(document.documentElement.dataset.content_root || "./", location.href);
+    var here = location.pathname;
+    document.querySelectorAll('.bd-sidebar-primary nav.bd-links a.reference.internal').forEach(function(link) {
+        var target = new URL(link.getAttribute('href'), location.href).pathname;
+        Object.keys(LANGUAGE_PAIRS).forEach(function(en) {
+            var enUrl = new URL(en, root);
+            if (target !== enUrl.pathname) {
+                return;
+            }
+            var jaUrl = new URL(LANGUAGE_PAIRS[en], root);
+            var span = document.createElement('span');
+            span.className = 'language-links';
+            [["en", enUrl], ["ja", jaUrl]].forEach(function(item, i) {
+                if (i > 0) {
+                    span.appendChild(document.createTextNode(", "));
+                }
+                var a = document.createElement('a');
+                a.href = item[1].href;
+                a.textContent = item[0];
+                a.lang = item[0];
+                if (here === item[1].pathname) {
+                    a.className = 'current-language';
+                }
+                span.appendChild(a);
+            });
+            span.insertBefore(document.createTextNode("["), span.firstChild);
+            span.appendChild(document.createTextNode("]"));
+            link.appendChild(document.createTextNode(" "));
+            link.after(span);
+            if (here === jaUrl.pathname) {
+                link.classList.add('current');
+                link.parentElement.classList.add('current', 'active');
+            }
+        });
+    });
+});
