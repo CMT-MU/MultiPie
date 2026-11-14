@@ -10,7 +10,7 @@ orphan: true
 
 SAMB は完全な基底をなすので、任意の物理量をその対称性の分類に従って記述するのに役立ちます。また、どのような物理量も SAMB で分解できます。
 
-MultiPie の簡易マニュアルとチュートリアルの PDF は、{ref}`ユーザーガイド <ja-brief-manual>`の最後にあります。また、サポートしているすべての群の情報は[群の情報](https://cmt-mu.github.io/MultiPieGen/src/group_info.html)にまとめています。
+MultiPie の簡易マニュアルとチュートリアルの PDF は、{ref}`ユーザーガイド <ja-brief-manual>`の最後にあります。また、サポートしているすべての群の情報は[群の情報](https://cmt-mu.github.io/MultiPieGen/src/group_info_ja.html)にまとめています。
 
 [ユーザーガイド](guide/users_guide_ja.md)では、調和関数と SAMB の読み方と使い方を（英語と日本語で）説明しています。[Group クラスの使い方](group/group_ja.md)では、`Group` のプロパティとメソッドを例とともに示し、[物質の例](materials_ja.md)では、SrVO$_3$、MoS$_2$、Te の模型を順を追って作ります。Ver.2 の利用者のために、[Ver.2 からの変更点](changes_ja.md)で Ver.3 での変更点をまとめています。
 

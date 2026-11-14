@@ -39,7 +39,7 @@ kernelspec:
 | MPG | `MPG:` ＋ ID `PG.no.ID`、または ID | `"MPG:15.7.59"`, `"15.7.59"` |
 | MSG | `MSG:` ＋ BNS 番号、または BNS 番号 | `"MSG:123.345"`, `"123.345"` |
 
-すべての群の表とそのタグは[群の情報](https://cmt-mu.github.io/MultiPieGen/src/group_info.html)にあります。
+すべての群の表とそのタグは[群の情報](https://cmt-mu.github.io/MultiPieGen/src/group_info_ja.html)にあります。
 
 ```{code-cell} ipython3
 from multipie import Group
