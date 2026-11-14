@@ -11,6 +11,7 @@ are made in a new way. This page summarizes what changes for the users of Ver.2.
 - The SAMB $Z_j$ of a model span the same space as in Ver.2, but their numbering, signs, and values can differ. Assign
   the weights $z_j$ again, e.g., by fitting.
 - Four f orbitals are renamed: `f2`, `f1`, `f3x`, `f3y` are now `fc`, `fs`, `fx`, `fy`.
+- The model keys `max_neighbor` and `search_cell_range` are removed; delete them from your model inputs.
 - The irreps of some groups, e.g., D$_{\rm 3h}$, are in another order.
 - Some functions of `Group` are removed or changed (see [Group](#changes-group)).
 
@@ -89,6 +90,11 @@ its xyz polynomial; entries sharing all the other fields are numbered by `p`. Se
   different unless the weights are converted.
 - `MaterialModel.load` (and so `mp_analyze`) refuses a model created by Ver.2 with an error. Create the model again with
   `mp_create`, and assign the weights again.
+- The keys `max_neighbor` and `search_cell_range` of a model input are removed, and an input with them is refused
+  with an error. The neighbors of a bond are given by `"bond"` only, without the upper limit of `max_neighbor`
+  (10 by default in Ver.2). For a space group, the bonds are searched in a range that is enlarged for each bond until
+  it contains every site up to the requested neighbor; in Ver.2, a too short `search_cell_range` silently dropped
+  neighbor shells and shifted the neighbor numbering.
 - The bands of a model obey the symmetry in the same way; see [Checks by symmetry](materials.md) for the tests that
   hold across the versions.
 

@@ -47,8 +47,6 @@ default_model = {
         "Gamma": [],  # "IR"=identity, []=all, "..."/["...","..."]=specified irreps.
     },
     "toroidal_priority": False,
-    "max_neighbor": 10,  # for DFT fitting, e.g. =200.
-    "search_cell_range": (-2, 3, -2, 3, -2, 3),  # (a1, a2, a3) range. for DFT fitting, e.g.=(-10, 10, -10, 10, -10, 10).
     "version": __version__,
     "qtdraw": {
         "create": True,  # create QtDraw file ?
