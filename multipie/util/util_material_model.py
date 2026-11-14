@@ -13,7 +13,14 @@ import numpy as np
 
 from multipie import RepSiteType, CellSiteType, BondInfoType, RepBondType, CellBondType, BraketInfoType
 from multipie.util.util import progress_bar_step, progress_bar_done, is_integer
-from multipie.util.util_crystal import site_distance, shift_site, convert_to_primitive, TOL_SAME_SITE
+from multipie.util.util_crystal import (
+    site_distance,
+    shift_site,
+    convert_to_primitive,
+    create_igrid,
+    TOL_SAME_SITE,
+    DISTANCE_DIGIT,
+)
 from multipie.util.util_wyckoff import find_vector
 from multipie.core.default_model import _site_property, _bond_property
 
@@ -229,6 +236,17 @@ def get_basis_type(site_data, spinful):
 RENAMED_ORBITAL = {"f2": "fc", "f1": "fs", "f3x": "fx", "f3y": "fy"}
 """
 f orbitals renamed in MultiPie Ver.3 (old -> new). The old names are not accepted.
+"""
+
+SEARCH_CELL_RANGE = (-2, 3, -2, 3, -2, 3)
+"""
+Initial cell range to search bonds (SG), (a1,a2,b1,b2,c1,c2). It is enlarged for a bond when it does not contain every
+site up to the requested neighbor shell.
+"""
+
+REMOVED_MODEL_KEY = ["max_neighbor", "search_cell_range"]
+"""
+Model keys removed in MultiPie Ver.3 (the neighbors are given by "bond" only, and the bond search range is automatic).
 """
 
 
@@ -813,6 +831,60 @@ def parse_representative_site(group, site_data, basis_type, basis_info):
 
 
 # ==================================================
+def search_box(G, tail, head_grid):
+    """
+    Region of the search grid that holds every image of the head sites.
+
+    Args:
+        G (ndarray): metric tensor (3x3).
+        tail (ndarray): tail position (fractional).
+        head_grid (dict): head sites on the search grid, Dict[(sublattice, plus_set, n1, n2, n3), position].
+
+    Returns:
+        - (float) -- largest distance from tail within which the grid contains every head site.
+        - (ndarray) -- min. and max. grid offsets (2x3).
+        - (ndarray) -- max. and min. positions at zero offset (2x3).
+        - (ndarray) -- distance between the lattice planes x_i = 0 and x_i = 1 (3).
+
+    Notes:
+        - along a_i the grid holds every image whose coordinate lies in [L_i, U_i],
+          L_i = min(n_i) + max(p_i) and U_i = max(n_i) + min(p_i), where p are the positions at zero offset.
+    """
+    offset = np.array([k[2:5] for k in head_grid.keys()], dtype=int)
+    base = np.array(list(head_grid.values()), dtype=float) - offset
+    n_range = np.array([offset.min(axis=0), offset.max(axis=0)])
+    p_range = np.array([base.max(axis=0), base.min(axis=0)])
+    spacing = 1.0 / np.sqrt(np.diag(np.linalg.inv(np.asarray(G, dtype=float))))
+    tail = np.asarray(tail, dtype=float)
+    margin = np.minimum(tail - (n_range[0] + p_range[0]), (n_range[1] + p_range[1]) - tail)
+    radius = float(max(0.0, (margin * spacing).min()))
+    return radius, n_range, p_range, spacing
+
+
+# ==================================================
+def enlarge_head_grid(G, tail, head_grid, cell_site, distance):
+    """
+    Head sites on a search grid enlarged to contain every head site within distance from tail.
+
+    Args:
+        G (ndarray): metric tensor (3x3).
+        tail (ndarray): tail position (fractional).
+        head_grid (dict): head sites on the current search grid.
+        cell_site (list): CellSiteType of the head site in the unit cell.
+        distance (float): required distance.
+
+    Returns:
+        - (dict) -- head sites on the enlarged grid.
+    """
+    _, n_range, p_range, spacing = search_box(G, tail, head_grid)
+    reach = distance / spacing + 10**-DISTANCE_DIGIT
+    lo = np.minimum(n_range[0], np.floor(tail - reach - p_range[0]).astype(int))
+    hi = np.maximum(n_range[1], np.ceil(tail + reach - p_range[1]).astype(int))
+    igrid = create_igrid(tuple(int(x) for pair in zip(lo, hi + 1) for x in pair))
+    return create_site_grid({"cell": {"head": cell_site}}, igrid)["head"]
+
+
+# ==================================================
 def create_representative_bond(group, G, so, tail, heads, max_neighbor):
     """
     Create representative bonds.
@@ -871,7 +943,7 @@ def remove_equivalent_representative_bond(so, pset, bonds):
 
 
 # ==================================================
-def parse_representative_bond(group, G, site_grid, site_so, site_dict, bond_data, max_neighbor, verbose):
+def parse_representative_bond(group, G, site_grid, site_so, site_dict, bond_data, verbose):
     """
     Parse representative bond.
 
@@ -882,7 +954,6 @@ def parse_representative_bond(group, G, site_grid, site_so, site_dict, bond_data
         site_so (dict): site SO dict.
         site_dict (dict): site dict.
         bond_data (list): bond data.
-        max_neighbor (int): max. neighbor.
         verbose (bool): verbose progress bar ?
 
     Returns:
@@ -922,7 +993,7 @@ def parse_representative_bond(group, G, site_grid, site_so, site_dict, bond_data
         head_rank = [no for no, orb in enumerate(site_dict["representative"][head_tag].orbital) if len(orb) > 0]
         neighbor, tail_rank, head_rank = parse_neighbor(neighbor, tail_rank, head_rank)
 
-        max_n = min(max(neighbor), max_neighbor)
+        max_n = max(neighbor)
         info_bond.append(BondInfoType(tail_tag, head_tag, neighbor, tail_rank, head_rank))
 
         # site idx.
@@ -937,6 +1008,34 @@ def parse_representative_bond(group, G, site_grid, site_so, site_dict, bond_data
         so = site_so[tail_tag]
         rep_bond_each = create_representative_bond(group, G, so, tail, heads, max_n)
         rep_bond_each = remove_equivalent_representative_bond(so_all, ps, rep_bond_each)
+
+        # the initial search range (SEARCH_CELL_RANGE) may cut off neighbor shells: a requested shell beyond the radius within which the
+        # grid holds every site can be incomplete or missing, which shifts the neighbor numbering. Then repeat the
+        # search on a grid enlarged for this bond, and keep the original result if the shells are the same.
+        if not group.is_point_group:
+            head_grid = site_grid[head_tag]
+            enlarged = None
+            while True:
+                radius = search_box(G, tail, head_grid)[0]
+                dist = list(site_distance(tail, np.asarray(list(head_grid.values())), G).keys())[:max_n]
+                # too few shells on the grid: aim at twice the farthest one found (the box volume grows ~8x per step).
+                need = dist[-1] if len(dist) == max_n else 2.0 * dist[-1]
+                if need <= radius + 10**-DISTANCE_DIGIT:
+                    break
+                head_grid = enlarge_head_grid(G, tail, head_grid, head_info, need)
+                enlarged = head_grid
+            if enlarged is not None:
+                heads_e = np.asarray(list(enlarged.values()))
+                rep_bond_e = create_representative_bond(group, G, so, tail, heads_e, max_n)
+                rep_bond_e = remove_equivalent_representative_bond(so_all, ps, rep_bond_e)
+                d_old = [float(np.sqrt(b[0, 0:3] @ G @ b[0, 0:3])) for b in rep_bond_each]
+                d_new = [float(np.sqrt(b[0, 0:3] @ G @ b[0, 0:3])) for b in rep_bond_e]
+                same = len(d_old) == len(d_new) and all(
+                    abs(a - b) < 10 ** -DISTANCE_DIGIT and len(x) == len(y)
+                    for a, b, x, y in zip(d_old, d_new, rep_bond_each, rep_bond_e)
+                )
+                if not same:
+                    rep_bond_each = rep_bond_e
 
         for n, bonds in enumerate(rep_bond_each):
             if n + 1 not in neighbor:
