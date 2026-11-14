@@ -116,3 +116,32 @@ def test_cluster_order_does_not_depend_on_hash_seed():
         assert result.returncode == 0, result.stderr
         orders.add(result.stdout.strip().splitlines()[-1])
     assert orders == {"['8a', '16a@16c', '48a@48f', '48b@16d']"}
+
+
+# ==================================================
+def _chain_bonds(search_cell_range):
+    from multipie import MaterialModel
+
+    mm = MaterialModel()
+    mm.analyze(
+        {
+            "model": "chain",
+            "group": 123,
+            "cell": {"a": 5.0, "c": 0.98},
+            "site": {"H": ("[0,0,0]", "s")},
+            "bond": [("H", "H", 8)],
+            "search_cell_range": search_cell_range,
+            "pdf": {"create": False},
+            "qtdraw": {"create": False},
+        }
+    )
+    return [(v.neighbor, round(v.distance, 4)) for v in mm["bond"]["representative"].values()]
+
+
+def test_neighbor_shells_beyond_search_cell_range():
+    # a chain with c = 0.98 A: the default search_cell_range (+-2 cells) reaches only 1.96 A along c, so the shells
+    # at 2.94, 3.92 and 4.90 A were missing and neighbor 3 was the 5.0 A in-plane bond. The search grid is now
+    # enlarged per bond until it contains every site up to the requested shell.
+    expected = [(1, 0.98), (2, 1.96), (3, 2.94), (4, 3.92), (5, 4.9), (6, 5.0), (7, 5.0951), (8, 5.3704)]
+    assert _chain_bonds((-2, 3, -2, 3, -2, 3)) == expected
+    assert _chain_bonds((-8, 9, -8, 9, -8, 9)) == expected

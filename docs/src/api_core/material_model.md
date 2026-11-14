@@ -32,7 +32,7 @@ This class has the following dict data.
   - **site_select** (dict): site-cluster SAMB selection.
   - **bond_select** (dict): bond-cluster SAMB selection.
   - **max_neighbor** (int): max. neighbor in search of bonds.
-  - **search_cell_range** (tuple): cell range in search of bonds, (a1,a2,b1,b2,c1,c2).
+  - **search_cell_range** (tuple): cell range in search of bonds, (a1,a2,b1,b2,c1,c2). For a space group it is a starting point: the range is enlarged for a bond when it does not contain every site up to the requested neighbor shell.
   - **toroidal_priority** (bool): toroidal priority, false=Q-G or true=G-Q.
 
 - Site and bond info.
