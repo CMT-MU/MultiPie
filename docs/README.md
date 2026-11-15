@@ -1,5 +1,11 @@
 # [MultiPie](https://cmt-mu.github.io/MultiPie/)
 
+[![PyPI](https://img.shields.io/pypi/v/multipie?label=pip%20install%20multipie)](https://pypi.org/project/multipie/)
+[![Python](https://img.shields.io/pypi/pyversions/multipie)](https://pypi.org/project/multipie/)
+[![License](https://img.shields.io/github/license/CMT-MU/MultiPie)](https://github.com/CMT-MU/MultiPie/blob/main/LICENSE)
+[![test](https://github.com/CMT-MU/MultiPie/actions/workflows/test.yml/badge.svg)](https://github.com/CMT-MU/MultiPie/actions/workflows/test.yml)
+[![docs](https://github.com/CMT-MU/MultiPie/actions/workflows/docs.yml/badge.svg)](https://cmt-mu.github.io/MultiPie/)
+
 A Python library for a database of crystallographic (magnetic) point and space groups, and constructing Symmetry-Adapted Multipole Basis (SAMB).
 Molecular or crystal structures and generated SAMB are best drawn by using [QtDraw](https://github.com/CMT-MU/QtDraw).
 
