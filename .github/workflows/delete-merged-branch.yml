@@ -1,0 +1,37 @@
+name: delete merged branch
+
+# Delete the head branch of a pull request merged into develop, or into a development branch "develop-*"
+# (e.g. develop-v3). main, develop, and the branches "develop-*" themselves are never deleted, so a development
+# branch is kept when it is merged into develop. Branches of forks are not touched.
+# (Automatic deletion in the repository settings is off, so that develop is kept when develop is merged into main.)
+
+on:
+  pull_request:
+    types: [closed]
+    branches: [develop, "develop-*"]
+
+permissions:
+  contents: write
+
+jobs:
+  delete:
+    if: >-
+      github.event.pull_request.merged == true &&
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      github.event.pull_request.head.ref != 'main' &&
+      github.event.pull_request.head.ref != 'develop' &&
+      !startsWith(github.event.pull_request.head.ref, 'develop-')
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Delete head branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BRANCH: ${{ github.event.pull_request.head.ref }}
+        run: |
+          if gh api "repos/${GITHUB_REPOSITORY}/git/refs/heads/${BRANCH}" > /dev/null 2>&1; then
+            gh api -X DELETE "repos/${GITHUB_REPOSITORY}/git/refs/heads/${BRANCH}"
+            echo "deleted ${BRANCH}"
+          else
+            echo "${BRANCH} is already deleted"
+          fi
