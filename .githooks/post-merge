@@ -1,0 +1,40 @@
+#!/bin/sh
+# Delete local branches whose remote branch is gone and that are merged into develop or into a development
+# branch "develop-*" (e.g. develop-v3), as the "delete merged branch" workflow does on GitHub.
+# main, develop, and the branches "develop-*" themselves are never deleted.
+# Runs after `git pull` (or `git merge`) on main, develop, or develop-*.
+# Enable once per clone:  git config core.hooksPath .githooks && git config fetch.prune true
+
+current=$(git symbolic-ref --quiet --short HEAD) || exit 0
+case "$current" in
+  main|develop|develop-*) ;;
+  *) exit 0 ;;
+esac
+
+# drop remote-tracking refs of deleted remote branches.
+git fetch --prune --quiet origin 2>/dev/null
+
+# branches that a merged branch may have been merged into.
+bases=$(git for-each-ref --format='%(refname:short)' refs/remotes/origin/develop 'refs/remotes/origin/develop-*')
+
+git for-each-ref --format='%(refname:short) %(upstream:track)' refs/heads |
+while read -r branch track; do
+  case "$branch" in
+    main|develop|develop-*|"$current") continue ;;
+  esac
+  [ "$track" = "[gone]" ] || continue
+  merged=""
+  for base in $bases; do
+    if git merge-base --is-ancestor "$branch" "$base" 2>/dev/null; then
+      merged="$base"
+      break
+    fi
+  done
+  if [ -n "$merged" ]; then
+    # -D: merged into $merged (checked above), which may not be the current branch.
+    git branch -D "$branch" >/dev/null && echo "post-merge: deleted branch '$branch' (merged into $merged)"
+  else
+    echo "post-merge: '$branch' is gone on remote but not merged into develop or develop-*; kept (delete with git branch -D $branch)"
+  fi
+done
+exit 0
