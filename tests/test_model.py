@@ -119,7 +119,26 @@ def test_cluster_order_does_not_depend_on_hash_seed():
 
 
 # ==================================================
-def _chain_bonds(search_cell_range):
+@pytest.mark.parametrize("version, ok", [("2.5.0", False), ("2.3.4", False), ("3.0.0.dev0", True), ("3.1.0", True)])
+def test_model_of_older_version(tmp_path, version, ok):
+    # a model created by Ver.2 (another group database) must be created again.
+    from multipie import MaterialModel
+
+    mm = MaterialModel(topdir=str(tmp_path))
+    mm.analyze(read_example("graphene_in.py") | {"pdf": {"create": False}, "qtdraw": {"create": False}})
+    mm["version"] = version
+    mm.save()
+    mm = MaterialModel(topdir=str(tmp_path))
+    if ok:
+        mm.load("graphene")
+        assert mm["version"] == version
+    else:
+        with pytest.raises(ValueError, match=f"created by MultiPie {version}.*Create the model again"):
+            mm.load("graphene")
+
+
+# ==================================================
+def _chain_bonds(neighbor):
     from multipie import MaterialModel
 
     mm = MaterialModel()
@@ -129,8 +148,7 @@ def _chain_bonds(search_cell_range):
             "group": 123,
             "cell": {"a": 5.0, "c": 0.98},
             "site": {"H": ("[0,0,0]", "s")},
-            "bond": [("H", "H", 8)],
-            "search_cell_range": search_cell_range,
+            "bond": [("H", "H", neighbor)],
             "pdf": {"create": False},
             "qtdraw": {"create": False},
         }
@@ -138,10 +156,36 @@ def _chain_bonds(search_cell_range):
     return [(v.neighbor, round(v.distance, 4)) for v in mm["bond"]["representative"].values()]
 
 
-def test_neighbor_shells_beyond_search_cell_range():
-    # a chain with c = 0.98 A: the default search_cell_range (+-2 cells) reaches only 1.96 A along c, so the shells
-    # at 2.94, 3.92 and 4.90 A were missing and neighbor 3 was the 5.0 A in-plane bond. The search grid is now
+def test_neighbor_shells_beyond_initial_search_range():
+    # a chain with c = 0.98 A: the initial search range (+-2 cells) reaches only 1.96 A along c, so the shells at
+    # 2.94, 3.92 and 4.90 A were missing and neighbor 3 was the 5.0 A in-plane bond. The search grid is now
     # enlarged per bond until it contains every site up to the requested shell.
     expected = [(1, 0.98), (2, 1.96), (3, 2.94), (4, 3.92), (5, 4.9), (6, 5.0), (7, 5.0951), (8, 5.3704)]
-    assert _chain_bonds((-2, 3, -2, 3, -2, 3)) == expected
-    assert _chain_bonds((-8, 9, -8, 9, -8, 9)) == expected
+    assert _chain_bonds(8) == expected
+
+
+def test_neighbor_shells_of_a_slab_with_a_large_c():
+    # graphene with c = 1000 A: the initial search range holds 15 in-plane shells, and the next one found is the next
+    # layer at 1000 A. The grid grows step by step to the in-plane shells, not at once to 1000 A (millions of sites).
+    from multipie import MaterialModel
+
+    mm = MaterialModel()
+    model = {"model": "g", "group": 191, "cell": {"a": 2.435, "c": 1000}, "site": {"C": ("[2/3,1/3,0]", "pz")}}
+    mm.analyze(model | {"bond": [("C", "C", list(range(1, 21)))], "pdf": {"create": False}, "qtdraw": {"create": False}})
+    dist = [v.distance for v in mm["bond"]["representative"].values()]
+    assert len(set(round(d, 4) for d in dist)) == 20 and max(dist) < 10
+
+
+def test_neighbor_from_bond_input():
+    # the number of neighbors is given by "bond" only (no upper limit such as the former "max_neighbor" = 10).
+    bonds = _chain_bonds(12)
+    assert [n for n, _ in bonds] == list(range(1, 13))
+
+
+@pytest.mark.parametrize("key, value", [("max_neighbor", 10), ("search_cell_range", (-2, 3, -2, 3, -2, 3))])
+def test_removed_model_keys(key, value):
+    from multipie import MaterialModel
+
+    model = {"model": "chain", "group": 123, "site": {"H": ("[0,0,0]", "s")}, "bond": [("H", "H", 1)], key: value}
+    with pytest.raises(ValueError, match=f"'{key}' is removed in MultiPie Ver.3"):
+        MaterialModel().analyze(model)

@@ -93,9 +93,6 @@ class ModelPDF:
     # ==================================================
     def general_info(self):
         tp = self.mm["toroidal_priority"]
-        mn = self.mm["max_neighbor"]
-        scr = self.mm["search_cell_range"]
-        scr = str(scr[0:2]) + ", " + str(scr[2:4]) + ", " + str(scr[4:6])
         basis_type = self.mm["basis_type"]
         select = self.mm["SAMB_select"]
         a_select = self.mm["atomic_select"]
@@ -131,8 +128,6 @@ class ModelPDF:
         self.text(r"\, - Rank: \texttt{" + str(b_select["l"]) + "}\n")
         self.text(r"\, - Irrep.: [" + ", ".join(b_irrep) + "]\n")
 
-        self.text(r"\item Max. neighbor: \texttt{" + str(mn) + "}\n")
-        self.text(r"\item Search cell range: \texttt{" + scr + "}\n")
         self.text(r"\item Toroidal priority: \texttt{" + str(tp).lower() + "}\n")
         self.text(r"\end{itemize}")
 

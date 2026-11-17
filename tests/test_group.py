@@ -15,7 +15,9 @@ from collections.abc import MutableMapping
 import numpy as np
 import pytest
 
-from multipie.core.group import Group, _group_file, _load_group_data, _load_group_opt_data
+from multipie import PGMultipoleType
+from multipie.core.group import Group, _group_file, _load_group_data
+from multipie.util.util_dict import Dict
 
 
 # ==================================================
@@ -44,6 +46,9 @@ def test_number_of_groups():
             ["A1g", "A2g", "B1g", "B2g", "E1g", "E2g", "A1u", "A2u", "B1u", "B2u", "E1u", "E2u"],
         ),
         ("MPG:1.1.1", "MPG:1.1.1", 1, ["A"]),
+        # Ver.3: the ' block comes before the '' block (Ver.2: A1', A2', A1'', A2'', E', E'').
+        ("D3h", "PG:26", 12, ["A1'", "A2'", "E'", "A1''", "A2''", "E''"]),
+        ("C3h", "PG:22", 6, ["A'", "E'", "A''", "E''"]),
     ],
 )
 def test_group_data(tag, group_id, n_so, irreps):
@@ -124,24 +129,58 @@ def test_group_file_names():
     assert _group_file("PG:32") == "PG/PG_32" and _group_file("MSG:123.345") == "MSG/MSG_123.345"
     ids = list(Group.global_info()["tag"])
     files = {f"{tp}/{f[:-4]}" for tp in ["PG", "SG", "MPG", "MSG"] for f in os.listdir(os.path.join(__bin_dir__, tp))}
-    pg = [gid for gid in ids if gid.startswith("PG:")]
-    assert files == {_group_file(gid) for gid in ids} | {_group_file(gid) + "_opt" for gid in pg}
+    assert files == {_group_file(gid) for gid in ids}
     assert not any(":" in f for f in files)
 
 
 # ==================================================
-def test_group_opt_data_cache():
-    # the optional data is cached in the same way (kept for two groups), with read-only arrays.
+def test_group_pg_data():
+    # representation matrix and multipolar harmonics are in the PG data, shared with read-only arrays.
     Group.clear_cache()
-    g1, g2 = Group("C1", with_opt=True), Group("C1", with_opt=True)  # loaded once (C1: the fastest to load).
-    assert _load_group_opt_data.cache_info().misses == 1
-    key = next(iter(g1.opt))
-    g1.opt[key] = None
-    assert g2.opt[key] is not None
+    g1, g2 = Group("Oh"), Group("Oh")
+    assert _load_group_data.cache_info().misses == 1
+    assert g1.representation_matrix["tag"] == g1.symmetry_operation["tag"]
+    assert isinstance(g1.multipolar_harmonics, Dict) and max(t.l for t in g1.multipolar_harmonics) == 3
+    g1.representation_matrix["tag"] = None
+    assert g2.representation_matrix["tag"] is not None
     with pytest.raises(ValueError, match="read-only"):
-        first_array(g2.opt["representation_matrix"]).flat[0] = 2
+        first_array(g2.representation_matrix["matrix"]).flat[0] = 2
     Group.clear_cache()
-    assert _load_group_data.cache_info().currsize == _load_group_opt_data.cache_info().currsize == 0
+    assert _load_group_data.cache_info().currsize == 0
+
+
+# ==================================================
+@pytest.mark.parametrize("tag, wp, bond", [("Oh", "6a", "3a@1o"), (221, "3c", "3a@1a")])
+def test_samb_with_expression(tag, wp, bond):
+    # cluster and atomic SAMB are Dict, {PGMultipoleType: (value, expression of the harmonics)}.
+    g = Group(tag)
+    harmonics = g.harmonics
+    for dic in [g.cluster_samb(wp), g.cluster_samb(bond, "bond"), g.atomic_samb("lg", (1, 2))]:
+        assert isinstance(dic, Dict) and dic.key_type._fields == PGMultipoleType._fields and len(dic) > 0
+        for t, (v, ex) in dic.items():
+            t = PGMultipoleType(*t)
+            h = PGMultipoleType({"T": "Q", "M": "G"}.get(t.X, t.X), t.l, t.Gamma, t.n, -1, 0, 0, "q")
+            assert list(ex) == list(harmonics[h][0])
+    for t, (v, ex) in g.cluster_samb(bond, "bond").items():  # Q/G: real, T/M: pure imaginary.
+        v = np.asarray(v, dtype=complex)
+        assert np.allclose(v.imag, 0) if t[0] in "QG" else np.allclose(v.real, 0) and not np.allclose(v.imag, 0)
+
+
+# ==================================================
+@pytest.mark.parametrize("cluster_type", ["vector", "bond_s", "bond_a"])
+def test_removed_cluster_type(cluster_type):
+    with pytest.raises(ValueError, match="unknown cluster_type"):
+        Group("Oh").cluster_samb("3a@1o", cluster_type)
+
+
+# ==================================================
+def test_complex_point_group():
+    # a complex PG (-c) has atomic SAMB and bonds, but no cluster SAMB.
+    g = Group("PG:38")
+    assert g.info.tag == "C4-c"
+    assert len(g.atomic_samb("lg", (1, 1))) > 0 and "1a@1a" in g.wyckoff["bond"]
+    with pytest.raises(ValueError, match="no cluster SAMB for C4-c"):
+        g.cluster_samb("1a@1a", "bond")
 
 
 def first_array(obj):

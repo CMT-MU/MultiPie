@@ -12,6 +12,7 @@ This module provides material model construction.
 """
 
 import os
+import re
 import logging
 import numpy as np
 import sympy as sp
@@ -45,12 +46,13 @@ from multipie.util.util_material_model import (
     parse_combined_select,
     create_atomic_samb_qtdraw,
     create_cluster_samb_qtdraw,
+    SEARCH_CELL_RANGE,
+    REMOVED_MODEL_KEY,
 )
 from multipie.util.util_material_model_pdf import ModelPDF
 from multipie.core.default_model import default_model
 from multipie.util.util import check_dict_keys
 from multipie.util.util_plot import plot_site, plot_bond, plot_site_samb, plot_bond_samb, plot_harmonics
-
 
 logger = logging.getLogger(__name__)
 
@@ -91,6 +93,13 @@ class MaterialModel(BinaryManager):
         """
         self.set_subdir(name)
         self.load_binary(name + ".pkl")
+        version = str(self.get("version", "0"))
+        m = re.match(r"(\d+)", version)
+        if m is None or int(m[1]) < 3:  # the group database (SAMB) of Ver.3 differs from that of Ver.2.
+            raise ValueError(
+                f"model '{name}' was created by MultiPie {version}, whose SAMB differ from those of MultiPie {__version__}. "
+                "Create the model again (e.g., mp_create)."
+            )
         self._group = Group(self["group"])
 
     # ==================================================
@@ -314,6 +323,14 @@ class MaterialModel(BinaryManager):
 
         self.clear()
 
+        # keys removed in Ver.3: the bond search range and the max. neighbor are set from "bond".
+        for key in REMOVED_MODEL_KEY:
+            if key in model_in:
+                raise ValueError(
+                    f"'{key}' is removed in MultiPie Ver.3: the neighbors are given by 'bond' only, "
+                    "and the bond search range is set automatically. Delete it from the model input."
+                )
+
         # check unknown keys, e.g., typo.
         select_key = ["X", "l", "Gamma", "s"]
         check_dict_keys(
@@ -351,8 +368,6 @@ class MaterialModel(BinaryManager):
                 raise ValueError(f"model '{model['model']}': site '{name}' must be (position, orbital), but {value!r} is given.")
         bond_data = model["bond"]
         spinful = model["spinful"]
-        max_neighbor = model["max_neighbor"]
-        search_cell_range = model["search_cell_range"]
         toroidal_priority = model["toroidal_priority"]
         samb_select = model["SAMB_select"]
         atomic_select = model["atomic_select"]
@@ -386,13 +401,13 @@ class MaterialModel(BinaryManager):
         if group.is_point_group:
             igrid = None
         else:
-            igrid = create_igrid(search_cell_range)
+            igrid = create_igrid(SEARCH_CELL_RANGE)  # initial range, enlarged per bond if needed.
 
         # set site and bond.
         site_dict = parse_representative_site(group, site_data, basis_type, basis_info)
         site_grid = create_site_grid(site_dict, igrid)
         site_so = create_site_so(group, site_dict)
-        bond_dict = parse_representative_bond(group, G, site_grid, site_so, site_dict, bond_data, max_neighbor, self.verbose)
+        bond_dict = parse_representative_bond(group, G, site_grid, site_so, site_dict, bond_data, self.verbose)
         A = cell_info["A"][0:3, 0:3].T
         lattice = group.info.lattice
         Ap = convert_to_primitive_vector(lattice, A)
@@ -419,8 +434,6 @@ class MaterialModel(BinaryManager):
         self["atomic_select"] = atomic_select
         self["site_select"] = site_select
         self["bond_select"] = bond_select
-        self["max_neighbor"] = model["max_neighbor"]
-        self["search_cell_range"] = model["search_cell_range"]
         self["site"] = site_dict
         self["site_grid"] = site_grid
         self["bond"] = bond_dict
