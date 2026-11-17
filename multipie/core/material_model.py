@@ -98,7 +98,7 @@ class MaterialModel(BinaryManager):
         if m is None or int(m[1]) < 3:  # the group database (SAMB) of Ver.3 differs from that of Ver.2.
             raise ValueError(
                 f"model '{name}' was created by MultiPie {version}, whose SAMB differ from those of MultiPie {__version__}. "
-                "Create the model again (e.g., mp_create)."
+                "Create the model again (e.g., mp_create), or convert a model of Ver.2 with mp_convert."
             )
         self._group = Group(self["group"])
 
@@ -730,6 +730,32 @@ class MaterialModel(BinaryManager):
         Note:
             - R = (n1,n2,n3) and m and n are lattice indices (corresponding to bond_no), bra and ket indexes, respectively.
         """
+        if fmt not in ["sympy", "value"]:
+            raise KeyError(f"Unknown format: {fmt}")
+
+        combined_id, _, _ = self.select_combined_samb(select)
+
+        return self._combined_samb_matrix(combined_id, fmt, digit, bond)
+
+    # ==================================================
+    def _combined_samb_matrix(self, combined_id, fmt="sympy", digit=14, bond=True):
+        """
+        Get the given combined SAMBs in matrix form (real-space).
+
+        Args:
+            combined_id (dict): combined IDs, dict[zj, (symbol, UniqueSAMBType, index, comp)], e.g., a part of self["combined_id"].
+            fmt (str, optional): sympy/value.
+            digit (int, optional): digit for value output.
+            bond (bool, optional): include bond_d ?
+
+        Returns:
+            - (dict) -- combined SAMB in matrix form (see, get_combined_samb_matrix).
+
+        Note:
+            - only the data of the model is used (not the group), so that the SAMB of a model of Ver.2 can be built.
+
+        :meta private:
+        """
 
         def _format_val(v):
             expanded_v = sp.expand(v)
@@ -740,8 +766,6 @@ class MaterialModel(BinaryManager):
 
         if fmt not in ["sympy", "value"]:
             raise KeyError(f"Unknown format: {fmt}")
-
-        combined_id, _, _ = self.select_combined_samb(select)
 
         full_matrix_idx = self["full_matrix"]["index"]
         atomic_samb_data = self["atomic_samb"]

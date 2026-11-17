@@ -8,7 +8,7 @@ MultiPie Ver.3 は、MultiPieGen が生成した新しい群のデータベー�
 
 **要点：**
 
-- 模型は Ver.3 で作り直してください。Ver.2 で作った模型（`.pkl`）は受け付けません。
+- 模型は Ver.3 で作り直してください。Ver.2 で作った模型（`.pkl`）は受け付けません。`mp_convert` は、Ver.2 の `.pkl` から模型を作り直し、その制御ファイルの重み $z_j$ を変換します（[Ver.2 の模型の変換](#ja-converting-a-model-of-ver-2)を参照）。
 - 模型の SAMB $Z_j$ が張る空間は Ver.2 と同じですが、番号、符号、値は違うことがあります。重み $z_j$ は、フィッティングなどでもう一度決めてください。
 - 4 つの f 軌道の名前が変わりました：`f2`、`f1`、`f3x`、`f3y` は `fc`、`fs`、`fx`、`fy` になります。
 - D$_{\rm 3h}$ など一部の群で、既約表現の並びが変わりました。
@@ -66,9 +66,25 @@ MultiPie Ver.3 は、MultiPieGen が生成した新しい群のデータベー�
 ## 結合 SAMB と模型
 
 - 模型の結合 SAMB が張る行列の空間は Ver.2 と同じで、SAMB の数も同じですが、番号 $z_j$、符号、値は違うことがあります。そのため、与えた重みを持つ模型のバンド構造は、重みを変換しない限り違ったものになります。
-- `MaterialModel.load`（したがって `mp_analyze`）は、Ver.2 で作った模型をエラーで拒否します。`mp_create` で模型を作り直し、重みをもう一度決めてください。
+- `MaterialModel.load`（したがって `mp_analyze`）は、Ver.2 で作った模型をエラーで拒否します。`mp_create` で模型を作り直して重みをもう一度決めるか、`mp_convert` で模型と重みを変換してください。
 - 模型の入力のキー `max_neighbor` と `search_cell_range` は削除しました。これらを含む入力はエラーになります。ボンドの近接は `"bond"` の指定だけで決まり、`max_neighbor`（Ver.2 の初期値は 10）による上限はありません。空間群では、指定した近接までのサイトがすべて入るまで、ボンドごとに探索範囲を広げます。Ver.2 では `search_cell_range` が狭すぎると、近接の殻が黙って抜け、近接の番号がずれていました。
 - 模型のバンドは同じように対称性に従います。バージョンをまたいで成り立つテストについては{ref}`対称性によるチェック <ja-checks-by-symmetry>`を参照してください。
+
+(ja-converting-a-model-of-ver-2)=
+## Ver.2 の模型の変換
+
+`mp_convert`（または `convert_model`）は、模型の入力が手元にないときに、Ver.2 の模型 `<model>/<model>.pkl` を Ver.3 に変換します。模型の制御ファイル（`samb` モード）の重み $z_j$ も変換します。
+
+```bash
+mp_convert graphene graphene_ctrl.py
+```
+
+1. Ver.2 の `.pkl` から模型の入力を組み立て直し、`graphene_in.py` に書き出します。f 軌道の名前を変え、`max_neighbor` と `search_cell_range` を除きます。近接は、Ver.2 のボンドの距離で選びます。Ver.2 が近接の殻の一部を取りこぼしていたとき（`search_cell_range` が狭すぎたとき）は、近接の番号が Ver.3 と違い、Ver.3 の模型には Ver.2 が取りこぼしたボンドも入ります（重みは 0）。
+2. Ver.3 で模型を作り、`graphene/graphene.pkl` とします。Ver.2 の模型は `graphene/graphene_v2.pkl` として残します。
+3. ket が違うとき、または Ver.2 の SAMB が Ver.3 の SAMB の張る空間に入らないときは、変換を拒否し、Ver.2 の模型を元に戻します。
+4. 重みは射影で変換します。Ver.2 の $H = \sum_j z_j Z_j$ から、Ver.3 の $z_j = {\rm Tr}[Z_j H]$ を求めます（SAMB が正規直交でないとき、例えば f 軌道の一部だけを持つサイトでは、最小二乗で求めます）。$H$ は丸め誤差の範囲で変わりません。変換した制御ファイルは `graphene_ctrl_v3.py` に書き出し、元のファイルは変えません。`samb/select` は変換しません。近接が変わったときは、その `"bond"` を確かめてください。
+
+`mp_convert` は、変わった点（名前を変えた軌道、除いたキー、近接、SAMB の数、射影の残差）を表示します。`--no-pdf` と `--no-qtdraw` を付けると、PDF と QtDraw のファイルを作りません（既定では Ver.2 の模型と同じ）。変換済みの模型（Ver.3 の `<model>.pkl` と `<model>_v2.pkl`）では、制御ファイルだけを変換します。辞書で与えた重み（例えばフィッティングの結果）は、`convert_model("graphene", parameter={"z1": ...})` で変換し、`report["parameter"]` として返します。
 
 (ja-changes-group)=
 ## Group

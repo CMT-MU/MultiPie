@@ -4,6 +4,7 @@
 .. autosummary::
     multipie.util.util_atomic_multipole
     multipie.util.util_binary
+    multipie.util.util_convert
     multipie.util.util_crystal
     multipie.util.util_dict
     multipie.util.util_gram_schmidt
