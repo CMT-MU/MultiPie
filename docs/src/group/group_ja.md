@@ -479,7 +479,7 @@ tensor
 relation
 ```
 
-`response_tensor(X, rank, comp, opt)` は 1 つの成分を与えます（添字 1, 2, 3 が $x, y, z$）。例えば上の $M_{zz}$ です。強磁性の 4/mm'm' では、磁化 $M_z$ と異常ホール効果（`"T"`、階数 2、反対称）はどちらも磁気双極子 $\mathbb{M}_z$ が担います。
+`response_tensor(X, rank, comp, opt)` は 1 つの成分を与えます（添字 1, 2, 3 が $x, y, z$）。例えば上の $M_{zz}$ です。強磁性の 4/mm'm' では、磁化 $M_z$ とホール効果（`"T"`、階数 2、反対称）はどちらも磁気双極子 $\mathbb{M}_z$ が担います。
 
 ```{code-cell} ipython3
 m.response_tensor("M", 2, (3, 3), "s")
