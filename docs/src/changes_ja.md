@@ -73,7 +73,7 @@ MultiPie Ver.3 は、MultiPieGen が生成した新しい群のデータベー�
 (ja-converting-a-model-of-ver-2)=
 ## Ver.2 の模型の変換
 
-`mp_convert`（または `convert_model`）は、模型の入力が手元にないときに、Ver.2 の模型 `<model>/<model>.pkl` を Ver.3 に変換します。模型の制御ファイル（`samb` モード）の重み $z_j$ も変換します。
+`mp_convert`（または `convert_model`。3.1.0 から）は、模型の入力が手元にないときに、Ver.2 の模型 `<model>/<model>.pkl` を Ver.3 に変換します。模型の制御ファイル（`samb` モード）の重み $z_j$ も変換します。
 
 ```bash
 mp_convert graphene graphene_ctrl.py
