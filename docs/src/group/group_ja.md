@@ -454,7 +454,7 @@ mp
 (ja-group-magnetic)=
 ## 9. 磁気群と応答テンソル
 
-`active_multipole` は磁気点群（PG ではその灰色群）で許される多極子の一覧を、`response_tensor_all(X)` はタイプ `X` の階数 4 までのすべての応答テンソルを `(テンソル, {成分: 多極子})` で与えます（{ref}`ja-response-tensors`）。4/m'm'm' では電気磁気テンソル（`"M"`、階数 2）が許されます。
+`active_multipole` は磁気点群（PG ではその灰色群）で許される多極子の一覧を、`response_tensor_all(X)` はタイプ `X` の階数 4 までのすべての応答テンソル（`X` を省略するとすべてのタイプ）を、キー `(X, rank, opt)` ごとに `(テンソル, {成分: 多極子})` で与えます（{ref}`ja-response-tensors`）。4/m'm'm' では電気磁気テンソル（`"M"`、階数 2）が許されます。
 
 ```{code-cell} ipython3
 m = Group("15.7.59")

@@ -1132,23 +1132,25 @@ class Group(dict):
         return obj
 
     # ==================================================
-    def response_tensor_all(self, X):
+    def response_tensor_all(self, X=None):
         """
         Get all response tensors up to rank 4 (in accordance with MPG).
 
         Args:
-            X (str): tensor type, "Q/G/T/M".
+            X (str, optional): tensor type, "Q/G/T/M". If None, the tensors of all the types.
 
         Returns:
             - (dict) -- response tensors, {(X, rank, opt): (tensor of symbols, {symbol: expression})}.
 
         Note:
             - the tensors are in the group database (the same as those given by response_tensor).
+            - the type is the first element of the key, so that X is not needed to use the tensors, e.g.,
+              response_tensor_all()[("Q", 2, "s")].
             - tensor type opt, "" (rank 0,1), "s/a" (rank 2), "ss/sa/a" (rank 3), "sss/ssa/aas/aaa/sa/as/s/a/t" (rank 4).
         """
-        if X not in ["Q", "G", "T", "M"]:
+        if X is not None and X not in ["Q", "G", "T", "M"]:
             raise ValueError(f"unknown tensor type, '{X}'.")
-        return {key: value for key, value in self._group("MPG")["response_tensor"].items() if key[0] == X}
+        return {key: value for key, value in self._group("MPG")["response_tensor"].items() if X is None or key[0] == X}
 
     # ==================================================
     def response_tensor(self, X, rank, comp=None, opt=None):

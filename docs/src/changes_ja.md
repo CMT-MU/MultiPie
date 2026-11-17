@@ -110,6 +110,7 @@ mp_convert graphene graphene_ctrl.py
 - 応答テンソルは、多極子の名前と `gv` の符号を除いて Ver.2 と同じです。
 - active multipole の名前は変更後の軌道名に従います。例えば `Qf1` は `Qfs` になります。その別名（`convert_mp_alias`）はデータベースの LaTeX の名前から作ります。例えば `Qfc` は $\mathbb{Q}_{3c}$ です。
 - `multipole_rank(tag)` は、active multipole の名前からそのランクを返します。
+- `Group.response_tensor_all()` は、タイプ `X` を省略するとすべてのタイプのテンソルを返します（タイプはキー `(X, rank, opt)` の最初の要素です）。`response_tensor_all(X)` は Ver.2 と同じく `X` のものを返します。
 
 ## 関連パッケージ
 

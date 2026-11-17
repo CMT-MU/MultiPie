@@ -78,6 +78,19 @@ def test_response_tensor_all_from_database():
 
 
 # ==================================================
+def test_response_tensor_all_of_all_types():
+    # without X, the tensors of all the types; the type is the first element of the key.
+    g = Group("MPG:32.4.121")
+    d = g.response_tensor_all()
+    assert {k[0] for k in d} == {"Q", "G", "T", "M"}
+    for X in "QGTM":
+        assert {k: v for k, v in d.items() if k[0] == X}.keys() == g.response_tensor_all(X).keys()
+    m1, ex1 = d[("M", 2, "a")]
+    m2, ex2 = g.response_tensor_all("M")[("M", 2, "a")]
+    assert (m1 == m2).all() and ex1 == ex2
+
+
+# ==================================================
 def test_multipole_rank_active_multipole():
     # all active multipoles in the database have a rank, and also an alias.
     tags = {tag for tp in Group.global_info()["id_set"]["MPG"]["all"] for tag in Group(tp).active_multipole}
