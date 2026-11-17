@@ -110,10 +110,11 @@ Use input files and `.pkl` files only from trusted sources.
 
 ## Command-line tools
 
-- `mp_create` and `mp_analyze` exit with status 1 when an error occurs, and with status 2 for a usage error, e.g., no input file or an unknown option. The error is printed in one message with the input file and, when applicable, the model and the site concerned; with `-v`, the full traceback is printed instead.
+- `mp_create`, `mp_analyze` and `mp_convert` exit with status 1 when an error occurs, and with status 2 for a usage error, e.g., no input file or an unknown option. The error is printed in one message with the input file and, when applicable, the model and the site concerned; with `-v`, the full traceback is printed instead.
 - When several input files are given, all of them are read before any model is created or analyzed.
 - `mp_create -i` and `mp_analyze -i` print the default model and control, which can be used as a template of an input file.
-- `python -m multipie.scripts.mp_create` and `python -m multipie.scripts.mp_analyze` work in the same way.
+- `python -m multipie.scripts.mp_create`, `python -m multipie.scripts.mp_analyze` and `python -m multipie.scripts.mp_convert` work in the same way.
+- `mp_convert` converts a model (`.pkl`) of Ver.2 into Ver.3, and the weights of its controls (see [Changes from Ver.2](changes.md)).
 - Messages such as the elapsed time and warnings are written to stdout through the `multipie` logger. `create_model` and `analyze_model` (and so `mp_create` and `mp_analyze`) set it up unless it already has a handler; the logging configuration of the application, e.g., the root logger in Jupyter, is not changed. To collect the messages elsewhere, add a handler to the `multipie` logger before calling them.
 
 ## Parallel computation
