@@ -103,7 +103,7 @@ its xyz polynomial; entries sharing all the other fields are numbered by `p`. Se
 (converting-a-model-of-ver-2)=
 ## Converting a model of Ver.2
 
-`mp_convert` (or `convert_model`) converts a model of Ver.2, `<model>/<model>.pkl`, into Ver.3, when the model input
+`mp_convert` (or `convert_model`, from 3.1.0) converts a model of Ver.2, `<model>/<model>.pkl`, into Ver.3, when the model input
 is no longer at hand. It also converts the weights $z_j$ of the controls (`samb` mode) of the model:
 
 ```bash
