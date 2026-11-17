@@ -467,6 +467,14 @@ That is, `X` has the same polar or axial character as the internal basis if `s +
 `s + k` is odd. The multipolar harmonics of a point group is $\sum_m U_{m\gamma} O_{lm}^{(s)}(k)$, with $U$ of the
 point-group harmonics `(X, l, Gamma, n)`.
 
+**Magnetic internal degree of freedom.** The internal bases $Q_\nu$ and $G_\nu$ are even under the time reversal.
+For a magnetic internal degree of freedom, odd under the time reversal, e.g., a spin or a magnetic moment, read the
+types as `Q` $\to$ `T` and `G` $\to$ `M`: the polar or axial character is unchanged, and the multipole becomes odd under
+the time reversal. For example, with a spin $\boldsymbol{\sigma}$ as the axial vector $\boldsymbol{G}$,
+$\boldsymbol{r} \cdot \boldsymbol{G}$ ($\vec{\mathbb{G}}_{0}^{(1,1)}[g]$) is the magnetic monopole $\boldsymbol{r} \cdot
+\boldsymbol{\sigma}$, and $\boldsymbol{G} \times \boldsymbol{r}$ ($\vec{\mathbb{Q}}_{1}^{(1,0)}[g]$) the magnetic
+toroidal dipole $\boldsymbol{\sigma} \times \boldsymbol{r}$.
+
 **Key and value.** The key is `PGMultipoleType(X, l, Gamma, n, p, s, k, x)` with `s = 1, 2, 3` and `l <= 3`, for all 47
 point groups. `Group.multipolar_harmonics` gives, for each key, the coefficients of the internal basis (`dim x` the
 number of the internal basis functions, polynomials in $x, y, z$) and the expression in terms of the internal basis
@@ -496,6 +504,27 @@ vector $\boldsymbol{G} = (G_x, G_y, G_z)$ (`x = g`) as the internal basis:
 For example, an arrangement of electric dipoles $\boldsymbol{Q}(\boldsymbol{r}_i)$ on the sites $\boldsymbol{r}_i$ that
 curls around the center, $\boldsymbol{Q} \propto \hat{z} \times \boldsymbol{r}$, is the electric toroidal dipole
 $\vec{\mathbb{G}}_{1}^{(1,0)}[q](T_{1g})$ along $z$.
+
+*Example: spin-orbit coupling depending on the wave vector.* Reading the axial vector $\boldsymbol{G}$ as the spin
+$\boldsymbol{\sigma}$ and the coordinates $(x, y, z)$ as the wave vector $(k_x, k_y, k_z)$, the multipolar harmonics
+with `x = g` and `s = 1` give the spin-orbit couplings of the form $\boldsymbol{k}$-$\boldsymbol{\sigma}$. Both
+$\boldsymbol{\sigma}$ and $\boldsymbol{k}$ are odd under the time reversal, so that the two readings `Q` $\to$ `T`,
+`G` $\to$ `M` above cancel, and the type is the one of the table (`Q` or `G`, even under the time reversal, as a term of a
+Hamiltonian). A spin-orbit coupling is allowed in a crystal when its multipolar harmonics belongs to the identity
+irrep of the point group. For the harmonics linear in $\boldsymbol{k}$:
+
+| point group | key | expression | spin-orbit coupling |
+|:--|:--|:--|:--|
+| C$_{\rm 4v}$ (polar) | `("Q", 1, "A1", -1, -1, 1, 0, "g")` | $(yG_x - xG_y)/\sqrt{2}$ | Rashba, $k_y\sigma_x - k_x\sigma_y$ |
+| D$_{\rm 2d}$ | `("G", 2, "A1", -1, -1, 1, -1, "g")` | $(xG_x - yG_y)/\sqrt{2}$ | Dresselhaus, $k_x\sigma_x - k_y\sigma_y$ |
+| O, D$_3$ (chiral) | `("G", 0, "A1", -1, -1, 1, 1, "g")` | $(xG_x + yG_y + zG_z)/\sqrt{3}$ | radial (Weyl type), $\boldsymbol{k} \cdot \boldsymbol{\sigma}$ |
+
+The Rashba term is the electric dipole $\vec{\mathbb{Q}}_{1}^{(1,0)}[g]$ along $z$, allowed by the polarity of
+C$_{\rm 4v}$, and the radial term the electric toroidal monopole $\vec{\mathbb{G}}_{0}^{(1,1)}[g]$, allowed by the
+chirality of O and D$_3$ (e.g., Te; see [Examples of materials](materials.md)). In D$_3$, the anisotropic
+$\vec{\mathbb{G}}_{2}^{(1,-1)}[g](A_1)$, $(2zG_z - xG_x - yG_y)/\sqrt{6}$, i.e., $2k_z\sigma_z - k_x\sigma_x -
+k_y\sigma_y$, is also allowed. The expressions are given by, e.g., `Group("C4v").multipolar_harmonics[("Q", 1, "A1", -1,
+-1, 1, 0, "g")]`.
 
 (brief-manual)=
 

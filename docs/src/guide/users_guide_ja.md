@@ -367,6 +367,8 @@ $$
 
 つまり、`X` の極性・軸性は、`s + k` が偶なら内部基底と同じ、奇なら逆です。点群の点群多極子調和関数は、点群調和関数 `(X, l, Gamma, n)` の $U$ を使った $\sum_m U_{m\gamma} O_{lm}^{(s)}(k)$ です。
 
+**磁気的な内部自由度。** 内部基底 $Q_\nu$ と $G_\nu$ は時間反転で偶です。スピンや磁気モーメントのような、時間反転で奇な磁気的な内部自由度では、タイプを `Q` $\to$ `T`、`G` $\to$ `M` と読み替えてください。極性・軸性は変わらず、多極子が時間反転で奇になります。例えば、軸性ベクトル $\boldsymbol{G}$ をスピン $\boldsymbol{\sigma}$ とすると、$\boldsymbol{r} \cdot \boldsymbol{G}$（$\vec{\mathbb{G}}_{0}^{(1,1)}[g]$）は磁気単極子 $\boldsymbol{r} \cdot \boldsymbol{\sigma}$、$\boldsymbol{G} \times \boldsymbol{r}$（$\vec{\mathbb{Q}}_{1}^{(1,0)}[g]$）は磁気トロイダル双極子 $\boldsymbol{\sigma} \times \boldsymbol{r}$ です。
+
 **キーと値。** キーは `PGMultipoleType(X, l, Gamma, n, p, s, k, x)` で、`s = 1, 2, 3`、`l <= 3`、47 の点群すべてについて与えられます。`Group.multipolar_harmonics` は、各キーについて、内部基底の係数（`dim` x 内部基底の関数の数。$x, y, z$ の多項式）と、内部基底の記号で書いた式を与えます。記号には矢印と上付きの $(s, k)$ が付き、内部タイプは $[q]$ または $[g]$ と書きます（例：$\vec{\mathbb{G}}_{1}^{(1,0)}[q](T_{1g})$）。`Group.tag_multipole(key, latex=True, vector=True)` は矢印の付いた記号を与えます。
 
 ```{code-cell} ipython3
@@ -388,6 +390,16 @@ ex
 | `("G", 0, "A1u", -1, -1, 1, 1, "g")` | $\vec{\mathbb{G}}_{0}^{(1,1)}[g](A_{1u})$ | $(xG_x + yG_y + zG_z)/\sqrt{3}$ | $\boldsymbol{r} \cdot \boldsymbol{G}$、電気トロイダル単極子 |
 
 例えば、サイト $\boldsymbol{r}_i$ 上の電気双極子 $\boldsymbol{Q}(\boldsymbol{r}_i)$ が中心のまわりを回るような配置、$\boldsymbol{Q} \propto \hat{z} \times \boldsymbol{r}$ は、$z$ 方向の電気トロイダル双極子 $\vec{\mathbb{G}}_{1}^{(1,0)}[q](T_{1g})$ です。
+
+*例：波数に依存するスピン軌道相互作用。* 軸性ベクトル $\boldsymbol{G}$ をスピン $\boldsymbol{\sigma}$ と、座標 $(x, y, z)$ を波数 $(k_x, k_y, k_z)$ と読み替えると、`x = g`、`s = 1` の点群多極子調和関数から、$\boldsymbol{k}$-$\boldsymbol{\sigma}$ の形のスピン軌道相互作用が読み取れます。$\boldsymbol{\sigma}$ も $\boldsymbol{k}$ も時間反転で奇なので、上の読み替え `Q` $\to$ `T`、`G` $\to$ `M` は打ち消し合い、タイプは表のとおり（`Q` または `G`。ハミルトニアンの項として時間反転で偶）です。スピン軌道相互作用は、その点群多極子調和関数が点群の恒等表現に属するとき、結晶で許されます。$\boldsymbol{k}$ について 1 次のものは次のとおりです。
+
+| 点群 | キー | 式 | スピン軌道相互作用 |
+|:--|:--|:--|:--|
+| C$_{\rm 4v}$（極性） | `("Q", 1, "A1", -1, -1, 1, 0, "g")` | $(yG_x - xG_y)/\sqrt{2}$ | ラシュバ型、$k_y\sigma_x - k_x\sigma_y$ |
+| D$_{\rm 2d}$ | `("G", 2, "A1", -1, -1, 1, -1, "g")` | $(xG_x - yG_y)/\sqrt{2}$ | ドレッセルハウス型、$k_x\sigma_x - k_y\sigma_y$ |
+| O、D$_3$（カイラル） | `("G", 0, "A1", -1, -1, 1, 1, "g")` | $(xG_x + yG_y + zG_z)/\sqrt{3}$ | 放射状（ワイル型）、$\boldsymbol{k} \cdot \boldsymbol{\sigma}$ |
+
+ラシュバ型の項は $z$ 方向の電気双極子 $\vec{\mathbb{Q}}_{1}^{(1,0)}[g]$ で、C$_{\rm 4v}$ の極性によって許されます。放射状の項は電気トロイダル単極子 $\vec{\mathbb{G}}_{0}^{(1,1)}[g]$ で、O や D$_3$ のカイラリティによって許されます（例えば Te。[物質の例](../materials_ja.md)を参照）。D$_3$ では、異方的な $\vec{\mathbb{G}}_{2}^{(1,-1)}[g](A_1)$、$(2zG_z - xG_x - yG_y)/\sqrt{6}$、つまり $2k_z\sigma_z - k_x\sigma_x - k_y\sigma_y$ も許されます。式は、例えば `Group("C4v").multipolar_harmonics[("Q", 1, "A1", -1, -1, 1, 0, "g")]` で得られます。
 
 (ja-brief-manual)=
 
