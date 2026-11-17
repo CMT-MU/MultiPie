@@ -257,7 +257,8 @@ Since each $Z_j$ is normalized, $z_j$ has the unit of energy. The numbering of $
 ## 7. Response tensors
 
 A response tensor of rank 0 to 4 relates two physical quantities, e.g., a current and an electric field. For each of
-the 157 magnetic point groups, `Group.response_tensor_all(X)` gives the tensors allowed by symmetry.
+the 157 magnetic point groups, `Group.response_tensor_all()` gives the tensors allowed by symmetry, as a dict with the
+keys `(X, rank, opt)` (only the type `X` with `Group.response_tensor_all(X)`).
 
 **Type.** The type `X` of a tensor is given by its parity under the spatial inversion and the time reversal. The four
 types are usually called i-polar, i-axial, c-polar, and c-axial tensors, where i (c) means that the tensor is invariant
@@ -275,7 +276,7 @@ A response is carried by the multipoles in its tensor (see **Active multipoles**
 | response | tensor `(X, rank, opt)` | multipoles |
 |:--|:--|:--|
 | electric conductivity (symmetric part) | `("Q", 2, "s")` | electric monopole, electric quadrupole |
-| anomalous Hall effect | `("T", 2, "a")` | magnetic dipole (MD), e.g., $T_{xy} = \mathbb{M}_{z}$ |
+| Hall effect | `("T", 2, "a")` | magnetic dipole (MD), e.g., $T_{xy} = \mathbb{M}_{z}$ |
 | magneto-electric effect | `("M", 2, "s")`, `("M", 2, "a")` | magnetic monopole (MM) and magnetic quadrupole (MQ) in the symmetric part, magnetic toroidal dipole (MTD) in the anti-symmetric part |
 | Edelstein (current-induced magnetization) effect | `("G", 2, "s")`, `("G", 2, "a")` | electric toroidal monopole (ETM) and electric toroidal quadrupole (ETQ) in the symmetric part, electric dipole (ED) in the anti-symmetric part |
 
@@ -312,13 +313,53 @@ and "independent" is the number of independent components of the part without an
 | 4 | `t` | $X_{abc;d}$ fully symmetric in $a, b, c$ | 30 | 10 x 3 (`t` x `c`) |
 
 For example, the electric conductivity $\sigma_{ab}$ ($j_a = \sigma_{ab} E_b$) is a rank-2 tensor; its symmetric part
-(`s`) is the ordinary conductivity, and its anti-symmetric part (`a`, odd under the time reversal) the anomalous Hall
+(`s`) is the ordinary conductivity, and its anti-symmetric part (`a`, odd under the time reversal) the Hall
 conductivity, which is carried by the magnetic dipole. The magneto-electric tensor $\alpha_{ab}$
 ($P_a = \alpha_{ab} H_b$) is axial and odd under the time reversal (`M`): its symmetric part is carried by the
 magnetic monopole and the magnetic quadrupoles, and its anti-symmetric part by the magnetic toroidal dipole. The
 Edelstein (current-induced magnetization) tensor $\chi_{ab}$ ($M_a = \chi_{ab} j_b$) is axial and even under the time
 reversal (`G`): its symmetric part is carried by the electric toroidal monopole and quadrupoles, as in a chiral crystal,
 and its anti-symmetric part by the electric dipole, as in a polar crystal.
+
+**Why these types and multipoles.** The type `X` of a response tensor follows from the parities of the two quantities
+it relates. Under the spatial inversion, the electric field $\boldsymbol{E}$, the current $\boldsymbol{j}$ and the
+polarization $\boldsymbol{P}$ are polar vectors, and the magnetic field $\boldsymbol{H}$ and the magnetization
+$\boldsymbol{M}$ are axial vectors. Under the time reversal, $\boldsymbol{E}$ and $\boldsymbol{P}$ are even, and
+$\boldsymbol{j}$, $\boldsymbol{H}$ and $\boldsymbol{M}$ are odd. The tensor that relates a response to a field has the
+product of their parities:
+
+| tensor | response = tensor x field | spatial inversion | time reversal | `X` |
+|:--|:--|:--|:--|:--|
+| magneto-electric $\alpha_{ab}$ | $P_a = \alpha_{ab} H_b$ | polar x axial = axial | even x odd = odd | `M` |
+| Edelstein $\chi_{ab}$ | $M_a = \chi_{ab} j_b$ | axial x polar = axial | odd x odd = even | `G` |
+| conductivity $\sigma_{ab}$ | $j_a = \sigma_{ab} E_b$ | polar x polar = polar | see below | `Q` (`s`), `T` (`a`) |
+
+For the conductivity, the time reversal is not a symmetry of the response itself, which dissipates energy. The Onsager
+relation, $\sigma_{ab}(\boldsymbol{X}) = \sigma_{ba}(-\boldsymbol{X})$ for the order parameters $\boldsymbol{X}$ odd
+under the time reversal (e.g., the magnetization), divides it into two parts. The symmetric part, the dissipative
+(ohmic) conductivity proportional to the relaxation time $\tau$, is even in $\boldsymbol{X}$: as a property of the
+material, apart from the factor $\tau$ (odd under the time reversal, as the dissipation itself), it is even (`Q`), and
+is present in every material. The anti-symmetric part, the non-dissipative Hall conductivity, is odd in
+$\boldsymbol{X}$ (`T`), and needs the time reversal broken, by a magnetization of the material or by a magnetic field. In this sense, `X` is the symmetry that a
+material must have for the response, i.e., the type of the multipoles that carry it.
+
+The multipoles then follow from the decomposition of a rank-2 tensor $X_{ab}$ into irreducible parts: the trace (rank
+0), the anti-symmetric part, which is a vector $\frac{1}{2}\epsilon_{abc} X_{bc}$ (rank 1), and the symmetric
+traceless part (rank 2). The parts of rank 0 and 2 have the type of the tensor. The vector of the anti-symmetric part
+has the opposite parity under the spatial inversion, as $\epsilon_{abc}$ is axial, and the same parity under the
+time reversal:
+
+| `X` (polar/axial, time reversal) | rank 0 | rank 1 (anti-symmetric) | rank 2 |
+|:--|:--|:--|:--|
+| `Q` (polar, even) | electric monopole $\mathbb{Q}_0$ | electric toroidal dipole $\mathbb{G}_1$ | electric quadrupole $\mathbb{Q}_2$ |
+| `G` (axial, even) | electric toroidal monopole $\mathbb{G}_0$ | electric dipole $\mathbb{Q}_1$ | electric toroidal quadrupole $\mathbb{G}_2$ |
+| `T` (polar, odd) | magnetic toroidal monopole $\mathbb{T}_0$ | magnetic dipole $\mathbb{M}_1$ | magnetic toroidal quadrupole $\mathbb{T}_2$ |
+| `M` (axial, odd) | magnetic monopole $\mathbb{M}_0$ | magnetic toroidal dipole $\mathbb{T}_1$ | magnetic quadrupole $\mathbb{M}_2$ |
+
+This is why the Hall effect (`T`, anti-symmetric) needs a magnetic dipole (a magnetization or a magnetic field), the
+magneto-electric effect a magnetic monopole or quadrupole (symmetric) or a magnetic toroidal dipole (anti-symmetric),
+and the Edelstein effect an electric toroidal monopole or quadrupole (symmetric; a chirality) or an electric dipole
+(anti-symmetric; a polarity). The tensors of higher rank are decomposed in the same way.
 
 **Active multipoles.** Each tensor component is decomposed into multipoles (irreducible cartesian parts). Only the
 active multipoles of the group, those invariant under all its operations including the time reversal, can be nonzero.
@@ -336,7 +377,7 @@ m.active_multipole
 ```
 
 ```{code-cell} ipython3
-tensor, ex = m.response_tensor_all("Q")[("Q", 2, "s")]  # e.g., the electric conductivity.
+tensor, ex = m.response_tensor_all()[("Q", 2, "s")]  # e.g., the electric conductivity.
 tensor
 ```
 
@@ -346,7 +387,7 @@ ex
 
 ```{code-cell} ipython3
 m = Group("MPG:15.6.58")  # 4/mm'm', a ferromagnet along z.
-tensor, ex = m.response_tensor_all("T")[("T", 2, "a")]  # e.g., the anomalous Hall effect.
+tensor, ex = m.response_tensor_all()[("T", 2, "a")]  # e.g., the Hall effect.
 tensor
 ```
 
@@ -356,7 +397,7 @@ ex
 
 ```{code-cell} ipython3
 m = Group("MPG:20.4.74")  # -3'm', e.g., Cr2O3.
-tensor, ex = m.response_tensor_all("M")[("M", 2, "s")]  # magneto-electric effect.
+tensor, ex = m.response_tensor_all()[("M", 2, "s")]  # magneto-electric effect.
 tensor
 ```
 
@@ -366,7 +407,7 @@ ex
 
 ```{code-cell} ipython3
 m = Group("MPG:13.2.45")  # 4mm1', a polar crystal (e.g., a Rashba system).
-tensor, ex = m.response_tensor_all("G")[("G", 2, "a")]  # Edelstein effect.
+tensor, ex = m.response_tensor_all()[("G", 2, "a")]  # Edelstein effect.
 tensor
 ```
 
@@ -376,7 +417,7 @@ ex
 
 ```{code-cell} ipython3
 m = Group("MPG:18.2.66")  # 321', a chiral crystal (e.g., Te).
-tensor, ex = m.response_tensor_all("G")[("G", 2, "s")]  # Edelstein effect.
+tensor, ex = m.response_tensor_all()[("G", 2, "s")]  # Edelstein effect.
 tensor
 ```
 
@@ -387,7 +428,7 @@ ex
 In 4/mmm, the conductivity is $\mathrm{diag}(Q_{xx}, Q_{xx}, Q_{zz})$, given by the active monopole $\mathbb{Q}_0$ and
 quadrupole $\mathbb{Q}_u$. In the ferromagnet 4/mm'm', the only nonzero anti-symmetric components are
 $T_{xy} = -T_{yx}$, given by the active magnetic dipole $\mathbb{M}_z$, i.e., the magnetization along $z$: the
-anomalous Hall effect. In -3'm' (e.g., Cr$_2$O$_3$), the magneto-electric tensor is
+Hall effect. In -3'm' (e.g., Cr$_2$O$_3$), the magneto-electric tensor is
 $\mathrm{diag}(M_{xx}, M_{xx}, M_{zz})$, given by the active magnetic monopole $\mathbb{M}_0$ and magnetic quadrupole
 $\mathbb{M}_u$. The Edelstein effect appears in its anti-symmetric part in the polar 4mm1', given by the active electric
 dipole $\mathbb{Q}_z$, and in its symmetric part in the chiral 321', given by the active electric toroidal monopole
@@ -427,6 +468,14 @@ That is, `X` has the same polar or axial character as the internal basis if `s +
 `s + k` is odd. The multipolar harmonics of a point group is $\sum_m U_{m\gamma} O_{lm}^{(s)}(k)$, with $U$ of the
 point-group harmonics `(X, l, Gamma, n)`.
 
+**Magnetic internal degree of freedom.** The internal bases $Q_\nu$ and $G_\nu$ are even under the time reversal.
+For a magnetic internal degree of freedom, odd under the time reversal, e.g., a spin or a magnetic moment, read the
+types as `Q` $\to$ `T` and `G` $\to$ `M`: the polar or axial character is unchanged, and the multipole becomes odd under
+the time reversal. For example, with a spin $\boldsymbol{\sigma}$ as the axial vector $\boldsymbol{G}$,
+$\boldsymbol{r} \cdot \boldsymbol{G}$ ($\vec{\mathbb{G}}_{0}^{(1,1)}[g]$) is the magnetic monopole $\boldsymbol{r} \cdot
+\boldsymbol{\sigma}$, and $\boldsymbol{G} \times \boldsymbol{r}$ ($\vec{\mathbb{Q}}_{1}^{(1,0)}[g]$) the magnetic
+toroidal dipole $\boldsymbol{\sigma} \times \boldsymbol{r}$.
+
 **Key and value.** The key is `PGMultipoleType(X, l, Gamma, n, p, s, k, x)` with `s = 1, 2, 3` and `l <= 3`, for all 47
 point groups. `Group.multipolar_harmonics` gives, for each key, the coefficients of the internal basis (`dim x` the
 number of the internal basis functions, polynomials in $x, y, z$) and the expression in terms of the internal basis
@@ -456,6 +505,27 @@ vector $\boldsymbol{G} = (G_x, G_y, G_z)$ (`x = g`) as the internal basis:
 For example, an arrangement of electric dipoles $\boldsymbol{Q}(\boldsymbol{r}_i)$ on the sites $\boldsymbol{r}_i$ that
 curls around the center, $\boldsymbol{Q} \propto \hat{z} \times \boldsymbol{r}$, is the electric toroidal dipole
 $\vec{\mathbb{G}}_{1}^{(1,0)}[q](T_{1g})$ along $z$.
+
+*Example: spin-orbit coupling depending on the wave vector.* Reading the axial vector $\boldsymbol{G}$ as the spin
+$\boldsymbol{\sigma}$ and the coordinates $(x, y, z)$ as the wave vector $(k_x, k_y, k_z)$, the multipolar harmonics
+with `x = g` and `s = 1` give the spin-orbit couplings of the form $\boldsymbol{k}$-$\boldsymbol{\sigma}$. Both
+$\boldsymbol{\sigma}$ and $\boldsymbol{k}$ are odd under the time reversal, so that the two readings `Q` $\to$ `T`,
+`G` $\to$ `M` above cancel, and the type is the one of the table (`Q` or `G`, even under the time reversal, as a term of a
+Hamiltonian). A spin-orbit coupling is allowed in a crystal when its multipolar harmonics belongs to the identity
+irrep of the point group. For the harmonics linear in $\boldsymbol{k}$:
+
+| point group | key | expression | spin-orbit coupling |
+|:--|:--|:--|:--|
+| C$_{\rm 4v}$ (polar) | `("Q", 1, "A1", -1, -1, 1, 0, "g")` | $(yG_x - xG_y)/\sqrt{2}$ | Rashba, $k_y\sigma_x - k_x\sigma_y$ |
+| D$_{\rm 2d}$ | `("G", 2, "A1", -1, -1, 1, -1, "g")` | $(xG_x - yG_y)/\sqrt{2}$ | Dresselhaus, $k_x\sigma_x - k_y\sigma_y$ |
+| O, D$_3$ (chiral) | `("G", 0, "A1", -1, -1, 1, 1, "g")` | $(xG_x + yG_y + zG_z)/\sqrt{3}$ | radial (Weyl type), $\boldsymbol{k} \cdot \boldsymbol{\sigma}$ |
+
+The Rashba term is the electric dipole $\vec{\mathbb{Q}}_{1}^{(1,0)}[g]$ along $z$, allowed by the polarity of
+C$_{\rm 4v}$, and the radial term the electric toroidal monopole $\vec{\mathbb{G}}_{0}^{(1,1)}[g]$, allowed by the
+chirality of O and D$_3$ (e.g., Te; see [Examples of materials](materials.md)). In D$_3$, the anisotropic
+$\vec{\mathbb{G}}_{2}^{(1,-1)}[g](A_1)$, $(2zG_z - xG_x - yG_y)/\sqrt{6}$, i.e., $2k_z\sigma_z - k_x\sigma_x -
+k_y\sigma_y$, is also allowed. The expressions are given by, e.g., `Group("C4v").multipolar_harmonics[("Q", 1, "A1", -1,
+-1, 1, 0, "g")]`.
 
 (brief-manual)=
 

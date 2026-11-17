@@ -211,7 +211,7 @@ for z, (symbol, u, key, comp) in mm["combined_id"].items(): print(z, symbol, u.s
 (ja-response-tensors)=
 ## 7. 応答テンソル
 
-ランク 0〜4 の応答テンソルは、2 つの物理量（例えば電流と電場）を結び付けます。157 の磁気点群それぞれについて、`Group.response_tensor_all(X)` は対称性で許されるテンソルを与えます。
+ランク 0〜4 の応答テンソルは、2 つの物理量（例えば電流と電場）を結び付けます。157 の磁気点群それぞれについて、`Group.response_tensor_all()` は対称性で許されるテンソルを、キーが `(X, rank, opt)` の辞書で与えます（`Group.response_tensor_all(X)` ではタイプ `X` のものだけ）。
 
 **タイプ。** テンソルのタイプ `X` は、空間反転と時間反転での偶奇で決まります。4 つのタイプは通常、i-polar、i-axial、c-polar、c-axial テンソルと呼ばれます。i（c）は、時間反転でテンソルが不変である（符号を変える）ことを表します。
 
@@ -227,7 +227,7 @@ for z, (symbol, u, key, comp) in mm["combined_id"].items(): print(z, symbol, u.s
 | 応答 | テンソル `(X, rank, opt)` | 多極子 |
 |:--|:--|:--|
 | 電気伝導度（対称部分） | `("Q", 2, "s")` | 電気単極子、電気四極子 |
-| 異常ホール効果 | `("T", 2, "a")` | 磁気双極子（MD）。例：$T_{xy} = \mathbb{M}_{z}$ |
+| ホール効果 | `("T", 2, "a")` | 磁気双極子（MD）。例：$T_{xy} = \mathbb{M}_{z}$ |
 | 電気磁気効果 | `("M", 2, "s")`、`("M", 2, "a")` | 対称部分は磁気単極子（MM）と磁気四極子（MQ）、反対称部分は磁気トロイダル双極子（MTD） |
 | エーデルシュタイン（電流磁気）効果 | `("G", 2, "s")`、`("G", 2, "a")` | 対称部分は電気トロイダル単極子（ETM）と電気トロイダル四極子（ETQ）、反対称部分は電気双極子（ED） |
 
@@ -260,7 +260,28 @@ for z, (symbol, u, key, comp) in mm["combined_id"].items(): print(z, symbol, u.s
 | 4 | `a` | $X_{ab;c;d} = -X_{ba;c;d}$（`aas` + `aaa` + `as`） | 27 | 3 x 9（`a` x `u`） |
 | 4 | `t` | $X_{abc;d}$ は $a, b, c$ について完全対称 | 30 | 10 x 3（`t` x `c`） |
 
-例えば、電気伝導度 $\sigma_{ab}$（$j_a = \sigma_{ab} E_b$）はランク 2 のテンソルです。その対称部分（`s`）が通常の伝導度で、反対称部分（`a`、時間反転で奇）が異常ホール伝導度です。異常ホール伝導度は磁気双極子が担います。電気磁気テンソル $\alpha_{ab}$（$P_a = \alpha_{ab} H_b$）は軸性で時間反転に奇（`M`）です。その対称部分は磁気単極子と磁気四極子が、反対称部分は磁気トロイダル双極子が担います。エーデルシュタイン（電流磁気）効果のテンソル $\chi_{ab}$（$M_a = \chi_{ab} j_b$）は軸性で時間反転に偶（`G`）です。その対称部分はキラルな結晶のように電気トロイダル単極子と四極子が、反対称部分は極性結晶のように電気双極子が担います。
+例えば、電気伝導度 $\sigma_{ab}$（$j_a = \sigma_{ab} E_b$）はランク 2 のテンソルです。その対称部分（`s`）が通常の伝導度で、反対称部分（`a`、時間反転で奇）がホール伝導度です。ホール伝導度は磁気双極子が担います。電気磁気テンソル $\alpha_{ab}$（$P_a = \alpha_{ab} H_b$）は軸性で時間反転に奇（`M`）です。その対称部分は磁気単極子と磁気四極子が、反対称部分は磁気トロイダル双極子が担います。エーデルシュタイン（電流磁気）効果のテンソル $\chi_{ab}$（$M_a = \chi_{ab} j_b$）は軸性で時間反転に偶（`G`）です。その対称部分はキラルな結晶のように電気トロイダル単極子と四極子が、反対称部分は極性結晶のように電気双極子が担います。
+
+**なぜそのタイプと多極子になるのか。** 応答テンソルのタイプ `X` は、テンソルが結び付ける 2 つの量の偶奇から決まります。空間反転では、電場 $\boldsymbol{E}$、電流 $\boldsymbol{j}$、電気分極 $\boldsymbol{P}$ は極性ベクトル、磁場 $\boldsymbol{H}$ と磁化 $\boldsymbol{M}$ は軸性ベクトルです。時間反転では、$\boldsymbol{E}$ と $\boldsymbol{P}$ は偶、$\boldsymbol{j}$、$\boldsymbol{H}$、$\boldsymbol{M}$ は奇です。応答と外場を結び付けるテンソルは、その偶奇の積を持ちます。
+
+| テンソル | 応答 = テンソル x 外場 | 空間反転 | 時間反転 | `X` |
+|:--|:--|:--|:--|:--|
+| 電気磁気 $\alpha_{ab}$ | $P_a = \alpha_{ab} H_b$ | 極性 x 軸性 = 軸性 | 偶 x 奇 = 奇 | `M` |
+| エーデルシュタイン $\chi_{ab}$ | $M_a = \chi_{ab} j_b$ | 軸性 x 極性 = 軸性 | 奇 x 奇 = 偶 | `G` |
+| 伝導度 $\sigma_{ab}$ | $j_a = \sigma_{ab} E_b$ | 極性 x 極性 = 極性 | 下を参照 | `Q`（`s`）、`T`（`a`） |
+
+伝導度では、エネルギーを散逸する応答そのものは時間反転の対称性を持ちません。時間反転で奇な秩序変数 $\boldsymbol{X}$（例えば磁化）についてのオンサーガーの関係 $\sigma_{ab}(\boldsymbol{X}) = \sigma_{ba}(-\boldsymbol{X})$ により、伝導度は 2 つの部分に分かれます。対称部分は、緩和時間 $\tau$ に比例する散逸的な（オームの）伝導度で、$\boldsymbol{X}$ について偶です。散逸そのものと同じく時間反転で奇な因子 $\tau$ を除くと、物質の性質としては偶（`Q`）で、どの物質にもあります。反対称部分は、散逸のないホール伝導度で、$\boldsymbol{X}$ について奇（`T`）であり、物質の磁化か磁場によって時間反転が破れていることが必要です。この意味で `X` は、その応答のために物質が持つべき対称性、つまり応答を担う多極子のタイプです。
+
+多極子は、ランク 2 のテンソル $X_{ab}$ を既約な部分に分けることで決まります。トレース（ランク 0）、反対称部分（ベクトル $\frac{1}{2}\epsilon_{abc} X_{bc}$、ランク 1）、対称でトレースのない部分（ランク 2）です。ランク 0 と 2 の部分はテンソルと同じタイプです。反対称部分のベクトルは、$\epsilon_{abc}$ が軸性なので空間反転の偶奇が逆になり、時間反転の偶奇は同じです。
+
+| `X`（極性・軸性、時間反転） | ランク 0 | ランク 1（反対称） | ランク 2 |
+|:--|:--|:--|:--|
+| `Q`（極性、偶） | 電気単極子 $\mathbb{Q}_0$ | 電気トロイダル双極子 $\mathbb{G}_1$ | 電気四極子 $\mathbb{Q}_2$ |
+| `G`（軸性、偶） | 電気トロイダル単極子 $\mathbb{G}_0$ | 電気双極子 $\mathbb{Q}_1$ | 電気トロイダル四極子 $\mathbb{G}_2$ |
+| `T`（極性、奇） | 磁気トロイダル単極子 $\mathbb{T}_0$ | 磁気双極子 $\mathbb{M}_1$ | 磁気トロイダル四極子 $\mathbb{T}_2$ |
+| `M`（軸性、奇） | 磁気単極子 $\mathbb{M}_0$ | 磁気トロイダル双極子 $\mathbb{T}_1$ | 磁気四極子 $\mathbb{M}_2$ |
+
+このため、ホール効果（`T`、反対称）には磁気双極子（磁化または磁場）が、電気磁気効果には磁気単極子または磁気四極子（対称部分）か磁気トロイダル双極子（反対称部分）が、エーデルシュタイン効果には電気トロイダル単極子または四極子（対称部分。キラリティ）か電気双極子（反対称部分。極性）が必要です。より高いランクのテンソルも同じように分解します。
 
 **Active multipole。** テンソルの各成分を多極子（既約なデカルト成分）に分解します。0 でない値をとれるのは、群の active multipole（時間反転を含むすべての操作で不変な多極子）だけです。これから、0 でない成分とその間の関係が決まります。`Group.active_multipole` がその一覧で、名前は `X` と軌道名をつなげたもの（例：`Qdu`）です。`multipole_rank` はその名前のランクを、`convert_mp_alias` は別名を与えます（どちらも `multipie.util.util_response_tensor`）。例えば `Qdu` のランクは 2、別名は `Qu` です。
 
@@ -272,7 +293,7 @@ m.active_multipole
 ```
 
 ```{code-cell} ipython3
-tensor, ex = m.response_tensor_all("Q")[("Q", 2, "s")]  # e.g., the electric conductivity.
+tensor, ex = m.response_tensor_all()[("Q", 2, "s")]  # e.g., the electric conductivity.
 tensor
 ```
 
@@ -282,7 +303,7 @@ ex
 
 ```{code-cell} ipython3
 m = Group("MPG:15.6.58")  # 4/mm'm', a ferromagnet along z.
-tensor, ex = m.response_tensor_all("T")[("T", 2, "a")]  # e.g., the anomalous Hall effect.
+tensor, ex = m.response_tensor_all()[("T", 2, "a")]  # e.g., the Hall effect.
 tensor
 ```
 
@@ -292,7 +313,7 @@ ex
 
 ```{code-cell} ipython3
 m = Group("MPG:20.4.74")  # -3'm', e.g., Cr2O3.
-tensor, ex = m.response_tensor_all("M")[("M", 2, "s")]  # magneto-electric effect.
+tensor, ex = m.response_tensor_all()[("M", 2, "s")]  # magneto-electric effect.
 tensor
 ```
 
@@ -302,7 +323,7 @@ ex
 
 ```{code-cell} ipython3
 m = Group("MPG:13.2.45")  # 4mm1', a polar crystal (e.g., a Rashba system).
-tensor, ex = m.response_tensor_all("G")[("G", 2, "a")]  # Edelstein effect.
+tensor, ex = m.response_tensor_all()[("G", 2, "a")]  # Edelstein effect.
 tensor
 ```
 
@@ -312,7 +333,7 @@ ex
 
 ```{code-cell} ipython3
 m = Group("MPG:18.2.66")  # 321', a chiral crystal (e.g., Te).
-tensor, ex = m.response_tensor_all("G")[("G", 2, "s")]  # Edelstein effect.
+tensor, ex = m.response_tensor_all()[("G", 2, "s")]  # Edelstein effect.
 tensor
 ```
 
@@ -320,7 +341,7 @@ tensor
 ex
 ```
 
-4/mmm では、伝導度は $\mathrm{diag}(Q_{xx}, Q_{xx}, Q_{zz})$ で、active な単極子 $\mathbb{Q}_0$ と四極子 $\mathbb{Q}_u$ で与えられます。強磁性体 4/mm'm' では、0 でない反対称成分は $T_{xy} = -T_{yx}$ だけで、active な磁気双極子 $\mathbb{M}_z$、つまり $z$ 方向の磁化で与えられます。これが異常ホール効果です。-3'm'（例えば Cr$_2$O$_3$）では、電気磁気テンソルは $\mathrm{diag}(M_{xx}, M_{xx}, M_{zz})$ で、active な磁気単極子 $\mathbb{M}_0$ と磁気四極子 $\mathbb{M}_u$ で与えられます。エーデルシュタイン効果は、極性の 4mm1' では反対称部分に現れ、active な電気双極子 $\mathbb{Q}_z$ で与えられます。キラルな 321' では対称部分に現れ、active な電気トロイダル単極子 $\mathbb{G}_0$ と四極子 $\mathbb{G}_u$ で与えられます。
+4/mmm では、伝導度は $\mathrm{diag}(Q_{xx}, Q_{xx}, Q_{zz})$ で、active な単極子 $\mathbb{Q}_0$ と四極子 $\mathbb{Q}_u$ で与えられます。強磁性体 4/mm'm' では、0 でない反対称成分は $T_{xy} = -T_{yx}$ だけで、active な磁気双極子 $\mathbb{M}_z$、つまり $z$ 方向の磁化で与えられます。これがホール効果です。-3'm'（例えば Cr$_2$O$_3$）では、電気磁気テンソルは $\mathrm{diag}(M_{xx}, M_{xx}, M_{zz})$ で、active な磁気単極子 $\mathbb{M}_0$ と磁気四極子 $\mathbb{M}_u$ で与えられます。エーデルシュタイン効果は、極性の 4mm1' では反対称部分に現れ、active な電気双極子 $\mathbb{Q}_z$ で与えられます。キラルな 321' では対称部分に現れ、active な電気トロイダル単極子 $\mathbb{G}_0$ と四極子 $\mathbb{G}_u$ で与えられます。
 
 (ja-multipolar-harmonics)=
 ## 8. 点群多極子調和関数
@@ -346,6 +367,8 @@ $$
 
 つまり、`X` の極性・軸性は、`s + k` が偶なら内部基底と同じ、奇なら逆です。点群の点群多極子調和関数は、点群調和関数 `(X, l, Gamma, n)` の $U$ を使った $\sum_m U_{m\gamma} O_{lm}^{(s)}(k)$ です。
 
+**磁気的な内部自由度。** 内部基底 $Q_\nu$ と $G_\nu$ は時間反転で偶です。スピンや磁気モーメントのような、時間反転で奇な磁気的な内部自由度では、タイプを `Q` $\to$ `T`、`G` $\to$ `M` と読み替えてください。極性・軸性は変わらず、多極子が時間反転で奇になります。例えば、軸性ベクトル $\boldsymbol{G}$ をスピン $\boldsymbol{\sigma}$ とすると、$\boldsymbol{r} \cdot \boldsymbol{G}$（$\vec{\mathbb{G}}_{0}^{(1,1)}[g]$）は磁気単極子 $\boldsymbol{r} \cdot \boldsymbol{\sigma}$、$\boldsymbol{G} \times \boldsymbol{r}$（$\vec{\mathbb{Q}}_{1}^{(1,0)}[g]$）は磁気トロイダル双極子 $\boldsymbol{\sigma} \times \boldsymbol{r}$ です。
+
 **キーと値。** キーは `PGMultipoleType(X, l, Gamma, n, p, s, k, x)` で、`s = 1, 2, 3`、`l <= 3`、47 の点群すべてについて与えられます。`Group.multipolar_harmonics` は、各キーについて、内部基底の係数（`dim` x 内部基底の関数の数。$x, y, z$ の多項式）と、内部基底の記号で書いた式を与えます。記号には矢印と上付きの $(s, k)$ が付き、内部タイプは $[q]$ または $[g]$ と書きます（例：$\vec{\mathbb{G}}_{1}^{(1,0)}[q](T_{1g})$）。`Group.tag_multipole(key, latex=True, vector=True)` は矢印の付いた記号を与えます。
 
 ```{code-cell} ipython3
@@ -367,6 +390,16 @@ ex
 | `("G", 0, "A1u", -1, -1, 1, 1, "g")` | $\vec{\mathbb{G}}_{0}^{(1,1)}[g](A_{1u})$ | $(xG_x + yG_y + zG_z)/\sqrt{3}$ | $\boldsymbol{r} \cdot \boldsymbol{G}$、電気トロイダル単極子 |
 
 例えば、サイト $\boldsymbol{r}_i$ 上の電気双極子 $\boldsymbol{Q}(\boldsymbol{r}_i)$ が中心のまわりを回るような配置、$\boldsymbol{Q} \propto \hat{z} \times \boldsymbol{r}$ は、$z$ 方向の電気トロイダル双極子 $\vec{\mathbb{G}}_{1}^{(1,0)}[q](T_{1g})$ です。
+
+*例：波数に依存するスピン軌道相互作用。* 軸性ベクトル $\boldsymbol{G}$ をスピン $\boldsymbol{\sigma}$ と、座標 $(x, y, z)$ を波数 $(k_x, k_y, k_z)$ と読み替えると、`x = g`、`s = 1` の点群多極子調和関数から、$\boldsymbol{k}$-$\boldsymbol{\sigma}$ の形のスピン軌道相互作用が読み取れます。$\boldsymbol{\sigma}$ も $\boldsymbol{k}$ も時間反転で奇なので、上の読み替え `Q` $\to$ `T`、`G` $\to$ `M` は打ち消し合い、タイプは表のとおり（`Q` または `G`。ハミルトニアンの項として時間反転で偶）です。スピン軌道相互作用は、その点群多極子調和関数が点群の恒等表現に属するとき、結晶で許されます。$\boldsymbol{k}$ について 1 次のものは次のとおりです。
+
+| 点群 | キー | 式 | スピン軌道相互作用 |
+|:--|:--|:--|:--|
+| C$_{\rm 4v}$（極性） | `("Q", 1, "A1", -1, -1, 1, 0, "g")` | $(yG_x - xG_y)/\sqrt{2}$ | ラシュバ型、$k_y\sigma_x - k_x\sigma_y$ |
+| D$_{\rm 2d}$ | `("G", 2, "A1", -1, -1, 1, -1, "g")` | $(xG_x - yG_y)/\sqrt{2}$ | ドレッセルハウス型、$k_x\sigma_x - k_y\sigma_y$ |
+| O、D$_3$（カイラル） | `("G", 0, "A1", -1, -1, 1, 1, "g")` | $(xG_x + yG_y + zG_z)/\sqrt{3}$ | 放射状（ワイル型）、$\boldsymbol{k} \cdot \boldsymbol{\sigma}$ |
+
+ラシュバ型の項は $z$ 方向の電気双極子 $\vec{\mathbb{Q}}_{1}^{(1,0)}[g]$ で、C$_{\rm 4v}$ の極性によって許されます。放射状の項は電気トロイダル単極子 $\vec{\mathbb{G}}_{0}^{(1,1)}[g]$ で、O や D$_3$ のカイラリティによって許されます（例えば Te。[物質の例](../materials_ja.md)を参照）。D$_3$ では、異方的な $\vec{\mathbb{G}}_{2}^{(1,-1)}[g](A_1)$、$(2zG_z - xG_x - yG_y)/\sqrt{6}$、つまり $2k_z\sigma_z - k_x\sigma_x - k_y\sigma_y$ も許されます。式は、例えば `Group("C4v").multipolar_harmonics[("Q", 1, "A1", -1, -1, 1, 0, "g")]` で得られます。
 
 (ja-brief-manual)=
 

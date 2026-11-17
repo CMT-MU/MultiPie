@@ -491,7 +491,8 @@ mp
 ## 9. Magnetic groups and response tensors
 
 `active_multipole` lists the multipoles allowed in the magnetic point group (of a PG, its gray group), and
-`response_tensor_all(X)` gives all the response tensors of type `X` up to rank 4, as `(tensor, {component: multipoles})`;
+`response_tensor_all(X)` gives all the response tensors of type `X` up to rank 4 (of all the types without `X`), as
+`(tensor, {component: multipoles})` for the keys `(X, rank, opt)`;
 see {ref}`response-tensors`. In 4/m'm'm', the magnetoelectric tensor (`"M"`, rank 2) is allowed:
 
 ```{code-cell} ipython3
@@ -519,7 +520,7 @@ relation
 
 `response_tensor(X, rank, comp, opt)` gives one component (indices 1, 2, 3 for $x, y, z$), e.g., $M_{zz}$ above. In the
 ferromagnetic
-4/mm'm', the magnetization $M_z$ and the anomalous Hall effect (`"T"`, rank 2, anti-symmetric) are both carried by the
+4/mm'm', the magnetization $M_z$ and the Hall effect (`"T"`, rank 2, anti-symmetric) are both carried by the
 magnetic dipole $\mathbb{M}_z$:
 
 ```{code-cell} ipython3

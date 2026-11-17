@@ -454,7 +454,7 @@ mp
 (ja-group-magnetic)=
 ## 9. 磁気群と応答テンソル
 
-`active_multipole` は磁気点群（PG ではその灰色群）で許される多極子の一覧を、`response_tensor_all(X)` はタイプ `X` の階数 4 までのすべての応答テンソルを `(テンソル, {成分: 多極子})` で与えます（{ref}`ja-response-tensors`）。4/m'm'm' では電気磁気テンソル（`"M"`、階数 2）が許されます。
+`active_multipole` は磁気点群（PG ではその灰色群）で許される多極子の一覧を、`response_tensor_all(X)` はタイプ `X` の階数 4 までのすべての応答テンソル（`X` を省略するとすべてのタイプ）を、キー `(X, rank, opt)` ごとに `(テンソル, {成分: 多極子})` で与えます（{ref}`ja-response-tensors`）。4/m'm'm' では電気磁気テンソル（`"M"`、階数 2）が許されます。
 
 ```{code-cell} ipython3
 m = Group("15.7.59")
@@ -479,7 +479,7 @@ tensor
 relation
 ```
 
-`response_tensor(X, rank, comp, opt)` は 1 つの成分を与えます（添字 1, 2, 3 が $x, y, z$）。例えば上の $M_{zz}$ です。強磁性の 4/mm'm' では、磁化 $M_z$ と異常ホール効果（`"T"`、階数 2、反対称）はどちらも磁気双極子 $\mathbb{M}_z$ が担います。
+`response_tensor(X, rank, comp, opt)` は 1 つの成分を与えます（添字 1, 2, 3 が $x, y, z$）。例えば上の $M_{zz}$ です。強磁性の 4/mm'm' では、磁化 $M_z$ とホール効果（`"T"`、階数 2、反対称）はどちらも磁気双極子 $\mathbb{M}_z$ が担います。
 
 ```{code-cell} ipython3
 m.response_tensor("M", 2, (3, 3), "s")

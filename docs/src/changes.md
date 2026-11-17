@@ -155,6 +155,8 @@ the order of the irreps), and the data of MPG and MSG are unchanged.
 - The names of the active multipoles follow the renamed orbitals, e.g., `Qf1` is now `Qfs`. Their aliases
   (`convert_mp_alias`) are made from the LaTeX names in the database, e.g., `Qfc` is $\mathbb{Q}_{3c}$.
 - `multipole_rank(tag)` gives the rank of an active multipole from its name.
+- `Group.response_tensor_all()` without the type `X` gives the tensors of all the types (the type is the first
+  element of the key, `(X, rank, opt)`); `response_tensor_all(X)` gives those of `X` as in Ver.2.
 
 ## Related packages
 
