@@ -164,6 +164,18 @@ def test_neighbor_shells_beyond_initial_search_range():
     assert _chain_bonds(8) == expected
 
 
+def test_neighbor_shells_of_a_slab_with_a_large_c():
+    # graphene with c = 1000 A: the initial search range holds 15 in-plane shells, and the next one found is the next
+    # layer at 1000 A. The grid grows step by step to the in-plane shells, not at once to 1000 A (millions of sites).
+    from multipie import MaterialModel
+
+    mm = MaterialModel()
+    model = {"model": "g", "group": 191, "cell": {"a": 2.435, "c": 1000}, "site": {"C": ("[2/3,1/3,0]", "pz")}}
+    mm.analyze(model | {"bond": [("C", "C", list(range(1, 21)))], "pdf": {"create": False}, "qtdraw": {"create": False}})
+    dist = [v.distance for v in mm["bond"]["representative"].values()]
+    assert len(set(round(d, 4) for d in dist)) == 20 and max(dist) < 10
+
+
 def test_neighbor_from_bond_input():
     # the number of neighbors is given by "bond" only (no upper limit such as the former "max_neighbor" = 10).
     bonds = _chain_bonds(12)

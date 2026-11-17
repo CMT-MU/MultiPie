@@ -1016,12 +1016,16 @@ def parse_representative_bond(group, G, site_grid, site_so, site_dict, bond_data
             head_grid = site_grid[head_tag]
             enlarged = None
             while True:
-                radius = search_box(G, tail, head_grid)[0]
+                radius, _, _, spacing = search_box(G, tail, head_grid)
                 dist = list(site_distance(tail, np.asarray(list(head_grid.values())), G).keys())[:max_n]
-                # too few shells on the grid: aim at twice the farthest one found (the box volume grows ~8x per step).
+                # too few shells on the grid: aim at twice the farthest one found.
                 need = dist[-1] if len(dist) == max_n else 2.0 * dist[-1]
                 if need <= radius + 10**-DISTANCE_DIGIT:
                     break
+                # the shell found may be far beyond the radius, e.g., the next layer of a slab with a large c, while the
+                # shells within it are not yet on the grid: grow the box by at most twice the radius per step, and count
+                # the shells again (the box volume grows ~8x per step).
+                need = min(need, 2.0 * max(radius, spacing.min()))
                 head_grid = enlarge_head_grid(G, tail, head_grid, head_info, need)
                 enlarged = head_grid
             if enlarged is not None:
