@@ -350,11 +350,11 @@ Fields:
 """
 
 
-__all__ = ["Group", "MaterialModel", "ModelAnalyzer", "create_model", "analyze_model"]
+__all__ = ["Group", "MaterialModel", "ModelAnalyzer", "create_model", "analyze_model", "convert_model"]
 
 if TYPE_CHECKING:
     from multipie.core.group import Group
-    from multipie.core.cmd import create_model, analyze_model
+    from multipie.core.cmd import create_model, analyze_model, convert_model
     from multipie.core.material_model import MaterialModel
     from multipie.core.model_analyzer import ModelAnalyzer
 
@@ -369,6 +369,11 @@ def __getattr__(name):
         from multipie.core.cmd import analyze_model
 
         return analyze_model
+
+    if name == "convert_model":
+        from multipie.core.cmd import convert_model
+
+        return convert_model
 
     if name == "Group":
         from multipie.core.group import Group

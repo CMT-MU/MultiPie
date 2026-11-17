@@ -14,7 +14,7 @@ MultiPie is a Python library (Python >= 3.12) that provides a database of crysta
 ### Ver.3
 
 - `develop` and `main` are Ver.3 (the group database of MultiPieGen) from 3.0.0. The former development line of Ver.3, `develop-v3`, was merged into `develop`. Ver.2 is not developed any more; its releases remain as the tags `v2.x.y` (the last is `v2.5.2`) and on PyPI.
-- A model (`.pkl`) created with Ver.2 is refused by Ver.3 (see `docs/src/changes.md`). QtDraw 3.4 (`multipie>=2.5,<4`) and SymClosestWannier 2.1.3 or later work with both versions.
+- A model (`.pkl`) created with Ver.2 is refused by Ver.3 (see `docs/src/changes.md`). `mp_convert` (`convert_model`, `util/util_convert.py`) creates it again from the `.pkl` of Ver.2 and converts the weights z_j of its controls by projection; its tests use the models of Ver.2 in `tests/data/convert_v2/`. QtDraw 3.4 (`multipie>=2.5,<4`) and SymClosestWannier 2.1.3 or later work with both versions.
 
 ## Commands
 
@@ -27,13 +27,14 @@ black .                                     # formatter; line length 130 (pyproj
 make -C docs build                          # Jupyter Book docs -> docs/_build/html; {code-cell} pages run at build (cached)
 mp_create model_in.py                       # CLI: create model(s); `mp_create -i` prints the input template
 mp_analyze model_ctrl.py                    # CLI: analyze model(s) from control file(s)
+mp_convert model model_ctrl.py              # CLI: convert a model (.pkl) of Ver.2 and its controls into Ver.3
 ```
 
 CI (`.github/workflows/test.yml`) installs the package non-editably on ubuntu and macOS with Python 3.12 and 3.13. It runs the tests from outside the checkout, so they must import the installed package rather than the source tree. As a result, anything the package needs at runtime has to be covered by `package-data` in `pyproject.toml`.
 
 ## Architecture
 
-The public API is lazily imported in `multipie/__init__.py` (`Group`, `MaterialModel`, `ModelAnalyzer`, `create_model`, `analyze_model`). The same file defines the namedtuple types used throughout the package (`PGMultipoleType`, `RepSiteType`, `CellBondType`, `SAMBType`, ...). Logic lives in `multipie/core/`, and most of the heavy lifting is in the helper modules under `multipie/util/`.
+The public API is lazily imported in `multipie/__init__.py` (`Group`, `MaterialModel`, `ModelAnalyzer`, `create_model`, `analyze_model`, `convert_model`). The same file defines the namedtuple types used throughout the package (`PGMultipoleType`, `RepSiteType`, `CellBondType`, `SAMBType`, ...). Logic lives in `multipie/core/`, and most of the heavy lifting is in the helper modules under `multipie/util/`.
 
 The pipeline has three layers:
 

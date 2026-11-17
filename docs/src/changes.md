@@ -7,7 +7,9 @@ are made in a new way. This page summarizes what changes for the users of Ver.2.
 
 **In short:**
 
-- Create your models again with Ver.3. A model (`.pkl`) created with Ver.2 is refused.
+- Create your models again with Ver.3. A model (`.pkl`) created with Ver.2 is refused. `mp_convert` creates it again
+  from the `.pkl` of Ver.2, and converts the weights $z_j$ of its controls (see
+  [Converting a model of Ver.2](#converting-a-model-of-ver-2)).
 - The SAMB $Z_j$ of a model span the same space as in Ver.2, but their numbering, signs, and values can differ. Assign
   the weights $z_j$ again, e.g., by fitting.
 - Four f orbitals are renamed: `f2`, `f1`, `f3x`, `f3y` are now `fc`, `fs`, `fx`, `fy`.
@@ -89,7 +91,7 @@ its xyz polynomial; entries sharing all the other fields are numbered by `p`. Se
   numbering $z_j$, the signs, and the values can differ. The band structure of a model with given weights is therefore
   different unless the weights are converted.
 - `MaterialModel.load` (and so `mp_analyze`) refuses a model created by Ver.2 with an error. Create the model again with
-  `mp_create`, and assign the weights again.
+  `mp_create`, and assign the weights again, or convert the model and the weights with `mp_convert`.
 - The keys `max_neighbor` and `search_cell_range` of a model input are removed, and an input with them is refused
   with an error. The neighbors of a bond are given by `"bond"` only, without the upper limit of `max_neighbor`
   (10 by default in Ver.2). For a space group, the bonds are searched in a range that is enlarged for each bond until
@@ -97,6 +99,35 @@ its xyz polynomial; entries sharing all the other fields are numbered by `p`. Se
   neighbor shells and shifted the neighbor numbering.
 - The bands of a model obey the symmetry in the same way; see [Checks by symmetry](materials.md) for the tests that
   hold across the versions.
+
+(converting-a-model-of-ver-2)=
+## Converting a model of Ver.2
+
+`mp_convert` (or `convert_model`) converts a model of Ver.2, `<model>/<model>.pkl`, into Ver.3, when the model input
+is no longer at hand. It also converts the weights $z_j$ of the controls (`samb` mode) of the model:
+
+```bash
+mp_convert graphene graphene_ctrl.py
+```
+
+1. The model input is rebuilt from the `.pkl` of Ver.2 and written as `graphene_in.py`. The f orbitals are renamed,
+   and `max_neighbor` and `search_cell_range` are dropped. The neighbors are chosen by the distances of the bonds of
+   Ver.2: when Ver.2 missed a part of the neighbor shells (a too short `search_cell_range`), its neighbor numbering
+   differs from that of Ver.3, and the model of Ver.3 has also the bonds that Ver.2 missed (with the weight 0).
+2. The model is created with Ver.3 as `graphene/graphene.pkl`. The model of Ver.2 is kept as
+   `graphene/graphene_v2.pkl`.
+3. The conversion is refused, and the model of Ver.2 is restored, if the kets differ or the SAMB of Ver.2 are not in the
+   space spanned by those of Ver.3.
+4. The weights are converted by projection: $H = \sum_j z_j Z_j$ of Ver.2 gives $z_j = {\rm Tr}[Z_j H]$ of Ver.3
+   (by least squares when the SAMB are not orthonormal, e.g., for a site with only a part of the f orbitals). $H$ is
+   unchanged within round-off, and the converted control is written as `graphene_ctrl_v3.py`; the original is not
+   changed. `samb/select` is not converted: check its `"bond"` when the neighbors changed.
+
+`mp_convert` prints what changed: the renamed orbitals, the removed keys, the neighbors, the numbers of SAMB, and the
+residuals of the projection. With `--no-pdf` and `--no-qtdraw`, the PDF and the QtDraw file are not created (by
+default, as in the model of Ver.2). For a model already converted (`<model>.pkl` of Ver.3 with `<model>_v2.pkl`), only
+the controls are converted. The weights given as a dict, e.g., a fit, are converted by
+`convert_model("graphene", parameter={"z1": ...})`, and returned as `report["parameter"]`.
 
 (changes-group)=
 ## Group
