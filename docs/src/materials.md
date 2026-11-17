@@ -136,17 +136,27 @@ The model has 66 SAMB ([Te.pdf](examples/materials/Te.pdf)):
 ```
 :::
 
-Two features show up:
+Three features show up:
 
 - **Spin-dependent SAMB.** In a spinful model, the atomic SAMB include the spin, written with the superscript
-  $(s, k)$ with $s = 1$. For example, $z_6$, $\mathbb{Q}_{0}^{(1,1;c)}(A_1)$, is the on-site spin-orbit coupling,
-  proportional to $\boldsymbol{l} \cdot \boldsymbol{s}$.
+  $(s, k)$ with $s = 1$. For example, $z_6$, $\mathbb{Q}_{0}^{(1,1;c)}(A_1)$, is the on-site (symmetric) spin-orbit
+  coupling, proportional to $\boldsymbol{l} \cdot \boldsymbol{s}$.
 - **Electric toroidal (`G`) SAMB.** As D$_3$ has only rotations, the axial (`G`) SAMB of the identity irrep are
   allowed in the Hamiltonian together with the polar (`Q`) ones, e.g., $\mathbb{G}_{0}^{(c)}(A_1)$ ($z_{19}$, $z_{20}$),
   the electric toroidal monopole of the bonds, which represents the chirality.
+- **Antisymmetric spin-orbit coupling.** $z_{22}$ and $z_{23}$, $\mathbb{G}_{0}^{(1,-1;c)}(A_1)$, combine the spin
+  $\sigma_z$ ($z_{22}$) or $\sigma_x, \sigma_y$ ($z_{23}$), independent of the orbitals, with the anti-symmetric
+  (pure imaginary) bond function of the first neighbor: a spin-dependent hopping odd under the exchange of the two ends
+  of a bond, $\propto i\,\boldsymbol{\sigma} \cdot \boldsymbol{d}$ along a bond $\boldsymbol{d}$. It is the
+  spin-orbit coupling allowed by the chirality (a `G` monopole, i.e., a pseudoscalar), which gives $\boldsymbol{\sigma}
+  \cdot \boldsymbol{k}$ near $\Gamma$.
 
-The control gives the spin-orbit coupling and the hoppings within and between the chains, and computes the
-expectation value of $S_z$ along the k path (`"local": ["Sz"]`), shown in color:
+The spin splitting of the bands needs a term odd under the inversion, i.e., a `G` SAMB of the identity irrep of D$_3$
+(which belongs to $A_{1u}$ of D$_{3d}$). The on-site spin-orbit coupling $z_6$ is even, so that with $z_6$ and the
+spin-independent `Q` hoppings only, the bands stay doubly degenerate at every k point. The control gives the on-site
+spin-orbit coupling, the antisymmetric spin-orbit coupling within the chains ($z_{22}$, $z_{23}$), and the hoppings
+within and between the chains, and computes the expectation value of $S_z$ along the k path (`"local": ["Sz"]`), shown
+in color:
 
 ```{literalinclude} examples/materials/Te_ctrl.py
 ```
@@ -155,10 +165,12 @@ expectation value of $S_z$ along the k path (`"local": ["Sz"]`), shown in color:
 :width: 600px
 ```
 
-Without the inversion, the spin-orbit coupling splits the bands except at the time-reversal invariant momenta, e.g.,
-$\Gamma$ and A, where the bands are doubly degenerate (Kramers). Along $\Gamma$-A (the chain direction, $k_z$), each
-pair of split bands is polarized along $z$ with opposite signs (red and blue), i.e., the spin is parallel or
-anti-parallel to $\boldsymbol{k}$: the radial spin texture of a chiral crystal.
+With the antisymmetric spin-orbit coupling, the bands split except at the time-reversal invariant momenta, e.g.,
+$\Gamma$ and A, where the bands are doubly degenerate (Kramers). The path A'-$\Gamma$-A, with A' = $-$A, runs along
+the chain direction from $-k_z$ to $k_z$. Each pair of split bands is polarized along $z$ with opposite signs (red and
+blue), and the red and blue are exchanged between $k_z$ and $-k_z$: the spin splitting is odd in $\boldsymbol{k}$
+(time reversal maps the state at $\boldsymbol{k}$ to the one at $-\boldsymbol{k}$ with the opposite spin). The spin is
+parallel or anti-parallel to $\boldsymbol{k}$: the radial spin texture of a chiral crystal.
 
 (checks-by-symmetry)=
 ## Checks by symmetry
