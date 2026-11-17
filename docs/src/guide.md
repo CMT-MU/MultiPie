@@ -320,6 +320,46 @@ Edelstein (current-induced magnetization) tensor $\chi_{ab}$ ($M_a = \chi_{ab} j
 reversal (`G`): its symmetric part is carried by the electric toroidal monopole and quadrupoles, as in a chiral crystal,
 and its anti-symmetric part by the electric dipole, as in a polar crystal.
 
+**Why these types and multipoles.** The type `X` of a response tensor follows from the parities of the two quantities
+it relates. Under the spatial inversion, the electric field $\boldsymbol{E}$, the current $\boldsymbol{j}$ and the
+polarization $\boldsymbol{P}$ are polar vectors, and the magnetic field $\boldsymbol{H}$ and the magnetization
+$\boldsymbol{M}$ are axial vectors. Under the time reversal, $\boldsymbol{E}$ and $\boldsymbol{P}$ are even, and
+$\boldsymbol{j}$, $\boldsymbol{H}$ and $\boldsymbol{M}$ are odd. The tensor that relates a response to a field has the
+product of their parities:
+
+| tensor | response = tensor x field | spatial inversion | time reversal | `X` |
+|:--|:--|:--|:--|:--|
+| magneto-electric $\alpha_{ab}$ | $P_a = \alpha_{ab} H_b$ | polar x axial = axial | even x odd = odd | `M` |
+| Edelstein $\chi_{ab}$ | $M_a = \chi_{ab} j_b$ | axial x polar = axial | odd x odd = even | `G` |
+| conductivity $\sigma_{ab}$ | $j_a = \sigma_{ab} E_b$ | polar x polar = polar | see below | `Q` (`s`), `T` (`a`) |
+
+For the conductivity, the time reversal is not a symmetry of the response itself, which dissipates energy. The Onsager
+relation, $\sigma_{ab}(\boldsymbol{X}) = \sigma_{ba}(-\boldsymbol{X})$ for the order parameters $\boldsymbol{X}$ odd
+under the time reversal (e.g., the magnetization), divides it into two parts. The symmetric part, the dissipative
+(ohmic) conductivity proportional to the relaxation time $\tau$, is even in $\boldsymbol{X}$: as a property of the
+material, apart from the factor $\tau$ (odd under the time reversal, as the dissipation itself), it is even (`Q`), and
+is present in every material. The anti-symmetric part, the non-dissipative Hall conductivity, is odd in
+$\boldsymbol{X}$ (`T`), and needs a material that breaks the time reversal. In this sense, `X` is the symmetry that a
+material must have for the response, i.e., the type of the multipoles that carry it.
+
+The multipoles then follow from the decomposition of a rank-2 tensor $X_{ab}$ into irreducible parts: the trace (rank
+0), the anti-symmetric part, which is a vector $\frac{1}{2}\epsilon_{abc} X_{bc}$ (rank 1), and the symmetric
+traceless part (rank 2). The parts of rank 0 and 2 have the type of the tensor. The vector of the anti-symmetric part
+has the opposite parity under the spatial inversion, as $\epsilon_{abc}$ is axial, and the same parity under the
+time reversal:
+
+| `X` (polar/axial, time reversal) | rank 0 | rank 1 (anti-symmetric) | rank 2 |
+|:--|:--|:--|:--|
+| `Q` (polar, even) | electric monopole $\mathbb{Q}_0$ | electric toroidal dipole $\mathbb{G}_1$ | electric quadrupole $\mathbb{Q}_2$ |
+| `G` (axial, even) | electric toroidal monopole $\mathbb{G}_0$ | electric dipole $\mathbb{Q}_1$ | electric toroidal quadrupole $\mathbb{G}_2$ |
+| `T` (polar, odd) | magnetic toroidal monopole $\mathbb{T}_0$ | magnetic dipole $\mathbb{M}_1$ | magnetic toroidal quadrupole $\mathbb{T}_2$ |
+| `M` (axial, odd) | magnetic monopole $\mathbb{M}_0$ | magnetic toroidal dipole $\mathbb{T}_1$ | magnetic quadrupole $\mathbb{M}_2$ |
+
+This is why the anomalous Hall effect (`T`, anti-symmetric) needs a magnetic dipole (a magnetization), the
+magneto-electric effect a magnetic monopole or quadrupole (symmetric) or a magnetic toroidal dipole (anti-symmetric),
+and the Edelstein effect an electric toroidal monopole or quadrupole (symmetric; a chirality) or an electric dipole
+(anti-symmetric; a polarity). The tensors of higher rank are decomposed in the same way.
+
 **Active multipoles.** Each tensor component is decomposed into multipoles (irreducible cartesian parts). Only the
 active multipoles of the group, those invariant under all its operations including the time reversal, can be nonzero.
 This gives the nonvanishing components and the relations among them. `Group.active_multipole` lists them, named by
