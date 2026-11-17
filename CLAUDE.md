@@ -11,13 +11,10 @@ MultiPie is a Python library (Python >= 3.12) that provides a database of crysta
 - The maintainer opens and merges the `develop` → `main` PR by hand. Never delete `develop`.
 - A GitHub release whose tag is `v` + `multipie.__version__` (e.g. `v2.4.1`) publishes the package to PyPI (`.github/workflows/release.yml`). The version is set in `multipie/core/multipie_info.py`.
 
-### Ver.3 (`develop-v3`)
+### Ver.3
 
-- `develop-v3` is the development line of Ver.3 (the group database of MultiPieGen; version `3.0.0.devN`), while `develop` and `main` stay Ver.2 (2.5.x). Never delete `develop-v3`.
-- Work for Ver.3 branches from `develop-v3`, and its PRs target `develop-v3` (`gh pr create --base develop-v3`). After merging, delete the feature branch and run the test suite on the updated `develop-v3`, as for `develop`.
-- Fixes for Ver.2 go to `develop` as usual. Bring them into Ver.3 by merging `develop` into `develop-v3` (a PR from `develop`, or `git merge origin/develop` on a branch from `develop-v3`). Do not rebase `develop-v3` or force-push it, since others test it.
-- Test Ver.3 in an environment separate from Ver.2. QtDraw 3.4 (QtDraw's branch `develop-v3.4`) works with Ver.3 (`multipie~=3.0.dev0`), and QtDraw 3.3 on PyPI with Ver.2 (`multipie~=2.5`), so the `dev` extra does not include QtDraw. To write `.qtdw` files with Ver.3, install QtDraw 3.4 after MultiPie: `pip install "git+https://github.com/CMT-MU/QtDraw.git@develop-v3.4"`. Install MultiPie Ver.3 itself with `pip install "git+https://github.com/CMT-MU/MultiPie.git@develop-v3"` (also on Windows, since the data files have no `:` in their names).
-- For testers, a pre-release version (e.g. `3.0.0a1` in `multipie_info.py`) can be released from `develop-v3` with the tag `v3.0.0a1`. A GitHub release marked as a pre-release uploads to TestPyPI only (`release.yml`); one not marked so uploads to PyPI, where pip still installs a pre-release version only with `--pre`. The maintainer decides which, and when `develop-v3` goes into `develop` for the release of Ver.3.
+- `develop` and `main` are Ver.3 (the group database of MultiPieGen) from 3.0.0. The former development line of Ver.3, `develop-v3`, was merged into `develop`. Ver.2 is not developed any more; its releases remain as the tags `v2.x.y` (the last is `v2.5.2`) and on PyPI.
+- A model (`.pkl`) created with Ver.2 is refused by Ver.3 (see `docs/src/changes.md`). QtDraw 3.4 (`multipie>=2.5,<4`) and SymClosestWannier 2.1.3 or later work with both versions.
 
 ## Commands
 

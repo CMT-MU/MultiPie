@@ -97,4 +97,5 @@ MultiPie Ver.3 は、MultiPieGen が生成した新しい群のデータベー�
 
 ## 関連パッケージ
 
-- QtDraw 3.4 は MultiPie Ver.3（`multipie~=3.0.dev0`）で、QtDraw 3.3 は Ver.2（`multipie~=2.5`）で動きます。リリースされるまでは、MultiPie Ver.3 を入れたあとで、QtDraw 3.4 を開発ブランチから入れてください：`pip install "git+https://github.com/CMT-MU/QtDraw.git@develop-v3.4"`。
+- QtDraw 3.4 以降は MultiPie Ver.3 で動きます（2.5 以降の Ver.2 でも動きます）。QtDraw 3.3 以前は Ver.2 でのみ動きます。
+- SymClosestWannier 2.1.3 以降は MultiPie Ver.3 で動きます。Wannier 関数に付ける f 軌道の名前は、入っている MultiPie に従います。対称化に使うモデルは Ver.3 で作り直してください。

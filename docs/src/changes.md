@@ -127,6 +127,6 @@ the order of the irreps), and the data of MPG and MSG are unchanged.
 
 ## Related packages
 
-- QtDraw 3.4 works with MultiPie Ver.3 (`multipie~=3.0.dev0`), and QtDraw 3.3 with Ver.2 (`multipie~=2.5`). Until
-  they are released, install QtDraw 3.4 from its development branch, after MultiPie Ver.3:
-  `pip install "git+https://github.com/CMT-MU/QtDraw.git@develop-v3.4"`.
+- QtDraw 3.4 or later works with MultiPie Ver.3 (and with Ver.2 from 2.5); QtDraw 3.3 or earlier works with Ver.2 only.
+- SymClosestWannier 2.1.3 or later works with MultiPie Ver.3: the names of the f orbitals given to the Wannier
+  functions follow the installed MultiPie. Create the models for the symmetrization again with Ver.3.
