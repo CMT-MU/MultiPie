@@ -9,8 +9,6 @@
 Utility for MaterialModel class.
 """
 
-import logging
-
 import numpy as np
 
 from multipie import RepSiteType, CellSiteType, BondInfoType, RepBondType, CellBondType, BraketInfoType
@@ -25,8 +23,6 @@ from multipie.util.util_crystal import (
 )
 from multipie.util.util_wyckoff import find_vector
 from multipie.core.default_model import _site_property, _bond_property
-
-logger = logging.getLogger(__name__)
 
 TOL = 100.0 * TOL_SAME_SITE
 DIGIT = 6
@@ -237,6 +233,24 @@ def get_basis_type(site_data, spinful):
 
 
 # ==================================================
+RENAMED_ORBITAL = {"f2": "fc", "f1": "fs", "f3x": "fx", "f3y": "fy"}
+"""
+f orbitals renamed in MultiPie Ver.3 (old -> new). The old names are not accepted.
+"""
+
+SEARCH_CELL_RANGE = (-2, 3, -2, 3, -2, 3)
+"""
+Initial cell range to search bonds (SG), (a1,a2,b1,b2,c1,c2). It is enlarged for a bond when it does not contain every
+site up to the requested neighbor shell.
+"""
+
+REMOVED_MODEL_KEY = ["max_neighbor", "search_cell_range"]
+"""
+Model keys removed in MultiPie Ver.3 (the neighbors are given by "bond" only, and the bond search range is automatic).
+"""
+
+
+# ==================================================
 def parse_orbital(orbital, basis_type, basis_info):
     """
     Parse atomic orbital information. ### input check needs to be implemented!!!
@@ -292,6 +306,8 @@ def parse_orbital(orbital, basis_type, basis_info):
             raise ValueError(f"invalid orbital format, {orbital}.")
 
         if not basis or any(i not in basis_info[basis_type][rank] for i in basis):
+            if orb in RENAMED_ORBITAL:
+                raise ValueError(f"orbital '{orb}' is renamed to '{RENAMED_ORBITAL[orb]}' in MultiPie Ver.3.")
             block = "spdf"[rank]
             if basis_type == "jml":
                 j = dict.fromkeys(i.split(",")[0][1:] for i in basis_info["jml"][rank])
@@ -927,7 +943,7 @@ def remove_equivalent_representative_bond(so, pset, bonds):
 
 
 # ==================================================
-def parse_representative_bond(group, G, site_grid, site_so, site_dict, bond_data, max_neighbor, verbose):
+def parse_representative_bond(group, G, site_grid, site_so, site_dict, bond_data, verbose):
     """
     Parse representative bond.
 
@@ -938,7 +954,6 @@ def parse_representative_bond(group, G, site_grid, site_so, site_dict, bond_data
         site_so (dict): site SO dict.
         site_dict (dict): site dict.
         bond_data (list): bond data.
-        max_neighbor (int): max. neighbor.
         verbose (bool): verbose progress bar ?
 
     Returns:
@@ -978,7 +993,7 @@ def parse_representative_bond(group, G, site_grid, site_so, site_dict, bond_data
         head_rank = [no for no, orb in enumerate(site_dict["representative"][head_tag].orbital) if len(orb) > 0]
         neighbor, tail_rank, head_rank = parse_neighbor(neighbor, tail_rank, head_rank)
 
-        max_n = min(max(neighbor), max_neighbor)
+        max_n = max(neighbor)
         info_bond.append(BondInfoType(tail_tag, head_tag, neighbor, tail_rank, head_rank))
 
         # site idx.
@@ -994,19 +1009,23 @@ def parse_representative_bond(group, G, site_grid, site_so, site_dict, bond_data
         rep_bond_each = create_representative_bond(group, G, so, tail, heads, max_n)
         rep_bond_each = remove_equivalent_representative_bond(so_all, ps, rep_bond_each)
 
-        # 'search_cell_range' may cut off neighbor shells: a requested shell beyond the radius within which the
+        # the initial search range (SEARCH_CELL_RANGE) may cut off neighbor shells: a requested shell beyond the radius within which the
         # grid holds every site can be incomplete or missing, which shifts the neighbor numbering. Then repeat the
         # search on a grid enlarged for this bond, and keep the original result if the shells are the same.
         if not group.is_point_group:
             head_grid = site_grid[head_tag]
             enlarged = None
             while True:
-                radius = search_box(G, tail, head_grid)[0]
+                radius, _, _, spacing = search_box(G, tail, head_grid)
                 dist = list(site_distance(tail, np.asarray(list(head_grid.values())), G).keys())[:max_n]
-                # too few shells on the grid: aim at twice the farthest one found (the box volume grows ~8x per step).
+                # too few shells on the grid: aim at twice the farthest one found.
                 need = dist[-1] if len(dist) == max_n else 2.0 * dist[-1]
                 if need <= radius + 10**-DISTANCE_DIGIT:
                     break
+                # the shell found may be far beyond the radius, e.g., the next layer of a slab with a large c, while the
+                # shells within it are not yet on the grid: grow the box by at most twice the radius per step, and count
+                # the shells again (the box volume grows ~8x per step).
+                need = min(need, 2.0 * max(radius, spacing.min()))
                 head_grid = enlarge_head_grid(G, tail, head_grid, head_info, need)
                 enlarged = head_grid
             if enlarged is not None:
@@ -1020,10 +1039,6 @@ def parse_representative_bond(group, G, site_grid, site_so, site_dict, bond_data
                     for a, b, x, y in zip(d_old, d_new, rep_bond_each, rep_bond_e)
                 )
                 if not same:
-                    logger.warning(
-                        f"bond '{tail_tag};{head_tag}': 'search_cell_range' cuts off neighbor shells; "
-                        "the search grid was enlarged for this bond."
-                    )
                     rep_bond_each = rep_bond_e
 
         for n, bonds in enumerate(rep_bond_each):

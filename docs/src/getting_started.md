@@ -1,5 +1,7 @@
 # Getting Started
 
+A Japanese version is [here](getting_started_ja.md).
+
 ## Tutorial
 
 As a tutorial, we describe the procedure for generating model in the case of **graphene**.
@@ -52,6 +54,17 @@ The other settings are provided as default values, which are given as follows:
 ```
 
 You can overwrite whatever you want as in the case of graphene.
+
+:::{note}
+MultiPie Ver.3 renamed four f orbitals. The old names are no longer accepted; replace them in your model input files.
+
+| Ver.2 | Ver.3 | Wannier90 |
+|:---|:---|:---|
+| `f2` | `fc` | `fx(x2-3y2)` |
+| `f1` | `fs` | `fy(3x2-y2)` |
+| `f3x` | `fx` | `fxz2` |
+| `f3y` | `fy` | `fyz2` |
+:::
 
 ## Control file
 
