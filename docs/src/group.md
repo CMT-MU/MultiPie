@@ -491,7 +491,8 @@ mp
 ## 9. Magnetic groups and response tensors
 
 `active_multipole` lists the multipoles allowed in the magnetic point group (of a PG, its gray group), and
-`response_tensor_all(X)` gives all the response tensors of type `X` up to rank 4, as `(tensor, {component: multipoles})`;
+`response_tensor_all(X)` gives all the response tensors of type `X` up to rank 4 (of all the types without `X`), as
+`(tensor, {component: multipoles})` for the keys `(X, rank, opt)`;
 see {ref}`response-tensors`. In 4/m'm'm', the magnetoelectric tensor (`"M"`, rank 2) is allowed:
 
 ```{code-cell} ipython3

@@ -211,7 +211,7 @@ for z, (symbol, u, key, comp) in mm["combined_id"].items(): print(z, symbol, u.s
 (ja-response-tensors)=
 ## 7. 応答テンソル
 
-ランク 0〜4 の応答テンソルは、2 つの物理量（例えば電流と電場）を結び付けます。157 の磁気点群それぞれについて、`Group.response_tensor_all(X)` は対称性で許されるテンソルを与えます。
+ランク 0〜4 の応答テンソルは、2 つの物理量（例えば電流と電場）を結び付けます。157 の磁気点群それぞれについて、`Group.response_tensor_all()` は対称性で許されるテンソルを、キーが `(X, rank, opt)` の辞書で与えます（`Group.response_tensor_all(X)` ではタイプ `X` のものだけ）。
 
 **タイプ。** テンソルのタイプ `X` は、空間反転と時間反転での偶奇で決まります。4 つのタイプは通常、i-polar、i-axial、c-polar、c-axial テンソルと呼ばれます。i（c）は、時間反転でテンソルが不変である（符号を変える）ことを表します。
 
@@ -293,7 +293,7 @@ m.active_multipole
 ```
 
 ```{code-cell} ipython3
-tensor, ex = m.response_tensor_all("Q")[("Q", 2, "s")]  # e.g., the electric conductivity.
+tensor, ex = m.response_tensor_all()[("Q", 2, "s")]  # e.g., the electric conductivity.
 tensor
 ```
 
@@ -303,7 +303,7 @@ ex
 
 ```{code-cell} ipython3
 m = Group("MPG:15.6.58")  # 4/mm'm', a ferromagnet along z.
-tensor, ex = m.response_tensor_all("T")[("T", 2, "a")]  # e.g., the Hall effect.
+tensor, ex = m.response_tensor_all()[("T", 2, "a")]  # e.g., the Hall effect.
 tensor
 ```
 
@@ -313,7 +313,7 @@ ex
 
 ```{code-cell} ipython3
 m = Group("MPG:20.4.74")  # -3'm', e.g., Cr2O3.
-tensor, ex = m.response_tensor_all("M")[("M", 2, "s")]  # magneto-electric effect.
+tensor, ex = m.response_tensor_all()[("M", 2, "s")]  # magneto-electric effect.
 tensor
 ```
 
@@ -323,7 +323,7 @@ ex
 
 ```{code-cell} ipython3
 m = Group("MPG:13.2.45")  # 4mm1', a polar crystal (e.g., a Rashba system).
-tensor, ex = m.response_tensor_all("G")[("G", 2, "a")]  # Edelstein effect.
+tensor, ex = m.response_tensor_all()[("G", 2, "a")]  # Edelstein effect.
 tensor
 ```
 
@@ -333,7 +333,7 @@ ex
 
 ```{code-cell} ipython3
 m = Group("MPG:18.2.66")  # 321', a chiral crystal (e.g., Te).
-tensor, ex = m.response_tensor_all("G")[("G", 2, "s")]  # Edelstein effect.
+tensor, ex = m.response_tensor_all()[("G", 2, "s")]  # Edelstein effect.
 tensor
 ```
 

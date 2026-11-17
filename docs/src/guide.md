@@ -257,7 +257,8 @@ Since each $Z_j$ is normalized, $z_j$ has the unit of energy. The numbering of $
 ## 7. Response tensors
 
 A response tensor of rank 0 to 4 relates two physical quantities, e.g., a current and an electric field. For each of
-the 157 magnetic point groups, `Group.response_tensor_all(X)` gives the tensors allowed by symmetry.
+the 157 magnetic point groups, `Group.response_tensor_all()` gives the tensors allowed by symmetry, as a dict with the
+keys `(X, rank, opt)` (only the type `X` with `Group.response_tensor_all(X)`).
 
 **Type.** The type `X` of a tensor is given by its parity under the spatial inversion and the time reversal. The four
 types are usually called i-polar, i-axial, c-polar, and c-axial tensors, where i (c) means that the tensor is invariant
@@ -376,7 +377,7 @@ m.active_multipole
 ```
 
 ```{code-cell} ipython3
-tensor, ex = m.response_tensor_all("Q")[("Q", 2, "s")]  # e.g., the electric conductivity.
+tensor, ex = m.response_tensor_all()[("Q", 2, "s")]  # e.g., the electric conductivity.
 tensor
 ```
 
@@ -386,7 +387,7 @@ ex
 
 ```{code-cell} ipython3
 m = Group("MPG:15.6.58")  # 4/mm'm', a ferromagnet along z.
-tensor, ex = m.response_tensor_all("T")[("T", 2, "a")]  # e.g., the Hall effect.
+tensor, ex = m.response_tensor_all()[("T", 2, "a")]  # e.g., the Hall effect.
 tensor
 ```
 
@@ -396,7 +397,7 @@ ex
 
 ```{code-cell} ipython3
 m = Group("MPG:20.4.74")  # -3'm', e.g., Cr2O3.
-tensor, ex = m.response_tensor_all("M")[("M", 2, "s")]  # magneto-electric effect.
+tensor, ex = m.response_tensor_all()[("M", 2, "s")]  # magneto-electric effect.
 tensor
 ```
 
@@ -406,7 +407,7 @@ ex
 
 ```{code-cell} ipython3
 m = Group("MPG:13.2.45")  # 4mm1', a polar crystal (e.g., a Rashba system).
-tensor, ex = m.response_tensor_all("G")[("G", 2, "a")]  # Edelstein effect.
+tensor, ex = m.response_tensor_all()[("G", 2, "a")]  # Edelstein effect.
 tensor
 ```
 
@@ -416,7 +417,7 @@ ex
 
 ```{code-cell} ipython3
 m = Group("MPG:18.2.66")  # 321', a chiral crystal (e.g., Te).
-tensor, ex = m.response_tensor_all("G")[("G", 2, "s")]  # Edelstein effect.
+tensor, ex = m.response_tensor_all()[("G", 2, "s")]  # Edelstein effect.
 tensor
 ```
 
