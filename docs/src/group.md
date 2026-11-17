@@ -519,7 +519,7 @@ relation
 
 `response_tensor(X, rank, comp, opt)` gives one component (indices 1, 2, 3 for $x, y, z$), e.g., $M_{zz}$ above. In the
 ferromagnetic
-4/mm'm', the magnetization $M_z$ and the anomalous Hall effect (`"T"`, rank 2, anti-symmetric) are both carried by the
+4/mm'm', the magnetization $M_z$ and the Hall effect (`"T"`, rank 2, anti-symmetric) are both carried by the
 magnetic dipole $\mathbb{M}_z$:
 
 ```{code-cell} ipython3

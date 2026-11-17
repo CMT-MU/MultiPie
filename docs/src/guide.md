@@ -275,7 +275,7 @@ A response is carried by the multipoles in its tensor (see **Active multipoles**
 | response | tensor `(X, rank, opt)` | multipoles |
 |:--|:--|:--|
 | electric conductivity (symmetric part) | `("Q", 2, "s")` | electric monopole, electric quadrupole |
-| anomalous Hall effect | `("T", 2, "a")` | magnetic dipole (MD), e.g., $T_{xy} = \mathbb{M}_{z}$ |
+| Hall effect | `("T", 2, "a")` | magnetic dipole (MD), e.g., $T_{xy} = \mathbb{M}_{z}$ |
 | magneto-electric effect | `("M", 2, "s")`, `("M", 2, "a")` | magnetic monopole (MM) and magnetic quadrupole (MQ) in the symmetric part, magnetic toroidal dipole (MTD) in the anti-symmetric part |
 | Edelstein (current-induced magnetization) effect | `("G", 2, "s")`, `("G", 2, "a")` | electric toroidal monopole (ETM) and electric toroidal quadrupole (ETQ) in the symmetric part, electric dipole (ED) in the anti-symmetric part |
 
@@ -312,7 +312,7 @@ and "independent" is the number of independent components of the part without an
 | 4 | `t` | $X_{abc;d}$ fully symmetric in $a, b, c$ | 30 | 10 x 3 (`t` x `c`) |
 
 For example, the electric conductivity $\sigma_{ab}$ ($j_a = \sigma_{ab} E_b$) is a rank-2 tensor; its symmetric part
-(`s`) is the ordinary conductivity, and its anti-symmetric part (`a`, odd under the time reversal) the anomalous Hall
+(`s`) is the ordinary conductivity, and its anti-symmetric part (`a`, odd under the time reversal) the Hall
 conductivity, which is carried by the magnetic dipole. The magneto-electric tensor $\alpha_{ab}$
 ($P_a = \alpha_{ab} H_b$) is axial and odd under the time reversal (`M`): its symmetric part is carried by the
 magnetic monopole and the magnetic quadrupoles, and its anti-symmetric part by the magnetic toroidal dipole. The
@@ -339,7 +339,7 @@ under the time reversal (e.g., the magnetization), divides it into two parts. Th
 (ohmic) conductivity proportional to the relaxation time $\tau$, is even in $\boldsymbol{X}$: as a property of the
 material, apart from the factor $\tau$ (odd under the time reversal, as the dissipation itself), it is even (`Q`), and
 is present in every material. The anti-symmetric part, the non-dissipative Hall conductivity, is odd in
-$\boldsymbol{X}$ (`T`), and needs a material that breaks the time reversal. In this sense, `X` is the symmetry that a
+$\boldsymbol{X}$ (`T`), and needs the time reversal broken, by a magnetization of the material or by a magnetic field. In this sense, `X` is the symmetry that a
 material must have for the response, i.e., the type of the multipoles that carry it.
 
 The multipoles then follow from the decomposition of a rank-2 tensor $X_{ab}$ into irreducible parts: the trace (rank
@@ -355,7 +355,7 @@ time reversal:
 | `T` (polar, odd) | magnetic toroidal monopole $\mathbb{T}_0$ | magnetic dipole $\mathbb{M}_1$ | magnetic toroidal quadrupole $\mathbb{T}_2$ |
 | `M` (axial, odd) | magnetic monopole $\mathbb{M}_0$ | magnetic toroidal dipole $\mathbb{T}_1$ | magnetic quadrupole $\mathbb{M}_2$ |
 
-This is why the anomalous Hall effect (`T`, anti-symmetric) needs a magnetic dipole (a magnetization), the
+This is why the Hall effect (`T`, anti-symmetric) needs a magnetic dipole (a magnetization or a magnetic field), the
 magneto-electric effect a magnetic monopole or quadrupole (symmetric) or a magnetic toroidal dipole (anti-symmetric),
 and the Edelstein effect an electric toroidal monopole or quadrupole (symmetric; a chirality) or an electric dipole
 (anti-symmetric; a polarity). The tensors of higher rank are decomposed in the same way.
@@ -386,7 +386,7 @@ ex
 
 ```{code-cell} ipython3
 m = Group("MPG:15.6.58")  # 4/mm'm', a ferromagnet along z.
-tensor, ex = m.response_tensor_all("T")[("T", 2, "a")]  # e.g., the anomalous Hall effect.
+tensor, ex = m.response_tensor_all("T")[("T", 2, "a")]  # e.g., the Hall effect.
 tensor
 ```
 
@@ -427,7 +427,7 @@ ex
 In 4/mmm, the conductivity is $\mathrm{diag}(Q_{xx}, Q_{xx}, Q_{zz})$, given by the active monopole $\mathbb{Q}_0$ and
 quadrupole $\mathbb{Q}_u$. In the ferromagnet 4/mm'm', the only nonzero anti-symmetric components are
 $T_{xy} = -T_{yx}$, given by the active magnetic dipole $\mathbb{M}_z$, i.e., the magnetization along $z$: the
-anomalous Hall effect. In -3'm' (e.g., Cr$_2$O$_3$), the magneto-electric tensor is
+Hall effect. In -3'm' (e.g., Cr$_2$O$_3$), the magneto-electric tensor is
 $\mathrm{diag}(M_{xx}, M_{xx}, M_{zz})$, given by the active magnetic monopole $\mathbb{M}_0$ and magnetic quadrupole
 $\mathbb{M}_u$. The Edelstein effect appears in its anti-symmetric part in the polar 4mm1', given by the active electric
 dipole $\mathbb{Q}_z$, and in its symmetric part in the chiral 321', given by the active electric toroidal monopole
