@@ -86,3 +86,20 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 });
+
+// Sidebar toggles on narrow screens: pydata-sphinx-theme (0.17) and sphinx-book-theme (1.3) hook their handlers only
+// to the first ".primary-toggle" / ".secondary-toggle" of the page, a button of the header navbar that the book theme
+// hides, so that the visible buttons above the article do nothing (the sidebars cannot be opened on a smartphone).
+// Forward the clicks on the other buttons to the first one.
+document.addEventListener("DOMContentLoaded", function() {
+    ["primary", "secondary"].forEach(function(side) {
+        var toggles = document.querySelectorAll("." + side + "-toggle");
+        for (var i = 1; i < toggles.length; i++) {
+            toggles[i].addEventListener("click", function(event) {
+                event.preventDefault();
+                event.stopPropagation();
+                toggles[0].click();
+            });
+        }
+    });
+});
