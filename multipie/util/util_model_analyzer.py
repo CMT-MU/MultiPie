@@ -702,6 +702,63 @@ def local_expectation(Uk, op):
 
 
 # ==================================================
+def samb_matrix_value(matrix):
+    """
+    SAMB matrix (real-space) with numerical values.
+
+    Args:
+        matrix (dict): SAMB matrix, dict[(n1,n2,n3,m,n), (value, bond_no)] (value may be sympy).
+
+    Returns:
+        - (dict) -- dict[((n1,n2,n3),m,n), complex value], the form of fourier_r_to_k.
+    """
+    return {((int(n1), int(n2), int(n3)), int(m), int(n)): complex(v) for (n1, n2, n3, m, n), (v, _) in matrix.items()}
+
+
+# ==================================================
+def operator_expectation(Uk, Ok):
+    """
+    Expectation value of k-dependent operator for each eigen state.
+
+    Args:
+        Uk (ndarray): eigen vectors, Uk[k,:,n].
+        Ok (ndarray): operator matrix at each k, Ok[k,:,:].
+
+    Returns:
+        - (ndarray) -- expectation values (real part), [k,n].
+    """
+    return np.einsum("kmi,kmn,kni->ki", Uk.conj(), Ok, Uk, optimize=True).real
+
+
+# ==================================================
+def density_matrix_r(Uk, occupation, atom, kv, R, s=True):
+    """
+    Sum over k points of the density matrix, as the counterpart of a real-space matrix O(R).
+
+    Args:
+        Uk (ndarray): eigen vectors, Uk[k,:,n].
+        occupation (ndarray): occupation of each eigen state, [k,n].
+        atom (ndarray): atomic positions.
+        kv (ndarray): k points (fractional).
+        R (ndarray): lattice vectors, [number of R, 3].
+        s (bool, optional): include phase of atomic position ?
+
+    Returns:
+        - (ndarray) -- A[R,m,n] = sum_k P(k)_nm exp(2pi i k*R) (with the phase of atomic position, as fourier_r_to_k).
+
+    Notes:
+        - P(k) = U(k) f U(k)^dagger, and sum_k Tr[P(k) O(k)] = sum_(R,m,n) O(R)_mn A[R,m,n] for O(k) by fourier_r_to_k.
+    """
+    PT = np.einsum("kni,ki,kmi->kmn", Uk, occupation, Uk.conj(), optimize=True)  # P(k)_nm as [k,m,n].
+    if s:
+        eRa = np.exp(1j * (2 * np.pi * kv @ atom.T))
+        PT *= np.conj(eRa)[:, :, None] * eRa[:, None, :]
+    eR = np.exp(1j * (2 * np.pi * kv @ np.asarray(R, dtype=float).T))  # (Nk, number of R).
+
+    return np.tensordot(eR, PT, axes=(0, 0))
+
+
+# ==================================================
 def power_energy(Ek, power):
     """
     Raise energy to the power.
@@ -1022,9 +1079,11 @@ def convert_zj_atomic_var(matrix_info, combined_cluster, combined_id, IR):
     """
     ket = [i.replace("@", "_").replace("(", "").replace(")", "") for i in matrix_info["ket"]]
 
-    # classify zj for each cluster.
+    # classify zj for each cluster (only the selected SAMBs, which are in the matrix).
     cluster = {}
     for tag, name in combined_cluster.items():
+        if tag not in matrix_info["matrix"]:
+            continue
         X = combined_id[tag][2][0]
         Gamma = combined_id[tag][2][2]
         if ";" in name and X in ["Q", "G"] and Gamma == IR:

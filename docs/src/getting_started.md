@@ -82,7 +82,7 @@ In a typical use, you first create the SAMBs for all irreps, and then choose the
 
 ### Post-processing tools
 
-The density of states, the Fermi energy from the filling, the orbital weight (fat band), the output of the eigenvalues and eigenvectors, and callbacks for custom calculations are set in `output` of the control file. See [Post-processing tools](post_processing.md) for details and an example.
+The density of states, the Fermi energy from the filling, the orbital weight (fat band), the output of the eigenvalues and eigenvectors, callbacks for custom calculations, local operators, and the expectation values of SAMBs are set in `output` of the control file. See [Post-processing tools](post_processing.md) for details and an example.
 
 ## Format of input files
 

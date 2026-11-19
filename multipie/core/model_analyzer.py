@@ -39,6 +39,9 @@ from multipie.util.util_model_analyzer import (
     create_all_local_operator,
     create_local_operator,
     local_expectation,
+    samb_matrix_value,
+    operator_expectation,
+    density_matrix_r,
     power_energy,
     create_k_multipole,
     create_k_matrix,
@@ -120,7 +123,21 @@ def import_libtetrabz():
     return libtetrabz
 
 
+_EF_TOL = 1e-8  # states within the tolerance from the fermi energy are at the fermi energy.
+
 LOCAL_OPERATOR = ["Sx", "Sy", "Sz", "Lx", "Ly", "Lz", "Qu", "Qv", "Qyz", "Qxz", "Qxy"]  # keywords of local operators.
+
+_z_expectation_comment = """Expectation value of SAMB, <Z_j> = (1/N_k) sum_(k,n) f(E_kn - E_F) <u_kn|Z_j(k)|u_kn> = Tr[rho Z_j].
+- per primitive cell (one state per band), at T = 0. the states at E_F (within 1e-8) share the remaining electrons equally,
+  so that the number of electrons is n_electron (f = 1/2 without n_electron).
+- fermi_energy (float): fermi energy E_F (0 with output/dispersion/power, where f is given by Ek^power).
+- n_electron (float): output/n_electron (None if not given).
+- grid (list): k grid, [N1, N2, N3] (None for a model of point group, where the Γ point only is used).
+- n_k (int): number of k points.
+- band_energy (float): (1/N_k) sum_(k,n) f(E_kn - E_F) E_kn.
+- z_sum (float): sum_j z_j <Z_j> over the parameters z_j of H, which equals band_energy (None if some z_j are not computed).
+- expectation (dict): dict[zj, <Z_j>].
+"""
 
 
 # ==================================================
@@ -597,6 +614,8 @@ class ModelAnalyzer(dict):
         self._k_path_info = None  # k path info. of the dispersion, used for callback.
         self._eigen_path = None  # (Ek, Uk) along k path.
         self._eigenvalue_full = None  # (kv, Ek) on full k grid.
+        self._samb_matrix = None  # selected SAMB matrices (real-space), dict[zj, dict[(n1,n2,n3,m,n), (value, bond_no)]].
+        self._samb_matrix_value = {}  # numerical SAMB matrices, dict[zj, dict[((n1,n2,n3),m,n), value]].
 
     # ==================================================
     def set_mode(self, mode):
@@ -746,6 +765,98 @@ class ModelAnalyzer(dict):
         """
         spinful = self.basis_type == "lgs"
         return create_local_operator(self.basis, tag, self._local, spinful)
+
+    # ==================================================
+    def get_samb_matrix(self):
+        """
+        Get selected SAMB matrices (real-space) of the model.
+
+        Returns:
+            - (dict) -- SAMB matrix, dict[zj, dict[(n1,n2,n3,m,n), (value, bond_no)]], or None without a model.
+
+        Notes:
+            - in wannier mode with a model, the SAMBs are selected by samb/select.
+
+        :meta private:
+        """
+        if not self._use_model:
+            return None
+        if self._samb_matrix is None:
+            if "matrix_info" in self["samb"]:  # created by exec_samb.
+                self._samb_matrix = self["samb"]["matrix_info"]["matrix"]
+            else:
+                self._samb_matrix = self.model.get_samb_matrix(self.samb["select"])["matrix"]
+
+        return self._samb_matrix
+
+    # ==================================================
+    def get_samb_operator(self, tag):
+        """
+        Get SAMB operator (real-space) with numerical values.
+
+        Args:
+            tag (str): SAMB name, zj.
+
+        Returns:
+            - (dict) -- dict[((n1,n2,n3),m,n), value].
+
+        :meta private:
+        """
+        if tag not in self._samb_matrix_value:
+            self._samb_matrix_value[tag] = samb_matrix_value(self.get_samb_matrix()[tag])
+
+        return self._samb_matrix_value[tag]
+
+    # ==================================================
+    def get_samb_operator_k(self, tag, kv):
+        """
+        Get SAMB operator in momentum space, in the same gauge as H(k).
+
+        Args:
+            tag (str): SAMB name, zj.
+            kv (ndarray): k points (fractional).
+
+        Returns:
+            - (ndarray) -- Z_j(k), [k,:,:].
+
+        :meta private:
+        """
+        _, atom, tb_gauge = self.get_hk_data()
+        return fourier_r_to_k(self.get_samb_operator(tag), atom, kv, tb_gauge)
+
+    # ==================================================
+    def check_samb_name(self, tags, key, allow_all=False):
+        """
+        Check SAMB names given in the control.
+
+        Args:
+            tags (list or str): SAMB names, [zj], or "all" if allow_all.
+            key (str): key in the control for error message.
+            allow_all (bool, optional): accept "all" for all selected SAMBs ?
+
+        Returns:
+            - (list) -- SAMB names.
+
+        :meta private:
+        """
+        if allow_all and isinstance(tags, str) and tags == "all":
+            if not self._use_model:
+                raise ValueError(f"'{key}' requires SAMBs of a model (samb/model).")
+            return list(self.get_samb_matrix())
+        valid = isinstance(tags, (list, tuple)) and all(isinstance(t, str) for t in tags)
+        if not valid:
+            s = ' or "all"' if allow_all else ""
+            raise ValueError(f"'{key}' must be a list of SAMB names (e.g., ['z1', 'z2']){s}, '{tags}' is given.")
+        if not tags:
+            return []
+        if not self._use_model:
+            raise ValueError(f"'{key}' requires SAMBs of a model (samb/model).")
+        matrix = self.get_samb_matrix()
+        missing = [t for t in tags if t not in matrix]
+        if missing:
+            raise ValueError(f"'{key}': {missing} are not in the selected SAMBs of samb/select.")
+
+        return list(dict.fromkeys(tags))
 
     # ==================================================
     def get_kpath(self, k_path):
@@ -1074,6 +1185,8 @@ class ModelAnalyzer(dict):
                 )
 
         info_operator = self.get_callback_info_operator(callback["callback_k_full"] is not None)
+        z_dispersion = self.check_samb_name(self.output.get("dispersion", {}).get("z", []), "output/dispersion/z")
+        z_expectation = self.check_samb_name(self.output["z_expectation"], "output/z_expectation", allow_all=True)
 
         # eigen system on the full k grid is kept only when it is required (otherwise, it is computed in chunks).
         need_full = callback["callback_k_full"] is not None or self.output["save_k_full"]
@@ -1089,10 +1202,11 @@ class ModelAnalyzer(dict):
         elif self.output["n_electron"] is not None:
             self.set_fermi_energy(self.compute_fermi_energy(eigen_full))
 
-        disp = self.compute_dispersion()
+        disp = self.compute_dispersion(z_dispersion)
         self["output"]["dispersion"] = disp
 
         self.compute_dos(eigen_full)
+        self.compute_z_expectation(z_expectation, eigen_full)
         self.save_eigen(eigen_full)
 
         # user-defined calculations.
@@ -1107,7 +1221,10 @@ class ModelAnalyzer(dict):
             info = self.get_callback_info(kv)
             info["grid"] = list(self["info"]["grid"])
             for tag, op in info_operator.items():
-                info[tag] = local_expectation(Uk, op)
+                if op is None:  # SAMB.
+                    info[tag] = operator_expectation(Uk, self.get_samb_operator_k(tag, kv))
+                else:
+                    info[tag] = local_expectation(Uk, op)
             callback["callback_k_full"](Ek, Uk, info)
 
     # ==================================================
@@ -1297,21 +1414,34 @@ class ModelAnalyzer(dict):
             has_callback_k_full (bool): is callback_k_full given ?
 
         Returns:
-            - (dict) -- operator matrix, dict[keyword, ndarray].
+            - (dict) -- operator matrix, dict[keyword, ndarray], or None for SAMB.
 
         :meta private:
         """
         keywords = self.output["callback_info"]
-        if not isinstance(keywords, (list, tuple)) or not all(isinstance(k, str) and k in LOCAL_OPERATOR for k in keywords):
-            raise ValueError(f"'output/callback_info' must be a list of {LOCAL_OPERATOR}, '{keywords}' is given.")
+
+        def is_samb(k):
+            return len(k) > 1 and k[0] == "z" and k[1:].isdecimal()
+
+        if not isinstance(keywords, (list, tuple)) or not all(
+            isinstance(k, str) and (k in LOCAL_OPERATOR or is_samb(k)) for k in keywords
+        ):
+            raise ValueError(
+                f"'output/callback_info' must be a list of {LOCAL_OPERATOR} or SAMB names (zj), '{keywords}' is given."
+            )
         if not keywords:
             return {}
         if not has_callback_k_full:
             raise ValueError("'output/callback_info' requires 'output/callback_k_full'.")
-        if self.basis_type not in ["lg", "lgs"]:
-            raise ValueError(f"'output/callback_info' requires a model with lg or lgs basis, basis type is '{self.basis_type}'.")
+        local = [k for k in keywords if k in LOCAL_OPERATOR]
+        if local and self.basis_type not in ["lg", "lgs"]:
+            raise ValueError(
+                f"'output/callback_info' requires a model with lg or lgs basis for local operators, basis type is '{self.basis_type}'."
+            )
+        self.check_samb_name([k for k in keywords if is_samb(k)], "output/callback_info")
 
-        return {tag: self.get_local_operator(tag) for tag in keywords}
+        # None for SAMB, whose matrix depends on k.
+        return {tag: self.get_local_operator(tag) if tag in LOCAL_OPERATOR else None for tag in keywords}
 
     # ==================================================
     def load_callback(self, key, modules=None):
@@ -1354,9 +1484,12 @@ class ModelAnalyzer(dict):
         return func
 
     # ==================================================
-    def compute_dispersion(self):
+    def compute_dispersion(self, z_tags=None):
         """
         Compute dispersion.
+
+        Args:
+            z_tags (list, optional): SAMB names of output/dispersion/z.
 
         :meta private:
         """
@@ -1388,8 +1521,11 @@ class ModelAnalyzer(dict):
         }
         Ek = self.power_eigenvalue(Ek)
 
-        # set local operators.
+        # set local operators, and SAMBs.
         Ok = [local_expectation(Uk, self.get_local_operator(tag)) for tag in op_lst]
+        if z_tags:
+            Ok += [operator_expectation(Uk, self.get_samb_operator_k(tag, k_point_path)) for tag in z_tags]
+            op_lst = list(op_lst) + list(z_tags)
 
         # output dispersion data, plot, and gnuplot.
         self.write_dispersion(Ek, Ok, op_lst, k_linear, k_dis_pos)
@@ -1573,6 +1709,104 @@ class ModelAnalyzer(dict):
             print(f"fermi energy = {ef} for n_electron = {n} ({method}).")
 
         return ef
+
+    # ==================================================
+    def get_occupation_at_fermi_energy(self, eigen_full=None):
+        """
+        Occupation of the states at the fermi energy (within _EF_TOL), at T = 0.
+
+        Args:
+            eigen_full (tuple, optional): (kv, Ek, Uk) on the full k grid.
+
+        Returns:
+            - (float) -- occupation, so that the number of electrons is n_electron, or 1/2 without n_electron.
+
+        :meta private:
+        """
+        n = self.output["n_electron"]
+        if n is None or self.get_power() is not None:
+            return 0.5
+
+        kv, Ek = self.get_eigenvalue_full(eigen_full)
+        x = Ek - self["info"]["fermi_energy"]
+        n_at = np.count_nonzero(np.abs(x) <= _EF_TOL)
+        if n_at == 0:
+            return 0.5
+        n_below = np.count_nonzero(x < -_EF_TOL)
+
+        return float(np.clip((n * len(kv) - n_below) / n_at, 0.0, 1.0))
+
+    # ==================================================
+    def compute_z_expectation(self, z_tags, eigen_full=None):
+        """
+        Compute expectation value of SAMBs, output/z_expectation.
+
+        Args:
+            z_tags (list): SAMB names.
+            eigen_full (tuple, optional): (kv, Ek, Uk) on the full k grid. if None, the eigen system is computed in chunks.
+
+        Notes:
+            - <Z_j> = (1/N_k) sum_(k,n) f(E_kn - E_F) <u_kn|Z_j(k)|u_kn> = sum_(R,m,n) Z_j(R)_mn rho(R)_mn, at T = 0.
+            - the density matrix rho(R) is accumulated only for R of the SAMBs.
+
+        :meta private:
+        """
+        if not z_tags:
+            return
+
+        ef = self["info"]["fermi_energy"]
+        operator = {tag: self.get_samb_operator(tag) for tag in z_tags}
+        R_list = sorted({R for op in operator.values() for (R, _, _) in op})
+        R_index = {R: no for no, R in enumerate(R_list)}
+        _, atom, tb_gauge = self.get_hk_data()
+
+        if eigen_full is None:
+            kv = self.get_k_full()
+            chunk = _k_chunk(len(atom))
+            chunks = (
+                (kv[i : i + chunk], Ek, Uk) for i, (Ek, Uk) in zip(range(0, len(kv), chunk), self.eigen_chunks(kv, chunk=chunk))
+            )
+        else:
+            kv = eigen_full[0]
+            chunks = [eigen_full]
+
+        f_ef = self.get_occupation_at_fermi_energy(eigen_full)
+
+        rho = np.zeros((len(R_list), len(atom), len(atom)), dtype=complex)
+        band_energy = 0.0
+        for kc, Ek, Uk in chunks:
+            x = self.power_eigenvalue(Ek) - ef
+            f = np.where(x < -_EF_TOL, 1.0, np.where(x > _EF_TOL, 0.0, f_ef))
+            f = np.where(np.isfinite(x), f, 0.0)
+            rho += density_matrix_r(Uk, f, atom, kc, R_list, tb_gauge)
+            band_energy += float(np.sum(f * Ek))
+        n_k = len(kv)
+        rho /= n_k
+        band_energy /= n_k
+
+        expectation = {}
+        for tag, op in operator.items():
+            idx = np.array([(R_index[R], m, n) for (R, m, n) in op], dtype=int).reshape(-1, 3)
+            value = np.fromiter(op.values(), dtype=complex, count=len(op))
+            expectation[tag] = float(np.sum(value * rho[idx[:, 0], idx[:, 1], idx[:, 2]]).real)
+        parameter = self.parameter or {}
+        z_sum = None
+        if parameter and all(zj in expectation for zj in parameter):
+            z_sum = float(sum(float(c) * expectation[zj] for zj, c in parameter.items()))
+
+        n_electron = self.output["n_electron"]
+        point_group = self._use_model and self.model.group.group_type != "SG"  # Γ point only.
+        dic = {
+            "fermi_energy": float(ef),
+            "n_electron": n_electron,
+            "grid": None if point_group else [int(i) for i in self["info"]["grid"]],
+            "n_k": n_k,
+            "band_energy": band_energy,
+            "z_sum": z_sum,
+            "expectation": expectation,
+        }
+        self["output"]["z_expectation"] = dic
+        self.write_dict(dic, "z_expectation.py", _z_expectation_comment, self.output["dir"])
 
     # ==================================================
     def compute_dos(self, eigen_full=None):
