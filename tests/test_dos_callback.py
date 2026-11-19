@@ -941,3 +941,29 @@ def test_orbital_operator(in_tmp, spinful):
         assert np.allclose(block("Qxz", shell), factor * (x @ z + z @ x))
         assert np.allclose(block("Qv", shell), factor * (x @ x - y @ y))
         assert np.allclose(block("Qu", shell), factor * (3 * z @ z - L2) / np.sqrt(3))
+
+
+# ==================================================
+@pytest.mark.parametrize(
+    "select",
+    [
+        {"Gamma": ["A1g"], "site": ["B"]},
+        {"Gamma": ["A1g"], "bond": [["A;B", 1]]},
+        {"Gamma": ["A1g"], "s": [0]},
+        {"site": ["A"]},
+    ],
+)
+def test_var_partial_select(sp_model, select):
+    # a select that keeps a part of the SAMBs of the identity irrep: zj in terms of the atomic variables is given for the
+    # selected SAMBs, and it is the same as that with all the SAMBs of the identity irrep.
+    ma = ModelAnalyzer("out")
+    ma.analyze({"samb": {"model": "sp", "select": SELECT}, "output": {"dispersion": {"k_path": None}}})
+    full = ma.get_var(ma["samb"]["matrix_info"])
+    ma.analyze({"samb": {"model": "sp", "select": select}, "output": {"dispersion": {"k_path": None}}})
+    selected = ma["samb"]["matrix_info"]["matrix"]
+    var = read_dict(os.path.join("out", "sp", "info", "sp_var.py"))
+    for name, d in var.items():
+        assert set(d) <= set(selected)
+        for zj, expression in d.items():
+            assert expression == str(full[name][zj]).replace(" ", "")  # as written by write_var_file.
+    assert sorted(z for d in var.values() for z in d) == sorted(z for d in full.values() for z in d if z in selected)
