@@ -564,6 +564,38 @@ def test_wannier_mode_dos(centred_model):
 
 
 # ==================================================
+def test_wannier_mode_z_expectation(centred_model):
+    # expectation value of SAMBs in wannier mode with a model and in symcw mode is the same as that in samb mode,
+    # and it requires a model.
+    topdir, name, mm, parameter, HR = centred_model
+    seed = name + "_z"
+    site_order = [("Mn", 1), ("Au", 1), ("Mn", 2)]
+    centers, wann, HR_w, _ = model_to_wannier(mm, HR, A_QE, np.zeros(3), site_order)
+    path = os.path.join(topdir, seed, "wannier")
+    shutil.rmtree(path, ignore_errors=True)
+    write_wannier(path, seed, A_QE, centers, wann, HR_w, species=["Mn", "Au", "Mn"])
+
+    output = {"dispersion": {"k_path": None}, "n_electron": 3, "z_expectation": "all"}
+    control = {"wannier": {"seedname": seed}, "grid": (4, 4, 4), "output": output}
+    ma = ModelAnalyzer(topdir)
+    ma.analyze(control | {"samb": {"model": name, "parameter": parameter}})
+    samb = copy.deepcopy(ma["output"]["z_expectation"])
+    assert samb["z_sum"] == pytest.approx(samb["band_energy"])
+    ma.analyze(control | {"mode": "wannier", "samb": {"model": name}})
+    wannier = ma["output"]["z_expectation"]
+    assert wannier["z_sum"] is None  # no parameter.
+    assert wannier["expectation"] == pytest.approx(samb["expectation"], abs=1e-8)
+    ma.analyze(control | {"mode": "symcw", "samb": {"model": name}})
+    symcw = ma["output"]["z_expectation"]
+    assert symcw["z_sum"] == pytest.approx(symcw["band_energy"])
+    assert symcw["expectation"] == pytest.approx(samb["expectation"], abs=1e-8)
+
+    for z in [["z1"], "all"]:
+        with pytest.raises(ValueError, match="'output/z_expectation' requires SAMBs of a model"):
+            ma.analyze(control | {"mode": "wannier", "output": output | {"z_expectation": z}})
+
+
+# ==================================================
 def test_point_group_model(tmp_path):
     # the model of a point group has no centring.
     topdir = str(tmp_path)

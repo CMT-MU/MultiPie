@@ -13,10 +13,12 @@ graphene_post_ctrl = {
         "save_k_path": True,  # save Ek, Uk along k path in .npz.
         "callback_k_path": "graphene_callback.py",
         "callback_k_full": "graphene_callback.py",
+        "z_expectation": "all",  # expectation value of all selected SAMBs.
         "dispersion": {
             "k_path": "Γ-M-K-Γ",
             "k_point": {"Γ": "[0,0,0]", "K": "[1/3,1/3,0]", "M": "[1/2,0,0]"},
             "weight": [["pz@C(1)"]],  # fat band of pz at C(1).
+            "z": ["z2"],  # SAMB of the nearest-neighbor bond for each band.
         },
     },
 }

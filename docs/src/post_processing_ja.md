@@ -17,6 +17,7 @@ orphan: true
 | [固有値と固有ベクトル](#ja-pp-eigenvalues-and-eigenvectors) | `save_k_path`, `save_k_full` | `_eigen_k_path.npz`, `_eigen_k_full.npz` |
 | [独自の計算のためのコールバック](#ja-pp-callbacks-for-custom-calculations) | `callback_k_path`, `callback_k_full`, `callback_info` | （コールバックが書き出す） |
 | [局所演算子](#ja-pp-local-operators) | `dispersion/local`, `callback_info` | `_dispersion.txt`（`dispersion/local` を指定した場合）、またはコールバックに渡す |
+| [SAMB とその期待値](#ja-pp-samb) | `dispersion/z`, `z_expectation`, `callback_info` | `_dispersion.txt`（`dispersion/z` を指定した場合）、`_z_expectation.py` |
 
 いずれもデフォルトでは無効で、バンド分散（`_dispersion.txt`, `.pdf`, `.eps`, `plot_band.gnu`）はこれまでどおり計算されます。
 
@@ -39,7 +40,10 @@ $ mp_analyze -v graphene_post_ctrl.py
 - `graphene_dos.txt`, `graphene_dos.pdf`, `graphene_dos.eps`, `plot_dos.gnu`：DOS。
 - `graphene_weight.txt`, `graphene_weight.pdf`, `plot_weight.gnu`：`pz@C(1)` の軌道の重み。
 - `graphene_eigen_k_path.npz`：k パスに沿った固有値と固有ベクトル。
+- `graphene_z_expectation.py`：SAMB の期待値。
 - `my_band.txt`, `my_occupation.txt`：コールバックが書き出したもの。
+
+バンド分散のファイル `graphene_dispersion.txt` には `z2` の列が加わります。
 
 `"n_electron": 1`（2 本のバンドのハーフフィリング）ではフェルミエネルギーは 0 で、`-v` は `fermi energy = 0.0 for n_electron = 1 (gaussian).` と表示します。
 
@@ -179,7 +183,7 @@ pz@C(2) 0.500000
 
 これらの関数は、ほかの出力のあと、解析の最後に呼ばれます。`callback_k_path` にはバンド分散が必要です。`callback_k_full` では、全グリッド上のすべての固有ベクトル、つまり `N1 x N2 x N3 x (number of kets)^2` 個の複素数をメモリに保持するので、大きな模型では粗い `grid` が必要になることがあります。
 
-`output/callback_info` を設定すると、全 k グリッド上の各固有状態での局所演算子の期待値を、`info[keyword]`（`[k, n]`）として渡します。キーワードは `output/dispersion/local` と同じで、スピン `Sx`, `Sy`, `Sz`、軌道角運動量 `Lx`, `Ly`, `Lz`、四極子 `Qu`, `Qv`, `Qyz`, `Qxz`, `Qxy` です（定義は[局所演算子](#ja-pp-local-operators)を参照）。例えば
+`output/callback_info` を設定すると、全 k グリッド上の各固有状態での局所演算子の期待値を、`info[keyword]`（`[k, n]`）として渡します。キーワードは `output/dispersion/local` と同じで、スピン `Sx`, `Sy`, `Sz`、軌道角運動量 `Lx`, `Ly`, `Lz`、四極子 `Qu`, `Qv`, `Qyz`, `Qxz`, `Qxy`（定義は[局所演算子](#ja-pp-local-operators)を参照）と、`z2` などの SAMB の名前（[SAMB とその期待値](#ja-pp-samb)を参照）です。例えば
 
 ```python
 "output": {
@@ -188,10 +192,10 @@ pz@C(2) 0.500000
 },
 ```
 
-とすると、`callback_k_full(Ek, Uk, info)` で `info["Sx"]`、`info["Sy"]`、`info["Sz"]` が得られます。`output/callback_info` には `output/callback_k_full` と `lg` または `lgs` 基底の模型が必要で、スピンの演算子にはスピンを含む模型が必要です。
+とすると、`callback_k_full(Ek, Uk, info)` で `info["Sx"]`、`info["Sy"]`、`info["Sz"]` が得られます。`output/callback_info` には `output/callback_k_full` が必要です。局所演算子には `lg` または `lgs` 基底の模型が必要で、スピンの演算子にはスピンを含む模型が必要です。
 
 ```{note}
-縮退したバンドの中では、固有ベクトル、したがって各バンドの値は任意です。例えば、空間反転対称性と時間反転対称性の両方を持つスピンを含む模型では、バンドはすべての k で 2 重に縮退しています。意味があるのは、縮退したバンドについての和だけです。`output/dispersion/local` についても同様です。
+縮退したバンドの中では、固有ベクトル、したがって各バンドの値は任意です。例えば、空間反転対称性と時間反転対称性の両方を持つスピンを含む模型では、バンドはすべての k で 2 重に縮退しています。意味があるのは、縮退したバンドについての和だけです。`output/dispersion/local` と `output/dispersion/z` についても同様です。
 
 演算子は模型の軸に沿って定義されます。Wannier の入力では、`seedname.nnkp` の射影の軸（z 軸、x 軸、スピンの量子化軸）は考慮しません。
 ```
@@ -220,6 +224,37 @@ pz@C(2) 0.500000
   例えば、$\langle p_z | Q_u | p_z \rangle = 2/5$、$\langle d_u | Q_u | d_u \rangle = 2/7$、$\langle f_{az} | Q_u | f_{az} \rangle = 4/15$ です。
 
 演算子は、各サイト（原子と副格子）の各軌道ランク $l$ の中で作用します。異なるサイトの間や、p と d のような異なるランクの間の行列要素は 0 です。$\boldsymbol{L}$ と $Q$ はスピンについて対角で、$\boldsymbol{S}$ は軌道について対角です。s 軌道（$l = 0$）では、$\boldsymbol{L}$ と $Q$ は 0 です。局所演算子は `lg` または `lgs` 基底の模型で使え、`jml` 基底では使えません。
+
+(ja-pp-samb)=
+## SAMB とその期待値
+
+模型の SAMB $Z_j$、つまり $H = \sum_j z_j Z_j$ を与える行列も、演算子として使えます。$Z_j$ はエルミートで正規直交、$\mathrm{Tr}[Z_i Z_j] = \delta_{ij}$ です。トレースは基本単位胞のケットと、$Z_j(R)$ の格子ベクトル $R$ についてとります。
+
+- `output/dispersion/z`：SAMB の名前のリスト。例えば `["z2"]`。k パスに沿った k での固有状態 $n$ の値 $\langle Z_j \rangle_{kn} = \langle u_{kn} | Z_j(k) | u_{kn} \rangle$ を、バンド分散のファイルの `output/dispersion/local` の列のあとに加えます。$Z_j(k)$ は、$Z_j(R)$ を $H(k)$ と同じゲージで Fourier 変換したものです。バンド分散のプロットのカラーマップには、これらの列の最初のものを使います。
+- `output/callback_info`：全 k グリッド上の同じ値を、`info["z2"]`（`[k, n]`）として `callback_k_full` に渡します。
+- `output/z_expectation`：SAMB の名前のリスト、または選んだ SAMB すべてを表す `"all"`。基本単位胞あたりの期待値
+
+  $$
+  \langle Z_j \rangle = \frac{1}{N_k} \sum_{k n} f(E_{kn} - E_{\rm F}) \langle Z_j \rangle_{kn} = \mathrm{Tr}[\rho Z_j]
+  $$
+
+  を、`grid` で与えた k グリッド上（点群の模型では Γ 点のみ）で、$T = 0$ で計算します。フェルミエネルギー $E_{\rm F}$ より下では $f = 1$、上では $f = 0$ です。$E_{\rm F}$ 上（$10^{-8}$ 以内）の状態は、電子数が `output/n_electron` になるように、残りの電子を等分します（`n_electron` を与えない場合は $f = 1/2$）。SAMB の格子ベクトル $R$ についての密度行列 $\rho(R)$ を通して計算するので、全グリッド上の $Z_j(k)$ は必要ありません。
+
+SAMB の名前は `samb/select` で選ばれている必要があります。名前は模型のすべての SAMB の名前、例えば `z1`, `z2`, `z38`, ... です。SAMB は `samb` モードと `symcw` モード、および `samb/model` を与えた `wannier` モードで使えます。
+
+`model_name_z_expectation.py` には、フェルミエネルギー、`n_electron`、k グリッド、バンドエネルギー $E_{\rm band} = (1/N_k) \sum_{kn} f E_{kn}$、$H$ のパラメータについての `z_sum` $= \sum_j z_j \langle Z_j \rangle$（パラメータがすべて `z_expectation` に含まれない場合は `None`）、期待値が入ります。$H = \sum_j z_j Z_j$ なので、`z_sum` はバンドエネルギーに一致します。例えば上のグラフェンの例では $H = Z_2$（`"z2": 1.0`）なので、バンド分散のファイルでは $\langle Z_2 \rangle_{kn} = E_{kn}$ で、
+
+```text
+"band_energy": -0.6428260081562857,
+"z_sum": -0.642826008156286,
+"expectation": {
+    "z1": 0.7071067811865476,
+    "z2": -0.642826008156286,
+    "z3": -3.572162951026015e-17,
+    ...
+```
+
+となります。$Z_1$ は単位行列を（2 つのサイトについて規格化するため）$\sqrt{2}$ で割ったものなので、電子 1 個では $\langle Z_1 \rangle = 1/\sqrt{2}$ です。ほかの SAMB は対称性により（数値誤差を除いて）0 です。
 
 ## gnuplot によるプロット
 
