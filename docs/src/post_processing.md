@@ -13,6 +13,7 @@ This page explains the tools, set in `output` of the control file:
 | [Eigenvalues and eigenvectors](#pp-eigenvalues-and-eigenvectors) | `save_k_path`, `save_k_full` | `_eigen_k_path.npz`, `_eigen_k_full.npz` |
 | [Callbacks for custom calculations](#pp-callbacks-for-custom-calculations) | `callback_k_path`, `callback_k_full`, `callback_info` | (written by the callbacks) |
 | [Local operators](#pp-local-operators) | `dispersion/local`, `callback_info` | `_dispersion.txt` (with `dispersion/local`), or passed to the callbacks |
+| [SAMB and their expectation values](#pp-samb) | `dispersion/z`, `z_expectation`, `callback_info` | `_dispersion.txt` (with `dispersion/z`), `_z_expectation.py` |
 
 All of them are off by default, and the dispersion (`_dispersion.txt`, `.pdf`, `.eps`, `plot_band.gnu`) is computed as before.
 
@@ -35,7 +36,10 @@ Then `graphene/output/` contains, in addition to the dispersion,
 - `graphene_dos.txt`, `graphene_dos.pdf`, `graphene_dos.eps`, `plot_dos.gnu` : DOS.
 - `graphene_weight.txt`, `graphene_weight.pdf`, `plot_weight.gnu` : orbital weight of `pz@C(1)`.
 - `graphene_eigen_k_path.npz` : eigenvalues and eigenvectors along the k path.
+- `graphene_z_expectation.py` : expectation values of the SAMBs.
 - `my_band.txt`, `my_occupation.txt` : written by the callbacks.
+
+The dispersion file `graphene_dispersion.txt` has the column of `z2`.
 
 The Fermi energy is 0 for `"n_electron": 1` (half filling of the two bands), and `-v` prints `fermi energy = 0.0 for n_electron = 1 (gaussian).`
 
@@ -175,7 +179,7 @@ The arguments of the callbacks are
 
 The functions are called after the other output, at the end of the analysis. `callback_k_path` requires the dispersion. For `callback_k_full`, all the eigenvectors on the full grid are kept in memory, `N1 x N2 x N3 x (number of kets)^2` complex numbers, so that a coarse `grid` may be needed for a large model.
 
-Set `output/callback_info` to pass the expectation value of local operators in each eigenstate on the full k grid, as `info[keyword]`, `[k, n]`. The keywords are those of `output/dispersion/local`: spin `Sx`, `Sy`, `Sz`, orbital angular momentum `Lx`, `Ly`, `Lz`, and quadrupole `Qu`, `Qv`, `Qyz`, `Qxz`, `Qxy` (see [Local operators](#pp-local-operators) for their definitions). For example,
+Set `output/callback_info` to pass the expectation value of local operators in each eigenstate on the full k grid, as `info[keyword]`, `[k, n]`. The keywords are those of `output/dispersion/local`: spin `Sx`, `Sy`, `Sz`, orbital angular momentum `Lx`, `Ly`, `Lz`, and quadrupole `Qu`, `Qv`, `Qyz`, `Qxz`, `Qxy` (see [Local operators](#pp-local-operators) for their definitions), and the names of SAMBs such as `z2` (see [SAMB and their expectation values](#pp-samb)). For example,
 
 ```python
 "output": {
@@ -184,10 +188,10 @@ Set `output/callback_info` to pass the expectation value of local operators in e
 },
 ```
 
-gives `info["Sx"]`, `info["Sy"]`, and `info["Sz"]` in `callback_k_full(Ek, Uk, info)`. `output/callback_info` requires `output/callback_k_full` and a model in the `lg` or `lgs` basis, and the spin operators require a spinful model.
+gives `info["Sx"]`, `info["Sy"]`, and `info["Sz"]` in `callback_k_full(Ek, Uk, info)`. `output/callback_info` requires `output/callback_k_full`. The local operators require a model in the `lg` or `lgs` basis, and the spin operators require a spinful model.
 
 ```{note}
-Within degenerate bands, the eigenvectors, and hence the value of each band, are arbitrary. For example, the bands of a spinful model with both inversion and time-reversal symmetries are doubly degenerate at every k. Only the sum over the degenerate bands is meaningful. The same holds for `output/dispersion/local`.
+Within degenerate bands, the eigenvectors, and hence the value of each band, are arbitrary. For example, the bands of a spinful model with both inversion and time-reversal symmetries are doubly degenerate at every k. Only the sum over the degenerate bands is meaningful. The same holds for `output/dispersion/local` and `output/dispersion/z`.
 
 The operators are defined along the axes of the model. With a Wannier input, the axes of the projections in `seedname.nnkp` (z-axis, x-axis, and spin-quantization axis) are not taken into account.
 ```
@@ -216,6 +220,37 @@ The local operators of `output/dispersion/local` and `output/callback_info` are 
   For example, $\langle p_z | Q_u | p_z \rangle = 2/5$, $\langle d_u | Q_u | d_u \rangle = 2/7$, and $\langle f_{az} | Q_u | f_{az} \rangle = 4/15$.
 
 The operators act within each orbital rank $l$ of each site (atom and sublattice): the matrix elements between different sites, and between different ranks such as p and d, are zero. $\boldsymbol{L}$ and $Q$ are diagonal in the spin, and $\boldsymbol{S}$ is diagonal in the orbital. For the s orbital ($l = 0$), $\boldsymbol{L}$ and $Q$ are zero. The local operators are available for a model in the `lg` or `lgs` basis, not in the `jml` basis.
+
+(pp-samb)=
+## SAMB and their expectation values
+
+The SAMBs $Z_j$ of the model, i.e., the matrices that give $H = \sum_j z_j Z_j$, are also available as operators. They are Hermitian and orthonormal, $\mathrm{Tr}[Z_i Z_j] = \delta_{ij}$, where the trace is over the kets of a primitive cell and the lattice vectors $R$ of $Z_j(R)$.
+
+- `output/dispersion/z`: a list of SAMB names, e.g., `["z2"]`. The value for the eigenstate $n$ at $k$ along the k path, $\langle Z_j \rangle_{kn} = \langle u_{kn} | Z_j(k) | u_{kn} \rangle$, is added to the dispersion file after the columns of `output/dispersion/local`, where $Z_j(k)$ is the Fourier transform of $Z_j(R)$ in the same gauge as $H(k)$. The colormap of the dispersion plot uses the first of these columns.
+- `output/callback_info`: the same values on the full k grid are passed to `callback_k_full` as `info["z2"]`, `[k, n]`.
+- `output/z_expectation`: a list of SAMB names, or `"all"` for all the selected SAMBs. The expectation value per primitive cell is
+
+  $$
+  \langle Z_j \rangle = \frac{1}{N_k} \sum_{k n} f(E_{kn} - E_{\rm F}) \langle Z_j \rangle_{kn} = \mathrm{Tr}[\rho Z_j],
+  $$
+
+  on the k grid given by `grid` (the Γ point only for a model of a point group), at $T = 0$: $f = 1$ below and $f = 0$ above the Fermi energy $E_{\rm F}$. The states at $E_{\rm F}$ (within $10^{-8}$) share the remaining electrons equally, so that the number of electrons is `output/n_electron` ($f = 1/2$ when `n_electron` is not given). It is computed through the density matrix $\rho(R)$ for the lattice vectors $R$ of the SAMBs, so that $Z_j(k)$ on the full grid is not needed.
+
+The SAMB names must be selected by `samb/select`; they are the names of all the SAMBs of the model, e.g., `z1`, `z2`, `z38`, .... The SAMBs are available in `samb` and `symcw` modes, and in `wannier` mode with `samb/model`.
+
+`model_name_z_expectation.py` holds the Fermi energy, `n_electron`, the k grid, the band energy $E_{\rm band} = (1/N_k) \sum_{kn} f E_{kn}$, `z_sum` $= \sum_j z_j \langle Z_j \rangle$ over the parameters of $H$ (`None` unless all of them are in `z_expectation`), and the expectation values. As $H = \sum_j z_j Z_j$, `z_sum` equals the band energy. For example, in the graphene example above, $H = Z_2$ (`"z2": 1.0`), so that $\langle Z_2 \rangle_{kn} = E_{kn}$ in the dispersion file, and
+
+```text
+"band_energy": -0.6428260081562857,
+"z_sum": -0.642826008156286,
+"expectation": {
+    "z1": 0.7071067811865476,
+    "z2": -0.642826008156286,
+    "z3": -3.572162951026015e-17,
+    ...
+```
+
+$Z_1$ is the identity divided by $\sqrt{2}$ (normalized over the two sites), so that $\langle Z_1 \rangle = 1/\sqrt{2}$ for one electron. The other SAMBs vanish by symmetry (up to numerical errors).
 
 ## Plotting by gnuplot
 
