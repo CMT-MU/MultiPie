@@ -1022,9 +1022,11 @@ def convert_zj_atomic_var(matrix_info, combined_cluster, combined_id, IR):
     """
     ket = [i.replace("@", "_").replace("(", "").replace(")", "") for i in matrix_info["ket"]]
 
-    # classify zj for each cluster.
+    # classify zj for each cluster (only the selected SAMBs, which are in the matrix).
     cluster = {}
     for tag, name in combined_cluster.items():
+        if tag not in matrix_info["matrix"]:
+            continue
         X = combined_id[tag][2][0]
         Gamma = combined_id[tag][2][2]
         if ";" in name and X in ["Q", "G"] and Gamma == IR:
