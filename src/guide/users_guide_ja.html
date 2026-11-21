@@ -1,0 +1,1592 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>ユーザーガイド &#8212; MultiPie</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=6a604523" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=2106c826" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../../_static/documentation_options.js?v=a8e58a58"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script data-sd-tabs-storage-prefix="sphinx-design-tab-id-" src="../../_static/design-tabs.js?v=fcb327ea"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"loader": {"load": ["[tex]/physics"]}, "tex": {"packages": {"[+]": ["physics"]}, "macros": {"bm": ["\\boldsymbol{#1}", 1]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'src/guide/users_guide_ja';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script src="../../_static/custom.js?v=7f87e22d"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../_static/searchtools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../README.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/multipie_logo.png" class="logo__image only-light" alt="MultiPie - Home"/>
+    <img src="../../_static/multipie_logo.png" class="logo__image only-dark pst-js-only" alt="MultiPie - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installing MultiPie</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference external" href="https://cmt-mu.github.io/MultiPieGen/src/group_info.html">Group information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guide.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../atomic_multipole_table.html">Atomic multipole operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../group.html">Using the Group class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../materials.html">Examples of materials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../post_processing.html">Post-processing tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changes.html">Changes from Ver.2</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../api_core.html">Core</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api_core/init.html">Type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_core/cmd.html">Create function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_core/group.html">Group</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_core/material_model.html">Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_core/model_analyzer.html">ModelAnalyzer</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../api_util.html">Utility</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_atomic_multipole.html">Atomic multipole</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_atomic_multipole_operator.html">Atomic multipole operator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_binary.html">Binary data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_crystal.html">Crystal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_dict.html">Dict</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_gram_schmidt.html">Gram-Schmidt orthonormalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_harmonics.html">Harmonics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_material_model_pdf.html">PDF creator for Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_material_model.html">Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_model_analyzer.html">Model Analyzer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_multipolar_harmonics.html">Multipolar harmonics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_pdf_latex.html">PDF creator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_plot.html">Plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_response_tensor.html">Response tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_samb.html">SAMB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_tag.html">Tag</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_wannier.html">Wannier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_wyckoff.html">Wyckoff position</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util.html">Versatile</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/CMT-MU/MultiPie.git" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>ユーザーガイド</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ja-multipole-key">1. 多極子のキー</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ja-point-group-harmonics">2. 点群調和関数</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ja-atomic-orbitals">3. 原子軌道</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#samb">4. 原子 SAMB</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ja-cluster-samb">5. クラスター SAMB</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ja-combined-samb">6. 結合 SAMB と模型</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ja-response-tensors">7. 応答テンソル</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ja-multipolar-harmonics">8. 点群多極子調和関数</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pdf">9. 簡易マニュアルとチュートリアル（PDF）</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie">MultiPie 簡易マニュアル</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qtdraw-multipie">QtDraw を用いた MultiPie のチュートリアル</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>ユーザーガイド<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<p>このガイドでは、MultiPie が提供する量と、その読み方・使い方を説明します。扱うのは、多極子のキーとその記号、点群調和関数、原子軌道、原子・クラスター・結合 SAMB（対称性適合多極子基底）、それらから作る強束縛模型、応答テンソルです。英語版は<a class="reference internal" href="../guide.html"><span class="std std-doc">こちら</span></a>です。</p>
+<p>群のデータは、MultiPieGen が生成した群のデータベースから取ります。すべての群の表は<a class="reference external" href="https://cmt-mu.github.io/MultiPieGen/src/group_info_ja.html">群の情報</a>にあります。コードの例では、<code class="docutils literal notranslate"><span class="pre">Group</span></code>（群のデータ）と <code class="docutils literal notranslate"><span class="pre">MaterialModel</span></code>（模型）を使います。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">multipie</span><span class="w"> </span><span class="kn">import</span> <span class="n">Group</span><span class="p">,</span> <span class="n">MaterialModel</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>目次：</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#ja-multipole-key">多極子のキー</a></p></li>
+<li><p><a class="reference internal" href="#ja-point-group-harmonics">点群調和関数</a></p></li>
+<li><p><a class="reference internal" href="#ja-atomic-orbitals">原子軌道</a></p></li>
+<li><p><a class="reference internal" href="#ja-atomic-samb">原子 SAMB</a></p></li>
+<li><p><a class="reference internal" href="#ja-cluster-samb">クラスター SAMB</a></p></li>
+<li><p><a class="reference internal" href="#ja-combined-samb">結合 SAMB と模型</a></p></li>
+<li><p><a class="reference internal" href="#ja-response-tensors">応答テンソル</a></p></li>
+<li><p><a class="reference internal" href="#ja-multipolar-harmonics">点群多極子調和関数</a></p></li>
+<li><p><a class="reference internal" href="#ja-brief-manual">簡易マニュアルとチュートリアル（PDF）</a></p></li>
+</ol>
+<section id="ja-multipole-key">
+<span id="id2"></span><h2>1. 多極子のキー<a class="headerlink" href="#ja-multipole-key" title="Link to this heading">#</a></h2>
+<p>点群の多極子（調和関数、原子 SAMB、クラスター SAMB、結合 SAMB）は、すべて <code class="docutils literal notranslate"><span class="pre">multipie</span></code> パッケージの名前付きタプル <code class="docutils literal notranslate"><span class="pre">PGMultipoleType(X,</span> <span class="pre">l,</span> <span class="pre">Gamma,</span> <span class="pre">n,</span> <span class="pre">p,</span> <span class="pre">s,</span> <span class="pre">k,</span> <span class="pre">x)</span></code> で表します。その値には、多重項のすべての成分を、既約表現の成分の順に格納しています。</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>フィールド</p></th>
+<th class="head text-left"><p>意味</p></th>
+<th class="head text-left"><p>値</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">X</span></code></p></td>
+<td class="text-left"><p>タイプ。空間反転（<span class="math notranslate nohighlight">\(\mathcal{P}\)</span>）と時間反転（<span class="math notranslate nohighlight">\(\mathcal{T}\)</span>）での偶奇で決まる</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">Q</span></code> 電気（<span class="math notranslate nohighlight">\(\mathcal{P} = (-1)^l\)</span>、<span class="math notranslate nohighlight">\(\mathcal{T}\)</span> 偶）、<code class="docutils literal notranslate"><span class="pre">G</span></code> 電気トロイダル（<span class="math notranslate nohighlight">\((-1)^{l+1}\)</span>、偶）、<code class="docutils literal notranslate"><span class="pre">T</span></code> 磁気トロイダル（<span class="math notranslate nohighlight">\((-1)^l\)</span>、奇）、<code class="docutils literal notranslate"><span class="pre">M</span></code> 磁気（<span class="math notranslate nohighlight">\((-1)^{l+1}\)</span>、奇）</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">l</span></code></p></td>
+<td class="text-left"><p>ランク</p></td>
+<td class="text-left"><p>0, 1, 2, …</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">Gamma</span></code></p></td>
+<td class="text-left"><p>点群の既約表現</p></td>
+<td class="text-left"><p>指標表での名前。例：<code class="docutils literal notranslate"><span class="pre">A1g</span></code>、<code class="docutils literal notranslate"><span class="pre">Eu</span></code>、<code class="docutils literal notranslate"><span class="pre">T2g</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">n</span></code></p></td>
+<td class="text-left"><p>調和関数 <code class="docutils literal notranslate"><span class="pre">(X,</span> <span class="pre">l,</span> <span class="pre">Gamma)</span></code> の多重度。同じ <code class="docutils literal notranslate"><span class="pre">(X,</span> <span class="pre">l,</span> <span class="pre">Gamma)</span></code> の調和関数のうちどれか</p></td>
+<td class="text-left"><p>1, 2, …。1 つだけなら <code class="docutils literal notranslate"><span class="pre">-1</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">p</span></code></p></td>
+<td class="text-left"><p>追加の多重度。ほかのフィールドがすべて同じものに番号を付ける</p></td>
+<td class="text-left"><p>1, 2, …。1 つだけなら <code class="docutils literal notranslate"><span class="pre">-1</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">s</span></code></p></td>
+<td class="text-left"><p>内部ランク（内部自由度のランク。例：スピン）</p></td>
+<td class="text-left"><p>0（スカラー）、1</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">k</span></code></p></td>
+<td class="text-left"><p>内部成分。軌道部分のランクは <code class="docutils literal notranslate"><span class="pre">l</span> <span class="pre">+</span> <span class="pre">k</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">-s,</span> <span class="pre">...,</span> <span class="pre">s</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">x</span></code></p></td>
+<td class="text-left"><p>内部タイプ</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">q</span></code>（極性）、<code class="docutils literal notranslate"><span class="pre">g</span></code>（軸性）</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">(X,</span> <span class="pre">l,</span> <span class="pre">Gamma,</span> <span class="pre">n)</span></code> は、常に 1 つの点群調和関数（その xyz の多項式と <span class="math notranslate nohighlight">\(U\)</span>）を指します。<code class="docutils literal notranslate"><span class="pre">T</span></code> と <code class="docutils literal notranslate"><span class="pre">M</span></code> は、<code class="docutils literal notranslate"><span class="pre">Q</span></code> と <code class="docutils literal notranslate"><span class="pre">G</span></code> の調和関数を使います。</p></li>
+<li><p>スカラーの量（調和関数、クラスター SAMB）は <code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">=</span> <span class="pre">0,</span> <span class="pre">k</span> <span class="pre">=</span> <span class="pre">0,</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">&quot;q&quot;</span></code> です。</p></li>
+<li><p>キーは、普通のタプルで与えることもできます（例：<code class="docutils literal notranslate"><span class="pre">(&quot;Q&quot;,</span> <span class="pre">1,</span> <span class="pre">&quot;T1u&quot;,</span> <span class="pre">-1,</span> <span class="pre">-1,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">&quot;q&quot;)</span></code>）。データは、これらのキーを持つ辞書 <code class="docutils literal notranslate"><span class="pre">Dict</span></code> で、フィールドで要素を選んだり並べ替えたりできます（例：<code class="docutils literal notranslate"><span class="pre">harmonics.select(X=&quot;Q&quot;,</span> <span class="pre">l=2)</span></code>）。</p></li>
+</ul>
+<p><strong>記号。</strong> 多極子は、そのキーから作った LaTeX 記号で書きます。</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{X}_{l,\gamma}^{(s,k;\,\mathrm{tag})}(\Gamma, n\,p),
+\]</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>部分</p></th>
+<th class="head text-left"><p>キーとの対応</p></th>
+<th class="head text-left"><p>書く場合</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{X}\)</span></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">X</span></code></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}, \mathbb{G}, \mathbb{T}, \mathbb{M}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><span class="math notranslate nohighlight">\(l\)</span></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">l</span></code></p></td>
+<td class="text-left"><p>常に</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><span class="math notranslate nohighlight">\(\gamma\)</span></p></td>
+<td class="text-left"><p>成分（1, 2, …）</p></td>
+<td class="text-left"><p>次元が 1 より大きい既約表現の多重項の、1 つの成分を指すときだけ</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><span class="math notranslate nohighlight">\((s, k)\)</span></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">s</span></code>, <code class="docutils literal notranslate"><span class="pre">k</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">&gt;</span> <span class="pre">0</span></code> のときだけ</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>tag</p></td>
+<td class="text-left"><p>データの種類</p></td>
+<td class="text-left"><p>調和関数ではなし。原子 SAMB は <code class="docutils literal notranslate"><span class="pre">a</span></code>、サイトのクラスター SAMB は <code class="docutils literal notranslate"><span class="pre">s</span></code>、ボンドのクラスター SAMB は <code class="docutils literal notranslate"><span class="pre">b</span></code>、結合 SAMB は <code class="docutils literal notranslate"><span class="pre">c</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><span class="math notranslate nohighlight">\(\Gamma\)</span></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">Gamma</span></code></p></td>
+<td class="text-left"><p>常に。例：<span class="math notranslate nohighlight">\(T_{1u}\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><span class="math notranslate nohighlight">\(n\)</span></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">n</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">!=</span> <span class="pre">-1</span></code> のときだけ</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><span class="math notranslate nohighlight">\(p\)</span></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">p</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">!=</span> <span class="pre">-1</span></code> のときだけ。英字で書く（<code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">-&gt;</span> <span class="pre">a,</span> <span class="pre">2</span> <span class="pre">-&gt;</span> <span class="pre">b,</span> <span class="pre">...</span></code>）</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Group.tag_multipole(key,</span> <span class="pre">comp=None,</span> <span class="pre">latex=False,</span> <span class="pre">superscript=&quot;&quot;)</span></code> で記号を作ります。<code class="docutils literal notranslate"><span class="pre">superscript</span></code> が tag です。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Group</span><span class="o">.</span><span class="n">tag_multipole</span><span class="p">((</span><span class="s2">"Q"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">"T1u"</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"q"</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">latex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>'\\mathbb{Q}_{1,1}(T_{1u})'
+</pre></div>
+</div>
+</div>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>キー</p></th>
+<th class="head text-left"><p>記号</p></th>
+<th class="head text-left"><p>意味</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">(&quot;Q&quot;,</span> <span class="pre">1,</span> <span class="pre">&quot;T1u&quot;,</span> <span class="pre">-1,</span> <span class="pre">-1,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">&quot;q&quot;)</span></code></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{1}(T_{1u})\)</span></p></td>
+<td class="text-left"><p>O<span class="math notranslate nohighlight">\(_{\rm h}\)</span> の電気双極子、<span class="math notranslate nohighlight">\((x, y, z)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">(&quot;M&quot;,</span> <span class="pre">1,</span> <span class="pre">&quot;T1g&quot;,</span> <span class="pre">-1,</span> <span class="pre">-1,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">&quot;q&quot;)</span></code></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{M}_{1}^{(a)}(T_{1g})\)</span></p></td>
+<td class="text-left"><p>原子 SAMB：軌道角運動量</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">(&quot;M&quot;,</span> <span class="pre">1,</span> <span class="pre">&quot;T1g&quot;,</span> <span class="pre">-1,</span> <span class="pre">-1,</span> <span class="pre">1,</span> <span class="pre">-1,</span> <span class="pre">&quot;q&quot;)</span></code></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{M}_{1}^{(1,-1;a)}(T_{1g})\)</span></p></td>
+<td class="text-left"><p>原子 SAMB：スピンの磁気双極子</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">(&quot;T&quot;,</span> <span class="pre">1,</span> <span class="pre">&quot;Eu&quot;,</span> <span class="pre">-1,</span> <span class="pre">1,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">&quot;q&quot;)</span></code></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{T}_{1}^{(b)}(E_{u},a)\)</span></p></td>
+<td class="text-left"><p>D<span class="math notranslate nohighlight">\(_{\rm 4h}\)</span> のボンドのクラスター SAMB：<span class="math notranslate nohighlight">\((x, y)\)</span> の対称性を持つ虚数の飛び移り</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">(&quot;Q&quot;,</span> <span class="pre">0,</span> <span class="pre">&quot;A1g&quot;,</span> <span class="pre">-1,</span> <span class="pre">2,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">&quot;q&quot;)</span></code></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{0}^{(c)}(A_{1g},b)\)</span></p></td>
+<td class="text-left"><p>同じ調和関数の 2 番目（<span class="math notranslate nohighlight">\(p = 2\)</span>）の結合 SAMB</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="ja-point-group-harmonics">
+<span id="id3"></span><h2>2. 点群調和関数<a class="headerlink" href="#ja-point-group-harmonics" title="Link to this heading">#</a></h2>
+<p><strong>球面調和関数と方域調和関数。</strong> ランク <span class="math notranslate nohighlight">\(l\)</span> の調和関数は、同次多項式</p>
+<div class="math notranslate nohighlight">
+\[
+O_{lm}(\boldsymbol{r}) = \sqrt{\frac{4\pi}{2l+1}}\, r^l\, Y_{lm}(\theta, \phi), \qquad m = l, l-1, \dots, -l,
+\]</div>
+<p>から作ります（例：<span class="math notranslate nohighlight">\(O_{10} = z\)</span>、<span class="math notranslate nohighlight">\(O_{1,\pm1} = \mp(x \pm iy)/\sqrt{2}\)</span>）。その実の組み合わせが方域調和関数です（例：<span class="math notranslate nohighlight">\(C_{11} = x\)</span>、<span class="math notranslate nohighlight">\(S_{11} = y\)</span>、<span class="math notranslate nohighlight">\(C_{22} = \frac{\sqrt{3}}{2}(x^2 - y^2)\)</span>、<span class="math notranslate nohighlight">\(S_{22} = \sqrt{3}xy\)</span>）。</p>
+<p><strong>点群調和関数。</strong> 点群の調和関数 <code class="docutils literal notranslate"><span class="pre">(X,</span> <span class="pre">l,</span> <span class="pre">Gamma,</span> <span class="pre">n)</span></code> は、既約表現 <span class="math notranslate nohighlight">\(\Gamma\)</span> の基底となるランク <span class="math notranslate nohighlight">\(l\)</span> の関数の組です。その成分 <span class="math notranslate nohighlight">\(\gamma\)</span> は</p>
+<div class="math notranslate nohighlight">
+\[
+X_{l\Gamma n}^{(\gamma)}(\boldsymbol{r}) = \sum_{m} U_{m\gamma}\, O_{lm}(\boldsymbol{r}),
+\]</div>
+<p>で、<span class="math notranslate nohighlight">\(U\)</span> はユニタリ行列（<code class="docutils literal notranslate"><span class="pre">(2l+1)</span> <span class="pre">x</span> <span class="pre">dim</span></code>、行は <span class="math notranslate nohighlight">\(m = l, \dots, -l\)</span>）です。<code class="docutils literal notranslate"><span class="pre">Group.harmonics</span></code> は、各キーについて、成分の多項式と <span class="math notranslate nohighlight">\(U\)</span> を与えます。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="s2">"Oh"</span><span class="p">)</span>
+<span class="n">ex</span><span class="p">,</span> <span class="n">U</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">harmonics</span><span class="p">[(</span><span class="s2">"Q"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">"T1u"</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"q"</span><span class="p">)]</span>
+<span class="n">ex</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([x, y, z], dtype=object)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">U</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-sqrt(2)/2, sqrt(2)*I/2, 0],
+       [0, 0, 1],
+       [sqrt(2)/2, sqrt(2)*I/2, 0]], dtype=object)
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>調和関数は、<code class="docutils literal notranslate"><span class="pre">Q</span></code>（極性）と <code class="docutils literal notranslate"><span class="pre">G</span></code>（軸性）について、ランク 11 まで与えます。軸性の調和関数は、非固有な操作 <span class="math notranslate nohighlight">\(R\)</span> で <span class="math notranslate nohighlight">\(\det R\)</span> の因子が余分に付きます。そのため、同じ関数の <code class="docutils literal notranslate"><span class="pre">Q</span></code> と <code class="docutils literal notranslate"><span class="pre">G</span></code> が別の既約表現に属することがあります。例えば C<span class="math notranslate nohighlight">\(_{\rm 4v}\)</span> では、<span class="math notranslate nohighlight">\(\mathbb{Q}_{1}(A_{1}) = z\)</span> ですが、<span class="math notranslate nohighlight">\(\mathbb{G}_{1}(A_{2}) = z\)</span> です。回転だけからなる群では、<code class="docutils literal notranslate"><span class="pre">Q</span></code> と <code class="docutils literal notranslate"><span class="pre">G</span></code> は同じです。</p></li>
+<li><p>同じランクに同じ既約表現が複数回現れるときは、<code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">=</span> <span class="pre">1,</span> <span class="pre">2,</span> <span class="pre">...</span></code> で調和関数を区別します。例：C<span class="math notranslate nohighlight">\(_{\rm 4h}\)</span> で <span class="math notranslate nohighlight">\(\mathbb{Q}_{2}(B_{g},1) = \frac{\sqrt{3}}{2}(x^2 - y^2)\)</span>、<span class="math notranslate nohighlight">\(\mathbb{Q}_{2}(B_{g},2) = \sqrt{3}xy\)</span>。</p></li>
+<li><p>空間群や磁気群の調和関数は、その点群のものです。</p></li>
+</ul>
+</section>
+<section id="ja-atomic-orbitals">
+<span id="id4"></span><h2>3. 原子軌道<a class="headerlink" href="#ja-atomic-orbitals" title="Link to this heading">#</a></h2>
+<p>ランク <span class="math notranslate nohighlight">\(L = 0, 1, 2, 3\)</span>（s, p, d, f）の軌道が、原子 SAMB の基底です。基底は 3 種類あり、<code class="docutils literal notranslate"><span class="pre">Group.atomic_basis(basis_type)</span></code> で与えられます。</p>
+<p><strong><code class="docutils literal notranslate"><span class="pre">lg</span></code>（実の軌道、スピンなし）。</strong> 方域調和関数です。</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p><span class="math notranslate nohighlight">\(L\)</span></p></th>
+<th class="head text-left"><p>軌道</p></th>
+<th class="head text-left"><p>関数</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>0</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">s</span></code></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(1\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>1</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">px</span></code>, <code class="docutils literal notranslate"><span class="pre">py</span></code>, <code class="docutils literal notranslate"><span class="pre">pz</span></code></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span>, <span class="math notranslate nohighlight">\(z\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>2</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">dv</span></code>, <code class="docutils literal notranslate"><span class="pre">dxy</span></code>, <code class="docutils literal notranslate"><span class="pre">dxz</span></code>, <code class="docutils literal notranslate"><span class="pre">dyz</span></code>, <code class="docutils literal notranslate"><span class="pre">du</span></code></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\frac{\sqrt{3}}{2}(x^2-y^2)\)</span>, <span class="math notranslate nohighlight">\(\sqrt{3}xy\)</span>, <span class="math notranslate nohighlight">\(\sqrt{3}xz\)</span>, <span class="math notranslate nohighlight">\(\sqrt{3}yz\)</span>, <span class="math notranslate nohighlight">\(z^2 - \frac{x^2+y^2}{2}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>3</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">fc</span></code>, <code class="docutils literal notranslate"><span class="pre">fs</span></code>, <code class="docutils literal notranslate"><span class="pre">fbz</span></code>, <code class="docutils literal notranslate"><span class="pre">f3</span></code>, <code class="docutils literal notranslate"><span class="pre">fx</span></code>, <code class="docutils literal notranslate"><span class="pre">fy</span></code>, <code class="docutils literal notranslate"><span class="pre">faz</span></code></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\frac{\sqrt{10}}{4}x(x^2-3y^2)\)</span>, <span class="math notranslate nohighlight">\(\frac{\sqrt{10}}{4}y(3x^2-y^2)\)</span>, <span class="math notranslate nohighlight">\(\frac{\sqrt{15}}{2}z(x^2-y^2)\)</span>, <span class="math notranslate nohighlight">\(\sqrt{15}xyz\)</span>, <span class="math notranslate nohighlight">\(\frac{\sqrt{6}}{4}x(4z^2-x^2-y^2)\)</span>, <span class="math notranslate nohighlight">\(\frac{\sqrt{6}}{4}y(4z^2-x^2-y^2)\)</span>, <span class="math notranslate nohighlight">\(\frac{1}{2}z(2z^2-3x^2-3y^2)\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong><code class="docutils literal notranslate"><span class="pre">lgs</span></code>（実の軌道、スピンあり）。</strong> <code class="docutils literal notranslate"><span class="pre">lg</span></code> にスピン <code class="docutils literal notranslate"><span class="pre">u</span></code>（上向き）と <code class="docutils literal notranslate"><span class="pre">d</span></code>（下向き）を掛けたもので、スピンを先に回します：<code class="docutils literal notranslate"><span class="pre">(px,u),</span> <span class="pre">(px,d),</span> <span class="pre">(py,u),</span> <span class="pre">...</span></code>。</p>
+<p><strong><code class="docutils literal notranslate"><span class="pre">jml</span></code>（全角運動量）。</strong> <span class="math notranslate nohighlight">\(|J, M\rangle\)</span>（<span class="math notranslate nohighlight">\(J = L \mp 1/2\)</span>）を、<span class="math notranslate nohighlight">\(J\)</span> の昇順、<span class="math notranslate nohighlight">\(M\)</span> の降順に並べたものです。例えば <span class="math notranslate nohighlight">\(L = 1\)</span> では <code class="docutils literal notranslate"><span class="pre">(1/2,1/2),</span> <span class="pre">(1/2,-1/2),</span> <span class="pre">(3/2,3/2),</span> <span class="pre">...,</span> <span class="pre">(3/2,-3/2)</span></code> です。</p>
+<p>模型の入力では、サイトの軌道をこれらの名前で与えます（例：<code class="docutils literal notranslate"><span class="pre">&quot;d&quot;</span></code>（5 つすべて）、<code class="docutils literal notranslate"><span class="pre">[&quot;dyz&quot;,</span> <span class="pre">&quot;dxz&quot;,</span> <span class="pre">&quot;dxy&quot;]</span></code>、<code class="docutils literal notranslate"><span class="pre">jml</span></code> では <code class="docutils literal notranslate"><span class="pre">&quot;(3/2,p)&quot;</span></code>）。スピンを含む模型（<code class="docutils literal notranslate"><span class="pre">&quot;spinful&quot;:</span> <span class="pre">True</span></code>）では <code class="docutils literal notranslate"><span class="pre">lgs</span></code>（または <code class="docutils literal notranslate"><span class="pre">jml</span></code>）を使います。</p>
+</section>
+<section id="samb">
+<span id="ja-atomic-samb"></span><h2>4. 原子 SAMB<a class="headerlink" href="#samb" title="Link to this heading">#</a></h2>
+<p>原子 SAMB は、原子多極子演算子の軌道基底での行列を、点群に適合させたものです。原子の電子のサイト上の自由度、つまり電荷、軌道（四極子）秩序、軌道角運動量、スピンなどを表します。</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">=</span> <span class="pre">Q,</span> <span class="pre">G,</span> <span class="pre">T,</span> <span class="pre">M</span></code> の多極子 <span class="math notranslate nohighlight">\(X_{lm}^{(s)}(k)\)</span>（<code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">=</span> <span class="pre">0</span></code>（軌道）と <code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">=</span> <span class="pre">1</span></code>（スピンに依存））を、調和関数の <span class="math notranslate nohighlight">\(U\)</span> で対称性に適合させたもので、<span class="math notranslate nohighlight">\(X_{l\Gamma n}^{(s)}(k)[\gamma] = \sum_m U_{m\gamma} X_{lm}^{(s)}(k)\)</span> です。</p></li>
+<li><p>各成分のノルムは、対角ブロック（<span class="math notranslate nohighlight">\(L_1 = L_2\)</span>）では 1、非対角ブロックでは <span class="math notranslate nohighlight">\(1/\sqrt{2}\)</span> です。</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">Group.atomic_samb(basis_type,</span> <span class="pre">(L1,</span> <span class="pre">L2))</span></code> は、各キーについて、成分の行列 <code class="docutils literal notranslate"><span class="pre">(dim,</span> <span class="pre">n1,</span> <span class="pre">n2)</span></code> と調和関数の式を与えます。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">atomic_samb</span><span class="p">(</span><span class="s2">"lg"</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>  <span class="c1"># p-p block of Oh.</span>
+<span class="nb">list</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[('Q', 0, 'A1g', -1, -1, 0, 0, 'q'),
+ ('Q', 2, 'Eg', -1, -1, 0, 0, 'q'),
+ ('Q', 2, 'T2g', -1, -1, 0, 0, 'q'),
+ ('M', 1, 'T1g', -1, -1, 0, 0, 'q')]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mat</span><span class="p">,</span> <span class="n">ex</span> <span class="o">=</span> <span class="n">a</span><span class="p">[(</span><span class="s2">"M"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">"T1g"</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"q"</span><span class="p">)]</span>
+<span class="n">mat</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># x component, l_x / sqrt(2) in (px, py, pz).</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0, 0, 0],
+       [0, 0, -sqrt(2)*I/2],
+       [0, sqrt(2)*I/2, 0]], dtype=object)
+</pre></div>
+</div>
+</div>
+</div>
+<p>O<span class="math notranslate nohighlight">\(_{\rm h}\)</span> の p 軌道では、<span class="math notranslate nohighlight">\(\mathbb{Q}_{0}^{(a)}(A_{1g})\)</span> は電荷（<span class="math notranslate nohighlight">\(\propto\)</span> 単位行列）、<span class="math notranslate nohighlight">\(\mathbb{Q}_{2}^{(a)}(E_{g})\)</span> と <span class="math notranslate nohighlight">\(\mathbb{Q}_{2}^{(a)}(T_{2g})\)</span> は軌道の四極子、<span class="math notranslate nohighlight">\(\mathbb{M}_{1}^{(a)}(T_{1g})\)</span> は軌道角運動量です。スピンを含めると（<code class="docutils literal notranslate"><span class="pre">lgs</span></code>）、スピンの磁気双極子は <span class="math notranslate nohighlight">\(\mathbb{M}_{1}^{(1,-1;a)}(T_{1g})\)</span> で、p 軌道のスピン軌道相互作用 <span class="math notranslate nohighlight">\(\boldsymbol{l} \cdot \boldsymbol{s}\)</span> は <span class="math notranslate nohighlight">\(\mathbb{Q}_{0}^{(1,1;a)}(A_{1g})\)</span> に比例します。</p>
+<p id="ja-atomic-multipole-operator"><strong>演算子表現。</strong> <code class="docutils literal notranslate"><span class="pre">Group.atomic_multipole_operator(X,</span> <span class="pre">l,</span> <span class="pre">m,</span> <span class="pre">s=0,</span> <span class="pre">k=0)</span></code> は、球面基底の成分 <span class="math notranslate nohighlight">\(m\)</span> の原子多極子 <span class="math notranslate nohighlight">\(X_{lm}^{(s)}(k)\)</span> を、H. Kusunose, R. Oiwa, and S. Hayami, J. Phys. Soc. Jpn. <strong>89</strong>, 104704 (2020) に従って演算子として与えます。スピンによらないもの（式 1-4）は、<span class="math notranslate nohighlight">\(\boldsymbol{l} = -i(\boldsymbol{r} \times \nabla)\)</span> とし、<span class="math notranslate nohighlight">\(\nabla\)</span> は <span class="math notranslate nohighlight">\(O_{lm}(\boldsymbol{r}) = \sqrt{4\pi/(2l+1)}\, r^l Y_{lm}(\hat{\boldsymbol{r}})\)</span> にだけ作用するとして、</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+Q_{lm} &amp;= O_{lm}, \\
+M_{lm} &amp;= \frac{1}{l+1}\,[(\nabla O_{lm})\cdot\boldsymbol{l} + \boldsymbol{l}\cdot(\nabla O_{lm})], \\
+T_{lm} &amp;= \frac{1}{(l+1)(l+2)}\,[(\nabla O_{lm})\cdot(\boldsymbol{r}\times\boldsymbol{l}) - (\boldsymbol{l}\times\boldsymbol{r})\cdot(\nabla O_{lm})], \\
+G_{lm} &amp;= \frac{2i}{(l+1)^2(l+2)}\,[(\nabla O_{lm})\cdot\boldsymbol{l}\,\boldsymbol{l}^2 - \boldsymbol{l}^2\,\boldsymbol{l}\cdot(\nabla O_{lm})]
+\end{aligned}
+\end{split}\]</div>
+<p>です。スピンに依存するもの（式 13）は、ランク <span class="math notranslate nohighlight">\(l + k\)</span> の軌道の多極子 <span class="math notranslate nohighlight">\(X'\)</span> とパウリ行列を結合したもので、</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+X_{lm}^{(1)}(k) = i^{1+k}(-1)^{l+m}\sqrt{2l+1}\sum_{n}
+\begin{pmatrix} l+k &amp; l &amp; 1\\ m-n &amp; -m &amp; n\end{pmatrix} X'_{l+k,m-n}\,\sigma_{1,n}
+\end{split}\]</div>
+<p>です。<span class="math notranslate nohighlight">\(\sigma_{1,0} = \sigma_z\)</span>、<span class="math notranslate nohighlight">\(\sigma_{1,\pm1} = \mp(\sigma_x \pm i\sigma_y)/\sqrt2\)</span> で、<span class="math notranslate nohighlight">\(X'\)</span> は、<code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">=</span> <span class="pre">Q,</span> <span class="pre">M,</span> <span class="pre">T,</span> <span class="pre">G</span></code> に対して <code class="docutils literal notranslate"><span class="pre">k</span> <span class="pre">=</span> <span class="pre">0</span></code> では <code class="docutils literal notranslate"><span class="pre">T</span></code>、<code class="docutils literal notranslate"><span class="pre">G</span></code>、<code class="docutils literal notranslate"><span class="pre">Q</span></code>、<code class="docutils literal notranslate"><span class="pre">M</span></code>、<code class="docutils literal notranslate"><span class="pre">k</span> <span class="pre">=</span> <span class="pre">±1</span></code> では <code class="docutils literal notranslate"><span class="pre">M</span></code>、<code class="docutils literal notranslate"><span class="pre">Q</span></code>、<code class="docutils literal notranslate"><span class="pre">G</span></code>、<code class="docutils literal notranslate"><span class="pre">T</span></code> です（論文の表 I）。<strong>軌道部分が常に極性の<a class="reference internal" href="#ja-multipolar-harmonics"><span class="std std-ref">点群多極子調和関数</span></a>と違い、ここでの軌道部分 <span class="math notranslate nohighlight">\(X'\)</span> は極性（<code class="docutils literal notranslate"><span class="pre">Q</span></code>、<code class="docutils literal notranslate"><span class="pre">T</span></code>）にも軸性（<code class="docutils literal notranslate"><span class="pre">G</span></code>、<code class="docutils literal notranslate"><span class="pre">M</span></code>。例えば軌道角運動量）にもなります。</strong></p>
+<ul class="simple">
+<li><p>結果は、非可換な演算子、つまり位置 <code class="docutils literal notranslate"><span class="pre">x</span></code>、<code class="docutils literal notranslate"><span class="pre">y</span></code>、<code class="docutils literal notranslate"><span class="pre">z</span></code>、軌道角運動量 <code class="docutils literal notranslate"><span class="pre">l_x</span></code>、<code class="docutils literal notranslate"><span class="pre">l_y</span></code>、<code class="docutils literal notranslate"><span class="pre">l_z</span></code>（無次元）、パウリ行列 <code class="docutils literal notranslate"><span class="pre">sigma_x</span></code>、<code class="docutils literal notranslate"><span class="pre">sigma_y</span></code>、<code class="docutils literal notranslate"><span class="pre">sigma_z</span></code>（<span class="math notranslate nohighlight">\(\sigma_0 = 1\)</span>。スピンは <span class="math notranslate nohighlight">\(\boldsymbol{\sigma}/2\)</span>）の sympy の式です。</p></li>
+<li><p>これらは <span class="math notranslate nohighlight">\([l_i, l_j] = i\epsilon_{ijk} l_k\)</span>、<span class="math notranslate nohighlight">\([\sigma_i, \sigma_j] = 2i\epsilon_{ijk}\sigma_k\)</span>、<span class="math notranslate nohighlight">\([l_i, x_j] = i\epsilon_{ijk} x_k\)</span> に従い、<span class="math notranslate nohighlight">\(x_i\)</span> どうしは交換し、<span class="math notranslate nohighlight">\(\sigma_i\)</span> は <span class="math notranslate nohighlight">\(l_i\)</span> とも <span class="math notranslate nohighlight">\(x_i\)</span> とも交換します。</p></li>
+<li><p>定義の演算子の並び順を保ちます。連続する位置の演算子の並びを <span class="math notranslate nohighlight">\(x, y, z\)</span> の順に並べ替えることと、パウリ行列を右端に寄せることだけを行い、ほかの交換関係は使いません。<span class="math notranslate nohighlight">\(l &lt; 2\)</span> の <span class="math notranslate nohighlight">\(G_{lm}\)</span> は 0 です。</p></li>
+<li><p>演算子は、位置を通して、異なるランクの軌道の間（例えば p-d）も含むどの軌道にも作用します。その行列要素は、対称性への適合と規格化の前の <code class="docutils literal notranslate"><span class="pre">Group.atomic_samb</span></code> のもので、動径の因子は <span class="math notranslate nohighlight">\(\langle r^k \rangle = 1\)</span> です。</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Group</span><span class="o">.</span><span class="n">atomic_multipole_operator</span><span class="p">(</span><span class="s2">"Q"</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># spin-orbit coupling, l.sigma / sqrt(3).</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \frac{\sqrt{3} l_{x} \sigma_{x}}{3} + \frac{\sqrt{3} l_{y} \sigma_{y}}{3} + \frac{\sqrt{3} l_{z} \sigma_{z}}{3}\]</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Group</span><span class="o">.</span><span class="n">atomic_multipole_operator</span><span class="p">(</span><span class="s2">"M"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># orbital angular momentum, l_z.</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle l_{z}\]</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Group</span><span class="o">.</span><span class="n">atomic_multipole_operator</span><span class="p">(</span><span class="s2">"T"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># magnetic toroidal dipole, [(r x l) - (l x r)]_z / 6.</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle - \frac{l_{x} y}{6} + \frac{l_{y} x}{6} + \frac{x l_{y}}{6} - \frac{y l_{x}}{6}\]</div>
+</div>
+</div>
+<p>ランク 2 までの演算子の一覧は<a class="reference internal" href="../atomic_multipole_table_ja.html"><span class="std std-doc">原子多極子演算子</span></a>にあります。動く例は <a class="reference external" href="https://github.com/CMT-MU/MultiPie/tree/main/docs/src/examples/atomic_multipole_operator.py">docs/src/examples/atomic_multipole_operator.py</a> です。</p>
+</section>
+<section id="ja-cluster-samb">
+<span id="id5"></span><h2>5. クラスター SAMB<a class="headerlink" href="#ja-cluster-samb" title="Link to this heading">#</a></h2>
+<p>Wyckoff 位置のクラスター SAMB は、その <span class="math notranslate nohighlight">\(N\)</span> 個の等価なサイト（またはボンド）上の関数で、群の既約表現の基底になります。ある量がクラスターのサイトやボンドにどう分布するかを表します。</p>
+<ul class="simple">
+<li><p><strong>サイト。</strong> サイトの Wyckoff 位置（例：<code class="docutils literal notranslate"><span class="pre">2a</span></code>）の <span class="math notranslate nohighlight">\(N\)</span> 個のサイト上の関数です。値は実数、タイプは <code class="docutils literal notranslate"><span class="pre">Q</span></code> で、完全な正規直交系をなします。</p></li>
+<li><p><strong>ボンド。</strong> ボンドの Wyckoff 位置の <span class="math notranslate nohighlight">\(N\)</span> 本のボンド上の関数です。ラベル <code class="docutils literal notranslate"><span class="pre">2b&#64;1o</span></code> は、中心がサイトの Wyckoff 位置 <code class="docutils literal notranslate"><span class="pre">1o</span></code> にある、ボンドの Wyckoff 位置 <code class="docutils literal notranslate"><span class="pre">2b</span></code>（2 本のボンド）を表します。対称なボンドの関数（ボンドの 2 つの向きで値が同じ。実数の飛び移り）は、タイプが <code class="docutils literal notranslate"><span class="pre">Q</span></code> または <code class="docutils literal notranslate"><span class="pre">G</span></code> で、値は実数です。反対称なもの（2 つの向きで符号が逆。虚数の飛び移り）は、タイプが <code class="docutils literal notranslate"><span class="pre">T</span></code> または <code class="docutils literal notranslate"><span class="pre">M</span></code> で、値は純虚数です。</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">Group.cluster_samb(wp)</span></code> と <code class="docutils literal notranslate"><span class="pre">Group.cluster_samb(wp,</span> <span class="pre">&quot;bond&quot;)</span></code> は、各キーについて、サイトまたはボンド上の値 <code class="docutils literal notranslate"><span class="pre">(dim,</span> <span class="pre">N)</span></code> と調和関数の式を与えます。D<span class="math notranslate nohighlight">\(_{\rm 4h}\)</span> では：</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="s2">"D4h"</span><span class="p">)</span>
+<span class="n">d</span><span class="o">.</span><span class="n">find_wyckoff_site</span><span class="p">(</span><span class="s2">"[0,0,1/4]"</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># two sites at (0, 0, ±z).</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>'2a'
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="p">(</span><span class="n">samb</span><span class="p">,</span> <span class="n">ex</span><span class="p">)</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">cluster_samb</span><span class="p">(</span><span class="s2">"2a"</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">():</span> <span class="nb">print</span><span class="p">(</span><span class="n">key</span><span class="p">[:</span><span class="mi">3</span><span class="p">],</span> <span class="n">samb</span><span class="p">,</span> <span class="n">ex</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>('Q', 0, 'A1g') [[sqrt(2)/2 sqrt(2)/2]] [1]
+('Q', 1, 'A2u') [[sqrt(2)/2 -sqrt(2)/2]] [z]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="p">(</span><span class="n">samb</span><span class="p">,</span> <span class="n">ex</span><span class="p">)</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">cluster_samb</span><span class="p">(</span><span class="s2">"2b@1o"</span><span class="p">,</span> <span class="s2">"bond"</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">():</span> <span class="nb">print</span><span class="p">(</span><span class="n">key</span><span class="p">[:</span><span class="mi">5</span><span class="p">],</span> <span class="n">samb</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>('Q', 0, 'A1g', -1, -1) [[sqrt(2)/2, sqrt(2)/2]]
+('Q', 2, 'B1g', -1, -1) [[-sqrt(2)/2, sqrt(2)/2]]
+('T', 1, 'Eu', -1, 1) [[I, 0], [0, I]]
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">2b&#64;1o</span></code> のボンドは、原点を通る <span class="math notranslate nohighlight">\(x\)</span> 方向と <span class="math notranslate nohighlight">\(y\)</span> 方向のものです。<span class="math notranslate nohighlight">\(\mathbb{Q}_{0}^{(b)}(A_{1g})\)</span> は一様な実数の飛び移り、<span class="math notranslate nohighlight">\(\mathbb{Q}_{2}^{(b)}(B_{1g})\)</span> は 2 本のボンドで符号が逆の実数の飛び移り（<span class="math notranslate nohighlight">\(x^2 - y^2\)</span> の対称性）、<span class="math notranslate nohighlight">\(\mathbb{T}_{1}^{(b)}(E_{u},a)\)</span> は <span class="math notranslate nohighlight">\((x, y)\)</span> の対称性を持つ虚数の飛び移りで、各ボンドに沿った電流です。</p>
+</section>
+<section id="ja-combined-samb">
+<span id="id6"></span><h2>6. 結合 SAMB と模型<a class="headerlink" href="#ja-combined-samb" title="Link to this heading">#</a></h2>
+<p>強束縛模型は、結合 SAMB で書きます。結合 SAMB は、原子 SAMB（サイト上の軌道、または bra と ket の軌道）とクラスター SAMB（サイトまたはボンド）の積を、Clebsch-Gordan 係数で 1 つの既約表現に結合したものです。</p>
+<div class="math notranslate nohighlight">
+\[
+Z_j = \sum_{\gamma_1 \gamma_2} C^{\gamma}_{\gamma_1 \gamma_2}\, X^{(\mathrm{a})}_{\gamma_1} \otimes Y^{(\mathrm{s/b})}_{\gamma_2},
+\qquad H = \sum_j z_j Z_j.
+\]</div>
+<p><code class="docutils literal notranslate"><span class="pre">MaterialModel.analyze(model_input)</span></code>（または <code class="docutils literal notranslate"><span class="pre">mp_create</span></code>）は、模型のサイト、軌道、ボンドについて、それらをすべて作ります。恒等表現に属する、タイプ <code class="docutils literal notranslate"><span class="pre">Q</span></code> と <code class="docutils literal notranslate"><span class="pre">G</span></code>（時間反転で偶）の SAMB が、ハミルトニアンに許されるものです。<code class="docutils literal notranslate"><span class="pre">&quot;SAMB_select&quot;:</span> <span class="pre">{&quot;Gamma&quot;:</span> <span class="pre">&quot;IR&quot;}</span></code> でそれらを選びます。グラフェン（C の <span class="math notranslate nohighlight">\(p_z\)</span> を持つ 2 つのサイト、第 2 近接までのボンド）では：</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mm</span> <span class="o">=</span> <span class="n">MaterialModel</span><span class="p">()</span>
+<span class="n">mm</span><span class="o">.</span><span class="n">analyze</span><span class="p">({</span><span class="s2">"model"</span><span class="p">:</span> <span class="s2">"graphene"</span><span class="p">,</span> <span class="s2">"group"</span><span class="p">:</span> <span class="mi">191</span><span class="p">,</span> <span class="s2">"cell"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"c"</span><span class="p">:</span> <span class="mi">4</span><span class="p">},</span> <span class="s2">"site"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"C"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"[1/3,2/3,0]"</span><span class="p">,</span> <span class="s2">"pz"</span><span class="p">)},</span>
+            <span class="s2">"bond"</span><span class="p">:</span> <span class="p">[(</span><span class="s2">"C"</span><span class="p">,</span> <span class="s2">"C"</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])],</span> <span class="s2">"SAMB_select"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"Gamma"</span><span class="p">:</span> <span class="s2">"IR"</span><span class="p">},</span> <span class="s2">"pdf"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"create"</span><span class="p">:</span> <span class="kc">False</span><span class="p">}})</span>
+<span class="k">for</span> <span class="n">z</span><span class="p">,</span> <span class="p">(</span><span class="n">symbol</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">comp</span><span class="p">)</span> <span class="ow">in</span> <span class="n">mm</span><span class="p">[</span><span class="s2">"combined_id"</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span> <span class="nb">print</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">symbol</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">samb_type</span><span class="o">.</span><span class="n">wyckoff</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">neighbor</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>z1 \mathbb{Q}_{0}^{(c)}(A_{1g}) 2c 0
+z2 \mathbb{Q}_{0}^{(c)}(A_{1g}) 3a@3f 1
+z3 \mathbb{Q}_{0}^{(c)}(A_{1g}) 6b@6l 2
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">mm[&quot;combined_id&quot;]</span></code> は、各 <span class="math notranslate nohighlight">\(z_j\)</span> について、その記号、サイトまたはボンドのクラスターとその近接の次数（<code class="docutils literal notranslate"><span class="pre">u.samb_type</span></code> と <code class="docutils literal notranslate"><span class="pre">u.neighbor</span></code>）、キー、成分を与えます。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mm[&quot;combined_samb&quot;]</span></code> は、各結合 SAMB の定義を与えます。原子とクラスターの各ブロックについての、<code class="docutils literal notranslate"><span class="pre">(coefficient,</span> <span class="pre">atomic</span> <span class="pre">key,</span> <span class="pre">atomic</span> <span class="pre">component,</span> <span class="pre">cluster</span> <span class="pre">key,</span> <span class="pre">cluster</span> <span class="pre">component)</span></code> のリストです。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mm.get_combined_samb_matrix(fmt=&quot;value&quot;)</span></code> は、各 <span class="math notranslate nohighlight">\(Z_j\)</span> の実空間での行列を、キー <code class="docutils literal notranslate"><span class="pre">(n1,</span> <span class="pre">n2,</span> <span class="pre">n3,</span> <span class="pre">m,</span> <span class="pre">n)</span></code> で与えます。キーは、格子ベクトル <span class="math notranslate nohighlight">\(\boldsymbol{R} = (n_1, n_2, n_3)\)</span> と、<code class="docutils literal notranslate"><span class="pre">mm[&quot;full_matrix&quot;][&quot;ket&quot;]</span></code> の bra と ket の添字です。例えば、グラフェンの最近接の飛び移り <span class="math notranslate nohighlight">\(Z_2\)</span> の要素は <span class="math notranslate nohighlight">\(1/\sqrt{6}\)</span> です（6 本のボンド、規格化済み）。</p></li>
+<li><p>模型の PDF（<code class="docutils literal notranslate"><span class="pre">&quot;pdf&quot;:</span> <span class="pre">{&quot;create&quot;:</span> <span class="pre">True}</span></code> を付けた <code class="docutils literal notranslate"><span class="pre">mp_create</span></code>）には、すべての SAMB がその定義とともに載ります。</p></li>
+</ul>
+<p>重み <span class="math notranslate nohighlight">\(z_j\)</span> は、<code class="docutils literal notranslate"><span class="pre">ModelAnalyzer</span></code>（または <code class="docutils literal notranslate"><span class="pre">mp_analyze</span></code>）の制御ファイル（control）<code class="docutils literal notranslate"><span class="pre">{&quot;samb&quot;:</span> <span class="pre">{&quot;parameter&quot;:</span> <span class="pre">{&quot;z1&quot;:</span> <span class="pre">...}}}</span></code> で与えます。各 <span class="math notranslate nohighlight">\(Z_j\)</span> は規格化されているので、<span class="math notranslate nohighlight">\(z_j\)</span> はエネルギーの単位を持ちます。<span class="math notranslate nohighlight">\(z_j\)</span> の番号付けは群のデータベースに依存しますが（<a class="reference internal" href="../changes_ja.html"><span class="std std-doc">Ver.2 からの変更点</span></a>を参照）、SAMB が張る空間は依存しません。完全な例は<a class="reference internal" href="../materials_ja.html"><span class="std std-doc">物質の例</span></a>を参照してください。</p>
+</section>
+<section id="ja-response-tensors">
+<span id="id7"></span><h2>7. 応答テンソル<a class="headerlink" href="#ja-response-tensors" title="Link to this heading">#</a></h2>
+<p>ランク 0〜4 の応答テンソルは、2 つの物理量（例えば電流と電場）を結び付けます。157 の磁気点群それぞれについて、<code class="docutils literal notranslate"><span class="pre">Group.response_tensor_all()</span></code> は対称性で許されるテンソルを、キーが <code class="docutils literal notranslate"><span class="pre">(X,</span> <span class="pre">rank,</span> <span class="pre">opt)</span></code> の辞書で与えます（<code class="docutils literal notranslate"><span class="pre">Group.response_tensor_all(X)</span></code> ではタイプ <code class="docutils literal notranslate"><span class="pre">X</span></code> のものだけ）。</p>
+<p><strong>タイプ。</strong> テンソルのタイプ <code class="docutils literal notranslate"><span class="pre">X</span></code> は、空間反転と時間反転での偶奇で決まります。4 つのタイプは通常、i-polar、i-axial、c-polar、c-axial テンソルと呼ばれます。i（c）は、時間反転でテンソルが不変である（符号を変える）ことを表します。</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>名称</p></th>
+<th class="head text-left"><p><code class="docutils literal notranslate"><span class="pre">X</span></code></p></th>
+<th class="head text-left"><p>空間反転</p></th>
+<th class="head text-left"><p>時間反転</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>i-polar テンソル</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">Q</span></code></p></td>
+<td class="text-left"><p>極性</p></td>
+<td class="text-left"><p>偶</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>i-axial テンソル</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">G</span></code></p></td>
+<td class="text-left"><p>軸性</p></td>
+<td class="text-left"><p>偶</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>c-polar テンソル</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">T</span></code></p></td>
+<td class="text-left"><p>極性</p></td>
+<td class="text-left"><p>奇</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>c-axial テンソル</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">M</span></code></p></td>
+<td class="text-left"><p>軸性</p></td>
+<td class="text-left"><p>奇</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>応答は、そのテンソルに現れる多極子が担います（下の <strong>Active multipole</strong> を参照）。例えば次のとおりです。</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>応答</p></th>
+<th class="head text-left"><p>テンソル <code class="docutils literal notranslate"><span class="pre">(X,</span> <span class="pre">rank,</span> <span class="pre">opt)</span></code></p></th>
+<th class="head text-left"><p>多極子</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>電気伝導度（対称部分）</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">(&quot;Q&quot;,</span> <span class="pre">2,</span> <span class="pre">&quot;s&quot;)</span></code></p></td>
+<td class="text-left"><p>電気単極子、電気四極子</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>ホール効果</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">(&quot;T&quot;,</span> <span class="pre">2,</span> <span class="pre">&quot;a&quot;)</span></code></p></td>
+<td class="text-left"><p>磁気双極子（MD）。例：<span class="math notranslate nohighlight">\(T_{xy} = \mathbb{M}_{z}\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>電気磁気効果</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">(&quot;M&quot;,</span> <span class="pre">2,</span> <span class="pre">&quot;s&quot;)</span></code>、<code class="docutils literal notranslate"><span class="pre">(&quot;M&quot;,</span> <span class="pre">2,</span> <span class="pre">&quot;a&quot;)</span></code></p></td>
+<td class="text-left"><p>対称部分は磁気単極子（MM）と磁気四極子（MQ）、反対称部分は磁気トロイダル双極子（MTD）</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>エーデルシュタイン（電流磁気）効果</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">(&quot;G&quot;,</span> <span class="pre">2,</span> <span class="pre">&quot;s&quot;)</span></code>、<code class="docutils literal notranslate"><span class="pre">(&quot;G&quot;,</span> <span class="pre">2,</span> <span class="pre">&quot;a&quot;)</span></code></p></td>
+<td class="text-left"><p>対称部分は電気トロイダル単極子（ETM）と電気トロイダル四極子（ETQ）、反対称部分は電気双極子（ED）</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>テンソルの部分（<code class="docutils literal notranslate"><span class="pre">opt</span></code>）。</strong> ランク 2 以上のテンソルは、添字の対称性で部分に分けます。添字の組について <code class="docutils literal notranslate"><span class="pre">s</span></code> は対称、<code class="docutils literal notranslate"><span class="pre">a</span></code> は反対称です。下の表は <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">=</span> <span class="pre">Q</span></code> の場合の関係です（ほかのタイプも同じ関係です）。<code class="docutils literal notranslate"><span class="pre">;</span></code> の前の添字が行列の行の組（または 3 つ組）、後ろの添字が列です。添字の組は</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">c</span></code> = <code class="docutils literal notranslate"><span class="pre">[x,</span> <span class="pre">y,</span> <span class="pre">z]</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">v</span></code> = <code class="docutils literal notranslate"><span class="pre">[xx,</span> <span class="pre">yy,</span> <span class="pre">zz,</span> <span class="pre">yz,</span> <span class="pre">zx,</span> <span class="pre">xy]</span></code>（対称な組）</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">a</span></code> = <code class="docutils literal notranslate"><span class="pre">[yz,</span> <span class="pre">zx,</span> <span class="pre">xy]</span></code>（反対称な組）</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">u</span></code> = <code class="docutils literal notranslate"><span class="pre">[xx,</span> <span class="pre">yy,</span> <span class="pre">zz,</span> <span class="pre">yz,</span> <span class="pre">zx,</span> <span class="pre">xy,</span> <span class="pre">zy,</span> <span class="pre">xz,</span> <span class="pre">yx]</span></code>（すべての組）</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">t</span></code> = <code class="docutils literal notranslate"><span class="pre">[xxx,</span> <span class="pre">yyy,</span> <span class="pre">zzz,</span> <span class="pre">yyz,</span> <span class="pre">zzx,</span> <span class="pre">xxy,</span> <span class="pre">yzz,</span> <span class="pre">zxx,</span> <span class="pre">xyy,</span> <span class="pre">xyz]</span></code>（対称な 3 つ組）</p></li>
+</ul>
+<p>で、「独立な数」は、対称性がないときのその部分の独立な成分の数です。</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>ランク</p></th>
+<th class="head text-left"><p><code class="docutils literal notranslate"><span class="pre">opt</span></code></p></th>
+<th class="head text-left"><p>成分間の関係</p></th>
+<th class="head text-left"><p>独立な数</p></th>
+<th class="head text-left"><p>行列（行 x 列）</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>0</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p></td>
+<td class="text-left"><p>-</p></td>
+<td class="text-left"><p>1</p></td>
+<td class="text-left"><p>1 x 1</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>1</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p></td>
+<td class="text-left"><p>-</p></td>
+<td class="text-left"><p>3</p></td>
+<td class="text-left"><p>1 x 3（<code class="docutils literal notranslate"><span class="pre">c</span></code>）</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>2</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">s</span></code></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(X_{ab} = X_{ba}\)</span></p></td>
+<td class="text-left"><p>6</p></td>
+<td class="text-left"><p>3 x 3（<code class="docutils literal notranslate"><span class="pre">c</span></code> x <code class="docutils literal notranslate"><span class="pre">c</span></code>）</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>2</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">a</span></code></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(X_{ab} = -X_{ba}\)</span></p></td>
+<td class="text-left"><p>3</p></td>
+<td class="text-left"><p>3 x 3（<code class="docutils literal notranslate"><span class="pre">c</span></code> x <code class="docutils literal notranslate"><span class="pre">c</span></code>）</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>3</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">ss</span></code></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(X_{abc}\)</span> は <span class="math notranslate nohighlight">\(a, b, c\)</span> について完全対称</p></td>
+<td class="text-left"><p>10</p></td>
+<td class="text-left"><p>6 x 3（<code class="docutils literal notranslate"><span class="pre">v</span></code> x <code class="docutils literal notranslate"><span class="pre">c</span></code>）</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>3</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">sa</span></code></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(X_{ab;c} = X_{ba;c} = -(X_{ac;b} + X_{bc;a})\)</span></p></td>
+<td class="text-left"><p>8</p></td>
+<td class="text-left"><p>6 x 3（<code class="docutils literal notranslate"><span class="pre">v</span></code> x <code class="docutils literal notranslate"><span class="pre">c</span></code>）</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>3</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">a</span></code></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(X_{ab;c} = -X_{ba;c}\)</span></p></td>
+<td class="text-left"><p>9</p></td>
+<td class="text-left"><p>3 x 3（<code class="docutils literal notranslate"><span class="pre">a</span></code> x <code class="docutils literal notranslate"><span class="pre">c</span></code>）</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>4</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">sss</span></code></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(X_{ab;cd} = X_{ba;cd} = X_{ab;dc} = X_{cd;ab}\)</span></p></td>
+<td class="text-left"><p>21</p></td>
+<td class="text-left"><p>6 x 6（<code class="docutils literal notranslate"><span class="pre">v</span></code> x <code class="docutils literal notranslate"><span class="pre">v</span></code>）</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>4</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">ssa</span></code></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(X_{ab;cd} = X_{ba;cd} = X_{ab;dc} = -X_{cd;ab}\)</span></p></td>
+<td class="text-left"><p>15</p></td>
+<td class="text-left"><p>6 x 6（<code class="docutils literal notranslate"><span class="pre">v</span></code> x <code class="docutils literal notranslate"><span class="pre">v</span></code>）</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>4</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">aas</span></code></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(X_{ab;cd} = -X_{ba;cd} = -X_{ab;dc} = X_{cd;ab}\)</span></p></td>
+<td class="text-left"><p>6</p></td>
+<td class="text-left"><p>3 x 3（<code class="docutils literal notranslate"><span class="pre">a</span></code> x <code class="docutils literal notranslate"><span class="pre">a</span></code>）</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>4</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">aaa</span></code></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(X_{ab;cd} = -X_{ba;cd} = -X_{ab;dc} = -X_{cd;ab}\)</span></p></td>
+<td class="text-left"><p>3</p></td>
+<td class="text-left"><p>3 x 3（<code class="docutils literal notranslate"><span class="pre">a</span></code> x <code class="docutils literal notranslate"><span class="pre">a</span></code>）</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>4</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">sa</span></code></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(X_{ab;cd} = X_{ba;cd} = -X_{ab;dc}\)</span></p></td>
+<td class="text-left"><p>18</p></td>
+<td class="text-left"><p>6 x 3（<code class="docutils literal notranslate"><span class="pre">v</span></code> x <code class="docutils literal notranslate"><span class="pre">a</span></code>）</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>4</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">as</span></code></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(X_{ab;cd} = -X_{ba;cd} = X_{ab;dc}\)</span></p></td>
+<td class="text-left"><p>18</p></td>
+<td class="text-left"><p>3 x 6（<code class="docutils literal notranslate"><span class="pre">a</span></code> x <code class="docutils literal notranslate"><span class="pre">v</span></code>）</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>4</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">s</span></code></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(X_{ab;c;d} = X_{ba;c;d}\)</span>（<code class="docutils literal notranslate"><span class="pre">sss</span></code> + <code class="docutils literal notranslate"><span class="pre">ssa</span></code> + <code class="docutils literal notranslate"><span class="pre">sa</span></code>）</p></td>
+<td class="text-left"><p>54</p></td>
+<td class="text-left"><p>6 x 9（<code class="docutils literal notranslate"><span class="pre">v</span></code> x <code class="docutils literal notranslate"><span class="pre">u</span></code>）</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>4</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">a</span></code></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(X_{ab;c;d} = -X_{ba;c;d}\)</span>（<code class="docutils literal notranslate"><span class="pre">aas</span></code> + <code class="docutils literal notranslate"><span class="pre">aaa</span></code> + <code class="docutils literal notranslate"><span class="pre">as</span></code>）</p></td>
+<td class="text-left"><p>27</p></td>
+<td class="text-left"><p>3 x 9（<code class="docutils literal notranslate"><span class="pre">a</span></code> x <code class="docutils literal notranslate"><span class="pre">u</span></code>）</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>4</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">t</span></code></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(X_{abc;d}\)</span> は <span class="math notranslate nohighlight">\(a, b, c\)</span> について完全対称</p></td>
+<td class="text-left"><p>30</p></td>
+<td class="text-left"><p>10 x 3（<code class="docutils literal notranslate"><span class="pre">t</span></code> x <code class="docutils literal notranslate"><span class="pre">c</span></code>）</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>例えば、電気伝導度 <span class="math notranslate nohighlight">\(\sigma_{ab}\)</span>（<span class="math notranslate nohighlight">\(j_a = \sigma_{ab} E_b\)</span>）はランク 2 のテンソルです。その対称部分（<code class="docutils literal notranslate"><span class="pre">s</span></code>）が通常の伝導度で、反対称部分（<code class="docutils literal notranslate"><span class="pre">a</span></code>、時間反転で奇）がホール伝導度です。ホール伝導度は磁気双極子が担います。電気磁気テンソル <span class="math notranslate nohighlight">\(\alpha_{ab}\)</span>（<span class="math notranslate nohighlight">\(P_a = \alpha_{ab} H_b\)</span>）は軸性で時間反転に奇（<code class="docutils literal notranslate"><span class="pre">M</span></code>）です。その対称部分は磁気単極子と磁気四極子が、反対称部分は磁気トロイダル双極子が担います。エーデルシュタイン（電流磁気）効果のテンソル <span class="math notranslate nohighlight">\(\chi_{ab}\)</span>（<span class="math notranslate nohighlight">\(M_a = \chi_{ab} j_b\)</span>）は軸性で時間反転に偶（<code class="docutils literal notranslate"><span class="pre">G</span></code>）です。その対称部分はキラルな結晶のように電気トロイダル単極子と四極子が、反対称部分は極性結晶のように電気双極子が担います。</p>
+<p><strong>なぜそのタイプと多極子になるのか。</strong> 応答テンソルのタイプ <code class="docutils literal notranslate"><span class="pre">X</span></code> は、テンソルが結び付ける 2 つの量の偶奇から決まります。空間反転では、電場 <span class="math notranslate nohighlight">\(\boldsymbol{E}\)</span>、電流 <span class="math notranslate nohighlight">\(\boldsymbol{j}\)</span>、電気分極 <span class="math notranslate nohighlight">\(\boldsymbol{P}\)</span> は極性ベクトル、磁場 <span class="math notranslate nohighlight">\(\boldsymbol{H}\)</span> と磁化 <span class="math notranslate nohighlight">\(\boldsymbol{M}\)</span> は軸性ベクトルです。時間反転では、<span class="math notranslate nohighlight">\(\boldsymbol{E}\)</span> と <span class="math notranslate nohighlight">\(\boldsymbol{P}\)</span> は偶、<span class="math notranslate nohighlight">\(\boldsymbol{j}\)</span>、<span class="math notranslate nohighlight">\(\boldsymbol{H}\)</span>、<span class="math notranslate nohighlight">\(\boldsymbol{M}\)</span> は奇です。応答と外場を結び付けるテンソルは、その偶奇の積を持ちます。</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>テンソル</p></th>
+<th class="head text-left"><p>応答 = テンソル x 外場</p></th>
+<th class="head text-left"><p>空間反転</p></th>
+<th class="head text-left"><p>時間反転</p></th>
+<th class="head text-left"><p><code class="docutils literal notranslate"><span class="pre">X</span></code></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>電気磁気 <span class="math notranslate nohighlight">\(\alpha_{ab}\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(P_a = \alpha_{ab} H_b\)</span></p></td>
+<td class="text-left"><p>極性 x 軸性 = 軸性</p></td>
+<td class="text-left"><p>偶 x 奇 = 奇</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">M</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>エーデルシュタイン <span class="math notranslate nohighlight">\(\chi_{ab}\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(M_a = \chi_{ab} j_b\)</span></p></td>
+<td class="text-left"><p>軸性 x 極性 = 軸性</p></td>
+<td class="text-left"><p>奇 x 奇 = 偶</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">G</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>伝導度 <span class="math notranslate nohighlight">\(\sigma_{ab}\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(j_a = \sigma_{ab} E_b\)</span></p></td>
+<td class="text-left"><p>極性 x 極性 = 極性</p></td>
+<td class="text-left"><p>下を参照</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">Q</span></code>（<code class="docutils literal notranslate"><span class="pre">s</span></code>）、<code class="docutils literal notranslate"><span class="pre">T</span></code>（<code class="docutils literal notranslate"><span class="pre">a</span></code>）</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>伝導度では、エネルギーを散逸する応答そのものは時間反転の対称性を持ちません。時間反転で奇な秩序変数 <span class="math notranslate nohighlight">\(\boldsymbol{X}\)</span>（例えば磁化）についてのオンサーガーの関係 <span class="math notranslate nohighlight">\(\sigma_{ab}(\boldsymbol{X}) = \sigma_{ba}(-\boldsymbol{X})\)</span> により、伝導度は 2 つの部分に分かれます。対称部分は、緩和時間 <span class="math notranslate nohighlight">\(\tau\)</span> に比例する散逸的な（オームの）伝導度で、<span class="math notranslate nohighlight">\(\boldsymbol{X}\)</span> について偶です。散逸そのものと同じく時間反転で奇な因子 <span class="math notranslate nohighlight">\(\tau\)</span> を除くと、物質の性質としては偶（<code class="docutils literal notranslate"><span class="pre">Q</span></code>）で、どの物質にもあります。反対称部分は、散逸のないホール伝導度で、<span class="math notranslate nohighlight">\(\boldsymbol{X}\)</span> について奇（<code class="docutils literal notranslate"><span class="pre">T</span></code>）であり、物質の磁化か磁場によって時間反転が破れていることが必要です。この意味で <code class="docutils literal notranslate"><span class="pre">X</span></code> は、その応答のために物質が持つべき対称性、つまり応答を担う多極子のタイプです。</p>
+<p>多極子は、ランク 2 のテンソル <span class="math notranslate nohighlight">\(X_{ab}\)</span> を既約な部分に分けることで決まります。トレース（ランク 0）、反対称部分（ベクトル <span class="math notranslate nohighlight">\(\frac{1}{2}\epsilon_{abc} X_{bc}\)</span>、ランク 1）、対称でトレースのない部分（ランク 2）です。ランク 0 と 2 の部分はテンソルと同じタイプです。反対称部分のベクトルは、<span class="math notranslate nohighlight">\(\epsilon_{abc}\)</span> が軸性なので空間反転の偶奇が逆になり、時間反転の偶奇は同じです。</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p><code class="docutils literal notranslate"><span class="pre">X</span></code>（極性・軸性、時間反転）</p></th>
+<th class="head text-left"><p>ランク 0</p></th>
+<th class="head text-left"><p>ランク 1（反対称）</p></th>
+<th class="head text-left"><p>ランク 2</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">Q</span></code>（極性、偶）</p></td>
+<td class="text-left"><p>電気単極子 <span class="math notranslate nohighlight">\(\mathbb{Q}_0\)</span></p></td>
+<td class="text-left"><p>電気トロイダル双極子 <span class="math notranslate nohighlight">\(\mathbb{G}_1\)</span></p></td>
+<td class="text-left"><p>電気四極子 <span class="math notranslate nohighlight">\(\mathbb{Q}_2\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">G</span></code>（軸性、偶）</p></td>
+<td class="text-left"><p>電気トロイダル単極子 <span class="math notranslate nohighlight">\(\mathbb{G}_0\)</span></p></td>
+<td class="text-left"><p>電気双極子 <span class="math notranslate nohighlight">\(\mathbb{Q}_1\)</span></p></td>
+<td class="text-left"><p>電気トロイダル四極子 <span class="math notranslate nohighlight">\(\mathbb{G}_2\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">T</span></code>（極性、奇）</p></td>
+<td class="text-left"><p>磁気トロイダル単極子 <span class="math notranslate nohighlight">\(\mathbb{T}_0\)</span></p></td>
+<td class="text-left"><p>磁気双極子 <span class="math notranslate nohighlight">\(\mathbb{M}_1\)</span></p></td>
+<td class="text-left"><p>磁気トロイダル四極子 <span class="math notranslate nohighlight">\(\mathbb{T}_2\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">M</span></code>（軸性、奇）</p></td>
+<td class="text-left"><p>磁気単極子 <span class="math notranslate nohighlight">\(\mathbb{M}_0\)</span></p></td>
+<td class="text-left"><p>磁気トロイダル双極子 <span class="math notranslate nohighlight">\(\mathbb{T}_1\)</span></p></td>
+<td class="text-left"><p>磁気四極子 <span class="math notranslate nohighlight">\(\mathbb{M}_2\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>このため、ホール効果（<code class="docutils literal notranslate"><span class="pre">T</span></code>、反対称）には磁気双極子（磁化または磁場）が、電気磁気効果には磁気単極子または磁気四極子（対称部分）か磁気トロイダル双極子（反対称部分）が、エーデルシュタイン効果には電気トロイダル単極子または四極子（対称部分。キラリティ）か電気双極子（反対称部分。極性）が必要です。より高いランクのテンソルも同じように分解します。</p>
+<p><strong>Active multipole。</strong> テンソルの各成分を多極子（既約なデカルト成分）に分解します。0 でない値をとれるのは、群の active multipole（時間反転を含むすべての操作で不変な多極子）だけです。これから、0 でない成分とその間の関係が決まります。<code class="docutils literal notranslate"><span class="pre">Group.active_multipole</span></code> がその一覧で、名前は <code class="docutils literal notranslate"><span class="pre">X</span></code> と軌道名をつなげたもの（例：<code class="docutils literal notranslate"><span class="pre">Qdu</span></code>）です。<code class="docutils literal notranslate"><span class="pre">multipole_rank</span></code> はその名前のランクを、<code class="docutils literal notranslate"><span class="pre">convert_mp_alias</span></code> は別名を与えます（どちらも <code class="docutils literal notranslate"><span class="pre">multipie.util.util_response_tensor</span></code>）。例えば <code class="docutils literal notranslate"><span class="pre">Qdu</span></code> のランクは 2、別名は <code class="docutils literal notranslate"><span class="pre">Qu</span></code> です。</p>
+<p><strong>値。</strong> 各キー <code class="docutils literal notranslate"><span class="pre">(X,</span> <span class="pre">rank,</span> <span class="pre">opt)</span></code> の値は、成分の行列（<span class="math notranslate nohighlight">\(Q_{xyz}\)</span> のような記号。0 になる成分は <code class="docutils literal notranslate"><span class="pre">0</span></code>。行と列は上の表のとおり）と、0 でない各成分を active multipole で書いた式の辞書です。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="s2">"MPG:15.1.53"</span><span class="p">)</span>  <span class="c1"># 4/mmm.</span>
+<span class="n">m</span><span class="o">.</span><span class="n">active_multipole</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>['Qs', 'Qdu', 'Qg', 'Qgu', 'Ts', 'Tdu', 'Tg', 'Tgu']
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tensor</span><span class="p">,</span> <span class="n">ex</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">response_tensor_all</span><span class="p">()[(</span><span class="s2">"Q"</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">"s"</span><span class="p">)]</span>  <span class="c1"># e.g., the electric conductivity.</span>
+<span class="n">tensor</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[Q_{xx}, 0, 0],
+       [0, Q_{xx}, 0],
+       [0, 0, Q_{zz}]], dtype=object)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{Q_{xx}: \mathbb{Q}_{0}^{(1)} - \mathbb{Q}_{u}^{(1)},
+ Q_{zz}: \mathbb{Q}_{0}^{(1)} + 2*\mathbb{Q}_{u}^{(1)}}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="s2">"MPG:15.6.58"</span><span class="p">)</span>  <span class="c1"># 4/mm'm', a ferromagnet along z.</span>
+<span class="n">tensor</span><span class="p">,</span> <span class="n">ex</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">response_tensor_all</span><span class="p">()[(</span><span class="s2">"T"</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">"a"</span><span class="p">)]</span>  <span class="c1"># e.g., the Hall effect.</span>
+<span class="n">tensor</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0, T_{xy}, 0],
+       [-T_{xy}, 0, 0],
+       [0, 0, 0]], dtype=object)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{T_{xy}: \mathbb{M}_{z}^{(1)}}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="s2">"MPG:20.4.74"</span><span class="p">)</span>  <span class="c1"># -3'm', e.g., Cr2O3.</span>
+<span class="n">tensor</span><span class="p">,</span> <span class="n">ex</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">response_tensor_all</span><span class="p">()[(</span><span class="s2">"M"</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">"s"</span><span class="p">)]</span>  <span class="c1"># magneto-electric effect.</span>
+<span class="n">tensor</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[M_{xx}, 0, 0],
+       [0, M_{xx}, 0],
+       [0, 0, M_{zz}]], dtype=object)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{M_{xx}: \mathbb{M}_{0}^{(1)} - \mathbb{M}_{u}^{(1)},
+ M_{zz}: \mathbb{M}_{0}^{(1)} + 2*\mathbb{M}_{u}^{(1)}}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="s2">"MPG:13.2.45"</span><span class="p">)</span>  <span class="c1"># 4mm1', a polar crystal (e.g., a Rashba system).</span>
+<span class="n">tensor</span><span class="p">,</span> <span class="n">ex</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">response_tensor_all</span><span class="p">()[(</span><span class="s2">"G"</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">"a"</span><span class="p">)]</span>  <span class="c1"># Edelstein effect.</span>
+<span class="n">tensor</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0, G_{xy}, 0],
+       [-G_{xy}, 0, 0],
+       [0, 0, 0]], dtype=object)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{G_{xy}: \mathbb{Q}_{z}^{(1)}}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="s2">"MPG:18.2.66"</span><span class="p">)</span>  <span class="c1"># 321', a chiral crystal (e.g., Te).</span>
+<span class="n">tensor</span><span class="p">,</span> <span class="n">ex</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">response_tensor_all</span><span class="p">()[(</span><span class="s2">"G"</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">"s"</span><span class="p">)]</span>  <span class="c1"># Edelstein effect.</span>
+<span class="n">tensor</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[G_{xx}, 0, 0],
+       [0, G_{xx}, 0],
+       [0, 0, G_{zz}]], dtype=object)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{G_{xx}: \mathbb{G}_{0}^{(1)} - \mathbb{G}_{u}^{(1)},
+ G_{zz}: \mathbb{G}_{0}^{(1)} + 2*\mathbb{G}_{u}^{(1)}}
+</pre></div>
+</div>
+</div>
+</div>
+<p>4/mmm では、伝導度は <span class="math notranslate nohighlight">\(\mathrm{diag}(Q_{xx}, Q_{xx}, Q_{zz})\)</span> で、active な単極子 <span class="math notranslate nohighlight">\(\mathbb{Q}_0\)</span> と四極子 <span class="math notranslate nohighlight">\(\mathbb{Q}_u\)</span> で与えられます。強磁性体 4/mm’m’ では、0 でない反対称成分は <span class="math notranslate nohighlight">\(T_{xy} = -T_{yx}\)</span> だけで、active な磁気双極子 <span class="math notranslate nohighlight">\(\mathbb{M}_z\)</span>、つまり <span class="math notranslate nohighlight">\(z\)</span> 方向の磁化で与えられます。これがホール効果です。-3’m’（例えば Cr<span class="math notranslate nohighlight">\(_2\)</span>O<span class="math notranslate nohighlight">\(_3\)</span>）では、電気磁気テンソルは <span class="math notranslate nohighlight">\(\mathrm{diag}(M_{xx}, M_{xx}, M_{zz})\)</span> で、active な磁気単極子 <span class="math notranslate nohighlight">\(\mathbb{M}_0\)</span> と磁気四極子 <span class="math notranslate nohighlight">\(\mathbb{M}_u\)</span> で与えられます。エーデルシュタイン効果は、極性の 4mm1’ では反対称部分に現れ、active な電気双極子 <span class="math notranslate nohighlight">\(\mathbb{Q}_z\)</span> で与えられます。キラルな 321’ では対称部分に現れ、active な電気トロイダル単極子 <span class="math notranslate nohighlight">\(\mathbb{G}_0\)</span> と四極子 <span class="math notranslate nohighlight">\(\mathbb{G}_u\)</span> で与えられます。</p>
+</section>
+<section id="ja-multipolar-harmonics">
+<span id="id8"></span><h2>8. 点群多極子調和関数<a class="headerlink" href="#ja-multipolar-harmonics" title="Link to this heading">#</a></h2>
+<p>点群多極子調和関数は、点群調和関数と、各点の内部自由度（例えば変位、電気分極、スピン）を組み合わせたものです。</p>
+<p><strong>内部自由度。</strong> 内部自由度は、そのランク <code class="docutils literal notranslate"><span class="pre">s</span></code>（<code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">=</span> <span class="pre">1</span></code>：ベクトル、<code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">=</span> <span class="pre">2,</span> <span class="pre">3</span></code>：より高いランクのテンソル）とタイプ <code class="docutils literal notranslate"><span class="pre">x</span></code> で決めます。タイプは極性（<code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">q</span></code>。例：変位、電気分極）か軸性（<code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">g</span></code>。例：スピン、回転）です。その基底 <span class="math notranslate nohighlight">\(e_\nu\)</span> は、そのタイプのランク <code class="docutils literal notranslate"><span class="pre">s</span></code> の軌道の組で、立方晶系（O<span class="math notranslate nohighlight">\(_{\rm h}\)</span>）または六方晶系（D<span class="math notranslate nohighlight">\(_{\rm 6h}\)</span>）のものです。記号は <span class="math notranslate nohighlight">\(Q_\nu\)</span>（<code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">q</span></code>）または <span class="math notranslate nohighlight">\(G_\nu\)</span>（<code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">g</span></code>）で、例えば <code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">=</span> <span class="pre">1</span></code> では <span class="math notranslate nohighlight">\((Q_x, Q_y, Q_z)\)</span> または <span class="math notranslate nohighlight">\((G_x, G_y, G_z)\)</span> です。基底は <code class="docutils literal notranslate"><span class="pre">Group.global_info()[&quot;harmonics&quot;][&quot;internal_basis&quot;]</span></code> に、系（<code class="docutils literal notranslate"><span class="pre">&quot;cubic&quot;</span></code> または <code class="docutils literal notranslate"><span class="pre">&quot;hexagonal&quot;</span></code>）と <code class="docutils literal notranslate"><span class="pre">(s,</span> <span class="pre">x)</span></code> ごとに入っています。</p>
+<p><strong>多極子球面調和関数。</strong> 全ランク <span class="math notranslate nohighlight">\(l\)</span> の多極子球面調和関数は、ランク <span class="math notranslate nohighlight">\(l + k\)</span> の軌道部分と内部基底を結合したものです。</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+O_{lm}^{(s)}(k) = i^{k+s} (-1)^{l+m} \sqrt{2l+1} \sum_{\nu}
+\begin{pmatrix} l+k &amp; l &amp; s \\ m-\nu &amp; -m &amp; \nu \end{pmatrix} O_{l+k, m-\nu}\, e_\nu,
+\qquad k = -s, \dots, s.
+\end{split}\]</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p><strong>軌道部分 <span class="math notranslate nohighlight">\(O_{l+k, m-\nu}(\boldsymbol{r}) = \sqrt{4\pi/(2l+2k+1)}\, r^{l+k} Y_{l+k, m-\nu}(\hat{\boldsymbol{r}})\)</span> は、常に <span class="math notranslate nohighlight">\(\boldsymbol{r}\)</span> の極性の関数です。</strong> そのため、タイプ <code class="docutils literal notranslate"><span class="pre">X</span></code>（極性 <code class="docutils literal notranslate"><span class="pre">Q</span></code> か軸性 <code class="docutils literal notranslate"><span class="pre">G</span></code>）は、下の表のとおり、内部タイプ <code class="docutils literal notranslate"><span class="pre">x</span></code> と <code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">+</span> <span class="pre">k</span></code> の偶奇で決まります。これは MultiPie の点群多極子調和関数の定義で、H. Kusunose, R. Oiwa, and S. Hayami, J. Phys. Soc. Jpn. <strong>89</strong>, 104704 (2020) の原子多極子の定義とは異なります。原子多極子では、軌道部分が極性（<code class="docutils literal notranslate"><span class="pre">Q</span></code>、<code class="docutils literal notranslate"><span class="pre">T</span></code>）にも軸性（<code class="docutils literal notranslate"><span class="pre">G</span></code>、<code class="docutils literal notranslate"><span class="pre">M</span></code>。例えば軌道角運動量）にもなります。</p>
+</div>
+<p><strong>多極子のタイプ。</strong> 内部タイプ <code class="docutils literal notranslate"><span class="pre">x</span></code> を固定すると、多極子のタイプ <code class="docutils literal notranslate"><span class="pre">X</span></code> は <code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">+</span> <span class="pre">k</span></code> の偶奇で決まります。</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>内部タイプ</p></th>
+<th class="head text-left"><p><code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">+</span> <span class="pre">k</span></code> 偶</p></th>
+<th class="head text-left"><p><code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">+</span> <span class="pre">k</span></code> 奇</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">q</span></code>（極性）</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">Q</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">G</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">g</span></code>（軸性）</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">G</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">Q</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>つまり、<code class="docutils literal notranslate"><span class="pre">X</span></code> の極性・軸性は、<code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">+</span> <span class="pre">k</span></code> が偶なら内部基底と同じ、奇なら逆です。点群の点群多極子調和関数は、点群調和関数 <code class="docutils literal notranslate"><span class="pre">(X,</span> <span class="pre">l,</span> <span class="pre">Gamma,</span> <span class="pre">n)</span></code> の <span class="math notranslate nohighlight">\(U\)</span> を使った <span class="math notranslate nohighlight">\(\sum_m U_{m\gamma} O_{lm}^{(s)}(k)\)</span> です。</p>
+<p><strong>磁気的な内部自由度。</strong> 内部基底 <span class="math notranslate nohighlight">\(Q_\nu\)</span> と <span class="math notranslate nohighlight">\(G_\nu\)</span> は時間反転で偶です。スピンや磁気モーメントのような、時間反転で奇な磁気的な内部自由度では、タイプを <code class="docutils literal notranslate"><span class="pre">Q</span></code> <span class="math notranslate nohighlight">\(\to\)</span> <code class="docutils literal notranslate"><span class="pre">T</span></code>、<code class="docutils literal notranslate"><span class="pre">G</span></code> <span class="math notranslate nohighlight">\(\to\)</span> <code class="docutils literal notranslate"><span class="pre">M</span></code> と読み替えてください。極性・軸性は変わらず、多極子が時間反転で奇になります。例えば、軸性ベクトル <span class="math notranslate nohighlight">\(\boldsymbol{G}\)</span> をスピン <span class="math notranslate nohighlight">\(\boldsymbol{\sigma}\)</span> とすると、<span class="math notranslate nohighlight">\(\boldsymbol{r} \cdot \boldsymbol{G}\)</span>（<span class="math notranslate nohighlight">\(\vec{\mathbb{G}}_{0}^{(1,1)}[g]\)</span>）は磁気単極子 <span class="math notranslate nohighlight">\(\boldsymbol{r} \cdot \boldsymbol{\sigma}\)</span>、<span class="math notranslate nohighlight">\(\boldsymbol{G} \times \boldsymbol{r}\)</span>（<span class="math notranslate nohighlight">\(\vec{\mathbb{Q}}_{1}^{(1,0)}[g]\)</span>）は磁気トロイダル双極子 <span class="math notranslate nohighlight">\(\boldsymbol{\sigma} \times \boldsymbol{r}\)</span> です。</p>
+<p><strong>キーと値。</strong> キーは <code class="docutils literal notranslate"><span class="pre">PGMultipoleType(X,</span> <span class="pre">l,</span> <span class="pre">Gamma,</span> <span class="pre">n,</span> <span class="pre">p,</span> <span class="pre">s,</span> <span class="pre">k,</span> <span class="pre">x)</span></code> で、<code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">=</span> <span class="pre">1,</span> <span class="pre">2,</span> <span class="pre">3</span></code>、<code class="docutils literal notranslate"><span class="pre">l</span> <span class="pre">&lt;=</span> <span class="pre">3</span></code>、47 の点群すべてについて与えられます。<code class="docutils literal notranslate"><span class="pre">Group.multipolar_harmonics</span></code> は、各キーについて、内部基底の係数（<code class="docutils literal notranslate"><span class="pre">dim</span></code> x 内部基底の関数の数。<span class="math notranslate nohighlight">\(x, y, z\)</span> の多項式）と、内部基底の記号で書いた式を与えます。記号には矢印と上付きの <span class="math notranslate nohighlight">\((s, k)\)</span> が付き、内部タイプは <span class="math notranslate nohighlight">\([q]\)</span> または <span class="math notranslate nohighlight">\([g]\)</span> と書きます（例：<span class="math notranslate nohighlight">\(\vec{\mathbb{G}}_{1}^{(1,0)}[q](T_{1g})\)</span>）。<code class="docutils literal notranslate"><span class="pre">Group.tag_multipole(key,</span> <span class="pre">latex=True,</span> <span class="pre">vector=True)</span></code> は矢印の付いた記号を与えます。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coeff</span><span class="p">,</span> <span class="n">ex</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">multipolar_harmonics</span><span class="p">[(</span><span class="s2">"G"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">"T1g"</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"q"</span><span class="p">)]</span>  <span class="c1"># Oh.</span>
+<span class="n">coeff</span>  <span class="c1"># rows: components of T1g, columns: Q_x, Q_y, Q_z.</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0, sqrt(2)*z/2, -sqrt(2)*y/2],
+       [-sqrt(2)*z/2, 0, sqrt(2)*x/2],
+       [sqrt(2)*y/2, -sqrt(2)*x/2, 0]], dtype=object)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([sqrt(2)*Q_{y}*z/2 - sqrt(2)*Q_{z}*y/2,
+       -sqrt(2)*Q_{x}*z/2 + sqrt(2)*Q_{z}*x/2,
+       sqrt(2)*Q_{x}*y/2 - sqrt(2)*Q_{y}*x/2], dtype=object)
+</pre></div>
+</div>
+</div>
+</div>
+<p><em>例（O<span class="math notranslate nohighlight">\(_{\rm h}\)</span>、<code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">=</span> <span class="pre">1</span></code>）。</em> 内部基底を極性ベクトル <span class="math notranslate nohighlight">\(\boldsymbol{Q} = (Q_x, Q_y, Q_z)\)</span>（<code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">q</span></code>）または軸性ベクトル <span class="math notranslate nohighlight">\(\boldsymbol{G} = (G_x, G_y, G_z)\)</span>（<code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">g</span></code>）とすると：</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>キー</p></th>
+<th class="head text-left"><p>記号</p></th>
+<th class="head text-left"><p>式</p></th>
+<th class="head text-left"><p>意味</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">(&quot;Q&quot;,</span> <span class="pre">0,</span> <span class="pre">&quot;A1g&quot;,</span> <span class="pre">-1,</span> <span class="pre">-1,</span> <span class="pre">1,</span> <span class="pre">1,</span> <span class="pre">&quot;q&quot;)</span></code></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\vec{\mathbb{Q}}_{0}^{(1,1)}[q](A_{1g})\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\((xQ_x + yQ_y + zQ_z)/\sqrt{3}\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\boldsymbol{r} \cdot \boldsymbol{Q}\)</span>、電気単極子</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">(&quot;Q&quot;,</span> <span class="pre">1,</span> <span class="pre">&quot;T1u&quot;,</span> <span class="pre">-1,</span> <span class="pre">-1,</span> <span class="pre">1,</span> <span class="pre">-1,</span> <span class="pre">&quot;q&quot;)</span></code></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\vec{\mathbb{Q}}_{1}^{(1,-1)}[q](T_{1u})\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\((Q_x, Q_y, Q_z)\)</span></p></td>
+<td class="text-left"><p>極性ベクトルそのもの</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">(&quot;G&quot;,</span> <span class="pre">1,</span> <span class="pre">&quot;T1g&quot;,</span> <span class="pre">-1,</span> <span class="pre">-1,</span> <span class="pre">1,</span> <span class="pre">0,</span> <span class="pre">&quot;q&quot;)</span></code></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\vec{\mathbb{G}}_{1}^{(1,0)}[q](T_{1g})\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\((zQ_y - yQ_z, xQ_z - zQ_x, yQ_x - xQ_y)/\sqrt{2}\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\boldsymbol{Q} \times \boldsymbol{r}\)</span>、電気トロイダル双極子</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">(&quot;G&quot;,</span> <span class="pre">0,</span> <span class="pre">&quot;A1u&quot;,</span> <span class="pre">-1,</span> <span class="pre">-1,</span> <span class="pre">1,</span> <span class="pre">1,</span> <span class="pre">&quot;g&quot;)</span></code></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\vec{\mathbb{G}}_{0}^{(1,1)}[g](A_{1u})\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\((xG_x + yG_y + zG_z)/\sqrt{3}\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\boldsymbol{r} \cdot \boldsymbol{G}\)</span>、電気トロイダル単極子</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>例えば、サイト <span class="math notranslate nohighlight">\(\boldsymbol{r}_i\)</span> 上の電気双極子 <span class="math notranslate nohighlight">\(\boldsymbol{Q}(\boldsymbol{r}_i)\)</span> が中心のまわりを回るような配置、<span class="math notranslate nohighlight">\(\boldsymbol{Q} \propto \hat{z} \times \boldsymbol{r}\)</span> は、<span class="math notranslate nohighlight">\(z\)</span> 方向の電気トロイダル双極子 <span class="math notranslate nohighlight">\(\vec{\mathbb{G}}_{1}^{(1,0)}[q](T_{1g})\)</span> です。</p>
+<p><em>例：波数に依存するスピン軌道相互作用。</em> 軸性ベクトル <span class="math notranslate nohighlight">\(\boldsymbol{G}\)</span> をスピン <span class="math notranslate nohighlight">\(\boldsymbol{\sigma}\)</span> と、座標 <span class="math notranslate nohighlight">\((x, y, z)\)</span> を波数 <span class="math notranslate nohighlight">\((k_x, k_y, k_z)\)</span> と読み替えると、<code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">g</span></code>、<code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">=</span> <span class="pre">1</span></code> の点群多極子調和関数から、<span class="math notranslate nohighlight">\(\boldsymbol{k}\)</span>-<span class="math notranslate nohighlight">\(\boldsymbol{\sigma}\)</span> の形のスピン軌道相互作用が読み取れます。<span class="math notranslate nohighlight">\(\boldsymbol{\sigma}\)</span> も <span class="math notranslate nohighlight">\(\boldsymbol{k}\)</span> も時間反転で奇なので、上の読み替え <code class="docutils literal notranslate"><span class="pre">Q</span></code> <span class="math notranslate nohighlight">\(\to\)</span> <code class="docutils literal notranslate"><span class="pre">T</span></code>、<code class="docutils literal notranslate"><span class="pre">G</span></code> <span class="math notranslate nohighlight">\(\to\)</span> <code class="docutils literal notranslate"><span class="pre">M</span></code> は打ち消し合い、タイプは表のとおり（<code class="docutils literal notranslate"><span class="pre">Q</span></code> または <code class="docutils literal notranslate"><span class="pre">G</span></code>。ハミルトニアンの項として時間反転で偶）です。スピン軌道相互作用は、その点群多極子調和関数が点群の恒等表現に属するとき、結晶で許されます。<span class="math notranslate nohighlight">\(\boldsymbol{k}\)</span> について 1 次のものは次のとおりです。</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>点群</p></th>
+<th class="head text-left"><p>キー</p></th>
+<th class="head text-left"><p>式</p></th>
+<th class="head text-left"><p>スピン軌道相互作用</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>C<span class="math notranslate nohighlight">\(_{\rm 4v}\)</span>（極性）</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">(&quot;Q&quot;,</span> <span class="pre">1,</span> <span class="pre">&quot;A1&quot;,</span> <span class="pre">-1,</span> <span class="pre">-1,</span> <span class="pre">1,</span> <span class="pre">0,</span> <span class="pre">&quot;g&quot;)</span></code></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\((yG_x - xG_y)/\sqrt{2}\)</span></p></td>
+<td class="text-left"><p>ラシュバ型、<span class="math notranslate nohighlight">\(k_y\sigma_x - k_x\sigma_y\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>D<span class="math notranslate nohighlight">\(_{\rm 2d}\)</span></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">(&quot;G&quot;,</span> <span class="pre">2,</span> <span class="pre">&quot;A1&quot;,</span> <span class="pre">-1,</span> <span class="pre">-1,</span> <span class="pre">1,</span> <span class="pre">-1,</span> <span class="pre">&quot;g&quot;)</span></code></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\((xG_x - yG_y)/\sqrt{2}\)</span></p></td>
+<td class="text-left"><p>ドレッセルハウス型、<span class="math notranslate nohighlight">\(k_x\sigma_x - k_y\sigma_y\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>O、D<span class="math notranslate nohighlight">\(_3\)</span>（カイラル）</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">(&quot;G&quot;,</span> <span class="pre">0,</span> <span class="pre">&quot;A1&quot;,</span> <span class="pre">-1,</span> <span class="pre">-1,</span> <span class="pre">1,</span> <span class="pre">1,</span> <span class="pre">&quot;g&quot;)</span></code></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\((xG_x + yG_y + zG_z)/\sqrt{3}\)</span></p></td>
+<td class="text-left"><p>放射状（ワイル型）、<span class="math notranslate nohighlight">\(\boldsymbol{k} \cdot \boldsymbol{\sigma}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>ラシュバ型の項は <span class="math notranslate nohighlight">\(z\)</span> 方向の電気双極子 <span class="math notranslate nohighlight">\(\vec{\mathbb{Q}}_{1}^{(1,0)}[g]\)</span> で、C<span class="math notranslate nohighlight">\(_{\rm 4v}\)</span> の極性によって許されます。放射状の項は電気トロイダル単極子 <span class="math notranslate nohighlight">\(\vec{\mathbb{G}}_{0}^{(1,1)}[g]\)</span> で、O や D<span class="math notranslate nohighlight">\(_3\)</span> のカイラリティによって許されます（例えば Te。<a class="reference internal" href="../materials_ja.html"><span class="std std-doc">物質の例</span></a>を参照）。D<span class="math notranslate nohighlight">\(_3\)</span> では、異方的な <span class="math notranslate nohighlight">\(\vec{\mathbb{G}}_{2}^{(1,-1)}[g](A_1)\)</span>、<span class="math notranslate nohighlight">\((2zG_z - xG_x - yG_y)/\sqrt{6}\)</span>、つまり <span class="math notranslate nohighlight">\(2k_z\sigma_z - k_x\sigma_x - k_y\sigma_y\)</span> も許されます。式は、例えば <code class="docutils literal notranslate"><span class="pre">Group(&quot;C4v&quot;).multipolar_harmonics[(&quot;Q&quot;,</span> <span class="pre">1,</span> <span class="pre">&quot;A1&quot;,</span> <span class="pre">-1,</span> <span class="pre">-1,</span> <span class="pre">1,</span> <span class="pre">0,</span> <span class="pre">&quot;g&quot;)]</span></code> で得られます。</p>
+<p id="ja-multipolar-harmonics-expression"><strong>成分ごとの式。</strong> <code class="docutils literal notranslate"><span class="pre">Group.multipolar_harmonics_expression(X,</span> <span class="pre">l,</span> <span class="pre">m,</span> <span class="pre">s=0,</span> <span class="pre">k=0,</span> <span class="pre">x=&quot;q&quot;,</span> <span class="pre">internal=&quot;cubic&quot;)</span></code> は、球面基底の成分 <span class="math notranslate nohighlight">\(m\)</span>（<span class="math notranslate nohighlight">\(-l \le m \le l\)</span>）の <span class="math notranslate nohighlight">\(O_{lm}^{(s)}(k)\)</span> そのもの、つまり <span class="math notranslate nohighlight">\(x, y, z\)</span> の多項式に内部基底の記号をかけた式を与えます。<span class="math notranslate nohighlight">\(l \le 3\)</span> に限らず、内部ランクは <code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">=</span> <span class="pre">0,</span> <span class="pre">1,</span> <span class="pre">2,</span> <span class="pre">3</span></code>（<code class="docutils literal notranslate"><span class="pre">k</span> <span class="pre">=</span> <span class="pre">-s,</span> <span class="pre">...,</span> <span class="pre">s</span></code>、<code class="docutils literal notranslate"><span class="pre">l</span> <span class="pre">+</span> <span class="pre">k</span> <span class="pre">&gt;=</span> <span class="pre">0</span></code>）で、内部基底は立方晶系（<code class="docutils literal notranslate"><span class="pre">&quot;cubic&quot;</span></code>）または六方晶系（<code class="docutils literal notranslate"><span class="pre">&quot;hexagonal&quot;</span></code>）のものです。</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">X</span></code>（<code class="docutils literal notranslate"><span class="pre">Q</span></code>、<code class="docutils literal notranslate"><span class="pre">G</span></code>、<code class="docutils literal notranslate"><span class="pre">T</span></code>、<code class="docutils literal notranslate"><span class="pre">M</span></code>）と <code class="docutils literal notranslate"><span class="pre">x</span></code> の両方を与えます。軌道部分は常に極性なので、偶奇の合わない <code class="docutils literal notranslate"><span class="pre">X</span></code> と <code class="docutils literal notranslate"><span class="pre">x</span></code> の組み合わせ（上の表にないもの）は 0 になります。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">=</span> <span class="pre">T,</span> <span class="pre">M</span></code> では、内部基底の記号を <code class="docutils literal notranslate"><span class="pre">Q</span></code> <span class="math notranslate nohighlight">\(\to\)</span> <code class="docutils literal notranslate"><span class="pre">T</span></code>、<code class="docutils literal notranslate"><span class="pre">G</span></code> <span class="math notranslate nohighlight">\(\to\)</span> <code class="docutils literal notranslate"><span class="pre">M</span></code> と読み替えます（磁気的な内部自由度）。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">=</span> <span class="pre">0</span></code> では、内部基底の記号は <span class="math notranslate nohighlight">\(G_{0}\)</span> と <span class="math notranslate nohighlight">\(M_{0}\)</span>（<code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">g</span></code> の <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">=</span> <span class="pre">G,</span> <span class="pre">M</span></code>）のときだけかけます。<span class="math notranslate nohighlight">\(Q_{0}\)</span> と <span class="math notranslate nohighlight">\(T_{0}\)</span> では、<code class="docutils literal notranslate"><span class="pre">Group.harmonics</span></code> と同じく多項式だけを与えます。</p></li>
+<li><p>点群の点群多極子調和関数は、<code class="docutils literal notranslate"><span class="pre">Group.harmonics</span></code> の <span class="math notranslate nohighlight">\(U\)</span>（<code class="docutils literal notranslate"><span class="pre">T</span></code>/<code class="docutils literal notranslate"><span class="pre">M</span></code> では <code class="docutils literal notranslate"><span class="pre">Q</span></code>/<code class="docutils literal notranslate"><span class="pre">G</span></code> のもの）を使った <span class="math notranslate nohighlight">\(\sum_m U_{m\gamma} O_{lm}^{(s)}(k)\)</span> です。</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Group</span><span class="o">.</span><span class="n">multipolar_harmonics_expression</span><span class="p">(</span><span class="s2">"Q"</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"q"</span><span class="p">)</span>  <span class="c1"># r.Q / sqrt(3).</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \frac{\sqrt{3} Q_{x} x}{3} + \frac{\sqrt{3} Q_{y} y}{3} + \frac{\sqrt{3} Q_{z} z}{3}\]</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Group</span><span class="o">.</span><span class="n">multipolar_harmonics_expression</span><span class="p">(</span><span class="s2">"M"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"g"</span><span class="p">)</span>  <span class="c1"># magnetic: G -&gt; M, (y M_x - x M_y)/sqrt(2).</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle 0\]</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Group</span><span class="o">.</span><span class="n">multipolar_harmonics_expression</span><span class="p">(</span><span class="s2">"Q"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"q"</span><span class="p">)</span>  <span class="c1"># the wrong parity: 0.</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle 0\]</div>
+</div>
+</div>
+<p>動く例は <a class="reference external" href="https://github.com/CMT-MU/MultiPie/tree/main/docs/src/examples/multipolar_harmonics_expression.py">docs/src/examples/multipolar_harmonics_expression.py</a> です。</p>
+</section>
+<section id="pdf">
+<span id="ja-brief-manual"></span><h2>9. 簡易マニュアルとチュートリアル（PDF）<a class="headerlink" href="#pdf" title="Link to this heading">#</a></h2>
+<p>MultiPie を紹介する PDF の文書が二つあります。プログラムの簡易マニュアルと、MultiPie と QtDraw で多極子と群論を学ぶチュートリアル記事です。英語版は<a class="reference internal" href="../guide.html#brief-manual"><span class="std std-ref">英語のユーザーガイド</span></a>にあります。</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>どちらも MultiPie Ver.2 向けに書かれています（簡易マニュアルは Version 2.3、チュートリアルは MultiPie 2.0.7 と QtDraw 3.1.0）。考え方と作業の流れは Ver.3 でも同じですが、名前や結果の一部が異なります。例えば、f 軌道 <code class="docutils literal notranslate"><span class="pre">f2</span></code>, <code class="docutils literal notranslate"><span class="pre">f1</span></code>, <code class="docutils literal notranslate"><span class="pre">f3x</span></code>, <code class="docutils literal notranslate"><span class="pre">f3y</span></code> の名前が変わり、<code class="docutils literal notranslate"><span class="pre">Group(tag,</span> <span class="pre">with_opt=True)</span></code> は廃止され、SAMB の番号や符号が異なることがあります。現在の版については <a class="reference internal" href="../changes_ja.html"><span class="std std-doc">Ver.2 からの変更点</span></a>と上の各節を見てください。</p>
+</div>
+<section id="multipie">
+<h3>MultiPie 簡易マニュアル<a class="headerlink" href="#multipie" title="Link to this heading">#</a></h3>
+<p><a class="reference download internal" download="" href="../../_downloads/a0a21cca24d254d8b1a77d9576efdcb8/brief_manual_ja.pdf"><span class="xref download myst">PDF</span></a></p>
+<p>MultiPie の概要をスライドでまとめたものです。群論的なデータ、SAMB（電気 <code class="docutils literal notranslate"><span class="pre">Q</span></code>、磁気 <code class="docutils literal notranslate"><span class="pre">M</span></code>、磁気トロイダル <code class="docutils literal notranslate"><span class="pre">T</span></code>、電気トロイダル <code class="docutils literal notranslate"><span class="pre">G</span></code> 多極子）、グラフェンの例、<code class="docutils literal notranslate"><span class="pre">mp_create</span></code> と <code class="docutils literal notranslate"><span class="pre">mp_analyze</span></code> による作業の流れ（入力ファイルと制御ファイルのすべてのキー）、<code class="docutils literal notranslate"><span class="pre">Group</span></code>、<code class="docutils literal notranslate"><span class="pre">MaterialModel</span></code>、<code class="docutils literal notranslate"><span class="pre">ModelAnalyzer</span></code> の各クラスの概要を扱います。</p>
+</section>
+<section id="qtdraw-multipie">
+<h3>QtDraw を用いた MultiPie のチュートリアル<a class="headerlink" href="#qtdraw-multipie" title="Link to this heading">#</a></h3>
+<p><a class="reference download internal" download="" href="../../_downloads/19307b7e322cf1ce4466b616b00ce71c/tutorial_via_qtdraw_ja.pdf"><span class="xref download myst">PDF</span></a></p>
+<p><em>MultiPie と QtDraw で学ぶ多極子表現と群論</em>（大槻純也、岡山大学）。QtDraw の画面を使い、利用者の立場から MultiPie を紹介します。基本的な使い方、軌道の結晶場分裂と既約表現の積の分解、p 軌道の原子多極子、URhSn（D<span class="math notranslate nohighlight">\(_{\rm 3h}\)</span>）の U サイトの電気四極子のクラスター多極子による分類、iPython からの利用を扱います。</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./src/guide"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ja-multipole-key">1. 多極子のキー</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ja-point-group-harmonics">2. 点群調和関数</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ja-atomic-orbitals">3. 原子軌道</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#samb">4. 原子 SAMB</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ja-cluster-samb">5. クラスター SAMB</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ja-combined-samb">6. 結合 SAMB と模型</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ja-response-tensors">7. 応答テンソル</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ja-multipolar-harmonics">8. 点群多極子調和関数</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pdf">9. 簡易マニュアルとチュートリアル（PDF）</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multipie">MultiPie 簡易マニュアル</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qtdraw-multipie">QtDraw を用いた MultiPie のチュートリアル</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Hiroaki Kusunose and Rikuto Oiwa
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2021-.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

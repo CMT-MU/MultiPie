@@ -1,0 +1,895 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>はじめに &#8212; MultiPie</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=6a604523" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=2106c826" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=a8e58a58"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script data-sd-tabs-storage-prefix="sphinx-design-tab-id-" src="../_static/design-tabs.js?v=fcb327ea"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'src/getting_started_ja';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script src="../_static/custom.js?v=7f87e22d"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../README.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/multipie_logo.png" class="logo__image only-light" alt="MultiPie - Home"/>
+    <img src="../_static/multipie_logo.png" class="logo__image only-dark pst-js-only" alt="MultiPie - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installing MultiPie</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference external" href="https://cmt-mu.github.io/MultiPieGen/src/group_info.html">Group information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guide.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="atomic_multipole_table.html">Atomic multipole operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="group.html">Using the Group class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="materials.html">Examples of materials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="post_processing.html">Post-processing tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changes.html">Changes from Ver.2</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="api_core.html">Core</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="api_core/init.html">Type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_core/cmd.html">Create function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_core/group.html">Group</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_core/material_model.html">Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_core/model_analyzer.html">ModelAnalyzer</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="api_util.html">Utility</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_atomic_multipole.html">Atomic multipole</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_atomic_multipole_operator.html">Atomic multipole operator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_binary.html">Binary data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_crystal.html">Crystal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_dict.html">Dict</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_gram_schmidt.html">Gram-Schmidt orthonormalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_harmonics.html">Harmonics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_material_model_pdf.html">PDF creator for Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_material_model.html">Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_model_analyzer.html">Model Analyzer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_multipolar_harmonics.html">Multipolar harmonics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_pdf_latex.html">PDF creator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_plot.html">Plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_response_tensor.html">Response tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_samb.html">SAMB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_tag.html">Tag</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_wannier.html">Wannier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_wyckoff.html">Wyckoff position</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util.html">Versatile</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/CMT-MU/MultiPie.git" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>はじめに</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">チュートリアル</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">模型の入力ファイル</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">制御ファイル</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">後処理ツール</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">入力ファイルの形式</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">コマンドラインツール</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">並列計算</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">出力ファイル</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>はじめに<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<p>英語版は<a class="reference internal" href="getting_started.html"><span class="std std-doc">こちら</span></a>です。</p>
+<section id="id2">
+<h2>チュートリアル<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p>チュートリアルとして、<strong>グラフェン</strong> の場合に模型を生成する手順を説明します。</p>
+<ol class="arabic">
+<li><p><a class="reference external" href="https://github.com/CMT-MU/MultiPie/tree/main/docs/src/examples">examples</a> ディレクトリから <code class="docutils literal notranslate"><span class="pre">graphene_in.py</span></code> と <code class="docutils literal notranslate"><span class="pre">graphene_ctrl.py</span></code> をダウンロードします。</p></li>
+<li><p>上の二つのファイルがある場所で、次を実行します：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>mp_create<span class="w"> </span>-v<span class="w"> </span>graphene_in.py
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">graphene</span></code> ディレクトリの下に、次のファイルが作られます：</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">graphene.pkl</span></code>：模型の情報のファイル（バイナリ）</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">graphene.tex</span></code>、<code class="docutils literal notranslate"><span class="pre">graphene.pdf</span></code>：模型の情報のまとめ</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">graphene.qtdw</span></code>：模型の構造の QtDraw ファイル</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">.tex</span></code>/<code class="docutils literal notranslate"><span class="pre">.pdf</span></code> ファイルは、<code class="docutils literal notranslate"><span class="pre">&quot;pdf&quot;:</span> <span class="pre">{&quot;create&quot;:</span> <span class="pre">True}</span></code>（デフォルト）で、かつ<a class="reference internal" href="install_ja.html"><span class="std std-doc">インストール</span></a>に挙げた TeX の構成要素（pLaTeX、<code class="docutils literal notranslate"><span class="pre">ptex2pdf</span></code>、LaTeX パッケージ）が使えるときだけ作られます：</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">latex</span></code> が見つからない場合は、どちらのファイルも書き出しません（<code class="docutils literal notranslate"><span class="pre">-v</span></code> を付けると、その旨を表示します）。</p></li>
+<li><p>そうでなければ、まず <code class="docutils literal notranslate"><span class="pre">.tex</span></code> ファイルを書き出します。そのあと <code class="docutils literal notranslate"><span class="pre">ptex2pdf</span></code> や LaTeX パッケージがないとわかった場合や、コンパイルが失敗したり終わらなかったりした場合は、警告を表示し、以前の実行で作られたものや不完全なものである <code class="docutils literal notranslate"><span class="pre">.pdf</span></code> ファイルを削除します（例えば権限がないなどの理由で削除できない場合を除きます）。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.pkl</span></code> ファイルとほかの出力は、どの場合にも書き出します。</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">.qtdw</span></code> ファイルは、<code class="docutils literal notranslate"><span class="pre">&quot;qtdraw&quot;:</span> <span class="pre">{&quot;create&quot;:</span> <span class="pre">True}</span></code>（デフォルト）で、かつ QtDraw がインストールされているときだけ作られます（<code class="docutils literal notranslate"><span class="pre">-v</span></code> を付けると、QtDraw が見つからない場合にその旨を表示します）。</p>
+</li>
+<li><p>模型を解析する（例えば分散を描く）には、次を実行します：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>mp_analyze<span class="w"> </span>-v<span class="w"> </span>graphene_ctrl.py
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">graphene</span></code> ディレクトリの下に、次のファイルが作られます：</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">info/graphene_matrix.py</span></code>、<code class="docutils literal notranslate"><span class="pre">info/graphene_hr.dat</span></code>：選んだ SAMB の行列の完全な情報</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">output/</span></code>：物理量のさまざまな出力</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">samb/</span></code>：SAMB の QtDraw ファイル。<code class="docutils literal notranslate"><span class="pre">samb_figure</span></code> が <code class="docutils literal notranslate"><span class="pre">True</span></code> で、QtDraw がインストールされていて、模型が <code class="docutils literal notranslate"><span class="pre">&quot;qtdraw&quot;:</span> <span class="pre">{&quot;create&quot;:</span> <span class="pre">True}</span></code> で作られたときに書き出します。<code class="docutils literal notranslate"><span class="pre">samb_figure</span></code> が <code class="docutils literal notranslate"><span class="pre">True</span></code> でもほかの条件のどれかが満たされない場合は、警告を表示し、ディレクトリは作りません。</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">graphene.pkl</span></code> を対話的に扱うには、IPython のインターフェースを使います。詳しくは <a class="reference internal" href="examples/analyze_model.html"><span class="std std-doc">analyze_model.ipynb</span></a> を参照してください。</p></li>
+</ol>
+</section>
+<section id="id3">
+<h2>模型の入力ファイル<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<p>グラフェンの場合、模型の入力ファイルは次のとおりです。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># graphene_in.py</span>
+<span class="n">graphene_in</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"model"</span><span class="p">:</span> <span class="s2">"graphene"</span><span class="p">,</span>  <span class="c1">#  name of model.</span>
+    <span class="s2">"group"</span><span class="p">:</span> <span class="mi">191</span><span class="p">,</span>  <span class="c1"># No. of space group.</span>
+    <span class="s2">"cell"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"c"</span><span class="p">:</span> <span class="mi">4</span><span class="p">},</span>  <span class="c1"># set large enough interlayer distance.</span>
+    <span class="c1">#</span>
+    <span class="s2">"site"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"C"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"[1/3,2/3,0]"</span><span class="p">,</span> <span class="s2">"pz"</span><span class="p">)},</span>  <span class="c1"># positions of C site and its orbital.</span>
+    <span class="s2">"bond"</span><span class="p">:</span> <span class="p">[(</span><span class="s2">"C"</span><span class="p">,</span> <span class="s2">"C"</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])],</span>  <span class="c1"># C-C bonds up to 2nd neighbors.</span>
+    <span class="c1">#</span>
+    <span class="s2">"spinful"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>  <span class="c1"># spinless.</span>
+    <span class="c1">#</span>
+    <span class="s2">"SAMB_select"</span><span class="p">:</span> <span class="p">{</span>  <span class="c1"># select combined SAMB.</span>
+        <span class="s2">"X"</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># all Q/G/M/T.</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>ほかの設定はデフォルト値で与えられ、それは次のとおりです：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># default model input.</span>
+<span class="n">default_model</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"model"</span><span class="p">:</span> <span class="s2">"unknown"</span><span class="p">,</span>
+    <span class="s2">"group"</span><span class="p">:</span> <span class="s2">"C1"</span><span class="p">,</span>  <span class="c1"># PG or SG tag (MPG/MSG are not supported).</span>
+    <span class="s2">"cell"</span><span class="p">:</span> <span class="p">{},</span>
+    <span class="s2">"spinful"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="c1"># acceptable orbital names (tesseral) in site:</span>
+    <span class="c1">#   s, p=(px, py, pz), d=(dv, dxy, dxz, dyz, du), f=(fc, fs, fbz, f3, fx, fy, faz).</span>
+    <span class="c1">#   (Ver.3 renamed f2, f1, f3x, f3y to fc, fs, fx, fy.)</span>
+    <span class="c1">#   (s,u), (s,d), ...</span>
+    <span class="c1">#   (1/2,s), (1/2,p), (3/2,p), (3/2,d), (5/2,d), (5/2,f), (7/2,f).</span>
+    <span class="s2">"site"</span><span class="p">:</span> <span class="p">{},</span>
+    <span class="s2">"bond"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"SAMB_select"</span><span class="p">:</span> <span class="p">{</span>  <span class="c1"># select combined SAMB.</span>
+        <span class="s2">"X"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"Q"</span><span class="p">,</span> <span class="s2">"G"</span><span class="p">],</span>  <span class="c1"># type, "Q/G/M/T", []=all.</span>
+        <span class="s2">"l"</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># rank, []=all.</span>
+        <span class="s2">"Gamma"</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># "IR"=identity, []=all, "..."/["...","..."]=specified irreps.</span>
+        <span class="s2">"s"</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># spin, 0/1, []=all.</span>
+    <span class="p">},</span>
+    <span class="s2">"atomic_select"</span><span class="p">:</span> <span class="p">{</span>  <span class="c1"># select atomic SAMB.</span>
+        <span class="s2">"X"</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># type, "Q/G/M/T", []=all.</span>
+        <span class="s2">"l"</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># rank, []=all.</span>
+        <span class="s2">"Gamma"</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># "IR"=identity, []=all, "..."/["...","..."]=specified irreps.</span>
+        <span class="s2">"s"</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># spin, 0/1, []=all.</span>
+    <span class="p">},</span>
+    <span class="s2">"site_select"</span><span class="p">:</span> <span class="p">{</span>  <span class="c1"># select site-cluster SAMB.</span>
+        <span class="s2">"l"</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># rank, []=all.</span>
+        <span class="s2">"Gamma"</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># "IR"=identity, []=all, "..."/["...","..."]=specified irreps.</span>
+    <span class="p">},</span>
+    <span class="s2">"bond_select"</span><span class="p">:</span> <span class="p">{</span>  <span class="c1"># select bond-cluster SAMB.</span>
+        <span class="s2">"X"</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># type, "Q/G/M/T", []=all.</span>
+        <span class="s2">"l"</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># rank, []=all.</span>
+        <span class="s2">"Gamma"</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># "IR"=identity, []=all, "..."/["...","..."]=specified irreps.</span>
+    <span class="p">},</span>
+    <span class="s2">"toroidal_priority"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s2">"qtdraw"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"create"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>  <span class="c1"># create QtDraw file ?</span>
+        <span class="s2">"mode"</span><span class="p">:</span> <span class="s2">"standard"</span><span class="p">,</span>  <span class="c1"># mode, "standard/detail".</span>
+        <span class="s2">"view"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># [a,b,c], if None, default=[6,5,1].</span>
+        <span class="c1">#</span>
+        <span class="s2">"rep_site"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>  <span class="c1"># show representative site ?</span>
+        <span class="s2">"rep_bond"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>  <span class="c1"># show representative bond ?</span>
+        <span class="c1">#</span>
+        <span class="s2">"max_neighbor"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>  <span class="c1"># max. neighbor to draw.</span>
+        <span class="s2">"cell_mode"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># "off/single/all", if None, single for SG, off for PG.</span>
+        <span class="s2">"scale"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># default or magnification scale.</span>
+        <span class="s2">"site_radius"</span><span class="p">:</span> <span class="mf">0.07</span><span class="p">,</span>  <span class="c1"># base site radius.</span>
+        <span class="s2">"bond_width"</span><span class="p">:</span> <span class="mf">0.02</span><span class="p">,</span>  <span class="c1"># base bond width.</span>
+    <span class="p">},</span>
+    <span class="s2">"pdf"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"create"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>  <span class="c1"># create PDF file ?</span>
+        <span class="s2">"common_samb"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>  <span class="c1"># display common SAMB ?</span>
+        <span class="s2">"harmonics"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>  <span class="c1"># display harmonics ?</span>
+        <span class="s2">"max_neighbor"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>  <span class="c1"># max. neighbor to write (None: all).</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>グラフェンの場合のように、どの設定でも上書きできます。</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>MultiPie Ver.3 では、4 つの f 軌道の名前を変えました。古い名前はもう受け付けないので、模型の入力ファイルで置き換えてください。</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Ver.2</p></th>
+<th class="head text-left"><p>Ver.3</p></th>
+<th class="head text-left"><p>Wannier90</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">f2</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">fc</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">fx(x2-3y2)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">f1</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">fs</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">fy(3x2-y2)</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">f3x</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">fx</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">fxz2</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">f3y</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">fy</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">fyz2</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="id4">
+<h2>制御ファイル<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<p>グラフェンの場合、制御ファイルは次のとおりです。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># graphene_ctrl.py</span>
+<span class="n">graphene_ctrl</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"samb"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"model"</span><span class="p">:</span> <span class="s2">"graphene"</span><span class="p">,</span>
+        <span class="s2">"parameter"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"z2"</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="s2">"samb_figure"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s2">"k_multipole"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="s2">"output"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"dispersion"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"k_path"</span><span class="p">:</span> <span class="s2">"Γ-M-K-Γ"</span><span class="p">,</span>
+            <span class="s2">"k_point"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"Γ"</span><span class="p">:</span> <span class="s2">"[0,0,0]"</span><span class="p">,</span> <span class="s2">"K"</span><span class="p">:</span> <span class="s2">"[1/3,1/3,0]"</span><span class="p">,</span> <span class="s2">"M"</span><span class="p">:</span> <span class="s2">"[1/2,0,0]"</span><span class="p">},</span>
+        <span class="p">},</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>制御ファイルのデフォルト値は次のとおりです：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># default control.</span>
+<span class="n">default_control</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"mode"</span><span class="p">:</span> <span class="s2">"samb"</span><span class="p">,</span>  <span class="c1"># samb (SAMB-based only), wannier (wannier-based only), symcw (SAMB and wannier based).</span>
+    <span class="s2">"grid"</span><span class="p">:</span> <span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">),</span>  <span class="c1"># k-grid size (b1, b2, b3).</span>
+    <span class="s2">"samb"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"model"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># model name for .pkl (optional in wannier mode).</span>
+        <span class="s2">"select"</span><span class="p">:</span> <span class="p">{</span>  <span class="c1"># SAMB select condition, where S=site name, R=orbital rank, N=neighbor bond.</span>
+            <span class="c1"># "site": [("A", [1, 2])],  # S or (S, [R]) in list.</span>
+            <span class="c1"># "bond": [[0, 1, 2]],  # S1;S2, N, [N], (S1;S2, N), (S1;S2, [N]), (S1;S2, R1;R2), (S1;S2, R1;R2, N) or (S1;S2, R1;R2, [N]) in list.</span>
+            <span class="c1"># "X": [],  # SAMB type Q/G/T/M in list. empty []=all.</span>
+            <span class="c1"># "l": [],  # SAMB rank, 0, 1, ..., 11 in list. empty []=all.</span>
+            <span class="c1"># "Gamma": ["A1g"],  # SAMB irreps. in list. "IR"=identity irrep., empty []=all.</span>
+            <span class="c1"># "s": [],  # SAMB internal rank, 0,1 in list. empty []=all</span>
+        <span class="p">},</span>
+        <span class="s2">"parameter"</span><span class="p">:</span> <span class="p">{</span>  <span class="c1"># SAMB with finite weight (float, or str of sympy const., e.g., "sqrt(2)"), or filename of z_j dict (.py file relative to model_name/info/).</span>
+            <span class="c1"># "z1": 1.0,</span>
+        <span class="p">},</span>
+        <span class="s2">"samb_figure"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>  <span class="c1"># save SAMB QtDraw files ?</span>
+        <span class="s2">"k_multipole"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>  <span class="c1"># compute momentum multipole ?</span>
+        <span class="s2">"NG_sum_rule"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>  <span class="c1"># Nambu-Goldstone sum rule ?</span>
+    <span class="p">},</span>
+    <span class="s2">"wannier"</span><span class="p">:</span> <span class="p">{</span>  <span class="c1"># Closest Wannier (CW) or SymWannier setting.</span>
+        <span class="s2">"dir"</span><span class="p">:</span> <span class="s2">"wannier"</span><span class="p">,</span>  <span class="c1"># directory for wannier input, i.e., "./seedname/wannier".</span>
+        <span class="s2">"seedname"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># read +(.win, .nnkp, _hr.dat, _wsvec.dat if exists, ...).</span>
+        <span class="s2">"ket_wannier"</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># correspondence between Wannier and MultiPie basis, [MultiPie ket name, "orbital@site(sublattice)"] in Wannier order. If empty, automatically determined.</span>
+    <span class="p">},</span>
+    <span class="s2">"output"</span><span class="p">:</span> <span class="p">{</span>  <span class="c1"># physical quantity setting.</span>
+        <span class="s2">"dir"</span><span class="p">:</span> <span class="s2">"output"</span><span class="p">,</span>  <span class="c1">#  output directory.</span>
+        <span class="s2">"fourier"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"tb_gauge"</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>  <span class="c1"># TB gauge ?</span>
+        <span class="s2">"dos"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>  <span class="c1"># DOS: False (none), "auto" (partial DOS for each site cluster and orbital, spin summed), or [[ket name]] (sum of partial DOS of the kets in each list). total DOS is always included.</span>
+        <span class="s2">"dos_e_num"</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>  <span class="c1"># number of energy points of DOS (range includes all eigenvalues).</span>
+        <span class="s2">"dos_width"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># Gaussian broadening of DOS. if None, 1% of the band width.</span>
+        <span class="s2">"dos_method"</span><span class="p">:</span> <span class="s2">"gaussian"</span><span class="p">,</span>  <span class="c1"># DOS method, "gaussian" or "tetrahedron" (optimized tetrahedron method by libtetrabz).</span>
+        <span class="s2">"dos_spin"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>  <span class="c1"># resolve spin, u/d, of spinful basis in "auto" DOS ?</span>
+        <span class="s2">"n_electron"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># number of occupied states per primitive cell (one per band) to determine fermi energy. if None, 0 (samb mode) or that of seedname.win.</span>
+        <span class="s2">"save_k_path"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>  <span class="c1"># save Ek, Uk along k path in .npz ?</span>
+        <span class="s2">"save_k_full"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>  <span class="c1"># save Ek, Uk on full k grid in .npz ?</span>
+        <span class="s2">"callback_k_path"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># file (.py, relative to topdir) defining callback_k_path(Ek, Uk, info), called with eigen system along k path.</span>
+        <span class="s2">"callback_k_full"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># file (.py, relative to topdir) defining callback_k_full(Ek, Uk, info), called with eigen system on full k grid.</span>
+        <span class="s2">"callback_info"</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># quantities added to info of callback_k_full as info[keyword], [k,n] on full k grid. local quantity, "Sx/Sy/Sz/Lx/Ly/Lz/Qu/Qv/Qyz/Qxz/Qxy", or SAMB, "zj".</span>
+        <span class="s2">"dispersion"</span><span class="p">:</span> <span class="p">{</span>  <span class="c1"># dispersion info.</span>
+            <span class="s2">"power"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># positive power p: Ek^p is used in the dispersion and DOS, with fermi energy = 0 (n_electron cannot be used). -|Ek|^p if Ek^p is not a real number (negative Ek with non-integer p). if None, power=1.</span>
+            <span class="s2">"k_path"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>  <span class="c1"># symmetry line, separated by "-". disconnected points by "|". if empty str, default values are used for k_path and k_point.</span>
+            <span class="s2">"k_point"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"Γ"</span><span class="p">:</span> <span class="s2">"[0,0,0]"</span><span class="p">},</span>  <span class="c1"># k-point (fractional, primitive cell of model, or of seedname.win without model).</span>
+            <span class="s2">"local"</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># local quantity, "Sx/Sy/Sz/Lx/Ly/Lz/Qu/Qv/Qyz/Qxz/Qxy".</span>
+            <span class="s2">"weight"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>  <span class="c1"># orbital weight (fat band): False (none), "auto" (each site cluster and orbital, spin summed), or [[ket name]].</span>
+            <span class="s2">"z"</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># SAMB, [zj], expectation value &lt;u_kn|Z_j(k)|u_kn&gt; of each band along k path.</span>
+        <span class="p">},</span>
+        <span class="s2">"z_expectation"</span><span class="p">:</span> <span class="p">[],</span>  <span class="c1"># SAMB, [zj] or "all" (all selected SAMBs), expectation value summed over occupied states (T=0) per primitive cell.</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>典型的な使い方では、まずすべての既約表現の SAMB を作り、それから制御ファイルで <code class="docutils literal notranslate"><span class="pre">samb/select</span></code> や <code class="docutils literal notranslate"><span class="pre">samb/parameter</span></code> を指定して、恒等表現に加えて対称性を破る項などの必要な SAMB を選びます。</p>
+<section id="id5">
+<h3>後処理ツール<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<p>状態密度、フィリングからのフェルミエネルギー、軌道の重み（ファットバンド）、固有値と固有ベクトルの出力、独自の計算のためのコールバック、局所演算子、SAMB の期待値は、制御ファイルの <code class="docutils literal notranslate"><span class="pre">output</span></code> で設定します。詳しい説明と例は<a class="reference internal" href="post_processing_ja.html"><span class="std std-doc">後処理ツール</span></a>を参照してください。</p>
+</section>
+</section>
+<section id="id6">
+<h2>入力ファイルの形式<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
+<p>模型の入力ファイルと制御ファイルは、辞書を含む Python ファイルです（例：<code class="docutils literal notranslate"><span class="pre">graphene_in</span> <span class="pre">=</span> <span class="pre">{...}</span></code>）。</p>
+<ul>
+<li><p>これらは Python のコードとしては実行されません。各辞書は <code class="docutils literal notranslate"><span class="pre">ast.literal_eval</span></code> で読むので、リテラル（文字列、数値、リスト、タプル、辞書、<code class="docutils literal notranslate"><span class="pre">True</span></code>/<code class="docutils literal notranslate"><span class="pre">False</span></code>/<code class="docutils literal notranslate"><span class="pre">None</span></code>）だけが使えます。<code class="docutils literal notranslate"><span class="pre">2*2</span></code> のような算術、変数、<code class="docutils literal notranslate"><span class="pre">import</span></code> は使えません。</p></li>
+<li><p>分数や記号的な値は、文字列で与えます（例：<code class="docutils literal notranslate"><span class="pre">&quot;[1/3,2/3,0]&quot;</span></code>）。数式を表す文字列は SymPy で解析します。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mp_create</span></code>（または <code class="docutils literal notranslate"><span class="pre">create_model</span></code>）では、模型の入力ファイル中のすべての辞書 <code class="docutils literal notranslate"><span class="pre">name</span> <span class="pre">=</span> <span class="pre">{...}</span></code> をそれぞれ別の模型として扱い、<code class="docutils literal notranslate"><span class="pre">mp_analyze</span></code>（または <code class="docutils literal notranslate"><span class="pre">analyze_model</span></code>）では、制御ファイル中のすべての辞書をそれぞれ別の制御として扱います。<code class="docutils literal notranslate"><span class="pre">MaterialModel.analyze(filename)</span></code> と <code class="docutils literal notranslate"><span class="pre">ModelAnalyzer.analyze(filename)</span></code> は、1 つのファイルに 1 つの辞書を想定しています。</p></li>
+<li><p>未知のキー（例えば <code class="docutils literal notranslate"><span class="pre">&quot;spinfull&quot;</span></code> のようなタイプミス）はエラーになります：<code class="docutils literal notranslate"><span class="pre">ValueError:</span> <span class="pre">unknown</span> <span class="pre">key(s)</span> <span class="pre">in</span> <span class="pre">model</span> <span class="pre">'x':</span> <span class="pre">'spinfull'</span> <span class="pre">(did</span> <span class="pre">you</span> <span class="pre">mean</span> <span class="pre">'spinful'?).</span></code> 受け付けるキーは、上のデフォルトの模型とデフォルトの制御にあるキーと、次のものです。</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">cell</span></code>：<code class="docutils literal notranslate"><span class="pre">a</span></code>、<code class="docutils literal notranslate"><span class="pre">b</span></code>、<code class="docutils literal notranslate"><span class="pre">c</span></code>、<code class="docutils literal notranslate"><span class="pre">alpha</span></code>、<code class="docutils literal notranslate"><span class="pre">beta</span></code>、<code class="docutils literal notranslate"><span class="pre">gamma</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SAMB_select</span></code>、<code class="docutils literal notranslate"><span class="pre">atomic_select</span></code>、<code class="docutils literal notranslate"><span class="pre">site_select</span></code>、<code class="docutils literal notranslate"><span class="pre">bond_select</span></code>：<code class="docutils literal notranslate"><span class="pre">X</span></code>、<code class="docutils literal notranslate"><span class="pre">l</span></code>、<code class="docutils literal notranslate"><span class="pre">Gamma</span></code>、<code class="docutils literal notranslate"><span class="pre">s</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">samb/select</span></code>：<code class="docutils literal notranslate"><span class="pre">site</span></code>、<code class="docutils literal notranslate"><span class="pre">bond</span></code>、<code class="docutils literal notranslate"><span class="pre">X</span></code>、<code class="docutils literal notranslate"><span class="pre">l</span></code>、<code class="docutils literal notranslate"><span class="pre">Gamma</span></code>、<code class="docutils literal notranslate"><span class="pre">s</span></code></p></li>
+</ul>
+<p>次の辞書のキーはデフォルトと照合しませんが、それぞれの規則があります：</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">site</span></code> のサイト名：<code class="docutils literal notranslate"><span class="pre">;</span></code> を含まない空でない文字列で、<code class="docutils literal notranslate"><span class="pre">bond</span></code> で使うサイトでは <code class="docutils literal notranslate"><span class="pre">_</span></code> も含まないもの（<code class="docutils literal notranslate"><span class="pre">;</span></code> と <code class="docutils literal notranslate"><span class="pre">_</span></code> はサイトとボンドのクラスターの名前に使います）。名前は PDF（LaTeX）やファイル名にも現れるので、すべてのサイトで英数字（例：<code class="docutils literal notranslate"><span class="pre">&quot;Fe1&quot;</span></code>）を推奨します。模型名とサイト名に含まれる LaTeX の特殊文字（例：<code class="docutils literal notranslate"><span class="pre">#</span></code> や <code class="docutils literal notranslate"><span class="pre">%</span></code>）は、PDF ではエスケープされます。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">samb/parameter</span></code> の SAMB 名：生成した SAMB の名前（例：<code class="docutils literal notranslate"><span class="pre">&quot;z1&quot;</span></code>）。<code class="docutils literal notranslate"><span class="pre">samb/parameter</span></code> には、同じ形の辞書を 1 つ含む Python ファイルの名前を与えることもできます。そのときは <code class="docutils literal notranslate"><span class="pre">model_name/info/</span></code> からの相対パスで、拡張子を付けて与えます（例：<code class="docutils literal notranslate"><span class="pre">model_name/info/my_z.py</span></code> なら <code class="docutils literal notranslate"><span class="pre">&quot;my_z.py&quot;</span></code>。<code class="docutils literal notranslate"><span class="pre">&quot;info/my_z.py&quot;</span></code>、<code class="docutils literal notranslate"><span class="pre">&quot;my_z&quot;</span></code>、絶対パスではありません）。パラメータが空でないとき、<code class="docutils literal notranslate"><span class="pre">mp_analyze</span></code> はそれを <code class="docutils literal notranslate"><span class="pre">model_name/info/model_name_z.py</span></code> に書き出します。このファイルは実行のたびに上書きされるので、編集する場合は別の名前にコピーしてください。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">output/dispersion/k_point</span></code> の k 点のラベル：<code class="docutils literal notranslate"><span class="pre">k_path</span></code> で使うラベルで、<code class="docutils literal notranslate"><span class="pre">-</span></code>、<code class="docutils literal notranslate"><span class="pre">|</span></code>、空白を含まないもの（これらは <code class="docutils literal notranslate"><span class="pre">k_path</span></code> で点を区切るのに使います）。</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">wannier/read_KS</span></code> は削除しました：<code class="docutils literal notranslate"><span class="pre">&quot;read_KS&quot;:</span> <span class="pre">True</span></code> はエラーになり、古い制御ファイルにある <code class="docutils literal notranslate"><span class="pre">&quot;read_KS&quot;:</span> <span class="pre">False</span></code> は警告を出して無視します（制御ファイルから削除してください）。</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>入力ファイル中の数式を表す文字列は、SymPy の <code class="docutils literal notranslate"><span class="pre">parse_expr</span></code> で解析します。これは内部で <code class="docutils literal notranslate"><span class="pre">eval</span></code> を使います。また、模型のファイル <code class="docutils literal notranslate"><span class="pre">model_name.pkl</span></code> は Python の <code class="docutils literal notranslate"><span class="pre">pickle</span></code> で保存しています。
+入力ファイルと <code class="docutils literal notranslate"><span class="pre">.pkl</span></code> ファイルは、信頼できる入手元のものだけを使ってください。</p>
+</div>
+</section>
+<section id="id7">
+<h2>コマンドラインツール<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">mp_create</span></code>、<code class="docutils literal notranslate"><span class="pre">mp_analyze</span></code>、<code class="docutils literal notranslate"><span class="pre">mp_convert</span></code> は、エラーが起きると終了ステータス 1 で、使い方の誤り（例えば入力ファイルがない、未知のオプション）では終了ステータス 2 で終了します。エラーは、入力ファイルと、該当する場合は模型とサイトとともに、1 つのメッセージで表示します。<code class="docutils literal notranslate"><span class="pre">-v</span></code> を付けると、代わりに完全なトレースバックを表示します。</p></li>
+<li><p>複数の入力ファイルを与えた場合は、どの模型を作成・解析するよりも前に、すべてのファイルを読み込みます。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mp_create</span> <span class="pre">-i</span></code> と <code class="docutils literal notranslate"><span class="pre">mp_analyze</span> <span class="pre">-i</span></code> は、デフォルトの模型と制御を表示します。これは入力ファイルのテンプレートとして使えます。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">multipie.scripts.mp_create</span></code>、<code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">multipie.scripts.mp_analyze</span></code>、<code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">multipie.scripts.mp_convert</span></code> も同じように動きます。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mp_convert</span></code> は、Ver.2 の模型（<code class="docutils literal notranslate"><span class="pre">.pkl</span></code>）を Ver.3 に変換し、その制御ファイルの重みも変換します（<a class="reference internal" href="changes_ja.html"><span class="std std-doc">Ver.2 からの変更点</span></a>を参照）。</p></li>
+<li><p>経過時間や警告などのメッセージは、<code class="docutils literal notranslate"><span class="pre">multipie</span></code> ロガーを通して標準出力に書き出します。<code class="docutils literal notranslate"><span class="pre">create_model</span></code> と <code class="docutils literal notranslate"><span class="pre">analyze_model</span></code>（したがって <code class="docutils literal notranslate"><span class="pre">mp_create</span></code> と <code class="docutils literal notranslate"><span class="pre">mp_analyze</span></code>）は、このロガーにまだハンドラがなければ設定します。アプリケーションのログの設定（例えば Jupyter のルートロガー）は変更しません。メッセージを別の場所に集めるには、これらを呼ぶ前に <code class="docutils literal notranslate"><span class="pre">multipie</span></code> ロガーにハンドラを加えてください。</p></li>
+</ul>
+</section>
+<section id="id8">
+<h2>並列計算<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
+<p>原子多極子の行列（<code class="docutils literal notranslate"><span class="pre">multipie.util.util_atomic_multipole</span></code> の <code class="docutils literal notranslate"><span class="pre">create_atomic_multipole_matrix</span></code>）と原子 SAMB（<code class="docutils literal notranslate"><span class="pre">Group.create_atomic_samb_L</span></code>）は、joblib で並列に計算します。
+これらはデータベースの生成に使います。
+<code class="docutils literal notranslate"><span class="pre">mp_create</span></code>（<code class="docutils literal notranslate"><span class="pre">MaterialModel.analyze</span></code>）では、大きな模型（例えば d 軌道を持つスピンありの模型）について、原子 SAMB と結合 SAMB の直交化も並列に行います。小さな模型は逐次に処理します。プロセスの起動のほうが計算より時間がかかるためです。
+出力はプロセス数によりません。
+プロセス数は環境変数 <code class="docutils literal notranslate"><span class="pre">MULTIPIE_N_JOBS</span></code> で与えます：</p>
+<ul class="simple">
+<li><p>設定なし、または空：すべてのコア（<code class="docutils literal notranslate"><span class="pre">-1</span></code>、デフォルト）</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span></code>：逐次</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">&gt;</span> <span class="pre">1</span></code>：<code class="docutils literal notranslate"><span class="pre">n</span></code> プロセス、<code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">&lt;</span> <span class="pre">0</span></code>：コア数 + 1 + n プロセス（最低 1）。joblib と同じです。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">0</span></code> や整数でない値はエラーです。</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nv">MULTIPIE_N_JOBS</span><span class="o">=</span><span class="m">4</span><span class="w"> </span>python<span class="w"> </span>my_script.py<span class="w">   </span><span class="c1"># a script calling the functions above</span>
+</pre></div>
+</div>
+<p>Windows の PowerShell では、スクリプトを実行する前に <code class="docutils literal notranslate"><span class="pre">$env:MULTIPIE_N_JOBS</span> <span class="pre">=</span> <span class="pre">&quot;4&quot;</span></code> とします。この設定は、<code class="docutils literal notranslate"><span class="pre">Remove-Item</span> <span class="pre">env:MULTIPIE_N_JOBS</span></code> で削除するまでセッションの間残ります。</p>
+</section>
+<section id="id9">
+<h2>出力ファイル<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
+<p>出力ファイルの説明は次のとおりです（先頭に model_name が付きます）：</p>
+<ul class="simple">
+<li><p><strong>model_name</strong>：すべてのファイルは <code class="docutils literal notranslate"><span class="pre">model_name</span></code> の下に作られます。</p>
+<ul>
+<li><p><strong>.pdf</strong>：模型の情報（PDF）。</p></li>
+<li><p><strong>.pkl</strong>：模型のデータ（バイナリ）。</p></li>
+<li><p><strong>.qtdw</strong>：模型の構造（QtDraw）。</p></li>
+<li><p><strong>.tex</strong>：模型の情報のソース。</p></li>
+<li><p><strong>samb</strong>/</p>
+<ul>
+<li><p><strong>_atomic_samb.qtdw</strong>：原子 SAMB。</p></li>
+<li><p><strong>_A-B-…_def.qtdw</strong>：サイトのクラスターの定義（すべてのサイトを 1 つのファイルに）。</p></li>
+<li><p><strong>_A-B-…qtdw</strong>：サイトのクラスター SAMB（すべてのサイトを 1 つのファイルに）。</p></li>
+<li><p><strong>_A;B_nnn_m_def.qtdw</strong>：A;B（nnn 近接、m）のボンドのクラスターの定義（nnn：近接の次数、3 桁。例：001）。</p></li>
+<li><p><strong>_A;B_nnn_m.qtdw</strong>：A;B（nnn 近接、m）のボンドのクラスター SAMB。</p></li>
+</ul>
+</li>
+<li><p><strong>info/</strong></p>
+<ul>
+<li><p><strong>_hr.dat</strong>：H[R] の行列データ。</p></li>
+<li><p><strong>_info_output.py</strong>：出力の情報。</p></li>
+<li><p><strong>_info_samb.py</strong>：模型と SAMB の情報。</p></li>
+<li><p><strong>_info_wannier.py</strong>：wannier の情報。</p></li>
+<li><p><strong>_info.py</strong>：全体の情報。</p></li>
+<li><p><strong>_k.py</strong>：運動量表示の SAMB。</p></li>
+<li><p><strong>_matrix.py</strong>：SAMB の行列データ。</p></li>
+<li><p><strong>_var.py</strong>：zj と、ボンド 1 での原子のパラメータとの関係。</p></li>
+<li><p><strong>_z.py</strong>：zj パラメータ。</p></li>
+</ul>
+</li>
+<li><p><strong>output/</strong></p>
+<ul>
+<li><p><strong>_dispersion.eps</strong>：分散（EPS）。</p></li>
+<li><p><strong>_dispersion.pdf</strong>：分散（PDF）。</p></li>
+<li><p><strong>_dispersion.txt</strong>：分散のデータ。</p></li>
+<li><p><strong>_dos.eps</strong>：DOS（EPS）。</p></li>
+<li><p><strong>_dos.pdf</strong>：DOS（PDF）。</p></li>
+<li><p><strong>_dos.txt</strong>：DOS のデータ（<code class="docutils literal notranslate"><span class="pre">output/dos</span></code> が <code class="docutils literal notranslate"><span class="pre">False</span></code> でないとき）。</p></li>
+<li><p><strong>_eigen_k_path.npz</strong>、<strong>_eigen_k_full.npz</strong>：固有値と固有ベクトル（<code class="docutils literal notranslate"><span class="pre">output/save_k_path</span></code> または <code class="docutils literal notranslate"><span class="pre">output/save_k_full</span></code> が <code class="docutils literal notranslate"><span class="pre">True</span></code> のとき）。</p></li>
+<li><p><strong>_weight.pdf</strong>：軌道の重みで色付けした分散。</p></li>
+<li><p><strong>_weight.txt</strong>：軌道の重み付きの分散（<code class="docutils literal notranslate"><span class="pre">output/dispersion/weight</span></code> が <code class="docutils literal notranslate"><span class="pre">False</span></code> でないとき）。</p></li>
+<li><p><strong>plot_dos.gnu</strong>、<strong>plot_weight.gnu</strong>：DOS と軌道の重みを gnuplot で描くためのコマンドスクリプト。</p></li>
+<li><p><strong>plot_band.gnu</strong>：gnuplot で描くためのコマンドスクリプト。</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./src"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">チュートリアル</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">模型の入力ファイル</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">制御ファイル</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">後処理ツール</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">入力ファイルの形式</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">コマンドラインツール</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">並列計算</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">出力ファイル</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Hiroaki Kusunose and Rikuto Oiwa
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2021-.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
