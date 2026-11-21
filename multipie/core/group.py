@@ -36,6 +36,7 @@ from multipie.util.util_wyckoff import (
 from multipie.util.util_tag import TagMultipole, TagSymmetryOperation, TagBasis, TagIrrep
 from multipie.util.util_samb import orthogonalize_multipole
 from multipie.util.util_atomic_multipole import atomic_multipole_matrix
+from multipie.util.util_multipolar_harmonics import multipolar_harmonics_expression, internal_crystal
 from multipie.util.util_response_tensor import (
     create_active_dict,
     get_response_tensor_mp,
@@ -236,6 +237,28 @@ def _cg_coefficient(l1, m1, l2, m2, l, m):
 
 
 # ==================================================
+@functools.lru_cache(maxsize=None, typed=True)  # typed: 1.0 is not 1.
+def _multipolar_harmonics_expression(cls, X, l, m, s, k, x, internal):
+    """
+    Expression of multipolar spherical harmonics (see Group.multipolar_harmonics_expression), cached.
+
+    :meta private:
+    """
+    if internal not in internal_crystal:
+        raise ValueError(f"internal must be {' or '.join(internal_crystal)}, '{internal}' is given.")
+    if isinstance(s, (int, np.integer)) and not isinstance(s, bool) and 0 <= s <= 3 and x in ["q", "g"]:
+        info = cls.global_info()["harmonics"]
+        basis_function = info["basis_function"]
+        orbital = info["atomic_basis"]["spinless"][internal][s]
+        U = np.array([basis_function[name][1] for name in orbital], dtype=object).T
+        symbols = info["internal_basis"][internal][(s, x)]
+    else:  # checked in multipolar_harmonics_expression.
+        U, symbols = None, None
+
+    return multipolar_harmonics_expression(X, l, m, s, k, x, symbols, U)
+
+
+# ==================================================
 class Group(dict):
     _info = BinaryManager("info")
 
@@ -333,6 +356,37 @@ class Group(dict):
             - (Dict) -- multipolar harmonics (rank <= 3, internal rank s=1-3), {PGMultipoleType: (coeff, expression)}.
         """
         return self._group("PG")["multipolar_harmonics"]
+
+    # ==================================================
+    @classmethod
+    def multipolar_harmonics_expression(cls, X, l, m, s=0, k=0, x="q", internal="cubic"):
+        """
+        Expression of multipolar spherical harmonics with internal degree of freedom, O_{lm}^{(s)}(k).
+
+        Args:
+            X (str): type, Q/G/T/M.
+            l (int): rank.
+            m (int): component of the spherical basis, -l <= m <= l.
+            s (int, optional): internal rank, 0 <= s <= 3.
+            k (int, optional): internal component, -s <= k <= s, l + k >= 0.
+            x (str, optional): internal type, q (polar, symbols Q_{...}) or g (axial, symbols G_{...}).
+            internal (str, optional): internal basis, cubic or hexagonal.
+
+        Returns:
+            - (sympy) -- polynomial in x, y, z multiplied by the internal basis symbols.
+
+        Notes:
+            - the definition is that of the PG multipolar harmonics (multipolar_harmonics):
+              O_{lm}^{(s)}(k) = i^{k+s} (-1)^{l+m} sqrt(2l+1) sum_n (l+k, l, s; m-n, -m, n) O_{l+k,m-n}(r) e_n.
+            - **the spatial part O_{l+k,m-n}(r) is always polar**, so that x is fixed by X and the parity of s+k:
+              for X = Q/T, x = q if s+k is even and g if odd; for X = G/M, the opposite. A combination of X and x of
+              the wrong parity gives 0.
+            - for X = T/M, the internal symbols Q/G are renamed T/M (magnetic internal degree of freedom).
+            - for s = 0, the internal symbol is multiplied only for G_{0} and M_{0}; Q_{0} and T_{0} are omitted.
+            - the internal basis is that of the orbitals of rank s, info["harmonics"]["atomic_basis"]["spinless"][internal],
+              with the symbols info["harmonics"]["internal_basis"][internal][(s, x)].
+        """
+        return _multipolar_harmonics_expression(cls, X, l, m, s, k, x, internal)
 
     # ==================================================
     def _load_group_binary(self, tp):

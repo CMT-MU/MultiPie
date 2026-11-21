@@ -358,6 +358,10 @@ O_{lm}^{(s)}(k) = i^{k+s} (-1)^{l+m} \sqrt{2l+1} \sum_{\nu}
 \qquad k = -s, \dots, s.
 $$
 
+```{important}
+**軌道部分 $O_{l+k, m-\nu}(\boldsymbol{r}) = \sqrt{4\pi/(2l+2k+1)}\, r^{l+k} Y_{l+k, m-\nu}(\hat{\boldsymbol{r}})$ は、常に $\boldsymbol{r}$ の極性の関数です。** そのため、タイプ `X`（極性 `Q` か軸性 `G`）は、下の表のとおり、内部タイプ `x` と `s + k` の偶奇で決まります。これは MultiPie の点群多極子調和関数の定義で、H. Kusunose, R. Oiwa, and S. Hayami, J. Phys. Soc. Jpn. **89**, 104704 (2020) の原子多極子の定義とは異なります。原子多極子では、軌道部分が極性（`Q`、`T`）にも軸性（`G`、`M`。例えば軌道角運動量）にもなります。
+```
+
 **多極子のタイプ。** 内部タイプ `x` を固定すると、多極子のタイプ `X` は `s + k` の偶奇で決まります。
 
 | 内部タイプ | `s + k` 偶 | `s + k` 奇 |
@@ -400,6 +404,28 @@ ex
 | O、D$_3$（カイラル） | `("G", 0, "A1", -1, -1, 1, 1, "g")` | $(xG_x + yG_y + zG_z)/\sqrt{3}$ | 放射状（ワイル型）、$\boldsymbol{k} \cdot \boldsymbol{\sigma}$ |
 
 ラシュバ型の項は $z$ 方向の電気双極子 $\vec{\mathbb{Q}}_{1}^{(1,0)}[g]$ で、C$_{\rm 4v}$ の極性によって許されます。放射状の項は電気トロイダル単極子 $\vec{\mathbb{G}}_{0}^{(1,1)}[g]$ で、O や D$_3$ のカイラリティによって許されます（例えば Te。[物質の例](../materials_ja.md)を参照）。D$_3$ では、異方的な $\vec{\mathbb{G}}_{2}^{(1,-1)}[g](A_1)$、$(2zG_z - xG_x - yG_y)/\sqrt{6}$、つまり $2k_z\sigma_z - k_x\sigma_x - k_y\sigma_y$ も許されます。式は、例えば `Group("C4v").multipolar_harmonics[("Q", 1, "A1", -1, -1, 1, 0, "g")]` で得られます。
+
+(ja-multipolar-harmonics-expression)=
+**成分ごとの式。** `Group.multipolar_harmonics_expression(X, l, m, s=0, k=0, x="q", internal="cubic")` は、球面基底の成分 $m$（$-l \le m \le l$）の $O_{lm}^{(s)}(k)$ そのもの、つまり $x, y, z$ の多項式に内部基底の記号をかけた式を与えます。$l \le 3$ に限らず、内部ランクは `s = 0, 1, 2, 3`（`k = -s, ..., s`、`l + k >= 0`）で、内部基底は立方晶系（`"cubic"`）または六方晶系（`"hexagonal"`）のものです。
+
+- `X`（`Q`、`G`、`T`、`M`）と `x` の両方を与えます。軌道部分は常に極性なので、偶奇の合わない `X` と `x` の組み合わせ（上の表にないもの）は 0 になります。
+- `X = T, M` では、内部基底の記号を `Q` $\to$ `T`、`G` $\to$ `M` と読み替えます（磁気的な内部自由度）。
+- `s = 0` では、内部基底の記号は $G_{0}$ と $M_{0}$（`x = g` の `X = G, M`）のときだけかけます。$Q_{0}$ と $T_{0}$ では、`Group.harmonics` と同じく多項式だけを与えます。
+- 点群の点群多極子調和関数は、`Group.harmonics` の $U$（`T`/`M` では `Q`/`G` のもの）を使った $\sum_m U_{m\gamma} O_{lm}^{(s)}(k)$ です。
+
+```{code-cell} ipython3
+Group.multipolar_harmonics_expression("Q", 0, 0, s=1, k=1, x="q")  # r.Q / sqrt(3).
+```
+
+```{code-cell} ipython3
+Group.multipolar_harmonics_expression("M", 1, 0, s=1, k=0, x="g")  # magnetic: G -> M, (y M_x - x M_y)/sqrt(2).
+```
+
+```{code-cell} ipython3
+Group.multipolar_harmonics_expression("Q", 1, 0, s=1, k=0, x="q")  # the wrong parity: 0.
+```
+
+動く例は [docs/src/examples/multipolar_harmonics_expression.py](https://github.com/CMT-MU/MultiPie/tree/main/docs/src/examples/multipolar_harmonics_expression.py) です。
 
 (ja-brief-manual)=
 

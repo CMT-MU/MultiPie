@@ -49,7 +49,7 @@ MultiPie Ver.3 は、MultiPieGen が生成した新しい群のデータベー�
 - `Group.harmonics` の値は `(expression, U)` です。Ver.2 の 3 番目の項目（tesseral 調和関数による式）は削除しました。
 - 式は展開した多項式です。例えば $\frac{\sqrt{10}}{4}y(3x^2 - y^2)$ ではなく$\frac{3\sqrt{10}}{4}x^2y - \frac{\sqrt{10}}{4}y^3$ となります。
 - キーは 47 点群すべてで同じです。32 個の調和関数で符号が変わります。これらは三方晶系と六方晶系の 16 点群の、多重度 2 または 3 の rank 4 の $E$ の調和関数です（D$_{\rm 6h}$ の $E_{2g}$ に由来します）。式と $U$ の符号は一緒に変わります。
-- multipolar harmonics（`Group.multipolar_harmonics`）は rank 3 まで（Ver.2 は rank 11 まで）で、内部基底は立方晶または六方晶の軌道、記号は $Q_{x}$ などです。
+- multipolar harmonics（`Group.multipolar_harmonics`）は rank 3 まで（Ver.2 は rank 11 まで）で、内部基底は立方晶または六方晶の軌道、記号は $Q_{x}$ などです。任意の rank の成分 $m$ ごとの式は、`Group.multipolar_harmonics_expression()` で得られます（3.1.3 から。{ref}`成分ごとの式 <ja-multipolar-harmonics-expression>` を参照）。
 
 ## 原子 SAMB
 
@@ -93,7 +93,7 @@ mp_convert graphene graphene_ctrl.py
 |:--|:--|
 | `Group(tag, with_opt=True)`, `Group.opt` | 削除 |
 | `Group.opt["representation_matrix"]` | `Group.representation_matrix` |
-| `Group.opt["harmonics_multipole"]` | `Group.multipolar_harmonics`（rank <= 3） |
+| `Group.opt["harmonics_multipole"]` | `Group.multipolar_harmonics`（rank <= 3）、`Group.multipolar_harmonics_expression()` |
 | `Group.opt["harmonics_irrep"]` | 削除（`Group.harmonics` のキーを使う） |
 | `Group.harmonics` の値 `(expression, U, tesseral expression)` | `(expression, U)` |
 | `Group.cluster_samb(wp, "bond_s" / "bond_a" / "vector")` | 削除。`Group.cluster_samb(wp, "bond")` |

@@ -456,6 +456,15 @@ O_{lm}^{(s)}(k) = i^{k+s} (-1)^{l+m} \sqrt{2l+1} \sum_{\nu}
 \qquad k = -s, \dots, s.
 $$
 
+```{important}
+**The orbital part $O_{l+k, m-\nu}(\boldsymbol{r}) = \sqrt{4\pi/(2l+2k+1)}\, r^{l+k} Y_{l+k, m-\nu}(\hat{\boldsymbol{r}})$
+is always a polar function of $\boldsymbol{r}$.** Therefore, the type `X` (polar `Q` or axial `G`) is fixed by the
+internal type `x` and the parity of `s + k`, as in the table below. This is the definition of the multipolar harmonics
+in MultiPie, and it differs from that of the atomic multipoles of H. Kusunose, R. Oiwa, and S. Hayami, J. Phys. Soc.
+Jpn. **89**, 104704 (2020), whose orbital part can be polar (`Q`, `T`) or axial (`G`, `M`, e.g., the orbital angular
+momentum).
+```
+
 **Type of the multipole.** For a fixed internal type `x`, the type `X` of the multipole is given by the parity of
 `s + k`:
 
@@ -526,6 +535,35 @@ chirality of O and D$_3$ (e.g., Te; see [Examples of materials](materials.md)). 
 $\vec{\mathbb{G}}_{2}^{(1,-1)}[g](A_1)$, $(2zG_z - xG_x - yG_y)/\sqrt{6}$, i.e., $2k_z\sigma_z - k_x\sigma_x -
 k_y\sigma_y$, is also allowed. The expressions are given by, e.g., `Group("C4v").multipolar_harmonics[("Q", 1, "A1", -1,
 -1, 1, 0, "g")]`.
+
+(multipolar-harmonics-expression)=
+**Expression for a component.** `Group.multipolar_harmonics_expression(X, l, m, s=0, k=0, x="q", internal="cubic")`
+gives $O_{lm}^{(s)}(k)$ itself for a component $m$ of the spherical basis ($-l \le m \le l$): a polynomial in $x, y, z$
+multiplied by the internal basis symbols. It is not limited to $l \le 3$, and the internal rank is `s = 0, 1, 2, 3`
+(`k = -s, ..., s`, `l + k >= 0`), with the internal basis of the cubic (`"cubic"`) or hexagonal (`"hexagonal"`) family.
+
+- Both `X` (`Q`, `G`, `T`, `M`) and `x` are given. As the orbital part is always polar, a combination of `X` and `x`
+  of the wrong parity (not in the table above) gives 0.
+- For `X = T, M`, the internal symbols are renamed `Q` $	o$ `T` and `G` $	o$ `M` (magnetic internal degree of freedom).
+- For `s = 0`, the internal symbol is multiplied only for $G_{0}$ and $M_{0}$ (`X = G, M` with `x = g`); for $Q_{0}$
+  and $T_{0}$, the polynomial alone is given, as in `Group.harmonics`.
+- The multipolar harmonics of a point group is $\sum_m U_{m\gamma} O_{lm}^{(s)}(k)$ with $U$ of `Group.harmonics`
+  (for `T`/`M`, that of `Q`/`G`).
+
+```{code-cell} ipython3
+Group.multipolar_harmonics_expression("Q", 0, 0, s=1, k=1, x="q")  # r.Q / sqrt(3).
+```
+
+```{code-cell} ipython3
+Group.multipolar_harmonics_expression("M", 1, 0, s=1, k=0, x="g")  # magnetic: G -> M, (y M_x - x M_y)/sqrt(2).
+```
+
+```{code-cell} ipython3
+Group.multipolar_harmonics_expression("Q", 1, 0, s=1, k=0, x="q")  # the wrong parity: 0.
+```
+
+A runnable script is
+[docs/src/examples/multipolar_harmonics_expression.py](https://github.com/CMT-MU/MultiPie/tree/main/docs/src/examples/multipolar_harmonics_expression.py).
 
 (brief-manual)=
 
