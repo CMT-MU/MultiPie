@@ -13,7 +13,7 @@ orphan: true
 - **演算子の順序。** 定義の順序を保ちます。例えば積 $l_x\, y$ では、$l_x$ は $y$ のあとに作用します。連続する位置の演算子の並びを並べ替えることと、パウリ行列を右端に置くことだけを行い、ほかに交換関係は使わないので、例えば $l_x y$ と $y l_x$ は別の項として現れます。
 - **記法。** $s = 0$ では $X_{l,\gamma}$、$s = 1$ では $X^{(1)}_{l,\gamma}(k)$ と書きます。軌道基底での行列要素は、対称性への適合と規格化の前の原子 SAMB のもので、動径の因子は $\langle r^k \rangle = 1$ です。
 
-0 になるもの（例えば $M_{0}$ や、スピンによらない $G_{1}$）は載せていません。一覧は `docs/src/examples/atomic_multipole/create_table.py` で作っています。
+0 になるもの（例えば $M_{0}$ や、$s = 0$ の $G_{1}$）は載せていません。一覧は `docs/src/examples/atomic_multipole/create_table.py` で作っています。
 
 ```{include} examples/atomic_multipole/table_ja.md
 ```

@@ -43,6 +43,7 @@ var LANGUAGE_PAIRS = {
     "src/install.html": "src/install_ja.html",
     "src/getting_started.html": "src/getting_started_ja.html",
     "src/guide.html": "src/guide/users_guide_ja.html",
+    "src/atomic_multipole_table.html": "src/atomic_multipole_table_ja.html",
     "src/group.html": "src/group/group_ja.html",
     "src/materials.html": "src/materials_ja.html",
     "src/post_processing.html": "src/post_processing_ja.html",
