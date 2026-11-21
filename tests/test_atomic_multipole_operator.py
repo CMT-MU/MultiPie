@@ -259,3 +259,16 @@ def test_docs_table_hermitian(L):
                 for _, ex in table["real_components"](X, l, s, k):
                     mat = operator_matrix(ex, L, L)
                     assert np.allclose(mat, mat.conj().T, atol=1e-12), (X, l, s, k, L)
+
+
+# ==================================================
+def test_docs_table_vanishing():
+    # the terms with r.l or l.r omitted from the compact forms in the list vanish (all blocks up to L = 3).
+    table = _create_table()
+    vanishing = [v[2] for v in table["COMPACT"].values() if len(v) > 2]
+    assert vanishing
+    for v in vanishing:
+        for ex in v:
+            for L1 in range(4):
+                for L2 in range(4):
+                    assert np.allclose(operator_matrix(sp.expand(ex), L1, L2), 0, atol=1e-12), (L1, L2)
