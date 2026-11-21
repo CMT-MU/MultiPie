@@ -66,7 +66,9 @@ its xyz polynomial; entries sharing all the other fields are numbered by `p`. Se
   or 3 of the 16 trigonal and hexagonal point groups (from $E_{2g}$ of D$_{\rm 6h}$); the expression and $U$ change sign
   together.
 - The multipolar harmonics (`Group.multipolar_harmonics`) are given up to rank 3 (rank 11 in Ver.2), with internal
-  bases of cubic or hexagonal orbitals and symbols such as $Q_{x}$.
+  bases of cubic or hexagonal orbitals and symbols such as $Q_{x}$. The expression of any rank for a component $m$ is
+  given by `Group.multipolar_harmonics_expression()` (from 3.1.3; see
+  {ref}`Expression for a component <multipolar-harmonics-expression>`).
 
 ## Atomic SAMB
 
@@ -136,7 +138,7 @@ the controls are converted. The weights given as a dict, e.g., a fit, are conver
 |:--|:--|
 | `Group(tag, with_opt=True)`, `Group.opt` | removed |
 | `Group.opt["representation_matrix"]` | `Group.representation_matrix` |
-| `Group.opt["harmonics_multipole"]` | `Group.multipolar_harmonics` (rank <= 3) |
+| `Group.opt["harmonics_multipole"]` | `Group.multipolar_harmonics` (rank <= 3), `Group.multipolar_harmonics_expression()` |
 | `Group.opt["harmonics_irrep"]` | removed (use the keys of `Group.harmonics`) |
 | `Group.harmonics` value `(expression, U, tesseral expression)` | `(expression, U)` |
 | `Group.cluster_samb(wp, "bond_s" / "bond_a" / "vector")` | removed; `Group.cluster_samb(wp, "bond")` |

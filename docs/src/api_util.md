@@ -12,6 +12,7 @@
     multipie.util.util_material_model_pdf
     multipie.util.util_material_model
     multipie.util.util_model_analyzer
+    multipie.util.util_multipolar_harmonics
     multipie.util.util_pdf_latex
     multipie.util.util_plot
     multipie.util.util_response_tensor

@@ -23,7 +23,7 @@ D$_{\rm 4h}$.
 | [Symmetry operations](#group-symmetry-operation) | `symmetry_operation`, `tag_symmetry_operation()` |
 | [Characters and representation matrices](#group-character) | `character`, `representation_matrix`, `tag_irrep()` |
 | [Wyckoff positions](#group-wyckoff) | `wyckoff`, `find_wyckoff()`, `find_wyckoff_site()`, `find_wyckoff_bond()`, `create_cell_site()`, `create_cell_bond()` |
-| [Harmonics](#group-harmonics) | `harmonics`, `multipolar_harmonics`, `tag_multipole()` |
+| [Harmonics](#group-harmonics) | `harmonics`, `multipolar_harmonics`, `multipolar_harmonics_expression()`, `tag_multipole()` |
 | [Atomic basis and atomic SAMB](#group-atomic) | `atomic_basis()`, `tag_atomic_basis()`, `tag_atomic_basis_proj()`, `atomic_samb()`, `transform_atomic_samb()`, `create_atomic_samb_L()` |
 | [Cluster and combined SAMB](#group-cluster) | `cluster_samb()`, `combined_samb()`, `cg()`, `multipole_cluster_samb()`, `combined_object()` |
 | [Transformation by the symmetry operations](#group-transform) | `transform_vector()`, `transform_multipole()`, `create_cell_vector()`, `create_cell_multipole()` |
@@ -318,6 +318,13 @@ $\boldsymbol{r} \cdot \boldsymbol{G}$ made of an axial vector $\boldsymbol{G}$:
 mh = g.multipolar_harmonics
 coeff, ex = mh[("G", 0, "A1u", -1, -1, 1, 1, "g")]
 ex
+```
+
+`multipolar_harmonics_expression(X, l, m, s, k, x, internal)` (class method) gives the expression of a component $m$
+of the spherical basis, for any rank; its orbital part is always polar (see {ref}`Expression for a component <multipolar-harmonics-expression>`):
+
+```{code-cell} ipython3
+Group.multipolar_harmonics_expression("G", 0, 0, s=1, k=1, x="g")
 ```
 
 (group-atomic)=
