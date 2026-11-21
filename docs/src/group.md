@@ -24,7 +24,7 @@ D$_{\rm 4h}$.
 | [Characters and representation matrices](#group-character) | `character`, `representation_matrix`, `tag_irrep()` |
 | [Wyckoff positions](#group-wyckoff) | `wyckoff`, `find_wyckoff()`, `find_wyckoff_site()`, `find_wyckoff_bond()`, `create_cell_site()`, `create_cell_bond()` |
 | [Harmonics](#group-harmonics) | `harmonics`, `multipolar_harmonics`, `tag_multipole()` |
-| [Atomic basis and atomic SAMB](#group-atomic) | `atomic_basis()`, `tag_atomic_basis()`, `tag_atomic_basis_proj()`, `atomic_samb()`, `transform_atomic_samb()`, `create_atomic_samb_L()` |
+| [Atomic basis and atomic SAMB](#group-atomic) | `atomic_basis()`, `tag_atomic_basis()`, `tag_atomic_basis_proj()`, `atomic_samb()`, `transform_atomic_samb()`, `create_atomic_samb_L()`, `atomic_multipole_operator()` |
 | [Cluster and combined SAMB](#group-cluster) | `cluster_samb()`, `combined_samb()`, `cg()`, `multipole_cluster_samb()`, `combined_object()` |
 | [Transformation by the symmetry operations](#group-transform) | `transform_vector()`, `transform_multipole()`, `create_cell_vector()`, `create_cell_multipole()` |
 | [Magnetic groups and response tensors](#group-magnetic) | `active_multipole`, `response_tensor_all()`, `response_tensor()` |
@@ -377,6 +377,14 @@ len(g.atomic_samb("lg", (1, 2))), len(g.atomic_samb("lgs", (1, 1)))  # p-d block
 - `transform_atomic_samb(samb, U_ket, U_bra)` transforms the atomic SAMB to another basis, given by the unitary
   matrices from the tesseral basis, or by a rank for the cubic or hexagonal basis of the group.
 - `create_atomic_samb_L(L)` creates the atomic multipoles of the $|L, M\rangle$ basis (rank $L$) from the definition.
+
+`atomic_multipole_operator(X, l, m, s, k)` (static method) gives the atomic multipole $X_{lm}^{(s)}(k)$ as an operator in
+the position, the orbital angular momentum, and the Pauli matrices (JPSJ 89, 104704 (2020)); see
+{ref}`Operator expression <atomic-multipole-operator>`:
+
+```{code-cell} ipython3
+Group.atomic_multipole_operator("M", 1, 0, s=1, k=-1)  # spin, sigma_z.
+```
 
 (group-cluster)=
 ## 7. Cluster and combined SAMB

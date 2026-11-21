@@ -36,6 +36,7 @@ from multipie.util.util_wyckoff import (
 from multipie.util.util_tag import TagMultipole, TagSymmetryOperation, TagBasis, TagIrrep
 from multipie.util.util_samb import orthogonalize_multipole
 from multipie.util.util_atomic_multipole import atomic_multipole_matrix
+from multipie.util.util_atomic_multipole_operator import atomic_multipole_operator
 from multipie.util.util_response_tensor import (
     create_active_dict,
     get_response_tensor_mp,
@@ -1440,6 +1441,42 @@ class Group(dict):
                 cg_array[g1, g2, g] = s
 
         return cg_array
+
+    # ==================================================
+    @staticmethod
+    def atomic_multipole_operator(X, l, m, s=0, k=0):
+        """
+        Operator expression of atomic multipole X_{lm}^{(s)}(k), following H. Kusunose, R. Oiwa, and S. Hayami,
+        J. Phys. Soc. Jpn. 89, 104704 (2020).
+
+        Args:
+            X (str): type, Q/G/T/M.
+            l (int): rank.
+            m (int): component of the spherical basis, -l <= m <= l.
+            s (int, optional): 0 (spinless) or 1 (spinful).
+            k (int, optional): -s <= k <= s, l + k >= 0.
+
+        Returns:
+            - (sympy) -- expression in the noncommutative operators: the position x, y, z, the orbital angular
+              momentum l_x, l_y, l_z (dimensionless), and the Pauli matrices sigma_x, sigma_y, sigma_z (sigma_0 = 1,
+              the spin is sigma/2).
+
+        Notes:
+            - spinless (Eqs. 1-4), with l = -i (r x nabla) and nabla acting only on O_lm = sqrt(4pi/(2l+1)) r^l Y_lm:
+              Q_lm = O_lm, M_lm = [(nabla O_lm).l + l.(nabla O_lm)]/(l+1),
+              T_lm = [(nabla O_lm).(r x l) - (l x r).(nabla O_lm)]/((l+1)(l+2)),
+              G_lm = 2i [(nabla O_lm).l l^2 - l^2 l.(nabla O_lm)]/((l+1)^2 (l+2)).
+            - spinful (Eq. 13 and Table I): X_lm^(1)(k) = i^(1+k) (-1)^(l+m) sqrt(2l+1)
+              sum_n (l+k, l, 1; m-n, -m, n) X'_(l+k,m-n) sigma_(1,n), with sigma_(1,0) = sigma_z,
+              sigma_(1,+-1) = -+(sigma_x +- i sigma_y)/sqrt(2), and X' of Table I.
+            - commutation relations: [l_i, l_j] = i eps_ijk l_k, [sigma_i, sigma_j] = 2i eps_ijk sigma_k,
+              [l_i, x_j] = i eps_ijk x_k, [x_i, x_j] = 0, and sigma commutes with l and the position.
+            - the order of the operators in the definition is kept (no simplification by the commutation relations),
+              except that a run of consecutive position operators is sorted as x, y, z, and the Pauli matrices are
+              moved to the right end. G_lm with l < 2 is 0.
+            - the operator acts on any orbitals, including those of different ranks (e.g., p-d).
+        """
+        return atomic_multipole_operator(X, l, m, s, k)
 
     # ==================================================
     def create_atomic_samb_L(self, basis_rank):

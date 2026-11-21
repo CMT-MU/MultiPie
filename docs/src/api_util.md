@@ -3,6 +3,7 @@
 ```{eval-rst}
 .. autosummary::
     multipie.util.util_atomic_multipole
+    multipie.util.util_atomic_multipole_operator
     multipie.util.util_binary
     multipie.util.util_convert
     multipie.util.util_crystal
