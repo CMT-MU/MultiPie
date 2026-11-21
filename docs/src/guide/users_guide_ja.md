@@ -195,7 +195,7 @@ Group.atomic_multipole_operator("M", 1, 0)  # orbital angular momentum, l_z.
 Group.atomic_multipole_operator("T", 1, 0)  # magnetic toroidal dipole, [(r x l) - (l x r)]_z / 6.
 ```
 
-動く例は [docs/src/examples/atomic_multipole_operator.py](https://github.com/CMT-MU/MultiPie/tree/main/docs/src/examples/atomic_multipole_operator.py) です。
+ランク 2 までの演算子の一覧は[原子多極子演算子](../atomic_multipole_table_ja.md)にあります。動く例は [docs/src/examples/atomic_multipole_operator.py](https://github.com/CMT-MU/MultiPie/tree/main/docs/src/examples/atomic_multipole_operator.py) です。
 
 (ja-cluster-samb)=
 ## 5. クラスター SAMB
