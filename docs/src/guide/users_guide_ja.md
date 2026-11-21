@@ -157,6 +157,46 @@ mat[0]  # x component, l_x / sqrt(2) in (px, py, pz).
 
 O$_{\rm h}$ の p 軌道では、$\mathbb{Q}_{0}^{(a)}(A_{1g})$ は電荷（$\propto$ 単位行列）、$\mathbb{Q}_{2}^{(a)}(E_{g})$ と $\mathbb{Q}_{2}^{(a)}(T_{2g})$ は軌道の四極子、$\mathbb{M}_{1}^{(a)}(T_{1g})$ は軌道角運動量です。スピンを含めると（`lgs`）、スピンの磁気双極子は $\mathbb{M}_{1}^{(1,-1;a)}(T_{1g})$ で、p 軌道のスピン軌道相互作用 $\boldsymbol{l} \cdot \boldsymbol{s}$ は $\mathbb{Q}_{0}^{(1,1;a)}(A_{1g})$ に比例します。
 
+(ja-atomic-multipole-operator)=
+**演算子表現。** `Group.atomic_multipole_operator(X, l, m, s=0, k=0)` は、球面基底の成分 $m$ の原子多極子 $X_{lm}^{(s)}(k)$ を、H. Kusunose, R. Oiwa, and S. Hayami, J. Phys. Soc. Jpn. **89**, 104704 (2020) に従って演算子として与えます。スピンによらないもの（式 1-4）は、$\boldsymbol{l} = -i(\boldsymbol{r} \times \nabla)$ とし、$\nabla$ は $O_{lm}(\boldsymbol{r}) = \sqrt{4\pi/(2l+1)}\, r^l Y_{lm}(\hat{\boldsymbol{r}})$ にだけ作用するとして、
+
+$$
+\begin{aligned}
+Q_{lm} &= O_{lm}, \\
+M_{lm} &= \frac{1}{l+1}\,[(\nabla O_{lm})\cdot\boldsymbol{l} + \boldsymbol{l}\cdot(\nabla O_{lm})], \\
+T_{lm} &= \frac{1}{(l+1)(l+2)}\,[(\nabla O_{lm})\cdot(\boldsymbol{r}\times\boldsymbol{l}) - (\boldsymbol{l}\times\boldsymbol{r})\cdot(\nabla O_{lm})], \\
+G_{lm} &= \frac{2i}{(l+1)^2(l+2)}\,[(\nabla O_{lm})\cdot\boldsymbol{l}\,\boldsymbol{l}^2 - \boldsymbol{l}^2\,\boldsymbol{l}\cdot(\nabla O_{lm})]
+\end{aligned}
+$$
+
+です。スピンに依存するもの（式 13）は、ランク $l + k$ の軌道の多極子 $X'$ とパウリ行列を結合したもので、
+
+$$
+X_{lm}^{(1)}(k) = i^{1+k}(-1)^{l+m}\sqrt{2l+1}\sum_{n}
+\begin{pmatrix} l+k & l & 1\\ m-n & -m & n\end{pmatrix} X'_{l+k,m-n}\,\sigma_{1,n}
+$$
+
+です。$\sigma_{1,0} = \sigma_z$、$\sigma_{1,\pm1} = \mp(\sigma_x \pm i\sigma_y)/\sqrt2$ で、$X'$ は、`X = Q, M, T, G` に対して `k = 0` では `T`、`G`、`Q`、`M`、`k = ±1` では `M`、`Q`、`G`、`T` です（論文の表 I）。**軌道部分が常に極性の{ref}`点群多極子調和関数 <ja-multipolar-harmonics>`と違い、ここでの軌道部分 $X'$ は極性（`Q`、`T`）にも軸性（`G`、`M`。例えば軌道角運動量）にもなります。**
+
+- 結果は、非可換な演算子、つまり位置 `x`、`y`、`z`、軌道角運動量 `l_x`、`l_y`、`l_z`（無次元）、パウリ行列 `sigma_x`、`sigma_y`、`sigma_z`（$\sigma_0 = 1$。スピンは $\boldsymbol{\sigma}/2$）の sympy の式です。
+- これらは $[l_i, l_j] = i\epsilon_{ijk} l_k$、$[\sigma_i, \sigma_j] = 2i\epsilon_{ijk}\sigma_k$、$[l_i, x_j] = i\epsilon_{ijk} x_k$ に従い、$x_i$ どうしは交換し、$\sigma_i$ は $l_i$ とも $x_i$ とも交換します。
+- 定義の演算子の並び順を保ちます。連続する位置の演算子の並びを $x, y, z$ の順に並べ替えることと、パウリ行列を右端に寄せることだけを行い、ほかの交換関係は使いません。$l < 2$ の $G_{lm}$ は 0 です。
+- 演算子は、位置を通して、異なるランクの軌道の間（例えば p-d）も含むどの軌道にも作用します。その行列要素は、対称性への適合と規格化の前の `Group.atomic_samb` のもので、動径の因子は $\langle r^k \rangle = 1$ です。
+
+```{code-cell} ipython3
+Group.atomic_multipole_operator("Q", 0, 0, s=1, k=1)  # spin-orbit coupling, l.sigma / sqrt(3).
+```
+
+```{code-cell} ipython3
+Group.atomic_multipole_operator("M", 1, 0)  # orbital angular momentum, l_z.
+```
+
+```{code-cell} ipython3
+Group.atomic_multipole_operator("T", 1, 0)  # magnetic toroidal dipole, [(r x l) - (l x r)]_z / 6.
+```
+
+動く例は [docs/src/examples/atomic_multipole_operator.py](https://github.com/CMT-MU/MultiPie/tree/main/docs/src/examples/atomic_multipole_operator.py) です。
+
 (ja-cluster-samb)=
 ## 5. クラスター SAMB
 
@@ -358,6 +398,10 @@ O_{lm}^{(s)}(k) = i^{k+s} (-1)^{l+m} \sqrt{2l+1} \sum_{\nu}
 \qquad k = -s, \dots, s.
 $$
 
+```{important}
+**軌道部分 $O_{l+k, m-\nu}(\boldsymbol{r}) = \sqrt{4\pi/(2l+2k+1)}\, r^{l+k} Y_{l+k, m-\nu}(\hat{\boldsymbol{r}})$ は、常に $\boldsymbol{r}$ の極性の関数です。** そのため、タイプ `X`（極性 `Q` か軸性 `G`）は、下の表のとおり、内部タイプ `x` と `s + k` の偶奇で決まります。これは MultiPie の点群多極子調和関数の定義で、H. Kusunose, R. Oiwa, and S. Hayami, J. Phys. Soc. Jpn. **89**, 104704 (2020) の原子多極子の定義とは異なります。原子多極子では、軌道部分が極性（`Q`、`T`）にも軸性（`G`、`M`。例えば軌道角運動量）にもなります。
+```
+
 **多極子のタイプ。** 内部タイプ `x` を固定すると、多極子のタイプ `X` は `s + k` の偶奇で決まります。
 
 | 内部タイプ | `s + k` 偶 | `s + k` 奇 |
@@ -400,6 +444,28 @@ ex
 | O、D$_3$（カイラル） | `("G", 0, "A1", -1, -1, 1, 1, "g")` | $(xG_x + yG_y + zG_z)/\sqrt{3}$ | 放射状（ワイル型）、$\boldsymbol{k} \cdot \boldsymbol{\sigma}$ |
 
 ラシュバ型の項は $z$ 方向の電気双極子 $\vec{\mathbb{Q}}_{1}^{(1,0)}[g]$ で、C$_{\rm 4v}$ の極性によって許されます。放射状の項は電気トロイダル単極子 $\vec{\mathbb{G}}_{0}^{(1,1)}[g]$ で、O や D$_3$ のカイラリティによって許されます（例えば Te。[物質の例](../materials_ja.md)を参照）。D$_3$ では、異方的な $\vec{\mathbb{G}}_{2}^{(1,-1)}[g](A_1)$、$(2zG_z - xG_x - yG_y)/\sqrt{6}$、つまり $2k_z\sigma_z - k_x\sigma_x - k_y\sigma_y$ も許されます。式は、例えば `Group("C4v").multipolar_harmonics[("Q", 1, "A1", -1, -1, 1, 0, "g")]` で得られます。
+
+(ja-multipolar-harmonics-expression)=
+**成分ごとの式。** `Group.multipolar_harmonics_expression(X, l, m, s=0, k=0, x="q", internal="cubic")` は、球面基底の成分 $m$（$-l \le m \le l$）の $O_{lm}^{(s)}(k)$ そのもの、つまり $x, y, z$ の多項式に内部基底の記号をかけた式を与えます。$l \le 3$ に限らず、内部ランクは `s = 0, 1, 2, 3`（`k = -s, ..., s`、`l + k >= 0`）で、内部基底は立方晶系（`"cubic"`）または六方晶系（`"hexagonal"`）のものです。
+
+- `X`（`Q`、`G`、`T`、`M`）と `x` の両方を与えます。軌道部分は常に極性なので、偶奇の合わない `X` と `x` の組み合わせ（上の表にないもの）は 0 になります。
+- `X = T, M` では、内部基底の記号を `Q` $\to$ `T`、`G` $\to$ `M` と読み替えます（磁気的な内部自由度）。
+- `s = 0` では、内部基底の記号は $G_{0}$ と $M_{0}$（`x = g` の `X = G, M`）のときだけかけます。$Q_{0}$ と $T_{0}$ では、`Group.harmonics` と同じく多項式だけを与えます。
+- 点群の点群多極子調和関数は、`Group.harmonics` の $U$（`T`/`M` では `Q`/`G` のもの）を使った $\sum_m U_{m\gamma} O_{lm}^{(s)}(k)$ です。
+
+```{code-cell} ipython3
+Group.multipolar_harmonics_expression("Q", 0, 0, s=1, k=1, x="q")  # r.Q / sqrt(3).
+```
+
+```{code-cell} ipython3
+Group.multipolar_harmonics_expression("M", 1, 0, s=1, k=0, x="g")  # magnetic: G -> M, (y M_x - x M_y)/sqrt(2).
+```
+
+```{code-cell} ipython3
+Group.multipolar_harmonics_expression("Q", 1, 0, s=1, k=0, x="q")  # the wrong parity: 0.
+```
+
+動く例は [docs/src/examples/multipolar_harmonics_expression.py](https://github.com/CMT-MU/MultiPie/tree/main/docs/src/examples/multipolar_harmonics_expression.py) です。
 
 (ja-brief-manual)=
 
