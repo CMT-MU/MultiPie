@@ -183,6 +183,61 @@ $\mathbb{M}_{1}^{(a)}(T_{1g})$ the orbital angular momentum. With the spin (`lgs
 $\mathbb{M}_{1}^{(1,-1;a)}(T_{1g})$, and the spin-orbit coupling $\boldsymbol{l} \cdot \boldsymbol{s}$ of the p orbitals
 is proportional to $\mathbb{Q}_{0}^{(1,1;a)}(A_{1g})$.
 
+(atomic-multipole-operator)=
+**Operator expression.** `Group.atomic_multipole_operator(X, l, m, s=0, k=0)` gives the atomic multipole
+$X_{lm}^{(s)}(k)$ of a component $m$ of the spherical basis as an operator, following H. Kusunose, R. Oiwa, and
+S. Hayami, J. Phys. Soc. Jpn. **89**, 104704 (2020). The spinless ones (Eqs. 1-4) are, with
+$\boldsymbol{l} = -i(\boldsymbol{r} \times \nabla)$ and $\nabla$ acting only on
+$O_{lm}(\boldsymbol{r}) = \sqrt{4\pi/(2l+1)}\, r^l Y_{lm}(\hat{\boldsymbol{r}})$,
+
+$$
+\begin{aligned}
+Q_{lm} &= O_{lm}, \\
+M_{lm} &= \frac{1}{l+1}\,[(\nabla O_{lm})\cdot\boldsymbol{l} + \boldsymbol{l}\cdot(\nabla O_{lm})], \\
+T_{lm} &= \frac{1}{(l+1)(l+2)}\,[(\nabla O_{lm})\cdot(\boldsymbol{r}\times\boldsymbol{l}) - (\boldsymbol{l}\times\boldsymbol{r})\cdot(\nabla O_{lm})], \\
+G_{lm} &= \frac{2i}{(l+1)^2(l+2)}\,[(\nabla O_{lm})\cdot\boldsymbol{l}\,\boldsymbol{l}^2 - \boldsymbol{l}^2\,\boldsymbol{l}\cdot(\nabla O_{lm})],
+\end{aligned}
+$$
+
+and the spin-dependent ones (Eq. 13) couple an orbital multipole $X'$ of rank $l + k$ with the Pauli matrices,
+
+$$
+X_{lm}^{(1)}(k) = i^{1+k}(-1)^{l+m}\sqrt{2l+1}\sum_{n}
+\begin{pmatrix} l+k & l & 1\\ m-n & -m & n\end{pmatrix} X'_{l+k,m-n}\,\sigma_{1,n},
+$$
+
+with $\sigma_{1,0} = \sigma_z$ and $\sigma_{1,\pm1} = \mp(\sigma_x \pm i\sigma_y)/\sqrt2$. $X'$ is `T`, `G`, `Q`, `M` for
+`X = Q, M, T, G` with `k = 0`, and `M`, `Q`, `G`, `T` with `k = ±1` (Table I of the paper). **Unlike the
+{ref}`multipolar harmonics <multipolar-harmonics>`, whose orbital part is always polar, the orbital part $X'$ here can
+be polar (`Q`, `T`) or axial (`G`, `M`, e.g., the orbital angular momentum).**
+
+- The result is a sympy expression in the noncommutative operators: the position `x`, `y`, `z`, the orbital angular
+  momentum `l_x`, `l_y`, `l_z` (dimensionless), and the Pauli matrices `sigma_x`, `sigma_y`, `sigma_z`
+  ($\sigma_0 = 1$; the spin is $\boldsymbol{\sigma}/2$).
+- They obey $[l_i, l_j] = i\epsilon_{ijk} l_k$, $[\sigma_i, \sigma_j] = 2i\epsilon_{ijk}\sigma_k$, and
+  $[l_i, x_j] = i\epsilon_{ijk} x_k$; $x_i$ commute with each other, and $\sigma_i$ commute with $l_i$ and $x_i$.
+- The order of the operators in the definition is kept. Only a run of consecutive position operators is sorted as
+  $x, y, z$, and the Pauli matrices are moved to the right end; no other commutation relation is used. $G_{lm}$ with
+  $l < 2$ is 0.
+- The operator acts on any orbitals, including those of different ranks (e.g., p-d), through the position. Its matrix
+  elements are those of `Group.atomic_samb` before the symmetry adaptation and the normalization, with the radial
+  factor $\langle r^k \rangle = 1$.
+
+```{code-cell} ipython3
+Group.atomic_multipole_operator("Q", 0, 0, s=1, k=1)  # spin-orbit coupling, l.sigma / sqrt(3).
+```
+
+```{code-cell} ipython3
+Group.atomic_multipole_operator("M", 1, 0)  # orbital angular momentum, l_z.
+```
+
+```{code-cell} ipython3
+Group.atomic_multipole_operator("T", 1, 0)  # magnetic toroidal dipole, [(r x l) - (l x r)]_z / 6.
+```
+
+A runnable script is
+[docs/src/examples/atomic_multipole_operator.py](https://github.com/CMT-MU/MultiPie/tree/main/docs/src/examples/atomic_multipole_operator.py).
+
 (cluster-samb)=
 ## 5. Cluster SAMB
 
