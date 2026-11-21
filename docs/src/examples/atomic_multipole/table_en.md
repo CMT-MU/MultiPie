@@ -1,4 +1,4 @@
-## Spinless, $s = 0$
+## $s = 0$, $k = 0$
 
 ### Electric (Q)
 
@@ -95,7 +95,7 @@ M_{2,xy} &= \frac{\sqrt{3} l_{x} y}{3} + \frac{\sqrt{3} l_{y} x}{3} + \frac{\sqr
 \end{aligned}
 $$
 
-## Spin-dependent, $s = 1$, $k = -1$
+## $s = 1$, $k = -1$
 
 ### Electric (Q)
 
@@ -147,7 +147,7 @@ M^{(1)}_{2,xy}(-1) &= \frac{\sqrt{2} x \sigma_{y}}{2} + \frac{\sqrt{2} y \sigma_
 \end{aligned}
 $$
 
-## Spin-dependent, $s = 1$, $k = 0$
+## $s = 1$, $k = 0$
 
 ### Electric (Q)
 
@@ -293,7 +293,7 @@ M^{(1)}_{2,xy}(0) &= - \frac{\sqrt{2} i l_{x}^{3} x \sigma_{z}}{18} + \frac{\sqr
 \end{aligned}
 $$
 
-## Spin-dependent, $s = 1$, $k = 1$
+## $s = 1$, $k = 1$
 
 ### Electric (Q)
 

@@ -22,7 +22,7 @@ R. Oiwa, and S. Hayami, J. Phys. Soc. Jpn. **89**, 104704 (2020).
   basis are those of the atomic SAMB before the symmetry adaptation and the normalization, with the radial factor
   $\langle r^k \rangle = 1$.
 
-The vanishing ones (e.g., $M_{0}$ and the spinless $G_{1}$) are not listed. The list is created by `docs/src/examples/atomic_multipole/create_table.py`.
+The vanishing ones (e.g., $M_{0}$ and $G_{1}$ of $s = 0$) are not listed. The list is created by `docs/src/examples/atomic_multipole/create_table.py`.
 
 ```{include} examples/atomic_multipole/table_en.md
 ```
