@@ -145,7 +145,7 @@ $$
 
 $$
 \begin{aligned}
-\boldsymbol{Q}^{(1)}(0) &= \frac{\sqrt{2}}{12} \boldsymbol{\sigma} \times (\boldsymbol{r} \times \boldsymbol{l} - \boldsymbol{l} \times \boldsymbol{r})
+\boldsymbol{Q}^{(1)}(0) &= \frac{\sqrt{2}}{12} (\boldsymbol{l} \times \boldsymbol{r} - \boldsymbol{r} \times \boldsymbol{l}) \times \boldsymbol{\sigma}
 \end{aligned}
 $$
 
@@ -186,7 +186,7 @@ $$
 
 $$
 \begin{aligned}
-\boldsymbol{G}^{(1)}(0) &= \frac{\sqrt{2}}{2} \boldsymbol{\sigma} \times \boldsymbol{l}
+\boldsymbol{G}^{(1)}(0) &= -\frac{\sqrt{2}}{2} \boldsymbol{l} \times \boldsymbol{\sigma}
 \end{aligned}
 $$
 
@@ -213,7 +213,7 @@ $$
 
 $$
 \begin{aligned}
-\boldsymbol{T}^{(1)}(0) &= \frac{\sqrt{2}}{2} \boldsymbol{\sigma} \times \boldsymbol{r}
+\boldsymbol{T}^{(1)}(0) &= -\frac{\sqrt{2}}{2} \boldsymbol{r} \times \boldsymbol{\sigma}
 \end{aligned}
 $$
 
