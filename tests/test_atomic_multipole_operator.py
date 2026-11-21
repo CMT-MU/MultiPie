@@ -229,3 +229,33 @@ def test_docs_example(capsys):
     example = os.path.join(os.path.dirname(__file__), os.pardir, "docs", "src", "examples", "atomic_multipole_operator.py")
     runpy.run_path(example, run_name="__main__")
     assert "spin-orbit" in capsys.readouterr().out
+
+
+# ==================================================
+def _create_table():
+    path = os.path.join(os.path.dirname(__file__), os.pardir, "docs", "src", "examples", "atomic_multipole", "create_table.py")
+    return runpy.run_path(path)
+
+
+# ==================================================
+@pytest.mark.parametrize("lang", ["en", "ja"])
+def test_docs_table_up_to_date(lang):
+    # the list of the operators in the docs is up to date (python docs/src/examples/atomic_multipole/create_table.py).
+    table = _create_table()
+    with open(table["output_file"](lang), encoding="utf-8") as f:
+        assert f.read() == table["create"](lang)
+
+
+# ==================================================
+@pytest.mark.parametrize("L", [1, 2])
+def test_docs_table_hermitian(L):
+    # the real components in the list are hermitian (in the diagonal blocks).
+    table = _create_table()
+    for s, k in table["SECTION"]:
+        for X in ["Q", "G", "T", "M"]:
+            for l in range(3):
+                if l + k < 0:
+                    continue
+                for _, ex in table["real_components"](X, l, s, k):
+                    mat = operator_matrix(ex, L, L)
+                    assert np.allclose(mat, mat.conj().T, atol=1e-12), (X, l, s, k, L)

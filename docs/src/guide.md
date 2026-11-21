@@ -235,7 +235,7 @@ Group.atomic_multipole_operator("M", 1, 0)  # orbital angular momentum, l_z.
 Group.atomic_multipole_operator("T", 1, 0)  # magnetic toroidal dipole, [(r x l) - (l x r)]_z / 6.
 ```
 
-A runnable script is
+The operators up to rank 2 are listed in [Atomic multipole operators](atomic_multipole_table.md). A runnable script is
 [docs/src/examples/atomic_multipole_operator.py](https://github.com/CMT-MU/MultiPie/tree/main/docs/src/examples/atomic_multipole_operator.py).
 
 (cluster-samb)=
