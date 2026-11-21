@@ -96,11 +96,11 @@ COMPACT = {
     ("M", 1, 0, 0): (L, l),
     ("M", 1, 1, -1): (S, sigma),
     ("Q", 1, 1, 0): (
-        rf"\frac{{\sqrt{{2}}}}{{12}} {S} \times ({R} \times {L} - {L} \times {R})",
-        _times(sp.sqrt(2) / 12, _cross(sigma, rl_lr)),
+        rf"\frac{{\sqrt{{2}}}}{{12}} ({L} \times {R} - {R} \times {L}) \times {S}",
+        _times(-sp.sqrt(2) / 12, _cross(rl_lr, sigma)),
     ),
-    ("G", 1, 1, 0): (rf"\frac{{\sqrt{{2}}}}{{2}} {S} \times {L}", _times(sp.sqrt(2) / 2, _cross(sigma, l))),
-    ("T", 1, 1, 0): (rf"\frac{{\sqrt{{2}}}}{{2}} {S} \times {R}", _times(sp.sqrt(2) / 2, _cross(sigma, r))),
+    ("G", 1, 1, 0): (rf"-\frac{{\sqrt{{2}}}}{{2}} {L} \times {S}", _times(-sp.sqrt(2) / 2, _cross(l, sigma))),
+    ("T", 1, 1, 0): (rf"-\frac{{\sqrt{{2}}}}{{2}} {R} \times {S}", _times(-sp.sqrt(2) / 2, _cross(r, sigma))),
     ("Q", 0, 1, 1): (rf"\frac{{\sqrt{{3}}}}{{3}} {L} \cdot {S}", _times(sp.sqrt(3) / 3, ls)),
     ("G", 0, 1, 1): (
         rf"\frac{{\sqrt{{3}}}}{{18}} ({R} \times {L} - {L} \times {R}) \cdot {S}",
