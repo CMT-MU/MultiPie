@@ -264,7 +264,7 @@ bonds, wp
 (ja-group-harmonics)=
 ## 5. 調和関数
 
-`harmonics` は点群調和関数（階数 $\le 11$）を、多極子のキー（{ref}`ja-multipole-key`）をキーとする `Dict` で与えます。値は各成分の多項式と、方域調和関数からのユニタリー行列 $U$ です。`Dict` は `select()` でキーのフィールドによって要素を選び、`named_keys()` でキーを named tuple として与えます。
+`harmonics` は点群調和関数（階数 $\le 11$）を、多極子のキー（{ref}`ja-multipole-key`）をキーとする `Dict` で与えます。値は各成分の多項式と、球面調和関数 $O_{lm}$ からのユニタリー行列 $U$（行は $m = l, \dots, -l$）です。`Dict` は `select()` でキーのフィールドによって要素を選び、`named_keys()` でキーを named tuple として与えます。
 
 ```{code-cell} ipython3
 h = g.harmonics

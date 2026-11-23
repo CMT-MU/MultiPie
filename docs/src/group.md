@@ -278,7 +278,7 @@ bonds, wp
 
 `harmonics` gives the point-group harmonics (rank $\le 11$) as a `Dict` keyed by the multipole key
 (see {ref}`multipole-key`). Each value is the polynomials of the components and the unitary matrix $U$ from the
-tesseral harmonics. A `Dict` selects its entries by the fields of the key with `select()`, and `named_keys()` gives the
+spherical harmonics $O_{lm}$ (rows $m = l, \dots, -l$). A `Dict` selects its entries by the fields of the key with `select()`, and `named_keys()` gives the
 keys as named tuples:
 
 ```{code-cell} ipython3
