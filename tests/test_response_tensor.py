@@ -105,3 +105,19 @@ def test_multipole_rank_active_multipole():
 def test_multipole_rank_unknown(tag):
     with pytest.raises(ValueError, match="unknown active multipole tag"):
         multipole_rank(tag)
+
+
+# ==================================================
+@pytest.mark.parametrize("X", ["Q", "G", "T", "M"])
+def test_rank4_t_part(X):
+    # the t part of rank 4, X_{abc;d}, is fully symmetric in (a, b, c) and has 30 independent components (C1).
+    import itertools
+
+    g = Group("MPG:1.1.1")
+    T = {c: sp.expand(g.response_tensor(X, 4, c, "t")) for c in itertools.product(range(1, 4), repeat=4)}
+    for c in T:
+        for p in itertools.permutations(c[:3]):
+            assert sp.expand(T[c] - T[p + (c[3],)]) == 0, (c, p)
+    symbols = sorted(set().union(*[e.free_symbols for e in T.values()]), key=str)
+    assert len(symbols) == 30
+    assert sp.Matrix([[sp.diff(T[c], s) for s in symbols] for c in T]).rank() == 30
