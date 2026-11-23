@@ -138,12 +138,14 @@ so["product"][("4+[001]", "4+[001]")]
 | キー | 内容 |
 |:--|:--|
 | `tag` | 対称操作。例えば `4+[001]`（[001] 軸まわりの $2\pi/4$ 回転）、`-1`（空間反転）、`m[100]`（鏡映） |
-| `generator` | 生成元 |
+| `generator` | 生成元（PG と SG） |
 | `cartesian`, `fractional` | デカルト座標と分率座標での行列（SG と MSG では並進を含む `(4, 4)`） |
 | `det` | 行列式（真性回転は +1、非真性回転は -1） |
 | `product` | 積の表 `{(a, b): ab}`（PG） |
 | `plus_set`, `cartesian_primitive`, `fractional_primitive` | 格子の中心化の並進と、基本単位胞での行列（SG） |
 | `tr_sign` | 時間反転の符号（MPG と MSG）。`-1'` のように時間反転を含む操作で -1 |
+| `so_matrix` | 基底 `[1]`（s = 0）と `[x, y, z]`（s = 1）に対するデカルト座標での行列。キーは `("Q", s)`（極性）と `("G", s)`（軸性、$\det R$ がかかる）（PG と SG。SG では点群の部分） |
+| `mapping` | 親の群の対称操作との対応 `{"top": top, "mapping": cosets}`。`top` は `Oh` か `D6h` で、`cosets` は親の群をたどる `top` での左剰余類を `top` の対称操作の番号（1 から）で与えたもの。最初は群そのもの（PG と SG） |
 
 `Group.tag_symmetry_operation(tag)` は対称操作の性質を与えます。
 

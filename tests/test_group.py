@@ -285,3 +285,33 @@ def test_harmonics_U(tag):
         for c in range(U.shape[1]):
             s = sum(sp.sympify(U[i, c]) * solid_harmonics(l, l - i) for i in range(2 * l + 1))
             assert sp.expand(s - ex[c]) == 0, (key, c)
+
+
+# ==================================================
+@pytest.mark.parametrize("tag, top", [("D4h", "Oh"), ("C1", "Oh"), ("C3v", "D6h"), (123, "Oh"), (194, "D6h")])
+def test_so_matrix_and_mapping(tag, top):
+    # so_matrix and mapping of symmetry_operation (PG and SG), as in the table of the Group page.
+    g = Group(tag)
+    so = g.symmetry_operation
+    pg = g.info.PG if isinstance(tag, int) else tag
+    cart = np.array(so["cartesian"], dtype=float)[:, :3, :3]
+    det = np.array(so["det"], dtype=float)
+    sm = so["so_matrix"]
+    assert set(sm.keys()) == {("Q", 0), ("G", 0), ("Q", 1), ("G", 1)}
+    assert np.allclose(np.array(sm[("Q", 0)], dtype=float), 1)
+    assert np.allclose(np.array(sm[("G", 0)], dtype=float), det[:, None, None])
+    assert np.allclose(np.array(sm[("Q", 1)], dtype=float), cart)
+    assert np.allclose(np.array(sm[("G", 1)], dtype=float), det[:, None, None] * cart)
+    # mapping: the left cosets g H of the group H in top, as the indices (from 1) of the operations of top.
+    mp = so["mapping"]
+    assert mp["top"] == top
+    t = Group(top).symmetry_operation
+    h = Group(pg).symmetry_operation["tag"]
+    cosets = mp["mapping"]
+    assert [t["tag"][i - 1] for i in cosets[0]] == list(h)
+    assert sorted(i for c in cosets for i in c) == list(range(1, len(t["tag"]) + 1)) and len(cosets[0]) == len(h)
+    for c in cosets:
+        g = t["tag"][c[0] - 1]
+        assert [t["tag"][i - 1] for i in c] == [t["product"][(g, x)] for x in h]
+    for tp in ["MPG:15.7.59", "MSG:123.339"]:
+        assert not {"so_matrix", "mapping", "generator"} & Group(tp).symmetry_operation.keys()
