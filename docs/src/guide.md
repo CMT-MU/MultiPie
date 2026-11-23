@@ -308,6 +308,43 @@ Since each $Z_j$ is normalized, $z_j$ has the unit of energy. The numbering of $
 (see [Changes from Ver.2](changes.md)); the space spanned by the SAMB does not. See
 [Examples of materials](materials.md) for complete examples.
 
+(samb-order)=
+### Order of the SAMB
+
+The combined SAMB $z_1, z_2, \ldots$ are numbered in the order of (from 3.2.0):
+
+1. the irrep $\Gamma$, in the order of the character table of the group (restricted to `SAMB_select["Gamma"]`);
+2. the site or bond cluster: the sites before the bonds, then the tail and the head (by their names), the neighbor,
+   the multiplicity of the neighbor (`u.neighbor`, `u.n`), and the bra-ket block of the orbitals (the ranks and the
+   orbitals of the bra and the ket);
+3. the multipole: the electric ones ($Q$, $G$) before the magnetic ones ($T$, $M$), then $s$, $k$, $l$, the type
+   ($Q$ before $G$, $T$ before $M$), $n$, and $p$ of its key;
+4. the component of the irrep (one $z_j$ for each component).
+
+E.g., for graphene with all the types (`"SAMB_select": {"X": []}`), the irreps are in the order A1g, A2g, E2g, B1u, B2u,
+E1u of the character table:
+
+| $z_j$ | irrep | cluster | multipole |
+| --- | --- | --- | --- |
+| $z_1$, $z_2$, $z_3$ | A1g | site, 1st and 2nd neighbors | $Q$, $l = 0$ |
+| $z_4$ | A2g | 2nd neighbor | $M$, $l = 1$ |
+| $z_5$-$z_8$ | E2g | 1st and 2nd neighbors | $Q$, $l = 2$ (two components each) |
+| $z_9$, $z_{10}$ | E2g | 2nd neighbor | $T$, $l = 2$ |
+| $z_{11}$-$z_{14}$ | B1u, B2u | site, 1st and 2nd neighbors | $Q$, $T$, $l = 3$ |
+| $z_{15}$-$z_{20}$ | E1u | 1st and 2nd neighbors | $T$, $Q$, $T$, $l = 1$ |
+
+Within a block, e.g., the p-d block of a spinful site, $\mathbb{G}_{4}^{(1,-1)}$ comes after $\mathbb{Q}_{3}^{(1,-1)}$
+and before $\mathbb{Q}_{1}^{(1,0)}$, as $s$, $k$, $l$ are compared before the type. The cluster SAMB $y_j$ are numbered
+by the cluster, then $\Gamma$ (in the order of the character table), $l$, $k$, the type ($Q$, $G$, $T$, $M$), and $n$.
+
+```{important}
+Before 3.2.0, the irreps were in the alphabetical order (e.g., A1g, A1u, A2g, ... for O$_{\rm h}$) and the multipoles
+in the order of the type ($Q$, $G$, $M$, $T$), $s$, $k$, $l$. The SAMB are the same, but a model created again with
+3.2.0 or later has another numbering of $z_j$. A saved model keeps its numbering, and `mp_convert` renumbers a model of
+an earlier version of Ver.3 and the weights of its controls (see
+{ref}`Converting a model of Ver.3 before 3.2.0 <converting-a-model-before-3-2>`).
+```
+
 (response-tensors)=
 ## 7. Response tensors
 

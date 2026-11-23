@@ -183,6 +183,8 @@ class Dict(MutableMapping):
                 - ("key_name", custum order list)
                 - ("key_name", ascending?)
                 - "key_name"
+            - custum order: a list of the values, or a dict of the value to its rank (values of the same rank are
+              not distinguished, e.g., {"Q": 0, "G": 0, "T": 1, "M": 1}). A value not in it comes last.
         """
         if not attributes:
             if key_type is None:
@@ -196,7 +198,7 @@ class Dict(MutableMapping):
                     if len(attr) == 3:
                         attr_name, order, asc = attr
                     elif len(attr) == 2:
-                        if isinstance(attr[1], list):
+                        if isinstance(attr[1], (list, dict)):
                             attr_name, order = attr
                             asc = True
                         else:
@@ -209,7 +211,10 @@ class Dict(MutableMapping):
 
                 value = getattr(key, attr_name)
 
-                if order is not None:
+                if isinstance(order, dict):
+                    idx = order.get(value, float("inf"))
+                    values.append(idx if asc else -idx)
+                elif order is not None:
                     idx = order.index(value) if value in order else float("inf")
                     values.append(idx if asc else -idx)
                 else:
@@ -233,6 +238,8 @@ class Dict(MutableMapping):
                 - ("key_name", custum order list)
                 - ("key_name", ascending?)
                 - "key_name"
+            - custum order: a list of the values, or a dict of the value to its rank (values of the same rank are
+              not distinguished, e.g., {"Q": 0, "G": 0, "T": 1, "M": 1}). A value not in it comes last.
         """
         sorted_keys = self.sort_key(self._data.keys(), self._key_type, *attributes)
         return Dict(self._key_type, {key: self[key] for key in sorted_keys})

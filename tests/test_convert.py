@@ -195,7 +195,7 @@ def test_refuse(v2):
     # a model of Ver.3 without the model of Ver.2.
     convert_model("ch4", **OPT)
     os.remove("ch4/ch4_v2.pkl")
-    with pytest.raises(ValueError, match="no model of Ver.2"):
+    with pytest.raises(ValueError, match="no old model"):
         convert_model("ch4", **OPT)
 
     with pytest.raises(FileNotFoundError):

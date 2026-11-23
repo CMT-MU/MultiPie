@@ -963,7 +963,10 @@ def test_var_partial_select(sp_model, select):
     selected = ma["samb"]["matrix_info"]["matrix"]
     var = read_dict(os.path.join("out", "sp", "info", "sp_var.py"))
     for name, d in var.items():
+        assert d["bond"] == full[name]["bond"]
+        d = {zj: ex for zj, ex in d.items() if zj != "bond"}
         assert set(d) <= set(selected)
         for zj, expression in d.items():
             assert expression == str(full[name][zj]).replace(" ", "")  # as written by write_var_file.
-    assert sorted(z for d in var.values() for z in d) == sorted(z for d in full.values() for z in d if z in selected)
+    zs = lambda dic: sorted(z for d in dic.values() for z in d if z != "bond")
+    assert zs(var) == [z for z in zs(full) if z in selected]

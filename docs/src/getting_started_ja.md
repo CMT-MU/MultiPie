@@ -118,7 +118,7 @@ MultiPie Ver.3 では、4 つの f 軌道の名前を変えました。古い名
 - 複数の入力ファイルを与えた場合は、どの模型を作成・解析するよりも前に、すべてのファイルを読み込みます。
 - `mp_create -i` と `mp_analyze -i` は、デフォルトの模型と制御を表示します。これは入力ファイルのテンプレートとして使えます。
 - `python -m multipie.scripts.mp_create`、`python -m multipie.scripts.mp_analyze`、`python -m multipie.scripts.mp_convert` も同じように動きます。
-- `mp_convert` は、Ver.2 の模型（`.pkl`）を Ver.3 に変換し、その制御ファイルの重みも変換します（[Ver.2 からの変更点](changes_ja.md)を参照）。
+- `mp_convert` は、Ver.2 の模型（`.pkl`）を Ver.3 に変換し、または 3.2.0 より前の Ver.3 の模型の番号を付け替え、その制御ファイルの重みも変換します（[Ver.2 からの変更点](changes_ja.md)を参照）。
 - 経過時間や警告などのメッセージは、`multipie` ロガーを通して標準出力に書き出します。`create_model` と `analyze_model`（したがって `mp_create` と `mp_analyze`）は、このロガーにまだハンドラがなければ設定します。アプリケーションのログの設定（例えば Jupyter のルートロガー）は変更しません。メッセージを別の場所に集めるには、これらを呼ぶ前に `multipie` ロガーにハンドラを加えてください。
 
 ## 並列計算
@@ -163,7 +163,7 @@ Windows の PowerShell では、スクリプトを実行する前に `$env:MULTI
     - **_info.py**：全体の情報。
     - **_k.py**：運動量表示の SAMB。
     - **_matrix.py**：SAMB の行列データ。
-    - **_var.py**：zj と、ボンド 1 での原子のパラメータとの関係。
+    - **_var.py**：zj と、ボンド 1 での原子のパラメータとの関係（下を参照）。
     - **_z.py**：zj パラメータ。
   - **output/**
     - **_dispersion.eps**：分散（EPS）。
@@ -177,3 +177,16 @@ Windows の PowerShell では、スクリプトを実行する前に `$env:MULTI
     - **_weight.txt**：軌道の重み付きの分散（`output/dispersion/weight` が `False` でないとき）。
     - **plot_dos.gnu**、**plot_weight.gnu**：DOS と軌道の重みを gnuplot で描くためのコマンドスクリプト。
     - **plot_band.gnu**：gnuplot で描くためのコマンドスクリプト。
+
+**_var.py** は、各ボンドクラスターについて、そのボンド 1 の head と tail のサイトと、恒等表現の各 $z_j$ をボンド 1 の行列要素で表した式を与えます（3.2.0 から）。例えばグラフェンでは：
+
+```python
+graphene_var = {
+    "C;C_001_1": {"bond": ("C(2)", "C(1)"), "z2": "sqrt(6)*g_{pz,pz}"},
+    "C;C_002_1": {"bond": ("C(1)", "C(1)"), "z3": "2*sqrt(3)*g_{pz,pz}"},
+}
+```
+
+- `"bond"`：ボンド 1 の（head のサイト, tail のサイト）で、`原子(副格子)` の形です。
+- `g_{a,b}` と `h_{a,b}`：ボンド 1 の、head の軌道 `a` と tail の軌道 `b` の間の行列要素は $H_{a,b} = g_{a,b} + i h_{a,b}$ です。
+- 軌道は、スピンのない模型ではそのまま（例えば `pz`）、スピンのある模型（`lgs`）では `(px,u)` と `(px,d)` を `pxu` と `pxd` と書きます。`jml` 基底ではランクの文字を付け、例えば p の `(3/2,1/2)` を `p(3/2,1/2)` と書きます。同じ $(j, m)$ の p と d を区別するためです。

@@ -3,11 +3,11 @@ Te_ctrl = {
     "samb": {
         "model": "Te",
         "parameter": {
-            "z6": 1.0,  # on-site (symmetric) spin-orbit coupling, l.s.
+            "z9": 1.0,  # on-site (symmetric) spin-orbit coupling, l.s.
             "z10": -2.0,  # intra-chain hopping.
-            "z11": 1.0,  # intra-chain hopping.
-            "z22": 0.3,  # intra-chain antisymmetric spin-orbit coupling (sigma_z).
-            "z23": 0.3,  # intra-chain antisymmetric spin-orbit coupling (sigma_x, sigma_y).
+            "z13": 1.0,  # intra-chain hopping.
+            "z16": 0.3,  # intra-chain antisymmetric spin-orbit coupling (sigma_z).
+            "z17": 0.3,  # intra-chain antisymmetric spin-orbit coupling (sigma_x, sigma_y).
             "z31": -0.5,  # inter-chain hopping.
         },
     },

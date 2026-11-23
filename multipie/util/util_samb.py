@@ -19,6 +19,32 @@ from multipie.util.util_gram_schmidt import gram_schmidt
 
 
 # ==================================================
+def combined_samb_order(irreps):
+    """
+    Sort attributes for the order of the combined SAMB (Dict.sort).
+
+    Args:
+        irreps ([str]): irreps in the order of the character table.
+
+    Returns:
+        - (tuple) -- attributes for Dict.sort.
+
+    Note:
+        - Gamma (as irreps), electric (Q, G) / magnetic (T, M), s, k, l, X (Q, G, T, M), n, p.
+    """
+    return (
+        ("Gamma", list(irreps)),
+        ("X", {"Q": 0, "G": 0, "T": 1, "M": 1}),
+        "s",
+        "k",
+        "l",
+        ("X", ["Q", "G", "T", "M"]),
+        "n",
+        "p",
+    )
+
+
+# ==================================================
 def orthogonalize_samb(samb, diagonal_block):
     """
     Orthogonalize SAMB.
