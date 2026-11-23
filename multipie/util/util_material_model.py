@@ -433,7 +433,8 @@ def parse_samb_select(select, irreps):
     if "s" not in select.keys() or len(select["s"]) == 0:
         select["s"] = [0, 1]
 
-    select["Gamma"] = sorted(select["Gamma"])
+    # in the order of the character table (the unknown ones at the end).
+    select["Gamma"] = [i for i in irreps if i in select["Gamma"]] + [i for i in select["Gamma"] if i not in irreps]
 
     return select
 

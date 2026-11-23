@@ -14,6 +14,7 @@ MultiPie Ver.3 は、MultiPieGen が生成した新しい群のデータベー�
 - D$_{\rm 3h}$ など一部の群で、既約表現の並びが変わりました。
 - 模型のキー `max_neighbor` と `search_cell_range` は削除しました。模型の入力から消してください。
 - `Group` の一部の関数が削除または変更されました（[Group](#ja-changes-group) を参照）。
+- 3.2.0 から、結合 SAMB $z_j$ の番号の付け方が変わりました（既約表現は指標表の順。{ref}`SAMB の順序 <ja-samb-order>`を参照）。`mp_convert` は、Ver.3 の以前の版の模型と、その制御ファイルの重みの番号を付け替えます（{ref}`3.2.0 より前の Ver.3 の模型の変換 <ja-converting-a-model-before-3-2>`を参照）。
 
 ## 群のデータベース
 
@@ -85,6 +86,26 @@ mp_convert graphene graphene_ctrl.py
 4. 重みは射影で変換します。Ver.2 の $H = \sum_j z_j Z_j$ から、Ver.3 の $z_j = {\rm Tr}[Z_j H]$ を求めます（SAMB が正規直交でないとき、例えば f 軌道の一部だけを持つサイトでは、最小二乗で求めます）。$H$ は丸め誤差の範囲で変わりません。変換した制御ファイルは `graphene_ctrl_v3.py` に書き出し、元のファイルは変えません。`samb/select` は変換しません。近接が変わったときは、その `"bond"` を確かめてください。
 
 `mp_convert` は、変わった点（名前を変えた軌道、除いたキー、近接、SAMB の数、射影の残差）を表示します。`--no-pdf` と `--no-qtdraw` を付けると、PDF と QtDraw のファイルを作りません（既定では Ver.2 の模型と同じ）。変換済みの模型（Ver.3 の `<model>.pkl` と `<model>_v2.pkl`）では、制御ファイルだけを変換します。辞書で与えた重み（例えばフィッティングの結果）は、`convert_model("graphene", parameter={"z1": ...})` で変換し、`report["parameter"]` として返します。
+
+(ja-converting-a-model-before-3-2)=
+## 3.2.0 より前の Ver.3 の模型の変換
+
+3.2.0 から、結合 SAMB は、指標表の既約表現の順に、1 つのブロックの中では電気（Q、G）/磁気（T、M）、$s$、$k$、$l$、タイプ、$n$、$p$ の順に番号を付けます（{ref}`SAMB の順序 <ja-samb-order>`を参照）。3.2.0 より前は、既約表現は名前の順で、多極子はタイプ（Q、G、M、T）、$s$、$k$、$l$ の順でした。SAMB そのものは同じです。
+
+- 3.2.0 より前に作った模型（`.pkl`）は、その番号のままです。その制御ファイルで、これまでどおり解析できます。
+- 同じ入力から 3.2.0 以降で作り直した模型は、番号が違います。古い制御ファイルの重み $z_j$ は、別の SAMB に掛かってしまいます。
+
+`mp_convert` は、そのような模型と、その制御ファイルの SAMB の番号を付け替えます。
+
+```bash
+mp_convert graphene graphene_ctrl.py
+```
+
+1. `graphene_in.py` から、それがなければ古い模型から組み立て直した入力（`graphene_in.py` に書き出します）から、模型を `graphene/graphene.pkl` として作り直します。古い模型は `graphene/graphene_v3.1.pkl`（その版）として残します。
+2. 古い模型と新しい模型の SAMB を、クラスターと bra-ket のブロック、キー、成分で一対一に対応させ、行列が一致することを確かめます。そうでないとき、例えば `graphene_in.py` を変えていたときは、変換を拒否し、古い模型を元に戻します。
+3. 制御ファイルの `samb/parameter`、`output/callback_info`、`output/dispersion/z`、`output/z_expectation` の SAMB の番号を付け替え、変換した制御ファイルを `graphene_ctrl_v3.2.py` に書き出します。元のファイルは変えません。$H$ はまったく同じです。
+
+`mp_convert` は、番号が変わった SAMB の数を表示します。変換済みの模型（3.2.0 以降の `<model>.pkl` と `<model>_v3.x.pkl`）では、制御ファイルだけを変換します。`convert_model` の `report["renumber"]` は、古い $z_j$ から新しい $z_j$ への対応を与えます。
 
 (ja-changes-group)=
 ## Group
