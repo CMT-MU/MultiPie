@@ -535,7 +535,7 @@ class Group(dict):
 
         Note:
             - expression (ndarray): polynomial in x, y, z for each component.
-            - U (ndarray): (2l+1, dim) unitary matrix from the tesseral harmonics (rows: m = l, ..., -l).
+            - U (ndarray): (2l+1, dim) unitary matrix from the spherical harmonics O_lm (rows: m = l, ..., -l).
             - harmonics are sorted in order of Gamma, l, (Q/G), n.
         """
         return self._group("PG")["harmonics"]

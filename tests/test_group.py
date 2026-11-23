@@ -268,3 +268,20 @@ def test_find_xyz():
     pos = str_to_sympy("[X, -X, 0]")
     assert np.isclose(find_xyz(pos, [0.25, -0.25, 0], ["X", "Y", "Z"])["X"], 0.25)
     assert find_xyz(pos, [0.25, 0.25, 0], ["X", "Y", "Z"]) is None
+
+
+# ==================================================
+@pytest.mark.parametrize("tag", ["Oh", "D6h", "C3v", "D2d"])
+def test_harmonics_U(tag):
+    # U is from the spherical harmonics O_lm (rows: m = l, ..., -l): expression[c] = sum_m U[l-m, c] O_lm.
+    import sympy as sp
+
+    from multipie.util.util_multipolar_harmonics import solid_harmonics
+
+    for key, (ex, U) in Group(tag).harmonics.items():
+        l = key[1]
+        if l > 4:
+            continue
+        for c in range(U.shape[1]):
+            s = sum(sp.sympify(U[i, c]) * solid_harmonics(l, l - i) for i in range(2 * l + 1))
+            assert sp.expand(s - ex[c]) == 0, (key, c)
