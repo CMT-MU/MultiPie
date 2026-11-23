@@ -571,7 +571,7 @@ def Mb1234(i1, i2, i3, i4):
 # ==================================================
 def T1234(i1, i2, i3, i4):
     """
-    S part of rank 4 tensor component.
+    T part of rank 4 tensor component (fully symmetric in i1, i2, i3).
 
     Args:
         i1 (int): index 1, 1-3.
@@ -581,41 +581,38 @@ def T1234(i1, i2, i3, i4):
 
     Returns:
         - (list) -- expression list, (coeff, multipole).
+
+    Note:
+        - (d12 d34 + d13 d24 + d14 d23) Q^{(1)} + d12 Q^{(1)}_{34} + d13 Q^{(1)}_{24} + d23 Q^{(1)}_{14}
+          + d14 Q^{(2)}_{23} + d24 Q^{(2)}_{13} + d34 Q^{(2)}_{12} + (d12 e345 + d13 e245 + d23 e145) G^{(1)}_{5}
+          + e345 G^{(1)}_{125} + e145 G^{(1)}_{235} + e245 G^{(1)}_{135} + Q^{(1)}_{1234}, i.e., 1 + 5 + 5 + 3 + 7 + 9 = 30.
     """
-    if i1 == i2 and i3 == i4:
-        d1 = 1
-    else:
-        d1 = 0
-    d2 = d1234(i1, i2, i3, i4)
-    if d1 + d2 != 0:
-        l1 = [(d1 + d2, "Q^{(1)}")]
-    else:
-        l1 = []
+    # (d12 d34 + d13 d24 + d14 d23) Q^{(1)}.
+    d = delta(i1, i2) * delta(i3, i4) + delta(i1, i3) * delta(i2, i4) + delta(i1, i4) * delta(i2, i3)
+    l1 = [(d, "Q^{(1)}")] if d != 0 else []
 
-    l2 = []
-    for i5, i6 in product(range(1, 4), range(1, 4)):
-        d = d123456(i1, i2, i3, i4, i5, i6)
-        if d != 0:
-            l2.append((d, mp_string([i5, i6], "Q^{(1)}")))
+    # d12 Q^{(1)}_{34} + d13 Q^{(1)}_{24} + d23 Q^{(1)}_{14}.
+    l2 = [(1, mp_string(k, "Q^{(1)}")) for a, b, k in [(i1, i2, [i3, i4]), (i1, i3, [i2, i4]), (i2, i3, [i1, i4])] if a == b]
 
-    l3 = []
-    for i5, i6 in product(range(1, 4), range(1, 4)):
-        d = d123456p(i1, i2, i3, i4, i5, i6)
-        if d != 0:
-            l3.append((d, mp_string([i5, i6], "Q^{(2)}")))
+    # d14 Q^{(2)}_{23} + d24 Q^{(2)}_{13} + d34 Q^{(2)}_{12}.
+    l3 = [(1, mp_string(k, "Q^{(2)}")) for a, b, k in [(i1, i4, [i2, i3]), (i2, i4, [i1, i3]), (i3, i4, [i1, i2])] if a == b]
 
+    # (d12 e345 + d13 e245 + d23 e145) G^{(1)}_{5}.
     l4 = []
-    for i5, i6 in product(range(1, 4), range(1, 4)):
-        d = d123456pp(i1, i2, i3, i4, i5, i6)
-        if d != 0:
-            l4.append((d, mp_string([i5, i6], "Q^{(3)}")))
+    for i5 in range(1, 4):
+        e = delta(i1, i2) * epsilon(i3, i4, i5) + delta(i1, i3) * epsilon(i2, i4, i5) + delta(i2, i3) * epsilon(i1, i4, i5)
+        if e != 0:
+            l4.append((e, mp_string([i5], "G^{(1)}")))
 
+    # e345 G^{(1)}_{125} + e145 G^{(1)}_{235} + e245 G^{(1)}_{135}.
     l5 = []
-    for i5, i6 in product(range(1, 4), range(1, 4)):
-        g = g125634(i1, i2, i3, i4, i5, i6)
-        if g != 0:
-            l5.append((g, mp_string([i5, i6], "Q^{(5)}")))
+    for i5 in range(1, 4):
+        for a, b, c in [(i1, i2, i3), (i2, i3, i1), (i1, i3, i2)]:
+            e = epsilon(c, i4, i5)
+            if e != 0:
+                l5.append((e, mp_string([a, b, i5], "G^{(1)}")))
 
+    # Q^{(1)}_{1234}.
     l6 = [(1, mp_string([i1, i2, i3, i4], "Q^{(1)}"))]
 
     return l1 + l2 + l3 + l4 + l5 + l6
