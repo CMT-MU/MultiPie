@@ -1037,7 +1037,7 @@ def solve_z(Z_dict, names, simplify=True):
 
     Args:
         Z_dict (dict): bond-1 basis, dict[(m,n), val].
-        names (list): ket string.
+        names (list): name of each ket, used for the atomic variables g_{m,n} and h_{m,n}.
         simplify (bool, optional): simplify result ?
 
     Returns:
@@ -1064,7 +1064,28 @@ def solve_z(Z_dict, names, simplify=True):
 
 
 # ==================================================
-def convert_zj_atomic_var(matrix_info, combined_cluster, combined_id, IR):
+def short_orbital_name(orbital, rank, basis_type):
+    """
+    Short orbital name for the atomic variables (ASCII).
+
+    Args:
+        orbital (str): orbital of the ket, e.g., "pz", "(px,u)", "(3/2,1/2)".
+        rank (int): orbital rank.
+        basis_type (str): basis type, "lg/lgs/jml".
+
+    Returns:
+        - (str) -- short name, e.g., "pz", "pxu" (lgs), "p(3/2,1/2)" (jml).
+    """
+    if basis_type == "lgs":  # (px,u) -> pxu.
+        o, s = orbital.strip("()").split(",")
+        return o + s
+    if basis_type == "jml":  # (3/2,1/2) of p -> p(3/2,1/2), as p and d have the same (j,m).
+        return "spdf"[rank] + orbital
+    return orbital
+
+
+# ==================================================
+def convert_zj_atomic_var(matrix_info, combined_cluster, combined_id, IR, full_ket, basis_type):
     """
     Convert from zj to atomic variable.
 
@@ -1073,11 +1094,19 @@ def convert_zj_atomic_var(matrix_info, combined_cluster, combined_id, IR):
         combined_cluster (dict): combined cluster.
         combined_id (dict): combined id.
         IR (str): identity irrep.
+        full_ket (list): kets of the full matrix, [(atom, sublattice, rank, basis_idx, orbital)].
+        basis_type (str): basis type, "lg/lgs/jml".
 
     Returns:
-        - (dict) -- zj to var for each cluster, dict[bond name, dict[zj, var] ].
+        - (dict) -- zj to var for each cluster, dict[bond name, dict["bond" or zj, (head site, tail site) or var] ].
+
+    Note:
+        - "bond" is (head site, tail site) of bond 1, e.g., ("C(2)", "C(1)").
+        - the atomic variables are g_{head orbital,tail orbital} and h_{...}, H_{head,tail} = g + i h at bond 1, with
+          the short orbital names (short_orbital_name).
     """
-    ket = [i.replace("@", "_").replace("(", "").replace(")", "") for i in matrix_info["ket"]]
+    ket = [short_orbital_name(orbital, rank, basis_type) for atom, sl, rank, idx, orbital in full_ket]
+    site = [f"{atom}({sl})" for atom, sl, rank, idx, orbital in full_ket]
 
     # classify zj for each cluster (only the selected SAMBs, which are in the matrix).
     cluster = {}
@@ -1101,8 +1130,12 @@ def convert_zj_atomic_var(matrix_info, combined_cluster, combined_id, IR):
     # solve zj for each cluster.
     result = {}
     for name, d in dic.items():
-        sol = solve_z(d, ket)
-        result[name] = sol
+        mn = {mn for v in d.values() for mn in v}
+        head = {site[m] for m, n in mn}
+        tail = {site[n] for m, n in mn}
+        if len(head) != 1 or len(tail) != 1:
+            raise ValueError(f"bond 1 of {name} connects more than one pair of sites: {sorted(head)}, {sorted(tail)}.")
+        result[name] = {"bond": (head.pop(), tail.pop())} | solve_z(d, ket)
 
     return result
 

@@ -101,6 +101,9 @@ its xyz polynomial; entries sharing all the other fields are numbered by `p`. Se
   neighbor shells and shifted the neighbor numbering.
 - The bands of a model obey the symmetry in the same way; see [Checks by symmetry](materials.md) for the tests that
   hold across the versions.
+- From 3.2.0, `info/<model>_var.py` gives the head and tail sites of bond 1 (`"bond"`) for each bond cluster, and the
+  atomic variables are named by the orbitals only, `g_{head orbital,tail orbital}`, e.g., `g_{pz,pz}` instead of
+  `g_{pz_C2,pz_C1}` (see [Getting started](getting_started.md)).
 
 (converting-a-model-of-ver-2)=
 ## Converting a model of Ver.2

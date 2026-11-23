@@ -163,7 +163,7 @@ Windows の PowerShell では、スクリプトを実行する前に `$env:MULTI
     - **_info.py**：全体の情報。
     - **_k.py**：運動量表示の SAMB。
     - **_matrix.py**：SAMB の行列データ。
-    - **_var.py**：zj と、ボンド 1 での原子のパラメータとの関係。
+    - **_var.py**：zj と、ボンド 1 での原子のパラメータとの関係（下を参照）。
     - **_z.py**：zj パラメータ。
   - **output/**
     - **_dispersion.eps**：分散（EPS）。
@@ -177,3 +177,16 @@ Windows の PowerShell では、スクリプトを実行する前に `$env:MULTI
     - **_weight.txt**：軌道の重み付きの分散（`output/dispersion/weight` が `False` でないとき）。
     - **plot_dos.gnu**、**plot_weight.gnu**：DOS と軌道の重みを gnuplot で描くためのコマンドスクリプト。
     - **plot_band.gnu**：gnuplot で描くためのコマンドスクリプト。
+
+**_var.py** は、各ボンドクラスターについて、そのボンド 1 の head と tail のサイトと、恒等表現の各 $z_j$ をボンド 1 の行列要素で表した式を与えます（3.2.0 から）。例えばグラフェンでは：
+
+```python
+graphene_var = {
+    "C;C_001_1": {"bond": ("C(2)", "C(1)"), "z2": "sqrt(6)*g_{pz,pz}"},
+    "C;C_002_1": {"bond": ("C(1)", "C(1)"), "z3": "2*sqrt(3)*g_{pz,pz}"},
+}
+```
+
+- `"bond"`：ボンド 1 の（head のサイト, tail のサイト）で、`原子(副格子)` の形です。
+- `g_{a,b}` と `h_{a,b}`：ボンド 1 の、head の軌道 `a` と tail の軌道 `b` の間の行列要素は $H_{a,b} = g_{a,b} + i h_{a,b}$ です。
+- 軌道は、スピンのない模型ではそのまま（例えば `pz`）、スピンのある模型（`lgs`）では `(px,u)` と `(px,d)` を `pxu` と `pxd` と書きます。`jml` 基底ではランクの文字を付け、例えば p の `(3/2,1/2)` を `p(3/2,1/2)` と書きます。同じ $(j, m)$ の p と d を区別するためです。

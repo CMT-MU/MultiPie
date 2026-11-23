@@ -94,9 +94,11 @@ _k_matrix_comment = """Selected SAMB matrix in momentum representation.
 """
 
 _zj_var_comment = """Correspondence between zj and atomic variable.
-- correspondence for each bond cluster, dict[bond_name, dict[zj, expression in terms of atomic variables] ].
+- correspondence for each bond cluster, dict[bond_name, dict["bond" or zj, (head site, tail site) or expression in terms of atomic variables] ].
+- "bond": head and tail sites of bond 1, (atom(sublattice), atom(sublattice)).
 - only for SAMB with identity irrep.
-- atomic variable of (m,n) component at bond 1 is given by g(m,n) +i h(m,n).
+- the matrix element of bond 1 between the head orbital a and the tail orbital b is H_{a,b} = g_{a,b} + i h_{a,b}.
+- orbital: as it is (spinless), e.g., pxu = (px,u) (lgs), p(3/2,1/2) = (3/2,1/2) of p (jml).
 """
 
 _param_comment = """Parameter dict (sorted by descending absolute value).
@@ -462,7 +464,7 @@ class ModelAnalyzer(dict):
 
         :meta private:
         """
-        d = {name: {zj: str(ex).replace(" ", "") for zj, ex in dic.items()} for name, dic in var.items()}
+        d = {name: {zj: ex if zj == "bond" else str(ex).replace(" ", "") for zj, ex in dic.items()} for name, dic in var.items()}
 
         self.write_dict(d, "var.py", _zj_var_comment, "info")
 
@@ -747,7 +749,14 @@ class ModelAnalyzer(dict):
         :meta private:
         """
         IR = next(iter(self.model.group.character["table"].keys()))  # identity irrep.
-        conv_dict = convert_zj_atomic_var(matrix_info, self.model["combined_cluster"], self.model["combined_id"], IR)
+        conv_dict = convert_zj_atomic_var(
+            matrix_info,
+            self.model["combined_cluster"],
+            self.model["combined_id"],
+            IR,
+            self.model["full_matrix"]["ket"],
+            self.model["basis_type"],
+        )
         return conv_dict
 
     # ==================================================
