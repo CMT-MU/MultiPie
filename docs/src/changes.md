@@ -191,7 +191,11 @@ the order of the irreps), and the data of MPG and MSG are unchanged.
 
 ## Response tensors
 
-- The response tensors are the same as in Ver.2, except for the names of the multipoles, and the sign of `gv`.
+- The response tensors are the same as in Ver.2, except for the names of the multipoles and the rank-4 `t` part,
+  $X_{abc;d}$, which is now fully symmetric in $a, b, c$ with 30 independent components (that of Ver.2 was not).
+- Every multipole in the response tensors is a positive multiple of the harmonic of the same name (`Group.harmonics`).
+  Up to 3.2.0, $\mathbb{Q}_{4v}$ (`gv`) had the opposite sign in the response tensors, and the `t` part was not fully
+  symmetric.
 - The names of the active multipoles follow the renamed orbitals, e.g., `Qf1` is now `Qfs`. Their aliases
   (`convert_mp_alias`) are made from the LaTeX names in the database, e.g., `Qfc` is $\mathbb{Q}_{3c}$.
 - `multipole_rank(tag)` gives the rank of an active multipole from its name.

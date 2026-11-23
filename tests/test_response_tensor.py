@@ -121,3 +121,50 @@ def test_rank4_t_part(X):
     symbols = sorted(set().union(*[e.free_symbols for e in T.values()]), key=str)
     assert len(symbols) == 30
     assert sp.Matrix([[sp.diff(T[c], s) for s in symbols] for c in T]).rank() == 30
+    # the database (response_tensor_all): 30 independent components, and the same expressions.
+    m, ex = g.response_tensor_all(X)[(X, 4, "t")]
+    assert len(set(m.flat) - {0}) == 30
+    for symbol in set(m.flat) - {0}:
+        c = tuple("xyz".index(k) + 1 for k in str(symbol)[3:-1])
+        assert sp.expand(ex[symbol] - T[c]) == 0, symbol
+
+
+# ==================================================
+@pytest.mark.parametrize("crystal", ["cubic", "hexagonal"])
+def test_cartesian_multipole_positive(crystal):
+    # the traceless part of each cartesian monomial is sum_k c_k N_k f_k with the coefficients c_k of cartesian_multipole
+    # and the basis functions f_k: every N_k is positive and the same for all keys, i.e., every multipole in the
+    # response tensors is a positive multiple of the harmonic of the same name.
+    info = Group.global_info()
+    x, y, z = sp.symbols("x y z")
+    v = {"x": x, "y": y, "z": z}
+    r2 = x**2 + y**2 + z**2
+    bf = info["harmonics"]["basis_function"]
+
+    def f(name):
+        e = bf[name][0]
+        return sp.expand(e.subs({s: v[str(s)] for s in e.free_symbols}))
+
+    def traceless(p, l):
+        h = 0
+        for k in range(l // 2 + 1):
+            h += (
+                sp.Integer(-1) ** k
+                * sp.factorial2(2 * l - 2 * k - 1)
+                / (sp.factorial2(2 * l - 1) * sp.factorial2(2 * k))
+                * r2**k
+                * p
+            )
+            p = sp.diff(p, x, 2) + sp.diff(p, y, 2) + sp.diff(p, z, 2)
+        return sp.expand(h)
+
+    N = {}
+    for key, lst in info["response_tensor"]["cartesian_multipole"][crystal].items():
+        h = traceless(sp.Mul(*[v[c] for c in key]), len(key)) if key != "s" else sp.S(1)
+        n = sp.symbols(f"n0:{len(lst)}")
+        sol = sp.solve(sp.Poly(h - sum(c * ni * f(name) for (c, name), ni in zip(lst, n)), x, y, z).coeffs(), n, dict=True)
+        assert len(sol) == 1, key
+        for (c, name), ni in zip(lst, n):
+            N.setdefault(name, set()).add(sp.nsimplify(sol[0][ni]))
+    for name, s in N.items():
+        assert len(s) == 1 and s.pop() > 0, name
