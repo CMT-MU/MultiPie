@@ -70,6 +70,7 @@ MultiPie Ver.3 は、MultiPieGen が生成した新しい群のデータベー�
 - `MaterialModel.load`（したがって `mp_analyze`）は、Ver.2 で作った模型をエラーで拒否します。`mp_create` で模型を作り直して重みをもう一度決めるか、`mp_convert` で模型と重みを変換してください。
 - 模型の入力のキー `max_neighbor` と `search_cell_range` は削除しました。これらを含む入力はエラーになります。ボンドの近接は `"bond"` の指定だけで決まり、`max_neighbor`（Ver.2 の初期値は 10）による上限はありません。空間群では、指定した近接までのサイトがすべて入るまで、ボンドごとに探索範囲を広げます。Ver.2 では `search_cell_range` が狭すぎると、近接の殻が黙って抜け、近接の番号がずれていました。
 - 模型のバンドは同じように対称性に従います。バージョンをまたいで成り立つテストについては{ref}`対称性によるチェック <ja-checks-by-symmetry>`を参照してください。
+- 3.2.0 から、`info/<model>_var.py` は、各ボンドクラスターについてボンド 1 の head と tail のサイト（`"bond"`）を与え、原子の変数は軌道だけで `g_{head の軌道,tail の軌道}` と名付けます。例えば `g_{pz_C2,pz_C1}` は `g_{pz,pz}` になります（[はじめに](getting_started_ja.md)を参照）。
 
 (ja-converting-a-model-of-ver-2)=
 ## Ver.2 の模型の変換

@@ -159,7 +159,7 @@ The description of the output files is as follows (with model_name prefixed):
     - **_info.py** : global info.
     - **_k.py** : SAMBs in momentum rep.
     - **_matrix.py** : SAMB matrix data.
-    - **_var.py** : relation between zj and atomic parameters at bond 1.
+    - **_var.py** : relation between zj and atomic parameters at bond 1 (see below).
     - **_z.py** : zj parameters.
   - **output/**
     - **_dispersion.eps** : dispersion in EPS.
@@ -173,3 +173,20 @@ The description of the output files is as follows (with model_name prefixed):
     - **_weight.txt** : dispersion with the orbital weight (when `output/dispersion/weight` is not `False`).
     - **plot_dos.gnu**, **plot_weight.gnu** : command scripts to plot DOS and orbital weight by gnuplot.
     - **plot_band.gnu** : command script to plot by gnuplot.
+
+The **_var.py** file gives, for each bond cluster, the head and tail sites of its bond 1 and each $z_j$ of the identity
+irrep in terms of the matrix elements of bond 1 (from 3.2.0), e.g., for graphene:
+
+```python
+graphene_var = {
+    "C;C_001_1": {"bond": ("C(2)", "C(1)"), "z2": "sqrt(6)*g_{pz,pz}"},
+    "C;C_002_1": {"bond": ("C(1)", "C(1)"), "z3": "2*sqrt(3)*g_{pz,pz}"},
+}
+```
+
+- `"bond"`: (head site, tail site) of bond 1, as `atom(sublattice)`.
+- `g_{a,b}` and `h_{a,b}`: the matrix element of bond 1 between the head orbital `a` and the tail orbital `b` is
+  $H_{a,b} = g_{a,b} + i h_{a,b}$.
+- The orbitals are written as they are for a spinless model (e.g., `pz`), as `pxu` and `pxd` for `(px,u)` and
+  `(px,d)` (spinful, `lgs`), and with the letter of the rank for the `jml` basis, e.g., `p(3/2,1/2)` for `(3/2,1/2)` of
+  p, so that p and d with the same $(j, m)$ are distinguished.
