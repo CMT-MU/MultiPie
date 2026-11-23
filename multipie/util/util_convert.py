@@ -6,10 +6,11 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 """
-Conversion of a model (.pkl) of MultiPie Ver.2 into Ver.3.
+Conversion of a model (.pkl) of MultiPie Ver.2, or of Ver.3 before 3.2.0, into the current version.
 
-The model is created again with Ver.3 from the input rebuilt from the model of Ver.2, and the weights z_j of the SAMB
-of Ver.2 are converted into those of Ver.3 by projection.
+The model is created again from the input rebuilt from the old model. The weights z_j of the SAMB of Ver.2 are
+converted by projection; those of Ver.3 before 3.2.0, whose SAMB are the same but numbered in another order, are
+renumbered.
 """
 
 import re
@@ -42,6 +43,8 @@ CONVERT_TOL = 1e-8
 DISTANCE_TOL = 1e-5
 # denominators tried to write a coordinate as a fraction.
 MAX_DENOMINATOR = 24
+# the version from which the combined SAMB are numbered in the current order.
+RENUMBER_VERSION = (3, 2)
 
 
 # ==================================================
@@ -75,6 +78,35 @@ def major_version(version):
     """
     m = re.match(r"(\d+)", str(version))
     return 0 if m is None else int(m[1])
+
+
+# ==================================================
+def version_tuple(version):
+    """
+    Major and minor version.
+
+    Args:
+        version (str): version, e.g., "3.1.3".
+
+    Returns:
+        - ((int, int)) -- (major, minor), (0, 0) if unknown.
+    """
+    m = re.match(r"(\d+)(?:\.(\d+))?", str(version))
+    return (0, 0) if m is None else (int(m[1]), int(m[2] or 0))
+
+
+# ==================================================
+def needs_renumber(version):
+    """
+    Is a model of Ver.3 numbered in the old order (before 3.2.0) ?
+
+    Args:
+        version (str): version of the model.
+
+    Returns:
+        - (bool) -- 3.0.0 <= version < 3.2.0 ?
+    """
+    return (3, 0) <= version_tuple(version) < RENUMBER_VERSION
 
 
 # ==================================================
@@ -168,9 +200,14 @@ def rebuild_model_input(data):
 
     irrep = list(Group(data["group"]).character["table"].keys())
 
+    def same(a, b):  # the order of a list does not matter (e.g., the irreps sorted in another order).
+        if isinstance(a, list) and isinstance(b, list):
+            return sorted(map(str, a)) == sorted(map(str, b))
+        return a == b
+
     def select(key):  # the conditions other than the default.
         default = parse_samb_select(copy.deepcopy(default_model[key]), irrep)
-        return {k: v for k, v in data[key].items() if k in ("X", "l", "Gamma", "s") and v != default.get(k)}
+        return {k: v for k, v in data[key].items() if k in ("X", "l", "Gamma", "s") and not same(v, default.get(k))}
 
     model = {
         "model": data["model"],
@@ -391,3 +428,96 @@ class ModelConverter:
         scale = max(np.abs(z3).max(initial=0.0), 1.0)
         # 12 significant digits, enough within the round-off of the projection.
         return {z: float(f"{v:.12g}") for z, v in zip(self.name3, z3) if abs(v) > CONVERT_TOL * scale}, residual
+
+
+# ==================================================
+class ModelRenumber:
+    """
+    Renumbering of the SAMB of a model of Ver.3 before 3.2.0 into those of the current version.
+    """
+
+    # ==================================================
+    def __init__(self, data_old, model_new):
+        """
+        Renumbering of the SAMB of an old model of Ver.3.
+
+        Args:
+            data_old (dict): data of the model of Ver.3 before 3.2.0.
+            model_new (MaterialModel): model of the current version.
+
+        Raises:
+            ValueError: if the kets differ, or the SAMB do not agree one to one.
+
+        Note:
+            - the SAMB are matched by (site/bond and bra-ket block, multipole key, component) of combined_id, and their
+              matrices must agree.
+        """
+        mm_old = MaterialModel()
+        mm_old.clear()
+        mm_old.update(data_old)
+
+        ket_old, ket_new = mm_old["full_matrix"]["ket"], model_new["full_matrix"]["ket"]
+        if [list(k) for k in ket_old] != [list(k) for k in ket_new]:
+            raise ValueError(f"the kets of the old and new models differ:\n  old: {ket_old}\n  new: {ket_new}")
+
+        def key(v):
+            _, u, idx, comp = v
+            return (u, tuple(idx), comp)
+
+        cid_old, cid_new = mm_old["combined_id"], model_new["combined_id"]
+        new_z = {key(v): z for z, v in cid_new.items()}
+        missing = [z for z, v in cid_old.items() if key(v) not in new_z]
+        if missing or len(cid_old) != len(cid_new):
+            raise ValueError(
+                f"the SAMB of the old and new models do not agree ({len(cid_old)} and {len(cid_new)} SAMB; "
+                f"not found: {missing[:5]})."
+            )
+        self.map = {z: new_z[key(v)] for z, v in cid_old.items()}
+
+        # the matrices of the matched SAMB agree.
+        Z_old = mm_old._combined_samb_matrix(cid_old, fmt="value", bond=False)
+        Z_new = model_new._combined_samb_matrix(cid_new, fmt="value", bond=False)
+        column = {}
+        name_old, coo_old = samb_matrix_rows(Z_old, column)
+        name_new, coo_new = samb_matrix_rows(Z_new, column)
+        A_old = sparse.csr_matrix((coo_old[0], (coo_old[1], coo_old[2])), shape=(len(name_old), len(column)))
+        A_new = sparse.csr_matrix((coo_new[0], (coo_new[1], coo_new[2])), shape=(len(name_new), len(column)))
+        row_new = {z: i for i, z in enumerate(name_new)}
+        perm = [row_new[self.map[z]] for z in name_old]
+        diff = A_old - A_new[perm]
+        self.residual = float(abs(diff).max()) if diff.nnz > 0 else 0.0
+        if self.residual > CONVERT_TOL:
+            raise ValueError(f"the matrices of the SAMB of the old and new models differ (residual {self.residual:.3g}).")
+
+    # ==================================================
+    def convert(self, parameter):
+        """
+        Renumber the weights z_j.
+
+        Args:
+            parameter (dict): weights of the old model, dict[zj, float].
+
+        Returns:
+            - (dict) -- weights of the new model, dict[zj, float], in the order of the new numbering.
+            - (float) -- residual (0).
+        """
+        unknown = [z for z in parameter if z not in self.map]
+        if unknown:
+            raise ValueError(f"{unknown} are not SAMB of the old model.")
+        new = {self.map[z]: v for z, v in parameter.items()}
+        return {z: new[z] for z in sorted(new, key=lambda z: int(z[1:]))}, 0.0
+
+    # ==================================================
+    def convert_list(self, lst):
+        """
+        Renumber the SAMB in a list (the other entries, e.g., "Sx", are kept).
+
+        Args:
+            lst (list or str): list of quantities, or a str (e.g., "all"), which is kept.
+
+        Returns:
+            - (list or str) -- renumbered list.
+        """
+        if isinstance(lst, str):
+            return lst
+        return [self.map.get(i, i) if isinstance(i, str) else i for i in lst]

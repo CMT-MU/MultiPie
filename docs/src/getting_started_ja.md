@@ -118,7 +118,7 @@ MultiPie Ver.3 では、4 つの f 軌道の名前を変えました。古い名
 - 複数の入力ファイルを与えた場合は、どの模型を作成・解析するよりも前に、すべてのファイルを読み込みます。
 - `mp_create -i` と `mp_analyze -i` は、デフォルトの模型と制御を表示します。これは入力ファイルのテンプレートとして使えます。
 - `python -m multipie.scripts.mp_create`、`python -m multipie.scripts.mp_analyze`、`python -m multipie.scripts.mp_convert` も同じように動きます。
-- `mp_convert` は、Ver.2 の模型（`.pkl`）を Ver.3 に変換し、その制御ファイルの重みも変換します（[Ver.2 からの変更点](changes_ja.md)を参照）。
+- `mp_convert` は、Ver.2 の模型（`.pkl`）を Ver.3 に変換し、または 3.2.0 より前の Ver.3 の模型の番号を付け替え、その制御ファイルの重みも変換します（[Ver.2 からの変更点](changes_ja.md)を参照）。
 - 経過時間や警告などのメッセージは、`multipie` ロガーを通して標準出力に書き出します。`create_model` と `analyze_model`（したがって `mp_create` と `mp_analyze`）は、このロガーにまだハンドラがなければ設定します。アプリケーションのログの設定（例えば Jupyter のルートロガー）は変更しません。メッセージを別の場所に集めるには、これらを呼ぶ前に `multipie` ロガーにハンドラを加えてください。
 
 ## 並列計算

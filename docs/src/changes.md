@@ -16,6 +16,9 @@ are made in a new way. This page summarizes what changes for the users of Ver.2.
 - The model keys `max_neighbor` and `search_cell_range` are removed; delete them from your model inputs.
 - The irreps of some groups, e.g., D$_{\rm 3h}$, are in another order.
 - Some functions of `Group` are removed or changed (see [Group](#changes-group)).
+- From 3.2.0, the combined SAMB $z_j$ are numbered in another order (the irreps in the order of the character table;
+  see {ref}`Order of the SAMB <samb-order>`). `mp_convert` renumbers a model of an earlier version of Ver.3 and the
+  weights of its controls (see {ref}`Converting a model of Ver.3 before 3.2.0 <converting-a-model-before-3-2>`).
 
 ## Group database
 
@@ -130,6 +133,38 @@ residuals of the projection. With `--no-pdf` and `--no-qtdraw`, the PDF and the 
 default, as in the model of Ver.2). For a model already converted (`<model>.pkl` of Ver.3 with `<model>_v2.pkl`), only
 the controls are converted. The weights given as a dict, e.g., a fit, are converted by
 `convert_model("graphene", parameter={"z1": ...})`, and returned as `report["parameter"]`.
+
+(converting-a-model-before-3-2)=
+## Converting a model of Ver.3 before 3.2.0
+
+From 3.2.0, the combined SAMB are numbered in the order of the irreps of the character table, and within a block,
+electric (Q, G) / magnetic (T, M), $s$, $k$, $l$, the type, $n$, $p$ (see {ref}`Order of the SAMB <samb-order>`).
+Before 3.2.0, the irreps were in the alphabetical order, and the multipoles in the order of the type (Q, G, M, T), $s$,
+$k$, $l$. The SAMB themselves are the same.
+
+- A model (`.pkl`) created before 3.2.0 keeps its numbering: it can be analyzed with its controls as before.
+- A model created again with 3.2.0 or later from the same input has another numbering: the weights $z_j$ of an old
+  control would apply to other SAMB.
+
+`mp_convert` renumbers such a model and the SAMB of its controls:
+
+```bash
+mp_convert graphene graphene_ctrl.py
+```
+
+1. The model is created again as `graphene/graphene.pkl` from `graphene_in.py`, or, if it does not exist, from the
+   input rebuilt from the old model (written as `graphene_in.py`). The old model is kept as
+   `graphene/graphene_v3.1.pkl` (its version).
+2. The SAMB of the old and new models are matched one to one by the cluster and the bra-ket block, the key, and the
+   component, and their matrices must agree. Otherwise, e.g., when `graphene_in.py` was changed, the conversion is
+   refused and the old model is restored.
+3. The SAMB in `samb/parameter`, `output/callback_info`, `output/dispersion/z`, and `output/z_expectation` of the
+   controls are renumbered, and the converted control is written as `graphene_ctrl_v3.2.py`; the original is not
+   changed. $H$ is exactly the same.
+
+`mp_convert` prints the number of the SAMB moved. For a model already converted (`<model>.pkl` of 3.2.0 or later
+with `<model>_v3.x.pkl`), only the controls are converted; `report["renumber"]` of `convert_model` gives the map of
+the old $z_j$ to the new ones.
 
 (changes-group)=
 ## Group

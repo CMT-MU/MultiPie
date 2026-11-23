@@ -539,12 +539,16 @@ class MaterialModel(BinaryManager):
             - (dict) -- cluster SAMB, dict[wyckoff, SAMB Dict].
             - (dict) -- cluster id, dict["y#", (wyckoff, SAMB index, comp)].
         """
+        irreps = list(self.group.character["table"].keys())
+
         # sort by multiplicity, and by name for the same multiplicity (the order of set changes from run to run).
         wp_lst = sorted(
             list(set([lst.wyckoff for lst in self["site"]["representative"].values()])), key=lambda i: (int(i[:-1]), i)
         )
         site_samb = {
-            wp: self.group.cluster_samb(wp).select(**site_select).sort("Gamma", "l", "k", ("X", ["Q", "G", "T", "M"]), "n")
+            wp: self.group.cluster_samb(wp)
+            .select(**site_select)
+            .sort(("Gamma", irreps), "l", "k", ("X", ["Q", "G", "T", "M"]), "n")
             for wp in wp_lst
         }
 
@@ -555,7 +559,7 @@ class MaterialModel(BinaryManager):
         bond_samb = {
             wp: self.group.cluster_samb(wp, "bond")
             .select(**bond_select)
-            .sort("Gamma", "l", "k", ("X", ["Q", "G", "T", "M"]), "n")
+            .sort(("Gamma", irreps), "l", "k", ("X", ["Q", "G", "T", "M"]), "n")
             for wp in wp_lst
         }
 

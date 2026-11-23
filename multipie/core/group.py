@@ -34,7 +34,7 @@ from multipie.util.util_wyckoff import (
     convert_to_bond,
 )
 from multipie.util.util_tag import TagMultipole, TagSymmetryOperation, TagBasis, TagIrrep
-from multipie.util.util_samb import orthogonalize_multipole
+from multipie.util.util_samb import combined_samb_order, orthogonalize_multipole
 from multipie.util.util_atomic_multipole import atomic_multipole_matrix
 from multipie.util.util_atomic_multipole_operator import atomic_multipole_operator
 from multipie.util.util_multipolar_harmonics import multipolar_harmonics_expression, internal_crystal
@@ -1042,7 +1042,8 @@ class Group(dict):
             - (Dict) -- combined SAMB.
 
         Note:
-            - SAMB is sorted in order of (Q/G/T/M), s, k, Gamma, l, n, p.
+            - SAMB is sorted in order of Gamma (as the character table), electric (Q, G) / magnetic (T, M), s, k, l,
+              X (Q, G, T, M), n, p (see, combined_samb_order).
         """
         if self.group_type in ["MPG", "MSG"]:
             raise None
@@ -1122,7 +1123,7 @@ class Group(dict):
 
                 dic[tag] = (lst, ex)
 
-        dic = dic.sort("Gamma", ("X", ["Q", "G", "M", "T"]), "s", "k", "l", "n", "p")
+        dic = dic.sort(*combined_samb_order(list(self.character["table"].keys())))
 
         return dic
 
