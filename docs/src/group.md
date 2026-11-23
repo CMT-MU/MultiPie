@@ -144,12 +144,14 @@ so["product"][("4+[001]", "4+[001]")]
 | key | content |
 |:--|:--|
 | `tag` | the operations, e.g., `4+[001]` (rotation by $2\pi/4$ about [001]), `-1` (inversion), `m[100]` (mirror) |
-| `generator` | the generators |
+| `generator` | the generators (PG and SG) |
 | `cartesian`, `fractional` | the matrices in the cartesian and fractional coordinates (`(4, 4)` with the translation for SG and MSG) |
 | `det` | the determinants (+1 for proper, -1 for improper operations) |
 | `product` | the product table, `{(a, b): ab}` (PG) |
 | `plus_set`, `cartesian_primitive`, `fractional_primitive` | the centering translations and the matrices of the primitive cell (SG) |
 | `tr_sign` | the sign of the time reversal (MPG and MSG): -1 for the operations with the time reversal, e.g., `-1'` |
+| `so_matrix` | the matrices in the cartesian coordinates for the bases `[1]` (s = 0) and `[x, y, z]` (s = 1), with the keys `("Q", s)` (polar) and `("G", s)` (axial, multiplied by $\det R$) (PG and SG; the point-group part for SG) |
+| `mapping` | the correspondence to the operations of the parent group, `{"top": top, "mapping": cosets}`: `top` is `Oh` or `D6h`, and `cosets` are the left cosets of the group in `top` along the parent groups, as the indices (from 1) of the operations of `top`; the first is the group itself (PG and SG) |
 
 `Group.tag_symmetry_operation(tag)` gives the properties of an operation:
 
@@ -278,7 +280,7 @@ bonds, wp
 
 `harmonics` gives the point-group harmonics (rank $\le 11$) as a `Dict` keyed by the multipole key
 (see {ref}`multipole-key`). Each value is the polynomials of the components and the unitary matrix $U$ from the
-tesseral harmonics. A `Dict` selects its entries by the fields of the key with `select()`, and `named_keys()` gives the
+spherical harmonics $O_{lm}$ (rows $m = l, \dots, -l$). A `Dict` selects its entries by the fields of the key with `select()`, and `named_keys()` gives the
 keys as named tuples:
 
 ```{code-cell} ipython3
