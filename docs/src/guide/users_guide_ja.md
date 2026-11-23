@@ -485,7 +485,7 @@ Group.multipolar_harmonics_expression("Q", 0, 0, s=1, k=1, x="q")  # r.Q / sqrt(
 ```
 
 ```{code-cell} ipython3
-Group.multipolar_harmonics_expression("M", 1, 0, s=1, k=0, x="g")  # magnetic: G -> M, (y M_x - x M_y)/sqrt(2).
+Group.multipolar_harmonics_expression("T", 1, 0, s=1, k=0, x="g")  # magnetic toroidal: Q -> T (G -> M in the symbols), (y M_x - x M_y)/sqrt(2).
 ```
 
 ```{code-cell} ipython3

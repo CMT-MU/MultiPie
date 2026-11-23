@@ -636,7 +636,7 @@ multiplied by the internal basis symbols. It is not limited to $l \le 3$, and th
 
 - Both `X` (`Q`, `G`, `T`, `M`) and `x` are given. As the orbital part is always polar, a combination of `X` and `x`
   of the wrong parity (not in the table above) gives 0.
-- For `X = T, M`, the internal symbols are renamed `Q` $	o$ `T` and `G` $	o$ `M` (magnetic internal degree of freedom).
+- For `X = T, M`, the internal symbols are renamed `Q` $\to$ `T` and `G` $\to$ `M` (magnetic internal degree of freedom).
 - For `s = 0`, the internal symbol is multiplied only for $G_{0}$ and $M_{0}$ (`X = G, M` with `x = g`); for $Q_{0}$
   and $T_{0}$, the polynomial alone is given, as in `Group.harmonics`.
 - The multipolar harmonics of a point group is $\sum_m U_{m\gamma} O_{lm}^{(s)}(k)$ with $U$ of `Group.harmonics`
@@ -647,7 +647,7 @@ Group.multipolar_harmonics_expression("Q", 0, 0, s=1, k=1, x="q")  # r.Q / sqrt(
 ```
 
 ```{code-cell} ipython3
-Group.multipolar_harmonics_expression("M", 1, 0, s=1, k=0, x="g")  # magnetic: G -> M, (y M_x - x M_y)/sqrt(2).
+Group.multipolar_harmonics_expression("T", 1, 0, s=1, k=0, x="g")  # magnetic toroidal: Q -> T (G -> M in the symbols), (y M_x - x M_y)/sqrt(2).
 ```
 
 ```{code-cell} ipython3

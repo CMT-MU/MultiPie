@@ -129,6 +129,11 @@ def test_examples():
     assert sp.expand(f("G", 1, 0, 1, 0, "q") - (y * Qx - x * Qy) / sp.sqrt(2)) == 0
     assert sp.expand(f("G", 0, 0, 1, 1, "g") - (x * Gx + y * Gy + z * Gz) / sp.sqrt(3)) == 0
     assert sp.expand(f("Q", 1, 0, 1, -1, "q") - Qz) == 0  # the polar vector itself (l + k = 0).
+    # magnetic (X = T, M): G x r with an axial G is T (G -> M in the symbols), and M with x = g has the wrong parity.
+    Mx, My, Tx, Ty = sp.symbols("M_{x} M_{y} T_{x} T_{y}", real=True)
+    assert sp.expand(f("T", 1, 0, 1, 0, "g") - (y * Mx - x * My) / sp.sqrt(2)) == 0
+    assert sp.expand(f("M", 1, 0, 1, 0, "q") - (y * Tx - x * Ty) / sp.sqrt(2)) == 0
+    assert f("M", 1, 0, 1, 0, "g") == 0
     # the wrong parity gives 0, and s = 0.
     assert f("Q", 0, 0, 1, 1, "g") == 0 and f("G", 1, 0, 1, 0, "g") == 0
     assert f("Q", 2, 0) == f("T", 2, 0) == solid_harmonics(2, 0)
