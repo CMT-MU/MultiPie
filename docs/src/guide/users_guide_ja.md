@@ -498,10 +498,10 @@ Group.multipolar_harmonics_expression("Q", 1, 0, s=1, k=0, x="q")  # the wrong p
 
 ## 9. チュートリアルと技術文書（PDF）
 
-MultiPie を紹介する PDF のチュートリアル記事があります。MultiPie と QtDraw で多極子と群論を学ぶものです。英語版は{ref}`英語のユーザーガイド <tutorial-documents>`にあります。Ver.2 の簡易マニュアルは{ref}`Ver.2 からの変更点 <ja-brief-manual-v2>`にあります。
+MultiPie を紹介する PDF の文書が二つあります。MultiPie と QtDraw で多極子と群論を学ぶチュートリアル記事と、MultiPie 3.2.1 の定義とアルゴリズムをまとめた技術文書です。英語版は{ref}`英語のユーザーガイド <tutorial-documents>`にあります。Ver.2 の簡易マニュアルは{ref}`Ver.2 からの変更点 <ja-brief-manual-v2>`にあります。
 
 :::{note}
-チュートリアルは MultiPie 2.0.7 と QtDraw 3.1.0（Ver.2）向けに書かれています。考え方と作業の流れは Ver.3 でも同じですが、名前や結果の一部が異なります。例えば、f 軌道 `f2`, `f1`, `f3x`, `f3y` の名前が変わり、SAMB の番号や符号が異なることがあります。現在の版については [Ver.2 からの変更点](../changes_ja.md)と上の各節を見てください。
+チュートリアルは MultiPie 2.0.7 と QtDraw 3.1.0（Ver.2）向け、技術文書は 3.2.1 向けに書かれています。考え方と作業の流れは Ver.3 でも同じですが、名前や結果の一部が異なります。例えば、f 軌道 `f2`, `f1`, `f3x`, `f3y` の名前が変わり、SAMB の番号や符号が異なることがあります。現在の版については [Ver.2 からの変更点](../changes_ja.md)と上の各節を見てください。
 :::
 
 ### QtDraw を用いた MultiPie のチュートリアル
@@ -509,3 +509,9 @@ MultiPie を紹介する PDF のチュートリアル記事があります。Mul
 [PDF](../pdf/tutorial_via_qtdraw_ja.pdf)
 
 *MultiPie と QtDraw で学ぶ多極子表現と群論*（大槻純也、岡山大学）。QtDraw の画面を使い、利用者の立場から MultiPie を紹介します。基本的な使い方、軌道の結晶場分裂と既約表現の積の分解、p 軌道の原子多極子、URhSn（D$_{\rm 3h}$）の U サイトの電気四極子のクラスター多極子による分類、iPython からの利用を扱います。
+
+### MultiPie 技術文書
+
+[PDF](../pdf/multipie_docs_ja.pdf)
+
+*MultiPie 技術文書（ver. 3.2.1 対応）*（楠瀬博明）。MultiPie のデータと関数のもとになる定義、規則、アルゴリズムをまとめ、補足を付録に収めたものです。結晶の対称操作（4 種類の結晶群、点群操作とその記号、結晶の座標系、空間群と磁気群、MultiPie での表し方）、調和関数と原子多極子基底（球面・方域（tesseral）・多極子調和関数、点群の調和関数、軌道と内部自由度の基底、原子 SAMB）、応答テンソルの多極子分解（階数 0 から 4、タイプ `Q`、`G`、`T`、`M`）、MultiPie の概要（MultiPie と MultiPieGen の役割、サイトとボンド、多極子のキー、3 種類の SAMB、基底データの生成、結合 SAMB の番号付け、フーリエ変換、射影と原子変数）を扱います。

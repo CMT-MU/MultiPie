@@ -661,12 +661,13 @@ A runnable script is
 
 ## 9. Tutorial and technical documents (PDF)
 
-A tutorial article in PDF introduces MultiPie: learning multipoles and group theory with MultiPie and QtDraw. The
-Japanese version is in the {ref}`Japanese User Guide <ja-tutorial-documents>`. The brief manual of Ver.2 is given in
+Two documents in PDF introduce MultiPie: a tutorial article on learning multipoles and group theory with MultiPie and
+QtDraw, and the technical notes on the definitions and the algorithms of MultiPie 3.2.1. The Japanese versions are in
+the {ref}`Japanese User Guide <ja-tutorial-documents>`. The brief manual of Ver.2 is given in
 {ref}`Changes from Ver.2 <brief-manual-v2>`.
 
 :::{note}
-The tutorial was written for MultiPie 2.0.7 and QtDraw 3.1.0 (Ver.2). The concepts and the workflow are the same in
+The tutorial was written for MultiPie 2.0.7 and QtDraw 3.1.0 (Ver.2); the technical notes are for 3.2.1. The concepts and the workflow are the same in
 Ver.3, but some names and results differ, e.g., the f orbitals `f2`, `f1`, `f3x`, `f3y` are renamed, and the numbering
 and the signs of SAMB can differ. See [Changes from Ver.2](changes.md) and the sections above for the current version.
 :::
@@ -685,3 +686,22 @@ an introduction to MultiPie from the user's point of view, using the graphical i
 - **Cluster multipoles.** The crystal structure of URhSn (D$_{\rm 3h}$), and the classification of the electric
   quadrupoles on the U sites by cluster multipoles, e.g., a polar and a chiral cluster order.
 - **iPython.** Using MultiPie from the iPython interactive interface, e.g., to generate figures of all multipoles.
+
+### MultiPie technical notes
+
+[PDF](pdf/multipie_docs_en.pdf)
+
+*MultiPie Technical Notes (ver. 3.2.1)*, by Hiroaki Kusunose: the definitions, the conventions, and the algorithms
+behind the data and the functions of MultiPie, with the supplements in the appendices.
+
+- **Symmetry operations.** The four kinds of crystallographic groups, the point-group operations and their symbols,
+  the coordinate systems of crystals (fractional coordinates, standard axes, primitive cell and centering), space
+  groups and magnetic groups, and their representation in MultiPie (`Group.symmetry_operation`).
+- **Harmonics and atomic multipole basis.** The spherical, tesseral, and multipolar harmonics, the harmonics of the
+  point groups (choice of the coefficients, polar and axial irreps, subgroups, complex representations), the orbitals
+  and the bases of the internal degrees of freedom, and the atomic SAMB.
+- **Response tensors.** The multipole decomposition of the response tensors of ranks 0 to 4 (types `Q`, `G`, `T`,
+  `M`), the conversion from Cartesian to harmonic multipoles, and its use in MultiPie.
+- **Overview of MultiPie.** The roles of MultiPie and MultiPieGen, sites and bonds, the keys of multipoles, the three
+  kinds of SAMB, the generation of the basis data, the numbering of the combined SAMB, the Fourier transform, and the
+  projection and atomic variables.
