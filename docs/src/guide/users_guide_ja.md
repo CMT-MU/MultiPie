@@ -29,7 +29,7 @@ from multipie import Group, MaterialModel
 6. [結合 SAMB と模型](#ja-combined-samb)
 7. [応答テンソル](#ja-response-tensors)
 8. [点群多極子調和関数](#ja-multipolar-harmonics)
-9. [簡易マニュアルとチュートリアル（PDF）](#ja-brief-manual)
+9. [チュートリアルと技術文書（PDF）](#ja-tutorial-documents)
 
 (ja-multipole-key)=
 ## 1. 多極子のキー
@@ -494,21 +494,15 @@ Group.multipolar_harmonics_expression("Q", 1, 0, s=1, k=0, x="q")  # the wrong p
 
 動く例は [docs/src/examples/multipolar_harmonics_expression.py](https://github.com/CMT-MU/MultiPie/tree/main/docs/src/examples/multipolar_harmonics_expression.py) です。
 
-(ja-brief-manual)=
+(ja-tutorial-documents)=
 
-## 9. 簡易マニュアルとチュートリアル（PDF）
+## 9. チュートリアルと技術文書（PDF）
 
-MultiPie を紹介する PDF の文書が二つあります。プログラムの簡易マニュアルと、MultiPie と QtDraw で多極子と群論を学ぶチュートリアル記事です。英語版は{ref}`英語のユーザーガイド <brief-manual>`にあります。
+MultiPie を紹介する PDF のチュートリアル記事があります。MultiPie と QtDraw で多極子と群論を学ぶものです。英語版は{ref}`英語のユーザーガイド <tutorial-documents>`にあります。Ver.2 の簡易マニュアルは{ref}`Ver.2 からの変更点 <ja-brief-manual-v2>`にあります。
 
 :::{note}
-どちらも MultiPie Ver.2 向けに書かれています（簡易マニュアルは Version 2.3、チュートリアルは MultiPie 2.0.7 と QtDraw 3.1.0）。考え方と作業の流れは Ver.3 でも同じですが、名前や結果の一部が異なります。例えば、f 軌道 `f2`, `f1`, `f3x`, `f3y` の名前が変わり、`Group(tag, with_opt=True)` は廃止され、SAMB の番号や符号が異なることがあります。現在の版については [Ver.2 からの変更点](../changes_ja.md)と上の各節を見てください。
+チュートリアルは MultiPie 2.0.7 と QtDraw 3.1.0（Ver.2）向けに書かれています。考え方と作業の流れは Ver.3 でも同じですが、名前や結果の一部が異なります。例えば、f 軌道 `f2`, `f1`, `f3x`, `f3y` の名前が変わり、SAMB の番号や符号が異なることがあります。現在の版については [Ver.2 からの変更点](../changes_ja.md)と上の各節を見てください。
 :::
-
-### MultiPie 簡易マニュアル
-
-[PDF](../brief_manual_ja.pdf)
-
-MultiPie の概要をスライドでまとめたものです。群論的なデータ、SAMB（電気 `Q`、磁気 `M`、磁気トロイダル `T`、電気トロイダル `G` 多極子）、グラフェンの例、`mp_create` と `mp_analyze` による作業の流れ（入力ファイルと制御ファイルのすべてのキー）、`Group`、`MaterialModel`、`ModelAnalyzer` の各クラスの概要を扱います。
 
 ### QtDraw を用いた MultiPie のチュートリアル
 

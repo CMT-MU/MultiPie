@@ -139,3 +139,12 @@ mp_convert graphene graphene_ctrl.py
 
 - QtDraw 3.4 以降は MultiPie Ver.3 で動きます（2.5 以降の Ver.2 でも動きます）。QtDraw 3.3 以前は Ver.2 でのみ動きます。
 - SymClosestWannier 2.1.3 以降は MultiPie Ver.3 で動きます。Wannier 関数に付ける f 軌道の名前は、入っている MultiPie に従います。対称化に使うモデルは Ver.3 で作り直してください。
+
+(ja-brief-manual-v2)=
+## Ver.2 の簡易マニュアル（PDF）
+
+MultiPie の簡易マニュアルは Version 2.3 向けに書かれています。考え方と作業の流れは Ver.3 でも同じですが、このページに書いたように名前や結果の一部が異なります。例えば、f 軌道 `f2`, `f1`, `f3x`, `f3y` の名前が変わり、`Group(tag, with_opt=True)` は廃止され、SAMB の番号や符号が異なることがあります。英語版は{ref}`英語のページ <brief-manual-v2>`にあります。
+
+[PDF](brief_manual_ja.pdf)
+
+MultiPie の概要をスライドでまとめたものです。群論的なデータ、SAMB（電気 `Q`、磁気 `M`、磁気トロイダル `T`、電気トロイダル `G` 多極子）、グラフェンの例、`mp_create` と `mp_analyze` による作業の流れ（入力ファイルと制御ファイルのすべてのキー）、`Group`、`MaterialModel`、`ModelAnalyzer` の各クラスの概要を扱います。

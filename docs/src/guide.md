@@ -32,7 +32,7 @@ Contents:
 6. [Combined SAMB and the model](#combined-samb)
 7. [Response tensors](#response-tensors)
 8. [Multipolar harmonics](#multipolar-harmonics)
-9. [Brief manual and tutorial (PDF)](#brief-manual)
+9. [Tutorial and technical documents (PDF)](#tutorial-documents)
 
 (multipole-key)=
 ## 1. Multipole key
@@ -657,39 +657,19 @@ Group.multipolar_harmonics_expression("Q", 1, 0, s=1, k=0, x="q")  # the wrong p
 A runnable script is
 [docs/src/examples/multipolar_harmonics_expression.py](https://github.com/CMT-MU/MultiPie/tree/main/docs/src/examples/multipolar_harmonics_expression.py).
 
-(brief-manual)=
+(tutorial-documents)=
 
-## 9. Brief manual and tutorial (PDF)
+## 9. Tutorial and technical documents (PDF)
 
-Two documents in PDF introduce MultiPie: a brief manual of the program, and a tutorial article on learning multipoles
-and group theory with MultiPie and QtDraw. The Japanese versions are in the
-{ref}`Japanese User Guide <ja-brief-manual>`.
+A tutorial article in PDF introduces MultiPie: learning multipoles and group theory with MultiPie and QtDraw. The
+Japanese version is in the {ref}`Japanese User Guide <ja-tutorial-documents>`. The brief manual of Ver.2 is given in
+{ref}`Changes from Ver.2 <brief-manual-v2>`.
 
 :::{note}
-Both documents were written for MultiPie Ver.2 (the brief manual for Version 2.3, the tutorial for MultiPie 2.0.7 and
-QtDraw 3.1.0). The concepts and the workflow are the same in Ver.3, but some names and results differ, e.g., the f
-orbitals `f2`, `f1`, `f3x`, `f3y` are renamed, `Group(tag, with_opt=True)` is removed, and the numbering and the signs of
-SAMB can differ. See [Changes from Ver.2](changes.md) and the sections above for the current version.
+The tutorial was written for MultiPie 2.0.7 and QtDraw 3.1.0 (Ver.2). The concepts and the workflow are the same in
+Ver.3, but some names and results differ, e.g., the f orbitals `f2`, `f1`, `f3x`, `f3y` are renamed, and the numbering
+and the signs of SAMB can differ. See [Changes from Ver.2](changes.md) and the sections above for the current version.
 :::
-
-### MultiPie brief manual
-
-[PDF](brief_manual_en.pdf)
-
-An overview of MultiPie in slides:
-
-- **Overview.** The group-theoretical data (symmetry operations, Wyckoff sites and bonds, characters, harmonics, and
-  active multipoles of the point, space, magnetic point, and magnetic space groups), and the model construction and
-  the physical quantities computed with SAMB.
-- **SAMB.** The physical degrees of freedom classified by the time-reversal parity, the spatial-inversion property, and
-  the spatial anisotropy: the electric (`Q`), magnetic (`M`), magnetic toroidal (`T`), and electric toroidal (`G`)
-  multipoles.
-- **Example of graphene.** The model input, the Wyckoff sites and bonds, the site and bond clusters, the combined SAMB,
-  the band dispersion, the matrix elements, and how to use the basis.
-- **Workflow.** Model construction with `mp_create` from a model input file, and the computation of the band
-  dispersion and other physical quantities with `mp_analyze` from a control file, with all the keys of the two files.
-- **Classes.** Overviews of `Group`, `MaterialModel`, and `ModelAnalyzer`, with their initialization, properties, and
-  main functions.
 
 ### Tutorial of MultiPie via QtDraw
 

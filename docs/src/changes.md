@@ -207,3 +207,28 @@ the order of the irreps), and the data of MPG and MSG are unchanged.
 - QtDraw 3.4 or later works with MultiPie Ver.3 (and with Ver.2 from 2.5); QtDraw 3.3 or earlier works with Ver.2 only.
 - SymClosestWannier 2.1.3 or later works with MultiPie Ver.3: the names of the f orbitals given to the Wannier
   functions follow the installed MultiPie. Create the models for the symmetrization again with Ver.3.
+
+(brief-manual-v2)=
+## Brief manual of Ver.2 (PDF)
+
+The brief manual of MultiPie was written for Version 2.3. The concepts and the workflow are the same in Ver.3, but some
+names and results differ as described on this page, e.g., the f orbitals `f2`, `f1`, `f3x`, `f3y` are renamed,
+`Group(tag, with_opt=True)` is removed, and the numbering and the signs of SAMB can differ. The Japanese version is in
+{ref}`the Japanese page <ja-brief-manual-v2>`.
+
+[PDF](brief_manual_en.pdf)
+
+An overview of MultiPie in slides:
+
+- **Overview.** The group-theoretical data (symmetry operations, Wyckoff sites and bonds, characters, harmonics, and
+  active multipoles of the point, space, magnetic point, and magnetic space groups), and the model construction and
+  the physical quantities computed with SAMB.
+- **SAMB.** The physical degrees of freedom classified by the time-reversal parity, the spatial-inversion property, and
+  the spatial anisotropy: the electric (`Q`), magnetic (`M`), magnetic toroidal (`T`), and electric toroidal (`G`)
+  multipoles.
+- **Example of graphene.** The model input, the Wyckoff sites and bonds, the site and bond clusters, the combined SAMB,
+  the band dispersion, the matrix elements, and how to use the basis.
+- **Workflow.** Model construction with `mp_create` from a model input file, and the computation of the band
+  dispersion and other physical quantities with `mp_analyze` from a control file, with all the keys of the two files.
+- **Classes.** Overviews of `Group`, `MaterialModel`, and `ModelAnalyzer`, with their initialization, properties, and
+  main functions.
