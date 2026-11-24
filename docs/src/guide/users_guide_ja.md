@@ -506,6 +506,6 @@ MultiPie を紹介する PDF のチュートリアル記事があります。Mul
 
 ### QtDraw を用いた MultiPie のチュートリアル
 
-[PDF](../tutorial_via_qtdraw_ja.pdf)
+[PDF](../pdf/tutorial_via_qtdraw_ja.pdf)
 
 *MultiPie と QtDraw で学ぶ多極子表現と群論*（大槻純也、岡山大学）。QtDraw の画面を使い、利用者の立場から MultiPie を紹介します。基本的な使い方、軌道の結晶場分裂と既約表現の積の分解、p 軌道の原子多極子、URhSn（D$_{\rm 3h}$）の U サイトの電気四極子のクラスター多極子による分類、iPython からの利用を扱います。

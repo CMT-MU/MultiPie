@@ -216,7 +216,7 @@ names and results differ as described on this page, e.g., the f orbitals `f2`, `
 `Group(tag, with_opt=True)` is removed, and the numbering and the signs of SAMB can differ. The Japanese version is in
 {ref}`the Japanese page <ja-brief-manual-v2>`.
 
-[PDF](brief_manual_en.pdf)
+[PDF](pdf/brief_manual_en.pdf)
 
 An overview of MultiPie in slides:
 

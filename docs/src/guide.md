@@ -673,7 +673,7 @@ and the signs of SAMB can differ. See [Changes from Ver.2](changes.md) and the s
 
 ### Tutorial of MultiPie via QtDraw
 
-[PDF](tutorial_via_qtdraw_en.pdf)
+[PDF](pdf/tutorial_via_qtdraw_en.pdf)
 
 *Multipole Representation and Group Theory Learned through MultiPie and QtDraw*, by Junya Otsuki (Okayama University):
 an introduction to MultiPie from the user's point of view, using the graphical interface of QtDraw.
