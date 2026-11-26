@@ -616,6 +616,117 @@ class ModelPDF:
         )
 
     # ==================================================
+    def coset_info(self):
+        cosets = self.mm.get("coset", [])
+        if not cosets:
+            return
+
+        def mat(M):
+            M = sp.Matrix(np.round(np.array(M, dtype=float), 10)).applyfunc(
+                lambda v: sp.nsimplify(v, [sp.sqrt(3)], tolerance=1e-8)
+            )
+            return sp.latex(M)
+
+        def num(v):
+            v = complex(v)
+            return f"{v.real:+.4f}" if abs(v.imag) < 1e-10 else f"{v.real:+.4f}{v.imag:+.4f}i"
+
+        self.hr("Coset")
+        for r in cosets:
+            P = Group(r["parent"])
+            n = r["order"]
+            kind = {"rotation": "rotation", "improper": "improper (achiral H)", "inversion": "inversion (chiral H)"}[r["kind"]]
+            tag = r["rep"].split(":")[0]
+            seitz = "$" + Group.tag_symmetry_operation(tag, latex=True) + "$"
+            if ":" in r["rep"]:
+                seitz += r" + \texttt{" + r["rep"].split(":")[1] + "}"
+            self.text(r"\begin{itemize}")
+            self.text(r"\item Group $H$: " + self.mm.group.latex(detail=True) + ", parent $P$: " + P.latex(detail=True) + "\n")
+            self.text(r"\item Representative $g$ (parent setting): " + seitz + f", order $n={n}$" + ", kind: " + kind + "\n")
+            self.text(r"\item $g$ in the coordinates of $H$: $" + mat(r["rep_matrix"]) + "$\n")
+            self.text(
+                r"\item Frame of the image system: $"
+                + mat(r["frame"])
+                + "$, image group: "
+                + Group(r["image_group"]).latex(detail=True)
+                + "\n"
+            )
+            if n > 1:
+                ev = ", ".join([f"$e^{{2\\pi i\\cdot {m}/{n}}}$" if m else "$1$" for m in range(n)])
+                self.text(r"\item Eigenvalues of $g$: " + ev + "\n")
+            self.text(r"\end{itemize}")
+
+            if r.get("site"):
+                tbl = []
+                for name, d in r["site"].items():
+                    tbl.append([f"'{tex_text(name)}'", d["wyckoff"], d["image"], str(d["perm"])])
+                for name, d in r["bond"].items():
+                    tbl.append(
+                        [
+                            self.fmt_site_bond(name),
+                            d["wyckoff"],
+                            d["image"],
+                            str([p if s > 0 else f"-{p}" for p, s in zip(d["perm"], d["sign"])]),
+                        ]
+                    )
+                self.pdf.table(
+                    tbl,
+                    [""] * len(tbl),
+                    col=["site/bond", "W", "W'", "perm (- : reversed)"],
+                    caption="Image of the sites and bonds",
+                    cpos="c|llll",
+                    stretch=1.3,
+                    long=True,
+                    center=False,
+                )
+
+            if r.get("parent_structure"):
+                tbl = []
+                for name, d in r["parent_structure"].items():
+                    param = ", ".join(f"{k}={v:.4f}" for k, v in d["param"].items())
+                    lim = ", ".join(f"{k}={v}" for k, v in d["limit_param"].items())
+                    tbl.append(
+                        [f"'{tex_text(name)}'", d["wyckoff"], tex_text(param), tex_text(lim), str(d["parent_wyckoff"] or "-")]
+                    )
+                self.pdf.table(
+                    tbl,
+                    [""] * len(tbl),
+                    col=["site", "W", "parameter", "limit", "W of P"],
+                    caption="Parent structure",
+                    cpos="c|lllll",
+                    stretch=1.3,
+                    long=True,
+                    center=False,
+                )
+
+            if r.get("weight_note"):
+                self.text(r"\noindent Weights are not given: " + tex_text(r["weight_note"]) + "\n")
+
+            tbl = []
+            for z, terms in r["samb"].items():
+                img = " ".join(f"{num(c)} {z2}'" for z2, c in terms)
+                row = [z, "$" + self.mm["combined_id"][z][0] + "$", img]
+                if r.get("weight"):
+                    w = r["weight"][z]
+                    mark = r" $\ast$" if n == 2 and w[1] > 1e-6 else ""
+                    row.append(", ".join(f"{x:.4f}" for x in w) + mark)
+                tbl.append(row)
+            col = ["z", "SAMB", "$g\\,\\mathbb{Z}_j$ (image system)"]
+            if r.get("weight"):
+                col.append("weight $w_m$, m=0.." + str(n - 1))
+            self.pdf.table(
+                tbl,
+                [""] * len(tbl),
+                col=col,
+                caption="SAMB moved by $g$ (* : odd part)",
+                cpos="c|" + "l" * len(col),
+                stretch=1.3,
+                long=True,
+                center=False,
+            )
+        self.vspace()
+
+    # ==================================================
     def __init__(self, mm, pdf):
         """
         create pdf file from material model.
@@ -633,6 +744,7 @@ class ModelPDF:
         self.harmonics_info()
         self.full_matrix_info()
         self.combined_samb_info()
+        self.coset_info()
         self.atomic_samb_info()
         self.cluster_samb_info()
         self.rep_site_bond_info()

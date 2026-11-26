@@ -47,6 +47,8 @@ The pipeline has three layers:
 
    It then computes physical quantities: band dispersion along a seekpath k-path, DOS (Gaussian or tetrahedron), the Fermi energy from filling, fat bands, local operators, k-multipoles, and user callbacks (`callback_k_path` / `callback_k_full`). Results go to `<topdir>/<model>/output/`, including gnuplot scripts.
 
+The model input key `coset` (`util/util_coset.py`, `coset_analysis`) gives `mm["coset"]`: for a representative g of a coset of the group in a parent (default: the first coset in the direct parent, from `Group.coset` and `Group.global_info()["parent"/"coset"]` of the binaries), how each combined SAMB is moved by g (rotation: +1; inversion of a chiral group: the eps/U of the cluster SAMB and the orbital parity, in the label space) and the weights of the eigenvalues of g on the parent structure; the PDF has a section "Coset".
+
 `core/cmd.py` (`create_model`, `analyze_model`) wraps layers 2 and 3. The click CLIs in `scripts/` are thin front ends to it.
 
 Input and control files are Python files holding exactly one dict literal. They are read with `util.util.read_dict` and `read_dict_file`, never executed as code. Output dict files are formatted with black if it is installed (`do_black`). Missing keys are filled in from the defaults with `deep_update`, and unknown keys are rejected by `check_dict_keys`.

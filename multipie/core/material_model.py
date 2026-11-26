@@ -50,6 +50,7 @@ from multipie.util.util_material_model import (
     REMOVED_MODEL_KEY,
 )
 from multipie.util.util_material_model_pdf import ModelPDF
+from multipie.util.util_coset import coset_analysis
 from multipie.core.default_model import default_model
 from multipie.util.util import check_dict_keys
 from multipie.util.util_plot import plot_site, plot_bond, plot_site_samb, plot_bond_samb, plot_harmonics
@@ -469,6 +470,9 @@ class MaterialModel(BinaryManager):
             irrep: self.select_combined_samb(select={"Gamma": irrep})[0] for irrep in self.group.character["table"].keys()
         }
         self["irrep_id"] = irrep_id
+
+        # coset.
+        self["coset"] = coset_analysis(self, model["coset"], model["coset_weight"])
 
         self["version"] = __version__
         self["created"] = time_stamp()

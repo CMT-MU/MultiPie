@@ -17,6 +17,7 @@
     multipie.util.util_pdf_latex
     multipie.util.util_plot
     multipie.util.util_response_tensor
+    multipie.util.util_coset
     multipie.util.util_samb
     multipie.util.util_tag
     multipie.util.util_wannier
