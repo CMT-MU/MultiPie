@@ -50,7 +50,7 @@ from multipie.util.util_material_model import (
     REMOVED_MODEL_KEY,
 )
 from multipie.util.util_material_model_pdf import ModelPDF
-from multipie.util.util_coset import coset_analysis
+from multipie.util.util_coset import coset_analysis, inversion_model, check_inversion_model
 from multipie.core.default_model import default_model
 from multipie.util.util import check_dict_keys
 from multipie.util.util_plot import plot_site, plot_bond, plot_site_samb, plot_bond_samb, plot_harmonics
@@ -409,6 +409,36 @@ class MaterialModel(BinaryManager):
         site_grid = create_site_grid(site_dict, igrid)
         site_so = create_site_so(group, site_dict)
         bond_dict = parse_representative_bond(group, G, site_grid, site_so, site_dict, bond_data, self.verbose)
+
+        # inversion model: the image of the model under the first coset (inversion) of a chiral group.
+        inversion_info = None
+        if model["create_inversion_model"]:
+            first = group.coset
+            if first is None or first["kind"] != "inversion":
+                print(
+                    f"model '{model['model']}': 'create_inversion_model' is ignored, "
+                    f"as the first coset of {group} is not the inversion (the group is not chiral or has no parent)."
+                )
+            else:
+                image_group, site_data, rep_bond_given, inversion_info = inversion_model(group, site_data, site_dict, bond_dict)
+                group = Group(image_group)
+                irrep = list(group.character["table"].keys())
+                samb_select = parse_samb_select(model["SAMB_select"], irrep)
+                atomic_select = parse_samb_select(model["atomic_select"], irrep)
+                site_select = parse_samb_select(model["site_select"], irrep)
+                bond_select = parse_samb_select(model["bond_select"], irrep)
+                basis_info = {k: group.atomic_basis(k) for k in basis_list}
+                basis_info_type = group.atomic_basis(basis_type)
+                site_dict = parse_representative_site(group, site_data, basis_type, basis_info)
+                site_grid = create_site_grid(site_dict, igrid)
+                site_so = create_site_so(group, site_dict)
+                bond_dict = parse_representative_bond(
+                    group, G, site_grid, site_so, site_dict, bond_data, self.verbose, rep_bond_given=rep_bond_given
+                )
+                check_inversion_model(inversion_info, site_dict, bond_dict, not group.is_point_group)
+                inversion_info["model"] = model["model"]
+                model["model"] = model["model"] + "_inv"
+
         A = cell_info["A"][0:3, 0:3].T
         lattice = group.info.lattice
         Ap = convert_to_primitive_vector(lattice, A)
@@ -443,6 +473,7 @@ class MaterialModel(BinaryManager):
         self["full_matrix"] = full_mat_info
         self["qtdraw_prop"] = model["qtdraw"]
         self["pdf_ctrl"] = model["pdf"]
+        self["inversion_model"] = inversion_info
 
         # SAMB.
         atomic_samb, atomic_id = self.get_atomic_samb(atomic_select)

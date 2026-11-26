@@ -54,6 +54,10 @@ default_model = {
     #   of a coset of H in the parent, Group.global_info()["coset"]).
     "coset": None,
     "coset_weight": True,  # calculate the weights on the parent structure ?
+    # create the inversion model instead: the image of the model under the first coset (inversion) of a chiral group
+    # (77 groups), with the representative sites and bonds that the eps/U of "coset" assume; the model name gets "_inv".
+    # Ignored for the other groups.
+    "create_inversion_model": False,
     "version": __version__,
     "qtdraw": {
         "create": True,  # create QtDraw file ?

@@ -22,6 +22,10 @@ the direct parent) and "parent", "coset" of info (the parents and the cosets in 
     (row i -> row perm[i], bond reversed if sign = -1), and the cluster SAMB by eps (label by label) or by U (within an
     irrep). The atomic SAMB of the orbitals of ranks (l1, l2) are multiplied by (-1)^(l1+l2). The frame is moved by r.
 
+- Image system of the inversion. Its representative (row 0) of each Wyckoff position is the image of row i0 with
+  perm[i0] = 0 (image_representative); a model of H' created from its own input may have other representative bonds,
+  and the inversion model (model input "create_inversion_model", inversion_model) has these representatives.
+
 - Weight. On the parent structure (the limit of the Wyckoff parameters at which the structure is invariant under the
   direct parent, "parent_limit"), g is a symmetry, and the weight of the eigenvalue w^m (w = exp(2 pi i/n), n the
   order of g modulo H) of Z_j is w_m(j) = (1/n) sum_t w^(-m t) <Z_j, g^t Z_j>/<Z_j, Z_j>. Given only for the direct
@@ -226,19 +230,36 @@ def samb_map(mm, coef):
         mm (MaterialModel): model.
         coef (dict): {z: {(UniqueSAMBType, t1, c1, t2, c2): coefficient}}, image of Z_j in the labels of the image
             system (the same UniqueSAMBType as the model for the SAMB of the image system with the same label).
+
+    Note:
+        - g Z_j = sum_k A_kj Z'_k is solved in the label space by least squares: the label vectors of the SAMB are
+          not normalized in general (e.g., the norm is 1/2 for a hybrid of the orbitals of different ranks, whose
+          hermitian partner has no label of its own).
     """
+    zs = list(mm["combined_id"])
+    keys = {}
     basis = {}
     for z, (_, u, idx, comp) in mm["combined_id"].items():
         lc = mm["combined_samb"][u.samb_type][idx][0][comp]
         basis[z] = {(u, t1, c1, t2, c2): complex(cg) for cg, t1, c1, t2, c2 in lc}
+        for k in basis[z]:
+            keys.setdefault(k, len(keys))
+    B = np.zeros((len(keys), len(zs)), dtype=complex)
+    for j, z in enumerate(zs):
+        for k, c in basis[z].items():
+            B[keys[k], j] = c
+    V = np.zeros((len(keys), len(zs)), dtype=complex)
+    for j, z in enumerate(zs):
+        for k, c in coef[z].items():
+            if k not in keys:
+                raise ValueError(f"the image of {z} is not in the span of the SAMB of the model (label {k}).")
+            V[keys[k], j] = c
+    A = np.linalg.lstsq(B, V, rcond=None)[0]
+    if not np.allclose(B @ A, V, atol=1e-8):
+        raise ValueError("the image of the SAMB is not in the span of the SAMB of the model.")
     res = {}
-    for zj, v in coef.items():
-        terms = []
-        for zk, b in basis.items():
-            a = sum(np.conj(b[k]) * c for k, c in v.items() if k in b)
-            if abs(a) > 1e-8:
-                terms.append((zk, _value(a)))
-        res[zj] = terms
+    for j, zj in enumerate(zs):
+        res[zj] = [(zk, _value(A[k, j])) for k, zk in enumerate(zs) if abs(A[k, j]) > 1e-8]
     return res
 
 
@@ -640,16 +661,153 @@ def weight(mm, frame, limits, g, n):
 
 
 # ==================================================
+def _round(v):
+    """vector rounded to DIG digits (list of float)."""
+    return [round(float(x), DIG) + 0.0 for x in v]
+
+
+# ==================================================
+def _mod1(v):
+    """vector reduced to [0,1) (components within 1e-10 of an integer are snapped to it)."""
+    v = np.asarray(v, dtype=float)
+    v = np.where(np.abs(v - np.rint(v)) < 1e-10, np.rint(v), v)
+    return np.mod(v, 1) + 0.0
+
+
+# ==================================================
+def image_representative(inv, site_dict, bond_dict, lattice=True):
+    """
+    Representative sites and bonds of the image system under the inversion (first coset of a chiral group).
+
+    The eps/U of the cluster SAMB (MultiPieGen) map row i of each Wyckoff position W to row perm[i] of W' (bond
+    reversed if sign = -1). The representative (row 0) of the image is therefore M (row i0) with perm[i0] = 0, which
+    is M (representative) when perm[0] = 0.
+
+    Args:
+        inv (dict): "inversion" of the first coset (Group.coset).
+        site_dict (dict): site dict of the model ("representative", "cell").
+        bond_dict (dict): bond dict of the model ("representative", "cell").
+        lattice (bool, optional): space group (positions reduced to [0,1)) ?
+
+    Returns:
+        - (dict) -- {site: position} of the image (fractional, in [0,1), ndarray).
+        - (dict) -- {bond: (vector, center)} of the image (fractional, center in [0,1), ndarray).
+    """
+    M = _mat4(_float(inv["map"]))
+    W, w = M[:3, :3], M[:3, 3]
+    red = _mod1 if lattice else (lambda v: np.asarray(v, dtype=float) + 0.0)
+    site = {}
+    for name, rep in site_dict["representative"].items():
+        i0 = inv["site"][rep.wyckoff]["perm"].index(0)
+        p = np.asarray(site_dict["cell"][name][i0].position, dtype=float)
+        site[name] = red(W @ p + w)
+    bond = {}
+    for name, rep in bond_dict["representative"].items():
+        t = inv["bond"][rep.wyckoff]
+        i0 = t["perm"].index(0)
+        b = bond_dict["cell"][name][i0]
+        v = t["sign"][i0] * (W @ np.asarray(b.vector, dtype=float))
+        c = W @ np.asarray(b.center, dtype=float) + w
+        bond[name] = (v, red(c))
+    return site, bond
+
+
+# ==================================================
+def _num_str(x):
+    """number as a short string (fraction with a denominator up to 24, else the decimal)."""
+    f = sp.Rational(x).limit_denominator(24)
+    if abs(float(f) - x) < 1e-10:
+        return str(f)
+    return repr(round(float(x), 12))
+
+
+# ==================================================
+def inversion_model(group, site_data, site_dict, bond_dict):
+    """
+    Input of the inversion model: the image of a model of a chiral group under the first coset (inversion).
+
+    Args:
+        group (Group): group of the model (its first coset is the inversion).
+        site_data (dict): "site" of the model input.
+        site_dict (dict): site dict of the model.
+        bond_dict (dict): bond dict of the model.
+
+    Returns:
+        - (str) -- image group.
+        - (dict) -- "site" of the image, {name: (position, orbital)}.
+        - (dict) -- representative bonds of the image, {(tail, head): [bonds of the n-th neighbor]}
+          (rep_bond_given of parse_representative_bond).
+        - (dict) -- information ("group", "image_group", "rep", "map", "site", "bond") of the source and the image.
+    """
+    f = group.coset
+    inv = f["inversion"]
+    rs, rb = image_representative(inv, site_dict, bond_dict, not group.is_point_group)
+    site = {
+        name: ("[" + ",".join(_num_str(x) for x in rs[name]) + "]", site_data[name][1]) for name in site_dict["representative"]
+    }
+
+    rep_bond = {}
+    for name, rep in bond_dict["representative"].items():
+        lst = rep_bond.setdefault((rep.tail, rep.head), [])
+        while len(lst) < rep.neighbor:
+            lst.append([])
+        v, c = rb[name]
+        lst[rep.neighbor - 1].append(np.concatenate([v, c]))
+    for info in bond_dict["info"]:  # the neighbors not selected.
+        lst = rep_bond.setdefault((info.tail, info.head), [])
+        while len(lst) < max(info.neighbor):
+            lst.append([])
+
+    info = {
+        "group": group_id(group),
+        "image_group": inv["image"],
+        "rep": f["rep"],
+        "map": _mat4(_float(inv["map"])).tolist(),
+        "site": {
+            name: {"source": _round(rep.position), "image": _round(rs[name])} for name, rep in site_dict["representative"].items()
+        },
+        "bond": {
+            name: {"source": (_round(rep.vector), _round(rep.center)), "image": (_round(rb[name][0]), _round(rb[name][1]))}
+            for name, rep in bond_dict["representative"].items()
+        },
+    }
+    return inv["image"], site, rep_bond, info
+
+
+# ==================================================
+def check_inversion_model(info, site_dict, bond_dict, lattice=True):
+    """
+    Check that the representative sites and bonds of the inversion model are the images (info of inversion_model).
+    """
+
+    def same(a, b, lattice):
+        d = np.asarray(a, dtype=float) - np.asarray(b, dtype=float)
+        return np.allclose(d - np.rint(d), 0, atol=TOL) if lattice else np.allclose(d, 0, atol=TOL)
+
+    for name, rep in site_dict["representative"].items():
+        if not same(rep.position, info["site"][name]["image"], lattice):
+            raise RuntimeError(f"inversion model: the representative of site '{name}' is not the image.")
+    for name, rep in bond_dict["representative"].items():
+        v, c = info["bond"][name]["image"]
+        if not (same(rep.vector, v, False) and same(rep.center, c, lattice)):
+            raise RuntimeError(f"inversion model: the representative of bond '{name}' is not the image.")
+    if set(bond_dict["representative"]) != set(info["bond"]):
+        raise RuntimeError("inversion model: the bonds differ from those of the model.")
+
+
+# ==================================================
 def _site_bond_image(mm, inv):
-    """images of the sites and bonds of the model (Wyckoff position, permutation, bond reversal)."""
+    """images of the sites and bonds of the model (Wyckoff position, permutation, bond reversal, representative)."""
+    rs, rb = image_representative(inv, mm["site"], mm["bond"], not mm.group.is_point_group)
     site = {}
     for name, rep in mm["site"]["representative"].items():
         t = inv["site"][rep.wyckoff]
-        site[name] = {"wyckoff": rep.wyckoff, "image": t["image"][1], "perm": t["perm"]}
+        site[name] = {"wyckoff": rep.wyckoff, "image": t["image"][1], "perm": t["perm"], "position": _round(rs[name])}
     bond = {}
     for name, rep in mm["bond"]["representative"].items():
         t = inv["bond"][rep.wyckoff]
         bond[name] = {"wyckoff": rep.wyckoff, "image": t["image"][1], "perm": t["perm"], "sign": t["sign"]}
+        bond[name]["vector"], bond[name]["center"] = _round(rb[name][0]), _round(rb[name][1])
     return site, bond
 
 

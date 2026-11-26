@@ -292,7 +292,7 @@ for z, (symbol, u, key, comp) in mm["combined_id"].items(): print(z, symbol, u.s
 - `"parent"`、`"rep"`、`"rep_matrix"`（$H$ の座標での $g$）、`"order"` $n$（$g^n \in H$ となる最小の $n$）、`"kind"`：
   - `"rotation"`：像の系は、模型を $g$ で動かした座標系（`"frame"`）で書いたもので、$g\,\mathbb{Z}_j = +\mathbb{Z}'_j$ です（像の系の同じラベルの SAMB）。
   - `"improper"`（$H$ がカイラルでない）：$H$ の回転でない操作 $m$ と回転 $g' = g m$（`"frame"`）で $g = g' m^{-1}$ とし、$g\,\mathbb{Z}_j = \sum_k D(m^{-1})_{kj} \mathbb{Z}'_k$ です。
-  - `"inversion"`（$H$ がカイラル）：最初の剰余類の空間反転 $I$ と回転 $r$ で $g = r I$ とします。$I$ は $H$ を $H' = I H I^{-1}$（`"image_group"`、`"map"`）に、サイトとボンドを像のもの（`"site"`、`"bond"`）に写し、SAMB をクラスター SAMB のデータ（ラベルごと、または既約表現の中の行列）と軌道のパリティ $(-1)^{l_1 + l_2}$ で写します。
+  - `"inversion"`（$H$ がカイラル）：最初の剰余類の空間反転 $I$ と回転 $r$ で $g = r I$ とします。$I$ は $H$ を $H' = I H I^{-1}$（`"image_group"`、`"map"`）に、サイトとボンドを像のもの（`"site"`、`"bond"`）に写し、SAMB をクラスター SAMB のデータ（ラベルごと、または既約表現の中の行列）と軌道のパリティ $(-1)^{l_1 + l_2}$ で写します。データは各 Wyckoff 位置の $i$ 行目を像の perm[$i$] 行目に写します（sign $= -1$ ならボンドの向きが逆）。そのため像の代表（0 行目）は、perm[$i_0$] $= 0$ となる $i_0$ 行目の像です（`"site"[name]["position"]`、`"bond"[name]["vector"]`、`["center"]`）。$\mathbb{Z}'_k$ は、これらを代表とする $H'$ の模型の SAMB です（下の空間反転模型を参照）。
 - `"samb"`：$g\,\mathbb{Z}_j = \sum_k A_{jk} \mathbb{Z}'_k$ を `{z_j: [(z_k, A_jk)]}` で。
 - `"parent_structure"`：各サイトについて、Wyckoff のパラメータ、構造が $P$ で不変になる最も近い極限、そこでの $P$ の Wyckoff 位置。
 - `"weight"`：$w_m(j) = \frac{1}{n}\sum_t \omega^{-mt} \langle \mathbb{Z}_j, g^t \mathbb{Z}_j\rangle$（$\omega = e^{2\pi i/n}$、親構造で）、固有値 $\omega^m$ の重み。$n = 2$ では偶と奇の部分です。
@@ -307,6 +307,20 @@ mm.analyze({"model": "Te", "group": 152, "cell": {"a": 4.457, "c": 5.929}, "site
 r = mm["coset"][0]
 print(r["parent"], r["rep"], r["kind"], r["image_group"], r["order"])
 for z, terms in r["samb"].items(): print(z, mm["combined_id"][z][0], terms, [round(w, 4) for w in r["weight"][z]])
+```
+
+**空間反転模型。** $H'$ の模型をそれ自身の入力から作ると、代表ボンドが上の像と違うことがあります。MultiPie は代表ボンドの始点を代表サイトにとり、終点を探索の順にとるからです。そのとき、同じ既約表現の SAMB を複数持つボンドの Wyckoff 位置では、SAMB が $\mathbb{Z}'_k$ とそれらの間の回転だけ違います。`"create_inversion_model": True` とすると、最初の剰余類が空間反転である群（親を持つ 77 個のカイラルな群：12 個の PG と 65 個の SG）の模型を、その像に置き換えます。群は $H'$、サイトはその像、代表ボンドは（探索の代わりに）その像で、近接は同じです。模型の名前には `_inv` を付けます。元の模型の `"coset"` で $g$ で写した SAMB は、この空間反転模型の SAMB になります。`mm["inversion_model"]`（と PDF の節 "Inversion Model"）は、元の模型と群、写像 $M$、元と像の代表サイトと代表ボンドを与えます。ほかの群では、このキーを無視し、そのことを表示します。
+
+自分自身に写る 38 個の Wyckoff 位置（SG 80、93、97、98、150、199、208–211、214）を除き、すべての SAMB で $g\,\mathbb{Z}_j = \pm \mathbb{Z}'_j$ です。38 個の位置では、代表をどう選んでも、データベースのクラスター SAMB は既約表現の中の行列で写ります。
+
+```{code-cell} ipython3
+mi = MaterialModel()
+mi.analyze({"model": "Te", "group": 152, "cell": {"a": 4.457, "c": 5.929}, "site": {"Te": ("[0.274,0,1/3]", "p")},
+            "bond": [("Te", "Te", [1, 2])], "SAMB_select": {"Gamma": "IR"}, "pdf": {"create": False},
+            "create_inversion_model": True})
+d = mi["inversion_model"]
+print(mi["model"], d["group"], "->", d["image_group"])
+for name, v in {**d["site"], **d["bond"]}.items(): print(name, v["source"], "->", v["image"])
 ```
 
 (ja-response-tensors)=
