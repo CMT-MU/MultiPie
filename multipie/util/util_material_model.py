@@ -944,7 +944,7 @@ def remove_equivalent_representative_bond(so, pset, bonds):
 
 
 # ==================================================
-def parse_representative_bond(group, G, site_grid, site_so, site_dict, bond_data, verbose):
+def parse_representative_bond(group, G, site_grid, site_so, site_dict, bond_data, verbose, rep_bond_given=None):
     """
     Parse representative bond.
 
@@ -956,6 +956,8 @@ def parse_representative_bond(group, G, site_grid, site_so, site_dict, bond_data
         site_dict (dict): site dict.
         bond_data (list): bond data.
         verbose (bool): verbose progress bar ?
+        rep_bond_given (dict, optional): representative bonds used instead of the search, {(tail, head): [bonds of the
+            n-th neighbor (vector+center), ...]} (the inversion model).
 
     Returns:
         - (dict) -- bond dict.
@@ -1004,16 +1006,19 @@ def parse_representative_bond(group, G, site_grid, site_so, site_dict, bond_data
         head_pos = [i.position for i in head_info]
 
         # create rep. bond.
+        if rep_bond_given is not None:
+            rep_bond_each = [np.asarray(b, dtype=float).reshape(-1, 6) for b in rep_bond_given[(tail_tag, head_tag)]]
         tail = site_grid[tail_tag][(1, 1, 0, 0, 0)]
         heads = np.asarray(list(site_grid[head_tag].values()))
         so = site_so[tail_tag]
-        rep_bond_each = create_representative_bond(group, G, so, tail, heads, max_n)
-        rep_bond_each = remove_equivalent_representative_bond(so_all, ps, rep_bond_each)
+        if rep_bond_given is None:
+            rep_bond_each = create_representative_bond(group, G, so, tail, heads, max_n)
+            rep_bond_each = remove_equivalent_representative_bond(so_all, ps, rep_bond_each)
 
         # the initial search range (SEARCH_CELL_RANGE) may cut off neighbor shells: a requested shell beyond the radius within which the
         # grid holds every site can be incomplete or missing, which shifts the neighbor numbering. Then repeat the
         # search on a grid enlarged for this bond, and keep the original result if the shells are the same.
-        if not group.is_point_group:
+        if not group.is_point_group and rep_bond_given is None:
             head_grid = site_grid[head_tag]
             enlarged = None
             while True:

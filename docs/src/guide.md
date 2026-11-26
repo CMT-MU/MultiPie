@@ -372,7 +372,10 @@ list with a dict for each $g$:
   - `"inversion"` ($H$ chiral): $g = r I$ with the inversion $I$ of the first coset; $I$ maps $H$ to
     $H' = I H I^{-1}$ (`"image_group"`, `"map"`), the sites and bonds to those of the image (`"site"`, `"bond"`), and
     the SAMB by the data of the cluster SAMB (label by label, or by a matrix within an irrep) and the parity
-    $(-1)^{l_1 + l_2}$ of the orbitals.
+    $(-1)^{l_1 + l_2}$ of the orbitals. The data map row $i$ of each Wyckoff position to row perm[$i$] of the image
+    (bond reversed if sign $= -1$), so the representative (row 0) of the image is the image of row $i_0$ with
+    perm[$i_0$] $= 0$: `"site"[name]["position"]` and `"bond"[name]["vector"]`, `["center"]`. $\mathbb{Z}'_k$ are the
+    SAMB of a model of $H'$ with these representatives (see the inversion model below).
 - `"samb"`: $g\,\mathbb{Z}_j = \sum_k A_{jk} \mathbb{Z}'_k$ as `{z_j: [(z_k, A_jk)]}`.
 - `"parent_structure"`: for each site, the Wyckoff parameters, the nearest limit at which the structure is invariant
   under $P$, and the Wyckoff position of $P$ there.
@@ -392,6 +395,30 @@ mm.analyze({"model": "Te", "group": 152, "cell": {"a": 4.457, "c": 5.929}, "site
 r = mm["coset"][0]
 print(r["parent"], r["rep"], r["kind"], r["image_group"], r["order"])
 for z, terms in r["samb"].items(): print(z, mm["combined_id"][z][0], terms, [round(w, 4) for w in r["weight"][z]])
+```
+
+**Inversion model.** A model of $H'$ created from its own input may have other representative bonds than the images:
+MultiPie takes the tail of a representative bond at the representative site and the head in the order of the search.
+Then the SAMB of a bond Wyckoff position with several SAMB of the same irrep differ from $\mathbb{Z}'_k$ by a rotation
+among them. With `"create_inversion_model": True`, a model of a group whose first coset is the inversion (the 77 chiral
+groups with a parent: 12 PG and 65 SG) is replaced by its image: the group $H'$, the images of the sites, and the
+images of the representative bonds (instead of the search; the neighbors are the same), with `_inv` added to the model
+name. The SAMB moved by $g$ in `"coset"` of the source are then those of the inversion model. `mm["inversion_model"]`
+(and the section "Inversion Model" of the PDF) has the source model and group, the map $M$, and the representative
+sites and bonds of the source and of the image. The key is ignored, with a message, for the other groups.
+
+$g\,\mathbb{Z}_j = \pm \mathbb{Z}'_j$ for all SAMB, except those of the 38 Wyckoff positions mapped onto themselves
+(SG 80, 93, 97, 98, 150, 199, 208-211, 214), whose cluster SAMB of the database are moved by a matrix within an irrep
+for any choice of the representatives.
+
+```{code-cell} ipython3
+mi = MaterialModel()
+mi.analyze({"model": "Te", "group": 152, "cell": {"a": 4.457, "c": 5.929}, "site": {"Te": ("[0.274,0,1/3]", "p")},
+            "bond": [("Te", "Te", [1, 2])], "SAMB_select": {"Gamma": "IR"}, "pdf": {"create": False},
+            "create_inversion_model": True})
+d = mi["inversion_model"]
+print(mi["model"], d["group"], "->", d["image_group"])
+for name, v in {**d["site"], **d["bond"]}.items(): print(name, v["source"], "->", v["image"])
 ```
 
 (response-tensors)=
