@@ -18,6 +18,12 @@ from multipie.util.util_pdf_latex import tex_text
 
 
 # ==================================================
+def vec(v):
+    """vector as a short string, [x,y,z] (4 digits)."""
+    return "[" + ",".join("0" if abs(float(x)) < 1e-10 else f"{float(x):.4f}".rstrip("0").rstrip(".") for x in v) + "]"
+
+
+# ==================================================
 class ModelPDF:
     # ==================================================
     def fmt_number(self, nums, int_digits=2, frac_digits=5):
@@ -616,6 +622,51 @@ class ModelPDF:
         )
 
     # ==================================================
+    def inversion_model_info(self):
+        info = self.mm.get("inversion_model")
+        if not info:
+            return
+        self.hr("Inversion Model")
+        g = Group(info["image_group"])
+        self.text(r"\begin{itemize}")
+        self.text(
+            r"\item Image of the model \texttt{"
+            + tex_text(info["model"])
+            + "} of "
+            + Group(info["group"]).latex(detail=True)
+            + " under the first coset (inversion, representative \\texttt{"
+            + tex_text(info["rep"])
+            + "}); group of this model: "
+            + g.latex(detail=True)
+            + "\n"
+        )
+        M = sp.Matrix(np.round(np.array(info["map"], dtype=float), 10)).applyfunc(lambda v: sp.nsimplify(v, tolerance=1e-8))
+        self.text(r"\item Map $M$ (coordinates of the model $\to$ those of this model): $" + sp.latex(M) + "$\n")
+        self.text(
+            r"\item The representative sites and bonds are the images of those of the source in the correspondence (perm)"
+            + r" of the coset data, which the $\epsilon$/$U$ of the section Coset of the source assume."
+            + "\n"
+        )
+        self.text(r"\end{itemize}")
+        tbl = []
+        for name, d in info["site"].items():
+            tbl.append([f"'{tex_text(name)}'", vec(d["source"]), vec(d["image"])])
+        for name, d in info["bond"].items():
+            (v0, c0), (v1, c1) = d["source"], d["image"]
+            tbl.append([self.fmt_site_bond(name), vec(v0) + "@" + vec(c0), vec(v1) + "@" + vec(c1)])
+        self.pdf.table(
+            tbl,
+            [""] * len(tbl),
+            col=["site/bond", "source", "image (this model)"],
+            caption="Representative sites and bonds",
+            cpos="c|lll",
+            stretch=1.3,
+            long=True,
+            center=False,
+        )
+        self.vspace()
+
+    # ==================================================
     def coset_info(self):
         cosets = self.mm.get("coset", [])
         if not cosets:
@@ -659,7 +710,7 @@ class ModelPDF:
             if r.get("site"):
                 tbl = []
                 for name, d in r["site"].items():
-                    tbl.append([f"'{tex_text(name)}'", d["wyckoff"], d["image"], str(d["perm"])])
+                    tbl.append([f"'{tex_text(name)}'", d["wyckoff"], d["image"], str(d["perm"]), vec(d["position"])])
                 for name, d in r["bond"].items():
                     tbl.append(
                         [
@@ -667,14 +718,15 @@ class ModelPDF:
                             d["wyckoff"],
                             d["image"],
                             str([p if s > 0 else f"-{p}" for p, s in zip(d["perm"], d["sign"])]),
+                            vec(d["vector"]) + "@" + vec(d["center"]),
                         ]
                     )
                 self.pdf.table(
                     tbl,
                     [""] * len(tbl),
-                    col=["site/bond", "W", "W'", "perm (- : reversed)"],
+                    col=["site/bond", "W", "W'", "perm (- : reversed)", "representative of the image"],
                     caption="Image of the sites and bonds",
-                    cpos="c|llll",
+                    cpos="c|lllll",
                     stretch=1.3,
                     long=True,
                     center=False,
@@ -739,6 +791,7 @@ class ModelPDF:
 
         self.header()
         self.general_info()
+        self.inversion_model_info()
         self.group_cell_info()
         self.symmetry_operation_info()
         self.harmonics_info()

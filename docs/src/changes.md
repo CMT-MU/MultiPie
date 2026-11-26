@@ -114,6 +114,12 @@ its xyz polynomial; entries sharing all the other fields are numbered by `p`. Se
 - From 3.3.0, the model input key `"coset"` gives the SAMB moved by a representative of a coset of the group in a
   parent and the weights of its eigenvalues on the parent structure, in `mm["coset"]` and in the PDF (see
   {ref}`Coset of the model <coset-model>`). It is calculated by default; `"coset": False` skips it.
+- From 3.4.0, the model input key `"create_inversion_model": True` creates, for a chiral group whose first coset is the
+  inversion, the image of the model with the representative sites and bonds that the SAMB moved by the inversion in
+  `"coset"` assume, and `mm["coset"]` gives these representatives of the image (see
+  {ref}`Coset of the model <coset-model>`). In 3.3.0, the coefficients of `"samb"` in `mm["coset"]` were 1/2 of the
+  correct values for the SAMB whose vectors in the label space have the norm 1/2 (e.g., a hybrid of s and p orbitals of
+  E), also for the rotation; they are solved by least squares from 3.4.0.
 
 (converting-a-model-of-ver-2)=
 ## Converting a model of Ver.2
