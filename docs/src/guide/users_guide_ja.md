@@ -275,6 +275,40 @@ for z, (symbol, u, key, comp) in mm["combined_id"].items(): print(z, symbol, u.s
 3.2.0 より前は、既約表現は名前の順（例えば O$_{\rm h}$ では A1g, A1u, A2g, ...）で、多極子はタイプ（$Q$、$G$、$M$、$T$）、$s$、$k$、$l$ の順でした。SAMB は同じですが、3.2.0 以降で作り直した模型では $z_j$ の番号が変わります。保存した模型はその番号のまま使えます。`mp_convert` は、Ver.3 の以前の版の模型と、その制御ファイルの重みの番号を付け替えます（{ref}`3.2.0 より前の Ver.3 の模型の変換 <ja-converting-a-model-before-3-2>`を参照）。
 ```
 
+(ja-coset-model)=
+### 模型の剰余類
+
+親 $P$ を持つ群 $H$（データベースの PG または SG。Oh、D6h、SG 191–194、221–230 以外）について、$P$ の剰余類 $gH$ の代表 $g$ は、模型を像の系に写します。MultiPie は、MultiPieGen の群のデータ（群の `"coset"`、`Group.global_info()["parent"]` と `["coset"]`）から、各 SAMB が $g$ でどう写るかと、親構造での $g$ の固有値の重みを与えます。$g$ は模型の入力キー `"coset"` で選びます。
+
+| `"coset"` | 意味 |
+| --- | --- |
+| `None`（既定） | すぐ上の親の最初の剰余類の $g$（`Group(...).coset`） |
+| `{"parent": "SG:164", "rep": "-1:[0,0,0]"}` | 親と代表（`Group.global_info()["coset"]` の剰余類にある操作） |
+| 辞書のリスト | 複数の代表 |
+| `False` | 計算しない |
+
+`"coset_weight": False` で重みの計算を省きます（重みはすぐ上の親についてだけ与えます）。結果は `mm["coset"]` で、各 $g$ についての辞書のリストです。
+
+- `"parent"`、`"rep"`、`"rep_matrix"`（$H$ の座標での $g$）、`"order"` $n$（$g^n \in H$ となる最小の $n$）、`"kind"`：
+  - `"rotation"`：像の系は、模型を $g$ で動かした座標系（`"frame"`）で書いたもので、$g\,\mathbb{Z}_j = +\mathbb{Z}'_j$ です（像の系の同じラベルの SAMB）。
+  - `"improper"`（$H$ がカイラルでない）：$H$ の回転でない操作 $m$ と回転 $g' = g m$（`"frame"`）で $g = g' m^{-1}$ とし、$g\,\mathbb{Z}_j = \sum_k D(m^{-1})_{kj} \mathbb{Z}'_k$ です。
+  - `"inversion"`（$H$ がカイラル）：最初の剰余類の空間反転 $I$ と回転 $r$ で $g = r I$ とします。$I$ は $H$ を $H' = I H I^{-1}$（`"image_group"`、`"map"`）に、サイトとボンドを像のもの（`"site"`、`"bond"`）に写し、SAMB をクラスター SAMB のデータ（ラベルごと、または既約表現の中の行列）と軌道のパリティ $(-1)^{l_1 + l_2}$ で写します。
+- `"samb"`：$g\,\mathbb{Z}_j = \sum_k A_{jk} \mathbb{Z}'_k$ を `{z_j: [(z_k, A_jk)]}` で。
+- `"parent_structure"`：各サイトについて、Wyckoff のパラメータ、構造が $P$ で不変になる最も近い極限、そこでの $P$ の Wyckoff 位置。
+- `"weight"`：$w_m(j) = \frac{1}{n}\sum_t \omega^{-mt} \langle \mathbb{Z}_j, g^t \mathbb{Z}_j\rangle$（$\omega = e^{2\pi i/n}$、親構造で）、固有値 $\omega^m$ の重み。$n = 2$ では偶と奇の部分です。
+
+模型の PDF の節 "Coset" に、これらを載せます。例えば右手系の Te（P3$_1$21、No.152）は、P-3m1（No.164）の空間反転で P3$_2$21（No.154）に、すべての SAMB が $+1$ で写ります。親構造（$x = 0$）では、サイトの SAMB $\mathbb{G}_2$ と $\mathbb{Q}_3$ の重みは $(1/2, 1/2)$ です。
+
+```{code-cell} ipython3
+mm = MaterialModel()
+mm.analyze({"model": "Te", "group": 152, "cell": {"a": 4.457, "c": 5.929}, "site": {"Te": ("[0.274,0,1/3]", "p")},
+            "bond": [("Te", "Te", [1])], "SAMB_select": {"Gamma": "IR"}, "atomic_select": {"X": "Q"},
+            "pdf": {"create": False}})
+r = mm["coset"][0]
+print(r["parent"], r["rep"], r["kind"], r["image_group"], r["order"])
+for z, terms in r["samb"].items(): print(z, mm["combined_id"][z][0], terms, [round(w, 4) for w in r["weight"][z]])
+```
+
 (ja-response-tensors)=
 ## 7. 応答テンソル
 

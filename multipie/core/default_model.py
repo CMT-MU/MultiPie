@@ -47,6 +47,13 @@ default_model = {
         "Gamma": [],  # "IR"=identity, []=all, "..."/["...","..."]=specified irreps.
     },
     "toroidal_priority": False,
+    # coset of the group H in a parent P (PG and SG): the SAMB moved by a representative g of a coset g H, and the
+    # weights of the eigenvalues of g on the parent structure (direct parent only).
+    #   None: g of the first coset in the direct parent, False: no analysis,
+    #   {"parent": "SG:164", "rep": "-1:[0,0,0]"} or a list of them: the parent and the representative (an operation
+    #   of a coset of H in the parent, Group.global_info()["coset"]).
+    "coset": None,
+    "coset_weight": True,  # calculate the weights on the parent structure ?
     "version": __version__,
     "qtdraw": {
         "create": True,  # create QtDraw file ?

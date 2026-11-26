@@ -558,6 +558,23 @@ class Group(dict):
 
     # ==================================================
     @property
+    def coset(self):
+        """
+        Get the first coset of the group in its direct parent (PG and SG).
+
+        Returns:
+            - (dict) -- coset data ("parent", "R", "index", "ops", "rep", "rep_matrix", "order", "kind", "frame",
+              "inversion", "parent_limit"), None for a group without a parent or a complex PG.
+
+        Note:
+            - the parents and the cosets in all parents are in Group.global_info()["parent"] and ["coset"].
+        """
+        if self.group_type not in ["PG", "SG"]:
+            return None
+        return self._group().get("coset")
+
+    # ==================================================
+    @property
     def character(self):
         """
         Get character dict (in accordance with PG).
