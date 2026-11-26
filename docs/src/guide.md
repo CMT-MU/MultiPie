@@ -345,6 +345,55 @@ an earlier version of Ver.3 and the weights of its controls (see
 {ref}`Converting a model of Ver.3 before 3.2.0 <converting-a-model-before-3-2>`).
 ```
 
+(coset-model)=
+### Coset of the model
+
+For a group $H$ with a parent $P$ (a PG or SG of the database; not Oh, D6h, SG 191-194, 221-230), a representative $g$
+of a coset $gH$ of $P$ maps the model to an image system. MultiPie gives, from the group data of MultiPieGen (`"coset"`
+of the group, `Group.global_info()["parent"]` and `["coset"]`), how each SAMB is moved by $g$ and, on the parent
+structure, the weights of the eigenvalues of $g$. The model input key `"coset"` selects $g$:
+
+| `"coset"` | meaning |
+| --- | --- |
+| `None` (default) | $g$ of the first coset in the direct parent (`Group(...).coset`) |
+| `{"parent": "SG:164", "rep": "-1:[0,0,0]"}` | the parent and the representative (an operation of a coset in `Group.global_info()["coset"]`) |
+| a list of dicts | several representatives |
+| `False` | no analysis |
+
+`"coset_weight": False` skips the weights (they are given for the direct parent only). The result is `mm["coset"]`, a
+list with a dict for each $g$:
+
+- `"parent"`, `"rep"`, `"rep_matrix"` ($g$ in the coordinates of $H$), `"order"` $n$ (the smallest $n$ with
+  $g^n \in H$), and `"kind"`:
+  - `"rotation"`: the image system is the model written in the frame moved by $g$ (`"frame"`), and
+    $g\,\mathbb{Z}_j = +\mathbb{Z}'_j$ (the SAMB of the image system with the same label);
+  - `"improper"` ($H$ not chiral): $g = g' m^{-1}$ with an improper operation $m$ of $H$ and the rotation $g' = g m$
+    (`"frame"`), and $g\,\mathbb{Z}_j = \sum_k D(m^{-1})_{kj} \mathbb{Z}'_k$;
+  - `"inversion"` ($H$ chiral): $g = r I$ with the inversion $I$ of the first coset; $I$ maps $H$ to
+    $H' = I H I^{-1}$ (`"image_group"`, `"map"`), the sites and bonds to those of the image (`"site"`, `"bond"`), and
+    the SAMB by the data of the cluster SAMB (label by label, or by a matrix within an irrep) and the parity
+    $(-1)^{l_1 + l_2}$ of the orbitals.
+- `"samb"`: $g\,\mathbb{Z}_j = \sum_k A_{jk} \mathbb{Z}'_k$ as `{z_j: [(z_k, A_jk)]}`.
+- `"parent_structure"`: for each site, the Wyckoff parameters, the nearest limit at which the structure is invariant
+  under $P$, and the Wyckoff position of $P$ there.
+- `"weight"`: $w_m(j) = \frac{1}{n}\sum_t \omega^{-mt} \langle \mathbb{Z}_j, g^t \mathbb{Z}_j\rangle$
+  ($\omega = e^{2\pi i/n}$, on the parent structure), the weights of the eigenvalues $\omega^m$; for $n = 2$, the even
+  and odd parts.
+
+The PDF of the model has a section "Coset" with these data. E.g., right-handed Te (P3$_1$21, No.152) is mapped by the
+inversion of P-3m1 (No.164) to P3$_2$21 (No.154) with every SAMB $+1$; on the parent structure ($x = 0$), the weights
+of the on-site SAMB $\mathbb{G}_2$ and $\mathbb{Q}_3$ are $(1/2, 1/2)$:
+
+```{code-cell} ipython3
+mm = MaterialModel()
+mm.analyze({"model": "Te", "group": 152, "cell": {"a": 4.457, "c": 5.929}, "site": {"Te": ("[0.274,0,1/3]", "p")},
+            "bond": [("Te", "Te", [1])], "SAMB_select": {"Gamma": "IR"}, "atomic_select": {"X": "Q"},
+            "pdf": {"create": False}})
+r = mm["coset"][0]
+print(r["parent"], r["rep"], r["kind"], r["image_group"], r["order"])
+for z, terms in r["samb"].items(): print(z, mm["combined_id"][z][0], terms, [round(w, 4) for w in r["weight"][z]])
+```
+
 (response-tensors)=
 ## 7. Response tensors
 
