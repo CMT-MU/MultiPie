@@ -28,6 +28,8 @@ from multipie.util.util_material_model import parse_samb_select
 DATA = os.path.join(os.path.dirname(__file__), "data", "convert_v3")
 EM = {"Q": 0, "G": 0, "T": 1, "M": 1}
 XO = {"Q": 0, "G": 1, "T": 2, "M": 3}
+# suffix of a control renumbered by mp_convert (the version of this MultiPie).
+CTRL = "_ctrl_v{}.{}.py".format(*version_tuple(__version__))
 
 
 # ==================================================
@@ -160,7 +162,7 @@ def test_renumber(v3, name, n_samb, with_input):
 
     ctrl = read_dict(f"{name}_ctrl.py", str(v3))
     out = report["control"][f"{name}_ctrl.py"]["output"]
-    assert out == str(v3 / f"{name}_ctrl_v3.2.py")
+    assert out == str(v3 / f"{name}{CTRL}")
     ctrl3 = read_dict(out, str(v3))
     assert ctrl3["samb"]["model"] == name
     p_old, p_new = ctrl["samb"]["parameter"], ctrl3["samb"]["parameter"]
@@ -188,7 +190,7 @@ def test_renumber_graphene_values(v3):
     assert [rn[f"z{i}"] for i in range(1, 5)] == ["z1", "z2", "z3", "z4"]
     assert [rn[f"z{i}"] for i in range(15, 21)] == [f"z{i}" for i in range(5, 11)]  # E2g.
     assert [rn[f"z{i}"] for i in range(5, 15)] == [f"z{i}" for i in range(11, 21)]  # B1u, B2u, E1u.
-    ctrl3 = read_dict("graphene_ctrl_v3.2.py", str(v3))
+    ctrl3 = read_dict(f"graphene{CTRL}", str(v3))
     assert ctrl3["output"]["callback_info"] == ["Sz", "z5"]
 
 
@@ -201,7 +203,7 @@ def test_parameter_and_converted_model(v3):
     report2 = convert_model("graphene", ["graphene_ctrl.py"])
     assert report2["kind"] == "renumber" and report2["input"] is None
     assert report2["renumber"] == report["renumber"]
-    assert os.path.isfile(v3 / "graphene_ctrl_v3.2.py")
+    assert os.path.isfile(v3 / f"graphene{CTRL}")
 
 
 # ==================================================
@@ -216,7 +218,7 @@ def test_refuse(v3, monkeypatch):
         convert_model("graphene", ["graphene_ctrl.py"])
     assert model_version(v3 / "graphene" / "graphene.pkl")[0] == "3.1.3"
     assert not os.path.exists(v3 / "graphene" / "graphene_v3.1.pkl")
-    assert not os.path.exists(v3 / "graphene_ctrl_v3.2.py")
+    assert not os.path.exists(v3 / f"graphene{CTRL}")
 
     # an unknown z_j.
     os.remove(v3 / "graphene_in.py")
@@ -239,4 +241,4 @@ def test_mp_convert(v3):
     result = CliRunner().invoke(mp_convert.cmd, ["graphene", "graphene_ctrl.py"])
     assert result.exit_code == 0, result.output
     assert "renumbered (" in result.output and "old model kept as:" in result.output
-    assert os.path.isfile(v3 / "graphene_ctrl_v3.2.py")
+    assert os.path.isfile(v3 / f"graphene{CTRL}")
