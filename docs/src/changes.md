@@ -89,6 +89,10 @@ its xyz polynomial; entries sharing all the other fields are numbered by `p`. Se
 - The keys of the anti-symmetric bond functions can differ from Ver.2 in `p`, in `n`, or in `(X, l, Gamma)`, e.g., the
   `p` of the key is kept from the top group, giving symbols such as $\mathbb{T}_{1}^{(b)}(E_{1u},a)$.
 - The complex point groups have no cluster SAMB (as in Ver.2); `Group.cluster_samb` raises an error for them.
+- From 3.3.0, the cluster SAMB of 20 Wyckoff positions of SG 98, 208, 211, 213, and 214 are averaged from another
+  reference site or bond, so that they are mapped label by label onto those of the image under the inversion coset
+  (see {ref}`Coset of the model <coset-model>`). A model of these Wyckoff positions created again has other values of
+  these cluster SAMB.
 
 ## Combined SAMB and models
 
@@ -107,6 +111,9 @@ its xyz polynomial; entries sharing all the other fields are numbered by `p`. Se
 - From 3.2.0, `info/<model>_var.py` gives the head and tail sites of bond 1 (`"bond"`) for each bond cluster, and the
   atomic variables are named by the orbitals only, `g_{head orbital,tail orbital}`, e.g., `g_{pz,pz}` instead of
   `g_{pz_C2,pz_C1}` (see [Getting started](getting_started.md)).
+- From 3.3.0, the model input key `"coset"` gives the SAMB moved by a representative of a coset of the group in a
+  parent and the weights of its eigenvalues on the parent structure, in `mm["coset"]` and in the PDF (see
+  {ref}`Coset of the model <coset-model>`). It is calculated by default; `"coset": False` skips it.
 
 (converting-a-model-of-ver-2)=
 ## Converting a model of Ver.2
