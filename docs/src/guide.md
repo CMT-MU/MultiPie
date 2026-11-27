@@ -650,6 +650,55 @@ $\mathbb{M}_u$. The Edelstein effect appears in its anti-symmetric part in the p
 dipole $\mathbb{Q}_z$, and in its symmetric part in the chiral 321', given by the active electric toroidal monopole
 $\mathbb{G}_0$ and quadrupole $\mathbb{G}_u$.
 
+(trace-moment)=
+### Trace moments of a model
+
+The model-dependent part $\Gamma$ of the linear and nonlinear response tensors in the Chebyshev expansion
+(R. Oiwa and H. Kusunose, J. Phys. Soc. Jpn. **91**, 014701 (2022), Eqs. (31)-(33)) is computed for the Hamiltonian
+$h = \sum_j z_j Z_j$ of a model by `ModelAnalyzer.trace_moment` (`util/util_trace_moment.py`):
+
+$$
+\Gamma^{i_1 \cdots i_n}_{O_1; \cdots; O_n} = \frac{1}{N} \sum_{\boldsymbol{k}}
+{\rm Tr}\left[ O_1(\boldsymbol{k}) h(\boldsymbol{k})^{i_1} O_2(\boldsymbol{k}) h(\boldsymbol{k})^{i_2} \cdots O_n(\boldsymbol{k}) h(\boldsymbol{k})^{i_n} \right]
+$$
+
+per unit cell. $\Gamma$ is a polynomial in $z_j$, and its lowest nonzero terms show the essential parameters of a
+response: the response vanishes if one of them is zero.
+
+```python
+ma = ModelAnalyzer(topdir)
+ma.analyze("model_ctrl.py")               # a model with the SAMB Z_j and the weights z_j.
+tm = ma.trace_moment({"vx": "v_x", "vy": "v_y", "M": "M_hr.dat"})
+tm.value(("vx", "vy"), 4)                 # Gamma^{ij}, i, j <= 4, at the current z_j (ndarray).
+tm.lowest(("vx", "vy", "vy"), n_term=2, part="im")    # the 2 lowest nonzero terms as polynomials in z_j.
+tm.polynomial(("M", "vy"), (2, 0), part="re")         # Gamma^{20} as a polynomial.
+```
+
+- **Operators.** A matrix dict `{(n1,n2,n3,m,n): value}` in the form of the SAMB matrices (indices of the full matrix
+  from 0), a file in the format of `seedname_hr.dat` of Wannier90 (indices from 1, divided by the Wigner-Seitz
+  degeneracy; relative to `topdir`), the name of a SAMB `"zj"`, or the velocity `"v_x"`, `"v_xy"`, ...,
+  $v_{\alpha_1 \cdots \alpha_n}(\boldsymbol{k}) = \partial_{\alpha_1} \cdots \partial_{\alpha_n} h(\boldsymbol{k})$
+  (Cartesian, $\hbar = 1$, the length unit of the cell), which is linear in $z_j$. The matrices are in the order of the
+  kets of the model, with $O(\boldsymbol{k}) = \sum_{\boldsymbol{R}} O(\boldsymbol{R}) e^{i \boldsymbol{k} \cdot \boldsymbol{R}}$.
+- **`lowest(ops, n_term, max_order, part, variable, expand)`** gives the `n_term` nonzero terms from the lowest total
+  order $\sum i$ (lexicographic order of $(i_1, \ldots, i_n)$ for the same total order), each with `"order"`,
+  `"variable"` (the $z_j$ that appear), `"essential"` (the $z_j$ whose zero makes the term vanish), `"polynomial"` and
+  `"factor"` (the common factors taken out; `factor=True` for the full factorization). `part="re"/"im"` takes the real
+  or imaginary part, as only one of them enters a response (Table I of the paper).
+- **Method.** The $\boldsymbol{k}$ sum is exact on the grid of $\sum r + 1$ points along each $\boldsymbol{a}_i$, where
+  $r$ are the ranges of the factors. The numerical values of all orders come from one diagonalization at each
+  $\boldsymbol{k}$, $\Gamma = \sum \tilde{O}_{1, b_0 b_1} \varepsilon_{b_1}^{i_1} \tilde{O}_{2, b_1 b_2} \cdots$
+  ($\tilde{O} = U^\dagger O U$; `polynomial="chebyshev"` gives $T_i(\tilde{h})$ with $\tilde{h} = (h - E_c)/W$).
+  A term is nonzero if its value at random $z_j$ is nonzero, and the $z_j$ that do not change it are dropped before
+  the polynomial is expanded on the exact grid.
+- The number of terms of a polynomial grows as (number of $z_j$)$^{\rm degree}$. For a model with many $z_j$, give
+  `variable` (the $z_j$ kept as symbols; the others are fixed to their values) or `expand=False` (only `"variable"` and
+  `"essential"`).
+
+For the model of the SnTe monolayer in the paper (Eq. (131)), `lowest(("vx", "vy", "vy"), part="im")` gives
+$\Gamma^{100} = {\rm Tr}[v_x h v_y v_y] = -128\, t'_3 (t'_2 t_{y3} t_{y1} + t_{y2} t_{y3} t'_1 + 2 t_{y2} t'_4 t_{y1} + 4 t'_2 t'_4 t'_1)$,
+Eq. (140), with the essential parameter $t'_3$ (`tests/test_trace_moment.py`).
+
 (multipolar-harmonics)=
 ## 8. Multipolar harmonics
 
