@@ -26,6 +26,7 @@ kernelspec:
 | [クラスター SAMB と結合 SAMB](#ja-group-cluster) | `cluster_samb()`, `combined_samb()`, `cg()`, `multipole_cluster_samb()`, `combined_object()` |
 | [対称操作による変換](#ja-group-transform) | `transform_vector()`, `transform_multipole()`, `create_cell_vector()`, `create_cell_multipole()` |
 | [磁気群と応答テンソル](#ja-group-magnetic) | `active_multipole`, `response_tensor_all()`, `response_tensor()` |
+| [親、上位群、剰余類](#ja-group-supergroup) | `coset`, `supergroups()`, `embedding()`, `coset_decomposition()`, `parent_limit()`, `map_site()` |
 
 (ja-group-create)=
 ## 1. 群の作成
@@ -494,4 +495,28 @@ f.name(), f.active_multipole
 
 ```{code-cell} ipython3
 f.response_tensor("M", 1, 3), f.response_tensor("T", 2, (1, 2), "a")
+```
+
+(ja-group-supergroup)=
+## 10. 親、上位群、剰余類
+
+`coset` は、すぐ上の親（MultiPieGen の代表の親）での群の最初の剰余類です（`Group.global_info()["parent"]` と `["coset"]` は、親の連鎖とそれぞれでの剰余類）。`supergroups()` は、群のデータの直接の（極大の）上位群（`Group.global_info()["supergroup"]`）をたどって、ほかの上位群も与えます。埋め込み $x_P = A x_H$、$H$ と $P$ の格子で割った指数、連鎖（`"path"`）が付きます。$P$ の格子は $H$ の格子の 4 倍まで細かいものです。P3$_1$21（No.152、Te）では、R-3m（No.166）には R32（No.155）を通って行き着きます。
+
+```{code-cell} ipython3
+t = Group("SG:152")
+t.coset["parent"], t.coset["rep"], [(d["group"], d["index"], d["path"]) for d in t.supergroups(max_index=6) if d["group"] in ("SG:164", "SG:166")]
+```
+
+`embedding(parent)` は $H$ の $P$ へのすべての埋め込み（同じ $H$ の原子に対して違う親構造を与える）、`coset_decomposition(parent)` はすべての左剰余類 $gH$（$P$ の格子で割ったもの。`modulo="self"` では $H$ の格子で割ったもの）、`parent_limit(parent)` は軌道が $P$ で不変になる Wyckoff パラメータの値、`map_site(op, wyckoff, parent)` はその親構造で $g$ が写す原子を与えます。{ref}`ja-coset-model` を参照してください。
+
+```{code-cell} ipython3
+[e["origin"] for e in t.embedding("SG:166")]
+```
+
+```{code-cell} ipython3
+[(c["rep"], c["kind"]) for c in t.coset_decomposition("SG:166", modulo="self")]
+```
+
+```{code-cell} ipython3
+t.parent_limit("SG:166", "3a"), t.map_site("-1:[1/3,1/3,0]", "3a", "SG:166")
 ```
