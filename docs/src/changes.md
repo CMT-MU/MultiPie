@@ -126,6 +126,8 @@ its xyz polynomial; entries sharing all the other fields are numbered by `p`. Se
   `image_overlap`, `parent_forbidden_part` (with the projections on the eigenvalues of $g$ for an order $n > 2$),
   `parent_shells`, `map_bond`); `"coset"` accepts any supergroup (see
   {ref}`Coset of the model <coset-model>`). The weights are given for every parent with a parent structure.
+- From 3.5.1, the trace moments $\Gamma$ of a model (the model-dependent part of the response tensors) and their lowest
+  nonzero terms as polynomials in $z_j$ (`ModelAnalyzer.trace_moment`; see {ref}`Trace moments of a model <trace-moment>`).
 
 (converting-a-model-of-ver-2)=
 ## Converting a model of Ver.2
