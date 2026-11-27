@@ -120,10 +120,11 @@ its xyz polynomial; entries sharing all the other fields are numbered by `p`. Se
   {ref}`Coset of the model <coset-model>`). In 3.3.0, the coefficients of `"samb"` in `mm["coset"]` were 1/2 of the
   correct values for the SAMB whose vectors in the label space have the norm 1/2 (e.g., a hybrid of s and p orbitals of
   E), also for the rotation; they are solved by least squares from 3.4.0.
-- From 3.4.1, any supergroup of a group (`Group.supergroups`, `embedding`, `coset_decomposition`, `parent_limit`,
+- From 3.5.0, any supergroup of a group (`Group.supergroups`, `embedding`, `coset_decomposition`, `parent_limit`,
   `map_site`, from the direct supergroups of the group data) and the matrix $S_{kj} = \langle Z_k, g Z_j \rangle$ and
   $F_j = \sum_k (\delta_{kj} - S_{kj}) \langle Z_k \rangle$ of a model (`MaterialModel.transform_samb`,
-  `image_overlap`, `parent_forbidden_part`, `parent_shells`, `map_bond`); `"coset"` accepts any supergroup (see
+  `image_overlap`, `parent_forbidden_part` (with the projections on the eigenvalues of $g$ for an order $n > 2$),
+  `parent_shells`, `map_bond`); `"coset"` accepts any supergroup (see
   {ref}`Coset of the model <coset-model>`). The weights are given for every parent with a parent structure.
 
 (converting-a-model-of-ver-2)=

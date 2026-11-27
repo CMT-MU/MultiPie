@@ -955,9 +955,10 @@ class MaterialModel(BinaryManager):
             embedding (None, int, dict or array, optional): embedding (see transform_samb).
 
         Returns:
-            - (dict) -- "parent", "rep", "order", "embedding" (None for the parents of the binaries), "samb" ([z]),
-              "S" (ndarray, S[k, j]), "eigenvalue", "eigenvector" (columns, for order 2), "complete" (every g Z_j lies
-              on the matrix elements of the model), "shell" (parent_shells), "parent_structure".
+            - (dict) -- "parent", "rep", "order" n, "embedding" (None for the parents of the binaries), "samb" ([z]),
+              "S" (ndarray, S[k, j]), "eigenvalue", "eigenvector" (columns), "projection" ([n Pi^(m)] for m = 0..n-1,
+              see parent_forbidden_part), "complete" (every g^t Z_j lies on the bonds of the model), "shell"
+              (parent_shells), "parent_structure".
 
         Note:
             - S is a constant matrix of the model and g; its diagonal is w_+ - w_- of "weight" (order 2).
@@ -965,7 +966,8 @@ class MaterialModel(BinaryManager):
               neighbor shells of the parent structure ("complete").
         """
         rc, sp_ = self._coset_space(op, parent, embedding)
-        S, complete = util_coset.overlap_matrix(sp_)
+        S, _ = util_coset.overlap_matrix(sp_)
+        Pm, complete = util_coset.projected_matrix(sp_, rc["order"])
         if rc["order"] == 2 and np.allclose(S, np.conj(S.T), atol=1e-8):
             w, v = np.linalg.eigh((S + np.conj(S.T)) / 2)
         else:
@@ -979,35 +981,39 @@ class MaterialModel(BinaryManager):
             "S": S,
             "eigenvalue": np.where(np.abs(w) < 1e-12, 0, w) + 0,
             "eigenvector": v,
+            "projection": Pm,
             "complete": complete,
             "shell": util_coset.parent_shells(self, rc),
             "parent_structure": rc["parent_structure"],
         }
 
     # ==================================================
-    def parent_forbidden_part(self, expectation, op=None, parent=None, embedding=None):
+    def parent_forbidden_part(self, expectation, op=None, parent=None, embedding=None, by_eigenvalue=False):
         """
-        Get F_j = sum_k (delta_kj - S_kj) <Z_k>, the part of Z_j forbidden by the parent, from the expectation values.
+        Get F_j, the part of Z_j forbidden by the parent, from the expectation values <Z_k>.
 
         Args:
             expectation (dict or array): <Z_k>, {z: value} or in the order of the SAMB of the model.
             op (str or array, optional): g (see transform_samb).
             parent (str, optional): supergroup P (see transform_samb).
             embedding (None, int, dict or array, optional): embedding (see transform_samb).
+            by_eigenvalue (bool, optional): give F_j^(m) for each eigenvalue w^m of g instead of F_j ?
 
         Returns:
-            - (dict) -- {z: F_j}.
+            - (dict) -- {z: F_j}, or {z: [F_j^(m) for m = 0..n-1]} (by_eigenvalue).
 
         Note:
-            - F_j = <Z_j> - <g Z_j> for a state invariant under H; 0 on the parent structure, eps_j F_j in the inversion
-              model, -F_j for the image state with the same matrix.
+            - with the projections Pi_m = (1/n) sum_t w^(-m t) g^t (w = exp(2 pi i/n), n: order of g) on the parent
+              structure, F_j^(m) = n <Pi_m Z_j> = sum_k sum_t w^(-m t) S^(t)_kj <Z_k> (S^(t)_kj = <Z_k, g^t Z_j>) for a
+              state invariant under H, and F_j = sum_{m>0} F_j^(m) = n <Z_j> - sum_t <g^t Z_j> (real). F_j^(0) is the
+              part allowed by the parent, sum_m F_j^(m) = n <Z_j>.
+            - n = 2 (e.g., the inversion): F_j = <Z_j> - <g Z_j> = sum_k (delta_kj - S_kj) <Z_k>; 0 on the parent
+              structure, eps_j F_j in the inversion model, -F_j for the image state with the same matrix.
             - a warning is given if the model does not contain the whole neighbor shells of the parent structure.
-            - only for g of order 2.
         """
         rc, sp_ = self._coset_space(op, parent, embedding)
-        if rc["order"] != 2:
-            raise NotImplementedError(f"F_j is defined for g of order 2 only (the order of {rc['rep']} is {rc['order']}).")
-        S, complete = util_coset.overlap_matrix(sp_)
+        n = rc["order"]
+        Pm, complete = util_coset.projected_matrix(sp_, n)
         zs = sp_["zs"]
         if isinstance(expectation, dict):
             e = np.array([expectation.get(z, 0) for z in zs])
@@ -1018,11 +1024,15 @@ class MaterialModel(BinaryManager):
         if not complete:
             logger.warning(
                 "the model does not contain the whole neighbor shells of the parent structure: F_j differs from "
-                "<Z_j> - <g Z_j> (see image_overlap()['shell'])."
+                "n <Z_j> - sum_t <g^t Z_j> (see image_overlap()['shell'])."
             )
-        F = (np.eye(len(zs)) - S).T @ e
-        F = F.real if np.allclose(np.imag(F), 0) else F
-        return dict(zip(zs, F.tolist()))
+        Fm = [M.T @ e for M in Pm]
+        clean = lambda v: (np.real(v) if np.allclose(np.imag(v), 0, atol=1e-12) else v).tolist()
+        if by_eigenvalue:
+            Fm = [clean(f) for f in Fm]
+            return {z: [Fm[m][j] for m in range(n)] for j, z in enumerate(zs)}
+        F = clean(sum(Fm[1:]))
+        return dict(zip(zs, F))
 
     # ==================================================
     def parent_shells(self, parent=None, embedding=None):

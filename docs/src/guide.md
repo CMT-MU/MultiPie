@@ -444,7 +444,12 @@ coset other than $H$ modulo the lattice of $H$ (the inversion if any). For a sta
 $\langle g\,\mathbb{Z}_j \rangle = \sum_k S_{kj} \langle \mathbb{Z}_k \rangle$ if the model contains the whole neighbor
 shells of the parent structure (`"complete"`; a warning is given otherwise), so that
 $F_j = \langle \mathbb{Z}_j \rangle - \langle g\,\mathbb{Z}_j \rangle$ is calculated within the model: it vanishes on the
-parent structure and is $\varepsilon_j F_j$ in the inversion model. $F_j$ is given for $g$ of order 2 only. The model
+parent structure and is $\varepsilon_j F_j$ in the inversion model. For $g$ of order $n > 2$, with the projections
+$\Pi_m = \frac{1}{n}\sum_t \omega^{-mt} g^t$ on the eigenvalues $\omega^m$ of $g$,
+$F_j^{(m)} = n \langle \Pi_m \mathbb{Z}_j \rangle$ (`by_eigenvalue=True`) and
+$F_j = \sum_{m > 0} F_j^{(m)} = n \langle \mathbb{Z}_j \rangle - \sum_t \langle g^t \mathbb{Z}_j \rangle$, which is
+$\langle \mathbb{Z}_j \rangle - \langle g\,\mathbb{Z}_j \rangle$ for $n = 2$ (the matrices $n \Pi^{(m)}$ are `"projection"`
+of `image_overlap`). The model
 input `"coset"` accepts any supergroup, `{"parent": "SG:166"}` (with `"rep"` and `"embedding"` optionally), and
 `mm["coset"]` has also `"S"`, `"S_eigenvalue"`, `"complete"`, `"shell"`, and `"embedding"`. E.g., Te with the first
 and second neighbors and R-3m ($x \to 1/3$; the first neighbor shell of the parent consists of the first and second

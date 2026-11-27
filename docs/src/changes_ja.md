@@ -74,7 +74,7 @@ MultiPie Ver.3 は、MultiPieGen が生成した新しい群のデータベー�
 - 3.2.0 から、`info/<model>_var.py` は、各ボンドクラスターについてボンド 1 の head と tail のサイト（`"bond"`）を与え、原子の変数は軌道だけで `g_{head の軌道,tail の軌道}` と名付けます。例えば `g_{pz_C2,pz_C1}` は `g_{pz,pz}` になります（[はじめに](getting_started_ja.md)を参照）。
 - 3.3.0 から、模型の入力キー `"coset"` で、親の群での剰余類の代表で写した SAMB と、親構造でのその固有値の重みを、`mm["coset"]` と PDF に出します（{ref}`模型の剰余類 <ja-coset-model>`を参照）。既定で計算し、`"coset": False` で省きます。
 - 3.4.0 から、模型の入力キー `"create_inversion_model": True` で、最初の剰余類が空間反転であるカイラルな群の模型について、その像を作ります。サイトと代表ボンドは、`"coset"` で空間反転で写した SAMB が前提とするものです。`mm["coset"]` もこの像の代表を与えます（{ref}`模型の剰余類 <ja-coset-model>`を参照）。3.3.0 では、ラベル空間でのベクトルのノルムが 1/2 の SAMB（例えば E の s と p の混成）について、`mm["coset"]` の `"samb"` の係数が正しい値の 1/2 でした（回転の場合も同じ）。3.4.0 からは最小二乗で解きます。
-- 3.4.1 から、群の任意の上位群（`Group.supergroups`、`embedding`、`coset_decomposition`、`parent_limit`、`map_site`。群のデータの直接の上位群から）と、模型の行列 $S_{kj} = \langle Z_k, g Z_j \rangle$ と $F_j = \sum_k (\delta_{kj} - S_{kj}) \langle Z_k \rangle$（`MaterialModel.transform_samb`、`image_overlap`、`parent_forbidden_part`、`parent_shells`、`map_bond`）を与えます。`"coset"` は任意の上位群を受け付けます（{ref}`模型の剰余類 <ja-coset-model>`を参照）。重みは、親構造を持つすべての親について与えます。
+- 3.5.0 から、群の任意の上位群（`Group.supergroups`、`embedding`、`coset_decomposition`、`parent_limit`、`map_site`。群のデータの直接の上位群から）と、模型の行列 $S_{kj} = \langle Z_k, g Z_j \rangle$ と $F_j = \sum_k (\delta_{kj} - S_{kj}) \langle Z_k \rangle$（`MaterialModel.transform_samb`、`image_overlap`、`parent_forbidden_part`（位数 $n > 2$ の $g$ では、$g$ の固有値への射影を使う）、`parent_shells`、`map_bond`）を与えます。`"coset"` は任意の上位群を受け付けます（{ref}`模型の剰余類 <ja-coset-model>`を参照）。重みは、親構造を持つすべての親について与えます。
 
 (ja-converting-a-model-of-ver-2)=
 ## Ver.2 の模型の変換

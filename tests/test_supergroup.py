@@ -351,14 +351,45 @@ def test_coset_input(caplog):
     assert r["complete"] and r["embedding"]["path"] == ["SG:152", "SG:155", "SG:166"]
     assert np.allclose(sorted(r["S_eigenvalue"]), [0] * 8 + [1] * 6, atol=1e-8)
     assert all(v == [(z, 1.0)] for z, v in r["samb"].items())
-    # incomplete: warning; order 3: not defined.
+    # incomplete: warning.
     mi = _build(TE, [("Te", "Te", [1, 2])])
     with caplog.at_level(logging.WARNING):
         mi.parent_forbidden_part({z: 0 for z in mi["combined_id"]}, parent="SG:164")
     assert "neighbor shells" in caplog.text
+
+
+# ==================================================
+def test_order_3():
+    # D4h in Oh, g = 3+[111] (n = 3): F_j^(m) = n <Pi_m Z_j>, F_j = sum_{m>0} F_j^(m) = n <Z_j> - sum_t <g^t Z_j>.
     md = _build(
         {"group": "PG:15", "site": {"A": ("[0.30,0.30,0.25]", ["s"])}, "SAMB_select": {"X": ["Q", "G"], "Gamma": ["A1g"]}},
         [("A", "A", [1, 2])],
     )
-    with pytest.raises(NotImplementedError):
-        md.parent_forbidden_part({}, parent="PG:32")
+    r = md.image_overlap(parent="PG:32")
+    assert r["order"] == 3 and r["complete"] and len(r["projection"]) == 3
+    zs = r["samb"]
+    # a state invariant under H: rho = exp(-H) / Tr, H = sum_j c_j Z_j.
+    d = md.get_combined_samb_matrix(fmt="value", bond=False)
+    nk = len(md["full_matrix"]["ket"])
+
+    def mat(O):
+        M = np.zeros((nk, nk), complex)
+        for (n1, n2, n3, a, b), v in O.items():
+            M[a, b] += complex(v)
+        return M
+
+    rng = np.random.default_rng(3)
+    H = sum(c * mat(d[z]) for c, z in zip(rng.normal(size=len(zs)), zs))
+    w, u = np.linalg.eigh(H)
+    rho = (u * np.exp(-w)) @ u.conj().T
+    rho /= np.trace(rho)
+    E = lambda O: np.sum(rho.T * mat(O)).real
+    e = {z: E(d[z]) for z in zs}
+    Fm = md.parent_forbidden_part(e, parent="PG:32", by_eigenvalue=True)
+    F = md.parent_forbidden_part(e, parent="PG:32")
+    g1 = md.transform_samb(parent="PG:32")
+    g2 = md.transform_samb(op="3-[111]", parent="PG:32")  # g^2 = g^-1.
+    for z in zs:
+        assert np.isclose(sum(Fm[z]), 3 * e[z])
+        assert np.isclose(F[z], 3 * e[z] - e[z] - E(g1[z]) - E(g2[z]), atol=1e-10)
+        assert np.isclose(Fm[z][1], np.conj(Fm[z][2]))  # w^1 and w^2 = w^-1.

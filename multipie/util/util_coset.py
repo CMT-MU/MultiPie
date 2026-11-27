@@ -892,7 +892,8 @@ def coset_analysis(mm, spec=None, with_weight=True):
                 sp_ = image_space(mm, rc)
                 res["parent_structure"] = rc["parent_structure"]
                 res["weight"] = weight_from_space(sp_, n)
-                S, complete = overlap_matrix(sp_)
+                S, _ = overlap_matrix(sp_)
+                _, complete = projected_matrix(sp_, n)
                 res["S"] = np.asarray(S).tolist()
                 ev = np.linalg.eigvalsh((S + np.conj(S.T)) / 2) if n == 2 else np.linalg.eigvals(S)
                 res["S_eigenvalue"] = [_value(v) for v in ev]
@@ -1075,27 +1076,58 @@ def image_space(mm, rc):
 
 
 # ==================================================
-def overlap_matrix(sp_):
+def overlap_matrix(sp_, t=1):
     """
-    S_kj = <Z_k, g Z_j> and whether every g Z_j lies on the bonds (pairs of sites) of the model.
+    S^(t)_kj = <Z_k, g^t Z_j> and whether every g^t Z_j lies on the bonds (pairs of sites) of the model.
+
+    Args:
+        sp_ (dict): image_space.
+        t (int, optional): power of g.
 
     Returns:
-        - (ndarray) -- S (real if the imaginary part vanishes).
+        - (ndarray) -- S^(t) (real if the imaginary part vanishes).
         - (bool) -- complete.
     """
     X, G = sp_["X"], sp_["G"]
-    GX = G @ X
+    GX = X
+    for _ in range(t):
+        GX = G @ GX
     nrm = np.sqrt(np.einsum("ij,ij->j", X.conj(), X).real)
     S = (X.conj().T @ GX) / np.outer(nrm, nrm)
     if np.allclose(S.imag, 0, atol=1e-10):
         S = S.real
     S = np.where(np.abs(S) < 1e-12, 0, S) + 0
-    # every g Z_j on the pairs of sites (bonds) of the model.
+    # every g^t Z_j on the pairs of sites (bonds) of the model.
     keys = sp_["ks"].keys
     pairs = {(k[0], k[1]) for k in keys[: sp_["n0"]]}
     out = [i for i, k in enumerate(keys) if (k[0], k[1]) not in pairs]
     complete = bool(np.allclose(GX[out], 0, atol=1e-8)) if out else True
     return S, complete
+
+
+# ==================================================
+def projected_matrix(sp_, n):
+    """
+    Matrices of the projections on the eigenvalues w^m of g (order n, w = exp(2 pi i/n)) in the SAMB of the model.
+
+    Returns:
+        - (list) -- [n Pi^(m)_kj = sum_t w^(-m t) S^(t)_kj for m = 0..n-1], so that n <Pi_m Z_j> = sum_k (n Pi^(m))_kj <Z_k>
+          for a state invariant under H.
+        - (bool) -- complete (for every power of g).
+    """
+    Ss, complete = [], True
+    for t in range(n):
+        S, c = overlap_matrix(sp_, t)
+        Ss.append(S)
+        complete = complete and c
+    w = np.exp(2j * np.pi / n)
+    out = []
+    for m in range(n):
+        M = sum(w ** (-m * t) * Ss[t] for t in range(n))
+        if np.allclose(np.imag(M), 0, atol=1e-10):
+            M = np.real(M)
+        out.append(np.where(np.abs(M) < 1e-12, 0, M) + 0)
+    return out, complete
 
 
 # ==================================================
