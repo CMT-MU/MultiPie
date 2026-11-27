@@ -64,6 +64,7 @@ from multipie.util.util_wannier import (
 )
 from multipie.util.util import read_dict, str_to_sympy, write_dict, deep_update
 from multipie.util.util import check_dict_keys
+from multipie.util.util_trace_moment import TraceMoment
 
 logger = logging.getLogger(__name__)
 
@@ -832,6 +833,29 @@ class ModelAnalyzer(dict):
         """
         _, atom, tb_gauge = self.get_hk_data()
         return fourier_r_to_k(self.get_samb_operator(tag), atom, kv, tb_gauge)
+
+    # ==================================================
+    def trace_moment(self, operator=None):
+        """
+        Trace moments of the SAMB Hamiltonian h = sum_j z_j Z_j, Gamma = (1/N) sum_k Tr[O_1 h^i1 O_2 h^i2 ...] (per unit cell).
+
+        Args:
+            operator (dict, optional): operators, dict[name, spec]; spec is a matrix dict {(n1,n2,n3,m,n): value}
+                (indices of the full matrix from 0), a file of the format of seedname_hr.dat (indices from 1, relative to topdir),
+                a SAMB name zj, or the velocity "v_x", "v_xy", ... (k derivatives of h, Cartesian, hbar = 1).
+
+        Returns:
+            - (TraceMoment) -- trace moments (value, polynomial, lowest), with zj of the selected SAMB and the current parameter.
+
+        Notes:
+            - a model is required (samb or symcw mode, or wannier mode with a model).
+            - see util_trace_moment for the method.
+        """
+        if not self._use_model:
+            raise ValueError("trace moments require a model (samb/model).")
+        atom = np.asarray(list(self.model.get_ket_site().values()), dtype=float)
+        parameter = {zj: v for zj, v in (self.parameter or {}).items() if zj in self.get_samb_matrix()}
+        return TraceMoment(self.get_samb_matrix(), atom, self["info"]["A"], parameter, operator, topdir=self._topdir)
 
     # ==================================================
     def check_samb_name(self, tags, key, allow_all=False):

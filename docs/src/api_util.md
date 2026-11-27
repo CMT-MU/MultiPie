@@ -21,6 +21,7 @@
     multipie.util.util_supergroup
     multipie.util.util_samb
     multipie.util.util_tag
+    multipie.util.util_trace_moment
     multipie.util.util_wannier
     multipie.util.util_wyckoff
     multipie.util.util

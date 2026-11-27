@@ -126,6 +126,12 @@ its xyz polynomial; entries sharing all the other fields are numbered by `p`. Se
   `image_overlap`, `parent_forbidden_part` (with the projections on the eigenvalues of $g$ for an order $n > 2$),
   `parent_shells`, `map_bond`); `"coset"` accepts any supergroup (see
   {ref}`Coset of the model <coset-model>`). The weights are given for every parent with a parent structure.
+- From 3.5.1, the trace moments $\Gamma$ of a model (the model-dependent part of the response tensors) and their lowest
+  nonzero terms as polynomials in $z_j$ (`ModelAnalyzer.trace_moment`; see {ref}`Trace moments of a model <trace-moment>`).
+- From 3.5.1, the basis vectors of the cell (`unit_vector` of a model, `info["A"]` of the analysis) and the metric are kept
+  in full precision (exact for the angles 90 and 120 degree); up to 3.5.0, they were rounded to 8 decimals (e.g.,
+  $\sqrt{3}/2 \to 0.8660254$), which put errors of about $10^{-9}$ in the quantities made from them, such as the
+  coefficients of the velocity operators.
 
 (converting-a-model-of-ver-2)=
 ## Converting a model of Ver.2

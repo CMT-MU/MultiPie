@@ -485,6 +485,34 @@ ex
 
 4/mmm では、伝導度は $\mathrm{diag}(Q_{xx}, Q_{xx}, Q_{zz})$ で、active な単極子 $\mathbb{Q}_0$ と四極子 $\mathbb{Q}_u$ で与えられます。強磁性体 4/mm'm' では、0 でない反対称成分は $T_{xy} = -T_{yx}$ だけで、active な磁気双極子 $\mathbb{M}_z$、つまり $z$ 方向の磁化で与えられます。これがホール効果です。-3'm'（例えば Cr$_2$O$_3$）では、電気磁気テンソルは $\mathrm{diag}(M_{xx}, M_{xx}, M_{zz})$ で、active な磁気単極子 $\mathbb{M}_0$ と磁気四極子 $\mathbb{M}_u$ で与えられます。エーデルシュタイン効果は、極性の 4mm1' では反対称部分に現れ、active な電気双極子 $\mathbb{Q}_z$ で与えられます。キラルな 321' では対称部分に現れ、active な電気トロイダル単極子 $\mathbb{G}_0$ と四極子 $\mathbb{G}_u$ で与えられます。
 
+(ja-trace-moment)=
+### 模型のトレースモーメント
+
+チェビシェフ展開での線形・非線形応答テンソルの模型に依存する部分 $\Gamma$（R. Oiwa and H. Kusunose, J. Phys. Soc. Jpn. **91**, 014701 (2022) の式 (31)-(33)）を、模型のハミルトニアン $h = \sum_j z_j Z_j$ について `ModelAnalyzer.trace_moment`（`util/util_trace_moment.py`）で計算します。
+
+$$
+\Gamma^{i_1 \cdots i_n}_{O_1; \cdots; O_n} = \frac{1}{N} \sum_{\boldsymbol{k}}
+{\rm Tr}\left[ O_1(\boldsymbol{k}) h(\boldsymbol{k})^{i_1} O_2(\boldsymbol{k}) h(\boldsymbol{k})^{i_2} \cdots O_n(\boldsymbol{k}) h(\boldsymbol{k})^{i_n} \right]
+$$
+
+は単位胞あたりの量です。$\Gamma$ は $z_j$ の多項式で、0 でない最低次の項が応答の本質的パラメータを示します。そのどれかが 0 なら応答は消えます。
+
+```python
+ma = ModelAnalyzer(topdir)
+ma.analyze("model_ctrl.py")               # SAMB Z_j と重み z_j を持つ模型。
+tm = ma.trace_moment({"vx": "v_x", "vy": "v_y", "M": "M_hr.dat"})
+tm.value(("vx", "vy"), 4)                 # 現在の z_j での Gamma^{ij}（i, j <= 4、ndarray）。
+tm.lowest(("vx", "vy", "vy"), n_term=2, part="im")    # 0 でない最低次の 2 項（z_j の多項式）。
+tm.polynomial(("M", "vy"), (2, 0), part="re")         # Gamma^{20} の多項式。
+```
+
+- **演算子.** SAMB の行列と同じ形の辞書 `{(n1,n2,n3,m,n): value}`（全行列の添字、0 から）、Wannier90 の `seedname_hr.dat` の形式のファイル（添字は 1 から、Wigner-Seitz の縮重度で割ります。`topdir` からの相対パス）、SAMB の名前 `"zj"`、または速度 `"v_x"`、`"v_xy"`、...（$v_{\alpha_1 \cdots \alpha_n}(\boldsymbol{k}) = \partial_{\alpha_1} \cdots \partial_{\alpha_n} h(\boldsymbol{k})$、デカルト座標、$\hbar = 1$、長さは格子の単位、$z_j$ について線形）です。行列は模型の ket の順で、$O(\boldsymbol{k}) = \sum_{\boldsymbol{R}} O(\boldsymbol{R}) e^{i \boldsymbol{k} \cdot \boldsymbol{R}}$ とします。
+- **`lowest(ops, n_term, max_order, part, variable, expand)`** は、全次数 $\sum i$ の低い方から（同じ全次数では $(i_1, \ldots, i_n)$ の辞書順）0 でない `n_term` 個の項を与えます。各項は `"order"`、`"variable"`（現れる $z_j$）、`"essential"`（0 にするとその項が消える $z_j$）、`"polynomial"`、`"factor"`（共通因子を括り出したもの。完全な因数分解は `factor=True`）を持ちます。応答に入るのは実部か虚部の一方なので（論文の Table I）、`part="re"/"im"` で選びます。
+- **方法.** $\boldsymbol{k}$ 和は、各 $\boldsymbol{a}_i$ 方向に $\sum r + 1$ 点（$r$ は各因子の到達距離）のグリッドで厳密です。全次数の数値は、各 $\boldsymbol{k}$ での 1 回の対角化から $\Gamma = \sum \tilde{O}_{1, b_0 b_1} \varepsilon_{b_1}^{i_1} \tilde{O}_{2, b_1 b_2} \cdots$（$\tilde{O} = U^\dagger O U$。`polynomial="chebyshev"` では $\tilde{h} = (h - E_c)/W$ の $T_i(\tilde{h})$）で求めます。乱数の $z_j$ での値が 0 でなければ、その項は 0 でありません。値を変えない $z_j$ を除いてから、厳密なグリッドで多項式を展開します。
+- 多項式の項数は（$z_j$ の数）$^{\rm 次数}$ で増えます。$z_j$ の多い模型では、`variable`（記号として残す $z_j$。他は値に固定）か `expand=False`（`"variable"` と `"essential"` だけ）を使います。
+
+論文の SnTe 単層の模型（式 (131)）では、`lowest(("vx", "vy", "vy"), part="im")` が式 (140) の $\Gamma^{100} = {\rm Tr}[v_x h v_y v_y] = -128\, t'_3 (t'_2 t_{y3} t_{y1} + t_{y2} t_{y3} t'_1 + 2 t_{y2} t'_4 t_{y1} + 4 t'_2 t'_4 t'_1)$ と、本質的パラメータ $t'_3$ を与えます（`tests/test_trace_moment.py`）。
+
 (ja-multipolar-harmonics)=
 ## 8. 点群多極子調和関数
 
