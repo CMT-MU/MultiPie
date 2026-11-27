@@ -442,7 +442,8 @@ $x_P = A x_H$; the lattice of $P$ is at most 4 times finer than that of $H$):
 | `mm.parent_shells(parent=None)`, `mm.map_bond(op=None, parent=None)` | the neighbor shells of the parent structure, and the bonds moved by $g$ |
 
 Without `embedding`, the embedding whose parent structure is the nearest to the model is used; without `op`, the first
-coset other than $H$ modulo the lattice of $H$ (the inversion if any). For a state invariant under $H$,
+coset other than $H$ modulo the lattice of $H$ (the inversion if any; a translation only if every other coset is
+one). For a state invariant under $H$,
 $\langle g\,\mathbb{Z}_j \rangle = \sum_k S_{kj} \langle \mathbb{Z}_k \rangle$ if the model contains the whole neighbor
 shells of the parent structure (`"complete"`; a warning is given otherwise), so that
 $F_j = \langle \mathbb{Z}_j \rangle - \langle g\,\mathbb{Z}_j \rangle$ is calculated within the model: it vanishes on the

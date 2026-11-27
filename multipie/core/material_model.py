@@ -928,7 +928,7 @@ class MaterialModel(BinaryManager):
         Args:
             op (str or array, optional): g ("point operation of P:[translation in the coordinates of H]" or 4x4 in the
                 coordinates of H); default: the first coset of the binaries for their parents, the first coset other
-                than H (the inversion if any) otherwise.
+                than H (the inversion if any, a translation only if no other) otherwise.
             z (str or [str], optional): SAMB (default: all).
             parent (str, optional): supergroup P (default: the direct parent of the binaries).
             embedding (None, int, dict or array, optional): embedding of H in P (Group.embedding); default: the one

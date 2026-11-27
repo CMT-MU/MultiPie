@@ -822,7 +822,7 @@ def coset_analysis(mm, spec=None, with_weight=True):
             R = _chain_R(group, parent)
             g = _op_matrix(group, parent, R, tag)
         else:
-            rc = resolve_coset(mm, parent, tag, emb)
+            rc = resolve_coset(mm, parent, tag, emb, require_structure=False)
             g, tag = rc["g"], rc["rep"]
         n = _order(g, Hkeys, L)
         res = {"parent": parent, "rep": tag, "rep_matrix": g.tolist(), "order": n}
@@ -854,6 +854,8 @@ def coset_analysis(mm, spec=None, with_weight=True):
             try:
                 if rc is None:
                     rc = resolve_coset(mm, parent, tag)
+                if rc["lim_pos"] is None:
+                    raise ValueError(rc["note"])
                 sp_ = image_space(mm, rc)
                 res["parent_structure"] = rc["parent_structure"]
                 res["weight"] = weight_from_space(sp_, n)
@@ -915,7 +917,7 @@ def _displacement(mm, md, lim_pos):
 
 
 # ==================================================
-def resolve_coset(mm, parent=None, rep=None, embedding=None):
+def resolve_coset(mm, parent=None, rep=None, embedding=None, require_structure=True):
     """
     The parent, the embedding, the representative g, and the parent structure used by image_space.
 
@@ -924,10 +926,12 @@ def resolve_coset(mm, parent=None, rep=None, embedding=None):
         parent (str, optional): supergroup P (default: the direct parent of the binaries).
         rep (str or array, optional): element g of P ("point operation of P:[translation in H]" or 4x4 in the
             coordinates of H; default: the first coset of the binaries for its parents, the first coset other than
-            H modulo the lattice of H (the inversion if any) otherwise).
+            H modulo the lattice of H (the inversion if any, a translation only if no other) otherwise).
         embedding (None, int, dict or array, optional): embedding of H in P (util_supergroup.resolve_embedding);
             default: the parents of the binaries with their transformation, otherwise the embedding whose parent
             structure is the nearest to the model.
+        require_structure (bool, optional): raise an error if no embedding gives a parent structure of the model
+            (otherwise the first embedding, with "parent_structure" and "lim_pos" None and the reason in "note").
 
     Returns:
         - (dict) -- "parent", "rep", "g", "order", "frame" (_Frame), "limits", "embedding" (None for the binaries),
@@ -961,6 +965,7 @@ def resolve_coset(mm, parent=None, rep=None, embedding=None):
         frame = _Frame(group, parent, R)
         pstruct, lim_pos = parent_structure(mm, md, frame, limits)
         emb = None
+        note = None
     else:
         cands = us.embedding(gid, parent) if embedding is None else [us.resolve_embedding(gid, parent, embedding)]
         if not cands:
@@ -978,14 +983,21 @@ def resolve_coset(mm, parent=None, rep=None, embedding=None):
             if best is None or d < best[0] - 1e-8:
                 best = (d, e, limits, frame, pstruct, lim_pos)
         if best is None:
-            raise ValueError(f"no parent structure of the model for {parent}: {err}")
+            if require_structure:
+                raise ValueError(f"no parent structure of the model for {parent}: {err}")
+            e = cands[0]
+            best = (None, e, None, _Frame(group, parent, e["A"]), None, None)
+            note = f"no parent structure of the model for {parent}: {err}"
+        else:
+            note = None
         _, emb, limits, frame, pstruct, lim_pos = best
         R = emb["A"]
         if rep is None:
             cs, _ = us.coset_decomposition(gid, parent, emb, modulo="self")
             nonid = [c for c in cs if c["kind"] not in ("identity", "translation")]
             inv = [c for c in nonid if c["kind"] == "inversion"]
-            rep = (inv or nonid)[0]["rep"]
+            trans = [c for c in cs if c["kind"] == "translation"]  # a k-supergroup of the same point group.
+            rep = (inv or nonid or trans)[0]["rep"]
         g = us.op_matrix(gid, parent, rep, emb)
     n = _order(g, Hkeys, L)
     rep_tag = rep if isinstance(rep, str) else us.vec_str(np.array(rep).ravel())
@@ -1000,6 +1012,7 @@ def resolve_coset(mm, parent=None, rep=None, embedding=None):
         "parent_structure": pstruct,
         "lim_pos": lim_pos,
         "md": md,
+        "note": note,
     }
 
 

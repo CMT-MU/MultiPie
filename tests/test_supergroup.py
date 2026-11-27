@@ -393,3 +393,16 @@ def test_order_3():
         assert np.isclose(sum(Fm[z]), 3 * e[z])
         assert np.isclose(F[z], 3 * e[z] - e[z] - E(g1[z]) - E(g2[z]), atol=1e-10)
         assert np.isclose(Fm[z][1], np.conj(Fm[z][2]))  # w^1 and w^2 = w^-1.
+
+
+# ==================================================
+def test_no_direct_parent():
+    # Pm-3m (No.221) has no direct parent in the binaries, but Im-3m (No.229) is a supergroup (k, index 2); the site 1a
+    # has no parent structure in it: the SAMB are moved by the translation (1/2,1/2,1/2), without the weights.
+    mm = _build(
+        {"group": "SG:221", "cell": {"a": 3.0}, "site": {"A": ("[0,0,0]", ["s"])}}, [("A", "A", [1])], coset={"parent": "SG:229"}
+    )
+    (r,) = mm["coset"]
+    assert r["parent"] == "SG:229" and r["rep"] == "1:[1/2,1/2,1/2]" and r["kind"] == "rotation" and r["samb"]
+    assert r["weight"] is None and "no parent structure" in r["weight_note"]
+    assert _build({"group": "SG:221", "cell": {"a": 3.0}, "site": {"A": ("[0,0,0]", ["s"])}}, [("A", "A", [1])])["coset"] == []
