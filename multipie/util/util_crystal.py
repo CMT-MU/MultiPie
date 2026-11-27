@@ -18,6 +18,7 @@ TOL_SAME_SITE = 1e-8
 CHOP = 1e-8
 DIGIT = 8
 DISTANCE_DIGIT = 5
+TOL_ZERO_CELL = 1e-14
 
 # Crystallographic definition.
 # ==================================================
@@ -395,6 +396,48 @@ def site_distance(tail, heads, G=None, digit=DISTANCE_DIGIT):
 
 
 # ==================================================
+def _cos_deg(x):
+    """
+    cos(x) for x in degree, exact for multiples of 30 and 45 degree (e.g., cos 120 = -1/2).
+    """
+    exact = {
+        0: 1.0,
+        30: np.sqrt(3) / 2,
+        45: np.sqrt(2) / 2,
+        60: 0.5,
+        90: 0.0,
+        120: -0.5,
+        135: -np.sqrt(2) / 2,
+        150: -np.sqrt(3) / 2,
+        180: -1.0,
+    }
+    if float(x).is_integer() and int(x) in exact:
+        return float(exact[int(x)])
+    return float(np.cos(x * np.pi / 180))
+
+
+# ==================================================
+def _sin_deg(x):
+    """
+    sin(x) for x in degree, exact for multiples of 30 and 45 degree (e.g., sin 120 = sqrt(3)/2).
+    """
+    exact = {
+        0: 0.0,
+        30: 0.5,
+        45: np.sqrt(2) / 2,
+        60: np.sqrt(3) / 2,
+        90: 1.0,
+        120: np.sqrt(3) / 2,
+        135: np.sqrt(2) / 2,
+        150: 0.5,
+        180: 0.0,
+    }
+    if float(x).is_integer() and int(x) in exact:
+        return float(exact[int(x)])
+    return float(np.sin(x * np.pi / 180))
+
+
+# ==================================================
 def get_cell_info(crystal, cell):
     """
     Get unit cell information.
@@ -438,10 +481,10 @@ def get_cell_info(crystal, cell):
     if not all(np.isfinite(x) and 0 < x < 180 for x in (alpha, beta, gamma)):
         raise ValueError(f"cell angles must be in (0, 180) degree, but alpha={alpha}, beta={beta}, gamma={gamma} are given.")
 
-    ca = np.cos(alpha * np.pi / 180)
-    cb = np.cos(beta * np.pi / 180)
-    cc = np.cos(gamma * np.pi / 180)
-    sc = np.sin(gamma * np.pi / 180)
+    ca = _cos_deg(alpha)
+    cb = _cos_deg(beta)
+    cc = _cos_deg(gamma)
+    sc = _sin_deg(gamma)
     s = 1.0 - ca * ca - cb * cb - cc * cc + 2.0 * ca * cb * cc
     if s <= 1e-12:  # (volume / abc)^2, zero within rounding errors, e.g., 8.6e-16 for alpha=beta=gamma=120.
         raise ValueError(f"cell angles alpha={alpha}, beta={beta}, gamma={gamma} do not form a cell (zero or negative volume).")
@@ -459,8 +502,11 @@ def get_cell_info(crystal, cell):
     cell = {"a": a, "b": b, "c": c, "alpha": alpha, "beta": beta, "gamma": gamma}
     volume = float(a * b * c * s)
 
-    A = A.round(DIGIT)
-    G = (A.T @ A).round(DIGIT)
+    # full precision (rounding A to DIGIT decimals, e.g., sqrt(3)/2 -> 0.8660254, spoils the quantities made from A,
+    # such as the velocity operators of a model); only the rounding errors around zero are removed.
+    A[np.abs(A) < TOL_ZERO_CELL] = 0.0
+    G = np.eye(4)  # metric tensor from the cell parameters, G = A^T A.
+    G[0:3, 0:3] = [[a * a, a * b * cc, a * c * cb], [a * b * cc, b * b, b * c * ca], [a * c * cb, b * c * ca, c * c]]
     dic = {"cell": cell, "volume": volume, "A": A, "G": G}
 
     return dic

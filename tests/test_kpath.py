@@ -310,3 +310,15 @@ def test_qtdraw_unit_cell(tmp_path, monkeypatch):
         methods = [m for m, _ in calls]
         assert ("set_unit_cell", (cell,)) in calls
         assert methods.index("set_unit_cell") < min(i for i, m in enumerate(methods) if m.startswith("add_"))
+
+
+# ==================================================
+def test_cell_in_full_precision():
+    # the cell vectors and the metric are not rounded (sqrt(3)/2 is kept), and exact for the angles 90 and 120 degree.
+    info = get_cell_info("hexagonal", {"a": 2.0, "c": 5.0})
+    A, G = info["A"][0:3, 0:3], info["G"][0:3, 0:3]
+    assert A[0, 1] == -1.0 and A[1, 1] == np.sqrt(3) and A[2, 2] == 5.0
+    assert G.tolist() == [[4.0, -2.0, 0.0], [-2.0, 4.0, 0.0], [0.0, 0.0, 25.0]]
+    info = get_cell_info("triclinic", {"a": 1.0, "b": 2.0, "c": 3.0, "alpha": 80.0, "beta": 95.0, "gamma": 110.0})
+    A, G = info["A"][0:3, 0:3], info["G"][0:3, 0:3]
+    assert np.allclose(A.T @ A, G, atol=1e-14, rtol=0)
