@@ -246,3 +246,15 @@ def test_graphene(graphene):
     assert "z1" not in r[0]["variable"]
     v = r[0]["polynomial"].subs({sp.Symbol(z, real=True): tm._parameter[z] for z in r[0]["variable"]})
     assert np.isclose(float(v), tm.value(("vx", "vx"), 0, part="re")[0, 0], atol=1e-12)
+
+    # exact coefficients (the cell vectors are kept in full precision, sqrt(3)/2 not rounded): Drude weight and the
+    # anomalous Hall effect of the Haldane type (z4: the imaginary hopping of the second neighbors, A2g).
+    z1, z2, z3, z4 = (sp.Symbol(f"z{i}", real=True) for i in range(1, 5))
+    var = ["z1", "z2", "z3", "z4"]
+    r = tm.lowest(("vx", "vx"), n_term=1, part="re", variable=var)
+    assert sp.expand(r[0]["polynomial"] - (z2**2 + 3 * z3**2 + 3 * z4**2) / 6) == 0
+    r = tm.lowest(("vx", "vy"), n_term=2, part="im", variable=var)
+    assert [x["order"] for x in r] == [(0, 1), (1, 0)]
+    assert sp.expand(r[0]["polynomial"] - z2**2 * z4 / 4) == 0
+    assert sp.expand(r[1]["polynomial"] + z2**2 * z4 / 4) == 0
+    assert r[0]["essential"] == ["z2", "z4"]
