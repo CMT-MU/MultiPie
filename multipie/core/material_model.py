@@ -51,6 +51,7 @@ from multipie.util.util_material_model import (
 )
 from multipie.util.util_material_model_pdf import ModelPDF
 from multipie.util.util_coset import coset_analysis, inversion_model, check_inversion_model
+from multipie.util import util_coset
 from multipie.core.default_model import default_model
 from multipie.util.util import check_dict_keys
 from multipie.util.util_plot import plot_site, plot_bond, plot_site_samb, plot_bond_samb, plot_harmonics
@@ -102,6 +103,7 @@ class MaterialModel(BinaryManager):
                 "Create the model again (e.g., mp_create), or convert a model of Ver.2 with mp_convert."
             )
         self._group = Group(self["group"])
+        self.__dict__.pop("_coset_cache", None)
 
     # ==================================================
     def save(self):
@@ -526,6 +528,7 @@ class MaterialModel(BinaryManager):
         """
         super().clear()
         self._group = None
+        self.__dict__.pop("_coset_cache", None)
 
     # ==================================================
     def get_atomic_samb(self, select):
@@ -906,6 +909,154 @@ class MaterialModel(BinaryManager):
         matrix = dict(sorted(matrix.items(), key=lambda x: int(x[0][1:])))
 
         return matrix
+
+    # ==================================================
+    def _coset_space(self, op=None, parent=None, embedding=None):
+        """the parent, embedding, g, parent structure (util_coset.resolve_coset) and the image space, cached."""
+        key = (parent, op if op is None or isinstance(op, str) else repr(np.asarray(op).tolist()), repr(embedding))
+        cache = self.__dict__.setdefault("_coset_cache", {})
+        if key not in cache:
+            rc = util_coset.resolve_coset(self, parent, op, embedding)
+            cache[key] = (rc, util_coset.image_space(self, rc))
+        return cache[key]
+
+    # ==================================================
+    def transform_samb(self, op=None, z=None, parent=None, embedding=None):
+        """
+        Get g Z_j: the combined SAMB moved by an element g of a supergroup P, in the basis of the model.
+
+        Args:
+            op (str or array, optional): g ("point operation of P:[translation in the coordinates of H]" or 4x4 in the
+                coordinates of H); default: the first coset of the binaries for their parents, the first coset other
+                than H (the inversion if any) otherwise.
+            z (str or [str], optional): SAMB (default: all).
+            parent (str, optional): supergroup P (default: the direct parent of the binaries).
+            embedding (None, int, dict or array, optional): embedding of H in P (Group.embedding); default: the one
+                whose parent structure is the nearest to the model.
+
+        Returns:
+            - (dict) -- {z: {(n1, n2, n3, a, b): value}}, as get_combined_samb_matrix(fmt="value", bond=False).
+
+        Note:
+            - the atoms are matched on the parent structure (the limit of the Wyckoff parameters at which the structure
+              is invariant under P), the orbitals are transformed by g.
+        """
+        rc, sp_ = self._coset_space(op, parent, embedding)
+        return util_coset.transformed_matrix(self, rc, sp_, z)
+
+    # ==================================================
+    def image_overlap(self, op=None, parent=None, embedding=None):
+        """
+        Get S_kj = <Z_k, g Z_j>, its eigenvalues and eigenvectors.
+
+        Args:
+            op (str or array, optional): g (see transform_samb).
+            parent (str, optional): supergroup P (see transform_samb).
+            embedding (None, int, dict or array, optional): embedding (see transform_samb).
+
+        Returns:
+            - (dict) -- "parent", "rep", "order", "embedding" (None for the parents of the binaries), "samb" ([z]),
+              "S" (ndarray, S[k, j]), "eigenvalue", "eigenvector" (columns, for order 2), "complete" (every g Z_j lies
+              on the matrix elements of the model), "shell" (parent_shells), "parent_structure".
+
+        Note:
+            - S is a constant matrix of the model and g; its diagonal is w_+ - w_- of "weight" (order 2).
+            - S gives <g Z_j> = sum_k S_kj <Z_k> for a state invariant under H only if the model contains the whole
+              neighbor shells of the parent structure ("complete").
+        """
+        rc, sp_ = self._coset_space(op, parent, embedding)
+        S, complete = util_coset.overlap_matrix(sp_)
+        if rc["order"] == 2 and np.allclose(S, np.conj(S.T), atol=1e-8):
+            w, v = np.linalg.eigh((S + np.conj(S.T)) / 2)
+        else:
+            w, v = np.linalg.eig(S)
+        return {
+            "parent": rc["parent"],
+            "rep": rc["rep"],
+            "order": rc["order"],
+            "embedding": rc["embedding"],
+            "samb": list(sp_["zs"]),
+            "S": S,
+            "eigenvalue": np.where(np.abs(w) < 1e-12, 0, w) + 0,
+            "eigenvector": v,
+            "complete": complete,
+            "shell": util_coset.parent_shells(self, rc),
+            "parent_structure": rc["parent_structure"],
+        }
+
+    # ==================================================
+    def parent_forbidden_part(self, expectation, op=None, parent=None, embedding=None):
+        """
+        Get F_j = sum_k (delta_kj - S_kj) <Z_k>, the part of Z_j forbidden by the parent, from the expectation values.
+
+        Args:
+            expectation (dict or array): <Z_k>, {z: value} or in the order of the SAMB of the model.
+            op (str or array, optional): g (see transform_samb).
+            parent (str, optional): supergroup P (see transform_samb).
+            embedding (None, int, dict or array, optional): embedding (see transform_samb).
+
+        Returns:
+            - (dict) -- {z: F_j}.
+
+        Note:
+            - F_j = <Z_j> - <g Z_j> for a state invariant under H; 0 on the parent structure, eps_j F_j in the inversion
+              model, -F_j for the image state with the same matrix.
+            - a warning is given if the model does not contain the whole neighbor shells of the parent structure.
+            - only for g of order 2.
+        """
+        rc, sp_ = self._coset_space(op, parent, embedding)
+        if rc["order"] != 2:
+            raise NotImplementedError(f"F_j is defined for g of order 2 only (the order of {rc['rep']} is {rc['order']}).")
+        S, complete = util_coset.overlap_matrix(sp_)
+        zs = sp_["zs"]
+        if isinstance(expectation, dict):
+            e = np.array([expectation.get(z, 0) for z in zs])
+        else:
+            e = np.asarray(expectation)
+            if len(e) != len(zs):
+                raise ValueError(f"expectation must have {len(zs)} values, but {len(e)} are given.")
+        if not complete:
+            logger.warning(
+                "the model does not contain the whole neighbor shells of the parent structure: F_j differs from "
+                "<Z_j> - <g Z_j> (see image_overlap()['shell'])."
+            )
+        F = (np.eye(len(zs)) - S).T @ e
+        F = F.real if np.allclose(np.imag(F), 0) else F
+        return dict(zip(zs, F.tolist()))
+
+    # ==================================================
+    def parent_shells(self, parent=None, embedding=None):
+        """
+        Get the neighbor shells of the parent structure and the neighbors of the model structure in each.
+
+        Args:
+            parent (str, optional): supergroup P (see transform_samb).
+            embedding (None, int, dict or array, optional): embedding (see transform_samb).
+
+        Returns:
+            - (dict) -- {(tail, head): [{"shell", "distance" (parent structure), "neighbor" ([n] of the model
+              structure), "model" ([n] in the bonds of the model), "complete"}]}.
+        """
+        rc, _ = self._coset_space(None, parent, embedding)
+        return util_coset.parent_shells(self, rc)
+
+    # ==================================================
+    def map_bond(self, op=None, parent=None, embedding=None):
+        """
+        Get the bonds of the model moved by g on the parent structure.
+
+        Args:
+            op (str or array, optional): g (see transform_samb).
+            parent (str, optional): supergroup P (see transform_samb).
+            embedding (None, int, dict or array, optional): embedding (see transform_samb).
+
+        Returns:
+            - (dict) -- {bond: [{"bond": (tail atom, head atom, n), "image": (tail atom, head atom, n), "neighbor" (of the
+              image in the model structure), "distance"}]}, atoms: (site, sublattice), n: lattice vector
+              (conventional), for the bonds from the first tail atom.
+        """
+        rc, _ = self._coset_space(op, parent, embedding)
+        return util_coset.map_bond(self, rc)
 
     # ==================================================
     def X(self, tag, hc=False):

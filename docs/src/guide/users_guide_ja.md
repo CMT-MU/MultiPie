@@ -284,10 +284,11 @@ for z, (symbol, u, key, comp) in mm["combined_id"].items(): print(z, symbol, u.s
 | --- | --- |
 | `None`（既定） | すぐ上の親の最初の剰余類の $g$（`Group(...).coset`） |
 | `{"parent": "SG:164", "rep": "-1:[0,0,0]"}` | 親と代表（`Group.global_info()["coset"]` の剰余類にある操作） |
+| `{"parent": "SG:166"}` | 任意の上位群（下の「任意の上位群」を参照） |
 | 辞書のリスト | 複数の代表 |
 | `False` | 計算しない |
 
-`"coset_weight": False` で重みの計算を省きます（重みはすぐ上の親についてだけ与えます）。結果は `mm["coset"]` で、各 $g$ についての辞書のリストです。
+`"coset_weight": False` で重み、$S$、殻の計算を省きます。結果は `mm["coset"]` で、各 $g$ についての辞書のリストです。
 
 - `"parent"`、`"rep"`、`"rep_matrix"`（$H$ の座標での $g$）、`"order"` $n$（$g^n \in H$ となる最小の $n$）、`"kind"`：
   - `"rotation"`：像の系は、模型を $g$ で動かした座標系（`"frame"`）で書いたもので、$g\,\mathbb{Z}_j = +\mathbb{Z}'_j$ です（像の系の同じラベルの SAMB）。
@@ -321,6 +322,32 @@ mi.analyze({"model": "Te", "group": 152, "cell": {"a": 4.457, "c": 5.929}, "site
 d = mi["inversion_model"]
 print(mi["model"], d["group"], "->", d["image_group"])
 for name, v in {**d["site"], **d["bond"]}.items(): print(name, v["source"], "->", v["image"])
+```
+
+**任意の上位群、S と F。** 上の親は、MultiPieGen の代表の親の連鎖にあるものです。$H$ のほかの上位群 $P$（例えば Te に対する R-3m、No.166）には、群のデータの直接の上位群（`Group.global_info()["supergroup"]`：$H$ が極大部分群である上位群と、埋め込み $x_P = A x_H$。$P$ の格子は $H$ の格子の 4 倍まで細かいもの）をたどって行き着きます。
+
+| 関数 | 結果 |
+| --- | --- |
+| `Group.supergroups(max_index=None)` | 上位群と `"A"`、`"index"`（$H$ の格子で割ったもの）、`"index_parent"`（$P$ の格子で割ったもの）、`"path"`（直接の上位群の連鎖） |
+| `Group.embedding(parent)` | $H$ の $P$ へのすべての埋め込み（同じ $H$ の原子に対して、違う親構造を与える） |
+| `Group.coset_decomposition(parent, embedding=None, modulo="parent")` | すべての剰余類 $gH$（`modulo="self"`：$H$ の格子で割ったもので、$P$ の並進の剰余類も含む） |
+| `Group.parent_limit(parent, wyckoff=None, embedding=None)` | 軌道が $P$ で不変になる Wyckoff パラメータの値 |
+| `Group.map_site(op, wyckoff, parent)` | 親構造で $g$ が写す原子 |
+| `mm.transform_samb(op=None, parent=None)` | 模型の基底での $g\,\mathbb{Z}_j$（原子は親構造で対応させる） |
+| `mm.image_overlap(op=None, parent=None)` | $S_{kj} = \langle \mathbb{Z}_k, g\,\mathbb{Z}_j \rangle$、その固有値と固有ベクトル、`"complete"` |
+| `mm.parent_forbidden_part(expectation, op=None, parent=None)` | $F_j = \sum_k (\delta_{kj} - S_{kj}) \langle \mathbb{Z}_k \rangle$ |
+| `mm.parent_shells(parent=None)`、`mm.map_bond(op=None, parent=None)` | 親構造の近接の殻と、$g$ で写したボンド |
+
+`embedding` を省くと、親構造が模型にもっとも近い埋め込みを使います。`op` を省くと、$H$ の格子で割った $H$ 以外の最初の剰余類（空間反転があればそれ）を使います。$H$ で不変な状態では、模型が親構造の近接の殻を丸ごと含んでいれば（`"complete"`。そうでなければ警告を出します）、$\langle g\,\mathbb{Z}_j \rangle = \sum_k S_{kj} \langle \mathbb{Z}_k \rangle$ です。そのため $F_j = \langle \mathbb{Z}_j \rangle - \langle g\,\mathbb{Z}_j \rangle$ を模型の中で計算できます。$F_j$ は親構造で 0 になり、空間反転模型では $\varepsilon_j F_j$ です。$F_j$ は位数 2 の $g$ についてだけ与えます。模型の入力 `"coset"` は任意の上位群を受け付け（`{"parent": "SG:166"}`、`"rep"` と `"embedding"` は省略可）、`mm["coset"]` には `"S"`、`"S_eigenvalue"`、`"complete"`、`"shell"`、`"embedding"` も入ります。例えば、第1、第2近接の Te と R-3m（$x \to 1/3$。親の第1近接の殻は第1、第2近接からなる）では次のとおりです。
+
+```{code-cell} ipython3
+mt = MaterialModel()
+mt.analyze({"model": "Te", "group": 152, "cell": {"a": 4.457, "c": 5.929}, "site": {"Te": ("[0.274,0,1/3]", "p")},
+            "bond": [("Te", "Te", [1, 2])], "SAMB_select": {"X": ["Q", "G"], "Gamma": ["A1"]}, "atomic_select": {"X": "Q"},
+            "pdf": {"create": False}, "coset": {"parent": "SG:166"}})
+r = mt.image_overlap(parent="SG:166")
+print(r["rep"], r["complete"], [d["neighbor"] for d in r["shell"][("Te", "Te")]])
+print(sorted(round(float(v), 6) for v in r["eigenvalue"]))
 ```
 
 (ja-response-tensors)=

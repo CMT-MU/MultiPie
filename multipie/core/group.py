@@ -574,6 +574,135 @@ class Group(dict):
         return self._group().get("coset")
 
     # ==================================================
+    def _check_pg_sg(self):
+        if self.group_type not in ["PG", "SG"]:
+            raise ValueError(f"supergroups are given for PG and SG only, but {self} is a {self.group_type}.")
+
+    # ==================================================
+    def supergroups(self, max_index=None, chain=False):
+        """
+        Get the supergroups of the group (PG and SG), not only the direct parents.
+
+        Args:
+            max_index (int, optional): upper limit of the index [P:H] (modulo the lattice of H).
+            chain (bool, optional): only the chain of the representative parents (Group.global_info()["parent"]) ?
+
+        Returns:
+            - (list) -- [dict] with "group", "A" (x_P = A x_H, 4x4), "R", "shift", "origin" (the origin of P in the
+              coordinates of H), "index", "index_parent" ([P:H] modulo the lattice of P), "path" (a chain of direct
+              supergroups H, ..., P), "direct", one for each supergroup up to the normalizer of H.
+
+        Note:
+            - the direct supergroups (H is a maximal subgroup) are Group.global_info()["supergroup"] of the binaries;
+              the others are their chains. Without max_index, every chain up to the top groups is followed (slow for
+              a group of low symmetry).
+        """
+        from multipie.util.util_supergroup import supergroups
+
+        self._check_pg_sg()
+        return supergroups(self, max_index, chain)
+
+    # ==================================================
+    def embedding(self, parent):
+        """
+        Get the embeddings of the group H in a supergroup P.
+
+        Args:
+            parent (Group or str): supergroup P.
+
+        Returns:
+            - (list) -- [dict] with "parent", "A" (x_P = A x_H, 4x4), "R", "shift", "origin", "index", "index_parent",
+              "path"; [] if P is not a supergroup.
+
+        Note:
+            - embeddings are different when they give different sets of the operations of P in the coordinates of H:
+              they give different parent structures for the same atoms of H.
+        """
+        from multipie.util.util_supergroup import embedding
+
+        self._check_pg_sg()
+        return embedding(self, parent)
+
+    # ==================================================
+    def coset_decomposition(self, parent, embedding=None, modulo="parent"):
+        """
+        Get all the left cosets g H of a supergroup P.
+
+        Args:
+            parent (Group or str): supergroup P.
+            embedding (None, int, dict or array, optional): embedding (index of embedding(), its dict, or A); default:
+                the first one.
+            modulo (str, optional): "parent" (modulo the lattice of P) or "self" (modulo the lattice of H, the cosets
+                of the translations of P included).
+
+        Returns:
+            - (list) -- [dict] with "rep" (tag "point operation of P:[translation in the coordinates of H]"),
+              "rep_matrix" (4x4 in the coordinates of H), "ops" (tags), "order" (smallest n with g^n in H), "kind"
+              ("identity", "translation", "rotation", "improper", "inversion"), H first.
+        """
+        from multipie.util.util_supergroup import coset_decomposition
+
+        self._check_pg_sg()
+        return coset_decomposition(self, parent, embedding, modulo)[0]
+
+    # ==================================================
+    def parent_limit(self, parent, wyckoff=None, embedding=None):
+        """
+        Get the parent structures of the Wyckoff sites for a supergroup P.
+
+        Args:
+            parent (Group or str): supergroup P.
+            wyckoff (str or [str], optional): Wyckoff sites (default: all with free parameters).
+            embedding (None, int, dict or array, optional): embedding (see coset_decomposition).
+
+        Returns:
+            - (dict) -- {wyckoff: [{"param": {parameter: expression}, "position", "parent_wyckoff"}]}, the values of the
+              parameters at which the orbit is invariant under P (modulo 1, the orbits with coinciding sites excluded).
+        """
+        from multipie.util.util_supergroup import parent_limit
+
+        self._check_pg_sg()
+        return parent_limit(self, parent, wyckoff, embedding)[0]
+
+    # ==================================================
+    def map_site(self, op, wyckoff, parent, embedding=None, limit=0):
+        """
+        Get the atoms of a Wyckoff site moved by an operation of a supergroup P on its parent structure.
+
+        Args:
+            op (str or array): element of P ("point operation of P:[translation in H]" or 4x4 in the coordinates of H).
+            wyckoff (str): Wyckoff site of H.
+            parent (Group or str): supergroup P.
+            embedding (None, int, dict or array, optional): embedding (see coset_decomposition).
+            limit (int, optional): index of the parent structure in parent_limit().
+
+        Returns:
+            - (dict) -- {i: (j, n)}: op r_i = r_j + n on the parent structure, i, j: atoms (from 1, in the order of the
+              Wyckoff positions and the plus set), n: lattice vector (conventional).
+        """
+        from multipie.util import util_supergroup as us
+
+        self._check_pg_sg()
+        e = us.resolve_embedding(self, parent, embedding)
+        lims = us.parent_limit(self, parent, wyckoff, e)[0][wyckoff]
+        if not lims:
+            raise ValueError(f"{wyckoff} has no parent structure for {us.gid(parent)}.")
+        lim = lims[limit]
+        rows = sp.Matrix(self.wyckoff["site"][wyckoff]["conventional"])
+        # parameters at the limit (a free parameter left at a generic value).
+        val = {k: sp.sympify(v).subs({x: sp.Rational(1, 7) for x in sp.sympify(v).free_symbols}) for k, v in lim["param"].items()}
+        rows = rows.subs({s: val[str(s)] for s in rows.free_symbols}, simultaneous=True)
+        R0 = np.array(rows.evalf(), dtype=float)
+        plus = [np.zeros(3)]
+        if not self.is_point_group:
+            plus = list(np.array(sp.Matrix(self.symmetry_operation["plus_set"]).evalf(), dtype=float))
+        pos = [r + c for c in plus for r in R0]
+        W = us.op_matrix(self, parent, op, e)
+        L = us._lattice(self)
+        m = us.map_site(pos, W, L)
+        return {i + 1: (j + 1, n) for i, (j, n) in m.items()}
+
+    # ==================================================
     @property
     def character(self):
         """

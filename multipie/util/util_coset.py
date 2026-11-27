@@ -139,12 +139,16 @@ def parse_coset(group, spec):
         spec (None, False, dict or list): "coset" of the model input.
 
     Returns:
-        - (list) -- [(parent id, representative tag)], [] for False or a group without a parent.
+        - (list) -- [(parent id, representative tag or None, embedding or None)], [] for False or a group without a
+          parent.
 
     Note:
         - None: the representative of the first coset in the direct parent.
-        - {"parent": id, "rep": tag}: the operation must be one of the cosets of info["coset"][H][parent] (not a
-          translation only, nor an operation of H).
+        - {"parent": id, "rep": tag}: for a parent of the binaries (info["parent"][H]), the operation must be one of
+          the cosets of info["coset"][H][parent] (not a translation only, nor an operation of H; default: the first).
+        - any supergroup P (Group.supergroups), or with "embedding" (index of Group.embedding): "rep" is an element
+          of P in the coordinates of H (default: the first coset other than H modulo the lattice of H, the inversion
+          if any); the embedding is the one whose parent structure is the nearest to the model if not given.
     """
     if spec is False:
         return []
@@ -152,22 +156,31 @@ def parse_coset(group, spec):
     if first is None:
         return []
     if spec is None:
-        return [(first["parent"], first["rep"])]
+        return [(first["parent"], first["rep"], None)]
     specs = [spec] if isinstance(spec, dict) else list(spec)
     info = Group.global_info()
     gid = group_id(group)
     out = []
     for s in specs:
-        if not isinstance(s, dict) or set(s) - {"parent", "rep"} or "rep" not in s:
-            raise ValueError(f"coset must be None, False, {{'parent': id, 'rep': tag}} or a list of them, but {s!r} is given.")
+        if not isinstance(s, dict) or set(s) - {"parent", "rep", "embedding"} or ("rep" not in s and "parent" not in s):
+            raise ValueError(
+                f"coset must be None, False, {{'parent': id, 'rep': tag, 'embedding': index}} or a list of them, but {s!r} is given."
+            )
         parent = s.get("parent", first["parent"])
         parent = group_id(Group(parent))
         cosets = info["coset"][gid].get(parent)
-        if cosets is None:
-            raise ValueError(f"{parent} is not a parent of {gid}: {info['parent'][gid]}.")
-        if not any(s["rep"] in c for c in cosets):
-            raise ValueError(f"{s['rep']} is not an operation of the cosets of {gid} in {parent}.")
-        out.append((parent, s["rep"]))
+        emb = s.get("embedding")
+        if cosets is None or emb is not None:  # any supergroup (util_supergroup).
+            from multipie.util.util_supergroup import embedding
+
+            if not embedding(gid, parent):
+                raise ValueError(f"{parent} is not a supergroup of {gid}.")
+            out.append((parent, s.get("rep"), emb))
+            continue
+        rep = s.get("rep", cosets[0][0])
+        if not any(rep in c for c in cosets):
+            raise ValueError(f"{rep} is not an operation of the cosets of {gid} in {parent}.")
+        out.append((parent, rep, None))
     return out
 
 
@@ -819,12 +832,14 @@ def coset_analysis(mm, spec=None, with_weight=True):
     Args:
         mm (MaterialModel): model (analyzed).
         spec (None, False, dict or list, optional): "coset" of the model input.
-        with_weight (bool, optional): calculate the weights on the parent structure (direct parent only) ?
+        with_weight (bool, optional): calculate the weights, S and the shells on the parent structure ?
 
     Returns:
         - (list) -- result for each representative, dict with "parent", "rep", "rep_matrix", "order", "kind", "frame",
-          "image_group", "site", "bond", "samb", "parent_structure", "weight", "weight_note" (the reason when the
-          weights are not given, e.g. no parent structure of a site).
+          "image_group", "site", "bond", "samb", "embedding" (None for the parents of the binaries), "parent_structure",
+          "weight", "weight_note" (the reason when the weights are not given, e.g. no parent structure of a site), "S"
+          (S[k][j] = <Z_k, g Z_j>), "S_eigenvalue", "complete" (the model contains the whole neighbor shells of the
+          parent structure), "shell" (parent_shells).
     """
     group = mm.group
     reps = parse_coset(group, spec)
@@ -836,9 +851,14 @@ def coset_analysis(mm, spec=None, with_weight=True):
     Hkeys = {_okey(W, L) for W in Hops}
     chiral = all(np.linalg.det(W[:3, :3]) > 0 for W in Hops)
     out = []
-    for parent, tag in reps:
-        R = _chain_R(group, parent)
-        g = _op_matrix(group, parent, R, tag)
+    for parent, tag, emb in reps:
+        rc = None
+        if emb is None and tag is not None and parent in Group.global_info()["parent"].get(group_id(group), []):
+            R = _chain_R(group, parent)
+            g = _op_matrix(group, parent, R, tag)
+        else:
+            rc = resolve_coset(mm, parent, tag, emb)
+            g, tag = rc["g"], rc["rep"]
         n = _order(g, Hkeys, L)
         res = {"parent": parent, "rep": tag, "rep_matrix": g.tolist(), "order": n}
         if np.linalg.det(g[:3, :3]) > 0:
@@ -859,11 +879,25 @@ def coset_analysis(mm, spec=None, with_weight=True):
             res.update(kind="inversion", frame=r.tolist(), image_group=inv["image"], map=_float(inv["map"]).tolist())
             res.update(site=site, bond=bond)
             res["samb"] = samb_map(mm, _inversion_coef(mm, inv))
+        res["embedding"] = None
+        if rc is not None and rc["embedding"] is not None:
+            e = rc["embedding"]
+            res["embedding"] = {"A": np.asarray(e["A"]).tolist(), "origin": _round(e["origin"]), "path": e["path"]}
         res["parent_structure"], res["weight"], res["weight_note"] = None, None, None
-        if with_weight and parent == first["parent"]:
-            frame = _Frame(group, parent, R)
+        res["S"], res["S_eigenvalue"], res["complete"], res["shell"] = None, None, None, None
+        if with_weight:
             try:
-                res["parent_structure"], res["weight"] = weight(mm, frame, first["parent_limit"], g, n)
+                if rc is None:
+                    rc = resolve_coset(mm, parent, tag)
+                sp_ = image_space(mm, rc)
+                res["parent_structure"] = rc["parent_structure"]
+                res["weight"] = weight_from_space(sp_, n)
+                S, complete = overlap_matrix(sp_)
+                res["S"] = np.asarray(S).tolist()
+                ev = np.linalg.eigvalsh((S + np.conj(S.T)) / 2) if n == 2 else np.linalg.eigvals(S)
+                res["S_eigenvalue"] = [_value(v) for v in ev]
+                res["complete"] = complete
+                res["shell"] = parent_shells(mm, rc)
             except ValueError as e:  # no parent structure for the sites of the model.
                 res["weight_note"] = str(e)
         out.append(res)
@@ -899,3 +933,340 @@ def _model_action(mm, md, frame, m):
     for j, zj in enumerate(zs):
         res[zj] = [(zk, _value(A[k, j])) for k, zk in enumerate(zs) if abs(A[k, j]) > 1e-8]
     return res
+
+
+# ==================================================
+# any supergroup (util_supergroup): the image g Z_j on the parent structure, S, F, shells.
+def _model_wyckoff(mm):
+    return sorted({rep.wyckoff for rep in mm["site"]["representative"].values()})
+
+
+# ==================================================
+def _displacement(mm, md, lim_pos):
+    """largest distance between the sites of the model and those of the parent structure (Cartesian)."""
+    C = np.array(mm["unit_vector"], dtype=float).T
+    return max(np.linalg.norm(C @ (lim_pos[k] - p)) for k, p in md["pos"].items())
+
+
+# ==================================================
+def resolve_coset(mm, parent=None, rep=None, embedding=None):
+    """
+    The parent, the embedding, the representative g, and the parent structure used by image_space.
+
+    Args:
+        mm (MaterialModel): model (analyzed).
+        parent (str, optional): supergroup P (default: the direct parent of the binaries).
+        rep (str or array, optional): element g of P ("point operation of P:[translation in H]" or 4x4 in the
+            coordinates of H; default: the first coset of the binaries for its parents, the first coset other than
+            H modulo the lattice of H (the inversion if any) otherwise).
+        embedding (None, int, dict or array, optional): embedding of H in P (util_supergroup.resolve_embedding);
+            default: the parents of the binaries with their transformation, otherwise the embedding whose parent
+            structure is the nearest to the model.
+
+    Returns:
+        - (dict) -- "parent", "rep", "g", "order", "frame" (_Frame), "limits", "embedding" (None for the binaries),
+          "parent_structure", "lim_pos", "md".
+    """
+    from multipie.util import util_supergroup as us
+
+    group = mm.group
+    gid = group_id(group)
+    first = group.coset
+    info = Group.global_info()
+    if parent is None:
+        if first is None:
+            raise ValueError(f"{gid} has no parent: give the parent.")
+        parent = first["parent"]
+    parent = group_id(Group(parent))
+    L = _lattice(group)
+    Hops = _ops(group)
+    Hkeys = {_okey(W, L) for W in Hops}
+    md = model_data(mm)
+    if embedding is None and parent in info["parent"].get(gid, []):
+        R = _chain_R(group, parent)
+        if rep is None:
+            rep = first["rep"] if parent == first["parent"] else info["coset"][gid][parent][0][0]
+        g = (
+            _op_matrix(group, parent, R, rep)
+            if isinstance(rep, str)
+            else us._mat4(np.array(rep, float)[:3, :3], np.array(rep, float)[:3, 3])
+        )
+        limits = first["parent_limit"] if parent == first["parent"] else us.parent_limit(gid, parent, _model_wyckoff(mm), R)[0]
+        frame = _Frame(group, parent, R)
+        pstruct, lim_pos = parent_structure(mm, md, frame, limits)
+        emb = None
+    else:
+        cands = us.embedding(gid, parent) if embedding is None else [us.resolve_embedding(gid, parent, embedding)]
+        if not cands:
+            raise ValueError(f"{parent} is not a supergroup of {gid}.")
+        best, err = None, None
+        for e in cands:
+            limits = us.parent_limit(gid, parent, _model_wyckoff(mm), e)[0]
+            frame = _Frame(group, parent, e["A"])
+            try:
+                pstruct, lim_pos = parent_structure(mm, md, frame, limits)
+            except ValueError as ex:
+                err = ex
+                continue
+            d = _displacement(mm, md, lim_pos)
+            if best is None or d < best[0] - 1e-8:
+                best = (d, e, limits, frame, pstruct, lim_pos)
+        if best is None:
+            raise ValueError(f"no parent structure of the model for {parent}: {err}")
+        _, emb, limits, frame, pstruct, lim_pos = best
+        R = emb["A"]
+        if rep is None:
+            cs, _ = us.coset_decomposition(gid, parent, emb, modulo="self")
+            nonid = [c for c in cs if c["kind"] not in ("identity", "translation")]
+            inv = [c for c in nonid if c["kind"] == "inversion"]
+            rep = (inv or nonid)[0]["rep"]
+        g = us.op_matrix(gid, parent, rep, emb)
+    n = _order(g, Hkeys, L)
+    rep_tag = rep if isinstance(rep, str) else us.vec_str(np.array(rep).ravel())
+    return {
+        "parent": parent,
+        "rep": rep_tag,
+        "g": g,
+        "order": n,
+        "frame": frame,
+        "limits": limits,
+        "embedding": emb,
+        "parent_structure": pstruct,
+        "lim_pos": lim_pos,
+        "md": md,
+    }
+
+
+# ==================================================
+def image_space(mm, rc):
+    """
+    The SAMB of the model and their images g Z_j on the parent structure (keys of the matrix elements).
+
+    Args:
+        mm (MaterialModel): model.
+        rc (dict): resolve_coset.
+
+    Returns:
+        - (dict) -- "ks" (_KeySpace), "G" (action of g), "X" (columns: Z_j), "zs", "n0" (number of keys of the
+          model; the keys beyond are reached by g only).
+    """
+    md, lim_pos, frame, g = rc["md"], rc["lim_pos"], rc["frame"], rc["g"]
+    C = np.array(mm["unit_vector"], dtype=float).T
+    ks = _KeySpace(frame, C)
+    ks.set_sites(
+        list(lim_pos.values()), [[o for o, s in zip(md["orb_of"], md["site_of"]) if s == name_sl] for name_sl in lim_pos]
+    )
+    Zp = {}
+    for z, d in md["Z"].items():
+        e = {}
+        for (m, k, Rc), v in d.items():
+            cb, ck = ks.canon(lim_pos[md["site_of"][m]], lim_pos[md["site_of"][k]] + np.array(Rc))
+            key = (cb, ck, md["orb_of"][m], md["orb_of"][k])
+            e[key] = e.get(key, 0) + v
+            ks.add(key)
+        Zp[z] = e
+    n0 = len(ks.keys)
+    ks.close([g])
+    G = ks.action(g)
+    N = len(ks.keys)
+    zs = list(md["Z"])
+    X = np.array([ks.vector(Zp[z], N) for z in zs]).T
+    return {"ks": ks, "G": G, "X": X, "zs": zs, "n0": n0}
+
+
+# ==================================================
+def overlap_matrix(sp_):
+    """
+    S_kj = <Z_k, g Z_j> and whether every g Z_j lies on the bonds (pairs of sites) of the model.
+
+    Returns:
+        - (ndarray) -- S (real if the imaginary part vanishes).
+        - (bool) -- complete.
+    """
+    X, G = sp_["X"], sp_["G"]
+    GX = G @ X
+    nrm = np.sqrt(np.einsum("ij,ij->j", X.conj(), X).real)
+    S = (X.conj().T @ GX) / np.outer(nrm, nrm)
+    if np.allclose(S.imag, 0, atol=1e-10):
+        S = S.real
+    S = np.where(np.abs(S) < 1e-12, 0, S) + 0
+    # every g Z_j on the pairs of sites (bonds) of the model.
+    keys = sp_["ks"].keys
+    pairs = {(k[0], k[1]) for k in keys[: sp_["n0"]]}
+    out = [i for i, k in enumerate(keys) if (k[0], k[1]) not in pairs]
+    complete = bool(np.allclose(GX[out], 0, atol=1e-8)) if out else True
+    return S, complete
+
+
+# ==================================================
+def weight_from_space(sp_, n):
+    """weights of the eigenvalues w^m of g (order n), {z: [w_m]}."""
+    X, G = sp_["X"], sp_["G"]
+    T = [X]
+    for _ in range(1, n):
+        T.append(G @ T[-1])
+    nx2 = np.einsum("ij,ij->j", X.conj(), X).real
+    ov = [np.einsum("ij,ij->j", X.conj(), Tt) / nx2 for Tt in T]
+    w = np.exp(2j * np.pi / n)
+    return {
+        z: [round(float(np.real(sum(w ** (-m * t) * ov[t][j] for t in range(n)) / n)), 10) + 0.0 for m in range(n)]
+        for j, z in enumerate(sp_["zs"])
+    }
+
+
+# ==================================================
+def transformed_matrix(mm, rc, sp_, z=None):
+    """
+    g Z_j in the basis of the model (the atoms matched on the parent structure).
+
+    Returns:
+        - (dict) -- {z: {(n1, n2, n3, a, b): value}} (as get_combined_samb_matrix(fmt="value")), a, b: kets, (n1, n2, n3):
+          primitive lattice vector of the ket.
+    """
+    md, lim_pos, ks = rc["md"], rc["lim_pos"], sp_["ks"]
+    L = ks.frame.L
+    Pm = np.eye(3) if L is None else L
+    red = {k: ks.snap(p)[0] for k, p in lim_pos.items()}
+    ket_index = {(s, o): i for i, (s, o) in enumerate(zip(md["site_of"], md["orb_of"]))}
+
+    def site_at(r):
+        for k, p in red.items():
+            if np.allclose(p, r, atol=1e-5):
+                return k
+        raise ValueError(f"position {r} is not a site of the parent structure.")
+
+    zs = sp_["zs"] if z is None else ([z] if isinstance(z, str) else list(z))
+    GX = sp_["G"] @ sp_["X"]
+    out = {}
+    for zz in zs:
+        j = sp_["zs"].index(zz)
+        d = {}
+        for i, (rb, rk, a, b) in enumerate(ks.keys):
+            v = GX[i, j]
+            if abs(v) < 1e-12:
+                continue
+            m = site_at(np.array(rb))
+            pk, tk = ks.snap(np.array(rk))
+            k = site_at(pk)
+            Rc = np.array(rk) - lim_pos[k] + (lim_pos[m] - np.array(rb))
+            n = np.rint(np.linalg.solve(Pm, Rc)).astype(int)
+            key = (int(n[0]), int(n[1]), int(n[2]), ket_index[(m, a)], ket_index[(k, b)])
+            d[key] = d.get(key, 0) + (v.real if abs(v.imag) < 1e-12 else v)
+        out[zz] = d
+    return out
+
+
+# ==================================================
+def parent_shells(mm, rc, cells=3):
+    """
+    The neighbor shells of the parent structure, and the neighbors of the structure of the model in each.
+
+    Returns:
+        - (dict) -- {(tail, head): [{"shell" (from 1), "distance" (parent structure), "neighbor" ([n] of the model
+          structure), "model" ([n] in the bonds of the model), "complete" (no neighbor or all neighbors in the model)}]}
+          for the pairs of the bonds of the model, up to the last shell with a neighbor of the model.
+    """
+    from multipie.util.util_material_model import DISTANCE_DIGIT
+
+    md, lim_pos = rc["md"], rc["lim_pos"]
+    C = np.array(mm["unit_vector"], dtype=float).T
+    L = _lattice(mm.group)
+    Pm = np.eye(3) if L is None else L
+    cell = list(itertools.product(range(-cells, cells + 1), repeat=3)) if L is not None else [(0, 0, 0)]
+    out = {}
+    for b in mm["bond"]["info"]:
+        tail, head, nb = b.tail, b.head, list(b.neighbor)
+        t = (tail, 1)
+        rows = []
+        for k, p in md["pos"].items():
+            if k[0] != head:
+                continue
+            for n in cell:
+                R = Pm @ np.array(n, dtype=float)
+                d = round(float(np.linalg.norm(C @ (p + R - md["pos"][t]))), DISTANCE_DIGIT)
+                dp = round(float(np.linalg.norm(C @ (lim_pos[k] + R - lim_pos[t]))), DISTANCE_DIGIT)
+                if d > 0:
+                    rows.append((d, dp))
+        dist = sorted({d for d, _ in rows})
+        nidx = {d: i + 1 for i, d in enumerate(dist)}
+        pdist = sorted({dp for _, dp in rows if dp > 0})
+        shells = []
+        for s, dp in enumerate(pdist):
+            ns = sorted({nidx[d] for d, x in rows if x == dp})
+            inm = [x for x in ns if x in nb]
+            shells.append({"shell": s + 1, "distance": dp, "neighbor": ns, "model": inm, "complete": not inm or inm == ns})
+        last = max((i for i, d in enumerate(shells) if d["model"]), default=-1)
+        out[(tail, head)] = shells[: last + 1]
+    return out
+
+
+# ==================================================
+def map_bond(mm, rc, cells=2):
+    """
+    The bonds of the model moved by g on the parent structure.
+
+    Returns:
+        - (dict) -- {bond name: [{"bond": (tail atom, head atom, n), "image": (tail atom, head atom, n), "neighbor" (of
+          the image in the structure of the model), "distance"}]} for the bonds from the first tail atom (atoms:
+          (site, sublattice), n: conventional lattice vector).
+    """
+    from multipie.util.util_material_model import DISTANCE_DIGIT
+    from multipie.util.util_supergroup import map_site
+
+    md, lim_pos, g = rc["md"], rc["lim_pos"], rc["g"]
+    C = np.array(mm["unit_vector"], dtype=float).T
+    L = _lattice(mm.group)
+    keys = list(lim_pos)
+    img = map_site([lim_pos[k] for k in keys], g, L)
+    out = {}
+    shells = {}
+    for name, rep in mm["bond"]["representative"].items():
+        tail, head = rep.tail, rep.head
+        t = (tail, 1)
+        if (tail, head) not in shells:
+            Pm = np.eye(3) if L is None else L
+            cell = list(itertools.product(range(-3, 4), repeat=3)) if L is not None else [(0, 0, 0)]
+            ds = set()
+            for k, p in md["pos"].items():
+                if k[0] == head:
+                    for n in cell:
+                        d = round(float(np.linalg.norm(C @ (p + Pm @ np.array(n, float) - md["pos"][t]))), DISTANCE_DIGIT)
+                        if d > 0:
+                            ds.add(d)
+            shells[(tail, head)] = {d: i + 1 for i, d in enumerate(sorted(ds))}
+        nidx = shells[(tail, head)]
+        res = []
+        Pm = np.eye(3) if L is None else L
+        cell = list(itertools.product(range(-cells, cells + 1), repeat=3)) if L is not None else [(0, 0, 0)]
+        for k, p in md["pos"].items():
+            if k[0] != head:
+                continue
+            for n in cell:
+                R = Pm @ np.array(n, dtype=float)
+                d = round(float(np.linalg.norm(C @ (p + R - md["pos"][t]))), DISTANCE_DIGIT)
+                if d == 0 or nidx.get(d) != rep.neighbor:
+                    continue
+                it, st = img[keys.index(t)]
+                ih, sh = img[keys.index(k)]
+                ti, hi = keys[it], keys[ih]
+                Rimg = (
+                    np.round(
+                        g[:3, :3] @ (lim_pos[k] + R)
+                        + g[:3, 3]
+                        - (g[:3, :3] @ lim_pos[t] + g[:3, 3])
+                        - (lim_pos[hi] - lim_pos[ti]),
+                        6,
+                    )
+                    + 0.0
+                )
+                di = round(float(np.linalg.norm(C @ (md["pos"][hi] + Rimg - md["pos"][ti]))), DISTANCE_DIGIT)
+                res.append(
+                    {
+                        "bond": (t, k, tuple(R.tolist())),
+                        "image": (ti, hi, tuple(Rimg.tolist())),
+                        "neighbor": nidx.get(di),
+                        "distance": di,
+                    }
+                )
+        out[name] = res
+    return out
