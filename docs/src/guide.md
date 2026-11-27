@@ -348,19 +348,22 @@ an earlier version of Ver.3 and the weights of its controls (see
 (coset-model)=
 ### Coset of the model
 
-For a group $H$ with a parent $P$ (a PG or SG of the database; not Oh, D6h, SG 191-194, 221-230), a representative $g$
+For a group $H$ with a supergroup $P$ (a PG or SG of the database; the direct parent of the default does not exist for
+Oh, D6h, SG 191-194, 221-230), a representative $g$
 of a coset $gH$ of $P$ maps the model to an image system. MultiPie gives, from the group data of MultiPieGen (`"coset"`
 of the group, `Group.global_info()["parent"]` and `["coset"]`), how each SAMB is moved by $g$ and, on the parent
-structure, the weights of the eigenvalues of $g$. The model input key `"coset"` selects $g$:
+structure, the weights of the eigenvalues of $g$; other supergroups are reached through the direct supergroups
+(`Group.global_info()["supergroup"]`, see "Any supergroup" below). The model input key `"coset"` selects $g$:
 
 | `"coset"` | meaning |
 | --- | --- |
 | `None` (default) | $g$ of the first coset in the direct parent (`Group(...).coset`) |
 | `{"parent": "SG:164", "rep": "-1:[0,0,0]"}` | the parent and the representative (an operation of a coset in `Group.global_info()["coset"]`) |
+| `{"parent": "SG:166"}` | any supergroup (see "Any supergroup" below) |
 | a list of dicts | several representatives |
 | `False` | no analysis |
 
-`"coset_weight": False` skips the weights (they are given for the direct parent only). The result is `mm["coset"]`, a
+`"coset_weight": False` skips the weights, $S$ and the shells. The result is `mm["coset"]`, a
 list with a dict for each $g$:
 
 - `"parent"`, `"rep"`, `"rep_matrix"` ($g$ in the coordinates of $H$), `"order"` $n$ (the smallest $n$ with
@@ -419,6 +422,51 @@ mi.analyze({"model": "Te", "group": 152, "cell": {"a": 4.457, "c": 5.929}, "site
 d = mi["inversion_model"]
 print(mi["model"], d["group"], "->", d["image_group"])
 for name, v in {**d["site"], **d["bond"]}.items(): print(name, v["source"], "->", v["image"])
+```
+
+**Any supergroup, S and F.** The parents above are those of the chain of the representative parents of MultiPieGen.
+Any other supergroup $P$ of $H$ (e.g., R-3m, No.166, for Te) is reached by the chains of the direct supergroups of the
+group data (`Group.global_info()["supergroup"]`: the supergroups in which $H$ is a maximal subgroup, with the embedding
+$x_P = A x_H$; the lattice of $P$ is at most 4 times finer than that of $H$):
+
+| function | result |
+| --- | --- |
+| `Group.supergroups(max_index=None)` | the supergroups with `"A"`, `"index"` (modulo the lattice of $H$), `"index_parent"` (modulo the lattice of $P$), and `"path"` (a chain of direct supergroups) |
+| `Group.embedding(parent)` | all the embeddings of $H$ in $P$ (they give different parent structures for the same atoms of $H$) |
+| `Group.coset_decomposition(parent, embedding=None, modulo="parent")` | all the cosets $gH$ (`modulo="self"`: modulo the lattice of $H$, the translations of $P$ included) |
+| `Group.parent_limit(parent, wyckoff=None, embedding=None)` | the values of the Wyckoff parameters at which the orbit is invariant under $P$ |
+| `Group.map_site(op, wyckoff, parent)` | the atoms moved by $g$ on the parent structure |
+| `mm.transform_samb(op=None, parent=None)` | $g\,\mathbb{Z}_j$ in the basis of the model (the atoms matched on the parent structure) |
+| `mm.image_overlap(op=None, parent=None)` | $S_{kj} = \langle \mathbb{Z}_k, g\,\mathbb{Z}_j \rangle$, its eigenvalues and eigenvectors, and `"complete"` |
+| `mm.parent_forbidden_part(expectation, op=None, parent=None)` | $F_j = \sum_k (\delta_{kj} - S_{kj}) \langle \mathbb{Z}_k \rangle$ |
+| `mm.parent_shells(parent=None)`, `mm.map_bond(op=None, parent=None)` | the neighbor shells of the parent structure, and the bonds moved by $g$ |
+
+Without `embedding`, the embedding whose parent structure is the nearest to the model is used; without `op`, the first
+coset other than $H$ modulo the lattice of $H$ (the inversion if any; a translation only if every other coset is
+one). For a state invariant under $H$,
+$\langle g\,\mathbb{Z}_j \rangle = \sum_k S_{kj} \langle \mathbb{Z}_k \rangle$ if the model contains the whole neighbor
+shells of the parent structure (`"complete"`; a warning is given otherwise), so that
+$F_j = \langle \mathbb{Z}_j \rangle - \langle g\,\mathbb{Z}_j \rangle$ is calculated within the model: it vanishes on the
+parent structure and is $\varepsilon_j F_j$ in the inversion model. For $g$ of order $n > 2$, with the projections
+$\Pi_m = \frac{1}{n}\sum_t \omega^{-mt} g^t$ on the eigenvalues $\omega^m$ of $g$,
+$F_j^{(m)} = n \langle \Pi_m \mathbb{Z}_j \rangle$ (`by_eigenvalue=True`) and
+$F_j = \sum_{m > 0} F_j^{(m)} = n \langle \mathbb{Z}_j \rangle - \sum_t \langle g^t \mathbb{Z}_j \rangle$, which is
+$\langle \mathbb{Z}_j \rangle - \langle g\,\mathbb{Z}_j \rangle$ for $n = 2$ (the matrices $n \Pi^{(m)}$ are `"projection"`
+of `image_overlap`). The model
+input `"coset"` accepts any supergroup, `{"parent": "SG:166"}` (with `"rep"` and `"embedding"` optionally), and
+`mm["coset"]` has also `"S"`, `"S_eigenvalue"`, `"complete"`, `"shell"`, and `"embedding"` (the section "Coset" of the
+PDF shows the embedding, the eigenvalues of $S$, and `"complete"`). E.g., Te with the first
+and second neighbors and R-3m ($x \to 1/3$; the first neighbor shell of the parent consists of the first and second
+neighbors):
+
+```{code-cell} ipython3
+mt = MaterialModel()
+mt.analyze({"model": "Te", "group": 152, "cell": {"a": 4.457, "c": 5.929}, "site": {"Te": ("[0.274,0,1/3]", "p")},
+            "bond": [("Te", "Te", [1, 2])], "SAMB_select": {"X": ["Q", "G"], "Gamma": ["A1"]}, "atomic_select": {"X": "Q"},
+            "pdf": {"create": False}, "coset": {"parent": "SG:166"}})
+r = mt.image_overlap(parent="SG:166")
+print(r["rep"], r["complete"], [d["neighbor"] for d in r["shell"][("Te", "Te")]])
+print(sorted(round(float(v), 6) for v in r["eigenvalue"]))
 ```
 
 (response-tensors)=

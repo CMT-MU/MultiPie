@@ -754,6 +754,32 @@ class ModelPDF:
             if r.get("weight_note"):
                 self.text(r"\noindent Weights are not given: " + tex_text(r["weight_note"]) + "\n")
 
+            if r.get("embedding"):
+                from multipie.util.util_supergroup import vec_str
+
+                e = r["embedding"]
+                self.text(
+                    r"\noindent Embedding: origin of $P$ at \texttt{"
+                    + vec_str(e["origin"])
+                    + r"} (coordinates of $H$), chain "
+                    + " $<$ ".join(tex_text(p) for p in e["path"])
+                    + ".\n"
+                )
+            if r.get("S_eigenvalue") is not None:
+                ev = {}
+                for v in r["S_eigenvalue"]:
+                    k = num(v)
+                    ev[k] = ev.get(k, 0) + 1
+                evs = ", ".join(f"{k} ({c})" for k, c in ev.items())
+                comp = "yes" if r.get("complete") else "no (the matrix S is not closed in the model)"
+                self.text(
+                    r"\noindent Eigenvalues of $S_{kj} = \langle \mathbb{Z}_k, g\,\mathbb{Z}_j \rangle$ (multiplicity): "
+                    + evs
+                    + r". The model contains the whole neighbor shells of the parent structure: "
+                    + comp
+                    + ".\n"
+                )
+
             tbl = []
             for z, terms in r["samb"].items():
                 img = " ".join(f"{num(c)} {z2}'" for z2, c in terms)
