@@ -6,10 +6,11 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 """
-Coset of a model: the SAMB of a model of H moved by a representative g of a coset g H in a parent P.
+Coset of a model: the SAMB of a model of H moved by a representative g of a coset g H in a supergroup P.
 
 The data of the cosets are those of the group binaries (MultiPieGen): "coset" of the group file (the first coset in
-the direct parent) and "parent", "coset" of info (the parents and the cosets in them).
+the direct parent) and "parent", "coset" of info (the parents and the cosets in them); any other supergroup is reached
+through the direct supergroups ("supergroup" of info, util_supergroup).
 
 - Reduction of g (in the coordinates of H).
 
@@ -26,10 +27,17 @@ the direct parent) and "parent", "coset" of info (the parents and the cosets in 
   perm[i0] = 0 (image_representative); a model of H' created from its own input may have other representative bonds,
   and the inversion model (model input "create_inversion_model", inversion_model) has these representatives.
 
-- Weight. On the parent structure (the limit of the Wyckoff parameters at which the structure is invariant under the
-  direct parent, "parent_limit"), g is a symmetry, and the weight of the eigenvalue w^m (w = exp(2 pi i/n), n the
-  order of g modulo H) of Z_j is w_m(j) = (1/n) sum_t w^(-m t) <Z_j, g^t Z_j>/<Z_j, Z_j>. Given only for the direct
-  parent.
+- Parent structure (resolve_coset). The limit of the Wyckoff parameters at which the structure is invariant under P:
+  "parent_limit" of the binaries for the direct parent, util_supergroup.parent_limit otherwise; for a supergroup that
+  is not a parent of the binaries, the embedding whose parent structure is the nearest to the model. On it, g is a
+  symmetry and acts on the matrix elements of the model (image_space, the atoms matched by their parent positions).
+
+- Weight. The weight of the eigenvalue w^m (w = exp(2 pi i/n), n the order of g modulo H) of Z_j is
+  w_m(j) = (1/n) sum_t w^(-m t) <Z_j, g^t Z_j>/<Z_j, Z_j> (weight_from_space).
+
+- S and F. S^(t)_kj = <Z_k, g^t Z_j> (overlap_matrix) and n Pi^(m) = sum_t w^(-m t) S^(t) (projected_matrix) give
+  <g^t Z_j> and n <Pi_m Z_j> for a state invariant under H if every g^t Z_j lies on the bonds of the model
+  ("complete", parent_shells); F_j = sum_{m>0} n <Pi_m Z_j> (MaterialModel.parent_forbidden_part).
 """
 
 import itertools
@@ -139,8 +147,8 @@ def parse_coset(group, spec):
         spec (None, False, dict or list): "coset" of the model input.
 
     Returns:
-        - (list) -- [(parent id, representative tag or None, embedding or None)], [] for False or a group without a
-          parent.
+        - (list) -- [(parent id, representative tag or None, embedding or None)], [] for False, or for None and a
+          group without a direct parent.
 
     Note:
         - None: the representative of the first coset in the direct parent.
@@ -153,10 +161,8 @@ def parse_coset(group, spec):
     if spec is False:
         return []
     first = group.coset
-    if first is None:
-        return []
     if spec is None:
-        return [(first["parent"], first["rep"], None)]
+        return [] if first is None else [(first["parent"], first["rep"], None)]
     specs = [spec] if isinstance(spec, dict) else list(spec)
     info = Group.global_info()
     gid = group_id(group)
@@ -166,9 +172,11 @@ def parse_coset(group, spec):
             raise ValueError(
                 f"coset must be None, False, {{'parent': id, 'rep': tag, 'embedding': index}} or a list of them, but {s!r} is given."
             )
-        parent = s.get("parent", first["parent"])
+        if "parent" not in s and first is None:
+            raise ValueError(f"{gid} has no direct parent: give the parent in {s!r}.")
+        parent = s.get("parent", first["parent"] if first else None)
         parent = group_id(Group(parent))
-        cosets = info["coset"][gid].get(parent)
+        cosets = info["coset"].get(gid, {}).get(parent)
         emb = s.get("embedding")
         if cosets is None or emb is not None:  # any supergroup (util_supergroup).
             from multipie.util.util_supergroup import embedding
@@ -628,49 +636,6 @@ class _KeySpace:
                         continue
                     M[self.idx[(nb, nk, ob[a2], ok[b2])], i] += x * np.conj(y)
         return M
-
-
-# ==================================================
-def weight(mm, frame, limits, g, n):
-    """
-    Weights of the eigenvalues of g on the parent structure.
-
-    Returns:
-        - (dict) -- parent structure of each site (parent_structure).
-        - (dict) -- {z: [w_m for m = 0..n-1]}.
-    """
-    md = model_data(mm)
-    info, lim_pos = parent_structure(mm, md, frame, limits)
-    C = np.array(mm["unit_vector"], dtype=float).T
-    ks = _KeySpace(frame, C)
-    ks.set_sites(
-        list(lim_pos.values()), [[o for o, s in zip(md["orb_of"], md["site_of"]) if s == name_sl] for name_sl in lim_pos]
-    )
-    Zp = {}
-    for z, d in md["Z"].items():
-        e = {}
-        for (m, k, Rc), v in d.items():
-            cb, ck = ks.canon(lim_pos[md["site_of"][m]], lim_pos[md["site_of"][k]] + np.array(Rc))
-            key = (cb, ck, md["orb_of"][m], md["orb_of"][k])
-            e[key] = e.get(key, 0) + v
-            ks.add(key)
-        Zp[z] = e
-    ks.close([g])
-    G = ks.action(g)
-    N = len(ks.keys)
-    zs = list(md["Z"])
-    X = np.array([ks.vector(Zp[z], N) for z in zs]).T
-    T = [X]
-    for _ in range(1, n):
-        T.append(G @ T[-1])
-    nx2 = np.einsum("ij,ij->j", X.conj(), X).real
-    ov = [np.einsum("ij,ij->j", X.conj(), Tt) / nx2 for Tt in T]
-    w = np.exp(2j * np.pi / n)
-    res = {
-        z: [round(float(np.real(sum(w ** (-m * t) * ov[t][j] for t in range(n)) / n)), 10) + 0.0 for m in range(n)]
-        for j, z in enumerate(zs)
-    }
-    return info, res
 
 
 # ==================================================

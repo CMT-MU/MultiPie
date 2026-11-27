@@ -790,8 +790,8 @@ def parent_limit(group, parent, wyckoff=None, embedding=None):
         embedding (None, int, dict or array, optional): embedding (resolve_embedding).
 
     Returns:
-        - (dict) -- {wyckoff: [{"param": {name: expression}, "position" (representative), "parent_wyckoff"}]}, the
-          same format as Group.coset["parent_limit"] (parameters modulo 1).
+        - (dict) -- parent structures of each Wyckoff site (as Group.coset["parent_limit"]), dicts with "param" (the
+          expression of each parameter, modulo 1), "position" of the representative, and "parent_wyckoff".
         - (dict) -- embedding.
     """
     h, p = gid(group), gid(parent)

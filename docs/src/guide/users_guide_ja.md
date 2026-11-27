@@ -278,7 +278,7 @@ for z, (symbol, u, key, comp) in mm["combined_id"].items(): print(z, symbol, u.s
 (ja-coset-model)=
 ### 模型の剰余類
 
-親 $P$ を持つ群 $H$（データベースの PG または SG。Oh、D6h、SG 191–194、221–230 以外）について、$P$ の剰余類 $gH$ の代表 $g$ は、模型を像の系に写します。MultiPie は、MultiPieGen の群のデータ（群の `"coset"`、`Group.global_info()["parent"]` と `["coset"]`）から、各 SAMB が $g$ でどう写るかと、親構造での $g$ の固有値の重みを与えます。$g$ は模型の入力キー `"coset"` で選びます。
+上位群 $P$ を持つ群 $H$（データベースの PG または SG。既定で使うすぐ上の親は、Oh、D6h、SG 191–194、221–230 にはありません）について、$P$ の剰余類 $gH$ の代表 $g$ は、模型を像の系に写します。MultiPie は、MultiPieGen の群のデータ（群の `"coset"`、`Group.global_info()["parent"]` と `["coset"]`）から、各 SAMB が $g$ でどう写るかと、親構造での $g$ の固有値の重みを与えます。ほかの上位群には、直接の上位群（`Group.global_info()["supergroup"]`）をたどって行き着きます（下の「任意の上位群」を参照）。$g$ は模型の入力キー `"coset"` で選びます。
 
 | `"coset"` | 意味 |
 | --- | --- |
@@ -338,7 +338,7 @@ for name, v in {**d["site"], **d["bond"]}.items(): print(name, v["source"], "->"
 | `mm.parent_forbidden_part(expectation, op=None, parent=None)` | $F_j = \sum_k (\delta_{kj} - S_{kj}) \langle \mathbb{Z}_k \rangle$ |
 | `mm.parent_shells(parent=None)`、`mm.map_bond(op=None, parent=None)` | 親構造の近接の殻と、$g$ で写したボンド |
 
-`embedding` を省くと、親構造が模型にもっとも近い埋め込みを使います。`op` を省くと、$H$ の格子で割った $H$ 以外の最初の剰余類（空間反転があればそれ）を使います。$H$ で不変な状態では、模型が親構造の近接の殻を丸ごと含んでいれば（`"complete"`。そうでなければ警告を出します）、$\langle g\,\mathbb{Z}_j \rangle = \sum_k S_{kj} \langle \mathbb{Z}_k \rangle$ です。そのため $F_j = \langle \mathbb{Z}_j \rangle - \langle g\,\mathbb{Z}_j \rangle$ を模型の中で計算できます。$F_j$ は親構造で 0 になり、空間反転模型では $\varepsilon_j F_j$ です。位数 $n > 2$ の $g$ では、$g$ の固有値 $\omega^m$ への射影 $\Pi_m = \frac{1}{n}\sum_t \omega^{-mt} g^t$ を使って、$F_j^{(m)} = n \langle \Pi_m \mathbb{Z}_j \rangle$（`by_eigenvalue=True`）と $F_j = \sum_{m > 0} F_j^{(m)} = n \langle \mathbb{Z}_j \rangle - \sum_t \langle g^t \mathbb{Z}_j \rangle$ を与えます。$n = 2$ では $\langle \mathbb{Z}_j \rangle - \langle g\,\mathbb{Z}_j \rangle$ です（行列 $n \Pi^{(m)}$ は `image_overlap` の `"projection"`）。模型の入力 `"coset"` は任意の上位群を受け付け（`{"parent": "SG:166"}`、`"rep"` と `"embedding"` は省略可）、`mm["coset"]` には `"S"`、`"S_eigenvalue"`、`"complete"`、`"shell"`、`"embedding"` も入ります。例えば、第1、第2近接の Te と R-3m（$x \to 1/3$。親の第1近接の殻は第1、第2近接からなる）では次のとおりです。
+`embedding` を省くと、親構造が模型にもっとも近い埋め込みを使います。`op` を省くと、$H$ の格子で割った $H$ 以外の最初の剰余類（空間反転があればそれ）を使います。$H$ で不変な状態では、模型が親構造の近接の殻を丸ごと含んでいれば（`"complete"`。そうでなければ警告を出します）、$\langle g\,\mathbb{Z}_j \rangle = \sum_k S_{kj} \langle \mathbb{Z}_k \rangle$ です。そのため $F_j = \langle \mathbb{Z}_j \rangle - \langle g\,\mathbb{Z}_j \rangle$ を模型の中で計算できます。$F_j$ は親構造で 0 になり、空間反転模型では $\varepsilon_j F_j$ です。位数 $n > 2$ の $g$ では、$g$ の固有値 $\omega^m$ への射影 $\Pi_m = \frac{1}{n}\sum_t \omega^{-mt} g^t$ を使って、$F_j^{(m)} = n \langle \Pi_m \mathbb{Z}_j \rangle$（`by_eigenvalue=True`）と $F_j = \sum_{m > 0} F_j^{(m)} = n \langle \mathbb{Z}_j \rangle - \sum_t \langle g^t \mathbb{Z}_j \rangle$ を与えます。$n = 2$ では $\langle \mathbb{Z}_j \rangle - \langle g\,\mathbb{Z}_j \rangle$ です（行列 $n \Pi^{(m)}$ は `image_overlap` の `"projection"`）。模型の入力 `"coset"` は任意の上位群を受け付け（`{"parent": "SG:166"}`、`"rep"` と `"embedding"` は省略可）、`mm["coset"]` には `"S"`、`"S_eigenvalue"`、`"complete"`、`"shell"`、`"embedding"` も入ります（PDF の節 "Coset" には、埋め込み、$S$ の固有値、`"complete"` を載せます）。例えば、第1、第2近接の Te と R-3m（$x \to 1/3$。親の第1近接の殻は第1、第2近接からなる）では次のとおりです。
 
 ```{code-cell} ipython3
 mt = MaterialModel()

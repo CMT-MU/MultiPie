@@ -961,7 +961,7 @@ class MaterialModel(BinaryManager):
               (parent_shells), "parent_structure".
 
         Note:
-            - S is a constant matrix of the model and g; its diagonal is w_+ - w_- of "weight" (order 2).
+            - S is a constant matrix of the model and g; its diagonal is w(+) - w(-) of "weight" (order 2).
             - S gives <g Z_j> = sum_k S_kj <Z_k> for a state invariant under H only if the model contains the whole
               neighbor shells of the parent structure ("complete").
         """

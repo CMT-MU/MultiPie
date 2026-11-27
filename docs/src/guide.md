@@ -348,10 +348,12 @@ an earlier version of Ver.3 and the weights of its controls (see
 (coset-model)=
 ### Coset of the model
 
-For a group $H$ with a parent $P$ (a PG or SG of the database; not Oh, D6h, SG 191-194, 221-230), a representative $g$
+For a group $H$ with a supergroup $P$ (a PG or SG of the database; the direct parent of the default does not exist for
+Oh, D6h, SG 191-194, 221-230), a representative $g$
 of a coset $gH$ of $P$ maps the model to an image system. MultiPie gives, from the group data of MultiPieGen (`"coset"`
 of the group, `Group.global_info()["parent"]` and `["coset"]`), how each SAMB is moved by $g$ and, on the parent
-structure, the weights of the eigenvalues of $g$. The model input key `"coset"` selects $g$:
+structure, the weights of the eigenvalues of $g$; other supergroups are reached through the direct supergroups
+(`Group.global_info()["supergroup"]`, see "Any supergroup" below). The model input key `"coset"` selects $g$:
 
 | `"coset"` | meaning |
 | --- | --- |
@@ -451,7 +453,8 @@ $F_j = \sum_{m > 0} F_j^{(m)} = n \langle \mathbb{Z}_j \rangle - \sum_t \langle 
 $\langle \mathbb{Z}_j \rangle - \langle g\,\mathbb{Z}_j \rangle$ for $n = 2$ (the matrices $n \Pi^{(m)}$ are `"projection"`
 of `image_overlap`). The model
 input `"coset"` accepts any supergroup, `{"parent": "SG:166"}` (with `"rep"` and `"embedding"` optionally), and
-`mm["coset"]` has also `"S"`, `"S_eigenvalue"`, `"complete"`, `"shell"`, and `"embedding"`. E.g., Te with the first
+`mm["coset"]` has also `"S"`, `"S_eigenvalue"`, `"complete"`, `"shell"`, and `"embedding"` (the section "Coset" of the
+PDF shows the embedding, the eigenvalues of $S$, and `"complete"`). E.g., Te with the first
 and second neighbors and R-3m ($x \to 1/3$; the first neighbor shell of the parent consists of the first and second
 neighbors):
 

@@ -28,6 +28,7 @@ D$_{\rm 4h}$.
 | [Cluster and combined SAMB](#group-cluster) | `cluster_samb()`, `combined_samb()`, `cg()`, `multipole_cluster_samb()`, `combined_object()` |
 | [Transformation by the symmetry operations](#group-transform) | `transform_vector()`, `transform_multipole()`, `create_cell_vector()`, `create_cell_multipole()` |
 | [Magnetic groups and response tensors](#group-magnetic) | `active_multipole`, `response_tensor_all()`, `response_tensor()` |
+| [Parents, supergroups, and cosets](#group-supergroup) | `coset`, `supergroups()`, `embedding()`, `coset_decomposition()`, `parent_limit()`, `map_site()` |
 
 (group-create)=
 ## 1. Creating a group
@@ -551,4 +552,37 @@ f.name(), f.active_multipole
 
 ```{code-cell} ipython3
 f.response_tensor("M", 1, 3), f.response_tensor("T", 2, (1, 2), "a")
+```
+
+(group-supergroup)=
+## 10. Parents, supergroups, and cosets
+
+`coset` is the first coset of the group in its direct parent (the representative parent of MultiPieGen;
+`Group.global_info()["parent"]` and `["coset"]` give the chain of parents and the cosets in them). `supergroups()`
+gives the other supergroups too, through the chains of the direct (maximal) supergroups of the group data
+(`Group.global_info()["supergroup"]`), with the embedding $x_P = A x_H$, the index modulo the lattice of $H$ and of
+$P$, and the chain (`"path"`); the lattice of $P$ is at most 4 times finer than that of $H$. For P3$_1$21 (No.152, Te),
+R-3m (No.166) is reached through R32 (No.155):
+
+```{code-cell} ipython3
+t = Group("SG:152")
+t.coset["parent"], t.coset["rep"], [(d["group"], d["index"], d["path"]) for d in t.supergroups(max_index=6) if d["group"] in ("SG:164", "SG:166")]
+```
+
+`embedding(parent)` gives all the embeddings of $H$ in $P$ (different embeddings give different parent structures for
+the same atoms of $H$), `coset_decomposition(parent)` all the left cosets $gH$ (modulo the lattice of $P$, or of $H$
+with `modulo="self"`), `parent_limit(parent)` the values of the Wyckoff parameters at which the orbit is invariant
+under $P$, and `map_site(op, wyckoff, parent)` the atoms moved by $g$ on that parent structure; see
+{ref}`coset-model`:
+
+```{code-cell} ipython3
+[e["origin"] for e in t.embedding("SG:166")]
+```
+
+```{code-cell} ipython3
+[(c["rep"], c["kind"]) for c in t.coset_decomposition("SG:166", modulo="self")]
+```
+
+```{code-cell} ipython3
+t.parent_limit("SG:166", "3a"), t.map_site("-1:[1/3,1/3,0]", "3a", "SG:166")
 ```
