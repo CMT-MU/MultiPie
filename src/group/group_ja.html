@@ -1,0 +1,1922 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Group クラスの使い方 &#8212; MultiPie</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=6a604523" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=2106c826" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../../_static/documentation_options.js?v=a8e58a58"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script data-sd-tabs-storage-prefix="sphinx-design-tab-id-" src="../../_static/design-tabs.js?v=fcb327ea"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"loader": {"load": ["[tex]/physics"]}, "tex": {"packages": {"[+]": ["physics"]}, "macros": {"bm": ["\\boldsymbol{#1}", 1]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'src/group/group_ja';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script src="../../_static/custom.js?v=7f87e22d"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../_static/searchtools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../README.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/multipie_logo.png" class="logo__image only-light" alt="MultiPie - Home"/>
+    <img src="../../_static/multipie_logo.png" class="logo__image only-dark pst-js-only" alt="MultiPie - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installing MultiPie</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference external" href="https://cmt-mu.github.io/MultiPieGen/src/group_info.html">Group information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guide.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../atomic_multipole_table.html">Atomic multipole operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../group.html">Using the Group class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../materials.html">Examples of materials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../post_processing.html">Post-processing tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changes.html">Changes from Ver.2</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../api_core.html">Core</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api_core/init.html">Type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_core/cmd.html">Create function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_core/group.html">Group</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_core/material_model.html">Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_core/model_analyzer.html">ModelAnalyzer</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../api_util.html">Utility</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_atomic_multipole.html">Atomic multipole</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_atomic_multipole_operator.html">Atomic multipole operator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_binary.html">Binary data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_crystal.html">Crystal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_dict.html">Dict</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_gram_schmidt.html">Gram-Schmidt orthonormalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_harmonics.html">Harmonics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_material_model_pdf.html">PDF creator for Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_material_model.html">Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_model_analyzer.html">Model Analyzer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_multipolar_harmonics.html">Multipolar harmonics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_pdf_latex.html">PDF creator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_plot.html">Plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_response_tensor.html">Response tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_coset.html">Coset of a model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_supergroup.html">Supergroups</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_samb.html">SAMB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_tag.html">Tag</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_trace_moment.html">Trace moments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_wannier.html">Wannier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util_wyckoff.html">Wyckoff position</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_util/util.html">Versatile</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/CMT-MU/MultiPie.git" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Group クラスの使い方</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ja-group-create">1. 群の作成</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ja-group-symmetry-operation">2. 対称操作</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ja-group-character">3. 指標と表現行列</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wyckoff">4. Wyckoff 位置</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ja-group-harmonics">5. 調和関数</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#samb">6. 原子基底と原子 SAMB</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#samb-samb">7. クラスター SAMB と結合 SAMB</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ja-group-transform">8. 対称操作による変換</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ja-group-magnetic">9. 磁気群と応答テンソル</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ja-group-supergroup">10. 親、上位群、剰余類</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="group">
+<h1>Group クラスの使い方<a class="headerlink" href="#group" title="Link to this heading">#</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">Group</span></code> は、群のデータベースから、点群（PG）、空間群（SG）、磁気点群（MPG）、磁気空間群（MSG）のデータを与えます。このページでは、そのプロパティとメソッドの使い方を、MultiPie Ver.3 の出力とともに示します。量の意味は<a class="reference internal" href="../guide/users_guide_ja.html"><span class="std std-doc">ユーザーガイド</span></a>で説明しています。英語版は<a class="reference internal" href="../group.html"><span class="std std-doc">こちら</span></a>です。</p>
+<p>例の多くは、点群 D<span class="math notranslate nohighlight">\(_{\rm 4h}\)</span>、空間群 P4/mmm（No. 123）、D<span class="math notranslate nohighlight">\(_{\rm 4h}\)</span> の磁気点群を使います。</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>項目</p></th>
+<th class="head text-left"><p>プロパティとメソッド</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="#ja-group-create">群の作成</a></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">Group(tag)</span></code>, <code class="docutils literal notranslate"><span class="pre">str()</span></code>, <code class="docutils literal notranslate"><span class="pre">name()</span></code>, <code class="docutils literal notranslate"><span class="pre">latex()</span></code>, <code class="docutils literal notranslate"><span class="pre">ID</span></code>, <code class="docutils literal notranslate"><span class="pre">group_type</span></code>, <code class="docutils literal notranslate"><span class="pre">info</span></code>, <code class="docutils literal notranslate"><span class="pre">is_point_group</span></code>, <code class="docutils literal notranslate"><span class="pre">is_magnetic_group</span></code>, <code class="docutils literal notranslate"><span class="pre">is_hexagonal_subgroup</span></code>, <code class="docutils literal notranslate"><span class="pre">global_info()</span></code>, <code class="docutils literal notranslate"><span class="pre">clear_cache()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="#ja-group-symmetry-operation">対称操作</a></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">symmetry_operation</span></code>, <code class="docutils literal notranslate"><span class="pre">tag_symmetry_operation()</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="#ja-group-character">指標と表現行列</a></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">character</span></code>, <code class="docutils literal notranslate"><span class="pre">representation_matrix</span></code>, <code class="docutils literal notranslate"><span class="pre">tag_irrep()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="#ja-group-wyckoff">Wyckoff 位置</a></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">wyckoff</span></code>, <code class="docutils literal notranslate"><span class="pre">find_wyckoff()</span></code>, <code class="docutils literal notranslate"><span class="pre">find_wyckoff_site()</span></code>, <code class="docutils literal notranslate"><span class="pre">find_wyckoff_bond()</span></code>, <code class="docutils literal notranslate"><span class="pre">create_cell_site()</span></code>, <code class="docutils literal notranslate"><span class="pre">create_cell_bond()</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="#ja-group-harmonics">調和関数</a></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">harmonics</span></code>, <code class="docutils literal notranslate"><span class="pre">multipolar_harmonics</span></code>, <code class="docutils literal notranslate"><span class="pre">tag_multipole()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="#ja-group-atomic">原子基底と原子 SAMB</a></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">atomic_basis()</span></code>, <code class="docutils literal notranslate"><span class="pre">tag_atomic_basis()</span></code>, <code class="docutils literal notranslate"><span class="pre">tag_atomic_basis_proj()</span></code>, <code class="docutils literal notranslate"><span class="pre">atomic_samb()</span></code>, <code class="docutils literal notranslate"><span class="pre">transform_atomic_samb()</span></code>, <code class="docutils literal notranslate"><span class="pre">create_atomic_samb_L()</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="#ja-group-cluster">クラスター SAMB と結合 SAMB</a></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">cluster_samb()</span></code>, <code class="docutils literal notranslate"><span class="pre">combined_samb()</span></code>, <code class="docutils literal notranslate"><span class="pre">cg()</span></code>, <code class="docutils literal notranslate"><span class="pre">multipole_cluster_samb()</span></code>, <code class="docutils literal notranslate"><span class="pre">combined_object()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="#ja-group-transform">対称操作による変換</a></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">transform_vector()</span></code>, <code class="docutils literal notranslate"><span class="pre">transform_multipole()</span></code>, <code class="docutils literal notranslate"><span class="pre">create_cell_vector()</span></code>, <code class="docutils literal notranslate"><span class="pre">create_cell_multipole()</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="#ja-group-magnetic">磁気群と応答テンソル</a></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">active_multipole</span></code>, <code class="docutils literal notranslate"><span class="pre">response_tensor_all()</span></code>, <code class="docutils literal notranslate"><span class="pre">response_tensor()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="#ja-group-supergroup">親、上位群、剰余類</a></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">coset</span></code>, <code class="docutils literal notranslate"><span class="pre">supergroups()</span></code>, <code class="docutils literal notranslate"><span class="pre">embedding()</span></code>, <code class="docutils literal notranslate"><span class="pre">coset_decomposition()</span></code>, <code class="docutils literal notranslate"><span class="pre">parent_limit()</span></code>, <code class="docutils literal notranslate"><span class="pre">map_site()</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="ja-group-create">
+<span id="id1"></span><h2>1. 群の作成<a class="headerlink" href="#ja-group-create" title="Link to this heading">#</a></h2>
+<p>群はタグで指定します。</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>群</p></th>
+<th class="head text-left"><p>タグ</p></th>
+<th class="head text-left"><p>例</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>PG</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">PG:1</span></code>〜<code class="docutils literal notranslate"><span class="pre">PG:47</span></code>、または Schoenflies 記号</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">&quot;PG:15&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;D4h&quot;</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>SG</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">SG:1</span></code>〜<code class="docutils literal notranslate"><span class="pre">SG:230</span></code>、番号、または Schoenflies 記号</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">&quot;SG:123&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">123</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;D4h^1&quot;</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>MPG</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">MPG:</span></code> ＋ ID <code class="docutils literal notranslate"><span class="pre">PG.no.ID</span></code>、または ID</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">&quot;MPG:15.7.59&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;15.7.59&quot;</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>MSG</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">MSG:</span></code> ＋ BNS 番号、または BNS 番号</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">&quot;MSG:123.345&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;123.345&quot;</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>すべての群の表とそのタグは<a class="reference external" href="https://cmt-mu.github.io/MultiPieGen/src/group_info_ja.html">群の情報</a>にあります。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">multipie</span><span class="w"> </span><span class="kn">import</span> <span class="n">Group</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="s2">"D4h"</span><span class="p">)</span>
+<span class="nb">str</span><span class="p">(</span><span class="n">g</span><span class="p">),</span> <span class="n">g</span><span class="o">.</span><span class="n">group_type</span><span class="p">,</span> <span class="n">g</span><span class="o">.</span><span class="n">ID</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>('D4h', 'PG', '15')
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="o">.</span><span class="n">name</span><span class="p">(),</span> <span class="n">g</span><span class="o">.</span><span class="n">name</span><span class="p">(</span><span class="n">detail</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>('D4h', 'PG#15:  D4h  (4/mmm)  [ tetragonal ]')
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="o">.</span><span class="n">latex</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>'D_{\\rm 4h}'
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="o">.</span><span class="n">latex</span><span class="p">(</span><span class="n">detail</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>'PG No. 15\\quad$D_{\\rm 4h}$\\quad$4/mmm$\\quad[ tetragonal ]'
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Group</span><span class="p">(</span><span class="s2">"PG:15"</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="p">(),</span> <span class="n">Group</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="p">(),</span> <span class="n">Group</span><span class="p">(</span><span class="s2">"SG:123"</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>('D4h', 'D4h^1', 'D4h^1')
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Group</span><span class="p">(</span><span class="s2">"15.7.59"</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="p">(</span><span class="n">detail</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>"MPG#15.7.59:  4/m'm'm'  [ Type III, tetragonal ]"
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Group</span><span class="p">(</span><span class="s2">"123.345"</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="p">(</span><span class="n">detail</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>"MSG#123.345:  P4/mm'm'    [ Type III, tetragonal ]"
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="o">.</span><span class="n">is_point_group</span><span class="p">,</span> <span class="n">g</span><span class="o">.</span><span class="n">is_magnetic_group</span><span class="p">,</span> <span class="n">g</span><span class="o">.</span><span class="n">is_hexagonal_subgroup</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(True, False, False)
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">name()</span></code> と <code class="docutils literal notranslate"><span class="pre">latex()</span></code> は群の名前をテキストと LaTeX で与えます。<code class="docutils literal notranslate"><span class="pre">detail=True</span></code> とすると、番号、国際記号、晶系が加わります。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">is_point_group</span></code> は PG と MPG で、<code class="docutils literal notranslate"><span class="pre">is_magnetic_group</span></code> は MPG と MSG で真になります。<code class="docutils literal notranslate"><span class="pre">is_hexagonal_subgroup</span></code> は D<span class="math notranslate nohighlight">\(_{\rm 6h}\)</span> の部分群（三方晶と六方晶）で真になり、その調和関数は六方晶の基底を使います。</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">info</span></code> は群の情報の named tuple です。関連する群（点群、空間群、灰色 MPG、同じ系列の MSG）を与え、<code class="docutils literal notranslate"><span class="pre">name()</span></code> と <code class="docutils literal notranslate"><span class="pre">latex()</span></code> の <code class="docutils literal notranslate"><span class="pre">tp</span></code> でそのどれかを指定できます。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">SG</span><span class="p">,</span> <span class="n">g</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">MPG</span><span class="p">,</span> <span class="n">g</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">MSG</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>('SG:123', 'MPG:15.2.54', 'MSG:123.340')
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="o">.</span><span class="n">name</span><span class="p">(</span><span class="n">tp</span><span class="o">=</span><span class="s2">"SG"</span><span class="p">),</span> <span class="n">g</span><span class="o">.</span><span class="n">latex</span><span class="p">(</span><span class="n">tp</span><span class="o">=</span><span class="s2">"SG"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>('D4h^1', 'D_{\\rm 4h}^{1}')
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Group.global_info()</span></code> はすべての群に共通の情報で、例えばタグと ID の対応表を含みます。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gi</span> <span class="o">=</span> <span class="n">Group</span><span class="o">.</span><span class="n">global_info</span><span class="p">()</span>
+<span class="nb">list</span><span class="p">(</span><span class="n">gi</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>['id_set',
+ 'tag',
+ 'id',
+ 'group_name',
+ 'character',
+ 'root_cluster',
+ 'harmonics',
+ 'response_tensor',
+ 'parent',
+ 'coset',
+ 'supergroup']
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gi</span><span class="p">[</span><span class="s2">"id"</span><span class="p">][</span><span class="s2">"D4h"</span><span class="p">],</span> <span class="n">gi</span><span class="p">[</span><span class="s2">"tag"</span><span class="p">][</span><span class="s2">"PG:15"</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>('PG:15', 'D4h')
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">[(</span><span class="n">t</span><span class="p">,</span> <span class="n">Group</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="p">())</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">gi</span><span class="p">[</span><span class="s2">"tag"</span><span class="p">]</span> <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"MPG:15."</span><span class="p">)][:</span><span class="mi">4</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[('MPG:15.1.53', '4/mmm'),
+ ('MPG:15.2.54', "4/mmm1'"),
+ ('MPG:15.3.55', "4/m'mm"),
+ ('MPG:15.4.56', "4'/mm'm")]
+</pre></div>
+</div>
+</div>
+</div>
+<p>群のデータは一度だけ読み込まれてメモリに保持されます。<code class="docutils literal notranslate"><span class="pre">Group.clear_cache()</span></code> で解放できます。</p>
+</section>
+<section id="ja-group-symmetry-operation">
+<span id="id2"></span><h2>2. 対称操作<a class="headerlink" href="#ja-group-symmetry-operation" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">symmetry_operation</span></code> は対称操作の dict です。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">so</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">symmetry_operation</span>
+<span class="nb">list</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>['tag',
+ 'generator',
+ 'cartesian',
+ 'fractional',
+ 'det',
+ 'product',
+ 'so_matrix',
+ 'mapping']
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">so</span><span class="p">[</span><span class="s2">"tag"</span><span class="p">][:</span><span class="mi">8</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>['1', '2[001]', '4+[001]', '4-[001]', '2[010]', '2[100]', '2[110]', '2[1-10]']
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">so</span><span class="p">[</span><span class="s2">"generator"</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>['2[001]', '4+[001]', '2[010]', '-1']
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">so</span><span class="p">[</span><span class="s2">"cartesian"</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>  <span class="c1"># 4+[001].</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0, -1, 0],
+       [1, 0, 0],
+       [0, 0, 1]], dtype=object)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">so</span><span class="p">[</span><span class="s2">"det"</span><span class="p">][</span><span class="mi">8</span><span class="p">:</span><span class="mi">12</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-1, -1, -1, -1], dtype=object)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">so</span><span class="p">[</span><span class="s2">"product"</span><span class="p">][(</span><span class="s2">"4+[001]"</span><span class="p">,</span> <span class="s2">"4+[001]"</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>'2[001]'
+</pre></div>
+</div>
+</div>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>キー</p></th>
+<th class="head text-left"><p>内容</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">tag</span></code></p></td>
+<td class="text-left"><p>対称操作。例えば <code class="docutils literal notranslate"><span class="pre">4+[001]</span></code>（[001] 軸まわりの <span class="math notranslate nohighlight">\(2\pi/4\)</span> 回転）、<code class="docutils literal notranslate"><span class="pre">-1</span></code>（空間反転）、<code class="docutils literal notranslate"><span class="pre">m[100]</span></code>（鏡映）</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">generator</span></code></p></td>
+<td class="text-left"><p>生成元（PG と SG）</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">cartesian</span></code>, <code class="docutils literal notranslate"><span class="pre">fractional</span></code></p></td>
+<td class="text-left"><p>デカルト座標と分率座標での行列（SG と MSG では並進を含む <code class="docutils literal notranslate"><span class="pre">(4,</span> <span class="pre">4)</span></code>）</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">det</span></code></p></td>
+<td class="text-left"><p>行列式（真性回転は +1、非真性回転は -1）</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">product</span></code></p></td>
+<td class="text-left"><p>積の表 <code class="docutils literal notranslate"><span class="pre">{(a,</span> <span class="pre">b):</span> <span class="pre">ab}</span></code>（PG）</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">plus_set</span></code>, <code class="docutils literal notranslate"><span class="pre">cartesian_primitive</span></code>, <code class="docutils literal notranslate"><span class="pre">fractional_primitive</span></code></p></td>
+<td class="text-left"><p>格子の中心化の並進と、基本単位胞での行列（SG）</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">tr_sign</span></code></p></td>
+<td class="text-left"><p>時間反転の符号（MPG と MSG）。<code class="docutils literal notranslate"><span class="pre">-1'</span></code> のように時間反転を含む操作で -1</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">so_matrix</span></code></p></td>
+<td class="text-left"><p>基底 <code class="docutils literal notranslate"><span class="pre">[1]</span></code>（s = 0）と <code class="docutils literal notranslate"><span class="pre">[x,</span> <span class="pre">y,</span> <span class="pre">z]</span></code>（s = 1）に対するデカルト座標での行列。キーは <code class="docutils literal notranslate"><span class="pre">(&quot;Q&quot;,</span> <span class="pre">s)</span></code>（極性）と <code class="docutils literal notranslate"><span class="pre">(&quot;G&quot;,</span> <span class="pre">s)</span></code>（軸性、<span class="math notranslate nohighlight">\(\det R\)</span> がかかる）（PG と SG。SG では点群の部分）</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">mapping</span></code></p></td>
+<td class="text-left"><p>親の群の対称操作との対応 <code class="docutils literal notranslate"><span class="pre">{&quot;top&quot;:</span> <span class="pre">top,</span> <span class="pre">&quot;mapping&quot;:</span> <span class="pre">cosets}</span></code>。<code class="docutils literal notranslate"><span class="pre">top</span></code> は <code class="docutils literal notranslate"><span class="pre">Oh</span></code> か <code class="docutils literal notranslate"><span class="pre">D6h</span></code> で、<code class="docutils literal notranslate"><span class="pre">cosets</span></code> は親の群をたどる <code class="docutils literal notranslate"><span class="pre">top</span></code> での左剰余類を <code class="docutils literal notranslate"><span class="pre">top</span></code> の対称操作の番号（1 から）で与えたもの。最初は群そのもの（PG と SG）</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Group.tag_symmetry_operation(tag)</span></code> は対称操作の性質を与えます。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Group</span><span class="o">.</span><span class="n">tag_symmetry_operation</span><span class="p">(</span><span class="s2">"4+[001]"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{'mirror': False,
+ 'inversion': False,
+ 'n': 4,
+ 'axis': '[0,0,1]',
+ 'det': 1,
+ 'partial_trans': '[0,0,0]',
+ 'zero_trans': True,
+ 'point_group': True,
+ 'time_reversal': False}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Group</span><span class="o">.</span><span class="n">tag_symmetry_operation</span><span class="p">(</span><span class="s2">"-4+[001]"</span><span class="p">,</span> <span class="n">latex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>'-4^{+}_{\\,\\,001}'
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="ja-group-character">
+<span id="id3"></span><h2>3. 指標と表現行列<a class="headerlink" href="#ja-group-character" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">character</span></code> は（点群の）指標表と既約表現の積を与えます。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ch</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">character</span>
+<span class="nb">list</span><span class="p">(</span><span class="n">ch</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>['conjugacy',
+ 'dimension',
+ 'table',
+ 'table_full',
+ 'polar_axial_conversion',
+ 'symmetric_product',
+ 'anti_symmetric_product']
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ch</span><span class="p">[</span><span class="s2">"conjugacy"</span><span class="p">][:</span><span class="mi">4</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[['1'], ['2[001]'], ['2[100]', '2[010]'], ['2[110]', '2[1-10]']]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ch</span><span class="p">[</span><span class="s2">"table"</span><span class="p">][</span><span class="s2">"Eu"</span><span class="p">]</span>  <span class="c1"># 共役類ごと。</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([2, -2, 0, 0, 0, -2, 2, 0, 0, 0], dtype=object)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ch</span><span class="p">[</span><span class="s2">"dimension"</span><span class="p">][</span><span class="s2">"Eu"</span><span class="p">],</span> <span class="n">ch</span><span class="p">[</span><span class="s2">"polar_axial_conversion"</span><span class="p">][</span><span class="s2">"Eu"</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2, 'Eg')
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ch</span><span class="p">[</span><span class="s2">"symmetric_product"</span><span class="p">][(</span><span class="s2">"Eu"</span><span class="p">,</span> <span class="s2">"Eu"</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(1, 'A1g'), (1, 'B1g'), (1, 'B2g')]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ch</span><span class="p">[</span><span class="s2">"anti_symmetric_product"</span><span class="p">][</span><span class="s2">"Eu"</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(1, 'A2g')]
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">table_full</span></code> は共役類ごとではなく、対称操作ごとの指標を与えます。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">polar_axial_conversion</span></code> は、同じ関数の軸性量の既約表現を与えます。例えば <span class="math notranslate nohighlight">\((x, y)\)</span> は、極性ベクトルとしては <span class="math notranslate nohighlight">\(E_u\)</span>、軸性ベクトルとしては <span class="math notranslate nohighlight">\(E_g\)</span> です。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">symmetric_product</span></code> と <code class="docutils literal notranslate"><span class="pre">anti_symmetric_product</span></code> は、対称積と反対称積の分解を <code class="docutils literal notranslate"><span class="pre">(重複度,</span> <span class="pre">既約表現)</span></code> で与えます。</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">representation_matrix</span></code> は、各対称操作に対する既約表現の行列を <code class="docutils literal notranslate"><span class="pre">rm[&quot;tag&quot;]</span></code> の順に与えます。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rm</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">representation_matrix</span>
+<span class="n">rm</span><span class="p">[</span><span class="s2">"tag"</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span> <span class="n">rm</span><span class="p">[</span><span class="s2">"matrix"</span><span class="p">][</span><span class="s2">"Eu"</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>('4+[001]',
+ array([[0, -1],
+        [1, 0]], dtype=object))
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Group</span><span class="o">.</span><span class="n">tag_irrep</span><span class="p">(</span><span class="s2">"Eu"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{'tag': 'Eu',
+ 'dimension': 2,
+ 'parity': 'odd',
+ 'complex': '',
+ 'head': 'E',
+ 'subscript': 'u',
+ 'superscript': ''}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Group</span><span class="o">.</span><span class="n">tag_irrep</span><span class="p">(</span><span class="s2">"Eu"</span><span class="p">,</span> <span class="n">latex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>'E_{u}'
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="wyckoff">
+<span id="ja-group-wyckoff"></span><h2>4. Wyckoff 位置<a class="headerlink" href="#wyckoff" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">wyckoff</span></code> は Wyckoff サイトと、PG と SG では Wyckoff ボンドを与えます。ボンドの位置 <code class="docutils literal notranslate"><span class="pre">2b&#64;1o</span></code> は、中心がサイトの位置 <code class="docutils literal notranslate"><span class="pre">1o</span></code> にあるボンドの位置 <code class="docutils literal notranslate"><span class="pre">2b</span></code>（2 本のボンド）です。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">w</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">wyckoff</span>
+<span class="nb">list</span><span class="p">(</span><span class="n">w</span><span class="p">[</span><span class="s2">"site"</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>['1o', '2a', '4b', '4c', '8d', '8e', '8f', '16g']
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">w</span><span class="p">[</span><span class="s2">"site"</span><span class="p">][</span><span class="s2">"4b"</span><span class="p">][</span><span class="s2">"symmetry"</span><span class="p">],</span> <span class="n">w</span><span class="p">[</span><span class="s2">"site"</span><span class="p">][</span><span class="s2">"4b"</span><span class="p">][</span><span class="s2">"conventional"</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>('m.m2',
+ array([[x, x, 0],
+        [-x, -x, 0],
+        [-x, x, 0],
+        [x, -x, 0]], dtype=object))
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">w</span><span class="p">[</span><span class="s2">"site"</span><span class="p">][</span><span class="s2">"4b"</span><span class="p">][</span><span class="s2">"bond"</span><span class="p">][:</span><span class="mi">3</span><span class="p">]</span>  <span class="c1"># 中心が 4b にあるボンドの位置。</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>['4a@4b', '4b@4b', '4c@4b']
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="n">w</span><span class="p">[</span><span class="s2">"bond"</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())[:</span><span class="mi">4</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>['1a@1o', '2b@1o', '2c@1o', '4d@1o']
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">w</span><span class="p">[</span><span class="s2">"bond"</span><span class="p">][</span><span class="s2">"2b@1o"</span><span class="p">][</span><span class="s2">"conventional"</span><span class="p">]</span>  <span class="c1"># (ベクトル, 中心)。</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[X, 0, 0, 0, 0, 0],
+       [0, X, 0, 0, 0, 0]], dtype=object)
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">find_wyckoff_site(site)</span></code> と <code class="docutils literal notranslate"><span class="pre">find_wyckoff_bond(bond)</span></code> は、サイトやボンドの Wyckoff 位置を探し、等価なサイトやボンドを与えます。<code class="docutils literal notranslate"><span class="pre">find_wyckoff()</span></code> はそのどちらかを呼びます。サイトは <code class="docutils literal notranslate"><span class="pre">&quot;[x,y,z]&quot;</span></code>、ボンドは <code class="docutils literal notranslate"><span class="pre">&quot;[始点];[終点]&quot;</span></code>、<code class="docutils literal notranslate"><span class="pre">&quot;[ベクトル]&#64;[中心]&quot;</span></code>、<code class="docutils literal notranslate"><span class="pre">&quot;[始点]:[ベクトル]&quot;</span></code> のいずれかで書きます。ボンドは (ベクトル, 中心) で与えられます。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="o">.</span><span class="n">find_wyckoff_site</span><span class="p">(</span><span class="s2">"[1,1,0]"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>('4b',
+ array([[ 1.,  1.,  0.],
+        [-1., -1.,  0.],
+        [-1.,  1.,  0.],
+        [ 1., -1.,  0.]]))
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="o">.</span><span class="n">find_wyckoff_bond</span><span class="p">(</span><span class="s2">"[0,0,0];[1,0,0]"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>('4a@4c',
+ array([[ 1. ,  0. ,  0. ,  0.5,  0. ,  0. ],
+        [-1. ,  0. ,  0. , -0.5,  0. ,  0. ],
+        [ 0. ,  1. ,  0. ,  0. ,  0.5,  0. ],
+        [ 0. , -1. ,  0. ,  0. , -0.5,  0. ]]))
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="o">.</span><span class="n">find_wyckoff</span><span class="p">(</span><span class="s2">"[1,0,0]@[0,0,0]"</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>'2b@1o'
+</pre></div>
+</div>
+</div>
+</div>
+<p>空間群では座標は分率座標です。<code class="docutils literal notranslate"><span class="pre">create_cell_site()</span></code> と <code class="docutils literal notranslate"><span class="pre">create_cell_bond()</span></code> は、単位胞内のサイトとボンド、対称操作からの対応（1 始まりの番号）、Wyckoff 位置を与えます。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">find_wyckoff_site</span><span class="p">(</span><span class="s2">"[1/2,0,0]"</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>'2f'
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sites</span><span class="p">,</span> <span class="n">mapping</span><span class="p">,</span> <span class="n">wp</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">create_cell_site</span><span class="p">(</span><span class="s2">"[1/2,0,0]"</span><span class="p">)</span>
+<span class="n">sites</span><span class="p">,</span> <span class="n">wp</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([[0.5, 0. , 0. ],
+        [0. , 0.5, 0. ]]),
+ '2f')
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bonds</span><span class="p">,</span> <span class="n">mapping</span><span class="p">,</span> <span class="n">wp</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">create_cell_bond</span><span class="p">(</span><span class="s2">"[0,0,0];[1/2,0,0]"</span><span class="p">)</span>
+<span class="n">bonds</span><span class="p">,</span> <span class="n">wp</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([[ 0.5 ,  0.  ,  0.  ,  0.25,  0.  ,  0.  ],
+        [-0.5 ,  0.  ,  0.  ,  0.75,  0.  ,  0.  ],
+        [ 0.  ,  0.5 ,  0.  ,  0.  ,  0.25,  0.  ],
+        [ 0.  , -0.5 ,  0.  ,  0.  ,  0.75,  0.  ]]),
+ '4a@4l')
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="ja-group-harmonics">
+<span id="id4"></span><h2>5. 調和関数<a class="headerlink" href="#ja-group-harmonics" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">harmonics</span></code> は点群調和関数（階数 <span class="math notranslate nohighlight">\(\le 11\)</span>）を、多極子のキー（<a class="reference internal" href="../guide/users_guide_ja.html#ja-multipole-key"><span class="std std-ref">1. 多極子のキー</span></a>）をキーとする <code class="docutils literal notranslate"><span class="pre">Dict</span></code> で与えます。値は各成分の多項式と、球面調和関数 <span class="math notranslate nohighlight">\(O_{lm}\)</span> からのユニタリー行列 <span class="math notranslate nohighlight">\(U\)</span>（行は <span class="math notranslate nohighlight">\(m = l, \dots, -l\)</span>）です。<code class="docutils literal notranslate"><span class="pre">Dict</span></code> は <code class="docutils literal notranslate"><span class="pre">select()</span></code> でキーのフィールドによって要素を選び、<code class="docutils literal notranslate"><span class="pre">named_keys()</span></code> でキーを named tuple として与えます。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">h</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">harmonics</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>216
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="s2">"Q"</span><span class="p">,</span> <span class="n">l</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[('Q', 2, 'A1g', -1, -1, 0, 0, 'q'),
+ ('Q', 2, 'B1g', -1, -1, 0, 0, 'q'),
+ ('Q', 2, 'B2g', -1, -1, 0, 0, 'q'),
+ ('Q', 2, 'Eg', -1, -1, 0, 0, 'q')]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex</span><span class="p">,</span> <span class="n">U</span> <span class="o">=</span> <span class="n">h</span><span class="p">[(</span><span class="s2">"Q"</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">"B1g"</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"q"</span><span class="p">)]</span>
+<span class="n">ex</span><span class="p">,</span> <span class="n">U</span><span class="o">.</span><span class="n">T</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([sqrt(3)*x**2/2 - sqrt(3)*y**2/2], dtype=object),
+ array([[sqrt(2)/2, 0, 0, 0, sqrt(2)/2]], dtype=object))
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">[(</span><span class="n">key</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">key</span><span class="o">.</span><span class="n">Gamma</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">h</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">l</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">named_keys</span><span class="p">()]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[('G', 'A2g'), ('G', 'Eg'), ('Q', 'A2u'), ('Q', 'Eu')]
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Group.tag_multipole(key,</span> <span class="pre">comp=None,</span> <span class="pre">latex=False,</span> <span class="pre">superscript=&quot;&quot;)</span></code> は多極子の記号を与えます。<code class="docutils literal notranslate"><span class="pre">comp</span></code> は 0 から数える成分で、<code class="docutils literal notranslate"><span class="pre">None</span></code> のときはすべての成分を与えます。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Group</span><span class="o">.</span><span class="n">tag_multipole</span><span class="p">((</span><span class="s2">"Q"</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">"Eg"</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"q"</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>['Q(2,1)(Eg)', 'Q(2,2)(Eg)']
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Group</span><span class="o">.</span><span class="n">tag_multipole</span><span class="p">((</span><span class="s2">"Q"</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">"Eg"</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"q"</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="n">latex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">superscript</span><span class="o">=</span><span class="s2">"a"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>'\\mathbb{Q}_{2,2}^{(a)}(E_{g})'
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">multipolar_harmonics</span></code> は、内部自由度をもつ点群多極子調和関数（内部階数 <code class="docutils literal notranslate"><span class="pre">s</span></code> = 1〜3、階数 <span class="math notranslate nohighlight">\(\le 3\)</span>）を <code class="docutils literal notranslate"><span class="pre">(係数,</span> <span class="pre">式)</span></code> で与えます（<a class="reference internal" href="../guide/users_guide_ja.html#ja-multipolar-harmonics"><span class="std std-ref">8. 点群多極子調和関数</span></a>）。例えば、軸性ベクトル <span class="math notranslate nohighlight">\(\boldsymbol{G}\)</span> から作る電気トロイダル単極子 <span class="math notranslate nohighlight">\(\boldsymbol{r} \cdot \boldsymbol{G}\)</span> は次のとおりです。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mh</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">multipolar_harmonics</span>
+<span class="n">coeff</span><span class="p">,</span> <span class="n">ex</span> <span class="o">=</span> <span class="n">mh</span><span class="p">[(</span><span class="s2">"G"</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"A1u"</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">"g"</span><span class="p">)]</span>
+<span class="n">ex</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([sqrt(3)*G_{x}*x/3 + sqrt(3)*G_{y}*y/3 + sqrt(3)*G_{z}*z/3],
+      dtype=object)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="samb">
+<span id="ja-group-atomic"></span><h2>6. 原子基底と原子 SAMB<a class="headerlink" href="#samb" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">atomic_basis(basis_type)</span></code> は、<code class="docutils literal notranslate"><span class="pre">&quot;lg&quot;</span></code>（実軌道）、<code class="docutils literal notranslate"><span class="pre">&quot;lgs&quot;</span></code>（スピン付き）、<code class="docutils literal notranslate"><span class="pre">&quot;jml&quot;</span></code>（全角運動量）について、階数ごとの軌道を与えます（<a class="reference internal" href="../guide/users_guide_ja.html#ja-atomic-orbitals"><span class="std std-ref">3. 原子軌道</span></a>）。<code class="docutils literal notranslate"><span class="pre">tag_atomic_basis()</span></code> は軌道の性質や LaTeX を、<code class="docutils literal notranslate"><span class="pre">tag_atomic_basis_proj()</span></code> はマスクで選んだ軌道の LaTeX を与えます。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="o">.</span><span class="n">atomic_basis</span><span class="p">(</span><span class="s2">"lg"</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>['dv', 'dxy', 'dxz', 'dyz', 'du']
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="o">.</span><span class="n">atomic_basis</span><span class="p">(</span><span class="s2">"lgs"</span><span class="p">)[</span><span class="mi">1</span><span class="p">][:</span><span class="mi">4</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>['(px,u)', '(px,d)', '(py,u)', '(py,d)']
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="o">.</span><span class="n">atomic_basis</span><span class="p">(</span><span class="s2">"jml"</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>['(1/2,1/2)',
+ '(1/2,-1/2)',
+ '(3/2,3/2)',
+ '(3/2,1/2)',
+ '(3/2,-1/2)',
+ '(3/2,-3/2)']
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Group</span><span class="o">.</span><span class="n">tag_atomic_basis</span><span class="p">(</span><span class="s2">"dxy"</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{'spinless': True,
+ 'spherical': False,
+ 'orbital': 'xy',
+ 'spin': None,
+ 'rank': 2}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Group</span><span class="o">.</span><span class="n">tag_atomic_basis</span><span class="p">(</span><span class="s2">"(3/2,1/2)"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">latex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>'\\ket{\\frac{3}{2},\\frac{1}{2};p}'
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="o">.</span><span class="n">tag_atomic_basis_proj</span><span class="p">(</span><span class="s2">"lg"</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="p">[</span><span class="s2">"dxz"</span><span class="p">,</span> <span class="s2">"dyz"</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[\ket{d_{xz}}, \ket{d_{yz}}]
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">atomic_samb(basis_type,</span> <span class="pre">(L1,</span> <span class="pre">L2),</span> <span class="pre">mask)</span></code> は、bra の階数 <code class="docutils literal notranslate"><span class="pre">L1</span></code>、ket の階数 <code class="docutils literal notranslate"><span class="pre">L2</span></code> のブロックの原子 SAMB を <code class="docutils literal notranslate"><span class="pre">(行列,</span> <span class="pre">式)</span></code> で与えます（<a class="reference internal" href="../guide/users_guide_ja.html#ja-atomic-samb"><span class="std std-ref">4. 原子 SAMB</span></a>）。マスク <code class="docutils literal notranslate"><span class="pre">(bra,</span> <span class="pre">ket)</span></code> は、軌道を名前か番号で選ぶか、別の基底へのユニタリー行列を与えます。このとき SAMB は選んだ軌道の中で正規直交化されます。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">atomic_samb</span><span class="p">(</span><span class="s2">"lg"</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>  <span class="c1"># すべての d 軌道。</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a2</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">atomic_samb</span><span class="p">(</span><span class="s2">"lg"</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">([</span><span class="s2">"dxz"</span><span class="p">,</span> <span class="s2">"dyz"</span><span class="p">],</span> <span class="p">[</span><span class="s2">"dxz"</span><span class="p">,</span> <span class="s2">"dyz"</span><span class="p">]))</span>
+<span class="p">[(</span><span class="n">key</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">key</span><span class="o">.</span><span class="n">l</span><span class="p">,</span> <span class="n">key</span><span class="o">.</span><span class="n">Gamma</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">a2</span><span class="o">.</span><span class="n">named_keys</span><span class="p">()]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[('Q', 0, 'A1g'), ('Q', 2, 'B1g'), ('Q', 2, 'B2g'), ('M', 1, 'A2g')]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mat</span><span class="p">,</span> <span class="n">ex</span> <span class="o">=</span> <span class="n">a2</span><span class="p">[(</span><span class="s2">"M"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">"A2g"</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"q"</span><span class="p">)]</span>  <span class="c1"># (dxz, dyz) での l_z。</span>
+<span class="n">mat</span><span class="p">,</span> <span class="n">ex</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([[[0, -sqrt(2)*I/2],
+         [sqrt(2)*I/2, 0]]], dtype=object),
+ array([z], dtype=object))
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">atomic_samb</span><span class="p">(</span><span class="s2">"lg"</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))),</span> <span class="nb">len</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">atomic_samb</span><span class="p">(</span><span class="s2">"lgs"</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)))</span>  <span class="c1"># p-d ブロックと、スピン付きの p。</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(22, 27)
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">transform_atomic_samb(samb,</span> <span class="pre">U_ket,</span> <span class="pre">U_bra)</span></code> は原子 SAMB を別の基底に変換します。基底は、方域基底からのユニタリー行列か、群の立方晶・六方晶の基底を表す階数で与えます。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">create_atomic_samb_L(L)</span></code> は、<span class="math notranslate nohighlight">\(|L, M\rangle\)</span> 基底（階数 <span class="math notranslate nohighlight">\(L\)</span>）の原子多極子を定義から作ります。</p></li>
+</ul>
+</section>
+<section id="samb-samb">
+<span id="ja-group-cluster"></span><h2>7. クラスター SAMB と結合 SAMB<a class="headerlink" href="#samb-samb" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">cluster_samb(wp)</span></code> はサイトの位置のサイト・クラスター SAMB を、<code class="docutils literal notranslate"><span class="pre">cluster_samb(wp,</span> <span class="pre">&quot;bond&quot;)</span></code> はボンドの位置のボンド・クラスター SAMB を、<code class="docutils literal notranslate"><span class="pre">(サイトやボンドの上の値,</span> <span class="pre">式)</span></code> で与えます（<a class="reference internal" href="../guide/users_guide_ja.html#ja-cluster-samb"><span class="std std-ref">5. クラスター SAMB</span></a>）。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">cluster_samb</span><span class="p">(</span><span class="s2">"4b"</span><span class="p">)</span>  <span class="c1"># サイト (x,x,0), (-x,-x,0), (-x,x,0), (x,-x,0)。</span>
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">ex</span><span class="p">)</span> <span class="ow">in</span> <span class="n">c</span><span class="o">.</span><span class="n">items</span><span class="p">():</span> <span class="nb">print</span><span class="p">(</span><span class="n">key</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">key</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">key</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">v</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="n">ex</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Q 0 A1g [[1/2, 1/2, 1/2, 1/2]] [1]
+Q 2 B2g [[1/2, 1/2, -1/2, -1/2]] [sqrt(3)*x*y]
+Q 1 Eu [[1/2, -1/2, -1/2, 1/2], [1/2, -1/2, 1/2, -1/2]] [x, y]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">cluster_samb</span><span class="p">(</span><span class="s2">"2b@1o"</span><span class="p">,</span> <span class="s2">"bond"</span><span class="p">)</span>  <span class="c1"># x 方向と y 方向のボンド。</span>
+<span class="p">[(</span><span class="n">key</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">key</span><span class="o">.</span><span class="n">l</span><span class="p">,</span> <span class="n">key</span><span class="o">.</span><span class="n">Gamma</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">b</span><span class="o">.</span><span class="n">named_keys</span><span class="p">()]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[('Q', 0, 'A1g'), ('Q', 2, 'B1g'), ('T', 1, 'Eu')]
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">combined_samb(原子のキー,</span> <span class="pre">クラスターのキー)</span></code> は、原子 SAMB とクラスター SAMB を Clebsch-Gordan 係数 <code class="docutils literal notranslate"><span class="pre">cg(key1,</span> <span class="pre">key2,</span> <span class="pre">key)</span></code> で既約表現に結合します（<a class="reference internal" href="../guide/users_guide_ja.html#ja-combined-samb"><span class="std std-ref">6. 結合 SAMB と模型</span></a>）。結合 SAMB の各成分は <code class="docutils literal notranslate"><span class="pre">(係数,</span> <span class="pre">原子のキー,</span> <span class="pre">原子の成分,</span> <span class="pre">クラスターのキー,</span> <span class="pre">クラスターの成分)</span></code> のリストです。キーワード <code class="docutils literal notranslate"><span class="pre">X</span></code>、<code class="docutils literal notranslate"><span class="pre">l</span></code>、<code class="docutils literal notranslate"><span class="pre">Gamma</span></code>、<code class="docutils literal notranslate"><span class="pre">s</span></code> で結合 SAMB を選べます。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">atomic_samb</span><span class="p">(</span><span class="s2">"lg"</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">([</span><span class="s2">"px"</span><span class="p">,</span> <span class="s2">"py"</span><span class="p">],</span> <span class="p">[</span><span class="s2">"px"</span><span class="p">,</span> <span class="s2">"py"</span><span class="p">]))</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">combined_samb</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">named_keys</span><span class="p">(),</span> <span class="n">b</span><span class="o">.</span><span class="n">named_keys</span><span class="p">())</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">z</span><span class="p">[(</span><span class="s2">"Q"</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"A1g"</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"q"</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>([[(1,
+    ('Q', 2, 'B1g', -1, -1, 0, 0, 'q'),
+    0,
+    ('Q', 2, 'B1g', -1, -1, 0, 0, 'q'),
+    0)]],
+ [1])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">[(</span><span class="n">key</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">key</span><span class="o">.</span><span class="n">l</span><span class="p">,</span> <span class="n">key</span><span class="o">.</span><span class="n">Gamma</span><span class="p">,</span> <span class="n">key</span><span class="o">.</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">combined_samb</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">named_keys</span><span class="p">(),</span> <span class="n">b</span><span class="o">.</span><span class="n">named_keys</span><span class="p">(),</span> <span class="n">Gamma</span><span class="o">=</span><span class="s2">"A1g"</span><span class="p">)</span><span class="o">.</span><span class="n">named_keys</span><span class="p">()]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[('Q', 0, 'A1g', 1), ('Q', 0, 'A1g', 2)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="o">.</span><span class="n">cg</span><span class="p">((</span><span class="s2">"Q"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">"Eu"</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"q"</span><span class="p">),</span> <span class="p">(</span><span class="s2">"Q"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">"Eu"</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"q"</span><span class="p">),</span> <span class="p">(</span><span class="s2">"Q"</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">"B1g"</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"q"</span><span class="p">))[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[sqrt(2)/2, 0],
+       [0, -sqrt(2)/2]], dtype=object)
+</pre></div>
+</div>
+</div>
+</div>
+<p>1 つ目の <span class="math notranslate nohighlight">\(A_{1g}\)</span> SAMB（<span class="math notranslate nohighlight">\(p = 1\)</span>）は、すべてのボンドで一様な <span class="math notranslate nohighlight">\(p_x\)</span>-<span class="math notranslate nohighlight">\(p_x\)</span> と <span class="math notranslate nohighlight">\(p_y\)</span>-<span class="math notranslate nohighlight">\(p_y\)</span> の和のホッピングです。2 つ目（<span class="math notranslate nohighlight">\(p = 2\)</span>）は、<span class="math notranslate nohighlight">\(p_x\)</span>-<span class="math notranslate nohighlight">\(p_x\)</span> と <span class="math notranslate nohighlight">\(p_y\)</span>-<span class="math notranslate nohighlight">\(p_y\)</span> の差の軌道部分（<span class="math notranslate nohighlight">\(B_{1g}\)</span>）と、<span class="math notranslate nohighlight">\(x\)</span> 方向と <span class="math notranslate nohighlight">\(y\)</span> 方向のボンドで符号が逆のボンド部分（<span class="math notranslate nohighlight">\(B_{1g}\)</span>）の積で、<span class="math notranslate nohighlight">\(\sigma\)</span> 型（<span class="math notranslate nohighlight">\(x\)</span> 方向のボンドでの <span class="math notranslate nohighlight">\(p_x\)</span>-<span class="math notranslate nohighlight">\(p_x\)</span>）と <span class="math notranslate nohighlight">\(\pi\)</span> 型（<span class="math notranslate nohighlight">\(x\)</span> 方向のボンドでの <span class="math notranslate nohighlight">\(p_y\)</span>-<span class="math notranslate nohighlight">\(p_y\)</span>）のホッピングの差です。</p>
+<p><code class="docutils literal notranslate"><span class="pre">multipole_cluster_samb(X,</span> <span class="pre">l,</span> <span class="pre">site)</span></code> は、サイトやボンドのクラスター上の多極子 <code class="docutils literal notranslate"><span class="pre">(X,</span> <span class="pre">l)</span></code> の結合 SAMB を作り、<code class="docutils literal notranslate"><span class="pre">combined_object(wp,</span> <span class="pre">X,</span> <span class="pre">samb)</span></code> はその成分を各サイト上の多項式として与えます。例えば、4 つのサイト <code class="docutils literal notranslate"><span class="pre">4c</span></code>（<span class="math notranslate nohighlight">\((\pm 1, 0, 0)\)</span>、<span class="math notranslate nohighlight">\((0, \pm 1, 0)\)</span>）上の電気双極子（<code class="docutils literal notranslate"><span class="pre">&quot;Q&quot;,</span> <span class="pre">1</span></code>）は次のとおりです。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">samb</span><span class="p">,</span> <span class="n">wp</span><span class="p">,</span> <span class="n">sites</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">multipole_cluster_samb</span><span class="p">(</span><span class="s2">"Q"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">"[1,0,0]"</span><span class="p">)</span>
+<span class="n">wp</span><span class="p">,</span> <span class="n">sites</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>('4c', [[1.0, 0.0, 0.0], [-1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, -1.0, 0.0]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">[(</span><span class="n">key</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">key</span><span class="o">.</span><span class="n">l</span><span class="p">,</span> <span class="n">key</span><span class="o">.</span><span class="n">Gamma</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">samb</span><span class="o">.</span><span class="n">named_keys</span><span class="p">()][:</span><span class="mi">4</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[('Q', 0, 'A1g'), ('G', 1, 'A2g'), ('Q', 2, 'B1g'), ('Q', 2, 'B2g')]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="o">.</span><span class="n">combined_object</span><span class="p">(</span><span class="n">wp</span><span class="p">,</span> <span class="s2">"Q"</span><span class="p">,</span> <span class="n">samb</span><span class="p">[(</span><span class="s2">"Q"</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"A1g"</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"q"</span><span class="p">)][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([x/2, -x/2, y/2, -y/2], dtype=object)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="o">.</span><span class="n">combined_object</span><span class="p">(</span><span class="n">wp</span><span class="p">,</span> <span class="s2">"G"</span><span class="p">,</span> <span class="n">samb</span><span class="p">[(</span><span class="s2">"G"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">"A2g"</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"q"</span><span class="p">)][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-y/2, y/2, x/2, -x/2], dtype=object)
+</pre></div>
+</div>
+</div>
+</div>
+<p><span class="math notranslate nohighlight">\(\mathbb{Q}_{0}(A_{1g})\)</span> では双極子は外向きで、<span class="math notranslate nohighlight">\(\mathbb{G}_{1}(A_{2g})\)</span> では <span class="math notranslate nohighlight">\(z\)</span> 軸のまわりを回ります。後者は <span class="math notranslate nohighlight">\(z\)</span> 方向の電気トロイダル双極子です。</p>
+</section>
+<section id="ja-group-transform">
+<span id="id5"></span><h2>8. 対称操作による変換<a class="headerlink" href="#ja-group-transform" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">transform_vector(vector,</span> <span class="pre">X)</span></code> と <code class="docutils literal notranslate"><span class="pre">transform_multipole(multipole,</span> <span class="pre">X)</span></code> は、すべての対称操作を <code class="docutils literal notranslate"><span class="pre">symmetry_operation[&quot;tag&quot;]</span></code> の順に作用させます。<code class="docutils literal notranslate"><span class="pre">X</span></code> は種類を表し、<code class="docutils literal notranslate"><span class="pre">&quot;Q&quot;</span></code> は極性、<code class="docutils literal notranslate"><span class="pre">&quot;G&quot;</span></code> は軸性（<span class="math notranslate nohighlight">\(\det R\)</span> がかかる）、<code class="docutils literal notranslate"><span class="pre">&quot;T&quot;</span></code> と <code class="docutils literal notranslate"><span class="pre">&quot;M&quot;</span></code> はそれぞれ極性と軸性に時間反転の符号（磁気群の <code class="docutils literal notranslate"><span class="pre">tr_sign</span></code>）がかかります。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">so</span><span class="p">[</span><span class="s2">"tag"</span><span class="p">][:</span><span class="mi">4</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>['1', '2[001]', '4+[001]', '4-[001]']
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="o">.</span><span class="n">transform_vector</span><span class="p">(</span><span class="s2">"[1,0,0]"</span><span class="p">)[:</span><span class="mi">4</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1, 0, 0],
+       [-1, 0, 0],
+       [0, 1, 0],
+       [0, -1, 0]], dtype=object)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="s2">"15.7.59"</span><span class="p">)</span>  <span class="c1"># 4/m'm'm'。</span>
+<span class="n">m</span><span class="o">.</span><span class="n">symmetry_operation</span><span class="p">[</span><span class="s2">"tag"</span><span class="p">][</span><span class="mi">8</span><span class="p">],</span> <span class="n">m</span><span class="o">.</span><span class="n">symmetry_operation</span><span class="p">[</span><span class="s2">"tr_sign"</span><span class="p">][</span><span class="mi">8</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>("-1'", -1)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="o">.</span><span class="n">transform_vector</span><span class="p">(</span><span class="s2">"[0,0,1]"</span><span class="p">,</span> <span class="n">X</span><span class="o">=</span><span class="s2">"M"</span><span class="p">)[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">]]</span>  <span class="c1"># 磁気モーメントは -1' で反転する。</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0, 0, 1],
+       [0, 0, -1]], dtype=object)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="o">.</span><span class="n">transform_multipole</span><span class="p">(</span><span class="s2">"x*y"</span><span class="p">)[:</span><span class="mi">4</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([x*y, x*y, -x*y, -x*y], dtype=object)
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">create_cell_vector(&quot;ベクトル#サイト&quot;,</span> <span class="pre">X)</span></code> と <code class="docutils literal notranslate"><span class="pre">create_cell_multipole(&quot;多極子#サイト&quot;,</span> <span class="pre">X)</span></code> は、変換したベクトルや多極子を等価なサイトに配置します（同じサイトを与える対称操作について平均します）。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">v</span><span class="p">,</span> <span class="n">sites</span><span class="p">,</span> <span class="n">mapping</span><span class="p">,</span> <span class="n">wp</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">create_cell_vector</span><span class="p">(</span><span class="s2">"[1,0,0]#[1,0,0]"</span><span class="p">)</span>
+<span class="n">v</span><span class="p">,</span> <span class="n">wp</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([[1, 0, 0],
+        [-1, 0, 0],
+        [0, 1, 0],
+        [0, -1, 0]], dtype=object),
+ '4c')
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mp</span><span class="p">,</span> <span class="n">sites</span><span class="p">,</span> <span class="n">mapping</span><span class="p">,</span> <span class="n">wp</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">create_cell_multipole</span><span class="p">(</span><span class="s2">"x**2-y**2#[1,0,0]"</span><span class="p">)</span>
+<span class="n">mp</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[x**2 - y**2, x**2 - y**2, -x**2 + y**2, -x**2 + y**2]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="ja-group-magnetic">
+<span id="id6"></span><h2>9. 磁気群と応答テンソル<a class="headerlink" href="#ja-group-magnetic" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">active_multipole</span></code> は磁気点群（PG ではその灰色群）で許される多極子の一覧を、<code class="docutils literal notranslate"><span class="pre">response_tensor_all(X)</span></code> はタイプ <code class="docutils literal notranslate"><span class="pre">X</span></code> の階数 4 までのすべての応答テンソル（<code class="docutils literal notranslate"><span class="pre">X</span></code> を省略するとすべてのタイプ）を、キー <code class="docutils literal notranslate"><span class="pre">(X,</span> <span class="pre">rank,</span> <span class="pre">opt)</span></code> ごとに <code class="docutils literal notranslate"><span class="pre">(テンソル,</span> <span class="pre">{成分:</span> <span class="pre">多極子})</span></code> で与えます（<a class="reference internal" href="../guide/users_guide_ja.html#ja-response-tensors"><span class="std std-ref">7. 応答テンソル</span></a>）。4/m’m’m’ では電気磁気テンソル（<code class="docutils literal notranslate"><span class="pre">&quot;M&quot;</span></code>、階数 2）が許されます。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="s2">"15.7.59"</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">name</span><span class="p">(</span><span class="n">detail</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>"MPG#15.7.59:  4/m'm'm'  [ Type III, tetragonal ]"
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="o">.</span><span class="n">active_multipole</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>['Qs', 'Qdu', 'Qg', 'Qgu', 'Ms', 'Mdu', 'Mg', 'Mgu']
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">response_tensor_all</span><span class="p">(</span><span class="s2">"M"</span><span class="p">)</span>
+<span class="nb">list</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">keys</span><span class="p">())[:</span><span class="mi">4</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[('M', 0, ''), ('M', 1, ''), ('M', 2, 's'), ('M', 2, 'a')]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tensor</span><span class="p">,</span> <span class="n">relation</span> <span class="o">=</span> <span class="n">r</span><span class="p">[(</span><span class="s2">"M"</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">"s"</span><span class="p">)]</span>
+<span class="n">tensor</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[M_{xx}, 0, 0],
+       [0, M_{xx}, 0],
+       [0, 0, M_{zz}]], dtype=object)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">relation</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{M_{xx}: \mathbb{M}_{0}^{(1)} - \mathbb{M}_{u}^{(1)},
+ M_{zz}: \mathbb{M}_{0}^{(1)} + 2*\mathbb{M}_{u}^{(1)}}
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">response_tensor(X,</span> <span class="pre">rank,</span> <span class="pre">comp,</span> <span class="pre">opt)</span></code> は 1 つの成分を与えます（添字 1, 2, 3 が <span class="math notranslate nohighlight">\(x, y, z\)</span>）。例えば上の <span class="math notranslate nohighlight">\(M_{zz}\)</span> です。強磁性の 4/mm’m’ では、磁化 <span class="math notranslate nohighlight">\(M_z\)</span> とホール効果（<code class="docutils literal notranslate"><span class="pre">&quot;T&quot;</span></code>、階数 2、反対称）はどちらも磁気双極子 <span class="math notranslate nohighlight">\(\mathbb{M}_z\)</span> が担います。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="o">.</span><span class="n">response_tensor</span><span class="p">(</span><span class="s2">"M"</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="s2">"s"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_latex math notranslate nohighlight">
+\[\displaystyle \mathbb{M}_{0}^{(1)} + 2 \mathbb{M}_{u}^{(1)}\]</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="s2">"15.6.58"</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">name</span><span class="p">(),</span> <span class="n">f</span><span class="o">.</span><span class="n">active_multipole</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>("4/mm'm'", ['Qs', 'Qdu', 'Qg', 'Qgu', 'Tgaz', 'Mpz', 'Mfaz'])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="o">.</span><span class="n">response_tensor</span><span class="p">(</span><span class="s2">"M"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">f</span><span class="o">.</span><span class="n">response_tensor</span><span class="p">(</span><span class="s2">"T"</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="s2">"a"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(\mathbb{M}_{z}^{(1)}, \mathbb{M}_{z}^{(1)})
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="ja-group-supergroup">
+<span id="id7"></span><h2>10. 親、上位群、剰余類<a class="headerlink" href="#ja-group-supergroup" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">coset</span></code> は、すぐ上の親（MultiPieGen の代表の親）での群の最初の剰余類です（<code class="docutils literal notranslate"><span class="pre">Group.global_info()[&quot;parent&quot;]</span></code> と <code class="docutils literal notranslate"><span class="pre">[&quot;coset&quot;]</span></code> は、親の連鎖とそれぞれでの剰余類）。<code class="docutils literal notranslate"><span class="pre">supergroups()</span></code> は、群のデータの直接の（極大の）上位群（<code class="docutils literal notranslate"><span class="pre">Group.global_info()[&quot;supergroup&quot;]</span></code>）をたどって、ほかの上位群も与えます。埋め込み <span class="math notranslate nohighlight">\(x_P = A x_H\)</span>、<span class="math notranslate nohighlight">\(H\)</span> と <span class="math notranslate nohighlight">\(P\)</span> の格子で割った指数、連鎖（<code class="docutils literal notranslate"><span class="pre">&quot;path&quot;</span></code>）が付きます。<span class="math notranslate nohighlight">\(P\)</span> の格子は <span class="math notranslate nohighlight">\(H\)</span> の格子の 4 倍まで細かいものです。P3<span class="math notranslate nohighlight">\(_1\)</span>21（No.152、Te）では、R-3m（No.166）には R32（No.155）を通って行き着きます。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="s2">"SG:152"</span><span class="p">)</span>
+<span class="n">t</span><span class="o">.</span><span class="n">coset</span><span class="p">[</span><span class="s2">"parent"</span><span class="p">],</span> <span class="n">t</span><span class="o">.</span><span class="n">coset</span><span class="p">[</span><span class="s2">"rep"</span><span class="p">],</span> <span class="p">[(</span><span class="n">d</span><span class="p">[</span><span class="s2">"group"</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="s2">"index"</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="s2">"path"</span><span class="p">])</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">t</span><span class="o">.</span><span class="n">supergroups</span><span class="p">(</span><span class="n">max_index</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span> <span class="k">if</span> <span class="n">d</span><span class="p">[</span><span class="s2">"group"</span><span class="p">]</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"SG:164"</span><span class="p">,</span> <span class="s2">"SG:166"</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>('SG:164',
+ '-1:[0,0,0]',
+ [('SG:164', 6, ['SG:152', 'SG:150', 'SG:164']),
+  ('SG:166', 6, ['SG:152', 'SG:155', 'SG:166'])])
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">embedding(parent)</span></code> は <span class="math notranslate nohighlight">\(H\)</span> の <span class="math notranslate nohighlight">\(P\)</span> へのすべての埋め込み（同じ <span class="math notranslate nohighlight">\(H\)</span> の原子に対して違う親構造を与える）、<code class="docutils literal notranslate"><span class="pre">coset_decomposition(parent)</span></code> はすべての左剰余類 <span class="math notranslate nohighlight">\(gH\)</span>（<span class="math notranslate nohighlight">\(P\)</span> の格子で割ったもの。<code class="docutils literal notranslate"><span class="pre">modulo=&quot;self&quot;</span></code> では <span class="math notranslate nohighlight">\(H\)</span> の格子で割ったもの）、<code class="docutils literal notranslate"><span class="pre">parent_limit(parent)</span></code> は軌道が <span class="math notranslate nohighlight">\(P\)</span> で不変になる Wyckoff パラメータの値、<code class="docutils literal notranslate"><span class="pre">map_site(op,</span> <span class="pre">wyckoff,</span> <span class="pre">parent)</span></code> はその親構造で <span class="math notranslate nohighlight">\(g\)</span> が写す原子を与えます。<a class="reference internal" href="../guide/users_guide_ja.html#ja-coset-model"><span class="std std-ref">模型の剰余類</span></a> を参照してください。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">e</span><span class="p">[</span><span class="s2">"origin"</span><span class="p">]</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">t</span><span class="o">.</span><span class="n">embedding</span><span class="p">(</span><span class="s2">"SG:166"</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[array([0.        , 0.33333333, 0.66666667]),
+ array([0.33333333, 0.33333333, 0.5       ])]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">[(</span><span class="n">c</span><span class="p">[</span><span class="s2">"rep"</span><span class="p">],</span> <span class="n">c</span><span class="p">[</span><span class="s2">"kind"</span><span class="p">])</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">t</span><span class="o">.</span><span class="n">coset_decomposition</span><span class="p">(</span><span class="s2">"SG:166"</span><span class="p">,</span> <span class="n">modulo</span><span class="o">=</span><span class="s2">"self"</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[('1:[0,0,0]', 'identity'),
+ ('1:[1/3,2/3,2/3]', 'translation'),
+ ('1:[2/3,1/3,1/3]', 'translation'),
+ ('-1:[1/3,1/3,0]', 'inversion'),
+ ('-1:[2/3,0,2/3]', 'inversion'),
+ ('-1:[0,2/3,1/3]', 'inversion')]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span><span class="o">.</span><span class="n">parent_limit</span><span class="p">(</span><span class="s2">"SG:166"</span><span class="p">,</span> <span class="s2">"3a"</span><span class="p">),</span> <span class="n">t</span><span class="o">.</span><span class="n">map_site</span><span class="p">(</span><span class="s2">"-1:[1/3,1/3,0]"</span><span class="p">,</span> <span class="s2">"3a"</span><span class="p">,</span> <span class="s2">"SG:166"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>({'3a': [{'param': {'x': '1/3'},
+    'position': '[1/3,0,1/3]',
+    'parent_wyckoff': '3a'}]},
+ {1: (2, array([ 0.,  0., -1.])),
+  2: (1, array([ 0.,  0., -1.])),
+  3: (3, array([1., 1., 0.]))})
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./src/group"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ja-group-create">1. 群の作成</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ja-group-symmetry-operation">2. 対称操作</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ja-group-character">3. 指標と表現行列</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wyckoff">4. Wyckoff 位置</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ja-group-harmonics">5. 調和関数</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#samb">6. 原子基底と原子 SAMB</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#samb-samb">7. クラスター SAMB と結合 SAMB</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ja-group-transform">8. 対称操作による変換</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ja-group-magnetic">9. 磁気群と応答テンソル</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ja-group-supergroup">10. 親、上位群、剰余類</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Hiroaki Kusunose and Rikuto Oiwa
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2021-.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

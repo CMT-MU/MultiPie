@@ -1,0 +1,779 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Ver.2 からの変更点 &#8212; MultiPie</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=6a604523" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=2106c826" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=a8e58a58"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script data-sd-tabs-storage-prefix="sphinx-design-tab-id-" src="../_static/design-tabs.js?v=fcb327ea"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"loader": {"load": ["[tex]/physics"]}, "tex": {"packages": {"[+]": ["physics"]}, "macros": {"bm": ["\\boldsymbol{#1}", 1]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'src/changes_ja';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script src="../_static/custom.js?v=7f87e22d"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../README.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/multipie_logo.png" class="logo__image only-light" alt="MultiPie - Home"/>
+    <img src="../_static/multipie_logo.png" class="logo__image only-dark pst-js-only" alt="MultiPie - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installing MultiPie</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference external" href="https://cmt-mu.github.io/MultiPieGen/src/group_info.html">Group information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guide.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="atomic_multipole_table.html">Atomic multipole operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="group.html">Using the Group class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="materials.html">Examples of materials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="post_processing.html">Post-processing tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changes.html">Changes from Ver.2</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="api_core.html">Core</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="api_core/init.html">Type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_core/cmd.html">Create function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_core/group.html">Group</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_core/material_model.html">Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_core/model_analyzer.html">ModelAnalyzer</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="api_util.html">Utility</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_atomic_multipole.html">Atomic multipole</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_atomic_multipole_operator.html">Atomic multipole operator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_binary.html">Binary data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_crystal.html">Crystal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_dict.html">Dict</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_gram_schmidt.html">Gram-Schmidt orthonormalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_harmonics.html">Harmonics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_material_model_pdf.html">PDF creator for Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_material_model.html">Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_model_analyzer.html">Model Analyzer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_multipolar_harmonics.html">Multipolar harmonics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_pdf_latex.html">PDF creator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_plot.html">Plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_response_tensor.html">Response tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_coset.html">Coset of a model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_supergroup.html">Supergroups</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_samb.html">SAMB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_tag.html">Tag</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_trace_moment.html">Trace moments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_wannier.html">Wannier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_wyckoff.html">Wyckoff position</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util.html">Versatile</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/CMT-MU/MultiPie.git" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Ver.2 からの変更点</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">群のデータベース</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">規則</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">調和関数</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#samb">原子 SAMB</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">クラスター SAMB</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">結合 SAMB と模型</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ja-converting-a-model-of-ver-2">Ver.2 の模型の変換</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ver-3">3.2.0 より前の Ver.3 の模型の変換</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#group">Group</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">応答テンソル</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">関連パッケージ</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ver-2-pdf">Ver.2 の簡易マニュアル（PDF）</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="ver-2">
+<h1>Ver.2 からの変更点<a class="headerlink" href="#ver-2" title="Link to this heading">#</a></h1>
+<p>MultiPie Ver.3 は、MultiPieGen が生成した新しい群のデータベースを使います。群そのもの（対称操作、Wyckoff 位置、指標）は変わりませんが、多極子のデータ、つまり調和関数とそれをもとに作る SAMB は、新しい方法で作られています。このページは、Ver.2 の利用者にとって何が変わるかをまとめたものです。英語版は<a class="reference internal" href="changes.html"><span class="std std-doc">こちら</span></a>です。</p>
+<p><strong>要点：</strong></p>
+<ul class="simple">
+<li><p>模型は Ver.3 で作り直してください。Ver.2 で作った模型（<code class="docutils literal notranslate"><span class="pre">.pkl</span></code>）は受け付けません。<code class="docutils literal notranslate"><span class="pre">mp_convert</span></code> は、Ver.2 の <code class="docutils literal notranslate"><span class="pre">.pkl</span></code> から模型を作り直し、その制御ファイルの重み <span class="math notranslate nohighlight">\(z_j\)</span> を変換します（<a class="reference internal" href="#ja-converting-a-model-of-ver-2">Ver.2 の模型の変換</a>を参照）。</p></li>
+<li><p>模型の SAMB <span class="math notranslate nohighlight">\(Z_j\)</span> が張る空間は Ver.2 と同じですが、番号、符号、値は違うことがあります。重み <span class="math notranslate nohighlight">\(z_j\)</span> は、フィッティングなどでもう一度決めてください。</p></li>
+<li><p>4 つの f 軌道の名前が変わりました：<code class="docutils literal notranslate"><span class="pre">f2</span></code>、<code class="docutils literal notranslate"><span class="pre">f1</span></code>、<code class="docutils literal notranslate"><span class="pre">f3x</span></code>、<code class="docutils literal notranslate"><span class="pre">f3y</span></code> は <code class="docutils literal notranslate"><span class="pre">fc</span></code>、<code class="docutils literal notranslate"><span class="pre">fs</span></code>、<code class="docutils literal notranslate"><span class="pre">fx</span></code>、<code class="docutils literal notranslate"><span class="pre">fy</span></code> になります。</p></li>
+<li><p>D<span class="math notranslate nohighlight">\(_{\rm 3h}\)</span> など一部の群で、既約表現の並びが変わりました。</p></li>
+<li><p>模型のキー <code class="docutils literal notranslate"><span class="pre">max_neighbor</span></code> と <code class="docutils literal notranslate"><span class="pre">search_cell_range</span></code> は削除しました。模型の入力から消してください。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Group</span></code> の一部の関数が削除または変更されました（<a class="reference internal" href="#ja-changes-group">Group</a> を参照）。</p></li>
+<li><p>3.2.0 から、結合 SAMB <span class="math notranslate nohighlight">\(z_j\)</span> の番号の付け方が変わりました（既約表現は指標表の順。<a class="reference internal" href="guide/users_guide_ja.html#ja-samb-order"><span class="std std-ref">SAMB の順序</span></a>を参照）。<code class="docutils literal notranslate"><span class="pre">mp_convert</span></code> は、Ver.3 の以前の版の模型と、その制御ファイルの重みの番号を付け替えます（<a class="reference internal" href="#ja-converting-a-model-before-3-2"><span class="std std-ref">3.2.0 より前の Ver.3 の模型の変換</span></a>を参照）。</p></li>
+</ul>
+<section id="id1">
+<h2>群のデータベース<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>データベース（<code class="docutils literal notranslate"><span class="pre">multipie/binary_data</span></code>）は別のプロジェクトである MultiPieGen が生成し、<code class="docutils literal notranslate"><span class="pre">tools/sync_binary_data.py</span></code> で MultiPie にコピーします。<code class="docutils literal notranslate"><span class="pre">multipie/binary_data/SOURCE.txt</span></code> に、元にした MultiPieGen のコミットが記録されています。Ver.2 でデータベースを作っていたツール（<code class="docutils literal notranslate"><span class="pre">others/tools</span></code>）は削除しました。</p></li>
+<li><p>データベースは約 20 MB です（Ver.2 は 81 MB）。点群のオプションのデータ（<code class="docutils literal notranslate"><span class="pre">PG/*_opt.pkl</span></code>）は、各点群のデータにまとめました。ファイル名では群の ID の <code class="docutils literal notranslate"><span class="pre">:</span></code> を <code class="docutils literal notranslate"><span class="pre">_</span></code> に置き換えています（例：<code class="docutils literal notranslate"><span class="pre">PG:32</span></code> は <code class="docutils literal notranslate"><span class="pre">PG/PG_32.pkl</span></code>。Ver.2 は <code class="docutils literal notranslate"><span class="pre">PG/PG:32.pkl</span></code>）。Windows でも git から MultiPie を入れられるようにするためです。</p></li>
+<li><p>群の表（PDF）も MultiPieGen が生成します。<a class="reference external" href="https://cmt-mu.github.io/MultiPieGen/src/group_info_ja.html">群の情報</a> からリンクしています。Ver.2 のドキュメントにあった群のページは削除しました。</p></li>
+</ul>
+</section>
+<section id="id2">
+<h2>規則<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p><strong>既約表現の並び。</strong> 既約表現は指標表の並びに従います。<code class="docutils literal notranslate"><span class="pre">g</span></code> が <code class="docutils literal notranslate"><span class="pre">u</span></code> より先、<code class="docutils literal notranslate"><span class="pre">'</span></code> の付く既約表現が <code class="docutils literal notranslate"><span class="pre">''</span></code> の付くものより先です。並びが変わるのは C<span class="math notranslate nohighlight">\(_{\rm 3h}\)</span>、D<span class="math notranslate nohighlight">\(_{\rm 3h}\)</span> とその別の設定です。例えば D<span class="math notranslate nohighlight">\(_{\rm 3h}\)</span> では次のようになります：</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Ver.2</p></th>
+<th class="head text-left"><p>Ver.3</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><span class="math notranslate nohighlight">\(A_1', A_2', A_1'', A_2'', E', E''\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(A_1', A_2', E', A_1'', A_2'', E''\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>最初の既約表現は、これまでどおり恒等表現です。</p>
+<p><strong>軌道名。</strong> 軌道の名前は次のように変わりました。模型の入力では古い名前は受け付けず、エラーで新しい名前を示します。</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Ver.2</p></th>
+<th class="head text-left"><p>Ver.3</p></th>
+<th class="head text-left"><p>関数</p></th>
+<th class="head text-left"><p>Wannier90</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">f2</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">fc</span></code></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\frac{\sqrt{10}}{4}x(x^2-3y^2)\)</span></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">fx(x2-3y2)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">f1</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">fs</span></code></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\frac{\sqrt{10}}{4}y(3x^2-y^2)\)</span></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">fy(3x2-y2)</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">f3x</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">fx</span></code></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\frac{\sqrt{6}}{4}x(4z^2-x^2-y^2)\)</span></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">fxz2</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">f3y</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">fy</span></code></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\frac{\sqrt{6}}{4}y(4z^2-x^2-y^2)\)</span></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">fyz2</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>多極子の名前（例えば応答テンソルの active multipole）に現れる rank 4 の軌道の名前も変わりました：<code class="docutils literal notranslate"><span class="pre">ga</span></code>、<code class="docutils literal notranslate"><span class="pre">gb</span></code>、<code class="docutils literal notranslate"><span class="pre">gc</span></code> は<code class="docutils literal notranslate"><span class="pre">gc</span></code>、<code class="docutils literal notranslate"><span class="pre">gs</span></code>、<code class="docutils literal notranslate"><span class="pre">gc4</span></code> になります（<code class="docutils literal notranslate"><span class="pre">gc</span></code> は旧 <code class="docutils literal notranslate"><span class="pre">ga</span></code> を指すことに注意してください）。</p>
+<p><strong>多重度。</strong> キーの多重度 <code class="docutils literal notranslate"><span class="pre">n</span></code> は常に点群の調和関数 <code class="docutils literal notranslate"><span class="pre">(X,</span> <span class="pre">l,</span> <span class="pre">Gamma)</span></code> の多重度で、xyz の多項式を特定します。ほかのフィールドがすべて同じものは <code class="docutils literal notranslate"><span class="pre">p</span></code> で番号付けします。<a class="reference internal" href="guide/users_guide_ja.html"><span class="std std-doc">ユーザーガイド</span></a> を参照してください。</p>
+</section>
+<section id="id3">
+<h2>調和関数<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Group.harmonics</span></code> の値は <code class="docutils literal notranslate"><span class="pre">(expression,</span> <span class="pre">U)</span></code> です。Ver.2 の 3 番目の項目（tesseral 調和関数による式）は削除しました。</p></li>
+<li><p>式は展開した多項式です。例えば <span class="math notranslate nohighlight">\(\frac{\sqrt{10}}{4}y(3x^2 - y^2)\)</span> ではなく<span class="math notranslate nohighlight">\(\frac{3\sqrt{10}}{4}x^2y - \frac{\sqrt{10}}{4}y^3\)</span> となります。</p></li>
+<li><p>キーは 47 点群すべてで同じです。32 個の調和関数で符号が変わります。これらは三方晶系と六方晶系の 16 点群の、多重度 2 または 3 の rank 4 の <span class="math notranslate nohighlight">\(E\)</span> の調和関数です（D<span class="math notranslate nohighlight">\(_{\rm 6h}\)</span> の <span class="math notranslate nohighlight">\(E_{2g}\)</span> に由来します）。式と <span class="math notranslate nohighlight">\(U\)</span> の符号は一緒に変わります。</p></li>
+<li><p>multipolar harmonics（<code class="docutils literal notranslate"><span class="pre">Group.multipolar_harmonics</span></code>）は rank 3 まで（Ver.2 は rank 11 まで）で、内部基底は立方晶または六方晶の軌道、記号は <span class="math notranslate nohighlight">\(Q_{x}\)</span> などです。任意の rank の成分 <span class="math notranslate nohighlight">\(m\)</span> ごとの式は、<code class="docutils literal notranslate"><span class="pre">Group.multipolar_harmonics_expression()</span></code> で得られます（3.1.3 から。<a class="reference internal" href="guide/users_guide_ja.html#ja-multipolar-harmonics-expression"><span class="std std-ref">成分ごとの式</span></a> を参照）。</p></li>
+</ul>
+</section>
+<section id="samb">
+<h2>原子 SAMB<a class="headerlink" href="#samb" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>キーと行列は Ver.2 と同じです。ただし D<span class="math notranslate nohighlight">\(_{\rm 6h}\)</span> 系では符号が変わるものがあります（調和関数に由来します）。</p></li>
+<li><p>複素の点群（<code class="docutils literal notranslate"><span class="pre">-c</span></code>）にも原子 SAMB があります。</p></li>
+</ul>
+</section>
+<section id="id4">
+<h2>クラスター SAMB<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>各既約表現のサイトとボンドのクラスター SAMB が張る空間は Ver.2 と同じですが、別の代表点から作るため、値は違います。例えばサイトのクラスター SAMB では、約 69% が変わらず、14% が符号が変わり、17% が値が変わります。</p></li>
+<li><p>ボンドのクラスター SAMB は <code class="docutils literal notranslate"><span class="pre">Group.cluster_samb(wp,</span> <span class="pre">&quot;bond&quot;)</span></code> で一組として与えます。対称（<code class="docutils literal notranslate"><span class="pre">Q</span></code>、<code class="docutils literal notranslate"><span class="pre">G</span></code>、実数）と反対称（<code class="docutils literal notranslate"><span class="pre">T</span></code>、<code class="docutils literal notranslate"><span class="pre">M</span></code>、純虚数）のボンド関数を合わせたものです。<code class="docutils literal notranslate"><span class="pre">&quot;bond_s&quot;</span></code>、<code class="docutils literal notranslate"><span class="pre">&quot;bond_a&quot;</span></code>、<code class="docutils literal notranslate"><span class="pre">&quot;vector&quot;</span></code> の種類は削除しました。</p></li>
+<li><p>反対称のボンド関数のキーは、Ver.2 と <code class="docutils literal notranslate"><span class="pre">p</span></code>、<code class="docutils literal notranslate"><span class="pre">n</span></code>、または <code class="docutils literal notranslate"><span class="pre">(X,</span> <span class="pre">l,</span> <span class="pre">Gamma)</span></code> が違うことがあります。例えばキーの<code class="docutils literal notranslate"><span class="pre">p</span></code> はトップの群から引き継ぐので、<span class="math notranslate nohighlight">\(\mathbb{T}_{1}^{(b)}(E_{1u},a)\)</span> のような記号になります。</p></li>
+<li><p>複素の点群にはクラスター SAMB はありません（Ver.2 と同じ）。<code class="docutils literal notranslate"><span class="pre">Group.cluster_samb</span></code> はエラーを出します。</p></li>
+<li><p>3.3.0 から、SG 98、208、211、213、214 の 20 個の Wyckoff 位置のクラスター SAMB を、別の基準のサイトまたはボンドから平均して作ります。空間反転の剰余類の像のクラスター SAMB に、ラベルごとに写るようにするためです（<a class="reference internal" href="guide/users_guide_ja.html#ja-coset-model"><span class="std std-ref">模型の剰余類</span></a>を参照）。これらの Wyckoff 位置を含む模型を作り直すと、これらのクラスター SAMB の値が変わります。</p></li>
+</ul>
+</section>
+<section id="id5">
+<h2>結合 SAMB と模型<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>模型の結合 SAMB が張る行列の空間は Ver.2 と同じで、SAMB の数も同じですが、番号 <span class="math notranslate nohighlight">\(z_j\)</span>、符号、値は違うことがあります。そのため、与えた重みを持つ模型のバンド構造は、重みを変換しない限り違ったものになります。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MaterialModel.load</span></code>（したがって <code class="docutils literal notranslate"><span class="pre">mp_analyze</span></code>）は、Ver.2 で作った模型をエラーで拒否します。<code class="docutils literal notranslate"><span class="pre">mp_create</span></code> で模型を作り直して重みをもう一度決めるか、<code class="docutils literal notranslate"><span class="pre">mp_convert</span></code> で模型と重みを変換してください。</p></li>
+<li><p>模型の入力のキー <code class="docutils literal notranslate"><span class="pre">max_neighbor</span></code> と <code class="docutils literal notranslate"><span class="pre">search_cell_range</span></code> は削除しました。これらを含む入力はエラーになります。ボンドの近接は <code class="docutils literal notranslate"><span class="pre">&quot;bond&quot;</span></code> の指定だけで決まり、<code class="docutils literal notranslate"><span class="pre">max_neighbor</span></code>（Ver.2 の初期値は 10）による上限はありません。空間群では、指定した近接までのサイトがすべて入るまで、ボンドごとに探索範囲を広げます。Ver.2 では <code class="docutils literal notranslate"><span class="pre">search_cell_range</span></code> が狭すぎると、近接の殻が黙って抜け、近接の番号がずれていました。</p></li>
+<li><p>模型のバンドは同じように対称性に従います。バージョンをまたいで成り立つテストについては<a class="reference internal" href="materials_ja.html#ja-checks-by-symmetry"><span class="std std-ref">対称性によるチェック</span></a>を参照してください。</p></li>
+<li><p>3.2.0 から、<code class="docutils literal notranslate"><span class="pre">info/&lt;model&gt;_var.py</span></code> は、各ボンドクラスターについてボンド 1 の head と tail のサイト（<code class="docutils literal notranslate"><span class="pre">&quot;bond&quot;</span></code>）を与え、原子の変数は軌道だけで <code class="docutils literal notranslate"><span class="pre">g_{head</span> <span class="pre">の軌道,tail</span> <span class="pre">の軌道}</span></code> と名付けます。例えば <code class="docutils literal notranslate"><span class="pre">g_{pz_C2,pz_C1}</span></code> は <code class="docutils literal notranslate"><span class="pre">g_{pz,pz}</span></code> になります（<a class="reference internal" href="getting_started_ja.html"><span class="std std-doc">はじめに</span></a>を参照）。</p></li>
+<li><p>3.3.0 から、模型の入力キー <code class="docutils literal notranslate"><span class="pre">&quot;coset&quot;</span></code> で、親の群での剰余類の代表で写した SAMB と、親構造でのその固有値の重みを、<code class="docutils literal notranslate"><span class="pre">mm[&quot;coset&quot;]</span></code> と PDF に出します（<a class="reference internal" href="guide/users_guide_ja.html#ja-coset-model"><span class="std std-ref">模型の剰余類</span></a>を参照）。既定で計算し、<code class="docutils literal notranslate"><span class="pre">&quot;coset&quot;:</span> <span class="pre">False</span></code> で省きます。</p></li>
+<li><p>3.4.0 から、模型の入力キー <code class="docutils literal notranslate"><span class="pre">&quot;create_inversion_model&quot;:</span> <span class="pre">True</span></code> で、最初の剰余類が空間反転であるカイラルな群の模型について、その像を作ります。サイトと代表ボンドは、<code class="docutils literal notranslate"><span class="pre">&quot;coset&quot;</span></code> で空間反転で写した SAMB が前提とするものです。<code class="docutils literal notranslate"><span class="pre">mm[&quot;coset&quot;]</span></code> もこの像の代表を与えます（<a class="reference internal" href="guide/users_guide_ja.html#ja-coset-model"><span class="std std-ref">模型の剰余類</span></a>を参照）。3.3.0 では、ラベル空間でのベクトルのノルムが 1/2 の SAMB（例えば E の s と p の混成）について、<code class="docutils literal notranslate"><span class="pre">mm[&quot;coset&quot;]</span></code> の <code class="docutils literal notranslate"><span class="pre">&quot;samb&quot;</span></code> の係数が正しい値の 1/2 でした（回転の場合も同じ）。3.4.0 からは最小二乗で解きます。</p></li>
+<li><p>3.5.0 から、群の任意の上位群（<code class="docutils literal notranslate"><span class="pre">Group.supergroups</span></code>、<code class="docutils literal notranslate"><span class="pre">embedding</span></code>、<code class="docutils literal notranslate"><span class="pre">coset_decomposition</span></code>、<code class="docutils literal notranslate"><span class="pre">parent_limit</span></code>、<code class="docutils literal notranslate"><span class="pre">map_site</span></code>。群のデータの直接の上位群から）と、模型の行列 <span class="math notranslate nohighlight">\(S_{kj} = \langle Z_k, g Z_j \rangle\)</span> と <span class="math notranslate nohighlight">\(F_j = \sum_k (\delta_{kj} - S_{kj}) \langle Z_k \rangle\)</span>（<code class="docutils literal notranslate"><span class="pre">MaterialModel.transform_samb</span></code>、<code class="docutils literal notranslate"><span class="pre">image_overlap</span></code>、<code class="docutils literal notranslate"><span class="pre">parent_forbidden_part</span></code>（位数 <span class="math notranslate nohighlight">\(n &gt; 2\)</span> の <span class="math notranslate nohighlight">\(g\)</span> では、<span class="math notranslate nohighlight">\(g\)</span> の固有値への射影を使う）、<code class="docutils literal notranslate"><span class="pre">parent_shells</span></code>、<code class="docutils literal notranslate"><span class="pre">map_bond</span></code>）を与えます。<code class="docutils literal notranslate"><span class="pre">&quot;coset&quot;</span></code> は任意の上位群を受け付けます（<a class="reference internal" href="guide/users_guide_ja.html#ja-coset-model"><span class="std std-ref">模型の剰余類</span></a>を参照）。重みは、親構造を持つすべての親について与えます。</p></li>
+<li><p>3.5.1 から、模型のトレースモーメント <span class="math notranslate nohighlight">\(\Gamma\)</span>（応答テンソルの模型に依存する部分）と、<span class="math notranslate nohighlight">\(z_j\)</span> の多項式としての 0 でない最低次の項を与えます（<code class="docutils literal notranslate"><span class="pre">ModelAnalyzer.trace_moment</span></code>。<a class="reference internal" href="guide/users_guide_ja.html#ja-trace-moment"><span class="std std-ref">模型のトレースモーメント</span></a>を参照）。</p></li>
+<li><p>3.5.1 から、セルの基本ベクトル（模型の <code class="docutils literal notranslate"><span class="pre">unit_vector</span></code>、解析の <code class="docutils literal notranslate"><span class="pre">info[&quot;A&quot;]</span></code>）と計量を完全な精度で持ちます（90 度と 120 度では厳密）。3.5.0 までは小数 8 桁に丸めていたため（例えば <span class="math notranslate nohighlight">\(\sqrt{3}/2 \to 0.8660254\)</span>）、速度演算子の係数など、それから作る量に <span class="math notranslate nohighlight">\(10^{-9}\)</span> 程度の誤差が入っていました。</p></li>
+</ul>
+</section>
+<section id="ja-converting-a-model-of-ver-2">
+<span id="id6"></span><h2>Ver.2 の模型の変換<a class="headerlink" href="#ja-converting-a-model-of-ver-2" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">mp_convert</span></code>（または <code class="docutils literal notranslate"><span class="pre">convert_model</span></code>。3.1.0 から）は、模型の入力が手元にないときに、Ver.2 の模型 <code class="docutils literal notranslate"><span class="pre">&lt;model&gt;/&lt;model&gt;.pkl</span></code> を Ver.3 に変換します。模型の制御ファイル（<code class="docutils literal notranslate"><span class="pre">samb</span></code> モード）の重み <span class="math notranslate nohighlight">\(z_j\)</span> も変換します。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mp_convert<span class="w"> </span>graphene<span class="w"> </span>graphene_ctrl.py
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li><p>Ver.2 の <code class="docutils literal notranslate"><span class="pre">.pkl</span></code> から模型の入力を組み立て直し、<code class="docutils literal notranslate"><span class="pre">graphene_in.py</span></code> に書き出します。f 軌道の名前を変え、<code class="docutils literal notranslate"><span class="pre">max_neighbor</span></code> と <code class="docutils literal notranslate"><span class="pre">search_cell_range</span></code> を除きます。近接は、Ver.2 のボンドの距離で選びます。Ver.2 が近接の殻の一部を取りこぼしていたとき（<code class="docutils literal notranslate"><span class="pre">search_cell_range</span></code> が狭すぎたとき）は、近接の番号が Ver.3 と違い、Ver.3 の模型には Ver.2 が取りこぼしたボンドも入ります（重みは 0）。</p></li>
+<li><p>Ver.3 で模型を作り、<code class="docutils literal notranslate"><span class="pre">graphene/graphene.pkl</span></code> とします。Ver.2 の模型は <code class="docutils literal notranslate"><span class="pre">graphene/graphene_v2.pkl</span></code> として残します。</p></li>
+<li><p>ket が違うとき、または Ver.2 の SAMB が Ver.3 の SAMB の張る空間に入らないときは、変換を拒否し、Ver.2 の模型を元に戻します。</p></li>
+<li><p>重みは射影で変換します。Ver.2 の <span class="math notranslate nohighlight">\(H = \sum_j z_j Z_j\)</span> から、Ver.3 の <span class="math notranslate nohighlight">\(z_j = {\rm Tr}[Z_j H]\)</span> を求めます（SAMB が正規直交でないとき、例えば f 軌道の一部だけを持つサイトでは、最小二乗で求めます）。<span class="math notranslate nohighlight">\(H\)</span> は丸め誤差の範囲で変わりません。変換した制御ファイルは <code class="docutils literal notranslate"><span class="pre">graphene_ctrl_v3.py</span></code> に書き出し、元のファイルは変えません。<code class="docutils literal notranslate"><span class="pre">samb/select</span></code> は変換しません。近接が変わったときは、その <code class="docutils literal notranslate"><span class="pre">&quot;bond&quot;</span></code> を確かめてください。</p></li>
+</ol>
+<p><code class="docutils literal notranslate"><span class="pre">mp_convert</span></code> は、変わった点（名前を変えた軌道、除いたキー、近接、SAMB の数、射影の残差）を表示します。<code class="docutils literal notranslate"><span class="pre">--no-pdf</span></code> と <code class="docutils literal notranslate"><span class="pre">--no-qtdraw</span></code> を付けると、PDF と QtDraw のファイルを作りません（既定では Ver.2 の模型と同じ）。変換済みの模型（Ver.3 の <code class="docutils literal notranslate"><span class="pre">&lt;model&gt;.pkl</span></code> と <code class="docutils literal notranslate"><span class="pre">&lt;model&gt;_v2.pkl</span></code>）では、制御ファイルだけを変換します。辞書で与えた重み（例えばフィッティングの結果）は、<code class="docutils literal notranslate"><span class="pre">convert_model(&quot;graphene&quot;,</span> <span class="pre">parameter={&quot;z1&quot;:</span> <span class="pre">...})</span></code> で変換し、<code class="docutils literal notranslate"><span class="pre">report[&quot;parameter&quot;]</span></code> として返します。</p>
+</section>
+<section id="ver-3">
+<span id="ja-converting-a-model-before-3-2"></span><h2>3.2.0 より前の Ver.3 の模型の変換<a class="headerlink" href="#ver-3" title="Link to this heading">#</a></h2>
+<p>3.2.0 から、結合 SAMB は、指標表の既約表現の順に、1 つのブロックの中では電気（Q、G）/磁気（T、M）、<span class="math notranslate nohighlight">\(s\)</span>、<span class="math notranslate nohighlight">\(k\)</span>、<span class="math notranslate nohighlight">\(l\)</span>、タイプ、<span class="math notranslate nohighlight">\(n\)</span>、<span class="math notranslate nohighlight">\(p\)</span> の順に番号を付けます（<a class="reference internal" href="guide/users_guide_ja.html#ja-samb-order"><span class="std std-ref">SAMB の順序</span></a>を参照）。3.2.0 より前は、既約表現は名前の順で、多極子はタイプ（Q、G、M、T）、<span class="math notranslate nohighlight">\(s\)</span>、<span class="math notranslate nohighlight">\(k\)</span>、<span class="math notranslate nohighlight">\(l\)</span> の順でした。SAMB そのものは同じです。</p>
+<ul class="simple">
+<li><p>3.2.0 より前に作った模型（<code class="docutils literal notranslate"><span class="pre">.pkl</span></code>）は、その番号のままです。その制御ファイルで、これまでどおり解析できます。</p></li>
+<li><p>同じ入力から 3.2.0 以降で作り直した模型は、番号が違います。古い制御ファイルの重み <span class="math notranslate nohighlight">\(z_j\)</span> は、別の SAMB に掛かってしまいます。</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">mp_convert</span></code> は、そのような模型と、その制御ファイルの SAMB の番号を付け替えます。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mp_convert<span class="w"> </span>graphene<span class="w"> </span>graphene_ctrl.py
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">graphene_in.py</span></code> から、それがなければ古い模型から組み立て直した入力（<code class="docutils literal notranslate"><span class="pre">graphene_in.py</span></code> に書き出します）から、模型を <code class="docutils literal notranslate"><span class="pre">graphene/graphene.pkl</span></code> として作り直します。古い模型は <code class="docutils literal notranslate"><span class="pre">graphene/graphene_v3.1.pkl</span></code>（その版）として残します。</p></li>
+<li><p>古い模型と新しい模型の SAMB を、クラスターと bra-ket のブロック、キー、成分で一対一に対応させ、行列が一致することを確かめます。そうでないとき、例えば <code class="docutils literal notranslate"><span class="pre">graphene_in.py</span></code> を変えていたときは、変換を拒否し、古い模型を元に戻します。</p></li>
+<li><p>制御ファイルの <code class="docutils literal notranslate"><span class="pre">samb/parameter</span></code>、<code class="docutils literal notranslate"><span class="pre">output/callback_info</span></code>、<code class="docutils literal notranslate"><span class="pre">output/dispersion/z</span></code>、<code class="docutils literal notranslate"><span class="pre">output/z_expectation</span></code> の SAMB の番号を付け替え、変換した制御ファイルを <code class="docutils literal notranslate"><span class="pre">graphene_ctrl_v3.2.py</span></code> に書き出します。元のファイルは変えません。<span class="math notranslate nohighlight">\(H\)</span> はまったく同じです。</p></li>
+</ol>
+<p><code class="docutils literal notranslate"><span class="pre">mp_convert</span></code> は、番号が変わった SAMB の数を表示します。変換済みの模型（3.2.0 以降の <code class="docutils literal notranslate"><span class="pre">&lt;model&gt;.pkl</span></code> と <code class="docutils literal notranslate"><span class="pre">&lt;model&gt;_v3.x.pkl</span></code>）では、制御ファイルだけを変換します。<code class="docutils literal notranslate"><span class="pre">convert_model</span></code> の <code class="docutils literal notranslate"><span class="pre">report[&quot;renumber&quot;]</span></code> は、古い <span class="math notranslate nohighlight">\(z_j\)</span> から新しい <span class="math notranslate nohighlight">\(z_j\)</span> への対応を与えます。</p>
+</section>
+<section id="group">
+<span id="ja-changes-group"></span><h2>Group<a class="headerlink" href="#group" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Ver.2</p></th>
+<th class="head text-left"><p>Ver.3</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">Group(tag,</span> <span class="pre">with_opt=True)</span></code>, <code class="docutils literal notranslate"><span class="pre">Group.opt</span></code></p></td>
+<td class="text-left"><p>削除</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">Group.opt[&quot;representation_matrix&quot;]</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">Group.representation_matrix</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">Group.opt[&quot;harmonics_multipole&quot;]</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">Group.multipolar_harmonics</span></code>（rank &lt;= 3）、<code class="docutils literal notranslate"><span class="pre">Group.multipolar_harmonics_expression()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">Group.opt[&quot;harmonics_irrep&quot;]</span></code></p></td>
+<td class="text-left"><p>削除（<code class="docutils literal notranslate"><span class="pre">Group.harmonics</span></code> のキーを使う）</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">Group.harmonics</span></code> の値 <code class="docutils literal notranslate"><span class="pre">(expression,</span> <span class="pre">U,</span> <span class="pre">tesseral</span> <span class="pre">expression)</span></code></p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">(expression,</span> <span class="pre">U)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">Group.cluster_samb(wp,</span> <span class="pre">&quot;bond_s&quot;</span> <span class="pre">/</span> <span class="pre">&quot;bond_a&quot;</span> <span class="pre">/</span> <span class="pre">&quot;vector&quot;)</span></code></p></td>
+<td class="text-left"><p>削除。<code class="docutils literal notranslate"><span class="pre">Group.cluster_samb(wp,</span> <span class="pre">&quot;bond&quot;)</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">Group.response_tensor_all(X)</span></code> がテンソルを計算する</p></td>
+<td class="text-left"><p>データベースから読む（テンソルは同じ）</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">wyckoff[...][&quot;reference&quot;]</span></code></p></td>
+<td class="text-left"><p>別の値（別の代表点）</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>点群の <code class="docutils literal notranslate"><span class="pre">symmetry_operation[&quot;mapping&quot;]</span></code>、右剰余類</p></td>
+<td class="text-left"><p>親の群をたどる左剰余類。空間群にもある</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>複素の点群にはボンドがない</p></td>
+<td class="text-left"><p>複素の点群にも Wyckoff のボンドがある</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>-</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">wyckoff[&quot;bond&quot;][...][&quot;symmetry&quot;]</span></code>（ボンドの中心のサイト対称性）</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>対称操作（とその並び）、Wyckoff のラベル・位置・mapping、指標表（既約表現の並びを除く）、MPG と MSG のデータは変わりません。</p>
+</section>
+<section id="id7">
+<h2>応答テンソル<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>応答テンソルは、多極子の名前と 4 階の <code class="docutils literal notranslate"><span class="pre">t</span></code> 部分を除いて Ver.2 と同じです。<code class="docutils literal notranslate"><span class="pre">t</span></code> 部分 <span class="math notranslate nohighlight">\(X_{abc;d}\)</span> は <span class="math notranslate nohighlight">\(a, b, c\)</span> について完全対称になり、独立な成分は 30 個です（Ver.2 では完全対称ではありませんでした）。</p></li>
+<li><p>応答テンソルの多極子は、どれも同じ名前の調和関数（<code class="docutils literal notranslate"><span class="pre">Group.harmonics</span></code>）の正の倍数です。3.2.0 までは、応答テンソルの <span class="math notranslate nohighlight">\(\mathbb{Q}_{4v}\)</span>（<code class="docutils literal notranslate"><span class="pre">gv</span></code>）の符号が逆で、<code class="docutils literal notranslate"><span class="pre">t</span></code> 部分も完全対称ではありませんでした。</p></li>
+<li><p>active multipole の名前は変更後の軌道名に従います。例えば <code class="docutils literal notranslate"><span class="pre">Qf1</span></code> は <code class="docutils literal notranslate"><span class="pre">Qfs</span></code> になります。その別名（<code class="docutils literal notranslate"><span class="pre">convert_mp_alias</span></code>）はデータベースの LaTeX の名前から作ります。例えば <code class="docutils literal notranslate"><span class="pre">Qfc</span></code> は <span class="math notranslate nohighlight">\(\mathbb{Q}_{3c}\)</span> です。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">multipole_rank(tag)</span></code> は、active multipole の名前からそのランクを返します。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Group.response_tensor_all()</span></code> は、タイプ <code class="docutils literal notranslate"><span class="pre">X</span></code> を省略するとすべてのタイプのテンソルを返します（タイプはキー <code class="docutils literal notranslate"><span class="pre">(X,</span> <span class="pre">rank,</span> <span class="pre">opt)</span></code> の最初の要素です）。<code class="docutils literal notranslate"><span class="pre">response_tensor_all(X)</span></code> は Ver.2 と同じく <code class="docutils literal notranslate"><span class="pre">X</span></code> のものを返します。</p></li>
+</ul>
+</section>
+<section id="id8">
+<h2>関連パッケージ<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>QtDraw 3.4 以降は MultiPie Ver.3 で動きます（2.5 以降の Ver.2 でも動きます）。QtDraw 3.3 以前は Ver.2 でのみ動きます。</p></li>
+<li><p>SymClosestWannier 2.1.3 以降は MultiPie Ver.3 で動きます。Wannier 関数に付ける f 軌道の名前は、入っている MultiPie に従います。対称化に使うモデルは Ver.3 で作り直してください。</p></li>
+</ul>
+</section>
+<section id="ver-2-pdf">
+<span id="ja-brief-manual-v2"></span><h2>Ver.2 の簡易マニュアル（PDF）<a class="headerlink" href="#ver-2-pdf" title="Link to this heading">#</a></h2>
+<p>MultiPie の簡易マニュアルは Version 2.3 向けに書かれています。考え方と作業の流れは Ver.3 でも同じですが、このページに書いたように名前や結果の一部が異なります。例えば、f 軌道 <code class="docutils literal notranslate"><span class="pre">f2</span></code>, <code class="docutils literal notranslate"><span class="pre">f1</span></code>, <code class="docutils literal notranslate"><span class="pre">f3x</span></code>, <code class="docutils literal notranslate"><span class="pre">f3y</span></code> の名前が変わり、<code class="docutils literal notranslate"><span class="pre">Group(tag,</span> <span class="pre">with_opt=True)</span></code> は廃止され、SAMB の番号や符号が異なることがあります。英語版は<a class="reference internal" href="changes.html#brief-manual-v2"><span class="std std-ref">英語のページ</span></a>にあります。</p>
+<p><a class="reference download internal" download="" href="../_downloads/0d5fae85b5b4d12c4b66c10e249b841e/brief_manual_ja.pdf"><span class="xref download myst">PDF</span></a></p>
+<p>MultiPie の概要をスライドでまとめたものです。群論的なデータ、SAMB（電気 <code class="docutils literal notranslate"><span class="pre">Q</span></code>、磁気 <code class="docutils literal notranslate"><span class="pre">M</span></code>、磁気トロイダル <code class="docutils literal notranslate"><span class="pre">T</span></code>、電気トロイダル <code class="docutils literal notranslate"><span class="pre">G</span></code> 多極子）、グラフェンの例、<code class="docutils literal notranslate"><span class="pre">mp_create</span></code> と <code class="docutils literal notranslate"><span class="pre">mp_analyze</span></code> による作業の流れ（入力ファイルと制御ファイルのすべてのキー）、<code class="docutils literal notranslate"><span class="pre">Group</span></code>、<code class="docutils literal notranslate"><span class="pre">MaterialModel</span></code>、<code class="docutils literal notranslate"><span class="pre">ModelAnalyzer</span></code> の各クラスの概要を扱います。</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./src"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">群のデータベース</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">規則</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">調和関数</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#samb">原子 SAMB</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">クラスター SAMB</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">結合 SAMB と模型</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ja-converting-a-model-of-ver-2">Ver.2 の模型の変換</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ver-3">3.2.0 より前の Ver.3 の模型の変換</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#group">Group</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">応答テンソル</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">関連パッケージ</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ver-2-pdf">Ver.2 の簡易マニュアル（PDF）</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Hiroaki Kusunose and Rikuto Oiwa
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2021-.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

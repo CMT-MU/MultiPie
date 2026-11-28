@@ -1,0 +1,1200 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Atomic multipole operators &#8212; MultiPie</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=6a604523" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=2106c826" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=a8e58a58"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script data-sd-tabs-storage-prefix="sphinx-design-tab-id-" src="../_static/design-tabs.js?v=fcb327ea"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"loader": {"load": ["[tex]/physics"]}, "tex": {"packages": {"[+]": ["physics"]}, "macros": {"bm": ["\\boldsymbol{#1}", 1]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'src/atomic_multipole_table';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script src="../_static/custom.js?v=7f87e22d"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Using the Group class" href="group.html" />
+    <link rel="prev" title="User Guide" href="guide.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../README.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/multipie_logo.png" class="logo__image only-light" alt="MultiPie - Home"/>
+    <img src="../_static/multipie_logo.png" class="logo__image only-dark pst-js-only" alt="MultiPie - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installing MultiPie</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference external" href="https://cmt-mu.github.io/MultiPieGen/src/group_info.html">Group information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guide.html">User Guide</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Atomic multipole operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="group.html">Using the Group class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="materials.html">Examples of materials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="post_processing.html">Post-processing tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changes.html">Changes from Ver.2</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="api_core.html">Core</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="api_core/init.html">Type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_core/cmd.html">Create function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_core/group.html">Group</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_core/material_model.html">Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_core/model_analyzer.html">ModelAnalyzer</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="api_util.html">Utility</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_atomic_multipole.html">Atomic multipole</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_atomic_multipole_operator.html">Atomic multipole operator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_binary.html">Binary data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_crystal.html">Crystal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_dict.html">Dict</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_gram_schmidt.html">Gram-Schmidt orthonormalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_harmonics.html">Harmonics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_material_model_pdf.html">PDF creator for Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_material_model.html">Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_model_analyzer.html">Model Analyzer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_multipolar_harmonics.html">Multipolar harmonics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_pdf_latex.html">PDF creator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_plot.html">Plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_response_tensor.html">Response tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_coset.html">Coset of a model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_supergroup.html">Supergroups</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_samb.html">SAMB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_tag.html">Tag</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_trace_moment.html">Trace moments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_wannier.html">Wannier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_wyckoff.html">Wyckoff position</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util.html">Versatile</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/CMT-MU/MultiPie.git" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Atomic multipole operators</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#s-0-k-0"><span class="math notranslate nohighlight">\(s = 0\)</span>, <span class="math notranslate nohighlight">\(k = 0\)</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#electric-q">Electric (Q)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#electric-toroidal-g">Electric toroidal (G)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#magnetic-toroidal-t">Magnetic toroidal (T)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#magnetic-m">Magnetic (M)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#s-1-k-1"><span class="math notranslate nohighlight">\(s = 1\)</span>, <span class="math notranslate nohighlight">\(k = -1\)</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Electric (Q)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Electric toroidal (G)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Magnetic (M)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#s-1-k-0"><span class="math notranslate nohighlight">\(s = 1\)</span>, <span class="math notranslate nohighlight">\(k = 0\)</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Electric (Q)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Electric toroidal (G)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Magnetic toroidal (T)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Magnetic (M)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8"><span class="math notranslate nohighlight">\(s = 1\)</span>, <span class="math notranslate nohighlight">\(k = 1\)</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">Electric (Q)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">Electric toroidal (G)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">Magnetic toroidal (T)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">Magnetic (M)</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="atomic-multipole-operators">
+<h1>Atomic multipole operators<a class="headerlink" href="#atomic-multipole-operators" title="Link to this heading">#</a></h1>
+<p>A Japanese version is <a class="reference internal" href="atomic_multipole_table_ja.html"><span class="std std-doc">here</span></a>.</p>
+<p>This page lists the atomic multipole operators <span class="math notranslate nohighlight">\(X_{lm}^{(s)}(k)\)</span> up to rank <span class="math notranslate nohighlight">\(l = 2\)</span>, given by
+<code class="docutils literal notranslate"><span class="pre">Group.atomic_multipole_operator</span></code> (see <a class="reference internal" href="guide.html#atomic-multipole-operator"><span class="std std-ref">Operator expression</span></a>), following H. Kusunose,
+R. Oiwa, and S. Hayami, J. Phys. Soc. Jpn. <strong>89</strong>, 104704 (2020).</p>
+<ul class="simple">
+<li><p><strong>Components.</strong> The real (tesseral) components are listed: <span class="math notranslate nohighlight">\(X_{l0}\)</span>, and
+<span class="math notranslate nohighlight">\(C_{lm} = [(-1)^m X_{lm} + X_{l,-m}]/\sqrt{2}\)</span> and <span class="math notranslate nohighlight">\(S_{lm} = [(-1)^m X_{lm} - X_{l,-m}]/(\sqrt{2}\,i)\)</span> for <span class="math notranslate nohighlight">\(m &gt; 0\)</span>.
+They are named as the orbitals: <span class="math notranslate nohighlight">\((x, y, z) = (C_{11}, S_{11}, C_{10})\)</span> for <span class="math notranslate nohighlight">\(l = 1\)</span>, and
+<span class="math notranslate nohighlight">\((u, v, yz, xz, xy) = (C_{20}, C_{22}, S_{21}, C_{21}, S_{22})\)</span> for <span class="math notranslate nohighlight">\(l = 2\)</span>. E.g., <span class="math notranslate nohighlight">\(Q_{u} = z^2 - (x^2 + y^2)/2\)</span>.
+The components are hermitian, as <span class="math notranslate nohighlight">\(X_{l,-m} = (-1)^m X_{lm}^\dagger\)</span> (Eqs. 6 and 14).</p></li>
+<li><p><strong>Operators.</strong> The position <span class="math notranslate nohighlight">\(x, y, z\)</span>, the orbital angular momentum <span class="math notranslate nohighlight">\(l_x, l_y, l_z\)</span> (dimensionless), and the Pauli
+matrices <span class="math notranslate nohighlight">\(\sigma_x, \sigma_y, \sigma_z\)</span> (the spin is <span class="math notranslate nohighlight">\(\boldsymbol{\sigma}/2\)</span>), with <span class="math notranslate nohighlight">\([l_i, l_j] = i\epsilon_{ijk} l_k\)</span>,
+<span class="math notranslate nohighlight">\([\sigma_i, \sigma_j] = 2i\epsilon_{ijk}\sigma_k\)</span>, and <span class="math notranslate nohighlight">\([l_i, x_j] = i\epsilon_{ijk} x_k\)</span>; <span class="math notranslate nohighlight">\(x_i\)</span> commute with each other,
+and <span class="math notranslate nohighlight">\(\sigma_i\)</span> commute with <span class="math notranslate nohighlight">\(l_i\)</span> and <span class="math notranslate nohighlight">\(x_i\)</span>.</p></li>
+<li><p><strong>Order of the operators.</strong> The order of the definition is kept: in a product such as <span class="math notranslate nohighlight">\(l_x\, y\)</span>, <span class="math notranslate nohighlight">\(l_x\)</span> acts after
+<span class="math notranslate nohighlight">\(y\)</span>. Only a run of consecutive position operators is sorted, and the Pauli matrices are put at the right end; the
+commutation relations are not used otherwise, so that, e.g., <span class="math notranslate nohighlight">\(l_x y\)</span> and <span class="math notranslate nohighlight">\(y l_x\)</span> appear as separate terms.</p></li>
+<li><p><strong>Notation.</strong> <span class="math notranslate nohighlight">\(X_{\gamma}\)</span> for <span class="math notranslate nohighlight">\(s = 0\)</span> and <span class="math notranslate nohighlight">\(X^{(1)}_{\gamma}(k)\)</span> for <span class="math notranslate nohighlight">\(s = 1\)</span>, with the name of the component
+<span class="math notranslate nohighlight">\(\gamma\)</span> (e.g., <span class="math notranslate nohighlight">\(Q_{u}\)</span> and <span class="math notranslate nohighlight">\(Q^{(1)}_{x}(0)\)</span>), and <span class="math notranslate nohighlight">\(X_{0}\)</span> and <span class="math notranslate nohighlight">\(X^{(1)}_{0}(k)\)</span> for rank 0. The matrix elements in an
+orbital basis are those of the atomic SAMB before the symmetry adaptation and the normalization, with the radial
+factor <span class="math notranslate nohighlight">\(\langle r^k \rangle = 1\)</span>.</p></li>
+<li><p><strong>Rank 1 in vectors.</strong> The three components of rank 1 are written together as a vector, e.g.,
+<span class="math notranslate nohighlight">\(\boldsymbol{T} = (T_{x}, T_{y}, T_{z})\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{Q}^{(1)}(0) = (Q^{(1)}_{x}(0), Q^{(1)}_{y}(0), Q^{(1)}_{z}(0))\)</span>,
+with <span class="math notranslate nohighlight">\(\boldsymbol{r} = (x, y, z)\)</span>, <span class="math notranslate nohighlight">\(\boldsymbol{l} = (l_x, l_y, l_z)\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{\sigma} = (\sigma_x, \sigma_y, \sigma_z)\)</span>.
+The order of the operators in the products is kept also here, e.g., <span class="math notranslate nohighlight">\((\boldsymbol{r} \times \boldsymbol{l})_x = y l_z - z l_y\)</span>
+and <span class="math notranslate nohighlight">\((\boldsymbol{l} \times \boldsymbol{r})_x = l_y z - l_z y\)</span>. The scalars of rank 0 are written in the same way. The
+terms with <span class="math notranslate nohighlight">\(\boldsymbol{r} \cdot \boldsymbol{l}\)</span> or <span class="math notranslate nohighlight">\(\boldsymbol{l} \cdot \boldsymbol{r}\)</span> are omitted, as they vanish
+(<span class="math notranslate nohighlight">\(\boldsymbol{r} \cdot \boldsymbol{l} = \boldsymbol{l} \cdot \boldsymbol{r} = 0\)</span> for
+<span class="math notranslate nohighlight">\(\boldsymbol{l} = -i\,\boldsymbol{r} \times \nabla\)</span>); <code class="docutils literal notranslate"><span class="pre">Group.atomic_multipole_operator</span></code> gives them, as it does not use
+the commutation relations.</p></li>
+</ul>
+<p>The vanishing ones (e.g., <span class="math notranslate nohighlight">\(M_{0}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{G}\)</span> of <span class="math notranslate nohighlight">\(s = 0\)</span>) are not listed.</p>
+<section id="s-0-k-0">
+<h2><span class="math notranslate nohighlight">\(s = 0\)</span>, <span class="math notranslate nohighlight">\(k = 0\)</span><a class="headerlink" href="#s-0-k-0" title="Link to this heading">#</a></h2>
+<section id="electric-q">
+<h3>Electric (Q)<a class="headerlink" href="#electric-q" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[
+\begin{aligned}
+Q_{0} &amp;= 1
+\end{aligned}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\begin{aligned}
+\boldsymbol{Q} &amp;= \boldsymbol{r}
+\end{aligned}
+\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+Q_{u} &amp;= - \frac{x^{2}}{2} - \frac{y^{2}}{2} + z^{2} \\
+Q_{v} &amp;= \frac{\sqrt{3} x^{2}}{2} - \frac{\sqrt{3} y^{2}}{2} \\
+Q_{yz} &amp;= \sqrt{3} y z \\
+Q_{xz} &amp;= \sqrt{3} x z \\
+Q_{xy} &amp;= \sqrt{3} x y
+\end{aligned}
+\end{split}\]</div>
+</section>
+<section id="electric-toroidal-g">
+<h3>Electric toroidal (G)<a class="headerlink" href="#electric-toroidal-g" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+G_{u} &amp;= \frac{i l_{x}^{3} x}{18} + \frac{i l_{y}^{3} y}{18} - \frac{i l_{z}^{3} z}{9} - \frac{i x l_{x}^{3}}{18} \\
+&amp;\quad - \frac{i y l_{y}^{3}}{18} + \frac{i z l_{z}^{3}}{9} + \frac{i l_{x}^{2} l_{y} y}{18} - \frac{i l_{x}^{2} l_{z} z}{9} \\
+&amp;\quad + \frac{i l_{y}^{2} l_{x} x}{18} - \frac{i l_{y}^{2} l_{z} z}{9} + \frac{i l_{z}^{2} l_{x} x}{18} + \frac{i l_{z}^{2} l_{y} y}{18} \\
+&amp;\quad - \frac{i x l_{x} l_{y}^{2}}{18} - \frac{i x l_{x} l_{z}^{2}}{18} - \frac{i y l_{y} l_{x}^{2}}{18} - \frac{i y l_{y} l_{z}^{2}}{18} \\
+&amp;\quad + \frac{i z l_{z} l_{x}^{2}}{9} + \frac{i z l_{z} l_{y}^{2}}{9} \\
+G_{v} &amp;= - \frac{\sqrt{3} i l_{x}^{3} x}{18} + \frac{\sqrt{3} i l_{y}^{3} y}{18} + \frac{\sqrt{3} i x l_{x}^{3}}{18} - \frac{\sqrt{3} i y l_{y}^{3}}{18} \\
+&amp;\quad + \frac{\sqrt{3} i l_{x}^{2} l_{y} y}{18} - \frac{\sqrt{3} i l_{y}^{2} l_{x} x}{18} - \frac{\sqrt{3} i l_{z}^{2} l_{x} x}{18} + \frac{\sqrt{3} i l_{z}^{2} l_{y} y}{18} \\
+&amp;\quad + \frac{\sqrt{3} i x l_{x} l_{y}^{2}}{18} + \frac{\sqrt{3} i x l_{x} l_{z}^{2}}{18} - \frac{\sqrt{3} i y l_{y} l_{x}^{2}}{18} - \frac{\sqrt{3} i y l_{y} l_{z}^{2}}{18} \\
+G_{yz} &amp;= - \frac{\sqrt{3} i l_{y}^{3} z}{18} - \frac{\sqrt{3} i l_{z}^{3} y}{18} + \frac{\sqrt{3} i y l_{z}^{3}}{18} + \frac{\sqrt{3} i z l_{y}^{3}}{18} \\
+&amp;\quad - \frac{\sqrt{3} i l_{x}^{2} l_{y} z}{18} - \frac{\sqrt{3} i l_{x}^{2} l_{z} y}{18} - \frac{\sqrt{3} i l_{y}^{2} l_{z} y}{18} - \frac{\sqrt{3} i l_{z}^{2} l_{y} z}{18} \\
+&amp;\quad + \frac{\sqrt{3} i y l_{z} l_{x}^{2}}{18} + \frac{\sqrt{3} i y l_{z} l_{y}^{2}}{18} + \frac{\sqrt{3} i z l_{y} l_{x}^{2}}{18} + \frac{\sqrt{3} i z l_{y} l_{z}^{2}}{18} \\
+G_{xz} &amp;= - \frac{\sqrt{3} i l_{x}^{3} z}{18} - \frac{\sqrt{3} i l_{z}^{3} x}{18} + \frac{\sqrt{3} i x l_{z}^{3}}{18} + \frac{\sqrt{3} i z l_{x}^{3}}{18} \\
+&amp;\quad - \frac{\sqrt{3} i l_{x}^{2} l_{z} x}{18} - \frac{\sqrt{3} i l_{y}^{2} l_{x} z}{18} - \frac{\sqrt{3} i l_{y}^{2} l_{z} x}{18} - \frac{\sqrt{3} i l_{z}^{2} l_{x} z}{18} \\
+&amp;\quad + \frac{\sqrt{3} i x l_{z} l_{x}^{2}}{18} + \frac{\sqrt{3} i x l_{z} l_{y}^{2}}{18} + \frac{\sqrt{3} i z l_{x} l_{y}^{2}}{18} + \frac{\sqrt{3} i z l_{x} l_{z}^{2}}{18} \\
+G_{xy} &amp;= - \frac{\sqrt{3} i l_{x}^{3} y}{18} - \frac{\sqrt{3} i l_{y}^{3} x}{18} + \frac{\sqrt{3} i x l_{y}^{3}}{18} + \frac{\sqrt{3} i y l_{x}^{3}}{18} \\
+&amp;\quad - \frac{\sqrt{3} i l_{x}^{2} l_{y} x}{18} - \frac{\sqrt{3} i l_{y}^{2} l_{x} y}{18} - \frac{\sqrt{3} i l_{z}^{2} l_{x} y}{18} - \frac{\sqrt{3} i l_{z}^{2} l_{y} x}{18} \\
+&amp;\quad + \frac{\sqrt{3} i x l_{y} l_{x}^{2}}{18} + \frac{\sqrt{3} i x l_{y} l_{z}^{2}}{18} + \frac{\sqrt{3} i y l_{x} l_{y}^{2}}{18} + \frac{\sqrt{3} i y l_{x} l_{z}^{2}}{18}
+\end{aligned}
+\end{split}\]</div>
+</section>
+<section id="magnetic-toroidal-t">
+<h3>Magnetic toroidal (T)<a class="headerlink" href="#magnetic-toroidal-t" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[
+\begin{aligned}
+\boldsymbol{T} &amp;= \frac{1}{6} (\boldsymbol{r} \times \boldsymbol{l} - \boldsymbol{l} \times \boldsymbol{r})
+\end{aligned}
+\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+T_{u} &amp;= - \frac{l_{x} y z}{4} + \frac{l_{y} x z}{4} + \frac{x z l_{y}}{4} - \frac{y z l_{x}}{4} \\
+T_{v} &amp;= - \frac{\sqrt{3} l_{x} y z}{12} - \frac{\sqrt{3} l_{y} x z}{12} + \frac{\sqrt{3} l_{z} x y}{6} + \frac{\sqrt{3} x y l_{z}}{6} \\
+&amp;\quad - \frac{\sqrt{3} x z l_{y}}{12} - \frac{\sqrt{3} y z l_{x}}{12} \\
+T_{yz} &amp;= - \frac{\sqrt{3} l_{x} y^{2}}{12} + \frac{\sqrt{3} l_{x} z^{2}}{12} - \frac{\sqrt{3} y^{2} l_{x}}{12} + \frac{\sqrt{3} z^{2} l_{x}}{12} \\
+&amp;\quad + \frac{\sqrt{3} l_{y} x y}{12} - \frac{\sqrt{3} l_{z} x z}{12} + \frac{\sqrt{3} x y l_{y}}{12} - \frac{\sqrt{3} x z l_{z}}{12} \\
+T_{xz} &amp;= \frac{\sqrt{3} l_{y} x^{2}}{12} - \frac{\sqrt{3} l_{y} z^{2}}{12} + \frac{\sqrt{3} x^{2} l_{y}}{12} - \frac{\sqrt{3} z^{2} l_{y}}{12} \\
+&amp;\quad - \frac{\sqrt{3} l_{x} x y}{12} + \frac{\sqrt{3} l_{z} y z}{12} - \frac{\sqrt{3} x y l_{x}}{12} + \frac{\sqrt{3} y z l_{z}}{12} \\
+T_{xy} &amp;= - \frac{\sqrt{3} l_{z} x^{2}}{12} + \frac{\sqrt{3} l_{z} y^{2}}{12} - \frac{\sqrt{3} x^{2} l_{z}}{12} + \frac{\sqrt{3} y^{2} l_{z}}{12} \\
+&amp;\quad + \frac{\sqrt{3} l_{x} x z}{12} - \frac{\sqrt{3} l_{y} y z}{12} + \frac{\sqrt{3} x z l_{x}}{12} - \frac{\sqrt{3} y z l_{y}}{12}
+\end{aligned}
+\end{split}\]</div>
+</section>
+<section id="magnetic-m">
+<h3>Magnetic (M)<a class="headerlink" href="#magnetic-m" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[
+\begin{aligned}
+\boldsymbol{M} &amp;= \boldsymbol{l}
+\end{aligned}
+\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+M_{u} &amp;= - \frac{l_{x} x}{3} - \frac{l_{y} y}{3} + \frac{2 l_{z} z}{3} - \frac{x l_{x}}{3} \\
+&amp;\quad - \frac{y l_{y}}{3} + \frac{2 z l_{z}}{3} \\
+M_{v} &amp;= \frac{\sqrt{3} l_{x} x}{3} - \frac{\sqrt{3} l_{y} y}{3} + \frac{\sqrt{3} x l_{x}}{3} - \frac{\sqrt{3} y l_{y}}{3} \\
+M_{yz} &amp;= \frac{\sqrt{3} l_{y} z}{3} + \frac{\sqrt{3} l_{z} y}{3} + \frac{\sqrt{3} y l_{z}}{3} + \frac{\sqrt{3} z l_{y}}{3} \\
+M_{xz} &amp;= \frac{\sqrt{3} l_{x} z}{3} + \frac{\sqrt{3} l_{z} x}{3} + \frac{\sqrt{3} x l_{z}}{3} + \frac{\sqrt{3} z l_{x}}{3} \\
+M_{xy} &amp;= \frac{\sqrt{3} l_{x} y}{3} + \frac{\sqrt{3} l_{y} x}{3} + \frac{\sqrt{3} x l_{y}}{3} + \frac{\sqrt{3} y l_{x}}{3}
+\end{aligned}
+\end{split}\]</div>
+</section>
+</section>
+<section id="s-1-k-1">
+<h2><span class="math notranslate nohighlight">\(s = 1\)</span>, <span class="math notranslate nohighlight">\(k = -1\)</span><a class="headerlink" href="#s-1-k-1" title="Link to this heading">#</a></h2>
+<section id="id1">
+<h3>Electric (Q)<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+Q^{(1)}_{u}(-1) &amp;= - \frac{\sqrt{6} l_{x} \sigma_{x}}{6} - \frac{\sqrt{6} l_{y} \sigma_{y}}{6} + \frac{\sqrt{6} l_{z} \sigma_{z}}{3} \\
+Q^{(1)}_{v}(-1) &amp;= \frac{\sqrt{2} l_{x} \sigma_{x}}{2} - \frac{\sqrt{2} l_{y} \sigma_{y}}{2} \\
+Q^{(1)}_{yz}(-1) &amp;= \frac{\sqrt{2} l_{y} \sigma_{z}}{2} + \frac{\sqrt{2} l_{z} \sigma_{y}}{2} \\
+Q^{(1)}_{xz}(-1) &amp;= \frac{\sqrt{2} l_{x} \sigma_{z}}{2} + \frac{\sqrt{2} l_{z} \sigma_{x}}{2} \\
+Q^{(1)}_{xy}(-1) &amp;= \frac{\sqrt{2} l_{x} \sigma_{y}}{2} + \frac{\sqrt{2} l_{y} \sigma_{x}}{2}
+\end{aligned}
+\end{split}\]</div>
+</section>
+<section id="id2">
+<h3>Electric toroidal (G)<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+G^{(1)}_{u}(-1) &amp;= - \frac{\sqrt{6} l_{x} y \sigma_{z}}{18} - \frac{\sqrt{6} l_{x} z \sigma_{y}}{36} + \frac{\sqrt{6} l_{y} x \sigma_{z}}{18} + \frac{\sqrt{6} l_{y} z \sigma_{x}}{36} \\
+&amp;\quad + \frac{\sqrt{6} l_{z} x \sigma_{y}}{36} - \frac{\sqrt{6} l_{z} y \sigma_{x}}{36} + \frac{\sqrt{6} x l_{y} \sigma_{z}}{18} + \frac{\sqrt{6} x l_{z} \sigma_{y}}{36} \\
+&amp;\quad - \frac{\sqrt{6} y l_{x} \sigma_{z}}{18} - \frac{\sqrt{6} y l_{z} \sigma_{x}}{36} - \frac{\sqrt{6} z l_{x} \sigma_{y}}{36} + \frac{\sqrt{6} z l_{y} \sigma_{x}}{36} \\
+G^{(1)}_{v}(-1) &amp;= - \frac{\sqrt{2} l_{x} z \sigma_{y}}{12} - \frac{\sqrt{2} l_{y} z \sigma_{x}}{12} + \frac{\sqrt{2} l_{z} x \sigma_{y}}{12} + \frac{\sqrt{2} l_{z} y \sigma_{x}}{12} \\
+&amp;\quad + \frac{\sqrt{2} x l_{z} \sigma_{y}}{12} + \frac{\sqrt{2} y l_{z} \sigma_{x}}{12} - \frac{\sqrt{2} z l_{x} \sigma_{y}}{12} - \frac{\sqrt{2} z l_{y} \sigma_{x}}{12} \\
+G^{(1)}_{yz}(-1) &amp;= - \frac{\sqrt{2} l_{x} y \sigma_{y}}{12} + \frac{\sqrt{2} l_{x} z \sigma_{z}}{12} + \frac{\sqrt{2} l_{y} x \sigma_{y}}{12} - \frac{\sqrt{2} l_{z} x \sigma_{z}}{12} \\
+&amp;\quad + \frac{\sqrt{2} x l_{y} \sigma_{y}}{12} - \frac{\sqrt{2} x l_{z} \sigma_{z}}{12} - \frac{\sqrt{2} y l_{x} \sigma_{y}}{12} + \frac{\sqrt{2} z l_{x} \sigma_{z}}{12} \\
+G^{(1)}_{xz}(-1) &amp;= - \frac{\sqrt{2} l_{x} y \sigma_{x}}{12} + \frac{\sqrt{2} l_{y} x \sigma_{x}}{12} - \frac{\sqrt{2} l_{y} z \sigma_{z}}{12} + \frac{\sqrt{2} l_{z} y \sigma_{z}}{12} \\
+&amp;\quad + \frac{\sqrt{2} x l_{y} \sigma_{x}}{12} - \frac{\sqrt{2} y l_{x} \sigma_{x}}{12} + \frac{\sqrt{2} y l_{z} \sigma_{z}}{12} - \frac{\sqrt{2} z l_{y} \sigma_{z}}{12} \\
+G^{(1)}_{xy}(-1) &amp;= \frac{\sqrt{2} l_{x} z \sigma_{x}}{12} - \frac{\sqrt{2} l_{y} z \sigma_{y}}{12} - \frac{\sqrt{2} l_{z} x \sigma_{x}}{12} + \frac{\sqrt{2} l_{z} y \sigma_{y}}{12} \\
+&amp;\quad - \frac{\sqrt{2} x l_{z} \sigma_{x}}{12} + \frac{\sqrt{2} y l_{z} \sigma_{y}}{12} + \frac{\sqrt{2} z l_{x} \sigma_{x}}{12} - \frac{\sqrt{2} z l_{y} \sigma_{y}}{12}
+\end{aligned}
+\end{split}\]</div>
+</section>
+<section id="id3">
+<h3>Magnetic (M)<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[
+\begin{aligned}
+\boldsymbol{M}^{(1)}(-1) &amp;= \boldsymbol{\sigma}
+\end{aligned}
+\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+M^{(1)}_{u}(-1) &amp;= - \frac{\sqrt{6} x \sigma_{x}}{6} - \frac{\sqrt{6} y \sigma_{y}}{6} + \frac{\sqrt{6} z \sigma_{z}}{3} \\
+M^{(1)}_{v}(-1) &amp;= \frac{\sqrt{2} x \sigma_{x}}{2} - \frac{\sqrt{2} y \sigma_{y}}{2} \\
+M^{(1)}_{yz}(-1) &amp;= \frac{\sqrt{2} y \sigma_{z}}{2} + \frac{\sqrt{2} z \sigma_{y}}{2} \\
+M^{(1)}_{xz}(-1) &amp;= \frac{\sqrt{2} x \sigma_{z}}{2} + \frac{\sqrt{2} z \sigma_{x}}{2} \\
+M^{(1)}_{xy}(-1) &amp;= \frac{\sqrt{2} x \sigma_{y}}{2} + \frac{\sqrt{2} y \sigma_{x}}{2}
+\end{aligned}
+\end{split}\]</div>
+</section>
+</section>
+<section id="s-1-k-0">
+<h2><span class="math notranslate nohighlight">\(s = 1\)</span>, <span class="math notranslate nohighlight">\(k = 0\)</span><a class="headerlink" href="#s-1-k-0" title="Link to this heading">#</a></h2>
+<section id="id4">
+<h3>Electric (Q)<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[
+\begin{aligned}
+\boldsymbol{Q}^{(1)}(0) &amp;= \frac{\sqrt{2}}{12} (\boldsymbol{l} \times \boldsymbol{r} - \boldsymbol{r} \times \boldsymbol{l}) \times \boldsymbol{\sigma}
+\end{aligned}
+\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+Q^{(1)}_{u}(0) &amp;= - \frac{\sqrt{6} l_{x} y^{2} \sigma_{x}}{24} + \frac{\sqrt{6} l_{x} z^{2} \sigma_{x}}{24} - \frac{\sqrt{6} l_{y} x^{2} \sigma_{y}}{24} + \frac{\sqrt{6} l_{y} z^{2} \sigma_{y}}{24} \\
+&amp;\quad - \frac{\sqrt{6} x^{2} l_{y} \sigma_{y}}{24} - \frac{\sqrt{6} y^{2} l_{x} \sigma_{x}}{24} + \frac{\sqrt{6} z^{2} l_{x} \sigma_{x}}{24} + \frac{\sqrt{6} z^{2} l_{y} \sigma_{y}}{24} \\
+&amp;\quad + \frac{\sqrt{6} l_{x} x y \sigma_{y}}{24} + \frac{\sqrt{6} l_{y} x y \sigma_{x}}{24} - \frac{\sqrt{6} l_{z} x z \sigma_{x}}{24} - \frac{\sqrt{6} l_{z} y z \sigma_{y}}{24} \\
+&amp;\quad + \frac{\sqrt{6} x y l_{x} \sigma_{y}}{24} + \frac{\sqrt{6} x y l_{y} \sigma_{x}}{24} - \frac{\sqrt{6} x z l_{z} \sigma_{x}}{24} - \frac{\sqrt{6} y z l_{z} \sigma_{y}}{24} \\
+Q^{(1)}_{v}(0) &amp;= - \frac{\sqrt{2} l_{x} y^{2} \sigma_{x}}{24} + \frac{\sqrt{2} l_{x} z^{2} \sigma_{x}}{24} + \frac{\sqrt{2} l_{y} x^{2} \sigma_{y}}{24} - \frac{\sqrt{2} l_{y} z^{2} \sigma_{y}}{24} \\
+&amp;\quad + \frac{\sqrt{2} l_{z} x^{2} \sigma_{z}}{12} - \frac{\sqrt{2} l_{z} y^{2} \sigma_{z}}{12} + \frac{\sqrt{2} x^{2} l_{y} \sigma_{y}}{24} + \frac{\sqrt{2} x^{2} l_{z} \sigma_{z}}{12} \\
+&amp;\quad - \frac{\sqrt{2} y^{2} l_{x} \sigma_{x}}{24} - \frac{\sqrt{2} y^{2} l_{z} \sigma_{z}}{12} + \frac{\sqrt{2} z^{2} l_{x} \sigma_{x}}{24} - \frac{\sqrt{2} z^{2} l_{y} \sigma_{y}}{24} \\
+&amp;\quad - \frac{\sqrt{2} l_{x} x y \sigma_{y}}{24} - \frac{\sqrt{2} l_{x} x z \sigma_{z}}{12} + \frac{\sqrt{2} l_{y} x y \sigma_{x}}{24} + \frac{\sqrt{2} l_{y} y z \sigma_{z}}{12} \\
+&amp;\quad - \frac{\sqrt{2} l_{z} x z \sigma_{x}}{24} + \frac{\sqrt{2} l_{z} y z \sigma_{y}}{24} - \frac{\sqrt{2} x y l_{x} \sigma_{y}}{24} + \frac{\sqrt{2} x y l_{y} \sigma_{x}}{24} \\
+&amp;\quad - \frac{\sqrt{2} x z l_{x} \sigma_{z}}{12} - \frac{\sqrt{2} x z l_{z} \sigma_{x}}{24} + \frac{\sqrt{2} y z l_{y} \sigma_{z}}{12} + \frac{\sqrt{2} y z l_{z} \sigma_{y}}{24} \\
+Q^{(1)}_{yz}(0) &amp;= \frac{\sqrt{2} l_{y} x^{2} \sigma_{z}}{24} - \frac{\sqrt{2} l_{y} z^{2} \sigma_{z}}{24} + \frac{\sqrt{2} l_{z} x^{2} \sigma_{y}}{24} - \frac{\sqrt{2} l_{z} y^{2} \sigma_{y}}{24} \\
+&amp;\quad + \frac{\sqrt{2} x^{2} l_{y} \sigma_{z}}{24} + \frac{\sqrt{2} x^{2} l_{z} \sigma_{y}}{24} - \frac{\sqrt{2} y^{2} l_{z} \sigma_{y}}{24} - \frac{\sqrt{2} z^{2} l_{y} \sigma_{z}}{24} \\
+&amp;\quad - \frac{\sqrt{2} l_{x} x y \sigma_{z}}{24} - \frac{\sqrt{2} l_{x} x z \sigma_{y}}{24} + \frac{\sqrt{2} l_{x} y z \sigma_{x}}{6} - \frac{\sqrt{2} l_{y} x z \sigma_{x}}{12} \\
+&amp;\quad + \frac{\sqrt{2} l_{y} y z \sigma_{y}}{24} - \frac{\sqrt{2} l_{z} x y \sigma_{x}}{12} + \frac{\sqrt{2} l_{z} y z \sigma_{z}}{24} - \frac{\sqrt{2} x y l_{x} \sigma_{z}}{24} \\
+&amp;\quad - \frac{\sqrt{2} x y l_{z} \sigma_{x}}{12} - \frac{\sqrt{2} x z l_{x} \sigma_{y}}{24} - \frac{\sqrt{2} x z l_{y} \sigma_{x}}{12} + \frac{\sqrt{2} y z l_{x} \sigma_{x}}{6} \\
+&amp;\quad + \frac{\sqrt{2} y z l_{y} \sigma_{y}}{24} + \frac{\sqrt{2} y z l_{z} \sigma_{z}}{24} \\
+Q^{(1)}_{xz}(0) &amp;= \frac{\sqrt{2} l_{x} y^{2} \sigma_{z}}{24} - \frac{\sqrt{2} l_{x} z^{2} \sigma_{z}}{24} - \frac{\sqrt{2} l_{z} x^{2} \sigma_{x}}{24} + \frac{\sqrt{2} l_{z} y^{2} \sigma_{x}}{24} \\
+&amp;\quad - \frac{\sqrt{2} x^{2} l_{z} \sigma_{x}}{24} + \frac{\sqrt{2} y^{2} l_{x} \sigma_{z}}{24} + \frac{\sqrt{2} y^{2} l_{z} \sigma_{x}}{24} - \frac{\sqrt{2} z^{2} l_{x} \sigma_{z}}{24} \\
+&amp;\quad + \frac{\sqrt{2} l_{x} x z \sigma_{x}}{24} - \frac{\sqrt{2} l_{x} y z \sigma_{y}}{12} - \frac{\sqrt{2} l_{y} x y \sigma_{z}}{24} + \frac{\sqrt{2} l_{y} x z \sigma_{y}}{6} \\
+&amp;\quad - \frac{\sqrt{2} l_{y} y z \sigma_{x}}{24} - \frac{\sqrt{2} l_{z} x y \sigma_{y}}{12} + \frac{\sqrt{2} l_{z} x z \sigma_{z}}{24} - \frac{\sqrt{2} x y l_{y} \sigma_{z}}{24} \\
+&amp;\quad - \frac{\sqrt{2} x y l_{z} \sigma_{y}}{12} + \frac{\sqrt{2} x z l_{x} \sigma_{x}}{24} + \frac{\sqrt{2} x z l_{y} \sigma_{y}}{6} + \frac{\sqrt{2} x z l_{z} \sigma_{z}}{24} \\
+&amp;\quad - \frac{\sqrt{2} y z l_{x} \sigma_{y}}{12} - \frac{\sqrt{2} y z l_{y} \sigma_{x}}{24} \\
+Q^{(1)}_{xy}(0) &amp;= - \frac{\sqrt{2} l_{x} y^{2} \sigma_{y}}{24} + \frac{\sqrt{2} l_{x} z^{2} \sigma_{y}}{24} - \frac{\sqrt{2} l_{y} x^{2} \sigma_{x}}{24} + \frac{\sqrt{2} l_{y} z^{2} \sigma_{x}}{24} \\
+&amp;\quad - \frac{\sqrt{2} x^{2} l_{y} \sigma_{x}}{24} - \frac{\sqrt{2} y^{2} l_{x} \sigma_{y}}{24} + \frac{\sqrt{2} z^{2} l_{x} \sigma_{y}}{24} + \frac{\sqrt{2} z^{2} l_{y} \sigma_{x}}{24} \\
+&amp;\quad + \frac{\sqrt{2} l_{x} x y \sigma_{x}}{24} - \frac{\sqrt{2} l_{x} y z \sigma_{z}}{12} + \frac{\sqrt{2} l_{y} x y \sigma_{y}}{24} - \frac{\sqrt{2} l_{y} x z \sigma_{z}}{12} \\
+&amp;\quad + \frac{\sqrt{2} l_{z} x y \sigma_{z}}{6} - \frac{\sqrt{2} l_{z} x z \sigma_{y}}{24} - \frac{\sqrt{2} l_{z} y z \sigma_{x}}{24} + \frac{\sqrt{2} x y l_{x} \sigma_{x}}{24} \\
+&amp;\quad + \frac{\sqrt{2} x y l_{y} \sigma_{y}}{24} + \frac{\sqrt{2} x y l_{z} \sigma_{z}}{6} - \frac{\sqrt{2} x z l_{y} \sigma_{z}}{12} - \frac{\sqrt{2} x z l_{z} \sigma_{y}}{24} \\
+&amp;\quad - \frac{\sqrt{2} y z l_{x} \sigma_{z}}{12} - \frac{\sqrt{2} y z l_{z} \sigma_{x}}{24}
+\end{aligned}
+\end{split}\]</div>
+</section>
+<section id="id5">
+<h3>Electric toroidal (G)<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[
+\begin{aligned}
+\boldsymbol{G}^{(1)}(0) &amp;= -\frac{\sqrt{2}}{2} \boldsymbol{l} \times \boldsymbol{\sigma}
+\end{aligned}
+\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+G^{(1)}_{u}(0) &amp;= - \frac{\sqrt{6} l_{x} z \sigma_{y}}{6} + \frac{\sqrt{6} l_{y} z \sigma_{x}}{6} - \frac{\sqrt{6} l_{z} x \sigma_{y}}{6} + \frac{\sqrt{6} l_{z} y \sigma_{x}}{6} \\
+&amp;\quad - \frac{\sqrt{6} x l_{z} \sigma_{y}}{6} + \frac{\sqrt{6} y l_{z} \sigma_{x}}{6} - \frac{\sqrt{6} z l_{x} \sigma_{y}}{6} + \frac{\sqrt{6} z l_{y} \sigma_{x}}{6} \\
+G^{(1)}_{v}(0) &amp;= - \frac{\sqrt{2} l_{x} y \sigma_{z}}{3} + \frac{\sqrt{2} l_{x} z \sigma_{y}}{6} - \frac{\sqrt{2} l_{y} x \sigma_{z}}{3} + \frac{\sqrt{2} l_{y} z \sigma_{x}}{6} \\
+&amp;\quad + \frac{\sqrt{2} l_{z} x \sigma_{y}}{6} + \frac{\sqrt{2} l_{z} y \sigma_{x}}{6} - \frac{\sqrt{2} x l_{y} \sigma_{z}}{3} + \frac{\sqrt{2} x l_{z} \sigma_{y}}{6} \\
+&amp;\quad - \frac{\sqrt{2} y l_{x} \sigma_{z}}{3} + \frac{\sqrt{2} y l_{z} \sigma_{x}}{6} + \frac{\sqrt{2} z l_{x} \sigma_{y}}{6} + \frac{\sqrt{2} z l_{y} \sigma_{x}}{6} \\
+G^{(1)}_{yz}(0) &amp;= - \frac{\sqrt{2} l_{x} y \sigma_{y}}{6} + \frac{\sqrt{2} l_{x} z \sigma_{z}}{6} - \frac{\sqrt{2} l_{y} x \sigma_{y}}{6} + \frac{\sqrt{2} l_{y} y \sigma_{x}}{3} \\
+&amp;\quad + \frac{\sqrt{2} l_{z} x \sigma_{z}}{6} - \frac{\sqrt{2} l_{z} z \sigma_{x}}{3} - \frac{\sqrt{2} x l_{y} \sigma_{y}}{6} + \frac{\sqrt{2} x l_{z} \sigma_{z}}{6} \\
+&amp;\quad - \frac{\sqrt{2} y l_{x} \sigma_{y}}{6} + \frac{\sqrt{2} y l_{y} \sigma_{x}}{3} + \frac{\sqrt{2} z l_{x} \sigma_{z}}{6} - \frac{\sqrt{2} z l_{z} \sigma_{x}}{3} \\
+G^{(1)}_{xz}(0) &amp;= - \frac{\sqrt{2} l_{x} x \sigma_{y}}{3} + \frac{\sqrt{2} l_{x} y \sigma_{x}}{6} + \frac{\sqrt{2} l_{y} x \sigma_{x}}{6} - \frac{\sqrt{2} l_{y} z \sigma_{z}}{6} \\
+&amp;\quad - \frac{\sqrt{2} l_{z} y \sigma_{z}}{6} + \frac{\sqrt{2} l_{z} z \sigma_{y}}{3} - \frac{\sqrt{2} x l_{x} \sigma_{y}}{3} + \frac{\sqrt{2} x l_{y} \sigma_{x}}{6} \\
+&amp;\quad + \frac{\sqrt{2} y l_{x} \sigma_{x}}{6} - \frac{\sqrt{2} y l_{z} \sigma_{z}}{6} - \frac{\sqrt{2} z l_{y} \sigma_{z}}{6} + \frac{\sqrt{2} z l_{z} \sigma_{y}}{3} \\
+G^{(1)}_{xy}(0) &amp;= \frac{\sqrt{2} l_{x} x \sigma_{z}}{3} - \frac{\sqrt{2} l_{x} z \sigma_{x}}{6} - \frac{\sqrt{2} l_{y} y \sigma_{z}}{3} + \frac{\sqrt{2} l_{y} z \sigma_{y}}{6} \\
+&amp;\quad - \frac{\sqrt{2} l_{z} x \sigma_{x}}{6} + \frac{\sqrt{2} l_{z} y \sigma_{y}}{6} + \frac{\sqrt{2} x l_{x} \sigma_{z}}{3} - \frac{\sqrt{2} x l_{z} \sigma_{x}}{6} \\
+&amp;\quad - \frac{\sqrt{2} y l_{y} \sigma_{z}}{3} + \frac{\sqrt{2} y l_{z} \sigma_{y}}{6} - \frac{\sqrt{2} z l_{x} \sigma_{x}}{6} + \frac{\sqrt{2} z l_{y} \sigma_{y}}{6}
+\end{aligned}
+\end{split}\]</div>
+</section>
+<section id="id6">
+<h3>Magnetic toroidal (T)<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[
+\begin{aligned}
+\boldsymbol{T}^{(1)}(0) &amp;= -\frac{\sqrt{2}}{2} \boldsymbol{r} \times \boldsymbol{\sigma}
+\end{aligned}
+\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+T^{(1)}_{u}(0) &amp;= - \frac{\sqrt{6} x z \sigma_{y}}{2} + \frac{\sqrt{6} y z \sigma_{x}}{2} \\
+T^{(1)}_{v}(0) &amp;= - \sqrt{2} x y \sigma_{z} + \frac{\sqrt{2} x z \sigma_{y}}{2} + \frac{\sqrt{2} y z \sigma_{x}}{2} \\
+T^{(1)}_{yz}(0) &amp;= \frac{\sqrt{2} y^{2} \sigma_{x}}{2} - \frac{\sqrt{2} z^{2} \sigma_{x}}{2} - \frac{\sqrt{2} x y \sigma_{y}}{2} + \frac{\sqrt{2} x z \sigma_{z}}{2} \\
+T^{(1)}_{xz}(0) &amp;= - \frac{\sqrt{2} x^{2} \sigma_{y}}{2} + \frac{\sqrt{2} z^{2} \sigma_{y}}{2} + \frac{\sqrt{2} x y \sigma_{x}}{2} - \frac{\sqrt{2} y z \sigma_{z}}{2} \\
+T^{(1)}_{xy}(0) &amp;= \frac{\sqrt{2} x^{2} \sigma_{z}}{2} - \frac{\sqrt{2} y^{2} \sigma_{z}}{2} - \frac{\sqrt{2} x z \sigma_{x}}{2} + \frac{\sqrt{2} y z \sigma_{y}}{2}
+\end{aligned}
+\end{split}\]</div>
+</section>
+<section id="id7">
+<h3>Magnetic (M)<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+M^{(1)}_{u}(0) &amp;= \frac{\sqrt{6} i l_{x}^{3} z \sigma_{y}}{36} - \frac{\sqrt{6} i l_{y}^{3} z \sigma_{x}}{36} + \frac{\sqrt{6} i l_{z}^{3} x \sigma_{y}}{36} - \frac{\sqrt{6} i l_{z}^{3} y \sigma_{x}}{36} \\
+&amp;\quad - \frac{\sqrt{6} i x l_{z}^{3} \sigma_{y}}{36} + \frac{\sqrt{6} i y l_{z}^{3} \sigma_{x}}{36} - \frac{\sqrt{6} i z l_{x}^{3} \sigma_{y}}{36} + \frac{\sqrt{6} i z l_{y}^{3} \sigma_{x}}{36} \\
+&amp;\quad - \frac{\sqrt{6} i l_{x}^{2} l_{y} z \sigma_{x}}{36} + \frac{\sqrt{6} i l_{x}^{2} l_{z} x \sigma_{y}}{36} - \frac{\sqrt{6} i l_{x}^{2} l_{z} y \sigma_{x}}{36} + \frac{\sqrt{6} i l_{y}^{2} l_{x} z \sigma_{y}}{36} \\
+&amp;\quad + \frac{\sqrt{6} i l_{y}^{2} l_{z} x \sigma_{y}}{36} - \frac{\sqrt{6} i l_{y}^{2} l_{z} y \sigma_{x}}{36} + \frac{\sqrt{6} i l_{z}^{2} l_{x} z \sigma_{y}}{36} - \frac{\sqrt{6} i l_{z}^{2} l_{y} z \sigma_{x}}{36} \\
+&amp;\quad - \frac{\sqrt{6} i x l_{z} l_{x}^{2} \sigma_{y}}{36} - \frac{\sqrt{6} i x l_{z} l_{y}^{2} \sigma_{y}}{36} + \frac{\sqrt{6} i y l_{z} l_{x}^{2} \sigma_{x}}{36} + \frac{\sqrt{6} i y l_{z} l_{y}^{2} \sigma_{x}}{36} \\
+&amp;\quad - \frac{\sqrt{6} i z l_{x} l_{y}^{2} \sigma_{y}}{36} - \frac{\sqrt{6} i z l_{x} l_{z}^{2} \sigma_{y}}{36} + \frac{\sqrt{6} i z l_{y} l_{x}^{2} \sigma_{x}}{36} + \frac{\sqrt{6} i z l_{y} l_{z}^{2} \sigma_{x}}{36} \\
+M^{(1)}_{v}(0) &amp;= \frac{\sqrt{2} i l_{x}^{3} y \sigma_{z}}{18} - \frac{\sqrt{2} i l_{x}^{3} z \sigma_{y}}{36} + \frac{\sqrt{2} i l_{y}^{3} x \sigma_{z}}{18} - \frac{\sqrt{2} i l_{y}^{3} z \sigma_{x}}{36} \\
+&amp;\quad - \frac{\sqrt{2} i l_{z}^{3} x \sigma_{y}}{36} - \frac{\sqrt{2} i l_{z}^{3} y \sigma_{x}}{36} - \frac{\sqrt{2} i x l_{y}^{3} \sigma_{z}}{18} + \frac{\sqrt{2} i x l_{z}^{3} \sigma_{y}}{36} \\
+&amp;\quad - \frac{\sqrt{2} i y l_{x}^{3} \sigma_{z}}{18} + \frac{\sqrt{2} i y l_{z}^{3} \sigma_{x}}{36} + \frac{\sqrt{2} i z l_{x}^{3} \sigma_{y}}{36} + \frac{\sqrt{2} i z l_{y}^{3} \sigma_{x}}{36} \\
+&amp;\quad + \frac{\sqrt{2} i l_{x}^{2} l_{y} x \sigma_{z}}{18} - \frac{\sqrt{2} i l_{x}^{2} l_{y} z \sigma_{x}}{36} - \frac{\sqrt{2} i l_{x}^{2} l_{z} x \sigma_{y}}{36} - \frac{\sqrt{2} i l_{x}^{2} l_{z} y \sigma_{x}}{36} \\
+&amp;\quad + \frac{\sqrt{2} i l_{y}^{2} l_{x} y \sigma_{z}}{18} - \frac{\sqrt{2} i l_{y}^{2} l_{x} z \sigma_{y}}{36} - \frac{\sqrt{2} i l_{y}^{2} l_{z} x \sigma_{y}}{36} - \frac{\sqrt{2} i l_{y}^{2} l_{z} y \sigma_{x}}{36} \\
+&amp;\quad + \frac{\sqrt{2} i l_{z}^{2} l_{x} y \sigma_{z}}{18} - \frac{\sqrt{2} i l_{z}^{2} l_{x} z \sigma_{y}}{36} + \frac{\sqrt{2} i l_{z}^{2} l_{y} x \sigma_{z}}{18} - \frac{\sqrt{2} i l_{z}^{2} l_{y} z \sigma_{x}}{36} \\
+&amp;\quad - \frac{\sqrt{2} i x l_{y} l_{x}^{2} \sigma_{z}}{18} - \frac{\sqrt{2} i x l_{y} l_{z}^{2} \sigma_{z}}{18} + \frac{\sqrt{2} i x l_{z} l_{x}^{2} \sigma_{y}}{36} + \frac{\sqrt{2} i x l_{z} l_{y}^{2} \sigma_{y}}{36} \\
+&amp;\quad - \frac{\sqrt{2} i y l_{x} l_{y}^{2} \sigma_{z}}{18} - \frac{\sqrt{2} i y l_{x} l_{z}^{2} \sigma_{z}}{18} + \frac{\sqrt{2} i y l_{z} l_{x}^{2} \sigma_{x}}{36} + \frac{\sqrt{2} i y l_{z} l_{y}^{2} \sigma_{x}}{36} \\
+&amp;\quad + \frac{\sqrt{2} i z l_{x} l_{y}^{2} \sigma_{y}}{36} + \frac{\sqrt{2} i z l_{x} l_{z}^{2} \sigma_{y}}{36} + \frac{\sqrt{2} i z l_{y} l_{x}^{2} \sigma_{x}}{36} + \frac{\sqrt{2} i z l_{y} l_{z}^{2} \sigma_{x}}{36} \\
+M^{(1)}_{yz}(0) &amp;= \frac{\sqrt{2} i l_{x}^{3} y \sigma_{y}}{36} - \frac{\sqrt{2} i l_{x}^{3} z \sigma_{z}}{36} + \frac{\sqrt{2} i l_{y}^{3} x \sigma_{y}}{36} - \frac{\sqrt{2} i l_{y}^{3} y \sigma_{x}}{18} \\
+&amp;\quad - \frac{\sqrt{2} i l_{z}^{3} x \sigma_{z}}{36} + \frac{\sqrt{2} i l_{z}^{3} z \sigma_{x}}{18} - \frac{\sqrt{2} i x l_{y}^{3} \sigma_{y}}{36} + \frac{\sqrt{2} i x l_{z}^{3} \sigma_{z}}{36} \\
+&amp;\quad - \frac{\sqrt{2} i y l_{x}^{3} \sigma_{y}}{36} + \frac{\sqrt{2} i y l_{y}^{3} \sigma_{x}}{18} + \frac{\sqrt{2} i z l_{x}^{3} \sigma_{z}}{36} - \frac{\sqrt{2} i z l_{z}^{3} \sigma_{x}}{18} \\
+&amp;\quad + \frac{\sqrt{2} i l_{x}^{2} l_{y} x \sigma_{y}}{36} - \frac{\sqrt{2} i l_{x}^{2} l_{y} y \sigma_{x}}{18} - \frac{\sqrt{2} i l_{x}^{2} l_{z} x \sigma_{z}}{36} + \frac{\sqrt{2} i l_{x}^{2} l_{z} z \sigma_{x}}{18} \\
+&amp;\quad + \frac{\sqrt{2} i l_{y}^{2} l_{x} y \sigma_{y}}{36} - \frac{\sqrt{2} i l_{y}^{2} l_{x} z \sigma_{z}}{36} - \frac{\sqrt{2} i l_{y}^{2} l_{z} x \sigma_{z}}{36} + \frac{\sqrt{2} i l_{y}^{2} l_{z} z \sigma_{x}}{18} \\
+&amp;\quad + \frac{\sqrt{2} i l_{z}^{2} l_{x} y \sigma_{y}}{36} - \frac{\sqrt{2} i l_{z}^{2} l_{x} z \sigma_{z}}{36} + \frac{\sqrt{2} i l_{z}^{2} l_{y} x \sigma_{y}}{36} - \frac{\sqrt{2} i l_{z}^{2} l_{y} y \sigma_{x}}{18} \\
+&amp;\quad - \frac{\sqrt{2} i x l_{y} l_{x}^{2} \sigma_{y}}{36} - \frac{\sqrt{2} i x l_{y} l_{z}^{2} \sigma_{y}}{36} + \frac{\sqrt{2} i x l_{z} l_{x}^{2} \sigma_{z}}{36} + \frac{\sqrt{2} i x l_{z} l_{y}^{2} \sigma_{z}}{36} \\
+&amp;\quad - \frac{\sqrt{2} i y l_{x} l_{y}^{2} \sigma_{y}}{36} - \frac{\sqrt{2} i y l_{x} l_{z}^{2} \sigma_{y}}{36} + \frac{\sqrt{2} i y l_{y} l_{x}^{2} \sigma_{x}}{18} + \frac{\sqrt{2} i y l_{y} l_{z}^{2} \sigma_{x}}{18} \\
+&amp;\quad + \frac{\sqrt{2} i z l_{x} l_{y}^{2} \sigma_{z}}{36} + \frac{\sqrt{2} i z l_{x} l_{z}^{2} \sigma_{z}}{36} - \frac{\sqrt{2} i z l_{z} l_{x}^{2} \sigma_{x}}{18} - \frac{\sqrt{2} i z l_{z} l_{y}^{2} \sigma_{x}}{18} \\
+M^{(1)}_{xz}(0) &amp;= \frac{\sqrt{2} i l_{x}^{3} x \sigma_{y}}{18} - \frac{\sqrt{2} i l_{x}^{3} y \sigma_{x}}{36} - \frac{\sqrt{2} i l_{y}^{3} x \sigma_{x}}{36} + \frac{\sqrt{2} i l_{y}^{3} z \sigma_{z}}{36} \\
+&amp;\quad + \frac{\sqrt{2} i l_{z}^{3} y \sigma_{z}}{36} - \frac{\sqrt{2} i l_{z}^{3} z \sigma_{y}}{18} - \frac{\sqrt{2} i x l_{x}^{3} \sigma_{y}}{18} + \frac{\sqrt{2} i x l_{y}^{3} \sigma_{x}}{36} \\
+&amp;\quad + \frac{\sqrt{2} i y l_{x}^{3} \sigma_{x}}{36} - \frac{\sqrt{2} i y l_{z}^{3} \sigma_{z}}{36} - \frac{\sqrt{2} i z l_{y}^{3} \sigma_{z}}{36} + \frac{\sqrt{2} i z l_{z}^{3} \sigma_{y}}{18} \\
+&amp;\quad - \frac{\sqrt{2} i l_{x}^{2} l_{y} x \sigma_{x}}{36} + \frac{\sqrt{2} i l_{x}^{2} l_{y} z \sigma_{z}}{36} + \frac{\sqrt{2} i l_{x}^{2} l_{z} y \sigma_{z}}{36} - \frac{\sqrt{2} i l_{x}^{2} l_{z} z \sigma_{y}}{18} \\
+&amp;\quad + \frac{\sqrt{2} i l_{y}^{2} l_{x} x \sigma_{y}}{18} - \frac{\sqrt{2} i l_{y}^{2} l_{x} y \sigma_{x}}{36} + \frac{\sqrt{2} i l_{y}^{2} l_{z} y \sigma_{z}}{36} - \frac{\sqrt{2} i l_{y}^{2} l_{z} z \sigma_{y}}{18} \\
+&amp;\quad + \frac{\sqrt{2} i l_{z}^{2} l_{x} x \sigma_{y}}{18} - \frac{\sqrt{2} i l_{z}^{2} l_{x} y \sigma_{x}}{36} - \frac{\sqrt{2} i l_{z}^{2} l_{y} x \sigma_{x}}{36} + \frac{\sqrt{2} i l_{z}^{2} l_{y} z \sigma_{z}}{36} \\
+&amp;\quad - \frac{\sqrt{2} i x l_{x} l_{y}^{2} \sigma_{y}}{18} - \frac{\sqrt{2} i x l_{x} l_{z}^{2} \sigma_{y}}{18} + \frac{\sqrt{2} i x l_{y} l_{x}^{2} \sigma_{x}}{36} + \frac{\sqrt{2} i x l_{y} l_{z}^{2} \sigma_{x}}{36} \\
+&amp;\quad + \frac{\sqrt{2} i y l_{x} l_{y}^{2} \sigma_{x}}{36} + \frac{\sqrt{2} i y l_{x} l_{z}^{2} \sigma_{x}}{36} - \frac{\sqrt{2} i y l_{z} l_{x}^{2} \sigma_{z}}{36} - \frac{\sqrt{2} i y l_{z} l_{y}^{2} \sigma_{z}}{36} \\
+&amp;\quad - \frac{\sqrt{2} i z l_{y} l_{x}^{2} \sigma_{z}}{36} - \frac{\sqrt{2} i z l_{y} l_{z}^{2} \sigma_{z}}{36} + \frac{\sqrt{2} i z l_{z} l_{x}^{2} \sigma_{y}}{18} + \frac{\sqrt{2} i z l_{z} l_{y}^{2} \sigma_{y}}{18} \\
+M^{(1)}_{xy}(0) &amp;= - \frac{\sqrt{2} i l_{x}^{3} x \sigma_{z}}{18} + \frac{\sqrt{2} i l_{x}^{3} z \sigma_{x}}{36} + \frac{\sqrt{2} i l_{y}^{3} y \sigma_{z}}{18} - \frac{\sqrt{2} i l_{y}^{3} z \sigma_{y}}{36} \\
+&amp;\quad + \frac{\sqrt{2} i l_{z}^{3} x \sigma_{x}}{36} - \frac{\sqrt{2} i l_{z}^{3} y \sigma_{y}}{36} + \frac{\sqrt{2} i x l_{x}^{3} \sigma_{z}}{18} - \frac{\sqrt{2} i x l_{z}^{3} \sigma_{x}}{36} \\
+&amp;\quad - \frac{\sqrt{2} i y l_{y}^{3} \sigma_{z}}{18} + \frac{\sqrt{2} i y l_{z}^{3} \sigma_{y}}{36} - \frac{\sqrt{2} i z l_{x}^{3} \sigma_{x}}{36} + \frac{\sqrt{2} i z l_{y}^{3} \sigma_{y}}{36} \\
+&amp;\quad + \frac{\sqrt{2} i l_{x}^{2} l_{y} y \sigma_{z}}{18} - \frac{\sqrt{2} i l_{x}^{2} l_{y} z \sigma_{y}}{36} + \frac{\sqrt{2} i l_{x}^{2} l_{z} x \sigma_{x}}{36} - \frac{\sqrt{2} i l_{x}^{2} l_{z} y \sigma_{y}}{36} \\
+&amp;\quad - \frac{\sqrt{2} i l_{y}^{2} l_{x} x \sigma_{z}}{18} + \frac{\sqrt{2} i l_{y}^{2} l_{x} z \sigma_{x}}{36} + \frac{\sqrt{2} i l_{y}^{2} l_{z} x \sigma_{x}}{36} - \frac{\sqrt{2} i l_{y}^{2} l_{z} y \sigma_{y}}{36} \\
+&amp;\quad - \frac{\sqrt{2} i l_{z}^{2} l_{x} x \sigma_{z}}{18} + \frac{\sqrt{2} i l_{z}^{2} l_{x} z \sigma_{x}}{36} + \frac{\sqrt{2} i l_{z}^{2} l_{y} y \sigma_{z}}{18} - \frac{\sqrt{2} i l_{z}^{2} l_{y} z \sigma_{y}}{36} \\
+&amp;\quad + \frac{\sqrt{2} i x l_{x} l_{y}^{2} \sigma_{z}}{18} + \frac{\sqrt{2} i x l_{x} l_{z}^{2} \sigma_{z}}{18} - \frac{\sqrt{2} i x l_{z} l_{x}^{2} \sigma_{x}}{36} - \frac{\sqrt{2} i x l_{z} l_{y}^{2} \sigma_{x}}{36} \\
+&amp;\quad - \frac{\sqrt{2} i y l_{y} l_{x}^{2} \sigma_{z}}{18} - \frac{\sqrt{2} i y l_{y} l_{z}^{2} \sigma_{z}}{18} + \frac{\sqrt{2} i y l_{z} l_{x}^{2} \sigma_{y}}{36} + \frac{\sqrt{2} i y l_{z} l_{y}^{2} \sigma_{y}}{36} \\
+&amp;\quad - \frac{\sqrt{2} i z l_{x} l_{y}^{2} \sigma_{x}}{36} - \frac{\sqrt{2} i z l_{x} l_{z}^{2} \sigma_{x}}{36} + \frac{\sqrt{2} i z l_{y} l_{x}^{2} \sigma_{y}}{36} + \frac{\sqrt{2} i z l_{y} l_{z}^{2} \sigma_{y}}{36}
+\end{aligned}
+\end{split}\]</div>
+</section>
+</section>
+<section id="id8">
+<h2><span class="math notranslate nohighlight">\(s = 1\)</span>, <span class="math notranslate nohighlight">\(k = 1\)</span><a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
+<section id="id9">
+<h3>Electric (Q)<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[
+\begin{aligned}
+Q^{(1)}_{0}(1) &amp;= \frac{\sqrt{3}}{3} \boldsymbol{l} \cdot \boldsymbol{\sigma}
+\end{aligned}
+\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\boldsymbol{Q}^{(1)}(1) &amp;= \frac{\sqrt{10}}{10} [\boldsymbol{r} (\boldsymbol{l} \cdot \boldsymbol{\sigma}) + (\boldsymbol{l} \cdot \boldsymbol{\sigma}) \boldsymbol{r} \\
+&amp;\quad + \boldsymbol{l} (\boldsymbol{r} \cdot \boldsymbol{\sigma}) + (\boldsymbol{r} \cdot \boldsymbol{\sigma}) \boldsymbol{l}]
+\end{aligned}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+Q^{(1)}_{u}(1) &amp;= - \frac{3 \sqrt{21} l_{x} x^{2} \sigma_{x}}{56} - \frac{\sqrt{21} l_{x} y^{2} \sigma_{x}}{56} + \frac{\sqrt{21} l_{x} z^{2} \sigma_{x}}{14} - \frac{\sqrt{21} l_{y} x^{2} \sigma_{y}}{56} \\
+&amp;\quad - \frac{3 \sqrt{21} l_{y} y^{2} \sigma_{y}}{56} + \frac{\sqrt{21} l_{y} z^{2} \sigma_{y}}{14} - \frac{3 \sqrt{21} l_{z} x^{2} \sigma_{z}}{56} - \frac{3 \sqrt{21} l_{z} y^{2} \sigma_{z}}{56} \\
+&amp;\quad + \frac{3 \sqrt{21} l_{z} z^{2} \sigma_{z}}{28} - \frac{3 \sqrt{21} x^{2} l_{x} \sigma_{x}}{56} - \frac{\sqrt{21} x^{2} l_{y} \sigma_{y}}{56} - \frac{3 \sqrt{21} x^{2} l_{z} \sigma_{z}}{56} \\
+&amp;\quad - \frac{\sqrt{21} y^{2} l_{x} \sigma_{x}}{56} - \frac{3 \sqrt{21} y^{2} l_{y} \sigma_{y}}{56} - \frac{3 \sqrt{21} y^{2} l_{z} \sigma_{z}}{56} + \frac{\sqrt{21} z^{2} l_{x} \sigma_{x}}{14} \\
+&amp;\quad + \frac{\sqrt{21} z^{2} l_{y} \sigma_{y}}{14} + \frac{3 \sqrt{21} z^{2} l_{z} \sigma_{z}}{28} - \frac{\sqrt{21} l_{x} x y \sigma_{y}}{28} - \frac{3 \sqrt{21} l_{x} x z \sigma_{z}}{28} \\
+&amp;\quad - \frac{\sqrt{21} l_{y} x y \sigma_{x}}{28} - \frac{3 \sqrt{21} l_{y} y z \sigma_{z}}{28} + \frac{\sqrt{21} l_{z} x z \sigma_{x}}{7} + \frac{\sqrt{21} l_{z} y z \sigma_{y}}{7} \\
+&amp;\quad - \frac{\sqrt{21} x y l_{x} \sigma_{y}}{28} - \frac{\sqrt{21} x y l_{y} \sigma_{x}}{28} - \frac{3 \sqrt{21} x z l_{x} \sigma_{z}}{28} + \frac{\sqrt{21} x z l_{z} \sigma_{x}}{7} \\
+&amp;\quad - \frac{3 \sqrt{21} y z l_{y} \sigma_{z}}{28} + \frac{\sqrt{21} y z l_{z} \sigma_{y}}{7} \\
+Q^{(1)}_{v}(1) &amp;= \frac{9 \sqrt{7} l_{x} x^{2} \sigma_{x}}{56} - \frac{\sqrt{7} l_{x} y^{2} \sigma_{x}}{8} - \frac{\sqrt{7} l_{x} z^{2} \sigma_{x}}{28} + \frac{\sqrt{7} l_{y} x^{2} \sigma_{y}}{8} \\
+&amp;\quad - \frac{9 \sqrt{7} l_{y} y^{2} \sigma_{y}}{56} + \frac{\sqrt{7} l_{y} z^{2} \sigma_{y}}{28} + \frac{5 \sqrt{7} l_{z} x^{2} \sigma_{z}}{56} - \frac{5 \sqrt{7} l_{z} y^{2} \sigma_{z}}{56} \\
+&amp;\quad + \frac{9 \sqrt{7} x^{2} l_{x} \sigma_{x}}{56} + \frac{\sqrt{7} x^{2} l_{y} \sigma_{y}}{8} + \frac{5 \sqrt{7} x^{2} l_{z} \sigma_{z}}{56} - \frac{\sqrt{7} y^{2} l_{x} \sigma_{x}}{8} \\
+&amp;\quad - \frac{9 \sqrt{7} y^{2} l_{y} \sigma_{y}}{56} - \frac{5 \sqrt{7} y^{2} l_{z} \sigma_{z}}{56} - \frac{\sqrt{7} z^{2} l_{x} \sigma_{x}}{28} + \frac{\sqrt{7} z^{2} l_{y} \sigma_{y}}{28} \\
+&amp;\quad + \frac{\sqrt{7} l_{x} x y \sigma_{y}}{4} + \frac{5 \sqrt{7} l_{x} x z \sigma_{z}}{28} - \frac{\sqrt{7} l_{y} x y \sigma_{x}}{4} - \frac{5 \sqrt{7} l_{y} y z \sigma_{z}}{28} \\
+&amp;\quad - \frac{\sqrt{7} l_{z} x z \sigma_{x}}{14} + \frac{\sqrt{7} l_{z} y z \sigma_{y}}{14} + \frac{\sqrt{7} x y l_{x} \sigma_{y}}{4} - \frac{\sqrt{7} x y l_{y} \sigma_{x}}{4} \\
+&amp;\quad + \frac{5 \sqrt{7} x z l_{x} \sigma_{z}}{28} - \frac{\sqrt{7} x z l_{z} \sigma_{x}}{14} - \frac{5 \sqrt{7} y z l_{y} \sigma_{z}}{28} + \frac{\sqrt{7} y z l_{z} \sigma_{y}}{14} \\
+Q^{(1)}_{yz}(1) &amp;= - \frac{\sqrt{7} l_{y} x^{2} \sigma_{z}}{28} - \frac{3 \sqrt{7} l_{y} y^{2} \sigma_{z}}{28} + \frac{\sqrt{7} l_{y} z^{2} \sigma_{z}}{7} - \frac{\sqrt{7} l_{z} x^{2} \sigma_{y}}{28} \\
+&amp;\quad + \frac{\sqrt{7} l_{z} y^{2} \sigma_{y}}{7} - \frac{3 \sqrt{7} l_{z} z^{2} \sigma_{y}}{28} - \frac{\sqrt{7} x^{2} l_{y} \sigma_{z}}{28} - \frac{\sqrt{7} x^{2} l_{z} \sigma_{y}}{28} \\
+&amp;\quad - \frac{3 \sqrt{7} y^{2} l_{y} \sigma_{z}}{28} + \frac{\sqrt{7} y^{2} l_{z} \sigma_{y}}{7} + \frac{\sqrt{7} z^{2} l_{y} \sigma_{z}}{7} - \frac{3 \sqrt{7} z^{2} l_{z} \sigma_{y}}{28} \\
+&amp;\quad - \frac{\sqrt{7} l_{x} x y \sigma_{z}}{14} - \frac{\sqrt{7} l_{x} x z \sigma_{y}}{14} + \frac{5 \sqrt{7} l_{x} y z \sigma_{x}}{28} + \frac{5 \sqrt{7} l_{y} x z \sigma_{x}}{28} \\
+&amp;\quad + \frac{2 \sqrt{7} l_{y} y z \sigma_{y}}{7} + \frac{5 \sqrt{7} l_{z} x y \sigma_{x}}{28} + \frac{2 \sqrt{7} l_{z} y z \sigma_{z}}{7} - \frac{\sqrt{7} x y l_{x} \sigma_{z}}{14} \\
+&amp;\quad + \frac{5 \sqrt{7} x y l_{z} \sigma_{x}}{28} - \frac{\sqrt{7} x z l_{x} \sigma_{y}}{14} + \frac{5 \sqrt{7} x z l_{y} \sigma_{x}}{28} + \frac{5 \sqrt{7} y z l_{x} \sigma_{x}}{28} \\
+&amp;\quad + \frac{2 \sqrt{7} y z l_{y} \sigma_{y}}{7} + \frac{2 \sqrt{7} y z l_{z} \sigma_{z}}{7} \\
+Q^{(1)}_{xz}(1) &amp;= - \frac{3 \sqrt{7} l_{x} x^{2} \sigma_{z}}{28} - \frac{\sqrt{7} l_{x} y^{2} \sigma_{z}}{28} + \frac{\sqrt{7} l_{x} z^{2} \sigma_{z}}{7} + \frac{\sqrt{7} l_{z} x^{2} \sigma_{x}}{7} \\
+&amp;\quad - \frac{\sqrt{7} l_{z} y^{2} \sigma_{x}}{28} - \frac{3 \sqrt{7} l_{z} z^{2} \sigma_{x}}{28} - \frac{3 \sqrt{7} x^{2} l_{x} \sigma_{z}}{28} + \frac{\sqrt{7} x^{2} l_{z} \sigma_{x}}{7} \\
+&amp;\quad - \frac{\sqrt{7} y^{2} l_{x} \sigma_{z}}{28} - \frac{\sqrt{7} y^{2} l_{z} \sigma_{x}}{28} + \frac{\sqrt{7} z^{2} l_{x} \sigma_{z}}{7} - \frac{3 \sqrt{7} z^{2} l_{z} \sigma_{x}}{28} \\
+&amp;\quad + \frac{2 \sqrt{7} l_{x} x z \sigma_{x}}{7} + \frac{5 \sqrt{7} l_{x} y z \sigma_{y}}{28} - \frac{\sqrt{7} l_{y} x y \sigma_{z}}{14} + \frac{5 \sqrt{7} l_{y} x z \sigma_{y}}{28} \\
+&amp;\quad - \frac{\sqrt{7} l_{y} y z \sigma_{x}}{14} + \frac{5 \sqrt{7} l_{z} x y \sigma_{y}}{28} + \frac{2 \sqrt{7} l_{z} x z \sigma_{z}}{7} - \frac{\sqrt{7} x y l_{y} \sigma_{z}}{14} \\
+&amp;\quad + \frac{5 \sqrt{7} x y l_{z} \sigma_{y}}{28} + \frac{2 \sqrt{7} x z l_{x} \sigma_{x}}{7} + \frac{5 \sqrt{7} x z l_{y} \sigma_{y}}{28} + \frac{2 \sqrt{7} x z l_{z} \sigma_{z}}{7} \\
+&amp;\quad + \frac{5 \sqrt{7} y z l_{x} \sigma_{y}}{28} - \frac{\sqrt{7} y z l_{y} \sigma_{x}}{14} \\
+Q^{(1)}_{xy}(1) &amp;= - \frac{3 \sqrt{7} l_{x} x^{2} \sigma_{y}}{28} + \frac{\sqrt{7} l_{x} y^{2} \sigma_{y}}{7} - \frac{\sqrt{7} l_{x} z^{2} \sigma_{y}}{28} + \frac{\sqrt{7} l_{y} x^{2} \sigma_{x}}{7} \\
+&amp;\quad - \frac{3 \sqrt{7} l_{y} y^{2} \sigma_{x}}{28} - \frac{\sqrt{7} l_{y} z^{2} \sigma_{x}}{28} - \frac{3 \sqrt{7} x^{2} l_{x} \sigma_{y}}{28} + \frac{\sqrt{7} x^{2} l_{y} \sigma_{x}}{7} \\
+&amp;\quad + \frac{\sqrt{7} y^{2} l_{x} \sigma_{y}}{7} - \frac{3 \sqrt{7} y^{2} l_{y} \sigma_{x}}{28} - \frac{\sqrt{7} z^{2} l_{x} \sigma_{y}}{28} - \frac{\sqrt{7} z^{2} l_{y} \sigma_{x}}{28} \\
+&amp;\quad + \frac{2 \sqrt{7} l_{x} x y \sigma_{x}}{7} + \frac{5 \sqrt{7} l_{x} y z \sigma_{z}}{28} + \frac{2 \sqrt{7} l_{y} x y \sigma_{y}}{7} + \frac{5 \sqrt{7} l_{y} x z \sigma_{z}}{28} \\
+&amp;\quad + \frac{5 \sqrt{7} l_{z} x y \sigma_{z}}{28} - \frac{\sqrt{7} l_{z} x z \sigma_{y}}{14} - \frac{\sqrt{7} l_{z} y z \sigma_{x}}{14} + \frac{2 \sqrt{7} x y l_{x} \sigma_{x}}{7} \\
+&amp;\quad + \frac{2 \sqrt{7} x y l_{y} \sigma_{y}}{7} + \frac{5 \sqrt{7} x y l_{z} \sigma_{z}}{28} + \frac{5 \sqrt{7} x z l_{y} \sigma_{z}}{28} - \frac{\sqrt{7} x z l_{z} \sigma_{y}}{14} \\
+&amp;\quad + \frac{5 \sqrt{7} y z l_{x} \sigma_{z}}{28} - \frac{\sqrt{7} y z l_{z} \sigma_{x}}{14}
+\end{aligned}
+\end{split}\]</div>
+</section>
+<section id="id10">
+<h3>Electric toroidal (G)<a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[
+\begin{aligned}
+G^{(1)}_{0}(1) &amp;= \frac{\sqrt{3}}{18} (\boldsymbol{r} \times \boldsymbol{l} - \boldsymbol{l} \times \boldsymbol{r}) \cdot \boldsymbol{\sigma}
+\end{aligned}
+\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\boldsymbol{G}^{(1)}(1) &amp;= \frac{\sqrt{10}}{40} \{(\boldsymbol{r} \cdot \boldsymbol{\sigma}) (\boldsymbol{r} \times \boldsymbol{l}) + \boldsymbol{r} [(\boldsymbol{r} \times \boldsymbol{l}) \cdot \boldsymbol{\sigma}] \\
+&amp;\quad - (\boldsymbol{l} \times \boldsymbol{r}) (\boldsymbol{r} \cdot \boldsymbol{\sigma}) - [(\boldsymbol{l} \times \boldsymbol{r}) \cdot \boldsymbol{\sigma}] \boldsymbol{r}\}
+\end{aligned}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+G^{(1)}_{u}(1) &amp;= \frac{3 \sqrt{21} l_{x} y^{3} \sigma_{z}}{280} + \frac{\sqrt{21} l_{x} z^{3} \sigma_{y}}{70} - \frac{3 \sqrt{21} l_{y} x^{3} \sigma_{z}}{280} - \frac{\sqrt{21} l_{y} z^{3} \sigma_{x}}{70} \\
+&amp;\quad + \frac{\sqrt{21} l_{z} x^{3} \sigma_{y}}{280} - \frac{\sqrt{21} l_{z} y^{3} \sigma_{x}}{280} - \frac{3 \sqrt{21} x^{3} l_{y} \sigma_{z}}{280} + \frac{\sqrt{21} x^{3} l_{z} \sigma_{y}}{280} \\
+&amp;\quad + \frac{3 \sqrt{21} y^{3} l_{x} \sigma_{z}}{280} - \frac{\sqrt{21} y^{3} l_{z} \sigma_{x}}{280} + \frac{\sqrt{21} z^{3} l_{x} \sigma_{y}}{70} - \frac{\sqrt{21} z^{3} l_{y} \sigma_{x}}{70} \\
+&amp;\quad + \frac{3 \sqrt{21} l_{x} x^{2} y \sigma_{z}}{280} - \frac{\sqrt{21} l_{x} x^{2} z \sigma_{y}}{280} - \frac{3 \sqrt{21} l_{x} y z^{2} \sigma_{z}}{70} - \frac{11 \sqrt{21} l_{x} y^{2} z \sigma_{y}}{280} \\
+&amp;\quad - \frac{3 \sqrt{21} l_{y} x y^{2} \sigma_{z}}{280} + \frac{3 \sqrt{21} l_{y} x z^{2} \sigma_{z}}{70} + \frac{11 \sqrt{21} l_{y} x^{2} z \sigma_{x}}{280} + \frac{\sqrt{21} l_{y} y^{2} z \sigma_{x}}{280} \\
+&amp;\quad + \frac{\sqrt{21} l_{z} x y^{2} \sigma_{y}}{280} - \frac{\sqrt{21} l_{z} x z^{2} \sigma_{y}}{70} - \frac{\sqrt{21} l_{z} x^{2} y \sigma_{x}}{280} + \frac{\sqrt{21} l_{z} y z^{2} \sigma_{x}}{70} \\
+&amp;\quad - \frac{3 \sqrt{21} x y^{2} l_{y} \sigma_{z}}{280} + \frac{\sqrt{21} x y^{2} l_{z} \sigma_{y}}{280} + \frac{3 \sqrt{21} x z^{2} l_{y} \sigma_{z}}{70} - \frac{\sqrt{21} x z^{2} l_{z} \sigma_{y}}{70} \\
+&amp;\quad + \frac{3 \sqrt{21} x^{2} y l_{x} \sigma_{z}}{280} - \frac{\sqrt{21} x^{2} y l_{z} \sigma_{x}}{280} - \frac{\sqrt{21} x^{2} z l_{x} \sigma_{y}}{280} + \frac{11 \sqrt{21} x^{2} z l_{y} \sigma_{x}}{280} \\
+&amp;\quad - \frac{3 \sqrt{21} y z^{2} l_{x} \sigma_{z}}{70} + \frac{\sqrt{21} y z^{2} l_{z} \sigma_{x}}{70} - \frac{11 \sqrt{21} y^{2} z l_{x} \sigma_{y}}{280} + \frac{\sqrt{21} y^{2} z l_{y} \sigma_{x}}{280} \\
+&amp;\quad - \frac{\sqrt{21} l_{x} x y z \sigma_{x}}{28} + \frac{\sqrt{21} l_{y} x y z \sigma_{y}}{28} - \frac{\sqrt{21} x y z l_{x} \sigma_{x}}{28} + \frac{\sqrt{21} x y z l_{y} \sigma_{y}}{28} \\
+G^{(1)}_{v}(1) &amp;= \frac{\sqrt{7} l_{x} y^{3} \sigma_{z}}{56} + \frac{\sqrt{7} l_{x} z^{3} \sigma_{y}}{140} + \frac{\sqrt{7} l_{y} x^{3} \sigma_{z}}{56} + \frac{\sqrt{7} l_{y} z^{3} \sigma_{x}}{140} \\
+&amp;\quad - \frac{\sqrt{7} l_{z} x^{3} \sigma_{y}}{40} - \frac{\sqrt{7} l_{z} y^{3} \sigma_{x}}{40} + \frac{\sqrt{7} x^{3} l_{y} \sigma_{z}}{56} - \frac{\sqrt{7} x^{3} l_{z} \sigma_{y}}{40} \\
+&amp;\quad + \frac{\sqrt{7} y^{3} l_{x} \sigma_{z}}{56} - \frac{\sqrt{7} y^{3} l_{z} \sigma_{x}}{40} + \frac{\sqrt{7} z^{3} l_{x} \sigma_{y}}{140} + \frac{\sqrt{7} z^{3} l_{y} \sigma_{x}}{140} \\
+&amp;\quad - \frac{\sqrt{7} l_{x} x^{2} y \sigma_{z}}{56} + \frac{\sqrt{7} l_{x} x^{2} z \sigma_{y}}{40} - \frac{\sqrt{7} l_{x} y z^{2} \sigma_{z}}{28} - \frac{13 \sqrt{7} l_{x} y^{2} z \sigma_{y}}{280} \\
+&amp;\quad - \frac{\sqrt{7} l_{y} x y^{2} \sigma_{z}}{56} - \frac{\sqrt{7} l_{y} x z^{2} \sigma_{z}}{28} - \frac{13 \sqrt{7} l_{y} x^{2} z \sigma_{x}}{280} + \frac{\sqrt{7} l_{y} y^{2} z \sigma_{x}}{40} \\
+&amp;\quad + \frac{23 \sqrt{7} l_{z} x y^{2} \sigma_{y}}{280} - \frac{\sqrt{7} l_{z} x z^{2} \sigma_{y}}{140} + \frac{23 \sqrt{7} l_{z} x^{2} y \sigma_{x}}{280} - \frac{\sqrt{7} l_{z} y z^{2} \sigma_{x}}{140} \\
+&amp;\quad - \frac{\sqrt{7} x y^{2} l_{y} \sigma_{z}}{56} + \frac{23 \sqrt{7} x y^{2} l_{z} \sigma_{y}}{280} - \frac{\sqrt{7} x z^{2} l_{y} \sigma_{z}}{28} - \frac{\sqrt{7} x z^{2} l_{z} \sigma_{y}}{140} \\
+&amp;\quad - \frac{\sqrt{7} x^{2} y l_{x} \sigma_{z}}{56} + \frac{23 \sqrt{7} x^{2} y l_{z} \sigma_{x}}{280} + \frac{\sqrt{7} x^{2} z l_{x} \sigma_{y}}{40} - \frac{13 \sqrt{7} x^{2} z l_{y} \sigma_{x}}{280} \\
+&amp;\quad - \frac{\sqrt{7} y z^{2} l_{x} \sigma_{z}}{28} - \frac{\sqrt{7} y z^{2} l_{z} \sigma_{x}}{140} - \frac{13 \sqrt{7} y^{2} z l_{x} \sigma_{y}}{280} + \frac{\sqrt{7} y^{2} z l_{y} \sigma_{x}}{40} \\
+&amp;\quad - \frac{\sqrt{7} l_{x} x y z \sigma_{x}}{28} - \frac{\sqrt{7} l_{y} x y z \sigma_{y}}{28} + \frac{\sqrt{7} l_{z} x y z \sigma_{z}}{14} - \frac{\sqrt{7} x y z l_{x} \sigma_{x}}{28} \\
+&amp;\quad - \frac{\sqrt{7} x y z l_{y} \sigma_{y}}{28} + \frac{\sqrt{7} x y z l_{z} \sigma_{z}}{14} \\
+G^{(1)}_{yz}(1) &amp;= - \frac{\sqrt{7} l_{x} y^{3} \sigma_{y}}{35} + \frac{\sqrt{7} l_{x} z^{3} \sigma_{z}}{35} - \frac{\sqrt{7} l_{y} x^{3} \sigma_{y}}{140} + \frac{\sqrt{7} l_{z} x^{3} \sigma_{z}}{140} \\
+&amp;\quad - \frac{\sqrt{7} x^{3} l_{y} \sigma_{y}}{140} + \frac{\sqrt{7} x^{3} l_{z} \sigma_{z}}{140} - \frac{\sqrt{7} y^{3} l_{x} \sigma_{y}}{35} + \frac{\sqrt{7} z^{3} l_{x} \sigma_{z}}{35} \\
+&amp;\quad - \frac{\sqrt{7} l_{x} x y^{2} \sigma_{x}}{28} + \frac{\sqrt{7} l_{x} x z^{2} \sigma_{x}}{28} + \frac{\sqrt{7} l_{x} x^{2} y \sigma_{y}}{140} - \frac{\sqrt{7} l_{x} x^{2} z \sigma_{z}}{140} \\
+&amp;\quad + \frac{11 \sqrt{7} l_{x} y z^{2} \sigma_{y}}{140} - \frac{11 \sqrt{7} l_{x} y^{2} z \sigma_{z}}{140} + \frac{\sqrt{7} l_{y} x y^{2} \sigma_{y}}{35} - \frac{\sqrt{7} l_{y} x z^{2} \sigma_{y}}{140} \\
+&amp;\quad + \frac{\sqrt{7} l_{y} x^{2} y \sigma_{x}}{28} - \frac{\sqrt{7} l_{y} y z^{2} \sigma_{x}}{28} + \frac{\sqrt{7} l_{z} x y^{2} \sigma_{z}}{140} - \frac{\sqrt{7} l_{z} x z^{2} \sigma_{z}}{35} \\
+&amp;\quad - \frac{\sqrt{7} l_{z} x^{2} z \sigma_{x}}{28} + \frac{\sqrt{7} l_{z} y^{2} z \sigma_{x}}{28} - \frac{\sqrt{7} x y^{2} l_{x} \sigma_{x}}{28} + \frac{\sqrt{7} x y^{2} l_{y} \sigma_{y}}{35} \\
+&amp;\quad + \frac{\sqrt{7} x y^{2} l_{z} \sigma_{z}}{140} + \frac{\sqrt{7} x z^{2} l_{x} \sigma_{x}}{28} - \frac{\sqrt{7} x z^{2} l_{y} \sigma_{y}}{140} - \frac{\sqrt{7} x z^{2} l_{z} \sigma_{z}}{35} \\
+&amp;\quad + \frac{\sqrt{7} x^{2} y l_{x} \sigma_{y}}{140} + \frac{\sqrt{7} x^{2} y l_{y} \sigma_{x}}{28} - \frac{\sqrt{7} x^{2} z l_{x} \sigma_{z}}{140} - \frac{\sqrt{7} x^{2} z l_{z} \sigma_{x}}{28} \\
+&amp;\quad + \frac{11 \sqrt{7} y z^{2} l_{x} \sigma_{y}}{140} - \frac{\sqrt{7} y z^{2} l_{y} \sigma_{x}}{28} - \frac{11 \sqrt{7} y^{2} z l_{x} \sigma_{z}}{140} + \frac{\sqrt{7} y^{2} z l_{z} \sigma_{x}}{28} \\
+&amp;\quad + \frac{\sqrt{7} l_{y} x y z \sigma_{z}}{14} - \frac{\sqrt{7} l_{z} x y z \sigma_{y}}{14} + \frac{\sqrt{7} x y z l_{y} \sigma_{z}}{14} - \frac{\sqrt{7} x y z l_{z} \sigma_{y}}{14} \\
+G^{(1)}_{xz}(1) &amp;= \frac{\sqrt{7} l_{x} y^{3} \sigma_{x}}{140} + \frac{\sqrt{7} l_{y} x^{3} \sigma_{x}}{35} - \frac{\sqrt{7} l_{y} z^{3} \sigma_{z}}{35} - \frac{\sqrt{7} l_{z} y^{3} \sigma_{z}}{140} \\
+&amp;\quad + \frac{\sqrt{7} x^{3} l_{y} \sigma_{x}}{35} + \frac{\sqrt{7} y^{3} l_{x} \sigma_{x}}{140} - \frac{\sqrt{7} y^{3} l_{z} \sigma_{z}}{140} - \frac{\sqrt{7} z^{3} l_{y} \sigma_{z}}{35} \\
+&amp;\quad - \frac{\sqrt{7} l_{x} x y^{2} \sigma_{y}}{28} + \frac{\sqrt{7} l_{x} x z^{2} \sigma_{y}}{28} - \frac{\sqrt{7} l_{x} x^{2} y \sigma_{x}}{35} + \frac{\sqrt{7} l_{x} y z^{2} \sigma_{x}}{140} \\
+&amp;\quad - \frac{\sqrt{7} l_{y} x y^{2} \sigma_{x}}{140} - \frac{11 \sqrt{7} l_{y} x z^{2} \sigma_{x}}{140} + \frac{\sqrt{7} l_{y} x^{2} y \sigma_{y}}{28} + \frac{11 \sqrt{7} l_{y} x^{2} z \sigma_{z}}{140} \\
+&amp;\quad - \frac{\sqrt{7} l_{y} y z^{2} \sigma_{y}}{28} + \frac{\sqrt{7} l_{y} y^{2} z \sigma_{z}}{140} - \frac{\sqrt{7} l_{z} x^{2} y \sigma_{z}}{140} - \frac{\sqrt{7} l_{z} x^{2} z \sigma_{y}}{28} \\
+&amp;\quad + \frac{\sqrt{7} l_{z} y z^{2} \sigma_{z}}{35} + \frac{\sqrt{7} l_{z} y^{2} z \sigma_{y}}{28} - \frac{\sqrt{7} x y^{2} l_{x} \sigma_{y}}{28} - \frac{\sqrt{7} x y^{2} l_{y} \sigma_{x}}{140} \\
+&amp;\quad + \frac{\sqrt{7} x z^{2} l_{x} \sigma_{y}}{28} - \frac{11 \sqrt{7} x z^{2} l_{y} \sigma_{x}}{140} - \frac{\sqrt{7} x^{2} y l_{x} \sigma_{x}}{35} + \frac{\sqrt{7} x^{2} y l_{y} \sigma_{y}}{28} \\
+&amp;\quad - \frac{\sqrt{7} x^{2} y l_{z} \sigma_{z}}{140} + \frac{11 \sqrt{7} x^{2} z l_{y} \sigma_{z}}{140} - \frac{\sqrt{7} x^{2} z l_{z} \sigma_{y}}{28} + \frac{\sqrt{7} y z^{2} l_{x} \sigma_{x}}{140} \\
+&amp;\quad - \frac{\sqrt{7} y z^{2} l_{y} \sigma_{y}}{28} + \frac{\sqrt{7} y z^{2} l_{z} \sigma_{z}}{35} + \frac{\sqrt{7} y^{2} z l_{y} \sigma_{z}}{140} + \frac{\sqrt{7} y^{2} z l_{z} \sigma_{y}}{28} \\
+&amp;\quad - \frac{\sqrt{7} l_{x} x y z \sigma_{z}}{14} + \frac{\sqrt{7} l_{z} x y z \sigma_{x}}{14} - \frac{\sqrt{7} x y z l_{x} \sigma_{z}}{14} + \frac{\sqrt{7} x y z l_{z} \sigma_{x}}{14} \\
+G^{(1)}_{xy}(1) &amp;= - \frac{\sqrt{7} l_{x} z^{3} \sigma_{x}}{140} + \frac{\sqrt{7} l_{y} z^{3} \sigma_{y}}{140} - \frac{\sqrt{7} l_{z} x^{3} \sigma_{x}}{35} + \frac{\sqrt{7} l_{z} y^{3} \sigma_{y}}{35} \\
+&amp;\quad - \frac{\sqrt{7} x^{3} l_{z} \sigma_{x}}{35} + \frac{\sqrt{7} y^{3} l_{z} \sigma_{y}}{35} - \frac{\sqrt{7} z^{3} l_{x} \sigma_{x}}{140} + \frac{\sqrt{7} z^{3} l_{y} \sigma_{y}}{140} \\
+&amp;\quad - \frac{\sqrt{7} l_{x} x y^{2} \sigma_{z}}{28} + \frac{\sqrt{7} l_{x} x z^{2} \sigma_{z}}{28} + \frac{\sqrt{7} l_{x} x^{2} z \sigma_{x}}{35} - \frac{\sqrt{7} l_{x} y^{2} z \sigma_{x}}{140} \\
+&amp;\quad + \frac{\sqrt{7} l_{y} x^{2} y \sigma_{z}}{28} + \frac{\sqrt{7} l_{y} x^{2} z \sigma_{y}}{140} - \frac{\sqrt{7} l_{y} y z^{2} \sigma_{z}}{28} - \frac{\sqrt{7} l_{y} y^{2} z \sigma_{y}}{35} \\
+&amp;\quad + \frac{11 \sqrt{7} l_{z} x y^{2} \sigma_{x}}{140} + \frac{\sqrt{7} l_{z} x z^{2} \sigma_{x}}{140} - \frac{11 \sqrt{7} l_{z} x^{2} y \sigma_{y}}{140} - \frac{\sqrt{7} l_{z} x^{2} z \sigma_{z}}{28} \\
+&amp;\quad - \frac{\sqrt{7} l_{z} y z^{2} \sigma_{y}}{140} + \frac{\sqrt{7} l_{z} y^{2} z \sigma_{z}}{28} - \frac{\sqrt{7} x y^{2} l_{x} \sigma_{z}}{28} + \frac{11 \sqrt{7} x y^{2} l_{z} \sigma_{x}}{140} \\
+&amp;\quad + \frac{\sqrt{7} x z^{2} l_{x} \sigma_{z}}{28} + \frac{\sqrt{7} x z^{2} l_{z} \sigma_{x}}{140} + \frac{\sqrt{7} x^{2} y l_{y} \sigma_{z}}{28} - \frac{11 \sqrt{7} x^{2} y l_{z} \sigma_{y}}{140} \\
+&amp;\quad + \frac{\sqrt{7} x^{2} z l_{x} \sigma_{x}}{35} + \frac{\sqrt{7} x^{2} z l_{y} \sigma_{y}}{140} - \frac{\sqrt{7} x^{2} z l_{z} \sigma_{z}}{28} - \frac{\sqrt{7} y z^{2} l_{y} \sigma_{z}}{28} \\
+&amp;\quad - \frac{\sqrt{7} y z^{2} l_{z} \sigma_{y}}{140} - \frac{\sqrt{7} y^{2} z l_{x} \sigma_{x}}{140} - \frac{\sqrt{7} y^{2} z l_{y} \sigma_{y}}{35} + \frac{\sqrt{7} y^{2} z l_{z} \sigma_{z}}{28} \\
+&amp;\quad + \frac{\sqrt{7} l_{x} x y z \sigma_{y}}{14} - \frac{\sqrt{7} l_{y} x y z \sigma_{x}}{14} + \frac{\sqrt{7} x y z l_{x} \sigma_{y}}{14} - \frac{\sqrt{7} x y z l_{y} \sigma_{x}}{14}
+\end{aligned}
+\end{split}\]</div>
+</section>
+<section id="id11">
+<h3>Magnetic toroidal (T)<a class="headerlink" href="#id11" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\boldsymbol{T}^{(1)}(1) &amp;= \frac{\sqrt{10}\, i}{60} [(\boldsymbol{r} \cdot \boldsymbol{\sigma}) \boldsymbol{l} \boldsymbol{l}^2 + \boldsymbol{r} (\boldsymbol{l} \cdot \boldsymbol{\sigma}) \boldsymbol{l}^2 \\
+&amp;\quad - \boldsymbol{l}^2 \boldsymbol{l} (\boldsymbol{r} \cdot \boldsymbol{\sigma}) - \boldsymbol{l}^2 (\boldsymbol{l} \cdot \boldsymbol{\sigma}) \boldsymbol{r}]
+\end{aligned}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+T^{(1)}_{u}(1) &amp;= \frac{3 \sqrt{21} i l_{x}^{3} x^{2} \sigma_{x}}{560} + \frac{\sqrt{21} i l_{x}^{3} y^{2} \sigma_{x}}{560} - \frac{\sqrt{21} i l_{x}^{3} z^{2} \sigma_{x}}{140} + \frac{\sqrt{21} i l_{y}^{3} x^{2} \sigma_{y}}{560} \\
+&amp;\quad + \frac{3 \sqrt{21} i l_{y}^{3} y^{2} \sigma_{y}}{560} - \frac{\sqrt{21} i l_{y}^{3} z^{2} \sigma_{y}}{140} + \frac{3 \sqrt{21} i l_{z}^{3} x^{2} \sigma_{z}}{560} + \frac{3 \sqrt{21} i l_{z}^{3} y^{2} \sigma_{z}}{560} \\
+&amp;\quad - \frac{3 \sqrt{21} i l_{z}^{3} z^{2} \sigma_{z}}{280} - \frac{3 \sqrt{21} i x^{2} l_{x}^{3} \sigma_{x}}{560} - \frac{\sqrt{21} i x^{2} l_{y}^{3} \sigma_{y}}{560} - \frac{3 \sqrt{21} i x^{2} l_{z}^{3} \sigma_{z}}{560} \\
+&amp;\quad - \frac{\sqrt{21} i y^{2} l_{x}^{3} \sigma_{x}}{560} - \frac{3 \sqrt{21} i y^{2} l_{y}^{3} \sigma_{y}}{560} - \frac{3 \sqrt{21} i y^{2} l_{z}^{3} \sigma_{z}}{560} + \frac{\sqrt{21} i z^{2} l_{x}^{3} \sigma_{x}}{140} \\
+&amp;\quad + \frac{\sqrt{21} i z^{2} l_{y}^{3} \sigma_{y}}{140} + \frac{3 \sqrt{21} i z^{2} l_{z}^{3} \sigma_{z}}{280} + \frac{\sqrt{21} i l_{x}^{2} l_{y} x^{2} \sigma_{y}}{560} + \frac{3 \sqrt{21} i l_{x}^{2} l_{y} y^{2} \sigma_{y}}{560} \\
+&amp;\quad - \frac{\sqrt{21} i l_{x}^{2} l_{y} z^{2} \sigma_{y}}{140} + \frac{3 \sqrt{21} i l_{x}^{2} l_{z} x^{2} \sigma_{z}}{560} + \frac{3 \sqrt{21} i l_{x}^{2} l_{z} y^{2} \sigma_{z}}{560} - \frac{3 \sqrt{21} i l_{x}^{2} l_{z} z^{2} \sigma_{z}}{280} \\
+&amp;\quad + \frac{\sqrt{21} i l_{x}^{3} x y \sigma_{y}}{280} + \frac{3 \sqrt{21} i l_{x}^{3} x z \sigma_{z}}{280} + \frac{3 \sqrt{21} i l_{y}^{2} l_{x} x^{2} \sigma_{x}}{560} + \frac{\sqrt{21} i l_{y}^{2} l_{x} y^{2} \sigma_{x}}{560} \\
+&amp;\quad - \frac{\sqrt{21} i l_{y}^{2} l_{x} z^{2} \sigma_{x}}{140} + \frac{3 \sqrt{21} i l_{y}^{2} l_{z} x^{2} \sigma_{z}}{560} + \frac{3 \sqrt{21} i l_{y}^{2} l_{z} y^{2} \sigma_{z}}{560} - \frac{3 \sqrt{21} i l_{y}^{2} l_{z} z^{2} \sigma_{z}}{280} \\
+&amp;\quad + \frac{\sqrt{21} i l_{y}^{3} x y \sigma_{x}}{280} + \frac{3 \sqrt{21} i l_{y}^{3} y z \sigma_{z}}{280} + \frac{3 \sqrt{21} i l_{z}^{2} l_{x} x^{2} \sigma_{x}}{560} + \frac{\sqrt{21} i l_{z}^{2} l_{x} y^{2} \sigma_{x}}{560} \\
+&amp;\quad - \frac{\sqrt{21} i l_{z}^{2} l_{x} z^{2} \sigma_{x}}{140} + \frac{\sqrt{21} i l_{z}^{2} l_{y} x^{2} \sigma_{y}}{560} + \frac{3 \sqrt{21} i l_{z}^{2} l_{y} y^{2} \sigma_{y}}{560} - \frac{\sqrt{21} i l_{z}^{2} l_{y} z^{2} \sigma_{y}}{140} \\
+&amp;\quad - \frac{\sqrt{21} i l_{z}^{3} x z \sigma_{x}}{70} - \frac{\sqrt{21} i l_{z}^{3} y z \sigma_{y}}{70} - \frac{\sqrt{21} i x y l_{x}^{3} \sigma_{y}}{280} - \frac{\sqrt{21} i x y l_{y}^{3} \sigma_{x}}{280} \\
+&amp;\quad - \frac{3 \sqrt{21} i x z l_{x}^{3} \sigma_{z}}{280} + \frac{\sqrt{21} i x z l_{z}^{3} \sigma_{x}}{70} - \frac{3 \sqrt{21} i x^{2} l_{x} l_{y}^{2} \sigma_{x}}{560} - \frac{3 \sqrt{21} i x^{2} l_{x} l_{z}^{2} \sigma_{x}}{560} \\
+&amp;\quad - \frac{\sqrt{21} i x^{2} l_{y} l_{x}^{2} \sigma_{y}}{560} - \frac{\sqrt{21} i x^{2} l_{y} l_{z}^{2} \sigma_{y}}{560} - \frac{3 \sqrt{21} i x^{2} l_{z} l_{x}^{2} \sigma_{z}}{560} - \frac{3 \sqrt{21} i x^{2} l_{z} l_{y}^{2} \sigma_{z}}{560} \\
+&amp;\quad - \frac{3 \sqrt{21} i y z l_{y}^{3} \sigma_{z}}{280} + \frac{\sqrt{21} i y z l_{z}^{3} \sigma_{y}}{70} - \frac{\sqrt{21} i y^{2} l_{x} l_{y}^{2} \sigma_{x}}{560} - \frac{\sqrt{21} i y^{2} l_{x} l_{z}^{2} \sigma_{x}}{560} \\
+&amp;\quad - \frac{3 \sqrt{21} i y^{2} l_{y} l_{x}^{2} \sigma_{y}}{560} - \frac{3 \sqrt{21} i y^{2} l_{y} l_{z}^{2} \sigma_{y}}{560} - \frac{3 \sqrt{21} i y^{2} l_{z} l_{x}^{2} \sigma_{z}}{560} - \frac{3 \sqrt{21} i y^{2} l_{z} l_{y}^{2} \sigma_{z}}{560} \\
+&amp;\quad + \frac{\sqrt{21} i z^{2} l_{x} l_{y}^{2} \sigma_{x}}{140} + \frac{\sqrt{21} i z^{2} l_{x} l_{z}^{2} \sigma_{x}}{140} + \frac{\sqrt{21} i z^{2} l_{y} l_{x}^{2} \sigma_{y}}{140} + \frac{\sqrt{21} i z^{2} l_{y} l_{z}^{2} \sigma_{y}}{140} \\
+&amp;\quad + \frac{3 \sqrt{21} i z^{2} l_{z} l_{x}^{2} \sigma_{z}}{280} + \frac{3 \sqrt{21} i z^{2} l_{z} l_{y}^{2} \sigma_{z}}{280} + \frac{\sqrt{21} i l_{x}^{2} l_{y} x y \sigma_{x}}{280} + \frac{3 \sqrt{21} i l_{x}^{2} l_{y} y z \sigma_{z}}{280} \\
+&amp;\quad - \frac{\sqrt{21} i l_{x}^{2} l_{z} x z \sigma_{x}}{70} - \frac{\sqrt{21} i l_{x}^{2} l_{z} y z \sigma_{y}}{70} + \frac{\sqrt{21} i l_{y}^{2} l_{x} x y \sigma_{y}}{280} + \frac{3 \sqrt{21} i l_{y}^{2} l_{x} x z \sigma_{z}}{280} \\
+&amp;\quad - \frac{\sqrt{21} i l_{y}^{2} l_{z} x z \sigma_{x}}{70} - \frac{\sqrt{21} i l_{y}^{2} l_{z} y z \sigma_{y}}{70} + \frac{\sqrt{21} i l_{z}^{2} l_{x} x y \sigma_{y}}{280} + \frac{3 \sqrt{21} i l_{z}^{2} l_{x} x z \sigma_{z}}{280} \\
+&amp;\quad + \frac{\sqrt{21} i l_{z}^{2} l_{y} x y \sigma_{x}}{280} + \frac{3 \sqrt{21} i l_{z}^{2} l_{y} y z \sigma_{z}}{280} - \frac{\sqrt{21} i x y l_{x} l_{y}^{2} \sigma_{y}}{280} - \frac{\sqrt{21} i x y l_{x} l_{z}^{2} \sigma_{y}}{280} \\
+&amp;\quad - \frac{\sqrt{21} i x y l_{y} l_{x}^{2} \sigma_{x}}{280} - \frac{\sqrt{21} i x y l_{y} l_{z}^{2} \sigma_{x}}{280} - \frac{3 \sqrt{21} i x z l_{x} l_{y}^{2} \sigma_{z}}{280} - \frac{3 \sqrt{21} i x z l_{x} l_{z}^{2} \sigma_{z}}{280} \\
+&amp;\quad + \frac{\sqrt{21} i x z l_{z} l_{x}^{2} \sigma_{x}}{70} + \frac{\sqrt{21} i x z l_{z} l_{y}^{2} \sigma_{x}}{70} - \frac{3 \sqrt{21} i y z l_{y} l_{x}^{2} \sigma_{z}}{280} - \frac{3 \sqrt{21} i y z l_{y} l_{z}^{2} \sigma_{z}}{280} \\
+&amp;\quad + \frac{\sqrt{21} i y z l_{z} l_{x}^{2} \sigma_{y}}{70} + \frac{\sqrt{21} i y z l_{z} l_{y}^{2} \sigma_{y}}{70} \\
+T^{(1)}_{v}(1) &amp;= - \frac{9 \sqrt{7} i l_{x}^{3} x^{2} \sigma_{x}}{560} + \frac{\sqrt{7} i l_{x}^{3} y^{2} \sigma_{x}}{80} + \frac{\sqrt{7} i l_{x}^{3} z^{2} \sigma_{x}}{280} - \frac{\sqrt{7} i l_{y}^{3} x^{2} \sigma_{y}}{80} \\
+&amp;\quad + \frac{9 \sqrt{7} i l_{y}^{3} y^{2} \sigma_{y}}{560} - \frac{\sqrt{7} i l_{y}^{3} z^{2} \sigma_{y}}{280} - \frac{\sqrt{7} i l_{z}^{3} x^{2} \sigma_{z}}{112} + \frac{\sqrt{7} i l_{z}^{3} y^{2} \sigma_{z}}{112} \\
+&amp;\quad + \frac{9 \sqrt{7} i x^{2} l_{x}^{3} \sigma_{x}}{560} + \frac{\sqrt{7} i x^{2} l_{y}^{3} \sigma_{y}}{80} + \frac{\sqrt{7} i x^{2} l_{z}^{3} \sigma_{z}}{112} - \frac{\sqrt{7} i y^{2} l_{x}^{3} \sigma_{x}}{80} \\
+&amp;\quad - \frac{9 \sqrt{7} i y^{2} l_{y}^{3} \sigma_{y}}{560} - \frac{\sqrt{7} i y^{2} l_{z}^{3} \sigma_{z}}{112} - \frac{\sqrt{7} i z^{2} l_{x}^{3} \sigma_{x}}{280} + \frac{\sqrt{7} i z^{2} l_{y}^{3} \sigma_{y}}{280} \\
+&amp;\quad - \frac{\sqrt{7} i l_{x}^{2} l_{y} x^{2} \sigma_{y}}{80} + \frac{9 \sqrt{7} i l_{x}^{2} l_{y} y^{2} \sigma_{y}}{560} - \frac{\sqrt{7} i l_{x}^{2} l_{y} z^{2} \sigma_{y}}{280} - \frac{\sqrt{7} i l_{x}^{2} l_{z} x^{2} \sigma_{z}}{112} \\
+&amp;\quad + \frac{\sqrt{7} i l_{x}^{2} l_{z} y^{2} \sigma_{z}}{112} - \frac{\sqrt{7} i l_{x}^{3} x y \sigma_{y}}{40} - \frac{\sqrt{7} i l_{x}^{3} x z \sigma_{z}}{56} - \frac{9 \sqrt{7} i l_{y}^{2} l_{x} x^{2} \sigma_{x}}{560} \\
+&amp;\quad + \frac{\sqrt{7} i l_{y}^{2} l_{x} y^{2} \sigma_{x}}{80} + \frac{\sqrt{7} i l_{y}^{2} l_{x} z^{2} \sigma_{x}}{280} - \frac{\sqrt{7} i l_{y}^{2} l_{z} x^{2} \sigma_{z}}{112} + \frac{\sqrt{7} i l_{y}^{2} l_{z} y^{2} \sigma_{z}}{112} \\
+&amp;\quad + \frac{\sqrt{7} i l_{y}^{3} x y \sigma_{x}}{40} + \frac{\sqrt{7} i l_{y}^{3} y z \sigma_{z}}{56} - \frac{9 \sqrt{7} i l_{z}^{2} l_{x} x^{2} \sigma_{x}}{560} + \frac{\sqrt{7} i l_{z}^{2} l_{x} y^{2} \sigma_{x}}{80} \\
+&amp;\quad + \frac{\sqrt{7} i l_{z}^{2} l_{x} z^{2} \sigma_{x}}{280} - \frac{\sqrt{7} i l_{z}^{2} l_{y} x^{2} \sigma_{y}}{80} + \frac{9 \sqrt{7} i l_{z}^{2} l_{y} y^{2} \sigma_{y}}{560} - \frac{\sqrt{7} i l_{z}^{2} l_{y} z^{2} \sigma_{y}}{280} \\
+&amp;\quad + \frac{\sqrt{7} i l_{z}^{3} x z \sigma_{x}}{140} - \frac{\sqrt{7} i l_{z}^{3} y z \sigma_{y}}{140} + \frac{\sqrt{7} i x y l_{x}^{3} \sigma_{y}}{40} - \frac{\sqrt{7} i x y l_{y}^{3} \sigma_{x}}{40} \\
+&amp;\quad + \frac{\sqrt{7} i x z l_{x}^{3} \sigma_{z}}{56} - \frac{\sqrt{7} i x z l_{z}^{3} \sigma_{x}}{140} + \frac{9 \sqrt{7} i x^{2} l_{x} l_{y}^{2} \sigma_{x}}{560} + \frac{9 \sqrt{7} i x^{2} l_{x} l_{z}^{2} \sigma_{x}}{560} \\
+&amp;\quad + \frac{\sqrt{7} i x^{2} l_{y} l_{x}^{2} \sigma_{y}}{80} + \frac{\sqrt{7} i x^{2} l_{y} l_{z}^{2} \sigma_{y}}{80} + \frac{\sqrt{7} i x^{2} l_{z} l_{x}^{2} \sigma_{z}}{112} + \frac{\sqrt{7} i x^{2} l_{z} l_{y}^{2} \sigma_{z}}{112} \\
+&amp;\quad - \frac{\sqrt{7} i y z l_{y}^{3} \sigma_{z}}{56} + \frac{\sqrt{7} i y z l_{z}^{3} \sigma_{y}}{140} - \frac{\sqrt{7} i y^{2} l_{x} l_{y}^{2} \sigma_{x}}{80} - \frac{\sqrt{7} i y^{2} l_{x} l_{z}^{2} \sigma_{x}}{80} \\
+&amp;\quad - \frac{9 \sqrt{7} i y^{2} l_{y} l_{x}^{2} \sigma_{y}}{560} - \frac{9 \sqrt{7} i y^{2} l_{y} l_{z}^{2} \sigma_{y}}{560} - \frac{\sqrt{7} i y^{2} l_{z} l_{x}^{2} \sigma_{z}}{112} - \frac{\sqrt{7} i y^{2} l_{z} l_{y}^{2} \sigma_{z}}{112} \\
+&amp;\quad - \frac{\sqrt{7} i z^{2} l_{x} l_{y}^{2} \sigma_{x}}{280} - \frac{\sqrt{7} i z^{2} l_{x} l_{z}^{2} \sigma_{x}}{280} + \frac{\sqrt{7} i z^{2} l_{y} l_{x}^{2} \sigma_{y}}{280} + \frac{\sqrt{7} i z^{2} l_{y} l_{z}^{2} \sigma_{y}}{280} \\
+&amp;\quad + \frac{\sqrt{7} i l_{x}^{2} l_{y} x y \sigma_{x}}{40} + \frac{\sqrt{7} i l_{x}^{2} l_{y} y z \sigma_{z}}{56} + \frac{\sqrt{7} i l_{x}^{2} l_{z} x z \sigma_{x}}{140} - \frac{\sqrt{7} i l_{x}^{2} l_{z} y z \sigma_{y}}{140} \\
+&amp;\quad - \frac{\sqrt{7} i l_{y}^{2} l_{x} x y \sigma_{y}}{40} - \frac{\sqrt{7} i l_{y}^{2} l_{x} x z \sigma_{z}}{56} + \frac{\sqrt{7} i l_{y}^{2} l_{z} x z \sigma_{x}}{140} - \frac{\sqrt{7} i l_{y}^{2} l_{z} y z \sigma_{y}}{140} \\
+&amp;\quad - \frac{\sqrt{7} i l_{z}^{2} l_{x} x y \sigma_{y}}{40} - \frac{\sqrt{7} i l_{z}^{2} l_{x} x z \sigma_{z}}{56} + \frac{\sqrt{7} i l_{z}^{2} l_{y} x y \sigma_{x}}{40} + \frac{\sqrt{7} i l_{z}^{2} l_{y} y z \sigma_{z}}{56} \\
+&amp;\quad + \frac{\sqrt{7} i x y l_{x} l_{y}^{2} \sigma_{y}}{40} + \frac{\sqrt{7} i x y l_{x} l_{z}^{2} \sigma_{y}}{40} - \frac{\sqrt{7} i x y l_{y} l_{x}^{2} \sigma_{x}}{40} - \frac{\sqrt{7} i x y l_{y} l_{z}^{2} \sigma_{x}}{40} \\
+&amp;\quad + \frac{\sqrt{7} i x z l_{x} l_{y}^{2} \sigma_{z}}{56} + \frac{\sqrt{7} i x z l_{x} l_{z}^{2} \sigma_{z}}{56} - \frac{\sqrt{7} i x z l_{z} l_{x}^{2} \sigma_{x}}{140} - \frac{\sqrt{7} i x z l_{z} l_{y}^{2} \sigma_{x}}{140} \\
+&amp;\quad - \frac{\sqrt{7} i y z l_{y} l_{x}^{2} \sigma_{z}}{56} - \frac{\sqrt{7} i y z l_{y} l_{z}^{2} \sigma_{z}}{56} + \frac{\sqrt{7} i y z l_{z} l_{x}^{2} \sigma_{y}}{140} + \frac{\sqrt{7} i y z l_{z} l_{y}^{2} \sigma_{y}}{140} \\
+T^{(1)}_{yz}(1) &amp;= \frac{\sqrt{7} i l_{y}^{3} x^{2} \sigma_{z}}{280} + \frac{3 \sqrt{7} i l_{y}^{3} y^{2} \sigma_{z}}{280} - \frac{\sqrt{7} i l_{y}^{3} z^{2} \sigma_{z}}{70} + \frac{\sqrt{7} i l_{z}^{3} x^{2} \sigma_{y}}{280} \\
+&amp;\quad - \frac{\sqrt{7} i l_{z}^{3} y^{2} \sigma_{y}}{70} + \frac{3 \sqrt{7} i l_{z}^{3} z^{2} \sigma_{y}}{280} - \frac{\sqrt{7} i x^{2} l_{y}^{3} \sigma_{z}}{280} - \frac{\sqrt{7} i x^{2} l_{z}^{3} \sigma_{y}}{280} \\
+&amp;\quad - \frac{3 \sqrt{7} i y^{2} l_{y}^{3} \sigma_{z}}{280} + \frac{\sqrt{7} i y^{2} l_{z}^{3} \sigma_{y}}{70} + \frac{\sqrt{7} i z^{2} l_{y}^{3} \sigma_{z}}{70} - \frac{3 \sqrt{7} i z^{2} l_{z}^{3} \sigma_{y}}{280} \\
+&amp;\quad + \frac{\sqrt{7} i l_{x}^{2} l_{y} x^{2} \sigma_{z}}{280} + \frac{3 \sqrt{7} i l_{x}^{2} l_{y} y^{2} \sigma_{z}}{280} - \frac{\sqrt{7} i l_{x}^{2} l_{y} z^{2} \sigma_{z}}{70} + \frac{\sqrt{7} i l_{x}^{2} l_{z} x^{2} \sigma_{y}}{280} \\
+&amp;\quad - \frac{\sqrt{7} i l_{x}^{2} l_{z} y^{2} \sigma_{y}}{70} + \frac{3 \sqrt{7} i l_{x}^{2} l_{z} z^{2} \sigma_{y}}{280} + \frac{\sqrt{7} i l_{x}^{3} x y \sigma_{z}}{140} + \frac{\sqrt{7} i l_{x}^{3} x z \sigma_{y}}{140} \\
+&amp;\quad - \frac{\sqrt{7} i l_{x}^{3} y z \sigma_{x}}{56} + \frac{\sqrt{7} i l_{y}^{2} l_{z} x^{2} \sigma_{y}}{280} - \frac{\sqrt{7} i l_{y}^{2} l_{z} y^{2} \sigma_{y}}{70} + \frac{3 \sqrt{7} i l_{y}^{2} l_{z} z^{2} \sigma_{y}}{280} \\
+&amp;\quad - \frac{\sqrt{7} i l_{y}^{3} x z \sigma_{x}}{56} - \frac{\sqrt{7} i l_{y}^{3} y z \sigma_{y}}{35} + \frac{\sqrt{7} i l_{z}^{2} l_{y} x^{2} \sigma_{z}}{280} + \frac{3 \sqrt{7} i l_{z}^{2} l_{y} y^{2} \sigma_{z}}{280} \\
+&amp;\quad - \frac{\sqrt{7} i l_{z}^{2} l_{y} z^{2} \sigma_{z}}{70} - \frac{\sqrt{7} i l_{z}^{3} x y \sigma_{x}}{56} - \frac{\sqrt{7} i l_{z}^{3} y z \sigma_{z}}{35} - \frac{\sqrt{7} i x y l_{x}^{3} \sigma_{z}}{140} \\
+&amp;\quad + \frac{\sqrt{7} i x y l_{z}^{3} \sigma_{x}}{56} - \frac{\sqrt{7} i x z l_{x}^{3} \sigma_{y}}{140} + \frac{\sqrt{7} i x z l_{y}^{3} \sigma_{x}}{56} - \frac{\sqrt{7} i x^{2} l_{y} l_{x}^{2} \sigma_{z}}{280} \\
+&amp;\quad - \frac{\sqrt{7} i x^{2} l_{y} l_{z}^{2} \sigma_{z}}{280} - \frac{\sqrt{7} i x^{2} l_{z} l_{x}^{2} \sigma_{y}}{280} - \frac{\sqrt{7} i x^{2} l_{z} l_{y}^{2} \sigma_{y}}{280} + \frac{\sqrt{7} i y z l_{x}^{3} \sigma_{x}}{56} \\
+&amp;\quad + \frac{\sqrt{7} i y z l_{y}^{3} \sigma_{y}}{35} + \frac{\sqrt{7} i y z l_{z}^{3} \sigma_{z}}{35} - \frac{3 \sqrt{7} i y^{2} l_{y} l_{x}^{2} \sigma_{z}}{280} - \frac{3 \sqrt{7} i y^{2} l_{y} l_{z}^{2} \sigma_{z}}{280} \\
+&amp;\quad + \frac{\sqrt{7} i y^{2} l_{z} l_{x}^{2} \sigma_{y}}{70} + \frac{\sqrt{7} i y^{2} l_{z} l_{y}^{2} \sigma_{y}}{70} + \frac{\sqrt{7} i z^{2} l_{y} l_{x}^{2} \sigma_{z}}{70} + \frac{\sqrt{7} i z^{2} l_{y} l_{z}^{2} \sigma_{z}}{70} \\
+&amp;\quad - \frac{3 \sqrt{7} i z^{2} l_{z} l_{x}^{2} \sigma_{y}}{280} - \frac{3 \sqrt{7} i z^{2} l_{z} l_{y}^{2} \sigma_{y}}{280} - \frac{\sqrt{7} i l_{x}^{2} l_{y} x z \sigma_{x}}{56} - \frac{\sqrt{7} i l_{x}^{2} l_{y} y z \sigma_{y}}{35} \\
+&amp;\quad - \frac{\sqrt{7} i l_{x}^{2} l_{z} x y \sigma_{x}}{56} - \frac{\sqrt{7} i l_{x}^{2} l_{z} y z \sigma_{z}}{35} + \frac{\sqrt{7} i l_{y}^{2} l_{x} x y \sigma_{z}}{140} + \frac{\sqrt{7} i l_{y}^{2} l_{x} x z \sigma_{y}}{140} \\
+&amp;\quad - \frac{\sqrt{7} i l_{y}^{2} l_{x} y z \sigma_{x}}{56} - \frac{\sqrt{7} i l_{y}^{2} l_{z} x y \sigma_{x}}{56} - \frac{\sqrt{7} i l_{y}^{2} l_{z} y z \sigma_{z}}{35} + \frac{\sqrt{7} i l_{z}^{2} l_{x} x y \sigma_{z}}{140} \\
+&amp;\quad + \frac{\sqrt{7} i l_{z}^{2} l_{x} x z \sigma_{y}}{140} - \frac{\sqrt{7} i l_{z}^{2} l_{x} y z \sigma_{x}}{56} - \frac{\sqrt{7} i l_{z}^{2} l_{y} x z \sigma_{x}}{56} - \frac{\sqrt{7} i l_{z}^{2} l_{y} y z \sigma_{y}}{35} \\
+&amp;\quad - \frac{\sqrt{7} i x y l_{x} l_{y}^{2} \sigma_{z}}{140} - \frac{\sqrt{7} i x y l_{x} l_{z}^{2} \sigma_{z}}{140} + \frac{\sqrt{7} i x y l_{z} l_{x}^{2} \sigma_{x}}{56} + \frac{\sqrt{7} i x y l_{z} l_{y}^{2} \sigma_{x}}{56} \\
+&amp;\quad - \frac{\sqrt{7} i x z l_{x} l_{y}^{2} \sigma_{y}}{140} - \frac{\sqrt{7} i x z l_{x} l_{z}^{2} \sigma_{y}}{140} + \frac{\sqrt{7} i x z l_{y} l_{x}^{2} \sigma_{x}}{56} + \frac{\sqrt{7} i x z l_{y} l_{z}^{2} \sigma_{x}}{56} \\
+&amp;\quad + \frac{\sqrt{7} i y z l_{x} l_{y}^{2} \sigma_{x}}{56} + \frac{\sqrt{7} i y z l_{x} l_{z}^{2} \sigma_{x}}{56} + \frac{\sqrt{7} i y z l_{y} l_{x}^{2} \sigma_{y}}{35} + \frac{\sqrt{7} i y z l_{y} l_{z}^{2} \sigma_{y}}{35} \\
+&amp;\quad + \frac{\sqrt{7} i y z l_{z} l_{x}^{2} \sigma_{z}}{35} + \frac{\sqrt{7} i y z l_{z} l_{y}^{2} \sigma_{z}}{35} \\
+T^{(1)}_{xz}(1) &amp;= \frac{3 \sqrt{7} i l_{x}^{3} x^{2} \sigma_{z}}{280} + \frac{\sqrt{7} i l_{x}^{3} y^{2} \sigma_{z}}{280} - \frac{\sqrt{7} i l_{x}^{3} z^{2} \sigma_{z}}{70} - \frac{\sqrt{7} i l_{z}^{3} x^{2} \sigma_{x}}{70} \\
+&amp;\quad + \frac{\sqrt{7} i l_{z}^{3} y^{2} \sigma_{x}}{280} + \frac{3 \sqrt{7} i l_{z}^{3} z^{2} \sigma_{x}}{280} - \frac{3 \sqrt{7} i x^{2} l_{x}^{3} \sigma_{z}}{280} + \frac{\sqrt{7} i x^{2} l_{z}^{3} \sigma_{x}}{70} \\
+&amp;\quad - \frac{\sqrt{7} i y^{2} l_{x}^{3} \sigma_{z}}{280} - \frac{\sqrt{7} i y^{2} l_{z}^{3} \sigma_{x}}{280} + \frac{\sqrt{7} i z^{2} l_{x}^{3} \sigma_{z}}{70} - \frac{3 \sqrt{7} i z^{2} l_{z}^{3} \sigma_{x}}{280} \\
+&amp;\quad - \frac{\sqrt{7} i l_{x}^{2} l_{z} x^{2} \sigma_{x}}{70} + \frac{\sqrt{7} i l_{x}^{2} l_{z} y^{2} \sigma_{x}}{280} + \frac{3 \sqrt{7} i l_{x}^{2} l_{z} z^{2} \sigma_{x}}{280} - \frac{\sqrt{7} i l_{x}^{3} x z \sigma_{x}}{35} \\
+&amp;\quad - \frac{\sqrt{7} i l_{x}^{3} y z \sigma_{y}}{56} + \frac{3 \sqrt{7} i l_{y}^{2} l_{x} x^{2} \sigma_{z}}{280} + \frac{\sqrt{7} i l_{y}^{2} l_{x} y^{2} \sigma_{z}}{280} - \frac{\sqrt{7} i l_{y}^{2} l_{x} z^{2} \sigma_{z}}{70} \\
+&amp;\quad - \frac{\sqrt{7} i l_{y}^{2} l_{z} x^{2} \sigma_{x}}{70} + \frac{\sqrt{7} i l_{y}^{2} l_{z} y^{2} \sigma_{x}}{280} + \frac{3 \sqrt{7} i l_{y}^{2} l_{z} z^{2} \sigma_{x}}{280} + \frac{\sqrt{7} i l_{y}^{3} x y \sigma_{z}}{140} \\
+&amp;\quad - \frac{\sqrt{7} i l_{y}^{3} x z \sigma_{y}}{56} + \frac{\sqrt{7} i l_{y}^{3} y z \sigma_{x}}{140} + \frac{3 \sqrt{7} i l_{z}^{2} l_{x} x^{2} \sigma_{z}}{280} + \frac{\sqrt{7} i l_{z}^{2} l_{x} y^{2} \sigma_{z}}{280} \\
+&amp;\quad - \frac{\sqrt{7} i l_{z}^{2} l_{x} z^{2} \sigma_{z}}{70} - \frac{\sqrt{7} i l_{z}^{3} x y \sigma_{y}}{56} - \frac{\sqrt{7} i l_{z}^{3} x z \sigma_{z}}{35} - \frac{\sqrt{7} i x y l_{y}^{3} \sigma_{z}}{140} \\
+&amp;\quad + \frac{\sqrt{7} i x y l_{z}^{3} \sigma_{y}}{56} + \frac{\sqrt{7} i x z l_{x}^{3} \sigma_{x}}{35} + \frac{\sqrt{7} i x z l_{y}^{3} \sigma_{y}}{56} + \frac{\sqrt{7} i x z l_{z}^{3} \sigma_{z}}{35} \\
+&amp;\quad - \frac{3 \sqrt{7} i x^{2} l_{x} l_{y}^{2} \sigma_{z}}{280} - \frac{3 \sqrt{7} i x^{2} l_{x} l_{z}^{2} \sigma_{z}}{280} + \frac{\sqrt{7} i x^{2} l_{z} l_{x}^{2} \sigma_{x}}{70} + \frac{\sqrt{7} i x^{2} l_{z} l_{y}^{2} \sigma_{x}}{70} \\
+&amp;\quad + \frac{\sqrt{7} i y z l_{x}^{3} \sigma_{y}}{56} - \frac{\sqrt{7} i y z l_{y}^{3} \sigma_{x}}{140} - \frac{\sqrt{7} i y^{2} l_{x} l_{y}^{2} \sigma_{z}}{280} - \frac{\sqrt{7} i y^{2} l_{x} l_{z}^{2} \sigma_{z}}{280} \\
+&amp;\quad - \frac{\sqrt{7} i y^{2} l_{z} l_{x}^{2} \sigma_{x}}{280} - \frac{\sqrt{7} i y^{2} l_{z} l_{y}^{2} \sigma_{x}}{280} + \frac{\sqrt{7} i z^{2} l_{x} l_{y}^{2} \sigma_{z}}{70} + \frac{\sqrt{7} i z^{2} l_{x} l_{z}^{2} \sigma_{z}}{70} \\
+&amp;\quad - \frac{3 \sqrt{7} i z^{2} l_{z} l_{x}^{2} \sigma_{x}}{280} - \frac{3 \sqrt{7} i z^{2} l_{z} l_{y}^{2} \sigma_{x}}{280} + \frac{\sqrt{7} i l_{x}^{2} l_{y} x y \sigma_{z}}{140} - \frac{\sqrt{7} i l_{x}^{2} l_{y} x z \sigma_{y}}{56} \\
+&amp;\quad + \frac{\sqrt{7} i l_{x}^{2} l_{y} y z \sigma_{x}}{140} - \frac{\sqrt{7} i l_{x}^{2} l_{z} x y \sigma_{y}}{56} - \frac{\sqrt{7} i l_{x}^{2} l_{z} x z \sigma_{z}}{35} - \frac{\sqrt{7} i l_{y}^{2} l_{x} x z \sigma_{x}}{35} \\
+&amp;\quad - \frac{\sqrt{7} i l_{y}^{2} l_{x} y z \sigma_{y}}{56} - \frac{\sqrt{7} i l_{y}^{2} l_{z} x y \sigma_{y}}{56} - \frac{\sqrt{7} i l_{y}^{2} l_{z} x z \sigma_{z}}{35} - \frac{\sqrt{7} i l_{z}^{2} l_{x} x z \sigma_{x}}{35} \\
+&amp;\quad - \frac{\sqrt{7} i l_{z}^{2} l_{x} y z \sigma_{y}}{56} + \frac{\sqrt{7} i l_{z}^{2} l_{y} x y \sigma_{z}}{140} - \frac{\sqrt{7} i l_{z}^{2} l_{y} x z \sigma_{y}}{56} + \frac{\sqrt{7} i l_{z}^{2} l_{y} y z \sigma_{x}}{140} \\
+&amp;\quad - \frac{\sqrt{7} i x y l_{y} l_{x}^{2} \sigma_{z}}{140} - \frac{\sqrt{7} i x y l_{y} l_{z}^{2} \sigma_{z}}{140} + \frac{\sqrt{7} i x y l_{z} l_{x}^{2} \sigma_{y}}{56} + \frac{\sqrt{7} i x y l_{z} l_{y}^{2} \sigma_{y}}{56} \\
+&amp;\quad + \frac{\sqrt{7} i x z l_{x} l_{y}^{2} \sigma_{x}}{35} + \frac{\sqrt{7} i x z l_{x} l_{z}^{2} \sigma_{x}}{35} + \frac{\sqrt{7} i x z l_{y} l_{x}^{2} \sigma_{y}}{56} + \frac{\sqrt{7} i x z l_{y} l_{z}^{2} \sigma_{y}}{56} \\
+&amp;\quad + \frac{\sqrt{7} i x z l_{z} l_{x}^{2} \sigma_{z}}{35} + \frac{\sqrt{7} i x z l_{z} l_{y}^{2} \sigma_{z}}{35} + \frac{\sqrt{7} i y z l_{x} l_{y}^{2} \sigma_{y}}{56} + \frac{\sqrt{7} i y z l_{x} l_{z}^{2} \sigma_{y}}{56} \\
+&amp;\quad - \frac{\sqrt{7} i y z l_{y} l_{x}^{2} \sigma_{x}}{140} - \frac{\sqrt{7} i y z l_{y} l_{z}^{2} \sigma_{x}}{140} \\
+T^{(1)}_{xy}(1) &amp;= \frac{3 \sqrt{7} i l_{x}^{3} x^{2} \sigma_{y}}{280} - \frac{\sqrt{7} i l_{x}^{3} y^{2} \sigma_{y}}{70} + \frac{\sqrt{7} i l_{x}^{3} z^{2} \sigma_{y}}{280} - \frac{\sqrt{7} i l_{y}^{3} x^{2} \sigma_{x}}{70} \\
+&amp;\quad + \frac{3 \sqrt{7} i l_{y}^{3} y^{2} \sigma_{x}}{280} + \frac{\sqrt{7} i l_{y}^{3} z^{2} \sigma_{x}}{280} - \frac{3 \sqrt{7} i x^{2} l_{x}^{3} \sigma_{y}}{280} + \frac{\sqrt{7} i x^{2} l_{y}^{3} \sigma_{x}}{70} \\
+&amp;\quad + \frac{\sqrt{7} i y^{2} l_{x}^{3} \sigma_{y}}{70} - \frac{3 \sqrt{7} i y^{2} l_{y}^{3} \sigma_{x}}{280} - \frac{\sqrt{7} i z^{2} l_{x}^{3} \sigma_{y}}{280} - \frac{\sqrt{7} i z^{2} l_{y}^{3} \sigma_{x}}{280} \\
+&amp;\quad - \frac{\sqrt{7} i l_{x}^{2} l_{y} x^{2} \sigma_{x}}{70} + \frac{3 \sqrt{7} i l_{x}^{2} l_{y} y^{2} \sigma_{x}}{280} + \frac{\sqrt{7} i l_{x}^{2} l_{y} z^{2} \sigma_{x}}{280} - \frac{\sqrt{7} i l_{x}^{3} x y \sigma_{x}}{35} \\
+&amp;\quad - \frac{\sqrt{7} i l_{x}^{3} y z \sigma_{z}}{56} + \frac{3 \sqrt{7} i l_{y}^{2} l_{x} x^{2} \sigma_{y}}{280} - \frac{\sqrt{7} i l_{y}^{2} l_{x} y^{2} \sigma_{y}}{70} + \frac{\sqrt{7} i l_{y}^{2} l_{x} z^{2} \sigma_{y}}{280} \\
+&amp;\quad - \frac{\sqrt{7} i l_{y}^{3} x y \sigma_{y}}{35} - \frac{\sqrt{7} i l_{y}^{3} x z \sigma_{z}}{56} + \frac{3 \sqrt{7} i l_{z}^{2} l_{x} x^{2} \sigma_{y}}{280} - \frac{\sqrt{7} i l_{z}^{2} l_{x} y^{2} \sigma_{y}}{70} \\
+&amp;\quad + \frac{\sqrt{7} i l_{z}^{2} l_{x} z^{2} \sigma_{y}}{280} - \frac{\sqrt{7} i l_{z}^{2} l_{y} x^{2} \sigma_{x}}{70} + \frac{3 \sqrt{7} i l_{z}^{2} l_{y} y^{2} \sigma_{x}}{280} + \frac{\sqrt{7} i l_{z}^{2} l_{y} z^{2} \sigma_{x}}{280} \\
+&amp;\quad - \frac{\sqrt{7} i l_{z}^{3} x y \sigma_{z}}{56} + \frac{\sqrt{7} i l_{z}^{3} x z \sigma_{y}}{140} + \frac{\sqrt{7} i l_{z}^{3} y z \sigma_{x}}{140} + \frac{\sqrt{7} i x y l_{x}^{3} \sigma_{x}}{35} \\
+&amp;\quad + \frac{\sqrt{7} i x y l_{y}^{3} \sigma_{y}}{35} + \frac{\sqrt{7} i x y l_{z}^{3} \sigma_{z}}{56} + \frac{\sqrt{7} i x z l_{y}^{3} \sigma_{z}}{56} - \frac{\sqrt{7} i x z l_{z}^{3} \sigma_{y}}{140} \\
+&amp;\quad - \frac{3 \sqrt{7} i x^{2} l_{x} l_{y}^{2} \sigma_{y}}{280} - \frac{3 \sqrt{7} i x^{2} l_{x} l_{z}^{2} \sigma_{y}}{280} + \frac{\sqrt{7} i x^{2} l_{y} l_{x}^{2} \sigma_{x}}{70} + \frac{\sqrt{7} i x^{2} l_{y} l_{z}^{2} \sigma_{x}}{70} \\
+&amp;\quad + \frac{\sqrt{7} i y z l_{x}^{3} \sigma_{z}}{56} - \frac{\sqrt{7} i y z l_{z}^{3} \sigma_{x}}{140} + \frac{\sqrt{7} i y^{2} l_{x} l_{y}^{2} \sigma_{y}}{70} + \frac{\sqrt{7} i y^{2} l_{x} l_{z}^{2} \sigma_{y}}{70} \\
+&amp;\quad - \frac{3 \sqrt{7} i y^{2} l_{y} l_{x}^{2} \sigma_{x}}{280} - \frac{3 \sqrt{7} i y^{2} l_{y} l_{z}^{2} \sigma_{x}}{280} - \frac{\sqrt{7} i z^{2} l_{x} l_{y}^{2} \sigma_{y}}{280} - \frac{\sqrt{7} i z^{2} l_{x} l_{z}^{2} \sigma_{y}}{280} \\
+&amp;\quad - \frac{\sqrt{7} i z^{2} l_{y} l_{x}^{2} \sigma_{x}}{280} - \frac{\sqrt{7} i z^{2} l_{y} l_{z}^{2} \sigma_{x}}{280} - \frac{\sqrt{7} i l_{x}^{2} l_{y} x y \sigma_{y}}{35} - \frac{\sqrt{7} i l_{x}^{2} l_{y} x z \sigma_{z}}{56} \\
+&amp;\quad - \frac{\sqrt{7} i l_{x}^{2} l_{z} x y \sigma_{z}}{56} + \frac{\sqrt{7} i l_{x}^{2} l_{z} x z \sigma_{y}}{140} + \frac{\sqrt{7} i l_{x}^{2} l_{z} y z \sigma_{x}}{140} - \frac{\sqrt{7} i l_{y}^{2} l_{x} x y \sigma_{x}}{35} \\
+&amp;\quad - \frac{\sqrt{7} i l_{y}^{2} l_{x} y z \sigma_{z}}{56} - \frac{\sqrt{7} i l_{y}^{2} l_{z} x y \sigma_{z}}{56} + \frac{\sqrt{7} i l_{y}^{2} l_{z} x z \sigma_{y}}{140} + \frac{\sqrt{7} i l_{y}^{2} l_{z} y z \sigma_{x}}{140} \\
+&amp;\quad - \frac{\sqrt{7} i l_{z}^{2} l_{x} x y \sigma_{x}}{35} - \frac{\sqrt{7} i l_{z}^{2} l_{x} y z \sigma_{z}}{56} - \frac{\sqrt{7} i l_{z}^{2} l_{y} x y \sigma_{y}}{35} - \frac{\sqrt{7} i l_{z}^{2} l_{y} x z \sigma_{z}}{56} \\
+&amp;\quad + \frac{\sqrt{7} i x y l_{x} l_{y}^{2} \sigma_{x}}{35} + \frac{\sqrt{7} i x y l_{x} l_{z}^{2} \sigma_{x}}{35} + \frac{\sqrt{7} i x y l_{y} l_{x}^{2} \sigma_{y}}{35} + \frac{\sqrt{7} i x y l_{y} l_{z}^{2} \sigma_{y}}{35} \\
+&amp;\quad + \frac{\sqrt{7} i x y l_{z} l_{x}^{2} \sigma_{z}}{56} + \frac{\sqrt{7} i x y l_{z} l_{y}^{2} \sigma_{z}}{56} + \frac{\sqrt{7} i x z l_{y} l_{x}^{2} \sigma_{z}}{56} + \frac{\sqrt{7} i x z l_{y} l_{z}^{2} \sigma_{z}}{56} \\
+&amp;\quad - \frac{\sqrt{7} i x z l_{z} l_{x}^{2} \sigma_{y}}{140} - \frac{\sqrt{7} i x z l_{z} l_{y}^{2} \sigma_{y}}{140} + \frac{\sqrt{7} i y z l_{x} l_{y}^{2} \sigma_{z}}{56} + \frac{\sqrt{7} i y z l_{x} l_{z}^{2} \sigma_{z}}{56} \\
+&amp;\quad - \frac{\sqrt{7} i y z l_{z} l_{x}^{2} \sigma_{x}}{140} - \frac{\sqrt{7} i y z l_{z} l_{y}^{2} \sigma_{x}}{140}
+\end{aligned}
+\end{split}\]</div>
+</section>
+<section id="id12">
+<h3>Magnetic (M)<a class="headerlink" href="#id12" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[
+\begin{aligned}
+M^{(1)}_{0}(1) &amp;= \frac{\sqrt{3}}{3} \boldsymbol{r} \cdot \boldsymbol{\sigma}
+\end{aligned}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\begin{aligned}
+\boldsymbol{M}^{(1)}(1) &amp;= \frac{\sqrt{10}}{10} [3 \boldsymbol{r} (\boldsymbol{r} \cdot \boldsymbol{\sigma}) - r^2 \boldsymbol{\sigma}]
+\end{aligned}
+\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+M^{(1)}_{u}(1) &amp;= - \frac{\sqrt{21} x^{3} \sigma_{x}}{14} - \frac{\sqrt{21} y^{3} \sigma_{y}}{14} + \frac{\sqrt{21} z^{3} \sigma_{z}}{7} - \frac{\sqrt{21} x y^{2} \sigma_{x}}{14} \\
+&amp;\quad + \frac{2 \sqrt{21} x z^{2} \sigma_{x}}{7} - \frac{\sqrt{21} x^{2} y \sigma_{y}}{14} - \frac{3 \sqrt{21} x^{2} z \sigma_{z}}{14} + \frac{2 \sqrt{21} y z^{2} \sigma_{y}}{7} \\
+&amp;\quad - \frac{3 \sqrt{21} y^{2} z \sigma_{z}}{14} \\
+M^{(1)}_{v}(1) &amp;= \frac{3 \sqrt{7} x^{3} \sigma_{x}}{14} - \frac{3 \sqrt{7} y^{3} \sigma_{y}}{14} - \frac{\sqrt{7} x y^{2} \sigma_{x}}{2} - \frac{\sqrt{7} x z^{2} \sigma_{x}}{7} \\
+&amp;\quad + \frac{\sqrt{7} x^{2} y \sigma_{y}}{2} + \frac{5 \sqrt{7} x^{2} z \sigma_{z}}{14} + \frac{\sqrt{7} y z^{2} \sigma_{y}}{7} - \frac{5 \sqrt{7} y^{2} z \sigma_{z}}{14} \\
+M^{(1)}_{yz}(1) &amp;= - \frac{\sqrt{7} y^{3} \sigma_{z}}{7} - \frac{\sqrt{7} z^{3} \sigma_{y}}{7} - \frac{\sqrt{7} x^{2} y \sigma_{z}}{7} - \frac{\sqrt{7} x^{2} z \sigma_{y}}{7} \\
+&amp;\quad + \frac{4 \sqrt{7} y z^{2} \sigma_{z}}{7} + \frac{4 \sqrt{7} y^{2} z \sigma_{y}}{7} + \frac{5 \sqrt{7} x y z \sigma_{x}}{7} \\
+M^{(1)}_{xz}(1) &amp;= - \frac{\sqrt{7} x^{3} \sigma_{z}}{7} - \frac{\sqrt{7} z^{3} \sigma_{x}}{7} - \frac{\sqrt{7} x y^{2} \sigma_{z}}{7} + \frac{4 \sqrt{7} x z^{2} \sigma_{z}}{7} \\
+&amp;\quad + \frac{4 \sqrt{7} x^{2} z \sigma_{x}}{7} - \frac{\sqrt{7} y^{2} z \sigma_{x}}{7} + \frac{5 \sqrt{7} x y z \sigma_{y}}{7} \\
+M^{(1)}_{xy}(1) &amp;= - \frac{\sqrt{7} x^{3} \sigma_{y}}{7} - \frac{\sqrt{7} y^{3} \sigma_{x}}{7} + \frac{4 \sqrt{7} x y^{2} \sigma_{y}}{7} - \frac{\sqrt{7} x z^{2} \sigma_{y}}{7} \\
+&amp;\quad + \frac{4 \sqrt{7} x^{2} y \sigma_{x}}{7} - \frac{\sqrt{7} y z^{2} \sigma_{x}}{7} + \frac{5 \sqrt{7} x y z \sigma_{z}}{7}
+\end{aligned}
+\end{split}\]</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./src"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#s-0-k-0"><span class="math notranslate nohighlight">\(s = 0\)</span>, <span class="math notranslate nohighlight">\(k = 0\)</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#electric-q">Electric (Q)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#electric-toroidal-g">Electric toroidal (G)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#magnetic-toroidal-t">Magnetic toroidal (T)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#magnetic-m">Magnetic (M)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#s-1-k-1"><span class="math notranslate nohighlight">\(s = 1\)</span>, <span class="math notranslate nohighlight">\(k = -1\)</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Electric (Q)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Electric toroidal (G)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Magnetic (M)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#s-1-k-0"><span class="math notranslate nohighlight">\(s = 1\)</span>, <span class="math notranslate nohighlight">\(k = 0\)</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Electric (Q)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Electric toroidal (G)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Magnetic toroidal (T)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Magnetic (M)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8"><span class="math notranslate nohighlight">\(s = 1\)</span>, <span class="math notranslate nohighlight">\(k = 1\)</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">Electric (Q)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">Electric toroidal (G)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">Magnetic toroidal (T)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">Magnetic (M)</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Hiroaki Kusunose and Rikuto Oiwa
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2021-.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1587 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Examples of materials &#8212; MultiPie</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=6a604523" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=2106c826" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=a8e58a58"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script data-sd-tabs-storage-prefix="sphinx-design-tab-id-" src="../_static/design-tabs.js?v=fcb327ea"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"loader": {"load": ["[tex]/physics"]}, "tex": {"packages": {"[+]": ["physics"]}, "macros": {"bm": ["\\boldsymbol{#1}", 1]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'src/materials';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script src="../_static/custom.js?v=7f87e22d"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Post-processing tools" href="post_processing.html" />
+    <link rel="prev" title="Using the Group class" href="group.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../README.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/multipie_logo.png" class="logo__image only-light" alt="MultiPie - Home"/>
+    <img src="../_static/multipie_logo.png" class="logo__image only-dark pst-js-only" alt="MultiPie - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installing MultiPie</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference external" href="https://cmt-mu.github.io/MultiPieGen/src/group_info.html">Group information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guide.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="atomic_multipole_table.html">Atomic multipole operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="group.html">Using the Group class</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Examples of materials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="post_processing.html">Post-processing tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changes.html">Changes from Ver.2</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="api_core.html">Core</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="api_core/init.html">Type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_core/cmd.html">Create function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_core/group.html">Group</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_core/material_model.html">Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_core/model_analyzer.html">ModelAnalyzer</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="api_util.html">Utility</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_atomic_multipole.html">Atomic multipole</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_atomic_multipole_operator.html">Atomic multipole operator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_binary.html">Binary data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_crystal.html">Crystal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_dict.html">Dict</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_gram_schmidt.html">Gram-Schmidt orthonormalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_harmonics.html">Harmonics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_material_model_pdf.html">PDF creator for Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_material_model.html">Material Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_model_analyzer.html">Model Analyzer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_multipolar_harmonics.html">Multipolar harmonics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_pdf_latex.html">PDF creator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_plot.html">Plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_response_tensor.html">Response tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_coset.html">Coset of a model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_supergroup.html">Supergroups</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_samb.html">SAMB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_tag.html">Tag</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_trace_moment.html">Trace moments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_wannier.html">Wannier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util_wyckoff.html">Wyckoff position</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_util/util.html">Versatile</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/CMT-MU/MultiPie.git" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Examples of materials</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-of-the-procedure">Overview of the procedure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#srvo-3-cubic-perovskite">SrVO<span class="math notranslate nohighlight">\(_3\)</span>: cubic perovskite</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mos-2-monolayer-of-2h-mos-2">MoS<span class="math notranslate nohighlight">\(_2\)</span>: monolayer of 2H-MoS<span class="math notranslate nohighlight">\(_2\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#te-a-chiral-crystal-with-the-spin-orbit-coupling">Te: a chiral crystal with the spin-orbit coupling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#checks-by-symmetry">Checks by symmetry</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="examples-of-materials">
+<h1>Examples of materials<a class="headerlink" href="#examples-of-materials" title="Link to this heading">#</a></h1>
+<p>A Japanese version is <a class="reference internal" href="materials_ja.html"><span class="std std-doc">here</span></a>.</p>
+<p>This page builds tight-binding models of three materials with MultiPie, step by step: SrVO<span class="math notranslate nohighlight">\(_3\)</span> (a cubic perovskite),
+monolayer MoS<span class="math notranslate nohighlight">\(_2\)</span> (a hexagonal layer without inversion), and Te (a chiral crystal with the spin-orbit coupling). They
+cover the main ingredients of a model: several sites with different orbitals, bonds between different sites up to
+further neighbors, a point group whose irreps carry primes (D<span class="math notranslate nohighlight">\(_{\rm 3h}\)</span>), and a spinful model in a chiral group.</p>
+<p>The same model inputs are used by the tests (<code class="docutils literal notranslate"><span class="pre">tests/test_materials.py</span></code>), which check the properties described at the
+end of each section, see <a class="reference internal" href="#checks-by-symmetry">Checks by symmetry</a>. The outputs on this page are created by
+<code class="docutils literal notranslate"><span class="pre">docs/src/examples/materials/create_examples.py</span></code>.</p>
+<p>The weights <span class="math notranslate nohighlight">\(z_j\)</span> used for the band dispersions below are chosen only for illustration; they are not fitted to any
+first-principles calculation. To build a realistic model, fit them to a calculation, e.g., with the <code class="docutils literal notranslate"><span class="pre">symcw</span></code> mode of
+<code class="docutils literal notranslate"><span class="pre">mp_analyze</span></code> (see <a class="reference internal" href="post_processing.html"><span class="std std-doc">Post processing</span></a>).</p>
+<section id="overview-of-the-procedure">
+<h2>Overview of the procedure<a class="headerlink" href="#overview-of-the-procedure" title="Link to this heading">#</a></h2>
+<p>For each material:</p>
+<ol class="arabic">
+<li><p>Write a model input file, <code class="docutils literal notranslate"><span class="pre">&lt;name&gt;_in.py</span></code>. It gives the space group, the cell, the sites with their orbitals, and
+the bonds by neighbor. <code class="docutils literal notranslate"><span class="pre">&quot;SAMB_select&quot;:</span> <span class="pre">{&quot;Gamma&quot;:</span> <span class="pre">&quot;IR&quot;}</span></code> selects the SAMB of the identity irrep, which are the
+ones allowed in a Hamiltonian.</p></li>
+<li><p>Create the model,</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mp_create<span class="w"> </span>SrVO3_in.py
+</pre></div>
+</div>
+<p>which writes <code class="docutils literal notranslate"><span class="pre">SrVO3/SrVO3.pkl</span></code> (the model) and <code class="docutils literal notranslate"><span class="pre">SrVO3/SrVO3.pdf</span></code> (a summary with all the SAMB and their
+definitions).</p>
+</li>
+<li><p>Choose the weights <span class="math notranslate nohighlight">\(z_j\)</span> of the SAMB <span class="math notranslate nohighlight">\(Z_j\)</span> in a control file, <code class="docutils literal notranslate"><span class="pre">&lt;name&gt;_ctrl.py</span></code>. The Hamiltonian is</p>
+<div class="math notranslate nohighlight">
+\[
+    H = \sum_j z_j Z_j,
+    \]</div>
+<p>where each <span class="math notranslate nohighlight">\(Z_j\)</span> is a hermitian matrix normalized to 1, so that <span class="math notranslate nohighlight">\(z_j\)</span> has the unit of energy.</p>
+</li>
+<li><p>Analyze the model,</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mp_analyze<span class="w"> </span>SrVO3_ctrl.py
+</pre></div>
+</div>
+<p>which writes the band dispersion along the k path to <code class="docutils literal notranslate"><span class="pre">SrVO3/output/</span></code>.</p>
+</li>
+</ol>
+<p>In the tables of SAMB below, “site/bond” gives the sites of the bra and the ket, “Wyckoff” the Wyckoff position of the
+site or the bond (<code class="docutils literal notranslate"><span class="pre">12b&#64;12j</span></code> is a bond Wyckoff position <code class="docutils literal notranslate"><span class="pre">12b</span></code> with the bond centers at <code class="docutils literal notranslate"><span class="pre">12j</span></code>), “neighbor” the order of
+the neighbor of the bond (<code class="docutils literal notranslate"><span class="pre">-</span></code> for an on-site term), and “bra-ket” the orbital ranks. The symbol is the combined SAMB,
+<span class="math notranslate nohighlight">\(\mathbb{X}_{l}^{(c)}(\Gamma)\)</span>, with the type <code class="docutils literal notranslate"><span class="pre">X</span></code>, the rank <code class="docutils literal notranslate"><span class="pre">l</span></code>, and the irrep <span class="math notranslate nohighlight">\(\Gamma\)</span>; how to read it is explained in
+the <a class="reference internal" href="guide.html"><span class="std std-doc">User Guide</span></a>. The expression of each <span class="math notranslate nohighlight">\(Z_j\)</span> in terms of the atomic and the cluster SAMB is given in the
+PDF of the model.</p>
+</section>
+<section id="srvo-3-cubic-perovskite">
+<h2>SrVO<span class="math notranslate nohighlight">\(_3\)</span>: cubic perovskite<a class="headerlink" href="#srvo-3-cubic-perovskite" title="Link to this heading">#</a></h2>
+<p>SrVO<span class="math notranslate nohighlight">\(_3\)</span> has the cubic perovskite structure (space group <span class="math notranslate nohighlight">\(Pm\bar{3}m\)</span>, No. 221, <span class="math notranslate nohighlight">\(a = 3.84\)</span> Å). The conduction bands
+come from the V <span class="math notranslate nohighlight">\(t_{2g}\)</span> orbitals (<span class="math notranslate nohighlight">\(d_{yz}\)</span>, <span class="math notranslate nohighlight">\(d_{xz}\)</span>, <span class="math notranslate nohighlight">\(d_{xy}\)</span>), which hybridize with the O <span class="math notranslate nohighlight">\(p\)</span> orbitals. We take the
+V site at the body center (Wyckoff <code class="docutils literal notranslate"><span class="pre">1b</span></code>) and the three O sites at the face centers (<code class="docutils literal notranslate"><span class="pre">3c</span></code>), and omit Sr.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># SrVO3_in.py: cubic perovskite (Pm-3m), V t2g and O p orbitals (Sr is omitted).</span>
+<span class="n">SrVO3_in</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"model"</span><span class="p">:</span> <span class="s2">"SrVO3"</span><span class="p">,</span>
+    <span class="s2">"group"</span><span class="p">:</span> <span class="mi">221</span><span class="p">,</span>  <span class="c1"># Pm-3m.</span>
+    <span class="s2">"cell"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"a"</span><span class="p">:</span> <span class="mf">3.84</span><span class="p">},</span>
+    <span class="c1">#</span>
+    <span class="s2">"site"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"V"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"[1/2,1/2,1/2]"</span><span class="p">,</span> <span class="p">[</span><span class="s2">"dyz"</span><span class="p">,</span> <span class="s2">"dxz"</span><span class="p">,</span> <span class="s2">"dxy"</span><span class="p">]),</span>  <span class="c1"># 1b, t2g.</span>
+        <span class="s2">"O"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"[1/2,1/2,0]"</span><span class="p">,</span> <span class="s2">"p"</span><span class="p">),</span>  <span class="c1"># 3c.</span>
+    <span class="p">},</span>
+    <span class="s2">"bond"</span><span class="p">:</span> <span class="p">[(</span><span class="s2">"V"</span><span class="p">,</span> <span class="s2">"O"</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="p">(</span><span class="s2">"O"</span><span class="p">,</span> <span class="s2">"O"</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="p">(</span><span class="s2">"V"</span><span class="p">,</span> <span class="s2">"V"</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">])],</span>
+    <span class="c1">#</span>
+    <span class="s2">"spinful"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s2">"SAMB_select"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"Gamma"</span><span class="p">:</span> <span class="s2">"IR"</span><span class="p">},</span>  <span class="c1"># identity irrep, for the Hamiltonian.</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The model has 10 SAMB (<a class="reference download internal" download="" href="../_downloads/7931d546b3e93fa22f1a3db2582d9177/SrVO3.pdf"><span class="xref download myst">SrVO3.pdf</span></a>):</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p><span class="math notranslate nohighlight">\(z_j\)</span></p></th>
+<th class="head text-left"><p>site/bond</p></th>
+<th class="head text-left"><p>Wyckoff</p></th>
+<th class="head text-left"><p>neighbor</p></th>
+<th class="head text-left"><p>bra-ket</p></th>
+<th class="head text-left"><p>symbol</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>z1</p></td>
+<td class="text-left"><p>O</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">3c</span></code></p></td>
+<td class="text-left"><p>-</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{0}^{(c)}(A_{1g},a)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>z2</p></td>
+<td class="text-left"><p>O</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">3c</span></code></p></td>
+<td class="text-left"><p>-</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{0}^{(c)}(A_{1g},b)\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>z3</p></td>
+<td class="text-left"><p>V</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">1b</span></code></p></td>
+<td class="text-left"><p>-</p></td>
+<td class="text-left"><p>d-d</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{0}^{(c)}(A_{1g})\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>z4</p></td>
+<td class="text-left"><p>O-O</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">12b&#64;12j</span></code></p></td>
+<td class="text-left"><p>1</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{0}^{(c)}(A_{1g},a)\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>z5</p></td>
+<td class="text-left"><p>O-O</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">12b&#64;12j</span></code></p></td>
+<td class="text-left"><p>1</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{0}^{(c)}(A_{1g},b)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>z6</p></td>
+<td class="text-left"><p>O-O</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">12b&#64;12j</span></code></p></td>
+<td class="text-left"><p>1</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{0}^{(c)}(A_{1g},c)\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>z7</p></td>
+<td class="text-left"><p>O-O</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">12b&#64;12j</span></code></p></td>
+<td class="text-left"><p>1</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{4}^{(c)}(A_{1g})\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>z8</p></td>
+<td class="text-left"><p>O-V</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">6a&#64;6f</span></code></p></td>
+<td class="text-left"><p>1</p></td>
+<td class="text-left"><p>p-d</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{0}^{(c)}(A_{1g})\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>z9</p></td>
+<td class="text-left"><p>V-V</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">3a&#64;3c</span></code></p></td>
+<td class="text-left"><p>1</p></td>
+<td class="text-left"><p>d-d</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{0}^{(c)}(A_{1g},a)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>z10</p></td>
+<td class="text-left"><p>V-V</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">3a&#64;3c</span></code></p></td>
+<td class="text-left"><p>1</p></td>
+<td class="text-left"><p>d-d</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{0}^{(c)}(A_{1g},b)\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The number of SAMB of each kind follows from the symmetry:</p>
+<ul class="simple">
+<li><p>V on-site (<span class="math notranslate nohighlight">\(z_3\)</span>): the <span class="math notranslate nohighlight">\(t_{2g}\)</span> orbitals form the irrep <span class="math notranslate nohighlight">\(T_{2g}\)</span> of the site symmetry O<span class="math notranslate nohighlight">\(_{\rm h}\)</span>, so one energy.</p></li>
+<li><p>O on-site (<span class="math notranslate nohighlight">\(z_1\)</span>, <span class="math notranslate nohighlight">\(z_2\)</span>): the site symmetry of O is D<span class="math notranslate nohighlight">\(_{\rm 4h}\)</span>, where the <span class="math notranslate nohighlight">\(p\)</span> orbitals split into the one along the
+V-O bond and the two perpendicular to it, so two energies.</p></li>
+<li><p>V-O hopping (<span class="math notranslate nohighlight">\(z_8\)</span>): a <span class="math notranslate nohighlight">\(t_{2g}\)</span> orbital has no <span class="math notranslate nohighlight">\(\sigma\)</span> bond with <span class="math notranslate nohighlight">\(p\)</span>, so only the <span class="math notranslate nohighlight">\(pd\pi\)</span> hopping remains.</p></li>
+<li><p>V-V hopping (<span class="math notranslate nohighlight">\(z_9\)</span>, <span class="math notranslate nohighlight">\(z_{10}\)</span>): <span class="math notranslate nohighlight">\(dd\pi\)</span> and <span class="math notranslate nohighlight">\(dd\delta\)</span> between <span class="math notranslate nohighlight">\(t_{2g}\)</span> orbitals.</p></li>
+<li><p>O-O hopping (<span class="math notranslate nohighlight">\(z_4\)</span>-<span class="math notranslate nohighlight">\(z_7\)</span>): four parameters, as the O-O bond has a low symmetry.</p></li>
+</ul>
+<p>The control gives the O on-site energy, the V-O hopping, and an O-O hopping:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># SrVO3_ctrl.py: illustrative weights (not fitted), on-site energies and nearest-neighbor V-O hopping.</span>
+<span class="n">SrVO3_ctrl</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"samb"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"model"</span><span class="p">:</span> <span class="s2">"SrVO3"</span><span class="p">,</span>
+        <span class="s2">"parameter"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"z1"</span><span class="p">:</span> <span class="o">-</span><span class="mf">12.0</span><span class="p">,</span>  <span class="c1"># O p on-site (uniform).</span>
+            <span class="s2">"z3"</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>  <span class="c1"># V t2g on-site.</span>
+            <span class="s2">"z8"</span><span class="p">:</span> <span class="mf">3.0</span><span class="p">,</span>  <span class="c1"># V-O hopping (t2g-p pi bond).</span>
+            <span class="s2">"z4"</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>  <span class="c1"># O-O nearest-neighbor hopping.</span>
+        <span class="p">},</span>
+    <span class="p">},</span>
+    <span class="s2">"output"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"dispersion"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"k_path"</span><span class="p">:</span> <span class="s2">"Γ-X-M-Γ-R-X"</span><span class="p">,</span>
+            <span class="s2">"k_point"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"Γ"</span><span class="p">:</span> <span class="s2">"[0,0,0]"</span><span class="p">,</span> <span class="s2">"X"</span><span class="p">:</span> <span class="s2">"[1/2,0,0]"</span><span class="p">,</span> <span class="s2">"M"</span><span class="p">:</span> <span class="s2">"[1/2,1/2,0]"</span><span class="p">,</span> <span class="s2">"R"</span><span class="p">:</span> <span class="s2">"[1/2,1/2,1/2]"</span><span class="p">},</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/SrVO3_dispersion.png"><img alt="../_images/SrVO3_dispersion.png" src="../_images/SrVO3_dispersion.png" style="width: 600px;" />
+</a>
+<p>The three <span class="math notranslate nohighlight">\(t_{2g}\)</span> bands lie above the nine O <span class="math notranslate nohighlight">\(p\)</span> bands. With the <span class="math notranslate nohighlight">\(pd\pi\)</span> hopping alone, a <span class="math notranslate nohighlight">\(t_{2g}\)</span> orbital hops only in
+its own plane, e.g., <span class="math notranslate nohighlight">\(d_{yz}\)</span> only within the <span class="math notranslate nohighlight">\(yz\)</span> plane, so one of the <span class="math notranslate nohighlight">\(t_{2g}\)</span> bands is flat along <span class="math notranslate nohighlight">\(\Gamma\)</span>-X. At
+<span class="math notranslate nohighlight">\(\Gamma\)</span> and R, the <span class="math notranslate nohighlight">\(t_{2g}\)</span> bands are triply degenerate (<span class="math notranslate nohighlight">\(T_{2g}\)</span>), and so are the O <span class="math notranslate nohighlight">\(p\)</span> bands at <span class="math notranslate nohighlight">\(\Gamma\)</span> (<span class="math notranslate nohighlight">\(2T_{1u} + T_{2u}\)</span>).</p>
+</section>
+<section id="mos-2-monolayer-of-2h-mos-2">
+<h2>MoS<span class="math notranslate nohighlight">\(_2\)</span>: monolayer of 2H-MoS<span class="math notranslate nohighlight">\(_2\)</span><a class="headerlink" href="#mos-2-monolayer-of-2h-mos-2" title="Link to this heading">#</a></h2>
+<p>A monolayer of 2H-MoS<span class="math notranslate nohighlight">\(_2\)</span> has the space group <span class="math notranslate nohighlight">\(P\bar{6}m2\)</span> (No. 187, point group D<span class="math notranslate nohighlight">\(_{\rm 3h}\)</span>), without the inversion.
+The Mo site is at <code class="docutils literal notranslate"><span class="pre">1a</span></code>, and the two S sites above and below it are at <code class="docutils literal notranslate"><span class="pre">2h</span></code>, <span class="math notranslate nohighlight">\((1/3, 2/3, \pm z)\)</span>. A large <span class="math notranslate nohighlight">\(c\)</span> (20 Å)
+separates the layers. We take the five Mo <span class="math notranslate nohighlight">\(d\)</span> orbitals and the three S <span class="math notranslate nohighlight">\(p\)</span> orbitals.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># MoS2_in.py: monolayer 2H-MoS2 (P-6m2, D3h), Mo d and S p orbitals.</span>
+<span class="n">MoS2_in</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"model"</span><span class="p">:</span> <span class="s2">"MoS2"</span><span class="p">,</span>
+    <span class="s2">"group"</span><span class="p">:</span> <span class="mi">187</span><span class="p">,</span>  <span class="c1"># P-6m2.</span>
+    <span class="s2">"cell"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"a"</span><span class="p">:</span> <span class="mf">3.16</span><span class="p">,</span> <span class="s2">"c"</span><span class="p">:</span> <span class="mf">20.0</span><span class="p">},</span>  <span class="c1"># vacuum along c.</span>
+    <span class="c1">#</span>
+    <span class="s2">"site"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"Mo"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"[0,0,0]"</span><span class="p">,</span> <span class="s2">"d"</span><span class="p">),</span>  <span class="c1"># 1a.</span>
+        <span class="s2">"S"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"[1/3,2/3,0.078]"</span><span class="p">,</span> <span class="s2">"p"</span><span class="p">),</span>  <span class="c1"># 2h, z = 1.56/20.</span>
+    <span class="p">},</span>
+    <span class="s2">"bond"</span><span class="p">:</span> <span class="p">[(</span><span class="s2">"Mo"</span><span class="p">,</span> <span class="s2">"S"</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="p">(</span><span class="s2">"Mo"</span><span class="p">,</span> <span class="s2">"Mo"</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="p">(</span><span class="s2">"S"</span><span class="p">,</span> <span class="s2">"S"</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])],</span>
+    <span class="c1">#</span>
+    <span class="s2">"spinful"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s2">"SAMB_select"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"Gamma"</span><span class="p">:</span> <span class="s2">"IR"</span><span class="p">},</span>  <span class="c1"># identity irrep, for the Hamiltonian.</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The model has 30 SAMB (<a class="reference download internal" download="" href="../_downloads/8c8ce704be26f2286970a109a9e1730a/MoS2.pdf"><span class="xref download myst">MoS2.pdf</span></a>):</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p><span class="math notranslate nohighlight">\(z_j\)</span></p></th>
+<th class="head text-left"><p>site/bond</p></th>
+<th class="head text-left"><p>Wyckoff</p></th>
+<th class="head text-left"><p>neighbor</p></th>
+<th class="head text-left"><p>bra-ket</p></th>
+<th class="head text-left"><p>symbol</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>z1</p></td>
+<td class="text-left"><p>Mo</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">1a</span></code></p></td>
+<td class="text-left"><p>-</p></td>
+<td class="text-left"><p>d-d</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{0}^{(c)}(A_{1}^{\prime})\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>z2</p></td>
+<td class="text-left"><p>Mo</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">1a</span></code></p></td>
+<td class="text-left"><p>-</p></td>
+<td class="text-left"><p>d-d</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{2}^{(c)}(A_{1}^{\prime})\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>z3</p></td>
+<td class="text-left"><p>Mo</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">1a</span></code></p></td>
+<td class="text-left"><p>-</p></td>
+<td class="text-left"><p>d-d</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{4}^{(c)}(A_{1}^{\prime})\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>z4</p></td>
+<td class="text-left"><p>S</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">2h</span></code></p></td>
+<td class="text-left"><p>-</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{0}^{(c)}(A_{1}^{\prime})\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>z5</p></td>
+<td class="text-left"><p>S</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">2h</span></code></p></td>
+<td class="text-left"><p>-</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{2}^{(c)}(A_{1}^{\prime})\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>z6</p></td>
+<td class="text-left"><p>Mo-Mo</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">3b&#64;3j</span></code></p></td>
+<td class="text-left"><p>1</p></td>
+<td class="text-left"><p>d-d</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{0}^{(c)}(A_{1}^{\prime},a)\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>z7</p></td>
+<td class="text-left"><p>Mo-Mo</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">3b&#64;3j</span></code></p></td>
+<td class="text-left"><p>1</p></td>
+<td class="text-left"><p>d-d</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{0}^{(c)}(A_{1}^{\prime},b)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>z8</p></td>
+<td class="text-left"><p>Mo-Mo</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">3b&#64;3j</span></code></p></td>
+<td class="text-left"><p>1</p></td>
+<td class="text-left"><p>d-d</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{2}^{(c)}(A_{1}^{\prime},a)\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>z9</p></td>
+<td class="text-left"><p>Mo-Mo</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">3b&#64;3j</span></code></p></td>
+<td class="text-left"><p>1</p></td>
+<td class="text-left"><p>d-d</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{2}^{(c)}(A_{1}^{\prime},b)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>z10</p></td>
+<td class="text-left"><p>Mo-Mo</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">3b&#64;3j</span></code></p></td>
+<td class="text-left"><p>1</p></td>
+<td class="text-left"><p>d-d</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{3}^{(c)}(A_{1}^{\prime},a)\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>z11</p></td>
+<td class="text-left"><p>Mo-Mo</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">3b&#64;3j</span></code></p></td>
+<td class="text-left"><p>1</p></td>
+<td class="text-left"><p>d-d</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{3}^{(c)}(A_{1}^{\prime},b)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>z12</p></td>
+<td class="text-left"><p>Mo-Mo</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">3b&#64;3j</span></code></p></td>
+<td class="text-left"><p>1</p></td>
+<td class="text-left"><p>d-d</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{3}^{(c)}(A_{1}^{\prime},c)\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>z13</p></td>
+<td class="text-left"><p>Mo-Mo</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">3b&#64;3j</span></code></p></td>
+<td class="text-left"><p>1</p></td>
+<td class="text-left"><p>d-d</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{4}^{(c)}(A_{1}^{\prime})\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>z14</p></td>
+<td class="text-left"><p>Mo-Mo</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">3b&#64;3j</span></code></p></td>
+<td class="text-left"><p>1</p></td>
+<td class="text-left"><p>d-d</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{5}^{(c)}(A_{1}^{\prime})\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>z15</p></td>
+<td class="text-left"><p>Mo-S</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">6a&#64;6n</span></code></p></td>
+<td class="text-left"><p>1</p></td>
+<td class="text-left"><p>d-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{0}^{(c)}(A_{1}^{\prime})\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>z16</p></td>
+<td class="text-left"><p>Mo-S</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">6a&#64;6n</span></code></p></td>
+<td class="text-left"><p>1</p></td>
+<td class="text-left"><p>d-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{2}^{(c)}(A_{1}^{\prime},a)\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>z17</p></td>
+<td class="text-left"><p>Mo-S</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">6a&#64;6n</span></code></p></td>
+<td class="text-left"><p>1</p></td>
+<td class="text-left"><p>d-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{2}^{(c)}(A_{1}^{\prime},b)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>z18</p></td>
+<td class="text-left"><p>Mo-S</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">6a&#64;6n</span></code></p></td>
+<td class="text-left"><p>1</p></td>
+<td class="text-left"><p>d-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{2}^{(c)}(A_{1}^{\prime},c)\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>z19</p></td>
+<td class="text-left"><p>Mo-S</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">6a&#64;6n</span></code></p></td>
+<td class="text-left"><p>1</p></td>
+<td class="text-left"><p>d-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{3}^{(c)}(A_{1}^{\prime},a)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>z20</p></td>
+<td class="text-left"><p>Mo-S</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">6a&#64;6n</span></code></p></td>
+<td class="text-left"><p>1</p></td>
+<td class="text-left"><p>d-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{3}^{(c)}(A_{1}^{\prime},b)\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>z21</p></td>
+<td class="text-left"><p>Mo-S</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">6a&#64;6n</span></code></p></td>
+<td class="text-left"><p>1</p></td>
+<td class="text-left"><p>d-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{3}^{(c)}(A_{1}^{\prime},c)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>z22</p></td>
+<td class="text-left"><p>Mo-S</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">6a&#64;6n</span></code></p></td>
+<td class="text-left"><p>1</p></td>
+<td class="text-left"><p>d-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{4}^{(c)}(A_{1}^{\prime})\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>z23</p></td>
+<td class="text-left"><p>S-S</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">1a&#64;1c</span></code></p></td>
+<td class="text-left"><p>1</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{0}^{(c)}(A_{1}^{\prime})\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>z24</p></td>
+<td class="text-left"><p>S-S</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">1a&#64;1c</span></code></p></td>
+<td class="text-left"><p>1</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{2}^{(c)}(A_{1}^{\prime})\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>z25</p></td>
+<td class="text-left"><p>S-S</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">6b&#64;6n</span></code></p></td>
+<td class="text-left"><p>2</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{0}^{(c)}(A_{1}^{\prime},a)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>z26</p></td>
+<td class="text-left"><p>S-S</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">6b&#64;6n</span></code></p></td>
+<td class="text-left"><p>2</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{0}^{(c)}(A_{1}^{\prime},b)\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>z27</p></td>
+<td class="text-left"><p>S-S</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">6b&#64;6n</span></code></p></td>
+<td class="text-left"><p>2</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{0}^{(c)}(A_{1}^{\prime},c)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>z28</p></td>
+<td class="text-left"><p>S-S</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">6b&#64;6n</span></code></p></td>
+<td class="text-left"><p>2</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{2}^{(c)}(A_{1}^{\prime},a)\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>z29</p></td>
+<td class="text-left"><p>S-S</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">6b&#64;6n</span></code></p></td>
+<td class="text-left"><p>2</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{2}^{(c)}(A_{1}^{\prime},b)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>z30</p></td>
+<td class="text-left"><p>S-S</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">6b&#64;6n</span></code></p></td>
+<td class="text-left"><p>2</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{3}^{(c)}(A_{1}^{\prime})\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The irreps of D<span class="math notranslate nohighlight">\(_{\rm 3h}\)</span> are written with primes, e.g., <span class="math notranslate nohighlight">\(A_1'\)</span> (the identity irrep) and <span class="math notranslate nohighlight">\(E''\)</span>. From Ver.3, the irreps
+are in the order <span class="math notranslate nohighlight">\(A_1', A_2', E', A_1'', A_2'', E''\)</span> (see <a class="reference internal" href="changes.html"><span class="std std-doc">Changes from Ver.2</span></a>). The site symmetry splits
+the Mo <span class="math notranslate nohighlight">\(d\)</span> orbitals into <span class="math notranslate nohighlight">\(A_1'\)</span> (<span class="math notranslate nohighlight">\(d_{z^2}\)</span>), <span class="math notranslate nohighlight">\(E'\)</span> (<span class="math notranslate nohighlight">\(d_{x^2-y^2}\)</span>, <span class="math notranslate nohighlight">\(d_{xy}\)</span>), and <span class="math notranslate nohighlight">\(E''\)</span> (<span class="math notranslate nohighlight">\(d_{xz}\)</span>, <span class="math notranslate nohighlight">\(d_{yz}\)</span>), giving
+the three on-site energies <span class="math notranslate nohighlight">\(z_1\)</span>-<span class="math notranslate nohighlight">\(z_3\)</span>; the S <span class="math notranslate nohighlight">\(p\)</span> orbitals split into <span class="math notranslate nohighlight">\(p_z\)</span> and (<span class="math notranslate nohighlight">\(p_x\)</span>, <span class="math notranslate nohighlight">\(p_y\)</span>), giving <span class="math notranslate nohighlight">\(z_4\)</span> and <span class="math notranslate nohighlight">\(z_5\)</span>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># MoS2_ctrl.py: illustrative weights (not fitted).</span>
+<span class="n">MoS2_ctrl</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"samb"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"model"</span><span class="p">:</span> <span class="s2">"MoS2"</span><span class="p">,</span>
+        <span class="s2">"parameter"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"z2"</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>  <span class="c1"># Mo d crystal field.</span>
+            <span class="s2">"z4"</span><span class="p">:</span> <span class="o">-</span><span class="mf">6.0</span><span class="p">,</span>  <span class="c1"># S p on-site.</span>
+            <span class="s2">"z15"</span><span class="p">:</span> <span class="mf">3.0</span><span class="p">,</span>  <span class="c1"># Mo-S hopping.</span>
+            <span class="s2">"z16"</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>  <span class="c1"># Mo-S hopping.</span>
+            <span class="s2">"z6"</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span>  <span class="c1"># Mo-Mo hopping.</span>
+        <span class="p">},</span>
+    <span class="p">},</span>
+    <span class="s2">"output"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"dispersion"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"k_path"</span><span class="p">:</span> <span class="s2">"Γ-M-K-Γ"</span><span class="p">,</span> <span class="s2">"k_point"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"Γ"</span><span class="p">:</span> <span class="s2">"[0,0,0]"</span><span class="p">,</span> <span class="s2">"M"</span><span class="p">:</span> <span class="s2">"[1/2,0,0]"</span><span class="p">,</span> <span class="s2">"K"</span><span class="p">:</span> <span class="s2">"[1/3,1/3,0]"</span><span class="p">}}},</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/MoS2_dispersion.png"><img alt="../_images/MoS2_dispersion.png" src="../_images/MoS2_dispersion.png" style="width: 600px;" />
+</a>
+<p>At <span class="math notranslate nohighlight">\(\Gamma\)</span>, the bands are non-degenerate (<span class="math notranslate nohighlight">\(A_1'\)</span>, <span class="math notranslate nohighlight">\(A_2''\)</span>) or doubly degenerate (<span class="math notranslate nohighlight">\(E'\)</span>, <span class="math notranslate nohighlight">\(E''\)</span>): three single bands
+and four pairs for the eleven bands.</p>
+</section>
+<section id="te-a-chiral-crystal-with-the-spin-orbit-coupling">
+<h2>Te: a chiral crystal with the spin-orbit coupling<a class="headerlink" href="#te-a-chiral-crystal-with-the-spin-orbit-coupling" title="Link to this heading">#</a></h2>
+<p>Trigonal Te has the chiral space group <span class="math notranslate nohighlight">\(P3_121\)</span> (No. 152, point group D<span class="math notranslate nohighlight">\(_3\)</span>): the Te atoms form helical chains along
+<span class="math notranslate nohighlight">\(c\)</span>, and the crystal has no mirror and no inversion. The three Te sites are at <code class="docutils literal notranslate"><span class="pre">3a</span></code>, <span class="math notranslate nohighlight">\((x, 0, 1/3)\)</span> with <span class="math notranslate nohighlight">\(x = 0.2636\)</span>.
+We take the <span class="math notranslate nohighlight">\(p\)</span> orbitals with the spin (<code class="docutils literal notranslate"><span class="pre">&quot;spinful&quot;:</span> <span class="pre">True</span></code>), and the bonds within a chain (first neighbor) and between
+the chains (second neighbor).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Te_in.py: trigonal Te (P3_121, chiral D3), spinful p orbitals.</span>
+<span class="n">Te_in</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"model"</span><span class="p">:</span> <span class="s2">"Te"</span><span class="p">,</span>
+    <span class="s2">"group"</span><span class="p">:</span> <span class="mi">152</span><span class="p">,</span>  <span class="c1"># P3_121.</span>
+    <span class="s2">"cell"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"a"</span><span class="p">:</span> <span class="mf">4.45</span><span class="p">,</span> <span class="s2">"c"</span><span class="p">:</span> <span class="mf">5.93</span><span class="p">},</span>
+    <span class="c1">#</span>
+    <span class="s2">"site"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"Te"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"[0.2636,0,1/3]"</span><span class="p">,</span> <span class="s2">"p"</span><span class="p">)},</span>  <span class="c1"># 3a.</span>
+    <span class="s2">"bond"</span><span class="p">:</span> <span class="p">[(</span><span class="s2">"Te"</span><span class="p">,</span> <span class="s2">"Te"</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])],</span>  <span class="c1"># intra- and inter-chain.</span>
+    <span class="c1">#</span>
+    <span class="s2">"spinful"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">"SAMB_select"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"Gamma"</span><span class="p">:</span> <span class="s2">"IR"</span><span class="p">},</span>  <span class="c1"># identity irrep, for the Hamiltonian (Q and G).</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The model has 66 SAMB (<a class="reference download internal" download="" href="../_downloads/92836c28d748de40f6bfd879727dcaf0/Te.pdf"><span class="xref download myst">Te.pdf</span></a>):</p>
+<div class="dropdown admonition">
+<p class="admonition-title">SAMB of Te (66)</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p><span class="math notranslate nohighlight">\(z_j\)</span></p></th>
+<th class="head text-left"><p>site/bond</p></th>
+<th class="head text-left"><p>Wyckoff</p></th>
+<th class="head text-left"><p>neighbor</p></th>
+<th class="head text-left"><p>bra-ket</p></th>
+<th class="head text-left"><p>symbol</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>z1</p></td>
+<td class="text-left"><p>Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">3a</span></code></p></td>
+<td class="text-left"><p>-</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{0}^{(c)}(A_{1})\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>z2</p></td>
+<td class="text-left"><p>Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">3a</span></code></p></td>
+<td class="text-left"><p>-</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{2}^{(c)}(A_{1})\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>z3</p></td>
+<td class="text-left"><p>Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">3a</span></code></p></td>
+<td class="text-left"><p>-</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{G}_{2}^{(c)}(A_{1})\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>z4</p></td>
+<td class="text-left"><p>Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">3a</span></code></p></td>
+<td class="text-left"><p>-</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{3}^{(c)}(A_{1})\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>z5</p></td>
+<td class="text-left"><p>Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">3a</span></code></p></td>
+<td class="text-left"><p>-</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{2}^{(1,-1;c)}(A_{1})\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>z6</p></td>
+<td class="text-left"><p>Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">3a</span></code></p></td>
+<td class="text-left"><p>-</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{G}_{2}^{(1,-1;c)}(A_{1})\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>z7</p></td>
+<td class="text-left"><p>Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">3a</span></code></p></td>
+<td class="text-left"><p>-</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{3}^{(1,-1;c)}(A_{1})\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>z8</p></td>
+<td class="text-left"><p>Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">3a</span></code></p></td>
+<td class="text-left"><p>-</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{G}_{0}^{(1,0;c)}(A_{1})\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>z9</p></td>
+<td class="text-left"><p>Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">3a</span></code></p></td>
+<td class="text-left"><p>-</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{0}^{(1,1;c)}(A_{1})\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>z10</p></td>
+<td class="text-left"><p>Te-Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">3a&#64;3b</span></code></p></td>
+<td class="text-left"><p>1</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{0}^{(c)}(A_{1})\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>z11</p></td>
+<td class="text-left"><p>Te-Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">3a&#64;3b</span></code></p></td>
+<td class="text-left"><p>1</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{G}_{0}^{(c)}(A_{1},a)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>z12</p></td>
+<td class="text-left"><p>Te-Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">3a&#64;3b</span></code></p></td>
+<td class="text-left"><p>1</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{G}_{0}^{(c)}(A_{1},b)\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>z13</p></td>
+<td class="text-left"><p>Te-Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">3a&#64;3b</span></code></p></td>
+<td class="text-left"><p>1</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{2}^{(c)}(A_{1})\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>z14</p></td>
+<td class="text-left"><p>Te-Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">3a&#64;3b</span></code></p></td>
+<td class="text-left"><p>1</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{G}_{2}^{(c)}(A_{1})\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>z15</p></td>
+<td class="text-left"><p>Te-Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">3a&#64;3b</span></code></p></td>
+<td class="text-left"><p>1</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{3}^{(c)}(A_{1})\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>z16</p></td>
+<td class="text-left"><p>Te-Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">3a&#64;3b</span></code></p></td>
+<td class="text-left"><p>1</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{G}_{0}^{(1,-1;c)}(A_{1},a)\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>z17</p></td>
+<td class="text-left"><p>Te-Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">3a&#64;3b</span></code></p></td>
+<td class="text-left"><p>1</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{G}_{0}^{(1,-1;c)}(A_{1},b)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>z18</p></td>
+<td class="text-left"><p>Te-Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">3a&#64;3b</span></code></p></td>
+<td class="text-left"><p>1</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{2}^{(1,-1;c)}(A_{1})\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>z19</p></td>
+<td class="text-left"><p>Te-Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">3a&#64;3b</span></code></p></td>
+<td class="text-left"><p>1</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{G}_{2}^{(1,-1;c)}(A_{1},a)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>z20</p></td>
+<td class="text-left"><p>Te-Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">3a&#64;3b</span></code></p></td>
+<td class="text-left"><p>1</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{G}_{2}^{(1,-1;c)}(A_{1},b)\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>z21</p></td>
+<td class="text-left"><p>Te-Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">3a&#64;3b</span></code></p></td>
+<td class="text-left"><p>1</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{G}_{2}^{(1,-1;c)}(A_{1},c)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>z22</p></td>
+<td class="text-left"><p>Te-Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">3a&#64;3b</span></code></p></td>
+<td class="text-left"><p>1</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{3}^{(1,-1;c)}(A_{1},a)\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>z23</p></td>
+<td class="text-left"><p>Te-Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">3a&#64;3b</span></code></p></td>
+<td class="text-left"><p>1</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{3}^{(1,-1;c)}(A_{1},b)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>z24</p></td>
+<td class="text-left"><p>Te-Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">3a&#64;3b</span></code></p></td>
+<td class="text-left"><p>1</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{3}^{(1,-1;c)}(A_{1},c)\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>z25</p></td>
+<td class="text-left"><p>Te-Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">3a&#64;3b</span></code></p></td>
+<td class="text-left"><p>1</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{G}_{0}^{(1,0;c)}(A_{1})\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>z26</p></td>
+<td class="text-left"><p>Te-Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">3a&#64;3b</span></code></p></td>
+<td class="text-left"><p>1</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{G}_{2}^{(1,0;c)}(A_{1})\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>z27</p></td>
+<td class="text-left"><p>Te-Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">3a&#64;3b</span></code></p></td>
+<td class="text-left"><p>1</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{3}^{(1,0;c)}(A_{1})\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>z28</p></td>
+<td class="text-left"><p>Te-Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">3a&#64;3b</span></code></p></td>
+<td class="text-left"><p>1</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{0}^{(1,1;c)}(A_{1})\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>z29</p></td>
+<td class="text-left"><p>Te-Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">3a&#64;3b</span></code></p></td>
+<td class="text-left"><p>1</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{G}_{0}^{(1,1;c)}(A_{1},a)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>z30</p></td>
+<td class="text-left"><p>Te-Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">3a&#64;3b</span></code></p></td>
+<td class="text-left"><p>1</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{G}_{0}^{(1,1;c)}(A_{1},b)\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>z31</p></td>
+<td class="text-left"><p>Te-Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">6a&#64;6c</span></code></p></td>
+<td class="text-left"><p>2</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{0}^{(c)}(A_{1},a)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>z32</p></td>
+<td class="text-left"><p>Te-Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">6a&#64;6c</span></code></p></td>
+<td class="text-left"><p>2</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{0}^{(c)}(A_{1},b)\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>z33</p></td>
+<td class="text-left"><p>Te-Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">6a&#64;6c</span></code></p></td>
+<td class="text-left"><p>2</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{0}^{(c)}(A_{1},c)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>z34</p></td>
+<td class="text-left"><p>Te-Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">6a&#64;6c</span></code></p></td>
+<td class="text-left"><p>2</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{G}_{0}^{(c)}(A_{1},a)\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>z35</p></td>
+<td class="text-left"><p>Te-Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">6a&#64;6c</span></code></p></td>
+<td class="text-left"><p>2</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{G}_{0}^{(c)}(A_{1},b)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>z36</p></td>
+<td class="text-left"><p>Te-Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">6a&#64;6c</span></code></p></td>
+<td class="text-left"><p>2</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{2}^{(c)}(A_{1})\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>z37</p></td>
+<td class="text-left"><p>Te-Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">6a&#64;6c</span></code></p></td>
+<td class="text-left"><p>2</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{G}_{2}^{(c)}(A_{1})\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>z38</p></td>
+<td class="text-left"><p>Te-Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">6a&#64;6c</span></code></p></td>
+<td class="text-left"><p>2</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{3}^{(c)}(A_{1})\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>z39</p></td>
+<td class="text-left"><p>Te-Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">6a&#64;6c</span></code></p></td>
+<td class="text-left"><p>2</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{4}^{(c)}(A_{1},2)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>z40</p></td>
+<td class="text-left"><p>Te-Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">6a&#64;6c</span></code></p></td>
+<td class="text-left"><p>2</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{0}^{(1,-1;c)}(A_{1},a)\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>z41</p></td>
+<td class="text-left"><p>Te-Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">6a&#64;6c</span></code></p></td>
+<td class="text-left"><p>2</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{0}^{(1,-1;c)}(A_{1},b)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>z42</p></td>
+<td class="text-left"><p>Te-Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">6a&#64;6c</span></code></p></td>
+<td class="text-left"><p>2</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{G}_{0}^{(1,-1;c)}(A_{1},a)\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>z43</p></td>
+<td class="text-left"><p>Te-Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">6a&#64;6c</span></code></p></td>
+<td class="text-left"><p>2</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{G}_{0}^{(1,-1;c)}(A_{1},b)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>z44</p></td>
+<td class="text-left"><p>Te-Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">6a&#64;6c</span></code></p></td>
+<td class="text-left"><p>2</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{2}^{(1,-1;c)}(A_{1},a)\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>z45</p></td>
+<td class="text-left"><p>Te-Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">6a&#64;6c</span></code></p></td>
+<td class="text-left"><p>2</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{2}^{(1,-1;c)}(A_{1},b)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>z46</p></td>
+<td class="text-left"><p>Te-Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">6a&#64;6c</span></code></p></td>
+<td class="text-left"><p>2</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{G}_{2}^{(1,-1;c)}(A_{1},a)\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>z47</p></td>
+<td class="text-left"><p>Te-Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">6a&#64;6c</span></code></p></td>
+<td class="text-left"><p>2</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{G}_{2}^{(1,-1;c)}(A_{1},b)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>z48</p></td>
+<td class="text-left"><p>Te-Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">6a&#64;6c</span></code></p></td>
+<td class="text-left"><p>2</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{G}_{2}^{(1,-1;c)}(A_{1},c)\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>z49</p></td>
+<td class="text-left"><p>Te-Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">6a&#64;6c</span></code></p></td>
+<td class="text-left"><p>2</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{3}^{(1,-1;c)}(A_{1},a)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>z50</p></td>
+<td class="text-left"><p>Te-Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">6a&#64;6c</span></code></p></td>
+<td class="text-left"><p>2</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{3}^{(1,-1;c)}(A_{1},b)\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>z51</p></td>
+<td class="text-left"><p>Te-Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">6a&#64;6c</span></code></p></td>
+<td class="text-left"><p>2</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{3}^{(1,-1;c)}(A_{1},c)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>z52</p></td>
+<td class="text-left"><p>Te-Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">6a&#64;6c</span></code></p></td>
+<td class="text-left"><p>2</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{G}_{3}^{(1,-1;c)}(A_{1})\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>z53</p></td>
+<td class="text-left"><p>Te-Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">6a&#64;6c</span></code></p></td>
+<td class="text-left"><p>2</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{4}^{(1,-1;c)}(A_{1},2a)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>z54</p></td>
+<td class="text-left"><p>Te-Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">6a&#64;6c</span></code></p></td>
+<td class="text-left"><p>2</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{4}^{(1,-1;c)}(A_{1},2b)\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>z55</p></td>
+<td class="text-left"><p>Te-Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">6a&#64;6c</span></code></p></td>
+<td class="text-left"><p>2</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{G}_{0}^{(1,0;c)}(A_{1})\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>z56</p></td>
+<td class="text-left"><p>Te-Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">6a&#64;6c</span></code></p></td>
+<td class="text-left"><p>2</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{2}^{(1,0;c)}(A_{1},a)\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>z57</p></td>
+<td class="text-left"><p>Te-Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">6a&#64;6c</span></code></p></td>
+<td class="text-left"><p>2</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{2}^{(1,0;c)}(A_{1},b)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>z58</p></td>
+<td class="text-left"><p>Te-Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">6a&#64;6c</span></code></p></td>
+<td class="text-left"><p>2</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{2}^{(1,0;c)}(A_{1},c)\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>z59</p></td>
+<td class="text-left"><p>Te-Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">6a&#64;6c</span></code></p></td>
+<td class="text-left"><p>2</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{G}_{2}^{(1,0;c)}(A_{1},a)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>z60</p></td>
+<td class="text-left"><p>Te-Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">6a&#64;6c</span></code></p></td>
+<td class="text-left"><p>2</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{G}_{2}^{(1,0;c)}(A_{1},b)\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>z61</p></td>
+<td class="text-left"><p>Te-Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">6a&#64;6c</span></code></p></td>
+<td class="text-left"><p>2</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{3}^{(1,0;c)}(A_{1})\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>z62</p></td>
+<td class="text-left"><p>Te-Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">6a&#64;6c</span></code></p></td>
+<td class="text-left"><p>2</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{G}_{3}^{(1,0;c)}(A_{1})\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>z63</p></td>
+<td class="text-left"><p>Te-Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">6a&#64;6c</span></code></p></td>
+<td class="text-left"><p>2</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{0}^{(1,1;c)}(A_{1},a)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>z64</p></td>
+<td class="text-left"><p>Te-Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">6a&#64;6c</span></code></p></td>
+<td class="text-left"><p>2</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{Q}_{0}^{(1,1;c)}(A_{1},b)\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>z65</p></td>
+<td class="text-left"><p>Te-Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">6a&#64;6c</span></code></p></td>
+<td class="text-left"><p>2</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{G}_{0}^{(1,1;c)}(A_{1},a)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>z66</p></td>
+<td class="text-left"><p>Te-Te</p></td>
+<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">6a&#64;6c</span></code></p></td>
+<td class="text-left"><p>2</p></td>
+<td class="text-left"><p>p-p</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\mathbb{G}_{0}^{(1,1;c)}(A_{1},b)\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Three features show up:</p>
+<ul class="simple">
+<li><p><strong>Spin-dependent SAMB.</strong> In a spinful model, the atomic SAMB include the spin, written with the superscript
+<span class="math notranslate nohighlight">\((s, k)\)</span> with <span class="math notranslate nohighlight">\(s = 1\)</span>. For example, <span class="math notranslate nohighlight">\(z_6\)</span>, <span class="math notranslate nohighlight">\(\mathbb{Q}_{0}^{(1,1;c)}(A_1)\)</span>, is the on-site (symmetric) spin-orbit
+coupling, proportional to <span class="math notranslate nohighlight">\(\boldsymbol{l} \cdot \boldsymbol{s}\)</span>.</p></li>
+<li><p><strong>Electric toroidal (<code class="docutils literal notranslate"><span class="pre">G</span></code>) SAMB.</strong> As D<span class="math notranslate nohighlight">\(_3\)</span> has only rotations, the axial (<code class="docutils literal notranslate"><span class="pre">G</span></code>) SAMB of the identity irrep are
+allowed in the Hamiltonian together with the polar (<code class="docutils literal notranslate"><span class="pre">Q</span></code>) ones, e.g., <span class="math notranslate nohighlight">\(\mathbb{G}_{0}^{(c)}(A_1)\)</span> (<span class="math notranslate nohighlight">\(z_{19}\)</span>, <span class="math notranslate nohighlight">\(z_{20}\)</span>),
+the electric toroidal monopole of the bonds, which represents the chirality.</p></li>
+<li><p><strong>Antisymmetric spin-orbit coupling.</strong> <span class="math notranslate nohighlight">\(z_{22}\)</span> and <span class="math notranslate nohighlight">\(z_{23}\)</span>, <span class="math notranslate nohighlight">\(\mathbb{G}_{0}^{(1,-1;c)}(A_1)\)</span>, combine the spin
+<span class="math notranslate nohighlight">\(\sigma_z\)</span> (<span class="math notranslate nohighlight">\(z_{22}\)</span>) or <span class="math notranslate nohighlight">\(\sigma_x, \sigma_y\)</span> (<span class="math notranslate nohighlight">\(z_{23}\)</span>), independent of the orbitals, with the anti-symmetric
+(pure imaginary) bond function of the first neighbor: a spin-dependent hopping odd under the exchange of the two ends
+of a bond, <span class="math notranslate nohighlight">\(\propto i\,\boldsymbol{\sigma} \cdot \boldsymbol{d}\)</span> along a bond <span class="math notranslate nohighlight">\(\boldsymbol{d}\)</span>. It is the
+spin-orbit coupling allowed by the chirality (a <code class="docutils literal notranslate"><span class="pre">G</span></code> monopole, i.e., a pseudoscalar), which gives <span class="math notranslate nohighlight">\(\boldsymbol{\sigma}
+\cdot \boldsymbol{k}\)</span> near <span class="math notranslate nohighlight">\(\Gamma\)</span>.</p></li>
+</ul>
+<p>The spin splitting of the bands needs a term odd under the inversion, i.e., a <code class="docutils literal notranslate"><span class="pre">G</span></code> SAMB of the identity irrep of D<span class="math notranslate nohighlight">\(_3\)</span>
+(which belongs to <span class="math notranslate nohighlight">\(A_{1u}\)</span> of D<span class="math notranslate nohighlight">\(_{3d}\)</span>). The on-site spin-orbit coupling <span class="math notranslate nohighlight">\(z_6\)</span> is even, so that with <span class="math notranslate nohighlight">\(z_6\)</span> and the
+spin-independent <code class="docutils literal notranslate"><span class="pre">Q</span></code> hoppings only, the bands stay doubly degenerate at every k point. The control gives the on-site
+spin-orbit coupling, the antisymmetric spin-orbit coupling within the chains (<span class="math notranslate nohighlight">\(z_{22}\)</span>, <span class="math notranslate nohighlight">\(z_{23}\)</span>), and the hoppings
+within and between the chains, and computes the expectation value of <span class="math notranslate nohighlight">\(S_z\)</span> along the k path (<code class="docutils literal notranslate"><span class="pre">&quot;local&quot;:</span> <span class="pre">[&quot;Sz&quot;]</span></code>), shown
+in color:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Te_ctrl.py: illustrative weights (not fitted), with the symmetric and antisymmetric spin-orbit couplings.</span>
+<span class="n">Te_ctrl</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"samb"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"model"</span><span class="p">:</span> <span class="s2">"Te"</span><span class="p">,</span>
+        <span class="s2">"parameter"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"z9"</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>  <span class="c1"># on-site (symmetric) spin-orbit coupling, l.s.</span>
+            <span class="s2">"z10"</span><span class="p">:</span> <span class="o">-</span><span class="mf">2.0</span><span class="p">,</span>  <span class="c1"># intra-chain hopping.</span>
+            <span class="s2">"z13"</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>  <span class="c1"># intra-chain hopping.</span>
+            <span class="s2">"z16"</span><span class="p">:</span> <span class="mf">0.3</span><span class="p">,</span>  <span class="c1"># intra-chain antisymmetric spin-orbit coupling (sigma_z).</span>
+            <span class="s2">"z17"</span><span class="p">:</span> <span class="mf">0.3</span><span class="p">,</span>  <span class="c1"># intra-chain antisymmetric spin-orbit coupling (sigma_x, sigma_y).</span>
+            <span class="s2">"z31"</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span>  <span class="c1"># inter-chain hopping.</span>
+        <span class="p">},</span>
+    <span class="p">},</span>
+    <span class="s2">"output"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"dispersion"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"k_path"</span><span class="p">:</span> <span class="s2">"Γ-M-K-Γ|A'-Γ-A-L-H-A"</span><span class="p">,</span>  <span class="c1"># A'-Γ-A: k_z and -k_z.</span>
+            <span class="s2">"k_point"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"Γ"</span><span class="p">:</span> <span class="s2">"[0,0,0]"</span><span class="p">,</span>
+                <span class="s2">"A'"</span><span class="p">:</span> <span class="s2">"[0,0,-1/2]"</span><span class="p">,</span>
+                <span class="s2">"M"</span><span class="p">:</span> <span class="s2">"[1/2,0,0]"</span><span class="p">,</span>
+                <span class="s2">"K"</span><span class="p">:</span> <span class="s2">"[1/3,1/3,0]"</span><span class="p">,</span>
+                <span class="s2">"A"</span><span class="p">:</span> <span class="s2">"[0,0,1/2]"</span><span class="p">,</span>
+                <span class="s2">"L"</span><span class="p">:</span> <span class="s2">"[1/2,0,1/2]"</span><span class="p">,</span>
+                <span class="s2">"H"</span><span class="p">:</span> <span class="s2">"[1/3,1/3,1/2]"</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="s2">"local"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"Sz"</span><span class="p">],</span>
+        <span class="p">},</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/Te_dispersion.png"><img alt="../_images/Te_dispersion.png" src="../_images/Te_dispersion.png" style="width: 600px;" />
+</a>
+<p>With the antisymmetric spin-orbit coupling, the bands split except at the time-reversal invariant momenta, e.g.,
+<span class="math notranslate nohighlight">\(\Gamma\)</span> and A, where the bands are doubly degenerate (Kramers). The path A’-<span class="math notranslate nohighlight">\(\Gamma\)</span>-A, with A’ = <span class="math notranslate nohighlight">\(-\)</span>A, runs along
+the chain direction from <span class="math notranslate nohighlight">\(-k_z\)</span> to <span class="math notranslate nohighlight">\(k_z\)</span>. Each pair of split bands is polarized along <span class="math notranslate nohighlight">\(z\)</span> with opposite signs (red and
+blue), and the red and blue are exchanged between <span class="math notranslate nohighlight">\(k_z\)</span> and <span class="math notranslate nohighlight">\(-k_z\)</span>: the spin splitting is odd in <span class="math notranslate nohighlight">\(\boldsymbol{k}\)</span>
+(time reversal maps the state at <span class="math notranslate nohighlight">\(\boldsymbol{k}\)</span> to the one at <span class="math notranslate nohighlight">\(-\boldsymbol{k}\)</span> with the opposite spin). The spin is
+parallel or anti-parallel to <span class="math notranslate nohighlight">\(\boldsymbol{k}\)</span>: the radial spin texture of a chiral crystal.</p>
+</section>
+<section id="checks-by-symmetry">
+<span id="id1"></span><h2>Checks by symmetry<a class="headerlink" href="#checks-by-symmetry" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">tests/test_materials.py</span></code> creates the three models and gives random weights to all the SAMB. It checks properties
+that hold for any complete set of SAMB, independent of their numbering, signs, and basis:</p>
+<ul class="simple">
+<li><p>the number of SAMB, and that all of them are <code class="docutils literal notranslate"><span class="pre">Q</span></code> or <code class="docutils literal notranslate"><span class="pre">G</span></code> of the identity irrep;</p></li>
+<li><p><span class="math notranslate nohighlight">\(H(\boldsymbol{k})\)</span> is hermitian;</p></li>
+<li><p><span class="math notranslate nohighlight">\(E_n(\boldsymbol{k}) = E_n(\boldsymbol{k} W)\)</span> for every rotation <span class="math notranslate nohighlight">\(W\)</span> of the space group, and
+<span class="math notranslate nohighlight">\(E_n(\boldsymbol{k}) = E_n(-\boldsymbol{k})\)</span> by the time reversal;</p></li>
+<li><p>the degeneracies at <span class="math notranslate nohighlight">\(\Gamma\)</span> follow the irreps: SrVO<span class="math notranslate nohighlight">\(_3\)</span> four triplets, MoS<span class="math notranslate nohighlight">\(_2\)</span> three singlets and four doublets, Te
+nine Kramers pairs;</p></li>
+<li><p>no degeneracy remains at a generic <span class="math notranslate nohighlight">\(\boldsymbol{k}\)</span>.</p></li>
+</ul>
+<p>They hold also when the group database changes, as long as the SAMB span the same space of Hamiltonians.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./src"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-of-the-procedure">Overview of the procedure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#srvo-3-cubic-perovskite">SrVO<span class="math notranslate nohighlight">\(_3\)</span>: cubic perovskite</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mos-2-monolayer-of-2h-mos-2">MoS<span class="math notranslate nohighlight">\(_2\)</span>: monolayer of 2H-MoS<span class="math notranslate nohighlight">\(_2\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#te-a-chiral-crystal-with-the-spin-orbit-coupling">Te: a chiral crystal with the spin-orbit coupling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#checks-by-symmetry">Checks by symmetry</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Hiroaki Kusunose and Rikuto Oiwa
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2021-.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
