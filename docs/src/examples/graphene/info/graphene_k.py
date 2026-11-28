@@ -14,7 +14,7 @@ Selected SAMB matrix in momentum representation.
 graphene_k = {
     "model": "graphene",
     "source": "graphene.pkl",
-    "created": "2026-11-23 18:08:21",
+    "created": "2026-11-28 09:13:09",
     "dimension": 2,
     "ket": ["pz@C(1)", "pz@C(2)"],
     "index": {("C", 1, 1): (0, 1), ("C", 2, 1): (1, 1)},
